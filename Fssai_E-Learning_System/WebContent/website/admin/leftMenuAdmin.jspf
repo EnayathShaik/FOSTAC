@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- Sidebar -->
+                <div id="sidebar-wrapper">
+                    <ul class="sidebar-nav">
+                        <!-- <li class="sidebar-brand"></li> -->
+                        <li><a href="manageCourse.fssai">Manage Course</a></li>
+                        <li><a href="manageCourseContent.fssai">Manage Course Content</a></li>
+                        <li> <a href="trainingCalendarForm.fssai">Training Calendar</a> </li>
+<!--                         <li> <a href="assessmentSchedule.fssai">Update Assessor</a> </li> -->
+                        <li> <a href="#">Update Assessor</a> </li>
+                        <li> <a href="manageAssessmentQuestions.fssai">Assessment Questions</a> </li>
+<!--                         <li> <a href="updateTrainerAssessment.fssai">TOT Assessment</a> </li> -->
+                        <li> <a href="#">TOT Assessment</a> </li>
+                        <li><a href="feedbackMaster.fssai">Feedback Master</a> </li>
+                    </ul>
+                </div>
+                <!-- /#sidebar-wrapper -->
+</body>
+</html>

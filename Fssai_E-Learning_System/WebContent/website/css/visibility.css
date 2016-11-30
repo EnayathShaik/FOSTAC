@@ -1,0 +1,10 @@
+@CHARSET "ISO-8859-1";
+
+.visibility{
+	display:none;
+}
+.btnImage{
+   background: url(../../website/images/refresh.jpg) no-repeat;
+   height: 50px;
+   margin-top: 15px;
+}

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd  	
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	
+	<context:component-scan base-package="com.ir.controller" />
+	
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<!-- <mvc:resources mapping="/resources/**" location="/resources/" />
+	 -->	
+	
+	<!-- Configure the multipart resolver -->
+	<!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="100000" />
+		<property name="uploadTempDir" ref="uploadDirResource" />
+	</bean>
+
+	<bean id="uploadDirResource" class="org.springframework.core.io.FileSystemResource">
+		<constructor-arg>
+			<value>C:/test111</value>
+		</constructor-arg>
+	</bean> -->
+	
+		
+		<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:message" />
+		<property name="defaultEncoding" value="UTF-8" />
+		</bean>
+	
+	 <bean id="myBeansValidator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+
+	<!-- <bean id="loginValidator" class="com.ir.form.validater.LoginFormValidator" /> -->
+	
+	
+	
+	<mvc:annotation-driven validator="myBeansValidator"/>
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="order" value="2"/>
+		<property name="viewClass">
+			<value>
+				org.springframework.web.servlet.view.tiles2.TilesView
+			</value>
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="viewResolver1" class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+        <property name="order" value="1"/>
+        <property name="basename" value="views"/>
+    </bean>
+	
+	
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		 
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tiles.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="jdbc:postgresql://localhost/FSSAI" />
+		<property name="username" value="postgres" />
+		<property name="password" value="Fss2iZentech" />
+	</bean>
+
+	<!-- Hibernate 4 SessionFactory Bean definition -->
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- <property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.import_files">sql/default.sql</prop>
+			</props>
+		</property> -->
+		<property name="annotatedClasses">
+			<list>
+				<value>com.ir.model.LoginDetails</value>
+				<value>com.ir.model.AdminUserManagement</value>
+				<value>com.ir.model.ManageTrainingPartner</value>
+				<value>com.ir.model.FeedbackMaster</value>
+				<value>com.ir.model.FeedbackForm</value>
+				<value>com.ir.model.ManageAssessmentAgency</value>
+				<value>com.ir.model.State</value>
+				<value>com.ir.model.District</value>
+				<value>com.ir.model.City</value>
+				<value>com.ir.model.Title</value>
+				<value>com.ir.model.Region</value>
+				<value>com.ir.model.Profile</value>
+				<value>com.ir.model.CourseType</value>
+				<value>com.ir.model.CourseName</value>
+<value>com.ir.model.FeedbackMaster</value>				<value>com.ir.model.ManageCourseContent</value>
+				<value>com.ir.model.KindOfBusinessDetailsTrainee</value>
+				<value>com.ir.model.KindOfBusiness</value>
+				<value>com.ir.model.PersonalInformationTrainee</value>
+				<value>com.ir.model.PersonalInformationTrainer</value>
+				<value>com.ir.model.PersonalInformationTrainingPartner</value>
+				<value>com.ir.model.PersonalInformationAssessor</value>
+				<value>com.ir.model.TrainingPartner</value>
+				<value>com.ir.model.TrainingCalendar</value>
+				<value>com.ir.model.CourseEnrolled</value>
+				<value>com.ir.model.AssessmentQuestion</value>
+				<value>com.ir.model.AssessorUserManagement</value>
+				<value>com.ir.model.PostVacancyTrainingCenter</value>
+				<value>com.ir.model.ContactTraineee</value>
+<!-- 				<value>com.ir.form.AssessmentAnswerCriteria</value> -->
+				<!-- 
+				
+				
+				
+				<value>com.ir.model.AssessmentAgency</value>
+				
+				
+				<value>com.ir.model.CourseEnrolledUser</value>
+				<value>com.ir.model.Steps</value>
+				 -->
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<!-- <prop key="connection.pool_size">1000</prop> -->
+				<!-- <prop key="hibernate.hbm2ddl.import_files">sql/default.sql</prop> -->
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="changePasswordUtility" class="com.ir.util.ChangePasswordUtility"  scope="prototype"/>
+	<bean id="adminService" class="com.ir.service.impl.AdminServiceImpl" />
+	<bean id="loginDAO" class="com.ir.dao.impl.LoginDAOImpl"/>
+	<bean id="registrationServiceTrainee" class="com.ir.service.impl.RegistrationServiceImpl"/>
+	<bean id="loginService" class="com.ir.service.impl.LoginServiceImpl"/>
+	<bean id="pageLoadService" class="com.ir.service.impl.PageLoadServiceImpl"/>
+	<bean id="pageLoadServiceTrainer" class="com.ir.service.impl.PageLoadServiceTrainerImpl"/>
+	<bean id="registrationServiceTrainer" class="com.ir.service.impl.RegistrationServiceTrainerImpl"/>
+	<bean id="registrationServiceTrainingPartner" class="com.ir.service.impl.RegistrationServiceTrainingPartnerImpl"/>
+	<bean id="registrationServiceAssessor" class="com.ir.service.impl.RegistrationServiceAssessorImpl"/>
+	<bean id="updateServiceImpl" class="com.ir.service.impl.UpdateServiceImpl"/>
+	<bean id="traineeService" class="com.ir.service.impl.TraineeServiceImpl"/>
+	<bean id="assessmentAgencyService" class="com.ir.service.impl.AssessmentAgencyServiceImpl"/>
+	<bean id="trainerContactService" class="com.ir.service.impl.TrainerContactTServiceIMPL" />
+	<bean id="trainingPartnerService" class="com.ir.service.impl.TrainingPartnerServiceImpl" />
+	
+<bean id = "assessmentService" class = "com.ir.service.impl.AssessmentServiceImpl" />
+	
+	
+<bean id="assessmentDao" class = "com.ir.dao.impl.AssessmentDaoImpl"/>
+	<bean id="adminDAO" class="com.ir.dao.impl.AdminDAOImpl"/>
+	<bean id="pageLoadDao" class="com.ir.dao.impl.PageLoadDaoImpl"/>
+	<bean id="registrationDAO" class="com.ir.dao.impl.RegistrationDAOImpl"/>
+	<bean id="pageLoadDaoTrainer" class="com.ir.dao.impl.PageLoadDaoTrainerImpl"/>
+	<bean id="registrationTrainerDAO" class="com.ir.dao.impl.RegistrationTrainerDAOImpl"/>
+	<bean id="registrationTrainingPartnerDAO" class="com.ir.dao.impl.RegistrationTrainingPartnerDAOImpl"/>
+	<bean id="registrationAssessorDAO" class="com.ir.dao.impl.RegistrationAsssessorDAOImpl"/>
+	<bean id="updateDAO" class="com.ir.dao.impl.UpdateDAOImpl"/>
+	<bean id="traineeDAO" class="com.ir.dao.impl.TraineeDAOImpl"/>
+	<bean id="assessmentAgencyDao" class="com.ir.dao.impl.AssessmentAgencyDaoImpl"/>
+	<bean id="trainerContactDao" class="com.ir.dao.impl.TrainerContactDaoIMPL"/>
+	<bean id="trainingPartnerDAO" class="com.ir.dao.impl.TrainingPartnerDaoImpl" />
+	
+	<bean id="state" class="com.ir.model.State" scope="prototype"/>
+	<bean id="district" class="com.ir.model.District" scope="prototype"/>
+	<bean id="city" class="com.ir.model.City" />
+	<bean id="title" class="com.ir.model.Title" scope="prototype"/>
+	<bean id="loginDetails" class="com.ir.model.LoginDetails"  scope="prototype"/>
+	<bean id="assessmentAgency" class="com.ir.model.ManageAssessmentAgency" scope="prototype"/>
+	<bean id="courseEnrolled" class="com.ir.model.CourseEnrolled" scope="prototype" />
+	<bean id="trainingPartnerName" class="com.ir.model.ManageTrainingPartner" scope="prototype" />
+	<bean id="kindOfBusiness" class="com.ir.model.KindOfBusiness" scope="prototype" />
+	<bean id="courseTypeS" class="com.ir.model.CourseType" scope="prototype" />
+	<bean id="feedBackMasterS" class="com.ir.model.FeedbackMaster" scope="prototype" />
+	<bean id="feedBackFormS" class="com.ir.model.FeedbackForm" scope="prototype" />
+	<bean id="courseNameS" class="com.ir.model.CourseName" scope="prototype" />
+	<bean id="assessmentQuestion" class="com.ir.model.AssessmentQuestion" scope="prototype"/>
+	<bean id="personalInformationTrainee" class="com.ir.model.PersonalInformationTrainee"  scope="prototype"/>
+	<bean id="personalInformationTrainer" class="com.ir.model.PersonalInformationTrainer"  scope="prototype"/>
+	<bean id="personalInformationTrainingPartner" class="com.ir.model.PersonalInformationTrainingPartner"  scope="prototype"/>
+	<bean id="personalInformationAssessor" class="com.ir.model.PersonalInformationAssessor"  scope="prototype"/>
+	<bean id="postVacancyTrainingCenter" class="com.ir.model.PostVacancyTrainingCenter"  scope="prototype"/>
+	
+</beans>

@@ -1,0 +1,165 @@
+.center-img{
+    text-align: -webkit-center;
+    text-align: -moz-center;
+    margin-bottom: 15px;
+}
+
+.logo-section-margin-top{
+    margin-top: 15px;
+}
+
+.login-btn-padding-top{
+    padding-top: 15px;
+}
+
+.login-btn{
+    background: #000077;
+    color: #fff;
+    border: 1px solid transparent;
+    transition: all 0.8s linear;
+}
+
+.login-btn:focus, .login-btn:hover{
+    background: #0808e6;
+}
+
+.form-control{
+    border-radius: 0px;
+}
+
+.section-form-margin-top{
+    margin-top: 4em;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: 1px;
+}
+
+img{
+    image-rendering: auto;
+}
+
+.terms-font-size{
+    font-size: 11px;
+}
+
+a:hover, a:focus{
+    text-decoration: none;
+}
+
+.heading-3-padding{
+    padding-bottom: 15px;
+    padding-left: 15px;
+}
+.lab-no{
+    list-style: none;
+    padding-bottom: 16px;
+    padding-left: 0px;
+}
+
+.error-red{
+    color: red;
+    padding-left: 15px;
+    font-size: 12px;
+}
+
+.style-li{
+    float: left;
+}
+
+
+
+.personel-info { padding:20px;}
+legend { font-size:16px;}
+
+/*login page */
+.center-img{
+    text-align: -webkit-center;
+    text-align: -moz-center;
+}
+
+.logo-section-margin-top{
+    margin-top: 15px;
+}
+
+.registration-box{
+    background-color: #0d0f85;
+    border-radius: 16px;
+    padding: 2.5em;
+    color: #fff;
+    margin-top: 15px;
+}
+
+.login-btn-padding-top{
+    padding-top: 15px;
+}
+
+.login-btn{
+    background: #ef580d!important;
+    color: #fff;
+    border: 1px solid transparent;
+    transition: all 0.8s linear;
+}
+
+.login-btn:focus, .login-btn:hover{
+    background: #f5844c;
+}
+
+.form-control{
+    border-radius: 0px;
+    height: 40px;
+}
+
+
+.forgot-margin-top{    
+    margin-top: 15px;
+}
+
+.section-form-margin-top{
+    margin-top: 0;
+}
+
+
+.horizontal-nav-top{
+    top: 71px;
+}
+
+
+.center-img{
+    text-align: -webkit-center;
+    text-align: -moz-center;
+    margin-bottom: 15px;
+}
+
+.logo-section-margin-top{
+    margin-top: 15px;
+}
+
+.login-btn-padding-top{
+    padding-top: 15px;
+}
+
+.login-btn{
+    background: #000077;
+    color: #fff;
+    border: 1px solid transparent;
+    transition: all 0.8s linear;
+}
+
+.login-btn:focus, .login-btn:hover{
+    background: #0808e6;
+}
+
+.form-control{
+    border-radius: 0px;
+}
+/*login */
+
+
+
+
+
+
+
+
