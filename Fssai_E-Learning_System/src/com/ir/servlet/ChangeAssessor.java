@@ -60,37 +60,41 @@ public class ChangeAssessor extends HttpServlet {
 		Session session = sf.openSession();
 		
 		String newList = null;
-		if(status.equalsIgnoreCase("A")){
-			
-			PersonalInformationAssessor   personalInformationAssessor=(PersonalInformationAssessor) session.load(PersonalInformationAssessor.class,Integer.parseInt(id));
-			
-			LoginDetails ld = new LoginDetails();
-			ld.setStatus("I");
-			ld.setLoginId(personalInformationAssessor.getLoginDetails().getLoginId());
-			ld.setPassword(personalInformationAssessor.getLoginDetails().getPassword());
-			
-			personalInformationAssessor.setLoginDetails(ld);
-			session.update(personalInformationAssessor);
-			session.beginTransaction().commit();
-			session.close();
-			newList = "Status changet to In-active" ;
+		PersonalInformationAssessor   personalInformationAssessor=(PersonalInformationAssessor) session.load(PersonalInformationAssessor.class,Integer.parseInt(id));
+		LoginDetails ld = personalInformationAssessor.getLoginDetails();
+		String newStatus = "I";
+		if(status.equalsIgnoreCase("I")){
+			newStatus = "A";
+			newList = "Status changet to ACTIVE" ;
 		}else{
-			PersonalInformationAssessor   personalInformationAssessor=(PersonalInformationAssessor) session.load(PersonalInformationAssessor.class,Integer.parseInt(id));
-			LoginDetails ld = new LoginDetails();
-			ld.setStatus("A");
-			ld.setLoginId(personalInformationAssessor.getLoginDetails().getLoginId());
-			ld.setPassword(personalInformationAssessor.getLoginDetails().getPassword());
+			newList = "Status changet to IN-ACTIVE" ;
+			newStatus = "I";
+		}
+				
+				if(personalInformationAssessor.getLoginDetails() != null){
+					String updateQry = "update logindetails set status ='"+newStatus+"' where id ="+personalInformationAssessor.getLoginDetails().getId(); 
+					Query query = session.createSQLQuery(updateQry);
+					System.out.println(updateQry);
+					Integer i = query.executeUpdate();
+					System.out.println("i  :"+ i);
+					session.beginTransaction().commit();
+					session.close();
+					String responseStr = null ;
+					if(i > 0 ){
+						System.out.println("data selected finally  " );
+						responseStr = "Data updated successfully"; 
+					}else{
+						responseStr = "Oops , something went wrong try ageain !!!";
+					}
+					out.write(newList);
+					out.flush();
+				}
+			System.out.println("##################Session get");
 			
-			
-			personalInformationAssessor.setLoginDetails(ld);
-			session.update(personalInformationAssessor);
 			session.beginTransaction().commit();
 			session.close();
-			newList = "Status changet to Active" ;
-		}
 		out.write(newList);
 		out.flush();
-		
 	}
 
 	/**

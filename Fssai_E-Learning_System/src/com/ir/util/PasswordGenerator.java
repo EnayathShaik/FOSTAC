@@ -62,10 +62,14 @@ public class PasswordGenerator {
 
       // choose a random character from the array
       for ( int i = 0; i < passwordSize; ++i ) {
-        password[i] = characters[ rnd.nextInt(charactersCount) ];
+    	int randomNumber = rnd.nextInt(charactersCount);
+    	if(randomNumber > 52)
+    	{
+    		randomNumber = randomNumber%52;
+    	}
+        password[i] = characters[randomNumber ];
         System.out.println("password[i]" +password[i]);
       }
-
       return password;
     }
 

@@ -103,8 +103,8 @@ public class PersonalInformationAssessor {
 	@NotNull
 	private String HowManyAssessmentConductInAMonth;
 	
-	@OneToMany (cascade=CascadeType.ALL)  @JoinColumn(name="courseEnrolled")
-	private List<CourseEnrolled> coursesEnrolled;
+//	@OneToMany (cascade=CascadeType.ALL)  @JoinColumn(name="courseEnrolled")
+//	private List<CourseEnrolled> coursesEnrolled;
 	
 	public PersonalInformationAssessor() {
 		super();
@@ -273,14 +273,14 @@ public class PersonalInformationAssessor {
 	/**
 	 * @return the coursesEnrolled
 	 */
-	public List<CourseEnrolled> getCoursesEnrolled() {
-		return coursesEnrolled;
-	}
+//	public List<CourseEnrolled> getCoursesEnrolled() {
+//		return coursesEnrolled;
+//	}
 	/**
 	 * @param coursesEnrolled the coursesEnrolled to set
 	 */
-	public void setCoursesEnrolled(List<CourseEnrolled> coursesEnrolled) {
-		this.coursesEnrolled = coursesEnrolled;
-	}
+//	public void setCoursesEnrolled(List<CourseEnrolled> coursesEnrolled) {
+//		this.coursesEnrolled = coursesEnrolled;
+//	}
 	
 }

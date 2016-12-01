@@ -51,15 +51,7 @@
                 <div id="wrapper">
 
                     <!-- Sidebar -->
-                    <div id="sidebar-wrapper">
-                        <ul class="sidebar-nav">
-                      <!-- <li class="sidebar-brand">
-                                </li> -->
-                      <li> <a href="assessment-calendar.fssai">Assessment Calendar</a> </li>
-                      <li> <a href="mark-attendance.fssai">Mark Attendance</a> </li>
-                      <li> <a href="update-result.fssai">Update Result</a> </li>
-                    </ul>
-                    </div>
+  					<%@include file="leftMenuAssessor.jspf" %> 
                     <!-- /#sidebar-wrapper -->
                     <!-- Page Content -->
                     <div id="page-content-wrapper">

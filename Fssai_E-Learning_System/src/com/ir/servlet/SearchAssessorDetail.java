@@ -86,7 +86,6 @@ public class SearchAssessorDetail extends HttpServlet {
 					System.out.println(stmt.toString());
 					rs = stmt.executeQuery();
 					
-				
 					while(rs.next()){
 						List l = new ArrayList<>();
 						l.add(rs.getString(1));

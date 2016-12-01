@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+</head>
+<!-- Sidebar -->
+       	
+<div id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+          <!-- <li class="sidebar-brand">
+                    </li> -->
+          <li> <a href="assessment-calendar.fssai">Assessment Calendar</a> </li>
+          <li> <a href="mark-attendance.fssai">Mark Attendance</a> </li>
+          <li> <a href="update-result.fssai">Update Result</a> </li>
+      </ul>
+</div>
+<!-- /#sidebar-wrapper --> 
+</html>
