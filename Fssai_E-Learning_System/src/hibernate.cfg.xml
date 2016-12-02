@@ -35,6 +35,7 @@
 		<mapping class="com.ir.model.TrainingCalendar"/>
 		<mapping class="com.ir.model.TrainingPartner"/>
 		<mapping class="com.ir.model.CourseEnrolled"/>
+		<mapping class="com.ir.model.CourseEnrolledUser"/>
 		<mapping class="com.ir.model.AssessmentQuestion"/>
 		<mapping class="com.ir.model.PersonalInformationAssessor"/>
 		<mapping class="com.ir.model.PostVacancyTrainingCenter"/>
