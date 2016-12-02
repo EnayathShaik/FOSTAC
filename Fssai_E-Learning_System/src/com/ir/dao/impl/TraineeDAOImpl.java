@@ -390,9 +390,9 @@ public class TraineeDAOImpl implements  TraineeDAO{
 		System.out.println("personalinformationtraineeid   :"+personalinformationtraineeid);
 		
 		courseEnrolledUser.setLoginDetails(loginid);
-		courseEnrolledUser.setProfileId(String.valueOf(3));
-		courseEnrolledUser.setTrainingCalendarId(String.valueOf(courseEnrolledUserForm.getTrainingCalendarId()));
-		courseEnrolledUser.setRollno(String.valueOf(date));
+		courseEnrolledUser.setProfileId(3);
+		courseEnrolledUser.setTrainingCalendarId(courseEnrolledUserForm.getTrainingCalendarId());
+		courseEnrolledUser.setRollno(date);
 		courseEnrolledUser.setPaymentstatus("Pending");
 		courseEnrolledUser.setEnrolledby("Trainee");
 		
@@ -420,9 +420,9 @@ public class TraineeDAOImpl implements  TraineeDAO{
 		System.out.println("calander id is  "+courseEnrolledUserForm.getTrainingCalendarId());
 		
 		courseEnrolledUser.setLoginDetails(loginid);
-		courseEnrolledUser.setProfileId(String.valueOf(3));
-		courseEnrolledUser.setTrainingCalendarId(String.valueOf(courseEnrolledUserForm.getTrainingCalendarId()));
-		courseEnrolledUser.setRollno(String.valueOf(date));
+		courseEnrolledUser.setProfileId(3);
+		courseEnrolledUser.setTrainingCalendarId(courseEnrolledUserForm.getTrainingCalendarId());
+		courseEnrolledUser.setRollno(date);
 		courseEnrolledUser.setPaymentstatus("Pending");
 		courseEnrolledUser.setEnrolledby("Trainee");
 		
@@ -448,9 +448,9 @@ public class TraineeDAOImpl implements  TraineeDAO{
 		System.out.println("calander id is  "+courseEnrolledUserForm.getTrainingCalendarId());
 		
 		courseEnrolledUser.setLoginDetails(loginid);
-		courseEnrolledUser.setProfileId(String.valueOf(3));
-		courseEnrolledUser.setTrainingCalendarId(String.valueOf(courseEnrolledUserForm.getTrainingCalendarId()));
-		courseEnrolledUser.setRollno(String.valueOf(date));
+		courseEnrolledUser.setProfileId(3);
+		courseEnrolledUser.setTrainingCalendarId(courseEnrolledUserForm.getTrainingCalendarId());
+		courseEnrolledUser.setRollno(date);
 		courseEnrolledUser.setEnrolledby("Trainee");
 		courseEnrolledUser.setPaymentstatus("Pending");
 		
