@@ -289,6 +289,24 @@
   <servlet-name>searchAssessorDetail</servlet-name> 
   <url-pattern>/searchAssessorDetail.jspp</url-pattern> 
   </servlet-mapping>
+  <servlet>
+  <servlet-name>searchAssessorCalendar</servlet-name> 
+  <servlet-class>com.ir.servlet.SearchAssessorCalendar</servlet-class> 
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>searchAssessorCalendar</servlet-name> 
+  <url-pattern>/searchAssessorCalendar.jspp</url-pattern> 
+  </servlet-mapping>
+  
+  <servlet>
+  <servlet-name>applyAssessments</servlet-name> 
+  <servlet-class>com.ir.servlet.assessor.ApplyAssessment</servlet-class> 
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>applyAssessments</servlet-name> 
+  <url-pattern>/applyAssessments.jspp</url-pattern> 
+  </servlet-mapping>
+  
    <servlet>
   <servlet-name>changeStatusDistrict</servlet-name> 
   <servlet-class>com.ir.servlet.ChangeStatusDistrict</servlet-class> 

@@ -25,6 +25,7 @@ public class TrainingCalendar {
 	private String trainerName;
 	private String status;
 	private String trainingType;
+	private int personalinformationassessorid;
 	
 	
 	public int getTrainingCalendarId() {
@@ -88,5 +89,18 @@ public class TrainingCalendar {
 	public void setTrainingType(String trainingType) {
 		this.trainingType = trainingType;
 	}
+	/**
+	 * @return the personalinformationassessorid
+	 */
+	public int getPersonalinformationassessorid() {
+		return personalinformationassessorid;
+	}
+	/**
+	 * @param personalinformationassessorid the personalinformationassessorid to set
+	 */
+	public void setPersonalinformationassessorid(int personalinformationassessorid) {
+		this.personalinformationassessorid = personalinformationassessorid;
+	}
+	
 	
 }

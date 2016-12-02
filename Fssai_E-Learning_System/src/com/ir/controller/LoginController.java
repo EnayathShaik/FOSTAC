@@ -137,7 +137,8 @@ public class LoginController {
 			// Rishi
 			session.setAttribute("logId",loginDetails.getLoginId());
 			// Rishi			
-return "adminHomepage";
+			
+			return "adminHomepage";
 		}else if(loginDetails !=null && loginDetails.getProfileId() == 3 && loginDetails.getStatus().equalsIgnoreCase("A"))
 		{
 			PersonalInformationTrainee personalInformationTrainee = loginService.FullDetail(loginDetails.getId() );

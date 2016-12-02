@@ -20,7 +20,7 @@
 		<mapping class="com.ir.model.City"/>
 		<mapping class="com.ir.model.District"/>
 		<mapping class="com.ir.model.LoginDetails"/>
-<mapping class="com.ir.model.FeedbackMaster"/>
+		<mapping class="com.ir.model.FeedbackMaster"/>
 		<mapping class="com.ir.model.ManageTrainingPartner"/>
 		<mapping class="com.ir.model.FeedbackMaster"/>
 		<mapping class="com.ir.model.FeedbackForm"/>
