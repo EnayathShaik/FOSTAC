@@ -183,6 +183,7 @@
 	<bean id="loginDetails" class="com.ir.model.LoginDetails"  scope="prototype"/>
 	<bean id="assessmentAgency" class="com.ir.model.ManageAssessmentAgency" scope="prototype"/>
 	<bean id="courseEnrolled" class="com.ir.model.CourseEnrolled" scope="prototype" />
+	<bean id="courseEnrolledUserS" class="com.ir.model.CourseEnrolledUser" scope="prototype" />
 	<bean id="trainingPartnerName" class="com.ir.model.ManageTrainingPartner" scope="prototype" />
 	<bean id="kindOfBusiness" class="com.ir.model.KindOfBusiness" scope="prototype" />
 	<bean id="courseTypeS" class="com.ir.model.CourseType" scope="prototype" />

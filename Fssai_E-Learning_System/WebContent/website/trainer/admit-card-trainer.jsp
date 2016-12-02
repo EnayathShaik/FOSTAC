@@ -40,7 +40,7 @@
                                     <li class="dropdown active"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog fa-spin"></i> <span class="caret"></span></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="changePasswordTrainer.fssai">Change Password</a></li>
-                                            <li><a href="#">Logout</a></li>
+                                            <li><a href="fostac.fssai">Logout</a></li>
                                         </ul>
                                     </li>
                                 </ul>

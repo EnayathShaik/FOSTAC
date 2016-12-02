@@ -108,7 +108,7 @@ function onFeedbackSave(feedbackMasterList){
                     <legend>
                     <h3 style="padding-bottom:20px;">Feedback</h3>
                     </legend>
-                    <table class="table table-bordered table-striped table-responsive table-hover">
+                    <table class="table table-bordered table-striped table-responsive table-hover paginated">
                           <thead>
                         <tr class="blue-table-head">
                               <th>Feedback Point</th>
@@ -155,3 +155,57 @@ function onFeedbackSave(feedbackMasterList){
 		</div>
 	</div>
 </section>
+<!--/#footer-->
+<script src="website/js/jquery.js"></script> 
+<script src="website/js/bootstrap.min.js"></script> 
+<script src="website/js/jquery.isotope.min.js"></script> 
+<style>
+div.pager {
+    text-align: center;
+    margin: 1em 0;
+}
+
+div.pager span {
+    display: inline-block;
+    width: 1.8em;
+    height: 1.8em;
+    line-height: 1.8;
+    text-align: center;
+    cursor: pointer;
+    background: #bab8bd;
+    color: #fff;
+    margin-right: 0.5em;
+}
+
+div.pager span.active {
+    background: #534e9e;
+}
+
+</style>
+
+<script type="text/javascript">
+
+
+$('table.paginated').each(function() {
+    var currentPage = 0;
+    var numPerPage = 5;
+    var $table = $(this);
+    $table.bind('repaginate', function() {
+        $table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+    });
+    $table.trigger('repaginate');
+    var numRows = $table.find('tbody tr').length;
+    var numPages = Math.ceil(numRows / numPerPage);
+    var $pager = $('<div class="pager"></div>');
+    for (var page = 0; page < numPages; page++) {
+        $('<span class="page-number"></span>').text(page + 1).bind('click', {
+            newPage: page
+        }, function(event) {
+            currentPage = event.data['newPage'];
+            $table.trigger('repaginate');
+            $(this).addClass('active').siblings().removeClass('active');
+        }).appendTo($pager).addClass('clickable');
+    }
+    $pager.insertBefore($table).find('span.page-number:first').addClass('active');
+});
+</script>

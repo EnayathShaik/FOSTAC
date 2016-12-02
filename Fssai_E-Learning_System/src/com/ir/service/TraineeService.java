@@ -42,5 +42,6 @@ public interface TraineeService {
 	public CourseName getCourseDetails(int loginId);
 	public CourseName getCourseName(int profileId);
 	public List<FeedbackMaster> getFeedMasterList(int profileId);
+	public AdmitCardForm generateAdmitCard(int loginId);
 	
 }

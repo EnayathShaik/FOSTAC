@@ -9,6 +9,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -50,6 +51,9 @@ public class TraineeDAOImpl implements  TraineeDAO{
 	@Autowired
 	@Qualifier("changePasswordUtility")
 	public ChangePasswordUtility changePasswordUtility;
+	
+	@Autowired
+	public CourseEnrolledUser courseEnrolledUser;
 	// Rishi
 		
 	@Autowired
@@ -193,7 +197,7 @@ public class TraineeDAOImpl implements  TraineeDAO{
 	public CourseName getCourseName(int profileId) {
 		CourseName courseName= new CourseName();
 		Session session = sessionFactory.openSession();
-		String sql="select c.coursename,c.coursenameid,c.courseduration from coursename c,courseenrolleduser ceu where c.coursenameid=ceu.courseenrolleduserid and profileid="+profileId;
+		String sql="select c.coursename,c.coursenameid,c.courseduration from coursename c,courseenrolleduser ceu where c.coursenameid=ceu.courseenrolleduserid and ceu.profileid="+profileId;
 		Query query = session.createSQLQuery(sql);
 		List<Object[]> courseNameList =(List<Object[]>)query.list();
 		session.close();
@@ -385,21 +389,21 @@ public class TraineeDAOImpl implements  TraineeDAO{
 		System.out.println("loginid  :"+loginid);
 		System.out.println("personalinformationtraineeid   :"+personalinformationtraineeid);
 		
-		CourseEnrolledUser ceu = new CourseEnrolledUser();
-		ceu.setLoginDetails(loginid);
-		ceu.setProfileId(3);
-		ceu.setTrainingCalendarId(courseEnrolledUserForm.getTrainingCalendarId());
-		ceu.setRollno(date);
-		ceu.setPaymentstatus("Pending");
-		ceu.setEnrolledby("Trainee");
+		courseEnrolledUser.setLoginDetails(loginid);
+		courseEnrolledUser.setProfileId(String.valueOf(3));
+		courseEnrolledUser.setTrainingCalendarId(String.valueOf(courseEnrolledUserForm.getTrainingCalendarId()));
+		courseEnrolledUser.setRollno(String.valueOf(date));
+		courseEnrolledUser.setPaymentstatus("Pending");
+		courseEnrolledUser.setEnrolledby("Trainee");
 		
-		//Integer ce = (Integer) session.save(ceu);
-		if(true){
-			PersonalInformationTrainee   personalInformationTrainee=(PersonalInformationTrainee) session.load(PersonalInformationTrainee.class, personalinformationtraineeid);
-			//personalInformationTrainee.setSteps(2);			
-			session.update(personalInformationTrainee);
+		Integer ce =0;
+//		= (Integer) session.save(courseEnrolledUser);
+		if(ce!=null&& ce.intValue()>0){
+				PersonalInformationTrainee   personalInformationTrainee=(PersonalInformationTrainee) session.load(PersonalInformationTrainee.class, personalinformationtraineeid);
+				//personalInformationTrainee.setSteps(2);			
+				session.update(personalInformationTrainee);
+			session.beginTransaction().commit();
 		}
-		session.beginTransaction().commit();
 		session.close();
 		return date;
 	}
@@ -415,15 +419,14 @@ public class TraineeDAOImpl implements  TraineeDAO{
 		System.out.println("personalinformationtraineeid   :"+personalinformationtraineeid);
 		System.out.println("calander id is  "+courseEnrolledUserForm.getTrainingCalendarId());
 		
-		CourseEnrolledUser ceu = new CourseEnrolledUser();
-		ceu.setLoginDetails(loginid);
-		ceu.setProfileId(3);
-		ceu.setTrainingCalendarId(courseEnrolledUserForm.getTrainingCalendarId());
-		ceu.setRollno(date);
-		ceu.setPaymentstatus("Pending");
-		ceu.setEnrolledby("Trainee");
+		courseEnrolledUser.setLoginDetails(loginid);
+		courseEnrolledUser.setProfileId(String.valueOf(3));
+		courseEnrolledUser.setTrainingCalendarId(String.valueOf(courseEnrolledUserForm.getTrainingCalendarId()));
+		courseEnrolledUser.setRollno(String.valueOf(date));
+		courseEnrolledUser.setPaymentstatus("Pending");
+		courseEnrolledUser.setEnrolledby("Trainee");
 		
-		Integer ce = (Integer) session.save(ceu);
+		Integer ce = (Integer) session.save(courseEnrolledUser);
 		if(ce > 0){
 			PersonalInformationTrainee   personalInformationTrainee=(PersonalInformationTrainee) session.load(PersonalInformationTrainee.class, personalinformationtraineeid);
 			//personalInformationTrainee.setSteps(2);			
@@ -444,15 +447,14 @@ public class TraineeDAOImpl implements  TraineeDAO{
 		System.out.println("personalinformationtraineeid   :"+personalinformationtraineeid);
 		System.out.println("calander id is  "+courseEnrolledUserForm.getTrainingCalendarId());
 		
-		CourseEnrolledUser ceu = new CourseEnrolledUser();
-		ceu.setLoginDetails(loginid);
-		ceu.setProfileId(3);
-		ceu.setTrainingCalendarId(courseEnrolledUserForm.getTrainingCalendarId());
-		ceu.setRollno(date);
-		 ceu.setEnrolledby("Trainee");
-		 ceu.setPaymentstatus("Pending");
+		courseEnrolledUser.setLoginDetails(loginid);
+		courseEnrolledUser.setProfileId(String.valueOf(3));
+		courseEnrolledUser.setTrainingCalendarId(String.valueOf(courseEnrolledUserForm.getTrainingCalendarId()));
+		courseEnrolledUser.setRollno(String.valueOf(date));
+		courseEnrolledUser.setEnrolledby("Trainee");
+		courseEnrolledUser.setPaymentstatus("Pending");
 		
-		Integer ce = (Integer) session.save(ceu);
+		Integer ce = (Integer) session.save(courseEnrolledUser);
 		if(ce > 0){
 			PersonalInformationTrainee   personalInformationTrainee=(PersonalInformationTrainee) session.load(PersonalInformationTrainee.class, personalinformationtraineeid);
 			//personalInformationTrainee.setSteps(2);			

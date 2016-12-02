@@ -318,7 +318,7 @@
 	<!-- Rishi -->
 	 <definition name="basicTrainer" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
-		<put-attribute name="body" value="/website/trainer/basictrainer.jsp" />
+		<put-attribute name="body" value="/website/trainer/basic.jsp" />
 	</definition>
 	<definition name="advanceTrainer" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />

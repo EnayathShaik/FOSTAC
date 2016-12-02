@@ -129,7 +129,7 @@ public class TraineeController {
 			model.addAttribute("roll", basicEnroll);
 		
 		}
-		 return "afterenrolled";
+		 return "traineeHomepage";
 	}
 	@RequestMapping(value="/changePasswordTraineeSave" , method=RequestMethod.POST)
 	public String changePasswordTraineeSave(@ModelAttribute("changePasswordForm") ChangePasswordForm changePasswordForm,HttpSession session
@@ -229,7 +229,10 @@ public class TraineeController {
 	
 	@RequestMapping(value="/admit-cardtrainee" , method=RequestMethod.GET)
 	public String admitcardtrainee(@ModelAttribute("basicTrainee") CourseEnrolledUserForm courseEnrolledUserForm ,
-			@ModelAttribute("state") State state , @ModelAttribute("tp") TrainingPartner tp ){
+			@ModelAttribute("state") State state , @ModelAttribute("tp") TrainingPartner tp,BindingResult result ,HttpSession session, Model model ){
+		String loginid=session.getAttribute("loginIdUnique").toString();
+		AdmitCardForm admitCardForm=traineeService.generateAdmitCard(Integer.parseInt(loginid));
+		model.addAttribute("admitCardForm", admitCardForm);
 		return "admit-cardtrainee";
 	}
 	

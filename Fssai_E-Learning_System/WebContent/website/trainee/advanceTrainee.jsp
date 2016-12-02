@@ -61,8 +61,8 @@ function gettid(){
 		 alert(calValue);
 		  calValue = document.getElementById('trainingCalendarIdd').value;
 		  alert(calValue);
-		/* }
-	document.getElementById("trainingCalendarId").value = document.getElementById("h").value;
+		 }
+	/*document.getElementById("trainingCalendarId").value = document.getElementById("h").value;
 	var a = document.getElementById("trainingCalendarId").value;
 	var b = document.getElementById("iii").value;
 	alert(a + '   '+ b); */
