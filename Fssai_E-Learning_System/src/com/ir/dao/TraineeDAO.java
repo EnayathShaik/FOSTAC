@@ -59,5 +59,5 @@ public interface TraineeDAO {
 			int personalinformationtraineeid);
 
 	public boolean changePasswordAssesorSave(ChangePasswordForm changePasswordForm, String id);
-	public AdmitCardForm generateAdmitCard(int loginId);
+	public AdmitCardForm generateAdmitCard(int loginId,int profileId);
 }

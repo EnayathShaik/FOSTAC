@@ -11,6 +11,7 @@ import com.ir.dao.LoginDAO;
 import com.ir.dao.impl.AssessmentDaoImpl;
 import com.ir.form.AssessmentAnswerCriteria;
 import com.ir.model.AssessmentQuestion;
+import com.ir.model.CourseType;
 import com.ir.service.AssessmentService;
 
 @Service("AssessmentService")
@@ -29,5 +30,12 @@ public class AssessmentServiceImpl implements AssessmentService {
 	public String saveAssessment(List<AssessmentAnswerCriteria> assessmentAnswerCriterias){
 		String result = assessmentDao.saveAssessment(assessmentAnswerCriterias);
 		return result;
+	}
+	
+	@Override
+	public List<CourseType> courseTypes() {
+		System.out.println("AdminDao");
+		List<CourseType> courseTypeList = assessmentDao.courseTypes();
+		return courseTypeList;
 	}
 }

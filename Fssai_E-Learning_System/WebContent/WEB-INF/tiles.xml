@@ -90,10 +90,6 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/registrationTrainer.jsp" />
 	</definition>
-	<definition name="traineeAssessmentOnline" extends="base.before.login">
-		<put-attribute name="title" value="Fssai E-Learning System" />
-		<put-attribute name="body" value="/website/trainee/traineeAssessmentOnline.jsp" />
-	</definition>
 	<definition name="trainingPartner" extends="base.before.login">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainingPartner.html" />
@@ -127,7 +123,10 @@
 		<put-attribute name="body" value="/success.htm" />
 	</definition>
 	
-	
+	<definition name="welcomeupdatetrainee" extends="base.before.login">
+		<put-attribute name="title" value="Fssai E-Learning System"/>
+		<put-attribute name="body" value="/website/trainee/welcomeupdatetrainee.jsp"/>
+	</definition>
 	
 	
 	<definition name="base.user.afterLogin"
@@ -144,9 +143,9 @@
 	
 	
 <!-- 						   Trainee Starts						  -->
-	<definition name="welcomeupdatetrainee" extends="base.before.login">
-		<put-attribute name="title" value="Fssai E-Learning System"/>
-		<put-attribute name="body" value="/website/trainee/welcomeupdatetrainee.jsp"/>
+		<definition name="traineeAssessmentOnline" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainee/traineeAssessmentOnline.jsp" />
 	</definition>
 	<definition name="traineeHomepage" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
@@ -338,7 +337,7 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainer/certificatetrainer.jsp" />
 	</definition>
-	<definition name="admitcardtrainer" extends="base.user.afterLogin">
+	<definition name="admit-cardtrainer" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainer/admit-card-trainer.jsp" />
 	</definition>
@@ -371,7 +370,7 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/assessor/assessment-calendar.jsp" />
 	</definition>
-	<definition name="mark-attendance" extends="base.user.afterLogin">
+	<definition name="markAttendance" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/assessor/mark-attendance.jsp" />
 	</definition>

@@ -1,4 +1,8 @@
+<%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <title></title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -55,22 +59,7 @@
   <div class="container-fluid">
     <div id="wrapper"> 
       <!-- Sidebar menu -->
-          <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-              <li class="dropdown active"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Course Enrollment <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                  <li><a href="basic.fssai" class="clr">Basic Course</a></li>
-                  <li><a href="advance.fssai" class="clr">Advanced Course</a></li>
-                  <li><a href="special.fssai" class="clr">Special Course</a></li>
-                </ul>
-          </li>
-              <li> <a href="generateAdmitCardtrainee.fssai">Generate Admit Card</a> </li>
-              <li> <a href="course-training.fssai">Training</a> </li>
-              <li> <a href="assessment-instructions.fssai">Assessment</a> </li>
-              <li> <a href="feedback-form.fssai">Feedback</a> </li>
-              <li> <a href="generateCertificatetrainee.fssai">Certification</a> </li>
-            </ul>
-      </div>
+    <%@include file="leftMenuTrainee.jspf"%>
        <!-- Sidebar menu -->
       <!-- /#sidebar-wrapper --> 
       <!-- Page Content -->
@@ -110,41 +99,46 @@
       </table></td>
   </tr>
   <tr>
-    <td width="35%" style="border-top: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;">Roll Number: 322</td>
-    <td width="50%" style="border-top: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;">Applied for Course: Basic Food Safety Certification</td>
+    <td width="35%" style="border-top: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;">Roll Number: ${admitCardForm.rollNo }</td>
+    <td width="50%" style="border-top: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;">Applied for Course: ${admitCardForm.courseName }</td>
   </tr>
   <tr>
-    <td width="35%" style="border-top: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;">Name: ${loginUser.firstName }</td>
+    <td width="35%" style="border-top: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;">Name: ${admitCardForm.name }</td>
     <td width="50%"><table width="100%" border="0">
         <tr>
-          <td width="52%" style="border-top: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold; margin:0px;">Category: General</td>
-          <td width="48%" style="border-top: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold; margin:0px;">Gender: Male</td>
+          <td width="52%" style="border-top: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold; margin:0px;">Category: ${admitCardForm.category }</td>
+          <td width="48%" style="border-top: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold; margin:0px;">Gender: ${admitCardForm.gender }</td>
         </tr>
         <tr>
           <td width="52%" style="border-top: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold; margin:0px;">&nbsp;</td>
-          <td width="48%" style="border-top: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold; margin:0px;">City: Goa</td>
+          <td width="48%" style="border-top: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold; margin:0px;">City: ${admitCardForm.city }</td>
         </tr>
       </table></td>
   </tr>
   <tr>
-    <td width="35%" style="border-top: 1px solid #CCC; border-bottom: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;">Father's Name: Mr. PASWAN</td>
+    <td width="35%" style="border-top: 1px solid #CCC; border-bottom: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;">Father's Name:${admitCardForm.fatherName }</td>
     <td width="50%" style="border-top: 1px solid #CCC; border-bottom: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;"></td>
   </tr>
   <tr>
     <td width="35%" style="padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;">Course Content:
       <ol type="i" style="font-weight:normal; line-height:22px;">
-        <li>Food Safety</li>
-        <li>GHP-GMP</li>
-        <li>GHP-GMP-HACCP</li>
-      </ol></td>
+      <ct:forEach items="${admitCardForm.courseContent}" var="coursContentName">
+       <li>${coursContentName}</li>
+      </ct:forEach>
+<!--         <li>Food Safety</li> -->
+<!--         <li>GHP-GMP</li> -->
+<!--         <li>GHP-GMP-HACCP</li> -->
+      </ol>
+      
+      </td>
     <td width="50%" style="padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;"></td>
   </tr>
   <tr>
     <td><table width="100%" border="0" style="border-top: 1px solid #CCC;">
         <tr>
           <td align="center" style="padding:10px; border-right: 1px solid #CCC; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;"><strong>Centre of Examination:</strong>
-            <p style="font-weight:normal;">Centre Code: 1104,<br>
-              FDA Bhavan, ITO Bhvan</p></td>
+            <p style="font-weight:normal;">Centre Code: ${admitCardForm.trainingCenterCode},<br>
+              ${admitCardForm.address}</p></td>
         </tr>
         <tr>
           <td align="center" style="border-top: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;"><img src="${pageContext.request.contextPath}/website/img/authorize-signature.png" width="58" height="30"  alt=""/><br>

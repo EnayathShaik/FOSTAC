@@ -18,11 +18,13 @@ import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.RegistrationFormTrainer;
+import com.ir.model.AdmitCardForm;
 import com.ir.model.CourseEnrolledUser;
 import com.ir.model.CourseName;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.State;
 import com.ir.model.TrainingPartner;
+import com.ir.model.Utility;
 import com.ir.service.AssessmentAgencyService;
 import com.ir.service.PageLoadService;
 import com.ir.service.TraineeService;
@@ -69,8 +71,14 @@ public class TrainerController {
 		return "contactTrainer";
 	}*/
 	@RequestMapping(value="/assessment-instructions-trainer" , method=RequestMethod.GET)
-	public String assessmentinstructions(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer )
+	public String assessmentinstructionstrainer(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer,BindingResult bindingResult, HttpSession session , Model model )
 	{
+		int loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
+		CourseName courseName=traineeService.getCourseDetails(loginId);
+		Utility utility=new Utility();
+		//Need to write service for AsssessorAgency 
+		model.addAttribute("courseName",courseName);
+		model.addAttribute("utility",utility);
 		return "assessment-instructions-trainer";
 	}
 	@RequestMapping(value="/feedbackFormTrainer" , method=RequestMethod.GET)
@@ -101,6 +109,18 @@ public class TrainerController {
 		model.addAttribute("courseName", courseName);
 		return "generateAdmitCardTrainer";
 	}
+	
+	@RequestMapping(value="/admit-cardtrainer" , method=RequestMethod.GET)
+	public String admitcardtrainee(@ModelAttribute("basicTrainee") CourseEnrolledUserForm courseEnrolledUserForm ,
+			@ModelAttribute("state") State state , @ModelAttribute("tp") TrainingPartner tp,BindingResult result ,HttpSession session, Model model ){
+		if(session.getAttribute("loginIdUnique")!=null){
+			String loginid=session.getAttribute("loginIdUnique").toString();
+			AdmitCardForm admitCardForm=traineeService.generateAdmitCard(Integer.parseInt(loginid),Profiles.TRAINER.value());
+			model.addAttribute("admitCardForm", admitCardForm);
+		}
+		return "admit-cardtrainer";
+	}
+	
 	@RequestMapping(value="/course-training-trainer" , method=RequestMethod.GET)
 	public String coursetraining(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer )
 	{

@@ -121,6 +121,7 @@
 				<value>com.ir.model.AssessorUserManagement</value>
 				<value>com.ir.model.PostVacancyTrainingCenter</value>
 				<value>com.ir.model.ContactTraineee</value>
+				<value>com.ir.model.assessor.AssessorAttendance</value>
 <!-- 				<value>com.ir.form.AssessmentAnswerCriteria</value> -->
 				<!-- 
 				
@@ -160,11 +161,8 @@
 	<bean id="assessmentAgencyService" class="com.ir.service.impl.AssessmentAgencyServiceImpl"/>
 	<bean id="trainerContactService" class="com.ir.service.impl.TrainerContactTServiceIMPL" />
 	<bean id="trainingPartnerService" class="com.ir.service.impl.TrainingPartnerServiceImpl" />
-	
-<bean id = "assessmentService" class = "com.ir.service.impl.AssessmentServiceImpl" />
-	
-	
-<bean id="assessmentDao" class = "com.ir.dao.impl.AssessmentDaoImpl"/>
+	<bean id = "assessmentService" class = "com.ir.service.impl.AssessmentServiceImpl" />
+	<bean id="assessmentDao" class = "com.ir.dao.impl.AssessmentDaoImpl"/>
 	<bean id="adminDAO" class="com.ir.dao.impl.AdminDAOImpl"/>
 	<bean id="pageLoadDao" class="com.ir.dao.impl.PageLoadDaoImpl"/>
 	<bean id="registrationDAO" class="com.ir.dao.impl.RegistrationDAOImpl"/>
@@ -177,7 +175,6 @@
 	<bean id="assessmentAgencyDao" class="com.ir.dao.impl.AssessmentAgencyDaoImpl"/>
 	<bean id="trainerContactDao" class="com.ir.dao.impl.TrainerContactDaoIMPL"/>
 	<bean id="trainingPartnerDAO" class="com.ir.dao.impl.TrainingPartnerDaoImpl" />
-	
 	<bean id="state" class="com.ir.model.State" scope="prototype"/>
 	<bean id="district" class="com.ir.model.District" scope="prototype"/>
 	<bean id="city" class="com.ir.model.City" />
@@ -198,5 +195,5 @@
 	<bean id="personalInformationTrainingPartner" class="com.ir.model.PersonalInformationTrainingPartner"  scope="prototype"/>
 	<bean id="personalInformationAssessor" class="com.ir.model.PersonalInformationAssessor"  scope="prototype"/>
 	<bean id="postVacancyTrainingCenter" class="com.ir.model.PostVacancyTrainingCenter"  scope="prototype"/>
-	
+	<bean id="assessorAttendance" class="com.ir.model.assessor.AssessorAttendance"  scope="prototype"/>
 </beans>

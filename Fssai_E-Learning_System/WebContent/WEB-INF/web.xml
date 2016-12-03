@@ -297,6 +297,24 @@
   <servlet-name>searchAssessorCalendar</servlet-name> 
   <url-pattern>/searchAssessorCalendar.jspp</url-pattern> 
   </servlet-mapping>
+  <servlet>
+  <servlet-name>markAssessorAttendance</servlet-name> 
+  <servlet-class>com.ir.servlet.MarkAssessorAttendance</servlet-class> 
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>markAssessorAttendance</servlet-name> 
+  <url-pattern>/markAssessorAttendance.jspp</url-pattern> 
+  </servlet-mapping>
+  
+  
+   <servlet>
+  <servlet-name>searchAssessorAttendanceCourses</servlet-name> 
+  <servlet-class>com.ir.servlet.assessor.SearchAssessorAttendanceCourses</servlet-class> 
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>searchAssessorAttendanceCourses</servlet-name> 
+  <url-pattern>/searchAssessorAttendanceCourses.jspp</url-pattern> 
+  </servlet-mapping>
   
   <servlet>
   <servlet-name>applyAssessments</servlet-name> 

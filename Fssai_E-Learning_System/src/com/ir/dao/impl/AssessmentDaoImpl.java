@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 import com.ir.dao.AssessmentDao;
 import com.ir.form.AssessmentAnswerCriteria;
 import com.ir.model.AssessmentQuestion;
+import com.ir.model.CourseType;
 import com.ir.model.ManageAssessmentAgency;
 @Repository("AssessmentDao")
 public class AssessmentDaoImpl implements AssessmentDao{
@@ -55,6 +56,16 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		}
 		
 		return "Success";
+	}
+	
+	@Override
+	public List<CourseType> courseTypes() {
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		Query query = session.createQuery("from CourseType");
+		List<CourseType> courseTypeList = query.list();
+		session.close();
+		return courseTypeList;
 	}
 	
 

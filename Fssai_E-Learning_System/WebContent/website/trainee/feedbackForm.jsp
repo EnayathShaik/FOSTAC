@@ -93,28 +93,7 @@ function onFeedbackSave(feedbackMasterList){
 		<div id="wrapper">
 
 			<!-- Sidebar menu -->
-			<div id="sidebar-wrapper">
-				<ul class="sidebar-nav">
-					<li class="dropdown active"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown" role="button"
-						arfeedbackRating${feedbackMaster[1]}-haspopup="true" arfeedbackRating${feedbackMaster[1]}-expanded="false">Course Enrollment <span
-							class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="basic.fssai" class="clr">Basic Course</a></li>
-							<li><a href="advanceTrainee.fssai" class="clr">Advanced
-									Course</a></li>
-							<li><a href="specfeedbackRating${feedbackMaster[1]}lTrainee.fssai" class="clr">SpecfeedbackRating${feedbackMaster[1]}l
-									Course</a></li>
-						</ul></li>
-					<li><a href="generateAdmitCardtrainee.fssai">Generate
-							Admit Card</a></li>
-					<li><a href="courseTraining.fssai">Training</a></li>
-					<li><a href="assessmentInstructions.fssai">Assessment</a></li>
-					<li><a href="feedbackForm.fssai">Feedback</a></li>
-					<li><a href="generateCertificatetrainee.fssai">Certification</a>
-					</li>
-				</ul>
-			</div>
+			<%@include file="leftMenuTrainee.jspf"%>
 			<!-- Sidebar menu -->
 			<!-- /#sidebar-wrapper -->
 			<!-- Page Content -->

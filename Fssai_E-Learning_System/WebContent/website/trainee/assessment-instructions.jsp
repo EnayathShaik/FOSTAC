@@ -59,11 +59,11 @@
                   <div class="col-md-6  col-xs-12"> 
                       <fieldset>
                     <legend><h3>Course Details</h3></legend>
-                    <h4>Course Name: <span class="f16">GHP-GMP* Certification Course</span></h4>
-                    <h4>Course Code: <span class="f16">0034</span></h4>
-                    <h4>Course Duration: <span class="f16">1.5 Hours</span></h4>
-                    <h4>Assessment Agency Name: <span class="f16">Skill India</span></h4>
-                      <h4>Assessor Name: <span class="f16">Dr. RK Gupta</span></h4>
+                    <h4>Course Name: <span class="f16">${courseName.coursename }</span></h4>
+                    <h4>Course Code: <span class="f16">${courseName.coursenameid }</span></h4>
+                    <h4>Course Duration: <span class="f16">${courseName.courseduration }</span></h4>
+                    <h4>Assessment Agency Name: <span class="f16">${utility.assessmentAgencyName }</span></h4>
+                    <h4>Assessor Name: <span class="f16">${utility.assessorName}</span></h4>
                   </fieldset>
                      <br>
               <h3 class="text-capitalize heading-3-padding">Assesment Instructions</h3>
@@ -100,7 +100,7 @@
                     <div class="row">
                        <div class="col-md-12  col-xs-12">
                        <div class="form-group">
-                         <a href="assesment-question.fssai"><input style="width:150px;"  type="button" class="form-control login-btn btn" value="Start Assessment" /></a>
+                         <a href="traineeAssessmentOnline.fssai"><input style="width:150px;"  type="button" class="form-control login-btn btn" value="Start Assessment" /></a>
                         </div>
 
                         </div>
@@ -112,4 +112,8 @@
 
         <!-- scripts --> 
 
-       
+       </div>
+       </div>
+       </div>
+       </div>
+       </section>

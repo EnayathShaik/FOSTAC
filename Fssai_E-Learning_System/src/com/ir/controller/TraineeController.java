@@ -33,6 +33,7 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.State;
 import com.ir.model.TraineeAssessment;
 import com.ir.model.TrainingPartner;
+import com.ir.model.Utility;
 import com.ir.service.AssessmentService;
 import com.ir.service.PageLoadService;
 import com.ir.service.TraineeService;
@@ -230,9 +231,11 @@ public class TraineeController {
 	@RequestMapping(value="/admit-cardtrainee" , method=RequestMethod.GET)
 	public String admitcardtrainee(@ModelAttribute("basicTrainee") CourseEnrolledUserForm courseEnrolledUserForm ,
 			@ModelAttribute("state") State state , @ModelAttribute("tp") TrainingPartner tp,BindingResult result ,HttpSession session, Model model ){
-		String loginid=session.getAttribute("loginIdUnique").toString();
-		AdmitCardForm admitCardForm=traineeService.generateAdmitCard(Integer.parseInt(loginid));
-		model.addAttribute("admitCardForm", admitCardForm);
+		if(session.getAttribute("loginIdUnique")!=null){
+			String loginid=session.getAttribute("loginIdUnique").toString();
+			AdmitCardForm admitCardForm=traineeService.generateAdmitCard(Integer.parseInt(loginid),Profiles.TRAINEE.value());
+			model.addAttribute("admitCardForm", admitCardForm);
+		}
 		return "admit-cardtrainee";
 	}
 	
@@ -338,9 +341,15 @@ public class TraineeController {
 		
 		return "generateCertificatetrainee";
 	}
-	@RequestMapping(value="/assessment-instructions" , method=RequestMethod.GET)
-	public String assessmentinstructions(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer )
+	@RequestMapping(value="/assessment-instructions-trainee" , method=RequestMethod.GET)
+	public String assessmentinstructionstrainee(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer,BindingResult bindingResult, HttpSession session , Model model )
 	{
+		int loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
+		CourseName courseName=traineeService.getCourseDetails(loginId);
+		Utility utility=new Utility();
+		//Need to write service for AsssessorAgency 
+		model.addAttribute("courseName",courseName);
+		model.addAttribute("utility",utility);
 		return "assessment-instructions-trainee";
 	}
 	@RequestMapping(value="/feedback-form" , method=RequestMethod.GET)

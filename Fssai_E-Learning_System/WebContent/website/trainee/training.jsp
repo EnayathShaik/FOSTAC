@@ -40,24 +40,7 @@
         <div id="wrapper"> 
 
               <!-- Sidebar -->
-              <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                  <!-- <li class="sidebar-brand">
-                            </li> -->
-                  <li class="dropdown active"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Course Enrollment <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                      <li><a href="basicTrainer.fssai" class="clr">Basic Course</a></li>
-                      <li><a href="advanceTrainer.fssai" class="clr">Advanced Course</a></li>
-                      <li><a href="specialTrainer.fssai" class="clr">Special Course</a></li>
-                    </ul>
-              </li>
-                  <li> <a href="generate-admit-card.fssai">Generate Admit Card</a> </li>
-                  <li> <a href="course-training.fssai">Training</a> </li>
-                  <li> <a href="assessment-instructions.fssai">Assessment</a> </li>
-                  <li> <a href="feedback-form.fssai">Feedback</a> </li>
-                  <li> <a href="generate-certificate.fssai">Certification</a> </li>
-                </ul>
-          </div>
+   <%@include file="leftMenuTrainee.jspf"%>
               <!-- /#sidebar-wrapper --> 
               <!-- Page Content -->
               <div id="page-content-wrapper">

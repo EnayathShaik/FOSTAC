@@ -103,8 +103,8 @@ public CourseName getCourseName(int profileId) {
 		boolean changePasswordAssesorSave= traineeDAO.changePasswordAssesorSave(changePasswordForm , id);
 		return changePasswordAssesorSave;
 	}
-	public AdmitCardForm generateAdmitCard(int loginId){
-		AdmitCardForm admitCardObj = traineeDAO.generateAdmitCard(loginId);
+	public AdmitCardForm generateAdmitCard(int loginId,int profileId){
+		AdmitCardForm admitCardObj = traineeDAO.generateAdmitCard(loginId,profileId);
 		return admitCardObj;
 	}
 }

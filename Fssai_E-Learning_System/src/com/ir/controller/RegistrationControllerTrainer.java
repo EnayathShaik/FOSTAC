@@ -26,6 +26,8 @@ import com.ir.model.Title;
 import com.ir.service.PageLoadServiceTrainer;
 import com.ir.service.RegistrationServiceTrainer;
 import com.ir.service.RegistrationServiceTrainingPartner;
+import com.ir.service.TraineeService;
+import com.ir.util.Profiles;
 
 @Controller
 public class RegistrationControllerTrainer implements Serializable{
@@ -42,6 +44,9 @@ public class RegistrationControllerTrainer implements Serializable{
 	@Autowired
 	@Qualifier("registrationServiceTrainingPartner")
 	RegistrationServiceTrainingPartner registrationServiceTrainingPartner;
+	@Autowired
+	@Qualifier("traineeService")
+	public TraineeService traineeService;
 	
 	
 	@ModelAttribute("trainingPartnerNameList" )
@@ -257,13 +262,10 @@ public class RegistrationControllerTrainer implements Serializable{
 	return "certificatetrainer";
 	}
     @RequestMapping(value="/generateadmitcardtrainer" , method=RequestMethod.GET)
-	public String generateadmitcard(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer )
+	public String generateadmitcard(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer,BindingResult bindingResult, HttpSession session , Model model )
 	{
-		return "generateadmitcardtrainer";
-	}
-    @RequestMapping(value="/admitcardtrainer" , method=RequestMethod.GET)
-    public String admitcard(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer )
-    {
-	return "admitcardtrainer";
+    	CourseName courseName=traineeService.getCourseName(Profiles.TRAINER.value());
+		model.addAttribute("courseName", courseName);
+		return "generateAdmitCardTrainer";
 	}
 }

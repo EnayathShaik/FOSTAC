@@ -1,4 +1,79 @@
+<%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
+<%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+<script>
+function showDetails(){
+	alert("Fetching details to mark attendance..");
+	
+	$('#tblAssessorCourses tr').remove();
+	$('#tblAssessorCourses').append('<thead>'+
+    '<tr class="background-open-vacancies">'+
+        '<th>S.No.</th>'+
+        '<th>Course Name</th>'+
+        '<th>Assessment Date</th>'+
+        '<th>Assessment Time</th>'+
+        '<th>Attendance</th>'+
+        '<th>&nbsp;&nbsp;</th>'+
+    '</tr>'+
+	'</thead>');
+	var result="";
+	//var id = document.getElementById("assessmentAgencyId").value;
+	var assessorId =710;
+	$.ajax({
+	type: 'post',
+	url: 'searchAssessorAttendanceCourses.jspp?'+assessorId,
+	async: false, 
+	success: function (data){
+		console.log("Data received..");
+		console.log(data);
+	var jsonData = jQuery.parseJSON(data);
+	console.log(jsonData);
+	var j=1;
+	var accessorId;
+	$.each(jsonData , function(i , obj)
+	{
+		$('#tblAssessorCourses').append('<tr id="tableRow"><td>'+j++ +'</td>'+
+				'<td>'+obj[3]+'</td>'+
+				'<td>'+obj[4]+'</td>'+
+				'<td>'+obj[5]+'</td>'+
+				'<td><select name =attendanceRow'+obj[1]+'><option name="present" value ="A">Present</option>'+
+				'<option name="absent" value="I">Absent</option></td>'+
+				'<td> <button onclick="updateAttendance('+obj[0]+','+obj[1]+');return false;">Update</button></td>'+
+				'</tr>');
+		console.log("0-"+obj[0] +" #1-" +obj[1] +" #2-" +obj[2] +" #3-"+obj[3] +" #4-"+obj[4]+" #5-"+obj[5]);
+		currentAssessorId = obj[0];
+	});
+	
+	},
+	failure:function(data){
+		alert("Error occured while retrieving upcoming calendars.");
+	 msgbox('Error occured while retrieving upcoming calendars.');
+	}
+	});
+return result;	
+}
 
+function updateAttendance(assessorId,trainingcalId){
+	alert ("AssessorId - " +assessorId +" #trainingcalId - " + trainingcalId);
+	$.ajax({
+		type: 'post',
+		url: 'markAssessorAttendance.jspp',
+		data:{assessorId: assessorId,
+			trainingcalId:trainingcalId
+		},
+		async: false, 
+		success: function (data){
+			console.log("Data received..");
+			console.log(data);
+		},
+		failure: function(data){
+			alert ("failure:" + data);
+			}
+});
+}
+</script>
+
+<cf:form name="myForm" commandName="markAttendance" >
         <section>
         	<div>
         		<%@include file="topMenuAssessor.jspf" %>
@@ -35,6 +110,13 @@
                                     <div class="col-xs-12">
                                         <fieldset>
                                         <legend><h3>Assessor Attendance</h3></legend>
+                                        <script type="text/javascript">
+                                        var formObj = '${markAttendance}';
+                                        var formData = JSON.parse(formObj);
+                                        var courseTypes = formData.courseType;
+                                        var trainingCenters = formData.trainingCenters;
+                                        </script>
+                                        
                                         <div class="row">
                                             <div class="col-xs-12">
 
@@ -47,11 +129,18 @@
                                                                 
                                                             </ul>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Basic</option>
-                                                            <option>Advanced</option>
-                                                            <option>Special</option>
-                                                        </select>
+                                                        <select class="form-control" name="selCourseType" id = "selCourseType"> </select>
+														<script>
+															var selectOptions = "";
+															for(var i=0 ; i < courseTypes.length; i++)
+																{
+																	console.log(courseTypes[i].CourseTypeId + " -- "+ courseTypes[i].CourseType);
+																	selectOptions += "<option value="+courseTypes[i].CourseTypeId+">"+courseTypes[i].CourseType+"</option>"
+																	
+																}
+															document.getElementById('selCourseType').innerHTML += selectOptions; 
+														</script>
+														
                                                     </div>
                                                     <div class="form-group">
                                                         <div>
@@ -84,13 +173,19 @@
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
-                                                        <select class="form-control">
-                                                            <option>Skill India</option>
-                                                            <option>FSSAI</option>
-                                                            <option>PMKVY</option>
-                                                        </select>
+                                                        <select class="form-control" name="selTrainingCenters" id = "selTrainingCenters"> </select>
+														<script>
+															var selectTc = "";
+															for(var i=0 ; i < trainingCenters.length; i++)
+																{
+																	console.log(trainingCenters[i].id + " -- "+ trainingCenters[i].value);
+																	selectTc += "<option value="+trainingCenters[i].id+">"+trainingCenters[i].value+"</option>"
+																	
+																}
+															document.getElementById('selTrainingCenters').innerHTML += selectTc; 
+														</script>
                                                     </div>
-                                                     <button type="submit" class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false">Show Details</button>
+                                                     <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails();return false">Show Details</button>
                                                 </div>
                                                
                                             </div>
@@ -110,16 +205,8 @@
                                               <!-- table -->
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <table class="table table-bordered table-responsive table-striped table-hover">
-                                                    <thead>
-                                                        <tr class="background-open-vacancies">
-                                                            <th>S.No.</th>
-                                                            <th>Course Name</th>
-                                                            <th>Assessment Date</th>
-                                                            <th>Assessment Time</th>
-                                                            <th>Attendance</th>
-                                                        </tr>
-                                                    </thead>
+                                                <table id = "tblAssessorCourses" class="table table-bordered table-responsive table-striped table-hover">
+                                                    
                                                     <tbody>
                                                         <tr>
                                                             <td>1</td>
@@ -173,10 +260,4 @@
                 </div>
             </div>
         </section>
-
-
-
-
-
-
-
+</cf:form>

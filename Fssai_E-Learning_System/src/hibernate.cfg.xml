@@ -41,6 +41,7 @@
 		<mapping class="com.ir.model.PostVacancyTrainingCenter"/>
 		<mapping class="com.ir.model.ContactTraineee"/>
 		<mapping class= "com.ir.model.Steps"/>
+		<mapping class="com.ir.model.assessor.AssessorAttendance"/>
 <!-- 		<mapping class="com.ir.form.AssessmentAnswerCriteria"/> -->
 <!-- 		<mapping class="com.ir.model.CourseEnrolledUser"/> -->
 		<!-- 

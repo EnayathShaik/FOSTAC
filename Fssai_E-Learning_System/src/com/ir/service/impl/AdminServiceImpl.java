@@ -92,6 +92,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<CourseType> courseTypeList() {
+		System.out.println("AdminDao");
 		List<CourseType> courseTypeList = adminDAO.courseTypeList();
 		return courseTypeList;
 	}

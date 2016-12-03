@@ -61,7 +61,7 @@
                     <h4>Course Name: <span class="f16">${courseName.coursename}</span></h4>
                     <h4>Course Code: <span class="f16">${courseName.coursenameid}</span></h4>
                     <h4>Course Duration: <span class="f16">${courseName.courseduration}</span></h4><br>
-                    <h4><a class="link-bg text-center" href="admitcardtrainer.fssai">Generate Admit Card</a></h4>
+                    <h4><a class="link-bg text-center" href="admit-cardtrainer.fssai">Generate Admit Card</a></h4>
                   </fieldset>
                   <br>
                   
