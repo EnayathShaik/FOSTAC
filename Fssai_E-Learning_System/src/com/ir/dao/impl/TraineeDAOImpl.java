@@ -388,6 +388,7 @@ public class TraineeDAOImpl implements  TraineeDAO{
 		System.out.println("roll nu  :"+date);
 		System.out.println("loginid  :"+loginid);
 		System.out.println("personalinformationtraineeid   :"+personalinformationtraineeid);
+		System.out.println("TrainingCalendarId()   :"+courseEnrolledUserForm.getTrainingCalendarId());
 		
 		courseEnrolledUser.setLoginDetails(loginid);
 		courseEnrolledUser.setProfileId(3);
@@ -396,8 +397,8 @@ public class TraineeDAOImpl implements  TraineeDAO{
 		courseEnrolledUser.setPaymentstatus("Pending");
 		courseEnrolledUser.setEnrolledby("Trainee");
 		
-		Integer ce =0;
-//		= (Integer) session.save(courseEnrolledUser);
+//		Integer ce =0;
+		Integer ce =  (Integer) session.save(courseEnrolledUser);
 		if(ce!=null&& ce.intValue()>0){
 				PersonalInformationTrainee   personalInformationTrainee=(PersonalInformationTrainee) session.load(PersonalInformationTrainee.class, personalinformationtraineeid);
 				//personalInformationTrainee.setSteps(2);			

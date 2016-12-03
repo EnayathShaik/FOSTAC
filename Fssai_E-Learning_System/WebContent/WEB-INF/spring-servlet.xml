@@ -105,7 +105,8 @@
 				<value>com.ir.model.Profile</value>
 				<value>com.ir.model.CourseType</value>
 				<value>com.ir.model.CourseName</value>
-<value>com.ir.model.FeedbackMaster</value>				<value>com.ir.model.ManageCourseContent</value>
+				<value>com.ir.model.FeedbackMaster</value>				
+				<value>com.ir.model.ManageCourseContent</value>
 				<value>com.ir.model.KindOfBusinessDetailsTrainee</value>
 				<value>com.ir.model.KindOfBusiness</value>
 				<value>com.ir.model.PersonalInformationTrainee</value>
@@ -115,6 +116,7 @@
 				<value>com.ir.model.TrainingPartner</value>
 				<value>com.ir.model.TrainingCalendar</value>
 				<value>com.ir.model.CourseEnrolled</value>
+				<value>com.ir.model.CourseEnrolledUser</value>
 				<value>com.ir.model.AssessmentQuestion</value>
 				<value>com.ir.model.AssessorUserManagement</value>
 				<value>com.ir.model.PostVacancyTrainingCenter</value>
@@ -183,7 +185,7 @@
 	<bean id="loginDetails" class="com.ir.model.LoginDetails"  scope="prototype"/>
 	<bean id="assessmentAgency" class="com.ir.model.ManageAssessmentAgency" scope="prototype"/>
 	<bean id="courseEnrolled" class="com.ir.model.CourseEnrolled" scope="prototype" />
-	<bean id="courseEnrolledUserS" class="com.ir.model.CourseEnrolledUser" scope="prototype" />
+	<bean id="courseEnrolledUser" class="com.ir.model.CourseEnrolledUser" scope="prototype" />
 	<bean id="trainingPartnerName" class="com.ir.model.ManageTrainingPartner" scope="prototype" />
 	<bean id="kindOfBusiness" class="com.ir.model.KindOfBusiness" scope="prototype" />
 	<bean id="courseTypeS" class="com.ir.model.CourseType" scope="prototype" />

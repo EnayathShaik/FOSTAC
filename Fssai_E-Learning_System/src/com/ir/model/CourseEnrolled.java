@@ -48,10 +48,4 @@ public class CourseEnrolled {
 		this.loginDetails = loginDetails;
 	}
 
-	
-	
-
-	
-	
-
 }
