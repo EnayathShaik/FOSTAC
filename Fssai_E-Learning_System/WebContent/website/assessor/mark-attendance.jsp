@@ -207,44 +207,6 @@ function updateAttendance(assessorId,trainingcalId){
                                             <div class="col-xs-12">
                                                 <table id = "tblAssessorCourses" class="table table-bordered table-responsive table-striped table-hover">
                                                     
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>HACCP* Course for Milk Industry</td>
-                                                            <td>12/11/2016</td>
-                                                            <td>12:00</td>
-                                                            <td>
-                                                                <select class="form-control">
-                                                                    <option>Present</option>
-                                                                    <option>Absent</option>
-                                                                </select>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>GHP-GMP* Certification Course</td>
-                                                            <td>28/10/2016</td>
-                                                            <td>11:00</td>
-                                                            <td>
-                                                                <select class="form-control">
-                                                                    <option>Present</option>
-                                                                    <option>Absent</option>
-                                                                </select>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>HACCP Course for Water & Beverages Industry</td>
-                                                            <td>28/09/2016</td>
-                                                            <td>10:30</td>
-                                                            <td>
-                                                                <select class="form-control">
-                                                                    <option>Present</option>
-                                                                    <option>Absent</option>
-                                                                </select>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
                                                 </table>
                                             </div>
                                         </div>
