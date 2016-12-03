@@ -24,8 +24,9 @@ public class CourseName implements Serializable{
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int coursenameid;
 	private String coursename;
-	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="coursetypeid")
-	private CourseType coursetypeid;
+	@OneToOne (cascade=CascadeType.ALL)  
+	@JoinColumn(name="coursetypeid")
+	private CourseType courseTypeS;
 	private String courseduration;
 	private String status;
 	private int createdby;
@@ -48,12 +49,7 @@ public class CourseName implements Serializable{
 	public void setCoursename(String coursename) {
 		this.coursename = coursename;
 	}
-	public CourseType getCoursetypeid() {
-		return coursetypeid;
-	}
-	public void setCoursetypeid(CourseType coursetypeid) {
-		this.coursetypeid = coursetypeid;
-	}
+	
 	public String getCourseduration() {
 		return courseduration;
 	}
@@ -117,6 +113,18 @@ public class CourseName implements Serializable{
 	 */
 	public void setModeOfTraining(String modeOfTraining) {
 		this.modeOfTraining = modeOfTraining;
+	}
+	/**
+	 * @return the courseType
+	 */
+	public CourseType getCourseTypeS() {
+		return courseTypeS;
+	}
+	/**
+	 * @param courseType the courseType to set
+	 */
+	public void setCourseTypeS(CourseType courseTypeS) {
+		this.courseTypeS = courseTypeS;
 	}
 	
 }

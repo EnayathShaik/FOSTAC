@@ -182,7 +182,7 @@ public class LoginController {
 				session.setAttribute("loginUsertrainingpartner", personalInformationTrainingPartner.getPersonalInformationTrainingPartnerId());
 				session.setAttribute("logId", personalInformationTrainingPartner.getLoginDetails().getLoginId());
 				System.out.println("id of trainpartner is "+personalInformationTrainingPartner.getPersonalInformationTrainingPartnerId());	
-				return "tcHomepage";
+				return "trainingPartnerHomepage";
 			}else{
 				model.addAttribute("error" , "Oops , you are not authorized !!!");
 				return "login";

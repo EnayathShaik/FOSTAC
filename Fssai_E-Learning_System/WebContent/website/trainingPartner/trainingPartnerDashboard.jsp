@@ -115,16 +115,7 @@ return result;
         <div class="container-fluid">
             <div id="wrapper">
                 <!-- Sidebar -->
-                <div id="sidebar-wrapper">
-                    <ul class="sidebar-nav">
-                        <!-- <li class="sidebar-brand"></li> -->
-                        <li><a href="postVacancyTrainingPartner.fssai">Post Trainer Vacancy</a></li>
-                        <li><a href="trainer-application-status.html">Trainer Application Status</a></li>
-                        <li><a href="view-training-calendar.html">View Training Calendar</a></li>
-                        <li><a href="view-feedback.html">View Feedback</a></li>
-                        
-                    </ul>
-                </div>
+           <%@include file="leftmenuTrainingPartner.jspf" %>
                 <!-- /#sidebar-wrapper -->
                 <!-- Page Content -->
                 <div id="page-content-wrapper">

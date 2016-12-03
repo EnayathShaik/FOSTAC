@@ -175,9 +175,9 @@
 	<bean id="assessmentAgencyDao" class="com.ir.dao.impl.AssessmentAgencyDaoImpl"/>
 	<bean id="trainerContactDao" class="com.ir.dao.impl.TrainerContactDaoIMPL"/>
 	<bean id="trainingPartnerDAO" class="com.ir.dao.impl.TrainingPartnerDaoImpl" />
-	<bean id="state" class="com.ir.model.State" scope="prototype"/>
 	<bean id="district" class="com.ir.model.District" scope="prototype"/>
-	<bean id="city" class="com.ir.model.City" />
+	<bean id="city" class="com.ir.model.City" scope="prototype"/>
+	<bean id="state" class="com.ir.model.State" scope="prototype" />
 	<bean id="title" class="com.ir.model.Title" scope="prototype"/>
 	<bean id="loginDetails" class="com.ir.model.LoginDetails"  scope="prototype"/>
 	<bean id="assessmentAgency" class="com.ir.model.ManageAssessmentAgency" scope="prototype"/>

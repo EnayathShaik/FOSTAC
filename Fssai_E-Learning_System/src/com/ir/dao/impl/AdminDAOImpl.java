@@ -180,7 +180,7 @@ System.out.println("**********SS");
 		}else{
 			District district = new District();
 			district.setDistrictName(districtForm.getDistrictName());
-			district.setStateId(s);
+			district.setState(s);
 			Session session1 = sessionFactory.openSession();
 			Transaction tx1 = session1.beginTransaction();
 			Integer districtId = (Integer)session1.save(district);
@@ -203,7 +203,7 @@ System.out.println("**********SS");
 		District d = (District) session.load(District.class, cityForm.getDistrictId());
 		City city = new City();
 		city.setCityName(cityForm.getCityName());
-		city.setDistrictId(d);
+		city.setDistrict(d);
 		city.setStatus(cityForm.getStatus());
 		
 		Integer cityIdd = null ;
@@ -275,7 +275,7 @@ System.out.println("**********SS");
 		CourseName courseName= new CourseName();
 		courseName.setCourseduration(manageCourse.getDuration());
 		courseName.setCoursename(manageCourse.getCourseName());
-		courseName.setCoursetypeid(ct);
+		courseName.setCourseTypeS(ct);
 		courseName.setStatus(manageCourse.getStatus());
 		courseName.setPaidunpaid(manageCourse.getFreePaid());
 		courseName.setModeOfTraining(manageCourse.getModeOfTraining());
@@ -422,7 +422,7 @@ System.out.println("**********SS");
 		manageAssessmentAgency.setCity(c);
 		manageAssessmentAgency.setEmail(manageAssessmentAgencyForm.getEmail());
 		manageAssessmentAgency.setLoginDetails(loginDetails);
-		manageAssessmentAgency.setStateId(s);
+		manageAssessmentAgency.setState(s);
 		Integer manageTrainingPartnerIdd = (Integer)session.save(manageAssessmentAgency);
 		if(manageTrainingPartnerIdd  != 0){
 			transaction.commit();

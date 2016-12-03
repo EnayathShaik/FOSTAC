@@ -7,13 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.ir.dao.AdminDAO;
+import com.ir.bean.common.IntStringBean;
+import com.ir.bean.common.StringStringBean;
 import com.ir.dao.TrainingPartnerDao;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.PostVacancyTrainingCenterForm;
+import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.PersonalInformationTrainingPartner;
-import com.ir.model.State;
 import com.ir.service.TrainingPartnerService;
 
 @Service
@@ -47,7 +48,32 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 		return changePasswordTraineeSave;
 	}
 
-
-	
-	 
+	@Override
+	public List<CourseType> courseTypes() {
+		System.out.println("TrainingPartnerServiceImpl");
+		List<CourseType> courseTypeList = trainingPartnerDAO.courseTypes();
+		return courseTypeList;
+	}
+	@Override
+	public List<IntStringBean> getTrainerList() {
+		System.out.println("TrainingPartnerServiceImpl");
+		List<IntStringBean> trainerList = trainingPartnerDAO.getTrainerList();
+		return trainerList;
+	}
+	@Override
+	public List<StringStringBean> getStatusList() {
+		System.out.println("TrainingPartnerServiceImpl");
+		List<StringStringBean> statusList = trainingPartnerDAO.getStatusList();
+		return statusList;
+	}
+	@Override
+	public List<StringStringBean> getModeOfTrainingList() {
+		System.out.println("TrainingPartnerServiceImpl");
+		List<StringStringBean> modeoftraininglist = trainingPartnerDAO.getModeOfTrainingList();
+		return modeoftraininglist;
+	}
+	@Override
+	public List<CourseName> getCourseNameList(){
+		return  trainingPartnerDAO.getCourseNameList();
+	}
 }

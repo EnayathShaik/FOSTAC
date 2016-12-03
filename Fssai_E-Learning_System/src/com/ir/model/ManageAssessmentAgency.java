@@ -34,8 +34,8 @@ public class ManageAssessmentAgency {
 	private City city;
 	private String email;
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="stateId")
-	private State stateId;
-	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="loginDetails")
+	private State state;
+	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="id")
 	private LoginDetails loginDetails;
 	public int getManageAssessmentAgencyId() {
 		return manageAssessmentAgencyId;
@@ -97,19 +97,25 @@ public class ManageAssessmentAgency {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public State getStateId() {
-		return stateId;
-	}
-	public void setStateId(State stateId) {
-		this.stateId = stateId;
-	}
+	
 	public LoginDetails getLoginDetails() {
 		return loginDetails;
 	}
 	public void setLoginDetails(LoginDetails loginDetails) {
 		this.loginDetails = loginDetails;
 	}
-	
+	/**
+	 * @return the state
+	 */
+	public State getState() {
+		return state;
+	}
+	/**
+	 * @param state the state to set
+	 */
+	public void setState(State state) {
+		this.state = state;
+	}
 	
 
 }

@@ -19,8 +19,8 @@ public class District {
 	private int districtId;
 	@NotEmpty(message="Please select district")
 	private String districtName;
-	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="stateId")
-	private State stateId;
+	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="stateid")
+	private State state;
 	private String status;
 	public District(){}
 	public int getDistrictId() {
@@ -35,17 +35,24 @@ public class District {
 	public void setDistrictName(String districtName) {
 		this.districtName = districtName;
 	}
-	public State getStateId() {
-		return stateId;
-	}
-	public void setStateId(State stateId) {
-		this.stateId = stateId;
-	}
+	
 	public String getStatus() {
 		return status;
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	/**
+	 * @return the state
+	 */
+	public State getState() {
+		return state;
+	}
+	/**
+	 * @param state the state to set
+	 */
+	public void setState(State state) {
+		this.state = state;
 	}
 	
 }

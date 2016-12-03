@@ -2,6 +2,8 @@ package com.ir.dao;
 
 import java.util.List;
 
+import com.ir.bean.common.IntStringBean;
+import com.ir.bean.common.StringStringBean;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.PostVacancyTrainingCenterForm;
 import com.ir.model.CourseName;
@@ -10,18 +12,24 @@ import com.ir.model.PersonalInformationTrainingPartner;
 
 public interface TrainingPartnerDao {
 
-	List<PersonalInformationTrainingPartner> trainingCenterList();
+	public List<PersonalInformationTrainingPartner> trainingCenterList();
 
-	List<CourseType> courseTypeList();
+	public List<CourseType> courseTypeList();
 
-	String postVacancyTrainingPartner(PostVacancyTrainingCenterForm postVacancyTrainingCenterForm);
+	public String postVacancyTrainingPartner(PostVacancyTrainingCenterForm postVacancyTrainingCenterForm);
 
-	CourseType getCourseType(int id);
+	public CourseType getCourseType(int id);
 
-	CourseName getCourseName(int id);
+	public CourseName getCourseName(int id);
 
-	PersonalInformationTrainingPartner getPersonalInformationTrainingPartner(int id);
+	public PersonalInformationTrainingPartner getPersonalInformationTrainingPartner(int id);
 
 	boolean changePasswordTrainingPartnerSave(ChangePasswordForm changePasswordForm, String id);
+	public List<CourseType> courseTypes();
+	public List<IntStringBean> getTrainerList();
+	public List<CourseName> getCourseNameList();
+	public List<StringStringBean> getStatusList();
+	public List<StringStringBean> getModeOfTrainingList();
+
 
 }

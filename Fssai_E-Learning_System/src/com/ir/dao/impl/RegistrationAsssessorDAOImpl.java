@@ -66,9 +66,6 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 	@Qualifier("kindOfBusiness")
 	private KindOfBusiness kindOfBusiness;
 	@Autowired
-	
-
-	
 	@Qualifier("assessmentAgency")
 	private ManageAssessmentAgency assessmentAgency;
 	
@@ -112,9 +109,9 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 	@Override
 	public ManageAssessmentAgency getAssessmentAgencyName(int id){
 		Session s = sessionFactory.openSession();
-		ManageAssessmentAgency maan = (ManageAssessmentAgency)s.load(ManageAssessmentAgency.class, id);
+		ManageAssessmentAgency manageAssessmentAgency = (ManageAssessmentAgency)s.load(ManageAssessmentAgency.class, id);
 		s.close();
-		return maan;
+		return manageAssessmentAgency;
 	}
 	
 	
