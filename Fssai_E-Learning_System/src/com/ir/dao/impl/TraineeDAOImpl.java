@@ -478,7 +478,7 @@ public class TraineeDAOImpl implements  TraineeDAO{
 		
 		return confirm;
 	}
-	public AdmitCardForm generateAdmitCard(int loginId){
+	public AdmitCardForm generateAdmitCard(int loginId, int profileId){
 //		String str_query = "select ce.courseenrolleduserid "+
 //				", cn.coursename as courseName,"+
 //				" ctype.coursetype as category, "+
@@ -531,7 +531,6 @@ public class TraineeDAOImpl implements  TraineeDAO{
 				System.out.println("Exception while retrieving admit card details : " + e.getMessage());
 			}
 		return admitcard;
-				
 	}
 	}
 	
