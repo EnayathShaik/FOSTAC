@@ -151,16 +151,7 @@ function searchVacancy(){
     <div id="wrapper"> 
       
       <!-- Sidebar -->
-      <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-          <!-- <li class="sidebar-brand">
-                        </li> -->
-          <li> <a href="postVacancyTrainingPartner.fssai">Post Trainer Vacancy</a> </li>
-          <li> <a href="view-trainee-list.html">Trainer Application Status</a> </li>
-          <li> <a href="mark-trainee-attendance.html">View Training Calendar</a> </li>
-          <li> <a href="post-vacancy.fssai">View Feedback</a> </li>
-        </ul>
-      </div>
+      <%@include file="leftmenuTrainingPartner.jspf" %>
       <!-- /#sidebar-wrapper --> 
       <!-- Page Content -->
       <div id="page-content-wrapper">
@@ -201,10 +192,10 @@ function searchVacancy(){
                                                             </li>
                             </ul>
                           </div>
-<cf:select path="courseType" class="form-control" onchange="getCourseName(this.value);">
-<cf:option value="0" label="Select Course Type" />
-<cf:options items="${courseTypeList}" itemValue="CourseTypeId" itemLabel="CourseType"/>
-</cf:select>
+						<cf:select path="courseType" class="form-control" onchange="getCourseName(this.value);">
+						<cf:option value="0" label="Select Course Type" />
+						<cf:options items="${courseTypeList}" itemValue="CourseTypeId" itemLabel="CourseType"/>
+						</cf:select>
                         </div>
                         <div class="form-group">
                           <div>
@@ -216,10 +207,10 @@ function searchVacancy(){
                                </li>
                             </ul>
                           </div>
-<cf:select path="courseName" class="form-control">
-<cf:option value="0" label="Select Course Name" />
-<%-- <cf:options items="${courseNameList}" itemValue="coursenameid" itemLabel="coursename"/> --%>
-</cf:select>
+							<cf:select path="courseName" class="form-control">
+							<cf:option value="0" label="Select Course Name" />
+							<%-- <cf:options items="${courseNameList}" itemValue="coursenameid" itemLabel="coursename"/> --%>
+							</cf:select>
                         </div>
                         <div class="form-group">
                           <div>
