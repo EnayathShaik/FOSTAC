@@ -123,6 +123,10 @@ public class LoginController {
 			return "login";
 		}
 		LoginDetails loginDetails = loginService.login(loginForm);
+		if(loginDetails == null){
+			model.addAttribute("error" , "Oops , You are not authorized !!!");
+			return "login";
+		}
 		session.setAttribute("loginIdUnique", loginDetails.getId());
 		if(loginDetails!=null && loginDetails.getProfileId()==1 && loginDetails.getStatus().equalsIgnoreCase("A")){
 			model.addAttribute("loginDetails", loginDetails);
