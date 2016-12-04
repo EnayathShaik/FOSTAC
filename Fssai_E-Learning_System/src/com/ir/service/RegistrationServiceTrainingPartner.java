@@ -11,7 +11,6 @@ import com.ir.model.CourseType;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.State;
 import com.ir.model.Title;
-import com.ir.model.TrainingPartner;
 
 public interface RegistrationServiceTrainingPartner {
 	

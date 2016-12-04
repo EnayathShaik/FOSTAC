@@ -383,6 +383,7 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 			session.close();
 			return "error";
 		}else{
+			session.flush();
 			CourseType ct = getCourseType(postVacancyTrainingCenterForm.getCourseType());
 			CourseName cn = getCourseName(postVacancyTrainingCenterForm.getCourseName());
 			//LoginDetails loginDetails = loginDetails.setLoginId(postVacancyTrainingCenterForm.getLoginId());

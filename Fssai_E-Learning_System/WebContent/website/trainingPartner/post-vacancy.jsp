@@ -125,13 +125,14 @@ function searchVacancy(){
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li class="hori"><a href="#">Home</a></li>
-                <li class="hori"><a href="#">Update Personal Information</a></li>
-                <li class="hori"><a href="contactTrainingPartner.fssai">Contact Us</a></li>
+                <li class="hori"><a href="update-personal-information.html">Update Personal Information</a></li>
+                <li class="hori"><a href="view-feedback-details.html">View Feedback Details</a></li>
+                <li class="hori"><a href="contact.html">Contact Us</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown active"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog fa-spin"></i> <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="changePasswordTrainingPartner.fssai">Change Password</a></li>
+                    <li><a href="change-password.html">Change Password</a></li>
                     <li><a href="fostac.fssai">Logout</a></li>
                   </ul>
                 </li>
@@ -151,7 +152,20 @@ function searchVacancy(){
     <div id="wrapper"> 
       
       <!-- Sidebar -->
-      <%@include file="leftmenuTrainingPartner.jspf" %>
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <!-- <li class="sidebar-brand">
+                        </li> -->
+          <li> <a href="trainingCalendar.fssai">Training Calendar</a> </li>
+          <li> <a href="view-trainee-list.html">View Trainee List</a> </li>
+          <li> <a href="mark-trainee-attendance.html">Mark Attendance</a> </li>
+          <li> <a href="post-vacancy.fssai">Post Vacancy for Trainer</a> </li>
+          <li> <a href="application-status.html">Application Status</a> </li>
+          <li> <a href="manage-trainer.html">Manage Trainer</a> </li>
+          <li> <a href="assessment-calendar.html">Assessment Calendar</a></li>
+          <li> <a href="payment-confirmation.html">Payment Confirmation</a> </li>
+        </ul>
+      </div>
       <!-- /#sidebar-wrapper --> 
       <!-- Page Content -->
       <div id="page-content-wrapper">
@@ -159,7 +173,7 @@ function searchVacancy(){
           
           <!-- vertical button -->
           <div class="row">
-            <div class="col-lg-12"> <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome Training Partner</span> </a> </div>
+            <div class="col-lg-12"> <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome Training Center</span> </a> </div>
           </div>
           
           <!-- add the content here for main body --> 
@@ -207,10 +221,10 @@ function searchVacancy(){
                                </li>
                             </ul>
                           </div>
-							<cf:select path="courseName" class="form-control">
-							<cf:option value="0" label="Select Course Name" />
-							<%-- <cf:options items="${courseNameList}" itemValue="coursenameid" itemLabel="coursename"/> --%>
-							</cf:select>
+					<cf:select path="courseName" class="form-control">
+					<cf:option value="0" label="Select Course Name" />
+					<%-- <cf:options items="${courseNameList}" itemValue="coursenameid" itemLabel="coursename"/> --%>
+					</cf:select>
                         </div>
                         <div class="form-group">
                           <div>
@@ -227,21 +241,6 @@ function searchVacancy(){
                       </div>
                       <!-- right side -->
                       <div class="col-md-6 col-xs-12">
-<div class="form-group">
-                          <div>
-                            <ul class="lab-no">
-                              <li class="style-li"><strong>Training Center name:<span style="color:red;">*</span></strong></li>
-                              <li class="style-li error-red">
-                               <label id="courseNameError" class="error visibility">select course name</label>
-                               <cf:errors path="courseName" cssclass="error"/>
-                               </li>
-                            </ul>
-                          </div>
-<cf:select path="trainingCenter" class="form-control">
-<cf:option value="0" label="Select Training center Name" />
-<cf:options items="${trainingCenterList}" itemValue="personalInformationTrainingPartnerId" itemLabel="TrainingCentreName"/>
-</cf:select>
-                        </div>                      
                         <div class="form-group">
                           <div>
                             <ul class="lab-no">

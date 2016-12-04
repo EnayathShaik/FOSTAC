@@ -1,9 +1,41 @@
-
+<%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
+<%System.out.print("trainee home page jsp"); %>
+<!--/#footer-->
+<script src="website/js/jquery.js"></script> 
+<script src="website/js/bootstrap.min.js"></script> 
+<script src="website/js/jquery.isotope.min.js"></script> 
 <!-- horizontal navigation -->
+<<script type="text/javascript">
+function applyForVacancy(coursetypeid,coursenameid,personalInformationTrainingPartnerId,loginId){
+	console.log(coursetypeid);
+	console.log(coursenameid);
+	console.log(personalInformationTrainingPartnerId);
+	var buttonID=window.event.currentTarget.id;
+	var data=JSON.stringify({
+		courseType:coursetypeid,
+		courseName:coursenameid,
+	  	trainingCenter:personalInformationTrainingPartnerId,
+	  	loginId:loginId
+  });
+	$.ajax({
+	      type: 'post',
+	      url: 'applyForVacancy.fssai',
+	      contentType : "application/json",
+	      data: data,
+	      success: function (response) {
+	    	var response=JSON.parse(response);
+			var msg=response.message;
+	    	  $('#'+buttonID).text(msg);
+	    	  $('#'+buttonID).prop("disabled",true);
+	      }
+	      });
+}
+</script>
 <section>
 <%@include file="topMenuTrainer.jspf" %>
 </section>
-
 <!-- main body -->
 <section class="main-section-margin-top">
   <div class="container-fluid">
@@ -35,68 +67,69 @@
                       <legend>
                       <h3 style="padding-bottom:20px;">My Training Calendar</h3>
                       </legend>
-                      <table class="table table-bordered table-hover table-striped table-responsive table-hover">
-                        <thead>
-                          <tr class="background-open-vacancies">
-                            <th>S.No.</th>
-                            <th>Course Type</th>
-                            <th>Course Name</th>
-                            <th>Training Date &amp; Time</th>
-                            <th>Training Center Name &amp; Address</th>
-                            <th>Contact Person Name</th>
-                            <th>Contact Person Phone Number &amp; Email ID</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td>Basic</td>
-                            <td>GHP-GMP</td>
-                            <td><p><strong>Date:</strong> 12/01/2015</p>
-                              <p><strong>Time:</strong> 12:00 AM</p></td>
-                            <td>FSSAI, ITO</td>
-                            <td>Mr. Smith</td>
-                            <td>P: 98763524125 <br>E: ajun.j@gmail.com</td>
-                          </tr>
-                          <tr>
-                            <td>2</td>
-                            <td>Special</td>
-                            <td>HACCP</td>
-                            <td><p><strong>Date:</strong> 12/01/2015</p>
-                              <p><strong>Time:</strong> 12:00 AM</p></td>
-                            <td>FBO Bhavan, Kotla Road</td>
-                            <td>Mr. Smith</td>
-                            <td>P: 98763524125 <br>E: ajun.j@gmail.com</td>
-                          </tr>
-                          <tr>
-                            <td>3</td>
-                            <td>Advanced</td>
-                            <td>GHP-GMP-HACCP</td>
-                            <td><p><strong>Date:</strong> 12/01/2015</p>
-                              <p><strong>Time:</strong> 12:00 AM</p></td>
-                            <td>FSSAI, ITO</td>
-                            <td>Mr. Smith</td>
-                            <td>P: 98763524125 <br>E: ajun.j@gmail.com</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <div class="row">
-                        <div class="col-md-6 hidden-xs"></div>
-                        <!-- pagination -->
-                        <div class="col-md-6 col-xs-12 pagination-right">
-                          <nav aria-label="Page navigation">
-                            <ul class="pagination pull-right">
-                              <li> <a href="#" aria-label="Previous"> <span aria-hidden="true">«</span> </a> </li>
-                              <li><a href="#">1</a></li>
-                              <li><a href="#">2</a></li>
-                              <li><a href="#">3</a></li>
-                              <li><a href="#">4</a></li>
-                              <li><a href="#">5</a></li>
-                              <li> <a href="#" aria-label="Next"> <span aria-hidden="true">»</span> </a> </li>
-                            </ul>
-                          </nav>
-                        </div>
-                      </div>
+<!--                       <table class="table table-bordered table-hover table-striped table-responsive table-hover"> -->
+                      Nothing is available for you
+<!--                         <thead> -->
+<!--                           <tr class="background-open-vacancies"> -->
+<!--                             <th>S.No.</th> -->
+<!--                             <th>Course Type</th> -->
+<!--                             <th>Course Name</th> -->
+<!--                             <th>Training Date &amp; Time</th> -->
+<!--                             <th>Training Center Name &amp; Address</th> -->
+<!--                             <th>Contact Person Name</th> -->
+<!--                             <th>Contact Person Phone Number &amp; Email ID</th> -->
+<!--                           </tr> -->
+<!--                         </thead> -->
+<!--                         <tbody> -->
+<!--                           <tr> -->
+<!--                             <td>1</td> -->
+<!--                             <td>Basic</td> -->
+<!--                             <td>GHP-GMP</td> -->
+<!--                             <td><p><strong>Date:</strong> 12/01/2015</p> -->
+<!--                               <p><strong>Time:</strong> 12:00 AM</p></td> -->
+<!--                             <td>FSSAI, ITO</td> -->
+<!--                             <td>Mr. Smith</td> -->
+<!--                             <td>P: 98763524125 <br>E: ajun.j@gmail.com</td> -->
+<!--                           </tr> -->
+<!--                           <tr> -->
+<!--                             <td>2</td> -->
+<!--                             <td>Special</td> -->
+<!--                             <td>HACCP</td> -->
+<!--                             <td><p><strong>Date:</strong> 12/01/2015</p> -->
+<!--                               <p><strong>Time:</strong> 12:00 AM</p></td> -->
+<!--                             <td>FBO Bhavan, Kotla Road</td> -->
+<!--                             <td>Mr. Smith</td> -->
+<!--                             <td>P: 98763524125 <br>E: ajun.j@gmail.com</td> -->
+<!--                           </tr> -->
+<!--                           <tr> -->
+<!--                             <td>3</td> -->
+<!--                             <td>Advanced</td> -->
+<!--                             <td>GHP-GMP-HACCP</td> -->
+<!--                             <td><p><strong>Date:</strong> 12/01/2015</p> -->
+<!--                               <p><strong>Time:</strong> 12:00 AM</p></td> -->
+<!--                             <td>FSSAI, ITO</td> -->
+<!--                             <td>Mr. Smith</td> -->
+<!--                             <td>P: 98763524125 <br>E: ajun.j@gmail.com</td> -->
+<!--                           </tr> -->
+<!--                         </tbody> -->
+<!--                       </table> -->
+<!--                       <div class="row"> -->
+<!--                         <div class="col-md-6 hidden-xs"></div> -->
+<!--                         pagination -->
+<!--                         <div class="col-md-6 col-xs-12 pagination-right"> -->
+<!--                           <nav aria-label="Page navigation"> -->
+<!--                             <ul class="pagination pull-right"> -->
+<!--                               <li> <a href="#" aria-label="Previous"> <span aria-hidden="true">«</span> </a> </li> -->
+<!--                               <li><a href="#">1</a></li> -->
+<!--                               <li><a href="#">2</a></li> -->
+<!--                               <li><a href="#">3</a></li> -->
+<!--                               <li><a href="#">4</a></li> -->
+<!--                               <li><a href="#">5</a></li> -->
+<!--                               <li> <a href="#" aria-label="Next"> <span aria-hidden="true">»</span> </a> </li> -->
+<!--                             </ul> -->
+<!--                           </nav> -->
+<!--                         </div> -->
+<!--                       </div> -->
                     </fieldset>
                   </div>
                 </div>
@@ -105,7 +138,6 @@
               <br>
               <!-- open vacancies table -->
               <div class="col-xs-12"> 
-                
                 <!-- table -->
                 <div class="row">
                   <div class="col-xs-12 table-overflow-responsive">
@@ -124,40 +156,29 @@
                             <th width="11%"></th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td>Basic</td>
-                            <td>GHP-GMP* Certification Course</td>
-                            <td><p><strong>Date:</strong> 12/01/2015</p>
-                              <p><strong>Time:</strong> 12:00 AM</p></td>
-                            <td>FSSAI, FDA Bhvan</td>
-                            <td><a href="#" class="btn btn-default">Apply</a></td>
-                          </tr>
-                          <tr>
-                            <td>2</td>
-                            <td>Advance</td>
-                            <td>HACCP Course for Oil & Fat Industry</td>
-                            <td><p><strong>Date:</strong> 10/01/2015</p>
-                              <p><strong>Time:</strong> 1:00 PM</p></td>
-                            <td>FSSAI, Kotla Road</td>
-                            <td><a href="#" class="btn btn-default">Apply</a></td>
-                          </tr>
-                          <tr>
-                            <td>3</td>
-                            <td>Special</td>
-                            <td>HACCP Course for Water & Beverages Industry</td>
-                            <td><p><strong>Date:</strong> 12/01/2015</p>
-                              <p><strong>Time:</strong> 12:00 AM</p></td>
-                            <td>FSSAI, Kotla Road, ITO</td>
-                            <td><a href="#" class="btn btn-default">Apply</a></td>
-                          </tr>
+                        <tbody id="traineePostVacancy">
                         </tbody>
                       </table>
                     </fieldset>
                   </div>
                 </div>
               </div>
+                  <script type="text/javascript">
+                  $(document).ready(function(){    
+                	  var postVacancyList=${postVacancyTrainingCenter};
+                      for(index=0;index<postVacancyList.length;index++){
+                    	  console.log(postVacancyList[index]);
+                    	  $('#traineePostVacancy').append('<tr>'+
+                    		'<td>'+(index+1)+'</td><td>'+postVacancyList[index].courseType.CourseType+'</td>'+
+                    	    '<td>'+postVacancyList[index].courseName.coursename+'</td>'+
+                    	    '<td><p><strong>Date:</strong>'+postVacancyList[index].trainingDate+'</td>'+
+                    	    '<td>'+postVacancyList[index].trainingCenter.TrainingCentreName+','+postVacancyList[index].trainingCenter.TrainingPartnerPermanentLine1+' '+postVacancyList[index].trainingCenter.TrainingPartnerPermanentLine2+'</td> '+
+                    	    '<td> <button id=button'+index+' onclick="applyForVacancy('+postVacancyList[index].courseType.CourseTypeId+','+postVacancyList[index].courseName.coursenameid+','+postVacancyList[index].trainingCenter.personalInformationTrainingPartnerId+','+postVacancyList[index].trainingCenter.loginDetails.id+')" class="btn btn-default">Apply</button></td>'+
+                    	  	'</tr>');
+                      }
+                  });
+              
+              </script>
               <br>
               <!-- job application -->
               <div class="col-xs-12"> <br>
@@ -168,6 +189,7 @@
                       <legend>
                       <h3 style="padding-bottom:20px;">Job Application</h3>
                       </legend>
+                     
                       <table class="table table-bordered table-responsive table-striped table-hover">
                         <thead>
                           <tr class="background-open-vacancies">
@@ -302,6 +324,5 @@
     </div>
   </div>
 </section>
-
 <!-- scripts --> 
 

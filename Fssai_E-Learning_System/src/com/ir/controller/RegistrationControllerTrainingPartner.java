@@ -19,17 +19,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.PostVacancyTrainingCenterForm;
-import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.RegistrationFormTrainingPartner;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.ManageTrainingPartner;
-import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.State;
 import com.ir.model.Title;
-import com.ir.model.TrainingPartner;
-import com.ir.service.PageLoadServiceTrainer;
-import com.ir.service.RegistrationServiceTrainer;
 import com.ir.service.RegistrationServiceTrainingPartner;
 
 @Controller

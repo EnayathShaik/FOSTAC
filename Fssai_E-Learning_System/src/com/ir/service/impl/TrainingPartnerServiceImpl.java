@@ -15,6 +15,8 @@ import com.ir.form.PostVacancyTrainingCenterForm;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.PersonalInformationTrainingPartner;
+import com.ir.model.PostVacancyTrainingCenter;
+import com.ir.model.PostVacancyTrainingCenterBean;
 import com.ir.service.TrainingPartnerService;
 
 @Service
@@ -75,5 +77,15 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 	@Override
 	public List<CourseName> getCourseNameList(){
 		return  trainingPartnerDAO.getCourseNameList();
+	}
+
+	@Override
+	public List<PostVacancyTrainingCenter> getPostVacancyTrainingList() {
+		return  trainingPartnerDAO.getPostVacancyTrainingList();
+	}
+
+	@Override
+	public int saveVacancy(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean) {
+		return  trainingPartnerDAO.saveVacancy(postVacancyTrainingCenterBean);
 	}
 }

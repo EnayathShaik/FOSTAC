@@ -41,8 +41,15 @@ function showDetails(){
 	var assessorId =710;
 	$.ajax({
 	type: 'post',
-	url: 'trainingpartnerapplicationstatus.jspp?'+assessorId,
-	async: false, 
+	url: 'SearchTrainingPartnerGenaricServlet.jspp',
+	async: false,
+	data: {
+		cousertypeid:$('#selCourseType').val(),
+		coursenameid:$('#selCourseName').val(),
+		trainerid:$('#selTrainerNames').val(),
+		trainingdate:$('#trainingdate').val(),
+		screentype:'TRAINING_PARTNER_APPLICATION_STATUS'
+    },
 	success: function (data){
 		console.log("Data received..");
 		console.log(data);

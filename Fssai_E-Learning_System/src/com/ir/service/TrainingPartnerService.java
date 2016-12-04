@@ -9,10 +9,14 @@ import com.ir.form.PostVacancyTrainingCenterForm;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.PersonalInformationTrainingPartner;
+import com.ir.model.PostVacancyTrainingCenter;
+import com.ir.model.PostVacancyTrainingCenterBean;
 
 public interface TrainingPartnerService {
 
 	public List<PersonalInformationTrainingPartner> trainingCenterList();
+	public List<PostVacancyTrainingCenter> getPostVacancyTrainingList();
+	public int saveVacancy(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
 
 	public List<CourseType> courseTypeList();
 

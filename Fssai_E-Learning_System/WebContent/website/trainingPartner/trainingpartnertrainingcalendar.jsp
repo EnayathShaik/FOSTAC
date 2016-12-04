@@ -21,9 +21,10 @@ function getCourseName(val){
 
 </script>
 <script>
-function showDetails(){
-	alert("Fetching details to mark attendance..");
+function saveDetails(){
 	
+}
+function showDetails(){
 	$('#tblAssessorCourses tr').remove();
 	$('#tblAssessorCourses').append('<thead>'+
     '<tr class="background-open-vacancies">'+
@@ -41,8 +42,16 @@ function showDetails(){
 	var assessorId =710;
 	$.ajax({
 	type: 'post',
-	url: 'trainingpartnertrainingcalendar.jspp?'+assessorId,
+	url: 'searchTrainingPartnerGenaricServlet.jspp?'+assessorId,
 	async: false, 
+	data: {
+		cousertypeid:$('#selCourseType').val(),
+		coursenameid:$('#selCourseName').val(),
+		trainerid:$('#selTrainerNames').val(),
+		trainingdate:$('#trainingdate').val(),
+		trainingtime:$('#trainingtime').val(),
+		screentype:"TRAINING_PARTNER_CALENDAR"
+    },
 	success: function (data){
 		console.log("Data received..");
 		console.log(data);
@@ -215,7 +224,7 @@ return result;
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
-                                                        <input type="date" class="form-control">
+                                                        <input type="date" id="trainingdate" class="form-control">
                                                     </div>
                                                     <div class="form-group">
                                                         <div>
@@ -224,8 +233,9 @@ return result;
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
-                                                        <input type="time" class="form-control">
+                                                        <input type="time" id="trainingtime" class="form-control">
                                                     </div>
+                                                    <input type="submit" style="margin-top:20px;"  class="btn login-btn pull-right show-details-vacancy collapsed"  data-target="#show-result" aria-expanded="false" value="Create">
                                                      <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails();return false">Show Details</button>
                                                 </div>
                                                
@@ -248,7 +258,7 @@ return result;
                       <legend>
                       <h4>Search results</h4>
                       </legend>
-                      <table class="table table-bordered table-responsive table-striped table-hover">
+                      <table id="trainingPartnercalendar" class="table table-bordered table-responsive table-striped table-hover">
                         <thead>
                           <tr class="background-open-vacancies">
                             <th>S.No.</th>
@@ -260,42 +270,7 @@ return result;
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>1
-                              <input type="checkbox"></td>
-                            <td>Basic</td>
-                            <td>GHP-GMP* Certification</td>
-                            <td><input type="date"></td>
-                            <td><input type="time"></td>
-                            <td><select class="form-control">
-                                <option>Rahul</option>
-                                <option>Suraj</option>
-                              </select></td>
-                          </tr>
-                          <tr>
-                            <td>2
-                              <input type="checkbox"></td>
-                            <td>Advance</td>
-                            <td>GHP-GMP-HACCP</td>
-                            <td><input type="date"></td>
-                            <td><input type="time"></td>
-                            <td><select class="form-control">
-                                <option>Rahul</option>
-                                <option>Suraj</option>
-                              </select></td>
-                          </tr>
-                          <tr>
-                            <td>3
-                              <input type="checkbox"></td>
-                            <td>Special</td>
-                            <td>HACCP Course</td>
-                            <td><input type="date"></td>
-                            <td><input type="time"></td>
-                            <td><select class="form-control">
-                                <option>Rahul</option>
-                                <option>Suraj</option>
-                              </select></td>
-                          </tr>
+                          
                         </tbody>
                       </table>
                       <a href="#" class="btn login-btn pull-right">Save</a>

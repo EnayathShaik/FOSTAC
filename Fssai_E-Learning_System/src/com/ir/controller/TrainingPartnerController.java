@@ -1,7 +1,11 @@
 package com.ir.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,19 +14,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.ir.bean.common.IntStringBean;
+import com.ir.bean.common.JsonResponse;
 import com.ir.bean.common.StringStringBean;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.PostVacancyTrainingCenterForm;
-import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.PersonalInformationTrainingPartner;
+import com.ir.model.PostVacancyTrainingCenterBean;
 import com.ir.model.TrainingPartnerTrainingCalender;
+import com.ir.service.LoginService;
 import com.ir.service.TrainingPartnerService;
 
 @Controller
@@ -32,9 +40,14 @@ public class TrainingPartnerController {
 	@Autowired
 	@Qualifier("trainingPartnerService")
 	TrainingPartnerService trainingPartnerService; 
+	
+	
+	@Autowired
+	@Qualifier("loginService")
+	LoginService loginService; 
 
 	@RequestMapping(value="/postVacancyTrainingPartner" , method=RequestMethod.GET)
-	public String postVacancy(@ModelAttribute("postVacancyTrainingCenterForm") PostVacancyTrainingCenterForm postVacancyTrainingCenterForm ){
+	public String postVacancy(@ModelAttribute("postVacancyTrainingCenterForm") PostVacancyTrainingCenterForm postVacancyTrainingCenterForm,HttpSession session,BindingResult result , Model model ){
 		return "postVacancyTrainingPartner";
 		
 	}
@@ -187,8 +200,10 @@ public class TrainingPartnerController {
 	}
 	
 	@RequestMapping(value="/postVacancyTrainingPartnerSave" , method=RequestMethod.POST)
-	  public String postVacancySave(@ModelAttribute("postVacancyTrainingCenterForm") PostVacancyTrainingCenterForm postVacancyTrainingCenterForm , Model model){		
-		  String postVacancy = trainingPartnerService.postVacancyTrainingPartner(postVacancyTrainingCenterForm);
+	  public String postVacancySave(@ModelAttribute("postVacancyTrainingCenterForm") PostVacancyTrainingCenterForm postVacancyTrainingCenterForm ,HttpSession session,BindingResult result ,  Model model){		
+		int loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
+		postVacancyTrainingCenterForm.setTrainingCenter(loginService.FullDetailtrainingpartner(loginId).getPersonalInformationTrainingPartnerId());
+		String postVacancy = trainingPartnerService.postVacancyTrainingPartner(postVacancyTrainingCenterForm);
 		  if(postVacancy.equalsIgnoreCase("created")){
 			  model.addAttribute("created", "Vacancy created successfull !!!");
 		  }else{
@@ -205,6 +220,29 @@ public class TrainingPartnerController {
 	public List<CourseType> courseTypeList(){
 		List<CourseType> courseTypeList = trainingPartnerService.courseTypeList();
 		return courseTypeList;
+	}
+	
+	@RequestMapping(value="/applyForVacancy" , method=RequestMethod.POST)
+	@ResponseBody
+	public void applyForVacancy(@RequestBody PostVacancyTrainingCenterBean postVacancyTrainingCenterBean,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		JsonResponse responseObj=new JsonResponse();
+		responseObj.setId(postVacancyTrainingCenterBean.getTrainingCenter());
+		try{
+			int appliedId = trainingPartnerService.saveVacancy(postVacancyTrainingCenterBean);
+			if(appliedId>0){
+				responseObj.setMessage("Vacancy applyed successfully");
+			}else{
+				responseObj.setMessage("Vacancy already updated");
+			}
+		}catch(Exception e){
+			responseObj.setMessage("unable to apply Vacancy");
+		}
+		response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        Gson gson=new Gson();
+        String newJSON=gson.toJson(responseObj);
+        out.print(newJSON);
+        out.flush();
 	}
 	
 	

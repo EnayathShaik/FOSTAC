@@ -8,7 +8,6 @@ import javax.validation.Valid;
 //import org.apache.tomcat.util.net.jsse.openssl.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,9 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.google.gson.Gson;
 import com.ir.form.LoginForm;
-import com.ir.form.RegistrationFormTrainer;
-import com.ir.model.CourseEnrolled;
 import com.ir.model.LoginDetails;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageTrainingPartner;
@@ -28,10 +26,10 @@ import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
-import com.ir.model.State;
+import com.ir.model.PostVacancyTrainingCenter;
 import com.ir.model.TrainingPartner;
-import com.ir.service.AdminService;
 import com.ir.service.LoginService;
+import com.ir.service.TrainingPartnerService;
 import com.ir.service.UpdateService;
 
 /**
@@ -62,6 +60,9 @@ public class LoginController {
 	@Autowired
 	@Qualifier("personalInformationAssessor")
 	PersonalInformationAssessor personalInformationAssessor; 
+	@Autowired
+	@Qualifier("trainingPartnerService")
+	TrainingPartnerService trainingPartnerService; 
 	
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -168,7 +169,9 @@ public class LoginController {
 			model.addAttribute("logintrainer", personalInformationTrainer);
 			session.setAttribute("loginUser2", personalInformationTrainer.getPersonalInformationTrainerId());
 			session.setAttribute("logId", personalInformationTrainer.getLoginDetails().getLoginId());
-		session.setAttribute("Id",personalInformationTrainer.getLoginDetails().getId());
+			session.setAttribute("Id",personalInformationTrainer.getLoginDetails().getId());
+			List<PostVacancyTrainingCenter> postVacancyTrainingCenter=trainingPartnerService.getPostVacancyTrainingList();
+			model.addAttribute("postVacancyTrainingCenter", new Gson().toJson(postVacancyTrainingCenter));
 			return "trainerHomepage";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 5){
 			if(loginDetails.getStatus().equalsIgnoreCase("A")){

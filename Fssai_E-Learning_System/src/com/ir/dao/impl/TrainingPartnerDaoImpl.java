@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -19,6 +20,7 @@ import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.PostVacancyTrainingCenter;
+import com.ir.model.PostVacancyTrainingCenterBean;
 import com.ir.util.ChangePasswordUtility;
 
 @Repository
@@ -119,6 +121,24 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		}
 	}
 	@Override
+	public int saveVacancy(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean){
+		Session session = sessionFactory.openSession();
+		Integer isapplied=0;
+		Transaction tx=session.beginTransaction();
+		Query sql=session.createSQLQuery("select * from trainingcentervacancyenrolled where coursetype= "+postVacancyTrainingCenterBean.getCourseType()+" AND coursename="+postVacancyTrainingCenterBean.getCourseName()+" AND trainingcenter="+postVacancyTrainingCenterBean.getTrainingCenter());
+		List<Object[]> list=sql.list();
+		if(list.size()>0){
+			postVacancyTrainingCenterBean.setVacancyEnrolledId(Integer.parseInt(list.get(0)[0].toString()));
+			session.update(postVacancyTrainingCenterBean);
+		}else{
+			isapplied= (Integer) session.save(postVacancyTrainingCenterBean);
+		}
+		tx.commit();
+		session.close();
+		return isapplied;
+		
+	}
+	@Override
 	public boolean changePasswordTrainingPartnerSave(ChangePasswordForm changePasswordForm, String id) {
 		String oldPassword=	changePasswordForm.getOldPassword();
 		String newPassword=changePasswordForm.getNewPassword();
@@ -167,6 +187,14 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			statusList.add(bean);
 		}
 		return statusList;
+	}
+	@Override
+	public List<PostVacancyTrainingCenter> getPostVacancyTrainingList(){
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery("from PostVacancyTrainingCenter");
+		List<PostVacancyTrainingCenter> postVacancyTrainingCenter = query.list();
+		session.close();
+		return postVacancyTrainingCenter;
 	}
 	@Override
 	public List<StringStringBean> getModeOfTrainingList(){

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
 import com.ir.dao.RegistrationTrainingPartnerDAO;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
@@ -15,7 +16,6 @@ import com.ir.model.CourseType;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.State;
 import com.ir.model.Title;
-import com.ir.model.TrainingPartner;
 import com.ir.service.RegistrationServiceTrainingPartner;
 
 
