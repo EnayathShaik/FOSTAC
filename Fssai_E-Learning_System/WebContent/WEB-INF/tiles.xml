@@ -433,6 +433,11 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainingPartner/post-vacancy.jsp" />
 	</definition>
+	<definition name="editApplicationStatusDetails" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainingPartner/applicationStatusInner.jsp" />
+	</definition>
+	
 	<definition name="contactTP" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainingPartner/contact.jsp" />

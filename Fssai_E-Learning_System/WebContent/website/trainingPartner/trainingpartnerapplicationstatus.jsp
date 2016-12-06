@@ -21,6 +21,37 @@ function getCourseName(val){
 
 </script>
 <script>
+var result="";
+var response="";
+
+function editApplicationStatus(){
+	//var id = document.getElementById("assessmentAgencyId").value;
+	var data=JSON.stringify({
+		courseType:$('#selCourseType').val()==null?0:$('#selCourseType').val(),
+		courseName:$('#selCourseName').val()==null?0:$('#selCourseName').val(),
+		trainingDate:$('#trainingdate').val()
+  });
+	$.ajax({
+	      type: 'post',
+	      url: 'editApplicationStatusDetails.fssai',
+	      contentType : "application/json",
+	      data: data,
+	      success: function (response) {
+	    	 response=JSON.parse(response);
+	    	 console.log(response)
+// 	    	 for(index=0;index<response.length;index++){
+//          	  console.log(response[index]);
+//          	  $('#applicaionStatus').append('<tr>'+
+//          		'<td>'+(index+1)+'</td><td>'+response[index].courseTypeName+'</td>'+
+//          	    '<td>'+response[index].courseName+'</td>'+
+//          	    '<td>'+response[index].trainingDate.replace("-","/").replace("-","/")+'</td>'+
+//          	     '<td>'+response[index].noOfVacancy+'</td>'+
+//          	    '<td><a href="#" onClick="editApplicationStatus('+index+')">'+response[index].noOfApplications+'</td> '+
+//          	  	'</tr>');
+//            }
+	      }
+	      });
+}
 function showDetails(){
 	alert("Fetching details to mark attendance..");
 	
@@ -36,48 +67,32 @@ function showDetails(){
         '<th>&nbsp;&nbsp;</th>'+
     '</tr>'+
 	'</thead>');
-	var result="";
 	//var id = document.getElementById("assessmentAgencyId").value;
-	var assessorId =710;
+	var data=JSON.stringify({
+		courseType:$('#selCourseType').val()==null?0:$('#selCourseType').val(),
+		courseName:$('#selCourseName').val()==null?0:$('#selCourseName').val(),
+		trainingDate:$('#trainingdate').val()
+  });
 	$.ajax({
-	type: 'post',
-	url: 'SearchTrainingPartnerGenaricServlet.jspp',
-	async: false,
-	data: {
-		cousertypeid:$('#selCourseType').val(),
-		coursenameid:$('#selCourseName').val(),
-		trainerid:$('#selTrainerNames').val(),
-		trainingdate:$('#trainingdate').val(),
-		screentype:'TRAINING_PARTNER_APPLICATION_STATUS'
-    },
-	success: function (data){
-		console.log("Data received..");
-		console.log(data);
-	var jsonData = jQuery.parseJSON(data);
-	console.log(jsonData);
-	var j=1;
-	var accessorId;
-	$.each(jsonData , function(i , obj)
-	{
-		$('#tblAssessorCourses').append('<tr id="tableRow"><td>'+j++ +'</td>'+
-				'<td>'+obj[3]+'</td>'+
-				'<td>'+obj[4]+'</td>'+
-				'<td>'+obj[5]+'</td>'+
-				'<td><select name =attendanceRow'+obj[1]+'><option name="present" value ="A">Present</option>'+
-				'<option name="absent" value="I">Absent</option></td>'+
-				'<td> <button onclick="updateAttendance('+obj[0]+','+obj[1]+');return false;">Update</button></td>'+
-				'</tr>');
-		console.log("0-"+obj[0] +" #1-" +obj[1] +" #2-" +obj[2] +" #3-"+obj[3] +" #4-"+obj[4]+" #5-"+obj[5]);
-		currentAssessorId = obj[0];
-	});
-	
-	},
-	failure:function(data){
-		alert("Error occured while retrieving upcoming calendars.");
-	 msgbox('Error occured while retrieving upcoming calendars.');
-	}
-	});
-return result;	
+	      type: 'post',
+	      url: 'getApplicationStatusDetails.fssai',
+	      contentType : "application/json",
+	      data: data,
+	      success: function (response) {
+	    	 response=JSON.parse(response);
+	    	 for(index=0;index<response.length;index++){
+           	  console.log(response[index]);
+           	  $('#applicaionStatus').append('<tr>'+
+           		'<td>'+(index+1)+'</td><td>'+response[index].courseTypeName+'</td>'+
+           	    '<td>'+response[index].courseName+'</td>'+
+           	    '<td>'+response[index].trainingDate.replace("-","/").replace("-","/")+'</td>'+
+           	     '<td>'+response[index].noOfVacancy+'</td>'+
+           	    '<td><a href="editApplicationStatusDetails.fssai?courseType='+response[index].courseTypeId+'&&courseName='+response[index].courseNameId+'">'+response[index].noOfApplications+'</td> '+
+           	  	'</tr>');
+             }
+	      }
+	      });
+
 }
 
 
@@ -114,7 +129,6 @@ return result;
     </nav>
   </div>
 </section>
-<cf:form name="myForm" commandName="trainingPartnerTrainingCalender" >
         <!-- main body -->
         <section class="main-section-margin-top">
             <div class="container-fluid">
@@ -199,9 +213,9 @@ return result;
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
-                                                        <input type="date" class="form-control">
+                                                        <input type="date" id="trainingdate" class="form-control">
                                                     </div>
-                                                     <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails();return false">Show Details</button>
+                                                     <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails();">Show Details</button>
                                                 </div>
                                                
                                             </div>
@@ -213,78 +227,36 @@ return result;
 
                                     </div>
 
-                                    <!-- search Results -->
-                        <!-- search Results -->
+<!--                                     search Results -->
+<!--                         search Results -->
               <div class="col-xs-12 collapse table-overflow-responsive" id="show-result" aria-expanded="false" style="height: 0px;"> 
-                <!-- table -->
+<!--                 table -->
                 <div class="row">
                   <div class="col-xs-12">
                     <fieldset style="margin-top: 20px;">
                       <legend>
-                      <h4>Search results</h4>
+                      <h4>Current Application Status</h4>
                       </legend>
                       <table class="table table-bordered table-responsive table-striped table-hover">
                         <thead>
                           <tr class="background-open-vacancies">
-                            <th>S.No.</th>
+						    <th>S.No</th>
                             <th>Course Type</th>
                             <th>Course Name</th>
                             <th>Training Date</th>
-                            <th>Training Time</th>
-                            <th>Trainer Name</th>
+                            <th>No. of Vacancies</th>
+                            <th>No. Of Applications</th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <tr>
-                            <td>1
-                              <input type="checkbox"></td>
-                            <td>Basic</td>
-                            <td>GHP-GMP* Certification</td>
-                            <td><input type="date"></td>
-                            <td><input type="time"></td>
-                            <td><select class="form-control">
-                                <option>Rahul</option>
-                                <option>Suraj</option>
-                              </select></td>
-                          </tr>
-                          <tr>
-                            <td>2
-                              <input type="checkbox"></td>
-                            <td>Advance</td>
-                            <td>GHP-GMP-HACCP</td>
-                            <td><input type="date"></td>
-                            <td><input type="time"></td>
-                            <td><select class="form-control">
-                                <option>Rahul</option>
-                                <option>Suraj</option>
-                              </select></td>
-                          </tr>
-                          <tr>
-                            <td>3
-                              <input type="checkbox"></td>
-                            <td>Special</td>
-                            <td>HACCP Course</td>
-                            <td><input type="date"></td>
-                            <td><input type="time"></td>
-                            <td><select class="form-control">
-                                <option>Rahul</option>
-                                <option>Suraj</option>
-                              </select></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <a href="#" class="btn login-btn pull-right">Save</a>
-                    </fieldset>
-                    <div style="width: 95px;">
-                      <ul class="pager">
-                        <li class="previous"><a href="#"><i class="fa fa-plus"></i></a></li>
-                        <li class="next"><a href="#"><i class="fa fa-minus"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+                        <tbody id="applicaionStatus">
+			</tbody>
               </div>
-
+</table>
+</fieldset>
+</div>
+</div>
+</div>
+<%-- </cf:form> --%>
                                 </div>
                             </div>
                         </div>
@@ -292,4 +264,3 @@ return result;
                 </div>
             </div>
         </section>
-</cf:form>

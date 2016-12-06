@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import jdk.nashorn.internal.ir.annotations.Ignore;
 
 @Entity
 @Table(name="trainingcentervacancyenrolled")
@@ -19,9 +22,8 @@ public class PostVacancyTrainingCenterBean {
 	private String trainingDate;
 	private String loginId;
 	private int trainingCenter;
-	
-	
-	
+	private String status;
+
 	public int getTrainingCenter() {
 		return trainingCenter;
 	}
@@ -76,6 +78,18 @@ public class PostVacancyTrainingCenterBean {
 	 */
 	public void setVacancyEnrolledId(int vacancyEnrolledId) {
 		this.vacancyEnrolledId = vacancyEnrolledId;
+	}
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

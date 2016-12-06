@@ -17,6 +17,7 @@ import com.ir.model.CourseType;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.PostVacancyTrainingCenter;
 import com.ir.model.PostVacancyTrainingCenterBean;
+import com.ir.model.Utility;
 import com.ir.service.TrainingPartnerService;
 
 @Service
@@ -63,6 +64,11 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 		return trainerList;
 	}
 	@Override
+	public Utility editApplicationStatus(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean){
+		return trainingPartnerDAO.editApplicationStatus(postVacancyTrainingCenterBean);
+	}
+	
+	@Override
 	public List<StringStringBean> getStatusList() {
 		System.out.println("TrainingPartnerServiceImpl");
 		List<StringStringBean> statusList = trainingPartnerDAO.getStatusList();
@@ -87,5 +93,16 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 	@Override
 	public int saveVacancy(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean) {
 		return  trainingPartnerDAO.saveVacancy(postVacancyTrainingCenterBean);
+	}
+
+	@Override
+	public List<PostVacancyTrainingCenter> getAppliedCount(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean) {
+		return trainingPartnerDAO.getAppliedCount(postVacancyTrainingCenterBean);
+	}
+
+	@Override
+	public void updateApplicationStatusForEnrolledVacancy(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean) {
+		trainingPartnerDAO.updateApplicationStatusForEnrolledVacancy(postVacancyTrainingCenterBean);
+		
 	}
 }

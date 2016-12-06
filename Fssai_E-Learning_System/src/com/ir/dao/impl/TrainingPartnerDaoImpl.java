@@ -21,6 +21,7 @@ import com.ir.model.CourseType;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.PostVacancyTrainingCenter;
 import com.ir.model.PostVacancyTrainingCenterBean;
+import com.ir.model.Utility;
 import com.ir.util.ChangePasswordUtility;
 
 @Repository
@@ -228,6 +229,108 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		}
 		session.close();
 		return courseNameList;
+	}
+	public Utility editApplicationStatus(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean){
+		Session session = sessionFactory.openSession();
+		
+		String sql="select trainingdate,noofvacancy,loginid from trainingcentervacancyenrolled where coursetype="+postVacancyTrainingCenterBean.getCourseType()+" AND coursename="+postVacancyTrainingCenterBean.getCourseName();
+		Query query = session.createSQLQuery(sql);
+		Utility utility=new Utility();
+		List<Object[]> list = query.list();
+		List<CourseType> courseTypeList=courseTypes();
+		List<CourseName> courseNames=getCourseNameList();
+		
+		
+		utility.setTrainingDate(list.get(0)[0].toString());
+		utility.setNoOfVacancy(Integer.parseInt(list.get(0)[1].toString()));
+		List<StringStringBean> trainerList=new ArrayList<>();
+		for(Object[] obj:list){
+			String loginSQL=" select ve.vacancyenrolledid , concat(pit.firstname,' ',pit.middlename,' ',pit.lastname) as name from personalinformationtrainer pit , trainingcentervacancyenrolled ve where logindetails="+Integer.parseInt(list.get(0)[2].toString());
+			Query loginSQLSQuery = session.createSQLQuery(loginSQL);
+			List<Object[]> loginSQLSQuerylist = loginSQLSQuery.list();
+			StringStringBean e=new StringStringBean();
+			e.setId(loginSQLSQuerylist.get(0)[0].toString());
+			e.setValue(loginSQLSQuerylist.get(0)[1].toString());
+			trainerList.add(e);
+		}
+		
+		utility.setTrainerList(trainerList);
+		session.close();
+		for(CourseType ctpe:courseTypeList){
+			if(ctpe.getCourseTypeId()==postVacancyTrainingCenterBean.getCourseType()){
+				utility.setCourseTypeId(ctpe.getCourseTypeId());
+				utility.setCourseTypeName(ctpe.getCourseType());
+				break;
+			}
+		}
+		for(CourseName cn:courseNames){
+			if(cn.getCoursenameid()==postVacancyTrainingCenterBean.getCourseName()){
+				utility.setCourseNameId(cn.getCoursenameid());
+				utility.setCourseName(cn.getCoursename());
+				break;
+			}
+		}
+		return utility;
+		
+	}
+	
+	@Override
+	public List<PostVacancyTrainingCenter> getAppliedCount(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean) {
+		Session session = sessionFactory.openSession();
+		String sql="select coursetype,coursename,trainingdate,noofvacancy,loginid from trainingcentervacancyenrolled tcev";
+		String queryParam="";
+		List<PostVacancyTrainingCenter> beans=new ArrayList<>();
+		if(postVacancyTrainingCenterBean.getCourseType()>0){
+			queryParam+="coursetype="+postVacancyTrainingCenterBean.getCourseType()+" AND ";
+		}
+		if(postVacancyTrainingCenterBean.getCourseName()>0){
+			queryParam+="coursename="+postVacancyTrainingCenterBean.getCourseName() +" AND ";
+		}
+		if(postVacancyTrainingCenterBean.getTrainingDate()!=""){
+			queryParam+="trainingdate="+postVacancyTrainingCenterBean.getTrainingDate() +" AND ";
+		}
+		if(queryParam!=null){
+			int index=queryParam.lastIndexOf(" AND ");
+			String str=queryParam.substring(0,index);
+			sql+=" where "+str;
+		}
+		Query query = session.createSQLQuery(sql);
+		List<Object[]> list = query.list();
+		List<CourseType> courseTypeList=courseTypes();
+		List<CourseName> courseNames=getCourseNameList();
+		
+		session.close();
+		PostVacancyTrainingCenter postVacancyTrainingBean=new PostVacancyTrainingCenter();
+		for(CourseType ctpe:courseTypeList){
+			if(Integer.parseInt(list.get(0)[0].toString())==ctpe.getCourseTypeId()){
+				postVacancyTrainingBean.setCourseType(ctpe);
+				break;
+			}
+		}
+		for(CourseName cn:courseNames){
+			if(Integer.parseInt(list.get(0)[1].toString())==cn.getCoursenameid()){
+				postVacancyTrainingBean.setCourseName(cn);
+				break;
+			}
+		}
+		postVacancyTrainingBean.setTrainingDate(list.get(0)[2].toString());
+		postVacancyTrainingBean.setNoOfVacancy(Integer.parseInt(list.get(0)[3].toString()));
+		postVacancyTrainingBean.setLoginId(list.get(0)[4].toString());
+		postVacancyTrainingBean.setNoOfApplications(list.size());
+		
+		beans.add(postVacancyTrainingBean);
+		return beans;
+	}
+	@Override
+	public void updateApplicationStatusForEnrolledVacancy(PostVacancyTrainingCenterBean PostVacancyTrainingCenterBean) {
+		Session session = sessionFactory.openSession();
+		PostVacancyTrainingCenterBean pvtcb = (PostVacancyTrainingCenterBean)session.load(PostVacancyTrainingCenterBean.class, Integer.parseInt(PostVacancyTrainingCenterBean.getLoginId()));
+		Transaction tx=session.beginTransaction();
+		pvtcb.setStatus(PostVacancyTrainingCenterBean.getStatus());
+		session.update(pvtcb);
+		tx.commit();
+		session.close();
+		
 	}
 
 }

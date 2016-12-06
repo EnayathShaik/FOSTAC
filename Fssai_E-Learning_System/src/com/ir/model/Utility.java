@@ -8,10 +8,105 @@ import javax.servlet.http.HttpServletRequest;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.ir.bean.common.StringStringBean;
+
 public class Utility {
 private String assessmentAgencyId;
 private String assessmentAgencyName;
 private String assessorName;
+private int courseTypeId;
+private int courseNameId ;
+private String courseTypeName;
+private String courseName ;
+private int noOfVacancy;
+private String trainingDate;
+private int noOfApplications;
+private String loginId;
+private List<StringStringBean> trainerList;
+/**
+ * @return the courseTypeId
+ */
+public int getCourseTypeId() {
+	return courseTypeId;
+}
+/**
+ * @param courseTypeId the courseTypeId to set
+ */
+public void setCourseTypeId(int courseTypeId) {
+	this.courseTypeId = courseTypeId;
+}
+/**
+ * @return the courseNameId
+ */
+public int getCourseNameId() {
+	return courseNameId;
+}
+/**
+ * @param courseNameId the courseNameId to set
+ */
+public void setCourseNameId(int courseNameId) {
+	this.courseNameId = courseNameId;
+}
+/**
+ * @return the courseTypeName
+ */
+public String getCourseTypeName() {
+	return courseTypeName;
+}
+/**
+ * @param courseTypeName the courseTypeName to set
+ */
+public void setCourseTypeName(String courseTypeName) {
+	this.courseTypeName = courseTypeName;
+}
+/**
+ * @return the courseName
+ */
+public String getCourseName() {
+	return courseName;
+}
+/**
+ * @param courseName the courseName to set
+ */
+public void setCourseName(String courseName) {
+	this.courseName = courseName;
+}
+/**
+ * @return the noOfVacancy
+ */
+public int getNoOfVacancy() {
+	return noOfVacancy;
+}
+/**
+ * @param noOfVacancy the noOfVacancy to set
+ */
+public void setNoOfVacancy(int noOfVacancy) {
+	this.noOfVacancy = noOfVacancy;
+}
+/**
+ * @return the trainingDate
+ */
+public String getTrainingDate() {
+	return trainingDate;
+}
+/**
+ * @param trainingDate the trainingDate to set
+ */
+public void setTrainingDate(String trainingDate) {
+	this.trainingDate = trainingDate;
+}
+/**
+ * @return the noOfApplications
+ */
+public int getNoOfApplications() {
+	return noOfApplications;
+}
+/**
+ * @param noOfApplications the noOfApplications to set
+ */
+public void setNoOfApplications(int noOfApplications) {
+	this.noOfApplications = noOfApplications;
+}
 /**
  * @return the assessmentAgencyId
  */
@@ -183,5 +278,29 @@ public static String save(HttpServletRequest request, Session session) {
 	}
 	transaction.commit();
 	return null;
+}
+/**
+ * @return the loginId
+ */
+public String getLoginId() {
+	return loginId;
+}
+/**
+ * @param loginId the loginId to set
+ */
+public void setLoginId(String loginId) {
+	this.loginId = loginId;
+}
+/**
+ * @return the trainerList
+ */
+public List<StringStringBean> getTrainerList() {
+	return trainerList;
+}
+/**
+ * @param trainerList the trainerList to set
+ */
+public void setTrainerList(List<StringStringBean> trainerList) {
+	this.trainerList = trainerList;
 }
 }

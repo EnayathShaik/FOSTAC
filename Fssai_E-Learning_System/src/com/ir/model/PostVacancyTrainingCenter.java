@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 @Entity @Table(name="postVacancyTrainingCenter")
@@ -34,6 +35,8 @@ public class PostVacancyTrainingCenter{
 	private String trainingDate;
 	@NotNull //@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="loginId")
 	private String loginId;
+	@Transient
+	private int noOfApplications;
 	
 	
 	
@@ -86,6 +89,18 @@ public class PostVacancyTrainingCenter{
 	}
 	public void setLoginId(String loginId) {
 		this.loginId = loginId;
+	}
+	/**
+	 * @return the noOfApplications
+	 */
+	public int getNoOfApplications() {
+		return noOfApplications;
+	}
+	/**
+	 * @param noOfApplications the noOfApplications to set
+	 */
+	public void setNoOfApplications(int noOfApplications) {
+		this.noOfApplications = noOfApplications;
 	}
 	
 	

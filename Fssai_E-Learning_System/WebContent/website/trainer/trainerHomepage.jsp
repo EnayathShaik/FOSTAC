@@ -8,16 +8,15 @@
 <script src="website/js/jquery.isotope.min.js"></script> 
 <!-- horizontal navigation -->
 <<script type="text/javascript">
-function applyForVacancy(coursetypeid,coursenameid,personalInformationTrainingPartnerId,loginId){
-	console.log(coursetypeid);
-	console.log(coursenameid);
-	console.log(personalInformationTrainingPartnerId);
+function applyForVacancy(index){
+	var vacancyObj=${postVacancyTrainingCenter}[index];
 	var buttonID=window.event.currentTarget.id;
 	var data=JSON.stringify({
-		courseType:coursetypeid,
-		courseName:coursenameid,
-	  	trainingCenter:personalInformationTrainingPartnerId,
-	  	loginId:loginId
+		courseType:vacancyObj.courseType.CourseTypeId,
+		courseName:vacancyObj.courseName.coursenameid,
+		noOfVacancy:vacancyObj.noOfVacancy,
+		trainingDate:vacancyObj.trainingDate.replace("-","/").replace("-","/"),
+	  	trainingCenter:vacancyObj.trainingCenter.personalInformationTrainingPartnerId
   });
 	$.ajax({
 	      type: 'post',
@@ -171,9 +170,9 @@ function applyForVacancy(coursetypeid,coursenameid,personalInformationTrainingPa
                     	  $('#traineePostVacancy').append('<tr>'+
                     		'<td>'+(index+1)+'</td><td>'+postVacancyList[index].courseType.CourseType+'</td>'+
                     	    '<td>'+postVacancyList[index].courseName.coursename+'</td>'+
-                    	    '<td><p><strong>Date:</strong>'+postVacancyList[index].trainingDate+'</td>'+
+                    	    '<td><p><strong>Date:</strong>'+postVacancyList[index].trainingDate.replace("-","/").replace("-","/")+'</td>'+
                     	    '<td>'+postVacancyList[index].trainingCenter.TrainingCentreName+','+postVacancyList[index].trainingCenter.TrainingPartnerPermanentLine1+' '+postVacancyList[index].trainingCenter.TrainingPartnerPermanentLine2+'</td> '+
-                    	    '<td> <button id=button'+index+' onclick="applyForVacancy('+postVacancyList[index].courseType.CourseTypeId+','+postVacancyList[index].courseName.coursenameid+','+postVacancyList[index].trainingCenter.personalInformationTrainingPartnerId+','+postVacancyList[index].trainingCenter.loginDetails.id+')" class="btn btn-default">Apply</button></td>'+
+                    	    '<td> <button id=button'+index+' onclick="applyForVacancy('+index+')" class="btn btn-default">Apply</button></td>'+
                     	  	'</tr>');
                       }
                   });

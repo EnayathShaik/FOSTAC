@@ -11,6 +11,7 @@ import com.ir.model.CourseType;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.PostVacancyTrainingCenter;
 import com.ir.model.PostVacancyTrainingCenterBean;
+import com.ir.model.Utility;
 
 public interface TrainingPartnerDao {
 
@@ -34,6 +35,10 @@ public interface TrainingPartnerDao {
 	public List<CourseName> getCourseNameList();
 	public List<StringStringBean> getStatusList();
 	public List<StringStringBean> getModeOfTrainingList();
+	public List<PostVacancyTrainingCenter> getAppliedCount(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
+	public Utility editApplicationStatus(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
+	public void updateApplicationStatusForEnrolledVacancy(
+			PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
 
 
 }

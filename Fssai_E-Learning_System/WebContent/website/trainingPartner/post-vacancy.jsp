@@ -83,7 +83,7 @@ function validateFields(){
 function searchVacancy(){
 	var courseType =  $("#courseType").val();
 	var courseName =  $("#courseName").val();
-	var trainingDate =  $("#trainingDate").val();
+	var trainingDate = $("#trainingDate").val().replace("-","/").replace("-","/");
 	var requiredExp =  $("#requiredExp").val();
 	var noOfVacancy =  $("#noOfVacancy").val();
 	$(".displayNone").css("display","block");
@@ -152,20 +152,7 @@ function searchVacancy(){
     <div id="wrapper"> 
       
       <!-- Sidebar -->
-      <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-          <!-- <li class="sidebar-brand">
-                        </li> -->
-          <li> <a href="trainingCalendar.fssai">Training Calendar</a> </li>
-          <li> <a href="view-trainee-list.html">View Trainee List</a> </li>
-          <li> <a href="mark-trainee-attendance.html">Mark Attendance</a> </li>
-          <li> <a href="post-vacancy.fssai">Post Vacancy for Trainer</a> </li>
-          <li> <a href="application-status.html">Application Status</a> </li>
-          <li> <a href="manage-trainer.html">Manage Trainer</a> </li>
-          <li> <a href="assessment-calendar.html">Assessment Calendar</a></li>
-          <li> <a href="payment-confirmation.html">Payment Confirmation</a> </li>
-        </ul>
-      </div>
+ <%@include file="leftmenuTrainingPartner.jspf" %>
       <!-- /#sidebar-wrapper --> 
       <!-- Page Content -->
       <div id="page-content-wrapper">

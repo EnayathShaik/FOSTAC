@@ -2,8 +2,11 @@ package com.ir.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -28,8 +31,10 @@ import com.ir.form.ContactTrainee;
 import com.ir.form.PostVacancyTrainingCenterForm;
 import com.ir.model.CourseType;
 import com.ir.model.PersonalInformationTrainingPartner;
+import com.ir.model.PostVacancyTrainingCenter;
 import com.ir.model.PostVacancyTrainingCenterBean;
 import com.ir.model.TrainingPartnerTrainingCalender;
+import com.ir.model.Utility;
 import com.ir.service.LoginService;
 import com.ir.service.TrainingPartnerService;
 
@@ -198,7 +203,32 @@ public class TrainingPartnerController {
 		model.addAttribute("trainingpartnerpaymentconfirmation" , gson.toJson(trainingpartnerpaymentconfirmation));
 		return "trainingpartnerpaymentconfirmation";
 	}
+	@RequestMapping(value="/updateApplicationStatusForEnrolledVacancy" , method=RequestMethod.POST)
+	@ResponseBody
+	  public void updateApplicationStatusForEnrolledVacancy(@RequestBody PostVacancyTrainingCenterBean postVacancyTrainingCenterBean ,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException {	
+		JsonResponse responseObj=new JsonResponse();
+		try{
+			trainingPartnerService.updateApplicationStatusForEnrolledVacancy(postVacancyTrainingCenterBean);
+			responseObj.setMessage("Vacancy status Updated sucessfutlly applyed successfully");
+		}catch(Exception e){
+			responseObj.setMessage("unable to apply Vacancy");
+		}
+		response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        Gson gson=new Gson();
+        String newJSON=gson.toJson(responseObj);
+        out.print(newJSON);
+        out.flush();
+	 }
 	
+	@RequestMapping(value="/editApplicationStatusDetails" , method=RequestMethod.GET)
+	  public String editApplicationStatusDetails(@ModelAttribute("PostVacancyTrainingCenterBean") PostVacancyTrainingCenterBean postVacancyTrainingCenterBean ,HttpSession session,BindingResult result ,  Model model) {	
+		
+		Utility utilityList=new Utility();
+		utilityList=trainingPartnerService.editApplicationStatus(postVacancyTrainingCenterBean);
+		model.addAttribute("utilityList", new Gson().toJson(utilityList));
+		return "editApplicationStatusDetails";
+	 }
 	@RequestMapping(value="/postVacancyTrainingPartnerSave" , method=RequestMethod.POST)
 	  public String postVacancySave(@ModelAttribute("postVacancyTrainingCenterForm") PostVacancyTrainingCenterForm postVacancyTrainingCenterForm ,HttpSession session,BindingResult result ,  Model model){		
 		int loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
@@ -221,6 +251,34 @@ public class TrainingPartnerController {
 		List<CourseType> courseTypeList = trainingPartnerService.courseTypeList();
 		return courseTypeList;
 	}
+	@RequestMapping(value="/getApplicationStatusDetails" , method=RequestMethod.POST)
+	@ResponseBody
+	public void getApplicationStatusDetails(@RequestBody PostVacancyTrainingCenterBean postVacancyTrainingCenterBean,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		List<PostVacancyTrainingCenter> list=new ArrayList<>();
+		try{
+			 list = trainingPartnerService.getAppliedCount(postVacancyTrainingCenterBean);
+		}catch(Exception e){
+		}
+		response.setContentType("text/html;charset=UTF-8");
+		List<Utility> utilityList=new ArrayList<>();
+		for(PostVacancyTrainingCenter pvtc:list){
+			Utility e=new Utility();
+				e.setCourseTypeId(pvtc.getCourseType().getCourseTypeId());
+				e.setCourseTypeName(pvtc.getCourseType().getCourseType());
+				e.setCourseNameId(pvtc.getCourseName().getCoursenameid());
+				e.setCourseName(pvtc.getCourseName().getCoursename());
+				e.setTrainingDate(pvtc.getTrainingDate());
+				e.setNoOfVacancy(pvtc.getNoOfVacancy());
+				e.setLoginId(pvtc.getLoginId());
+				e.setNoOfApplications(pvtc.getNoOfApplications());
+				utilityList.add(e);
+		}
+        PrintWriter out = response.getWriter();
+        out.print(new Gson().toJson(utilityList));
+        out.flush();
+	}
+	
+
 	
 	@RequestMapping(value="/applyForVacancy" , method=RequestMethod.POST)
 	@ResponseBody
@@ -228,6 +286,8 @@ public class TrainingPartnerController {
 		JsonResponse responseObj=new JsonResponse();
 		responseObj.setId(postVacancyTrainingCenterBean.getTrainingCenter());
 		try{
+			HttpSession session=httpServletRequest.getSession(false);
+			postVacancyTrainingCenterBean.setLoginId(session.getAttribute("loginIdUnique").toString());
 			int appliedId = trainingPartnerService.saveVacancy(postVacancyTrainingCenterBean);
 			if(appliedId>0){
 				responseObj.setMessage("Vacancy applyed successfully");
