@@ -1,6 +1,7 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="website/js/jquery-1.9.1.js"></script>
 <script>
 function showDetails(){
 	alert("Fetching details to mark attendance..");
@@ -18,7 +19,7 @@ function showDetails(){
 	'</thead>');
 	var result="";
 	//var id = document.getElementById("assessmentAgencyId").value;
-	var assessorId =710;
+	var assessorId =$('#assessorId').value;
 	$.ajax({
 	type: 'post',
 	url: 'searchAssessorAttendanceCourses.jspp?'+assessorId,
@@ -65,6 +66,7 @@ function updateAttendance(assessorId,trainingcalId){
 		success: function (data){
 			console.log("Data received..");
 			console.log(data);
+			$('#strResponse').html = data;
 		},
 		failure: function(data){
 			alert ("failure:" + data);
@@ -105,7 +107,7 @@ function updateAttendance(assessorId,trainingcalId){
                             <!-- timeline  -->
                             <div class="container-fluid">
                                 <div class="row">
-
+									<div><input type="hidden" id="assessorId"/></div>
                                     <!-- search and apply vacancies -->
                                     <div class="col-xs-12">
                                         <fieldset>
@@ -115,6 +117,7 @@ function updateAttendance(assessorId,trainingcalId){
                                         var formData = JSON.parse(formObj);
                                         var courseTypes = formData.courseType;
                                         var trainingCenters = formData.trainingCenters;
+                                        $('#assessorId').value = formData.assessorId;
                                         </script>
                                         
                                         <div class="row">
@@ -205,6 +208,7 @@ function updateAttendance(assessorId,trainingcalId){
                                               <!-- table -->
                                         <div class="row">
                                             <div class="col-xs-12">
+                                            <span id="strResponse" class="style-li error-red"></span>
                                                 <table id = "tblAssessorCourses" class="table table-bordered table-responsive table-striped table-hover">
                                                     
                                                 </table>

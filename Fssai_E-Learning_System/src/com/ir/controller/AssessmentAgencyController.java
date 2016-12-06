@@ -12,11 +12,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.google.gson.Gson;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.LoginForm;
+import com.ir.model.assessmentagency.AssessmentAgencyForm;
 import com.ir.service.AdminService;
 import com.ir.service.AssessmentAgencyService;
+
+import jdk.nashorn.internal.ir.RuntimeNode.Request;
 
 @Controller
 public class AssessmentAgencyController {
@@ -106,5 +110,20 @@ public class AssessmentAgencyController {
 		return "loginAssessor";
 	}
 	
+	@RequestMapping(value="/viewAssessmentAgencyCalendar", method=RequestMethod.GET)
+	public String viewAssessmentAgencyCalendar(@Validated @ModelAttribute("assessmentAgencyForm") AssessmentAgencyForm assessmentAgencyForm,HttpSession httpSession,Model model){
+		int agencyId = (Integer)httpSession.getAttribute("loginIdUnique");
+		if(agencyId >0 ){
+			assessmentAgencyForm = assessmentAgencyService.getAssessmentAgencyForm(agencyId);
+			Gson gson = new Gson();
+			String assessmentAgencyFormData = gson.toJson(assessmentAgencyForm);
+			model.addAttribute("viewAssessmentAgencyCalendar" , assessmentAgencyFormData);
+			return "viewAssessmentAgencyCalendar";
+		} 
+		else{
+			model.addAttribute("error" , "Oops , You are not authorized !!!");
+			return "login";
+		}
+	}
 	
 }

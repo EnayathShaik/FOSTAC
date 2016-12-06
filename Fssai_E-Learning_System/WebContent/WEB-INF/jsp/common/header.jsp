@@ -7,7 +7,6 @@
 					<span class="icon-bar"></span>
 				</a>
 				<a class="brand" href="index.html"> <img alt="Charisma Logo" src="img/logo20.png" /> <span>National Repository </span></a>
-				
 				<!-- theme selector starts -->
 		</div>
 </div>

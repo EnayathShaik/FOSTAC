@@ -1,5 +1,8 @@
 package com.ir.dao.impl;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -11,6 +14,7 @@ import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.model.ChangePassword;
 import com.ir.model.ContactTraineee;
+import com.ir.model.assessmentagency.AssessmentAgencyForm;
 import com.ir.util.ChangePasswordUtility;
 import com.ir.util.SendContectMail;
 
@@ -60,13 +64,25 @@ public class AssessmentAgencyDaoImpl implements AssessmentAgencyDao {
 	public boolean changePasswordData(ChangePasswordForm changePasswordForm, String id) {
 	String oldPassword=	changePasswordForm.getOldPassword();
 		String newPassword=changePasswordForm.getNewPassword();
-		//String idd=changePasswordForm.getLoginid();
-		
-		
 		boolean confirm = changePasswordUtility.changePasswordUtil(oldPassword, newPassword, id);
-		
-		
 		return confirm;
 	}
-		// Rishi
+	
+	@Override
+	public AssessmentAgencyForm getAssessmentAgencyForm(int agencyLoginId){
+		Session session = sessionFactory.openSession();
+		AssessmentAgencyForm agencyForm = new AssessmentAgencyForm(); 
+		String qry = "select mag.manageassessmentagencyid from manageassessmentagency mag "
+				+ "where mag.logindetails = "+agencyLoginId;
+		Query query = session.createSQLQuery(qry);
+		List<Object[]> agencyDataForm =(List<Object[]>) query.list();
+		session.close();
+		if(agencyForm != null && agencyDataForm.size() >0){
+			for(int i =0 ; i<agencyDataForm.size(); i++){
+				Object o = agencyDataForm.get(0);
+				agencyForm.setManageassessmentagencyid((int)o);
+			}
+		}
+		return agencyForm;
+	}
 }

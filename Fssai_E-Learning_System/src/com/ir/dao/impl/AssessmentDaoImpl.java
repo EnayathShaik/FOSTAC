@@ -1,5 +1,6 @@
 package com.ir.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import com.ir.bean.common.IntStringBean;
 import com.ir.dao.AssessmentDao;
 import com.ir.form.AssessmentAnswerCriteria;
 import com.ir.model.AssessmentQuestion;
@@ -66,6 +68,35 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		List<CourseType> courseTypeList = query.list();
 		session.close();
 		return courseTypeList;
+	}
+	@Override
+	public List<IntStringBean> getTrainingPartners(int assessorId){
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		List<IntStringBean> trainingPartnerList = new ArrayList<IntStringBean>();
+		String strQuery = "select pit.personalinformationtrainingpartnerid, pit.trainingcentrename "
+				+ "from personalinformationassessor pia "
+				+ "inner join courseenrolled ce on ce.logindetails = pia.logindetails "
+				+ "inner join trainingcalendar tc on tc.coursename = ce.coursenameid "
+				+ "inner join coursename cn on cn.coursenameid = tc.coursename "
+				+ "inner join personalinformationtrainingpartner pit on pit.personalinformationtrainingpartnerid = tc.trainingcenter "
+				+ "where pia.logindetails = "+assessorId + " "
+						+ "group by pit.personalinformationtrainingpartnerid, pit.trainingcentrename";
+		Query query = session.createSQLQuery(strQuery);
+		//List tpList = query.list();
+		List<Object[]> tpList =(List<Object[]>) query.list();
+		if(tpList != null && tpList.size() >0){
+			session.close();
+			for(int i =0 ; i<tpList.size(); i++){
+				
+				IntStringBean tc = new IntStringBean();
+				Object[] o =tpList.get(0);
+				tc.setId((int)o[0]);
+				tc.setValue(o[1].toString());
+				trainingPartnerList.add(tc);
+			}
+		}
+		return trainingPartnerList;
 	}
 	
 

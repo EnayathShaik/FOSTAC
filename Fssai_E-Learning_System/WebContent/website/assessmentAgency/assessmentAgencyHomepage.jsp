@@ -126,7 +126,7 @@ return result;
                         <!-- <li class="sidebar-brand"></li> -->
                         <!-- TODO -->
 <!--                         <li><a href="viewTrainingCalendar.fssai">View Calendar</a></li> -->
- 							<li><a href="#">View Calendar</a></li>
+ 							<li><a href="viewAssessmentAgencyCalendar.fssai">View Calendar</a></li>
                        
                         
                     </ul>
@@ -187,9 +187,9 @@ return result;
                                     </thead>
                                    <tbody></tbody>
                                 </table>
-                                <div class="col-xs-12 pull-right">
-                                    <input style="margin-top:20px; width:100px;" type="button" class="form-control login-btn btn" value="Activate" /> </div>
-                            </div>
+<!--                                 <div class="col-xs-12 pull-right"> -->
+<!--                                     <input style="margin-top:20px; width:100px;" type="button" class="form-control login-btn btn" value="Activate" /> </div> -->
+<!--                             </div> -->
                             <div class="col-md-2 hidden-xs"></div>
                         </div>
                     </div>

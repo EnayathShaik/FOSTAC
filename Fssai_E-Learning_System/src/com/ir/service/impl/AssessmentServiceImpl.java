@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.ir.bean.common.IntStringBean;
 import com.ir.dao.AssessmentDao;
 import com.ir.dao.LoginDAO;
 import com.ir.dao.impl.AssessmentDaoImpl;
@@ -34,8 +35,12 @@ public class AssessmentServiceImpl implements AssessmentService {
 	
 	@Override
 	public List<CourseType> courseTypes() {
-		System.out.println("AdminDao");
 		List<CourseType> courseTypeList = assessmentDao.courseTypes();
 		return courseTypeList;
+	}
+	@Override
+	public List<IntStringBean> getTrainingPartners(int assessorId){
+		List<IntStringBean> trainingPartners = assessmentDao.getTrainingPartners(assessorId);
+		return trainingPartners;
 	}
 }

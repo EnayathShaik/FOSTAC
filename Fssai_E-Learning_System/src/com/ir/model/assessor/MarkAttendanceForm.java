@@ -7,6 +7,7 @@ import com.ir.model.CourseType;
 
 public class MarkAttendanceForm {
 
+	int assessorId;
 	List<IntStringBean> trainingCenters;
 	List<CourseType> courseType;
 
@@ -37,5 +38,20 @@ public class MarkAttendanceForm {
 	public void setCourseType(List<CourseType> courseType) {
 		this.courseType = courseType;
 	}
+
+	/**
+	 * @return the assessorId
+	 */
+	public int getAssessorId() {
+		return assessorId;
+	}
+
+	/**
+	 * @param assessorId the assessorId to set
+	 */
+	public void setAssessorId(int assessorId) {
+		this.assessorId = assessorId;
+	}
+	
 	
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping>
+<class name="com.ir.model.assessor.EnrolledAssessments" table="EnrolledAssessments">
+<composite-id>
+<key-property name="assessmentsenrolledid" column="assessmentsenrolledid"  />
+<key-property name="trainingcalendarid" column="trainingcalendarid" />
+</composite-id>
+<property name="status"/>
+<property name="filler1"/>
+<property name="filler2"/>
+ 
+</class>
+</hibernate-mapping>

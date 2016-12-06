@@ -3,6 +3,8 @@ package com.ir.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.hibernate.cfg.InheritanceState;
@@ -42,60 +44,50 @@ public class AssessorController {
 		return "assessment-calendar";
 	}
 	
-//	@RequestMapping(value="/mark-attendance" , method=RequestMethod.GET)
-//	public String markAttendance(){
-//		return "mark-attendance";
-//	}
-	
 	@RequestMapping(value="/mark-attendance" , method=RequestMethod.GET)
-	public String markAttendance(@Valid @ModelAttribute("markAttendance") MarkAttendanceForm markAttendance, BindingResult result, Model model){
+	public String markAttendance(@Valid @ModelAttribute("markAttendance") MarkAttendanceForm markAttendance, BindingResult result, HttpSession httpSession, Model model){
 		if(result.hasErrors()){
 			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
 			System.out.println(result.getErrorCount());
 			System.out.println(result.getAllErrors());
 			return "markAttendance";
 		}
-		
+		PersonalInformationAssessor assessorInfo = (PersonalInformationAssessor)httpSession.getAttribute("loginUser");
+		int assessorId = assessorInfo.getId();
 		/**TODO Training center list of assessor needs to be implemented*/
 		List<IntStringBean> listTc = new ArrayList<IntStringBean>();
-		IntStringBean trainingCenter = new IntStringBean();
-		trainingCenter.setId(171);
-		trainingCenter.setValue("Zentech");
-		listTc.add(trainingCenter);
+		listTc = assessmentService.getTrainingPartners(assessorId);
 		markAttendance.setTrainingCenters(listTc);
 		
 		List<CourseType> courseTypes = assessmentService.courseTypes();
 		markAttendance.setCourseType(courseTypes);
+		markAttendance.setAssessorId(assessorId);
 		Gson gson = new Gson();
 		model.addAttribute("markAttendance" , gson.toJson(markAttendance));
-		
 		
 		return "markAttendance";
 	}
 	
-	/*@RequestMapping(value="/contactA" , method=RequestMethod.GET)
-	public String contactTA(@ModelAttribute("contactTrainee") ContactTrainee contactTrainee){
-		return "contactA";
-	}
-	@RequestMapping(value="/contactTASave" , method=RequestMethod.POST)
-	public String contactTrainee1(@ModelAttribute("contactTrainee") ContactTrainee contactTrainee
-			,BindingResult result , Model model
-			){
+	@RequestMapping(value="/update-result" , method=RequestMethod.GET)
+	public String updateResultForm(@Valid @ModelAttribute("updateResult") MarkAttendanceForm markAttendance, BindingResult result, Model model, HttpSession httpSession){
 		if(result.hasErrors()){
 			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
 			System.out.println(result.getErrorCount());
 			System.out.println(result.getAllErrors());
-			return "contactTrainee";
-		}String id = contactTrainee.getUserId();
-		System.out.println("userid   "+ id);
-		String contactTraineeSave = traineeService.contactTraineeSave(contactTrainee , id);
-		if(contactTraineeSave.equalsIgnoreCase("created")){
-			model.addAttribute("created" , "Your request has been sent successfully !!!");
-		}else{
-			model.addAttribute("created" , "Oops, something went wrong !!!");
+			return "updateResult";
 		}
-		return "contactA";
-	}*/
+		
+		int assessorId= (int)httpSession.getAttribute("loginIdUnique");
+		
+		List<CourseType> courseTypes = assessmentService.courseTypes();
+		List<IntStringBean> listTc = assessmentService.getTrainingPartners(assessorId);
+		markAttendance.setCourseType(courseTypes);
+		markAttendance.setTrainingCenters(listTc);
+		Gson gson = new Gson();
+		model.addAttribute("updateResult" , gson.toJson(markAttendance));
+		return "updateResult";
+	}
+	
 	@RequestMapping(value="/contactA" , method=RequestMethod.GET)
 	public String contactTA(@ModelAttribute("contactTrainee") ContactTrainee contactTrainee){
 		return "contactA";

@@ -75,7 +75,6 @@ function searchManageCourse(){
 	}
 }
 
-
 </script>
 <script>
 function editManageCourse(i){

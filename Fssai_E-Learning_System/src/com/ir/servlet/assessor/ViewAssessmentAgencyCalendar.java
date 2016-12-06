@@ -1,4 +1,4 @@
-package com.ir.servlet;
+package com.ir.servlet.assessor;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -8,10 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -25,16 +23,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import com.google.gson.Gson;
-import com.ir.model.AdminUserManagement;
 import com.ir.model.City;
 import com.ir.model.District;
 import com.ir.model.TrainingPartner;
-import com.ir.model.assessor.AssessorAttendance;
-import com.ir.model.assessor.MarkAttendanceForm;
 import com.ir.service.PageLoadService;
 import com.ir.service.impl.PageLoadServiceImpl;
 import com.itextpdf.text.log.SysoCounter;
@@ -43,13 +37,13 @@ import com.itextpdf.text.log.SysoCounter;
  * Servlet implementation class MyServlt
  */
 
-public class MarkAssessorAttendance extends HttpServlet {
+public class ViewAssessmentAgencyCalendar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MarkAssessorAttendance() {
+    public ViewAssessmentAgencyCalendar() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -59,17 +53,11 @@ public class MarkAssessorAttendance extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-				System.out.println("Updating attendance for accessor..");
+				System.out.println("Retrieve Assessment agency calendar");
 				response.setContentType("text/html;charset=UTF-8");
-				String strAssessorId = request.getParameter("assessorId");
-				String strTrainingcalId = request.getParameter("trainingcalId");
+				String agencyId = request.getParameter("agencyId");
 		        PrintWriter out = response.getWriter();
-		        int assessorId, trainingCalId;
-		        String responseStr="";
-		        Integer attendanceId = 0;
-		        if(strAssessorId != null && strTrainingcalId!=null){
-		        	assessorId = Integer.parseInt(strAssessorId);
-		        	trainingCalId = Integer.parseInt(strTrainingcalId);
+			
 				try {
 					Class.forName("org.postgresql.Driver");
 				} catch (ClassNotFoundException e) {
@@ -83,32 +71,53 @@ public class MarkAssessorAttendance extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				
-				Configuration conf = new Configuration();
-				conf.configure("/hibernate.cfg.xml");
-				SessionFactory sf = conf.buildSessionFactory();
-				Session session = sf.openSession();
-				Transaction tx = session.beginTransaction();
-				String pattern = "dd-MM-yyyy"; 
-				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern); 
-				String date = simpleDateFormat.format(new Date()); 
-				AssessorAttendance attendanceObj = new AssessorAttendance();
-				attendanceObj.setAssessorid(100);
-				attendanceObj.setAttendance("A");
-				attendanceObj.setCoursenameid(80);
-				attendanceObj.setDate(date);
-				attendanceId = (Integer)session.save(attendanceObj);
-				tx.commit();
-				session.close();
-				
-		        }
-				if(attendanceId != 0 ){
-					responseStr =  "Attendance marked successfully";
-				}else{
-					responseStr =  "Oops! Error occured while marking attendance.";
+				ResultSet rs = null;
+				PreparedStatement stmt = null;
+				System.out.println("before sql query");
+				String sql = "select mag.manageassessmentagencyid,ct.coursetype,  cn.coursename ,"
+						+ "concat(mag.headofficedataaddress1, ', ', headofficedataaddress2) as address "
+						+ ",concat(pia.firstname, ' ', pia.middlename, ' ' , pia.lastname) as assessorname "
+						+ ", case when logind.status='A' then 'Active' else 'In-active' end as status "
+						+ "from manageassessmentagency mag "
+						+ "inner join personalinformationassessor pia on pia.assessmentagencyname = mag.manageassessmentagencyid "
+						+ "inner join logindetails logind on logind.id = pia.logindetails "
+						+ "inner join courseenrolled ce on ce.logindetails = pia.logindetails "
+						+ "inner join coursename cn on cn.coursenameid = ce.coursenameid "
+						+ "inner join coursetype ct on ct.coursetypeid = cn.coursetypeid "
+						+ "where mag.manageassessmentagencyid ="+agencyId;
+				System.out.println(sql);
+				List listUpcomingAssessments = new ArrayList<>();
+				try {
+					stmt = conn.prepareStatement(sql);
+					System.out.println(stmt.toString());
+					rs = stmt.executeQuery();
+					
+					while(rs.next()){
+						List upcomingAssessment = new ArrayList<>();
+						upcomingAssessment.add(rs.getInt(1));
+						upcomingAssessment.add(rs.getString(2));
+						upcomingAssessment.add(rs.getString(3));
+						upcomingAssessment.add(rs.getString(4));
+						upcomingAssessment.add(rs.getString(5));
+						upcomingAssessment.add(rs.getString(6));
+						listUpcomingAssessments.add(upcomingAssessment);
+					}
+				} catch (SQLException e) {
+					System.out.println("Error while fetching upcoming assement calendars : "+e.getMessage());
+				}finally{
+					try {
+						if(rs != null){
+							rs.close();
+						}
+						if(conn != null){
+							conn.close();
+						}
+					} catch (SQLException e) {
+					}
 				}
-				out.write(responseStr);
+				Gson g =new Gson();
+				String newList = g.toJson(listUpcomingAssessments); 
+				out.write(newList);
 				out.flush();
 		
 	}

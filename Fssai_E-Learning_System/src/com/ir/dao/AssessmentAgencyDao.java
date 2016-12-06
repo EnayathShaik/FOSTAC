@@ -2,13 +2,11 @@ package com.ir.dao;
 
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
+import com.ir.model.assessmentagency.AssessmentAgencyForm;
 
 public interface AssessmentAgencyDao {
 
-	// Rishi
-	String contactSave(ContactTrainee contactTrainee  , String id);
-
-	boolean changePasswordData(ChangePasswordForm changePasswordForm, String id);
-	
-	// Rishi
+	public String contactSave(ContactTrainee contactTrainee  , String id);
+	public boolean changePasswordData(ChangePasswordForm changePasswordForm, String id);
+	public AssessmentAgencyForm getAssessmentAgencyForm(int agencyId);
 }

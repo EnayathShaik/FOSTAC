@@ -139,8 +139,8 @@
 				<value>com.ir.model.PostVacancyTrainingCenter</value>
 				<value>com.ir.model.ContactTraineee</value>
 				<value>com.ir.model.assessor.AssessorAttendance</value>
+				<value>com.ir.model.assessor.AssessmentResult</value>
 				<value>com.ir.model.PostVacancyTrainingCenterBean</value>
-				
 <!-- 				<value>com.ir.form.AssessmentAnswerCriteria</value> -->
 				<!-- 
 				
@@ -215,5 +215,6 @@
 	<bean id="personalInformationAssessor" class="com.ir.model.PersonalInformationAssessor"  scope="prototype"/>
 	<bean id="postVacancyTrainingCenter" class="com.ir.model.PostVacancyTrainingCenter"  scope="prototype"/>
 	<bean id="assessorAttendance" class="com.ir.model.assessor.AssessorAttendance"  scope="prototype"/>
+	<bean id="assessmentResult" class="com.ir.model.assessor.AssessmentResult"  scope="prototype"/>
 	<bean id="postVacancyTrainingCenterBeanS" class="com.ir.model.PostVacancyTrainingCenterBean"  scope="prototype"/>
 </beans>

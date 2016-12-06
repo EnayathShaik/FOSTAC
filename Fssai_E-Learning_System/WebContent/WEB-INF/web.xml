@@ -305,8 +305,31 @@
   <servlet-name>markAssessorAttendance</servlet-name> 
   <url-pattern>/markAssessorAttendance.jspp</url-pattern> 
   </servlet-mapping>
+   <servlet>
+  <servlet-name>updateAssessmentResult</servlet-name> 
+  <servlet-class>com.ir.servlet.assessor.UpdateAssessmentResult</servlet-class> 
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>updateAssessmentResult</servlet-name> 
+  <url-pattern>/updateAssessmentResult.jspp</url-pattern> 
+  </servlet-mapping>
+  <servlet>
+  <servlet-name>viewAssessmentAgencyCalendar</servlet-name> 
+  <servlet-class>com.ir.servlet.assessor.ViewAssessmentAgencyCalendar</servlet-class> 
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>viewAssessmentAgencyCalendar</servlet-name> 
+  <url-pattern>/viewAssessmentAgencyCalendar.jspp</url-pattern> 
+  </servlet-mapping>
   
-  
+  <servlet>
+  <servlet-name>searchAssessorTraineesForResults</servlet-name> 
+  <servlet-class>com.ir.servlet.assessor.SearchAssessorTraineesForResults</servlet-class> 
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>searchAssessorTraineesForResults</servlet-name> 
+  <url-pattern>/searchAssessorTraineesForResults.jspp</url-pattern> 
+  </servlet-mapping>
    <servlet>
   <servlet-name>searchAssessorAttendanceCourses</servlet-name> 
   <servlet-class>com.ir.servlet.assessor.SearchAssessorAttendanceCourses</servlet-class> 

@@ -1,5 +1,8 @@
 package com.ir.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Util {
 
 	public static boolean isNotNull(String value){
@@ -7,5 +10,10 @@ public class Util {
 		return true;
 		else 
 		return false;
+	}
+	public static String currentDate(String pattern){
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern); 
+		String date = simpleDateFormat.format(new Date());
+		return date;
 	}
 }

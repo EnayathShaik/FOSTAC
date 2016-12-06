@@ -42,13 +42,13 @@
 		<mapping class="com.ir.model.ContactTraineee"/>
 		<mapping class= "com.ir.model.Steps"/>
 		<mapping class="com.ir.model.assessor.AssessorAttendance"/>
+		<mapping class="com.ir.model.assessor.AssessmentResult"/>
 		<mapping class="com.ir.model.PostVacancyTrainingCenterBean"/>
+		<mapping class="com.ir.model.assessor.AssessmentResult"/>
 <!-- 		<mapping class="com.ir.form.AssessmentAnswerCriteria"/> -->
 <!-- 		<mapping class="com.ir.model.CourseEnrolledUser"/> -->
 		<!-- 
 		<mapping class="com.ir.model.AssessorUserManagement"/>
-		
-		
 		 -->
 	</session-factory>
 </hibernate-configuration>

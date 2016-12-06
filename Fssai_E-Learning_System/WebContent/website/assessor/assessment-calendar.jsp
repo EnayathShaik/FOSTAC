@@ -158,39 +158,6 @@ return result;
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <table id="upcomingTrainings" class="table table-bordered table-responsive table-striped table-hover">
-                                                    <thead>
-                                                        <tr class="background-open-vacancies">
-                                                            <th>S.No.</th>
-                                                            <th>Course Name</th>
-                                                            <th>Training Date</th>
-                                                            <th>Training Center Details</th>
-                                                            <th>No. Of Participants Enrolled</th>
-
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>GHP-GMP</td>
-                                                            <td>27/10/2016</td>
-                                                            <td>404 Karol Bagh, New Delhi</td>
-                                                            <td>20</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>-HACCP Certification Course</td>
-                                                            <td>22/09/2016</td>
-                                                            <td>FDA Bhavan, New Delhi</td>
-                                                            <td>10</td>
-                                                        </tr>
-                                                        <tr>
-                                                           <td>3</td>
-                                                            <td>HACCP* Course for Milk Industry</td>
-                                                            <td>29/09/2016</td>
-                                                            <td>Bikaner, Rajsthan</td>
-                                                            <td>30</td>
-                                                        </tr>
-                                                    </tbody>
                                                 </table>
 
                                             </div>

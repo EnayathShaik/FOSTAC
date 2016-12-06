@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import com.ir.dao.AssessmentAgencyDao;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
+import com.ir.model.assessmentagency.AssessmentAgencyForm;
 import com.ir.service.AssessmentAgencyService;
 
 public class AssessmentAgencyServiceImpl implements AssessmentAgencyService {
@@ -16,7 +17,6 @@ public class AssessmentAgencyServiceImpl implements AssessmentAgencyService {
 	@Qualifier("assessmentAgencyDao")
 	AssessmentAgencyDao assessmentAgencyDao; 
 	
-	// Rishi
 	@Override
 	public String contactAssessorSave(ContactTrainee contactTrainee  , String id) {
 		String contactAssessorSave = assessmentAgencyDao.contactSave(contactTrainee , id);
@@ -29,6 +29,10 @@ public class AssessmentAgencyServiceImpl implements AssessmentAgencyService {
 		boolean confirmaPass = assessmentAgencyDao.changePasswordData(changePasswordForm , id);
 		return confirmaPass;
 	}
+	@Override
+	public AssessmentAgencyForm getAssessmentAgencyForm(int agencyId){
+		AssessmentAgencyForm assessmentAgencyForm = assessmentAgencyDao.getAssessmentAgencyForm(agencyId);
+		return assessmentAgencyForm;
+	}
 
-	// Rishi
 }

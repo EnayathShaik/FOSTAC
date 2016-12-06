@@ -60,8 +60,6 @@ public class ApplyAssessment extends HttpServlet {
 				calendarIds = calendarIds.substring(0, index);	
 			}
 		System.out.println("Calendar Id :" + calendarIds + "assessorId : " + assessorId);
-		
-		
 		String updateQry = "update trainingcalendar set personalinformationassessorid = "+assessorId+" where trainingcalendarid in ("+calendarIds+")"; 
 		Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");

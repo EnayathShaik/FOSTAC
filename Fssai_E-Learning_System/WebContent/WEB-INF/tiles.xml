@@ -374,6 +374,10 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/assessor/mark-attendance.jsp" />
 	</definition>
+	<definition name="updateResult" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/assessor/update-result.jsp" />
+	</definition>
 	<definition name="contactA" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/assessor/contact.jsp" />
@@ -602,26 +606,18 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/manageAssessmentQuestions.jsp" />
 	</definition>
+	<definition name="viewAssessmentAgencyCalendar" extends="base.user.afterLogin">
+		<put-attribute name="title" value="View Assessment Agency Calendar" />
+		<put-attribute name="body" value="/website/assessmentAgency/viewAssessmentAgencyCalendar.jsp" />
+	</definition>
+	
 <!--  						Admin			Ends			-->	
-
-
-
-
-
-
-
-
-
-
-
-
 
 	<definition name="adminDashboard" extends="base.admin.definition">
 		<put-attribute name="title" value="Admin DashBoard" />
 		<put-attribute name="body" value="/WEB-INF/jsp/allUserDetails.jsp" />
 	</definition>
-
-		<definition name="userDashboard" extends="base.admin.definition">
+	<definition name="userDashboard" extends="base.admin.definition">
 		<put-attribute name="title" value="Admin DashBoard" />
 		<put-attribute name="body" value="/WEB-INF/jsp/allUserDetails.jsp" />
 	</definition>
