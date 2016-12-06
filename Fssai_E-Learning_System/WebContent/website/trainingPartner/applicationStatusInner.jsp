@@ -77,6 +77,7 @@
                     <fieldset style="margin-top: 20px;">
                       <legend>
                       <h4 style="padding-bottom:20px;">Status</h4>
+                      <span id="applicationStatusMesssage" style="color:red;"></span>
                       </legend>
                       <div id="hiddenVaraibles"></div>
                       <table class="table table-bordered table-responsive table-striped table-hover">
@@ -142,8 +143,8 @@
 		 statusList.push($("#selectOption_"+index+"").val());
 	 }
 	 var data=JSON.stringify({
-		 	loginId:$("#trainerId_"+0+"").val(),
-			status:$("#selectOption_"+0+"").val(),
+		 	loginId:strIdList.join(),
+			status:statusList.join(),
 	});
 		$.ajax({
 		      type: 'post',
@@ -152,6 +153,7 @@
 		      data: data,
 		      success: function (response) {
 		    	 response=JSON.parse(response);
+		   		$("#applicationStatusMesssage").text(response.message) 	 
 		   
 		      }
 		      });

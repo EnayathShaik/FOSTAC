@@ -324,13 +324,30 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	@Override
 	public void updateApplicationStatusForEnrolledVacancy(PostVacancyTrainingCenterBean PostVacancyTrainingCenterBean) {
 		Session session = sessionFactory.openSession();
-		PostVacancyTrainingCenterBean pvtcb = (PostVacancyTrainingCenterBean)session.load(PostVacancyTrainingCenterBean.class, Integer.parseInt(PostVacancyTrainingCenterBean.getLoginId()));
-		Transaction tx=session.beginTransaction();
-		pvtcb.setStatus(PostVacancyTrainingCenterBean.getStatus());
-		session.update(pvtcb);
-		tx.commit();
+		String[] trainerList=PostVacancyTrainingCenterBean.getLoginId().split(",");
+		String[] statusList=PostVacancyTrainingCenterBean.getStatus().split(",");
+		for(int index=0;index<trainerList.length;index++){
+			Transaction tx=session.beginTransaction();
+			PostVacancyTrainingCenterBean pvtcb = (PostVacancyTrainingCenterBean)session.load(PostVacancyTrainingCenterBean.class, Integer.parseInt(trainerList[index]));
+			pvtcb.setStatus(statusList[index]);
+			session.update(pvtcb);
+			tx.commit();
+		}
 		session.close();
 		
+	}
+	@Override
+	public PostVacancyTrainingCenterBean getApplicationStatusBean(String loginId, int trainingCenterId,int coursename, int cousertype) {
+		PostVacancyTrainingCenterBean bean=new PostVacancyTrainingCenterBean();
+		Session session = sessionFactory.openSession();
+		String sql="select status from trainingcentervacancyenrolled where loginid='"+loginId +"' AND trainingcenter="+trainingCenterId+" AND coursename="+coursename+" AND coursetype="+cousertype;
+		Query query = session.createSQLQuery(sql);
+		List<String> status = query.list();
+		if(status.size()>0){
+			bean.setStatus(status.get(0));
+		}
+		session.close();
+		return bean;
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.ir.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -27,6 +28,7 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.PostVacancyTrainingCenter;
+import com.ir.model.PostVacancyTrainingCenterBean;
 import com.ir.model.TrainingPartner;
 import com.ir.service.LoginService;
 import com.ir.service.TrainingPartnerService;
@@ -171,7 +173,19 @@ public class LoginController {
 			session.setAttribute("logId", personalInformationTrainer.getLoginDetails().getLoginId());
 			session.setAttribute("Id",personalInformationTrainer.getLoginDetails().getId());
 			List<PostVacancyTrainingCenter> postVacancyTrainingCenter=trainingPartnerService.getPostVacancyTrainingList();
+			List<PostVacancyTrainingCenterBean> vacancyTrainingCenterBeans=new ArrayList<>();
+			for(PostVacancyTrainingCenter pvtc:postVacancyTrainingCenter){
+				PostVacancyTrainingCenterBean applicationStatusBean=trainingPartnerService.getApplicationStatusBean(String.valueOf(loginDetails.getId()),pvtc.getTrainingCenter().getLoginDetails().getId(),pvtc.getCourseName().getCoursenameid(),pvtc.getCourseType().getCourseTypeId());
+				if(applicationStatusBean.getStatus()!=null){
+					applicationStatusBean.setCoursetypeName(pvtc.getCourseType().getCourseType());
+					applicationStatusBean.setStrCourseName(pvtc.getCourseName().getCoursename());
+					applicationStatusBean.setTrainingDate(pvtc.getTrainingDate());
+					applicationStatusBean.setPersonalInformationTrainingPartner(pvtc.getTrainingCenter());
+					vacancyTrainingCenterBeans.add(applicationStatusBean);
+				}
+			}
 			model.addAttribute("postVacancyTrainingCenter", new Gson().toJson(postVacancyTrainingCenter));
+			model.addAttribute("vacancyTrainingCenterBeans", new Gson().toJson(vacancyTrainingCenterBeans));
 			return "trainerHomepage";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 5){
 			if(loginDetails.getStatus().equalsIgnoreCase("A")){

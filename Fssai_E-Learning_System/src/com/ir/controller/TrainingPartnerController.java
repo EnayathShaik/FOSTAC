@@ -209,9 +209,9 @@ public class TrainingPartnerController {
 		JsonResponse responseObj=new JsonResponse();
 		try{
 			trainingPartnerService.updateApplicationStatusForEnrolledVacancy(postVacancyTrainingCenterBean);
-			responseObj.setMessage("Vacancy status Updated sucessfutlly applyed successfully");
+			responseObj.setMessage("Vacancy status Updated sucessfully");
 		}catch(Exception e){
-			responseObj.setMessage("unable to apply Vacancy");
+			responseObj.setMessage("unable to update Vacancy");
 		}
 		response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
@@ -292,7 +292,7 @@ public class TrainingPartnerController {
 			if(appliedId>0){
 				responseObj.setMessage("Vacancy applyed successfully");
 			}else{
-				responseObj.setMessage("Vacancy already updated");
+				responseObj.setMessage("Vacancy already applyed");
 			}
 		}catch(Exception e){
 			responseObj.setMessage("unable to apply Vacancy");

@@ -38,10 +38,7 @@ public class PostVacancyTrainingCenter{
 	@Transient
 	private int noOfApplications;
 	
-	
-	
-	
-	
+
 	public PersonalInformationTrainingPartner getTrainingCenter() {
 		return trainingCenter;
 	}

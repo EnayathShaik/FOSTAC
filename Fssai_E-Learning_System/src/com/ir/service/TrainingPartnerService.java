@@ -32,4 +32,5 @@ public interface TrainingPartnerService {
 	public List<PostVacancyTrainingCenter> getAppliedCount(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
 	public Utility editApplicationStatus(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
 	public void updateApplicationStatusForEnrolledVacancy(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
+	public PostVacancyTrainingCenterBean getApplicationStatusBean(String loginId,int trainingCenterId,int coursename, int cousertype);
 }

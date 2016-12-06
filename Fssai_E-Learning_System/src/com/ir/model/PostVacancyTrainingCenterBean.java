@@ -23,7 +23,12 @@ public class PostVacancyTrainingCenterBean {
 	private String loginId;
 	private int trainingCenter;
 	private String status;
-
+	@Transient
+	private PersonalInformationTrainingPartner personalInformationTrainingPartner;
+	@Transient
+	private String coursetypeName;
+	@Transient
+	private String strCourseName;
 	public int getTrainingCenter() {
 		return trainingCenter;
 	}
@@ -90,6 +95,42 @@ public class PostVacancyTrainingCenterBean {
 	 */
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	/**
+	 * @return the personalInformationTrainingPartner
+	 */
+	public PersonalInformationTrainingPartner getPersonalInformationTrainingPartner() {
+		return personalInformationTrainingPartner;
+	}
+	/**
+	 * @param personalInformationTrainingPartner the personalInformationTrainingPartner to set
+	 */
+	public void setPersonalInformationTrainingPartner(PersonalInformationTrainingPartner personalInformationTrainingPartner) {
+		this.personalInformationTrainingPartner = personalInformationTrainingPartner;
+	}
+	/**
+	 * @return the coursetypeName
+	 */
+	public String getCoursetypeName() {
+		return coursetypeName;
+	}
+	/**
+	 * @param coursetypeName the coursetypeName to set
+	 */
+	public void setCoursetypeName(String coursetypeName) {
+		this.coursetypeName = coursetypeName;
+	}
+	/**
+	 * @return the strCourseName
+	 */
+	public String getStrCourseName() {
+		return strCourseName;
+	}
+	/**
+	 * @param strCourseName the strCourseName to set
+	 */
+	public void setStrCourseName(String strCourseName) {
+		this.strCourseName = strCourseName;
 	}
 
 }

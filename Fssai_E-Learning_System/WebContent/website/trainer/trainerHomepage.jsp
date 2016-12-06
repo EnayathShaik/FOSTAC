@@ -162,22 +162,6 @@ function applyForVacancy(index){
                   </div>
                 </div>
               </div>
-                  <script type="text/javascript">
-                  $(document).ready(function(){    
-                	  var postVacancyList=${postVacancyTrainingCenter};
-                      for(index=0;index<postVacancyList.length;index++){
-                    	  console.log(postVacancyList[index]);
-                    	  $('#traineePostVacancy').append('<tr>'+
-                    		'<td>'+(index+1)+'</td><td>'+postVacancyList[index].courseType.CourseType+'</td>'+
-                    	    '<td>'+postVacancyList[index].courseName.coursename+'</td>'+
-                    	    '<td><p><strong>Date:</strong>'+postVacancyList[index].trainingDate.replace("-","/").replace("-","/")+'</td>'+
-                    	    '<td>'+postVacancyList[index].trainingCenter.TrainingCentreName+','+postVacancyList[index].trainingCenter.TrainingPartnerPermanentLine1+' '+postVacancyList[index].trainingCenter.TrainingPartnerPermanentLine2+'</td> '+
-                    	    '<td> <button id=button'+index+' onclick="applyForVacancy('+index+')" class="btn btn-default">Apply</button></td>'+
-                    	  	'</tr>');
-                      }
-                  });
-              
-              </script>
               <br>
               <!-- job application -->
               <div class="col-xs-12"> <br>
@@ -195,46 +179,54 @@ function applyForVacancy(index){
                             <th>S.No</th>
                             <th width="15%">Course Type</th>
                             <th>Course Name</th>
-                            <th width="29%">Training Date &amp; Time</th>
+<!--                             <th width="29%">Training Date &amp; Time</th> -->
+							<th width="29%">Training Date &amp;</th>
                             <th width="23%">Training Center Name &amp; Address</th>
                             <th>Status</th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td>Basic</td>
-                            <td>GHP-GMP</td>
-                            <td><p><strong>Date:</strong> 12/01/2015</p>
-                              <p><strong>Time:</strong> 12:00 AM</p></td>
-                            <td>FSSAI, FDA Bhvan</td>
-                            <td class="bg-success">Selected</td>
-                          </tr>
-                          <tr>
-                            <td>2</td>
-                            <td>Advance</td>
-                            <td>HACCP Course for Oil & Fat Industry</td>
-                            <td><p><strong>Date:</strong> 10/21/2016</p>
-                              <p><strong>Time:</strong> 11:30:00 AM</p></td>
-                            <td>FSSAI, Kotla Road</td>
-                            <td class="bg-danger">Rejected</td>
-                          </tr>
-                          <tr>
-                            <td>3</td>
-                            <td>Special</td>
-                            <td>HACCP Course for Water & Beverages Industry</td>
-                            <td><p><strong>Date:</strong> 11/12/2016</p>
-                              <p><strong>Time:</strong> 12:00 AM</p></td>
-                            <td>FSSAI, Kotla Road, ITO</td>
-                            <td class="bg-primary">Under Process</td>
-                          </tr>
+                        <tbody id="applicationStatusList">
                         </tbody>
                       </table>
                     </fieldset>
                   </div>
                 </div>
               </div>
+              <script type="text/javascript">
+                  $(document).ready(function(){    
+                	  var postVacancyList=${postVacancyTrainingCenter};
+                	  var statusList=['Selected','Rejected','Under Process']
+                	  var applicationStatusList=${vacancyTrainingCenterBeans};
+                	  for(var index=0;index<applicationStatusList.length;index++){
+                		  var statusTR=""
+                			  if(applicationStatusList[index].status=="Selected"){
+                				  	statusTR= '<td class="bg-success">Selected</td>';
+                            	    }else if(applicationStatusList[index].status=="Rejected"){
+                            	    	statusTR= '<td class="bg-danger">Rejected</td>';
+                            	    }else if(applicationStatusList[index].status=="Under Process"){
+                            	    	statusTR='<td class="bg-primary">Under Process</td>';
+                            	    }
+                		  $('#applicationStatusList').append('<tr>'+
+                          		'<td>'+(index+1)+'</td><td>'+applicationStatusList[index].coursetypeName+'</td>'+
+                          	    '<td>'+applicationStatusList[index].strCourseName+'</td>'+
+                          	    '<td><p><strong>Date:</strong>'+postVacancyList[index].trainingDate.replace("-","/").replace("-","/")+'</td>'+
+                          	    '<td>'+applicationStatusList[index].personalInformationTrainingPartner.TrainingCentreName+','+applicationStatusList[index].personalInformationTrainingPartner.TrainingPartnerPermanentLine1+' '+applicationStatusList[index].personalInformationTrainingPartner.TrainingPartnerPermanentLine2+'</td> '+statusTR+'</tr>');
+                	  }
+                	  
+                	  console.log(applicationStatusList);
+                      for(index=0;index<postVacancyList.length;index++){
+                    	  console.log(postVacancyList[index]);
+                    	  $('#traineePostVacancy').append('<tr>'+
+                    		'<td>'+(index+1)+'</td><td>'+postVacancyList[index].courseType.CourseType+'</td>'+
+                    	    '<td>'+postVacancyList[index].courseName.coursename+'</td>'+
+                    	    '<td><p><strong>Date:</strong>'+postVacancyList[index].trainingDate.replace("-","/").replace("-","/")+'</td>'+
+                    	    '<td>'+postVacancyList[index].trainingCenter.TrainingCentreName+','+postVacancyList[index].trainingCenter.TrainingPartnerPermanentLine1+' '+postVacancyList[index].trainingCenter.TrainingPartnerPermanentLine2+'</td> '+
+                    	    '<td> <button id=button'+index+' onclick="applyForVacancy('+index+')" class="btn btn-default">Apply</button></td>'+
+                    	  	'</tr>');
+                      }
+                  });
               
+              </script>
               <!-- timeline -->
               <div class="container-fluid">
                 <div class="row">
