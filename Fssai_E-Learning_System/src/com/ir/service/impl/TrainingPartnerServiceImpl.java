@@ -107,7 +107,7 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 	}
 
 	@Override
-	public PostVacancyTrainingCenterBean getApplicationStatusBean(String loginId, int trainingCenterId,int coursename, int cousertype) {
-		return trainingPartnerDAO.getApplicationStatusBean(loginId,trainingCenterId,coursename, cousertype);
+	public PostVacancyTrainingCenterBean getApplicationStatusBean(String loginId,int coursename, int cousertype) {
+		return trainingPartnerDAO.getApplicationStatusBean(loginId,coursename, cousertype);
 	}
 }

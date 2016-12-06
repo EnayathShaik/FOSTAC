@@ -337,10 +337,10 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		
 	}
 	@Override
-	public PostVacancyTrainingCenterBean getApplicationStatusBean(String loginId, int trainingCenterId,int coursename, int cousertype) {
+	public PostVacancyTrainingCenterBean getApplicationStatusBean(String loginId,int coursename, int cousertype) {
 		PostVacancyTrainingCenterBean bean=new PostVacancyTrainingCenterBean();
 		Session session = sessionFactory.openSession();
-		String sql="select status from trainingcentervacancyenrolled where loginid='"+loginId +"' AND trainingcenter="+trainingCenterId+" AND coursename="+coursename+" AND coursetype="+cousertype;
+		String sql="select status from trainingcentervacancyenrolled where loginid='"+loginId +"' AND coursename="+coursename+" AND coursetype="+cousertype;
 		Query query = session.createSQLQuery(sql);
 		List<String> status = query.list();
 		if(status.size()>0){

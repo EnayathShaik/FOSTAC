@@ -175,7 +175,7 @@ public class LoginController {
 			List<PostVacancyTrainingCenter> postVacancyTrainingCenter=trainingPartnerService.getPostVacancyTrainingList();
 			List<PostVacancyTrainingCenterBean> vacancyTrainingCenterBeans=new ArrayList<>();
 			for(PostVacancyTrainingCenter pvtc:postVacancyTrainingCenter){
-				PostVacancyTrainingCenterBean applicationStatusBean=trainingPartnerService.getApplicationStatusBean(String.valueOf(loginDetails.getId()),pvtc.getTrainingCenter().getLoginDetails().getId(),pvtc.getCourseName().getCoursenameid(),pvtc.getCourseType().getCourseTypeId());
+				PostVacancyTrainingCenterBean applicationStatusBean=trainingPartnerService.getApplicationStatusBean(String.valueOf(loginDetails.getId()),pvtc.getCourseName().getCoursenameid(),pvtc.getCourseType().getCourseTypeId());
 				if(applicationStatusBean.getStatus()!=null){
 					applicationStatusBean.setCoursetypeName(pvtc.getCourseType().getCourseType());
 					applicationStatusBean.setStrCourseName(pvtc.getCourseName().getCoursename());
