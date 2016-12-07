@@ -71,6 +71,10 @@
 <script>
         $(document).ready(function () {
 
+        	$(function() {
+      		  $( "#dateP" ).datepicker({  maxDate: 0 });
+      		});
+        	
             $("#news").owlCarousel({
 
                 navigation: false, // Show next and prev buttons
