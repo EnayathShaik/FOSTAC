@@ -7,7 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
 
 @Entity
 @Table(name="trainingcentervacancyenrolled")

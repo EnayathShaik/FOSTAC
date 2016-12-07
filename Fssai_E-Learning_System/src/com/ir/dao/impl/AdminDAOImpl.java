@@ -821,7 +821,7 @@ System.out.println("**********SS");
 		tc.setTrainingTime(trainingCalendarForm.getTrainingTime());
 		tc.setTrainerName(trainingCalendarForm.getTrainerName());
 		tc.setTrainingType(trainingCalendarForm.getTrainingType());
-		int i = (int) session.save(tc);
+		int i = (Integer) session.save(tc);
 		tx.commit();
 		session.close();
 		if(i >0){
