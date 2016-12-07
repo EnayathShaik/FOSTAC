@@ -171,7 +171,7 @@ public class LoginController {
 			session.setAttribute("loginUserS", personalInformationTrainer);
 			session.setAttribute("stateid", personalInformationTrainer.getPermanentstate().getStateId());
 			session.setAttribute("statename", personalInformationTrainer.getPermanentstate().getStateName());
-			session.setAttribute("tp", personalInformationTrainer.getAssociatedTrainingpartnerName().getTrainingPartnerName());
+			session.setAttribute("tp", personalInformationTrainer.getAssociatedTrainingpartnerName() == null ? "" : personalInformationTrainer.getAssociatedTrainingpartnerName().getTrainingPartnerName());
 			session.setAttribute("loginId", personalInformationTrainer.getLoginDetails().getLoginId());
 			model.addAttribute("logintrainer", personalInformationTrainer);
 			session.setAttribute("loginUser2", personalInformationTrainer.getPersonalInformationTrainerId());
