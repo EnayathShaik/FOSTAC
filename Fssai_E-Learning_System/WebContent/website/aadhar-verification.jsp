@@ -41,7 +41,7 @@
                     <li class="style-li error-red"> </li>
                   </ul>
                 </div>
-                <cf:input path="dob" type="date" class="form-control" placeholder="Date of birth" />
+                <cf:input path="dob" type="text" id="dateP" class="form-control" placeholder="Date of birth" />
               </div>
 
             </div>

@@ -841,7 +841,7 @@ function checkagree()
 <cf:errors path="dob" cssClass="error" /></li>
 </ul>
 </div>
-<cf:input path="dob" type="date"   class="form-control"  placeholder="DOB"/>
+<cf:input path="dob" type="text" id="dateP"  class="form-control"  placeholder="DOB"/>
 </div>
 
 <div class="form-group">

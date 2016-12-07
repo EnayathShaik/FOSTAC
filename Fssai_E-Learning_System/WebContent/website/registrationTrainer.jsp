@@ -675,7 +675,7 @@ return true;
 <cf:errors path="DOB" cssclass="error" /></li>
 </ul>
 </div>
-<cf:input path="DOB" type="date" class="form-control"  placeholder="DOB"/>
+<cf:input path="DOB" type="text" id="dateP" class="form-control"  placeholder="DOB"/>
 </div>
 
 <div class="form-group">
