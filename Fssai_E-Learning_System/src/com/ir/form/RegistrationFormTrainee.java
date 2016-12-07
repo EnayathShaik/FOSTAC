@@ -108,8 +108,7 @@ public boolean isCheckCompany() {
     @NotNull
 	private int bussState;
 	
-	@NotNull
-	 @Size(min=1, max=100 , message="enter your registrationNo")
+	
 	private String registrationNo;
 
 	

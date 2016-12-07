@@ -207,13 +207,13 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 		
 		
 		
-		//LoginDetails loginDetails = new LoginDetails();
+		LoginDetails loginDetails = new LoginDetails();
 		loginDetails.setLoginId(registrationFormTrainee.getUserId());
 		loginDetails.setPassword(passwordString);
 		loginDetails.setEncrypted_Password(encryprPassword);
 		loginDetails.setStatus("A");
 		loginDetails.setProfileId(3);
-		//PersonalInformationTrainee personalInformationTrainee = new PersonalInformationTrainee();
+		PersonalInformationTrainee personalInformationTrainee = new PersonalInformationTrainee();
 		personalInformationTrainee.setSteps(1);
 		personalInformationTrainee.setTitle(tt);
 		personalInformationTrainee.setAadharNumber(registrationFormTrainee.getAadharNumber().trim());

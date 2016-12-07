@@ -515,17 +515,20 @@ return true;
        user_name:name,
       },
       success: function (response) {
-       $( '#name_status' ).html(response);
-       if(response=="OK")	
-       {
-    	   document.getElementById("register").style.display = 'none';
-        return true;	
-       }
-       else
-       {
-    	   document.getElementById("register").style.display = 'block';
-        return false;	
-       }
+    	  $( '#name_status' ).html(response);
+    	  if(response.trim() == 'Already'){
+    		  document.getElementById('UserId').value="";
+    	  }
+          if(response=="OK")	
+          {
+       	   document.getElementById("register").style.display = 'none';
+           return true;	
+          }
+          else
+          {
+       	   document.getElementById("register").style.display = 'block';
+           return false;	
+          }
       }
       });
      }
@@ -1208,10 +1211,12 @@ return true;
  
  </div>
 </div>
-<!-- <div style="float:left; width:99%;">
+<div style="float:left; width:99%;">
 <input type="checkbox" id="check" style="margin-left:1%;">
-<a href="#" target="_blank" class="terms-font-size"> I have read and understood the Terms & Conditions and the Privacy Policy of FSSAI. </a>
-</div> -->
+<!-- <a href="#" target="_blank" class="terms-font-size">  -->
+I have read and understood the Terms & Conditions and the Privacy Policy of FSSAI. 
+<!-- </a> -->
+</div>
 </div>
 
 

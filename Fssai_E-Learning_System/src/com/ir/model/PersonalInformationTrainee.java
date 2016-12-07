@@ -53,8 +53,6 @@ public class PersonalInformationTrainee {
 	@Size(min=1, max=20 , message="enter your father's name")
 	private String FatherName;
 	
-	@NotNull
-	 @Size(min=1, max=100 , message="enter your registrationNo")
 	private String registrationNo;
 	
 	@NotNull

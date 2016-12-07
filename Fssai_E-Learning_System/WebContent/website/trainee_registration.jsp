@@ -768,16 +768,15 @@ function checkagree()
       },
       success: function (response) {
        $( '#name_status' ).html(response);
-       if(response == 'Already')	
+       if(response.trim() == 'Already')	
        {
-    	   alert('a');
+    	   document.getElementById('userId').value="";
     	   document.getElementById("register").style.display = 'none';
            return false;
     	   
        }
        else
        {
-    	   alert('b');
     	   var aa = $('#name_status').html(response);
     	   document.getElementById("register").style.display = 'block';
            return true;	
