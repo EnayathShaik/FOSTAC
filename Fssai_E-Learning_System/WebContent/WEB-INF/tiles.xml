@@ -82,6 +82,10 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainee_registration.jsp" />
 	</definition>
+	<definition name="generic_error" extends="base.before.login">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/WEB-INF/views/generic_error.jsp" />
+	</definition>
 	<definition name="trainer" extends="base.before.login">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainer.html" />

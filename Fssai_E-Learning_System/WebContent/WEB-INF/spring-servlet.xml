@@ -164,6 +164,14 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="simpleMappingExceptionResolver" class="com.ir.resolver.MySimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<map>
+				<entry key="Exception" value="generic_error"></entry>
+			</map>
+		</property>
+		<property name="defaultErrorView" value="generic_error"/>
+	</bean>
 	
 	<bean id="changePasswordUtility" class="com.ir.util.ChangePasswordUtility"  scope="prototype"/>
 	<bean id="adminService" class="com.ir.service.impl.AdminServiceImpl" />
