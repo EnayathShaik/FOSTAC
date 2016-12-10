@@ -41,16 +41,16 @@ public class PersonalInformationTrainee {
 	private Title title;
 	
 	@NotNull
-	@Size(min=1, max=20 , message="enter your FirstName")
+	@Size(min=1, max=50 , message="enter your FirstName")
 	private String FirstName;
 
 	private String MiddleName;
 	@NotNull
-	@Size(min=1, max=20 , message="enter your LastName ")
+	@Size(min=1, max=50 , message="enter your LastName ")
 	private String  LastName ;
 
 	@NotNull
-	@Size(min=1, max=20 , message="enter your father's name")
+	@Size(min=1, max=100 , message="enter your father's name")
 	private String FatherName;
 	
 	private String registrationNo;
@@ -63,7 +63,7 @@ public class PersonalInformationTrainee {
 	@NotNull
 	private String dob;
 
-	@Size(min=10, max=10 , message = "enter your mobile Number")
+	@Size(max=10 , message = "enter your mobile Number")
 	private String mobile;
 	@NotNull
 	private String gender;
@@ -106,24 +106,24 @@ public class PersonalInformationTrainee {
 
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="correspondenceDistrict")
 	private District correspondenceDistrict;
-	@NotNull
+	//@NotNull
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="bussDistrict")
 	private District bussDistrict;
 	
     @NotNull
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="KindOfBusiness")
 	private KindOfBusiness KindOfBusiness;
-	@NotNull @Size(min=1, max=50 , message="enter your Designation")
+	//@NotNull @Size(min=1, max=50 , message="enter your Designation")
 	private String Designation;
-	@NotNull  @Size(min=1, max=100 , message="enter your BusinessAddress ")
+	//@NotNull  @Size(min=1, max=100 , message="enter your BusinessAddress ")
 	private String BusinessAddressLine1;
-	@NotNull  @Size(min=1, max=100 , message="enter your BusinessAddress ")
+	//@NotNull  @Size(min=1, max=100 , message="enter your BusinessAddress ")
 	private String BusinessAddressLine2;
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="bussCity")
 	private City bussCity;
-	@NotNull @Size(min=6, max=6 , message="enter your bussPincode")
+	//@NotNull @Size(min=6, max=6 , message="enter your bussPincode")
 	private String bussPincode;
-	 @Size(min=1, max=50 )
+	// @Size(min=1, max=50 )
 	private String CompanyName;
 
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="bussState")

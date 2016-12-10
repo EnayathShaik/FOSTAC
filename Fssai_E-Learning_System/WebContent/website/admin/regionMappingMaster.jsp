@@ -11,7 +11,7 @@ window.onload = OnStart;
 function onLoadRegion(){
 	$('#newTable').show();
 	$('#newTable tr').remove();
-	/* $.ajax({
+	$.ajax({
 		type: 'post',
 		url: 'onLoadRegion.jspp',
 		async: false, 
@@ -27,7 +27,7 @@ function onLoadRegion(){
 			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td></tr>');	
 		});
 		}
-		}); */
+		}); 
 	return result;
 }
 </script>

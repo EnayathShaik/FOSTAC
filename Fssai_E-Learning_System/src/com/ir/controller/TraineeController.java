@@ -58,6 +58,8 @@ public class TraineeController {
 	// Rishi 
 	@RequestMapping(value="/contactTrainee" , method=RequestMethod.GET)
 	public String contactTrainee(@ModelAttribute("contactTraineee") ContactTrainee contactTrainee ){
+		System.out.println("My Mail == "+contactTrainee.getEmailAddress());
+		System.out.println("My Address == "+contactTrainee.getMessageDetails());
 		return "contactTrainee";
 	}
 	@RequestMapping(value="/changePasswordTrainee" , method=RequestMethod.GET)

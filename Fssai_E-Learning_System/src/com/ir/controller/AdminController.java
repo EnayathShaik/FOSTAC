@@ -572,6 +572,12 @@ public class AdminController {
 	
 	@RequestMapping(value="/saveFeedbackMaster" , method=RequestMethod.POST)
 	public String saveFeedbackMaster(@ModelAttribute("feedbackMaster") FeedbackMaster feedbackMaster, HttpSession session,  BindingResult result,Model model ){
+		if(result.hasErrors()){
+			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
+			System.out.println(result.getErrorCount());
+			System.out.println(result.getAllErrors());
+			return "feedbackMaster";
+		}
 		String created=adminService.saveFeedbackMaster(feedbackMaster);
 		model.addAttribute("created", created);
 		return "feedbackMaster";

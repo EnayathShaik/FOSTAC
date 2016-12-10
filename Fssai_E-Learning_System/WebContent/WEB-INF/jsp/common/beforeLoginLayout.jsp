@@ -58,6 +58,7 @@
 <script src="website/js/jquery.isotope.min.js"></script> 
 <script src="website/js/main.js"></script> 
 <script src="website/js/wow.min.js"></script>
+<script src="website/js/validation.js"></script>
 
 <script src="website/js/jquery-ui.js"></script>
     <script>
@@ -71,9 +72,19 @@
 <script>
         $(document).ready(function () {
 
-        	$(function() {
+        	/* $(function() {
       		  $( "#dateP" ).datepicker({  maxDate: 0 });
-      		});
+      		}); */
+        	
+        	$('#dateP').datepicker( {
+        		defaultDate: new Date(),
+        		yearRange: "-60:-1",
+        		maxDate: 0,
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+               
+            });
         	
             $("#news").owlCarousel({
 

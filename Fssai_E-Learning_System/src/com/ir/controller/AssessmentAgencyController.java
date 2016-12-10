@@ -77,7 +77,7 @@ public class AssessmentAgencyController {
 	public String changePass(@ModelAttribute("changePasswordForm")ChangePasswordForm ChangePasswordForm ){
 		return "changePasswordAssesAgency";
 	}
-	@RequestMapping(value="/passwordChangeAssesAgency" , method=RequestMethod.GET)
+	@RequestMapping(value="/passwordChangeAssesAgency" , method=RequestMethod.POST)
 	public String changePassword(@ModelAttribute("changePasswordForm") ChangePasswordForm changePasswordForm,HttpSession session,
 				 Model model){
 		String getConfirmation=null;

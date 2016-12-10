@@ -6,7 +6,45 @@ function AvoidSpace(event) {
     var k = event ? event.which : window.event.keyCode;
     if (k == 32) return false;
 }
-
+function checkname()
+{
+ var name=document.getElementById( "userId" ).value;
+	
+ if(name)
+ {
+  $.ajax({
+  type: 'post',
+  url: 'checkdata.jspp?'+ name,
+  data: {
+   user_name:name,
+  },
+  
+  success: function (response) {
+   $( '#name_status' ).html(response);
+   
+   if(response.trim() == 'Already')	
+   {
+	   document.getElementById('userId').value="";
+	   document.getElementById("register").style.display = 'none';
+       return false;
+	   
+   }
+   else
+   {
+	   var aa = $('#name_status').html(response);
+	   document.getElementById("register").style.display = 'block';
+       return true;	
+   }
+  }
+  });
+ }
+ else
+ {
+  $( '#name_status' ).html("");
+  document.getElementById("register").style.display = 'none';
+  return false;
+ }
+} 
 </script>
 <cf:form action="adminUserManagementSave.fssai" name="myForm" method="POST" commandName="adminUserManagementForm" > 
     <section>
@@ -137,11 +175,12 @@ function AvoidSpace(event) {
                                                                     <ul class="lab-no">
                                                                         <li class="style-li"><strong>User ID:</strong></li>
                                                                     <li class="style-li error-red">
+                                                                     <span id="name_status"> </span>
                                                                      <cf:errors path="userId"  cssClass="error" />
                                                                     </li>
                                                                 </ul>
                                                             </div>
-<cf:input path="userId"   placeholder="UserId" class="form-control"  required="required" onkeypress="return AvoidSpace(event)"  onKeyUP="this.value = this.value.toUpperCase();"/></div>
+<cf:input path="userId" onblur  ="checkname();"  placeholder="UserId" class="form-control"  required="required" onkeypress="return AvoidSpace(event)"  onKeyUP="this.value = this.value.toUpperCase();"/></div>
                                                             <div class="form-group">
                                                                 <div>
                                                                     <ul class="lab-no">
@@ -167,7 +206,7 @@ function AvoidSpace(event) {
 </cf:select> --%>
     <div class="col-md-6 col-xs-12">
                                                                
-<input type="submit" class="form-control login-btn" value="Create" style="margin-top:26px;">  
+<input type="submit" class="form-control login-btn" id="register" value="Create" style="margin-top:26px;">  
                                                             </div>                                             
                                                 </div>
                                                         </div>

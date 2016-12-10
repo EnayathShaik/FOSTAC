@@ -1,6 +1,12 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript">
+function OnStart(){
+	searchCity();
+}
+window.onload = OnStart;
+</script>
 <script type='text/javascript'>
 function searchCity(){
 	var stateId =  $("#stateId").val();
@@ -331,7 +337,7 @@ font-weight: normal; line-height: 1.42857143; text-align: center; white-space: n
   background: #ef580d !important; color: #fff; border: 1px solid transparent; transition: all 0.8s linear;">Update</a>
 
                                                  
-                                                  <a href="#testt" onclick="searchCity();" class="pull-right">Search</a>
+                                                  <a href="#testt" onclick="searchCity('ALL');" class="pull-right">Search</a>
                                                     
                                                 </div>
                                                 

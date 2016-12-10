@@ -149,10 +149,12 @@ public class TraineeDAOImpl implements  TraineeDAO{
 		String msg=contactTrainee.getMessageDetails();
 		//String ss=contactTrainee.getUserId();
 		System.out.println("user id in dao impl  :::::" + id);
+		
 		traineeMaail.mailProperty(msg, email,id);
 		contactTraineeModel.setEmailAddress(email);
 		contactTraineeModel.setMessageDetails(msg);
 		contactTraineeModel.setUserId(id);
+		contactTraineeModel.setDescription("Hello my  Id is  :- "+id+"  My EmailId is :- "+email+" My message to You:-  "+msg);
 		Integer contactTraineeModelId = (Integer) session.save(contactTraineeModel);
 		tx.commit();
 		session.close();

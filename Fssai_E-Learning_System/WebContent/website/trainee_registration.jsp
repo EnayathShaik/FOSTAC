@@ -1,12 +1,14 @@
 
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
 
 
 <html>
 <head>
 
 <script type='text/javascript'>
+
+
     function myFunction() {
     	window.document.myForm.imgcaptcha.src='';window.document.myForm.imgcaptcha.src='./Captcha.jpg?random='+new Date().getTime();
         return false;
@@ -459,9 +461,9 @@ if(x != ''){
                                        	   
     }
 </script>
- <style>
+<style>
 .error {
-    color: red;
+	color: red;
 }
 </style>
 
@@ -488,7 +490,60 @@ function DrawCaptcha()
 
 // Validate the Entered input aganist the generated security code function   
 function ValidCaptcha(){
-    var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
+	var kindOfBuss = removeSpaces(document.getElementById('KindOfBusiness').value);
+	if(kindOfBuss != 6){
+		var status = true;
+
+		var companyName = removeSpaces(document.getElementById('CompanyName').value);
+		var designation = removeSpaces(document.getElementById('Designation').value);
+		var bussAdd1 = removeSpaces(document.getElementById('BusinessAddressLine1').value);
+		var district = removeSpaces(document.getElementById('bussDistrict').value);
+		var bussAdd2 = removeSpaces(document.getElementById('BusinessAddressLine2').value);
+		var city = removeSpaces(document.getElementById('bussCity').value);
+		var state = removeSpaces(document.getElementById('bussState').value);
+		var pincode = removeSpaces(document.getElementById('bussPincode').value);
+		if(companyName == "" || companyName.length <= 0){
+		  alert('Please Enter Company Name.')
+		  status = false;
+		}
+		else if(designation == 0 || designation == "" || designation.length <= 0){
+			  alert('Please Select Designation.')
+			  status = false;
+			}
+		else if(bussAdd1 == "" || bussAdd1.length <= 0){
+			  alert('Please Enter Buss Add1.')
+			  status = false;
+			}
+		else if(state == 0 || state == "" || state.length <= 0){
+			  alert('Please Select State.')
+			  status = false;
+			}
+		else if(district == 0 || district == "" || district.length <= 0){
+			  alert('Please Select District')
+			  status = false;
+			}
+		else if(bussAdd2 == "" || bussAdd2.length <= 0){
+			  alert('Please Enter Buss Add2.')
+			  status = false;
+			}
+		else if(city == 0 || city == "" || city.length <= 0){
+			  alert('Please Select City.')
+			  status = false;
+			}
+		
+		else if(pincode == "" || pincode.length <= 0){
+			  alert('Please Enter Pincode')
+			  status = false;
+			}
+		
+		if(!status){
+			return false;
+		}
+		
+	}
+	
+	
+	var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
     var str2 = removeSpaces(document.getElementById('txtInput').value);
     
     
@@ -727,7 +782,41 @@ function checkagree()
 	}
 
 </script>
-    <script>
+<script>
+function ck_aadhar() {
+	var name=document.getElementById( "AadharNumber" ).value;
+    if(name)
+    {
+     $.ajax({
+     type: 'post',
+     url: 'checkaadhartrainee.jspp?'+ name,
+     data: {
+      user_name:name,
+     },
+     success: function (response) {
+      $( '#aadhar_status' ).html(response);
+      if(response.trim() == 'Already')	
+      {
+   	   document.getElementById('AadharNumber').value="";
+   	   document.getElementById("register").style.display = 'none';
+          return false;
+   	   
+      }
+      else
+      {
+   	   var aa = $('#aadhar_status').html(response);
+   	   document.getElementById("register").style.display = 'block';
+          return true;	
+      }
+   	  
+      }  
+     })
+     }else{
+   	  $( '#aadhar_status' ).html("");
+         document.getElementById("register").style.display = 'none';
+         return false;
+     }
+}
     function myCompany(val) {
     	businessID3.style.display = checkCompany.checked ? "none" : "block";
     	businessID2.style.display = checkCompany.checked ? "none" : "block";
@@ -756,7 +845,8 @@ function checkagree()
  
     function checkname()
     {
-     var name=document.getElementById( "userId" ).value;
+   
+    	var name=document.getElementById( "userId" ).value;
     	
      if(name)
      {
@@ -790,333 +880,404 @@ function checkagree()
           return false;
       }
      }
-</script> 
+    
+    
+</script>
 <head>
 <body>
 
-<cf:form action="registerTrainee.fssai" name="myForm" method="POST" commandName="registrationFormTrainee" onsubmit="return validateFields();" >
+	<cf:form action="registerTrainee.fssai" name="myForm" method="POST"
+		commandName="registrationFormTrainee"
+		onsubmit="return validateFields();">
 
- <div class="row">
-      <div class="col-md-2 hidden-xs"></div>
-      <div class="col-md-8  col-xs-12">
-        <h3 class="text-capitalize heading-3-padding">Trainee Registration Form</h3>
-        <!-- personel info Start -->
-        <div class="personel-info">
-          <fieldset >
-            <legend>Personal Information</legend>
-            <!-- left side -->
-			<div class="col-md-6 col-xs-12">
-				
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.UserId" /></strong></li>
-<li class="style-li error-red"><span id="name_status"> </span><span id="err"> </span>
-<label id=userIdError class="error visibility">* Enter your UserId </label>
-<cf:errors path="userId" cssClass="error" />${created }</li>
-</ul>
-</div>
-<cf:input path="userId"  maxlength="20"  onkeypress="return AvoidSpace(event)" onKeyUP="this.value = this.value.toUpperCase();" class="form-control"  onblur  ="checkname();"  placeholder="User Id"/>
-</div>
+		<div class="row">
+			<div class="col-md-2 hidden-xs"></div>
+			<div class="col-md-8  col-xs-12">
+				<h3 class="text-capitalize heading-3-padding">Trainee
+					Registration Form</h3>
+				<!-- personel info Start -->
+				<div class="personel-info">
+					<fieldset>
+						<legend>Personal Information</legend>
+						<!-- left side -->
+						<div class="col-md-6 col-xs-12">
 
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.AadharNumber" /></strong></li>
-<li class="style-li error-red">
-<label id=AadharNumberError class="error visibility">* Enter your aadharNumber </label>
-<cf:errors path="AadharNumber" cssClass="error" /></li>
-</ul>
-</div>
-<cf:input path="AadharNumber" class="form-control" maxlength="12"  placeholder="Aadhar Number" value="${aadharDetails.AadharNumber}" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
-</div>
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.UserId" /></strong></li>
+										<li class="style-li error-red"><span id="name_status">
+										</span><span id="err"> </span> <label id=userIdError
+											class="error visibility">* Enter your UserId </label> <cf:errors
+												path="userId" cssClass="error" />${created }</li>
+									</ul>
+								</div>
+								<cf:input path="userId" maxlength="20"
+									onkeypress="return AvoidSpace(event)"
+									onKeyUP="this.value = this.value.toUpperCase();"
+									class="form-control" onblur="checkname();"
+									placeholder="User Id" />
+							</div>
 
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.DOB" /></strong></li>
-<li class="style-li error-red">
-<label id=dobError class="error visibility">* select your date </label>
-<cf:errors path="dob" cssClass="error" /></li>
-</ul>
-</div>
-<cf:input path="dob" type="text" id="dateP"  class="form-control"  placeholder="DOB"/>
-</div>
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.AadharNumber" /></strong></li>
+										<li class="style-li error-red"><span id="aadhar_status"><label
+											id=AadharNumberError class="error visibility">* Enter
+												your aadharNumber </label> <cf:errors path="AadharNumber"
+												cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:input path="AadharNumber" class="form-control"
+									maxlength="12" placeholder="Aadhar Number"  onblur="ck_aadhar();"
+									value="${aadharDetails.AadharNumber}"
+									onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" />
+							</div>
 
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.Gender" /></strong></li>
-<li class="style-li error-red"><cf:errors path="gender" cssClass="error" /></li>
-</ul>
-</div>
-<label class="radio-inline">
-<cf:radiobutton path="gender" value="M" checked="true" />Male&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <cf:radiobutton path="gender" value="F" />Female</td>
-</label>
-</div>
-</div>
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.DOB" /></strong></li>
+										<li class="style-li error-red"><label id=dobError
+											class="error visibility">* select your date </label> <cf:errors
+												path="dob" cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:input path="dob" type="text" id="dateP" class="form-control"
+									placeholder="DOB" readonly="true" />
+							</div>
 
-
-
-<!-- right side -->
-<div class="col-md-6 col-xs-12">
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.Title" /></strong></li>
-<li class="style-li error-red">
-<label id="TitleError" class="error visibility">* enter your Title</label>
-<cf:errors path="Title" cssClass="error" /></li>
-</ul>
-</div>
-<cf:select path="Title" class="form-control">
-<cf:option value="0" label="Select Title" />
-<cf:options items="${titleList}" itemValue="titleId" itemLabel="titleName" />
-</cf:select>
-</div>
-
- <div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.FirstName" /></strong></li>
-<li class="style-li error-red">
-<label id="firstNameError" class="error visibility">* enter your firstname </label>
-<cf:errors path="firstName" cssClass="error" /></li>
-</ul>
-</div>
-<cf:input path="firstName" maxlength="20" class="form-control"  placeholder="First Name"/>
-</div>
-
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.MiddleName" /></strong></li>
-<li class="style-li error-red">
-<label id="MiddleNameError" class="error visibility">* enter your middlename </label>
-<cf:errors path="MiddleName" cssClass="error" /></li>
-</ul>
-</div>
-<cf:input path="MiddleName" maxlength="20" class="form-control" name="MiddleName"  placeholder="Middle Name"/>
-</div>
-
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.LastName" /></strong></li>
-<li class="style-li error-red">
-<label id="LastNameError" class="error visibility">* enter your last name </label>
-<cf:errors path="LastName" cssClass="error" /></li>
-</ul>
-</div>
-<cf:input path="LastName" maxlength="20" class="form-control"  placeholder="Last Name"/>
-</div>
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.fatherName" /></strong></li>
-<li class="style-li error-red">
-<label id="FatherNameError" class="error visibility">* enter your father name </label>
-<cf:errors path="FatherName" cssClass="error" /></li>
-</ul>
-</div>
-<cf:input path="FatherName" maxlength="20" class="form-control"  placeholder="Father Name"/>
-</div>
-</div>
-</fieldset>
-</div>
-<!-- personel info End-->
-<div class="row" style="height:20px;"></div>
-
-
-<!-- Contact details Start -->
-<div class="personel-info">
-<fieldset>
-<legend>Correspondence Address </legend>
-
-<!--Left side-->
-
-<div class="col-md-6 col-xs-12" id = "correspondence1">
-
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.correspondenceAddress1" /></strong></li>
-<li class="style-li error-red">
-<label id="correspondenceAddress1Error" class="error visibility">* enter your correspondence address  </label>
-<cf:errors path="correspondenceAddress1" cssClass="error" /></li>  
-</ul>
-</div>
-<cf:input path="correspondenceAddress1" maxlength="100" class="form-control"  placeholder="Address "/>
-</div> 
- 
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.correspondenceAddress2" /></strong></li>
-<li class="style-li error-red">
-<label id="correspondenceAddress2Error" class="error visibility">* enter your correspondence address </label>
-<cf:errors path="correspondenceAddress2" cssClass="error" /></li>       
-</ul>
-</div>
-<cf:input path="correspondenceAddress2" maxlength="100" class="form-control"  placeholder="Address 2"/>
-</div> 
-
- <div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.correspondenceState" /></strong></li>
-<li class="style-li error-red">
-<label id="correspondenceStateError" class="error visibility">* select your state </label>
-<cf:errors path="correspondenceState" cssClass="error" /></li>
-</ul>
-</div>
-<cf:select path="correspondenceState" class="form-control" onchange="getDistrict(this.value);">
-<cf:option value="0" label="Select State" />
-<cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName"/>
-</cf:select>
-</div>
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.Email" /></strong></li>
-<li class="style-li error-red">
-<label id="EmailError" class="error visibility">* Not a valid e-mail address</label>
-<cf:errors path="Email" cssClass="error" /></li>
-</ul>
-</div>
-<cf:input path="Email" class="form-control"  placeholder="Email"/>
-</div>
-
-
-</div>
-<!--Left side--> 
-<!--Right side-->
-<div class="col-md-6 col-xs-12" id = "correspondence2">
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.District" /></strong></li>
-<li class="style-li error-red">
-<label id="correspondenceDistrictError" class="error visibility">* select your correspondence district </label>
-<cf:errors path="correspondenceDistrict" cssClass="error" /></li>
-</ul>
-</div>
-<cf:select path="correspondenceDistrict" class="form-control" onchange="getCity(this.value);" >
-<cf:option value="0" label="Select District" />
-<%-- <cf:options items="${districtList}" itemValue="districtId" itemLabel="districtName" /> --%>
-</cf:select>
-</div>
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.correspondenceCity" /></strong></li>
-<li class="style-li error-red">
-<label id="correspondenceCityError" class="error visibility">* select your correspondence city</label>
-<cf:errors path="correspondenceCity" cssClass="error" />
-</li>
-</ul>
-</div>                                
-<cf:select path="correspondenceCity" class="form-control"  onchange="return myBusiness()">
-	<cf:option value="0" label="Select City" />
-	<cf:options items="${cityList}" itemValue="cityId" itemLabel="cityName" />
-	</cf:select>  		
-</div>
-
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.correspondencePincode" /></strong></li>
-<li class="style-li error-red">
-<label id="correspondencePincodeError" class="error visibility">* enter your correspondence pincode </label>
-<cf:errors path="correspondencePincode" cssClass="error" /></li>        
-</ul>
-</div>
-<cf:input path="correspondencePincode" maxlength="6" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" placeholder="Pincode" class="form-control"  />
-</div>
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.Mobile" /></strong></li>
-<li class="style-li error-red">
-<label id="MobileError" class="error visibility">* enter your correct mobile number </label>
-<cf:errors path="Mobile" cssClass="error" /></li>
-</ul>
-</div>
-<cf:input path="Mobile" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" placeholder="Mobile Number" class="form-control" type="text" value="" maxlength="10"/>
-</div>
-
-<!--Right side-->
-</div></fieldset>
-</div>
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.Gender" /></strong></li>
+										<li class="style-li error-red"><cf:errors path="gender"
+												cssClass="error" /></li>
+									</ul>
+								</div>
+								<label class="radio-inline"> <cf:radiobutton
+										path="gender" value="M" checked="true" />Male&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<cf:radiobutton path="gender" value="F" />Female
+									</td>
+								</label>
+							</div>
+						</div>
 
 
 
+						<!-- right side -->
+						<div class="col-md-6 col-xs-12">
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.Title" /></strong></li>
+										<li class="style-li error-red"><label id="TitleError"
+											class="error visibility">* enter your Title</label> <cf:errors
+												path="Title" cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:select path="Title" class="form-control">
+									<cf:option value="0" label="Select Title" />
+									<cf:options items="${titleList}" itemValue="titleId"
+										itemLabel="titleName" />
+								</cf:select>
+							</div>
+
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.FirstName" /></strong></li>
+										<li class="style-li error-red"><label id="firstNameError"
+											class="error visibility">* enter your firstname </label> <cf:errors
+												path="firstName" cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:input id="traineeFirstName" onkeyup="allLetter(this.id,this.value);" path="firstName" maxlength="50" class="form-control"
+									placeholder="First Name" />
+							</div>
+
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.MiddleName" /></strong></li>
+										<li class="style-li error-red"><label
+											id="MiddleNameError" class="error visibility">* enter
+												your middlename </label> <cf:errors path="MiddleName"
+												cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:input path="MiddleName" onkeyup="allLetter(this.id,this.value);" maxlength="50" class="form-control"
+									name="MiddleName" placeholder="Middle Name" />
+							</div>
+
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.LastName" /></strong></li>
+										<li class="style-li error-red"><label id="LastNameError"
+											class="error visibility">* enter your last name </label> <cf:errors
+												path="LastName" cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:input path="LastName" onkeyup="allLetter(this.id,this.value);" maxlength="50" class="form-control"
+									placeholder="Last Name" />
+							</div>
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.fatherName" /></strong></li>
+										<li class="style-li error-red"><label
+											id="FatherNameError" class="error visibility">* enter
+												your father name </label> <cf:errors path="FatherName"
+												cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:input path="FatherName" onkeyup="allLetter(this.id,this.value);" maxlength="100" class="form-control"
+									placeholder="Father Name" />
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				<!-- personel info End-->
+				<div class="row" style="height: 20px;"></div>
 
 
-<!-- Contact details End-->
-<div class="row" style="height:20px;"></div>
+				<!-- Contact details Start -->
+				<div class="personel-info">
+					<fieldset>
+						<legend>Correspondence Address </legend>
 
-<div class="personel-info">
-<fieldset>
-<legend>Permanent Address </legend>
+						<!--Left side-->
 
-<div class="col-md-12 col-sm-12 col-x-sm-12">
-<cf:checkbox id="checkCorrespondence"  path="checkCorrespondence" onclick="myCorrespondence(this)" />
-<label class = "error">Is your permanent address same as correspondence address.</label> 
-</div>
+						<div class="col-md-6 col-xs-12" id="correspondence1">
 
-<!--Left side-->
-<div class="col-md-6 col-xs-12" id="residential1">
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.correspondenceAddress1" /></strong></li>
+										<li class="style-li error-red"><label
+											id="correspondenceAddress1Error" class="error visibility">*
+												enter your correspondence address </label> <cf:errors
+												path="correspondenceAddress1" cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:input path="correspondenceAddress1" maxlength="100"
+									class="form-control" placeholder="Address " />
+							</div>
 
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.ResidentialAddressLine1" /></strong></li>
-<li class="style-li error-red">
-<label id="ResidentialAddressLine1Error" class="error visibility">* enter your residentialAddress1 </label>
-<cf:errors path="ResidentialAddressLine1"  cssClass="error"/></li> 
-</ul>
-</div>
-<cf:input path="ResidentialAddressLine1" maxlength="100" placeholder="Residential Address Line 2" class="form-control" />
-</div> 
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.correspondenceAddress2" /></strong></li>
+										<li class="style-li error-red"><label
+											id="correspondenceAddress2Error" class="error visibility">*
+												enter your correspondence address </label> <cf:errors
+												path="correspondenceAddress2" cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:input path="correspondenceAddress2" maxlength="100"
+									class="form-control" placeholder="Address 2" />
+							</div>
 
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.ResidentialAddressLine2" /></strong></li>
-<li class="style-li error-red"><strong>
-<label id="ResidentialAddressLine2Error" class="error visibility">* enter your residentialAddress1 </label>
-<cf:errors path="ResidentialAddressLine2"  cssClass="error"/></li>       
-</ul>
-</div>
-<cf:input path="ResidentialAddressLine2" maxlength="100" placeholder="Residential Address Line 2" class="form-control" />
-</div>
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.correspondenceState" /></strong></li>
+										<li class="style-li error-red"><label
+											id="correspondenceStateError" class="error visibility">*
+												select your state </label> <cf:errors path="correspondenceState"
+												cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:select path="correspondenceState" class="form-control"
+									onchange="getDistrict(this.value);">
+									<cf:option value="0" label="Select State" />
+									<cf:options items="${stateList}" itemValue="stateId"
+										itemLabel="stateName" />
+								</cf:select>
+							</div>
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.Email" /></strong></li>
+										<li class="style-li error-red"><label id="EmailError"
+											class="error visibility">* Not a valid e-mail address</label>
+											<cf:errors path="Email" cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:input path="Email" class="form-control" placeholder="Email" />
+							</div>
+
+
+						</div>
+						<!--Left side-->
+						<!--Right side-->
+						<div class="col-md-6 col-xs-12" id="correspondence2">
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.District" /></strong></li>
+										<li class="style-li error-red"><label
+											id="correspondenceDistrictError" class="error visibility">*
+												select your correspondence district </label> <cf:errors
+												path="correspondenceDistrict" cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:select path="correspondenceDistrict" class="form-control"
+									onchange="getCity(this.value);">
+									<cf:option value="0" label="Select District" />
+									<%-- <cf:options items="${districtList}" itemValue="districtId" itemLabel="districtName" /> --%>
+								</cf:select>
+							</div>
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.correspondenceCity" /></strong></li>
+										<li class="style-li error-red"><label
+											id="correspondenceCityError" class="error visibility">*
+												select your correspondence city</label> <cf:errors
+												path="correspondenceCity" cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:select path="correspondenceCity" class="form-control"
+									onchange="return myBusiness()">
+									<cf:option value="0" label="Select City" />
+									<cf:options items="${cityList}" itemValue="cityId"
+										itemLabel="cityName" />
+								</cf:select>
+							</div>
+
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.correspondencePincode" /></strong></li>
+										<li class="style-li error-red"><label
+											id="correspondencePincodeError" class="error visibility">*
+												enter your correspondence pincode </label> <cf:errors
+												path="correspondencePincode" cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:input path="correspondencePincode" maxlength="6"
+									onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"
+									placeholder="Pincode" class="form-control" />
+							</div>
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.Mobile" /></strong></li>
+										<li class="style-li error-red"><label id="MobileError"
+											class="error visibility">* enter your correct mobile
+												number </label> <cf:errors path="Mobile" cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:input path="Mobile"
+									onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"
+									placeholder="Mobile Number" class="form-control" type="text"
+									value="" maxlength="10" />
+							</div>
+
+							<!--Right side-->
+						</div>
+					</fieldset>
+				</div>
 
 
 
 
- <div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.State" /></strong></li>
-<li class="style-li error-red">
-<label id="resStateError" class="error visibility">* select your state </label>
-<cf:errors path="resState" cssClass="error" /></li>
-</ul>
-</div>
-<cf:select path="resState" class="form-control state" onchange="getDistrict1(this.value);">
-<cf:option value="0" label="Select State" />
-<cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName" />
-</cf:select>
-</div>
-<table>
-<tr>
-<td id="response">
-                <!--Response will be inserted here-->
-            </td>
-</tr>
-</table>
-<%-- <div class="form-group">
+
+				<!-- Contact details End-->
+				<div class="row" style="height: 20px;"></div>
+
+				<div class="personel-info">
+					<fieldset>
+						<legend>Permanent Address </legend>
+
+						<div class="col-md-12 col-sm-12 col-x-sm-12">
+							<cf:checkbox id="checkCorrespondence" path="checkCorrespondence"
+								onclick="myCorrespondence(this)" />
+							<label class="error">Is your permanent address same as
+								correspondence address.</label>
+						</div>
+
+						<!--Left side-->
+						<div class="col-md-6 col-xs-12" id="residential1">
+
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.ResidentialAddressLine1" /></strong></li>
+										<li class="style-li error-red"><label
+											id="ResidentialAddressLine1Error" class="error visibility">*
+												enter your residentialAddress1 </label> <cf:errors
+												path="ResidentialAddressLine1" cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:input path="ResidentialAddressLine1" maxlength="100"
+									placeholder="Residential Address Line 2" class="form-control" />
+							</div>
+
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.ResidentialAddressLine2" /></strong></li>
+										<li class="style-li error-red"><strong> <label
+												id="ResidentialAddressLine2Error" class="error visibility">*
+													enter your residentialAddress1 </label> <cf:errors
+													path="ResidentialAddressLine2" cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:input path="ResidentialAddressLine2" maxlength="100"
+									placeholder="Residential Address Line 2" class="form-control" />
+							</div>
+
+
+
+
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.State" /></strong></li>
+										<li class="style-li error-red"><label id="resStateError"
+											class="error visibility">* select your state </label> <cf:errors
+												path="resState" cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:select path="resState" class="form-control state"
+									onchange="getDistrict1(this.value);">
+									<cf:option value="0" label="Select State" />
+									<cf:options items="${stateList}" itemValue="stateId"
+										itemLabel="stateName" />
+								</cf:select>
+							</div>
+							<table>
+								<tr>
+									<td id="response">
+										<!--Response will be inserted here-->
+									</td>
+								</tr>
+							</table>
+							<%-- <div class="form-group">
 <div>
 <ul class="lab-no">
 <li class="style-li"><strong><cs:message code="lbl.Trainee.District" /></strong></li>
@@ -1130,58 +1291,67 @@ function checkagree()
 </div> --%>
 
 
- 
-
-</div>
-<!--Left side--> 
-<!--Right side-->
-<div class="col-md-6 col-xs-12" id="residential2">
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.District" /></strong></li>
-<li class="style-li error-red">
-<label id="residentialDistrictError" class="error visibility">* select your district </label>
-<cf:errors path="residentialDistrict" cssClass="error" /></li>
-</ul>
-</div>
-<cf:select path="residentialDistrict" class="form-control" onchange="getCity1(this.value);">
-<cf:option value="0" label="Select District" />
-<cf:options items="${districtList}" itemValue="districtId" itemLabel="districtName" />
-</cf:select> 
-</div>
 
 
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><strong><cs:message code="lbl.Trainee.City" /></strong></li>
-<li class="style-li error-red">
-<label id="resCityError" class="error visibility">* select your city </label>
-<cf:errors path="resCity" cssClass="error" />
-</li>
-</ul>
-</div>                                
-<cf:select path="resCity" class="form-control">
-<cf:option value="0" label="Select City" />
-<cf:options items="${cityList}" itemValue="cityId" itemLabel="cityName" />
-</cf:select> 		
-</div>
+						</div>
+						<!--Left side-->
+						<!--Right side-->
+						<div class="col-md-6 col-xs-12" id="residential2">
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.District" /></strong></li>
+										<li class="style-li error-red"><label
+											id="residentialDistrictError" class="error visibility">*
+												select your district </label> <cf:errors path="residentialDistrict"
+												cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:select path="residentialDistrict" class="form-control"
+									onchange="getCity1(this.value);">
+									<cf:option value="0" label="Select District" />
+									<cf:options items="${districtList}" itemValue="districtId"
+										itemLabel="districtName" />
+								</cf:select>
+							</div>
 
 
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.Pincode" /></strong></li>
-<li class="style-li error-red">
-<label id="resPincodeError" class="error visibility">* enter your pincode</label>
-<cf:errors path="resPincode" cssClass="error" /></li>        
-</ul>
-</div>
-<input id="resPincode" name="resPincode" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" placeholder="Pincode" class="form-control" type="text" value="" maxlength="6">
-</div>
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><strong><cs:message
+														code="lbl.Trainee.City" /></strong></li>
+										<li class="style-li error-red"><label id="resCityError"
+											class="error visibility">* select your city </label> <cf:errors
+												path="resCity" cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:select path="resCity" class="form-control">
+									<cf:option value="0" label="Select City" />
+									<cf:options items="${cityList}" itemValue="cityId"
+										itemLabel="cityName" />
+								</cf:select>
+							</div>
 
-<%-- <div class="form-group">
+
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.Pincode" /></strong></li>
+										<li class="style-li error-red"><label
+											id="resPincodeError" class="error visibility">* enter
+												your pincode</label> <cf:errors path="resPincode" cssClass="error" /></li>
+									</ul>
+								</div>
+								<input id="resPincode" name="resPincode"
+									onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"
+									placeholder="Pincode" class="form-control" type="text" value=""
+									maxlength="6">
+							</div>
+
+							<%-- <div class="form-group">
 <div>
 <ul class="lab-no">
 <li class="style-li"><strong><cs:message code="lbl.Trainee.Email" /></strong></li>
@@ -1192,7 +1362,7 @@ function checkagree()
 </div> --%>
 
 
-<%-- <div class="form-group">
+							<%-- <div class="form-group">
 <div>
 <ul class="lab-no">
 <li class="style-li"><strong><cs:message code="lbl.Trainee.Mobile" /></strong></li>
@@ -1201,147 +1371,171 @@ function checkagree()
 </div>
 <cf:input path="Mobile" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" placeholder="Mobile Number" class="form-control" type="text" value="" maxlength="10"/>
 </div> --%>
- 
 
 
 
-<!--Right side-->
-</div></fieldset>
-</div>
+
+							<!--Right side-->
+						</div>
+					</fieldset>
+				</div>
 
 
-<!-- Business address Start -->
-<div class="personel-info ">
-<fieldset>
-<legend>Business Details</legend>
+				<!-- Business address Start -->
+				<div class="personel-info ">
+					<fieldset>
+						<legend>Business Details</legend>
 
-<div class="col-xs-12">
-	<div class="form-group">
-		<div>
-		<ul class="lab-no">
-		<li class="style-li"><strong><cs:message code="lbl.Trainee.KindOfBusiness" /></strong></li>
-		<li class="style-li error-red">
-		<label id="KindOfBusinessError" class="error visibility">* select your kindofbussiness </label>
-		<cf:errors path="KindOfBusiness" cssClass="error" /></li>
-		</ul>
-		</div>
-	<cf:select path="KindOfBusiness" class="form-control" onchange="return myBusiness()">
-	<cf:option value="0" label="Select Business" />
-	<cf:options items="${kindOfBusinessList}" itemValue="kindOfBusinessId" itemLabel="kindOfBusinessName" />
-	</cf:select>
-	<div id="desiNCm"><div>
-	
-	
-	<div class="col-xs-12" style="padding: 0;">
-	
-		<!-- left side -->
-		<div class="col-md-6 col-xs-12" style="padding-left: 0;">
-			<div class="form-group">
-			<div>
-			<ul class="lab-no">
-			<li class="style-li"><strong><cs:message code="lbl.Trainee.CompanyName" /></strong></li>
-			<li class="style-li error-red">
-			<label id="CompanyNameError" class="error visibility">* enter your CompanyName</label>
-			<cf:errors path="CompanyName" cssClass="error" /></li>
-			</ul>
-			</div>
-			<cf:input path="CompanyName" maxlength="50" class="form-control"  placeholder="Company Name"/>
-			</div>
-		</div>
-		
-		<!-- right side -->
-		<div class="col-md-6 col-xs-12" style="padding-right: 0;">
-			<div class="form-group" >
-			<div>
-			<ul class="lab-no">
-			<li class="style-li"><strong><cs:message code="lbl.Trainee.Designation" /></strong> <a href="#myModal" data-toggle="modal" data-target="#myModal">Do you want?</a></li>
-			<li class="style-li error-red">
-			<label id="DesignationError" class="error visibility">* enter your designation </label>
-			<cf:errors path="Designation" cssClass="error" /></li>
-			</ul>
-			</div>
-			<cf:select path="Designation" class="form-control">
-			<cf:option value="0" label="Select" />	
-			<cf:option value="Food Handler" label="Food Handler" />
-			<cf:option value="Food Safety Supervisior" label="Food Safety Supervisior" />
-			<cf:option value="Food Safety Manager" label="Food Safety Manager" />
-			<cf:option value="Other" label="Other" />
-			</cf:select>
-			</div>
-		</div>
-	
-	</div>
-	
-	
-	
-	
-<div class="form-group">
-                <div class="modal fade" id="myModal" role="dialog">
-                  <div class="modal-dialog"> 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Designation</h4>
-                      </div>
-                      <div class="modal-body">
-                        <table align="center" width="200" border="0" class="table table-bordered table-responsive table-hover table-striped">
-                          <thead>
-                          <th bgcolor="#0033CC" style="color:#fff;">Designation</th>
-                            <th bgcolor="#0033CC" style="color:#fff;">Example</th>
-                              </thead>
-                          <tr>
-                            <td>Food Handler</td>
-                            <td>Example</td>
-                          </tr>
-                          <tr>
-                            <td>Food Safety Supervisior</td>
-                            <td>Example</td>
-                          </tr>
-                          <tr>
-                            <td>Food Safety Manager</td>
-                            <td>Example</td>
-                          </tr>
-                          <tr>
-                            <td>Other</td>
-                            <td>Example</td>
-                          </tr>
-                        </table>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn login-btn" data-dismiss="modal">Close</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-</div>
-<div>
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong>Registration/Licence No.</strong></li>
-<li class="style-li error-red">
-<label id="registrationNoError" class="error visibility">* enter your registrationNumber </label>
-<cf:errors path="registrationNo" cssClass="error" /></li>
-</ul>
-</div>
-<cf:input path="registrationNo" maxlength="50" class="form-control"  placeholder="Registration/Licence Number"/>
-</div>
-</div>
-</div>
-	</div>	
-</div>
+						<div class="col-xs-12">
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.KindOfBusiness" /></strong></li>
+										<li class="style-li error-red"><label
+											id="KindOfBusinessError" class="error visibility">*
+												select your kindofbussiness </label> <cf:errors
+												path="KindOfBusiness" cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:select path="KindOfBusiness" class="form-control"
+									onchange="return myBusiness()">
+									<cf:option value="0" label="Select Business" />
+									<cf:options items="${kindOfBusinessList}"
+										itemValue="kindOfBusinessId" itemLabel="kindOfBusinessName" />
+								</cf:select>
+								<div id="desiNCm">
+									<div>
 
 
-<!--Left side-->
+										<div class="col-xs-12" style="padding: 0;">
 
-<div class="col-md-12 col-xs-12 " id="businessID1">
-<cf:checkbox path="checkCompany" id="checkCompany" onclick="myCompany(this.value)"/> <label class = "error">Is your company address same as correspondence address.</label> 
-</div>
-<div class="col-md-6 col-xs-12" id="businessID2">
-<%-- <div class="form-group">
+											<!-- left side -->
+											<div class="col-md-6 col-xs-12" style="padding-left: 0;">
+												<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong><cs:message
+																		code="lbl.Trainee.CompanyName" /></strong></li>
+															<li class="style-li error-red"><label
+																id="CompanyNameError" class="error visibility">*
+																	enter your CompanyName</label> <cf:errors path="CompanyName"
+																	cssClass="error" /></li>
+														</ul>
+													</div>
+													<cf:input path="CompanyName" maxlength="50"
+														class="form-control" placeholder="Company Name" />
+												</div>
+											</div>
+
+											<!-- right side -->
+											<div class="col-md-6 col-xs-12" style="padding-right: 0;">
+												<div class="form-group">
+													<div>
+														<ul class="lab-no">
+															<li class="style-li"><strong><cs:message
+																		code="lbl.Trainee.Designation" /></strong> <a href="#myModal"
+																data-toggle="modal" data-target="#myModal">Do you
+																	want?</a></li>
+															<li class="style-li error-red"><label
+																id="DesignationError" class="error visibility">*
+																	enter your designation </label> <cf:errors path="Designation"
+																	cssClass="error" /></li>
+														</ul>
+													</div>
+													<cf:select path="Designation" class="form-control">
+														<cf:option value="0" label="Select" />
+														<cf:option value="Food Handler" label="Food Handler" />
+														<cf:option value="Food Safety Supervisior"
+															label="Food Safety Supervisior" />
+														<cf:option value="Food Safety Manager"
+															label="Food Safety Manager" />
+														<cf:option value="Other" label="Other" />
+													</cf:select>
+												</div>
+											</div>
+
+										</div>
+
+
+
+
+										<div class="form-group">
+											<div class="modal fade" id="myModal" role="dialog">
+												<div class="modal-dialog">
+													<!-- Modal content-->
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal">&times;</button>
+															<h4 class="modal-title">Designation</h4>
+														</div>
+														<div class="modal-body">
+															<table align="center" width="200" border="0"
+																class="table table-bordered table-responsive table-hover table-striped">
+																<thead>
+																	<th bgcolor="#0033CC" style="color: #fff;">Designation</th>
+																	<th bgcolor="#0033CC" style="color: #fff;">Example</th>
+																</thead>
+																<tr>
+																	<td>Food Handler</td>
+																	<td>Example</td>
+																</tr>
+																<tr>
+																	<td>Food Safety Supervisior</td>
+																	<td>Example</td>
+																</tr>
+																<tr>
+																	<td>Food Safety Manager</td>
+																	<td>Example</td>
+																</tr>
+																<tr>
+																	<td>Other</td>
+																	<td>Example</td>
+																</tr>
+															</table>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn login-btn"
+																data-dismiss="modal">Close</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+									</div>
+									<div>
+										<div class="form-group">
+											<div>
+												<ul class="lab-no">
+													<li class="style-li"><strong>Registration/Licence
+															No.</strong></li>
+													<li class="style-li error-red"><label
+														id="registrationNoError" class="error visibility">*
+															enter your registrationNumber </label> <cf:errors
+															path="registrationNo" cssClass="error" /></li>
+												</ul>
+											</div>
+											<cf:input path="registrationNo" maxlength="50"
+												class="form-control"
+												placeholder="Registration/Licence Number" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<!--Left side-->
+
+						<div class="col-md-12 col-xs-12 " id="businessID1">
+							<cf:checkbox path="checkCompany" id="checkCompany"
+								onclick="myCompany(this.value)" />
+							<label class="error">Is your company address same as
+								correspondence address.</label>
+						</div>
+						<div class="col-md-6 col-xs-12" id="businessID2">
+							<%-- <div class="form-group">
 <div>
 <ul class="lab-no">
 <li class="style-li"><strong><cs:message code="lbl.Trainee.CompanyName" /></strong></li>
@@ -1354,58 +1548,67 @@ function checkagree()
 
 
 
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.BusinessAddressLine1" /></strong></li>
-<li class="style-li error-red">
-<label id="BusinessAddressLine1Error" class="error visibility">* enter your BusinessAddressLine1 </label>
-<cf:errors path="BusinessAddressLine1" cssClass="error" /></li>
-</ul>
-</div>
-<cf:input path="BusinessAddressLine1" maxlength="100" class="form-control"  placeholder="Business Address Line 1"/>
-</div>
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.BusinessAddressLine1" /></strong></li>
+										<li class="style-li error-red"><label
+											id="BusinessAddressLine1Error" class="error visibility">*
+												enter your BusinessAddressLine1 </label> <cf:errors
+												path="BusinessAddressLine1" cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:input path="BusinessAddressLine1" maxlength="100"
+									class="form-control" placeholder="Business Address Line 1" />
+							</div>
 
 
 
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.BusinessAddressLine2" /></strong></li>
-<li class="style-li error-red">
-<label id="BusinessAddressLine2Error" class="error visibility">* enter your BusinessAddressLine2 </label>
-<cf:errors path="BusinessAddressLine2"   cssClass="error" /></li>
-</ul>
-</div>
-<cf:input path="BusinessAddressLine2" maxlength="100" class="form-control"  placeholder="Business Address Line 2"/>
-</div>
- 
- 
-
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.State" /></strong></li>
-<li class="style-li error-red">
-<label id="bussStateError" class="error visibility">* enter your bussinessState </label>
-<cf:errors path="bussState" cssClass="error" /></li>
-</ul>
-</div>
-<cf:select path="bussState" class="form-control" onchange="getDistrict2(this.value);">
-<cf:option value="0" label="Select State" />
-<cf:options items="${stateList}" itemValue="stateId" itemLabel="StateName" />
-</cf:select>					
-</div>
- 
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.BusinessAddressLine2" /></strong></li>
+										<li class="style-li error-red"><label
+											id="BusinessAddressLine2Error" class="error visibility">*
+												enter your BusinessAddressLine2 </label> <cf:errors
+												path="BusinessAddressLine2" cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:input path="BusinessAddressLine2" maxlength="100"
+									class="form-control" placeholder="Business Address Line 2" />
+							</div>
 
 
 
-</div>
-<!--Left side--> 
-<!--Right side-->
-<div class="col-md-6 col-xs-12" id="businessID3">
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.State" /></strong></li>
+										<li class="style-li error-red"><label id="bussStateError"
+											class="error visibility">* enter your bussinessState
+										</label> <cf:errors path="bussState" cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:select path="bussState" class="form-control"
+									onchange="getDistrict2(this.value);">
+									<cf:option value="0" label="Select State" />
+									<cf:options items="${stateList}" itemValue="stateId"
+										itemLabel="StateName" />
+								</cf:select>
+							</div>
 
-<%-- <div class="form-group">
+
+
+
+						</div>
+						<!--Left side-->
+						<!--Right side-->
+						<div class="col-md-6 col-xs-12" id="businessID3">
+
+							<%-- <div class="form-group">
 <div>
 <ul class="lab-no">
 <li class="style-li"><strong><cs:message code="lbl.Trainee.Designation" /></strong></li>
@@ -1422,92 +1625,108 @@ function checkagree()
 
  --%>
 
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.District" /></strong></li>
-<li class="style-li error-red">
-<label id="bussDistrictError" class="error visibility">* select your bussinessDistrict </label>
-<cf:errors path="bussDistrict" cssClass="error" /></li>
-</ul>
-</div>
-<cf:select path="bussDistrict" class="form-control" onchange="getCity2(this.value);" >
-<cf:option value="0" label="Select District" />
-<cf:options items="${districtList}" itemValue="districtId" itemLabel="districtName" />
-</cf:select>					
-</div>
- 
-<div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.City" /></strong></li>
-<li class="style-li error-red">
-<cf:errors path="correspondenceState" cssClass="error" /></li>
-</ul>
-</div>
-<label id="bussCityError" class="error visibility">* select your bussinessDistrict </label>
-<cf:select path="bussCity" class="form-control">
-<cf:option value="0" label="Select City" />
-<cf:options items="${cityList}" itemValue="cityId" itemLabel="cityName" />
-</cf:select>					
-</div>
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.District" /></strong></li>
+										<li class="style-li error-red"><label
+											id="bussDistrictError" class="error visibility">*
+												select your bussinessDistrict </label> <cf:errors
+												path="bussDistrict" cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:select path="bussDistrict" class="form-control"
+									onchange="getCity2(this.value);">
+									<cf:option value="0" label="Select District" />
+									<cf:options items="${districtList}" itemValue="districtId"
+										itemLabel="districtName" />
+								</cf:select>
+							</div>
 
- <div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.Pincode" /></strong></li>
-<li class="style-li error-red">
-<label id="bussPincodeError" class="error visibility">* enter your bussinessPincode </label>
-<cf:errors path="bussPincode" cssClass="error" /></li>
-</ul>
-</div>
-<cf:input path="bussPincode" class="form-control"  placeholder="Pincode" maxlength="6" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
-</div>
-</div>
-<!--Right side-->
-</fieldset>
-</div>
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.City" /></strong></li>
+										<li class="style-li error-red"><cf:errors
+												path="correspondenceState" cssClass="error" /></li>
+									</ul>
+								</div>
+								<label id="bussCityError" class="error visibility">*
+									select your bussinessDistrict </label>
+								<cf:select path="bussCity" class="form-control">
+									<cf:option value="0" label="Select City" />
+									<cf:options items="${cityList}" itemValue="cityId"
+										itemLabel="cityName" />
+								</cf:select>
+							</div>
+
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.Pincode" /></strong></li>
+										<li class="style-li error-red"><label
+											id="bussPincodeError" class="error visibility">*
+												enter your bussinessPincode </label> <cf:errors path="bussPincode"
+												cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:input path="bussPincode" class="form-control"
+									placeholder="Pincode" maxlength="6"
+									onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" />
+							</div>
+						</div>
+						<!--Right side-->
+					</fieldset>
+				</div>
 
 
-<!-- Business address Start -->
-<div class="row" style="height:20px;"></div>
-<div style="width:95%; margin-left:32px; float:left; height:100px; border:1px solid #cecece;"  class="form-group">
-<div style="float:left">
-<div style="float:left; width:98%;">
-<label id="captchaError" style="float:left; width:99%; font-family:Calibri; margin-left:0px;">Please enter captcha in below textbox !!!</label>
-</div>
+				<!-- Business address Start -->
+				<div class="row" style="height: 20px;"></div>
+				<div
+					style="width: 95%; margin-left: 32px; float: left; height: 100px; border: 1px solid #cecece;"
+					class="form-group">
+					<div style="float: left">
+						<div style="float: left; width: 98%;">
+							<label id="captchaError"
+								style="float: left; width: 99%; font-family: Calibri; margin-left: 0px;">Please
+								enter captcha in below textbox !!!</label>
+						</div>
 
-<div style="float:left; width:99%;">
+						<div style="float: left; width: 99%;">
 
-<input type="text" id="txtCaptcha" 
-            style="background-image:url(1.jpg); text-align:center; border:none;    width: 140px;
-    margin-left: 8px;
-            font-weight:bold; font-family:Modern" disabled="disabled" />
-        <input type="button" id="btnrefresh" value="Refresh" onclick="DrawCaptcha();" />
-<input type="text"  id="txtInput" placeholder="Captcha"  style="width: 140px;"  / > 
- 
- </div>
-</div>
-<div style="float:left; width:99%;">
-<input type="checkbox" id="check" style="margin-left:1%;">
-<!-- <a href="#" target="_blank" class="terms-font-size">  -->
-I have read and understood the Terms & Conditions and the Privacy Policy of FSSAI. 
-<!-- </a> -->
-</div>
-</div>
+							<input type="text" id="txtCaptcha"
+								style="background-image: url(1.jpg); text-align: center; border: none; width: 140px; margin-left: 8px; font-weight: bold; font-family: Modern"
+								disabled="disabled" /> <input type="button" id="btnrefresh"
+								value="Refresh" onclick="DrawCaptcha();" /> <input type="text"
+								id="txtInput" placeholder="Captcha" style="width: 140px;"/ >
 
-<div class="col-xs-12">
-<div class="col-xs-4"></div>
-<div class="col-xs-4" id="register">
-<div class="form-group">
-<input  type="submit" class="form-control login-btn"  value="Register" onclick="return ValidCaptcha();"  />
-</div>
-</div>
-<div class="col-xs-4"></div>
-</div>
-</div>
-</div>    
-      
+						</div>
+					</div>
+					<div style="float: left; width: 99%;">
+						<input type="checkbox" id="check" style="margin-left: 1%;">
+						<!-- <a href="#" target="_blank" class="terms-font-size">  -->
+						I have read and understood the Terms & Conditions and the Privacy
+						Policy of FSSAI.
+						<!-- </a> -->
+					</div>
+				</div>
 
-<div class="col-md-2 hidden-xs"></div>      
- </cf:form>
+				<div class="col-xs-12">
+					<div class="col-xs-4"></div>
+					<div class="col-xs-4" id="register">
+						<div class="form-group">
+							<input type="submit" class="form-control login-btn"
+								value="Register" onclick="return ValidCaptcha();" />
+						</div>
+					</div>
+					<div class="col-xs-4"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="col-md-2 hidden-xs"></div>
+	</cf:form>

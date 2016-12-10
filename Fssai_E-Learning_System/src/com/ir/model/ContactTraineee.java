@@ -15,6 +15,9 @@ public class ContactTraineee {
 @Id @GeneratedValue(strategy=GenerationType.SEQUENCE)
 private int contactTraineeeId;
 
+
+private String description;
+
 @NotNull @Email
 private String emailAddress;
 @NotNull
@@ -48,6 +51,15 @@ public void setUserId(String userId) {
 	this.userId = userId;
 }
 
+
+
+
+public String getDescription() {
+	return description;
+}
+public void setDescription(String description) {
+	this.description = description;
+}
 @Override
 public String toString() {
 	return "ContactTraineee [contactTraineeeId=" + contactTraineeeId + ", emailAddress=" + emailAddress

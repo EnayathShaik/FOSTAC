@@ -7,6 +7,63 @@
 }
 </style>
 <script type="text/javascript">
+function validate() {
+	var status = true;
+	var userID = $("#userId").val();
+	var trainingPartnerName = $("#trainingPartnerName").val();
+	var websiteURL = $("#websiteUrl").val();
+	var pan = $("#PAN").val();
+	var email = $("#email").val();
+	var headOfficeDataAddress1 = $("#headOfficeDataAddress1").val();
+	var headOfficeDataAddress2 = $("#headOfficeDataAddress2").val();
+	var pin = $("#pin").val();
+	var stateId = $("#state").val();
+	var district = $("#district").val();
+	var city = $("#city").val();
+	if (userID == "" || userID.length <= 0) {
+		alert('Please Enter User ID')
+		status = false;
+	} else if (trainingPartnerName == ""
+			|| trainingPartnerName.length <= 0) {
+		alert('Please Enter Training Partner Name.')
+		status = false;
+	} else if (websiteURL == ""
+			|| websiteURL.length <= 0) {
+		alert('Please Enter Website URL.')
+		status = false;
+	} else if (pan == ""
+			|| pan.length <= 0) {
+		alert('Please Enter PAN.')
+		status = false;
+	} else if (email == ""
+			|| email.length <= 0) {
+		alert('Please Enter Email.')
+		status = false;
+	} else if (headOfficeDataAddress1 == ""
+			|| headOfficeDataAddress1.length <= 0) {
+		alert('Please Enter Address 1.')
+		status = false;
+	} else if (headOfficeDataAddress2 == ""
+			|| headOfficeDataAddress2.length <= 0) {
+		alert('Please Enter Address 2.')
+		status = false;
+	} else if (pin == "" || pin.length <= 0) {
+		alert('Please Enter Pincode.')
+		status = false;
+	} else if (stateId == 0 || stateId == "" || stateId.length <= 0) {
+		alert('Please Select State.')
+		status = false;
+	} else if (district == 0 || district == "" || district.length <= 0) {
+		alert('Please Select District')
+		status = false;
+	} else if (city == 0 || city == "" || city.length <= 0) {
+		alert('Please Select City.')
+		status = false;
+	}
+	if (!status) {
+		return false;
+	}
+}
 function OnStart(){
 	////alert('s');
 	updateDiv();
@@ -47,15 +104,18 @@ function checkname()
   success: function (response) {
    $( '#name_status' ).html(response);
    
-   if(response == 'OK')	
+   if(response.trim() == 'Already')	
    {
-	   document.getElementById("register1").style.display = 'none';
-    return false;	
+	   document.getElementById('userId').value="";
+	   document.getElementById("register").style.display = 'none';
+       return false;
+	   
    }
    else
    {
+	   var aa = $('#name_status').html(response);
 	   document.getElementById("register").style.display = 'block';
-    return false;	
+       return true;	
    }
   }
   });
@@ -565,7 +625,7 @@ function updateMTP()
                                     <div class="col-md-6 col-xs-12" style="margin-top: 26px;">
                                         
 <div id="createDiv" style="float:left;">
-<input type="submit" id="register" class="btn login-btn" value="Create" />
+<input type="submit" id="register" onclick="return validate();" class="btn login-btn" value="Create" />
 </div>
 <div id="updateDiv" style=" float:left; margin-left: 20px;">
 <a href="#" onclick="updateMTP();" class="btn btn-default pull-right show-details-vacancy collapsed" 

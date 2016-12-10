@@ -13,18 +13,18 @@ public class RegistrationFormTrainee {
 	@NotNull
 	private int title;
 	@NotNull
-	@Size(min=1, max=20 , message="enter FirstName") 
+	@Size(min=1, max=50 , message="enter FirstName") 
 	private String FirstName;
 	
 	/*@NotNull*/
-	@Size(min=0, max=20 , message="")
+	@Size(min=0, max=50 , message="")
 	private String  MiddleName ;
 	@NotNull
-	@Size(min=1, max=20 , message="enter your LastName")
+	@Size(min=1, max=50 , message="enter your LastName")
 	private String  LastName ;
 	
 	@NotNull
-	@Size(min=1, max=20 , message="enter your father's name")
+	@Size(min=1, max=100 , message="enter your father's name")
 	private String FatherName;
 	public String getFatherName() {
 		return FatherName;
@@ -59,7 +59,7 @@ public boolean isCheckCompany() {
 		this.checkCompany = checkCompany;
 	}
 
-		@Size(min=10, max=10 , message = "enter your mobile Number")
+    @Size(max=10 , message = "enter your mobile Number")
 	private String mobile;
 	@NotEmpty	@Size(min=1, max=1 , message="Please select gender")
 	private String gender;
@@ -80,17 +80,17 @@ public boolean isCheckCompany() {
 	private String resPincode;
 	
 	
-	@NotNull
+	//@NotNull
 	private int KindOfBusiness;
-	@NotNull @Size(min=1, max=20 , message="Please enter your designation")
+	//@NotNull @Size(min=1, max=20 , message="Please enter your designation")
 	private String Designation;
-	@NotNull @Size(min=1, max=100 , message="enter your BusinessAddress ")
+	//@NotNull @Size(min=1, max=100 , message="enter your BusinessAddress ")
 	private String BusinessAddressLine1;
-    @NotNull @Size(min=1, max=100 , message="* enter your BusinessAddress ")
+    //@NotNull @Size(min=1, max=100 , message="* enter your BusinessAddress ")
 	private String BusinessAddressLine2;
-	@NotNull
+	//@NotNull
 	private int bussCity;
-    @NotNull @Size(min=6, max=6 , message="enter your bussPincode")
+    //@NotNull @Size(min=6, max=6 , message="enter your bussPincode")
 	private String bussPincode;
 	
 	private boolean checkCorrespondence;
@@ -105,7 +105,7 @@ public boolean isCheckCompany() {
 	}
 
 	private String CompanyName;
-    @NotNull
+   // @NotNull
 	private int bussState;
 	
 	

@@ -17,6 +17,7 @@
     <link href="website/afterLogin/css/owl.transitions.css" rel="stylesheet" />
     <link href="website/afterLogin/css/swipebox.css" rel="stylesheet" />
     <link href="website/css/visibility.css" rel="stylesheet" />
+    
     <style>
         #news .item img {
             display: block;
@@ -35,4 +36,5 @@
 		
     	<div style="clear:both; float:left;"><tiles:insertAttribute name="footer" /></div>
 </body>
+<script src="website/js/validation.js"></script>
 </html>

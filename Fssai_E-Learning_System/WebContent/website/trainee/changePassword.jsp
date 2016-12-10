@@ -144,18 +144,18 @@ function pwd(){
                       
                         <label>Current Password</label>
 <cf:errors path="oldPassword" cssclass="error" ></cf:errors><h4 style="color: Red">${created }</h4>
-<cf:input path="oldPassword" class="form-control" placeholder="Password" onblur="pwd();"/>
+<cf:input type="password" path="oldPassword" class="form-control" placeholder="Password" onblur="pwd();"/>
                       </div>
                       <div class="form-group">
                         <label>New Password</label>
 <cf:errors path="newPassword" cssclass="error" />
-<cf:input path="newPassword" class="form-control" placeholder="Password"/>
+<cf:input type="password" path="newPassword" class="form-control" placeholder="Password"/>
 
                       </div>
                       <div class="form-group">
                         <label>Confirm Password</label>
 <cf:errors path="confirmPwd" cssclass="error" />
-<cf:input path="confirmPwd" class="form-control" placeholder="Confirm Password"   onblur="pwdConfirm();"/>
+<cf:input type="password" path="confirmPwd" class="form-control" placeholder="Confirm Password"   onblur="pwdConfirm();"/>
                       </div>
                       <div class="form-group">
                         <input type="submit" class="form-control login-btn" value="Change Password" onsubmit="return pwdConfirm();" />

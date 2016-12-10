@@ -114,6 +114,7 @@
     <script src="website/afterLogin/js/bootstrap.js"></script>
     <!-- on scroll animation -->
     <script src="website/afterLogin/js/aos.js"></script>
+    <script src="website/js/validation.js"></script>
     <script>
         AOS.init();
     </script>

@@ -149,8 +149,23 @@
     <url-pattern>/checkdata.jspp</url-pattern>
   </servlet-mapping>
   
+    <servlet>
+    <servlet-name>checkaadhartrainee</servlet-name>
+    <servlet-class>com.ir.servlet.CheckAadharTrainee</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkaadhartrainee</servlet-name>
+    <url-pattern>/checkaadhartrainee.jspp</url-pattern>
+  </servlet-mapping>
   
-  
+   <servlet>
+    <servlet-name>checkaadhartrainer</servlet-name>
+    <servlet-class>com.ir.servlet.CheckAadharTrainer</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkaadhartrainer</servlet-name>
+    <url-pattern>/checkaadhartrainer.jspp</url-pattern>
+  </servlet-mapping>
   
   <servlet>
     <servlet-name>manageCourseContent</servlet-name>

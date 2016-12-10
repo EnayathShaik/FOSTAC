@@ -224,7 +224,6 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 		personalInformationTrainee.setGender(registrationFormTrainee.getGender().trim());
 		personalInformationTrainee.setEmail(registrationFormTrainee.getEmail().trim());
 		personalInformationTrainee.setMobile(registrationFormTrainee.getMobile().trim());		
-		personalInformationTrainee.setDesignation(registrationFormTrainee.getDesignation().trim());
 		personalInformationTrainee.setCorrespondenceAddress1(registrationFormTrainee.getCorrespondenceAddress1().trim());
 		personalInformationTrainee.setCorrespondenceAddress2(registrationFormTrainee.getCorrespondenceAddress2().trim());
 		personalInformationTrainee.setCorrespondenceState(cs);
@@ -232,7 +231,7 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 		personalInformationTrainee.setCorrespondenceCity(cc);
 		personalInformationTrainee.setCorrespondencePincode(registrationFormTrainee.getCorrespondencePincode().trim());
 		personalInformationTrainee.setFatherName(registrationFormTrainee.getFatherName());
-		personalInformationTrainee.setDesignation(registrationFormTrainee.getDesignation());
+		
 		
 		
 		if(correspondADD){
@@ -254,6 +253,7 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 			}
 		
 		if(registrationFormTrainee.getKindOfBusiness()==6){
+			System.out.println(" IF Kind of business");
 			registrationFormTrainee.setKindOfBusiness(6);
 			personalInformationTrainee.setDesignation(null);
 			personalInformationTrainee.setCompanyName(null);
@@ -264,8 +264,11 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 			personalInformationTrainee.setBussDistrict(null);
 			personalInformationTrainee.setBussState(null);
 			personalInformationTrainee.setBussPincode(null);
+			
 		}
 		else{
+			System.out.println("Else Kind of business");
+			personalInformationTrainee.setDesignation(registrationFormTrainee.getDesignation().trim());
 			personalInformationTrainee.setKindOfBusiness(kob);
 			personalInformationTrainee.setCompanyName(registrationFormTrainee.getCompanyName());
 			personalInformationTrainee.setRegistrationNo(registrationFormTrainee.getRegistrationNo());
@@ -303,9 +306,9 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 		session.close();
 		System.out.println("saved login "+ personalInformationTraineeId);
 		if(personalInformationTraineeId  != 0){
-			SendMail sendMail = new SendMail();
+			/*SendMail sendMail = new SendMail();
 			sendMail.mailProperty(passwordString, registrationFormTrainee.getEmail(), registrationFormTrainee.getFirstName()+ " " + registrationFormTrainee.getLastName());
-
+*/
 			return passwordString+"&"+registrationFormTrainee.getUserId();
 		}else{
 			return passwordString+"&"+registrationFormTrainee.getUserId();

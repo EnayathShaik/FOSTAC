@@ -123,15 +123,15 @@ public class PersonalInformationTrainer implements Serializable {
 	private Title Title;
 	@NotNull @Size(min=12, max=12 , message="* error")
 	private String AadharNumber;
-	@NotNull @Size(min=1, max=20 , message="* error")
+	@NotNull @Size(min=1, max=50 , message="* error")
 	private String FirstName;
 	//@NotNull @Size(min=1, max=20 , message="* error")
 	private String MiddleName;
-	@NotNull @Size(min=1, max=20 , message="* error")
+	@NotNull @Size(min=1, max=50 , message="* error")
 	private String LastName;
-	@NotNull @Size(min=1, max=20 , message="* error")
+	@NotNull @Size(min=1, max=50 , message="* error")
 	private String fathername;
-	@NotNull @Size(min=1, max=20 , message="* error")
+	@NotNull @Size(min=1, max=100 , message="* error")
 	private String DOB;
 	@NotNull @Size(min=1, max=20 , message="* error")
 	private String gender;

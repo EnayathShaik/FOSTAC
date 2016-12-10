@@ -3,7 +3,7 @@
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
 function OnStart(){
-	onLoadDistrict1();
+	onLoadDistrict();
 }
 window.onload = OnStart;
 </script>
@@ -23,7 +23,7 @@ function onLoadDistrict(){
 		$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>State Name</th><th>District Name</th><th>Status</th><th>Edit</th><th>Change Status</th></tr>')
 		$.each(mainData1 , function(i , obj)
 		{
-			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><input type="hidden" id="stateName" value="'+obj[0]+'">'+obj[0]+'</td><td><input type="hidden" id="districtName" value="'+obj[1]+'">'+obj[1]+'</td><td><input type="hidden" id="statusLabel" value="'+obj[2]+'">'+obj[2]+'</td><td><input type="hidden" id="idCity" value="'+obj[3]+'" /><a href="#" onClick="editDistrict();">edit</a></td><td><a href="#" onClick="changeStatus();">Active / In-Active</a></td></tr>');
+			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><input type="hidden" id="stateName" value="'+obj[0]+'">'+obj[0]+'</td><td><input type="hidden" id="districtName" value="'+obj[1]+'">'+obj[1]+'</td><td><input type="hidden" id="statusLabel" value="'+obj[2]+'">'+obj[2]+'</td><td><input type="hidden" id="idCity" value="'+obj[3]+'" /><a href="#" onClick="editDistrict();">Edit</a></td><td><a href="#" onClick="changeStatus();">Active / In-Active</a></td></tr>');
 			
 		});
 		}

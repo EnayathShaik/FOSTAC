@@ -56,21 +56,21 @@ public class RegisterTraineeInformationFull {
 	private String resPincode;
 	@NotEmpty
 	private List<KindOfBusiness> KindOfBusiness;
-	@NotEmpty
+	//@NotEmpty
 	private String Designation;
-	@NotEmpty
+	//@NotEmpty
 	private String BusinessAddressLine1;
-	@NotEmpty
+	//@NotEmpty
 	private String BusinessAddressLine2;
-	@NotEmpty
+	//@NotEmpty
 	private String bussCity;
-	@NotEmpty
+	//@NotEmpty
 	private String bussPincode;
-	@NotEmpty
+	//@NotEmpty
 	private String CompanyName;
-	@NotEmpty
+	//@NotEmpty
 	private String bussState;
-	@NotEmpty
+	//@NotEmpty
 	private String bussLocation;
 	
 	

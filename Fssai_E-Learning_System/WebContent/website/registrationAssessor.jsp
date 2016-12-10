@@ -570,7 +570,7 @@ function validate()
 <cf:errors path="DOB" cssClass="error" /></li>
 </ul>
 </div>
-<cf:input path="DOB" type="date" class="form-control"  placeholder="DOB"/>
+<cf:input path="DOB" type="text" class="form-control" id="dateP" placeholder="DOB"/>
 </div>
 
 <div class="form-group">

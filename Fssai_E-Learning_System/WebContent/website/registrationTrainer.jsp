@@ -501,7 +501,40 @@ return true;
     	return y;
     }
     
-    
+    function ck_aadhar() {
+    	var name=document.getElementById( "AadharNumber" ).value;
+        if(name)
+        {
+         $.ajax({
+         type: 'post',
+         url: 'checkaadhartrainer.jspp?'+ name,
+         data: {
+          user_name:name,
+         },
+         success: function (response) {
+          $( '#aadhar_status' ).html(response);
+          if(response.trim() == 'Already')	
+          {
+       	   document.getElementById('AadharNumber').value="";
+       	   document.getElementById("register").style.display = 'none';
+              return false;
+       	   
+          }
+          else
+          {
+       	   var aa = $('#aadhar_status').html(response);
+       	   document.getElementById("register").style.display = 'block';
+              return true;	
+          }
+       	  
+          }  
+         })
+         }else{
+       	  $( '#aadhar_status' ).html("");
+             document.getElementById("register").style.display = 'none';
+             return false;
+         }
+    }
     function checkname()
     {
      var name=document.getElementById( "UserId" ).value;
@@ -661,12 +694,12 @@ return true;
 <ul class="lab-no">
 <li class="style-li"><strong><cs:message code="lbl.Trainee.AadharNumber" /></strong></li>
 
-<li class="style-li error-red">
+<li class="style-li error-red"><span id="aadhar_status">
 <label id="AadharNumberError" class="error visibility">* enter your AadharNumber </label>
 <cf:errors path="AadharNumber" cssclass="error" /></li>
 </ul>
 </div>
-<cf:input path="AadharNumber"  class="form-control" maxlength="12"  placeholder="Aadhar Number" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
+<cf:input path="AadharNumber" onblur="ck_aadhar();"   class="form-control" maxlength="12"  placeholder="Aadhar Number" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"/>
 </div>
 
 <div class="form-group">
@@ -678,7 +711,7 @@ return true;
 <cf:errors path="DOB" cssclass="error" /></li>
 </ul>
 </div>
-<cf:input path="DOB" type="text" id="dateP" class="form-control"  placeholder="DOB"/>
+<cf:input path="DOB" type="text" id="dateP" readonly="true" class="form-control"  placeholder="DOB"/>
 </div>
 
 <div class="form-group">
@@ -721,7 +754,7 @@ return true;
 <cf:errors path="firstName" cssclass="error" /></li>
 </ul>
 </div>
-<cf:input path="firstName" class="form-control"  placeholder="First Name"/>
+<cf:input path="firstName" maxlength="50"  onkeyup="allLetter(this.id,this.value);" class="form-control"  placeholder="First Name"/>
 </div>
 
 <div class="form-group">
@@ -733,7 +766,7 @@ return true;
 <cf:errors path="MiddleName" cssclass="error" /></li>
 </ul>
 </div>
-<cf:input path="MiddleName" class="form-control" name="MiddleName"  placeholder="Middle Name"/>
+<cf:input path="MiddleName" maxlength="50"  onkeyup="allLetter(this.id,this.value);"  class="form-control" name="MiddleName"  placeholder="Middle Name"/>
 </div>
 
 <div class="form-group">
@@ -745,7 +778,7 @@ return true;
 <cf:errors path="LastName" cssclass="error" /></li>
 </ul>
 </div>
-<cf:input path="LastName" class="form-control"  placeholder="Last Name"/>
+<cf:input path="LastName" maxlength="50"  onkeyup="allLetter(this.id,this.value);" class="form-control"  placeholder="Last Name"/>
 </div>
 <div class="form-group">
 <div>
@@ -756,7 +789,7 @@ return true;
 <cf:errors path="fatherName" cssclass="error" /></li>
 </ul>
 </div>
-<cf:input path="fatherName" class="form-control"  placeholder="Father Name"/>
+<cf:input path="fatherName" maxlength="100"  onkeyup="allLetter(this.id,this.value);"  class="form-control"  placeholder="Father Name"/>
 </div>
 
 </div></fieldset>

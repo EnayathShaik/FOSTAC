@@ -97,6 +97,11 @@ function onFeedbackMasterSearchClick(){
 		});
 	}
 function validateFields(){
+	var fback = document.getElementById("feedback").value;
+	if(fback.length <= 0){
+		alert('Please enter feebback.');
+		return false;
+	}
 	if($('#submit').val()==='Create'){
 		$('#feedbackTypeID').val(0);
 	}
@@ -260,7 +265,7 @@ return result;
                                                     <div style="padding-top: 35px;">
                                                         
                                                     </div>
-                                                    <cf:radiobutton path="status" label="Active"  class="radio-inline"  value="Active"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <cf:radiobutton path="status" label="Active" checked="checked"  class="radio-inline"  value="Active"/>&nbsp;&nbsp;&nbsp;&nbsp;
                                                     <cf:radiobutton path="status" label="Inactive"  class="radio-inline"  value="Inactive"/>
                                                 </div>
                                                 

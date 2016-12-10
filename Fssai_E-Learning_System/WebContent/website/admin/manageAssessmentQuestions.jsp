@@ -346,7 +346,7 @@ function searchCourse1(val)
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
-                                                        <cf:input path="correctAnswer" class="form-control" placeholder="Answer Number" />
+                                                        <cf:input path="correctAnswer" onkeyup="allnumeric(this.id,this.value);" class="form-control" placeholder="Answer Number" />
                                                         
                                                     </div>
                                                     <button class="btn login-btn pull-right">Save</button>

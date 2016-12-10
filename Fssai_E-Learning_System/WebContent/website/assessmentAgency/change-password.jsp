@@ -216,15 +216,15 @@ function matchPassword(){
                                                     <label>Current Password</label>
                                                    <%--  <cf:input path="id" value="${logId.loginDetails.loginId}"/> --%>
                                                    <label class="error visibility" id="oldPasswordError" style="color:red;">* enter your current password</label> 
-                                                    <cf:input type="text" path="oldPassword" class="form-control" placeholder="Current Password"/> </div>
+                                                    <cf:input type="password" path="password"  class="form-control" placeholder="Current Password"/> </div>
                                                 <div class="form-group">
                                                     <label>New Password</label>
                                                      <label class="error visibility" id="newPasswordError" style="color:red;">* enter your new password</label>
-                                                    <cf:input type="text" class="form-control" name="newPwd" path="newPassword" placeholder="New Password"/> </div>
+                                                    <cf:input type="password" class="form-control" name="newPwd" path="newPassword" placeholder="New Password"/> </div>
                                                 <div class="form-group">
                                                     <label>Confirm Password</label>
                                                     <label class="error visibility" id="confirmPwdError" style="color:red;">* confirm password</label>
-                                                    <cf:input type="text" class="form-control" path="confirmPwd" placeholder="Confirm Password"   /> </div>
+                                                    <cf:input type="password" class="form-control" path="confirmPwd" placeholder="Confirm Password"   /> </div>
                                                 <div class="form-group">
                                                     <input type="submit" class="form-control login-btn" value="Change Password" /> </div>
                                             </div>
