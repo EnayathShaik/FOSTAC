@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.ir.bean.common.IntStringBean;
 import com.ir.dao.LoginDAO;
 import com.ir.form.LoginForm;
 import com.ir.model.CourseEnrolled;
@@ -81,4 +82,5 @@ public class LoginServiceImpl implements LoginService {
 		PersonalInformationTrainingPartner personalInformationTrainingPartner = loginDAO.fulldetailtainingpartner(loginId);
 		return personalInformationTrainingPartner;
 	}
+	
 }

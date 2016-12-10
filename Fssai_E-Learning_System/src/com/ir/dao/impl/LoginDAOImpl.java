@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import com.ir.bean.common.IntStringBean;
 import com.ir.dao.LoginDAO;
 import com.ir.form.LoginForm;
 import com.ir.model.CourseEnrolled;
@@ -220,6 +221,6 @@ public class LoginDAOImpl implements LoginDAO{
 		//session.close();
 		return personalInformationTrainingPartner11;
 	}
-	
+
 
 }

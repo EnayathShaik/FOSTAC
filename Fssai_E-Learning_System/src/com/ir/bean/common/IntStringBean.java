@@ -3,6 +3,7 @@ package com.ir.bean.common;
 public class IntStringBean {
 	private int id;
 	private String value;
+	private int count;
 	/**
 	 * @return the id
 	 */
@@ -26,6 +27,18 @@ public class IntStringBean {
 	 */
 	public void setValue(String value) {
 		this.value = value;
+	}
+	/**
+	 * @return the count
+	 */
+	public int getCount() {
+		return count;
+	}
+	/**
+	 * @param count the count to set
+	 */
+	public void setCount(int count) {
+		this.count = count;
 	}
 	
 

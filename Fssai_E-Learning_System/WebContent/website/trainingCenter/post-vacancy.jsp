@@ -83,11 +83,11 @@ function validateFields(){
 function searchVacancy(){
 	var courseType =  $("#courseType").val();
 	var courseName =  $("#courseName").val();
-	var trainingDate =  $("#trainingDate").val();
+	var trainingDate = $("#trainingDate").val().replace("-","/").replace("-","/");
 	var requiredExp =  $("#requiredExp").val();
 	var noOfVacancy =  $("#noOfVacancy").val();
 	$(".displayNone").css("display","block");
-	var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy;
+	var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy+"&selectAll=1";
 	var result="";
 		$.ajax({
 		type: 'post',
@@ -99,10 +99,9 @@ function searchVacancy(){
 		var mainData1 = jQuery.parseJSON(data);
 		var j=1;
 		$('#newTable tr').remove();
-		$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th ><th style="display:none;"></th><th>Course Type</th><th>Course Name</th><th>Training Date</th><th>Required Experience</th><th>No. Of Vacancies</th></tr>')
 		$.each(mainData1 , function(i , obj)
 		{
-			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td style="display:none;">'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td>'+obj[5]+'</td></tr>');
+			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td style="display:none;">'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[6]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td>'+obj[5]+'</td></tr>');
 			
 		});
 		}
@@ -111,7 +110,7 @@ function searchVacancy(){
 }
 </script>
 
-<cf:form action="postVacancyTrainingCenterSave.fssai" name="myForm" method="POST" commandName="postVacancy" onsubmit="return validateFields();" >
+<cf:form action="postVacancyTrainingPartnerSave.fssai" name="myForm" method="POST" commandName="postVacancyTrainingCenterForm" onsubmit="return validateFields();" >
 
 <section>
   <div class="container-fluid">
@@ -152,20 +151,7 @@ function searchVacancy(){
     <div id="wrapper"> 
       
       <!-- Sidebar -->
-      <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-          <!-- <li class="sidebar-brand">
-                        </li> -->
-          <li> <a href="trainingCalendar.fssai">Training Calendar</a> </li>
-          <li> <a href="view-trainee-list.html">View Trainee List</a> </li>
-          <li> <a href="mark-trainee-attendance.html">Mark Attendance</a> </li>
-          <li> <a href="post-vacancy.fssai">Post Vacancy for Trainer</a> </li>
-          <li> <a href="application-status.html">Application Status</a> </li>
-          <li> <a href="manage-trainer.html">Manage Trainer</a> </li>
-          <li> <a href="assessment-calendar.html">Assessment Calendar</a></li>
-          <li> <a href="payment-confirmation.html">Payment Confirmation</a> </li>
-        </ul>
-      </div>
+ <%@include file="leftmenuTrainingPartner.jspf" %>
       <!-- /#sidebar-wrapper --> 
       <!-- Page Content -->
       <div id="page-content-wrapper">
@@ -187,7 +173,7 @@ function searchVacancy(){
               <div class="col-xs-12">
                 <fieldset>
                   <legend>
-                  <h3>Post Vacancy for Trainer</h3>
+                  <h3>Post Vacancy for Training Partner</h3>
                   </legend>
                   <div class="row">
                     <div class="col-xs-12"> 
@@ -206,10 +192,10 @@ function searchVacancy(){
                                                             </li>
                             </ul>
                           </div>
-<cf:select path="courseType" class="form-control" onchange="getCourseName(this.value);">
-<cf:option value="0" label="Select Course Type" />
-<cf:options items="${courseTypeList}" itemValue="CourseTypeId" itemLabel="CourseType"/>
-</cf:select>
+						<cf:select path="courseType" class="form-control" onchange="getCourseName(this.value);">
+						<cf:option value="0" label="Select Course Type" />
+						<cf:options items="${courseTypeList}" itemValue="CourseTypeId" itemLabel="CourseType"/>
+						</cf:select>
                         </div>
                         <div class="form-group">
                           <div>
@@ -221,11 +207,30 @@ function searchVacancy(){
                                </li>
                             </ul>
                           </div>
-<cf:select path="courseName" class="form-control">
-<cf:option value="0" label="Select Course Name" />
-<%-- <cf:options items="${courseNameList}" itemValue="coursenameid" itemLabel="coursename"/> --%>
-</cf:select>
+					<cf:select path="courseName" class="form-control">
+					<cf:option value="0" label="Select Course Name" />
+					<%-- <cf:options items="${courseNameList}" itemValue="coursenameid" itemLabel="coursename"/> --%>
+					</cf:select>
                         </div>
+                          <div class="form-group">
+                          <div>
+                            <ul class="lab-no">
+                              <li class="style-li"><strong>Training Center Name:<span style="color:red;">*</span></strong></li>
+                              <li class="style-li error-red">
+                               <label id="courseNameError" class="error visibility">select Training Center Name:</label>
+                               <cf:errors path="trainingCenter" cssclass="error"/>
+                               </li>
+                            </ul>
+                          </div>
+					<cf:select path="trainingCenter" class="form-control">
+					<cf:option value="0" label="select Training Center Name" />
+					<cf:options items="${trainingCenterList}" itemValue="personalInformationTrainingPartnerId" itemLabel="TrainingCentreName"/>
+					</cf:select>
+                        </div>
+                      
+                      </div>
+                      <!-- right side -->
+                      <div class="col-md-6 col-xs-12">
                         <div class="form-group">
                           <div>
                             <ul class="lab-no">
@@ -238,9 +243,7 @@ function searchVacancy(){
                           </div>
                           <cf:input path="trainingDate" type="date" class="form-control" />
                         </div>
-                      </div>
-                      <!-- right side -->
-                      <div class="col-md-6 col-xs-12">
+                      
                         <div class="form-group">
                           <div>
                             <ul class="lab-no">
@@ -287,18 +290,19 @@ function searchVacancy(){
                   <div class="row">
                     <div class="col-xs-12"> 
                       <!-- table -->
-                      <table id="newTable" class="table table-bordered table-responsive table-striped table-hover">
+                      <table  class="table table-bordered table-responsive table-striped table-hover">
                         <thead>
                           <tr class="background-open-vacancies">
                             <th>S.No.</th>
                             <th>Course Type</th>
                             <th>Course Name</th>
                             <th>Training Date</th>
+                            <th>Training CenterName</th>
                             <th>Required Experience</th>
                             <th>No. Of Vacancies</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="newTable">
                         </tbody>
                       </table>
                       </div>

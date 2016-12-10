@@ -56,6 +56,11 @@ public class TrainingPartnerController {
 		return "postVacancyTrainingPartner";
 		
 	}
+	@RequestMapping(value="/postVacancyTrainingCenter" , method=RequestMethod.GET)
+	public String postVacancyTrainingCenter(@ModelAttribute("postVacancyTrainingCenterForm") PostVacancyTrainingCenterForm postVacancyTrainingCenterForm,HttpSession session,BindingResult result , Model model ){
+		return "postVacancyTrangCenter";
+		
+	}
 	@RequestMapping(value="/changePasswordTrainingPartner" , method=RequestMethod.GET)
 	public String changePasswordTP(@ModelAttribute("changePasswordTrainingPartner") ChangePasswordForm changePasswordForm ){
 		return "changePasswordTrainingPartner";		
@@ -138,6 +143,26 @@ public class TrainingPartnerController {
 		model.addAttribute("trainingpartnerapplicationstatus" , gson.toJson(trainingpartnerapplicationstatus));
 		return "trainingpartnerapplicationstatus";
 	}
+	@RequestMapping(value="/trainingpartnerapplicationstatus1" , method=RequestMethod.GET)
+	public String trainingpartnerapplicationstatus1(@ModelAttribute("trainingpartnerapplicationstatus") TrainingPartnerTrainingCalender trainingpartnerapplicationstatus,HttpSession session,BindingResult result , Model model){
+		if(result.hasErrors()){
+			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
+			System.out.println(result.getErrorCount());
+			System.out.println(result.getAllErrors());
+			return "trainingpartnerapplicationstatus1";
+		}
+		
+		List<CourseType> courseTypes = trainingPartnerService.courseTypes();
+		//List<CourseName> courseNames = trainingPartnerService.getCourseNameList();
+		trainingpartnerapplicationstatus.setCourseTypes(courseTypes);
+		List<PersonalInformationTrainingPartner> trainingCenterList=trainingCenterList();
+		trainingpartnerapplicationstatus.setTrainingCenterList(trainingCenterList);
+//		trainingpartnerapplicationstatus.setCourseNames(courseNames);
+		Gson gson = new Gson();
+		model.addAttribute("trainingpartnerapplicationstatus" , gson.toJson(trainingpartnerapplicationstatus));
+		return "trainingpartnerapplicationstatus1";
+	}
+
 	@RequestMapping(value="/trainingpartnermanagetrainer" , method=RequestMethod.GET)
 	public String trainingpartnermanagetrainer(@ModelAttribute("trainingpartnermanagetrainer") TrainingPartnerTrainingCalender trainingpartnermanagetrainer,HttpSession session,BindingResult result , Model model){
 		if(result.hasErrors()){
@@ -227,19 +252,32 @@ public class TrainingPartnerController {
 		Utility utilityList=new Utility();
 		utilityList=trainingPartnerService.editApplicationStatus(postVacancyTrainingCenterBean);
 		model.addAttribute("utilityList", new Gson().toJson(utilityList));
-		return "editApplicationStatusDetails";
+		if(postVacancyTrainingCenterBean.getTrainingCenter()>0){
+			return "editApplicationStatusDetails1";
+		}else{
+			return "editApplicationStatusDetails";
+		}
+		
 	 }
 	@RequestMapping(value="/postVacancyTrainingPartnerSave" , method=RequestMethod.POST)
 	  public String postVacancySave(@ModelAttribute("postVacancyTrainingCenterForm") PostVacancyTrainingCenterForm postVacancyTrainingCenterForm ,HttpSession session,BindingResult result ,  Model model){		
-		int loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
-		postVacancyTrainingCenterForm.setTrainingCenter(loginService.FullDetailtrainingpartner(loginId).getPersonalInformationTrainingPartnerId());
+		boolean isPostVacancyTrainingPartner=true;
+		if(postVacancyTrainingCenterForm.getTrainingCenter()==0){
+			isPostVacancyTrainingPartner=false;
+			int loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
+			postVacancyTrainingCenterForm.setTrainingCenter(loginService.FullDetailtrainingpartner(loginId).getPersonalInformationTrainingPartnerId());
+		}
 		String postVacancy = trainingPartnerService.postVacancyTrainingPartner(postVacancyTrainingCenterForm);
 		  if(postVacancy.equalsIgnoreCase("created")){
 			  model.addAttribute("created", "Vacancy created successfull !!!");
 		  }else{
 			  model.addAttribute("created", "vacancy already created !!!");
 		  }
-		  return "postVacancyTrainingPartner";	
+		  if(isPostVacancyTrainingPartner){
+			  return "postVacancyTrangCenter";
+		  }else{
+			  return "postVacancyTrainingPartner";	
+		  }
 	 }
 	@ModelAttribute("trainingCenterList")
 	public List<PersonalInformationTrainingPartner> trainingCenterList(){
@@ -279,6 +317,25 @@ public class TrainingPartnerController {
 	}
 	
 
+	@RequestMapping(value="/updateUpcomingTrainingsStatus" , method=RequestMethod.POST)
+	@ResponseBody
+	public void updateUpcomingTrainingsStatus(@RequestBody IntStringBean intStringBean,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		JsonResponse responseObj=new JsonResponse();
+		responseObj.setId(intStringBean.getId());
+		try{
+			trainingPartnerService.updateUpcomingTrainingsStatus(intStringBean.getId());
+			responseObj.setMessage("OK");
+		}catch(Exception e){
+			responseObj.setMessage("KO");
+		}
+		response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        Gson gson=new Gson();
+        String newJSON=gson.toJson(responseObj);
+        out.print(newJSON);
+        out.flush();
+	}
+	
 	
 	@RequestMapping(value="/applyForVacancy" , method=RequestMethod.POST)
 	@ResponseBody

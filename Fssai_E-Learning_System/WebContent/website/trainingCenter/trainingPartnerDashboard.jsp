@@ -115,7 +115,8 @@ return result;
         <div class="container-fluid">
             <div id="wrapper">
                 <!-- Sidebar -->
-           <%@include file="leftmenuTrainingPartner.jspf" %>
+            <%@include file="leftmenuTrainingPartner.jspf" %>
+    
                 <!-- /#sidebar-wrapper -->
                 <!-- Page Content -->
                 <div id="page-content-wrapper">

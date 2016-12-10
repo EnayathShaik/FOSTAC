@@ -21,40 +21,10 @@ function getCourseName(val){
 
 </script>
 <script>
-var result="";
-var response="";
-
-function editApplicationStatus(){
-	//var id = document.getElementById("assessmentAgencyId").value;
-	var data=JSON.stringify({
-		courseType:$('#selCourseType').val()==null?0:$('#selCourseType').val(),
-		courseName:$('#selCourseName').val()==null?0:$('#selCourseName').val(),
-		trainingDate:$('#trainingdate').val()
-  });
-	$.ajax({
-	      type: 'post',
-	      url: 'editApplicationStatusDetails.fssai',
-	      contentType : "application/json",
-	      data: data,
-	      success: function (response) {
-	    	 response=JSON.parse(response);
-	    	 console.log(response)
-// 	    	 for(index=0;index<response.length;index++){
-//          	  console.log(response[index]);
-//          	  $('#applicaionStatus').append('<tr>'+
-//          		'<td>'+(index+1)+'</td><td>'+response[index].courseTypeName+'</td>'+
-//          	    '<td>'+response[index].courseName+'</td>'+
-//          	    '<td>'+response[index].trainingDate.replace("-","/").replace("-","/")+'</td>'+
-//          	     '<td>'+response[index].noOfVacancy+'</td>'+
-//          	    '<td><a href="#" onClick="editApplicationStatus('+index+')">'+response[index].noOfApplications+'</td> '+
-//          	  	'</tr>');
-//            }
-	      }
-	      });
+function saveDetails(){
+	
 }
 function showDetails(){
-	alert("Fetching details to mark attendance..");
-	
 	$('#tblAssessorCourses tr').remove();
 	$('#tblAssessorCourses').append('<thead>'+
     '<tr class="background-open-vacancies">'+
@@ -67,33 +37,49 @@ function showDetails(){
         '<th>&nbsp;&nbsp;</th>'+
     '</tr>'+
 	'</thead>');
+	var result="";
 	//var id = document.getElementById("assessmentAgencyId").value;
-	var data=JSON.stringify({
-		courseType:$('#selCourseType').val()==null?0:$('#selCourseType').val(),
-		courseName:$('#selCourseName').val()==null?0:$('#selCourseName').val(),
-		trainingDate:$('#trainingdate').val(),
-		trainingCenter:0
-  });
+	var assessorId =710;
 	$.ajax({
-	      type: 'post',
-	      url: 'getApplicationStatusDetails.fssai',
-	      contentType : "application/json",
-	      data: data,
-	      success: function (response) {
-	    	 response=JSON.parse(response);
-	    	 for(index=0;index<response.length;index++){
-           	  console.log(response[index]);
-           	  $('#applicaionStatus').append('<tr>'+
-           		'<td>'+(index+1)+'</td><td>'+response[index].courseTypeName+'</td>'+
-           	    '<td>'+response[index].courseName+'</td>'+
-           	    '<td>'+response[index].trainingDate.replace("-","/").replace("-","/")+'</td>'+
-           	     '<td>'+response[index].noOfVacancy+'</td>'+
-           	    '<td><a href="editApplicationStatusDetails.fssai?courseType='+response[index].courseTypeId+'&&courseName='+response[index].courseNameId+'">'+response[index].noOfApplications+'</td> '+
-           	  	'</tr>');
-             }
-	      }
-	      });
-
+	type: 'post',
+	url: 'searchTrainingPartnerGenaricServlet.jspp?'+assessorId,
+	async: false, 
+	data: {
+		cousertypeid:$('#selCourseType').val(),
+		coursenameid:$('#selCourseName').val(),
+		trainerid:$('#selTrainerNames').val(),
+		trainingdate:$('#trainingdate').val(),
+		trainingtime:$('#trainingtime').val(),
+		screentype:"TRAINING_PARTNER_CALENDAR"
+    },
+	success: function (data){
+		console.log("Data received..");
+		console.log(data);
+	var jsonData = jQuery.parseJSON(data);
+	console.log(jsonData);
+	var j=1;
+	var accessorId;
+	$.each(jsonData , function(i , obj)
+	{
+		$('#tblAssessorCourses').append('<tr id="tableRow"><td>'+j++ +'</td>'+
+				'<td>'+obj[3]+'</td>'+
+				'<td>'+obj[4]+'</td>'+
+				'<td>'+obj[5]+'</td>'+
+				'<td><select name =attendanceRow'+obj[1]+'><option name="present" value ="A">Present</option>'+
+				'<option name="absent" value="I">Absent</option></td>'+
+				'<td> <button onclick="updateAttendance('+obj[0]+','+obj[1]+');return false;">Update</button></td>'+
+				'</tr>');
+		console.log("0-"+obj[0] +" #1-" +obj[1] +" #2-" +obj[2] +" #3-"+obj[3] +" #4-"+obj[4]+" #5-"+obj[5]);
+		currentAssessorId = obj[0];
+	});
+	
+	},
+	failure:function(data){
+		alert("Error occured while retrieving upcoming calendars.");
+	 msgbox('Error occured while retrieving upcoming calendars.');
+	}
+	});
+return result;	
 }
 
 
@@ -130,6 +116,7 @@ function showDetails(){
     </nav>
   </div>
 </section>
+<cf:form name="myForm" commandName="trainingPartnerTrainingCalender" >
         <!-- main body -->
         <section class="main-section-margin-top">
             <div class="container-fluid">
@@ -159,11 +146,12 @@ function showDetails(){
                                     <!-- search and apply vacancies -->
                                     <div class="col-xs-12">
                                         <fieldset>
-                                        <legend><h3>Trainer Application Status</h3></legend>
+                                        <legend><h3>Training Calendar</h3></legend>
                                         <script type="text/javascript">
-                                        var formObj = '${trainingpartnerapplicationstatus}';
+                                        var formObj = '${trainingPartnerTrainingCalender}';
                                         var formData = JSON.parse(formObj);
                                         var courseTypes = formData.courseTypes;
+                                        var trainerList = formData.trainerList;
                                         </script>
                                         
                                         <div class="row">
@@ -192,16 +180,38 @@ function showDetails(){
 														
                                                     </div>
                                                     
+						                       <div class="form-group">
+						                          <div>
+						                            <ul class="lab-no">
+						                              <li class="style-li"><strong>Course Name:<span style="color:red;">*</span></strong></li>
+						                              <li class="style-li error-red">
+						                               <label id="courseNameError" class="error visibility">select course name</label>
+<%-- 						                               <cf:errors path="courseName" cssclass="error"/> --%>
+						                               </li>
+						                            </ul>
+						                          </div>
+						                           <select class="form-control" name="selCourseName" id = "selCourseName"> </select>
+						                        </div>          
                                                     <div class="form-group">
                                                         <div>
                                                             <ul class="lab-no">
-                                                                <li class="style-li"><strong>Course Name:</strong></li>
+                                                                <li class="style-li"><strong>Trainer Name:</strong></li>
                                                                 
                                                             </ul>
                                                         </div>
-                                                        <select class="form-control" name="selCourseName" id = "selCourseName"> </select>
+                                                        <select class="form-control" name="selTrainerNames" id = "selTrainerNames"> </select>
+														<script>
+															var selectTrainerOptions = "";
+															for(var i=0 ; i < trainerList.length; i++)
+																{
+																	selectTrainerOptions += "<option value="+trainerList[i].id+">"+trainerList[i].value+"</option>"
+																	
+																}
+															document.getElementById('selTrainerNames').innerHTML += selectTrainerOptions; 
+														</script>
 														
                                                     </div>
+
                                                 </div>
 
                                                 <!-- right side -->
@@ -216,7 +226,17 @@ function showDetails(){
                                                         </div>
                                                         <input type="date" id="trainingdate" class="form-control">
                                                     </div>
-                                                     <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails();">Show Details</button>
+                                                    <div class="form-group">
+                                                        <div>
+                                                            <ul class="lab-no">
+                                                                <li class="style-li"><strong>Training Time</strong></li>
+                                                                <li class="style-li error-red"> </li>
+                                                            </ul>
+                                                        </div>
+                                                        <input type="time" id="trainingtime" class="form-control">
+                                                    </div>
+                                                    <input type="submit" style="margin-top:20px;"  class="btn login-btn pull-right show-details-vacancy collapsed"  data-target="#show-result" aria-expanded="false" value="Create">
+                                                     <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails();return false">Show Details</button>
                                                 </div>
                                                
                                             </div>
@@ -228,36 +248,43 @@ function showDetails(){
 
                                     </div>
 
-<!--                                     search Results -->
-<!--                         search Results -->
+                                    <!-- search Results -->
+                        <!-- search Results -->
               <div class="col-xs-12 collapse table-overflow-responsive" id="show-result" aria-expanded="false" style="height: 0px;"> 
-<!--                 table -->
+                <!-- table -->
                 <div class="row">
                   <div class="col-xs-12">
                     <fieldset style="margin-top: 20px;">
                       <legend>
-                      <h4>Current Application Status</h4>
+                      <h4>Search results</h4>
                       </legend>
-                      <table class="table table-bordered table-responsive table-striped table-hover">
+                      <table id="trainingPartnercalendar" class="table table-bordered table-responsive table-striped table-hover">
                         <thead>
                           <tr class="background-open-vacancies">
-						    <th>S.No</th>
+                            <th>S.No.</th>
                             <th>Course Type</th>
                             <th>Course Name</th>
                             <th>Training Date</th>
-                            <th>No. of Vacancies</th>
-                            <th>No. Of Applications</th>
+                            <th>Training Time</th>
+                            <th>Trainer Name</th>
                           </tr>
                         </thead>
-                        <tbody id="applicaionStatus">
-			</tbody>
+                        <tbody>
+                          
+                        </tbody>
+                      </table>
+                      <a href="#" class="btn login-btn pull-right">Save</a>
+                    </fieldset>
+                    <div style="width: 95px;">
+                      <ul class="pager">
+                        <li class="previous"><a href="#"><i class="fa fa-plus"></i></a></li>
+                        <li class="next"><a href="#"><i class="fa fa-minus"></i></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
-</table>
-</fieldset>
-</div>
-</div>
-</div>
-<%-- </cf:form> --%>
+
                                 </div>
                             </div>
                         </div>
@@ -265,3 +292,4 @@ function showDetails(){
                 </div>
             </div>
         </section>
+</cf:form>

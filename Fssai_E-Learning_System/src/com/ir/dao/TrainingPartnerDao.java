@@ -40,6 +40,7 @@ public interface TrainingPartnerDao {
 	public void updateApplicationStatusForEnrolledVacancy(
 			PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
 	public PostVacancyTrainingCenterBean getApplicationStatusBean(String loginId,int coursename, int cousertype);
+	public void updateUpcomingTrainingsStatus(int id);
 
 
 }

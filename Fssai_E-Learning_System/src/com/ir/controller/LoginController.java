@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
+import com.ir.bean.common.IntStringBean;
 import com.ir.form.LoginForm;
 import com.ir.form.RegistrationFormTrainer;
 import com.ir.model.CourseEnrolled;
@@ -203,6 +204,8 @@ public class LoginController {
 				System.out.println("**************"+personalInformationTrainingPartner.getPersonalInformationTrainingPartnerId());
 				session.setAttribute("loginUsertrainingpartner", personalInformationTrainingPartner.getPersonalInformationTrainingPartnerId());
 				session.setAttribute("logId", personalInformationTrainingPartner.getLoginDetails().getLoginId());
+				session.setAttribute("profileId", personalInformationTrainingPartner.getLoginDetails().getProfileId());
+				
 				System.out.println("id of trainpartner is "+personalInformationTrainingPartner.getPersonalInformationTrainingPartnerId());	
 				return "trainingPartnerHomepage";
 			}else{

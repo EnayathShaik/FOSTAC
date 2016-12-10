@@ -99,7 +99,6 @@ function searchVacancy(){
 		var mainData1 = jQuery.parseJSON(data);
 		var j=1;
 		$('#newTable tr').remove();
-		$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th ><th style="display:none;"></th><th>Course Type</th><th>Course Name</th><th>Training Date</th><th>Required Experience</th><th>No. Of Vacancies</th></tr>')
 		$.each(mainData1 , function(i , obj)
 		{
 			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td style="display:none;">'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td>'+obj[5]+'</td></tr>');
@@ -274,7 +273,7 @@ function searchVacancy(){
                   <div class="row">
                     <div class="col-xs-12"> 
                       <!-- table -->
-                      <table id="newTable" class="table table-bordered table-responsive table-striped table-hover">
+                      <table  class="table table-bordered table-responsive table-striped table-hover">
                         <thead>
                           <tr class="background-open-vacancies">
                             <th>S.No.</th>
@@ -285,7 +284,7 @@ function searchVacancy(){
                             <th>No. Of Vacancies</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="newTable">
                         </tbody>
                       </table>
                       </div>

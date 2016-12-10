@@ -9,7 +9,58 @@ function OnStart(){
 window.onload = OnStart;
 </script>
 <script type="text/javascript">
+function searchCurrentAppliactionStatus(){
+	alert("Fetching details to mark attendance..");
+	var data=JSON.stringify({
+		courseType:0,
+		courseName:0
+  })
+	
+	$.ajax({
+	      type: 'post',
+	      url: 'getApplicationStatusDetails.fssai',
+	      contentType : "application/json",
+	      data:data,
+	      success: function (response) {
+	    	 response=JSON.parse(response);
+	    	 for(index=0;index<response.length;index++){
+           	  console.log(response[index]);
+           	  $('#applicaionStatus').append('<tr>'+
+           		'<td>'+(index+1)+'</td><td>'+response[index].courseTypeName+'</td>'+
+           	    '<td>'+response[index].courseName+'</td>'+
+           	    '<td>'+response[index].trainingDate.replace("-","/").replace("-","/")+'</td>'+
+           	     '<td>'+response[index].noOfVacancy+'</td>'+
+           	    '<td><a href="editApplicationStatusDetails.fssai?courseType='+response[index].courseTypeId+'&&courseName='+response[index].courseNameId+'">'+response[index].noOfApplications+'</td> '+
+           	  	'</tr>');
+             }
+	      }
+	      });
+
+}
+
+
+function confirmStatus(trainingCenterID){
+	 var data=JSON.stringify({
+		 	id:trainingCenterID
+	});
+		$.ajax({
+		      type: 'post',
+		      url: 'updateUpcomingTrainingsStatus.fssai',
+		      contentType : "application/json",
+		      data: data,
+		      success: function (response) {
+		    	 response=JSON.parse(response);
+		    	 if(response.message=="OK"){
+		    		 searchUpcomingTraining();
+				   
+		    	 }
+		   		
+		      }
+		      });
+}
 function searchUpcomingTraining(){
+
+	 
 		var result="";
 		$.ajax({
 		type: 'post',
@@ -19,7 +70,7 @@ function searchUpcomingTraining(){
 		$('#newTable').show();
 		//var mainData = JSON.stringify(data);
 		var mainData1 = jQuery.parseJSON(data);
-		alert(mainData1);
+// 		alert(mainData1);
 		var j=1;
 		$('#newTable tr').remove();
 		$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Course Type</th><th>Course Name</th><th>Training Date</th><th>No. Of Seats</th><th>No. Of Enrollments</th><th>Required Seat</th><th>Status</th></tr>')
@@ -30,7 +81,7 @@ function searchUpcomingTraining(){
 			if(statuss == "A"){
 				a = "Confirmed";
 			}else{
-				a = '<a href="#"  onClick="confirmStatus();" id="confirm" >Confirm</a>';
+				a = '<a href="#"  onClick=confirmStatus('+obj[0]+'); id=confirm_'+obj[0]+' >Confirm</a>';
 			}
 			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[7]+'</td><td>'+obj[8]+'</td><td>'+obj[2]+'</td><td>'+obj[6]+'</td><td>'+obj[2]+'</td><td>'+obj[6]+'</td><td>'+ a +'</td></tr>');
 			
@@ -148,32 +199,7 @@ function searchUpcomingTraining(){
                               <th>No. Of Applications</th>
                             </tr>
                           </thead>
-                          <tbody>
-                            <tr>
-                              <td>1</td>
-                              <td>Basic</td>
-                              <td>GHP-GMP</td>
-                              <td>12/12/2012</td>
-                              <td>58</td>
-                              <td><a href="application-status-inner.html">20</a></td>
-                            </tr>
-                            <tr>
-                              <td>2</td>
-                              <td>Advance</td>
-                              <td>GHP-GMP</td>
-                              <td>12/12/2012</td>
-                              <td>58</td>
-                              <td><a href="application-status-inner.html">20</a></td>
-                            </tr>
-                            <tr>
-                              <td>3</td>
-                              <td>Special</td>
-                              <td>GHP-GMP</td>
-                              <td>12/12/2012</td>
-                              <td>58</td>
-                              <td><a href="application-status-inner.html">20</a></td>
-                            </tr>
-                          </tbody>
+                          <tbody id="applicaionStatus">
                         </table>
                       </fieldset>
                     </div>

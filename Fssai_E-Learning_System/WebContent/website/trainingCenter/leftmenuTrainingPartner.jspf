@@ -1,0 +1,10 @@
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <!-- <li class="sidebar-brand">
+                        </li> -->
+          <li> <a href="postVacancyTrainingCenter.fssai">Post Vacancy for Trainer</a> </li>
+          <li> <a href="trainingpartnerapplicationstatus1.fssai">Application Status</a> </li>
+           <li><a href="view-training-calendar.html">View Training Calendar</a></li>
+           <li><a href="view-feedback.html">View Feedback</a></li>
+        </ul>
+      </div>

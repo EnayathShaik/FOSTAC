@@ -72,7 +72,8 @@ function showDetails(){
 		courseType:$('#selCourseType').val()==null?0:$('#selCourseType').val(),
 		courseName:$('#selCourseName').val()==null?0:$('#selCourseName').val(),
 		trainingDate:$('#trainingdate').val(),
-		trainingCenter:0
+		trainingCenter:$('#personalInformationTrainingPartnerId').val()==null?0:$('#personalInformationTrainingPartnerId').val()
+		
   });
 	$.ajax({
 	      type: 'post',
@@ -88,7 +89,7 @@ function showDetails(){
            	    '<td>'+response[index].courseName+'</td>'+
            	    '<td>'+response[index].trainingDate.replace("-","/").replace("-","/")+'</td>'+
            	     '<td>'+response[index].noOfVacancy+'</td>'+
-           	    '<td><a href="editApplicationStatusDetails.fssai?courseType='+response[index].courseTypeId+'&&courseName='+response[index].courseNameId+'">'+response[index].noOfApplications+'</td> '+
+           	    '<td><a href="editApplicationStatusDetails.fssai?courseType='+response[index].courseTypeId+'&&courseName='+response[index].courseNameId+'&&trainingCenter='+1+'">'+response[index].noOfApplications+'</td> '+
            	  	'</tr>');
              }
 	      }
@@ -164,6 +165,7 @@ function showDetails(){
                                         var formObj = '${trainingpartnerapplicationstatus}';
                                         var formData = JSON.parse(formObj);
                                         var courseTypes = formData.courseTypes;
+                                        var trainingCenterList=formData.trainingCenterList;
                                         </script>
                                         
                                         <div class="row">
@@ -179,17 +181,6 @@ function showDetails(){
                                                             </ul>
                                                         </div>
                                                         <select class="form-control" onchange="getCourseName(this.value);" name="selCourseType" id = "selCourseType"> </select>
-														<script>
-															var selectctpeOptions = "<option disabled selected value> -- select courseType -- </option>";
-															for(var i=0 ; i < courseTypes.length; i++)
-																{
-																	console.log(courseTypes[i].CourseTypeId + " -- "+ courseTypes[i].CourseType);
-																	selectctpeOptions += "<option value="+courseTypes[i].CourseTypeId+">"+courseTypes[i].CourseType+"</option>"
-																	
-																}
-															document.getElementById('selCourseType').innerHTML += selectctpeOptions; 
-														</script>
-														
                                                     </div>
                                                     
                                                     <div class="form-group">
@@ -216,6 +207,16 @@ function showDetails(){
                                                         </div>
                                                         <input type="date" id="trainingdate" class="form-control">
                                                     </div>
+                                                      <div class="form-group">
+                                                        <div>
+                                                            <ul class="lab-no">
+                                                                <li class="style-li"><strong>Training Center Name:</strong></li>
+                                                                
+                                                            </ul>
+                                                        </div>
+                                                        <select class="form-control" name="TrainingCentreName" id = "personalInformationTrainingPartnerId"> </select>
+														
+                                                    </div>
                                                      <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails();">Show Details</button>
                                                 </div>
                                                
@@ -224,7 +225,26 @@ function showDetails(){
                                             <div class="col-md-3 hidden-xs"></div>
                                         </div>
                                         </fieldset>
-
+<script>
+															var selectctpeOptions = "<option disabled selected value> -- select courseType -- </option>";
+															for(var i=0 ; i < courseTypes.length; i++)
+																{
+																	console.log(courseTypes[i].CourseTypeId + " -- "+ courseTypes[i].CourseType);
+																	selectctpeOptions += "<option value="+courseTypes[i].CourseTypeId+">"+courseTypes[i].CourseType+"</option>"
+																	
+																}
+															document.getElementById('selCourseType').innerHTML += selectctpeOptions;
+															
+															var selectctTCpeOptions = "<option disabled selected value> -- select Training Center -- </option>";
+															for(var i=0 ; i < trainingCenterList.length; i++)
+																{
+																	console.log(trainingCenterList[i].personalInformationTrainingPartnerId + " -- "+ trainingCenterList[i].TrainingCentreName);
+																	selectctTCpeOptions += "<option value="+trainingCenterList[i].personalInformationTrainingPartnerId+">"+trainingCenterList[i].TrainingCentreName+"</option>"
+																	
+																}
+															document.getElementById('personalInformationTrainingPartnerId').innerHTML += selectctTCpeOptions;
+														</script>
+														
 
                                     </div>
 

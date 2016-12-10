@@ -21,6 +21,7 @@ import com.ir.model.CourseType;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.PostVacancyTrainingCenter;
 import com.ir.model.PostVacancyTrainingCenterBean;
+import com.ir.model.TrainingCalendar;
 import com.ir.model.Utility;
 import com.ir.util.ChangePasswordUtility;
 
@@ -286,10 +287,13 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		if(postVacancyTrainingCenterBean.getCourseName()>0){
 			queryParam+="coursename="+postVacancyTrainingCenterBean.getCourseName() +" AND ";
 		}
-		if(postVacancyTrainingCenterBean.getTrainingDate()!=""){
+		if(postVacancyTrainingCenterBean.getTrainingDate()!=null&& postVacancyTrainingCenterBean.getTrainingDate()!=""){
 			queryParam+="trainingdate="+postVacancyTrainingCenterBean.getTrainingDate() +" AND ";
 		}
-		if(queryParam!=null){
+		if(postVacancyTrainingCenterBean.getTrainingCenter()>0){
+			queryParam+="trainingcenter="+postVacancyTrainingCenterBean.getTrainingCenter() +" AND ";
+		}
+		if(queryParam!=""){
 			int index=queryParam.lastIndexOf(" AND ");
 			String str=queryParam.substring(0,index);
 			sql+=" where "+str;
@@ -348,6 +352,17 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		}
 		session.close();
 		return bean;
+	}
+	@Override
+	public void updateUpcomingTrainingsStatus(int id) {
+		Session session = sessionFactory.openSession();
+			Transaction tx=session.beginTransaction();
+			String sql="update trainingCalendar set status='A' where trainingCalendarId="+id;
+			Query query = session.createSQLQuery(sql);
+			query.executeUpdate();
+			tx.commit();
+			session.close();
+		
 	}
 
 }

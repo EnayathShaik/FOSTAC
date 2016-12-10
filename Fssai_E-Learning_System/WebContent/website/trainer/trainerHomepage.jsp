@@ -7,7 +7,40 @@
 <script src="website/js/bootstrap.min.js"></script> 
 <script src="website/js/jquery.isotope.min.js"></script> 
 <!-- horizontal navigation -->
-<<script type="text/javascript">
+
+<script type="text/javascript">
+function OnStart(){
+	searchUpcomingTraining();
+}
+window.onload = OnStart;
+
+function searchUpcomingTraining(){
+	$.ajax({
+	type: 'post',
+	url: 'searchUpcomingTraining.jspp',
+	async: false, 
+	success: function (data){
+	$('#newTable').show();
+	//var mainData = JSON.stringify(data);
+	var mainData1 = jQuery.parseJSON(data);
+	console.log(mainData1);
+//		alert(mainData1);
+	var j=1;
+	$('#newTable tr').remove();
+	$.each(mainData1 , function(i , obj)
+	{
+		var a = null;
+		var statuss = obj[9];
+		if(statuss == "A"){
+			a = "Confirmed";
+		$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[7]+'</td><td>'+obj[8]+'</td><td>'+obj[2]+'</td><td>'+obj[1]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td></tr>');
+		}
+		
+	});
+	}
+	});
+}
+
 function applyForVacancy(index){
 	var vacancyObj=${postVacancyTrainingCenter}[index];
 	var buttonID=window.event.currentTarget.id;
@@ -66,52 +99,21 @@ function applyForVacancy(index){
                       <legend>
                       <h3 style="padding-bottom:20px;">My Training Calendar</h3>
                       </legend>
-<!--                       <table class="table table-bordered table-hover table-striped table-responsive table-hover"> -->
-                      Nothing is available for you
-<!--                         <thead> -->
-<!--                           <tr class="background-open-vacancies"> -->
-<!--                             <th>S.No.</th> -->
-<!--                             <th>Course Type</th> -->
-<!--                             <th>Course Name</th> -->
-<!--                             <th>Training Date &amp; Time</th> -->
-<!--                             <th>Training Center Name &amp; Address</th> -->
-<!--                             <th>Contact Person Name</th> -->
-<!--                             <th>Contact Person Phone Number &amp; Email ID</th> -->
-<!--                           </tr> -->
-<!--                         </thead> -->
-<!--                         <tbody> -->
-<!--                           <tr> -->
-<!--                             <td>1</td> -->
-<!--                             <td>Basic</td> -->
-<!--                             <td>GHP-GMP</td> -->
-<!--                             <td><p><strong>Date:</strong> 12/01/2015</p> -->
-<!--                               <p><strong>Time:</strong> 12:00 AM</p></td> -->
-<!--                             <td>FSSAI, ITO</td> -->
-<!--                             <td>Mr. Smith</td> -->
-<!--                             <td>P: 98763524125 <br>E: ajun.j@gmail.com</td> -->
-<!--                           </tr> -->
-<!--                           <tr> -->
-<!--                             <td>2</td> -->
-<!--                             <td>Special</td> -->
-<!--                             <td>HACCP</td> -->
-<!--                             <td><p><strong>Date:</strong> 12/01/2015</p> -->
-<!--                               <p><strong>Time:</strong> 12:00 AM</p></td> -->
-<!--                             <td>FBO Bhavan, Kotla Road</td> -->
-<!--                             <td>Mr. Smith</td> -->
-<!--                             <td>P: 98763524125 <br>E: ajun.j@gmail.com</td> -->
-<!--                           </tr> -->
-<!--                           <tr> -->
-<!--                             <td>3</td> -->
-<!--                             <td>Advanced</td> -->
-<!--                             <td>GHP-GMP-HACCP</td> -->
-<!--                             <td><p><strong>Date:</strong> 12/01/2015</p> -->
-<!--                               <p><strong>Time:</strong> 12:00 AM</p></td> -->
-<!--                             <td>FSSAI, ITO</td> -->
-<!--                             <td>Mr. Smith</td> -->
-<!--                             <td>P: 98763524125 <br>E: ajun.j@gmail.com</td> -->
-<!--                           </tr> -->
-<!--                         </tbody> -->
-<!--                       </table> -->
+                      <table class="table table-bordered table-hover table-striped table-responsive table-hover">
+                        <thead>
+                          <tr class="background-open-vacancies">
+                            <th>S.No.</th>
+                            <th>Course Type</th>
+                            <th>Course Name</th>
+                            <th>Training Date &amp; Time</th>
+                            <th>Training Center Name &amp; Address</th>
+                            <th>Contact Person Name</th>
+                            <th>Contact Person Phone Number &amp; Email ID</th>
+                          </tr>
+                        </thead>
+                        <tbody id="newTable">
+                        </tbody>
+                      </table>
 <!--                       <div class="row"> -->
 <!--                         <div class="col-md-6 hidden-xs"></div> -->
 <!--                         pagination -->

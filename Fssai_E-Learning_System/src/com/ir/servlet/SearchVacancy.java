@@ -7,6 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Query;
@@ -41,14 +43,14 @@ public class SearchVacancy extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void callPost(HttpServletRequest request, HttpServletResponse response,String loginId,int profileCode) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 		String name = (request.getQueryString());
 		String [] n1 = name.split("&");
 		
-		String courseType,courseName , trainingDate , requiredExp ,noOfVacancy;
+		String courseType,courseName , trainingDate , requiredExp ,noOfVacancy,selectAll;
 		if(n1[0].split("=")[1].equals("0")){
 			courseType = "%";
 		}else{
@@ -88,11 +90,18 @@ public class SearchVacancy extends HttpServlet {
 		Session session = sf.openSession();
 		String newList=null;
 		System.out.println("district 0");
-		String sql = "select pvtc.postvacancytrainingcenterid , ct.coursetype , cn.coursename , pvtc.trainingdate , pvtc.requiredexp , pvtc.noofvacancy "+
+		String sql ="";
+		if(n1.length==5 && profileCode==5){
+			sql = "select pvtc.postvacancytrainingcenterid , ct.coursetype , cn.coursename , pvtc.trainingdate , pvtc.requiredexp , pvtc.noofvacancy,pvtc.loginid "+
 					" from postvacancytrainingcenter as pvtc "+
 					" inner join coursetype as ct on ct.coursetypeid = pvtc.coursetype "+
-					" inner join coursename as cn on cn.coursenameid = pvtc.coursename ";
-
+					" inner join coursename as cn on cn.coursenameid = pvtc.coursename and pvtc.loginid='"+loginId+"'";
+		}else{ sql = "select pvtc.postvacancytrainingcenterid , ct.coursetype , cn.coursename , pvtc.trainingdate , pvtc.requiredexp , pvtc.noofvacancy,pvtc.loginid "+
+				" from postvacancytrainingcenter as pvtc "+
+				" inner join coursetype as ct on ct.coursetypeid = pvtc.coursetype "+
+				" inner join coursename as cn on cn.coursenameid = pvtc.coursename ";
+			
+		}
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
 		System.out.println(list.size());
@@ -110,8 +119,16 @@ public class SearchVacancy extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession httpSession=request.getSession(false);
+		String loginId="";
+		int profileId=0;
+		if(null!=httpSession.getAttribute("logId")){
+			 loginId=httpSession.getAttribute("logId").toString();
+			 profileId=Integer.parseInt(httpSession.getAttribute("profileId").toString());
+		}
+		
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		callPost(request, response,loginId,profileId);
 	}
 
 }
