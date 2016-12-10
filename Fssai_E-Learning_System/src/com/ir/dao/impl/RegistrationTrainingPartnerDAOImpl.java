@@ -166,7 +166,7 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 		loginDetails.setLoginId(registrationFormTrainingPartner.getUserId());
 		/**TODO - change the status to I initially */
 		
-		loginDetails.setStatus("A");
+		loginDetails.setStatus("I");
 		loginDetails.setPassword(passwordString);
 		loginDetails.setEncrypted_Password(encryprPassword);
 		loginDetails.setProfileId(5);

@@ -9,6 +9,43 @@ function OnStart(){
 window.onload = OnStart;
 </script>
 <script>
+function checkname()
+{
+ var name=document.getElementById( "UserId" ).value;
+	
+ if(name)
+ {
+  $.ajax({
+  type: 'post',
+  url: 'checkdata.jspp?'+ name,
+  data: {
+   user_name:name,
+  },
+  success: function (response) {
+	  $( '#name_status' ).html(response);
+	  if(response.trim() == 'Already'){
+		  document.getElementById('UserId').value="";
+	  }
+      if(response=="OK")	
+      {
+   	   document.getElementById("register").style.display = 'none';
+       return true;	
+      }
+      else
+      {
+   	   document.getElementById("register").style.display = 'block';
+       return false;	
+      }
+  }
+  });
+ }
+ else
+ {
+  $( '#name_status' ).html("");
+  document.getElementById("register").style.display = 'none';
+  return false;
+ }
+} 
 function DrawCaptcha()
 {
     var a = Math.ceil(Math.random() * 10)+ '';
@@ -118,43 +155,6 @@ function AvoidSpace(event) {
     	document.getElementById('SpecialCourse1').value= y;
     	return y;
     }
-    
-    function checkname()
-    {
-     var name=document.getElementById( "UserId" ).value;
-    	
-     if(name)
-     {
-      $.ajax({
-      type: 'post',
-      url: 'checkdata.jspp?'+ name,
-      data: {
-       user_name:name,
-      },
-      success: function (response) {
-       $( '#name_status' ).html(response);
-       if(response=="OK")	
-       {
-    	   document.getElementById("register").style.display = 'none';
-        return true;	
-       }
-       else
-       {
-    	   document.getElementById("register").style.display = 'block';
-    	   document.getElementById("created").style.display = 'none';
-        return false;	
-       }
-      }
-      });
-     }
-     else
-     {
-      $( '#name_status' ).html("");
-      document.getElementById("register").style.display = 'none';
-      return false;
-     }
-    } 
-    
     
     function getDistrict(val)
     {
@@ -488,26 +488,13 @@ function AvoidSpace(event) {
     return( true );
     
    }</script>
-<script>    
-    function pan_validate(pan)
-    {
-    var regpan = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
-    if(regpan.test(pan) == false)
-    {
-   		document.getElementById("status").innerHTML = "Invalid PAN Number !!!";
-    }else{
-    	document.getElementById("status").innerHTML = ""; 
-    }
-    }
-</script>
-
 <cf:form action="registrationTrainingPartner.fssai" name="myForm" method="POST" commandName="registrationFormTrainingPartner" onsubmit="return validateFields();"> 
 
     <!-- login form -->
     <div class="row">
       <div class="col-md-2 hidden-xs"></div>
       <div class="col-md-8  col-xs-12">
-        <h3 class="text-capitalize heading-3-padding">Training Center Registration Form</h3>
+        <h3 class="text-capitalize heading-3-padding">ATraining Center Registration Form</h3>
 
           <!-- personal information -->
           <div class="personel-info">
@@ -520,13 +507,13 @@ function AvoidSpace(event) {
                   <div>
                     <ul class="lab-no">
                      <li class="style-li"><strong><cs:message code="lbl.Trainee.UserId" /></strong></li> 
-                      <li class="style-li error-red">        
+                      <li class="style-li error-red"><span id="name_status">        
                       <label id="UserIdError" class="error visibility">Enter UserId</label>
                       <cf:errors path="UserId" cssClass="error"/>
                       </li>
                     </ul>
                   </div>
-                  <cf:input path="UserId" maxlength="20" onkeypress="return AvoidSpace(event)" onKeyUP="this.value = this.value.toUpperCase();" class="form-control" placeholder="User ID"/>
+                  <cf:input path="UserId" maxlength="20" onkeypress="return AvoidSpace(event)" onKeyUP="this.value = this.value.toUpperCase();" class="form-control" onblur  ="checkname();" placeholder="User ID"/>
                 </div>
                 
                 <div class="form-group">
@@ -563,7 +550,7 @@ function AvoidSpace(event) {
                       <cf:errors path="PAN" cssClass="error" /></li>
                     </ul>
                   </div>
-                  <cf:input path="PAN" maxlength="10" class="form-control" onkeypress="return AvoidSpace(event)"  placeholder="PAN" onKeyUP="this.value = this.value.toUpperCase();" onblur="pan_validate(this.value);" />
+                  <cf:input path="PAN" maxlength="10" class="form-control" onkeypress="return AvoidSpace(event)"  placeholder="PAN" onKeyUP="this.value = this.value.toUpperCase();" onblur="pan_validate(this.id,this.value);" />
                 </div>
               </div>              
               <!-- right side -->
@@ -594,7 +581,7 @@ function AvoidSpace(event) {
                       <cf:errors path="FirstName" cssClass="error" /></li>
                     </ul>
                   </div>
-                   <cf:input path="FirstName" maxlength="20" class="form-control"  placeholder="First Name"/>
+                   <cf:input path="FirstName" maxlength="50" onkeyup="allLetter(this.id,this.value);" class="form-control"  placeholder="First Name"/>
                 </div>
                 <div class="form-group">
                   <div>
@@ -603,7 +590,7 @@ function AvoidSpace(event) {
                       <li class="style-li error-red"><cf:errors path="MiddleName" cssClass="error" /></li>
                     </ul>
                   </div>
-                  <cf:input path="MiddleName" maxlength="20" class="form-control"  placeholder="Middle Name"/>
+                  <cf:input path="MiddleName" maxlength="50" onkeyup="allLetter(this.id,this.value);" class="form-control"  placeholder="Middle Name"/>
                 </div>
                 <div class="form-group">
                   <div>
@@ -614,7 +601,7 @@ function AvoidSpace(event) {
                       <cf:errors path="LastName" cssClass="error" /></li>
                     </ul>
                   </div>
-                 <cf:input path="LastName" maxlength="20" class="form-control"  placeholder="Last Name"/>
+                 <cf:input path="LastName" maxlength="50" onkeyup="allLetter(this.id,this.value);" class="form-control"  placeholder="Last Name"/>
                 </div>
               </div>
               <!-- personal information ends -->

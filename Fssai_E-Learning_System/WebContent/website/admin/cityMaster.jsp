@@ -3,12 +3,12 @@
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
 function OnStart(){
-	searchCity();
+	searchCity('ALL');
 }
 window.onload = OnStart;
 </script>
 <script type='text/javascript'>
-function searchCity(){
+function searchCity(indicator){
 	var stateId =  $("#stateId").val();
 	var districtName =  $("#districtId").val();
 	var cityName =  $("#cityName").val();
@@ -16,7 +16,12 @@ function searchCity(){
 	$(".displayNone").css("display","block");
 	 {
 		var result="";
-		var total ="stateId="+stateId +"&districtName="+districtName+"&cityName="+cityName+"&status="+status;
+		var total ="";
+		 if(indicator.match('ALL')){
+			total = "stateId=0&districtName=0&cityName=&status="+status;
+		}else{ 
+			total = "stateId="+stateId +"&districtName="+districtName+"&cityName="+cityName+"&status="+status;
+		}
 		$.ajax({
 		type: 'post',
 		url: 'searchCity.jspp?'+ total,
@@ -337,7 +342,7 @@ font-weight: normal; line-height: 1.42857143; text-align: center; white-space: n
   background: #ef580d !important; color: #fff; border: 1px solid transparent; transition: all 0.8s linear;">Update</a>
 
                                                  
-                                                  <a href="#testt" onclick="searchCity('ALL');" class="pull-right">Search</a>
+                                                  <a href="#testt" onclick="searchCity('SELECTED');" class="pull-right">Search</a>
                                                     
                                                 </div>
                                                 

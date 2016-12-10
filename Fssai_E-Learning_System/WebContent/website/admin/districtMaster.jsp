@@ -20,10 +20,16 @@ function onLoadDistrict(){
 		var mainData1 = jQuery.parseJSON(data);
 		var j=1;
 		$('#newTable tr').remove();
-		$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>State Name</th><th>District Name</th><th>Status</th><th>Edit</th><th>Change Status</th></tr>')
+		$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>State Name</th><th>District Name</th><th>Status</th><th>Edit</th></tr>')
 		$.each(mainData1 , function(i , obj)
 		{
-			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><input type="hidden" id="stateName" value="'+obj[0]+'">'+obj[0]+'</td><td><input type="hidden" id="districtName" value="'+obj[1]+'">'+obj[1]+'</td><td><input type="hidden" id="statusLabel" value="'+obj[2]+'">'+obj[2]+'</td><td><input type="hidden" id="idCity" value="'+obj[3]+'" /><a href="#" onClick="editDistrict();">Edit</a></td><td><a href="#" onClick="changeStatus();">Active / In-Active</a></td></tr>');
+			var status ;
+	 		if(obj[2] == 'A'){
+				status = 'Active';
+			}else{
+				status = 'In-Active';
+			}
+			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><input type="hidden" id="stateName" value="'+obj[0]+'">'+obj[0]+'</td><td><input type="hidden" id="districtName" value="'+obj[1]+'">'+obj[1]+'</td><td><input type="hidden" id="statusLabel" value="'+status+'">'+status+'</td><td><input type="hidden" id="idCity" value="'+obj[3]+'" /><a href="#" onClick="editDistrict();">Edit</a></td></tr>');
 			
 		});
 		}
@@ -295,7 +301,7 @@ function editDistrict(){
                                                 <!-- create button -->
                                                 <div class="col-md-3 col-xs-12">
                                                     <input type="submit" id="btnCreate" class="btn login-btn" value="Create" />
-<a href="" onclick="updateDistrict();" id="btnUpdate1" style="display: none; padding: 6px 7px; width: 20%; 
+<a href="" onclick="updateDistrict();" id="btnUpdate" style="display: none; padding: 6px 7px; width: 40%; 
 margin-bottom: 0; font-size: 14px; font-weight: normal; line-height: 1.42857143; 
 text-align: center; white-space: nowrap; vertical-align: middle; 
 -ms-touch-action: manipulation; touch-action: manipulation; cursor: pointer; 

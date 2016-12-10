@@ -2,6 +2,10 @@
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type='text/javascript'>
+function OnStart(){
+	searchManageCourseContent('ALL');
+}
+window.onload = OnStart;
 function validateFields() {
 	if(document.getElementById("contentLink").value=="") {
 	document.getElementById("contentLink").style.borderColor = "red";
@@ -50,7 +54,7 @@ function editCourseContentData(){
 return result;
 }
 
-function searchManageCourseContent(){
+function searchManageCourseContent(indicator){
 	var contentLocation =  $("#contentLocation").val();
 	var courseType =  $("#courseType").val();
 	var courseName = $("#courseName").val();
@@ -59,7 +63,12 @@ function searchManageCourseContent(){
 	$(".displayNone").css("display","block");
 		 {
 		var result="";
-		var total = "contentLocation="+contentLocation+"&courseType="+courseType+"&courseName="+courseName+"&modeOfTraining="+modeOfTraining+"&contentType="+contentType+"";
+		var total ="";
+		if(indicator.match('ALL')){
+			total = "contentLocation=0&courseType=0&courseName=&modeOfTraining=&contentType=0";
+		}else{
+			total = "contentLocation="+contentLocation+"&courseType="+courseType+"&courseName="+courseName+"&modeOfTraining="+modeOfTraining+"&contentType="+contentType+"";
+		}
 		$.ajax({
 		type: 'post',
 		url: 'searchManageCourseContent.jspp?'+ total,
@@ -315,7 +324,7 @@ font-weight: normal; line-height: 1.42857143; text-align: center; white-space: n
 
 
                                 
-<a href="#testt" class="pull-right" onclick="searchManageCourseContent();">Search</a>   
+<a href="#testt" class="pull-right" onclick="searchManageCourseContent('SELECTED');">Search</a>   
                                             
                                                 </div>
                                             </div>

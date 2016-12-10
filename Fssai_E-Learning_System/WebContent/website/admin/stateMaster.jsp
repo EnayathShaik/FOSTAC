@@ -3,7 +3,7 @@
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
 function OnStart(){
-	searchState();
+	searchState('ALL');
 }
 window.onload = OnStart;
 </script>
@@ -63,7 +63,9 @@ function checkState() {
 }
 </script>
 <script>
-function deleteState(i) {
+function deleteState(state,status) {
+	alert(state);
+	alert(status);
 		var idHidden =  $("#idLabel"+i).val();
 		var status = $("#statusLabel").val();
 		var state = $("#stateLabel").val();
@@ -111,14 +113,19 @@ function deleteState1(i) {
 }
 </script>
 <script>
-	function searchState() {
+	function searchState(indicator) {
 		$('.displayNone').css('display', 'block');
 		$('#created').css('display', 'none');
 		var stateName =  $("#stateName").val();
 		var status =  $("#status").val();
 		 {
 			var result="";
-			var total = "stateName="+stateName+"&status="+status;
+			var total ="";
+			if(indicator.match('ALL')){
+				total = "stateName=&status="+status;
+			}else{
+				total = "stateName="+stateName+"&status="+status;
+			}
 			$.ajax({
 			type: 'post',
 			url: 'searchState.jspp?'+ total,
@@ -138,7 +145,9 @@ function deleteState1(i) {
 				}else{
 					stat = 'In-Active';
 				}
-				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><input type="hidden" id="stateLabel" value="'+obj.stateName+'">'+obj.stateName+'</td><td><input type="hidden" id="statusLabel" value="'+obj.status+'">'+stat+'</td><td> &nbsp;&nbsp;&nbsp;&nbsp; <a href="#" onClick="deleteState('+i+');">Edit</a> </td><td style="display:none;"><input type="hidden" id="idLabel'+i+'" value="'+obj.stateId+'"></td></tr>');	
+				var state = obj.stateName;
+				var status = obj.status;
+				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><input type="hidden" id="stateLabel" value="'+obj.stateName+'">'+obj.stateName+'</td><td><input type="hidden" id="statusLabel" value="'+obj.status+'">'+stat+'</td><td> &nbsp;&nbsp;&nbsp;&nbsp; <a href="#" onClick="deleteState('+state+','+status+')">Edit</a> </td><td style="display:none;"><input type="hidden" id="idLabel'+i+'" value="'+obj.stateId+'"></td></tr>');	
 			});
 			}
 			});
@@ -320,7 +329,7 @@ user-select: none; background-image: none; border: 1px solid transparent;
 background: #ef580d !important; color: #fff; border: 1px solid transparent; 
 transition: all 0.8s linear;">
 Update</a> 
-	<a href="#testt" onclick="searchState();" class="pull-right">Search</a>
+	<a href="#testt" onclick="searchState('SELECTED');" class="pull-right">Search</a>
 
 
 											</div>

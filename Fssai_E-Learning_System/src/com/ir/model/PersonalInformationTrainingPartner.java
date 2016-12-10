@@ -43,7 +43,6 @@ public class PersonalInformationTrainingPartner {
 	private int TrainingPartnerName;
 	@NotNull @Size(min=1, max=20 , message="* Enter First Name")
 	private String FirstName;
-	@Size(min=1, max=20)
 	private String MiddleName;
 	@NotNull @Size(min=1, max=20 , message="* Enter Last Name")
 	private String LastName;
