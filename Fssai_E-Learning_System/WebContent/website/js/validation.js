@@ -1,13 +1,17 @@
 function allLetter(id, inputtxt) {
-	var letters = /^[A-Za-z]+$/;
-	if (inputtxt.match(letters)) {
-		return true;
-	} else {
-		document.getElementById(id).value = "";
-		alert('Please input alphabet characters only');
-		return false;
+	//var letters = /^[A-Za-z]+$/; //With out Space
+	var letters = /^[a-zA-Z\s]+$/; //With Space only
+	if(inputtxt.length < 0){
+		if (inputtxt.match(letters)) {
+			return true;
+		} else {
+			document.getElementById(id).value = "";
+			alert('Please input alphabet characters only');
+			return false;
+		}
 	}
 }
+
 
 function allnumeric(id, inputtxt) {
 	var numbers = /^[0-9]+$/;
