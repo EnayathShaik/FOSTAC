@@ -5,8 +5,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -69,6 +67,26 @@ public class TrainingPartnerController {
 	public String contactTrainingPartner(@ModelAttribute("contactTrainingPartner") ContactTrainee contactTrainee ){
 		return "contactTrainingPartner";		
 	}
+	@RequestMapping(value="/viewFeedbackDetails" , method=RequestMethod.GET)
+	public String viewFeedbackDetails(@ModelAttribute("trainingpartnerapplicationstatus") TrainingPartnerTrainingCalender trainingpartnerapplicationstatus,HttpSession session,BindingResult result , Model model){
+		if(result.hasErrors()){
+			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
+			System.out.println(result.getErrorCount());
+			System.out.println(result.getAllErrors());
+			return "trainingpartnerapplicationstatus1";
+		}
+		
+		List<CourseType> courseTypes = trainingPartnerService.courseTypes();
+		//List<CourseName> courseNames = trainingPartnerService.getCourseNameList();
+		trainingpartnerapplicationstatus.setCourseTypes(courseTypes);
+		List<PersonalInformationTrainingPartner> trainingCenterList=trainingCenterList();
+		trainingpartnerapplicationstatus.setTrainingCenterList(trainingCenterList);
+//		trainingpartnerapplicationstatus.setCourseNames(courseNames);
+		Gson gson = new Gson();
+		model.addAttribute("trainingpartnerapplicationstatus" , gson.toJson(trainingpartnerapplicationstatus));
+	
+		return "viewFeedbackDetails";		
+	}
 	@RequestMapping(value="/changePasswordTrainingartnerSave" , method=RequestMethod.POST)
 	public String changePasswordTraineeSave(@ModelAttribute("changePasswordTrainingPartner") ChangePasswordForm changePasswordForm,HttpSession session,BindingResult result , Model model){
 		if(result.hasErrors()){
@@ -107,6 +125,27 @@ public class TrainingPartnerController {
 		model.addAttribute("trainingPartnerTrainingCalender" , gson.toJson(trainingPartnerTrainingCalender));
 		return "trainingpartnertrainingcalendar";
 	}
+	@RequestMapping(value="/viewtrainingpartnertrainingcalendar" , method=RequestMethod.GET)
+	public String viewtrainingpartnertrainingcalendar(@ModelAttribute("trainingPartnerTrainingCalender") TrainingPartnerTrainingCalender trainingPartnerTrainingCalender,HttpSession session,BindingResult result , Model model){
+		if(result.hasErrors()){
+			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
+			System.out.println(result.getErrorCount());
+			System.out.println(result.getAllErrors());
+			return "trainingpartnertrainingcalendar";
+		}
+		
+		List<CourseType> courseTypes = trainingPartnerService.courseTypes();
+		//List<CourseName> courseNames = trainingPartnerService.getCourseNameList();
+		trainingPartnerTrainingCalender.setCourseTypes(courseTypes);
+		List<IntStringBean> trainerList = trainingPartnerService.getTrainerList();
+		trainingPartnerTrainingCalender.setTrainerList(trainerList);
+		List<PersonalInformationTrainingPartner> trainingCenterList=trainingCenterList();
+		trainingPartnerTrainingCalender.setTrainingCenterList(trainingCenterList);
+		Gson gson = new Gson();
+		model.addAttribute("trainingPartnerTrainingCalender" , gson.toJson(trainingPartnerTrainingCalender));
+		return "viewtrainingpartnertrainingcalendar";
+	}
+	
 	@RequestMapping(value="/trainingpartnerassessmentcalendar" , method=RequestMethod.GET)
 	public String trainingpartnerassessmentcalendar(@ModelAttribute("trainingpartnerassessmentcalendar") TrainingPartnerTrainingCalender trainingpartnerassessmentcalendar,HttpSession session,BindingResult result , Model model){
 		if(result.hasErrors()){
@@ -243,6 +282,20 @@ public class TrainingPartnerController {
         Gson gson=new Gson();
         String newJSON=gson.toJson(responseObj);
         out.print(newJSON);
+        out.flush();
+	 }
+	@RequestMapping(value="/getTrainingCalenderList" , method=RequestMethod.POST)
+	@ResponseBody
+	  public void getTrainingCalenderList(@RequestBody PostVacancyTrainingCenterBean postVacancyTrainingCenterBean ,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException {	
+		List<PostVacancyTrainingCenterBean> trainingCalendarList=new ArrayList<>();
+		try{
+		trainingCalendarList=trainingPartnerService.getTrainingCalenderList(postVacancyTrainingCenterBean);
+	
+		}catch(Exception e){
+		}
+		response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.print(new Gson().toJson(trainingCalendarList));
         out.flush();
 	 }
 	

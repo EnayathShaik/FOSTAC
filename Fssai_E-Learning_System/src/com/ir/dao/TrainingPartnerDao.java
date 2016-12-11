@@ -41,6 +41,7 @@ public interface TrainingPartnerDao {
 			PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
 	public PostVacancyTrainingCenterBean getApplicationStatusBean(String loginId,int coursename, int cousertype);
 	public void updateUpcomingTrainingsStatus(int id);
+	public List<PostVacancyTrainingCenterBean> getTrainingCalenderList(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
 
 
 }

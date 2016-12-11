@@ -179,6 +179,10 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainee/feedbackForm.jsp" />
 	</definition>
+	<definition name="viewFeedbackDetails" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainingCenter/feedbackForm.jsp" />
+	</definition>
 	<definition name="feedbackFormTrainer" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainer/feedbackForm.jsp" />
@@ -469,6 +473,10 @@
 	<definition name="trainingpartnertrainingcalendar" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainingPartner/trainingpartnertrainingcalendar.jsp" />
+	</definition>
+	<definition name="viewtrainingpartnertrainingcalendar" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainingCenter/trainingpartnertrainingcalendar.jsp" />
 	</definition>
 	<definition name="trainingpartnerapplicationstatus" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />

@@ -69,6 +69,7 @@
                       </legend>
                       <h5><strong>Course Type:</strong> <span id="courseType"></span></h5>
                       <h5><strong>Course Name:</strong><span id="courseName"></span></h5>
+                      <h5><strong>Training Center Name:</strong><span id="trainingCentername"></span></h5>
                       <h5><strong>Training Date:</strong><span id="trainingDate"></span></h5>
                       <h5><strong>Number of Vacancies:</strong> <span id="noOfVacancys"></span></h5>
                     </fieldset>
@@ -123,6 +124,7 @@
                 console.log(utilityList);
                 $("#courseType").text(utilityList.courseTypeName);
                 $("#courseName").text(utilityList.courseName);
+                $("#trainingCentername").text(utilityList.trainerList[0].value);
                 $("#trainingDate").text(utilityList.trainingDate);
                 $("#noOfVacancys").text(utilityList.noOfVacancy);
                 

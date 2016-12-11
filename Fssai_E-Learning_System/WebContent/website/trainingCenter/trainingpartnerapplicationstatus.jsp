@@ -166,6 +166,7 @@ function showDetails(){
                                         var formData = JSON.parse(formObj);
                                         var courseTypes = formData.courseTypes;
                                         var trainingCenterList=formData.trainingCenterList;
+                                        console.log(trainingCenterList);
                                         </script>
                                         
                                         <div class="row">

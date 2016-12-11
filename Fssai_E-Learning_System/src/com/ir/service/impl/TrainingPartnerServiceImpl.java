@@ -67,6 +67,10 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 	public Utility editApplicationStatus(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean){
 		return trainingPartnerDAO.editApplicationStatus(postVacancyTrainingCenterBean);
 	}
+	@Override
+	public List<PostVacancyTrainingCenterBean> getTrainingCalenderList(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean){
+		return trainingPartnerDAO.getTrainingCalenderList(postVacancyTrainingCenterBean);
+	}
 	
 	@Override
 	public List<StringStringBean> getStatusList() {
