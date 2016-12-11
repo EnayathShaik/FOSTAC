@@ -255,6 +255,8 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 		if(registrationFormTrainee.getKindOfBusiness()==6){
 			System.out.println(" IF Kind of business");
 			registrationFormTrainee.setKindOfBusiness(6);
+			KindOfBusiness koFbusiness = new KindOfBusiness(6, "Not in business");
+			personalInformationTrainee.setKindOfBusiness(koFbusiness);
 			personalInformationTrainee.setDesignation(null);
 			personalInformationTrainee.setCompanyName(null);
 			personalInformationTrainee.setRegistrationNo(null);
@@ -298,7 +300,6 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 	//		personalInformationTrainee.setFirstName(registrationFormTrainee.getFirstName());
 		
 		personalInformationTrainee.setLoginDetails(loginDetails);
-		
 		Integer personalInformationTraineeId = (Integer)session.save(personalInformationTrainee);
 		
 		System.out.println("all insert done");
