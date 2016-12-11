@@ -22,6 +22,7 @@ import com.ir.form.AssessmentAnswerCriteria;
 import com.ir.model.AssessmentQuestion;
 import com.ir.model.CourseType;
 import com.ir.model.ManageAssessmentAgency;
+import com.ir.model.trainee.TraineeAssessmentEvaluation;
 @Repository("AssessmentDao")
 public class AssessmentDaoImpl implements AssessmentDao{
 
@@ -98,6 +99,40 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		}
 		return trainingPartnerList;
 	}
-	
 
+	@Override
+	public List<AssessmentQuestion> getAssessmentAnswers(int courseType, List<Integer> questions) {
+		Session session = sessionFactory.openSession();
+		String questionIds = questions.toString();
+		if(questionIds.length() >2){
+			questionIds = questionIds.substring(1,questionIds.length()-1);
+		}
+		Query query = session.createQuery("from AssessmentQuestion where coursename = "+ courseType +" and assessmentquestionid in ("+questionIds+")");
+		List<AssessmentQuestion> listAssessmentQuestions = query.list();
+		session.close();
+		
+		return listAssessmentQuestions;
+	}
+	@Override
+	public int saveTraineeAssessmentEvaluation(TraineeAssessmentEvaluation traineeAssessmentEvaluation){
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		Integer traineeAssessmentEvaluationId = (Integer) session.save(traineeAssessmentEvaluation);
+		tx.commit();
+		session.close();
+		return traineeAssessmentEvaluationId;
+	}
+
+	@Override
+	public int getElegibilityForAssessment(int coursenameid){
+		Session session = sessionFactory.openSession();
+		String sql = "select eligibility from assessmenteligibility where coursenameid="+coursenameid;
+		Query query = session.createSQLQuery(sql);
+		List listEligibility = query.list();
+		if(listEligibility.size() > 0)
+		{
+			return (int)listEligibility.get(0);
+		}
+		return -1;
+	}
 }

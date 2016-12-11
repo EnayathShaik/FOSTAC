@@ -69,12 +69,15 @@
 			var questionList = ${traineeAssessment};
 			
 			$('#questionsTable').append('<input type="hidden" name="courseNameId" value = "'+questionList.courseNameId+'">');
+// 			$('#questionsTable').append('<input type="hidden" name = "assessmentQuestionsList" value = "+JSON.stringify(assessmentQuestions)+">');
 			$(window).load(function () {
+				var assessmentQuestions = [];
 				for(var index=0;index<questionList.listAssessmentQuestion.length;index++){
 					$('#questionsTable').append('<ol>');
 					$('#questionsTable').append('<li><strong>Question No.'+questionList.listAssessmentQuestion[index].questionNumber+':</strong>'+questionList.listAssessmentQuestion[index].questionTitle+'</li>')
 					
 					//var noOption=questionList.listAssessmentQuestion[index].noOfOption;
+					assessmentQuestions.push(questionList.listAssessmentQuestion[index].assessmentQuestionId);
 					var noOption=6;
 					$('#questionsTable').append('<table width="200" border="0">');
 					for(var noOptionIndex=1; noOptionIndex<=noOption; noOptionIndex++){
@@ -107,8 +110,8 @@
 					$('#questionsTable').append('</table>');
 					$('#questionsTable').append('</ol>')
 				}
-				
-				
+				$('#questionsTable').append('<input type="hidden" name = "assessmentQuestionsList" value = "'+assessmentQuestions+'">');
+				$('#questionsTable').append('<input type="hidden" name = "assessmentQuestions" value = "'+JSON.stringify(assessmentQuestions)+'">');
 			});
 			 </script>
 			 

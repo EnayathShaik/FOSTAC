@@ -132,7 +132,6 @@
 		<put-attribute name="body" value="/website/trainee/welcomeupdatetrainee.jsp"/>
 	</definition>
 	
-	
 	<definition name="base.user.afterLogin"
 		template="/WEB-INF/jsp/common/afterLoginLayout.jsp">
 		<put-attribute name="title" value="" />
@@ -140,12 +139,6 @@
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/jsp/common/afterLoginFooter.jsp" />
 	</definition>
-	
-	
-	
-	
-	
-	
 <!-- 						   Trainee Starts						  -->
 		<definition name="traineeAssessmentOnline" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
@@ -237,7 +230,10 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainee/playvedio.jsp" />
 	</definition>
-	
+	<definition name="traineeAssessmentEvaluation" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainee/traineeAssessmentEvaluation.jsp" />
+	</definition>
 <!--						Trainee Ends						  -->	
 
 

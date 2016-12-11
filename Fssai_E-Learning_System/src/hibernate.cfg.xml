@@ -45,6 +45,7 @@
 		<mapping class="com.ir.model.assessor.AssessmentResult"/>
 		<mapping class="com.ir.model.PostVacancyTrainingCenterBean"/>
 		<mapping class="com.ir.model.assessor.AssessmentResult"/>
+		<mapping class="com.ir.model.trainee.TraineeAssessmentEvaluation"/>
 <!-- 		<mapping class="com.ir.form.AssessmentAnswerCriteria"/> -->
 <!-- 		<mapping class="com.ir.model.CourseEnrolledUser"/> -->
 		<!-- 

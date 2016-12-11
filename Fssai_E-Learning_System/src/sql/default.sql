@@ -52,3 +52,5 @@ INSERT INTO city(  cityid, cityname, districtid, status) VALUES (1000007, 'Moren
 --INSERT INTO logindetails( id, encrypted_password, password, loginid, profileid, status) VALUES (2, 'jhjhj', 'Password', 'SUPERADMIN', 1, 'A');
 --commit;
 --INSERT INTO adminusermanagement( adminusermanagementid, aadharnumber, firstname, lastname, middlename, logindetails) VALUES (1, 123456789123, 'Lalit', 'Kr', 'Pachauri', 2);
+create sequence assessmentsequence increment by 1 start with 100;
+create table assessmenteligibility(id integer default nextval('assessmentsequence'), coursenameid integer, eligibility integer);
