@@ -110,7 +110,7 @@ public class PersonalInformationTrainee {
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="bussDistrict")
 	private District bussDistrict;
 	
-    @NotNull
+    
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="KindOfBusiness")
 	private KindOfBusiness KindOfBusiness;
 	//@NotNull @Size(min=1, max=50 , message="enter your Designation")
