@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import com.ir.bean.common.IntStringBean;
 import com.ir.dao.TraineeDAO;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
@@ -13,9 +14,11 @@ import com.ir.form.RegistrationFormTrainee;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.CourseName;
 import com.ir.model.CourseTrainee;
+import com.ir.model.FeedbackForm;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.State;
+import com.ir.model.Utility;
 import com.ir.service.TraineeService;
 
 public class TraineeServiceImpl implements TraineeService {
@@ -106,5 +109,9 @@ public CourseName getCourseName(int profileId) {
 	public AdmitCardForm generateAdmitCard(int loginId,int profileId){
 		AdmitCardForm admitCardObj = traineeDAO.generateAdmitCard(loginId,profileId);
 		return admitCardObj;
+	}
+	@Override
+	public List<FeedbackForm> getFeedbackDetails(Utility utility) {
+		return traineeDAO.getFeedbackDetails(utility);
 	}
 }

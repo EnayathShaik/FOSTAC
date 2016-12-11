@@ -28,13 +28,17 @@ import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.PostVacancyTrainingCenterForm;
 import com.ir.model.CourseType;
+import com.ir.model.FeedbackForm;
+import com.ir.model.FeedbackMaster;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.PostVacancyTrainingCenter;
 import com.ir.model.PostVacancyTrainingCenterBean;
 import com.ir.model.TrainingPartnerTrainingCalender;
 import com.ir.model.Utility;
 import com.ir.service.LoginService;
+import com.ir.service.TraineeService;
 import com.ir.service.TrainingPartnerService;
+import com.ir.util.Profiles;
 
 @Controller
 public class TrainingPartnerController {
@@ -43,6 +47,10 @@ public class TrainingPartnerController {
 	@Autowired
 	@Qualifier("trainingPartnerService")
 	TrainingPartnerService trainingPartnerService; 
+	
+	@Autowired
+	@Qualifier("traineeService")
+	public TraineeService traineeService;
 	
 	
 	@Autowired
@@ -389,7 +397,6 @@ public class TrainingPartnerController {
         out.flush();
 	}
 	
-	
 	@RequestMapping(value="/applyForVacancy" , method=RequestMethod.POST)
 	@ResponseBody
 	public void applyForVacancy(@RequestBody PostVacancyTrainingCenterBean postVacancyTrainingCenterBean,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
@@ -412,6 +419,20 @@ public class TrainingPartnerController {
         Gson gson=new Gson();
         String newJSON=gson.toJson(responseObj);
         out.print(newJSON);
+        out.flush();
+	}
+	@RequestMapping(value="/getFeedbackDetails" , method=RequestMethod.POST)
+	@ResponseBody
+	public void getFeedbackDetails(@RequestBody Utility utility,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		List<FeedbackForm> feedbackFormList=new ArrayList<>();
+		try{
+			feedbackFormList=traineeService.getFeedbackDetails(utility);
+		}catch(Exception e){
+
+		}
+		response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.print(new Gson().toJson(feedbackFormList));
         out.flush();
 	}
 	

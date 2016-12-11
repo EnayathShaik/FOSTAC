@@ -21,37 +21,7 @@ function getCourseName(val){
 
 </script>
 <script>
-var result="";
-var response="";
 
-function editApplicationStatus(){
-	//var id = document.getElementById("assessmentAgencyId").value;
-	var data=JSON.stringify({
-		courseType:$('#selCourseType').val()==null?0:$('#selCourseType').val(),
-		courseName:$('#selCourseName').val()==null?0:$('#selCourseName').val(),
-		trainingDate:$('#trainingdate').val()
-  });
-	$.ajax({
-	      type: 'post',
-	      url: 'editApplicationStatusDetails.fssai',
-	      contentType : "application/json",
-	      data: data,
-	      success: function (response) {
-	    	 response=JSON.parse(response);
-	    	 console.log(response)
-// 	    	 for(index=0;index<response.length;index++){
-//          	  console.log(response[index]);
-//          	  $('#applicaionStatus').append('<tr>'+
-//          		'<td>'+(index+1)+'</td><td>'+response[index].courseTypeName+'</td>'+
-//          	    '<td>'+response[index].courseName+'</td>'+
-//          	    '<td>'+response[index].trainingDate.replace("-","/").replace("-","/")+'</td>'+
-//          	     '<td>'+response[index].noOfVacancy+'</td>'+
-//          	    '<td><a href="#" onClick="editApplicationStatus('+index+')">'+response[index].noOfApplications+'</td> '+
-//          	  	'</tr>');
-//            }
-	      }
-	      });
-}
 function showDetails(){
 	alert("Fetching details to mark attendance..");
 	
@@ -69,28 +39,36 @@ function showDetails(){
 	'</thead>');
 	//var id = document.getElementById("assessmentAgencyId").value;
 	var data=JSON.stringify({
-		courseType:$('#selCourseType').val()==null?0:$('#selCourseType').val(),
-		courseName:$('#selCourseName').val()==null?0:$('#selCourseName').val(),
+		courseTypeId:$('#selCourseType').val()==null?0:$('#selCourseType').val(),
+		courseNameId:$('#selCourseName').val()==null?0:$('#selCourseName').val(),
 		trainingDate:$('#trainingdate').val(),
-		trainingCenter:$('#personalInformationTrainingPartnerId').val()==null?0:$('#personalInformationTrainingPartnerId').val()
+		feedbackId:$('#personalInformationTrainingPartnerId').val()==null?0:$('#personalInformationTrainingPartnerId').val()
 		
   });
 	$.ajax({
 	      type: 'post',
-	      url: 'getApplicationStatusDetails.fssai',
+	      url: 'getFeedbackDetails.fssai',
 	      contentType : "application/json",
 	      data: data,
 	      success: function (response) {
 	    	 response=JSON.parse(response);
+	    	 if(response.length==0){
+	    		 $('#show-result').hide();
+	    	 }else{
+	    		 $('#show-result').show();
+	    	 }
 	    	 for(index=0;index<response.length;index++){
-           	  console.log(response[index]);
-           	  $('#applicaionStatus').append('<tr>'+
-           		'<td>'+(index+1)+'</td><td>'+response[index].courseTypeName+'</td>'+
-           	    '<td>'+response[index].courseName+'</td>'+
-           	    '<td>'+response[index].trainingDate.replace("-","/").replace("-","/")+'</td>'+
-           	     '<td>'+response[index].noOfVacancy+'</td>'+
-           	    '<td><a href="editApplicationStatusDetails.fssai?courseType='+response[index].courseTypeId+'&&courseName='+response[index].courseNameId+'&&trainingCenter='+1+'">'+response[index].noOfApplications+'</td> '+
-           	  	'</tr>');
+				var objec=response[index];
+				var rdStr=""
+				for(var radioIndex=0;radioIndex<5;radioIndex++){
+					if((radioIndex+1)==parseInt(objec[2])){
+					rdStr+='<td class="text-center"><input type="radio" name="'+index+'" value="'+radioIndex+'" checked="checked" /></td> ';				
+					}else{
+						rdStr+='<td class="text-center"><input type="radio" name="'+index+'" value="'+radioIndex+'"/></td> '
+					}
+				}
+	    		 $('#feedbackDetails').append('<tr>'+
+           		'<td>'+objec[1]+'</td>'+rdStr+'</tr>');
              }
 	      }
 	      });
@@ -111,8 +89,7 @@ function showDetails(){
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li class="hori"><a href="index.html">Home</a></li>
-                <li class="hori"><a href="update-personal-information.html">Update Personal Information</a></li>
-                <li class="hori"><a href="view-feedback-details.html">View Feedback Details</a></li>
+                <li><a href="training-center-management.html">Training Center Management</a></li>
                 <li class="hori"><a href="contact.html">Contact Us</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
@@ -257,23 +234,42 @@ function showDetails(){
                   <div class="col-xs-12">
                     <fieldset style="margin-top: 20px;">
                       <legend>
-                      <h4>Current Application Status</h4>
+                      <h4>Feed back details</h4>
                       </legend>
-                      <table class="table table-bordered table-responsive table-striped table-hover">
-                        <thead>
-                          <tr class="background-open-vacancies">
-						    <th>S.No</th>
-                            <th>Course Type</th>
-                            <th>Course Name</th>
-                            <th>Training Date</th>
-                            <th>No. of Vacancies</th>
-                            <th>No. Of Applications</th>
-                          </tr>
-                        </thead>
-                        <tbody id="applicaionStatus">
-			</tbody>
-              </div>
-</table>
+                                <table class="table table-bordered table-striped table-responsive table-hover paginated">
+                          <thead>
+                        <tr class="blue-table-head">
+                              <th>Feedback Point</th>
+                              <th class="text-center">1</th>
+                              <th class="text-center">2</th>
+                              <th class="text-center">3</th>
+                              <th class="text-center">4</th>
+                              <th class="text-center">5</th>
+                            </tr>
+                      </thead>
+                          <tbody id="feedbackDetails">
+<!-- 						    <tr>       -->
+<%-- 						        <td>${feedbackMaster[1]}</td> --%>
+<%-- 							  <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="1"></td> --%>
+<%--                               <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="2"></td> --%>
+<%--                               <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="3"></td> --%>
+<%--                               <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="4"></td> --%>
+<%--                               <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="5"></td> --%>
+<!-- 						    </tr> -->
+                      </tbody>
+                        </table>
+                    <div class="col-xs-12">
+                          <ul class="feed-no">
+                        <li class="feed-li"><span><strong>1</strong></span>&nbsp;<span>Poor</span></li>
+                        <li class="feed-li"><span><strong>2</strong></span>&nbsp;<span>Good</span></li>
+                        <li class="feed-li"><span><strong>3</strong></span>&nbsp;<span>Better</span></li>
+                        <li class="feed-li"><span><strong>4</strong></span>&nbsp;<span>Best</span></li>
+                        <li class="feed-li"><span><strong>5</strong></span>&nbsp;<span>Excellent</span></li>
+                      </ul>
+                        </div>
+                    <div class="col-md-4 col-x-12"></div>
+                    <div class="col-md-4 col-x-12"></div>
+                    
 </fieldset>
 </div>
 </div>

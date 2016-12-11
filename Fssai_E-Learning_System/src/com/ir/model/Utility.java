@@ -16,6 +16,7 @@ private String assessmentAgencyName;
 private String assessorName;
 private int courseTypeId;
 private int courseNameId ;
+private int feedbackId;
 private String courseTypeName;
 private String courseName ;
 private int noOfVacancy;
@@ -302,5 +303,17 @@ public List<StringStringBean> getTrainerList() {
  */
 public void setTrainerList(List<StringStringBean> trainerList) {
 	this.trainerList = trainerList;
+}
+/**
+ * @return the feedbackId
+ */
+public int getFeedbackId() {
+	return feedbackId;
+}
+/**
+ * @param feedbackId the feedbackId to set
+ */
+public void setFeedbackId(int feedbackId) {
+	this.feedbackId = feedbackId;
 }
 }

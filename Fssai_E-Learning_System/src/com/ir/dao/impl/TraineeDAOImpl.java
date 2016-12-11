@@ -2,14 +2,12 @@ package com.ir.dao.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -22,24 +20,20 @@ import com.ir.form.RegistrationFormTrainee;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.City;
 import com.ir.model.ContactTraineee;
-import com.ir.model.CourseEnrolled;
 import com.ir.model.CourseEnrolledUser;
 import com.ir.model.CourseName;
 import com.ir.model.CourseTrainee;
 import com.ir.model.District;
+import com.ir.model.FeedbackForm;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.KindOfBusiness;
-import com.ir.model.LoginDetails;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationTrainee;
-import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.State;
 import com.ir.model.Title;
-import com.ir.model.TrainingPartner;
+import com.ir.model.Utility;
 import com.ir.util.ChangePasswordUtility;
-import com.ir.util.Profiles;
 import com.ir.util.SendContectMail;
-import com.itextpdf.text.log.SysoCounter;
 
 public class TraineeDAOImpl implements  TraineeDAO{
 
@@ -525,6 +519,7 @@ public class TraineeDAOImpl implements  TraineeDAO{
 			AdmitCardForm admitcard = new AdmitCardForm();
 			Query query = session.createSQLQuery(str_query);
 			List records = query.list();
+			session.close();
 			try{
 			if(records.size() > 0){
 				admitcard = (AdmitCardForm)records.get(0);
@@ -533,6 +528,22 @@ public class TraineeDAOImpl implements  TraineeDAO{
 				System.out.println("Exception while retrieving admit card details : " + e.getMessage());
 			}
 		return admitcard;
+	}
+	@Override
+	public List<FeedbackForm> getFeedbackDetails(Utility utility) {
+		String str_query ="select fbd.feedbackId as feedBackFormId ,fdm.feedback as feedbackId,fbd.feedbackrating as feedbackRating,fbd.userid as userid from  feedbackdetail fbd inner join personalinformationtrainingpartner pitp on pitp.personalinformationtrainingpartnerid="+utility.getFeedbackId()+" and "
+				+ " pitp.logindetails=CAST(CAST (fbd.userid AS NUMERIC(19,4)) AS INT) inner join trainingcalendar tc on";
+				if(utility.getTrainingDate()!=null && utility.getTrainingDate()!=""){
+					str_query+= " tc.trainingdate='"+utility.getTrainingDate()+"' and ";
+				}
+				str_query+=" tc.coursetype="+utility.getCourseTypeId()+" and "
+				+ "coursename="+utility.getCourseNameId()+" "
+				+ "inner join feedbackmaster fdm on fdm.feedbacktypeid=CAST(CAST (fbd.feedbackId AS NUMERIC(19,4)) AS INT)";
+		Session session = sessionFactory.openSession();
+		Query query = session.createSQLQuery(str_query);
+		List<FeedbackForm> list=query.list();
+		session.close();
+		return list;
 	}
 	}
 	

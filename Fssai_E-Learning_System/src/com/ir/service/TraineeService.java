@@ -2,6 +2,7 @@ package com.ir.service;
 
 import java.util.List;
 
+import com.ir.bean.common.IntStringBean;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
@@ -9,12 +10,14 @@ import com.ir.form.RegistrationFormTrainee;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.CourseName;
 import com.ir.model.CourseTrainee;
+import com.ir.model.FeedbackForm;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.State;
 import com.ir.model.TrainingPartner;
+import com.ir.model.Utility;
 
 public interface TraineeService {
 	
@@ -43,5 +46,6 @@ public interface TraineeService {
 	public CourseName getCourseName(int profileId);
 	public List<FeedbackMaster> getFeedMasterList(int profileId);
 	public AdmitCardForm generateAdmitCard(int loginId,int profileId);
+	public List<FeedbackForm> getFeedbackDetails(Utility utility);
 	
 }

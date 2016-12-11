@@ -90,8 +90,7 @@ return result;
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li class="hori"><a href="index.html">Home</a></li>
-                <li class="hori"><a href="update-personal-information.html">Update Personal Information</a></li>
-                <li class="hori"><a href="view-feedback-details.html">View Feedback Details</a></li>
+				<li><a href="training-center-management.html">Training Center Management</a></li>
                 <li class="hori"><a href="contact.html">Contact Us</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
