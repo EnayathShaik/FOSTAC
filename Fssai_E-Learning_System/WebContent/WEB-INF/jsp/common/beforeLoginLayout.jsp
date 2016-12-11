@@ -78,7 +78,7 @@
         	
         	$('#dateP').datepicker( {
         		defaultDate: new Date(),
-        		yearRange: "-60:-1",
+        		yearRange: "-100:-1",
         		maxDate: 0,
                 changeMonth: true,
                 changeYear: true,
