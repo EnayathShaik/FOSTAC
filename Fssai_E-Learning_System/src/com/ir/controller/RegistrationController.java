@@ -1,9 +1,5 @@
 package com.ir.controller;
-
-
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -146,19 +142,6 @@ public class RegistrationController {
 	public String registerTrainee(@Valid @ModelAttribute("registrationFormTrainee") RegistrationFormTrainee registrationFormTrainee, BindingResult bindingResult,Model model)  {
 		System.out.println("Entering Registration ...............");
 		System.out.println("register controller before bind");
-		System.out.println("*********************************8");
-		System.out.println(registrationFormTrainee.getKindOfBusiness());
-		System.out.println(registrationFormTrainee.getCompanyName());
-		System.out.println(registrationFormTrainee.getDesignation());
-		System.out.println(registrationFormTrainee.getBusinessAddressLine1());
-		System.out.println(registrationFormTrainee.getBusinessAddressLine2());
-		System.out.println(registrationFormTrainee.getBussState());
-		System.out.println(registrationFormTrainee.getBussDistrict());
-		System.out.println(registrationFormTrainee.getBussCity());
-		System.out.println(registrationFormTrainee.getBussPincode());
-		System.out.println(registrationFormTrainee.getRegistrationNo());
-		System.out.println("*********************************8");
-		
 		if(bindingResult.hasErrors()){
 			System.out.println(" bindingResult.hasErrors "+bindingResult.hasErrors());
 			System.out.println(bindingResult.getErrorCount());
