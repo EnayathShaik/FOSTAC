@@ -25,12 +25,11 @@ function allnumeric(id, inputtxt) {
 	}
 }
 
-function pan_validate(id, inputtxt) {
-	if (inputtxt.length < 0) {
+function pan_validate(id, pan) {
 	var regpan = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
 	if (regpan.test(pan) == false) {
 		document.getElementById(id).value = "";
-		alert('INVALID PAN')
+		alert('INVALID PAN');
 	}
-	}
+	
 }
