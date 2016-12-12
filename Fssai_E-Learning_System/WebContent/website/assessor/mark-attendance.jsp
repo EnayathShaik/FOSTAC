@@ -66,10 +66,10 @@ function updateAttendance(assessorId,trainingcalId){
 		success: function (data){
 			console.log("Data received..");
 			console.log(data);
-			$('#strResponse').html = data;
+			$('#strResponse').text = data;
 		},
 		failure: function(data){
-			alert ("failure:" + data);
+			$('#strResponse').text = data;
 			}
 });
 }

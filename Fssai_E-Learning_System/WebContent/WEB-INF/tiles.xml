@@ -126,7 +126,10 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/success.htm" />
 	</definition>
-	
+	<definition name="trainingPartnerSearch" extends="base.before.login">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainingPartnerSearch.jsp" />
+	</definition>
 	<definition name="welcomeupdatetrainee" extends="base.before.login">
 		<put-attribute name="title" value="Fssai E-Learning System"/>
 		<put-attribute name="body" value="/website/trainee/welcomeupdatetrainee.jsp"/>
@@ -631,7 +634,10 @@
 		<put-attribute name="title" value="View Assessment Agency Calendar" />
 		<put-attribute name="body" value="/website/assessmentAgency/viewAssessmentAgencyCalendar.jsp" />
 	</definition>
-	
+	<definition name="updateTrainerAssessment" extends="base.user.afterLogin">
+		<put-attribute name ="title" value="Fssai E-Learning System" />
+		<put-attribute name = "body" value = "/website/admin/updateTrainerAssessment.jsp" />
+	</definition>
 <!--  						Admin			Ends			-->	
 
 	<definition name="adminDashboard" extends="base.admin.definition">

@@ -1,6 +1,8 @@
 package com.ir.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,9 +23,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.google.gson.Gson;
+import com.ir.bean.common.IntStringBean;
 import com.ir.form.AdminUserManagementForm;
 import com.ir.form.AssessmentQuestionForm;
 import com.ir.form.AssessorUserManagementForm;
@@ -43,6 +47,7 @@ import com.ir.form.TraineeUserManagementForm;
 import com.ir.form.TrainerUserManagementForm;
 import com.ir.form.TrainingCalendarForm;
 import com.ir.form.TrainingCenterUserManagementForm;
+import com.ir.form.UpdateTrainerAssessmentForm;
 import com.ir.model.AdminUserManagement;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
@@ -55,6 +60,8 @@ import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.State;
 import com.ir.model.TrainingPartner;
+import com.ir.model.admin.TrainerAssessmentSearchForm;
+import com.ir.model.trainer.TrainerAssessmentEvaluation;
 import com.ir.service.AdminService;
 
 @Controller
@@ -604,5 +611,51 @@ public class AdminController {
 			model.addAttribute("created" , "Oops, something went wrong !!!");
 		}
 		return "contactTrainee";
+	}
+	
+	@RequestMapping(value="/updateTrainerAssessmentForm", method=RequestMethod.GET)
+	public String updateTrainerAssessment(Model model, HttpServletRequest request){
+		UpdateTrainerAssessmentForm updateTrainerAssessmentForm = new UpdateTrainerAssessmentForm();
+		model.addAttribute("updateTrainerAssessment", updateTrainerAssessmentForm);
+		return "updateTrainerAssessment";
+	}
+	
+	@RequestMapping (value = "/trainingCenterByCoursenameId", method = RequestMethod.POST)
+	@ResponseBody
+	public String getTrainingCentersByCourse(@RequestParam Integer courseNameId, HttpServletRequest request, HttpServletResponse response){
+		List <IntStringBean> listTrainingCenters = adminService.getTrainingCentersByCourse(courseNameId);
+		Gson gson = new Gson();
+		String strData = gson.toJson(listTrainingCenters);
+		return strData;
+	}
+	
+	@RequestMapping (value = "/searchTrainerForAssessmentValidation", method = RequestMethod.POST)
+	@ResponseBody
+	public String searchTrainerForAssessmentValidation(@RequestParam Integer courseNameId, @RequestParam Integer tpId, HttpServletRequest request, HttpServletResponse response){
+		List <TrainerAssessmentSearchForm> listTrainersForAssessmentEval = adminService.searchTrainerForAssessmentValidation(courseNameId, tpId);
+		Gson gson = new Gson();
+		String strData = gson.toJson(listTrainersForAssessmentEval);
+		return strData;
+	}
+	
+	@RequestMapping(value="/saveTrainerAssessment", method= RequestMethod.POST)
+	@ResponseBody
+	public String saveTrainerAssessment(@Valid @ModelAttribute("trainerAssessmentForm") TrainerAssessmentSearchForm trainerAssessmentForm, Model model){
+		trainerAssessmentForm = adminService.evaluateTrainerAssessment(trainerAssessmentForm);
+		
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy"); 
+		String date = simpleDateFormat.format(new Date());
+		TrainerAssessmentEvaluation trainerAssessmentEvaluation = new TrainerAssessmentEvaluation();
+		trainerAssessmentEvaluation.setTrainerId(trainerAssessmentForm.getTrainerId());
+		trainerAssessmentEvaluation.setCourseNameId(trainerAssessmentForm.getCourseNameId());
+		trainerAssessmentEvaluation.setTrainingPartnerId(trainerAssessmentForm.getTrainingPartnerId());
+		trainerAssessmentEvaluation.setRating(trainerAssessmentForm.getRating());
+		trainerAssessmentEvaluation.setResult(trainerAssessmentForm.getResult());
+		trainerAssessmentEvaluation.setAssessmentDate(date);
+		int response = adminService.saveTrainerAssessment(trainerAssessmentEvaluation);
+		if(response >0)
+			return "success";
+		else
+			return "Error occured while updating the accessment";
 	}
 }

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import com.ir.bean.common.IntStringBean;
 import com.ir.dao.AdminDAO;
 import com.ir.form.AdminUserManagementForm;
 import com.ir.form.AssessmentQuestionForm;
@@ -53,6 +54,8 @@ import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.Region;
 import com.ir.model.State;
 import com.ir.model.TrainingCalendar;
+import com.ir.model.admin.TrainerAssessmentSearchForm;
+import com.ir.model.trainer.TrainerAssessmentEvaluation;
 import com.ir.util.ChangePasswordUtility;
 import com.ir.util.EncryptionPasswordANDVerification;
 import com.ir.util.PasswordGenerator;
@@ -954,5 +957,95 @@ System.out.println("**********SS");
 		}catch(Exception exception){
 			return "error";
 		}
+	}
+	@Override
+	public List<IntStringBean> getTrainingCentersByCourse(int courseNameId){
+		Session session = sessionFactory.openSession();
+		String strQuery = "select pitp.personalinformationtrainingpartnerid, pitp.trainingcentrename "
+				+ "from courseenrolled ce "
+				+ "inner join logindetails login on login.id = ce.logindetails and profileid = 5 "
+				+ "inner join personalinformationtrainingpartner pitp on pitp.logindetails = login.id "
+				+ "where ce.coursenameid = "+courseNameId;
+;
+		Query query = session.createSQLQuery(strQuery);
+		List<IntStringBean> listTrainingCenters = new ArrayList<IntStringBean>();
+		List<Object[]> list =(List<Object[]>) query.list();
+		for (int i = 0; i < list.size(); i++) {
+			IntStringBean bean = new IntStringBean();
+			Object[] obj = list.get(i);
+			bean.setId((int)obj[0]);
+			bean.setValue(obj[1].toString());
+			listTrainingCenters.add(bean);
+		}
+		return listTrainingCenters;
+	}
+	@Override
+	public List<TrainerAssessmentSearchForm> searchTrainerForAssessmentValidation(int courseNameId, int trainingPartnerId){
+		List<TrainerAssessmentSearchForm> list = new ArrayList<TrainerAssessmentSearchForm>();
+		Session session = sessionFactory.openSession();	
+		StringBuffer strQuery = new StringBuffer();
+		
+		strQuery.append("select pit.personalinformationtrainerid ,ct.coursetype ,cn.coursenameid, cn.coursename, "
+				+ "concat(pit.firstname, ' ', pit.middlename, ' ', pit.lastname) as name, "
+				+ "pitp.personalinformationtrainingpartnerid, pitp.trainingcentrename "
+				+ "from personalinformationtrainer pit "
+				+ "inner join courseenrolled ce on ce.logindetails = pit.logindetails "
+				+ "inner join coursename cn on cn.coursenameid = ce.coursenameid "
+				+ "inner join coursetype ct on ct.coursetypeid = cn.coursetypeid "
+				+ "inner join courseenrolled cetp on cetp.coursenameid = ce.coursenameid "
+				+ "inner join logindetails login on login.id = cetp.logindetails and profileid = 5 "
+				+ "inner join personalinformationtrainingpartner pitp on pitp.logindetails = login.id");
+		
+		if (courseNameId >0 || trainingPartnerId > 0){
+			strQuery.append(" where ");
+			if (courseNameId > 0){
+				strQuery.append("ce.coursenameid = "+courseNameId+" and ");
+			}
+			if(trainingPartnerId > 0){
+				strQuery.append("pitp.personalinformationtrainingpartnerid ="+trainingPartnerId);
+			}
+		}
+		
+		Query query = session.createSQLQuery(strQuery.toString());
+		List rawlist = query.list();
+		
+		if(rawlist.size() > 0){
+			for (int i = 0; i < rawlist.size(); i++) {
+				Object[] obj = (Object[])rawlist.get(i);
+				TrainerAssessmentSearchForm dataForm = new TrainerAssessmentSearchForm();
+				dataForm.setTrainerId((int)obj[0]);
+				dataForm.setCourseType(obj[1].toString());
+				dataForm.setCourseNameId((int)obj[2]);
+				dataForm.setCourseName(obj[3].toString());
+				dataForm.setTrainerName(obj[4].toString());
+				dataForm.setTrainingPartnerId((int)obj[5]);
+				dataForm.setTrainingPartnerName(obj[6].toString());
+				list.add(dataForm);
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public int getElegibilityForAssessment(int coursenameid){
+		Session session = sessionFactory.openSession();
+		String sql = "select eligibility from assessmenteligibilitytrainer where coursenameid="+coursenameid;
+		Query query = session.createSQLQuery(sql);
+		List listEligibility = query.list();
+		if(listEligibility.size() > 0)
+		{
+			return (int)listEligibility.get(0);
+		}
+		return -1;
+	}
+	
+	@Override
+	public int saveTrainerAssessment(TrainerAssessmentEvaluation trainerAssessmentEvaluation){
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		Integer trainerAssessmentEvaluationId = (Integer) session.save(trainerAssessmentEvaluation);
+		tx.commit();
+		session.close();
+		return trainerAssessmentEvaluationId;
 	}
 }

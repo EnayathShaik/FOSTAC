@@ -92,7 +92,7 @@ function searchAssessor1(){
                         <li> <a href="trainingCalendarForm.fssai">Training Calendar</a> </li>
                         <li> <a href="assessmentSchedule.fssai">Assessment Schedule</a> </li>
                         <li> <a href="manageAssessmentQuestions.fssai">Assessment Questions</a> </li>
-                        <li> <a href="updateTrainerAssessment.fssai">Update Assessment</a> </li>
+                        <li> <a href="updateTrainerAssessmentForm.fssai">Update Assessment</a> </li>
                     </ul>
                 </div>
                 <!-- /#sidebar-wrapper -->

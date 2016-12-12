@@ -2,6 +2,7 @@ package com.ir.dao;
 
 import java.util.List;
 
+import com.ir.bean.common.IntStringBean;
 import com.ir.form.AdminUserManagementForm;
 import com.ir.form.AssessmentQuestionForm;
 import com.ir.form.AssessorUserManagementForm;
@@ -32,6 +33,8 @@ import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.State;
 import com.ir.model.TrainingPartner;
+import com.ir.model.admin.TrainerAssessmentSearchForm;
+import com.ir.model.trainer.TrainerAssessmentEvaluation;
 
 public interface AdminDAO {
 	
@@ -86,17 +89,14 @@ public interface AdminDAO {
 	District getDistrict(int id);
 
 	City getCity(int id);
-// Rishi
 	public boolean trainingadminForm(ChangePasswordForm changePasswordForm, String id);
-
 	public boolean trainingPartnerPass(ChangePasswordForm changePasswordForm, String id);
-
 	public String contactTrainigPartnerSave(ContactTrainee contactTrainee, String id);
 	public String saveFeedbackMaster(FeedbackMaster feedbackMaster);
 	
-
+	public List<IntStringBean> getTrainingCentersByCourse(int courseNameId);
 	//public boolean trainingadminForm(ChangePasswordForm changePasswordForm, String id);
-
-		// Rishi
-
+	public List<TrainerAssessmentSearchForm> searchTrainerForAssessmentValidation(int courseNameId, int trainingPartnerId);
+	public int getElegibilityForAssessment(int coursenameid);
+	public int saveTrainerAssessment(TrainerAssessmentEvaluation trainerAssessmentEvaluation);
 }

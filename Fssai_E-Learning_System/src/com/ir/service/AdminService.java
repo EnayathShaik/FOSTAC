@@ -2,6 +2,7 @@ package com.ir.service;
 
 import java.util.List;
 
+import com.ir.bean.common.IntStringBean;
 import com.ir.form.AdminUserManagementForm;
 import com.ir.form.AssessmentQuestionForm;
 import com.ir.form.AssessorUserManagementForm;
@@ -31,6 +32,9 @@ import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.State;
 import com.ir.model.TrainingPartner;
+import com.ir.model.admin.TrainerAssessmentSearchForm;
+import com.ir.model.trainee.TraineeAssessmentEvaluation;
+import com.ir.model.trainer.TrainerAssessmentEvaluation;
 
 public interface AdminService {
 
@@ -58,13 +62,14 @@ public interface AdminService {
 	List<District> districtList();
 	String trainingCalendarForm(TrainingCalendarForm trainingCalendarForm);
 	String manageAssessmentQuestionsSave(AssessmentQuestionForm assessmentQuestionForm);
-	// Rishi
 //	boolean changePasswordTraineeSave(ChangePasswordForm changePasswordForm, String id);
 	boolean changePasswordTPSave(ChangePasswordForm changePasswordForm, String id);
 	boolean changePasswordadminSave(ChangePasswordForm changePasswordForm, String id);
 	String contactTraningPTSave(ContactTrainee contactTrainee, String id);
 	String saveFeedbackMaster(FeedbackMaster feedbackMaster);
-	// Rishi end
-
+	List<IntStringBean> getTrainingCentersByCourse(int courseNameId);
+	List<TrainerAssessmentSearchForm> searchTrainerForAssessmentValidation(int courseNameId, int trainingPartnerId);
+	TrainerAssessmentSearchForm evaluateTrainerAssessment(TrainerAssessmentSearchForm trainerAssessmentForm);
+	int saveTrainerAssessment(TrainerAssessmentEvaluation trainerAssessmentEvaluation);
 
 }

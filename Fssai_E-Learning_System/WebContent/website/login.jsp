@@ -95,13 +95,13 @@ window.onload = OnStart;
                             <label for="user id">User Id:</label>
 								<cf:errors path="userId" cssClass="error" />
                             <label id="UserError" class="error visibility">Please enter user id</label>
-                             <cf:input path="userId" onKeyUP="this.value = this.value.toUpperCase();" class="form-control" id="userId" placeholder="Enter Your User ID"/>
+                             <cf:input path="userId" onKeyUP="this.value = this.value.toUpperCase();" class="form-control" id="userId" placeholder="Enter Your User ID" value = "SUPERADMIN"/>
                         </div>
                         <div class="form-group">
                             <label for="pwd">Password:</label>
                             <cf:errors path="password" cssClass="error" />
                             <label id="pwdError" class="error visibility">Please enter Password</label>
-                            <cf:password path="password" class="form-control" id="password" placeholder="Enter Your Password"/>
+                            <cf:password path="password" class="form-control" id="password" placeholder="Enter Your Password" value = "Password"/>
                         </div> 
                         
                         

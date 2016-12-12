@@ -147,7 +147,7 @@ return result;
                         <li> <a href="trainingCalendarForm.fssai">Training Calendar</a> </li>
                         <li> <a href="assessmentSchedule.fssai">Update Assessor</a> </li>
                         <li> <a href="manageAssessmentQuestions.fssai">Assessment Questions</a> </li>
-                        <li> <a href="updateTrainerAssessment.fssai">TOT Assessment</a> </li>
+                        <li> <a href="updateTrainerAssessmentForm.fssai">TOT Assessment</a> </li>
                         <li> <a href="feedbackMaster.fssai">Feedback Master</a> </li>
                     </ul>
                 </div>

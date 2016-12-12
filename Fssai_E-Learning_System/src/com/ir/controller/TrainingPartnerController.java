@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -27,14 +28,19 @@ import com.ir.bean.common.StringStringBean;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.PostVacancyTrainingCenterForm;
+import com.ir.form.trainingPartner.TrainingPartnerSearch;
+import com.ir.form.trainingPartner.TrainingPartnerSearchForm;
 import com.ir.model.CourseType;
+import com.ir.model.District;
 import com.ir.model.FeedbackForm;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.PostVacancyTrainingCenter;
 import com.ir.model.PostVacancyTrainingCenterBean;
+import com.ir.model.State;
 import com.ir.model.TrainingPartnerTrainingCalender;
 import com.ir.model.Utility;
+import com.ir.service.AdminService;
 import com.ir.service.LoginService;
 import com.ir.service.TraineeService;
 import com.ir.service.TrainingPartnerService;
@@ -56,7 +62,7 @@ public class TrainingPartnerController {
 	@Autowired
 	@Qualifier("loginService")
 	LoginService loginService; 
-
+	
 	@RequestMapping(value="/postVacancyTrainingPartner" , method=RequestMethod.GET)
 	public String postVacancy(@ModelAttribute("postVacancyTrainingCenterForm") PostVacancyTrainingCenterForm postVacancyTrainingCenterForm,HttpSession session,BindingResult result , Model model ){
 		return "postVacancyTrainingPartner";
@@ -397,6 +403,7 @@ public class TrainingPartnerController {
         out.flush();
 	}
 	
+	
 	@RequestMapping(value="/applyForVacancy" , method=RequestMethod.POST)
 	@ResponseBody
 	public void applyForVacancy(@RequestBody PostVacancyTrainingCenterBean postVacancyTrainingCenterBean,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
@@ -436,5 +443,17 @@ public class TrainingPartnerController {
         out.flush();
 	}
 	
+	
+	@RequestMapping(value="/trainingPartnerSearch", method = RequestMethod.GET)
+	public String searchTrainingPartnerSearch(Model model, @ModelAttribute("trainingPartnerSearch")TrainingPartnerSearchForm tpSearchForm, @RequestParam int trainingPartnerId){
+		TrainingPartnerSearchForm formData = new TrainingPartnerSearchForm();
+		List<TrainingPartnerSearch> listTp = trainingPartnerService.getTrainingPartnerDetails(trainingPartnerId);
+		formData.setListTp(listTp);
+		
+		Gson gson = new Gson();
+		String strFormData = gson.toJson(formData);
+		model.addAttribute("trainingPartnerSearch" , strFormData);
+		return "trainingPartnerSearch";
+	}
 	
 }

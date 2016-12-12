@@ -1,11 +1,13 @@
 package com.ir.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.ir.bean.common.IntStringBean;
 import com.ir.dao.AdminDAO;
 import com.ir.form.AdminUserManagementForm;
 import com.ir.form.AssessmentQuestionForm;
@@ -35,6 +37,9 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.State;
+import com.ir.model.admin.TrainerAssessmentSearchForm;
+import com.ir.model.trainee.TraineeAssessmentEvaluation;
+import com.ir.model.trainer.TrainerAssessmentEvaluation;
 import com.ir.service.AdminService;
 
 @Service
@@ -209,5 +214,38 @@ public class AdminServiceImpl implements AdminService {
 		String saveFeedbackMaster = adminDAO.saveFeedbackMaster(feedbackMaster);
 		return saveFeedbackMaster;
 	}
-	// Rishi 
+	
+	@Override
+	public List<IntStringBean> getTrainingCentersByCourse(int courseNameId){
+		List <IntStringBean> listTrainingCenters = adminDAO.getTrainingCentersByCourse(courseNameId);
+		return listTrainingCenters;
+	}
+	@Override
+	public List<TrainerAssessmentSearchForm> searchTrainerForAssessmentValidation(int courseNameId, int trainingPartnerId){
+		List<TrainerAssessmentSearchForm> list = adminDAO.searchTrainerForAssessmentValidation(courseNameId, trainingPartnerId);
+		return list;
+	}
+	@Override
+	public TrainerAssessmentSearchForm evaluateTrainerAssessment(TrainerAssessmentSearchForm trainerAssessmentForm){
+		
+		int eligibility = adminDAO.getElegibilityForAssessment(trainerAssessmentForm.getCourseNameId());
+		int rating = trainerAssessmentForm.getRating();
+		if(eligibility > -1){
+			if(rating >= eligibility){
+				trainerAssessmentForm.setResult("Pass");
+			}else{
+				trainerAssessmentForm.setResult("Fail");
+			}
+		}else{
+			trainerAssessmentForm.setResult("Eligibility yet to declare");
+		}
+		return trainerAssessmentForm;
+		
+	}
+	
+	@Override
+	public int saveTrainerAssessment(TrainerAssessmentEvaluation trainerAssessmentEvaluation){
+		int assessmentId = adminDAO.saveTrainerAssessment(trainerAssessmentEvaluation);
+		return assessmentId;
+	}
 }

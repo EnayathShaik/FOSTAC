@@ -159,10 +159,10 @@ function getTrainingCalender(){
                                                         <li class="style-li error-red">${created}</li>
                                                     </ul>
                                                 </div>
-<cf:select path="courseType" class="form-control" onchange="getCourseName(this.value);">
-<cf:option value="0" label="Select Course Type"></cf:option>
-<cf:options items="${courseTypeList}" itemValue="CourseTypeId" itemLabel="CourseType"/>
-</cf:select>
+												<cf:select path="courseType" class="form-control" onchange="getCourseName(this.value);">
+													<cf:option value="0" label="Select Course Type"></cf:option>
+													<cf:options items="${courseTypeList}" itemValue="CourseTypeId" itemLabel="CourseType"/>
+												</cf:select>
                                             </div>
                                             
                                             <div class="form-group">
@@ -172,9 +172,9 @@ function getTrainingCalender(){
                                                         <li class="style-li error-red"></li>
                                                     </ul>
                                                 </div>
-<cf:select path="courseName" class="form-control">
-<cf:option value="0" label="Select Course Name" />
-</cf:select>
+													<cf:select path="courseName" class="form-control">
+														<cf:option value="0" label="Select Course Name" />
+													</cf:select>
                                             </div>
                                             
                                             <div class="form-group">

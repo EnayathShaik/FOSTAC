@@ -16,6 +16,7 @@ import com.ir.bean.common.StringStringBean;
 import com.ir.dao.TrainingPartnerDao;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.PostVacancyTrainingCenterForm;
+import com.ir.form.trainingPartner.TrainingPartnerSearch;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.PersonalInformationTrainingPartner;
@@ -429,6 +430,33 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			tx.commit();
 			session.close();
 		
+	}
+	@Override
+	public List<TrainingPartnerSearch> getTrainingPartnerDetails(int trainingPartnerId){
+		List<TrainingPartnerSearch> listTp = new ArrayList<TrainingPartnerSearch>();
+		Session session = sessionFactory.openSession();
+		String sql = "select  tp.trainingpartnername, pitp.trainingcentrename, "
+				+ "concat(pitp.trainingpartnerpermanentline1, ', ', pitp.trainingpartnerpermanentline2, ',Ph-', trainingpartnerpermanentmobile, ', ', trainingpartnerpermanentemail) as details, "
+				+ "cn.coursename "
+				+ "from managetrainingpartner tp "
+				+ "inner join personalinformationtrainingpartner pitp on pitp.trainingpartnername = tp.managetrainingpartnerid "
+				+ "inner join courseenrolled ce on ce.logindetails = pitp.logindetails "
+				+ "inner join coursename cn on cn.coursenameid = ce.coursenameid "
+				+ "where tp.managetrainingpartnerid = "+ trainingPartnerId+ ""
+						+ " group by tp.trainingpartnername, pitp.trainingcentrename,details, cn.coursename";
+		Query query = session.createSQLQuery(sql);
+		List<Object[]> list = query.list();
+		for(int index=0;index<list.size();index++){
+			TrainingPartnerSearch tpData = new TrainingPartnerSearch();
+			Object[] listObj=list.get(index);
+			tpData.setTrainingPartnerName(listObj[0].toString());
+			tpData.setTrainingCenterName(listObj[1].toString());
+			tpData.setDetails(listObj[2].toString());
+			tpData.setCourseName(listObj[3].toString());
+			listTp.add(tpData);
+		}
+		session.close();
+		return listTp;
 	}
 
 }

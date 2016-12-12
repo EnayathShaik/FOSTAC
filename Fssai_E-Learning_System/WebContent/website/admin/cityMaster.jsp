@@ -246,7 +246,7 @@ function validateFields() {
                         <li> <a href="trainingCalendarForm.fssai">Training Calendar</a> </li>
                         <li> <a href="assessmentSchedule.fssai">Assessment Schedule</a> </li>
                         <li> <a href="manageAssessmentQuestions.fssai">Assessment Questions</a> </li>
-                        <li> <a href="updateTrainerAssessment.fssai">Update Assessment</a> </li>
+                        <li> <a href="updateTrainerAssessmentForm.fssai">Update Assessment</a> </li>
                     </ul>
                 </div>
                 <!-- /#sidebar-wrapper -->
@@ -313,10 +313,10 @@ function validateFields() {
                                                             </li>
                                                         </ul>
                                                     </div>
-<cf:select path="districtId" class="form-control" >
-<cf:option value="0" label="Select District" />
-<%-- <cf:options items="${districtList}" itemValue="districtId" itemLabel="districtName"/> --%>
-</cf:select>
+											<cf:select path="districtId" class="form-control" >
+											<cf:option value="0" label="Select District" />
+											<%-- <cf:options items="${districtList}" itemValue="districtId" itemLabel="districtName"/> --%>
+											</cf:select>
                                                 </div>
                                                <div class="form-group">
                                                     <div>

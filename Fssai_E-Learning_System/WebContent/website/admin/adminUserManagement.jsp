@@ -109,7 +109,7 @@ function checkname()
                         <li> <a href="trainingCalendarForm.fssai">Training Calendar</a> </li>
                         <li> <a href="assessmentSchedule.fssai">Update Assessor</a> </li>
                         <li> <a href="manageAssessmentQuestions.fssai">Assessment Questions</a> </li>
-                        <li> <a href="updateTrainerAssessment.fssai">TOT Assessment</a> </li><li> <a href="feedback-master.html">Feedback Master</a> </li>
+                        <li> <a href="updateTrainerAssessmentForm.fssai">TOT Assessment</a> </li><li> <a href="feedback-master.html">Feedback Master</a> </li>
                     </ul>
                 </div>
                 <!-- /#sidebar-wrapper -->

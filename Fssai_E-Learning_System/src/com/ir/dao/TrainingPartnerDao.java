@@ -6,6 +6,7 @@ import com.ir.bean.common.IntStringBean;
 import com.ir.bean.common.StringStringBean;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.PostVacancyTrainingCenterForm;
+import com.ir.form.trainingPartner.TrainingPartnerSearch;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.PersonalInformationTrainingPartner;
@@ -42,6 +43,6 @@ public interface TrainingPartnerDao {
 	public PostVacancyTrainingCenterBean getApplicationStatusBean(String loginId,int coursename, int cousertype);
 	public void updateUpcomingTrainingsStatus(int id);
 	public List<PostVacancyTrainingCenterBean> getTrainingCalenderList(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
-
+	public List<TrainingPartnerSearch> getTrainingPartnerDetails(int trainingPartnerId);
 
 }
