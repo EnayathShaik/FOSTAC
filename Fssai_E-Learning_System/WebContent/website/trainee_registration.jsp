@@ -17,7 +17,6 @@
     	//alert("validate");
     	
     	if(document.getElementById("userId").value=="") {
-    		//alert("IN Fname");
     		document.getElementById('userId').style.borderColor = "red";
 	    	document.getElementById("userIdError").style.display = 'block';
 	    	document.getElementById("userId").focus();
@@ -26,9 +25,10 @@
     	 else{
     	    document.getElementById('userId').style.borderColor = "#ccc";
     	    document.getElementById("userIdError").style.display = 'none';
-    	    }  
+    	}  
     	    
  		var x=document.getElementById("AadharNumber").value;
+ 		alert(x)
     	if(x =="" || x.length<12 ) {
     		document.getElementById('AadharNumber').style.borderColor = "red";
 	    	document.getElementById("AadharNumberError").style.display = 'block';
@@ -37,8 +37,8 @@
     	}else{
     	    document.getElementById('AadharNumber').style.borderColor = "#ccc";
     	    document.getElementById("AadharNumberError").style.display = 'none';
-    	    }
-    	
+    	}
+    	alert(document.getElementById("dob").value);
     	if(document.getElementById("dob").value=="") {
     		//alert("IN Fname");
     		document.getElementById('dob').style.borderColor = "red";
@@ -49,18 +49,20 @@
     	else{
     	    document.getElementById('dob').style.borderColor = "#ccc";
     	    document.getElementById("dobError").style.display = 'none';
-    	    }    
-    		 if(document.getElementById("Title").selectedIndex == 0) {
-        		//alert("IN Fname");
-        		document.getElementById('Title').style.borderColor = "red";
-    	    	document.getElementById("TitleError").style.display = 'block';
-    	    	document.getElementById("Title").focus();
-    	    	return false;
-        	}
-        	 else{
-         	    document.getElementById('Title').style.borderColor = "#ccc";
-         	    document.getElementById("TitleError").style.display = 'none';
-         	    }
+    	} 
+    	
+    	alert(document.getElementById("Title").value);
+    	if(document.getElementById("Title").value == 0) {
+        		alert("IN Fname");
+        	document.getElementById('Title').style.borderColor = "red";
+    	   	document.getElementById("TitleError").style.display = 'block';
+    	   	document.getElementById("Title").focus();
+    	   	return false;
+        }
+        else{
+       	    document.getElementById('Title').style.borderColor = "#ccc";
+       	    document.getElementById("TitleError").style.display = 'none';
+        }
    
     	 if(document.getElementById("firstName").value=="") {
      		//alert("IN Fname");
@@ -71,7 +73,7 @@
      	}else{
      	    document.getElementById('firstName').style.borderColor = "#ccc";
      	    document.getElementById("firstNameError").style.display = 'none';
-     	    }
+   	    }
     	 	
     	 if(document.getElementById("LastName").value=="") {
       		//alert("IN Lname");
@@ -79,10 +81,11 @@
   	    	document.getElementById("LastNameError").style.display = 'block';
   	    	document.getElementById("LastName").focus(); 
   	    	return false;
-      	}	 else{
+      	}
+    	else{
       	    document.getElementById('LastName').style.borderColor = "#ccc";
       	    document.getElementById("LastNameError").style.display = 'none';
-      	    } 
+        } 
      	 	
      		
      	 if(document.getElementById("FatherName").value=="") {
@@ -95,7 +98,7 @@
      	else{
      	    document.getElementById('FatherName').style.borderColor = "#ccc";
      	    document.getElementById("FatherNameError").style.display = 'none';
-     	    } 
+   	    } 
      	
      	
   	
@@ -110,21 +113,21 @@
      	else{
      	    document.getElementById('correspondenceAddress1').style.borderColor = "#ccc";
      	    document.getElementById("correspondenceAddress1Error").style.display = 'none';
-     	    } 
+   	    } 
   	    
-          if(document.getElementById("correspondenceAddress2").value=="") {
+        if(document.getElementById("correspondenceAddress2").value=="") {
    		//alert("IN Fname");
-   		document.getElementById('correspondenceAddress2').style.borderColor = "red";
+	   		document.getElementById('correspondenceAddress2').style.borderColor = "red";
 	    	document.getElementById("correspondenceAddress2Error").style.display = 'block';
 	    	document.getElementById("correspondenceAddress2").focus();
 	    	return false;
-   	}
-   	else{
-   	    document.getElementById('correspondenceAddress2').style.borderColor = "#ccc";
-   	    document.getElementById("correspondenceAddress2Error").style.display = 'none';
    	    }
+   		else{
+   	  	    document.getElementById('correspondenceAddress2').style.borderColor = "#ccc";
+   	    	document.getElementById("correspondenceAddress2Error").style.display = 'none';
+        }
  	
-  		  if(document.getElementById("correspondenceState").selectedIndex == 0) {
+  	   if(document.getElementById("correspondenceState").selectedIndex == 0) {
      		//alert("IN Fname");
      		document.getElementById('correspondenceState').style.borderColor = "red";
  	    	document.getElementById("correspondenceStateError").style.display = 'block';
@@ -134,26 +137,26 @@
      	else{
      	    document.getElementById('correspondenceState').style.borderColor = "#ccc";
      	    document.getElementById("correspondenceStateError").style.display = 'none';
-     	    }
+        }
   		  
-  		  var x =document.getElementById('Email').value;
-  		  if(x!=''){
-         var atpos = x.indexOf("@");
-         var dotpos = x.lastIndexOf(".");
-           if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
+  		var x =document.getElementById('Email').value;
+  		if(x!=''){
+        var atpos = x.indexOf("@");
+        var dotpos = x.lastIndexOf(".");
+        if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
           	    //  //alert("Not a valid e-mail address");
-        document.getElementById('Email').style.borderColor = "red";
-       	document.getElementById("EmailError").style.display = 'block';
-       	document.getElementById("Email").focus();
-          	return false;
+	        document.getElementById('Email').style.borderColor = "red";
+	       	document.getElementById("EmailError").style.display = 'block';
+	       	document.getElementById("Email").focus();
+         	return false;
             	} 
-  		  }
-          	else{
+  		 }
+         else{
            document.getElementById('Email').style.borderColor = "#ccc";
            document.getElementById("EmailError").style.display = 'none'; 
-          	}  	   
+       	}  	   
    	  
-             if(document.getElementById("correspondenceDistrict").selectedIndex == 0) {
+        if(document.getElementById("correspondenceDistrict").selectedIndex == 0) {
      		//alert("IN Fname");
      		document.getElementById('correspondenceDistrict').style.borderColor = "red";
  	    	document.getElementById("correspondenceDistrictError").style.display = 'block';
@@ -163,21 +166,21 @@
      	 else{
       	    document.getElementById('correspondenceDistrict').style.borderColor = "#ccc";
       	    document.getElementById("correspondenceDistrictError").style.display = 'none';
-      	    }
+        }
 
-            	  if(document.getElementById("correspondenceCity").selectedIndex == 0) {
+        if(document.getElementById("correspondenceCity").selectedIndex == 0) {
              		//alert("IN Fname");
-             		document.getElementById('correspondenceCity').style.borderColor = "red";
-         	    	document.getElementById("correspondenceCityError").style.display = 'block';
-         	    	document.getElementById("correspondenceCity").focus();
-         	    	return false;
-             	}
-             	 else{
-              	    document.getElementById('correspondenceCity').style.borderColor = "#ccc";
-              	    document.getElementById("correspondenceCityError").style.display = 'none';
-              	    } 
+            document.getElementById('correspondenceCity').style.borderColor = "red";
+         	document.getElementById("correspondenceCityError").style.display = 'block';
+         	document.getElementById("correspondenceCity").focus();
+         	return false;
+        }
+        else{
+            document.getElementById('correspondenceCity').style.borderColor = "#ccc";
+            document.getElementById("correspondenceCityError").style.display = 'none';
+        } 
               	     
-            	  var x=document.getElementById("correspondencePincode").value;
+        var x=document.getElementById("correspondencePincode").value;
             	
                  	if( x.length < 6 ) 
                      	    { 
@@ -509,32 +512,35 @@ function ValidCaptcha(){
 		else if(designation == 0 || designation == "" || designation.length <= 0){
 			  alert('Please Select Designation.')
 			  status = false;
-			}
-		else if(bussAdd1 == "" || bussAdd1.length <= 0){
-			  alert('Please Enter Buss Add1.')
-			  status = false;
-			}
-		else if(state == 0 || state == "" || state.length <= 0){
-			  alert('Please Select State.')
-			  status = false;
-			}
-		else if(district == 0 || district == "" || district.length <= 0){
-			  alert('Please Select District')
-			  status = false;
-			}
-		else if(bussAdd2 == "" || bussAdd2.length <= 0){
-			  alert('Please Enter Buss Add2.')
-			  status = false;
-			}
-		else if(city == 0 || city == "" || city.length <= 0){
-			  alert('Please Select City.')
-			  status = false;
-			}
-		
-		else if(pincode == "" || pincode.length <= 0){
-			  alert('Please Enter Pincode')
-			  status = false;
-			}
+		}
+		if(document.getElementById('checkCompany').checked==false){
+			if(bussAdd1 == "" || bussAdd1.length <= 0){
+				  alert('Please Enter Buss Add1.')
+				  status = false;
+				}
+			else if(state == 0 || state == "" || state.length <= 0){
+				  alert('Please Select State.')
+				  status = false;
+				}
+			else if(district == 0 || district == "" || district.length <= 0){
+				  alert('Please Select District')
+				  status = false;
+				}
+			else if(bussAdd2 == "" || bussAdd2.length <= 0){
+				  alert('Please Enter Buss Add2.')
+				  status = false;
+				}
+			else if(city == 0 || city == "" || city.length <= 0){
+				  alert('Please Select City.')
+				  status = false;
+				}
+			
+			else if(pincode == "" || pincode.length <= 0){
+				  alert('Please Enter Pincode')
+				  status = false;
+				}
+			
+		}
 		
 		if(!status){
 			return false;
@@ -585,8 +591,7 @@ function getDistrict(val)
 	  	 
 	      $.each(mainData1 , function(i , obj)
 	  		{
-	  		
-	  				$('#correspondenceDistrict').append('<option value='+obj.districtId+' label='+obj.districtName+' />');		
+  				$('#correspondenceDistrict').append('<option value='+obj.districtId+' >'+obj.districtName+'</option>');	
 	  		});
 	      }
 	      });     
@@ -604,8 +609,7 @@ function getCity(val)
 	      $('#correspondenceCity').append('<option value="0" label="Select City" />');
 	  	  $.each(mainData1 , function(i , obj)
 	  		{
-	  		
-	  				$('#correspondenceCity').append('<option value='+obj.cityId+' label='+obj.cityName+' />');		
+	  		$('#correspondenceCity').append('<option value='+obj.cityId+' >'+obj.cityName+'</option>');	
 	  		});
 	      }
 	      });     
@@ -628,8 +632,7 @@ function getDistrict1(val)
 	  	 
 	      $.each(mainData1 , function(i , obj)
 	  		{
-	  		
-	  				$('#residentialDistrict').append('<option value='+obj.districtId+' label='+obj.districtName+' />');		
+	    	 	 $('#residentialDistrict').append('<option value='+obj.districtId+' >'+obj.districtName+'</option>');
 	  		});
 	      }
 	      });     
@@ -647,8 +650,7 @@ function getCity1(val)
 	      $('#resCity').append('<option value="0" label="Select City" />');
 	  	  $.each(mainData1 , function(i , obj)
 	  		{
-	  		
-	  				$('#resCity').append('<option value='+obj.cityId+' label='+obj.cityName+' />');		
+	  		$('#resCity').append('<option value='+obj.cityId+' >'+obj.cityName+'</option>');
 	  		});
 	      }
 	      });     
@@ -671,8 +673,7 @@ function getDistrict2(val)
 	  	 
 	      $.each(mainData1 , function(i , obj)
 	  		{
-	  		
-	  				$('#bussDistrict').append('<option value='+obj.districtId+' label='+obj.districtName+' />');		
+	    		  $('#bussDistrict').append('<option value='+obj.districtId+' >'+obj.districtName+'</option>');
 	  		});
 	      }
 	      });     
@@ -690,8 +691,7 @@ function getCity2(val)
 	      $('#bussCity').append('<option value="0" label="Select City" />');
 	  	  $.each(mainData1 , function(i , obj)
 	  		{
-	  		
-	  				$('#bussCity').append('<option value='+obj.cityId+' label='+obj.cityName+' />');		
+	  		$('#bussCity').append('<option value='+obj.cityId+' >'+obj.cityName+'</option>');
 	  		});
 	      }
 	      });     
@@ -926,14 +926,14 @@ function ck_aadhar() {
 										<li class="style-li"><strong><cs:message
 													code="lbl.Trainee.AadharNumber" /></strong></li>
 										<li class="style-li error-red"><span id="aadhar_status"><label
-											id=AadharNumberError class="error visibility">* Enter
-												your aadharNumber </label> <cf:errors path="AadharNumber"
-												cssClass="error" /></li>
+												id=AadharNumberError class="error visibility">*
+													Enter your aadharNumber </label> <cf:errors path="AadharNumber"
+													cssClass="error" /></li>
 									</ul>
 								</div>
 								<cf:input path="AadharNumber" class="form-control"
-									maxlength="12" placeholder="Aadhar Number"  onblur="ck_aadhar();"
-									value="${aadharDetails.AadharNumber}"
+									maxlength="12" placeholder="Aadhar Number"
+									onblur="ck_aadhar();" value="${aadharDetails.AadharNumber}"
 									onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" />
 							</div>
 
@@ -999,8 +999,9 @@ function ck_aadhar() {
 												path="firstName" cssClass="error" /></li>
 									</ul>
 								</div>
-								<cf:input id="traineeFirstName" onkeyup="allLetter(this.id,this.value);" path="firstName" maxlength="50" class="form-control"
-									placeholder="First Name" />
+								<cf:input id="traineeFirstName"
+									onkeyup="allLetter(this.id,this.value);" path="firstName"
+									maxlength="50" class="form-control" placeholder="First Name" />
 							</div>
 
 							<div class="form-group">
@@ -1014,8 +1015,10 @@ function ck_aadhar() {
 												cssClass="error" /></li>
 									</ul>
 								</div>
-								<cf:input path="MiddleName" onkeyup="allLetter(this.id,this.value);" maxlength="50" class="form-control"
-									name="MiddleName" placeholder="Middle Name" />
+								<cf:input path="MiddleName"
+									onkeyup="allLetter(this.id,this.value);" maxlength="50"
+									class="form-control" name="MiddleName"
+									placeholder="Middle Name" />
 							</div>
 
 							<div class="form-group">
@@ -1028,8 +1031,9 @@ function ck_aadhar() {
 												path="LastName" cssClass="error" /></li>
 									</ul>
 								</div>
-								<cf:input path="LastName" onkeyup="allLetter(this.id,this.value);" maxlength="50" class="form-control"
-									placeholder="Last Name" />
+								<cf:input path="LastName"
+									onkeyup="allLetter(this.id,this.value);" maxlength="50"
+									class="form-control" placeholder="Last Name" />
 							</div>
 							<div class="form-group">
 								<div>
@@ -1042,8 +1046,9 @@ function ck_aadhar() {
 												cssClass="error" /></li>
 									</ul>
 								</div>
-								<cf:input path="FatherName" onkeyup="allLetter(this.id,this.value);" maxlength="100" class="form-control"
-									placeholder="Father Name" />
+								<cf:input path="FatherName"
+									onkeyup="allLetter(this.id,this.value);" maxlength="100"
+									class="form-control" placeholder="Father Name" />
 							</div>
 						</div>
 					</fieldset>

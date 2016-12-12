@@ -331,9 +331,9 @@ function getStateUpdate(psid , pdid , pcid)
 	      $.each(mainData2 , function(i , obj)
 	  		{	
 	    	  if(psid == obj.stateId){
-	    		  $('#TrainingCenterPermanentState').append('<option value='+obj.stateId+' label='+obj.stateName+' selected="true" />');	
+	    		  $('#TrainingCenterPermanentState').append('<option selected="true" value='+obj.stateId+'>'+obj.stateName+'</option>');	
 	    	  }else{
-	    		  $('#TrainingCenterPermanentState').append('<option value='+obj.stateId+' label='+obj.stateName+' />');	
+	    		  $('#TrainingCenterPermanentState').append('<option value='+obj.stateId+'>'+obj.stateName+'</option>');	
 	    	  }	
 	  		});
 	      }
@@ -355,9 +355,9 @@ function getDistrictUpdate(ss , dd , cc)
 	      $.each(mainData1 , function(i , obj)
 	  		{
 	    	  if(dd == obj.districtId){
-	    		  $('#TrainingCenterPermanentDistrict').append('<option value='+obj.districtId+' label='+obj.districtName+' selected="true"/>');
+	    		  $('#TrainingCenterPermanentDistrict').append('<option  selected="true" value='+obj.districtId+'>'+obj.districtName+'</option>');
 	    	  }else{
-	    		  $('#TrainingCenterPermanentDistrict').append('<option value='+obj.districtId+' label='+obj.districtName+' />');
+	    		  $('#TrainingCenterPermanentDistrict').append('<option value='+obj.districtId+'>'+obj.districtName+'</option>');
 	    	  }	
 	  		});
 	      }
@@ -377,9 +377,9 @@ function getCityUpdate(dd , cc)
 	      $.each(mainData1 , function(i ,obj)
 	  		{
 	    	  if(cc == obj.cityId){
-	    		  $('#TrainingCenterPermanentCity').append('<option value='+obj.cityId+' label='+obj.cityName+' selected="true"/>');
+	    		  $('#TrainingCenterPermanentCity').append('<option selected="true" value='+obj.cityId+'>'+obj.cityName+'</option>');
 	    	  }else{
-	    		  $('#TrainingCenterPermanentCity').append('<option value='+obj.cityId+' label='+obj.cityName+' />');
+	    		  $('#TrainingCenterPermanentCity').append('<option value='+obj.cityId+'>'+obj.cityName+'</option>');
 	    	  }	
 	  		});
 	      }
@@ -420,9 +420,9 @@ function getCityUpdate(dd , cc)
 		      $.each(mainData2 , function(i , obj)
 		  		{	
 		    	  if(csid == obj.stateId){
-		    		  $('#TrainingCenterCorrespondenceState').append('<option value='+obj.stateId+' label='+obj.stateName+' selected="true" />');	
+		    		  $('#TrainingCenterCorrespondenceState').append('<option selected="true" value='+obj.stateId+'>'+obj.stateName+'</option>');	
 		    	  }else{
-		    		  $('#TrainingCenterCorrespondenceState').append('<option value='+obj.stateId+' label='+obj.stateName+' />');	
+		    		  $('#TrainingCenterCorrespondenceState').append('<option value='+obj.stateId+'>'+obj.stateName+'</option>');	
 		    	  }	
 		  		});
 		      }
@@ -449,11 +449,11 @@ function getCityUpdate(dd , cc)
 		    	 // $("#TrainingCenterCorrespondenceDistrict").prop('selectedIndex', cdid);
 		    	  if(cdid == obj.districtId){
 		    		  //TrainingCenterCorrespondenceDistrict.options[0].text = cdname;
-		    		  $('#TrainingCenterCorrespondenceDistrict').append('<option value='+obj.districtId+' label='+obj.districtName+' selected="true"/>');
+		    		  $('#TrainingCenterCorrespondenceDistrict').append('<option selected="true" value='+obj.districtId+'>'+obj.districtName+'</option>');
 		    		 alert("cd is "+cdid);
 		    		  
 		    	  }else{
-		    		  $('#TrainingCenterCorrespondenceDistrict').append('<option value='+obj.districtId+' label='+obj.districtName+' />');
+		    		  $('#TrainingCenterCorrespondenceDistrict').append('<option value='+obj.districtId+'>'+obj.districtName+'</option>');
 		    	  }	
 		  		});
 		      }
@@ -473,9 +473,9 @@ function getCityUpdate(dd , cc)
 		      $.each(mainData1 , function(i ,obj)
 		  		{
 		    	  if(ccid == obj.cityId){
-		    		  $('#TrainingCenterCorrespondenceCity').append('<option value='+obj.cityId+' label='+obj.cityName+' selected="true"/>');
+		    		  $('#TrainingCenterCorrespondenceCity').append('<option selected="true" value='+obj.cityId+'>'+obj.cityName+'</option>');
 		    	  }else{
-		    		  $('#TrainingCenterCorrespondenceCity').append('<option value='+obj.cityId+' label='+obj.cityName+' />');
+		    		  $('#TrainingCenterCorrespondenceCity').append('<option value='+obj.cityId+'>'+obj.cityName+'</option>');
 		    	  }	
 		  		});
 		      }
@@ -510,7 +510,7 @@ function getCityUpdate(dd , cc)
     	      $.each(mainData1 , function(i , obj)
     	  		{
     	  		
-    	  				$('#TrainingCenterCorrespondenceDistrict').append('<option value='+obj.districtId+' label='+obj.districtName+' />');		
+    	  				$('#TrainingCenterCorrespondenceDistrict').append('<option value='+obj.districtId+'>'+obj.districtName+'</option>');		
     	  		});
     	      }
     	      });     
@@ -534,7 +534,7 @@ function getCityUpdate(dd , cc)
     	      $.each(mainData1 , function(i , obj)
     	  		{
     	  		
-    	  				$('#TrainingCenterPermanentDistrict').append('<option value='+obj.districtId+' label='+obj.districtName+' />');		
+    	  				$('#TrainingCenterPermanentDistrict').append('<option value='+obj.districtId+'>'+obj.districtName+'</option>');		
     	  		});
     	      }
     	      });     
@@ -555,7 +555,7 @@ function getCityUpdate(dd , cc)
     	  	  $.each(mainData1 , function(i , obj)
     	  		{
     	  		
-    	  				$('#TrainingCenterCorrespondenceCity').append('<option value='+obj.cityId+' label='+obj.cityName+' />');		
+    	  				$('#TrainingCenterCorrespondenceCity').append('<option value='+obj.cityId+'>'+obj.cityName+'</option>');		
     	  		});
     	      }
     	      });     
@@ -573,7 +573,7 @@ function getCityUpdate(dd , cc)
     	  	  $.each(mainData1 , function(i , obj)
     	  		{
     	  		
-    	  				$('#TrainingCenterPermanentCity').append('<option value='+obj.cityId+' label='+obj.cityName+' />');		
+    	  				$('#TrainingCenterPermanentCity').append('<option value='+obj.cityId+'>'+obj.cityName+'</option>');		
     	  		});
     	      }
     	      });     

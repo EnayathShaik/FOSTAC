@@ -167,6 +167,16 @@
     <url-pattern>/checkaadhartrainer.jspp</url-pattern>
   </servlet-mapping>
   
+  
+   <servlet>
+    <servlet-name>checkaadharassessor </servlet-name>
+    <servlet-class>com.ir.servlet.CheckAadharAccessor</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkaadharassessor</servlet-name>
+    <url-pattern>/checkaadharassessor.jspp</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>manageCourseContent</servlet-name>
     <servlet-class>com.ir.servlet.ManageCourseContent</servlet-class>

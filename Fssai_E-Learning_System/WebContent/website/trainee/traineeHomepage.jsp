@@ -48,7 +48,7 @@
                         <p>
 <ct:choose>
 <ct:when test="${loginUser != null}">
-<a href="basic.fssai">Basic</a> | <a href="advanceTrainee.fssai">Advance</a> | <a href="special.fssai">Special</a> | <a href="../login-trainer/login.html">TOT</a>
+<a href="basic.fssai">Basic</a> | <a href="advanceTrainee.fssai">Advance</a> | <a href="specialTrainee.fssai">Special</a> | <a href="../login-trainer/login.html">TOT</a>
 </ct:when>
 <ct:otherwise>
 Basic | Advance | Special |  TOT

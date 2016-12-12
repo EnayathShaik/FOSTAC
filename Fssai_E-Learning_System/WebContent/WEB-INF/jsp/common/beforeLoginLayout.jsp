@@ -86,6 +86,8 @@
                
             });
         	
+      		
+      		
             $("#news").owlCarousel({
 
                 navigation: false, // Show next and prev buttons

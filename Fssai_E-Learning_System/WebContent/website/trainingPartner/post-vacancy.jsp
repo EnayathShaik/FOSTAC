@@ -50,7 +50,7 @@ function validateFields(){
 		document.getElementById('courseName').style.borderColor = "#ccc";
 	    document.getElementById("courseNameError").style.display = 'none';
 	}
-	if(trainingDate == 0){
+	/* if(trainingDate == 0){
 		document.getElementById('trainingDate').style.borderColor = "red";
     	document.getElementById("trainingDateError").style.display = 'block';
     	document.getElementById("trainingDate").focus();
@@ -58,7 +58,7 @@ function validateFields(){
 	}else{
 		document.getElementById('trainingDate').style.borderColor = "#ccc";
 	    document.getElementById("trainingDateError").style.display = 'none';
-	}
+	} */
 	if(requiredExp <= 0){
 		document.getElementById('requiredExp').style.borderColor = "red";
     	document.getElementById("requiredExpError").style.display = 'block';
@@ -215,7 +215,7 @@ function searchVacancy(){
                         <div class="form-group">
                           <div>
                             <ul class="lab-no">
-                              <li class="style-li"><strong>Training Date:<span style="color:red;">*</span></strong></li>
+                              <li class="style-li"><strong>Training Date:</strong></li>
                               <li class="style-li error-red">
                                <label id="trainingDateError" class="error visibility">enter training date</label>
                                <cf:errors path="trainingDate" cssclass="error"/>

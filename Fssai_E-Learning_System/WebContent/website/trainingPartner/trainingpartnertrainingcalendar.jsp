@@ -2,6 +2,7 @@
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
+
 function getCourseName(val){
 	 $('#selCourseName option').remove();
 	$.ajax({
@@ -224,7 +225,7 @@ return result;
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
-                                                        <input type="date" id="trainingdate" class="form-control">
+                                                        <input type="text" id="dateP" class="form-control">
                                                     </div>
                                                     <div class="form-group">
                                                         <div>
@@ -236,7 +237,7 @@ return result;
                                                         <input type="time" id="trainingtime" class="form-control">
                                                     </div>
                                                     <input type="submit" style="margin-top:20px;"  class="btn login-btn pull-right show-details-vacancy collapsed"  data-target="#show-result" aria-expanded="false" value="Create">
-                                                     <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails();return false">Show Details</button>
+                                                     <button style="margin-top:20px; margin-right: 5px;"      class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails();return false">Show Details</button>
                                                 </div>
                                                
                                             </div>
