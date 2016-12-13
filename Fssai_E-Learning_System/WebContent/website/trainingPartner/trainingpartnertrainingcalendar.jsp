@@ -225,7 +225,7 @@ return result;
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
-                                                        <input type="text" id="dateP" class="form-control">
+                                                        <input type="text" id="dateF" class="form-control">
                                                     </div>
                                                     <div class="form-group">
                                                         <div>

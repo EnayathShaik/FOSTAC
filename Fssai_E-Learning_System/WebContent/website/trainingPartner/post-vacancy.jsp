@@ -68,7 +68,7 @@ function validateFields(){
 		document.getElementById('requiredExp').style.borderColor = "#ccc";
 	    document.getElementById("requiredExpError").style.display = 'none';
 	}
-	if(noOfVacancy <= 1){
+	if(noOfVacancy <= 0){
 		document.getElementById('noOfVacancy').style.borderColor = "red";
     	document.getElementById("noOfVacancyError").style.display = 'block';
     	document.getElementById("noOfVacancy").focus();
@@ -237,7 +237,7 @@ function searchVacancy(){
                                </li>
                             </ul>
                           </div>
-                          <cf:input path="requiredExp"  class="form-control" />
+                          <cf:input path="requiredExp" maxlength="2" class="form-control" />
                         </div>
                         <div class="form-group">
                           <div>
@@ -252,7 +252,7 @@ function searchVacancy(){
                             </ul>
                           </div>
                            <cf:input path="loginId" type="hidden" class="form-control" value="${loginUserS.loginDetails.loginId }" />
-                         <cf:input path="noOfVacancy" type="text" class="form-control" />
+                         <cf:input path="noOfVacancy" type="text" maxlength="3" class="form-control" />
                         </div>
                       </div>
                       <input type="submit" style="margin-top:20px;"  class="btn login-btn pull-right show-details-vacancy collapsed"  data-target="#show-result" aria-expanded="false" value="Create">

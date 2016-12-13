@@ -36,5 +36,32 @@
 		
     	<div style="clear:both; float:left;"><tiles:insertAttribute name="footer" /></div>
 </body>
+
+<script src="website/js/jquery.js"></script> 
+<script src="website/js/bootstrap.min.js"></script> 
+<script src="website/js/jquery.isotope.min.js"></script> 
+<script src="website/js/main.js"></script> 
+<script src="website/js/wow.min.js"></script>
 <script src="website/js/validation.js"></script>
+
+<script src="website/js/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#accordion").accordion();
+        });
+    </script> 
+<script src="website/js/owl.carousel.js"></script> 
+<script src="website/js/monthly.js"></script> 
+<script src="website/js/jquery.swipebox.js"></script> 
+<script type="text/javascript">
+$('#dateF').datepicker( {
+	defaultDate: new Date(),
+	minDate: 0,
+    changeMonth: true,
+    changeYear: true,
+    showButtonPanel: true,
+   
+});
+</script>
+
 </html>
