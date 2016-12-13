@@ -38,8 +38,8 @@ public class TraineeServiceImpl implements TraineeService {
 		return courseTrainee;
 	}
 @Override
-public CourseName getCourseName(int profileId) {
-	CourseName courseName = traineeDAO.getCourseName(profileId);
+public CourseName getCourseName(int loginId) {
+	CourseName courseName = traineeDAO.getCourseName(loginId);
 	return courseName;
 }
 	@Override

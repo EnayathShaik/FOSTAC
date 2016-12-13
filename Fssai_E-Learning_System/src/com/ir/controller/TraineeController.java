@@ -225,8 +225,17 @@ public class TraineeController {
 	}
 	@RequestMapping(value="/generateAdmitCardtrainee" , method=RequestMethod.GET)
 	public String generateAdmitCardtrainee(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm ,BindingResult bindingResult, HttpSession session , Model model ){
-		CourseName courseName=traineeService.getCourseName(Profiles.TRAINEE.value());
-		model.addAttribute("courseName", courseName);
+		try{
+			int loginId = (int) session.getAttribute("loginIdUnique");
+			CourseName courseName=traineeService.getCourseName(loginId);
+			model.addAttribute("courseName", courseName);
+		}catch(NullPointerException npe){
+			System.out.println("1 - Exception while fetching card details generating admit card course: "+npe.getMessage());
+		}catch(NumberFormatException nfe){
+			System.out.println("2 - Exception while fetching card details generating admit card course: "+nfe.getMessage());
+		}catch(Exception e){
+			System.out.println("3- Exception while fetching card details generating admit card course: "+e.getMessage());
+		}
 		return "generateAdmitCardtrainee";
 	}
 	

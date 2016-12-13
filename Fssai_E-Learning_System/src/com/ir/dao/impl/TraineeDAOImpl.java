@@ -1,5 +1,6 @@
 package com.ir.dao.impl;
 
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -190,10 +191,14 @@ public class TraineeDAOImpl implements  TraineeDAO{
 		
 	}	
 	@Override
-	public CourseName getCourseName(int profileId) {
+	public CourseName getCourseName(int loginId) {
 		CourseName courseName= new CourseName();
 		Session session = sessionFactory.openSession();
-		String sql="select c.coursename,c.coursenameid,c.courseduration from coursename c,courseenrolleduser ceu where c.coursenameid=ceu.courseenrolleduserid and ceu.profileid="+profileId;
+		String sql="select cn.coursename, ce.coursenameid, cn.courseduration "
+				+ "from courseenrolled ce "
+				+ "inner join coursename cn on cn.coursenameid = ce.coursenameid "
+				+ "where ce.logindetails = "+loginId; 
+;
 		Query query = session.createSQLQuery(sql);
 		List<Object[]> courseNameList =(List<Object[]>)query.list();
 		session.close();
@@ -518,11 +523,23 @@ public class TraineeDAOImpl implements  TraineeDAO{
 			Transaction tx = session.beginTransaction();
 			AdmitCardForm admitcard = new AdmitCardForm();
 			Query query = session.createSQLQuery(str_query);
-			List records = query.list();
+			//List records = query.list();
+			List<Object[]> records =(List<Object[]>) query.list();
 			session.close();
 			try{
 			if(records.size() > 0){
-				admitcard = (AdmitCardForm)records.get(0);
+				
+				Object[] obj=records.get(0);
+				admitcard.setCourseName(obj[0].toString());
+				admitcard.setCategory(obj[1].toString());
+				admitcard.setFatherName(obj[2].toString());
+				admitcard.setTitle(obj[3].toString());
+				admitcard.setName(obj[4].toString());
+				admitcard.setTrainingCenterCode((int)obj[5]);
+				admitcard.setAddress(obj[6].toString());
+				BigInteger rollNo = (BigInteger) obj[7];
+				admitcard.setRollNo(rollNo.longValue());
+				admitcard.setCity(obj[8].toString()); 
 			}
 			}catch(Exception e){
 				System.out.println("Exception while retrieving admit card details : " + e.getMessage());

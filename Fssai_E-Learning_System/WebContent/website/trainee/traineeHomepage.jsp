@@ -79,7 +79,7 @@ Basic | Advance | Special |  TOT
                         <p>
 <ct:choose>
 <ct:when test="${loginUser != null}">
-<a href="basic.fssai">Get Your Admit Card</a>
+<a href="generateAdmitCardtrainee.fssai">Get Your Admit Card</a>
 </ct:when>
 <ct:otherwise>
 Get Your Admit Card
