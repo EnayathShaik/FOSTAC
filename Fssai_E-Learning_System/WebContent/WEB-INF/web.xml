@@ -534,6 +534,16 @@
   <url-pattern>/searchVacancy.jspp</url-pattern> 
   </servlet-mapping>
   <servlet>
+  
+  <servlet-name>traineeCenterViewTrainee</servlet-name> 
+  <servlet-class>com.ir.servlet.TraineeCenterViewTraineeList</servlet-class> 
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>traineeCenterViewTrainee</servlet-name> 
+  <url-pattern>/traineeCenterViewTrainee.jspp</url-pattern> 
+  </servlet-mapping>
+  <servlet>
+  
   <servlet-name>updateMTP</servlet-name> 
   <servlet-class>com.ir.servlet.UpdateMTP</servlet-class> 
   </servlet>

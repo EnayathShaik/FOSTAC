@@ -20,6 +20,25 @@ function getCourseName(val){
 	      });
 }
 
+function getTrainingCenter(val)
+{
+	$.ajax({
+	      type: 'post',
+	      url: 'loadTrainingCenter.jspp?'+ val,
+	      success: function (response) {      
+	      var mainData1 = jQuery.parseJSON(response);
+	        //alert(mainData1);
+	      $('#trainingCenter option').remove();
+	      $('#trainingCenter').append('<option value="0" label="Select Training Center" />');
+	  	  $.each(mainData1 , function(i , obj)
+	  		{
+	  		
+	  				$('#trainingCenter').append('<option value='+obj[0]+' label='+obj[1]+' />');		
+	  		});
+	      }
+	      });     
+}
+
 </script>
 <script>
 function saveDetails(){
@@ -117,7 +136,7 @@ return result;
     </nav>
   </div>
 </section>
-<cf:form name="myForm" commandName="trainingPartnerTrainingCalender" >
+<cf:form id="trainingPartnerCalendarForm" name="myForm" action="trainingCenterCalenderSave.fssai" commandName="trainingPartnerCalendarForm" >
         <!-- main body -->
         <section class="main-section-margin-top">
             <div class="container-fluid">
@@ -153,6 +172,7 @@ return result;
                                         var formData = JSON.parse(formObj);
                                         var courseTypes = formData.courseTypes;
                                         var trainerList = formData.trainerList;
+                                        
                                         </script>
                                         
                                         <div class="row">
@@ -225,7 +245,7 @@ return result;
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
-                                                        <input type="text" id="dateF" class="form-control">
+                                                        <input type="text" id="trainingDate" class="form-control">
                                                     </div>
                                                     <div class="form-group">
                                                         <div>

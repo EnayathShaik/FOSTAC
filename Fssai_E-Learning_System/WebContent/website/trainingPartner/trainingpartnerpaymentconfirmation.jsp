@@ -21,7 +21,38 @@ function getCourseName(val){
 
 </script>
 <script>
+
 function showDetails(){
+	/* 	var courseType =  $("#courseType").val();
+		var courseName =  $("#courseName").val();
+		var trainingDate = $("#trainingDate").val().replace("-","/").replace("-","/");
+		var requiredExp =  $("#requiredExp").val();
+		var noOfVacancy =  $("#noOfVacancy").val(); */
+		$(".displayNone").css("display","block");
+		//var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy;
+		var total = "";
+		var result="";
+			$.ajax({
+			type: 'post',
+			url: 'traineeCenterViewTrainee.jspp?'+ total,
+			async: false, 
+			success: function (data){
+			$('#newTable').show();
+			//var mainData = JSON.stringify(data);
+			var mainData1 = jQuery.parseJSON(data);
+			var j=1;
+			$('#newTable tr').remove();
+			$.each(mainData1 , function(i , obj)
+			{
+				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td></tr>');
+				
+			});
+			}
+			});
+		return result;
+	}
+
+function showDetail(){
 	alert("Fetching details to mark attendance..");
 	
 	$('#tblAssessorCourses tr').remove();
@@ -249,7 +280,7 @@ return result;
                       <legend>
                       <h4>Search results</h4>
                       </legend>
-                      <table class="table table-bordered table-responsive table-striped table-hover">
+                      <table  class="table table-bordered table-responsive table-striped table-hover">
                         <thead>
                           <tr class="background-open-vacancies">
                             <th>S.No.</th>
@@ -260,51 +291,13 @@ return result;
                             <th>Trainer Name</th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <tr>
-                            <td>1
-                              <input type="checkbox"></td>
-                            <td>Basic</td>
-                            <td>GHP-GMP* Certification</td>
-                            <td><input type="date"></td>
-                            <td><input type="time"></td>
-                            <td><select class="form-control">
-                                <option>Rahul</option>
-                                <option>Suraj</option>
-                              </select></td>
-                          </tr>
-                          <tr>
-                            <td>2
-                              <input type="checkbox"></td>
-                            <td>Advance</td>
-                            <td>GHP-GMP-HACCP</td>
-                            <td><input type="date"></td>
-                            <td><input type="time"></td>
-                            <td><select class="form-control">
-                                <option>Rahul</option>
-                                <option>Suraj</option>
-                              </select></td>
-                          </tr>
-                          <tr>
-                            <td>3
-                              <input type="checkbox"></td>
-                            <td>Special</td>
-                            <td>HACCP Course</td>
-                            <td><input type="date"></td>
-                            <td><input type="time"></td>
-                            <td><select class="form-control">
-                                <option>Rahul</option>
-                                <option>Suraj</option>
-                              </select></td>
-                          </tr>
+                        <tbody id="newTable">
                         </tbody>
                       </table>
                       <a href="#" class="btn login-btn pull-right">Save</a>
                     </fieldset>
                     <div style="width: 95px;">
                       <ul class="pager">
-                        <li class="previous"><a href="#"><i class="fa fa-plus"></i></a></li>
-                        <li class="next"><a href="#"><i class="fa fa-minus"></i></a></li>
                       </ul>
                     </div>
                   </div>

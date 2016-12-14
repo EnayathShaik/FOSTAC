@@ -161,7 +161,7 @@
 						success : function(response) {
 							$('#name_status').html(response);
 							if (response.trim() == 'Already') {
-								document.getElementById('userId').value = "";
+								document.getElementById('UserId').value = "";
 								document.getElementById("register").style.display = 'none';
 								return false;
 

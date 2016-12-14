@@ -54,7 +54,7 @@
 <script src="website/js/monthly.js"></script> 
 <script src="website/js/jquery.swipebox.js"></script> 
 <script type="text/javascript">
-$('#dateF').datepicker( {
+$('#trainingDate').datepicker( {
 	defaultDate: new Date(),
 	minDate: 0,
     changeMonth: true,

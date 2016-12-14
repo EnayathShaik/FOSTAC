@@ -4,7 +4,7 @@
                         </li> -->
           <li> <a href="trainingpartnertrainingcalendar.fssai">Training Calendar</a> </li>
           <li> <a href="trainingpartnerviewtraineelist.fssai">View Trainee List</a> </li>
-          <li> <a href="mark-trainee-attendance.html">Mark Attendance</a> </li>
+          <li> <a href="markAttendance.fssai">Mark Attendance</a> </li>
           <li> <a href="postVacancyTrainingPartner.fssai">Post Vacancy for Trainer</a> </li>
           <li> <a href="trainingpartnerapplicationstatus.fssai">Application Status</a> </li>
           <li> <a href="trainingpartnermanagetrainer.fssai">Manage Trainer</a> </li>
