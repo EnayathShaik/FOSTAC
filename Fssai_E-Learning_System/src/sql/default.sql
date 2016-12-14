@@ -57,3 +57,6 @@ create table assessmenteligibility(id integer default nextval('assessmentsequenc
 INSERT INTO ASSESSMENTELIGIBILITY(COURSENAMEID, ELIGIBILITY) VALUES (?, ?);
 create table assessmenteligibilitytrainer(id integer default nextval('assessmentsequence'), coursenameid integer, eligibility integer);
 INSERT INTO ASSESSMENTELIGIBILITYTRAINER(COURSENAMEID, ELIGIBILITY) VALUES (?, ?);
+
+--- RUNNING
+----alter table courseenrolled add column trainingstatus character varying(10);
