@@ -17,7 +17,7 @@ public class CourseEnrolledUser {
 	@NotNull
 	private int trainingCalendarId;
 	
-	private String loginDetails;
+	private int loginDetails;
 
 	private int profileId;
 	private long rollno; 
@@ -77,11 +77,11 @@ public class CourseEnrolledUser {
 		this.trainingCalendarId = trainingCalendarId;
 	}
 
-	public String getLoginDetails() {
+	public int getLoginDetails() {
 		return loginDetails;
 	}
 
-	public void setLoginDetails(String loginDetails) {
+	public void setLoginDetails(int loginDetails) {
 		this.loginDetails = loginDetails;
 	}
 	

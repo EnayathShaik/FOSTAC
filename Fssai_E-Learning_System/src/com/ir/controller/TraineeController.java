@@ -113,15 +113,17 @@ public class TraineeController {
 	
 	@RequestMapping(value="/basicSave" , method=RequestMethod.POST)
 	public String basicSave(@ModelAttribute("basicTrainee") CourseEnrolledUserForm courseEnrolledUserForm,
-			@ModelAttribute("rft") PersonalInformationTrainee loginUser ,BindingResult result , Model model){
-		String loginid = courseEnrolledUserForm.getLoginId();
-//by Rishi
-		//abhay String loginid=(String) session.getAttribute("logId");
-		//
+			@ModelAttribute("rft") PersonalInformationTrainee loginUser ,BindingResult result , HttpSession httpSession,Model model){
+		int loginId = 0;
+		try{
+			loginId = (int) httpSession.getAttribute("loginIdUnique");
+		}catch(Exception e){
+			System.out.println("Exception while course details save : "+ e.getMessage());
+		}
 		int personalinformationtraineeid = courseEnrolledUserForm.getPersonalinformationtraineeid();
-		System.out.println("loginid   :"+ loginid);
+		System.out.println("loginid   :"+ loginId);
 		System.out.println("personalinformationtraineeid  :"+ personalinformationtraineeid);
-		long basicEnroll = traineeService.basicSave(courseEnrolledUserForm , loginid , personalinformationtraineeid);
+		long basicEnroll = traineeService.basicSave(courseEnrolledUserForm , loginId , personalinformationtraineeid);
 		System.out.println("bjghjhjhjkhkjkhjgjgjhjh");
 			if(basicEnroll  > 1){
 			model.addAttribute("created", "You have successfully enrolled !!!");
@@ -271,15 +273,19 @@ public class TraineeController {
 	}
 	@RequestMapping(value="/advanceTraineeSave" , method=RequestMethod.POST)
 	public String advanceTraineeSave(@ModelAttribute("advanceTrainee") CourseEnrolledUserForm courseEnrolledUserForm,
-			@ModelAttribute("rft") PersonalInformationTrainee loginUser ,BindingResult result ,HttpSession session, Model model){
-		//String loginid = courseEnrolledUserForm.getLoginId();
-		//by Rishi
-		String loginid=(String) session.getAttribute("logId");
-		//
+			@ModelAttribute("rft") PersonalInformationTrainee loginUser ,BindingResult result ,HttpSession httpSession, Model model){
+		
+		int loginId = 0;
+		try{
+			loginId = (int) httpSession.getAttribute("loginIdUnique");
+		}catch(Exception e){
+			System.out.println("Exception while course details save : "+ e.getMessage());
+		}
+		
 		int personalinformationtraineeid = courseEnrolledUserForm.getPersonalinformationtraineeid();
-		System.out.println("loginid   :"+ loginid);
+		System.out.println("loginid   :"+ loginId);
 		System.out.println("personalinformationtraineeid  :"+ personalinformationtraineeid);
-		long basicEnroll = traineeService.advanceTraineeSave(courseEnrolledUserForm , loginid , personalinformationtraineeid);
+		long basicEnroll = traineeService.advanceTraineeSave(courseEnrolledUserForm , loginId , personalinformationtraineeid);
 		if(basicEnroll  > 1){
 			model.addAttribute("created", "You have successfully enrolled !!!");
 			model.addAttribute("roll", basicEnroll);
@@ -297,15 +303,17 @@ public class TraineeController {
 	
 	@RequestMapping(value="/specialTraineeSave" , method=RequestMethod.POST)
 	public String specialTraineeSave(@ModelAttribute("specialTrainee") CourseEnrolledUserForm courseEnrolledUserForm,
-			@ModelAttribute("rft") PersonalInformationTrainee loginUser ,BindingResult result ,HttpSession session, Model model){
-		//String loginid = courseEnrolledUserForm.getLoginId();
-		//by Rishi
-		String loginid=(String) session.getAttribute("logId");
-		//
+			@ModelAttribute("rft") PersonalInformationTrainee loginUser ,BindingResult result ,HttpSession httpSession, Model model){
+		int loginId = 0;
+		try{
+			loginId = (int) httpSession.getAttribute("loginIdUnique");
+		}catch(Exception e){
+			System.out.println("Exception while course details save : "+ e.getMessage());
+		}
 		int personalinformationtraineeid = courseEnrolledUserForm.getPersonalinformationtraineeid();
-		System.out.println("loginid   :"+ loginid);
+		System.out.println("loginid   :"+ loginId);
 		System.out.println("personalinformationtraineeid  :"+ personalinformationtraineeid);
-		long basicEnroll = traineeService.specialTrainee(courseEnrolledUserForm , loginid , personalinformationtraineeid);
+		long basicEnroll = traineeService.specialTrainee(courseEnrolledUserForm , loginId , personalinformationtraineeid);
 		if(basicEnroll  > 1){
 			model.addAttribute("created", "You have successfully enrolled !!!");
 			model.addAttribute("roll", basicEnroll);

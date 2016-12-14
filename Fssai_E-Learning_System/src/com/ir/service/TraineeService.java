@@ -20,28 +20,19 @@ import com.ir.model.TrainingPartner;
 import com.ir.model.Utility;
 
 public interface TraineeService {
-	
 	public List<CourseName> courseNameList();
 	public CourseTrainee getCourseTrainingByCourseTypeID(int typeId);
 	public List<ManageTrainingPartner> trainingPartnerList();
-
 	public List<State> trainingCenterStateList();
 	public String updateTrainee(RegistrationFormTrainee registrationFormTrainee , Integer ss);
-
 	public String contactTraineeSave(ContactTrainee contactTrainee , String id);
-
 	public boolean changePasswordTraineeSave(ChangePasswordForm changePasswordForm, String id);
-
-	public long basicSave(CourseEnrolledUserForm courseEnrolledUserForm , String loginid, int personalinformationtraineeid);
-// Rishi
-	public long advanceTraineeSave(CourseEnrolledUserForm courseEnrolledUserForm, String loginid,
+	public long basicSave(CourseEnrolledUserForm courseEnrolledUserForm , int loginid, int personalinformationtraineeid);
+	public long advanceTraineeSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid,
 			int personalinformationtraineeid);
-
-	public long specialTrainee(CourseEnrolledUserForm courseEnrolledUserForm, String loginid,
+	public long specialTrainee(CourseEnrolledUserForm courseEnrolledUserForm, int loginid,
 			int personalinformationtraineeid);
-
 	public boolean changePasswordAssesorSave(ChangePasswordForm changePasswordForm, String id);
-	// Rishi 
 	public CourseName getCourseDetails(int loginId);
 	public CourseName getCourseName(int profileId);
 	public List<FeedbackMaster> getFeedMasterList(int profileId);

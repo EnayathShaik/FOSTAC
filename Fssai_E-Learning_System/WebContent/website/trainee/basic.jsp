@@ -20,6 +20,8 @@ function getDistrict(val)
 	      });     
 }
 
+
+
 function getCourseDetails(){
 	var courseName =  $("#courseName").val();
 	var modeOfTraining =  $("#modeOfTraining").val();
@@ -50,23 +52,25 @@ function getCourseDetails(){
 			});
 			}
 			});
-	return result; 
+	//return result; 
 }
-</script>
-<script>
+
 function gettid(){
 	alert('f');
 	if (document.getElementById('trainingCalendarIdd').checked) {
-		 alert(calValue);
+		// alert(calValue);
 		  calValue = document.getElementById('trainingCalendarIdd').value;
+		  document.getElementById("trainingCalendarId").value = calValue;
 		  alert(calValue);
-		/* }
+		  
+		} /*
 	document.getElementById("trainingCalendarId").value = document.getElementById("h").value;
 	var a = document.getElementById("trainingCalendarId").value;
 	var b = document.getElementById("iii").value;
 	alert(a + '   '+ b); */
 }
 </script>
+
 <cf:form action="basicSave.fssai" name="myForm" method="POST" commandName="basicTrainee" >
     <section>
       <div class="container-fluid">

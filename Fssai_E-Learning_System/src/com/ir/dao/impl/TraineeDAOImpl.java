@@ -194,11 +194,14 @@ public class TraineeDAOImpl implements  TraineeDAO{
 	public CourseName getCourseName(int loginId) {
 		CourseName courseName= new CourseName();
 		Session session = sessionFactory.openSession();
-		String sql="select cn.coursename, ce.coursenameid, cn.courseduration "
-				+ "from courseenrolled ce "
-				+ "inner join coursename cn on cn.coursenameid = ce.coursenameid "
-				+ "where ce.logindetails = "+loginId; 
-;
+//		String sql="select cn.coursename, ce.coursenameid, cn.courseduration "
+//				+ "from courseenrolled ce "
+//				+ "inner join coursename cn on cn.coursenameid = ce.coursenameid "
+//				+ "where ce.logindetails = "+loginId; 
+		String sql = "select cn.coursename, cn.coursenameid, cn.courseduration "
+				+ "from courseenrolleduser  ceu "
+				+ "inner join trainingcalendar tc on tc.trainingcalendarid =   ceu.trainingcalendarid "
+				+ "inner join coursename cn on cn.coursenameid = tc.coursename where ceu.logindetails = "+loginId;
 		Query query = session.createSQLQuery(sql);
 		List<Object[]> courseNameList =(List<Object[]>)query.list();
 		session.close();
@@ -381,7 +384,7 @@ public class TraineeDAOImpl implements  TraineeDAO{
 	}
 
 	@Override
-	public long basicSave(CourseEnrolledUserForm courseEnrolledUserForm , String loginid, int personalinformationtraineeid ) {
+	public long basicSave(CourseEnrolledUserForm courseEnrolledUserForm , int loginid, int personalinformationtraineeid ) {
 		System.out.println("course enrolled");
 		Session session =sessionFactory.openSession();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
@@ -410,7 +413,7 @@ public class TraineeDAOImpl implements  TraineeDAO{
 		return date;
 	}
 	@Override
-	public long advanceTraineeSave(CourseEnrolledUserForm courseEnrolledUserForm, String loginid,
+	public long advanceTraineeSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid,
 			int personalinformationtraineeid) {
 		System.out.println("course enrolled");
 		Session session =sessionFactory.openSession();
@@ -439,7 +442,7 @@ public class TraineeDAOImpl implements  TraineeDAO{
 		return date;
 	}
 	@Override
-	public long specialTraineeSave(CourseEnrolledUserForm courseEnrolledUserForm, String loginid,
+	public long specialTraineeSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid,
 			int personalinformationtraineeid) {
 		Session session =sessionFactory.openSession();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
@@ -510,13 +513,14 @@ public class TraineeDAOImpl implements  TraineeDAO{
 
 				" from courseenrolleduser ce "+
 
-				" inner join personalinformationtrainee pit on pit.logindetails = ce.courseenrolleduserid "+
+				" inner join personalinformationtrainee pit on pit.logindetails = ce.logindetails   "+
 				" inner join title on title.titleId = pit.title "+
 				" inner join trainingcalendar tcal on tcal.trainingcalendarid = ce.trainingcalendarid "+
 				" inner join personalinformationtrainingpartner pitp on pitp.personalinformationtrainingpartnerid = tcal.trainingcenter "+
 				" inner join district district on district.districtid = pitp.trainingpartnerpermanentdistrict "+
 				" inner join coursename cn on cn.coursenameid = tcal.coursename "+
-				" inner join coursetype ctype on ctype.coursetypeid = cn.coursetypeid ";
+				" inner join coursetype ctype on ctype.coursetypeid = cn.coursetypeid "
+				+ "where ce.logindetails = "+loginId;
 
 		
 			Session session = sessionFactory.openSession();

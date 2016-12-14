@@ -39,7 +39,7 @@ public interface TraineeDAO {
 
 	public boolean changePasswordTraineeSave(ChangePasswordForm changePasswordForm, String id);
 
-	public long basicSave(CourseEnrolledUserForm courseEnrolledUserForm  , String loginid, int personalinformationtraineeid);
+	public long basicSave(CourseEnrolledUserForm courseEnrolledUserForm  , int loginid, int personalinformationtraineeid);
 
 	Title getTitle(int id);
 
@@ -55,10 +55,10 @@ public interface TraineeDAO {
 
 //	public boolean changePasswordTraineeSave(ChangePasswordForm changePasswordForm, String id);
 	// Rishi
-	public long advanceTraineeSave(CourseEnrolledUserForm courseEnrolledUserForm, String loginid,
+	public long advanceTraineeSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid,
 			int personalinformationtraineeid);
 
-	public long specialTraineeSave(CourseEnrolledUserForm courseEnrolledUserForm, String loginid,
+	public long specialTraineeSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid,
 			int personalinformationtraineeid);
 
 	public boolean changePasswordAssesorSave(ChangePasswordForm changePasswordForm, String id);

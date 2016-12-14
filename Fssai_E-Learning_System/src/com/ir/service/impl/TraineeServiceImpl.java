@@ -72,7 +72,7 @@ public CourseName getCourseName(int loginId) {
 	}
 
 	@Override
-	public long basicSave(CourseEnrolledUserForm courseEnrolledUserForm ,String loginid, int personalinformationtraineeid) {
+	public long basicSave(CourseEnrolledUserForm courseEnrolledUserForm ,int loginid, int personalinformationtraineeid) {
 		long basicEnroll= traineeDAO.basicSave(courseEnrolledUserForm , loginid , personalinformationtraineeid);
 		return basicEnroll;
 	}
@@ -87,14 +87,14 @@ public CourseName getCourseName(int loginId) {
 		return contactTraineeSave;
 	}
 @Override
-	public long advanceTraineeSave(CourseEnrolledUserForm courseEnrolledUserForm, String loginid,
+	public long advanceTraineeSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid,
 			int personalinformationtraineeid) {
 		long advanceEnroll= traineeDAO.advanceTraineeSave(courseEnrolledUserForm , loginid , personalinformationtraineeid);
 		return advanceEnroll;
 	}
 
 	@Override
-	public long specialTrainee(CourseEnrolledUserForm courseEnrolledUserForm, String loginid,
+	public long specialTrainee(CourseEnrolledUserForm courseEnrolledUserForm, int loginid,
 			int personalinformationtraineeid) {
 		long specialEnroll= traineeDAO.specialTraineeSave(courseEnrolledUserForm , loginid , personalinformationtraineeid);
 		return specialEnroll;
