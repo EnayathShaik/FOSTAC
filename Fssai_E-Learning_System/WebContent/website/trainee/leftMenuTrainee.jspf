@@ -9,7 +9,7 @@
           </li>
               <li> <a href="generateAdmitCardtrainee.fssai">Generate Admit Card</a> </li>
              <li> <a href="course-training.fssai?courseTypeId=1">Training</a> </li>
-              <li> <a href="assessment-instructions-trainer.fssai">Assessment</a> </li>
+              <li> <a href="assessment-instructions-trainee.fssai">Assessment</a> </li>
               <li> <a href="feedbackForm.fssai">Feedback</a> </li>
               <li> <a href="generateCertificatetrainee.fssai">Certification</a> </li>
             </ul>

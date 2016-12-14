@@ -323,17 +323,28 @@ public class TraineeController {
 		return "viewTraineeList";
 	}
 	@RequestMapping(value ="/traineeAssessmentOnline", method = RequestMethod.GET)
-	public String traineeAssessmentOnline(@ModelAttribute ("courseEnrolledUserForm")CourseEnrolledUserForm courseEnroledUserForm, Model model){
-		TraineeAssessment traineeAssessment = new TraineeAssessment();
-		int courseType = 1;
-		int courseNameId = 80;
-		List<AssessmentQuestion> assessmentQuestions =  assessmentService.getAssessmentQuestions(courseType, courseNameId);
-		traineeAssessment.setListAssessmentQuestion(assessmentQuestions);
-		traineeAssessment.setCourseNameId(courseNameId);
-		Gson gson=new Gson();
-		String list=gson.toJson(traineeAssessment);
-		model.addAttribute("traineeAssessment",list);
-		return "traineeAssessmentOnline";
+	public String traineeAssessmentOnline(@ModelAttribute ("courseEnrolledUserForm")CourseEnrolledUserForm courseEnroledUserForm, Model model, HttpSession httpSession){
+		String responseText = "";
+		int loginId = -1;
+		try{
+		loginId = (int)httpSession.getAttribute("loginIdUnique");
+		}catch(Exception e){
+			responseText = "generic_error";
+			System.out.println("Exception while fetching assessment details for trainee - "+e.getMessage());
+		}
+		if(loginId > 0){
+			TraineeAssessment traineeAssessment = new TraineeAssessment();
+			int courseType = 1;
+			int courseNameId = 	traineeService.getCurrentCourseId(loginId);
+			List<AssessmentQuestion> assessmentQuestions =  assessmentService.getAssessmentQuestions(courseType, courseNameId);
+			traineeAssessment.setListAssessmentQuestion(assessmentQuestions);
+			traineeAssessment.setCourseNameId(courseNameId);
+			Gson gson=new Gson();
+			String list=gson.toJson(traineeAssessment);
+			responseText = "traineeAssessmentOnline";
+			model.addAttribute("traineeAssessment",list);
+		}
+		return responseText;
 	}
 	@RequestMapping(value="/feedbackForm" , method=RequestMethod.GET)
 	public String feedback(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm ,BindingResult bindingResult, HttpSession session , Model model){

@@ -47,5 +47,5 @@ public interface TraineeService {
 	public List<FeedbackMaster> getFeedMasterList(int profileId);
 	public AdmitCardForm generateAdmitCard(int loginId,int profileId);
 	public List<FeedbackForm> getFeedbackDetails(Utility utility);
-	
+	public int getCurrentCourseId(int loginId);
 }

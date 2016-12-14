@@ -111,4 +111,5 @@ public class AssessmentServiceImpl implements AssessmentService {
 		int assessmentId = assessmentDao.saveTraineeAssessmentEvaluation(traineeAssessmentEvaluation);
 		return assessmentId;
 	}
+
 }

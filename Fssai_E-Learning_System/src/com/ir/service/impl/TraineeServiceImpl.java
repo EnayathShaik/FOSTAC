@@ -114,4 +114,8 @@ public CourseName getCourseName(int loginId) {
 	public List<FeedbackForm> getFeedbackDetails(Utility utility) {
 		return traineeDAO.getFeedbackDetails(utility);
 	}
+	@Override
+	public int getCurrentCourseId(int loginId){
+		return traineeDAO.getCurrentCourseId(loginId);
+	}
 }

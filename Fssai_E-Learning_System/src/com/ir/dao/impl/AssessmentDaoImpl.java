@@ -38,7 +38,8 @@ public class AssessmentDaoImpl implements AssessmentDao{
 //		criteria.add(Restrictions.eq("courseType", courseType));
 //		List <AssessmentQuestion> listAssessmentQuestions = criteria.list();
 		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("from AssessmentQuestion where coursename = "+ courseName +" and courseType= "+courseType);
+//		Query query = session.createQuery("from AssessmentQuestion where coursename = "+ courseName +" and courseType= "+courseType);
+		Query query = session.createQuery("from AssessmentQuestion where coursename = "+ courseName);
 		List<AssessmentQuestion> assessmentQuestions = query.list();
 		session.close();
 		return assessmentQuestions;
@@ -135,4 +136,5 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		}
 		return -1;
 	}
+	
 }

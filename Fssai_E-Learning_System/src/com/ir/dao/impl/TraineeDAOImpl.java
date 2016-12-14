@@ -562,7 +562,18 @@ public class TraineeDAOImpl implements  TraineeDAO{
 		session.close();
 		return list;
 	}
+	@Override
+	public int getCurrentCourseId(int loginId){
+		Session session = sessionFactory.openSession();
+		/** TODO - change training status as 'A' while course enrollment **/
+//		String sql = "select coursenameid from courseenrolled where trainingstatus ='A' and logindetails="+loginId;
+		String sql = "select coursenameid from courseenrolled where logindetails="+loginId;
+		Query query = session.createSQLQuery(sql);
+		List listCourseNameId = query.list();
+		if(listCourseNameId.size() > 0)
+		{
+			return (int)listCourseNameId.get(0);
+		}
+		return -1;
 	}
-	
-
-
+	}
