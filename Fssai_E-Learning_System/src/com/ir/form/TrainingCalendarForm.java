@@ -61,5 +61,16 @@ public class TrainingCalendarForm {
 	public void setTrainingType(String trainingType) {
 		this.trainingType = trainingType;
 	}
+	@Override
+	public String toString() {
+		return "TrainingCalendarForm [courseType=" + courseType
+				+ ", courseName=" + courseName + ", trainingPartner="
+				+ trainingPartner + ", trainingCenter=" + trainingCenter
+				+ ", trainingDate=" + trainingDate + ", trainingTime="
+				+ trainingTime + ", trainerName=" + trainerName
+				+ ", trainingType=" + trainingType + "]";
+	}
+	
+	
 	
 }
