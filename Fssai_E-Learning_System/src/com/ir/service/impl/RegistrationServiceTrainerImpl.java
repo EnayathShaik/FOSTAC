@@ -30,18 +30,18 @@ public class RegistrationServiceTrainerImpl implements RegistrationServiceTraine
 	}
 	//by Rishi
 	@Override
-	public long basicTrainerSave(CourseEnrolledUserForm courseEnrolledUserForm, String loginid){
+	public long basicTrainerSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid){
 			long basicCouseTrainer1 = registrationTrainerDAO.basicCourseTrainer(courseEnrolledUserForm,loginid);
 		return basicCouseTrainer1;
 	}
 	
 	@Override
-	public long advanceTrainerSave(CourseEnrolledUserForm courseEnrolledUserForm, String loginid) {
+	public long advanceTrainerSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid) {
 		long basicCouseTrainer1 = registrationTrainerDAO.advanceTrainerSave(courseEnrolledUserForm,loginid);
 		return basicCouseTrainer1;
 	}
 	@Override
-	public long specialTrainerSave(CourseEnrolledUserForm courseEnrolledUserForm, String loginid) {
+	public long specialTrainerSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid) {
 		long basicCouseTrainer1 = registrationTrainerDAO.specialTrainerSave(courseEnrolledUserForm,loginid);
 		return basicCouseTrainer1;
 	}

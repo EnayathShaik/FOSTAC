@@ -45,7 +45,7 @@
                         </li> -->
               <li class="dropdown active"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Course Enrollment <span class="caret"></span></a>
             <ul class="dropdown-menu">
-                  <li><a href="basictrainer.fssai" class="clr">Basic Course</a></li>
+                  <li><a href="basicTrainer.fssai" class="clr">Basic Course</a></li>
                   <li><a href="advance.fssai" class="clr">Advanced Course</a></li>
                   <li><a href="special.fssai" class="clr">Special Course</a></li>
                 </ul>

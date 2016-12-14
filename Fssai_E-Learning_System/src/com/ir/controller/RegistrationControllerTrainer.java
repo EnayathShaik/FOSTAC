@@ -145,14 +145,9 @@ public class RegistrationControllerTrainer implements Serializable{
 		
     	System.out.println("wefsjdjksbjbsdjbjsdjfsdjkfbjksdbfjbsdjfbjsdbfjsdbfjsdjfjbsd");
     	
-    	//String loginid = courseEnrolledUserForm.getLoginId();
-		//by Rishi
-		String loginid=(String) session.getAttribute("logId");
-		// Rishi
-	//	int// personalinformationtrainerid = courseEnrolledUserForm.getLoginId();
-		System.out.println("loginid   :"+ loginid);
-	//	System.out.println("personalinformationtraineeid  :"+ personalinformationtraineeid);
-		long basicEnroll = registrationServiceTrainer.basicTrainerSave(courseEnrolledUserForm , loginid );
+		int loginId=(int) session.getAttribute("loginIdUnique");
+		System.out.println("loginid   :"+ loginId);
+		long basicEnroll = registrationServiceTrainer.basicTrainerSave(courseEnrolledUserForm , loginId );
 		if(basicEnroll  > 1){
 			model.addAttribute("created", "You have successfully enrolled !!!");
 			model.addAttribute("roll", basicEnroll);
@@ -174,16 +169,9 @@ public class RegistrationControllerTrainer implements Serializable{
 	public String advanceTrainerSave(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm,
 			@ModelAttribute("rft") PersonalInformationTrainee loginUser ,BindingResult result ,HttpSession session, Model model){
 		
-    //	System.out.println("wefsjdjksbjbsdjbjsdjfsdjkfbjksdbfjbsdjfbjsdbfjsdbfjsdjfjbsd");
-    	
-    	//String loginid = courseEnrolledUserForm.getLoginId();
-		//by Rishi
-		String loginid=(String) session.getAttribute("logId");
-		// Rishi
-	//	int// personalinformationtrainerid = courseEnrolledUserForm.getLoginId();
-		System.out.println("loginid   :"+ loginid);
-	//	System.out.println("personalinformationtraineeid  :"+ personalinformationtraineeid);
-		long basicEnroll = registrationServiceTrainer.advanceTrainerSave(courseEnrolledUserForm , loginid );
+    	int loginId=(int) session.getAttribute("loginIdUnique");
+		System.out.println("loginid   :"+ loginId);
+		long basicEnroll = registrationServiceTrainer.advanceTrainerSave(courseEnrolledUserForm , loginId);
 		if(basicEnroll  > 1){
 			model.addAttribute("created", "You have successfully enrolled !!!");
 			model.addAttribute("roll", basicEnroll);
@@ -206,14 +194,9 @@ public class RegistrationControllerTrainer implements Serializable{
    		
        	System.out.println("wefsjdjksbjbsdjbjsdjfsdjkfbjksdbfjbsdjfbjsdbfjsdbfjsdjfjbsd");
        	
-       	//String loginid = courseEnrolledUserForm.getLoginId();
-   		//by Rishi
-   		String loginid=(String) session.getAttribute("logId");
-   		// Rishi
-   	//	int// personalinformationtrainerid = courseEnrolledUserForm.getLoginId();
-   		System.out.println("loginid   :"+ loginid);
-   	//	System.out.println("personalinformationtraineeid  :"+ personalinformationtraineeid);
-   		long basicEnroll = registrationServiceTrainer.specialTrainerSave(courseEnrolledUserForm , loginid );
+       	int loginId=(int) session.getAttribute("loginIdUnique");
+   		System.out.println("loginid   :"+ loginId);
+   		long basicEnroll = registrationServiceTrainer.specialTrainerSave(courseEnrolledUserForm , loginId );
    		if(basicEnroll  > 1){
    			model.addAttribute("created", "You have successfully enrolled !!!");
    			model.addAttribute("roll", basicEnroll);

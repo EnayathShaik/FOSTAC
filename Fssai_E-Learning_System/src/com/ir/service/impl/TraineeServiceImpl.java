@@ -118,4 +118,9 @@ public CourseName getCourseName(int loginId) {
 	public int getCurrentCourseId(int loginId){
 		return traineeDAO.getCurrentCourseId(loginId);
 	}
+	@Override
+	public AdmitCardForm generateTrainerAdmitCard(int loginId,int profileId){
+		AdmitCardForm admitCardObj = traineeDAO.generateTrainerAdmitCard(loginId,profileId);
+		return admitCardObj;
+	}
 }

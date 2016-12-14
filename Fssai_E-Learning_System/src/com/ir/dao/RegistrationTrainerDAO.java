@@ -11,27 +11,15 @@ import com.ir.model.State;
 import com.ir.model.Title;
 
 public interface RegistrationTrainerDAO {
-
 	String register(RegistrationFormTrainer registrationFormTrainer);
-
 	String updatetrainer(RegistrationFormTrainer registrationFormTrainer,int id);
-
 	City getCity(int id);
-
 	State getState(int id);
-
 	District getDistrict(int id);
-
 	Title getTitle(int id);
-
 	ManageTrainingPartner getTP(int id);
-//by Rishi
-	long basicCourseTrainer(CourseEnrolledUserForm courseEnrolledUserForm, String loginid);
-
-	long advanceTrainerSave(CourseEnrolledUserForm courseEnrolledUserForm, String loginid);
-
-	long specialTrainerSave(CourseEnrolledUserForm courseEnrolledUserForm, String loginid);
-	
-//by Rishi
+	long basicCourseTrainer(CourseEnrolledUserForm courseEnrolledUserForm, int loginid);
+	long advanceTrainerSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid);
+	long specialTrainerSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid);
 
 }

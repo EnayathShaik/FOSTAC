@@ -245,7 +245,7 @@ function applyForVacancy(index){
                           </div>
                           <div class="timeline-body">
                             <p>Course Enrollment</p>
-                            <p> <a href="basictrainer.fssai">Basic</a> | <a href="advance.fssai">Advance</a> | <a href="special.fssai">Special</a></P>
+                            <p> <a href="basicTrainer.fssai">Basic</a> | <a href="advance.fssai">Advance</a> | <a href="special.fssai">Special</a></P>
                           </div>
                         </div>
                       </li>

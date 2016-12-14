@@ -583,4 +583,54 @@ public class TraineeDAOImpl implements  TraineeDAO{
 		}
 		return -1;
 	}
+	@Override
+	public AdmitCardForm generateTrainerAdmitCard(int loginId, int profileId){
+		
+		String str_query = "select cn.coursename as courseName,"+
+				" ctype.coursetype as category, "+
+				" pit.fathername as fatherName, titlename as title, pit.firstname ||' '|| pit.middlename ||' '|| pit.lastname  as name ,"+
+				" tcal.trainingcenter as trainingCenterCode,"+
+				" pitp.trainingpartnerpermanentline1||','|| pitp.trainingpartnerpermanentline2 as address,"+
+				" ce.rollno as rollNo "+
+				", district.districtname as city"+
+
+				" from courseenrolleduser ce "+
+
+				" inner join personalinformationtrainer pit on pit.logindetails = ce.logindetails   "+
+				" inner join title on title.titleId = pit.title "+
+				" inner join trainingcalendar tcal on tcal.trainingcalendarid = ce.trainingcalendarid "+
+				" inner join personalinformationtrainingpartner pitp on pitp.personalinformationtrainingpartnerid = tcal.trainingcenter "+
+				" inner join district district on district.districtid = pitp.trainingpartnerpermanentdistrict "+
+				" inner join coursename cn on cn.coursenameid = tcal.coursename "+
+				" inner join coursetype ctype on ctype.coursetypeid = cn.coursetypeid "
+				+ "where ce.logindetails = "+loginId;
+
+		
+			Session session = sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
+			AdmitCardForm admitcard = new AdmitCardForm();
+			Query query = session.createSQLQuery(str_query);
+			//List records = query.list();
+			List<Object[]> records =(List<Object[]>) query.list();
+			session.close();
+			try{
+			if(records.size() > 0){
+				
+				Object[] obj=records.get(0);
+				admitcard.setCourseName(obj[0].toString());
+				admitcard.setCategory(obj[1].toString());
+				admitcard.setFatherName(obj[2].toString());
+				admitcard.setTitle(obj[3].toString());
+				admitcard.setName(obj[4].toString());
+				admitcard.setTrainingCenterCode((int)obj[5]);
+				admitcard.setAddress(obj[6].toString());
+				BigInteger rollNo = (BigInteger) obj[7];
+				admitcard.setRollNo(rollNo.longValue());
+				admitcard.setCity(obj[8].toString()); 
+			}
+			}catch(Exception e){
+				System.out.println("Exception while retrieving admit card details : " + e.getMessage());
+			}
+		return admitcard;
+	}
 	}

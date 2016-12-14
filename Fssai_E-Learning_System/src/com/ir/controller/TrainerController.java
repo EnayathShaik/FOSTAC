@@ -104,10 +104,19 @@ public class TrainerController {
 		return "contactTrainer";
 	}
 	@RequestMapping(value="/generateAdmitCardTrainer" , method=RequestMethod.GET)
-	public String generateAdmitCardTrainer(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm ,BindingResult bindingResult, HttpSession session , Model model  ){
-		CourseName courseName=traineeService.getCourseName(Profiles.TRAINER.value());
+	public String generateAdmitCardTrainer(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm ,BindingResult bindingResult, HttpSession httpSession , Model model  ){
+		String responseText = "";
+		int loginId = -1;
+		try{
+		loginId = (int)httpSession.getAttribute("loginIdUnique");
+		}catch(Exception e){
+			responseText = "generic_error";
+			System.out.println("Exception while fetching assessment details for trainee - "+e.getMessage());
+		}
+		CourseName courseName=traineeService.getCourseName(loginId);
 		model.addAttribute("courseName", courseName);
-		return "generateAdmitCardTrainer";
+		responseText =  "generateAdmitCardTrainer";
+		return responseText;
 	}
 	
 	@RequestMapping(value="/admit-cardtrainer" , method=RequestMethod.GET)
@@ -115,7 +124,7 @@ public class TrainerController {
 			@ModelAttribute("state") State state , @ModelAttribute("tp") TrainingPartner tp,BindingResult result ,HttpSession session, Model model ){
 		if(session.getAttribute("loginIdUnique")!=null){
 			String loginid=session.getAttribute("loginIdUnique").toString();
-			AdmitCardForm admitCardForm=traineeService.generateAdmitCard(Integer.parseInt(loginid),Profiles.TRAINER.value());
+			AdmitCardForm admitCardForm=traineeService.generateTrainerAdmitCard(Integer.parseInt(loginid),Profiles.TRAINER.value());
 			model.addAttribute("admitCardForm", admitCardForm);
 		}
 		return "admit-cardtrainer";

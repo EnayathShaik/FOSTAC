@@ -296,9 +296,8 @@ private Title title;
 		return "updated";
 		}
 
-	// Rishi
 	@Override
-	public long basicCourseTrainer(CourseEnrolledUserForm courseEnrolledUserForm, String loginid) {
+	public long basicCourseTrainer(CourseEnrolledUserForm courseEnrolledUserForm, int loginid) {
 		
 		Session session =sessionFactory.openSession();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
@@ -309,11 +308,11 @@ private Title title;
 		System.out.println("calander id is  "+courseEnrolledUserForm.getTrainingCalendarId());
 		
 		CourseEnrolledUser ceu = new CourseEnrolledUser();
-		//ceu.setLoginDetails(loginid);
+		ceu.setLoginDetails(loginid);
 		ceu.setProfileId(4);
 		ceu.setTrainingCalendarId(courseEnrolledUserForm.getTrainingCalendarId());
 		ceu.setRollno(date);
-		//abhay ceu.setStatus("Pending");
+//		ceu.setStatus("Pending");
 		
 		Integer ce = (Integer) session.save(ceu);
 		session.beginTransaction().commit();
@@ -327,7 +326,7 @@ private Title title;
 		return date;
 	}
 	@Override
-	public long advanceTrainerSave(CourseEnrolledUserForm courseEnrolledUserForm, String loginid) {
+	public long advanceTrainerSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid) {
 		Session session =sessionFactory.openSession();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 		long date = System.currentTimeMillis();
@@ -349,7 +348,7 @@ private Title title;
 		return date;
 	}
 	@Override
-	public long specialTrainerSave(CourseEnrolledUserForm courseEnrolledUserForm, String loginid) {
+	public long specialTrainerSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid) {
 		Session session =sessionFactory.openSession();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 		long date = System.currentTimeMillis();

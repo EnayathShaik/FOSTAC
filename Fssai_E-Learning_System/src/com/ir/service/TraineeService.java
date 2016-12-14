@@ -39,4 +39,5 @@ public interface TraineeService {
 	public AdmitCardForm generateAdmitCard(int loginId,int profileId);
 	public List<FeedbackForm> getFeedbackDetails(Utility utility);
 	public int getCurrentCourseId(int loginId);
+	public AdmitCardForm generateTrainerAdmitCard(int loginId,int profileId);
 }
