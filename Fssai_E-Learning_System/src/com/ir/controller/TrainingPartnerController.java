@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,6 +29,7 @@ import com.ir.bean.common.StringStringBean;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.PostVacancyTrainingCenterForm;
+import com.ir.form.TrainingCalendarForm;
 import com.ir.form.trainingPartner.TrainingPartnerSearch;
 import com.ir.form.trainingPartner.TrainingPartnerSearchForm;
 import com.ir.model.CourseType;
@@ -38,6 +40,7 @@ import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.PostVacancyTrainingCenter;
 import com.ir.model.PostVacancyTrainingCenterBean;
 import com.ir.model.State;
+import com.ir.model.TrainingPartnerCalendarForm;
 import com.ir.model.TrainingPartnerTrainingCalender;
 import com.ir.model.Utility;
 import com.ir.service.AdminService;
@@ -454,6 +457,26 @@ public class TrainingPartnerController {
 		String strFormData = gson.toJson(formData);
 		model.addAttribute("trainingPartnerSearch" , strFormData);
 		return "trainingPartnerSearch";
+	}
+	
+	@RequestMapping(value="/trainingCenterCalenderSave" , method=RequestMethod.POST)
+	public String trainingCalenderSave(@Valid @ModelAttribute("trainingPartnerCalendarForm") TrainingPartnerCalendarForm trainingPartnerCalendarForm ,BindingResult result ,Model model) {
+		System.out.println("kkkkkk == "+trainingPartnerCalendarForm);
+		
+		if(result.hasErrors()){
+			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
+			System.out.println(result.getErrorCount());
+			System.out.println(result.getAllErrors());
+			return "trainingpartnertrainingcalendar";
+		}
+		/*System.out.println(trainingCalendarForm.getTrainingDate()+"   "+ trainingCalendarForm.getTrainingTime());
+		String trainingCalendar = adminService.trainingCalendarForm(trainingCalendarForm);
+		if(trainingCalendar.equalsIgnoreCase("created")){
+			model.addAttribute("created", "Calender saved successfully !!!");
+		}else{
+			model.addAttribute("created", "Oops , something went wrong !!!");
+		}*/
+		return "trainingpartnertrainingcalendar";
 	}
 	
 }
