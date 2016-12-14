@@ -309,7 +309,7 @@ private Title title;
 		System.out.println("calander id is  "+courseEnrolledUserForm.getTrainingCalendarId());
 		
 		CourseEnrolledUser ceu = new CourseEnrolledUser();
-		ceu.setLoginDetails(loginid);
+		//ceu.setLoginDetails(loginid);
 		ceu.setProfileId(4);
 		ceu.setTrainingCalendarId(courseEnrolledUserForm.getTrainingCalendarId());
 		ceu.setRollno(date);
@@ -337,7 +337,7 @@ private Title title;
 		System.out.println("calander id is  "+courseEnrolledUserForm.getTrainingCalendarId());
 		
 		CourseEnrolledUser ceu = new CourseEnrolledUser();
-		ceu.setLoginDetails(loginid);
+		//ceu.setLoginDetails(loginid);
 		ceu.setProfileId(4);
 		ceu.setTrainingCalendarId(courseEnrolledUserForm.getTrainingCalendarId());
 		ceu.setRollno(date);
@@ -359,7 +359,7 @@ private Title title;
 		System.out.println("calander id is  "+courseEnrolledUserForm.getTrainingCalendarId());
 		
 		CourseEnrolledUser ceu = new CourseEnrolledUser();
-		ceu.setLoginDetails(loginid);
+		//ceu.setLoginDetails(loginid);
 		ceu.setProfileId(4);
 		ceu.setTrainingCalendarId(courseEnrolledUserForm.getTrainingCalendarId());
 		ceu.setRollno(date);
