@@ -357,7 +357,7 @@ public class TraineeController {
 	@RequestMapping(value="/feedbackForm" , method=RequestMethod.GET)
 	public String feedback(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm ,BindingResult bindingResult, HttpSession session , Model model){
 		int loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
-		CourseName courseName=traineeService.getCourseDetails(loginId);
+		CourseName courseName=traineeService.getCourseName(loginId);
 		List<FeedbackMaster> feedbackMasters=traineeService.getFeedMasterList(Profiles.TRAINEE.value());
 		model.addAttribute("courseName",courseName);
 		model.addAttribute("feedbackMasters",feedbackMasters);
@@ -366,7 +366,7 @@ public class TraineeController {
 	@RequestMapping(value="/generateCertificatetrainee" , method=RequestMethod.GET)
 	public String generateCertificatetrainee(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm ,BindingResult bindingResult, HttpSession session , Model model){
 		int loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
-		CourseName courseName=traineeService.getCourseDetails(loginId);
+		CourseName courseName=traineeService.getCourseName(loginId);
 		model.addAttribute("courseName",courseName);
 		
 		return "generateCertificatetrainee";
@@ -375,7 +375,7 @@ public class TraineeController {
 	public String assessmentinstructionstrainee(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer,BindingResult bindingResult, HttpSession session , Model model )
 	{
 		int loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
-		CourseName courseName=traineeService.getCourseDetails(loginId);
+		CourseName courseName=traineeService.getCourseName(loginId);
 		Utility utility=new Utility();
 		//Need to write service for AsssessorAgency 
 		model.addAttribute("courseName",courseName);

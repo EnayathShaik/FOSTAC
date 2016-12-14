@@ -12,4 +12,6 @@ public class Constantes {
 	public static final String DBSERVER_USERNAME_PROPERTY= "dbUsername";
 	public static final String DBSERVER_PASSWORD_ID_PROPERTY= "dbPassword";
 	public static final String DBSERVER_DRIVER_PROPERTY= "dbDriver";
+	public static final String TRAINEE_LABEL = "TRAINEE";
+	public static final String TRAINER_LABEL = "TRAINER";
 }

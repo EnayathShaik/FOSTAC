@@ -12,6 +12,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import com.ir.constantes.Constantes;
 import com.ir.dao.AdminDAO;
 import com.ir.dao.TraineeDAO;
 import com.ir.form.ChangePasswordForm;
@@ -240,13 +241,13 @@ public class TraineeDAOImpl implements  TraineeDAO{
 		Session session = sessionFactory.openSession();
 		String profile="";
 				if(profileId==3){
-					profile="trainee";
+					profile = Constantes.TRAINEE_LABEL;
 				}else if(profileId==4){
-					profile="trainer";
+					profile = Constantes.TRAINER_LABEL;
 				}
 				
 		
-		Query query = session.createSQLQuery("select feedbacktypeid,feedback from feedbackmaster where coursetype='"+profile+"'");
+		Query query = session.createSQLQuery("select feedbacktypeid,feedback from feedbackmaster where upper(coursetype)='"+profile+"'");
 		List<FeedbackMaster> feedbackMasters = query.list();
 		session.close();
 		return feedbackMasters;
@@ -569,9 +570,11 @@ public class TraineeDAOImpl implements  TraineeDAO{
 	@Override
 	public int getCurrentCourseId(int loginId){
 		Session session = sessionFactory.openSession();
-		/** TODO - change training status as 'A' while course enrollment **/
-//		String sql = "select coursenameid from courseenrolled where trainingstatus ='A' and logindetails="+loginId;
-		String sql = "select coursenameid from courseenrolled where logindetails="+loginId;
+		/** TODO - add training status change training status as 'A' while course enrollment **/
+		String sql = "select cn.coursenameid "
+				+ "from courseenrolleduser  ceu "
+				+ "inner join trainingcalendar tc on tc.trainingcalendarid =   ceu.trainingcalendarid "
+				+ "inner join coursename cn on cn.coursenameid = tc.coursename where ceu.logindetails = "+loginId;
 		Query query = session.createSQLQuery(sql);
 		List listCourseNameId = query.list();
 		if(listCourseNameId.size() > 0)
