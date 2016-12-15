@@ -44,7 +44,7 @@ function showDetails(){
 			$('#newTable tr').remove();
 			$.each(mainData1 , function(i , obj)
 			{
-				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td></tr>');
+				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td><input type="checkbox">YES</td><td>Confirm</td></tr>');
 				
 			});
 			}
@@ -169,7 +169,7 @@ return result;
                                     <!-- search and apply vacancies -->
                                     <div class="col-xs-12">
                                         <fieldset>
-                                        <legend><h3>View Trainee List</h3></legend>
+                                        <legend><h3>Payment Confirmation</h3></legend>
                                         <script type="text/javascript">
                                         var formObj = '${trainingpartnerpaymentconfirmation}';
                                         var formData = JSON.parse(formObj);
@@ -288,7 +288,9 @@ return result;
                             <th>Course Name</th>
                             <th>Training Date</th>
                             <th>Training Time</th>
-                            <th>Trainer Name</th>
+                            <th>Participant Name</th>
+                            <th>Payment Received</th>
+                            <th>Status</th>
                           </tr>
                         </thead>
                         <tbody id="newTable">
