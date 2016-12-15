@@ -362,6 +362,9 @@ public class TrainingPartnerController {
 	@RequestMapping(value="/getApplicationStatusDetails" , method=RequestMethod.POST)
 	@ResponseBody
 	public void getApplicationStatusDetails(@RequestBody PostVacancyTrainingCenterBean postVacancyTrainingCenterBean,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		
+		System.out.println("Get Application Status............");
+		
 		List<PostVacancyTrainingCenter> list=new ArrayList<>();
 		try{
 			 list = trainingPartnerService.getAppliedCount(postVacancyTrainingCenterBean);
@@ -469,13 +472,20 @@ public class TrainingPartnerController {
 			System.out.println(result.getAllErrors());
 			return "trainingpartnertrainingcalendar";
 		}
-		/*System.out.println(trainingCalendarForm.getTrainingDate()+"   "+ trainingCalendarForm.getTrainingTime());
-		String trainingCalendar = adminService.trainingCalendarForm(trainingCalendarForm);
+		TrainingCalendarForm trainingCalendarForm = new TrainingCalendarForm();
+		trainingCalendarForm.setCourseName(trainingPartnerCalendarForm.getSelCourseName());
+		trainingCalendarForm.setCourseType(trainingPartnerCalendarForm.getSelCourseType());
+		trainingCalendarForm.setTrainerName(trainingPartnerCalendarForm.getSelTrainerNames());
+		trainingCalendarForm.setTrainingDate(trainingPartnerCalendarForm.getTrainingdate());
+		trainingCalendarForm.setTrainingTime(trainingPartnerCalendarForm.getTrainingTime());
+		
+		System.out.println(trainingCalendarForm.getTrainingDate()+"   "+ trainingCalendarForm.getTrainingTime());
+		String trainingCalendar = trainingPartnerService.trainingCalendarForm(trainingCalendarForm);
 		if(trainingCalendar.equalsIgnoreCase("created")){
 			model.addAttribute("created", "Calender saved successfully !!!");
 		}else{
 			model.addAttribute("created", "Oops , something went wrong !!!");
-		}*/
+		}
 		return "trainingpartnertrainingcalendar";
 	}
 	

@@ -544,6 +544,42 @@
   </servlet-mapping>
   <servlet>
   
+   <servlet-name>traineeAssessmentCalender</servlet-name> 
+  <servlet-class>com.ir.servlet.TraineeCenterAssessmentCalender</servlet-class> 
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>traineeAssessmentCalender</servlet-name> 
+  <url-pattern>/traineeAssessmentCalender.jspp</url-pattern> 
+  </servlet-mapping>
+  <servlet>
+  
+  <servlet-name>getApplicationStatusDetails</servlet-name> 
+  <servlet-class>com.ir.servlet.TrainingPartnerApplicationStatus</servlet-class> 
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>getApplicationStatusDetails</servlet-name> 
+  <url-pattern>/getApplicationStatusDetails.jspp</url-pattern> 
+  </servlet-mapping>
+  <servlet>
+  
+  <servlet-name>trainingpartnermanagetrainer</servlet-name> 
+  <servlet-class>com.ir.servlet.TrainingPartnerManageTrainer</servlet-class> 
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>trainingpartnermanagetrainer</servlet-name> 
+  <url-pattern>/trainingpartnermanagetrainer.jspp</url-pattern> 
+  </servlet-mapping>
+  <servlet>
+  
+  <servlet-name>traineeCenterViewTraineeList</servlet-name> 
+  <servlet-class>com.ir.servlet.TraineeCenterViewTraineeLists</servlet-class> 
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>traineeCenterViewTraineeList</servlet-name> 
+  <url-pattern>/traineeCenterViewTraineeList.jspp</url-pattern> 
+  </servlet-mapping>
+  <servlet>
+  
   <servlet-name>updateMTP</servlet-name> 
   <servlet-class>com.ir.servlet.UpdateMTP</servlet-class> 
   </servlet>

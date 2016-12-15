@@ -2,6 +2,8 @@
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
+
+
 function getCourseName(val){
 	 $('#selCourseName option').remove();
 	$.ajax({
@@ -73,7 +75,35 @@ function showDetails(){
 return result;	
 }
 
-
+function showDetails(){
+	/* 	var courseType =  $("#courseType").val();
+		var courseName =  $("#courseName").val();
+		var trainingDate = $("#trainingDate").val().replace("-","/").replace("-","/");
+		var requiredExp =  $("#requiredExp").val();
+		var noOfVacancy =  $("#noOfVacancy").val(); */
+		$(".displayNone").css("display","block");
+		//var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy;
+		var total = "";
+		var result="";
+			$.ajax({
+			type: 'post',
+			url: 'traineeAssessmentCalender.jspp?'+ total,
+			async: false, 
+			success: function (data){
+			$('#newTable').show();
+			//var mainData = JSON.stringify(data);
+			var mainData1 = jQuery.parseJSON(data);
+			var j=1;
+			$('#newTable tr').remove();
+			$.each(mainData1 , function(i , obj)
+			{
+				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td><input type="date"/></td><td><input type="time"/></td><td>'+obj[2]+'</td></tr>');
+				
+			});
+			}
+			});
+		return result;
+	}
 </script>
 <section>
   <div class="container-fluid">
@@ -252,58 +282,17 @@ return result;
                             <th>S.No.</th>
                             <th>Course Type</th>
                             <th>Course Name</th>
-                            <th>Training Date</th>
-                            <th>Training Time</th>
+                            <th>Assessment Date</th>
+                            <th>Assessment Time</th>
                             <th>Trainer Name</th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <tr>
-                            <td>1
-                              <input type="checkbox"></td>
-                            <td>Basic</td>
-                            <td>GHP-GMP* Certification</td>
-                            <td><input type="date"></td>
-                            <td><input type="time"></td>
-                            <td><select class="form-control">
-                                <option>Rahul</option>
-                                <option>Suraj</option>
-                              </select></td>
-                          </tr>
-                          <tr>
-                            <td>2
-                              <input type="checkbox"></td>
-                            <td>Advance</td>
-                            <td>GHP-GMP-HACCP</td>
-                            <td><input type="date"></td>
-                            <td><input type="time"></td>
-                            <td><select class="form-control">
-                                <option>Rahul</option>
-                                <option>Suraj</option>
-                              </select></td>
-                          </tr>
-                          <tr>
-                            <td>3
-                              <input type="checkbox"></td>
-                            <td>Special</td>
-                            <td>HACCP Course</td>
-                            <td><input type="date"></td>
-                            <td><input type="time"></td>
-                            <td><select class="form-control">
-                                <option>Rahul</option>
-                                <option>Suraj</option>
-                              </select></td>
-                          </tr>
+                        <tbody id="newTable">
                         </tbody>
                       </table>
                       <a href="#" class="btn login-btn pull-right">Save</a>
                     </fieldset>
-                    <div style="width: 95px;">
-                      <ul class="pager">
-                        <li class="previous"><a href="#"><i class="fa fa-plus"></i></a></li>
-                        <li class="next"><a href="#"><i class="fa fa-minus"></i></a></li>
-                      </ul>
-                    </div>
+                   
                   </div>
                 </div>
               </div>

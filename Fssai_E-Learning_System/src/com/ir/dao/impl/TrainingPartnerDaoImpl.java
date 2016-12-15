@@ -16,6 +16,7 @@ import com.ir.bean.common.StringStringBean;
 import com.ir.dao.TrainingPartnerDao;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.PostVacancyTrainingCenterForm;
+import com.ir.form.TrainingCalendarForm;
 import com.ir.form.trainingPartner.TrainingPartnerSearch;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
@@ -457,6 +458,30 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		}
 		session.close();
 		return listTp;
+	}
+	
+	@Override
+	public String trainingCalendarForm(TrainingCalendarForm trainingCalendarForm) {
+		System.out.println("********  "+trainingCalendarForm.getCourseName());
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		TrainingCalendar tc = new TrainingCalendar();
+		tc.setCourseType(trainingCalendarForm.getCourseType());
+		tc.setCourseName(trainingCalendarForm.getCourseName());
+		tc.setTrainingPartner(trainingCalendarForm.getTrainingPartner());
+		tc.setTrainingCenter(trainingCalendarForm.getTrainingCenter());
+		tc.setTrainingDate(trainingCalendarForm.getTrainingDate());
+		tc.setTrainingTime(trainingCalendarForm.getTrainingTime());
+		tc.setTrainerName(trainingCalendarForm.getTrainerName());
+		tc.setTrainingType(trainingCalendarForm.getTrainingType());
+		int i = (Integer) session.save(tc);
+		tx.commit();
+		session.close();
+		if(i >0){
+			return "created";
+		}else{
+			return "error";
+		}	
 	}
 
 }

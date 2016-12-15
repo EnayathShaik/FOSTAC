@@ -52,7 +52,7 @@ function editApplicationStatus(){
 	      }
 	      });
 }
-function showDetails(){
+function showDetail(){
 	alert("Fetching details to mark attendance..");
 	
 	$('#tblAssessorCourses tr').remove();
@@ -95,7 +95,38 @@ function showDetails(){
 	      });
 
 }
+function showDetails() {
+	/* 	var courseType =  $("#courseType").val();
+		var courseName =  $("#courseName").val();
+		var trainingDate = $("#trainingDate").val().replace("-","/").replace("-","/");
+		var requiredExp =  $("#requiredExp").val();
+		var noOfVacancy =  $("#noOfVacancy").val(); */
+	$(".displayNone").css("display", "block");
+	//var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy;
+	var total = "";
+	var result = "";
+	$.ajax({
+		type : 'post',
+		url : 'getApplicationStatusDetails.jspp?' + total,
+		async : false,
+		success : function(data) {
+			$('#newTable').show();
+			//var mainData = JSON.stringify(data);
+			var mainData1 = jQuery.parseJSON(data);
+			var j = 1;
+			$('#newTable tr').remove();
+			$.each(mainData1, function(i, obj) {
+				$('#newTable').append(
+						'<tr id="tableRow"><td>' + j++ + '</td><td>'
+								+ obj[0] + '</td><td>' + obj[1]
+								+ '</td><td>' + obj[2] + '</td><td>'
+								+ obj[3] + '</td><td></td></tr>');
 
+			});
+		}
+	});
+	return result;
+}
 
 </script>
 <section>
@@ -249,7 +280,7 @@ function showDetails(){
                             <th>No. Of Applications</th>
                           </tr>
                         </thead>
-                        <tbody id="applicaionStatus">
+                        <tbody id="newTable">
 			</tbody>
               </div>
 </table>

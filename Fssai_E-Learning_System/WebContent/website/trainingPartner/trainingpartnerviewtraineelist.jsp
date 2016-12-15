@@ -23,6 +23,7 @@ function getCourseName(val){
 <script>
 
 function showDetails(){
+	alert('Data')
 /* 	var courseType =  $("#courseType").val();
 	var courseName =  $("#courseName").val();
 	var trainingDate = $("#trainingDate").val().replace("-","/").replace("-","/");
@@ -34,9 +35,10 @@ function showDetails(){
 	var result="";
 		$.ajax({
 		type: 'post',
-		url: 'traineeCenterViewTrainee.jspp?'+ total,
+		url: 'traineeCenterViewTraineeList.jspp?'+ total,
 		async: false, 
 		success: function (data){
+			alert(data)
 		$('#newTable').show();
 		//var mainData = JSON.stringify(data);
 		var mainData1 = jQuery.parseJSON(data);
@@ -44,7 +46,7 @@ function showDetails(){
 		$('#newTable tr').remove();
 		$.each(mainData1 , function(i , obj)
 		{
-			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td></tr>');
+			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td>'+obj[5]+'</td><td>Pending</td></tr>');
 			
 		});
 		}
@@ -330,7 +332,9 @@ return result;
                             <th>Course Name</th>
                             <th>Training Date</th>
                             <th>Training Time</th>
-                            <th>Trainer Name</th>
+                            <th>Participant Name</th>
+                            <th>Mode OF Training</th>
+                            <th>Status</th>
                           </tr>
                         </thead>
                         <tbody id="newTable">

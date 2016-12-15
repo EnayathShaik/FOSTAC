@@ -12,6 +12,7 @@ import com.ir.bean.common.StringStringBean;
 import com.ir.dao.TrainingPartnerDao;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.PostVacancyTrainingCenterForm;
+import com.ir.form.TrainingCalendarForm;
 import com.ir.form.trainingPartner.TrainingPartnerSearch;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
@@ -123,5 +124,10 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 	@Override
 	public List<TrainingPartnerSearch> getTrainingPartnerDetails(int trainingPartnerId){
 		return trainingPartnerDAO.getTrainingPartnerDetails(trainingPartnerId);
+	}
+	@Override
+	public String trainingCalendarForm(TrainingCalendarForm trainingCalendarForm) {
+		String trainingCalendar = trainingPartnerDAO.trainingCalendarForm(trainingCalendarForm);
+		return trainingCalendar;
 	}
 }
