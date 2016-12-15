@@ -12,6 +12,6 @@
 <!--               <li> <a href="assessment-instructions-trainer.fssai">Assessment</a> </li> -->
 					<li> <a href="assessment-instructions-trainer.fssai">Assessment</a>
               <li> <a href="feedbackFormTrainer.fssai">Feedback</a> </li>
-              <li> <a href="generatecertificatetrainer.fssai">Certification</a> </li>
+              <li> <a href="generateCertificateTrainer.fssai">Certification</a> </li>
             </ul>
       </div>

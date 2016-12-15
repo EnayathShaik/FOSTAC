@@ -91,7 +91,7 @@ public class TrainerController {
 		return "feedbackFormTrainer";
 	}
 	
-	@RequestMapping(value="/generateCertificatetraineer" , method=RequestMethod.GET)
+	@RequestMapping(value="/generateCertificateTrainer" , method=RequestMethod.GET)
 	public String generateCertificatetraineer(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm ,BindingResult bindingResult, HttpSession session , Model model){
 		int loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
 		CourseName courseName=traineeService.getCourseDetails(loginId);

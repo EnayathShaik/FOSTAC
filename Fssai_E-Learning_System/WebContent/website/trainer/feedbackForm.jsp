@@ -26,7 +26,7 @@ function onFeedbackSave(feedbackMasterList){
 	    	  feedbackMastersIds:feedbackMastersIds.join()
 	      },
 	      success: function (response) {
-	    	  window.location.href ='/Fssai_E-Learning_System/redirectHome.fssai'
+	    	  window.location.href ='/Fssai_E-Learning_System/trainerHome.fssai'
 	      }
 	      });
 	
