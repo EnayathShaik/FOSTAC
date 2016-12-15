@@ -2,6 +2,7 @@
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
+
 function OnStart(){
 	searchVacancy();
 }
@@ -81,13 +82,16 @@ function validateFields(){
 </script>
 <script type="text/javascript">
 function searchVacancy(){
+	var loginID = $("#loginId").val();
+	alert(loginID)
+	
 	var courseType =  $("#courseType").val();
 	var courseName =  $("#courseName").val();
 	var trainingDate = $("#trainingDate").val().replace("-","/").replace("-","/");
 	var requiredExp =  $("#requiredExp").val();
 	var noOfVacancy =  $("#noOfVacancy").val();
 	$(".displayNone").css("display","block");
-	var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy;
+	var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy+"&loginid="+loginID;
 	var result="";
 		$.ajax({
 		type: 'post',
@@ -108,6 +112,8 @@ function searchVacancy(){
 		});
 	return result;
 }
+
+
 </script>
 
 <cf:form action="postVacancyTrainingPartnerSave.fssai" name="myForm" method="POST" commandName="postVacancyTrainingCenterForm" onsubmit="return validateFields();" >
@@ -251,13 +257,13 @@ function searchVacancy(){
                                </li>
                             </ul>
                           </div>
-                           <cf:input path="loginId" type="hidden" class="form-control" value="${loginUserS.loginDetails.loginId }" />
+                           <cf:input path="loginId" id="loginId" type="hidden" class="form-control" value="${loginUserS.loginDetails.loginId }" />
                          <cf:input path="noOfVacancy" type="text" maxlength="3" class="form-control" />
                         </div>
                       </div>
                       <input type="submit" style="margin-top:20px;"  class="btn login-btn pull-right show-details-vacancy collapsed"  data-target="#show-result" aria-expanded="false" value="Create">
-                    <a href="#testt"  onclick="searchVacancy();" style="margin-top:20px; margin-right: 20px;"  class="btn login-btn pull-right"   >Search</a>
-                  
+                      <a href="#testt"  onclick="searchVacancy();" style="margin-top:20px; margin-right: 20px;"  class="btn login-btn pull-right"   >Search</a>
+                 	  <input type="button" id="btnExport" style="margin-top:20px; margin-right: 20px;"  class="btn login-btn pull-right" value="Download" />
                     
                     </div>
                     <div class="col-md-3 hidden-xs"></div>
@@ -272,6 +278,7 @@ function searchVacancy(){
                   </legend>
                   <div class="row">
                     <div class="col-xs-12"> 
+                    <div id="dvData">
                       <!-- table -->
                       <table  class="table table-bordered table-responsive table-striped table-hover">
                         <thead>
@@ -287,6 +294,7 @@ function searchVacancy(){
                         <tbody id="newTable">
                         </tbody>
                       </table>
+                      </div>
                       </div>
                   </div>
                 </fieldset>

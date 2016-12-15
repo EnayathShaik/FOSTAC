@@ -34,3 +34,9 @@ function pan_validate(id, pan) {
 	}
 	
 }
+
+$("#btnExport").click(function (e) {
+	alert('sdf');
+    window.open('data:application/vnd.ms-excel,' + $('#dvData').html());
+    e.preventDefault();
+});
