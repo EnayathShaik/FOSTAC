@@ -45,6 +45,9 @@ public class SearchVacancy extends HttpServlet {
 	 */
 	protected void callPost(HttpServletRequest request, HttpServletResponse response,String loginId,int profileCode) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		System.out.println("loginId == "+loginId);
+		
 		response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 		String name = (request.getQueryString());
@@ -91,7 +94,7 @@ public class SearchVacancy extends HttpServlet {
 		String newList=null;
 		System.out.println("district 0");
 		String sql ="";
-		if(n1.length==5 && profileCode==5){
+		/*if(n1.length==5 && profileCode==5){
 			sql = "select pvtc.postvacancytrainingcenterid , ct.coursetype , cn.coursename , pvtc.trainingdate , pvtc.requiredexp , pvtc.noofvacancy,pvtc.loginid "+
 					" from postvacancytrainingcenter as pvtc "+
 					" inner join coursetype as ct on ct.coursetypeid = pvtc.coursetype "+
@@ -101,7 +104,10 @@ public class SearchVacancy extends HttpServlet {
 				" inner join coursetype as ct on ct.coursetypeid = pvtc.coursetype "+
 				" inner join coursename as cn on cn.coursenameid = pvtc.coursename ";
 			
-		}
+		}*/
+		
+		
+		sql = " select pvtc.postvacancytrainingcenterid , ct.coursetype , cn.coursename , pvtc.trainingdate ,pvtc.requiredexp , pvtc.noofvacancy,pvtc.loginid  from postvacancytrainingcenter as pvtc   inner join coursetype as ct on ct.coursetypeid = pvtc.coursetype    inner join coursename as cn on cn.coursenameid = pvtc.coursename inner join personalinformationtrainingpartner D on(pvtc.trainingcenter=D.personalinformationtrainingpartnerid) inner join logindetails E on(D.logindetails=E.ID) where E.loginid ='"+loginId+"'";
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
 		System.out.println(list.size());

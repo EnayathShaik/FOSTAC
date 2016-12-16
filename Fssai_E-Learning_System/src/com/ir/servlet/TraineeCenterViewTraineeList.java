@@ -47,7 +47,7 @@ public class TraineeCenterViewTraineeList extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-		
+		System.out.println("*******"+loginId);
 		
 		Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
@@ -56,7 +56,8 @@ public class TraineeCenterViewTraineeList extends HttpServlet {
 		String newList=null;
 		System.out.println("district 0");
 		String sql ="";
-		sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,A.trainername from trainingcalendar A inner join coursetype B on(A.coursetype=B.coursetypeid)inner join coursename C on(A.coursename=C.coursenameid)";
+		//sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,A.trainername from trainingcalendar A inner join coursetype B on(A.coursetype=B.coursetypeid)inner join coursename C on(A.coursename=C.coursenameid)";
+		sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,A.trainername from trainingcalendar A inner join coursetype B on(A.coursetype=B.coursetypeid) inner join coursename C on(A.coursename=C.coursenameid) inner join personalinformationtrainingpartner D on(A.trainingcenter=D.personalinformationtrainingpartnerid) inner join logindetails E on(D.logindetails=E.ID) where E.loginid ='"+loginId+"'";
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
 		System.out.println(list.size());

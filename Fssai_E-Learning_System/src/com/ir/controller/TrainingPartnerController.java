@@ -284,6 +284,28 @@ public class TrainingPartnerController {
 		model.addAttribute("trainingpartnerpaymentconfirmation" , gson.toJson(trainingpartnerpaymentconfirmation));
 		return "trainingpartnerpaymentconfirmation";
 	}
+	
+	@RequestMapping(value="/trainingpartnermarkAttendence" , method=RequestMethod.GET)
+	public String trainingpartnermarkAttendence(@ModelAttribute("trainingpartnermarkAttendence") TrainingPartnerTrainingCalender trainingpartnerpaymentconfirmation,HttpSession session,BindingResult result , Model model){
+		if(result.hasErrors()){
+			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
+			System.out.println(result.getErrorCount());
+			System.out.println(result.getAllErrors());
+			return "trainingpartnermarkAttendence";
+		}
+		
+		List<CourseType> courseTypes = trainingPartnerService.courseTypes();
+		//List<CourseName> courseNames = trainingPartnerService.getCourseNameList();
+		trainingpartnerpaymentconfirmation.setCourseTypes(courseTypes);
+		List<IntStringBean> trainerList = trainingPartnerService.getTrainerList();
+		trainingpartnerpaymentconfirmation.setTrainerList(trainerList);
+//		trainingpartnerpaymentconfirmation.setCourseNames(courseNames);
+		List<StringStringBean> statusList= trainingPartnerService.getStatusList();
+		trainingpartnerpaymentconfirmation.setStatusList(statusList);
+		Gson gson = new Gson();
+		model.addAttribute("trainingpartnermarkAttendence" , gson.toJson(trainingpartnerpaymentconfirmation));
+		return "trainingpartnermarkAttendence";
+	}
 	@RequestMapping(value="/updateApplicationStatusForEnrolledVacancy" , method=RequestMethod.POST)
 	@ResponseBody
 	  public void updateApplicationStatusForEnrolledVacancy(@RequestBody PostVacancyTrainingCenterBean postVacancyTrainingCenterBean ,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException {	
