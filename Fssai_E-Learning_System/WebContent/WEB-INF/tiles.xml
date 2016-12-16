@@ -498,6 +498,11 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainingPartner/trainingpartnerpaymentconfirmation.jsp" />
 	</definition>
+	<definition name="trainingpartnermarkAttendence" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainingPartner/trainingpartnermarkAttendence.jsp" />
+	</definition>
+	
 	<definition name="trainingpartnerviewtraineelist" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainingPartner/trainingpartnerviewtraineelist.jsp" />
