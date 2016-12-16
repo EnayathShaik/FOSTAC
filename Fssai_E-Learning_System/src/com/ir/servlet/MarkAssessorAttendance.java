@@ -29,6 +29,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import com.google.gson.Gson;
+import com.ir.constantes.DBUtil;
 import com.ir.model.AdminUserManagement;
 import com.ir.model.City;
 import com.ir.model.District;
@@ -78,7 +79,7 @@ public class MarkAssessorAttendance extends HttpServlet {
 				}
 				Connection conn = null;
 				try {
-					conn = DriverManager.getConnection("jdbc:postgresql://localhost/FSSAI","postgres","Fss2iZentech");
+					conn = DriverManager.getConnection(DBUtil.databaseUrl,DBUtil.dbUsername,DBUtil.dbPassword);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

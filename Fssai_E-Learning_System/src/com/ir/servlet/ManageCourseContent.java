@@ -21,6 +21,8 @@ import org.hibernate.cfg.Configuration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
+import com.ir.constantes.DBUtil;
+
 /**
  * Servlet implementation class DeleteState
  */
@@ -92,7 +94,7 @@ public class ManageCourseContent extends HttpServlet {
 		}
 		Connection conn = null;
 		try {
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost/postgres","postgres","Fss2iZentech");
+			conn = DriverManager.getConnection(DBUtil.databaseUrl,DBUtil.dbUsername,DBUtil.dbPassword);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -20,6 +20,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import com.ir.constantes.DBUtil;
 import com.ir.model.City;
 import com.ir.service.PageLoadService;
 import com.ir.service.impl.PageLoadServiceImpl;
@@ -57,7 +58,7 @@ public class CheckAadharTrainee extends HttpServlet {
 				}
 				Connection conn = null;
 				try {
-					conn = DriverManager.getConnection("jdbc:postgresql://localhost/FSSAI","postgres","Fss2iZentech");
+					conn = DriverManager.getConnection(DBUtil.databaseUrl,DBUtil.dbUsername,DBUtil.dbPassword);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

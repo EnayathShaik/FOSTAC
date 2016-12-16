@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import com.ir.constantes.DBUtil;
 import com.ir.dao.AdminDAO;
 import com.ir.dao.RegistrationDAO;
 import com.ir.form.RegistrationFormTrainee;
@@ -139,7 +140,7 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 		}
          Connection con = null;
 		try {
-			con = DriverManager.getConnection("jdbc:postgresql://localhost/Fssai","postgres","postgres");
+			con = DriverManager.getConnection(DBUtil.databaseUrl,DBUtil.dbUsername,DBUtil.dbPassword);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -4,6 +4,13 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+  
+    <servlet>
+    <servlet-name>ConfigServlet</servlet-name>
+    <servlet-class>com.ir.servlet.config.ConfigServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
   <servlet>
     <servlet-name>spring</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -15,6 +22,7 @@
     <servlet-name>spring</servlet-name>
     <url-pattern>*.fssai</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>Captcha</servlet-name>
     <servlet-class>com.ir.captcha.Captcha</servlet-class>
@@ -23,7 +31,6 @@
     <servlet-name>Captcha</servlet-name>
     <url-pattern>/Captcha.jpg</url-pattern>
   </servlet-mapping>
-  
  
   <servlet>
     <servlet-name>searchCity</servlet-name>
