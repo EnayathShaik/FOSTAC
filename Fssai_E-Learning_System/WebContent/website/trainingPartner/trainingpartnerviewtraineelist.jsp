@@ -24,14 +24,20 @@ function getCourseName(val){
 
 function showDetails(){
 	alert('Data')
-/* 	var courseType =  $("#courseType").val();
-	var courseName =  $("#courseName").val();
-	var trainingDate = $("#trainingDate").val().replace("-","/").replace("-","/");
-	var requiredExp =  $("#requiredExp").val();
-	var noOfVacancy =  $("#noOfVacancy").val(); */
+	var courseType =  $("#selCourseType").val();
+	var courseName =  $("#selCourseName").val();
+	var trainingDate = $("#traineeDate").val().replace("-","/").replace("-","/");
+	var trainingTime =  $("#traineeTime").val();
+	var modeOfTraining =  $("#selTraineeModeOfTraining").val();
+	var paymentStatus =  $("#selTraineeStatus").val();
+	alert('courseType == '+courseType)
+	alert('courseName == '+courseName)
+	alert('trainingDate == '+trainingDate)
+	alert('trainingTime == '+trainingTime)
+	alert('modeOfTraining == '+modeOfTraining)
+	alert('paymentStatus == '+paymentStatus)
 	$(".displayNone").css("display","block");
-	//var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy;
-	var total = "";
+	var total = courseType+"&"+courseName+"&"+trainingDate+"&"+trainingTime+"&"+modeOfTraining+"&"+paymentStatus;;
 	var result="";
 		$.ajax({
 		type: 'post',
@@ -217,26 +223,7 @@ return result;
                                                         </div>
                                                         <select class="form-control" name="selCourseName" id = "selCourseName"> </select>
                                                     </div>
-                                                                      
-                                                    <div class="form-group">
-                                                        <div>
-                                                            <ul class="lab-no">
-                                                                <li class="style-li"><strong>Trainer Name:</strong></li>
-                                                                
-                                                            </ul>
-                                                        </div>
-                                                        <select class="form-control" name="selTrainerNames" id = "selTrainerNames"> </select>
-														<script>
-															var selectTrainerOptions = "";
-															for(var i=0 ; i < trainerList.length; i++)
-																{
-																	selectTrainerOptions += "<option value="+trainerList[i].id+">"+trainerList[i].value+"</option>"
-																	
-																}
-															document.getElementById('selTrainerNames').innerHTML += selectTrainerOptions; 
-														</script>
-														
-                                                    </div>
+                                                   
                                                      
                                                     <div class="form-group">
                                                         <div>
@@ -245,7 +232,7 @@ return result;
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
-                                                        <input type="date" class="form-control">
+                                                        <input type="date" class="form-control" id="traineeDate">
                                                     </div>
 
                                                 </div>
@@ -259,7 +246,7 @@ return result;
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
-                                                        <input type="time" class="form-control">
+                                                        <input type="time" class="form-control" id="traineeTime">
                                                     </div>
                                                                                 
                                                     <div class="form-group">
