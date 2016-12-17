@@ -6,7 +6,7 @@
     <section>
     <div class="container-fluid">
     <div class="col-xs-6 fostac-logo-left">
-		<label id="uniqueId" style="margin-top:20px; font-size: 20px; font-weight: bold;">${loginUserS.loginDetails.loginId}</label>
+		<label id="uniqueId" style="font-size: 20px; font-weight: bold;">${loginUserS.loginDetails.loginId}</label>
 	</div>
             <nav class="navbar navbar-default navbar-fixed-top top-logo-background">
                 <div class="container-fluid">

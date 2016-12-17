@@ -12,26 +12,10 @@
   </div> -->
 </footer>
 
-<!-- core CSS -->
-<link  href="website/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="website/css/font-awesome.min.css" rel="stylesheet" />
-<link href="website/css/animate.min.css" rel="stylesheet" />
-<link href="website/css/main.css" rel="stylesheet" />
-<link href="website/css/responsive.css" rel="stylesheet" />
 
-<link href="website/css/jquery-ui.css" rel="stylesheet">
-<link href="website/css/jquery-ui.structure.css" rel="stylesheet">
-<link href="website/css/jquery-ui.theme.css" rel="stylesheet">
-   
-<link href="website/css/custom.css" rel="stylesheet" />
-<link href="website/css/aos.css" rel="stylesheet" />
-<link href="website/css/owl.carousel.css" rel="stylesheet">
-<link href="website/css/owl.transitions.css" rel="stylesheet">
-<link href="website/css/visibility.css" rel="stylesheet" />
 
  <!-- scripts -->
-   <!--  <script src="website/afterLogin/js/jquery-2.1.0.min.js"></script> -->
-    <script src="website/js/jquery.js"></script> 
+    <script src="website/afterLogin/js/jquery-2.1.0.min.js"></script>
     <script src="website/afterLogin/js/bootstrap.js"></script>
     <script src="website/afterLogin/js/jquery.isotope.min.js"></script> 
 
@@ -43,12 +27,13 @@
     </script>
     <!-- carousel -->
     <script src="website/afterLogin/js/owl.carousel.js"></script>
-    <script src="website/js/validation.js"></script>
     <script>
         $(document).ready(function () {
+
             $("#news").owlCarousel({
+
                 navigation: false, // Show next and prev buttons
-                slideSpeed: 310,
+                slideSpeed: 300,
                 paginationSpeed: 400,
                 singleItem: true,
                 autoPlay: true
