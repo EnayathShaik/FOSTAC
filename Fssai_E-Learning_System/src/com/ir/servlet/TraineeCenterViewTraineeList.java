@@ -57,7 +57,11 @@ public class TraineeCenterViewTraineeList extends HttpServlet {
 		System.out.println("district 0");
 		String sql ="";
 		//sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,A.trainername from trainingcalendar A inner join coursetype B on(A.coursetype=B.coursetypeid)inner join coursename C on(A.coursename=C.coursenameid)";
-		sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,A.trainername from trainingcalendar A inner join coursetype B on(A.coursetype=B.coursetypeid) inner join coursename C on(A.coursename=C.coursenameid) inner join personalinformationtrainingpartner D on(A.trainingcenter=D.personalinformationtrainingpartnerid) inner join logindetails E on(D.logindetails=E.ID) where E.loginid ='"+loginId+"'";
+		sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,A.trainername " +
+				"from trainingcalendar A inner join coursetype B on(A.coursetype=B.coursetypeid)" +
+				" inner join coursename C on(A.coursename=C.coursenameid)" +
+				" inner join personalinformationtrainingpartner D on(A.trainingcenter=D.personalinformationtrainingpartnerid) " +
+				"inner join logindetails E on(D.logindetails=E.ID) where E.loginid ='"+loginId+"'";
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
 		System.out.println(list.size());

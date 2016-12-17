@@ -90,11 +90,16 @@
 		return result;
 	}
 	function showDetails() {
-		/* 	var courseType =  $("#courseType").val();
-			var courseName =  $("#courseName").val();
-			var trainingDate = $("#trainingDate").val().replace("-","/").replace("-","/");
-			var requiredExp =  $("#requiredExp").val();
-			var noOfVacancy =  $("#noOfVacancy").val(); */
+		
+		alert('data');
+		 	var courseType =  $("#selCourseType").val();
+		 	var trainername =  $('#selTrainerName').val();
+			var courseName =  $("#selCourseName").val();
+			alert("courseType "+courseType); 
+			alert("trainername "+trainername);
+			alert("courseName "+courseName);
+			
+			
 		$(".displayNone").css("display", "block");
 		//var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy;
 		var total = "";

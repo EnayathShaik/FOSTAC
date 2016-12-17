@@ -53,6 +53,7 @@ function editApplicationStatus(){
 	      });
 }
 function showDetail(){
+	
 	alert("Fetching details to mark attendance..");
 	
 	$('#tblAssessorCourses tr').remove();
@@ -96,14 +97,20 @@ function showDetail(){
 
 }
 function showDetails() {
-	/* 	var courseType =  $("#courseType").val();
-		var courseName =  $("#courseName").val();
-		var trainingDate = $("#trainingDate").val().replace("-","/").replace("-","/");
-		var requiredExp =  $("#requiredExp").val();
-		var noOfVacancy =  $("#noOfVacancy").val(); */
+	alert('data');
+	
+		var courseType =  $("#selCourseType").val();
+		var courseName =  $("#selCourseName").val();
+		var trainingDate = $("#trainingdate").val().replace("-","/").replace("-","/");
+	 
+		alert('courseType == '+courseType);
+		alert('courseName == '+courseName);
+		alert('trainingDate == '+trainingDate);
+		
+		
+		
 	$(".displayNone").css("display", "block");
-	//var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy;
-	var total = "";
+	var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate;
 	var result = "";
 	$.ajax({
 		type : 'post',

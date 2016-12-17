@@ -76,11 +76,19 @@ return result;
 }
 
 function showDetails(){
-	/* 	var courseType =  $("#courseType").val();
-		var courseName =  $("#courseName").val();
-		var trainingDate = $("#trainingDate").val().replace("-","/").replace("-","/");
-		var requiredExp =  $("#requiredExp").val();
-		var noOfVacancy =  $("#noOfVacancy").val(); */
+	alert('data');
+	 	var courseType =  $("#selCourseType").val();
+		var courseName =  $("#selCourseName").val();
+		var TrainerNames =  $("#selTrainerNames").val(); 
+		var assesmentDate = $('#assessmentDate').val();
+		var assesmentTime = $('#assessmentTime').val();
+		
+		alert("courseType" + courseType);
+		alert("courseName" + courseName);
+		alert("TrainerNames" + TrainerNames);
+		alert("assesmentDate" + assesmentDate);
+		alert("assesmentTime" + assesmentTime);
+		
 		$(".displayNone").css("display","block");
 		//var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy;
 		var total = "";
@@ -243,7 +251,7 @@ function showDetails(){
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
-                                                        <input type="date" class="form-control">
+                                                        <input type="date" class="form-control" id="assessmentDate" name="assessmentDate">
                                                     </div>
                                                     <div class="form-group">
                                                         <div>
@@ -252,7 +260,7 @@ function showDetails(){
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
-                                                        <input type="time" class="form-control">
+                                                        <input type="time" class="form-control" id="assessmentTime" name="assessmentTime">
                                                     </div>
                                                      <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails();return false">Show Details</button>
                                                 </div>

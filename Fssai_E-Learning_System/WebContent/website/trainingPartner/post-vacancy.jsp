@@ -83,15 +83,25 @@ function validateFields(){
 <script type="text/javascript">
 function searchVacancy(){
 	var loginID = $("#loginId").val();
-	alert(loginID)
+	alert(loginID);
 	
 	var courseType =  $("#courseType").val();
 	var courseName =  $("#courseName").val();
 	var trainingDate = $("#trainingDate").val().replace("-","/").replace("-","/");
 	var requiredExp =  $("#requiredExp").val();
 	var noOfVacancy =  $("#noOfVacancy").val();
+	
+	alert('courseType == '+courseType);
+	alert('courseName == '+courseName);
+	alert('trainingDate == '+trainingDate);
+	alert('requiredExp == '+requiredExp);
+	alert('noOfVacancy == '+noOfVacancy);
+	
+	
 	$(".displayNone").css("display","block");
+	
 	var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy+"&loginid="+loginID;
+	alert("total "+total);
 	var result="";
 		$.ajax({
 		type: 'post',

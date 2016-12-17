@@ -46,6 +46,19 @@
 
 	}
 	function showDetail() {
+		alert('data');
+		//
+		var courseType =  $("#selCourseType").val();
+		var courseName =  $("#selCourseName").val();
+		var trainingDate = $("#traineeDate").val().replace("-","/").replace("-","/");
+		var trainingTime =  $("#traineeTime").val();
+		var trainerName = $('#selTrainerNames').val();
+		alert('courseType == '+courseType);
+		alert('courseName == '+courseName);
+		alert('trainingDate == '+trainingDate);
+		alert('trainingTime == '+trainingTime);
+	
+		
 		$('#tblAssessorCourses tr').remove();
 		$('#tblAssessorCourses').append(
 				'<thead>' + '<tr class="background-open-vacancies">'
@@ -120,14 +133,21 @@
 	}
 
 	function showDetails() {
-		/* 	var courseType =  $("#courseType").val();
-			var courseName =  $("#courseName").val();
+		alert('data');
+		 	var courseType =  $("#selCourseType").val();
+			var courseName =  $("#selCourseName").val();
 			var trainingDate = $("#trainingDate").val().replace("-","/").replace("-","/");
-			var requiredExp =  $("#requiredExp").val();
-			var noOfVacancy =  $("#noOfVacancy").val(); */
+			var trainerName =  $("#selTrainerNames").val();
+			var trainingtime =  $("#trainingtime").val(); 
+			alert('courseType '+courseType);
+			alert('courseName '+courseName);
+			alert('trainingDate '+trainingDate);
+			alert('trainerName '+trainerName);
+			alert('trainingtime '+trainingtime);
+			
 		$(".displayNone").css("display", "block");
-		//var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy;
-		var total = "";
+		var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&trainingTime"+trainingtime;
+		alert("total "+total);
 		var result = "";
 		$.ajax({
 			type : 'post',

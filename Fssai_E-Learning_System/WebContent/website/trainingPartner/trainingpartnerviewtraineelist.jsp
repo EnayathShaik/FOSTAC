@@ -23,28 +23,23 @@ function getCourseName(val){
 <script>
 
 function showDetails(){
-	alert('Data')
+	alert('Hoiee');
+	alert('Data......');
 	var courseType =  $("#selCourseType").val();
 	var courseName =  $("#selCourseName").val();
 	var trainingDate = $("#traineeDate").val().replace("-","/").replace("-","/");
 	var trainingTime =  $("#traineeTime").val();
-	var modeOfTraining =  $("#selTraineeModeOfTraining").val();
-	var paymentStatus =  $("#selTraineeStatus").val();
-	alert('courseType == '+courseType)
-	alert('courseName == '+courseName)
-	alert('trainingDate == '+trainingDate)
-	alert('trainingTime == '+trainingTime)
-	alert('modeOfTraining == '+modeOfTraining)
-	alert('paymentStatus == '+paymentStatus)
+
+	
+	var total = courseType+"&"+courseName+"&"+trainingDate+"&"+trainingTime;
+	alert("total "+total);
 	$(".displayNone").css("display","block");
-	var total = courseType+"&"+courseName+"&"+trainingDate+"&"+trainingTime+"&"+modeOfTraining+"&"+paymentStatus;;
 	var result="";
-		$.ajax({
-		type: 'post',
+	$.ajax({
+		type: 'POST',
 		url: 'traineeCenterViewTraineeList.jspp?'+ total,
 		async: false, 
 		success: function (data){
-			alert(data)
 		$('#newTable').show();
 		//var mainData = JSON.stringify(data);
 		var mainData1 = jQuery.parseJSON(data);
@@ -57,7 +52,7 @@ function showDetails(){
 		});
 		}
 		});
-	return result;
+	return result; 
 }
 
 function showDetail(){
