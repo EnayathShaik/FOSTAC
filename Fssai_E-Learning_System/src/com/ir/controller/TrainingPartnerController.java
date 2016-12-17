@@ -33,21 +33,16 @@ import com.ir.form.TrainingCalendarForm;
 import com.ir.form.trainingPartner.TrainingPartnerSearch;
 import com.ir.form.trainingPartner.TrainingPartnerSearchForm;
 import com.ir.model.CourseType;
-import com.ir.model.District;
 import com.ir.model.FeedbackForm;
-import com.ir.model.FeedbackMaster;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.PostVacancyTrainingCenter;
 import com.ir.model.PostVacancyTrainingCenterBean;
-import com.ir.model.State;
 import com.ir.model.TrainingPartnerCalendarForm;
 import com.ir.model.TrainingPartnerTrainingCalender;
 import com.ir.model.Utility;
-import com.ir.service.AdminService;
 import com.ir.service.LoginService;
 import com.ir.service.TraineeService;
 import com.ir.service.TrainingPartnerService;
-import com.ir.util.Profiles;
 
 @Controller
 public class TrainingPartnerController {

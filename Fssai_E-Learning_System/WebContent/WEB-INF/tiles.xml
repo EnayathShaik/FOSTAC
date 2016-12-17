@@ -114,9 +114,9 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/knowYourTrainingPartner.jsp" />
 	</definition>
-	<definition name="freeFoodSafetyCertification" extends="base.before.login">
+	<definition name="basicFoodSafetyCertification" extends="base.before.login">
 		<put-attribute name="title" value="Fssai E-Learning System" />
-		<put-attribute name="body" value="/website/freeFoodSafetyCertification.jsp" />
+		<put-attribute name="body" value="/website/basicFoodSafetyCertification.jsp" />
 	</definition>
 	<definition name="certificationProcess" extends="base.before.login">
 		<put-attribute name="title" value="Fssai E-Learning System" />

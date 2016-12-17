@@ -1017,76 +1017,26 @@ a.accordion-toggle  i{
   color: #fff;
 }
 
-.nav-tabs>li{
-  margin-bottom: 0px;
-  border-bottom: transparent;
-  background:#8498a6;
-  border:0px;
-  display:inline-block;
-  
-	
-}
-
-.nav-tabs{
-  border-bottom: transparent;
-  border-right: transparent;
-}
-
-.nav-tabs>li>a {
-      background: transparent;
-    color: #666;
-    border-radius: 0;
-    border: 0 none;
-    line-height: 24px;
-    margin-right: 1px;
-    padding: 13px 15px;
-    border: 1px solid #c1bebe;
-    letter-spacing: 0.7px;
-	display:block;
-
-}
-
-.nav-tabs li:last-child{
-  border-bottom: 0 none;
-} 
-
-.nav-stacked>li+li{
-  margin-top: 0;
-}
-
 
 .nav-tabs>li>a{
+  background: #e6511a;
   color:#fff;
   font-size:15px;
-  border:0 !important;
-  display:block;
 }
 
 .nav-tabs>li>a:hover{
-  background: #758788;
-  color:#fff !important;
-  border:0 !important;
-  display:block;
+  background: #ff4500;
+  color:#fff;
 }
-
-
-
-
-
-
 
 .nav-tabs>li.active>a, 
 .nav-tabs>li.active>a:hover, 
 .nav-tabs>li.active>a:focus {
   
-  color:#fff !important;
-  background: #758788;
+  color:#fff;
+  background: #e6511a;
   position: relative;
 }
-
-
-
-
 
 .nav-tabs>li.active>a:after {
   position: absolute;
@@ -1107,15 +1057,13 @@ a.accordion-toggle  i{
 
 .tab-content{
      padding: 20px;
-    border: 1px solid #adadde;
+    border: 1px solid #e4e4e5;
     margin-top: -1px;
-	background:#8da4b4 !important;
+	background:#f8f8f8;
 }
 
 
-.tab-content:hover { background:#758788 !important;}
-
-
+.tab-content:hover { background:#f3f3ff;}
 
 
 .tab-content h2{
@@ -1124,9 +1072,7 @@ a.accordion-toggle  i{
 
 .tab-content img{
   border-radius: 4px;
-}
-
-.testimonial h2{
+}.testimonial h2{
   margin-top: 0;
 }
 

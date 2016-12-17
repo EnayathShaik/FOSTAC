@@ -10,6 +10,7 @@ import com.ir.model.CourseName;
 import com.ir.model.District;
 import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageAssessmentAgency;
+import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.State;
 import com.ir.model.Title;
@@ -101,6 +102,21 @@ public class PageLoadServiceImpl implements PageLoadService {
 	public List basicCourseList() {
 		List basicCourseList = pageLoadDao.basicCourseList();
 		return basicCourseList;
+	}
+
+	@Override
+	public List<CourseName> getCouserNameList(int coursetypeid) {
+		return pageLoadDao.getCouserNameList(coursetypeid);
+	}
+
+	@Override
+	public List<String> getTrainingPartnerNameList() {
+		return pageLoadDao.getTrainingPartnerNameList();
+	}
+
+	@Override
+	public List<ManageCourseContent> getManageCourseContentList(int coursetypeid) {
+		return pageLoadDao.getManageCourseContentList(coursetypeid);
 	}
 
 }

@@ -57,7 +57,7 @@
         <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
               <div class="row">
                <div class="col-md-2 col-xs-12"></div>              
-                <div class="col-md-8 col-xs-12">
+                <div class="col-md-10 col-xs-14">
                     <!-- tabs navigation -->
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#course">Course Name</a></li>
@@ -69,18 +69,13 @@
                     <!-- content for above tabs -->
                     <div class="tab-content">
                         <div id="course" class="tab-pane fade in active">
-                            <ul>
-                                <li class="fsize">Basics of Food Safety</li>
-                            </ul>
+                        <ul id="courseul"></ul>
                         </div>
                         <div id="training" class="tab-pane fade">
-                            <ul>
-                                <li class="fsize">FSSAI</li>
-                            </ul>
+                        <ul id="trainingul"></ul>
                         </div>
                         <div id="duration" class="tab-pane fade">
-                            <ul>
-                                <li class="fsize">2 Hrs</li>
+                            <ul id="durationul">
                             </ul>
                         </div>
                         <div id="who" class="tab-pane fade">
@@ -89,12 +84,11 @@
                             </ul>
                         </div>
                         <div id="curriculum" class="tab-pane fade">
-                            <ul id="video">
-                            <h4>PPT</h4>                            
-                                <li class="fsize"><a href="file:///D:/sita/Sita/FOSTAC/Website/ppts/Full PPT hindi translated 2.pdf" target="_blank">Good Hygiene in Streat Food</a></li>
+                            <h4>PPT</h4>   
+                            <ul id="ppts">                         
+                              </ul>
                               <h4>Videos</h4>
-                                <li class="fsize"><a href="https://www.youtube.com/watch?v=_pSz7G_hV8k&feature=youtu.be" target="_blank">Food Safety and Hygiene</a></li>
-                                <li class="fsize"><a href="https://www.youtube.com/watch?v=vtEjKle_XeI&feature=youtu.be" target="_blank">Mislabelled Food</a></li>
+                              <ul id="vedios">
                             </ul>
                         </div>
                     </div>
@@ -102,6 +96,27 @@
                 <div class="col-md-2 col-xs-12"></div>
             </div>
         </div>
+        <script src="website/js/jquery.js"></script> 
+		<script src="website/js/bootstrap.min.js"></script> 
+		<script src="website/js/jquery.isotope.min.js"></script> 
+        
+        <script type="text/javascript">
+        var cousernamelist=${courseNameList};
+        for(var index=0;index<cousernamelist.length;index++){
+        	 $('#courseul').append(' <li class="fsize">'+cousernamelist[index].coursename+'</li>');
+        	 $('#durationul').append('<li class="fsize">'+cousernamelist[index].courseduration+'</li>');
+        }
+        var trainingPartnerNameList=${trainingPartnerNameList};
+        for(var index=0;index<trainingPartnerNameList.length;index++){
+        	 $('#trainingul').append(' <li class="fsize">'+trainingPartnerNameList[index]+'</li>');
+        }
+        var manageCourseContents=${manageCourseContents};
+        for(var index=0;index<manageCourseContents.length;index++){
+        	if(manageCourseContents[index].contentTypeInput==="PPTs"){
+        		$('#ppts').append('<li class="fsize"><a href="'+manageCourseContents[index].contentLinkInput+'" target="_blank">'+manageCourseContents[index].contentNameInput+'</a></li>');
+        	}else if(manageCourseContents[index].contentTypeInput==="Videos"){
+        		$('#vedios').append('<li class="fsize"><a href="'+manageCourseContents[index].contentLinkInput+'" target="_blank">'+manageCourseContents[index].contentNameInput+'</a></li>');
+        	}
+       }
+        </script>
     </section>
- 
-    

@@ -8,6 +8,7 @@ import com.ir.model.CourseName;
 import com.ir.model.District;
 import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageAssessmentAgency;
+import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.State;
 import com.ir.model.Title;
@@ -27,4 +28,7 @@ public interface PageLoadService {
 	public List<ManageTrainingPartner> tpList();
 	public List<ManageAssessmentAgency> aaList();
 	public List basicCourseList();
+	public List<CourseName> getCouserNameList(int coursetypeid);
+	public List<String> getTrainingPartnerNameList();
+	public List<ManageCourseContent> getManageCourseContentList(int i);
 }

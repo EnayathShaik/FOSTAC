@@ -35,7 +35,7 @@
       <div class="features">
         <div class="col-md-12 col-xs-12 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
           <div class="feature-wrap"> <img class="img-responsive center-block" src="website/images/fssai-certification-logo.jpg" width="132" height="87">
-            <h3>Free Training on Food Safety</h3>
+            <h3>Basic Training On Food Safety</h3>
           </div>
         </div>
         <!--/.col-md-4-->
@@ -59,7 +59,7 @@
 <!--/#feature-->
 <section id="course">
   <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-  <div class="row"><h2>Free Training on Food Safety</h2></div>
+  <div class="row"><h2>Basic Training On Food Safety</h2></div>
     <div class="row">
 <div class="col-md-12 col-sm-12">
 <table width="100%" border="0" cellpadding="10" cellspacing="10" class="table-border">

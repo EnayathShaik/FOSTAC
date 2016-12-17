@@ -136,8 +136,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="row">
       <div class="features">
         <div class="col-md-3 col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-          <div class="feature-wrap"> <a href="freeFoodSafetyCertification.fssai"><img class="img-responsive center-block" src="website/images/fssai-certification-logo.jpg" width="132" height="87"></a>
-            <h3><a href="freeFoodSafetyCertification.fassi">Basic Training on<br>
+          <div class="feature-wrap"> <a href="basicFoodSafetyCertification.fssai"><img class="img-responsive center-block" src="website/images/fssai-certification-logo.jpg" width="132" height="87"></a>
+            <h3><a href="basicFoodSafetyCertification.fssai">Basic Training on<br>
               Food Safety</a></h3>
           </div>
         </div>

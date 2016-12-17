@@ -45,7 +45,7 @@
 <ct:if test="${not empty tpList }">
 <ct:forEach varStatus="loop" var="tpList" items="${tpList}">
 <ul>
-<li><a href="trainingPartnerSearch.fssai?trainingPartnerId=${tpList.manageTrainingPartnerId}" style="color:#c52d2f;">${tpList.trainingPartnerName}</a></li>            
+<li><a href="http://${tpList.websiteUrl}" style="color:#c52d2f;" target="blank">${tpList.trainingPartnerName}</a></li>            
 </ul>
 </ct:forEach>
 </ct:if>

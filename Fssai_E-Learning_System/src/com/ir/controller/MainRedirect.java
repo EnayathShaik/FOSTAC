@@ -1,7 +1,5 @@
 package com.ir.controller;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -10,21 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.google.gson.Gson;
 import com.ir.form.LoginForm;
-import com.ir.form.RegistrationFormTrainer;
 import com.ir.model.CourseName;
-import com.ir.model.LoginDetails;
 import com.ir.model.ManageAssessmentAgency;
+import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
-import com.ir.model.State;
-import com.ir.model.Title;
-import com.ir.model.TrainingPartner;
 import com.ir.service.PageLoadService;
-import com.ir.service.RegistrationServiceTrainee;
+import com.ir.util.Profiles;
 
 @Controller
 public class MainRedirect {
@@ -51,16 +47,34 @@ public class MainRedirect {
 		   return basicCourseList;
 	   }
 	   @RequestMapping(value="/basic-level" ,method = RequestMethod.GET)
-	   public String basicLevel() {
-		return "basic-level";
+	   public String basicLevel(@ModelAttribute("login") LoginForm loginForm,HttpSession session,BindingResult result ,  Model model) {
+		   List<CourseName> courseNameList=pageLoadService.getCouserNameList(1);
+		   List<String> trainingPartnerNameList=pageLoadService.getTrainingPartnerNameList();
+		   List<ManageCourseContent> manageCourseContents=pageLoadService.getManageCourseContentList(1);
+		   model.addAttribute("courseNameList", new Gson().toJson(courseNameList));
+		   model.addAttribute("trainingPartnerNameList", new Gson().toJson(trainingPartnerNameList));
+		   model.addAttribute("manageCourseContents", new Gson().toJson(manageCourseContents));
+		   return "basic-level";
 	   }
 	   
 	   @RequestMapping(value="/advance-level" ,method = RequestMethod.GET)
-	   public String advanceLevel() {
+	   public String advanceLevel(@ModelAttribute("login") LoginForm loginForm,HttpSession session,BindingResult result ,  Model model) {
+		   List<CourseName> courseNameList=pageLoadService.getCouserNameList(2);
+		   List<String> trainingPartnerNameList=pageLoadService.getTrainingPartnerNameList();
+		   List<ManageCourseContent> manageCourseContents=pageLoadService.getManageCourseContentList(2);
+		   model.addAttribute("courseNameList", new Gson().toJson(courseNameList));
+		   model.addAttribute("trainingPartnerNameList", new Gson().toJson(trainingPartnerNameList));
+		   model.addAttribute("manageCourseContents", new Gson().toJson(manageCourseContents));
 		   return "advance-level";
 	   }
 	   @RequestMapping(value="/special-level" ,method = RequestMethod.GET)
-	   public String specialLevel() {
+	   public String specialLevel(@ModelAttribute("login") LoginForm loginForm,HttpSession session,BindingResult result ,  Model model) {
+		   List<CourseName> courseNameList=pageLoadService.getCouserNameList(3);
+		   List<String> trainingPartnerNameList=pageLoadService.getTrainingPartnerNameList();
+		   List<ManageCourseContent> manageCourseContents=pageLoadService.getManageCourseContentList(3);
+		   model.addAttribute("courseNameList", new Gson().toJson(courseNameList));
+		   model.addAttribute("trainingPartnerNameList", new Gson().toJson(trainingPartnerNameList));
+		   model.addAttribute("manageCourseContents", new Gson().toJson(manageCourseContents));
 		   return "special-level";
 	   }
 	   @RequestMapping(value="/fostac" ,method = RequestMethod.GET)
@@ -88,9 +102,15 @@ public class MainRedirect {
 	   public String knowYourTrainingPartner() {
 		   return "knowYourTrainingPartner";
 	   }
-	   @RequestMapping(value="/freeFoodSafetyCertification" ,method = RequestMethod.GET)
-	   public String freeFoodSafetyCertification() {
-		   return "freeFoodSafetyCertification";
+	   @RequestMapping(value="/basicFoodSafetyCertification" ,method = RequestMethod.GET)
+	   public String basicFoodSafetyCertification(@ModelAttribute("login") LoginForm loginForm,HttpSession session,BindingResult result ,  Model model) {
+		   List<CourseName> courseNameList=pageLoadService.getCouserNameList(1);
+		   List<String> trainingPartnerNameList=pageLoadService.getTrainingPartnerNameList();
+		   List<ManageCourseContent> manageCourseContents=pageLoadService.getManageCourseContentList(1);
+		   model.addAttribute("courseNameList", new Gson().toJson(courseNameList));
+		   model.addAttribute("trainingPartnerNameList", new Gson().toJson(trainingPartnerNameList));
+		   model.addAttribute("manageCourseContents", new Gson().toJson(manageCourseContents));
+		   return "basicFoodSafetyCertification";
 	   }
 	   @RequestMapping(value="/certificationProcess" ,method = RequestMethod.GET)
 	   public String certificationProcess() {

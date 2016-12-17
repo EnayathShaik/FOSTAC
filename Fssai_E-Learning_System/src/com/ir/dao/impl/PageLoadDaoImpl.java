@@ -3,7 +3,6 @@ package com.ir.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,12 +13,11 @@ import com.ir.dao.PageLoadDao;
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.KindOfBusiness;
-import com.ir.model.LoginDetails;
 import com.ir.model.ManageAssessmentAgency;
+import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.State;
 import com.ir.model.Title;
-import com.ir.model.TrainingPartner;
 
 public class PageLoadDaoImpl implements PageLoadDao {
 
@@ -173,8 +171,46 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		session.close();
 		return basicCourseList;
 	}
-
-
-
-
+	@Override
+	public List<CourseName> getCouserNameList(int coursetypeid) {
+		Session session = sessionFactory.openSession();
+		Query query = session.createSQLQuery("select coursename,courseduration from coursename where online ='Online' and status='A' and coursetypeid="+coursetypeid);
+		List<Object[]> courseNameList = query.list();
+		List<CourseName> courseNames=new ArrayList<>();
+		for(int index=0;index<courseNameList.size();index++){
+			Object[] objects=courseNameList.get(index);
+			CourseName courseName=new CourseName();
+			courseName.setCoursename(objects[0].toString());
+			courseName.setCourseduration(objects[1].toString());
+			courseNames.add(courseName);
+		}
+		session.close();
+		return courseNames;
+	}
+	@Override
+	public List<String> getTrainingPartnerNameList() {
+		Session session = sessionFactory.openSession();
+		String sql="select trainingpartnername from ManageTrainingPartner";
+		Query query = session.createSQLQuery(sql);
+		List<String> trainingPartnerNameList = query.list();
+		session.close();
+		return trainingPartnerNameList;
+	}
+	@Override
+	public List<ManageCourseContent> getManageCourseContentList(int coursetypeid) {
+		Session session = sessionFactory.openSession();
+		Query query = session.createSQLQuery("select contentnameinput,contentlinkinput,contenttypeinput from managecoursecontent  where coursetypeinput="+coursetypeid);
+		List<ManageCourseContent> manageCourseContents =new ArrayList<>();
+		List<Object[]> manageCourseObjArrContents = query.list();
+		for(int index=0;index<manageCourseObjArrContents.size();index++){
+			ManageCourseContent manageCourseContent=new ManageCourseContent();
+			Object[] mangeCntObArr=manageCourseObjArrContents.get(index);
+			manageCourseContent.setContentNameInput(mangeCntObArr[0].toString());
+			manageCourseContent.setContentLinkInput(mangeCntObArr[1].toString());
+			manageCourseContent.setContentTypeInput(mangeCntObArr[2].toString());
+			manageCourseContents.add(manageCourseContent);
+		}
+		session.close();
+		return manageCourseContents;
+	}
 }

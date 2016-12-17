@@ -373,20 +373,6 @@ a:hover, a:focus{
     margin-top: 40px;
 }
 
-.nav-tabs {
-    border-bottom: 1px solid #dd4108;
-}
-
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
-    color: #20a700;
-    cursor: default;
-    font-weight: 500;
-    background-color: #ffffff;
-    border: 1px solid #dd4108;
-    border-bottom-color: transparent;
-    letter-spacing: 0.8px;
-}
-
 .navbar-default .navbar-toggle{
     border-color: transparent;  
 }
