@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.google.gson.Gson;
+import com.ir.bean.common.PropertyUtils;
 import com.ir.form.LoginForm;
 import com.ir.model.CourseName;
 import com.ir.model.ManageAssessmentAgency;
@@ -48,9 +49,9 @@ public class MainRedirect {
 	   }
 	   @RequestMapping(value="/basic-level" ,method = RequestMethod.GET)
 	   public String basicLevel(@ModelAttribute("login") LoginForm loginForm,HttpSession session,BindingResult result ,  Model model) {
-		   List<CourseName> courseNameList=pageLoadService.getCouserNameList(1);
+		   List<CourseName> courseNameList=pageLoadService.getCouserNameList(Integer.parseInt(PropertyUtils.basicLevel));
 		   List<String> trainingPartnerNameList=pageLoadService.getTrainingPartnerNameList();
-		   List<ManageCourseContent> manageCourseContents=pageLoadService.getManageCourseContentList(1);
+		   List<ManageCourseContent> manageCourseContents=pageLoadService.getManageCourseContentList(Integer.parseInt(PropertyUtils.basicLevel));
 		   model.addAttribute("courseNameList", new Gson().toJson(courseNameList));
 		   model.addAttribute("trainingPartnerNameList", new Gson().toJson(trainingPartnerNameList));
 		   model.addAttribute("manageCourseContents", new Gson().toJson(manageCourseContents));
@@ -59,9 +60,9 @@ public class MainRedirect {
 	   
 	   @RequestMapping(value="/advance-level" ,method = RequestMethod.GET)
 	   public String advanceLevel(@ModelAttribute("login") LoginForm loginForm,HttpSession session,BindingResult result ,  Model model) {
-		   List<CourseName> courseNameList=pageLoadService.getCouserNameList(2);
+		   List<CourseName> courseNameList=pageLoadService.getCouserNameList(Integer.parseInt(PropertyUtils.advanceLevel));
 		   List<String> trainingPartnerNameList=pageLoadService.getTrainingPartnerNameList();
-		   List<ManageCourseContent> manageCourseContents=pageLoadService.getManageCourseContentList(2);
+		   List<ManageCourseContent> manageCourseContents=pageLoadService.getManageCourseContentList(Integer.parseInt(PropertyUtils.advanceLevel));
 		   model.addAttribute("courseNameList", new Gson().toJson(courseNameList));
 		   model.addAttribute("trainingPartnerNameList", new Gson().toJson(trainingPartnerNameList));
 		   model.addAttribute("manageCourseContents", new Gson().toJson(manageCourseContents));
@@ -69,9 +70,9 @@ public class MainRedirect {
 	   }
 	   @RequestMapping(value="/special-level" ,method = RequestMethod.GET)
 	   public String specialLevel(@ModelAttribute("login") LoginForm loginForm,HttpSession session,BindingResult result ,  Model model) {
-		   List<CourseName> courseNameList=pageLoadService.getCouserNameList(3);
+		   List<CourseName> courseNameList=pageLoadService.getCouserNameList(Integer.parseInt(PropertyUtils.specialLevel));
 		   List<String> trainingPartnerNameList=pageLoadService.getTrainingPartnerNameList();
-		   List<ManageCourseContent> manageCourseContents=pageLoadService.getManageCourseContentList(3);
+		   List<ManageCourseContent> manageCourseContents=pageLoadService.getManageCourseContentList(Integer.parseInt(PropertyUtils.specialLevel));
 		   model.addAttribute("courseNameList", new Gson().toJson(courseNameList));
 		   model.addAttribute("trainingPartnerNameList", new Gson().toJson(trainingPartnerNameList));
 		   model.addAttribute("manageCourseContents", new Gson().toJson(manageCourseContents));
@@ -104,9 +105,9 @@ public class MainRedirect {
 	   }
 	   @RequestMapping(value="/basicFoodSafetyCertification" ,method = RequestMethod.GET)
 	   public String basicFoodSafetyCertification(@ModelAttribute("login") LoginForm loginForm,HttpSession session,BindingResult result ,  Model model) {
-		   List<CourseName> courseNameList=pageLoadService.getCouserNameList(1);
+		   List<CourseName> courseNameList=pageLoadService.getCouserNameList(Integer.parseInt(PropertyUtils.basicLevel));
 		   List<String> trainingPartnerNameList=pageLoadService.getTrainingPartnerNameList();
-		   List<ManageCourseContent> manageCourseContents=pageLoadService.getManageCourseContentList(1);
+		   List<ManageCourseContent> manageCourseContents=pageLoadService.getManageCourseContentList(Integer.parseInt(PropertyUtils.basicLevel));
 		   model.addAttribute("courseNameList", new Gson().toJson(courseNameList));
 		   model.addAttribute("trainingPartnerNameList", new Gson().toJson(trainingPartnerNameList));
 		   model.addAttribute("manageCourseContents", new Gson().toJson(manageCourseContents));
