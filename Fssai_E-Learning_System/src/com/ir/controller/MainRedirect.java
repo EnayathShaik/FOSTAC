@@ -14,14 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.google.gson.Gson;
+import com.ir.bean.common.IntStringBean;
 import com.ir.bean.common.PropertyUtils;
 import com.ir.form.LoginForm;
+import com.ir.model.CourseEnrolled;
 import com.ir.model.CourseName;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
+import com.ir.model.Utility;
 import com.ir.service.PageLoadService;
-import com.ir.util.Profiles;
 
 @Controller
 public class MainRedirect {
@@ -47,6 +49,17 @@ public class MainRedirect {
 		   List basicCourseList = pageLoadService.basicCourseList();
 		   return basicCourseList;
 	   }
+	   @RequestMapping(value="/calendarSearch" ,method = RequestMethod.GET)
+	   public String calendarSearch(@ModelAttribute("utility")Utility utility,HttpSession session,BindingResult result ,  Model model) {
+		   List<CourseName> courseNameList=pageLoadService.getCouserNameList(utility.getCourseTypeId());
+		   List<String> trainingPartnerNameList=pageLoadService.getTrainingPartnerNameList();
+		   List<ManageCourseContent> manageCourseContents=pageLoadService.getManageCourseContentList(utility.getCourseTypeId());
+		   model.addAttribute("courseNameList", new Gson().toJson(courseNameList));
+		   model.addAttribute("trainingPartnerNameList", new Gson().toJson(trainingPartnerNameList));
+		   model.addAttribute("manageCourseContents", new Gson().toJson(manageCourseContents));
+		   return "calendarSearch";
+	   }
+	   
 	   @RequestMapping(value="/basic-level" ,method = RequestMethod.GET)
 	   public String basicLevel(@ModelAttribute("login") LoginForm loginForm,HttpSession session,BindingResult result ,  Model model) {
 		   List<CourseName> courseNameList=pageLoadService.getCouserNameList(Integer.parseInt(PropertyUtils.basicLevel));

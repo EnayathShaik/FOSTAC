@@ -46,7 +46,7 @@ public class EventsCreater {
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
-		Query query = session.createSQLQuery("select cn.coursename,tc.trainingdate,tc.trainingtime,SUM(CAST(cn.courseduration AS DECIMAL(10, 2))) as courseduration ,tc.coursetype from trainingcalendar tc inner join coursename cn on tc.coursetype=cn.coursetypeid  GROUP BY tc.trainingdate,tc.trainingtime,tc.coursetype,cn.coursename");
+		Query query = session.createSQLQuery("select cn.coursename,tc.trainingdate,tc.trainingtime,SUM(CAST(cn.courseduration AS DECIMAL(10, 2))) as courseduration ,tc.coursetype,tc.coursename as coursnme from trainingcalendar tc inner join coursename cn on tc.coursetype=cn.coursetypeid  GROUP BY tc.trainingdate,tc.trainingtime,tc.coursetype,cn.coursename,coursnme");
 		List<Object[]> eventList = query.list();
 		session.close();
 		for(int index=0;index<eventList.size();index++){
@@ -99,7 +99,7 @@ public class EventsCreater {
 			event.appendChild(color);
 			
 			Element url = doc.createElement("url");
-			url.appendChild(doc.createTextNode("calendarSearch?coursetypeid="+objArr[4].toString()));
+			url.appendChild(doc.createTextNode("calendarSearch.fssai?courseTypeId="+objArr[4].toString()+"&courseNameId="+objArr[5].toString()));
 			event.appendChild(url);
 
 

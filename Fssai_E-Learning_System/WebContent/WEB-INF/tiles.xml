@@ -47,6 +47,9 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/about.jsp" />
 	</definition>
+	<definition name="calendarSearch" extends="base.before.login.accordion">
+		<put-attribute name="body" value="/website/calendarSearch.jsp" />
+	</definition>
 	<definition name="basic-level" extends="base.before.login.accordion">
 		<put-attribute name="body" value="/website/basic-level.jsp" />
 	</definition>
