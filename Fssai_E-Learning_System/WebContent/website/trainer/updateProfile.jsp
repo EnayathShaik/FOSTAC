@@ -7,20 +7,11 @@
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-<%-- <%
-response.setHeader("Pragma","No-cache");     
-response.setHeader("Cache-Control","no-cache");     
-response.setDateHeader("Expires",   0); 
-
-%> --%>
-
 <script type="text/javascript">
 function validateFields(){
 if(document.getElementById("TrainingCenterCorrespondenceLine1").value=="") {
-	alert("IN TrainingCenterCorrespondenceLine1");
-	 document.getElementById('TrainingCenterCorrespondenceLine1').style.borderColor = "red";
-		document.getElementById("TrainingCenterCorrespondenceLine1Error").style.display = 'block';
+	document.getElementById('TrainingCenterCorrespondenceLine1').style.borderColor = "red";
+	document.getElementById("TrainingCenterCorrespondenceLine1Error").style.display = 'block';
 	document.getElementById("TrainingCenterCorrespondenceLine1").focus();
 	return false;
 }
@@ -28,14 +19,12 @@ else{
     document.getElementById('TrainingCenterCorrespondenceLine1').style.borderColor = "#ccc";
     document.getElementById("TrainingCenterCorrespondenceLine1Error").style.display = 'none'; 
     }
-   
     
     if(document.getElementById("TrainingCenterCorrespondenceLine2").value=="") {
-    	alert("IN TrainingCenterCorrespondenceLine2");
-    	 document.getElementById('TrainingCenterCorrespondenceLine2').style.borderColor = "red";
-    		document.getElementById("TrainingCenterCorrespondenceLine2Error").style.display = 'block';
+	    document.getElementById('TrainingCenterCorrespondenceLine2').style.borderColor = "red";
+	    document.getElementById("TrainingCenterCorrespondenceLine2Error").style.display = 'block';
     	document.getElementById("TrainingCenterCorrespondenceLine2").focus();
-    	return false;
+    return false;
     }
     else{
         document.getElementById('TrainingCenterCorrespondenceLine2').style.borderColor = "#ccc";
@@ -44,7 +33,6 @@ else{
         
         
         if(document.getElementById("TrainingCenterCorrespondenceState").selectedIndex == 0) {
-       		////alert("IN Fname");
        		document.getElementById('TrainingCenterCorrespondenceState').style.borderColor = "red";
    	    	document.getElementById("TrainingCenterCorrespondenceStateError").style.display = 'block';
    	    	document.getElementById("TrainingCenterCorrespondenceState").focus();
@@ -56,7 +44,6 @@ else{
         	    }
         	    
         	    if(document.getElementById("TrainingCenterCorrespondenceDistrict").selectedIndex == 0) {
-               		////alert("IN Fname");
                		document.getElementById('TrainingCenterCorrespondenceDistrict').style.borderColor = "red";
            	    	document.getElementById("TrainingCenterCorrespondenceDistrictError").style.display = 'block';
            	    	document.getElementById("TrainingCenterCorrespondenceDistrict").focus();
@@ -68,7 +55,6 @@ else{
                 	    }
         	    
         	    if(document.getElementById("TrainingCenterCorrespondenceCity").selectedIndex == 0) {
-               		////alert("IN Fname");
                		document.getElementById('TrainingCenterCorrespondenceCity').style.borderColor = "red";
            	    	document.getElementById("TrainingCenterCorrespondenceCityError").style.display = 'block';
            	    	document.getElementById("TrainingCenterCorrespondenceCity").focus();
@@ -82,7 +68,6 @@ else{
         	    var x=document.getElementById("TrainingCenterCorrespondencePincode").value;
             	if(x =="" || x.length<6 ) 
                 	    {
-                    		////alert("IN Fname");
                     		document.getElementById('TrainingCenterCorrespondencePincode').style.borderColor = "red";
                 	    	document.getElementById("TrainingCenterCorrespondencePincodeError").style.display = 'block';
                 	    	document.getElementById("TrainingCenterCorrespondencePincode").focus();
@@ -98,7 +83,6 @@ else{
                var atpos = x.indexOf("@");
                var dotpos = x.lastIndexOf(".");
                  if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
-                	    //  alert("Not a valid e-mail address");
               document.getElementById('TrainingCenterPermanentEmail').style.borderColor = "red";
              	document.getElementById("TrainingCenterPermanentEmailError").style.display = 'block';
              	document.getElementById("TrainingCenterPermanentEmail").focus();
@@ -129,7 +113,6 @@ else{
            	 
            	 
              	if(document.getElementById("TrainingCenterPermanentLine1").value=="") {
-            		////alert("IN Fname");
             		document.getElementById('TrainingCenterPermanentLine1').style.borderColor = "red";
         	    	document.getElementById("TrainingCenterPermanentLine1Error").style.display = 'block';
         	    	document.getElementById("TrainingCenterPermanentLine1").focus();
@@ -140,7 +123,6 @@ else{
             	    }
 	    
         	    if(document.getElementById("TrainingCenterPermanentLine2").value=="") {
-            		////alert("IN Fname");
             		document.getElementById('TrainingCenterPermanentLine2').style.borderColor = "red";
         	    	document.getElementById("TrainingCenterPermanentLine2Error").style.display = 'block';
         	    	document.getElementById("TrainingCenterPermanentLine2").focus();
@@ -152,7 +134,6 @@ else{
 	    
         	   
         	    if(document.getElementById("TrainingCenterPermanentState").selectedIndex == 0) {
-            		////alert("IN Fname");
             		document.getElementById('TrainingCenterPermanentState').style.borderColor = "red";
         	    	document.getElementById("TrainingCenterPermanentStateError").style.display = 'block';
         	    	document.getElementById("TrainingCenterPermanentState").focus();
@@ -164,7 +145,6 @@ else{
              	    }
 
                	 if(document.getElementById("TrainingCenterPermanentDistrict").selectedIndex == 0) {
-               		////alert("IN Fname");
                		document.getElementById('TrainingCenterPermanentDistrict').style.borderColor = "red";
            	    	document.getElementById("TrainingCenterPermanentDistrictError").style.display = 'block';
            	    	document.getElementById("TrainingCenterPermanentDistrict").focus();
@@ -176,7 +156,6 @@ else{
                 	    }
           
                 	    if(document.getElementById("TrainingCenterPermanentCity").selectedIndex == 0) {
-                       		////alert("IN Fname");
                        		document.getElementById('TrainingCenterPermanentCity').style.borderColor = "red";
                    	    	document.getElementById("TrainingCenterPermanentCityError").style.display = 'block';
                    	    	document.getElementById("TrainingCenterPermanentCity").focus();
@@ -192,7 +171,6 @@ else{
                 	    var x=document.getElementById("TrainingCenterPermanentPincode").value;
                     	if(x =="" || x.length<6 ) 
                         	    {
-                            		////alert("IN Fname");
                             		document.getElementById('TrainingCenterPermanentPincode').style.borderColor = "red";
                         	    	document.getElementById("TrainingCenterPermanentPincodeError").style.display = 'block';
                         	    	document.getElementById("TrainingCenterPermanentPincode").focus();
@@ -206,7 +184,6 @@ else{
            	 					}
            	 
            	 if(document.getElementById("FoodSafetyExpBackground").selectedIndex == 0) {
-         		////alert("IN Fname");
          		document.getElementById('FoodSafetyExpBackground').style.borderColor = "red";
      	    	document.getElementById("FoodSafetyExpBackgroundError").style.display = 'block';
      	    	document.getElementById("FoodSafetyExpBackground").focus();
@@ -218,7 +195,6 @@ else{
           	    }
      	 
      	  if(document.getElementById("ExpInFoodSafefyTimeMonth").selectedIndex == 0) {
-         		////alert("IN Fname");
          		document.getElementById('ExpInFoodSafefyTimeMonth').style.borderColor = "red";
      	    	document.getElementById("ExpInFoodSafefyTimeMonthError").style.display = 'block';
      	    	document.getElementById("ExpInFoodSafefyTimeMonth").focus();
@@ -230,7 +206,6 @@ else{
           	    }
                         	 
 	 if(document.getElementById("NoOfTrainingSessionConducted").value == "") {
-		////alert("IN Fname");
 		document.getElementById('NoOfTrainingSessionConducted').style.borderColor = "red";
     	document.getElementById("NoOfTrainingSessionConductedError").style.display = 'block';
    	document.getElementById("NoOfTrainingSessionConducted").focus();
@@ -242,7 +217,6 @@ else{
    	    }
    
    	   if(document.getElementById("TrainingSessionWishToConduct").value == 0) {
-   		////alert("IN Fname");
    		document.getElementById('TrainingSessionWishToConduct').style.borderColor = "red";
        	document.getElementById("TrainingSessionWishToConductError").style.display = 'block';
        	document.getElementById("TrainingSessionWishToConduct").focus();
@@ -273,7 +247,6 @@ else{
 
 <script>
 function getstateid(){
-	//alert('ll');
 	getstat2();
 getstateid1();
 
@@ -301,10 +274,8 @@ function getstateid1(){
 	var tp = '${tp}';
 	var safety=${loginUr.foodSafetyExpBackground};
 	var month=${loginUr.expInFoodSafefyTimeMonth};
-	//alert('safety is '+safety+" "+month); 
 	$("#FoodSafetyExpBackground").prop('selectedIndex', safety);  
 	$("#ExpInFoodSafefyTimeMonth").prop('selectedIndex', month);  
-	//alert("In Permanent "+psid + ' '+ psname + ' '+ pdid + ' '+ pdname + ' '+ pcid + ' '+ pcname+' '+title + ' '+ tp);
 	//$("#TrainingCenterPermanentState").prop('selectedIndex', psid);  
 	//TrainingCenterPermanentState.options[0].text = psname;    
 	 getStateUpdate(psid , pdid , pcid);
@@ -315,7 +286,6 @@ function getstateid1(){
 		//TrainingCenterPermanentCity.options[0].text = pcname;
 		Title.options[0].text = title;
 		associatedTrainingpartnerName.options[0].text = tp;
-		alert("in permanent");
 	}
 	
 function getStateUpdate(psid , pdid , pcid)
@@ -398,12 +368,10 @@ function getCityUpdate(dd , cc)
 		var ccid='${loginUr.correspondencecity.cityId}';
 		var ccname='${loginUr.correspondencecity.cityName}';
 		//var trainingPartnerName='${loginUr.associatedTrainingpartnerName.trainingPartnerName}';
-		alert('In Correspondance'+csid + ' '+ csname + ' '+ cdid + ' '+ cdname + ' '+ ccid + ' '+ ccname);
 		//TrainingCenterCorrespondenceState.options[0].text = csname;
 	   // TrainingCenterCorrespondenceDistrict.options[0].text = cdname;
 		//TrainingCenterCorrespondenceCity.options[0].text = ccname;
 		getCorrespondanceStateUpdate(csid,cdid,ccid,cdname);
-		alert('hii');
 		/* associatedTrainingpartnerName.options[0].text = trainingPartnerName; */
 	}
 	
@@ -427,9 +395,7 @@ function getCityUpdate(dd , cc)
 		  		});
 		      }
 		      });
-		alert('hhhhhhpk');
 		CorrDistrictUpdate(csid,cdid,ccid,cdname);
-		alert('hhhhhh');
 	}
 
 	function CorrDistrictUpdate(csid,cdid,ccid,cdname)
@@ -445,12 +411,10 @@ function getCityUpdate(dd , cc)
 		      $.each(mainData1 , function(i , obj)
 		  		{
 		    	  
-		    	  alert("cdname is "+cdname);
 		    	 // $("#TrainingCenterCorrespondenceDistrict").prop('selectedIndex', cdid);
 		    	  if(cdid == obj.districtId){
 		    		  //TrainingCenterCorrespondenceDistrict.options[0].text = cdname;
 		    		  $('#TrainingCenterCorrespondenceDistrict').append('<option selected="true" value='+obj.districtId+'>'+obj.districtName+'</option>');
-		    		 alert("cd is "+cdid);
 		    		  
 		    	  }else{
 		    		  $('#TrainingCenterCorrespondenceDistrict').append('<option value='+obj.districtId+'>'+obj.districtName+'</option>');
@@ -480,7 +444,6 @@ function getCityUpdate(dd , cc)
 		  		});
 		      }
 		      });  
-		alert("corresep city");
 	}
 	
 	
