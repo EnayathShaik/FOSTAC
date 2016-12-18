@@ -285,6 +285,7 @@ return result;
 														
                                                     </div>
                                                      <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails();return false">Show Details</button>
+                                                		<input type="button" id="btnExport" style="margin-right: 20px;"  class="btn login-btn pull-right" value="Download" />
                                                 </div>
                                                
                                             </div>
@@ -306,6 +307,7 @@ return result;
                       <legend>
                       <h4>Search results</h4>
                       </legend>
+                      <div id="dvData">
                       <table  class="table table-bordered table-responsive table-striped table-hover">
                         <thead>
                           <tr class="background-open-vacancies">
@@ -322,6 +324,7 @@ return result;
                         <tbody id="newTable">
                         </tbody>
                       </table>
+                      </div>
                       <a href="#" class="btn login-btn pull-right">Save</a>
                     </fieldset>
                     <div style="width: 95px;">

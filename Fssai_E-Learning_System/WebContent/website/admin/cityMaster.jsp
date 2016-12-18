@@ -140,7 +140,7 @@ function getDistrict(val)
 	      $.each(mainData1 , function(i , obj)
 	  		{
 	  		
-	  				$('#districtId').append('<option value='+obj.districtId+' label='+obj.districtName+' />');		
+	  				$('#districtId').append('<option value='+obj.districtId+'>'+obj.districtName+'</option>');		
 	  		});
 	      }
 	      });     

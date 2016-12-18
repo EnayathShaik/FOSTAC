@@ -33,7 +33,6 @@
 				$('#trainingCenter').append(
 						'<option value="0" label="Select Training Center" />');
 				$.each(mainData1, function(i, obj) {
-
 					$('#trainingCenter').append(
 							'<option value='+obj[0]+' label='+obj[1]+' />');
 				});
@@ -45,20 +44,18 @@
 	function saveDetails() {
 
 	}
+
 	function showDetail() {
 		alert('data');
 		//
-		var courseType =  $("#selCourseType").val();
-		var courseName =  $("#selCourseName").val();
-		var trainingDate = $("#traineeDate").val().replace("-","/").replace("-","/");
-		var trainingTime =  $("#traineeTime").val();
+		var courseType = $("#selCourseType").val();
+		var courseName = $("#selCourseName").val();
+		var trainingDate = $("#seltraineeDate").val();
+		var trainingTime = $("#seltrainingtime").val();
 		var trainerName = $('#selTrainerNames').val();
-		alert('courseType == '+courseType);
-		alert('courseName == '+courseName);
-		alert('trainingDate == '+trainingDate);
-		alert('trainingTime == '+trainingTime);
-	
-		
+		alert('trainingDate == ' + trainingDate);
+		alert('trainingTime == ' + trainingTime);
+
 		$('#tblAssessorCourses tr').remove();
 		$('#tblAssessorCourses').append(
 				'<thead>' + '<tr class="background-open-vacancies">'
@@ -134,20 +131,23 @@
 
 	function showDetails() {
 		alert('data');
-		 	var courseType =  $("#selCourseType").val();
-			var courseName =  $("#selCourseName").val();
-			var trainingDate = $("#trainingDate").val().replace("-","/").replace("-","/");
-			var trainerName =  $("#selTrainerNames").val();
-			var trainingtime =  $("#trainingtime").val(); 
-			alert('courseType '+courseType);
-			alert('courseName '+courseName);
-			alert('trainingDate '+trainingDate);
-			alert('trainerName '+trainerName);
-			alert('trainingtime '+trainingtime);
-			
+		var courseType = $("#selCourseType").val();
+		var courseName = $("#selCourseName").val();
+		var trainingDate = $("#trainingDate").val().replace("-", "/").replace(
+				"-", "/");
+		var trainerName = $("#selTrainerNames").val();
+		var trainingtime = $("#trainingtime").val();
+		alert('courseType ' + courseType);
+		alert('courseName ' + courseName);
+		alert('trainingDate ' + trainingDate);
+		alert('trainerName ' + trainerName);
+		alert('trainingtime ' + trainingtime);
+
 		$(".displayNone").css("display", "block");
-		var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&trainingTime"+trainingtime;
-		alert("total "+total);
+		var total = "courseType=" + courseType + "&courseName=" + courseName
+				+ "&trainingDate=" + trainingDate + "&trainingTime"
+				+ trainingtime;
+		alert("total " + total);
 		var result = "";
 		$.ajax({
 			type : 'post',
@@ -189,26 +189,7 @@
 									class="icon-bar"></span>
 							</button>
 						</div>
-						<div id="navbar" class="navbar-collapse collapse">
-							<ul class="nav navbar-nav">
-								<li class="hori"><a href="index.html">Home</a></li>
-								<li class="hori"><a href="update-personal-information.html">Update
-										Personal Information</a></li>
-								<li class="hori"><a href="view-feedback-details.html">View
-										Feedback Details</a></li>
-								<li class="hori"><a href="contact.html">Contact Us</a></li>
-							</ul>
-							<ul class="nav navbar-nav navbar-right">
-								<li class="dropdown active"><a href="#"
-									class="dropdown-toggle" data-toggle="dropdown" role="button"
-									aria-haspopup="true" aria-expanded="false"><i
-										class="fa fa-cog fa-spin"></i> <span class="caret"></span></a>
-									<ul class="dropdown-menu">
-										<li><a href="change-password.html">Change Password</a></li>
-										<li><a href="#">Logout</a></li>
-									</ul></li>
-							</ul>
-						</div>
+						<jsp:include page="../trainingPartner/trainingCenterNavBar.jsp" />
 						<!--/.nav-collapse -->
 					</div>
 				</div>
@@ -269,7 +250,9 @@
 														<div>
 															<ul class="lab-no">
 																<li class="style-li"><strong>Course Type:</strong></li>
-
+																<label id="courseTypeError" class="error visibility">select
+																	course type</label>
+																<span id="name_status"> ${created } </span>
 															</ul>
 														</div>
 														<select path="selCourseType" class="form-control"
@@ -346,8 +329,8 @@
 																<li class="style-li error-red"></li>
 															</ul>
 														</div>
-														<input type="text" value="" name="trainingDate"
-															id="trainingDate" class="form-control">
+														<input type="date" value="" name="seltraineeDate"
+															id="seltraineeDate" class="form-control">
 													</div>
 													<div class="form-group">
 														<div>
@@ -356,8 +339,8 @@
 																<li class="style-li error-red"></li>
 															</ul>
 														</div>
-														<input type="time" name="trainingtime" id="trainingtime"
-															class="form-control">
+														<input type="time" name="seltrainingtime"
+															id="seltrainingtime" class="form-control">
 													</div>
 													<input type="submit" onclick="return saveDetails();"
 														style="margin-top: 20px;"
@@ -369,6 +352,7 @@
 														data-toggle="collapse" data-target="#show-result"
 														aria-expanded="false" onclick="showDetails();return false">Show
 														Details</button>
+														 <input type="button" id="btnExport" style="margin-top:20px; margin-right: 20px;"  class="btn login-btn pull-right" value="Download" />
 												</div>
 
 											</div>
@@ -391,6 +375,7 @@
 												<legend>
 													<h4>Search results</h4>
 												</legend>
+												<div id="dvData">
 												<table id="trainingPartnercalendar"
 													class="table table-bordered table-responsive table-striped table-hover">
 													<thead>
@@ -406,6 +391,7 @@
 													<tbody id="newTable">
 													</tbody>
 												</table>
+												</div>
 												<a href="#" class="btn login-btn pull-right">Save</a>
 											</fieldset>
 											<div style="width: 95px;"></div>

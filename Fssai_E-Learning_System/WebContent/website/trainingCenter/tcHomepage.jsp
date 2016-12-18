@@ -52,7 +52,7 @@ function searchUpcomingTraining(){
             <div id="navbar" class="navbar-collapse collapse">
              <ul class="nav navbar-nav">
                 <li class="hori active"><a href="#">Home</a></li>
-                <li class="hori"><a href="update-personal-information.fssai">Update Personal Information</a></li>
+                <li class="hori"><a href="update-personal-information.fssai">UpdateA Personal Information</a></li>
                 <li class="hori"><a href="view-feedback-details.html">View Feedback Details</a></li>
                 <li class="hori"><a href="contactTC.fssai">Contact Us</a></li>
               </ul>

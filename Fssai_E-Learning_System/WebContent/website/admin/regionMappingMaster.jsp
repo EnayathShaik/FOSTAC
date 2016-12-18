@@ -51,7 +51,7 @@ function getDistrict(val)
 	      $.each(mainData1 , function(i , obj)
 	  		{
 	  		
-	  				$('#districtId').append('<option value='+obj.districtId+' label='+obj.districtName+' />');		
+	  				$('#districtId').append('<option value='+obj.districtId+'>'+obj.districtName+'</option>');		
 	  		});
 	      }
 	      });     
@@ -70,7 +70,7 @@ function getCity(val)
 	  	  $.each(mainData1 , function(i , obj)
 	  		{
 	  		
-	  				$('#cityId').append('<option value='+obj.cityId+' label='+obj.cityName+' />');		
+	  				$('#cityId').append('<option value='+obj.cityId+'>'+obj.cityName+'</option>');		
 	  		});
 	      }
 	      });     

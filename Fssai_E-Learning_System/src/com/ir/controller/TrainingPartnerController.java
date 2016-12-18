@@ -135,6 +135,7 @@ public class TrainingPartnerController {
 //		trainingPartnerTrainingCalender.setCourseNames(courseNames);
 		Gson gson = new Gson();
 		model.addAttribute("trainingPartnerTrainingCalender" , gson.toJson(trainingPartnerTrainingCalender));
+		//model.addAttribute("created", "Oops , something went wrong !!!");
 		return "trainingpartnertrainingcalendar";
 	}
 	@RequestMapping(value="/viewtrainingpartnertrainingcalendar" , method=RequestMethod.GET)
@@ -493,8 +494,8 @@ public class TrainingPartnerController {
 		trainingCalendarForm.setCourseName(trainingPartnerCalendarForm.getSelCourseName());
 		trainingCalendarForm.setCourseType(trainingPartnerCalendarForm.getSelCourseType());
 		trainingCalendarForm.setTrainerName(trainingPartnerCalendarForm.getSelTrainerNames());
-		trainingCalendarForm.setTrainingDate(trainingPartnerCalendarForm.getTrainingdate());
-		trainingCalendarForm.setTrainingTime(trainingPartnerCalendarForm.getTrainingTime());
+		trainingCalendarForm.setTrainingDate(trainingPartnerCalendarForm.getSeltraineeDate());
+		trainingCalendarForm.setTrainingTime(trainingPartnerCalendarForm.getSeltrainingtime());
 		
 		System.out.println(trainingCalendarForm.getTrainingDate()+"   "+ trainingCalendarForm.getTrainingTime());
 		String trainingCalendar = trainingPartnerService.trainingCalendarForm(trainingCalendarForm);
@@ -503,7 +504,7 @@ public class TrainingPartnerController {
 		}else{
 			model.addAttribute("created", "Oops , something went wrong !!!");
 		}
-		return "trainingpartnertrainingcalendar";
+		return "redirect:/trainingpartnertrainingcalendar.fssai";
 	}
 	
 }

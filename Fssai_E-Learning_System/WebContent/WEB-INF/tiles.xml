@@ -436,7 +436,7 @@
 	</definition>
 	<definition name="changePasswordTCentre" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
-		<put-attribute name="body" value="/website/trainingCenter/change-passwordTC.jsp" />
+		<put-attribute name="body" value="/website/trainingPartner/change-passwordTC.jsp" />
 	</definition>
 	
 <!--					Training Center Ends			  -->

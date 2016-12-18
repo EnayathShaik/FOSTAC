@@ -39,9 +39,9 @@ window.onload=getstateid;
  	      $.each(mainData2 , function(i , obj)
  	  		{	
  	    	  if(ss == obj.stateId){
- 	    		  $('#TrainingPartnerPermanentState').append('<option value='+obj.stateId+' label='+obj.stateName+' selected="true" />');	
+ 	    		  $('#TrainingPartnerPermanentState').append('<option value='+obj.stateId+'>'+obj.stateName+' selected="true" </option>');	
  	    	  }else{
- 	    		  $('#TrainingPartnerPermanentState').append('<option value='+obj.stateId+' label='+obj.stateName+' />');	
+ 	    		  $('#TrainingPartnerPermanentState').append('<option value='+obj.stateId+'>'+obj.stateName+' </option>');	
  	    	  }	
  	  		});
  	      }
@@ -63,9 +63,9 @@ window.onload=getstateid;
  	      $.each(mainData1 , function(i , obj)
  	  		{
  	    	  if(dd == obj.districtId){
- 	    		  $('#TrainingPartnerPermanentDistrict').append('<option value='+obj.districtId+' label='+obj.districtName+' selected="true"/>');
+ 	    		  $('#TrainingPartnerPermanentDistrict').append('<option value='+obj.districtId+'>'+obj.districtName+' selected="true" </option>');
  	    	  }else{
- 	    		  $('#TrainingPartnerPermanentDistrict').append('<option value='+obj.districtId+' label='+obj.districtName+' />');
+ 	    		  $('#TrainingPartnerPermanentDistrict').append('<option value='+obj.districtId+'>'+obj.districtName+' </option>');
  	    	  }	
  	  		});
  	      }
@@ -85,9 +85,9 @@ window.onload=getstateid;
  	      $.each(mainData1 , function(i ,obj)
  	  		{
  	    	  if(cc == obj.cityId){
- 	    		  $('#TrainingPartnerPermanentCity').append('<option value='+obj.cityId+' label='+obj.cityName+' selected="true"/>');
+ 	    		  $('#TrainingPartnerPermanentCity').append('<option value='+obj.cityId+'>'+obj.cityName+' selected="true" </option>');
  	    	  }else{
- 	    		  $('#TrainingPartnerPermanentCity').append('<option value='+obj.cityId+' label='+obj.cityName+' />');
+ 	    		  $('#TrainingPartnerPermanentCity').append('<option value='+obj.cityId+'>'+obj.cityName+' </option>');
  	    	  }	
  	  		});
  	      }
@@ -113,7 +113,7 @@ window.onload=getstateid;
     	      $.each(mainData1 , function(i , obj)
     	  		{
     	  		
-    	  				$('#TrainingPartnerPermanentDistrict').append('<option value='+obj.districtId+' label='+obj.districtName+' />');		
+    	  				$('#TrainingPartnerPermanentDistrict').append('<option value='+obj.districtId+'>'+obj.districtName+' </option>');		
     	  		});
     	      }
     	      });     
@@ -130,7 +130,7 @@ window.onload=getstateid;
     	  	  $.each(mainData1 , function(i , obj)
     	  		{
     	  		
-    	  				$('#TrainingPartnerPermanentCity').append('<option value='+obj.cityId+' label='+obj.cityName+' />');		
+    	  				$('#TrainingPartnerPermanentCity').append('<option value='+obj.cityId+'>'+obj.cityName+' </option>');		
     	  		});
     	      }
     	      });     
@@ -148,22 +148,7 @@ window.onload=getstateid;
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
             </div>
-            <div id="navbar" class="navbar-collapse collapse">
-             <ul class="nav navbar-nav">
-                <li class="hori active"><a href="#">Home</a></li>
-                <li class="hori"><a href="update-personal-information.fssai">Update Personal Information</a></li>
-                <li class="hori"><a href="view-feedback-details.html">View Feedback Details</a></li>
-                <li class="hori"><a href="contactTC.fssai">Contact Us</a></li>
-              </ul>
-              <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown active"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog fa-spin"></i> <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href=changePasswordAssesAgency.fssai>Change Password</a></li>
-                    <li><a href="fostac.fssai">Logout</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
+             <jsp:include page="../trainingPartner/trainingCenterNavBar.jsp" />
             <!--/.nav-collapse --> 
           </div>
         </div>
@@ -178,20 +163,7 @@ window.onload=getstateid;
         <div id="wrapper"> 
 
           <!-- Sidebar -->
-          <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-              <!-- <li class="sidebar-brand">
-                            </li> -->
-              <li> <a href="trainingCalendar.fssai">Training Calendar</a> </li>
-              <li> <a href="view-trainee-list.fssai">View Trainee List</a> </li>
-              <li> <a href="mark-trainee-attendance.fssai">Mark Attendance</a> </li>
-              <li> <a href="post-vacancy.fssai">Post Vacancy for Trainer</a> </li>
-              <li> <a href="application-status.fssai">Application Status</a> </li>
-              <li> <a href="manage-trainer.fssai">Manage Trainer</a> </li>
-              <li> <a href="assessment-calendar.fssai">Assessment Calendar</a></li>
-              <li> <a href="payment-confirmation.fssai">Payment Confirmation</a> </li>
-            </ul>
-          </div>
+          <%@include file="../trainingPartner/leftmenuTrainingPartner.jspf" %>
           <!-- /#sidebar-wrapper --> 
           <!-- Page Content -->
           <div id="page-content-wrapper">

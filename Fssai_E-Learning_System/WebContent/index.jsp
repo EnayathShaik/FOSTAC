@@ -332,7 +332,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
              
             </li> --> </form>
-            <li class="pd-top"> <a href="#" target="_blank"><img src="website/images/facebook.png" width="30" height="30"></a>&nbsp; <a href="#" target="_blank"><img src="website/images/twitter.png" width="30" height="30"></a>&nbsp; <a href="#" target="_blank"><img src="website/images/linkedin.png" width="30" height="30"></a> &nbsp;<a href="#" target="_blank"><img src="website/images/google-plus.png" width="32" height="32"></a></li>
+            <li class="pd-top"> <a href="website/android/app-release.apk" target="_blank"><img src="website/images/android.png" width="30" height="30"></a>&nbsp; <a href="#" target="_blank"><img src="website/images/facebook.png" width="30" height="30"></a>&nbsp; <a href="#" target="_blank"><img src="website/images/twitter.png" width="30" height="30"></a>&nbsp; <a href="#" target="_blank"><img src="website/images/linkedin.png" width="30" height="30"></a> &nbsp;<a href="#" target="_blank"><img src="website/images/google-plus.png" width="32" height="32"></a></li>
           </ul>
         </div>
       </div>

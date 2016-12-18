@@ -56,17 +56,17 @@ public class TraineeCenterViewTraineeLists extends HttpServlet {
         	String[] whereList = name.split("&");
         	for(int i=0;i<whereList.length;i++){
         		if(i==0){
-        			stringBuffer.append(whereList[0] != null & whereList[0].length() > 0 ? " AND B.COURSETYPEID="+whereList[0] : "");
+        			stringBuffer.append(whereList[0] != null & !whereList[0].equals("null") & whereList[0].length() > 0 ? " AND B.COURSETYPEID="+whereList[0] : "");
         		}else if(i==1){
-        			stringBuffer.append(whereList[1] != null & whereList[1].length() > 0 ? " AND C.COURSENAMEID="+whereList[1] : "");
+        			stringBuffer.append(whereList[1] != null & !whereList[1].equals("null") & whereList[1].length() > 0 ? " AND C.COURSENAMEID="+whereList[1] : "");
         		}else if(i==2){
-        			stringBuffer.append(whereList[2] != null & whereList[2].length() > 0 ? " AND A.TRAININGDATE='"+whereList[2]+"'" : "");
+        			stringBuffer.append(whereList[2] != null & !whereList[2].equals("null") & whereList[2].length() > 0 ? " AND A.TRAININGDATE='"+whereList[2]+"'" : "");
         		}else if(i==3){
-        			stringBuffer.append(whereList[3] != null & whereList[3].length() > 0 ? " AND A.TRAININGTIME='"+whereList[3]+"'" : "");
+        			stringBuffer.append(whereList[3] != null & !whereList[3].equals("null") & whereList[3].length() > 0 ? " AND A.TRAININGTIME='"+whereList[3]+"'" : "");
         		}else if(i==4){
-        			//stringBuffer.append(whereList[4] != null & whereList[4].length() > 0 ? " AND B.COURSETYPEID"+whereList[4] : "");
+        			//stringBuffer.append(whereList[4] != null & whereList[4].equals("null") & whereList[4].length() > 0 ? " AND B.COURSETYPEID"+whereList[4] : "");
         		}else if(i==5){
-        			stringBuffer.append(whereList[5] != null & whereList[5].length() > 0 ? " AND F.PAYMENTSTATUS='"+whereList[5]+"'" : "");
+        			stringBuffer.append(whereList[5] != null & !whereList[5].equals("null") & whereList[5].length() > 0 ? " AND F.PAYMENTSTATUS='"+whereList[5]+"'" : "");
         		}
         	}
         }
