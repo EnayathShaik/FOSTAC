@@ -165,7 +165,7 @@ return result;
                                         <fieldset>
                                         <legend><h3>Mark Attendence</h3></legend>
                                         <script type="text/javascript">
-                                        var formObj = '${trainingpartnerpaymentconfirmation}';
+                                        var formObj = '${trainingpartnermarkAttendence}';
                                         var formData = JSON.parse(formObj);
                                         var courseTypes = formData.courseTypes;
                                         var statusList = formData.statusList;
@@ -207,15 +207,7 @@ return result;
                                                         <select class="form-control" name="selCourseName" id = "selCourseName"> </select>
                                                     </div>
                                                      
-                                                    <div class="form-group">
-                                                        <div>
-                                                            <ul class="lab-no">
-                                                                <li class="style-li"><strong>Training Date:</strong></li>
-                                                                <li class="style-li error-red"> </li>
-                                                            </ul>
-                                                        </div>
-                                                        <input type="date" class="form-control" id="trainingDate" name="trainingDate">
-                                                    </div>
+                                                    
 
                                                 </div>
 
@@ -230,29 +222,18 @@ return result;
                                                         </div>
                                                         <input type="time" class="form-control" id="trainingTime" name="trainingTime">
                                                     </div>
-                                                                                
-                                                    <div class="form-group">
+                                                  <div class="form-group">
                                                         <div>
                                                             <ul class="lab-no">
-                                                                <li class="style-li"><strong>Status:</strong></li>
-                                                                
+                                                                <li class="style-li"><strong>Training Date:</strong></li>
+                                                                <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
-                                                        <select class="form-control" name="selTraineeStatus" id = "selTraineeStatus"> </select>
-														<script>
-															var selTraineeStatusOptions = "";
-															for(var i=0 ; i < statusList.length; i++)
-																{
-																	console.log(statusList[i].id + " -- "+ statusList[i].value);
-																	selTraineeStatusOptions += "<option value="+statusList[i].id+">"+statusList[i].value+"</option>"
-																	
-																}
-															document.getElementById('selTraineeStatus').innerHTML += selTraineeStatusOptions; 
-														</script>
-														
-                                                    </div>
+                                                        <input type="date" class="form-control" id="trainingDate" name="trainingDate">
+                                                    </div>                              
+                                                    
                                                      <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails();return false">Show Details</button>
-                                                       <button type="submit" class="btn login-btn">Download</button>
+                                                     <input type="button" id="btnExport" style="margin-right: 20px;"  class="btn login-btn pull-right" value="Download" />
                                                 </div>
                                                
                                             </div>
@@ -274,6 +255,7 @@ return result;
                       <legend>
                       <h4>Search results</h4>
                       </legend>
+                      <div id="dvData">
                       <table  class="table table-bordered table-responsive table-striped table-hover">
                         <thead>
                           <tr class="background-open-vacancies">
@@ -289,6 +271,7 @@ return result;
                         <tbody id="newTable">
                         </tbody>
                       </table>
+                      </div>
                       <a href="#" class="btn login-btn pull-right">Save</a>
                     </fieldset>
                     <div style="width: 95px;">
