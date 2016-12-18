@@ -28,5 +28,4 @@ public interface PageLoadDao {
 	public List<CourseName> getCouserNameList(int coursetypeid);
 	public List<String> getTrainingPartnerNameList();
 	public List<ManageCourseContent> getManageCourseContentList(int coursetypeid);
-
 }

@@ -213,4 +213,5 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		session.close();
 		return manageCourseContents;
 	}
+
 }

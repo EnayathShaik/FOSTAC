@@ -1,3 +1,4 @@
+<%@page import="com.ir.form.common.EventsCreater"%>
 <%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 
 <%
@@ -360,7 +361,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="website/js/jquery.isotope.min.js"></script> 
 
 <script src="website/js/wow.min.js"></script> 
-<script src="website/js/monthly.js"></script> 
+<script src="website/js/monthly.js"></script>
+<!-- <script src="/Fssai_E-Learning_System/WEB-INF/classes/events.xml"></script> -->
+	<%
+	EventsCreater creater=new EventsCreater();
+	creater.createEvents(request);
+	%>
     <script type="text/javascript">
     $(window).load(function () {
 
@@ -368,7 +374,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             mode: 'event',
             //jsonUrl: 'events.json',
             //dataType: 'json'
-            xmlUrl: 'website/js/events.xml'
+//             xmlUrl: 'website/js/events.xml'
+            xmlUrl: '/Fssai_E-Learning_System/website/js/events.xml'
         });
 
         $('#mycalendar2').monthly({
