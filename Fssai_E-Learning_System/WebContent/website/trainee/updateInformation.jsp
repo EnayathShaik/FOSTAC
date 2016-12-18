@@ -147,21 +147,21 @@
 	
 
 	 } */
-	function my11(str) {
-		var xhttp;
-		if (str == "") {
-			document.getElementById("resState").innerHTML = "";
-			return;
-		}
-		xhttp = new XMLHttpRequest();
-		xhttp.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				document.getElementById("resCity").innerHTML = this.responseText;
-			}
-		};
-		xhttp.open("GET", "loadCity.fssaii?q=" + str, true);
-		xhttp.send();
-	}
+// 	function my11(str) {
+// 		var xhttp;
+// 		if (str == "") {
+// 			document.getElementById("resState").innerHTML = "";
+// 			return;
+// 		}
+// 		xhttp = new XMLHttpRequest();
+// 		xhttp.onreadystatechange = function() {
+// 			if (this.readyState == 4 && this.status == 200) {
+// 				document.getElementById("resCity").innerHTML = this.responseText;
+// 			}
+// 		};
+// 		xhttp.open("GET", "loadCity.fssaii?q=" + str, true);
+// 		xhttp.send();
+// 	}
 </script>
 
 
@@ -208,7 +208,7 @@
 		} else {
 			/* document.getElementById('Email').value=${loginUser.email} ; */
 			document.getElementById('ResidentialAddressLine1').value = '${loginUser.residentialLine1 }';
-			document.getElementById('ResidentialAddressLine2').value = '${loginUser.residentialLine1 }';
+			document.getElementById('ResidentialAddressLine2').value = '${loginUser.residentialLine2 }';
 			/* document.getElementById('Mobile').value= ""; */
 			/* document.getElementById('resPincode').value= ""; */
 			/* document.getElementById('resState').selectedIndex=
@@ -650,7 +650,6 @@
 
 <cf:form action="updateTrainee.fssai" name="myForm" method="POST"
 	commandName="updateInformation" onsubmit="return validateFields();">
-
 	<section>
 		<%@include file="topMenuTrainee.jspf"%>
 	</section>
@@ -1035,7 +1034,7 @@
 														<ul class="lab-no">
 															<li class="style-li"><strong><cs:message
 																		code="lbl.Trainee.ResidentialAddressLine2" /></strong></li>
-															<li class="style-li error-red"><strong><cf:errors
+															<li class="style-li error-red"></strong><cf:errors
 																		path="ResidentialAddressLine2" cssClass="error" /></li>
 														</ul>
 													</div>
@@ -1160,14 +1159,6 @@
 																	Business:</strong></li>
 														</ul>
 													</div>
-													<!-- <select class="form-control" required="">
-                <option>Select Kind of Business</option>
-                <option>Permanent / Temporary Stall Holder</option>
-                <option>Hawker (Itinerant/Mobile food vendor)</option>
-                <option>Home Based Canteens/Dabba wallas</option>
-                <option>Petty Retailer of snacks</option>
-                <option>Manufacturer/Processor</option>
-              </select>   -->
 													<cf:select path="KindOfBusiness" class="form-control"
 														onchange="return myBusiness()">
 														<cf:option value="0" label="Select Business" />
@@ -1229,11 +1220,10 @@
 															</div>
 														</div>
 													</div>
-													<!--  <select class="form-control">
-                  <option value="">DD Training</option>
-                  <option value="">Scientist1</option>
-                </select> -->
-													<cf:select path="Designation" class="form-control">
+													<script>
+														console.log("designation selected:");
+													</script>
+													<cf:select path="Designation" class="form-control" >
 														<cf:option value="0" label="Select" />
 														<cf:option value="Food Handler" label="Food Handler" />
 														<cf:option value="Food Safety Supervisior"

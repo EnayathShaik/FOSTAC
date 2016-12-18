@@ -1,6 +1,6 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" -->
+<!-- "http://www.w3.org/TR/html4/loose.dtd"> -->
 
 <html>
 <!-- core CSS -->
@@ -78,7 +78,7 @@
         	
         	$('#dateP').datepicker( {
         		defaultDate: new Date(),
-        		yearRange: "-100:-1",
+        		yearRange: "-70:-1",
         		maxDate: 0,
                 changeMonth: true,
                 changeYear: true,

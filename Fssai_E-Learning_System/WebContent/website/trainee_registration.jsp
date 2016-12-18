@@ -4,464 +4,379 @@
 
 
 <html>
-<head>
+<!-- <head> -->
+<?
+ $myForm = $_POST['correspondenceDistrict'];
+ ?>
+ 
+ <script type="text/javascript">
+function OnStart(){
+	DrawCaptcha();
+	if(document.getElementById('checkCorrespondence').checked == true){
+		document.getElementById("residential1").style.display = "none";
+		document.getElementById("residential2").style.display = "none";
+	}
+	if(document.getElementById('checkCompany').checked == true){
+		document.getElementById("businessID2").style.display= 'none';
+		document.getElementById("businessID3").style.display= 'none';
+	}
+}
+window.onload = OnStart;
+</script>
 
 <script type='text/javascript'>
-
-
     function myFunction() {
     	window.document.myForm.imgcaptcha.src='';window.document.myForm.imgcaptcha.src='./Captcha.jpg?random='+new Date().getTime();
         return false;
     }
     function validateFields() {
-    	//alert("validate");
-    	
-    	if(document.getElementById("userId").value=="") {
-    		document.getElementById('userId').style.borderColor = "red";
-	    	document.getElementById("userIdError").style.display = 'block';
-	    	document.getElementById("userId").focus();
-	    	return false;
-    	}
-    	 else{
-    	    document.getElementById('userId').style.borderColor = "#ccc";
-    	    document.getElementById("userIdError").style.display = 'none';
-    	}  
-    	    
- 		var x=document.getElementById("AadharNumber").value;
- 		alert(x)
-    	if(x =="" || x.length<12 ) {
-    		document.getElementById('AadharNumber').style.borderColor = "red";
-	    	document.getElementById("AadharNumberError").style.display = 'block';
-	    	document.getElementById("AadharNumber").focus();
-	    	return false;
-    	}else{
-    	    document.getElementById('AadharNumber').style.borderColor = "#ccc";
-    	    document.getElementById("AadharNumberError").style.display = 'none';
-    	}
-    	alert(document.getElementById("dob").value);
-    	if(document.getElementById("dob").value=="") {
-    		//alert("IN Fname");
-    		document.getElementById('dob').style.borderColor = "red";
-	    	document.getElementById("dobError").style.display = 'block';
-	    	document.getElementById("dob").focus();
-	    	return false;
-    	}
-    	else{
-    	    document.getElementById('dob').style.borderColor = "#ccc";
-    	    document.getElementById("dobError").style.display = 'none';
-    	} 
-    	
-    	alert(document.getElementById("Title").value);
-    	if(document.getElementById("Title").value == 0) {
-        		alert("IN Fname");
-        	document.getElementById('Title').style.borderColor = "red";
-    	   	document.getElementById("TitleError").style.display = 'block';
-    	   	document.getElementById("Title").focus();
-    	   	return false;
+        //alert("validate");
+
+        if (document.getElementById("userId").value == "") {
+            document.getElementById('userId').style.borderColor = "red";
+            document.getElementById("userIdError").style.display = 'block';
+            document.getElementById("userId").focus();
+            return false;
+        } else {
+            document.getElementById('userId').style.borderColor = "#ccc";
+            document.getElementById("userIdError").style.display = 'none';
         }
-        else{
-       	    document.getElementById('Title').style.borderColor = "#ccc";
-       	    document.getElementById("TitleError").style.display = 'none';
+        if (document.getElementById("Title").value == 0) {
+            document.getElementById('Title').style.borderColor = "red";
+            document.getElementById("TitleError").style.display = 'block';
+            document.getElementById("Title").focus();
+            return false;
+        } else {
+            document.getElementById('Title').style.borderColor = "#ccc";
+            document.getElementById("TitleError").style.display = 'none';
         }
-   
-    	 if(document.getElementById("firstName").value=="") {
-     		//alert("IN Fname");
-     		document.getElementById('firstName').style.borderColor = "red";
- 	    	document.getElementById("firstNameError").style.display = 'block';
- 	    	document.getElementById("firstName").focus();
- 	    	return false;
-     	}else{
-     	    document.getElementById('firstName').style.borderColor = "#ccc";
-     	    document.getElementById("firstNameError").style.display = 'none';
-   	    }
-    	 	
-    	 if(document.getElementById("LastName").value=="") {
-      		//alert("IN Lname");
-      		document.getElementById('LastName').style.borderColor = "red";
-  	    	document.getElementById("LastNameError").style.display = 'block';
-  	    	document.getElementById("LastName").focus(); 
-  	    	return false;
-      	}
-    	else{
-      	    document.getElementById('LastName').style.borderColor = "#ccc";
-      	    document.getElementById("LastNameError").style.display = 'none';
-        } 
-     	 	
-     		
-     	 if(document.getElementById("FatherName").value=="") {
-     		//alert("IN Fname");
-     		document.getElementById('FatherName').style.borderColor = "red";
- 	    	document.getElementById("FatherNameError").style.display = 'block';
- 	    	document.getElementById("FatherName").focus();
- 	    	return false;
-     	}
-     	else{
-     	    document.getElementById('FatherName').style.borderColor = "#ccc";
-     	    document.getElementById("FatherNameError").style.display = 'none';
-   	    } 
-     	
-     	
-  	
-     	
-     	if(document.getElementById("correspondenceAddress1").value=="") {
-     		//alert("IN Fname");
-     		document.getElementById('correspondenceAddress1').style.borderColor = "red";
- 	    	document.getElementById("correspondenceAddress1Error").style.display = 'block';
- 	    	document.getElementById("correspondenceAddress1").focus();
- 	    	return false;
-     	}
-     	else{
-     	    document.getElementById('correspondenceAddress1').style.borderColor = "#ccc";
-     	    document.getElementById("correspondenceAddress1Error").style.display = 'none';
-   	    } 
-  	    
-        if(document.getElementById("correspondenceAddress2").value=="") {
-   		//alert("IN Fname");
-	   		document.getElementById('correspondenceAddress2').style.borderColor = "red";
-	    	document.getElementById("correspondenceAddress2Error").style.display = 'block';
-	    	document.getElementById("correspondenceAddress2").focus();
-	    	return false;
-   	    }
-   		else{
-   	  	    document.getElementById('correspondenceAddress2').style.borderColor = "#ccc";
-   	    	document.getElementById("correspondenceAddress2Error").style.display = 'none';
-        }
- 	
-  	   if(document.getElementById("correspondenceState").selectedIndex == 0) {
-     		//alert("IN Fname");
-     		document.getElementById('correspondenceState').style.borderColor = "red";
- 	    	document.getElementById("correspondenceStateError").style.display = 'block';
- 	    	document.getElementById("correspondenceState").focus();
- 	    	return false;
-     	}
-     	else{
-     	    document.getElementById('correspondenceState').style.borderColor = "#ccc";
-     	    document.getElementById("correspondenceStateError").style.display = 'none';
-        }
-  		  
-  		var x =document.getElementById('Email').value;
-  		if(x!=''){
-        var atpos = x.indexOf("@");
-        var dotpos = x.lastIndexOf(".");
-        if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
-          	    //  //alert("Not a valid e-mail address");
-	        document.getElementById('Email').style.borderColor = "red";
-	       	document.getElementById("EmailError").style.display = 'block';
-	       	document.getElementById("Email").focus();
-         	return false;
-            	} 
-  		 }
-         else{
-           document.getElementById('Email').style.borderColor = "#ccc";
-           document.getElementById("EmailError").style.display = 'none'; 
-       	}  	   
-   	  
-        if(document.getElementById("correspondenceDistrict").selectedIndex == 0) {
-     		//alert("IN Fname");
-     		document.getElementById('correspondenceDistrict').style.borderColor = "red";
- 	    	document.getElementById("correspondenceDistrictError").style.display = 'block';
- 	    	document.getElementById("correspondenceDistrict").focus();
- 	    	return false;
-     	}
-     	 else{
-      	    document.getElementById('correspondenceDistrict').style.borderColor = "#ccc";
-      	    document.getElementById("correspondenceDistrictError").style.display = 'none';
+        var x = document.getElementById("AadharNumber").value;
+        if (x == "" || x.length < 12) {
+            document.getElementById('AadharNumber').style.borderColor = "red";
+            document.getElementById("AadharNumberError").style.display = 'block';
+            document.getElementById("AadharNumber").focus();
+            return false;
+        } else {
+            document.getElementById('AadharNumber').style.borderColor = "#ccc";
+            document.getElementById("AadharNumberError").style.display = 'none';
         }
 
-        if(document.getElementById("correspondenceCity").selectedIndex == 0) {
-             		//alert("IN Fname");
-            document.getElementById('correspondenceCity').style.borderColor = "red";
-         	document.getElementById("correspondenceCityError").style.display = 'block';
-         	document.getElementById("correspondenceCity").focus();
-         	return false;
+        if (document.getElementById("traineeFirstName").value == "") {
+            //alert("IN Fname");
+            document.getElementById('traineeFirstName').style.borderColor = "red";
+            document.getElementById("firstNameError").style.display = 'block';
+            document.getElementById("traineeFirstName").focus();
+            return false;
+        } else {
+            document.getElementById('traineeFirstName').style.borderColor = "#ccc";
+            document.getElementById("firstNameError").style.display = 'none';
         }
-        else{
+
+        if (document.getElementById("dateP").value == "") {
+            //alert("IN Fname");
+            document.getElementById('dateP').style.borderColor = "red";
+            document.getElementById("dobError").style.display = 'block';
+            document.getElementById("dateP").focus();
+            return false;
+        } else {
+            document.getElementById('dateP').style.borderColor = "#ccc";
+            document.getElementById("dobError").style.display = 'none';
+        }
+
+
+        if (document.getElementById("LastName").value == "") {
+            //alert("IN Lname");
+            document.getElementById('LastName').style.borderColor = "red";
+            document.getElementById("LastNameError").style.display = 'block';
+            document.getElementById("LastName").focus();
+            return false;
+        } else {
+            document.getElementById('LastName').style.borderColor = "#ccc";
+            document.getElementById("LastNameError").style.display = 'none';
+        }
+
+
+        if (document.getElementById("FatherName").value == "") {
+            //alert("IN Fname");
+            document.getElementById('FatherName').style.borderColor = "red";
+            document.getElementById("FatherNameError").style.display = 'block';
+            document.getElementById("FatherName").focus();
+            return false;
+        } else {
+            document.getElementById('FatherName').style.borderColor = "#ccc";
+            document.getElementById("FatherNameError").style.display = 'none';
+        }
+
+
+
+
+        if (document.getElementById("correspondenceAddress1").value == "") {
+            //alert("IN Fname");
+            document.getElementById('correspondenceAddress1').style.borderColor = "red";
+            document.getElementById("correspondenceAddress1Error").style.display = 'block';
+            document.getElementById("correspondenceAddress1").focus();
+            return false;
+        } else {
+            document.getElementById('correspondenceAddress1').style.borderColor = "#ccc";
+            document.getElementById("correspondenceAddress1Error").style.display = 'none';
+        }
+
+        if (document.getElementById("correspondenceAddress2").value == "") {
+            //alert("IN Fname");
+            document.getElementById('correspondenceAddress2').style.borderColor = "red";
+            document.getElementById("correspondenceAddress2Error").style.display = 'block';
+            document.getElementById("correspondenceAddress2").focus();
+            return false;
+        } else {
+            document.getElementById('correspondenceAddress2').style.borderColor = "#ccc";
+            document.getElementById("correspondenceAddress2Error").style.display = 'none';
+        }
+
+        if (document.getElementById("correspondenceState").selectedIndex == 0) {
+            //alert("IN Fname");
+            document.getElementById('correspondenceState').style.borderColor = "red";
+            document.getElementById("correspondenceStateError").style.display = 'block';
+            document.getElementById("correspondenceState").focus();
+            return false;
+        } else {
+            document.getElementById('correspondenceState').style.borderColor = "#ccc";
+            document.getElementById("correspondenceStateError").style.display = 'none';
+        }
+
+        var x = document.getElementById('Email').value;
+        if (x != '') {
+            var atpos = x.indexOf("@");
+            var dotpos = x.lastIndexOf(".");
+            if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= x.length) {
+                //  //alert("Not a valid e-mail address");
+                document.getElementById('Email').style.borderColor = "red";
+                document.getElementById("EmailError").style.display = 'block';
+                document.getElementById("Email").focus();
+                return false;
+            }
+        } else {
+            document.getElementById('Email').style.borderColor = "#ccc";
+            document.getElementById("EmailError").style.display = 'none';
+        }
+
+        if (document.getElementById("correspondenceDistrict").selectedIndex == 0) {
+            //alert("IN Fname");
+            document.getElementById('correspondenceDistrict').style.borderColor = "red";
+            document.getElementById("correspondenceDistrictError").style.display = 'block';
+            document.getElementById("correspondenceDistrict").focus();
+            return false;
+        } else {
+            document.getElementById('correspondenceDistrict').style.borderColor = "#ccc";
+            document.getElementById("correspondenceDistrictError").style.display = 'none';
+        }
+
+        if (document.getElementById("correspondenceCity").selectedIndex == 0) {
+            //alert("IN Fname");
+            document.getElementById('correspondenceCity').style.borderColor = "red";
+            document.getElementById("correspondenceCityError").style.display = 'block';
+            document.getElementById("correspondenceCity").focus();
+            return false;
+        } else {
             document.getElementById('correspondenceCity').style.borderColor = "#ccc";
             document.getElementById("correspondenceCityError").style.display = 'none';
-        } 
-              	     
-        var x=document.getElementById("correspondencePincode").value;
-            	
-                 	if( x.length < 6 ) 
-                     	    { 
-                 	
-                    		document.getElementById('correspondencePincode').style.borderColor = "red";
-                    		
-                        	document.getElementById("correspondencePincodeError").style.display = 'block';
-                        	
-                        	document.getElementById("correspondencePincode").focus();
-                        	
-                        	return false;
-                        	} 
-                        	else{
-                  	   		document.getElementById('correspondencePincode').style.borderColor = "#ccc";
-                   	  
-                   	   		document.getElementById("correspondencePincodeError").style.display = 'none';
-                     	    }
- 
-var x=document.getElementById("Mobile").value;
-if(x != ''){
-		if( x.length<10 ) {
-				document.getElementById('Mobile').style.borderColor = "red";
-           	  	document.getElementById("MobileError").style.display = 'block';
-           	    document.getElementById("Mobile").focus();
-             	return false;
-		}else{
-		     document.getElementById('Mobile').style.borderColor = "#ccc"; 
-		     document.getElementById("MobileError").style.display = 'none';
-		}
+        }
+
+        var x = document.getElementById("correspondencePincode").value;
+        if (x.length < 6) {
+            document.getElementById('correspondencePincode').style.borderColor = "red";
+            document.getElementById("correspondencePincodeError").style.display = 'block';
+            document.getElementById("correspondencePincode").focus();
+            return false;
+        } else {
+            document.getElementById('correspondencePincode').style.borderColor = "#ccc";
+            document.getElementById("correspondencePincodeError").style.display = 'none';
+        }
+
+        var x = document.getElementById("Mobile").value;
+        if (x != '') {
+            if (x.length < 10) {
+                document.getElementById('Mobile').style.borderColor = "red";
+                document.getElementById("MobileError").style.display = 'block';
+                document.getElementById("Mobile").focus();
+                return false;
+            } else {
+                document.getElementById('Mobile').style.borderColor = "#ccc";
+                document.getElementById("MobileError").style.display = 'none';
+            }
+
+            if (document.getElementById('checkCorrespondence').checked == false) {
+
+                if (document.getElementById("ResidentialAddressLine1").value == "") {
+                    document.getElementById('ResidentialAddressLine1').style.borderColor = "red";
+                    document.getElementById("ResidentialAddressLine1Error").style.display = 'block';
+                    document.getElementById("ResidentialAddressLine1").focus();
+                    return false;
+                } else {
+                    document.getElementById('ResidentialAddressLine2').style.borderColor = "#ccc";
+                    document.getElementById("ResidentialAddressLine2Error").style.display = 'none';
+                }
+                if (document.getElementById("ResidentialAddressLine2").value == "") {
+                    document.getElementById('ResidentialAddressLine2').style.borderColor = "red";
+                    document.getElementById("ResidentialAddressLine2Error").style.display = 'block';
+                    document.getElementById("ResidentialAddressLine2").focus();
+                    return false;
+                } else {
+                    document.getElementById('ResidentialAddressLine2').style.borderColor = "#ccc";
+                    document.getElementById("ResidentialAddressLine2Error").style.display = 'none';
+                }
+                if (document.getElementById("resState").selectedIndex == 0) {
+                    document.getElementById('resState').style.borderColor = "red";
+                    document.getElementById("resStateError").style.display = 'block';
+                    document.getElementById("resState").focus();
+                    return false;
+                } else {
+                    document.getElementById('resState').style.borderColor = "#ccc";
+                    document.getElementById("resStateError").style.display = 'none';
+                }
+
+                if (document.getElementById("residentialDistrict").selectedIndex == 0) {
+                    document.getElementById('residentialDistrict').style.borderColor = "red";
+                    document.getElementById("residentialDistrictError").style.display = 'block';
+                    document.getElementById("residentialDistrict").focus();
+                    return false;
+                } else {
+                    document.getElementById('residentialDistrict').style.borderColor = "#ccc";
+                    document.getElementById("residentialDistrictError").style.display = 'none';
+                }
 
 
-                   
-                   if(document.getElementById('checkCorrespondence').checked==false) {
-                
-                  		 if(document.getElementById("ResidentialAddressLine1").value=="") {
-                        	document.getElementById('ResidentialAddressLine1').style.borderColor = "red";
-                        	document.getElementById("ResidentialAddressLine1Error").style.display = 'block';
-                         	document.getElementById("ResidentialAddressLine1").focus();
-                         	return false;
-                          	}
-                          	else{
-                          	    document.getElementById('ResidentialAddressLine2').style.borderColor = "#ccc";
-                          	    document.getElementById("ResidentialAddressLine2Error").style.display = 'none';
-     }
-                                     	    
-             if(document.getElementById("ResidentialAddressLine2").value=="") {
-                   	document.getElementById('ResidentialAddressLine2').style.borderColor = "red";
-                   	document.getElementById("ResidentialAddressLine2Error").style.display = 'block';
-                	document.getElementById("ResidentialAddressLine2").focus();
-                   	return false;
-                           	}
-                	else{
-                 document.getElementById('ResidentialAddressLine2').style.borderColor = "#ccc";
-                 document.getElementById("ResidentialAddressLine2Error").style.display = 'none';
-                   }
-                 if(document.getElementById("resState").selectedIndex == 0) {
-                		//alert("IN Fname");
-                		document.getElementById('resState').style.borderColor = "red";
-            	    	document.getElementById("resStateError").style.display = 'block';
-            	    	document.getElementById("resState").focus();
-            	    	return false;
-                	}
-                	 else{
-                 	    document.getElementById('resState').style.borderColor = "#ccc";
-                 	    document.getElementById("resStateError").style.display = 'none';
-                 	    }
-                 	    
-      	   if(document.getElementById("residentialDistrict").selectedIndex == 0) {
-                   		//alert("IN Fname");
-                   		document.getElementById('residentialDistrict').style.borderColor = "red";
-               	    	document.getElementById("residentialDistrictError").style.display = 'block';
-               	    	document.getElementById("residentialDistrict").focus();
-               	    	return false;
-                   	}
-                   	 else{
-                    	    document.getElementById('residentialDistrict').style.borderColor = "#ccc";
-                    	    document.getElementById("residentialDistrictError").style.display = 'none';
-                    	    }
-                    	    
-                    	    
-                    	    if(document.getElementById("resCity").selectedIndex == 0) {
-                           		//alert("IN Fname");
-                           		document.getElementById('resCity').style.borderColor = "red";
-                       	    	document.getElementById("resCityError").style.display = 'block';
-                       	    	document.getElementById("resCity").focus();
-                       	    	return false;
-                           	}
-                           	 else{
-                            	    document.getElementById('resCity').style.borderColor = "#ccc";
-                            	    document.getElementById("resCityError").style.display = 'none';
-                            	    } 
-                            	    var x=document.getElementById("resPincode").value;
-                                	
-                                 	if( x.length < 6 ) 
-                                     	    { 
-                                 	
-                                    		document.getElementById('resPincode').style.borderColor = "red";
-                                    		
-                                        	document.getElementById("resPincodeError").style.display = 'block';
-                                        	
-                                        	document.getElementById("resPincode").focus();
-                                        	
-                                        	return false;
-                                        	} 
-                                        	else{
-                                  	   		document.getElementById('resPincode').style.borderColor = "#ccc";
-                                   	  
-                                   	   		document.getElementById("resPincode").style.display = 'none';
-                                     	 
-                 
-                                        	}
-                            	    
-                            	    
-                            	    
-                            	    
-                            	    
-                            	    
-                 /* 
-                            	    if(document.getElementById("resPincode").value=="") {
-                                       	document.getElementById('resPincode').style.borderColor = "red";
-                                       	document.getElementById("resPincodeError").style.display = 'block';
-                                    	document.getElementById("resPincode").focus();
-                                       	return false;
-                                               	}
-                                    	else{
-                                     document.getElementById('resPincode').style.borderColor = "#ccc";
-                                     document.getElementById("resPincodeError").style.display = 'none'; */
-                                       
-                                     	   
-                  
-                     if(document.getElementById("KindOfBusiness").selectedIndex == 0) {
-                                      	//alert('kind 0');
-                     	 document.getElementById('KindOfBusiness').style.borderColor = "red";
-                                      	
-                       	 document.getElementById("KindOfBusinessError").style.display = 'block';
-                                      		
-                      	 document.getElementById("KindOfBusiness").focus();
-                           		//alert("IN Fname");
-                         	return false;
-                          	}
-                     else   if(document.getElementById("KindOfBusiness").selectedIndex == 6) {
-                    	 	   document.getElementById('KindOfBusiness').style.borderColor = "#ccc";
-               		   		   document.getElementById("KindOfBusinessError").style.display = 'none';
-               		        return false;
-                         }
-					   else{
-						    //alert('kind not 0 and not in business');
-						    document.getElementById('KindOfBusiness').style.borderColor = "#ccc";
-						    document.getElementById("KindOfBusinessError").style.display = 'none';
-                  		  
-					    		     
-                     
-                    if(document.getElementById("CompanyName").value=="") {
-                        	document.getElementById('CompanyName').style.borderColor = "red";
-                        	document.getElementById("CompanyNameError").style.display = 'block';
-                     		document.getElementById("CompanyName").focus();
-                        	return false;
-                                	}
-                     		else{
-                     		document.getElementById('CompanyName').style.borderColor = "#ccc";
-                    		document.getElementById("CompanyNameError").style.display = 'none';
-                       		 } 
-                       		 
-                       		 if(document.getElementById("Designation").selectedIndex == 0) {
-                            		//alert("IN Fname");
-                            		document.getElementById('Designation').style.borderColor = "red";
-                        	    	document.getElementById("DesignationError").style.display = 'block';
-                        	    	document.getElementById("Designation").focus();
-                        	    	return false;
-                            	}
-                            	 else{
-                             	    document.getElementById('Designation').style.borderColor = "#ccc";
-                             	    document.getElementById("DesignationError").style.display = 'none';
-                             	    }
-                             	    
-                             	   if(document.getElementById("registrationNo").value=="") {
-                                   	document.getElementById('registrationNo').style.borderColor = "red";
-                                   	document.getElementById("registrationNoError").style.display = 'block';
-                                		document.getElementById("registrationNo").focus();
-                                   	return false;
-                                           	}
-                                		else{
-                                		document.getElementById('registrationNo').style.borderColor = "#ccc";
-                               		document.getElementById("registrationNoError").style.display = 'none';
-                                  		 
-           if(document.getElementById('checkCompany').checked==false){
-                                  		 
-                                  		 if(document.getElementById("BusinessAddressLine1").value=="") {
-                  	document.getElementById('BusinessAddressLine1').style.borderColor = "red";
-                   	document.getElementById("BusinessAddressLine1Error").style.display = 'block';
-               		document.getElementById("BusinessAddressLine1").focus();
-                     	return false;
-                          	}
-                	else{
-                	document.getElementById('BusinessAddressLine1').style.borderColor = "#ccc";
-             		document.getElementById("BusinessAddressLine1Error").style.display = 'none';
-              				 }
-                        if(document.getElementById("BusinessAddressLine2").value=="") {
-           		document.getElementById('BusinessAddressLine2').style.borderColor = "red";
-            	document.getElementById("BusinessAddressLine2Error").style.display = 'block';
-            	document.getElementById("BusinessAddressLine2").focus();
-                      	return false;
-                              	}
-              	else{
-           		document.getElementById('BusinessAddressLine2').style.borderColor = "#ccc";
-           		document.getElementById("BusinessAddressLine2Error").style.display = 'none';
-                                      				 } 
-                        
-                        
-                        
-                        if(document.getElementById("bussState").selectedIndex == 0) {
-                    		//alert("IN Fname");
-                    		document.getElementById('bussState').style.borderColor = "red";
-                	    	document.getElementById("bussStateError").style.display = 'block';
-                	    	document.getElementById("bussState").focus();
-                	    	return false;
-                    	}
-                    	 else{
-                     	    document.getElementById('bussState').style.borderColor = "#ccc";
-                     	    document.getElementById("bussStateError").style.display = 'none';
-                     	    }
-                     	    
-          	   if(document.getElementById("bussDistrict").selectedIndex == 0) {
-                       		//alert("IN Fname");
-                       		document.getElementById('bussDistrict').style.borderColor = "red";
-                   	    	document.getElementById("bussDistrictError").style.display = 'block';
-                   	    	document.getElementById("bussDistrict").focus();
-                   	    	return false;
-                       	}
-                       	 else{
-                        	    document.getElementById('bussDistrict').style.borderColor = "#ccc";
-                        	    document.getElementById("bussDistrictError").style.display = 'none';
-                        	    }
-                        	    
-                        	    
-                        	    if(document.getElementById("bussCity").selectedIndex == 0) {
-                               		//alert("IN Fname");
-                               		document.getElementById('bussCity').style.borderColor = "red";
-                           	    	document.getElementById("bussCityError").style.display = 'block';
-                           	    	document.getElementById("bussCity").focus();
-                           	    	return false;
-                               	}
-                               	 else{
-                                	    document.getElementById('bussCity').style.borderColor = "#ccc";
-                                	    document.getElementById("bussCityError").style.display = 'none';
-                                	    }
-                                	    
-                                	    
-                                	   var x=document.getElementById("bussPincode").value;
-                                    	
-                                     	if( x.length < 6 ) 
-                                         	    { 
-                                     	
-                                        		document.getElementById('bussPincode').style.borderColor = "red";
-                                        		
-                                            	document.getElementById("bussPincodeError").style.display = 'block';
-                                            	
-                                            	document.getElementById("bussPincode").focus();
-                                            	
-                                            	return false;
-                                            	} 
-                                            	else{
-                                      	   		document.getElementById('bussPincode').style.borderColor = "#ccc";
-                                       	  
-                                       	   		document.getElementById("bussPincodeError").style.display = 'none';
-                                         	    } 
-           
-           }
-                             	   }
-          }
-                                		}
-                                  		 
-                                  		 
-                                  		 
-                                  		 
-					   }
-                     
-                     
-					   
-     
-                                       	   
+                if (document.getElementById("resCity").selectedIndex == 0) {
+                    document.getElementById('resCity').style.borderColor = "red";
+                    document.getElementById("resCityError").style.display = 'block';
+                    document.getElementById("resCity").focus();
+                    return false;
+                } else {
+                    document.getElementById('resCity').style.borderColor = "#ccc";
+                    document.getElementById("resCityError").style.display = 'none';
+                }
+                var x = document.getElementById("resPincode").value;
+
+                if (x.length < 6) {
+                    document.getElementById('resPincode').style.borderColor = "red";
+                    document.getElementById("resPincodeError").style.display = 'block';
+                    document.getElementById("resPincode").focus();
+                    return false;
+                } else {
+                    document.getElementById('resPincode').style.borderColor = "#ccc";
+                    document.getElementById("resPincode").style.display = 'none';
+                }
+
+                if (document.getElementById("KindOfBusiness").selectedIndex == 0) {
+                    document.getElementById('KindOfBusiness').style.borderColor = "red";
+                    document.getElementById("KindOfBusinessError").style.display = 'block';
+                    document.getElementById("KindOfBusiness").focus();
+                    return false;
+                } else if (document.getElementById("KindOfBusiness").selectedIndex == 6) {
+                    document.getElementById('KindOfBusiness').style.borderColor = "#ccc";
+                    document.getElementById("KindOfBusinessError").style.display = 'none';
+                    return false;
+                } else {
+                    document.getElementById('KindOfBusiness').style.borderColor = "#ccc";
+                    document.getElementById("KindOfBusinessError").style.display = 'none';
+                    if (document.getElementById("CompanyName").value == "") {
+                        document.getElementById('CompanyName').style.borderColor = "red";
+                        document.getElementById("CompanyNameError").style.display = 'block';
+                        document.getElementById("CompanyName").focus();
+                        return false;
+                    } else {
+                        document.getElementById('CompanyName').style.borderColor = "#ccc";
+                        document.getElementById("CompanyNameError").style.display = 'none';
+                    }
+
+                    if (document.getElementById("Designation").selectedIndex == 0) {
+                        document.getElementById('Designation').style.borderColor = "red";
+                        document.getElementById("DesignationError").style.display = 'block';
+                        document.getElementById("Designation").focus();
+                        return false;
+                    } else {
+                        document.getElementById('Designation').style.borderColor = "#ccc";
+                        document.getElementById("DesignationError").style.display = 'none';
+                    }
+
+                    if (document.getElementById("registrationNo").value == "") {
+                        document.getElementById('registrationNo').style.borderColor = "red";
+                        document.getElementById("registrationNoError").style.display = 'block';
+                        document.getElementById("registrationNo").focus();
+                        return false;
+                    } else {
+                        document.getElementById('registrationNo').style.borderColor = "#ccc";
+                        document.getElementById("registrationNoError").style.display = 'none';
+
+                        if (document.getElementById('checkCompany').checked == false) {
+
+                            if (document.getElementById("BusinessAddressLine1").value == "") {
+                                document.getElementById('BusinessAddressLine1').style.borderColor = "red";
+                                document.getElementById("BusinessAddressLine1Error").style.display = 'block';
+                                document.getElementById("BusinessAddressLine1").focus();
+                                return false;
+                            } else {
+                                document.getElementById('BusinessAddressLine1').style.borderColor = "#ccc";
+                                document.getElementById("BusinessAddressLine1Error").style.display = 'none';
+                            }
+                            if (document.getElementById("BusinessAddressLine2").value == "") {
+                                document.getElementById('BusinessAddressLine2').style.borderColor = "red";
+                                document.getElementById("BusinessAddressLine2Error").style.display = 'block';
+                                document.getElementById("BusinessAddressLine2").focus();
+                                return false;
+                            } else {
+                                document.getElementById('BusinessAddressLine2').style.borderColor = "#ccc";
+                                document.getElementById("BusinessAddressLine2Error").style.display = 'none';
+                            }
+
+
+
+                            if (document.getElementById("bussState").selectedIndex == 0) {
+                                document.getElementById('bussState').style.borderColor = "red";
+                                document.getElementById("bussStateError").style.display = 'block';
+                                document.getElementById("bussState").focus();
+                                return false;
+                            } else {
+                                document.getElementById('bussState').style.borderColor = "#ccc";
+                                document.getElementById("bussStateError").style.display = 'none';
+                            }
+
+                            if (document.getElementById("bussDistrict").selectedIndex == 0) {
+                                document.getElementById('bussDistrict').style.borderColor = "red";
+                                document.getElementById("bussDistrictError").style.display = 'block';
+                                document.getElementById("bussDistrict").focus();
+                                return false;
+                            } else {
+                                document.getElementById('bussDistrict').style.borderColor = "#ccc";
+                                document.getElementById("bussDistrictError").style.display = 'none';
+                            }
+
+
+                            if (document.getElementById("bussCity").selectedIndex == 0) {
+                                document.getElementById('bussCity').style.borderColor = "red";
+                                document.getElementById("bussCityError").style.display = 'block';
+                                document.getElementById("bussCity").focus();
+                                return false;
+                            } else {
+                                document.getElementById('bussCity').style.borderColor = "#ccc";
+                                document.getElementById("bussCityError").style.display = 'none';
+                            }
+                            var x = document.getElementById("bussPincode").value;
+                            if (x.length < 6) {
+                                document.getElementById('bussPincode').style.borderColor = "red";
+                                document.getElementById("bussPincodeError").style.display = 'block';
+                                document.getElementById("bussPincode").focus();
+                                return false;
+                            } else {
+                                document.getElementById('bussPincode').style.borderColor = "#ccc";
+                                document.getElementById("bussPincodeError").style.display = 'none';
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+
     }
 </script>
 <style>
@@ -470,12 +385,6 @@ if(x != ''){
 }
 </style>
 
-<script type="text/javascript">
-function OnStart(){
-	DrawCaptcha();
-}
-window.onload = OnStart;
-</script>
 <script>
 function DrawCaptcha()
 {
@@ -493,10 +402,10 @@ function DrawCaptcha()
 
 // Validate the Entered input aganist the generated security code function   
 function ValidCaptcha(){
+	var status = true;
+	var message = "";
 	var kindOfBuss = removeSpaces(document.getElementById('KindOfBusiness').value);
 	if(kindOfBuss != 6){
-		var status = true;
-
 		var companyName = removeSpaces(document.getElementById('CompanyName').value);
 		var designation = removeSpaces(document.getElementById('Designation').value);
 		var bussAdd1 = removeSpaces(document.getElementById('BusinessAddressLine1').value);
@@ -505,49 +414,53 @@ function ValidCaptcha(){
 		var city = removeSpaces(document.getElementById('bussCity').value);
 		var state = removeSpaces(document.getElementById('bussState').value);
 		var pincode = removeSpaces(document.getElementById('bussPincode').value);
-		if(companyName == "" || companyName.length <= 0){
-		  alert('Please Enter Company Name.')
-		  status = false;
-		}
-		else if(designation == 0 || designation == "" || designation.length <= 0){
-			  alert('Please Select Designation.')
-			  status = false;
-		}
-		if(document.getElementById('checkCompany').checked==false){
-			if(bussAdd1 == "" || bussAdd1.length <= 0){
-				  alert('Please Enter Buss Add1.')
+		
+		if(kindOfBuss != 7){
+			if(companyName == "" || companyName.length <= 0){
+				message = 'Please Enter Company Name.';
 				  status = false;
 				}
-			else if(state == 0 || state == "" || state.length <= 0){
-				  alert('Please Select State.')
+				else if(designation == 0 || designation == "" || designation.length <= 0){
+					message ='Please Select Designation.';
+					  status = false;
+				}
+		}
+		
+		if(status && document.getElementById('checkCompany').checked==false){
+			if(bussAdd1 == "" || bussAdd1.length <= 0){
+				message ='Please Enter Business Address line 1.';
 				  status = false;
+				}
+			else if( state == 0 || state == "" || state.length <= 0){
+					message = 'Please Select State.';
+					status = false;
 				}
 			else if(district == 0 || district == "" || district.length <= 0){
-				  alert('Please Select District')
-				  status = false;
+					message = 'Please Select District';
+					status = false;
 				}
 			else if(bussAdd2 == "" || bussAdd2.length <= 0){
-				  alert('Please Enter Buss Add2.')
-				  status = false;
+					message = 'Please Enter Buss Add2.';
+					status = false;
 				}
 			else if(city == 0 || city == "" || city.length <= 0){
-				  alert('Please Select City.')
-				  status = false;
+					message = 'Please Select City.' ;
+				 	status = false;
 				}
 			
 			else if(pincode == "" || pincode.length <= 0){
-				  alert('Please Enter Pincode')
-				  status = false;
+					message = 'Please Enter Pincode';
+				  	status = false;
 				}
 			
 		}
 		
 		if(!status){
+			alert(message);
 			return false;
 		}
 		
 	}
-	
 	
 	var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
     var str2 = removeSpaces(document.getElementById('txtInput').value);
@@ -558,8 +471,8 @@ function ValidCaptcha(){
     	return checkagree();
     	return true;
 	} else{      
-	alert("Please Enter correct captcha");
-	document.getElementById('txtInput').value="";
+		alert("Please Enter correct captcha");
+		document.getElementById('txtInput').value="";
     return false;
 	}  
 }
@@ -883,7 +796,7 @@ function ck_aadhar() {
     
     
 </script>
-<head>
+<!-- <head> -->
 <body>
 
 	<cf:form action="registerTrainee.fssai" name="myForm" method="POST"
@@ -942,7 +855,7 @@ function ck_aadhar() {
 									<ul class="lab-no">
 										<li class="style-li"><strong><cs:message
 													code="lbl.Trainee.DOB" /></strong></li>
-										<li class="style-li error-red"><label id=dobError
+										<li class="style-li error-red"><label id="dobError"
 											class="error visibility">* select your date </label> <cf:errors
 												path="dob" cssClass="error" /></li>
 									</ul>
@@ -1031,7 +944,7 @@ function ck_aadhar() {
 												path="LastName" cssClass="error" /></li>
 									</ul>
 								</div>
-								<cf:input path="LastName"
+								<cf:input path="LastName" id="LastName"
 									onkeyup="allLetter(this.id,this.value);" maxlength="50"
 									class="form-control" placeholder="Last Name" />
 							</div>
@@ -1243,9 +1156,9 @@ function ck_aadhar() {
 							<div class="form-group">
 								<div>
 									<ul class="lab-no">
-										<li class="style-li"><strong><cs:message
+										<li class="style-li"><strong></strong><cs:message
 													code="lbl.Trainee.ResidentialAddressLine2" /></strong></li>
-										<li class="style-li error-red"><strong> <label
+										<li class="style-li error-red"><label
 												id="ResidentialAddressLine2Error" class="error visibility">*
 													enter your residentialAddress1 </label> <cf:errors
 													path="ResidentialAddressLine2" cssClass="error" /></li>
@@ -1282,21 +1195,6 @@ function ck_aadhar() {
 									</td>
 								</tr>
 							</table>
-							<%-- <div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.District" /></strong></li>
-<li class="style-li error-red"><cf:errors path="residentialDistrict" cssClass="error" /></li>
-</ul>
-</div>
-<cf:select path="residentialDistrict" class="form-control" onchange="getCity1(this.value);">
-<cf:option value="0" label="Select District" />
-<cf:options items="${districtList}" itemValue="districtId" itemLabel="districtName" />
-</cf:select> 
-</div> --%>
-
-
-
 
 						</div>
 						<!--Left side-->
@@ -1325,7 +1223,7 @@ function ck_aadhar() {
 							<div class="form-group">
 								<div>
 									<ul class="lab-no">
-										<li class="style-li"><strong><strong><cs:message
+										<li class="style-li"><strong><cs:message
 														code="lbl.Trainee.City" /></strong></li>
 										<li class="style-li error-red"><label id="resCityError"
 											class="error visibility">* select your city </label> <cf:errors
@@ -1356,35 +1254,10 @@ function ck_aadhar() {
 									maxlength="6">
 							</div>
 
-							<%-- <div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.Email" /></strong></li>
-<li class="style-li error-red"><cf:errors path="Email" cssClass="error" /></li>
-</ul>
-</div>
-<cf:input path="Email" class="form-control"  placeholder="Email"/>
-</div> --%>
-
-
-							<%-- <div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.Mobile" /></strong></li>
-<li class="style-li error-red"><cf:errors path="Mobile" cssClass="error" /></li>
-</ul>
-</div>
-<cf:input path="Mobile" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" placeholder="Mobile Number" class="form-control" type="text" value="" maxlength="10"/>
-</div> --%>
-
-
-
-
 							<!--Right side-->
 						</div>
 					</fieldset>
 				</div>
-
 
 				<!-- Business address Start -->
 				<div class="personel-info ">
@@ -1439,9 +1312,9 @@ function ck_aadhar() {
 													<div>
 														<ul class="lab-no">
 															<li class="style-li"><strong><cs:message
-																		code="lbl.Trainee.Designation" /></strong> <a href="#myModal"
+																		code="lbl.Trainee.Designation" /><a href="#myModal"
 																data-toggle="modal" data-target="#myModal">Do you
-																	want?</a></li>
+																	want?</a><strong></li>
 															<li class="style-li error-red"><label
 																id="DesignationError" class="error visibility">*
 																	enter your designation </label> <cf:errors path="Designation"
@@ -1513,8 +1386,7 @@ function ck_aadhar() {
 										<div class="form-group">
 											<div>
 												<ul class="lab-no">
-													<li class="style-li"><strong>Registration/Licence
-															No.</strong></li>
+													<li class="style-li"><strong>Registration/Licence No.</strong></li>
 													<li class="style-li error-red"><label
 														id="registrationNoError" class="error visibility">*
 															enter your registrationNumber </label> <cf:errors
@@ -1540,18 +1412,6 @@ function ck_aadhar() {
 								correspondence address.</label>
 						</div>
 						<div class="col-md-6 col-xs-12" id="businessID2">
-							<%-- <div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.CompanyName" /></strong></li>
-<li class="style-li error-red">
-<cf:errors path="CompanyName" cssClass="error" /></li>
-</ul>
-</div>
-<cf:input path="CompanyName" class="form-control"  placeholder="Company Name"/>
-</div> --%>
-
-
 
 							<div class="form-group">
 								<div>
@@ -1613,28 +1473,11 @@ function ck_aadhar() {
 						<!--Right side-->
 						<div class="col-md-6 col-xs-12" id="businessID3">
 
-							<%-- <div class="form-group">
-<div>
-<ul class="lab-no">
-<li class="style-li"><strong><cs:message code="lbl.Trainee.Designation" /></strong></li>
-<li class="style-li error-red"><cf:errors path="Designation" cssClass="error" /></li>
-</ul>
-</div>
-<cf:select path="Designation">
-<cf:option value="Food Handler" label="Food Handler" />
-<cf:option value="Food Safety Supervisior" label="Food Safety Supervisior" />
-<cf:option value="Food Safety Manager" label="Food Safety Manager" />
-<cf:option value="Other" label="Other" />
-</cf:select>
-</div>
-
- --%>
-
 							<div class="form-group">
 								<div>
 									<ul class="lab-no">
 										<li class="style-li"><strong><cs:message
-													code="lbl.Trainee.District" /></strong></li>
+													code="lbl.Trainee.District" /><strong></li>
 										<li class="style-li error-red"><label
 											id="bussDistrictError" class="error visibility">*
 												select your bussinessDistrict </label> <cf:errors
@@ -1652,8 +1495,7 @@ function ck_aadhar() {
 							<div class="form-group">
 								<div>
 									<ul class="lab-no">
-										<li class="style-li"><strong><cs:message
-													code="lbl.Trainee.City" /></strong></li>
+										<li class="style-li"><cs:message code="lbl.Trainee.City" /></li>
 										<li class="style-li error-red"><cf:errors
 												path="correspondenceState" cssClass="error" /></li>
 									</ul>
@@ -1723,8 +1565,10 @@ function ck_aadhar() {
 					<div class="col-xs-4"></div>
 					<div class="col-xs-4" id="register">
 						<div class="form-group">
-							<input type="submit" class="form-control login-btn"
-								value="Register" onclick="return ValidCaptcha();" />
+<!-- 							<input type="submit" class="form-control login-btn" -->
+<!-- 								value="Register" onclick="return ValidCaptcha();" /> -->
+								<input type="submit" class="form-control login-btn"
+								value="Register" />
 						</div>
 					</div>
 					<div class="col-xs-4"></div>

@@ -114,6 +114,7 @@ public class PersonalInformationTrainee {
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="KindOfBusiness")
 	private KindOfBusiness KindOfBusiness;
 	//@NotNull @Size(min=1, max=50 , message="enter your Designation")
+	//@Column(name="designation")
 	private String Designation;
 	//@NotNull  @Size(min=1, max=100 , message="enter your BusinessAddress ")
 	private String BusinessAddressLine1;

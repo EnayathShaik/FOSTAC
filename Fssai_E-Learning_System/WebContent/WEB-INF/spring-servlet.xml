@@ -192,8 +192,10 @@
 	<bean id="trainerContactService" class="com.ir.service.impl.TrainerContactTServiceIMPL" />
 	<bean id="trainingPartnerService" class="com.ir.service.impl.TrainingPartnerServiceImpl" />
 	<bean id = "assessmentService" class = "com.ir.service.impl.AssessmentServiceImpl" />
+	<bean id="commonService" class="com.ir.service.impl.CommonServiceImpl" />
 	<bean id="assessmentDao" class = "com.ir.dao.impl.AssessmentDaoImpl"/>
 	<bean id="adminDAO" class="com.ir.dao.impl.AdminDAOImpl"/>
+	<bean id="commonDao" class="com.ir.dao.impl.CommonDaoImpl"/>
 	<bean id="pageLoadDao" class="com.ir.dao.impl.PageLoadDaoImpl"/>
 	<bean id="registrationDAO" class="com.ir.dao.impl.RegistrationDAOImpl"/>
 	<bean id="pageLoadDaoTrainer" class="com.ir.dao.impl.PageLoadDaoTrainerImpl"/>

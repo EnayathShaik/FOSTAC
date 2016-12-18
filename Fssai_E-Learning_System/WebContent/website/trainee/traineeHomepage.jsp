@@ -6,7 +6,13 @@
 <section>
 	<%@include file="topMenuTrainee.jspf"  %>     
 </section>
-
+<script>
+	var rollNo = '${roll}';
+	
+	if(rollNo != undefined && rollNo != ""){
+		alert("Unique student ID is :" +rollNo);
+	}
+</script>
 <!-- main body -->
 <section class="main-section-margin-top">
       <div class="container-fluid">

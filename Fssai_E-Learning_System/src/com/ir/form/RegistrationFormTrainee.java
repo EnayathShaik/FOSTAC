@@ -17,7 +17,7 @@ public class RegistrationFormTrainee {
 	private String FirstName;
 	
 	/*@NotNull*/
-	@Size(min=0, max=50 , message="")
+//	@Size(min=0, max=50 , message="")
 	private String  MiddleName ;
 	@NotNull
 	@Size(min=1, max=50 , message="enter your LastName")
@@ -26,17 +26,6 @@ public class RegistrationFormTrainee {
 	@NotNull
 	@Size(min=1, max=100 , message="enter your father's name")
 	private String FatherName;
-	public String getFatherName() {
-		return FatherName;
-	}
-
-	
-
-	public void setFatherName(String fatherName) {
-		FatherName = fatherName;
-	}
-
-	//@NotNull @Size(min=7, max=12 , message="Please enter valid password")
 	private String Password="Password";
 	@NotNull
 	@Size(min=12, max=12 , message="enter your AAdhar Number")
@@ -46,19 +35,7 @@ public class RegistrationFormTrainee {
 	//@DateTimeFormat(pattern="MM/dd/yyyy")
     @NotNull //@Past
 	private String dob;
-	
     private boolean checkCompany;
-    
-    
-    
-public boolean isCheckCompany() {
-		return checkCompany;
-	}
-
-	public void setCheckCompany(boolean checkCompany) {
-		this.checkCompany = checkCompany;
-	}
-
     @Size(max=10 , message = "enter your mobile Number")
 	private String mobile;
 	@NotEmpty	@Size(min=1, max=1 , message="Please select gender")
@@ -78,8 +55,6 @@ public boolean isCheckCompany() {
 	private int residentialDistrict;
 	@NotNull @Size(min=6, max=6 , message="enter your Pincode")
 	private String resPincode;
-	
-	
 	//@NotNull
 	private int KindOfBusiness;
 	//@NotNull @Size(min=1, max=20 , message="Please enter your designation")
@@ -92,25 +67,31 @@ public boolean isCheckCompany() {
 	private int bussCity;
     //@NotNull @Size(min=6, max=6 , message="enter your bussPincode")
 	private String bussPincode;
-	
 	private boolean checkCorrespondence;
-	
-	public boolean isCheckCorrespondence() {
-		
-		return checkCorrespondence;
-	}
-
-	public void setCheckCorrespondence(boolean checkCorrespondence) {
-		this.checkCorrespondence = checkCorrespondence;
-	}
-
 	private String CompanyName;
    // @NotNull
 	private int bussState;
-	
-	
 	private String registrationNo;
+	@NotNull @Size(min=1, max=100 , message="* enter your correspondenceAddress1 ")
+	private String correspondenceAddress1;
+	@NotNull @Size(min=1, max=100 , message="* enter your correspondenceAddress2 ")
+	private String correspondenceAddress2;
 
+	@NotNull
+	private int correspondenceState;
+	@NotNull
+	private int correspondenceCity;
+	@NotNull @Size(min=6, max=6 , message="* enter your Pincode")
+	private String correspondencePincode;
+
+	@NotNull
+	private int correspondenceDistrict;
+	
+//	@NotNull
+	private int bussDistrict;
+	/**Constructor */
+	public RegistrationFormTrainee(){
+	}
 	
 	public String getRegistrationNo() {
 		return registrationNo;
@@ -138,25 +119,6 @@ public boolean isCheckCompany() {
 		this.correspondenceDistrict = correspondenceDistrict;
 	}
 
-	@NotNull @Size(min=1, max=100 , message="* enter your correspondenceAddress1 ")
-	private String correspondenceAddress1;
-	@NotNull @Size(min=1, max=100 , message="* enter your correspondenceAddress2 ")
-	private String correspondenceAddress2;
-
-	@NotNull
-	private int correspondenceState;
-	@NotNull
-	private int correspondenceCity;
-	@NotNull @Size(min=6, max=6 , message="* enter your Pincode")
-	private String correspondencePincode;
-
-	@NotNull
-	private int correspondenceDistrict;
-	
-//	@NotNull
-	private int bussDistrict;
-	
-	
 	public int getBussDistrict() {
 		return bussDistrict;
 	}
@@ -164,10 +126,6 @@ public boolean isCheckCompany() {
 	public void setBussDistrict(int bussDistrict) {
 		this.bussDistrict = bussDistrict;
 	}
-
-	public RegistrationFormTrainee(){}
-
-	
 
 	public String getCorrespondenceAddress1() {
 		return correspondenceAddress1;
@@ -267,6 +225,14 @@ public boolean isCheckCompany() {
 		AadharNumber = aadharNumber;
 	}
 
+	public String getFatherName() {
+		return FatherName;
+	}
+
+	public void setFatherName(String fatherName) {
+		FatherName = fatherName;
+	}
+
 	public String getEmail() {
 		return Email;
 	}
@@ -283,6 +249,12 @@ public boolean isCheckCompany() {
 		this.dob = dob;
 	}
 
+	public boolean isCheckCompany() {
+		return checkCompany;
+	}
+	public void setCheckCompany(boolean checkCompany) {
+		this.checkCompany = checkCompany;
+	}
 	public String getMobile() {
 		return mobile;
 	}
@@ -428,6 +400,14 @@ public boolean isCheckCompany() {
 
 	public void setSteps(int steps) {
 		this.steps = steps;
+	}
+	public boolean isCheckCorrespondence() {
+		
+		return checkCorrespondence;
+	}
+
+	public void setCheckCorrespondence(boolean checkCorrespondence) {
+		this.checkCorrespondence = checkCorrespondence;
 	}
 	
 }

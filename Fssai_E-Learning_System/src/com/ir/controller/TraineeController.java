@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
@@ -124,7 +125,6 @@ public class TraineeController {
 		System.out.println("loginid   :"+ loginId);
 		System.out.println("personalinformationtraineeid  :"+ personalinformationtraineeid);
 		long basicEnroll = traineeService.basicSave(courseEnrolledUserForm , loginId , personalinformationtraineeid);
-		System.out.println("bjghjhjhjkhkjkhjgjgjhjh");
 			if(basicEnroll  > 1){
 			model.addAttribute("created", "You have successfully enrolled !!!");
 			model.addAttribute("roll", basicEnroll);
@@ -200,10 +200,9 @@ public class TraineeController {
 		//return null;
 	}
 	@RequestMapping(value="/updateInformation" , method=RequestMethod.GET)
-	public String updateInformation(@ModelAttribute("updateInformation") RegistrationFormTrainee registrationFormTrainee, HttpSession session ){		
+	public String updateInformation(@ModelAttribute("updateInformation") RegistrationFormTrainee registrationFormTrainee, HttpSession session, Model model ){		
 		Integer ss = (Integer)session.getAttribute("loginUser1");
-		System.out.println("nnb   " +ss);
-		System.out.println(registrationFormTrainee.getBusinessAddressLine2());
+		PersonalInformationTrainee personalInformationTrainee = (PersonalInformationTrainee) session.getAttribute("loginUser");
 		return "updateInformation";
 	}
 	@RequestMapping(value="/updateTrainee" , method=RequestMethod.POST)
