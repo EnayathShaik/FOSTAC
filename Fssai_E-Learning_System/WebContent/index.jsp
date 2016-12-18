@@ -375,7 +375,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             //jsonUrl: 'events.json',
             //dataType: 'json'
 //             xmlUrl: 'website/js/events.xml'
-            xmlUrl: '/Fssai_E-Learning_System/website/js/events.xml'
+            xmlUrl: 'website/js/events.xml'
         });
 
         $('#mycalendar2').monthly({

@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import com.ir.bean.common.IntStringBean;
 import com.ir.dao.PageLoadDao;
 import com.ir.model.City;
 import com.ir.model.CourseName;
@@ -18,6 +19,7 @@ import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.State;
 import com.ir.model.Title;
+import com.ir.model.Utility;
 
 public class PageLoadDaoImpl implements PageLoadDao {
 
@@ -174,7 +176,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 	@Override
 	public List<CourseName> getCouserNameList(int coursetypeid) {
 		Session session = sessionFactory.openSession();
-		Query query = session.createSQLQuery("select coursename,courseduration from coursename where online ='Online' and status='A' and coursetypeid="+coursetypeid);
+		Query query = session.createSQLQuery("select coursename,courseduration,coursenameid from coursename where online ='Online' and status='A' and coursetypeid="+coursetypeid);
 		List<Object[]> courseNameList = query.list();
 		List<CourseName> courseNames=new ArrayList<>();
 		for(int index=0;index<courseNameList.size();index++){
@@ -182,6 +184,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			CourseName courseName=new CourseName();
 			courseName.setCoursename(objects[0].toString());
 			courseName.setCourseduration(objects[1].toString());
+			courseName.setCoursenameid(Integer.parseInt(objects[2].toString()));
 			courseNames.add(courseName);
 		}
 		session.close();
@@ -212,6 +215,41 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		}
 		session.close();
 		return manageCourseContents;
+	}
+
+
+	@Override
+	public List<IntStringBean> getTrainingPartnerList(int courseTypeId) {
+		Session session = sessionFactory.openSession();
+		Query query = session.createSQLQuery("select mtp.managetrainingpartnerid,mtp.trainingpartnername from trainingcalendar tc inner join managetrainingpartner mtp on mtp.managetrainingpartnerid=tc.trainingpartner and tc.coursetype="+courseTypeId);
+		List<IntStringBean> mangeTrainingPartnerList =new ArrayList<>();
+		List<Object[]> mangeTrainingObjPartnerList = query.list();
+		for(int index=0;index<mangeTrainingObjPartnerList.size();index++){
+			IntStringBean manageCourseContent=new IntStringBean();
+			Object[] mangeCntObArr=mangeTrainingObjPartnerList.get(index);
+			manageCourseContent.setId(Integer.parseInt(mangeCntObArr[0].toString()));
+			manageCourseContent.setValue(mangeCntObArr[1].toString());
+			mangeTrainingPartnerList.add(manageCourseContent);
+		}
+		session.close();
+		return mangeTrainingPartnerList;
+	}
+
+
+	@Override
+	public List<Object[]> loadTrainingDetails(Utility utility) {
+		Session session = sessionFactory.openSession();
+		String sql="select cn.coursename,mtp.trainingpartnername,"
+				+ "concat(pitp.trainingpartnerpermanentline1,' , ',pitp.trainingpartnerpermanentline2,',pin : ',pitp.trainingpartnerpermanentpincode,',phone : ',pitp.trainingpartnerpermanentmobile),"
+				+ "pitp.seatcapacityavailable from trainingcalendar tc inner join managetrainingpartner mtp on mtp.managetrainingpartnerid=tc.trainingpartner"
+				+ " and tc.coursetype="+utility.getCourseTypeId()+" inner join coursename cn "
+				+ "on cn.coursetypeid="+utility.getCourseTypeId()+" and coursenameid="+utility.getCourseNameId()+" inner join personalinformationtrainingpartner  pitp on mtp.managetrainingpartnerid=pitp.trainingpartnername "
+				+ "and  pitp.trainingpartnerpermanentcity="+utility.getCityId()+" and mtp.city="+utility.getCityId()+" "
+				+ "and mtp.state="+utility.getStateId()+" and mtp.managetrainingpartnerid="+utility.getTrainingCenterId();
+		Query query = session.createSQLQuery(sql);
+		List<Object[]> trainingCalendarList = query.list();
+		session.close();
+		return trainingCalendarList;
 	}
 
 }

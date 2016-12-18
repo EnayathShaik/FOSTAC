@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import com.ir.bean.common.IntStringBean;
 import com.ir.dao.PageLoadDao;
 import com.ir.model.City;
 import com.ir.model.CourseName;
@@ -16,6 +17,7 @@ import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.State;
 import com.ir.model.Title;
+import com.ir.model.Utility;
 import com.ir.service.PageLoadService;
 
 public class PageLoadServiceImpl implements PageLoadService {
@@ -118,6 +120,16 @@ public class PageLoadServiceImpl implements PageLoadService {
 	@Override
 	public List<ManageCourseContent> getManageCourseContentList(int coursetypeid) {
 		return pageLoadDao.getManageCourseContentList(coursetypeid);
+	}
+
+	@Override
+	public List<IntStringBean> getTrainingPartnerList(int courseTypeId) {
+		return pageLoadDao.getTrainingPartnerList(courseTypeId);
+	}
+
+	@Override
+	public List<Object[]> loadTrainingDetails(Utility utility) {
+		return  pageLoadDao.loadTrainingDetails(utility);
 	}
 
 }

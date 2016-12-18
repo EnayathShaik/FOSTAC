@@ -23,6 +23,9 @@ private int noOfVacancy;
 private String trainingDate;
 private int noOfApplications;
 private String loginId;
+private int cityId;
+private int stateId;
+private int trainingCenterId;
 private List<StringStringBean> trainerList;
 /**
  * @return the courseTypeId
@@ -315,5 +318,41 @@ public int getFeedbackId() {
  */
 public void setFeedbackId(int feedbackId) {
 	this.feedbackId = feedbackId;
+}
+/**
+ * @return the cityId
+ */
+public int getCityId() {
+	return cityId;
+}
+/**
+ * @param cityId the cityId to set
+ */
+public void setCityId(int cityId) {
+	this.cityId = cityId;
+}
+/**
+ * @return the stateId
+ */
+public int getStateId() {
+	return stateId;
+}
+/**
+ * @param stateId the stateId to set
+ */
+public void setStateId(int stateId) {
+	this.stateId = stateId;
+}
+/**
+ * @return the trainingCenterId
+ */
+public int getTrainingCenterId() {
+	return trainingCenterId;
+}
+/**
+ * @param trainingCenterId the trainingCenterId to set
+ */
+public void setTrainingCenterId(int trainingCenterId) {
+	this.trainingCenterId = trainingCenterId;
 }
 }

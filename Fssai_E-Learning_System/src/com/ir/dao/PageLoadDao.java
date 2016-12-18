@@ -1,6 +1,8 @@
 package com.ir.dao;
 
 import java.util.List;
+
+import com.ir.bean.common.IntStringBean;
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.District;
@@ -11,6 +13,7 @@ import com.ir.model.ManageTrainingPartner;
 import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.model.TrainingPartner;
+import com.ir.model.Utility;
 
 public interface PageLoadDao {
 	public List<State> loadState();
@@ -28,4 +31,6 @@ public interface PageLoadDao {
 	public List<CourseName> getCouserNameList(int coursetypeid);
 	public List<String> getTrainingPartnerNameList();
 	public List<ManageCourseContent> getManageCourseContentList(int coursetypeid);
+	public List<IntStringBean> getTrainingPartnerList(int courseTypeId);
+	public List<Object[]> loadTrainingDetails(Utility utility);
 }

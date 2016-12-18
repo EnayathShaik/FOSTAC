@@ -1,7 +1,12 @@
 package com.ir.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,18 +15,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.ir.bean.common.IntStringBean;
 import com.ir.bean.common.PropertyUtils;
 import com.ir.form.LoginForm;
-import com.ir.model.CourseEnrolled;
+import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
+import com.ir.model.PostVacancyTrainingCenter;
+import com.ir.model.PostVacancyTrainingCenterBean;
+import com.ir.model.State;
 import com.ir.model.Utility;
 import com.ir.service.PageLoadService;
 
@@ -49,14 +59,35 @@ public class MainRedirect {
 		   List basicCourseList = pageLoadService.basicCourseList();
 		   return basicCourseList;
 	   }
+	   @RequestMapping(value="/showTrainingCalendarDetails" , method=RequestMethod.POST)
+		@ResponseBody
+		public void getApplicationStatusDetails(@RequestBody Utility utility,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+			
+			System.out.println("Get Application Status............");
+			
+			List<Object[]> list=new ArrayList<>();
+			try{
+				 list = pageLoadService.loadTrainingDetails(utility);
+			}catch(Exception e){
+			}
+			response.setContentType("text/html;charset=UTF-8");
+	        PrintWriter out = response.getWriter();
+	        out.print(new Gson().toJson(list));
+	        out.flush();
+		}
+	   
 	   @RequestMapping(value="/calendarSearch" ,method = RequestMethod.GET)
 	   public String calendarSearch(@ModelAttribute("utility")Utility utility,HttpSession session,BindingResult result ,  Model model) {
 		   List<CourseName> courseNameList=pageLoadService.getCouserNameList(utility.getCourseTypeId());
-		   List<String> trainingPartnerNameList=pageLoadService.getTrainingPartnerNameList();
-		   List<ManageCourseContent> manageCourseContents=pageLoadService.getManageCourseContentList(utility.getCourseTypeId());
+		   List<IntStringBean> mangePartnerList=pageLoadService.getTrainingPartnerList(utility.getCourseTypeId());
+		   List<City> citys=pageLoadService.loadCity(0);
+		   List<State> states=pageLoadService.loadState();
 		   model.addAttribute("courseNameList", new Gson().toJson(courseNameList));
-		   model.addAttribute("trainingPartnerNameList", new Gson().toJson(trainingPartnerNameList));
-		   model.addAttribute("manageCourseContents", new Gson().toJson(manageCourseContents));
+		   model.addAttribute("mangePartnerList", new Gson().toJson(mangePartnerList));
+		   model.addAttribute("citys", new Gson().toJson(citys));
+		   model.addAttribute("states", new Gson().toJson(states));
+		   model.addAttribute("courseTypeId", utility.getCourseTypeId());
+		   model.addAttribute("trainingDate", utility.getTrainingDate());
 		   return "calendarSearch";
 	   }
 	   

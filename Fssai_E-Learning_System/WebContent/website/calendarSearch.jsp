@@ -54,7 +54,7 @@
 			<div class="col-md-6 col-sm-6">
 				<h2 style="float: left; clear: both;">Basic Course Level</h2>
 				<p class="date">
-					<strong>Date:</strong> 09/08/2016
+					<strong>Date:</strong> <span id="trainingDate"></span>
 				</p>
 			</div>
 		</div>
@@ -68,10 +68,7 @@
 
 			<div class="col-md-3 col-sm-2">
 				<form>
-					<select>
-						<option value="Basic">Basic</option>
-						<option value="Advance">Advance</option>
-						<option value="Special">Special</option>
+					<select id="coursenameList">
 					</select>
 				</form>
 
@@ -86,10 +83,7 @@
 
 			<div class="col-md-3 col-sm-2">
 				<form>
-					<select>
-						<option value="Skill India">Skill India</option>
-						<option value="Haldiram's">Haldiram's</option>
-						<option value="Jubliant Food">Jubliant Food</option>
+					<select id="trainingPartnerList">
 					</select>
 				</form>
 			</div>
@@ -102,10 +96,7 @@
 			</div>
 			<div class="col-md-3 col-sm-2">
 				<form>
-					<select>
-						<option value="">New Delhi</option>
-						<option value="">Maharashtra</option>
-						<option value="">Haryana</option>
+					<select id="states">
 					</select>
 				</form>
 			</div>
@@ -119,13 +110,10 @@
 			</div>
 			<div class="col-md-3 col-sm-2">
 				<form>
-					<select>
-						<option value="">Delhi</option>
-						<option value="">Mumbai</option>
-						<option value="">Gurgaon</option>
+					<select id="citys">
 					</select>
 
-					<button style="margin-left: 110px;" class="btn" type="button">
+					<button style="margin-left: 110px;" class="btn" type="button" onclick="showCalenderDetails();">
 						<strong>Show Details</strong>
 					</button>
 				</form>
@@ -162,33 +150,70 @@
 								<th class="td-heading text-center"><strong>Availability
 										Seat</strong></th>
 							</thead>
+							<tbody id="calendrDtls"></tbody>
 
-							<tr>
-								<td class="td-border text-center"><p>Basic
-										Certification on Food Safety</p></td>
-								<td class="td-border text-center"><p>Skill India</p></td>
-								<td class="td-border text-center"><p>
-										Block A, Clarion Collection<br> Shaheed Jeet Singh Marg,
-										New Delhi - 110016.<br> Tel: +91-11-47451600-10 Fax:
-										+91-11-46560417
-									</p></td>
-								<td class="td-border" align="center"><p>20</p></td>
-							</tr>
-
-							<tr>
-								<td class="td-border text-center"><p>GHP-GMP-HACCP
-										Certification Course for Manufacturing Sector</p></td>
-								<td class="td-border text-center"><p>Skill India</p></td>
-								<td class="td-border text-center"><p>
-										4/.127, Champak Road, Bori Wali Mumbai,<br> Mumbai -
-										400035.<br> Tel: +91-022-47451600-10 Fax:
-										+91-022-46560417
-									</p></td>
-								<td class="td-border text-center"><p>10</p></td>
-							</tr>
 						</table>
 					</div>
 				</div>
 			</div>
 		</section>
+		 <script src="website/js/jquery.js"></script> 
+		<script src="website/js/bootstrap.min.js"></script> 
+		<script src="website/js/jquery.isotope.min.js"></script> 
+        
+        <script type="text/javascript">
+        var cousernamelist=${courseNameList};
+        var mangePartnerList=${mangePartnerList};
+        var citys=${citys};
+        var states=${states};
+        var trainingDate=${trainingDate};
+        var courseTypeId=${courseTypeId};
+        $("#trainingDate").text(trainingDate);
+        
+        for(var index=0;index<cousernamelist.length;index++){
+        	 $('#coursenameList').append('<option value="'+cousernamelist[index].coursenameid+'">'+cousernamelist[index].coursename+'</option>');
+        }
+        for(var index=0;index<mangePartnerList.length;index++){
+       	 $('#trainingPartnerList').append('<option value="'+mangePartnerList[index].id+'">'+mangePartnerList[index].value+'</option>');
+       }
+        for(var index=0;index<states.length;index++){
+        	if(states[index].status=="A")
+          	 $('#states').append('<option value="'+states[index].stateId+'">'+states[index].stateName+'</option>');
+          }
+        for(var index=0;index<citys.length;index++){
+          	 $('#citys').append('<option value="'+citys[index].cityId+'">'+citys[index].cityName+'</option>');
+          }
+        function showCalenderDetails(){
+        	alert("Show Calendar Details");
+        	 var data=JSON.stringify({
+        		 courseNameId:$("#coursenameList").val(),
+        		 trainingCenterId:$("#trainingPartnerList").val(),
+        		 stateId:$("#states").val(),
+        		 cityId:$("#citys").val(),
+     			courseTypeId:courseTypeId
+     	});
+     		$.ajax({
+     		      type: 'post',
+     		      url: 'showTrainingCalendarDetails.fssai',
+     		      contentType : "application/json",
+     		      data: data,
+     		      success: function (response) {
+     		    	 response=JSON.parse(response);
+     		    	$('#calendrDtls').empty();
+     		    	 for(var index=0;index<response.length;index++){
+     		    		$('#calendrDtls').append('<tr>');
+     		    		$('#calendrDtls').append('<td class="td-border text-center"><p>'+response[index][0]+'</p></td>');
+     		    		$('#calendrDtls').append('<td class="td-border text-center"><p>'+response[index][1]+'</p></td>');
+     		    		var addLst=response[index][2].split(",");
+     		    		$('#calendrDtls').append('<td class="td-border text-center"><p>'+addLst[0]+'<br>'+addLst[1]+'.<br> '+addLst[2]+', <br> '+addLst[3]+'</p></td>');
+     		    		$('#calendrDtls').append('<td class="td-border" align="center"><p>'+response[index][3]+'</p></td>');
+     		    		$('#calendrDtls').append('</tr>');
+     		          }
+     		    	
+     		   
+     		      }
+     		      });
+        }
+        
+        </script>
 </section>
