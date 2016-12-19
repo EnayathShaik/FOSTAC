@@ -5,6 +5,17 @@
 <script type="text/javascript">
 function OnStart(){
 	DrawCaptcha();
+	/*
+	if(document.getElementById('checkCorrespondence').checked == true){
+		document.getElementById("residential1").style.display = "none";
+		document.getElementById("residential2").style.display = "none";
+	}
+	if(document.getElementById('checkCompany').checked == true){
+		document.getElementById("businessID2").style.display= 'none';
+		document.getElementById("businessID3").style.display= 'none';
+	}
+	*/
+
 }
 window.onload = OnStart;
 </script>

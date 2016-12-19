@@ -24,7 +24,6 @@ public class ChangePasswordUtility {
 		String newEncryptPwd=null;
 		String dataPassword=null;
 		String Password=null;
-		System.out.println("this is for pass set  "+userId);
 		try {
 			 oldEcriptedPwd=EncryptionPasswordANDVerification.encryptPass(oldPassword);
 			 newEncryptPwd=EncryptionPasswordANDVerification.encryptPass(newPassword);
@@ -41,35 +40,17 @@ public class ChangePasswordUtility {
 	List psdList = pwdQuery.list();
 	for(Object LoginPassword :psdList){
 		 Password=(String) LoginPassword;
-		 System.out.println("this is to pass the password  "+Password);
-		 System.out.println("this is old password  "+oldEcriptedPwd);
-		 System.out.println("data base data "+Password);
-	
-		/*for(int i=0;i<psdList.size();i++){
-		String LoginPassword=(String) psdList.get(i);
-			
-		// dataPassword=LoginPassword.getPassword();
-		}*/
 		if(oldEcriptedPwd.equalsIgnoreCase(Password)){
-			
-			
-			
 			Query updateQuery=session.createSQLQuery("update LoginDetails  set Encrypted_Password='"+newEncryptPwd+"', Password='"+newPassword+"'  where loginId='"+userId+"'");
-			System.out.println("password is getting change");
-
 			updateQuery.executeUpdate();
-						
-						
-						passwordCheck=true;
-						session.close();
+			passwordCheck=true;
+			session.close();
 		}
-		
 		else{
 			passwordCheck=false;
 		}
 	}
-			
-		return passwordCheck;
+	return passwordCheck;
 	}
 	
 	

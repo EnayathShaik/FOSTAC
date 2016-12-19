@@ -11,12 +11,18 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.ir.dao.CommonDao;
+import com.ir.form.ChangePasswordForm;
+import com.ir.util.ChangePasswordUtility;
 
 @Repository
 public class CommonDaoImpl implements CommonDao{
 	@Autowired
 	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
+
+	@Autowired
+	@Qualifier("changePasswordUtility")
+	public ChangePasswordUtility changePasswordUtility;
 	
 	@Override
 	public String getCourseTrainingType(String courseNameId){
@@ -40,6 +46,14 @@ public class CommonDaoImpl implements CommonDao{
 			session.close();
 		}
 		return response;
+	}
+	
+	@Override
+	public boolean changePasswordSave(ChangePasswordForm changePasswordForm, String id) {
+		String oldPassword=	changePasswordForm.getOldPassword();
+		String newPassword=changePasswordForm.getNewPassword();
+		boolean confirm = changePasswordUtility.changePasswordUtil(oldPassword, newPassword, id);
+		return confirm;
 	}
 
 }

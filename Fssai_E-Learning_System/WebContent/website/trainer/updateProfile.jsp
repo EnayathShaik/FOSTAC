@@ -1053,7 +1053,7 @@ function getCityUpdate(dd , cc)
 </ul>
 </div>
 <%-- <cf:input path="TrainingCenterPermanentPincode" name="TrainingCenterPermanentPincode" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" placeholder="Pincode" class="form-control" type="text" value="" maxlength="6" value="${loginUr.trainingCenterPermanentPincode}"/> --%>
-<cf:input type="text" class="form-control" maxlength="6" path="TrainingCenterPermanentPincode" placeholder="Pincode" value="${loginUr.trainingCenterPermanentPincode}"/>
+<cf:input type="text" class="form-control" maxlength="6" path="TrainingCenterPermanentPincode" placeholder="Pincode" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,&#39;&#39;)" value="${loginUr.trainingCenterPermanentPincode}"/>
 </div>
 
 

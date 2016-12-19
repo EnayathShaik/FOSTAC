@@ -43,7 +43,7 @@ function pwd(){
 	}
 }
 </script>
-<cf:form action="changePasswordTrainerSave.fssai" commandName="changePasswordForm" name="myForm" method="POST"  >
+<cf:form action="changePasswordSave.fssai" commandName="changePasswordForm" name="myForm" method="POST"  >
     <!-- horizontal navigation -->
     <section>
           <div class="container-fluid">

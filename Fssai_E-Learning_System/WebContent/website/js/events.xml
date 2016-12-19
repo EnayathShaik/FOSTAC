@@ -1,143 +1,70 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0"?>
 <monthly>
-<event>
-<id>0</id>
-<name>adgsdf</name>
-<startdate>2016-11-29</startdate>
-<enddate>2016-11-29</enddate>
-<starttime>10:00</starttime>
-<endtime>1:7</endtime>
-<color>#ffb128</color>
-<url>calendarSearch.fssai?courseTypeId=1&amp;courseNameId=80</url>
-</event>
-<event>
-<id>1</id>
-<name>FoodSafty</name>
-<startdate>2016-11-28</startdate>
-<enddate>2016-11-28</enddate>
-<starttime>13:00</starttime>
-<endtime>0:30</endtime>
-<color>#ffb128</color>
-<url>calendarSearch.fssai?courseTypeId=1&amp;courseNameId=80</url>
-</event>
-<event>
-<id>2</id>
-<name>GHC-Basic</name>
-<startdate>2016-12-12</startdate>
-<enddate>2016-12-12</enddate>
-<starttime>12:59</starttime>
-<endtime>1:30</endtime>
-<color>#ffb128</color>
-<url>calendarSearch.fssai?courseTypeId=1&amp;courseNameId=370</url>
-</event>
-<event>
-<id>3</id>
-<name>adgsdf</name>
-<startdate>2016-11-28</startdate>
-<enddate>2016-11-28</enddate>
-<starttime>13:00</starttime>
-<endtime>1:7</endtime>
-<color>#ffb128</color>
-<url>calendarSearch.fssai?courseTypeId=1&amp;courseNameId=80</url>
-</event>
-<event>
-<id>4</id>
-<name>FoodSafty</name>
-<startdate>2016-11-29</startdate>
-<enddate>2016-11-29</enddate>
-<starttime>10:00</starttime>
-<endtime>0:30</endtime>
-<color>#ffb128</color>
-<url>calendarSearch.fssai?courseTypeId=1&amp;courseNameId=80</url>
-</event>
-<event>
-<id>5</id>
-<name>FoodSafty</name>
-<startdate>2016-12-12</startdate>
-<enddate>2016-12-12</enddate>
-<starttime>12:59</starttime>
-<endtime>0:30</endtime>
-<color>#ffb128</color>
-<url>calendarSearch.fssai?courseTypeId=1&amp;courseNameId=370</url>
-</event>
-<event>
-<id>6</id>
-<name>GHC-Basic</name>
-<startdate>2016-11-28</startdate>
-<enddate>2016-11-28</enddate>
-<starttime>13:00</starttime>
-<endtime>1:30</endtime>
-<color>#ffb128</color>
-<url>calendarSearch.fssai?courseTypeId=1&amp;courseNameId=80</url>
-</event>
-<event>
-<id>7</id>
-<name>GHC-Basic</name>
-<startdate>2016-11-29</startdate>
-<enddate>2016-11-29</enddate>
-<starttime>10:00</starttime>
-<endtime>1:30</endtime>
-<color>#ffb128</color>
-<url>calendarSearch.fssai?courseTypeId=1&amp;courseNameId=80</url>
-</event>
-<event>
-<id>8</id>
-<name>adgsdf</name>
-<startdate>2016-12-12</startdate>
-<enddate>2016-12-12</enddate>
-<starttime>12:59</starttime>
-<endtime>1:7</endtime>
-<color>#ffb128</color>
-<url>calendarSearch.fssai?courseTypeId=1&amp;courseNameId=370</url>
-</event>
-<event>
-<id>9</id>
-<name>GH-advance</name>
-<startdate>2016-12-12</startdate>
-<enddate>2016-12-12</enddate>
-<starttime>00:12</starttime>
-<endtime>0:56</endtime>
-<color>#ffb128</color>
-<url>calendarSearch.fssai?courseTypeId=2&amp;courseNameId=600</url>
-</event>
-<event>
-<id>10</id>
-<name>GH-Basic</name>
-<startdate>2016-12-12</startdate>
-<enddate>2016-12-12</enddate>
-<starttime>12:59</starttime>
-<endtime>1:30</endtime>
-<color>#ffb128</color>
-<url>calendarSearch.fssai?courseTypeId=1&amp;courseNameId=370</url>
-</event>
-<event>
-<id>11</id>
-<name>GH-Basic</name>
-<startdate>2016-11-29</startdate>
-<enddate>2016-11-29</enddate>
-<starttime>10:00</starttime>
-<endtime>1:30</endtime>
-<color>#ffb128</color>
-<url>calendarSearch.fssai?courseTypeId=1&amp;courseNameId=80</url>
-</event>
-<event>
-<id>12</id>
-<name>Advance-A</name>
-<startdate>2016-12-12</startdate>
-<enddate>2016-12-12</enddate>
-<starttime>00:12</starttime>
-<endtime>0:20</endtime>
-<color>#ffb128</color>
-<url>calendarSearch.fssai?courseTypeId=2&amp;courseNameId=600</url>
-</event>
-<event>
-<id>13</id>
-<name>GH-Basic</name>
-<startdate>2016-11-28</startdate>
-<enddate>2016-11-28</enddate>
-<starttime>13:00</starttime>
-<endtime>1:30</endtime>
-<color>#ffb128</color>
-<url>calendarSearch.fssai?courseTypeId=1&amp;courseNameId=80</url>
-</event>
+
+
+	<event>
+		<id>1</id>
+		<name>XML Events</name>
+		<startdate>2016-9-15</startdate>
+		<enddate>2016-9-17</enddate>
+		<starttime>12:00</starttime>
+		<endtime>2:00</endtime>
+		<color>#ffb128</color>
+		<url></url>
+	</event>
+
+	<event>
+		<id>2</id>
+		<name>Another Event</name>
+		<startdate>2016-10-15</startdate>
+		<enddate></enddate>
+		<starttime></starttime>
+		<endtime></endtime>
+		<color>#28cbff</color>
+		<url></url>
+	</event>
+
+	<event>
+		<id>3</id>
+		<name>Another Event</name>
+		<startdate>2016-10-19</startdate>
+		<enddate>2016-10-23</enddate>
+		<starttime>9:00</starttime>
+		<endtime>10:00</endtime>
+		<color>#9cc370</color>
+		<url></url>
+	</event>
+
+	<event>
+		<id>4</id>
+		<name>Another Event</name>
+		<startdate>2016-10-2</startdate>
+		<enddate></enddate>
+		<starttime></starttime>
+		<endtime></endtime>
+		<color>#9f4b99</color>
+		<url></url>
+	</event>
+
+	<event>
+		<id>5</id>
+		<name>Another Event</name>
+		<startdate>2016-10-19</startdate>
+		<enddate></enddate>
+		<starttime>9:00</starttime>
+		<endtime>10:00</endtime>
+		<color>#9cc370</color>
+		<url></url>
+	</event>
+
+	<event>
+		<id>6</id>
+		<name>Another Event</name>
+		<startdate>2016-11-2</startdate>
+		<enddate></enddate>
+		<starttime></starttime>
+		<endtime></endtime>
+		<color>#9f4b99</color>
+		<url></url>
+	</event>
 </monthly>

@@ -43,14 +43,12 @@ public class TraineeDAOImpl implements  TraineeDAO{
 	@Qualifier("sessionFactory")
 	public SessionFactory sessionFactory;
 	
-// Rishi
 	@Autowired
 	@Qualifier("changePasswordUtility")
 	public ChangePasswordUtility changePasswordUtility;
 	
 	@Autowired
 	public CourseEnrolledUser courseEnrolledUser;
-	// Rishi
 		
 	@Autowired
 	@Qualifier("state")
