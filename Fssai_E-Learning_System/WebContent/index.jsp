@@ -363,8 +363,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="website/js/wow.min.js"></script> 
 <script src="website/js/monthly.js"></script>
 <%
-	//EventsCreater creater=new EventsCreater();
-	//creater.createEvents(request);
+	EventsCreater creater=new EventsCreater();
+	creater.createEvents(request);
 %>
     <script type="text/javascript">
     $(window).load(function () {

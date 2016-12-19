@@ -67,32 +67,39 @@ public class EventsCreater {
 
 			// startdate elements
 			Element startdate = doc.createElement("startdate");
-			startdate.appendChild(doc.createTextNode(objArr[1].toString()));
-			event.appendChild(startdate);
 			
-			String ed = objArr[1].toString();  // Start date
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Calendar c = Calendar.getInstance();
-			c.setTime(sdf.parse(ed));
-			String[] convetedTime=timeConvert((int)Double.parseDouble(objArr[3].toString())).split(":");
-			c.add(Calendar.DATE,Integer.parseInt(convetedTime[0]));  // number of days to add
+			String[] convetedTime;
+			try {
+				String ed = objArr[1].toString();  // Start date
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				Calendar c = Calendar.getInstance();
+				String formateDate = ed.substring(6,10) + "-" + ed.substring(3,5)+ "-" + ed.substring(0,2);
+				c.setTime(sdf.parse(formateDate));
+				startdate.appendChild(doc.createTextNode(formateDate));
+				event.appendChild(startdate);
+				
+				convetedTime = timeConvert((int)Double.parseDouble(objArr[3].toString())).split(":");
+				c.add(Calendar.DATE,Integer.parseInt(convetedTime[0]));  // number of days to add
+				
+				ed = sdf.format(c.getTime());
 			
-			ed = sdf.format(c.getTime());
-			// enddate elements
-			Element enddate = doc.createElement("enddate");
-			enddate.appendChild(doc.createTextNode(objArr[1].toString()));
-			event.appendChild(enddate);
-
-			// starttime elements
-			Element starttime = doc.createElement("starttime");
-			starttime.appendChild(doc.createTextNode(objArr[2].toString()));
-			event.appendChild(starttime);
-
-			// endtime elements
-			Element endtime = doc.createElement("endtime");
-			endtime.appendChild(doc.createTextNode(convetedTime[1]+":"+convetedTime[2]));
-			event.appendChild(endtime);
-
+				// enddate elements
+				Element enddate = doc.createElement("enddate");
+				enddate.appendChild(doc.createTextNode(ed));
+				event.appendChild(enddate);
+	
+				// starttime elements
+				Element starttime = doc.createElement("starttime");
+				starttime.appendChild(doc.createTextNode(objArr[2].toString()));
+				event.appendChild(starttime);
+	
+				// endtime elements
+				Element endtime = doc.createElement("endtime");
+				endtime.appendChild(doc.createTextNode(convetedTime[1]+":"+convetedTime[2]));
+				event.appendChild(endtime);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 			// color elements
 			Element color = doc.createElement("color");
 			color.appendChild(doc.createTextNode("#ffb128"));
