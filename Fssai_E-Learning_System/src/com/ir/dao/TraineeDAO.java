@@ -26,6 +26,7 @@ import com.ir.model.Utility;
 public interface TraineeDAO {
 	
 	public List<CourseName> courseNameList();
+	public List<CourseName> courseNameListByType(int courseType);
 	public CourseName getCourseName(int profileId);
 	public CourseName getCourseDetails(int loginId);
 	public CourseTrainee getCourseTrainingByCourseTypeID(int typeId);

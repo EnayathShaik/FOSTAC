@@ -30,11 +30,11 @@ function getTrainingCenter(val)
 	      var mainData1 = jQuery.parseJSON(response);
 	        //alert(mainData1);
 	      $('#trainingCenter option').remove();
-	      $('#trainingCenter').append('<option value="0" label="Select Training Center" />');
+	      $('#trainingCenter').append('<option value="0">Select Training Center </option>');
 	  	  $.each(mainData1 , function(i , obj)
 	  		{
 	  		
-	  				$('#trainingCenter').append('<option value='+obj[0]+' label='+obj[1]+' />');		
+	  				$('#trainingCenter').append('<option value='+obj[0]+'>'+obj[1]+'</option>');		
 	  		});
 	      }
 	      });     

@@ -32,16 +32,21 @@ public class TraineeServiceImpl implements TraineeService {
 		List<CourseName> courseNameList = traineeDAO.courseNameList();
 		return courseNameList;
 	}
-@Override
-	public CourseTrainee getCourseTrainingByCourseTypeID(int typeId) {
-		CourseTrainee courseTrainee = traineeDAO.getCourseTrainingByCourseTypeID(typeId);
-		return courseTrainee;
+	@Override
+	public List<CourseName> courseNameListByType(int courseType) {
+		List<CourseName> courseNameList = traineeDAO.courseNameListByType(courseType);
+		return courseNameList;
 	}
-@Override
-public CourseName getCourseName(int loginId) {
-	CourseName courseName = traineeDAO.getCourseName(loginId);
-	return courseName;
-}
+	@Override
+		public CourseTrainee getCourseTrainingByCourseTypeID(int typeId) {
+			CourseTrainee courseTrainee = traineeDAO.getCourseTrainingByCourseTypeID(typeId);
+			return courseTrainee;
+		}
+	@Override
+	public CourseName getCourseName(int loginId) {
+		CourseName courseName = traineeDAO.getCourseName(loginId);
+		return courseName;
+	}
 	@Override
 	public CourseName getCourseDetails(int loginId) {
 		CourseName courseName = traineeDAO.getCourseDetails(loginId);

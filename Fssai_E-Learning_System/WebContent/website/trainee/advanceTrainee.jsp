@@ -56,12 +56,20 @@ function getCourseDetails(){
 </script>
 <script>
 function gettid(){
-	alert('f');
 	if (document.getElementById('trainingCalendarIdd').checked) {
-		 alert(calValue);
 		  calValue = document.getElementById('trainingCalendarIdd').value;
 		  alert(calValue);
-		 }
+		  document.getElementById("trainingCalendarId").value = calValue;
+	 }
+	
+// 	if (document.getElementById('trainingCalendarIdd').checked) {
+// 		// alert(calValue);
+// 		  calValue = document.getElementById('trainingCalendarIdd').value;
+// 		  document.getElementById("trainingCalendarId").value = calValue;
+// 		  alert(calValue);
+		  
+// 		}
+	
 	/*document.getElementById("trainingCalendarId").value = document.getElementById("h").value;
 	var a = document.getElementById("trainingCalendarId").value;
 	var b = document.getElementById("iii").value;
@@ -113,10 +121,10 @@ function gettid(){
                       <div class="col-md-6 col-xs-12">
                         <div class="form-group">
                           <label>Course Name</label> &nbsp;&nbsp;<label> ${created}</label>
-<cf:select path="courseName" class="form-control">
-<cf:option value="0" label="Select Course" />
-<cf:options items="${courseNameList}" itemValue="coursenameid" itemLabel="coursename" />
-</cf:select>
+							<cf:select path="courseName" class="form-control">
+							<cf:option value="0" label="Select Course" />
+							<cf:options items="${advanceCourseNameList}" itemValue="coursenameid" itemLabel="coursename" />
+							</cf:select>
                         </div>
                         <div class="form-group">
                           <label>Training Partner</label>

@@ -21,6 +21,7 @@ import com.ir.model.Utility;
 
 public interface TraineeService {
 	public List<CourseName> courseNameList();
+	public List<CourseName> courseNameListByType(int courseType);
 	public CourseTrainee getCourseTrainingByCourseTypeID(int typeId);
 	public List<ManageTrainingPartner> trainingPartnerList();
 	public List<State> trainingCenterStateList();

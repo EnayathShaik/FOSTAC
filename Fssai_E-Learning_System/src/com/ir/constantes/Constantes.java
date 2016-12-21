@@ -13,5 +13,8 @@ public final class Constantes {
 	public static final String DBSERVER_USERNAME_PROPERTY= "dbUsername";
 	public static final String DBSERVER_PASSWORD_ID_PROPERTY= "dbPassword";
 	public static final String DBSERVER_DRIVER_PROPERTY= "dbDriver";
+	public static final int COURSETYPE_BASIC = 1;
+	public static final int COURSETYPE_ADVANCE = 2;
+	public static final int COURSETYPE_SPECIAL = 3;
 
 }

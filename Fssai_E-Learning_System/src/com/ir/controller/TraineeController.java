@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.ir.constantes.Constantes;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
@@ -26,6 +27,7 @@ import com.ir.model.AdmitCardForm;
 import com.ir.model.AssessmentQuestion;
 import com.ir.model.CourseName;
 import com.ir.model.CourseTrainee;
+import com.ir.model.CourseType;
 import com.ir.model.FeedbackForm;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.KindOfBusiness;
@@ -178,13 +180,25 @@ public class TraineeController {
 		return "contactTrainee";
 	}
 
-	// Rishi end
-	
 	@ModelAttribute("courseNameListB")
 	public List<CourseName> courseNameList(){
 		List<CourseName> courseNameListB = traineeService.courseNameList();
 		System.out.println("course name list   :   "+ courseNameListB);
 		return courseNameListB;
+	}
+	
+	@ModelAttribute("advanceCourseNameList")
+	public List<CourseName> advanceCourseNameList(){
+		List<CourseName> advanceCourseNameList = traineeService.courseNameListByType(Constantes.COURSETYPE_ADVANCE);
+		System.out.println("Advance course name list   :   "+ advanceCourseNameList);
+		return advanceCourseNameList;
+	}
+
+	@ModelAttribute("specialCourseNameList")
+	public List<CourseName> specialCourseNameList(){
+		List<CourseName> specialCourseNameList = traineeService.courseNameListByType(Constantes.COURSETYPE_SPECIAL);
+		System.out.println("Advance course name list   :   "+ specialCourseNameList);
+		return specialCourseNameList;
 	}
 	@ModelAttribute("trainingPartnerList")
 	public List<ManageTrainingPartner> trainingPartnerList(){
@@ -251,20 +265,12 @@ public class TraineeController {
 		return "admit-cardtrainee";
 	}
 	
-	
-//	@RequestMapping(value="/generateCertificatetrainee" , method=RequestMethod.GET)
-//	public String generateCertificatetrainee(@ModelAttribute("basicTrainee") CourseEnrolledUserForm courseEnrolledUserForm ,
-//			@ModelAttribute("state") State state , @ModelAttribute("tp") TrainingPartner tp ){
-//		return "generateCertificatetrainee";
-//	}
-	
 	@RequestMapping(value="/certificatetrainee" , method=RequestMethod.GET)
 	public String certificatetrainee(@ModelAttribute("basicTrainee") CourseEnrolledUserForm courseEnrolledUserForm ,
 			@ModelAttribute("state") State state , @ModelAttribute("tp") TrainingPartner tp ){
 		return "certificatetrainee";
 	}
 
-	// Rishi
 	@RequestMapping(value="/advanceTrainee" , method=RequestMethod.GET)
 	public String advance(@ModelAttribute("advanceTrainee") CourseEnrolledUserForm courseEnrolledUserForm ,
 			@ModelAttribute("state") State state , @ModelAttribute("loginUser") PersonalInformationTrainee pit ){
@@ -292,7 +298,7 @@ public class TraineeController {
 			model.addAttribute("created", "Oops , something went wrong !!!");
 			model.addAttribute("roll", basicEnroll);
 		}
-		return "afterenrolled";
+		return "traineeHomepage";
 	}
 	@RequestMapping(value="/specialTrainee" , method=RequestMethod.GET)
 	public String specialTrainee(@ModelAttribute("specialTrainee") CourseEnrolledUserForm courseEnrolledUserForm ,
@@ -320,10 +326,9 @@ public class TraineeController {
 			model.addAttribute("created", "Oops , something went wrong !!!");
 			model.addAttribute("roll", basicEnroll);
 		}
-		return "afterenrolled";
+		return "traineeHomepage";
 	}
 	
-	// Rishi end
 	@RequestMapping(value="/viewTraineeList" , method=RequestMethod.GET)
 	public String viewTraineeList(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm ,
 			@ModelAttribute("state") State state , @ModelAttribute("loginUser") PersonalInformationTrainee pit ){

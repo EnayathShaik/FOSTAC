@@ -167,6 +167,16 @@ public class TraineeDAOImpl implements  TraineeDAO{
 		session.close();
 		return courseNameList;
 	}
+	
+	@Override
+	public List<CourseName> courseNameListByType(int courseType) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		Query query = session.createQuery("from CourseName where coursetypeid = "+courseType);
+		List<CourseName> courseNameList = query.list();
+		session.close();
+		return courseNameList;
+	}
 	@Override
 	public CourseTrainee getCourseTrainingByCourseTypeID(int typeId) {
 		Session session = sessionFactory.openSession();

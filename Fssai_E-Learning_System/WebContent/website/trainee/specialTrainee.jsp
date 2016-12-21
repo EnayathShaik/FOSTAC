@@ -55,12 +55,11 @@ function getCourseDetails(){
 </script>
 <script>
 function gettid(){
-	alert('f');
 	if (document.getElementById('trainingCalendarIdd').checked) {
-		 alert(calValue);
 		  calValue = document.getElementById('trainingCalendarIdd').value;
+		  document.getElementById("trainingCalendarId").value = calValue;
 		  alert(calValue);
-		/* }
+		 }/*
 	document.getElementById("trainingCalendarId").value = document.getElementById("h").value;
 	var a = document.getElementById("trainingCalendarId").value;
 	var b = document.getElementById("iii").value;
@@ -112,24 +111,24 @@ function gettid(){
                       <div class="col-md-6 col-xs-12">
                         <div class="form-group">
                           <label>Course Name</label> &nbsp;&nbsp;<label> ${created}</label>
-<cf:select path="courseName" class="form-control">
-<cf:option value="0" label="Select Course" />
-<cf:options items="${courseNameList}" itemValue="coursenameid" itemLabel="coursename" />
-</cf:select>
+								<cf:select path="courseName" class="form-control">
+								<cf:option value="0" label="Select Course" />
+								<cf:options items="${specialCourseNameList}" itemValue="coursenameid" itemLabel="coursename" />
+								</cf:select>
                         </div>
                         <div class="form-group">
                           <label>Training Partner</label>
-<cf:select path="trainingPartner" class="form-control">
-<cf:option value="0" label="Select Training Partner" />
-<cf:options items="${trainingPartnerList}" itemValue="manageTrainingPartnerId" itemLabel="trainingPartnerName" />
-</cf:select>
+								<cf:select path="trainingPartner" class="form-control">
+								<cf:option value="0" label="Select Training Partner" />
+								<cf:options items="${trainingPartnerList}" itemValue="manageTrainingPartnerId" itemLabel="trainingPartnerName" />
+								</cf:select>
                         </div>
                         <div class="form-group">
                           <label>Training Centre: State</label>
-<cf:select path="trainingCenterState" class="form-control" onchange="getDistrict(this.value);">
-<cf:option value="0" label="Select State" />
-<cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName" />
-</cf:select>
+								<cf:select path="trainingCenterState" class="form-control" onchange="getDistrict(this.value);">
+								<cf:option value="0" label="Select State" />
+								<cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName" />
+								</cf:select>
                         </div>
 
                         <!-- residential address --> 
@@ -140,30 +139,27 @@ function gettid(){
                       <div class="col-md-6 col-xs-12">
                         <div class="form-group">
                           <label>Mode of Training</label>
-<cf:select path="modeOfTraining" class="form-control">
-<cf:option value="0" label="Select Mode of Training"></cf:option>
-<cf:option value="Online" label="Online" />
-<cf:option value="Classroom" label="Classroom" />
-</cf:select>
-                        </div>
+								<cf:select path="modeOfTraining" class="form-control">
+								<cf:option value="0" label="Select Mode of Training"></cf:option>
+								<cf:option value="Online" label="Online" />
+								<cf:option value="Classroom" label="Classroom" />
+								</cf:select>
+								                        </div>
                         <div class="form-group">
                           <label>Training Date</label>
                           <input type="date" id="trainingDate" class="form-control" placeholder="Training Date">
                         </div>
                         <div class="form-group">
                           <label>Training Centre: District</label>
-<cf:select path="trainingCenterCity" class="form-control">
-<cf:option value="0" label="Select District" />
-</cf:select>
+								<cf:select path="trainingCenterCity" class="form-control">
+								<cf:option value="0" label="Select District" />
+								</cf:select>
                         </div>
                         <!-- business address --> 
                       </div>
                       <div class="col-md-6 col-xs-12">
                         <div class="form-group">
-                        
-                        
-            
-<a href="#" onclick="getCourseDetails();" class="form-control login-btn btn pull-right" style="width: 50%;">Show Details</a>
+							<a href="#" onclick="getCourseDetails();" class="form-control login-btn btn pull-right" style="width: 50%;">Show Details</a>
                         </div>
 
                         <!-- residential address --> 
