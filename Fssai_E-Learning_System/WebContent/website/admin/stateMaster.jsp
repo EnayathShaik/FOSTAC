@@ -9,7 +9,13 @@ window.onload = OnStart;
 </script>
 <script type='text/javascript'>
 
-function editStateData(){
+function editStateData(state_id){
+	alert(state_id);
+	alert(state);
+	alert(status);
+}
+
+function editStateDataOld(){
 	var idHidden =  $("#idH").val();
 	var status = $("#status").val();
 	var state = $("#stateName").val();
@@ -63,17 +69,12 @@ function checkState() {
 }
 </script>
 <script>
-function deleteState(state,status) {
-	alert(state);
-	alert(status);
-		var idHidden =  $("#idLabel"+i).val();
-		var status = $("#statusLabel").val();
-		var state = $("#stateLabel").val();
+function deleteState(state,status,idHidden) {
 		document.getElementById('idH').value = idHidden;
-		
 		document.getElementById('btnUpdate').style.display = 'none';
 		document.getElementById('btnCreate').style.display = 'block';
-		document.getElementById('stateName').value = document.getElementById('stateLabel').value;
+		document.getElementById('stateName').value = state;
+	    document.getElementById('stateLabel').value = status;
 		$(".displayNone").css("display","block");
 		$("#btnUpdate").css("display","block");
 		 if(status=="A"){
@@ -147,7 +148,7 @@ function deleteState1(i) {
 				}
 				var state = obj.stateName;
 				var status = obj.status;
-				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><input type="hidden" id="stateLabel" value="'+obj.stateName+'">'+obj.stateName+'</td><td><input type="hidden" id="statusLabel" value="'+obj.status+'">'+stat+'</td><td> &nbsp;&nbsp;&nbsp;&nbsp; <a href="#" onClick="deleteState('+state+','+status+')">Edit</a> </td><td style="display:none;"><input type="hidden" id="idLabel'+i+'" value="'+obj.stateId+'"></td></tr>');	
+				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><input type="hidden" id="stateLabel" value="'+obj.stateName+'">'+obj.stateName+'</td><td><input type="hidden" id="statusLabel" value="'+obj.status+'">'+stat+'</td><td> &nbsp;&nbsp;&nbsp;&nbsp; <a href="#" onClick="deleteState(\''+obj.stateName+'\',\''+obj.status+'\',\''+obj.stateId+'\');">Edit</a> </td><td style="display:none;"><input type="hidden" id="idLabel'+i+'" value="'+obj.stateId+'"></td></tr>');	
 			});
 			}
 			});
