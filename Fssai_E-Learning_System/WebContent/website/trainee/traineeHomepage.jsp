@@ -4,7 +4,7 @@
 <%System.out.print("trainee home page jsp"); %>
 
 <section>
-	<%@include file="topMenuTrainee.jspf"  %>     
+	<%@include file="../roles/top-menu.jsp"%>
 </section>
 <script>
 	var rollNo = '${roll}';
@@ -19,7 +19,7 @@
     <div id="wrapper"> 
           
           <!-- Sidebar menu -->
-    <%@include file="leftMenuTrainee.jspf"%>
+    <%@include file="../roles/slider.jsp" %>
        <!-- Sidebar menu -->
           <!-- /#sidebar-wrapper --> 
           <!-- Page Content -->

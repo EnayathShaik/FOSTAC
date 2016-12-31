@@ -66,7 +66,7 @@ function applyForVacancy(index){
 }
 </script>
 <section>
-<%@include file="topMenuTrainer.jspf" %>
+<%@include file="../roles/top-menu.jsp"%>
 </section>
 <!-- main body -->
 <section class="main-section-margin-top">
@@ -74,7 +74,7 @@ function applyForVacancy(index){
     <div id="wrapper"> 
       
       <!-- Sidebar -->
-    <%@include file="leftMenuTrainer.jspf" %>
+    <%@include file="../roles/slider.jsp" %>
       <!-- /#sidebar-wrapper --> 
       <!-- Page Content -->
       <div id="page-content-wrapper">

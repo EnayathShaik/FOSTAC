@@ -5,6 +5,12 @@
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
   
+  
+ <!--  <session-config>
+		<session-timeout>1</session-timeout>
+	</session-config> -->
+	
+	
     <servlet>
     <servlet-name>ConfigServlet</servlet-name>
     <servlet-class>com.ir.servlet.config.ConfigServlet</servlet-class>
@@ -114,6 +120,16 @@
     <servlet-name>searchState</servlet-name>
     <url-pattern>/searchState.jspp</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>saveAssementCalender</servlet-name>
+    <servlet-class>com.ir.servlet.SaveTPAssementCalender</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>saveAssementCalender</servlet-name>
+    <url-pattern>/saveAssementCalender.jspp</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>checkState</servlet-name>
     <servlet-class>com.ir.servlet.CheckState</servlet-class>

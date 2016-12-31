@@ -83,7 +83,7 @@ function validateFields(){
 <script type="text/javascript">
 function searchVacancy(){
 	var loginID = $("#loginId").val();
-	alert(loginID);
+	
 	
 	var courseType =  $("#courseType").val();
 	var courseName =  $("#courseName").val();
@@ -91,17 +91,17 @@ function searchVacancy(){
 	var requiredExp =  $("#requiredExp").val();
 	var noOfVacancy =  $("#noOfVacancy").val();
 	
-	alert('courseType == '+courseType);
+	/* alert('courseType == '+courseType);
 	alert('courseName == '+courseName);
 	alert('trainingDate == '+trainingDate);
 	alert('requiredExp == '+requiredExp);
-	alert('noOfVacancy == '+noOfVacancy);
+	alert('noOfVacancy == '+noOfVacancy); */
 	
 	
 	$(".displayNone").css("display","block");
 	
 	var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy+"&loginid="+loginID;
-	alert("total "+total);
+//	alert("total "+total);
 	var result="";
 		$.ajax({
 		type: 'post',
@@ -129,22 +129,7 @@ function searchVacancy(){
 <cf:form action="postVacancyTrainingPartnerSave.fssai" name="myForm" method="POST" commandName="postVacancyTrainingCenterForm" onsubmit="return validateFields();" >
 
 <section>
-  <div class="container-fluid">
-    <nav class="navbar navbar-default navbar-fixed-top horizontal-nav-top horizontal-top-nav-border">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-            </div>
-            
-            <jsp:include page="../trainingPartner/trainingCenterNavBar.jsp" />
-            <!--/.nav-collapse --> 
-          </div>
-        </div>
-      </div>
-    </nav>
-  </div>
+   <%@include file="../roles/top-menu.jsp"%>
 </section>
 
 <!-- main body -->
@@ -153,7 +138,7 @@ function searchVacancy(){
     <div id="wrapper"> 
       
       <!-- Sidebar -->
- <%@include file="leftmenuTrainingPartner.jspf" %>
+ <%@include file="../roles/slider.jsp" %>
       <!-- /#sidebar-wrapper --> 
       <!-- Page Content -->
       <div id="page-content-wrapper">

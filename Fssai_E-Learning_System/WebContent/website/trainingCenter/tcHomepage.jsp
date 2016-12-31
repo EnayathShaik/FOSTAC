@@ -99,7 +99,7 @@ function searchUpcomingTraining(){
                     <div class="col-xs-12 table-overflow-responsive">
                       <fieldset>
                         <legend>
-                        <h3>Upcoming Trainings</h3>
+                        <h3>Upcoming Trainings-</h3>
                         </legend>
                         <table id="newTable" class="table table-bordered table-responsive table-striped table-hover">
                           <thead>

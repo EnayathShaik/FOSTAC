@@ -641,4 +641,11 @@ public class TraineeDAOImpl implements  TraineeDAO{
 			}
 		return admitcard;
 	}
+	@Override
+	public String getDefaultMailID(int loginId, int profileId) {
+		// TODO Auto-generated method stub
+		System.out.println("Login ID -- "+loginId);
+		System.out.println("profileId ID -- "+profileId);
+		return null;
+	}
 	}

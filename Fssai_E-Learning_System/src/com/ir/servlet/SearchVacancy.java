@@ -107,7 +107,8 @@ public class SearchVacancy extends HttpServlet {
 		}*/
 		
 		
-		sql = " select pvtc.postvacancytrainingcenterid , ct.coursetype , cn.coursename , pvtc.trainingdate ,pvtc.requiredexp , pvtc.noofvacancy,pvtc.loginid  from postvacancytrainingcenter as pvtc   inner join coursetype as ct on ct.coursetypeid = pvtc.coursetype    inner join coursename as cn on cn.coursenameid = pvtc.coursename inner join personalinformationtrainingpartner D on(pvtc.trainingcenter=D.personalinformationtrainingpartnerid) inner join logindetails E on(D.logindetails=E.ID) where E.loginid ='"+loginId+"'";
+		sql = " select pvtc.postvacancytrainingcenterid , ct.coursetype , cn.coursename , pvtc.trainingdate ,pvtc.requiredexp , pvtc.noofvacancy,pvtc.loginid  from postvacancytrainingcenter as pvtc   inner join coursetype as ct on ct.coursetypeid = pvtc.coursetype    inner join coursename as cn on cn.coursenameid = pvtc.coursename inner join personalinformationtrainingpartner D on(pvtc.trainingcenter=D.personalinformationtrainingpartnerid) inner join logindetails E on(D.logindetails=E.ID) " +
+				"where 1=1";//E.loginid ='"+loginId+"'";
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
 		System.out.println(list.size());

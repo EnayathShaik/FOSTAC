@@ -20,15 +20,10 @@ public class AssessmentQuestionForm {
 	private int noOfOption;
 	@NotNull @Size(min=1 , max = 100 , message="Please enter option One")
 	private String optionOne;
-	@NotNull @Size(min=1 , max = 100 , message="Please enter option Two")
 	private String optionTwo;
-	@NotNull @Size(min=1 , max = 100 , message="Please enter option Three")
 	private String optionThree;
-	@NotNull @Size(min=1 , max = 100 , message="Please enter option Four")
 	private String optionFour;
-	@NotNull @Size(min=1 , max = 100 , message="Please enter option Five")
 	private String optionFive;
-	@NotNull @Size(min=1 , max = 100 , message="Please enter option Six")
 	private String optionSix;
 	@NotNull
 	private int correctAnswer;

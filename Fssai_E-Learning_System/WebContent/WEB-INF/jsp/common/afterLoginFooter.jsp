@@ -30,6 +30,8 @@
     <script>
         $(document).ready(function () {
         	
+        	
+        	
         	$(function(){
         	    var dtToday = new Date();
         	    var month = dtToday.getMonth() + 1;

@@ -10,7 +10,6 @@ window.onload = OnStart;
 </script>
 <script type="text/javascript">
 function searchCurrentAppliactionStatus(){
-	alert("Fetching details to mark attendance..");
 	var data=JSON.stringify({
 		courseType:0,
 		courseName:0
@@ -100,7 +99,7 @@ function searchUpcomingTraining(){
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
             </div>
-            <jsp:include page="../trainingPartner/trainingCenterNavBar.jsp" />
+             <%@include file="../roles/top-menu.jsp"%>
             <!--/.nav-collapse --> 
           </div>
         </div>
@@ -115,7 +114,7 @@ function searchUpcomingTraining(){
     <div id="wrapper"> 
       
       <!-- Sidebar -->
- <%@include file="leftmenuTrainingPartner.jspf" %>
+ <%@include file="../roles/slider.jsp" %>
       <!-- /#sidebar-wrapper --> 
       <!-- Page Content -->
       <div id="page-content-wrapper">

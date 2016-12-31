@@ -19,42 +19,14 @@
 <form>
     <!-- horizontal navigation -->
     <section>
-        <div class="container-fluid">
-            <nav class="navbar navbar-default navbar-fixed-top horizontal-nav-top horizontal-top-nav-border">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                            </div>
-                            <div id="navbar" class="navbar-collapse collapse">
-                                <ul class="nav navbar-nav">
-                                    <li class="hori"><a href="redirectHome.fssai">Home</a></li>
-                                    <li class="hori"><a href="update-information.fssai">Update Information</a></li>
-                                    <li class="hori"><a href="contactAA.fssai">Contact Us</a></li>
-                                </ul>
-                                <ul class="nav navbar-nav navbar-right">
-                                    <li class="dropdown active"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog fa-spin"></i> <span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="changePasswordAssesAgency.fssai">Change Password</a></li>
-                                            <li><a href="#">Logout</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!--/.nav-collapse -->
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </div>
+        <%@include file="../roles/top-menu.jsp"%>
     </section>
     <!-- main body -->
     <section class="main-section-margin-top">
         <div class="container-fluid">
             <div id="wrapper">
                 <!-- Sidebar menu -->
-           <%@include file="leftMenuTrainee.jspf"%>
+           <%@include file="../roles/slider.jsp" %>
                 <!-- Sidebar menu -->
                 <!-- /#sidebar-wrapper -->
                 <!-- Page Content -->

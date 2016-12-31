@@ -60,9 +60,13 @@ public class TraineeController {
 	
 	// Rishi 
 	@RequestMapping(value="/contactTrainee" , method=RequestMethod.GET)
-	public String contactTrainee(@ModelAttribute("contactTraineee") ContactTrainee contactTrainee ){
+	public String contactTrainee(@ModelAttribute("contactTraineee") ContactTrainee contactTrainee , HttpSession session){
 		System.out.println("My Mail == "+contactTrainee.getEmailAddress());
 		System.out.println("My Address == "+contactTrainee.getMessageDetails());
+		Integer userId = (Integer) session.getAttribute("userId");
+		Integer profileId = (Integer) session.getAttribute("profileId");
+		String defaultMail = traineeService.getDefaultMailID(userId, profileId);
+		
 		return "contactTrainee";
 	}
 	@RequestMapping(value="/changePasswordTrainee" , method=RequestMethod.GET)

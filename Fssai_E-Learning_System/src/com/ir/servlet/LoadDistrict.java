@@ -47,24 +47,27 @@ public class LoadDistrict extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		System.out.println("in load district data servlet");
-		response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-		String name = (request.getQueryString());
-		System.out.println("passing name   :" + name);
+		try{
+			System.out.println("in load district -- data servlet");
+			response.setContentType("text/html;charset=UTF-8");
+	        PrintWriter out = response.getWriter();
+			String name = (request.getQueryString());
+			System.out.println("passing name   :" + name);
+			Configuration conf = new Configuration();
+			conf.configure("/hibernate.cfg.xml");
+			SessionFactory sf = conf.buildSessionFactory();
+			Session session = sf.openSession();
+			Query query = session.createQuery("from District where stateid ='"+name+"'");
+			List<District> list = query.list();
+			System.out.println("after list load district");
+			Gson g =new Gson();
+			String newList = g.toJson(list); 
+			out.write(newList);
+			out.flush();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		
-		
-		Configuration conf = new Configuration();
-		conf.configure("/hibernate.cfg.xml");
-		SessionFactory sf = conf.buildSessionFactory();
-		Session session = sf.openSession();
-		Query query = session.createQuery("from District where stateid ='"+name+"'");
-		List<District> list = query.list();
-		System.out.println("after list load district");
-		Gson g =new Gson();
-		String newList = g.toJson(list); 
-		out.write(newList);
-		out.flush();
 	}
 
 	/**

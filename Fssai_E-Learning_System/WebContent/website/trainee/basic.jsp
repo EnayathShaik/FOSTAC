@@ -10,7 +10,7 @@ function getDistrict(val)
 	      success: function (response) {      
 	      var mainData1 = jQuery.parseJSON(response);
 	      $('#trainingCenterCity option').remove();
-	      $('#trainingCenterCity').append('<option value="0" label="Select District" />');
+	      $('#trainingCenterCity').append('<option value="0" label="Select District a" />');
 	  	  $.each(mainData1 , function(i , obj)
 	  		{
 	  		
@@ -94,7 +94,7 @@ function gettid(){
 
 <cf:form action="basicSave.fssai" name="myForm" method="POST" commandName="basicTrainee" >
     <section>
-     <%@include file="topMenuTrainee.jspf"%>
+     <%@include file="../roles/top-menu.jsp"%>
     </section>
 
     <!-- main body -->
@@ -103,7 +103,8 @@ function gettid(){
         <div id="wrapper"> 
 
           <!-- Sidebar menu -->
-         <%@include file="leftMenuTrainee.jspf"%>
+       <%--   <%@include file="leftMenuTrainee.jspf"%> --%>
+          <%@include file="../roles/slider.jsp" %>
           <!-- Sidebar menu --> 
           <div id="page-content-wrapper">
             <div class="container-fluid"> 

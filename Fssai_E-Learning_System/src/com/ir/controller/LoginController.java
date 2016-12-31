@@ -141,16 +141,18 @@ public class LoginController {
 			model.addAttribute("loginDetails", loginDetails);
 			List<TrainingPartner> trainingPartnerList = trainingPartnerList();
 			session.setAttribute("trainingPartnerList", trainingPartnerList);
-			session.setAttribute("loginUser", loginDetails);
+			session.setAttribute("loginUser", loginDetails);  
+			session.setAttribute("logId",loginDetails.getLoginId());
+			session.setAttribute("profileId", loginDetails.getProfileId());
+			session.setAttribute("userId", loginDetails.getId());
 			System.out.println("in super admin admin login");
 			return "adminHomepage";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 2 && loginDetails.getStatus().equalsIgnoreCase("A")){
 			System.out.println("in admin login");
 			session.setAttribute("loginUser", loginDetails);
-			// Rishi
 			session.setAttribute("logId",loginDetails.getLoginId());
-			// Rishi			
-			
+			session.setAttribute("profileId", loginDetails.getProfileId());
+			session.setAttribute("userId", loginDetails.getId());
 			return "adminHomepage";
 		}else if(loginDetails !=null && loginDetails.getProfileId() == 3 && loginDetails.getStatus().equalsIgnoreCase("A"))
 		{
@@ -163,6 +165,8 @@ public class LoginController {
 			session.setAttribute("loginUser", personalInformationTrainee);
 			session.setAttribute("loginUser1", personalInformationTrainee.getId());
 			session.setAttribute("logId", personalInformationTrainee.getLoginDetails().getLoginId());
+			session.setAttribute("profileId", loginDetails.getProfileId());
+			session.setAttribute("userId", loginDetails.getId());
 			return "traineeHomepage";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 4 && loginDetails.getStatus().equalsIgnoreCase("A")){
 			PersonalInformationTrainer personalInformationTrainer = loginService.FullDetailTrainer(loginDetails.getId());
@@ -174,6 +178,8 @@ public class LoginController {
 			session.setAttribute("statename", personalInformationTrainer.getPermanentstate().getStateName());
 			session.setAttribute("tp", personalInformationTrainer.getAssociatedTrainingpartnerName() == null ? "" : personalInformationTrainer.getAssociatedTrainingpartnerName().getTrainingPartnerName());
 			session.setAttribute("loginId", personalInformationTrainer.getLoginDetails().getLoginId());
+			session.setAttribute("profileId", loginDetails.getProfileId());
+			session.setAttribute("userId", loginDetails.getId());
 			model.addAttribute("logintrainer", personalInformationTrainer);
 			session.setAttribute("loginUser2", personalInformationTrainer.getPersonalInformationTrainerId());
 			session.setAttribute("logId", personalInformationTrainer.getLoginDetails().getLoginId());
@@ -204,8 +210,8 @@ public class LoginController {
 				System.out.println("**************"+personalInformationTrainingPartner.getPersonalInformationTrainingPartnerId());
 				session.setAttribute("loginUsertrainingpartner", personalInformationTrainingPartner.getPersonalInformationTrainingPartnerId());
 				session.setAttribute("logId", personalInformationTrainingPartner.getLoginDetails().getLoginId());
-				session.setAttribute("profileId", personalInformationTrainingPartner.getLoginDetails().getProfileId());
-				
+				session.setAttribute("profileId", loginDetails.getProfileId());
+				session.setAttribute("userId", loginDetails.getId());
 				System.out.println("id of trainpartner is "+personalInformationTrainingPartner.getPersonalInformationTrainingPartnerId());	
 				return "trainingPartnerHomepage";
 			}else{
@@ -227,6 +233,8 @@ public class LoginController {
 				session.setAttribute("logId", personalInformationAssessor.getLoginDetails().getLoginId());
 				// commenet after abhay code
 				//return "personalInformationAssessor";
+				session.setAttribute("profileId", loginDetails.getProfileId());
+				session.setAttribute("userId", loginDetails.getId());
 				return "AssessorPage";
 			}else{
 				model.addAttribute("error" , "Oops , you are not authorized !!!");
@@ -258,6 +266,7 @@ public class LoginController {
 		//by rishi
 			session.setAttribute("logId", manageTrainingPartner.getLoginDetails().getLoginId());
 			//rishi
+			session.setAttribute("profileId", loginDetails.getProfileId());
 			return "trainingPartnerDashboard";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 8 && loginDetails.getStatus().equalsIgnoreCase("A")){
 			// Assessment Agency  //// Assessment Agency  //// Assessment Agency  //// Assessment Agency  //
@@ -272,6 +281,8 @@ public class LoginController {
 			session.setAttribute("logerClass","ManageAssessmentAgency");
 			session.setAttribute("loginIdUnique", loginDetails.getId());
 			System.out.println("id Is "+manageAssessmentAgency.getLoginDetails().getLoginId());
+			session.setAttribute("profileId", loginDetails.getProfileId());
+			session.setAttribute("userId", loginDetails.getId());
 			return "assessmentAgencyHomepage";
 		}else{
 			model.addAttribute("error" , "Oops , wrong Id and password !!!");
@@ -279,11 +290,43 @@ public class LoginController {
 		}
 
 	}
-	@RequestMapping(value="/redirectHome" ,method = RequestMethod.GET)
-	   public String redirectHome(@ModelAttribute("loginUser") PersonalInformationTrainee pit) {
-		   System.out.println("redirect trainee");
-		   return "traineeHomepage";
-	   }
+	
+	/**
+	 * @param loginForm
+	 * @param result
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "/loginProcess", method = RequestMethod.GET)
+	public String loginAuto(@Valid @ModelAttribute("login") LoginForm loginForm,BindingResult result, Model model, HttpSession session) {
+		Integer profileID = (Integer) session.getAttribute("profileId");
+		
+		
+		if(profileID != null && profileID > 0){
+			if(profileID == 1){
+				return "adminHomepage";
+			}else if(profileID == 2){
+				return "adminHomepage";
+			}else if(profileID == 3){
+				return "traineeHomepage";
+			}else if(profileID == 4){
+				return "trainerHomepage";
+			}else if(profileID == 5){
+				return "trainingPartnerHomepage";
+			}else if(profileID == 6){
+				return "AssessorPage";
+			}else if(profileID == 7){
+				return "trainingPartnerDashboard";
+			}else if(profileID == 8){
+				return "assessmentAgencyHomepage";
+			}
+		}
+		return "login";
+	}
+	
+	
+	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(@Validated @ModelAttribute("login") LoginForm loginForm, HttpSession session,  BindingResult result,Model model) {
 		model.addAttribute("error"," You have successfully logout");

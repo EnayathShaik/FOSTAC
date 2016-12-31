@@ -54,7 +54,7 @@ function validateFields() {
     <!-- horizontal navigation -->
      <cf:form action="contactTraineeSave.fssai" name="myForm" method="POST" commandName="contactTraineee" onsubmit="return validateFields();"> 
     <section>
-      <%@ include file="topMenuTrainee.jspf" %>
+      <%@include file="../roles/top-menu.jsp"%>
     </section>
 
     <!-- main body -->
@@ -63,7 +63,7 @@ function validateFields() {
         <div id="wrapper"> 
 
           <!-- Sidebar menu -->
-   <%@include file="leftMenuTrainee.jspf"%>
+   <%@include file="../roles/slider.jsp" %>
            <!-- Sidebar menu -->
           <!-- /#sidebar-wrapper --> 
           <!-- Page Content -->

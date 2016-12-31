@@ -281,6 +281,14 @@ public class TrainingPartnerController {
 		return "trainingpartnerpaymentconfirmation";
 	}
 	
+	
+	@RequestMapping(value="/tcm" , method=RequestMethod.GET)
+	public String tcm(){
+			return "tcm";
+	}
+	
+	
+	
 	@RequestMapping(value="/trainingpartnermarkAttendence" , method=RequestMethod.GET)
 	public String trainingpartnermarkAttendence(@ModelAttribute("trainingpartnermarkAttendence") TrainingPartnerTrainingCalender trainingpartnerpaymentconfirmation,HttpSession session,BindingResult result , Model model){
 		if(result.hasErrors()){

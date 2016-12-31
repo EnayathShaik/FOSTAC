@@ -548,7 +548,7 @@ function getCityUpdate(dd , cc)
             <!-- horizontal navigation -->
              <cf:form   action="updateAssessorDatavalue.fssai" name="myForm" method="POST" commandName="updateAssessor">
             <section>
-                <%@ include file="topMenuAssessor.jspf"%>
+                <%@include file="../roles/top-menu.jsp"%>
             </section>
 
             <!-- main body -->
@@ -557,7 +557,7 @@ function getCityUpdate(dd , cc)
                     <div id="wrapper">
 
                         <!-- Sidebar -->
-                        <div> <%@ include file="leftMenuAssessor.jspf" %>
+                       <%@include file="../roles/slider.jsp" %>
                         </div>
                         <!-- /#sidebar-wrapper -->
                         <!-- Page Content -->

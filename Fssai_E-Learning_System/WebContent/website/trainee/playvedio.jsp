@@ -42,7 +42,7 @@
     <div id="wrapper"> 
           
           <!-- Sidebar menu -->
-         <%@include file="leftMenuTrainee.jspf"%>
+         <%-- <%@include file="leftMenuTrainee.jspf"%> --%>
        <!-- Sidebar menu -->
           <!-- /#sidebar-wrapper --> 
           <!-- Page Content -->

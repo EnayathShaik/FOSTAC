@@ -2,6 +2,7 @@ package com.ir.dao.impl;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -183,6 +184,7 @@ System.out.println("**********SS");
 		}else{
 			District district = new District();
 			district.setDistrictName(districtForm.getDistrictName());
+			district.setStatus(districtForm.getStatus());
 			district.setState(s);
 			Session session1 = sessionFactory.openSession();
 			Transaction tx1 = session1.beginTransaction();
@@ -848,13 +850,24 @@ System.out.println("**********SS");
 		assessmentQuestion.setQuestionNumber(assessmentQuestionForm.getQuestionNumber());
 		assessmentQuestion.setQuestionHint(assessmentQuestionForm.getQuestionHint());
 		assessmentQuestion.setQuestionTitle(assessmentQuestionForm.getQuestionTitle());
-		assessmentQuestion.setOptionOne(assessmentQuestionForm.getOptionOne());
-		assessmentQuestion.setOptionTwo(assessmentQuestionForm.getOptionTwo());
-		assessmentQuestion.setOptionThree(assessmentQuestionForm.getOptionThree());
-		assessmentQuestion.setOptionFour(assessmentQuestionForm.getOptionFour());
-		assessmentQuestion.setOptionFive(assessmentQuestionForm.getOptionFive());
-		assessmentQuestion.setOptionSix(assessmentQuestionForm.getOptionSix());
-		assessmentQuestion.setCorrectAnswer(1);
+		List<String> items = Arrays.asList(assessmentQuestionForm.getOptionOne().split("\\s*,\\s*"));
+		System.out.println("Size Of Items : "+items.size());
+		for(int i=0;i<items.size();i++){
+			if(i==0){
+				assessmentQuestion.setOptionOne(items.get(i));
+			}else if(i==1){
+				assessmentQuestion.setOptionTwo(items.get(i));
+			}else if(i==2){
+				assessmentQuestion.setOptionThree(items.get(i));
+			}else if(i==3){
+				assessmentQuestion.setOptionFour(items.get(i));
+			}else if(i==4){
+				assessmentQuestion.setOptionFive(items.get(i));
+			}else if(i==5){
+				assessmentQuestion.setOptionSix(items.get(i));
+			}
+		}
+		assessmentQuestion.setCorrectAnswer(assessmentQuestionForm.getCorrectAnswer());
 		assessmentQuestion.setAssessmentType("Post");
 		Integer assessmentQuestionIdd = null ;
 		String where = " where coursetype = '"+assessmentQuestionForm.getCourseTypeId()+"' and coursename = '"+assessmentQuestionForm.getCourseName()+"' and questionTitle = '"+assessmentQuestionForm.getQuestionTitle()+"'";

@@ -91,13 +91,13 @@
 	}
 	function showDetails() {
 		
-		alert('data');
+		
 		 	var courseType =  $("#selCourseType").val();
 		 	var trainername =  $('#selTrainerName').val();
 			var courseName =  $("#selCourseName").val();
-			alert("courseType "+courseType); 
+			/* alert("courseType "+courseType); 
 			alert("trainername "+trainername);
-			alert("courseName "+courseName);
+			alert("courseName "+courseName); */
 			
 			
 		$(".displayNone").css("display", "block");
@@ -125,28 +125,7 @@
 	}
 </script>
 <section>
-	<div class="container-fluid">
-		<nav
-			class="navbar navbar-default navbar-fixed-top horizontal-nav-top horizontal-top-nav-border">
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle collapsed"
-								data-toggle="collapse" data-target="#navbar"
-								aria-expanded="false" aria-controls="navbar">
-								<span class="sr-only">Toggle navigation</span> <span
-									class="icon-bar"></span> <span class="icon-bar"></span> <span
-									class="icon-bar"></span>
-							</button>
-						</div>
-						<jsp:include page="../trainingPartner/trainingCenterNavBar.jsp" />
-						<!--/.nav-collapse -->
-					</div>
-				</div>
-			</div>
-		</nav>
-	</div>
+	 <%@include file="../roles/top-menu.jsp"%>
 </section>
 <cf:form name="myForm" commandName="trainingPartnerTrainingCalender">
 	<!-- main body -->
@@ -155,7 +134,7 @@
 			<div id="wrapper">
 
 				<!-- Sidebar -->
-				<%@include file="leftmenuTrainingPartner.jspf"%>
+				<%@include file="../roles/slider.jsp" %>
 				<!-- /#sidebar-wrapper -->
 				<!-- Page Content -->
 				<div id="page-content-wrapper">

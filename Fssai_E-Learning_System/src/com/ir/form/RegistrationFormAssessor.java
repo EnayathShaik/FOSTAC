@@ -31,7 +31,7 @@ public class RegistrationFormAssessor {
 	@NotNull
 	@Size(min=1, max=20 , message="* error")
 	private String gender;
-	@NotNull
+	@NotNull(message="please select agency name")
 	private int AssessmentAgencyName;
 	
 	
@@ -143,6 +143,7 @@ public class RegistrationFormAssessor {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+	
 	public int getAssessmentAgencyName() {
 		return AssessmentAgencyName;
 	}

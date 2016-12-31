@@ -78,7 +78,7 @@ function updateAttendance(assessorId,trainingcalId){
 <cf:form name="myForm" commandName="markAttendance" >
         <section>
         	<div>
-        		<%@include file="topMenuAssessor.jspf" %>
+        		 <%@include file="../roles/top-menu.jsp"%>
             </div>
         </section>
 
@@ -88,7 +88,7 @@ function updateAttendance(assessorId,trainingcalId){
                 <div id="wrapper">
 
                     <!-- Sidebar -->
-                    <%@include file="leftMenuAssessor.jspf" %>
+                    <%@include file="../roles/slider.jsp" %>
                     <!-- /#sidebar-wrapper -->
                     <!-- Page Content -->
                     <div id="page-content-wrapper">

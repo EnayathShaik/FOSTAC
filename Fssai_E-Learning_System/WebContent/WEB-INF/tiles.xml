@@ -150,6 +150,11 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainee/traineeAssessmentOnline.jsp" />
 	</definition>
+	
+	<definition name="trainerAssessmentOnline" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainer/trainerAssessmentOnline.jsp" />
+	</definition>
 	<definition name="traineeHomepage" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainee/traineeHomepage.jsp" />
@@ -181,6 +186,10 @@
 	<definition name="viewFeedbackDetails" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainingCenter/feedbackForm.jsp" />
+	</definition>
+	<definition name="tcm" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainingPartner/tcm.jsp" />
 	</definition>
 	<definition name="feedbackFormTrainer" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
@@ -214,11 +223,11 @@
 	</definition>
 	<definition name="contactTrainee" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
-		<put-attribute name="body" value="/website/trainee/contactUsTrainee.jsp" />
+		<put-attribute name="body" value="/website/commonjsp/contactUsTrainee.jsp" />
 	</definition>
 	<definition name="changePasswordTrainee" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
-		<put-attribute name="body" value="/website/trainee/changePassword.jsp" />
+		<put-attribute name="body" value="/website/commonjsp/changePassword.jsp" />
 	</definition>
 <definition name="advanceTrainee" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />

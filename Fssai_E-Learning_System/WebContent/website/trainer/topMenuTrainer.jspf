@@ -16,7 +16,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active hori"><a href="#">Home</a></li>
+                <li class="active hori"><a href="trainerHome.fssai">Home</a></li>
                 <li class="hori"><a href="search-and-apply.fssai">Search & Apply Vacancy</a></li>
                 <li class="hori"><a href="update-profile.fssai">Update Profile</a></li>
                 <li class="hori"><a href="contactTrainer.fssai">Contact Us</a></li>

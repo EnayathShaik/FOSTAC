@@ -79,35 +79,7 @@ return result;
 
 </script>
 <section>
-  <div class="container-fluid">
-    <nav class="navbar navbar-default navbar-fixed-top horizontal-nav-top horizontal-top-nav-border">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-              <ul class="nav navbar-nav">
-                <li class="hori"><a href="index.html">Home</a></li>
-				<li><a href="training-center-management.html">Training Center Management</a></li>
-                <li class="hori"><a href="contact.html">Contact Us</a></li>
-              </ul>
-              <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown active"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog fa-spin"></i> <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="change-password.html">Change Password</a></li>
-                    <li><a href="#">Logout</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-            <!--/.nav-collapse --> 
-          </div>
-        </div>
-      </div>
-    </nav>
-  </div>
+   <%@include file="../roles/top-menu.jsp"%>
 </section>
 <cf:form name="myForm" commandName="trainingPartnerTrainingCalender" >
         <!-- main body -->
@@ -116,7 +88,7 @@ return result;
                 <div id="wrapper">
 
                     <!-- Sidebar -->
-        <%@include file="leftmenuTrainingPartner.jspf" %>
+        <%@include file="../roles/slider.jsp" %>
                     <!-- /#sidebar-wrapper -->
                     <!-- Page Content -->
                     <div id="page-content-wrapper">

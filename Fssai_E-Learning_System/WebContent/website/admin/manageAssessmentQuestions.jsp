@@ -4,6 +4,9 @@
 
 
 <script>
+
+
+
 function getQuestions(){
 	var courseTypeSearch =  $("#courseTypeSearch").val();
 	var courseNameSearch =  $("#courseNameSearch").val();
@@ -64,62 +67,24 @@ function searchCourse1(val)
 }
 </script>
 <cf:form   action="manageAssessmentQuestionsSave.fssai" name="myForm" method="POST" commandName="assessmentQuestionForm" onsubmit="return validateFields();"> 
-
+<script>
+    function generateAnsSeq(){
+    	$('#assAnsTable').html("");
+    	var noOfAssmentQ =  $("#noOfAssesmentQues").val();
+    	for(i=1;i<=noOfAssmentQ;i++){
+    		$('#assAnsTable').append('<tr><td>'+i+'</td><td><cf:input path="optionOne" class="form-control" /></td></tr>')
+    	}
+    }
+    </script>
     <section>
-        <div class="container-fluid">
-            <nav class="navbar navbar-default navbar-fixed-top horizontal-nav-top horizontal-top-nav-border">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                            </div>
-                            <div id="navbar" class="navbar-collapse collapse">
-                                <ul class="nav navbar-nav">
-                                    <li></li>
-                                    <li class="active hori"><a href="adminHomepage.fssai">Home</a></li>
-                                    <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Management<span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="traineeUserManagementForm.fssai" class="clr">Trainee</a></li>
-                                            <li><a href="trainerUserManagementForm.fssai" class="clr">Trainer</a></li>
-                                            <li><a href="trainingCenterUserManagementForm.fssai" class="clr">Training Center</a></li>
-                                            <li><a href="assessorUserManagementForm.fssai" class="clr">Assessor</a></li>
-                                            <li><a href="adminUserManagementForm.fssai" class="clr">Admin</a></li>
-                                        </ul>
-                                    </li>
-                                    <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master Data<span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="stateMaster.fssai" class="clr">State</a></li>
-                                            <li><a href="districtMaster.fssai" class="clr">District</a></li>
-                                            <li><a href="cityMaster.fssai" class="clr">City</a></li>                                            
-                                            <li><a href="regionMappingMaster.fssai" class="clr">Region Mapping</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="manageTrainingPartnerForm.fssai">Manage Training Partner</a></li>
-                                    <li><a href="manageAssessmentAgencyForm.fssai">Manage Assessment Agency</a></li>
-                                </ul>
-                                <ul class="nav navbar-nav navbar-right">
-                                    <li class="dropdown active"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog fa-spin"></i> <span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="changePasswordAssesAgency.fssai">Change Password</a></li>
-                                            <li><a href="fostac.fssai">Logout</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!--/.nav-collapse -->
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </div>
+        <%@include file="../roles/top-menu.jsp"%>
     </section>
     <!-- main body -->
     <section class="main-section-margin-top">
         <div class="container-fluid">
             <div id="wrapper">
                 <!-- Page Content -->
-                <div><%@include file="leftMenuAdmin.jspf" %>
+                <div><%@include file="../roles/slider.jsp" %>
                 </div>
                 <div id="page-content-wrapper">
                     <div class="container-fluid">
@@ -308,7 +273,8 @@ function searchCourse1(val)
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
-                                                        <cf:select path="noOfOption" class="form-control">
+                                                        <cf:select id="noOfAssesmentQues" onchange="generateAnsSeq();" path="noOfOption" class="form-control">
+                                                            <cf:option value="-1" label="Please Select" />
                                                             <cf:option value="1" label="1" />
                                                              <cf:option value="2" label="2" />
                                                              <cf:option value="3" label="3" />
@@ -322,21 +288,14 @@ function searchCourse1(val)
                                                 
                                                 <div class="col-md-6 col-xs-12">
                                                     <h3>Correct Answer</h3>
-                                                    <table class="table table-bordered table-responsive">
+                                                    <table id="assAnsTable" class="table table-bordered table-responsive">
                                                     <thead>
                                                         <tr class="background-open-vacancies">
                                                             <th>S.No.</th>
                                                             <th>Options</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-<tr><td>1</td><td><cf:input path="optionOne" class="form-control" /></td></tr>
-<tr><td>2</td><td><cf:input path="optionTwo" class="form-control" /></td></tr>
-<tr><td>3</td><td><cf:input path="optionThree" class="form-control" /></td> </tr>
-<tr><td>4</td><td><cf:input path="optionFour" class="form-control" /></td></tr>
-<tr><td>5</td><td><cf:input path="optionFive" class="form-control" /></td></tr>
-<tr><td>6</td><td><cf:input path="optionSix" class="form-control" /></td></tr>
-                                                    </tbody>
+                                                    <tbody></tbody>
                                                 </table>
                                                     
                                                     <div class="form-group">
@@ -366,4 +325,8 @@ function searchCourse1(val)
             </div>
         </div>
     </section>
+    
+   
     </cf:form>
+    
+    

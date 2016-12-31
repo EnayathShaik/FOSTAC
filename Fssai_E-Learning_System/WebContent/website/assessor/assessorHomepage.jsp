@@ -82,7 +82,7 @@ function applyAssessments(){
 </script>
 
     <section>
-       <%@ include file="topMenuAssessor.jspf"%>
+       <%@include file="../roles/top-menu.jsp"%>
         </section>
 
     <!-- main body -->
@@ -91,7 +91,7 @@ function applyAssessments(){
         <div id="wrapper"> 
 
               <!-- Sidebar -->
-           	<%@include file="leftMenuAssessor.jspf" %>
+           <%@include file="../roles/slider.jsp" %>
               <!-- /#sidebar-wrapper --> 
               <!-- Page Content -->
               <div id="page-content-wrapper">

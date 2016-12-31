@@ -80,7 +80,7 @@ public class OnLoadTrainingPartnerCenterId extends HttpServlet {
 							 " mtp.trainingpartnername , ld.loginid , ld.id   from personalinformationtrainingpartner as pitp "+
 							 " inner join managetrainingpartner as mtp on pitp.trainingpartnername = mtp.managetrainingpartnerid "+
 							 "  inner join logindetails as ld on ld.id = pitp.logindetails "+
-							 " where mtp.managetrainingpartnerid = '"+id+"'";
+							 " where mtp.managetrainingpartnerid = '"+id+"'  and ld.status = 'I'";
 				System.out.println(sql);
 				List list = new ArrayList<>();
 				try {

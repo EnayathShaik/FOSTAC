@@ -128,4 +128,9 @@ public class TraineeServiceImpl implements TraineeService {
 		AdmitCardForm admitCardObj = traineeDAO.generateTrainerAdmitCard(loginId,profileId);
 		return admitCardObj;
 	}
+	@Override
+	public String getDefaultMailID(int loginId, int profileId) {
+		// TODO Auto-generated method stub
+		return traineeDAO.getDefaultMailID(loginId, profileId);
+	}
 }

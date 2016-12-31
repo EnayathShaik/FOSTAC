@@ -148,6 +148,10 @@ public class AdminController {
 	}
 	@RequestMapping(value = "/manageAssessmentQuestionsSave", method = RequestMethod.POST)
 	public String stateSave(@Valid @ModelAttribute("assessmentQuestionForm") AssessmentQuestionForm assessmentQuestionForm,BindingResult result, Model model){
+		
+		System.out.println(assessmentQuestionForm.getOptionOne());
+		System.out.println(assessmentQuestionForm.getOptionTwo());
+		
 		if(result.hasErrors()){
 			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
 			System.out.println(result.getErrorCount());

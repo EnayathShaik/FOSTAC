@@ -29,11 +29,11 @@ function showDetails(){
 		var traningTime =  $("#traningTime").val();
 		var status = $('#selTraineeStatus').val();
 		
-		alert("courseType "+courseType);
+		/* alert("courseType "+courseType);
 		alert("courseName "+courseName);
 		alert("trainingDate "+trainingDate);
 		alert("traningTime "+traningTime);
-		alert("status "+status);
+		alert("status "+status); */
 		
 		$(".displayNone").css("display","block");
 		//var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy;
@@ -60,7 +60,7 @@ function showDetails(){
 	}
 
 function showDetail(){
-	alert("Fetching details to mark attendance..");
+	//alert("Fetching details to mark attendance..");
 	
 	$('#tblAssessorCourses tr').remove();
 	$('#tblAssessorCourses').append('<thead>'+
@@ -114,21 +114,7 @@ return result;
 
 </script>
 <section>
-  <div class="container-fluid">
-    <nav class="navbar navbar-default navbar-fixed-top horizontal-nav-top horizontal-top-nav-border">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-            </div>
-             <jsp:include page="../trainingPartner/trainingCenterNavBar.jsp" />
-            <!--/.nav-collapse --> 
-          </div>
-        </div>
-      </div>
-    </nav>
-  </div>
+   <%@include file="../roles/top-menu.jsp"%>
 </section>
 <cf:form name="myForm" commandName="trainingPartnerTrainingCalender" >
         <!-- main body -->
@@ -137,7 +123,7 @@ return result;
                 <div id="wrapper">
 
                     <!-- Sidebar -->
- 	 <%@include file="leftmenuTrainingPartner.jspf" %>
+ 	<%@include file="../roles/slider.jsp" %>
                       <!-- Sidebar -->
                     <!-- /#sidebar-wrapper -->
                     <!-- Page Content -->

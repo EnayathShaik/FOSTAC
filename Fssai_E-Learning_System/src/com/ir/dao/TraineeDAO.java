@@ -68,4 +68,6 @@ public interface TraineeDAO {
 	public int getCurrentCourseId(int loginId);
 	
 	public AdmitCardForm generateTrainerAdmitCard(int loginId,int profileId);
+	
+	public String getDefaultMailID(int loginId,int profileId);
 }

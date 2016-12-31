@@ -77,8 +77,7 @@ public class ChangeAssessor extends HttpServlet {
 					System.out.println(updateQry);
 					Integer i = query.executeUpdate();
 					System.out.println("i  :"+ i);
-					session.beginTransaction().commit();
-					session.close();
+					
 					String responseStr = null ;
 					if(i > 0 ){
 						System.out.println("data selected finally  " );

@@ -2,7 +2,7 @@
 
         <!-- horizontal navigation -->
         <section>
-              <%@include file="topMenuTrainee.jspf"%>
+              <%@include file="../roles/top-menu.jsp"%>
             </section>
 
         <!-- main body -->
@@ -11,7 +11,7 @@
         <div id="wrapper">
 
         <!-- Sidebar -->
-      <%@include file="leftMenuTrainee.jspf"%>
+      <%@include file="../roles/slider.jsp" %>
         <!-- /#sidebar-wrapper --> 
         <!-- Page Content -->
         <div id="page-content-wrapper">

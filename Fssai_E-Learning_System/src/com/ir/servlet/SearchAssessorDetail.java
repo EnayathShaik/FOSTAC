@@ -79,7 +79,7 @@ public class SearchAssessorDetail extends HttpServlet {
 							"  ld.status ,  pia.personalinformationassessorid , ld.status from personalinformationassessor as pia "+
 							" inner join manageassessmentagency as maa on pia.assessmentagencyname = maa.manageassessmentagencyid "+
 							" inner join logindetails as ld on ld.id = pia.logindetails "+
-							" where maa.manageassessmentagencyid = '"+Integer.parseInt(id)+"'";
+							" where maa.manageassessmentagencyid = '"+Integer.parseInt(id)+"' AND ld.status='I'";
 				System.out.println(sql);
 				List list = new ArrayList<>();
 				try {
