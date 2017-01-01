@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -67,7 +68,7 @@ public class AdminController {
 	@Autowired
 	@Qualifier("adminService")
 	AdminService adminService; 
-	
+	Long PLACE_KEY;
 	
 	@ModelAttribute("stateList")
 	public List<State> stateList(){
@@ -115,8 +116,15 @@ public class AdminController {
 		return "stateMaster";
 	}
 	
-	@RequestMapping(value = "/stateMasterSave", method = RequestMethod.POST)
+	@RequestMapping(value = "/stateMasterSave", method =  RequestMethod.POST )
 	public String stateSave(@Valid @ModelAttribute("stateMaster") StateForm stateForm,BindingResult result, Model model , HttpSession session){
+	
+		if (((Long) session.getAttribute("LAST_PLACE_KEY"))!=null && ((Long) session.getAttribute("LAST_PLACE_KEY")).equals(PLACE_KEY)) {
+			return "redirect:stateMaster.fssai";
+			}
+		
+			session.setAttribute("LAST_PLACE_KEY", PLACE_KEY);
+		
 		if(result.hasErrors()){
 			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
 			System.out.println(result.getErrorCount());
@@ -134,6 +142,14 @@ public class AdminController {
 			return "stateMaster";
 		}	
 	}
+	
+	
+	@RequestMapping(value = "/stateMasterSave", method = RequestMethod.GET )
+	public String showForm() {
+		PLACE_KEY = (new Random()).nextLong();
+		return "redirect:stateMaster.fssai";
+		}
+	
 	
 	@RequestMapping(value="/districtMaster" , method=RequestMethod.GET)
 	public String districtMaster(@ModelAttribute("districtMaster") DistrictForm districtForm , Model model , HttpSession session){
@@ -419,7 +435,13 @@ public class AdminController {
 		return "trainingCalendarForm";
 	}
 	@RequestMapping(value="/trainingCalenderSave" , method=RequestMethod.POST)
-	public String trainingCalenderSave(@Valid @ModelAttribute("trainingCalendarForm") TrainingCalendarForm trainingCalendarForm ,BindingResult result ,Model model) {
+	public String trainingCalenderSave(@Valid @ModelAttribute("trainingCalendarForm") TrainingCalendarForm trainingCalendarForm ,BindingResult result ,Model model , HttpSession session) {
+		
+		if (((Long) session.getAttribute("LAST_PLACE_KEY"))!=null && ((Long) session.getAttribute("LAST_PLACE_KEY")).equals(PLACE_KEY)) {
+			return "redirect:trainingCalendar.fssai";
+			}
+		
+			session.setAttribute("LAST_PLACE_KEY", PLACE_KEY);
 		System.out.println("kkkkkk");
 		if(result.hasErrors()){
 			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
@@ -436,6 +458,13 @@ public class AdminController {
 		}
 		return "trainingCalendarForm";
 	}
+	
+	
+	@RequestMapping(value = "/trainingCalenderSave", method = RequestMethod.GET )
+	public String showtrainingCalenderSaveForm() {
+		PLACE_KEY = (new Random()).nextLong();
+		return "redirect:trainingCalendar.fssai";
+		}
 	
 	@RequestMapping(value = "/trainerUserManagementSearch", method = RequestMethod.POST)
 	public String trainerUserManagementSave(@Valid @ModelAttribute("trainerUserManagementForm") TrainerUserManagementForm trainerUserManagementForm,BindingResult result, Model model){

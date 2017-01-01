@@ -146,6 +146,7 @@
                                 <li class="style-li error-red">*Error</li>
                               </ul>
                             </div>
+                        
                             <input type="text" class="form-control"  placeholder="Title" required value="${loginUser.title}">
                           </div>
                           <div class="form-group">
@@ -334,7 +335,7 @@
                     	    var x =document.getElementById('TrainingCenterPermanentEmail').value;
                     	    var atpos = x.indexOf("@");
                     	    var dotpos = x.lastIndexOf(".");
-                    	    if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
+                    	    if (atpos<1 || dotpos<atpos+2 || dotpos+2 >= x.length ) {
                     	      //  alert("Not a valid e-mail address");
                     	        document.getElementById('TrainingCenterPermanentEmail').style.borderColor = "red";
                     	    	document.getElementById("TrainingCenterPermanentEmailError").style.display = 'block';

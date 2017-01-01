@@ -17,12 +17,18 @@ public class Region {
 	private int districtId;
 	@NotNull
 	private String regionName;
-	
+	private String status;
 	
 	private int stateId;
 	private int cityId;
 	
 	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public int getStateId() {
 		return stateId;
 	}

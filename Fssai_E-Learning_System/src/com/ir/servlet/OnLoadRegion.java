@@ -52,60 +52,6 @@ public class OnLoadRegion extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				System.out.println("onload admin region list");
-				response.setContentType("text/html;charset=UTF-8");
-		        PrintWriter out = response.getWriter();
-			
-				try {
-					Class.forName("org.postgresql.Driver");
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				Connection conn = null;
-				try {
-					conn = DriverManager.getConnection(DBUtil.databaseUrl,DBUtil.dbUsername,DBUtil.dbPassword);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				ResultSet rs = null;
-				PreparedStatement stmt = null;
-				String sql = "select  d.districtName , r.regionname , r.id from region as r inner join district as d  on d.districtid= r.districtid" ;
-				List list = new ArrayList<>();
-				try {
-					stmt = conn.prepareStatement(sql);
-					System.out.println(stmt.toString());
-					rs = stmt.executeQuery();
-					
-				
-					while(rs.next()){
-						List l = new ArrayList<>();
-						l.add(rs.getString(1));
-						l.add(rs.getString(2));
-						l.add(rs.getInt(3));
-						list.add(l);
-					}
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				Gson g =new Gson();
-				String newList = g.toJson(list); 
-				out.write(newList);
-				out.flush();
 		
 	}
 
@@ -114,7 +60,70 @@ public class OnLoadRegion extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		//doGet(request, response);
+		System.out.println("onload admin region list");
+		response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+	
+		try {
+			Class.forName("org.postgresql.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(DBUtil.databaseUrl,DBUtil.dbUsername,DBUtil.dbPassword);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ResultSet rs = null;
+		PreparedStatement stmt = null;
+		String sql = "select  d.districtName , r.regionname , r.id ,s.statename ,c.cityname,r.cityid,r.districtid,r.stateid,r.status from region as r "
+				+ "inner join district as d  on d.districtid= r.districtid inner join city as c on c.districtid = d.districtid inner join state as s on s.stateid = d.stateid" ;
+		List list = new ArrayList<>();
+		try {
+			stmt = conn.prepareStatement(sql);
+			System.out.println(stmt.toString());
+			rs = stmt.executeQuery();
+			
+		
+			while(rs.next()){
+				List l = new ArrayList<>();
+				l.add(rs.getString(1));
+				l.add(rs.getString(2));
+				l.add(rs.getInt(3));
+				l.add(rs.getString(4));
+				l.add(rs.getString(5));
+				l.add(rs.getString(6));
+				l.add(rs.getString(7));
+				l.add(rs.getString(8));
+				l.add(rs.getString(9));
+				list.add(l);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Gson g =new Gson();
+		String newList = g.toJson(list); 
+		out.write(newList);
+		out.flush();
+
+	
 	}
 
 }

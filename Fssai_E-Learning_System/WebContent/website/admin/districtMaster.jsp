@@ -29,7 +29,7 @@ function onLoadDistrict(){
 			}else{
 				status = 'In-Active';
 			}
-			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><input type="hidden" id="stateName" value="'+obj[0]+'">'+obj[0]+'</td><td><input type="hidden" id="districtName" value="'+obj[1]+'">'+obj[1]+'</td><td><input type="hidden" id="statusLabel" value="'+status+'">'+status+'</td><td><input type="hidden" id="idCity" value="'+obj[3]+'" /><a href="#" onClick="editDistrict();">Edit</a></td></tr>');
+			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><input type="hidden" id="stateName" value="'+obj[0]+'">'+obj[0]+'</td><td><input type="hidden" id="districtName" value="'+obj[1]+'">'+obj[1]+'</td><td><input type="hidden" id="statusLabel" value="'+status+'">'+status+'</td><td><input type="hidden" id="idCity" value="'+obj[3]+'" /><a href="#" onClick="editDistrict(\''+obj[0]+'\',\''+obj[1]+'\',\''+status+'\',\''+obj[3]+'\');">Edit</a></td></tr>');
 			
 		});
 		}
@@ -78,12 +78,17 @@ function updateDistrict(){
 
 <script type="text/javascript">
 function changeStatus(){
-	var districtLabel = $("#idCity").val();
-	var statusLabel = $("#statusLabel").val();
+	var districtLabel = $("#DistrictIdH").val();
+	console.log("districtLabel>>"+districtLabel);
+	var stateName =  $("#stateName").val();
+	var disName =  $("#DistrictName").val();
+	var statusLabel = $("#status").val();
+	console.log("statusLabel>>"+statusLabel);
+	//var districtIdHidden = $("#DistrictIdH").val();
 	document.getElementById('btnUpdate').style.display = 'none';
 	document.getElementById('btnCreate').style.display = 'block';
 	$(".displayNone").css("display","block");
-		var total = "id="+districtLabel+"&status="+ statusLabel+ "";
+		var total = "id="+districtLabel+"&status="+ statusLabel+ "&disName="+disName+"&stateName="+stateName;
 		$('#newTable').hide();
 		$.ajax({
 		type: 'post',
@@ -95,9 +100,9 @@ function changeStatus(){
 		       $( '#name_status' ).html(response);
 		      }
 		      });
-		//onLoadDistrict();
+		onLoadDistrict();
 	return true;
-	
+	location.reload();
 }
 
 
@@ -120,21 +125,37 @@ function searchDistrict(){
 		$('#newTable').append('<tr  class="background-open-vacancies" style="background-color:#000077;"><th>S.No.</th><th>State Name</th><th>District Name</th><th>Status</th><th>Edit</th></tr>')
 		$.each(mainData1 , function(i , obj)
 		{
-			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><input type="hidden" id="stateName" value="'+obj[0]+'">'+obj[0]+'</td><td><input type="hidden" id="stateName" value="'+obj[1]+'">'+obj[1]+'</td><td><input type="hidden" id="idCity" value="'+obj[0]+'"><a href="#" onclick="editDistrict();">edit</a></td><td><a href="#" onclick="changeStatus();">Active / In-Active</a></td></tr>');	
+			
+			var status ;
+	 		if(obj[2] == 'A'){
+				status = 'Active';
+			}else{
+				status = 'In-Active';
+			}
+			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><input type="hidden" id="stateName" value="'+obj[0]+'">'+obj[0]+'</td><td><input type="hidden" id="stateName" value="'+obj[1]+'">'+obj[1]+'</td><td><input type="hidden" id="idCity" value="'+obj[0]+'"><a href="#" onclick="editDistrict(\''+obj[0]+'\',\''+obj[1]+'\',\''+status+'\',\''+obj[3]+'\');"">edit</a></td><td><a href="#" onclick="changeStatus();">'+status+'</a></td></tr>');	
 		});
 		}
 		});
 	return result;
 }
 
-function editDistrict(state,district,status,id){
-	document.getElementById('idH').value = idHidden;
-	document.getElementById('btnUpdate').style.display = 'none';
-	document.getElementById('btnCreate').style.display = 'block';
-	document.getElementById('DistrictName').value = district;
-    document.getElementById('statusLabel').value = status;
-    document.getElementById('stateName').value = state;
-	if(status=="A"){
+function editDistrict(state,districtName,statuslabel,distID){
+
+	document.getElementById('btnUpdate').style.display = 'block';
+	document.getElementById('btnCreate').style.display = 'none';
+	$("#stateId").prop("disabled", true);
+	//document.getElementById('stateId').value = state;
+	//document.getElementById('stateLabel').value = statuslabel;
+	
+	document.getElementById('DistrictName').value = districtName;
+	document.getElementById('DistrictIdH').value = distID;
+	/* var a =document.getElementById('stateName').value;
+	console.log("stateId.options[0].text"+stateId.options[0].text);
+	 *///
+	 stateId.options[0].text = state;
+	
+	console.log("status>"+statuslabel);
+	if(statuslabel=="A"){
 		$('#status option').remove();
 		$('#status').append('<option value="A" selected="true">Active</option><option value="I">In-active</option>');
 	}else{
@@ -243,8 +264,9 @@ function editDistrict(state,district,status,id){
                                                 <div class="col-md-6 hidden-xs"></div>
                                                 <!-- create button -->
                                                 <div class="col-md-3 col-xs-12">
+                                                <input type="hidden" id="DistrictIdH" value="" />
                                                     <input type="submit" id="btnCreate" class="btn login-btn" value="Create" />
-<a href="" onclick="updateDistrict();" id="btnUpdate" style="display: none; padding: 6px 7px; width: 40%; 
+<a href="" onclick="changeStatus();" id="btnUpdate" style="display: none; padding: 6px 7px; width: 40%; 
 margin-bottom: 0; font-size: 14px; font-weight: normal; line-height: 1.42857143; 
 text-align: center; white-space: nowrap; vertical-align: middle; 
 -ms-touch-action: manipulation; touch-action: manipulation; cursor: pointer; 

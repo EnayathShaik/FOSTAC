@@ -62,7 +62,7 @@ window.onload = OnStart;
         }
 
         if (document.getElementById("traineeFirstName").value == "") {
-            //alert("IN Fname");
+            //alert("IN Fname");d
             document.getElementById('traineeFirstName').style.borderColor = "red";
             document.getElementById("firstNameError").style.display = 'block';
             document.getElementById("traineeFirstName").focus();
@@ -895,6 +895,7 @@ function ck_aadhar() {
 												path="Title" cssClass="error" /></li>
 									</ul>
 								</div>
+								System.out.println("------> "+${titleList} );
 								<cf:select path="Title" class="form-control">
 									<cf:option value="0" label="Select Title" />
 									<cf:options items="${titleList}" itemValue="titleId"

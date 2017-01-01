@@ -127,7 +127,7 @@ public class AdminDAOImpl implements AdminDAO {
 		State state = new State();
 		state.setStateName(stateForm.getStateName().replaceAll("%20", " "));
 		state.setStatus(stateForm.getStatus());
-System.out.println("**********SS");
+		System.out.println("**********SS");
 		Integer stateIdd = null ;
 		String sql = "select * from state where upper(stateName) like '"+stateForm.getStateName().replaceAll("%20", " ").toUpperCase()+"'";
 		Query query = session.createSQLQuery(sql);

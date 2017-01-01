@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -59,7 +60,8 @@ public class TrainingPartnerController {
 	
 	@Autowired
 	@Qualifier("loginService")
-	LoginService loginService; 
+	LoginService loginService;
+	Long PLACE_KEY;
 	
 	@RequestMapping(value="/postVacancyTrainingPartner" , method=RequestMethod.GET)
 	public String postVacancy(@ModelAttribute("postVacancyTrainingCenterForm") PostVacancyTrainingCenterForm postVacancyTrainingCenterForm,HttpSession session,BindingResult result , Model model ){
@@ -356,7 +358,12 @@ public class TrainingPartnerController {
 		
 	 }
 	@RequestMapping(value="/postVacancyTrainingPartnerSave" , method=RequestMethod.POST)
-	  public String postVacancySave(@ModelAttribute("postVacancyTrainingCenterForm") PostVacancyTrainingCenterForm postVacancyTrainingCenterForm ,HttpSession session,BindingResult result ,  Model model){		
+	  public String postVacancySave(@ModelAttribute("postVacancyTrainingCenterForm") PostVacancyTrainingCenterForm postVacancyTrainingCenterForm ,HttpSession session,BindingResult result ,  Model model){
+		
+		if (((Long) session.getAttribute("LAST_PLACE_KEY"))!=null && ((Long) session.getAttribute("LAST_PLACE_KEY")).equals(PLACE_KEY)) {
+			return "redirect:postVacancyTrainingPartner.fssai";
+			}
+		
 		boolean isPostVacancyTrainingPartner=true;
 		if(postVacancyTrainingCenterForm.getTrainingCenter()==0){
 			isPostVacancyTrainingPartner=false;
@@ -375,6 +382,14 @@ public class TrainingPartnerController {
 			  return "postVacancyTrainingPartner";	
 		  }
 	 }
+	
+	
+	@RequestMapping(value = "/postVacancyTrainingPartnerSave", method = RequestMethod.GET )
+	public String showForm() {
+		PLACE_KEY = (new Random()).nextLong();
+		return "redirect:postVacancyTrainingPartner.fssai";
+		}
+
 	@ModelAttribute("trainingCenterList")
 	public List<PersonalInformationTrainingPartner> trainingCenterList(){
 		List<PersonalInformationTrainingPartner> trainingCenterList = trainingPartnerService.trainingCenterList();
@@ -515,4 +530,30 @@ public class TrainingPartnerController {
 		return "redirect:/trainingpartnertrainingcalendar.fssai";
 	}
 	
+	
+	
+	//
+	
+	
+	/*@RequestMapping(value="/trainingpartnerpaymentconfirmationSave" , method=RequestMethod.POST)
+	  public String trainingpartnerpaymentconfirmationSave(@ModelAttribute("trainingpartnerpaymentconfirmationForm") PostVacancyTrainingCenterForm trainingpartnerpaymentconfirmationForm ,HttpSession session,BindingResult result ,  Model model){		
+		boolean isPostVacancyTrainingPartner=true;
+		if(postVacancyTrainingCenterForm.getTrainingCenter()==0){
+			isPostVacancyTrainingPartner=false;
+			int loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
+			postVacancyTrainingCenterForm.setTrainingCenter(loginService.FullDetailtrainingpartner(loginId).getPersonalInformationTrainingPartnerId());
+		}
+		String postVacancy = trainingPartnerService.postVacancyTrainingPartner(postVacancyTrainingCenterForm);
+		  if(postVacancy.equalsIgnoreCase("created")){
+			  model.addAttribute("created", "Vacancy created successfull !!!");
+		  }else{
+			  model.addAttribute("created", "vacancy already created !!!");
+		  }
+		  if(isPostVacancyTrainingPartner){
+			  return "postVacancyTrangCenter";
+		  }else{
+			  return "postVacancyTrainingPartner";	
+		  }
+	 }
+	*/
 }

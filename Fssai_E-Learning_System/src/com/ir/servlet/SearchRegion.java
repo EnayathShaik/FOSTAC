@@ -54,15 +54,17 @@ public class SearchRegion extends HttpServlet {
 		}
 		String fcn = cn.substring(0, cn.length()-1);
 		System.out.println(fcn.length() + "    "+ fcn);
-        /*String[] totalConnected = total.split("&");
-        String districtId = (totalConnected[1].split("="))[1];
-        String	regionName =null ;
+        String[] totalConnected = total.split("&");
+        //String districtId = (totalConnected[1].split("="))[1];
+        String	regionName ;
         
         try{
         	regionName =  (totalConnected[0].split("="))[1];
        }catch(Exception e){
+    	   e.printStackTrace();
     	   regionName = "%";
-       }*/
+       }
+        System.out.println("region==>"+regionName);
 		Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
@@ -73,7 +75,7 @@ public class SearchRegion extends HttpServlet {
 			String sql = "select r.id , s.statename , d.districtname ,c.cityname, r.regionname from region as r "+
 						" inner join state as s on s.stateid = r.stateid "+
 						" inner join district as d on d.districtid = r.districtid "+
-						" inner join city as c on c.cityid = r.cityid ";
+						" inner join city as c on c.cityid = r.cityid where r.regionname like '"+regionName+"%'  ";
 			Query query = session.createSQLQuery(sql);
 			List list = query.list();
 			System.out.println(list.size());

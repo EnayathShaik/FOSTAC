@@ -20,22 +20,20 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
+import com.ir.model.Region;
 import com.ir.model.CourseName;
-import com.ir.model.District;
-import com.ir.model.LoginDetails;
-import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 /**
  * Servlet implementation class DeleteState
  */
 
-public class ChangeStatusDistrict extends HttpServlet {
+public class EditRegion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChangeStatusDistrict() {
+    public EditRegion() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -54,54 +52,48 @@ public class ChangeStatusDistrict extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
+		
 		response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 		String name = (request.getQueryString());
 		System.out.println("passing name   :" + name);
 		String[] totalConnected = name.split("&");
-		String id,status,distName;
+		String regionName,status;
+		int  regionId;
+		//status = (totalConnected[0].split("="))[1];
 		
-		
-		id = (totalConnected[0].split("="))[1];
-		status = (totalConnected[1].split("="))[1];
-		distName = (totalConnected[2].split("="))[1];
-		//districtIdH = (totalConnected[4].split("="))[1];
-		System.out.println("check status:"+status);
-		System.out.println("district name==>"+distName);
-		
+		regionId = Integer.parseInt((totalConnected[0].split("="))[1]);
+		regionName = (totalConnected[1].split("="))[1];
+		status = (totalConnected[2].split("="))[1];
+		System.out.println("checkkk data==>"+regionId+regionName);
 		Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
-		
-		String newList = null;
+		System.out.println("status=>"+status);
 		if(status.equals("A")){
-			System.out.println("hii");
-			District d = (District) session.load(District.class,Integer.parseInt(id));
-			System.out.println("if>>"+d);
-			//District dd = new District();
-			d.setStatus("A");
-			d.setDistrictName(distName);
-			//d.setDistrictId(districtId);
-			//d.setState(state);
-			session.update(d);
-			session.beginTransaction().commit();
-			session.close();
-			newList = "Status changet to Active" ;
-		}else{
-			District d = (District) session.load(District.class,Integer.parseInt( id));			
-			//District dd = new District();
-			System.out.println("else");
-			d.setStatus("I");
-			d.setDistrictName(distName);
-			session.update(d);
-			session.beginTransaction().commit();
-			session.close();
-			newList = "Status changet to In-Active" ;
+			
+		Region   r=(Region) session.load(Region.class, regionId);
+		
+		r.setRegionName(regionName);
+		r.setStatus("A");
+		session.update(r);
+		session.beginTransaction().commit();
+		session.close();
 		}
+		else 
+		{
+			Region   r=(Region) session.load(Region.class, regionId);
+			
+			r.setRegionName(regionName);
+			r.setStatus("I");
+			session.update(r);
+			session.beginTransaction().commit();
+			session.close();
+		}
+		String newList = "Records successfully updated !!!" ;
 		out.write(newList);
 		out.flush();
-		
 
 	}
 

@@ -43,25 +43,37 @@ public class EditCityData extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+				
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//doGet(request, response);
+		
 		response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 		String name = (request.getQueryString());
 		System.out.println("passing name   :" + name);
 		String[] totalConnected = name.split("&");
-		String status;
+		String status,cityName;
 		int  cityId;
 		status = (totalConnected[0].split("="))[1];
-		//districtId = Integer.parseInt((totalConnected[1].split("="))[1]);
-		cityId = Integer.parseInt((totalConnected[1].split("="))[1]);
 		
+		cityId = Integer.parseInt((totalConnected[1].split("="))[1]);
+		cityName = (totalConnected[2].split("="))[1];
+		System.out.println("checkkk data==>"+cityName+cityId+status);
 		Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
 		City   cityNameee=(City) session.load(City.class, cityId);
 		
-		//cityNameee.setDistrictId(districtId);
+		
 		cityNameee.setStatus(status);
+		cityNameee.setCityName(cityName);
 		session.update(cityNameee);
 		session.beginTransaction().commit();
 		session.close();
@@ -83,15 +95,7 @@ public class EditCityData extends HttpServlet {
 		}*/
 		out.write(newList);
 		out.flush();
-		
-	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

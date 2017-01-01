@@ -163,7 +163,9 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	public List<IntStringBean> getTrainerList(){
 		Session session = sessionFactory.openSession();
 		List<IntStringBean> trinerNameList=new ArrayList<>();
-		String sql="select pit.logindetails,pit.firstname,pit.middlename,pit.lastname from personalinformationtrainer pit,personalinformationtrainingpartner pitp";// where pit.logindetails=pitp.logindetails";
+		String sql="select distinct pitp.personalinformationtrainingpartnerid,pitp.firstname,pitp.middlename,pitp.lastname from personalinformationtrainingpartner pitp , logindetails pit";
+				
+		//"select pit.logindetails,pit.firstname,pit.middlename,pit.lastname from personalinformationtrainer pit,personalinformationtrainingpartner pitp";// where pit.logindetails=pitp.logindetails";
 		Query query = session.createSQLQuery(sql);
 		List<Object[]> courseTypeList = query.list();
 		if(courseTypeList.size()>0){

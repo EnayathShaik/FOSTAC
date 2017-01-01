@@ -77,7 +77,7 @@ public class SearchDistrict extends HttpServlet {
 			}
 		}else{
 			String sql = "select  s.stateName , d.districtName  , d.districtId  from district as d inner join state as s on s.stateid = d.stateid where "+
-					 " s.stateId='"+stateId+"' and  upper(districtname) like '"+districtName.replaceAll("%20", " ").toUpperCase()+"'";
+					 " upper(districtname) like '"+districtName.replaceAll("%20", " ").toUpperCase()+"%'";
 			Query query = session.createSQLQuery(sql);
 			List list = query.list();
 			System.out.println(list.size());

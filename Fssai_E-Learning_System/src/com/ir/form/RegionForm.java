@@ -6,10 +6,9 @@ public class RegionForm {
 	private String regionName;
 	private int stateId;
 	private int cityId;
+	private String status;
 	
-	
-	
-	
+
 	public int getStateId() {
 		return stateId;
 	}
@@ -22,6 +21,14 @@ public class RegionForm {
 	public void setCityId(int cityId) {
 		this.cityId = cityId;
 	}
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 	public int getDistrictId() {
 		return districtId;
 	}

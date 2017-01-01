@@ -8,6 +8,31 @@ function OnStart(){
 window.onload = OnStart;
 </script>
 <script type='text/javascript'>
+
+function editRegion(distid,stateid,regionid,cityid,regionName){
+	//$('#cityName').attr('readonly', 'true');
+	document.getElementById('btnUpdate').style.display = 'block';
+	document.getElementById('btnCreate').style.display = 'none';
+	//var c = document.getElementById('statusH').value;
+	
+	document.getElementById('districtId').value = distid;
+	
+	document.getElementById('stateId').value = stateid;
+	document.getElementById('RegionidH').value = regionid;
+	document.getElementById('cityId').value = cityid;
+	document.getElementById('regionName').value = regionName;
+	/* $("#stateId").prop("disabled", true);
+	stateId.options[0].text = stateName;
+	$("#stateId").prop('selectedIndex',0); */
+	$("#stateId").prop("disabled", true);
+	/* $("#districtId").prop("disabled", true);
+	$("#cityId").prop("disabled", true); */
+	
+		
+}
+
+
+
 function onLoadRegion(){
 	$('#newTable').show();
 	$('#newTable tr').remove();
@@ -21,17 +46,57 @@ function onLoadRegion(){
 		////alert(mainData1);
 		var j=1;
 		$('#newTable tr').remove();
-		$('#newTable').append('<tr  class="background-open-vacancies" style="background-color:#000077;"><th>S.No.</th><th>Region Name</th><th>District Name</th></tr>')
+		$('#newTable').append('<tr  class="background-open-vacancies" style="background-color:#000077;"><th>S.No.</th><th>State Name</th><th>District Name</th><th>City Name</th><th>Region Name</th><th>Status</th><th>Edit</th></tr>')
 		$.each(mainData1 , function(i , obj)
 		{
-			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td></tr>');	
+			
+			var status ;
+			
+	 		if(obj[8] == 'A'){
+				status = 'Active';
+			}else{
+				status = 'In-Active';
+			}
+			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[3]+'</td><td>'+obj[0]+'</td><td>'+obj[4]+'</td><td>'+obj[1]+'</td><td>'+status+'</td><td><a href="#" onclick="editRegion(\''+obj[6]+'\',\''+obj[7]+'\',\''+obj[2]+'\',\''+obj[5]+'\',\''+obj[1]+'\');">edit</a></td></tr>');	
 		});
 		}
 		}); 
-	return result;
+
 }
 </script>
 <script type="text/javascript">
+
+function editRegionData(){
+	var status =  $("#status").val();
+	
+	var regionId = $("#RegionidH").val();
+	
+	var regionName = $('#regionName').val();
+	document.getElementById('btnUpdate').style.display = 'none';
+	document.getElementById('btnCreate').style.display = 'block';
+	$(".displayNone").css("display","block");
+	 {
+		var result="";
+		var total = "regionId="+regionId+"&regionName="+regionName+"&status="+status;
+		alert(total);
+		$('#newTable').hide();
+		$.ajax({
+		type: 'post',
+		url: 'editRegionData.jspp?'+ total,
+		data: {
+		       user_name:name,
+		      },
+		      success: function (response) {
+		       $( '#name_status' ).html(response);
+		      }
+		      });
+		//alert (result);
+		onLoadRegion();
+	return true;
+	location.reload();
+	}
+}
+
 
 function getDistrict(val)
 {
@@ -45,17 +110,25 @@ function getDistrict(val)
 	    
 	      $('#districtId option').remove();
 	      $('#districtId').append('<option value="0" label="Select District" />');
-	      $('#cityId option').remove();
+	      
+	      $.each(mainData1 , function(i , obj)
+	  	  		{
+	  	  		
+	  	  				$('#districtId').append('<option value='+obj.districtId+'>'+obj.districtName+'</option>');		
+	  	  		});
+	      
+	   /*    $('#cityId option').remove();
 	      $('#cityId').append('<option value="0" label="Select City" />');
+	      
 	  	 
 	      $.each(mainData1 , function(i , obj)
 	  		{
 	  		
-	  				$('#districtId').append('<option value='+obj.districtId+'>'+obj.districtName+'</option>');		
+	  				$('#districtId').append('<option value='+obj.cityId+'>'+obj.cityId+'</option>');		
 	  		});
-	      }
+	     */  }
 	      });     
-}correspondenceCity
+}
 
 
 function getCity(val)
@@ -105,7 +178,7 @@ function searchRegion(){
 	//var districtId =  $("#districtId").val();
 	 {
 		var result="";
-		var total = regionName ; //"regionName="+regionName+"&districtId="+districtId;
+		var total = "&regionName="+regionName ; //"regionName="+regionName+"&districtId="+districtId;
 		$.ajax({
 		type: 'post',
 		url: 'searchRegion.jspp?'+ total,
@@ -182,7 +255,7 @@ function searchRegion(){
     <div class="form-group">
                                                     <div>
                                                         <ul class="lab-no">
-                                                            <li class="style-li"><strong>State Name:
+                                                            <li class="style-li"><strong>City Name:
                                                             <span style="color:red;">*</span>
                                                             </strong></li>
                                                             <li class="style-li error-red">
@@ -193,8 +266,28 @@ function searchRegion(){
                                                     </div>
 <cf:select path="cityId" class="form-control">
 <cf:option value="0"  label="Select City"/>
+<cf:options items="${cityList}" itemValue="cityId" itemLabel="cityName"/>
 </cf:select>
+
+                        <div class="form-group">
+                                                    <div>
+                                                        <ul class="lab-no">
+                                                            <li class="style-li"><strong>Status:
+                                                            <span style="color:red;">*</span>
+                                                            </strong></li>
+                                                    <li class="style-li error-red">
+                                                            <label class="error visibility" id="statusError">error</label>
+                                                                  </li>
+                                                        </ul>
+                                                    </div>
+<cf:select path="status" class="form-control">
+<cf:option value="A" label="Active" />
+<cf:option value="I" label="In-Active" />
+</cf:select>
+                                                </div> 
+
                                                 </div>
+                                                
                                                                                               
                                                 
                                                 
@@ -212,6 +305,7 @@ function searchRegion(){
                                                     </div>
 <cf:select path="districtId" class="form-control" onchange="getCity(this.value);">
 <cf:option value="0" label="Select District" />
+<cf:options items="${districtList}" itemValue="districtId" itemLabel="districtName"/>
 </cf:select>
                                                 </div>
                                                 <div class="form-group">
@@ -220,20 +314,28 @@ function searchRegion(){
                                                             <li class="style-li"><strong>Region Name:</strong></li>
                                                             <li class="style-li error-red"><label class="error visibility" id="regionNameError">* error</label></li>
                                                         </ul>
-                                                    </div>
+                                                        
+                                                </div>  
+                                                   
+                                                    
     <cf:input path="regionName"   placeholder="Region Name" class="form-control"   />
-        
-</div>
-                                                <div class="form-group">
+                                    <div class="form-group">
                                                     <button id="btnCreate" class="btn login-btn">Create</button>
+                                                    <input type="hidden" id="RegionidH" value="">
+                                                    
+                                                    <a href="#" onclick="editRegionData();" id="btnUpdate" style="display: none; padding: 6px 7px; width: 20%; margin-bottom: 0; font-size: 14px; 
+font-weight: normal; line-height: 1.42857143; text-align: center; white-space: nowrap; vertical-align: middle;
+ -ms-touch-action: manipulation; touch-action: manipulation; cursor: pointer; -webkit-user-select: none; 
+ -moz-user-select: none; -ms-user-select: none; user-select: none; background-image: none; border: 1px solid transparent;
+  background: #ef580d !important; color: #fff; border: 1px solid transparent; transition: all 0.8s linear;">Update</a>
                                                     
                                                        <a href="#testt" onclick="searchRegion();" class="pull-right">Search</a>
                                                 </div>
                                             </div> <!-- rigth side ends -->
-                                            
+                                            </div>
                                             <!-- button -->
-                                            
-                                          
+                                           </div> 
+                                          </div>
                                         </div>
 
                                        

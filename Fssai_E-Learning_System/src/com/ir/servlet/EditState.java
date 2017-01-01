@@ -61,7 +61,7 @@ public class EditState extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    String sql="update table State set statename = " + name + ", status = " + name +" ";
+	    String sql="update table State set status = " + name +" ";
 	    int i = 0;
 		try {
 			 i = stmt.executeUpdate(sql);

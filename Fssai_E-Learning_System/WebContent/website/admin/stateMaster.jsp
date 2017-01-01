@@ -23,7 +23,7 @@ function editStateDataOld(){
 	document.getElementById('btnUpdate').style.display = 'block';
 	document.getElementById('btnCreate').style.display = 'none';
 	 var total = "id="+idHidden+"&status="+ status+ "&state="+state;
-	 alert(total);
+	// alert(total);
 	//$('#newTable').hide();
 	//alert(total);
 	$.ajax({
@@ -38,6 +38,7 @@ function editStateDataOld(){
 	      });
 	//alert (result);
 	return true; 
+	location.reload();
 }
 	
 function checkState() {
@@ -72,7 +73,9 @@ function checkState() {
 function deleteState(state,status,idHidden) {
 		document.getElementById('idH').value = idHidden;
 		document.getElementById('btnUpdate').style.display = 'none';
-		document.getElementById('btnCreate').style.display = 'block';
+		//document.getElementById('btnCreate').style.display = 'block';
+		$("#btnCreate").hide();
+		 $("#stateName").prop("disabled", true);
 		document.getElementById('stateName').value = state;
 	    document.getElementById('stateLabel').value = status;
 		$(".displayNone").css("display","block");
@@ -91,7 +94,7 @@ function deleteState1(i) {
 	var idHidden =  $("#idLabel'"+i+"'").val();
 	var status = $("#statusLabel").val();
 	var state = $("#stateLabel").val();
-	alert(idHidden + "  "+ status + "   "+ state);
+	//alert(idHidden + "  "+ status + "   "+ state);
 	document.getElementById('btnUpdate').style.display = 'none';
 	document.getElementById('btnCreate').style.display = 'block';
 	$(".displayNone").css("display","block");
@@ -115,6 +118,7 @@ function deleteState1(i) {
 </script>
 <script>
 	function searchState(indicator) {
+	
 		$('.displayNone').css('display', 'block');
 		$('#created').css('display', 'none');
 		var stateName =  $("#stateName").val();
@@ -246,7 +250,7 @@ function deleteState1(i) {
 
 											<div class="form-group">
 
-<a href="" onclick="editStateData();" id="btnUpdate" style="display: none; padding: 6px 7px; width: 20%; 
+<a href="" onclick="editStateDataOld();" id="btnUpdate" style="display: none; padding: 6px 7px; width: 20%; 
 margin-bottom: 0; font-size: 14px; font-weight: normal; line-height: 1.42857143; 
 text-align: center; white-space: nowrap; vertical-align: middle; 
 -ms-touch-action: manipulation; touch-action: manipulation; cursor: pointer; 
@@ -327,4 +331,4 @@ ${state.status }
 		</div>
 	</section>
 	<input type="hidden" id="idH" value="" />
-</cf:form>
+</cf:form>`

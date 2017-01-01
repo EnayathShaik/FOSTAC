@@ -74,11 +74,11 @@ public class SearchCity extends HttpServlet {
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
 		String newList=null;
-		String sql = "select s.statename , d.districtname , c.cityname , c.status , c.cityId from city as c "+
+		String sql = "select s.statename , d.districtname , c.cityname , c.status , c.cityId,d.districtid from city as c "+
 					" inner join district d on d.districtid = c.districtid "+
 					" inner join state as s on s.stateid = d.stateid"+
-					" where CAST(s.stateid AS varchar(10)) like'"+ stateId +"' and c.status like '"+status+"' "+
-					" and c.cityName like '"+cityName+"' and  CAST(d.districtid AS varchar(10)) like '"+districtId+"'";
+					" where CAST(s.stateid AS varchar(10)) like'"+ stateId +"'"+
+					" and c.cityName like '"+cityName+"%' and  CAST(d.districtid AS varchar(10)) like '"+districtId+"'";
 
 			Query query = session.createSQLQuery(sql);
 			List list = query.list();

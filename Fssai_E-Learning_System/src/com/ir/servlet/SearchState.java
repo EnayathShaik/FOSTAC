@@ -74,7 +74,7 @@ public class SearchState extends HttpServlet {
 		
 		//if(stateName.equals("%")){
 			System.out.println("state 1");
-			Query query = session.createQuery("from State where status = '"+status+"' and statename like '"+ stateName+"'");
+			Query query = session.createQuery("from State where statename like '"+ stateName+"%'");
 			List<State> list = query.list();
 			System.out.println(list.size());
 			session.close();
