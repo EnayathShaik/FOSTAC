@@ -40,7 +40,7 @@ function searchCity(indicator){
 			}else{
 				status = 'In-Active';
 			}
-			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><input type="hidden" id="stateH" value="'+obj[0]+'">'+obj[0]+'</td><td><input type="hidden" id="districtH" value="'+obj[1]+'">'+obj[1]+'</td><td><input type="hidden" id="cityNameH" value="'+obj[2]+'">'+obj[2]+'</td><td><input type="hidden" id="statusH" value="'+obj[3]+'">'+status+'</td><td><input type="hidden" id="id" value="'+obj[4]+'"><a href="#" onclick="editCity();">edit</a></td></tr>');	
+			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><input type="hidden" id="stateH" value="'+obj[0]+'">'+obj[0]+'</td><td><input type="hidden" id="districtH" value="'+obj[1]+'">'+obj[1]+'</td><td><input type="hidden" id="cityNameH" value="'+obj[2]+'">'+obj[2]+'</td><td><input type="hidden" id="statusH" value="'+obj[3]+'">'+status+'</td><td><input type="hidden" id="id" value="'+obj[4]+'"><a href="#" onclick="editCity(\''+obj[0]+'\',\''+obj[1]+'\',\''+obj[2]+'\',\''+status+'\');">edit</a></td></tr>');	
 		});
 		}
 		});
@@ -48,19 +48,31 @@ function searchCity(indicator){
 	}
 }
 
-function editCity(){
+function editCity(state , district , city , status){
+	$('.error-red').html('');
 	//$('#cityName').attr('readonly', 'true');
-	document.getElementById('btnUpdate').style.display = 'block';
+	console.log("state "+state);
+	$("#stateId option").filter(function() {
+	    return this.text == state; 
+	}).attr('selected', true);
+	//stateId.options[0].text = state;	
+	$("#stateId").trigger("change");
+	$("#cityName").val(city);
+	
+	$("#status option").filter(function() {
+	    return this.text == status; 
+	}).attr('selected', true);
+	
+	 document.getElementById('btnUpdate').style.display = 'block';
 	document.getElementById('btnCreate').style.display = 'none';
-	var a = document.getElementById('stateH').value;
+	/*var a = document.getElementById('stateH').value;
 	var b = document.getElementById('districtH').value;
 	var c = document.getElementById('statusH').value;
-	stateId.options[0].text = a;
-	$("#stateId").prop('selectedIndex',0);
-	$("#stateId").prop("disabled", true);
-	$('#districtId option').remove();
-	$('#districtId').append('<option value="0" label="'+b+'" />');
-	$("#districtId").prop("disabled", true);
+	console.log("c "+c); */
+	//stateId.options[0].text = a;
+	//$("#stateId").prop('selectedIndex',0);
+	//$('#districtId option').remove();
+/* 	$('#districtId').append('<option value="0" label="'+b+'" />');
 	document.getElementById('cityName').value = document.getElementById('cityNameH').value;
 	//var status = document.getElementById('statusLabel').value;
 	if(c=="A"){
@@ -69,34 +81,38 @@ function editCity(){
 	}else{
 		$('#status option').remove();
 		$('#status').append('<option value="A">Active</option><option value="I"  selected="true">In-active</option>');
-	}
+	} */
 }
 
 function editCityData(){
 	var status =  $("#status").val();
 	var cityId = $("#id").val();
-	alert(cityId);
+	var cityName = $("#cityName").val();
+	var districtId= $("#districtId").val();
+	var showResponse = "";
 	document.getElementById('btnUpdate').style.display = 'none';
 	document.getElementById('btnCreate').style.display = 'block';
 	$(".displayNone").css("display","block");
 	 {
 		var result="";
-		var total = "status="+status+"&cityId="+cityId;
-		alert(total);
-		$('#newTable').hide();
+		var total = "status="+status+"&cityId="+cityId+"&cityName="+cityName+"&districtId="+districtId;
 		$.ajax({
 		type: 'post',
+		async:false,
 		url: 'editCityData.jspp?'+ total,
 		data: {
 		       user_name:name,
 		      },
 		      success: function (response) {
-		       $( '#name_status' ).html(response);
+		    	//  showResponse = response;
+		    	  
 		      }
 		      });
-		//alert (result);
+		location.reload();
 	return true;
+	
 	}
+	 
 }
 
 function deleteCity(){
@@ -127,7 +143,7 @@ function deleteCity(){
 <script>
 function getDistrict(val)
 {
-	
+	console.log("val "+val);
 	$.ajax({
 	      type: 'post',
 	      

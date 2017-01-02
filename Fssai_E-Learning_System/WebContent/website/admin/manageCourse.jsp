@@ -4,6 +4,12 @@
 
 
 <script type='text/javascript'>
+function OnStart(){
+	searchManageCourse();
+}
+
+window.onload = OnStart;
+
 function validateFields() {
 	if(document.getElementById("courseName").value=="") {
 	document.getElementById("courseName").style.borderColor = "red";
@@ -125,21 +131,23 @@ function editManageCourseData(){
 	var courseType = $("#hiddenCourseType").val(); 
 	var courseName = $("#courseName").val();
 	var duration = $("#duration").val();
-	var classroom =  $("#classroom").val();
-	var online =  $("#online").val();
+	var classroom =  $("#classroom").prop("checked");
+	var online =  $("#online").prop("checked");
+	console.log("online "+online);
 	var status = $("#status").val();
 	var freePaid = $("#freePaid").val();
 	var idHidden =  $("#idHidden").val();
 	document.getElementById('btnUpdate').style.display = 'none';
 	document.getElementById('btnCreate').style.display = 'block';
 	$(".displayNone").css("display","block");
-	 {
+	 
 		var result="";
 		var total = "freePaid="+freePaid+"&courseName="+courseName+"&online="+online+"&status="+status+"&duration="+duration+"&id="+idHidden+"&classroom="+classroom;
+		console.log("total "+total);
 		alert(idHidden);
 		$('#newTable').hide();
 		
-		$.ajax({
+	 	$.ajax({
 		type: 'post',
 		url: 'editManageCourseData.jspp?'+ total,
 		data: {
@@ -149,9 +157,9 @@ function editManageCourseData(){
 		       $( '#name_status' ).html(response);
 		      }
 		      });
-	//return true;
+	return true;
 	searchManageCourse();
-	}
+	
 }
 
 function deleteManageCourse(){
@@ -326,15 +334,15 @@ font-weight: normal; line-height: 1.42857143; text-align: center; white-space: n
                                 </div>
 
                                 <!-- search Results -->
-                                <div  id="testt" class="displayNone" aria-expanded="false" style="height: 0px; display:none;">
-                                    
+                             <!--    <div  id="testt" class="displayNone" aria-expanded="false" style="height: 0px;"> -->
+                                 <div class="col-xs-12 displayNone" id="show-result" aria-expanded="false" style="height: 0px;">    
                                     <!-- table -->
                                     <div class="row">
                                         <div >
                                             <fieldset>
                                                 <legend>Search Result</legend>
                                                 
-                                                <table class="table table-bordered table-responsive" id="newTable" style="display: none">
+                                                <table class="table table-bordered table-responsive" id="newTable" >
                                                 <thead>
                                                     <tr class="background-open-vacancies">
                                                         <th>S.No.</th>

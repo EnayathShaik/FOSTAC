@@ -3,20 +3,21 @@
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
 function OnStart(){
-	searchTrainingPartnameList();
-	searchAssessmentAgencyList();
+	//searchTrainingPartnameList();
+	//searchAssessmentAgencyList();
+	onFeedbackMasterSearchClick("ALL");
 }
 window.onload = OnStart;
 </script>
 <script type="text/javascript">
 function searchTrainingPartnameList(){
+	$('#newTable').show();
 		var result="";
 		$.ajax({
 		type: 'post',
 		url: 'searchTrainingPartnameList.jspp?',
 		async: false, 
 		success: function (data){
-		$('#newTable').show();
 		//var mainData = JSON.stringify(data);
 		var mainData1 = jQuery.parseJSON(data);
 		var j=1;
@@ -67,14 +68,28 @@ function editFeedbackMaster(feedbackTypeID){
 	$('#submit').val('Update');
 }
 
-function onFeedbackMasterSearchClick(){
+function onFeedbackMasterSearchClick(indicator){
+	
+	var courseType = $("#courseType").val();
+	var catogery = $("#catogery").val();
+	var feedback = $("#feedback").val();
+	($("#status1").prop("checked")) ? status ="Active" : status = "Inactive"; 
+	console.log("status "+status);
+	var searchStr = "";
+	if(indicator == "ALL"){
+		searchStr = "ALL";
+	}else{
+		searchStr = "courseType="+courseType+"&catogery="+catogery+"&feedback="+feedback+"&status="+status;
+	}
+	console.log(" searchStr "+searchStr);
 	$.ajax({
 		type: 'post',
-		url: 'searchFeedbackMaster.jspp',
+		url: 'searchFeedbackMaster.jspp?'+searchStr,
 		async: false, 
 		success: function (data){
 			var feedbackList=jQuery.parseJSON(data);
 			var feedbackCount=feedbackList.length;
+			$('#newTable tr').remove();
 			if(feedbackCount>0){
 				for(var index=0;index<feedbackCount;index++){
 					var trStr="<tr>";
@@ -109,8 +124,8 @@ function validateFields(){
 function onLoadTrainingPartnerCenterId(){
 	var  id = document.getElementById("idHiddenTrainingPartner").value;
 	var result="";
-	$('#newTable').hide();
-	$('#newTable1').hide();
+	//$('#newTable').hide();
+	//$('#newTable1').hide();
 	$.ajax({
 	type: 'post',
 	url: 'onLoadTrainingPartnerCenterId.jspp?'+ id,
@@ -224,22 +239,21 @@ return result;
                                                 <!-- show details -->
                                                 <div class="col-md-6 col-xs-12">
                                                     <br>
-                                                    <a  class="btn login-btn show-details-vacancy collapsed"  href="#" onclick="onFeedbackMasterSearchClick()" style="width: 100%;">Search</a>
+                                                    <a  class="btn login-btn show-details-vacancy collapsed"  href="#" onclick="onFeedbackMasterSearchClick('')" style="width: 100%;">Search</a>
                                                     <br>
                                                 </div>
                                                 </div>
                                                 </div>
                                                 </div>
                                                     <!-- search Results -->
-                                <div class="col-xs-12 collapse" id="show-result" aria-expanded="true" style="height: 0px;">
-                                    
+                                   <div class="col-xs-12 displayNone" id="show-result" aria-expanded="false" style="height: 0px;">   
                                     <!-- table -->
                                     <div class="row">
                                         <div class="col-xs-12 table-overflow-responsive">
                                             <fieldset>
                                                 <legend>Search Result</legend>
                                                 
-                                                <table class="table table-bordered table-responsive">
+                                                <table id="newTable" class="table table-bordered table-responsive">
                                                 <thead>
                                                     <tr class="background-open-vacancies">
                                                         <th>S.No.</th>

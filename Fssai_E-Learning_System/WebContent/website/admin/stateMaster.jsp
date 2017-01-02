@@ -42,6 +42,7 @@ function editStateDataOld(){
 }
 	
 function checkState() {
+	
 		var name = document.getElementById("stateName").value;
 		if (name) {
 			$
@@ -73,9 +74,10 @@ function checkState() {
 function deleteState(state,status,idHidden) {
 		document.getElementById('idH').value = idHidden;
 		document.getElementById('btnUpdate').style.display = 'none';
+		$('label[id=created').html('');
 		//document.getElementById('btnCreate').style.display = 'block';
 		$("#btnCreate").hide();
-		 $("#stateName").prop("disabled", true);
+		// $("#stateName").prop("disabled", true);
 		document.getElementById('stateName').value = state;
 	    document.getElementById('stateLabel').value = status;
 		$(".displayNone").css("display","block");

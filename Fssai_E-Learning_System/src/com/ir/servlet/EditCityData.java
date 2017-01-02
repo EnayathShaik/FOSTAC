@@ -64,7 +64,8 @@ public class EditCityData extends HttpServlet {
 		
 		cityId = Integer.parseInt((totalConnected[1].split("="))[1]);
 		cityName = (totalConnected[2].split("="))[1];
-		System.out.println("checkkk data==>"+cityName+cityId+status);
+		String districtId = (totalConnected[3].split("="))[1];
+		System.out.println("checkkk data==>"+cityName+" " +cityId+" "+status + " districtId "+districtId);
 		Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();

@@ -16,15 +16,16 @@ function editRegion(distid,stateid,regionid,cityid,regionName){
 	//var c = document.getElementById('statusH').value;
 	
 	document.getElementById('districtId').value = distid;
-	
+	$("#districtId").trigger("change");
 	document.getElementById('stateId').value = stateid;
 	document.getElementById('RegionidH').value = regionid;
+	
 	document.getElementById('cityId').value = cityid;
 	document.getElementById('regionName').value = regionName;
 	/* $("#stateId").prop("disabled", true);
 	stateId.options[0].text = stateName;
 	$("#stateId").prop('selectedIndex',0); */
-	$("#stateId").prop("disabled", true);
+	//$("#stateId").prop("disabled", true);
 	/* $("#districtId").prop("disabled", true);
 	$("#cityId").prop("disabled", true); */
 	
@@ -175,18 +176,23 @@ function validateFields() {
 
 function searchRegion(){
 	var regionName =  $("#regionName").val();
-	//var districtId =  $("#districtId").val();
+	
+	var stateId = $("#stateId").val();
+	var districtName =  $("#districtId").val();
+	var cityId =  $("#cityId").val();
+	var status =  $("#status").val();
 	 {
 		var result="";
-		var total = "&regionName="+regionName ; //"regionName="+regionName+"&districtId="+districtId;
+		
+		var total = "stateId="+stateId +"&districtName="+districtName+"&cityName="+cityId+"&status="+status+"&regionName="+regionName ;
 		$.ajax({
 		type: 'post',
 		url: 'searchRegion.jspp?'+ total,
 		async: false, 
 		success: function (data){
+		
 		$('#newTable').show();
 		var mainData1 = jQuery.parseJSON(data);
-		//alert(mainData1);
 		var j=1;
 		$('#newTable tr').remove();
 		$('#newTable').append('<tr  class="background-open-vacancies" style="background-color:#000077;"><th>S.No.</th><th>State</th><th>District</th><th>City</th><th>Region Name</th></tr>')
@@ -198,7 +204,7 @@ function searchRegion(){
 		});
 	return result;
 	}
-
+	 $("#regionNameError").css("display" , "none");
 }
 </script>
 <cf:form action="regionMasterSave.fssai" name="myForm" method="POST" commandName="regionMappingMaster" onsubmit="return validateFields();"> 
@@ -303,7 +309,7 @@ function searchRegion(){
                                                             <li class="style-li error-red"></li>
                                                         </ul>
                                                     </div>
-<cf:select path="districtId" class="form-control" onchange="getCity(this.value);">
+<cf:select path="districtId" id="districtId" class="form-control" onchange="getCity(this.value);">
 <cf:option value="0" label="Select District" />
 <cf:options items="${districtList}" itemValue="districtId" itemLabel="districtName"/>
 </cf:select>
@@ -320,7 +326,8 @@ function searchRegion(){
                                                     
     <cf:input path="regionName"   placeholder="Region Name" class="form-control"   />
                                     <div class="form-group">
-                                                    <button id="btnCreate" class="btn login-btn">Create</button>
+                                                    <button id="btnCreate" style="margin-top:20px;" class="btn login-btn">Create</button>
+                                                      <a href="#testt" style="margin-top:20px;" onclick="searchRegion();"  class="btn login-btn">Search</a>
                                                     <input type="hidden" id="RegionidH" value="">
                                                     
                                                     <a href="#" onclick="editRegionData();" id="btnUpdate" style="display: none; padding: 6px 7px; width: 20%; margin-bottom: 0; font-size: 14px; 
@@ -329,7 +336,7 @@ font-weight: normal; line-height: 1.42857143; text-align: center; white-space: n
  -moz-user-select: none; -ms-user-select: none; user-select: none; background-image: none; border: 1px solid transparent;
   background: #ef580d !important; color: #fff; border: 1px solid transparent; transition: all 0.8s linear;">Update</a>
                                                     
-                                                       <a href="#testt" onclick="searchRegion();" class="pull-right">Search</a>
+                                                       <!--  <a href="#testt" onclick="searchRegion();"  class="btn login-btn">Search</a>-->
                                                 </div>
                                             </div> <!-- rigth side ends -->
                                             </div>

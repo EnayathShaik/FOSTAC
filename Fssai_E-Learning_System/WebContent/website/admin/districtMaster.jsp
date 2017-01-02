@@ -92,17 +92,20 @@ function changeStatus(){
 		$('#newTable').hide();
 		$.ajax({
 		type: 'post',
+		async : false,
 		url: 'changeStatusDistrict.jspp?'+ total,
 		data: {
 		       user_name:name,
 		      },
 		      success: function (response) {
+		    	  console.log("response "+response);
 		       $( '#name_status' ).html(response);
 		      }
 		      });
-		onLoadDistrict();
 	return true;
-	location.reload();
+	
+	$("#newTable").empty();
+	onLoadDistrict();
 }
 
 
@@ -143,7 +146,6 @@ function editDistrict(state,districtName,statuslabel,distID){
 
 	document.getElementById('btnUpdate').style.display = 'block';
 	document.getElementById('btnCreate').style.display = 'none';
-	$("#stateId").prop("disabled", true);
 	//document.getElementById('stateId').value = state;
 	//document.getElementById('stateLabel').value = statuslabel;
 	
@@ -155,7 +157,7 @@ function editDistrict(state,districtName,statuslabel,distID){
 	 stateId.options[0].text = state;
 	
 	console.log("status>"+statuslabel);
-	if(statuslabel=="A"){
+	if(statuslabel=="Active"){
 		$('#status option').remove();
 		$('#status').append('<option value="A" selected="true">Active</option><option value="I">In-active</option>');
 	}else{

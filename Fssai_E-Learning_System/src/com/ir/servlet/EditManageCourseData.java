@@ -46,6 +46,7 @@ public class EditManageCourseData extends HttpServlet {
         PrintWriter out = response.getWriter();
 		String name = (request.getQueryString());
 		System.out.println("passing name   :" + name);
+		//"freePaid="+freePaid+"&courseName="+courseName+"&online="+online+"&status="+status+"&duration="+duration+"&id="+idHidden+"&classroom="+classroom;
 		String[] totalConnected = name.split("&");
 		String courseName , courseDuration , online, status , paidunpaid , id  , classroom;
 		
@@ -59,7 +60,7 @@ public class EditManageCourseData extends HttpServlet {
 		paidunpaid = (totalConnected[0].split("="))[1];
 		status = (totalConnected[3].split("="))[1];
 		id = (totalConnected[5].split("="))[1];
-		
+		System.out.println(" classroom "+(totalConnected[6].split("="))[1]);
 		if( (totalConnected[6].split("="))[1].equals("true")){
 			classroom =  "Classroom";
 		}else{

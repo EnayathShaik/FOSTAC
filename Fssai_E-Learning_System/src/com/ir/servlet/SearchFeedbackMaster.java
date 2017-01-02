@@ -54,7 +54,37 @@ public class SearchFeedbackMaster extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-				System.out.println("onload admin search feedback list");
+				String searchStr = request.getQueryString();
+				String courseType ="" , catagory ="", feedback = "" , status = "";
+				if(!searchStr.equalsIgnoreCase("ALL")){
+					
+					 String [] n1 = searchStr.split("&");
+						
+						
+						try{
+							courseType = (n1[0].split("="))[1];
+						}catch(Exception e){
+							courseType = "%";
+						}
+						
+						
+						
+						System.out.println("-----> "+(n1[1].split("="))[1]);
+						try{
+							catagory = n1[1].split("=")[1];
+							
+						}catch(Exception e){
+							catagory ="%";
+						}
+						
+						try{
+							feedback = (n1[2].split("="))[1];
+						}catch(Exception e){
+							feedback = "%";
+						}
+						
+						 status = (n1[3].split("="))[1] ;
+				}
 				response.setContentType("text/html;charset=UTF-8");
 		        PrintWriter out = response.getWriter();
 			
@@ -63,8 +93,13 @@ public class SearchFeedbackMaster extends HttpServlet {
 				SessionFactory sf = conf.buildSessionFactory();
 				Session session = sf.openSession();
 				String newList=null;
-				String sql = "select feedbacktypeid,coursetype,catogery,feedback,status from feedbackmaster";
-
+				String sql  = null;
+				
+				if(searchStr.equalsIgnoreCase("ALL"))
+				sql = "select feedbacktypeid,coursetype,catogery,feedback,status from feedbackmaster";
+				else
+				sql = "select feedbacktypeid,coursetype,catogery,feedback,status from feedbackmaster"+
+				" where cast (coursetype as varchar(20)) like '"+courseType+"%' and cast(catogery as varchar(20)) like  '"+catagory+"%' and cast(feedback as varchar(20)) like '"+feedback+"%' and cast(status as varchar(10)) like '"+status+"%'";
 					Query query = session.createSQLQuery(sql);
 					List<FeedbackMaster> list = query.list();
 					System.out.println(list.size());

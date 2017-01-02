@@ -75,7 +75,7 @@ public class ChangeStatusDistrict extends HttpServlet {
 		Session session = sf.openSession();
 		
 		String newList = null;
-		if(status.equals("A")){
+	/*	if(status.equals("A")){
 			System.out.println("hii");
 			District d = (District) session.load(District.class,Integer.parseInt(id));
 			System.out.println("if>>"+d);
@@ -88,17 +88,17 @@ public class ChangeStatusDistrict extends HttpServlet {
 			session.beginTransaction().commit();
 			session.close();
 			newList = "Status changet to Active" ;
-		}else{
+		}else{*/
 			District d = (District) session.load(District.class,Integer.parseInt( id));			
 			//District dd = new District();
 			System.out.println("else");
-			d.setStatus("I");
+			d.setStatus(status);
 			d.setDistrictName(distName);
 			session.update(d);
 			session.beginTransaction().commit();
 			session.close();
 			newList = "Status changet to In-Active" ;
-		}
+	//	}
 		out.write(newList);
 		out.flush();
 		

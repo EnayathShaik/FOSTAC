@@ -3,10 +3,12 @@ package com.ir.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Query;
@@ -45,23 +47,39 @@ public class SearchRegion extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        String total = request.getQueryString();
-        System.out.println(total);
-        String[] totalA  = total.split("%20");
-		String cn = "";
-		for(int i = 0 ; i < totalA.length ; i++){
-			cn = cn + totalA[i] + " ";
+        String name = request.getQueryString();
+        String [] n1 = name.split("&");
+		
+		String stateId ;
+		if((n1[0].split("="))[1].equals("")){
+			stateId = "%";
+		}else{
+			stateId = (n1[0].split("="))[1];
 		}
-		String fcn = cn.substring(0, cn.length()-1);
-		System.out.println(fcn.length() + "    "+ fcn);
-        String[] totalConnected = total.split("&");
-        //String districtId = (totalConnected[1].split("="))[1];
+		
+		String districtId;
+		System.out.println("-----> "+(n1[1].split("="))[1]);
+		if((n1[1].split("="))[1].equals("0")){
+			districtId ="%";
+		}else{
+			districtId = (n1[1].split("="))[1];
+		}
+		
+		String cityName = null;
+		System.out.println("city "+(n1[2].split("="))[1]);
+		if( (n1[2].split("="))[1].equals("0")){
+			cityName = "%";
+		}else{
+			cityName =  (n1[2].split("="))[1];
+		}
+		
+		String status = (n1[3].split("="))[1] ;
+		
         String	regionName ;
         
         try{
-        	regionName =  (totalConnected[0].split("="))[1];
+        	regionName =  (n1[4].split("="))[1];
        }catch(Exception e){
-    	   e.printStackTrace();
     	   regionName = "%";
        }
         System.out.println("region==>"+regionName);
@@ -69,13 +87,16 @@ public class SearchRegion extends HttpServlet {
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
-		String newList = null ;
-		if(total.equals("") ){
+		String newList =  "No Data Found!!";
+		//if(total.equals("") ){
 			System.out.println("lkjkj");
 			String sql = "select r.id , s.statename , d.districtname ,c.cityname, r.regionname from region as r "+
 						" inner join state as s on s.stateid = r.stateid "+
 						" inner join district as d on d.districtid = r.districtid "+
-						" inner join city as c on c.cityid = r.cityid where r.regionname like '"+regionName+"%'  ";
+						" inner join city as c on c.cityid = r.cityid "+ 
+						" where CAST(s.stateid AS varchar(10)) like'"+ stateId +"'"+
+						" and CAST(c.cityId AS VARCHAR(10)) like '"+cityName+"%' and  CAST(d.districtid AS varchar(10)) like '"+districtId+"'"+
+						" and r.regionname like '"+regionName+"%'  ";
 			Query query = session.createSQLQuery(sql);
 			List list = query.list();
 			System.out.println(list.size());
@@ -86,23 +107,6 @@ public class SearchRegion extends HttpServlet {
 				Gson g =new Gson();
 				newList = g.toJson(list); 
 			}
-		}else{
-			String sql = "select r.id , s.statename , d.districtname ,c.cityname, r.regionname from region as r "+
-					" inner join state as s on s.stateid = r.stateid "+
-					" inner join district as d on d.districtid = r.districtid "+
-					" inner join city as c on c.cityid = r.cityid "+
-					" where r.regionname = '"+fcn+"'";
-			Query query = session.createSQLQuery(sql);
-			List list = query.list();
-			System.out.println(list.size());
-			session.close();
-			if(list.size() > 0 || list != null){
-				System.out.println("data selected finally  " );
-				System.out.println(list);
-				Gson g =new Gson();
-				newList = g.toJson(list); 
-			}
-		}
 		
 		out.write(newList);
 		out.flush();
