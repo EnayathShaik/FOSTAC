@@ -3,7 +3,6 @@
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
 	function getDistrict(val) {
-		////alert('jjh');
 		$.ajax({
 			type : 'post',
 
@@ -46,7 +45,6 @@
 	}
 
 	function getDistrict1(val) {
-		////alert('jjh');
 		$.ajax({
 			type : 'post',
 
@@ -59,7 +57,7 @@
 						'<option value="0" label="Select District" />');
 				$('#resCity option').remove();
 				$('#resCity')
-						.append('<option value="0" label="Select City" />');
+						.append('<option value="0" >Select City </option>');
 
 				$.each(mainData1, function(i, obj) {
 					$('#residentialDistrict').append(
@@ -78,7 +76,7 @@
 				var mainData1 = jQuery.parseJSON(response);
 				$('#resCity option').remove();
 				$('#resCity')
-						.append('<option value="0" label="Select City" />');
+						.append('<option value="0"> Select City </>');
 				$.each(mainData1, function(i, obj) {
 					$('#resCity').append(
 							'<option value='+obj.cityId+' >' + obj.cityName
@@ -90,7 +88,6 @@
 	}
 
 	function getDistrict2(val) {
-		////alert('jjh');
 		$.ajax({
 			type : 'post',
 
@@ -100,10 +97,10 @@
 
 				$('#bussDistrict option').remove();
 				$('#bussDistrict').append(
-						'<option value="0" label="Select District" />');
+						'<option value="0">Select District </option>');
 				$('#bussCity option').remove();
 				$('#bussCity').append(
-						'<option value="0" label="Select City" />');
+						'<option value="0"> Select City </option>');
 
 				$.each(mainData1, function(i, obj) {
 
@@ -133,37 +130,6 @@
 			}
 		});
 	}
-	/* function myBusiness() {
-	 var x = document.getElementById("KindOfBusiness").value;
-	 if($('[id*=KindOfBusiness] option:selected').text()=='Others') {
-	 document.getElementById("businessID1").style.display= 'none';
-	 document.getElementById("businessID2").style.display= 'none';
-	 document.getElementById("businessID3").style.display= 'none';
-	 }else{
-	 document.getElementById("businessID1").style.display= 'block';
-	 document.getElementById("businessID2").style.display= 'block';
-	 document.getElementById("businessID3").style.display= 'block';
-	 }
-	
-
-	 } */
-// 	function my11(str) {
-// 		var xhttp;
-// 		if (str == "") {
-// 			document.getElementById("resState").innerHTML = "";
-// 			return;
-// 		}
-// 		xhttp = new XMLHttpRequest();
-// 		xhttp.onreadystatechange = function() {
-// 			if (this.readyState == 4 && this.status == 200) {
-// 				document.getElementById("resCity").innerHTML = this.responseText;
-// 			}
-// 		};
-// 		xhttp.open("GET", "loadCity.fssaii?q=" + str, true);
-// 		xhttp.send();
-// 	}
-</script>
-
 
 <script language="javascript" type="text/javascript">
 	function myBusiness() {
@@ -191,14 +157,11 @@
 		var y = document.getElementById("correspondenceState").selectedIndex;
 		var z = document.getElementById("correspondenceCity").selectedIndex;
 		var v = document.getElementById("correspondenceDistrict").selectedIndex;
-		////alert(z + "    " + y);
 		if (x) {
-			/* document.getElementById('Email').value= document.getElementById('correspondenceEmail').value; */
 			document.getElementById('ResidentialAddressLine1').value = document
 					.getElementById('correspondenceAddress1').value;
 			document.getElementById('ResidentialAddressLine2').value = document
 					.getElementById('correspondenceAddress2').value;
-			/* document.getElementById('Mobile').value= document.getElementById('correspondenceMobile').value; */
 			document.getElementById('resPincode').value = document
 					.getElementById('correspondencePincode').value;
 			document.getElementById('resState').selectedIndex = y;
@@ -206,20 +169,10 @@
 			document.getElementById('resCity').selectedIndex = z;
 
 		} else {
-			/* document.getElementById('Email').value=${loginUser.email} ; */
 			document.getElementById('ResidentialAddressLine1').value = '${loginUser.residentialLine1 }';
 			document.getElementById('ResidentialAddressLine2').value = '${loginUser.residentialLine2 }';
-			/* document.getElementById('Mobile').value= ""; */
-			/* document.getElementById('resPincode').value= ""; */
-			/* document.getElementById('resState').selectedIndex=
-			document.getElementById('resCity').selectedIndex= z; */
 		}
 	}
-
-	/* function myCompany() {
-		businessID3.style.display = checkCompany.checked ? "none" : "block";
-		businessID2.style.display = checkCompany.checked ? "none" : "block";
-	} */
 
 	function checkname() {
 		var name = document.getElementById("userId").value;
@@ -263,7 +216,6 @@
 		var cs = '${loginUser.correspondenceState.stateId }';
 
 		var cd = '${loginUser.correspondenceDistrict.districtId}';
-		//alert('cd is'+cd);
 		var cc = '${loginUser.correspondenceCity.cityId}';
 		var ps = '${loginUser.resState.stateId}';
 		var pd = '${loginUser.residentialDistrict.districtId}';
@@ -274,11 +226,8 @@
 		var kob = '${loginUser.kindOfBusiness.kindOfBusinessId}';
 		var checkpermanent = '${loginUser.checkPermanent}';
 		var designation = '${loginUser.designation}';
-		/* $("#Designation").prop('selectedIndex',designation); */
 		Designation.options[0].text = designation;
-		//alert(checkpermanent);
 		if (checkpermanent) {
-			//alert("Inside If");
 			document.getElementById('checkCorrespondence').checked = true;
 			residential1.style.display = checkCorrespondence.checked ? "none"
 					: "block";
@@ -293,9 +242,6 @@
 			businessID2.style.display = checkCompany.checked ? "none" : "block";
 		}
 		$("#KindOfBusiness").prop('selectedIndex', kob);
-		//alert("cs");
-		//alert(cs + ' '+cd+' '+cc+' '+ps+' '+pd+' '+pc+' '+bd+' '+bs+' '+bc+' '+checkpermanent+' '+checkbusiness+' '+designation);
-
 		getStateUpdate(cs, cd, cc);
 		getStateUpdateP(ps, pd, pc);
 		getStateUpdateB(bs, bd, bc);
@@ -343,7 +289,7 @@
 						var mainData1 = jQuery.parseJSON(response);
 						$('#correspondenceDistrict option').remove();
 						$('#correspondenceDistrict').append(
-								'<option value="0" label="Select District" />');
+								'<option value="0">Select District</option>');
 
 						$
 								.each(
@@ -352,11 +298,11 @@
 											if (cd == obj.districtId) {
 												$('#correspondenceDistrict')
 														.append(
-																'<option value='+obj.districtId+' label='+obj.districtName+' selected="true"/>');
+																'<option value='+obj.districtId+' selected="true">'+obj.districtName+'</option>');
 											} else {
 												$('#correspondenceDistrict')
 														.append(
-																'<option value='+obj.districtId+' label='+obj.districtName+' />');
+																'<option value='+obj.districtId+' >'+obj.districtName+'</option>');
 											}
 										});
 					}
@@ -372,7 +318,7 @@
 						var mainData1 = jQuery.parseJSON(response);
 						$('#correspondenceCity option').remove();
 						$('#correspondenceCity').append(
-								'<option value="0" label="Select City" />');
+								'<option value="0">Select City </option>');
 
 						$
 								.each(
@@ -381,17 +327,16 @@
 											if (cc == obj.cityId) {
 												$('#correspondenceCity')
 														.append(
-																'<option value='+obj.cityId+' label='+obj.cityName+' selected="true"/>');
+																'<option value='+obj.cityId+' selected="true">'+obj.cityName+'</option>');
 											} else {
 												$('#correspondenceCity')
 														.append(
-																'<option value='+obj.cityId+' label='+obj.cityName+' />');
+																'<option value='+obj.cityId+'>'+obj.cityName+'</option>');
 											}
 										});
 					}
 				});
 
-		//alert("hhhhhh");
 	}
 </script>
 <script>
@@ -427,28 +372,24 @@
 </script>
 <script>
 	function getDistrictUpdateP(ps, pd, pc) {
-		$
-				.ajax({
+				$.ajax({
 					type : 'post',
 					url : 'getDistrictUpdate.jspp?' + ps,
 					success : function(response) {
 						var mainData1 = jQuery.parseJSON(response);
 						$('#bussDistrict option').remove();
 						$('#bussDistrict').append(
-								'<option value="0" label="Select District" />');
+								'<option value="0">Select District</option>');
 
-						$
-								.each(
-										mainData1,
-										function(i, obj) {
+						$.each(mainData1,function(i, obj) {
 											if (pd == obj.districtId) {
 												$('#bussDistrict')
 														.append(
-																'<option value='+obj.districtId+' label='+obj.districtName+' selected="true"/>');
+																'<option value='+obj.districtId+' selected ="true">'+obj.districtName+'</option>');
 											} else {
 												$('#bussDistrict')
 														.append(
-																'<option value='+obj.districtId+' label='+obj.districtName+' />');
+																'<option value='+obj.districtId+' >'+obj.districtName+' </option>');
 											}
 										});
 					}
@@ -458,7 +399,6 @@
 </script>
 <script>
 	function getCityUpdateP(pd, pc) {
-		//alert('in city');
 		$
 				.ajax({
 					type : 'post',
@@ -467,7 +407,7 @@
 						var mainData1 = jQuery.parseJSON(response);
 						$('#resCity option').remove();
 						$('#resCity').append(
-								'<option value="0" label="Select District" />');
+								'<option value="0">Select City </option>');
 
 						$
 								.each(
@@ -476,11 +416,11 @@
 											if (pc == obj.cityId) {
 												$('#resCity')
 														.append(
-																'<option value='+obj.cityId+' label='+obj.cityName+' selected="true"/>');
+																'<option value='+obj.cityId+'  selected="true">'+obj.cityName+'</option>');
 											} else {
 												$('#resCity')
 														.append(
-																'<option value='+obj.cityId+' label='+obj.cityName+' />');
+																'<option value='+obj.cityId+'>'+obj.cityName+' </option>');
 											}
 										});
 					}
@@ -529,7 +469,7 @@
 						var mainData1 = jQuery.parseJSON(response);
 						$('#residentialDistrict option').remove();
 						$('#residentialDistrict').append(
-								'<option value="0" label="Select District" />');
+								'<option value="0">Select District</option>');
 
 						$
 								.each(
@@ -538,11 +478,11 @@
 											if (bd == obj.districtId) {
 												$('#residentialDistrict')
 														.append(
-																'<option value='+obj.districtId+' label='+obj.districtName+' selected="true"/>');
+																'<option value='+obj.districtId+'  selected="true">'+obj.districtName+'</option>');
 											} else {
 												$('#residentialDistrict')
 														.append(
-																'<option value='+obj.districtId+' label='+obj.districtName+' />');
+																'<option value='+obj.districtId+'>'+obj.districtName+'</option>');
 											}
 										});
 					}
@@ -560,8 +500,7 @@
 						var mainData1 = jQuery.parseJSON(response);
 						$('#bussCity option').remove();
 						$('#bussCity').append(
-								'<option value="0" label="Select District" />');
-
+								'<option value="0">Select District </option>');
 						$
 								.each(
 										mainData1,
@@ -569,22 +508,20 @@
 											if (bc == obj.cityId) {
 												$('#bussCity')
 														.append(
-																'<option value='+obj.cityId+' label='+obj.cityName+' selected="true"/>');
+																'<option value='+obj.cityId+' selected="true">'+obj.cityName+'</option>');
 											} else {
 												$('#bussCity')
 														.append(
-																'<option value='+obj.cityId+' label='+obj.cityName+' />');
+																'<option value='+obj.cityId+'>'+obj.cityName+'</option>');
 											}
 										});
 					}
 				});
-		//alert('bc end');
 	}
 </script>
 
 <script>
 	function myCompany(val) {
-		//alert("Inside My Company");
 		businessID3.style.display = checkCompany.checked ? "none" : "block";
 		businessID2.style.display = checkCompany.checked ? "none" : "block";
 		var x = document.getElementById('checkCompany').checked;
@@ -626,12 +563,10 @@
 						success : function(response) {
 							$('#name_status').html(response);
 							if (response == 'Already') {
-								//alert('a');
 								document.getElementById("register").style.display = 'none';
 								return false;
 
 							} else {
-								//alert('b');
 								var aa = $('#name_status').html(response);
 								document.getElementById("register").style.display = 'block';
 								return true;
@@ -764,7 +699,6 @@
 														disabled="true">
 														<cf:option value="0" label="Mr." />
 														<cf:option value="1" label="Mrs." />
-														<%-- <cf:options items="${titleList}" itemValue="titleId" itemLabel="titleName" /> --%>
 													</cf:select>
 												</div>
 												<div class="form-group">
@@ -851,22 +785,14 @@
 															<li class="style-li"><strong>State:</strong></li>
 															<li class="style-li error-red"></li>
 														</ul>
-														<!--  <select class="form-control">
-                          <option value="0">Lorem</option>
-                          <option value="1">Lorem</option>
-                          <option value="2">Lorem</option>
-                          <option value="3">Lorem</option>
-                        </select>-->
 													</div>
 													<cf:select path="correspondenceState" class="form-control"
 														onchange="getDistrict(this.value);">
 														<cf:option value="0" label="Select State" />
 														<cf:options items="${stateList}" itemValue="stateId"
-															itemLabel="stateName" />
+ 															itemLabel="stateName" /> 
 													</cf:select>
 												</div>
-
-
 
 												<div class="form-group">
 													<div>
@@ -899,16 +825,10 @@
 															<li class="style-li error-red"></li>
 														</ul>
 													</div>
-													<!--  <select class="form-control">
-                          <option value="0">Lorem</option>
-                          <option value="1">Lorem</option>
-                          <option value="2">Lorem</option>
-                          <option value="3">Lorem</option>
-                        </select>   -->
 													<cf:select path="correspondenceDistrict"
 														class="form-control" onchange="getCity(this.value);">
 														<cf:option value="0" label="Select District" />
-														<%-- <cf:options items="${districtList}" itemValue="districtId" itemLabel="districtName" /> --%>
+														<cf:options items="${districtList}" itemValue="districtId" itemLabel="districtName" />
 													</cf:select>
 												</div>
 
@@ -920,12 +840,6 @@
 															<li class="style-li error-red"></li>
 														</ul>
 													</div>
-													<!--  <select class="form-control">
-                          <option value="0">Lorem</option>
-                          <option value="1">Lorem</option>
-                          <option value="2">Lorem</option>
-                          <option value="3">Lorem</option>
-                        </select> -->
 													<cf:select path="correspondenceCity" class="form-control"
 														onchange="return myBusiness()">
 														<cf:option value="0" label="Select City" />
@@ -967,15 +881,6 @@
 
 												</div>
 
-												<!-- <div class="form-group">
-                        <div>
-                          <ul class="lab-no">
-                            <li class="style-li"><strong>Location:</strong></li>
-                            <li class="style-li error-red"></li>
-                          </ul>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Location" >
-                      </div> -->
 											</div>
 											<!--Right side-->
 
@@ -985,12 +890,6 @@
 
 
 									<div class="row" style="height: 20px;"></div>
-
-
-
-
-
-
 
 									<!-- Contact details Start -->
 									<div class="personel-info">
@@ -1005,14 +904,8 @@
 													as correspondence address.</label>
 											</div>
 
-
-
-
 											<!--Left side-->
 											<div id="residential1" class="col-md-6 col-xs-12">
-
-
-
 												<div class="form-group">
 													<div>
 														<ul class="lab-no">
@@ -1044,7 +937,6 @@
 														class="form-control" maxlength="100" />
 												</div>
 
-
 												<div class="form-group">
 													<div>
 														<ul class="lab-no">
@@ -1053,16 +945,7 @@
 															<li class="style-li error-red"><cf:errors
 																	path="resState" cssClass="error" /></li>
 														</ul>
-														<!--  <select class="form-control">
-                          <option value="0">Lorem</option>
-                          <option value="1">Lorem</option>
-                          <option value="2">Lorem</option>
-                          <option value="3">Lorem</option>
-                        </select> -->
 													</div>
-													<%-- <cf:select path="resState" class="form-control state">
-<cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName" />
-</cf:select> --%>
 													<cf:select path="resState" class="form-control state"
 														onchange="getDistrict1(this.value);">
 														<cf:option value="0" label="Select State" />
@@ -1074,11 +957,7 @@
 											</div>
 											<!--Left side-->
 											<!--Right side-->
-
-
 											<div id="residential2" class="col-md-6 col-xs-12">
-
-
 												<div class="form-group">
 													<div>
 														<ul class="lab-no">
@@ -1086,12 +965,6 @@
 															<li class="style-li error-red"></li>
 														</ul>
 													</div>
-													<!-- <select class="form-control">
-                          <option value="0">Lorem</option>
-                          <option value="1">Lorem</option>
-                          <option value="2">Lorem</option>
-                          <option value="3">Lorem</option>
-                        </select> -->
 													<cf:select path="residentialDistrict" class="form-control"
 														onchange="getCity1(this.value);">
 														<cf:option value="0" label="Select District" />
@@ -1100,9 +973,6 @@
 													</cf:select>
 
 												</div>
-
-
-
 												<div class="form-group">
 													<div>
 														<ul class="lab-no">
@@ -1110,18 +980,12 @@
 															<li class="style-li error-red"></li>
 														</ul>
 													</div>
-													<%-- <cf:select path="correspondenceCity" class="form-control" onchange="return myBusiness()">
-<cf:options items="${cityList}" itemValue="cityId" itemLabel="cityName" />
-</cf:select>  --%>
 													<cf:select path="resCity" class="form-control">
 														<cf:option value="0" label="Select City" />
 														<cf:options items="${cityList}" itemValue="cityId"
 															itemLabel="cityName" />
 													</cf:select>
 												</div>
-
-
-
 												<div class="form-group">
 													<div>
 														<ul class="lab-no">
@@ -1149,7 +1013,6 @@
 											<legend>
 												<h3>Kind of Business</h3>
 											</legend>
-
 
 											<div class="col-md-6 col-xs-12">
 												<div class="form-group">
@@ -1220,9 +1083,6 @@
 															</div>
 														</div>
 													</div>
-													<script>
-														console.log("designation selected:");
-													</script>
 													<cf:select path="Designation" class="form-control" >
 														<cf:option value="0" label="Select" />
 														<cf:option value="Food Handler" label="Food Handler" />
@@ -1326,12 +1186,6 @@
 															<li class="style-li error-red"></li>
 														</ul>
 													</div>
-													<!--   <select class="form-control">
-                          <option value="0">Lorem</option>
-                          <option value="1">Lorem</option>
-                          <option value="2">Lorem</option>
-                          <option value="3">Lorem</option>
-                        </select> -->
 													<cf:select path="bussState" class="form-control"
 														onchange="getDistrict2(this.value);">
 														<cf:option value="0" label="Select State" />
@@ -1340,25 +1194,10 @@
 													</cf:select>
 												</div>
 
-
-
-
-
-
-
-
-
-
-
 											</div>
 											<!--Left side-->
-
-
 											<!--Right side-->
 											<div class="col-md-6 col-xs-12" id="businessID3">
-
-
-
 												<div class="form-group">
 													<div>
 														<ul class="lab-no">
@@ -1366,12 +1205,6 @@
 															<li class="style-li error-red"></li>
 														</ul>
 													</div>
-													<!-- <select class="form-control">
-                          <option value="0">Lorem</option>
-                          <option value="1">Lorem</option>
-                          <option value="2">Lorem</option>
-                          <option value="3">Lorem</option>
-                        </select> -->
 													<select id="bussDistrict" name="bussDistrict"
 														class="form-control" onchange="getCity2(this.value);">
 														<option value="0" selected="selected">Select
@@ -1380,9 +1213,6 @@
 													</select>
 
 												</div>
-
-
-
 												<div class="form-group">
 													<div>
 														<ul class="lab-no">
@@ -1390,13 +1220,6 @@
 															<li class="style-li error-red"></li>
 														</ul>
 													</div>
-													<!--  <select class="form-control" >
-                          <option>value="">Select City</option>
-                          <option value="0">Lorem</option>
-                          <option value="1">Lorem</option>
-                          <option value="2">Lorem</option>
-                          <option value="3">Lorem</option>
-                        </select> -->
 													<cf:select path="bussCity" id="bussCity"
 														class="form-control">
 														<cf:option value="0" label="Select City" />
