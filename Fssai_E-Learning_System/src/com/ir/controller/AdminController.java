@@ -118,7 +118,6 @@ public class AdminController {
 	
 	@RequestMapping(value = "/stateMasterSave", method =  RequestMethod.POST )
 	public String stateSave(@Valid @ModelAttribute("stateMaster") StateForm stateForm,BindingResult result, Model model , HttpSession session){
-	
 		if (((Long) session.getAttribute("LAST_PLACE_KEY"))!=null && ((Long) session.getAttribute("LAST_PLACE_KEY")).equals(PLACE_KEY)) {
 			return "redirect:stateMaster.fssai";
 			}
@@ -200,6 +199,16 @@ public class AdminController {
 			return "districtMaster";
 		}	
 	}
+	
+	@RequestMapping(value = "/districtMasterSave", method = RequestMethod.GET )
+	public String showdistrictMasterSave() {
+		
+		PLACE_KEY = (new Random()).nextLong();
+		System.out.println("PLACE_KEY "+PLACE_KEY);
+		return "redirect:districtMaster.fssai";
+		}
+	
+	
 	@RequestMapping(value="/cityMaster" , method=RequestMethod.GET)
 	public String districtMaster(@ModelAttribute("cityMaster") CityForm cityForm){
 		return "cityMaster";
@@ -222,6 +231,8 @@ public class AdminController {
 			return "cityMaster";
 		}	
 	}
+	
+	
 	@RequestMapping(value="/regionMappingMaster" , method=RequestMethod.GET)
 	public String districtMaster(@ModelAttribute("regionMappingMaster") RegionForm regionForm){
 		return "regionMappingMaster";
@@ -608,6 +619,13 @@ public class AdminController {
 	
 	@RequestMapping(value="/saveFeedbackMaster" , method=RequestMethod.POST)
 	public String saveFeedbackMaster(@ModelAttribute("feedbackMaster") FeedbackMaster feedbackMaster, HttpSession session,  BindingResult result,Model model ){
+		if (((Long) session.getAttribute("LAST_PLACE_KEY"))!=null && ((Long) session.getAttribute("LAST_PLACE_KEY")).equals(PLACE_KEY)) {
+			return "redirect:feedbackMaster.fssai";
+			}
+		
+			session.setAttribute("LAST_PLACE_KEY", PLACE_KEY);
+		
+		
 		if(result.hasErrors()){
 			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
 			System.out.println(result.getErrorCount());
@@ -619,6 +637,13 @@ public class AdminController {
 		return "feedbackMaster";
 	
 	}
+	
+	@RequestMapping(value = "/saveFeedbackMaster", method = RequestMethod.GET )
+	public String showFeedbackMaster() {
+		
+		PLACE_KEY = (new Random()).nextLong();
+		return "redirect:feedbackMaster.fssai";
+		}
 	
 	// Rishi
 	@RequestMapping(value="/contactTrainingPTSave" , method=RequestMethod.POST)

@@ -43,6 +43,7 @@ function editCourseContentData(){
 	var total = mccId+","+contentLocation+","+courseType+","+courseName+","+modeOfTraining+","+contentType+","+contentLink+","+contentName;
 	$.ajax({
 	type: 'post',
+	async:false,
 	url: 'editCourseContentDataMCC.jspp?'+ total,
 	data: {
 		   user_name:name,
@@ -51,6 +52,7 @@ function editCourseContentData(){
 			   $( '#name_status' ).html(response);
 		  }
 	});
+	location.reload();
 return result;
 }
 
@@ -65,7 +67,7 @@ function searchManageCourseContent(indicator){
 		var result="";
 		var total ="";
 		if(indicator.match('ALL')){
-			total = "contentLocation=0&courseType=0&courseName=&modeOfTraining=&contentType=0";
+			total = "ALL";//"contentLocation=0&courseType=0&courseName=&modeOfTraining=&contentType=0";
 		}else{
 			total = "contentLocation="+contentLocation+"&courseType="+courseType+"&courseName="+courseName+"&modeOfTraining="+modeOfTraining+"&contentType="+contentType+"";
 		}
@@ -82,7 +84,7 @@ function searchManageCourseContent(indicator){
 		$.each(mainData1 , function(i , obj)
 		{
 
-			$('#newTable').append('<tr id="tableRow"><td>'+ j++ +'</td><td>'+ obj[3]+'</td><td>'+ obj[1] +'</td><td>'+ obj[0] +'</td><td>'+ obj[4] +'</td><td>'+ obj[5] +'</td><td><input type="hidden" id="contentNameLabel" value="'+ obj[6] +'" />'+  obj[6] +'</td><td><input type="hidden" id="contentLinkLabel" value="'+ obj[2] +'" />'+ obj[2] +'</td><td><input type="hidden" id="idLabel'+i+'" value="'+ obj[7] +'" /> <a href="#" onClick="editCourseContent('+i+');">edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onClick="deleteCourseContent('+i+');">delete</a></td></tr>');
+			$('#newTable').append('<tr id="tableRow"><td>'+ j++ +'</td><td>'+ obj[3]+'</td><td>'+ obj[1] +'</td><td>'+ obj[0] +'</td><td>'+ obj[4] +'</td><td>'+ obj[5] +'</td><td><input type="hidden" id="contentNameLabel" value="'+ obj[6] +'" />'+  obj[6] +'</td><td><input type="hidden" id="contentLinkLabel" value="'+ obj[2] +'" />'+ obj[2] +'</td><td><input type="hidden" id="idLabel'+i+'" value="'+ obj[7] +'" /> <a href="#" onClick="editCourseContent(\''+obj[3]+'\',\''+obj[1]+'\',\''+obj[0]+'\',\''+obj[4]+'\',\''+obj[5]+'\',\''+obj[2]+'\',\''+obj[6]+'\',\''+i+'\');">edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onClick="deleteCourseContent('+i+');">delete</a></td></tr>');
 		});
 		}
 		});
@@ -90,40 +92,60 @@ function searchManageCourseContent(indicator){
 	}
 }
 
-function editCourseContent(i){
+function editCourseContent(location , courseType , courseName ,modeOfTraining , contentType ,link ,contentName,i){
+	
+	console.log("-----> "+location + " "+courseType + " " +courseName + " "+modeOfTraining + " "+contentType + " "+contentName + " "+link);
 	document.getElementById('mccId').value =  $("#idLabel"+i).val();
 	document.getElementById('btnUpdate').style.display = 'block';
 	document.getElementById('btnCreate').style.display = 'none';
-	document.getElementById('contentLink').value = document.getElementById('contentLinkLabel').value;
-	document.getElementById('contentName').value = document.getElementById('contentNameLabel').value;
+	$("#contentLocation").val(location);
+	$("#courseType option").filter(function() {
+	    return this.text == courseType; 
+	}).attr('selected', true);
+	$("#courseName option").filter(function() {
+	    return this.text == courseName; 
+	}).attr('selected', true);
+	$("#modeOfTraining").val(modeOfTraining);
+	$("#contentType").val(contentType);
+	$("#contentName").val(contentName);
+	$("#contentLink").val(link);
+	
 	//$(contentLocation).attr("readOnly", "true");
 }
 
 function deleteCourseContent(i){
 	var contentLink =  $("#contentLinkLabel").val();
 	var contentName = $("#contentNameLabel").val();
-	var id = $("#idLabel"+i).val();
-	document.getElementById('btnUpdate').style.display = 'none';
-	document.getElementById('btnCreate').style.display = 'block';
-	$(".displayNone").css("display","block");
-	 {
-		var result="";
-		var total = id;
-		$('#newTable').hide();	
-		$.ajax({
-		type: 'post',
-		url: 'deleteCourseContent.jspp?'+ total,
-		data: {
-		       user_name:name,
-		      },
-		      success: function (response) {
-		       $( '#name_status' ).html(response);
-		      }
-		      });
-		//alert (result);
-	return true;
+	
+	 var result = confirm("Do you want to delete this record?");
+	 
+	 if(result){
+		 var id = $("#idLabel"+i).val();
+			document.getElementById('btnUpdate').style.display = 'none';
+			document.getElementById('btnCreate').style.display = 'block';
+			$(".displayNone").css("display","block");
+			 {
+				var result="";
+				var total = id;
+				$('#newTable').hide();	
+				$.ajax({
+				type: 'post',
+				async : false,
+				url: 'deleteCourseContent.jspp?'+ total,
+				data: {
+				       user_name:name,
+				      },
+				      success: function (response) {
+				       $( '#name_status' ).html(response);
+				      }
+				      });
+				OnStart();
+			return true;
+			
+			}
+ 
+	 }
 	}
-}
 
 </script>
 <cf:form action="manageCourseContentSearch.fssai" name="myForm" method="POST" commandName="manageCourseContent" onsubmit="return validateFields();"> 
@@ -267,8 +289,8 @@ function deleteCourseContent(i){
                                               
                                                 
   
-                                                    <button id="btnCreate" class="btn login-btn">Create</button>
-                                              
+                                                    <button id="btnCreate"  class="btn login-btn">Create</button>
+                                              		<a href="#testt" class="btn login-btn" onclick="searchManageCourseContent('SELECTED');">Search</a>
                                                 
 <a href="#" onclick="editCourseContentData();" id="btnUpdate" style="display: none; padding: 6px 7px; width: 20%; margin-bottom: 0; font-size: 14px; 
 font-weight: normal; line-height: 1.42857143; text-align: center; white-space: nowrap; vertical-align: middle;
@@ -279,7 +301,7 @@ font-weight: normal; line-height: 1.42857143; text-align: center; white-space: n
 
 
                                 
-<a href="#testt" class="pull-right" onclick="searchManageCourseContent('SELECTED');">Search</a>   
+   
                                             
                                                 </div>
                                             </div>

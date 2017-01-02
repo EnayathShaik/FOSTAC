@@ -123,8 +123,10 @@ public class SearchManageCourseContent extends HttpServlet {
 		String name = (request.getQueryString());
 		System.out.println("passing name   :" + name);
 		String[] totalConnected = name.split("&");
-		String contentLocation , courseType,courseName,modeOfTraining,contentType;
+		String contentLocation="" , courseType="",courseName="",modeOfTraining="",contentType="";
+		// "contentLocation=0&courseType=0&courseName=&modeOfTraining=&contentType=0";
 		
+		if(!name.equalsIgnoreCase("ALL")){
 		contentLocation = (totalConnected[0].split("="))[1];
 		courseType = (totalConnected[1].split("="))[1];
 		courseName = (totalConnected[2].split("="))[1];
@@ -137,17 +139,26 @@ public class SearchManageCourseContent extends HttpServlet {
 		System.out.println("modeOfTraining    "+   modeOfTraining);
 		System.out.println("contentType    "+   contentType);
 		
-		
+		}
 		Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
+		String sql = null;
 		
-		String sql = "select cn.coursename , ct.coursetype , mcm.contentlinkinput , mcm.contentlocationinput, "+
+		
+		if(!name.equalsIgnoreCase("ALL"))
+		 sql= "select cn.coursename , ct.coursetype , mcm.contentlinkinput , mcm.contentlocationinput, "+
 				"mcm.modeoftraininginput , mcm.contenttypeinput , mcm.contentnameinput , mcm.managecoursecontentid from ManageCoursecontent as mcm "+
 				"inner join coursetype as ct on ct.coursetypeid = mcm.coursetypeinput "+
 				"inner join coursename as cn on cn.coursenameid = mcm.coursenameinput "+
 				"where mcm.contentlocationinput = '"+ contentLocation+"' and mcm.coursetypeinput = '"+courseType+"' and mcm.coursenameinput = '"+courseName  +"' and mcm.modeoftraininginput = '"+modeOfTraining+"' and mcm.contenttypeinput = '"+contentType+ "'";
+		else
+			 sql= "select cn.coursename , ct.coursetype , mcm.contentlinkinput , mcm.contentlocationinput, "+
+						"mcm.modeoftraininginput , mcm.contenttypeinput , mcm.contentnameinput , mcm.managecoursecontentid from ManageCoursecontent as mcm "+
+						"inner join coursetype as ct on ct.coursetypeid = mcm.coursetypeinput "+
+						"inner join coursename as cn on cn.coursenameid = mcm.coursenameinput ";	
+		
 		
 		Query query = session.createSQLQuery(sql);
 		/*query.setString(1, contentLocation);
