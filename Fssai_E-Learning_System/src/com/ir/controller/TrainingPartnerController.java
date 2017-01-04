@@ -505,8 +505,6 @@ public class TrainingPartnerController {
 	
 	@RequestMapping(value="/trainingCenterCalenderSave" , method=RequestMethod.POST)
 	public String trainingCalenderSave(@Valid @ModelAttribute("trainingPartnerCalendarForm") TrainingPartnerCalendarForm trainingPartnerCalendarForm ,BindingResult result ,Model model) {
-		System.out.println("kkkkkk == "+trainingPartnerCalendarForm);
-		
 		if(result.hasErrors()){
 			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
 			System.out.println(result.getErrorCount());
@@ -514,14 +512,14 @@ public class TrainingPartnerController {
 			return "trainingpartnertrainingcalendar";
 		}
 		TrainingCalendarForm trainingCalendarForm = new TrainingCalendarForm();
+		trainingPartnerService.setTrainingCalanderDeatils(trainingCalendarForm, trainingPartnerCalendarForm.getLoginId());
 		trainingCalendarForm.setCourseName(trainingPartnerCalendarForm.getSelCourseName());
 		trainingCalendarForm.setCourseType(trainingPartnerCalendarForm.getSelCourseType());
 		trainingCalendarForm.setTrainerName(trainingPartnerCalendarForm.getSelTrainerNames());
 		trainingCalendarForm.setTrainingDate(trainingPartnerCalendarForm.getSeltraineeDate());
 		trainingCalendarForm.setTrainingTime(trainingPartnerCalendarForm.getSeltrainingtime());
-		
-		System.out.println(trainingCalendarForm.getTrainingDate()+"   "+ trainingCalendarForm.getTrainingTime());
 		String trainingCalendar = trainingPartnerService.trainingCalendarForm(trainingCalendarForm);
+		
 		if(trainingCalendar.equalsIgnoreCase("created")){
 			model.addAttribute("created", "Calender saved successfully !!!");
 		}else{
@@ -556,4 +554,9 @@ public class TrainingPartnerController {
 		  }
 	 }
 	*/
+	
+	
+	
+	
+	
 }

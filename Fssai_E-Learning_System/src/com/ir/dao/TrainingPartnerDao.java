@@ -39,12 +39,12 @@ public interface TrainingPartnerDao {
 	public List<StringStringBean> getModeOfTrainingList();
 	public List<PostVacancyTrainingCenter> getAppliedCount(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
 	public Utility editApplicationStatus(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
-	public void updateApplicationStatusForEnrolledVacancy(
-			PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
+	public void updateApplicationStatusForEnrolledVacancy(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
 	public PostVacancyTrainingCenterBean getApplicationStatusBean(String loginId,int coursename, int cousertype);
 	public void updateUpcomingTrainingsStatus(int id);
 	public List<PostVacancyTrainingCenterBean> getTrainingCalenderList(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
 	public List<TrainingPartnerSearch> getTrainingPartnerDetails(int trainingPartnerId);
 	public String trainingCalendarForm(TrainingCalendarForm trainingCalendarForm);
+	public void setTrainingCalanderDeatils(TrainingCalendarForm trainingCalendarForm , String loginId);
 
 }

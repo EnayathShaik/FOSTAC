@@ -127,7 +127,7 @@
 	}
 
 	function showDetails() {
-		alert('data');
+		//alert('data');
 		var courseType = $("#selCourseType").val();
 		var courseName = $("#selCourseName").val();
 		var trainingDate = $("#trainingDate").val().replace("-", "/").replace(
@@ -195,7 +195,7 @@
 								<a href="#menu-toggle" class="vertical-menu-position-btn"
 									id="menu-toggle"> <i class="fa fa-bars"></i> <span
 									class="orange-font">Welcome :
-										${loginUser.loginDetails.loginId}</span>
+										${loginUserS.loginDetails.loginId}</span>
 								</a>
 							</div>
 						</div>
@@ -318,6 +318,9 @@
 														</div>
 														<input type="time" name="seltrainingtime"
 															id="seltrainingtime" class="form-control">
+															
+															<input type="hidden" name="loginId"
+															id="loginId" value="${loginUserS.loginDetails.loginId}" class="form-control">
 													</div>
 													<input type="submit" onclick="return saveDetails();"
 														style="margin-top: 20px;"

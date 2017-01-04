@@ -130,4 +130,11 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 		String trainingCalendar = trainingPartnerDAO.trainingCalendarForm(trainingCalendarForm);
 		return trainingCalendar;
 	}
+	
+	@Override
+	public void setTrainingCalanderDeatils(TrainingCalendarForm trainingCalendarForm , String loginId) {
+		trainingPartnerDAO.setTrainingCalanderDeatils(trainingCalendarForm , loginId);
+	}
+	
+	
 }

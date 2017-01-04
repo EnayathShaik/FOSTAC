@@ -39,4 +39,5 @@ public interface TrainingPartnerService {
 	public List<PostVacancyTrainingCenterBean> getTrainingCalenderList(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
 	public List<TrainingPartnerSearch> getTrainingPartnerDetails(int trainingPartnerId);
 	String trainingCalendarForm(TrainingCalendarForm trainingCalendarForm);
+	public void setTrainingCalanderDeatils(TrainingCalendarForm trainingCalendarForm , String loginId);
 }

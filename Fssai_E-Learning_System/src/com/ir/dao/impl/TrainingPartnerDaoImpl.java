@@ -3,10 +3,12 @@ package com.ir.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -485,5 +487,28 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			return "error";
 		}	
 	}
+	
+	
+	public void setTrainingCalanderDeatils(TrainingCalendarForm trainingCalendarForm , String loginName){
+		
+		Session session = sessionFactory.openSession();
+		String sql = "select personalinformationtrainingpartnerid , trainingpartnername   from personalinformationtrainingpartner ptp inner join  logindetails ld on ptp.logindetails = ld.id where ld.loginid ='"+loginName+"'";
+		System.out.println("sql "+sql);
+		Query query = session.createSQLQuery(sql);
+		List<Object[]> status = query.list();
+		try{
+			if(status.size()>0){
+				for(Object[] s : status){
+				trainingCalendarForm.setTrainingCenter((int) s[0]);
+				trainingCalendarForm.setTrainingPartner((int)s[1]);
+				}
+			}	
+		}catch(Exception e){
+			System.out.println("e "+e.getMessage());
+		}
+		
+		session.close();
+	}
+	
 
 }
