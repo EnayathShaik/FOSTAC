@@ -46,11 +46,44 @@ public class SearchManageCourseContent extends HttpServlet {
 		String[] totalConnected = name.split("&");
 		String contentLocation , courseType,courseName,modeOfTraining,contentType;
 		
+		try{
 		contentLocation = (totalConnected[0].split("="))[1];
+		}
+		catch(Exception e)
+		{
+			contentLocation = "%" ;
+		}
+		
+		try{
 		courseType = (totalConnected[1].split("="))[1];
+		}
+		catch(Exception e)
+		{
+			courseType = "%" ;	
+		}
+		
+		try{
 		courseName = (totalConnected[2].split("="))[1];
-		modeOfTraining = (totalConnected[3].split("="))[1];
-		contentType = (totalConnected[4].split("="))[1];
+		}
+		catch(Exception e)
+		{
+			courseName = "%" ;	
+		}
+		try{
+			modeOfTraining = (totalConnected[3].split("="))[1];	
+		}
+		catch(Exception e)
+		{
+			modeOfTraining = "%" ;
+		}
+		try{
+			contentType = (totalConnected[4].split("="))[1];	
+		}
+		catch(Exception e)
+		{
+			contentType = "%" ;	
+		}
+		
 		
 		System.out.println("contentLocation  "+contentLocation);
 		System.out.println("courseType   "+courseType);
@@ -68,7 +101,7 @@ public class SearchManageCourseContent extends HttpServlet {
 				"mcm.modeoftraininginput , mcm.contenttypeinput , mcm.contentnameinput from ManageCoursecontent as mcm "+
 				"inner join coursetype as ct on ct.coursetypeid = mcm.coursetypeinput "+
 				"inner join coursename as cn on cn.coursenameid = mcm.coursenameinput "+
-				"where mcm.contentlocationinput = '"+ contentLocation+"' and mcm.coursetypeinput = '"+courseType+"' and mcm.coursenameinput = '"+courseName  +"' and mcm.modeoftraininginput = '"+modeOfTraining+"' and mcm.contenttypeinput = '"+contentType+ "'";
+				"where mcm.contentlocationinput = '"+ contentLocation+"%' and mcm.coursetypeinput = '"+courseType+"%' and mcm.coursenameinput = '"+courseName  +"%' and mcm.modeoftraininginput = '"+modeOfTraining+"%' and mcm.contenttypeinput = '"+contentType+ "%'";
 		
 		Query query = session.createSQLQuery(sql);
 		/*query.setString(1, contentLocation);
@@ -127,11 +160,47 @@ public class SearchManageCourseContent extends HttpServlet {
 		// "contentLocation=0&courseType=0&courseName=&modeOfTraining=&contentType=0";
 		
 		if(!name.equalsIgnoreCase("ALL")){
-		contentLocation = (totalConnected[0].split("="))[1];
-		courseType = (totalConnected[1].split("="))[1];
-		courseName = (totalConnected[2].split("="))[1];
-		modeOfTraining = (totalConnected[3].split("="))[1];
-		contentType = (totalConnected[4].split("="))[1];
+			
+			try{
+			contentLocation = (totalConnected[0].split("="))[1];
+			}
+			catch(Exception e)
+			{
+				contentLocation = "%" ;
+			}
+			
+			try{
+			courseType = (totalConnected[1].split("="))[1];
+			}
+			catch(Exception e)
+			{
+				courseType = "%" ;	
+			}
+			
+			try{
+			courseName = (totalConnected[2].split("="))[1];
+			}
+			catch(Exception e)
+			{
+				courseName = "%" ;	
+			}
+			try{
+				modeOfTraining = (totalConnected[3].split("="))[1];	
+			}
+			catch(Exception e)
+			{
+				modeOfTraining = "%" ;
+			}
+			try{
+				contentType = (totalConnected[4].split("="))[1];	
+			}
+			catch(Exception e)
+			{
+				contentType = "%" ;	
+			}
+			
+			
+		
 		
 		System.out.println("contentLocation  "+contentLocation);
 		System.out.println("courseType   "+courseType);
@@ -152,7 +221,7 @@ public class SearchManageCourseContent extends HttpServlet {
 				"mcm.modeoftraininginput , mcm.contenttypeinput , mcm.contentnameinput , mcm.managecoursecontentid from ManageCoursecontent as mcm "+
 				"inner join coursetype as ct on ct.coursetypeid = mcm.coursetypeinput "+
 				"inner join coursename as cn on cn.coursenameid = mcm.coursenameinput "+
-				"where mcm.contentlocationinput = '"+ contentLocation+"' and mcm.coursetypeinput = '"+courseType+"' and mcm.coursenameinput = '"+courseName  +"' and mcm.modeoftraininginput = '"+modeOfTraining+"' and mcm.contenttypeinput = '"+contentType+ "'";
+				"where cast(mcm.contentlocationinput as varchar) like '"+ contentLocation+"' and cast(mcm.coursetypeinput as varchar) like '"+courseType+"' and cast(mcm.coursenameinput as varchar) like '"+courseName  +"' and cast(mcm.modeoftraininginput as varchar) like '"+modeOfTraining+"' and cast(mcm.contenttypeinput as varchar) like '"+contentType+ "'";
 		else
 			 sql= "select cn.coursename , ct.coursetype , mcm.contentlinkinput , mcm.contentlocationinput, "+
 						"mcm.modeoftraininginput , mcm.contenttypeinput , mcm.contentnameinput , mcm.managecoursecontentid from ManageCoursecontent as mcm "+

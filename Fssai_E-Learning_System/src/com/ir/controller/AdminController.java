@@ -424,8 +424,10 @@ public class AdminController {
 		String manageCourseContentSearch= adminService.manageCourseContentSearch(manageCourseContentForm);
 		if(manageCourseContentSearch.equalsIgnoreCase("created")){
 			model.addAttribute("created" , "Data inserted successfully !!!");
+			model.addAttribute("manageCourseContent", new ManageCourseContentForm());
 		}else{
-			model.addAttribute("created" , "Data already exists !!!");
+			model.addAttribute("created" , "Data updated successfully !!!");
+			model.addAttribute("manageCourseContent", new ManageCourseContentForm());
 		}
 		return "manageCourseContent";
 	}

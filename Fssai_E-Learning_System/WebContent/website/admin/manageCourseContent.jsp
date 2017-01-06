@@ -28,6 +28,29 @@ function validateFields() {
 	return true;
 }
 </script>
+<script>
+function getContentName(val)
+{
+	console.log("val "+val);
+	$.ajax({
+	      type: 'post',
+	      
+	      url: 'loadCourseName.jspp?'+ val,
+	      success: function (response) {      
+	      var mainData1 = jQuery.parseJSON(response);
+	    
+	      $('#courseName option').remove();
+	     $('#courseName').append('<option value="0" label="Select Course Name" />');
+	      $.each(mainData1 , function(i , obj)
+	  		{                                                                                                                                         
+	  				$('#courseName').append('<option value='+obj[0]+'>'+obj[1]+'</option>');		
+	  		});
+	      }
+	      });     
+}
+
+
+</script>
 <script type='text/javascript'>
 function editCourseContentData(){
 	var mccId  =  document.getElementById('mccId').value;
@@ -62,6 +85,17 @@ function searchManageCourseContent(indicator){
 	var courseName = $("#courseName").val();
 	var modeOfTraining = $("#modeOfTraining").val();
 	var contentType =  $("#contentType").val(); 
+
+	if(contentLocation==0)
+		contentLocation="";
+	if(courseType==0)
+		courseType="";
+	if(courseName==0)
+		courseName="";
+	if(modeOfTraining==0)
+		modeOfTraining="";
+	if(contentType==0)
+		contentType="";
 	$(".displayNone").css("display","block");
 		 {
 		var result="";
@@ -93,7 +127,7 @@ function searchManageCourseContent(indicator){
 }
 
 function editCourseContent(location , courseType , courseName ,modeOfTraining , contentType ,link ,contentName,i){
-	
+	$('.error-red').html('');
 	console.log("-----> "+location + " "+courseType + " " +courseName + " "+modeOfTraining + " "+contentType + " "+contentName + " "+link);
 	document.getElementById('mccId').value =  $("#idLabel"+i).val();
 	document.getElementById('btnUpdate').style.display = 'block';
@@ -114,6 +148,7 @@ function editCourseContent(location , courseType , courseName ,modeOfTraining , 
 }
 
 function deleteCourseContent(i){
+	$('.error-red').html('');
 	var contentLink =  $("#contentLinkLabel").val();
 	var contentName = $("#contentNameLabel").val();
 	
@@ -192,6 +227,7 @@ function deleteCourseContent(i){
                                                         </ul>
                                                     </div>
 <cf:select path="contentLocation" class="form-control">
+<cf:option value="0" label="Content Location" />
 <cf:option value="Website" label="Website" />
 <cf:option value="Application" label="Application" />
 </cf:select>
@@ -205,6 +241,7 @@ function deleteCourseContent(i){
                                                         </ul>
                                                     </div>
 <cf:select path="courseName" class="form-control">
+<cf:option value="0" label="Select Course Name" />
 <cf:options items="${courseNameList}" itemValue="coursenameid" itemLabel="coursename"/>
 </cf:select> 
                                                 </div>
@@ -218,7 +255,9 @@ function deleteCourseContent(i){
                                                             </li>
                                                         </ul>
                                                     </div>
+
 <cf:select path="contentType" class="form-control">
+<cf:option value="0" label="Select Content Type" />
 <cf:option value="PPTs" label="PPTs" />
 <cf:option value="Videos" label="Videos" />
 <cf:option value="StudyMaterial" label="Study Material" />
@@ -233,7 +272,11 @@ function deleteCourseContent(i){
                                                             <cf:errors path="contentName" cssClass="error" /></li>
                                                         </ul>
                                                     </div>
-<cf:input path="contentName" class="form-control" />
+<%-- <cf:input path="contentName" class="form-control" /> --%>
+<cf:select path="contentName" class="form-control" >
+											<cf:option value="0" label="Select Content Name" />
+											 <cf:options items="${contentNameList}" itemValue="contentName" itemLabel="contentDesc"/> 
+											</cf:select>
                                                 </div>                                                
                                                 
                                             </div> <!-- left side ends -->
@@ -249,7 +292,9 @@ function deleteCourseContent(i){
                                                             <li class="style-li error-red"></li>
                                                         </ul>
                                                     </div>
-<cf:select path="courseType" class="form-control">
+
+<cf:select path="courseType" class="form-control" onchange="getContentName(this.value);">
+<cf:option value="0" label="Select Content Type" />
 <cf:options items="${courseTypeList}" itemValue="CourseTypeId" itemLabel="CourseType"/>
 </cf:select>
                                                 </div>
@@ -262,6 +307,7 @@ function deleteCourseContent(i){
                                                         </ul>
                                                     </div>
 <cf:select path="modeOfTraining" class="form-control">
+<cf:option value="0" label="Select Mode of Training" />
 <cf:option value="Online" label="Online" />
 <cf:option value="Classroom" label="Classroom" />
 </cf:select>
