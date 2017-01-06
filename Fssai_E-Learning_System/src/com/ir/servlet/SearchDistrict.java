@@ -64,7 +64,7 @@ public class SearchDistrict extends HttpServlet {
 		if(districtName.equals("%") ){
 			System.out.println("lkjkj");
 			String sql = "select  s.stateName , d.districtName  , d.districtId  from district as d inner join state as s on s.stateid = d.stateid where "+
-					 " s.stateId='"+stateId+"'";
+					 " s.stateId='"+stateId+"' or d.districtName='"+districtName+"%'";
 			Query query = session.createSQLQuery(sql);
 			List list = query.list();
 			System.out.println(list.size());

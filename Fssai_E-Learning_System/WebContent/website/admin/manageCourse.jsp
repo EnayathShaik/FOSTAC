@@ -5,7 +5,7 @@
 
 <script type='text/javascript'>
 function OnStart(){
-	searchManageCourse();
+	searchManageCourse('ALL');
 }
 
 window.onload = OnStart;
@@ -41,11 +41,17 @@ function validateFields() {
 	return( true );
 }
 
-function searchManageCourse(){
+function searchManageCourse(indicator){
 // 	alert('lll');
 	var courseType =  $("#courseType").val();
 	var courseName = $("#courseName").val();
 	var freePaid = $("#freePaid").val();
+	var duration = $("#duration").val();
+	if(courseType==0)
+		courseType="";
+	if(freePaid==0)
+		freePaid="";
+		
 	var online = document.getElementById('online').checked;
 	
 	var classroom= document.getElementById('classroom').checked; 
@@ -54,7 +60,12 @@ function searchManageCourse(){
 	$(".displayNone").css("display","block");
 	 {
 		var result="";
-		var total = "courseType="+courseType+"&courseName="+courseName+"&freePaid="+freePaid+"&status="+status+"&online="+online+"&classroom="+classroom;
+		var total = "";
+		if(indicator.match('ALL')){
+			total = "ALL";//"contentLocation=0&courseType=0&courseName=&modeOfTraining=&contentType=0";
+		}else{
+		total = "courseType="+courseType+"&courseName="+courseName+"&freePaid="+freePaid+"&status="+status+"&duration="+duration;
+		}
 		$.ajax({
 		type: 'post',
 		url: 'searchManageCourse.jspp?'+ total,
@@ -68,12 +79,12 @@ function searchManageCourse(){
 		$.each(mainData1 , function(i , obj)
 		{
 			var stat ;
-			if(obj[4] == 'A'){
+			if(obj[5] == 'A'){
 				stat = 'Active';
 			}else{
 				stat ='In-Active';
 			}
-			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><input type="hidden" id="courseTypeL'+i+'" value="'+obj[0]+'">'+obj[0]+'</td><td><input type="hidden" id="courseNameL'+i+'" value="'+obj[1]+'">'+obj[1]+'</td><td><input type="hidden" id="durationL'+i+'" value="'+obj[2]+'">'+obj[2]+'</td><td><input type="hidden" id="freepaidL'+i+'" value="'+obj[3]+'">'+obj[3]+'</td><td><input type="hidden" id="onlineL'+i+'" value="'+obj[6]+'">'+obj[6]+'</td><td><input type="hidden" id="classroomL'+i+'" value="'+obj[7]+'">'+obj[7]+'</td><td><input type="hidden" id="statusL'+i+'" value="'+stat+'">'+stat+'</td><td><input type="hidden" id="cnid'+i+'" value="'+obj[5]+'"><a href="#" onClick="editManageCourse('+i+');">edit</a> </td></tr>');	
+			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><input type="hidden" id="courseTypeVal'+i+'" value="'+obj[0]+'">'+obj[0]+'<td><input type="hidden" id="courseTypeL'+i+'" value="'+obj[1]+'">'+obj[1]+'</td><td><input type="hidden" id="courseNameL'+i+'" value="'+obj[2]+'">'+obj[2]+'</td><td><input type="hidden" id="durationL'+i+'" value="'+obj[3]+'">'+obj[3]+'</td><td><input type="hidden" id="freepaidL'+i+'" value="'+obj[4]+'">'+obj[4]+'</td><td><input type="hidden" id="onlineL'+i+'" value="'+obj[7]+'">'+obj[7]+'</td><td><input type="hidden" id="classroomL'+i+'" value="'+obj[8]+'">'+obj[8]+'</td><td><input type="hidden" id="statusL'+i+'" value="'+stat+'">'+stat+'</td><td><input type="hidden" id="cnid'+i+'" value="'+obj[6]+'"><a href="#" onClick="editManageCourse(\''+i+'\',\''+obj[0]+'\');">edit</a> </td></tr>');	
 		});
 		}
 		});
@@ -83,8 +94,9 @@ function searchManageCourse(){
 
 </script>
 <script>
-function editManageCourse(i){
+function editManageCourse(i,courseType){
 	var c =  $("#cnid"+i).val();
+	$('.error-red').html('');
 	document.getElementById('idHidden').value = c;
 	document.getElementById('hiddenCourseType').value =  $("#courseTypeL"+i).val();
 	var courseNameLL =  $("#courseNameL"+i).val();
@@ -93,9 +105,10 @@ function editManageCourse(i){
 	var onlineLL =  $("#onlineL"+i).val();
 	var classroomLL =  $("#classroomL"+i).val();
 	var statusLL =  $("#statusL"+i).val();
+	document.getElementById('courseType').value = courseType;
 	document.getElementById('btnUpdate').style.display = 'block';
 	document.getElementById('btnCreate').style.display = 'none';
-	//$("#courseType").attr("disabled", "disabled");
+
 	document.getElementById('courseName').value = courseNameLL; 
 	document.getElementById('duration').value = durationLL;
 	if(freepaidLL=="free"){
@@ -128,6 +141,7 @@ function editManageCourse(i){
 </script>
 <script>
 function editManageCourseData(){
+	$('.error-red').html('');
 	var courseType = $("#hiddenCourseType").val(); 
 	var courseName = $("#courseName").val();
 	var duration = $("#duration").val();
@@ -157,8 +171,10 @@ function editManageCourseData(){
 		       $( '#name_status' ).html(response);
 		      }
 		      });
-	return true;
-	searchManageCourse();
+	 	location.reload();
+	 	return true;
+	
+	//searchManageCourse();
 	
 }
 
@@ -225,11 +241,12 @@ function deleteManageCourse(){
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Course Type:</strong></li>
                                                             <li class="style-li error-red">
-                                                            <span id="name_status"> </span>
+                                                            <span id="name_status" class = "clear-label"> </span>
                                                             ${created }</li>
                                                         </ul>
                                                     </div>
 <cf:select path="courseType" class="form-control">
+<cf:option value="0" label="Select Course" />
 <cf:options items="${courseTypeList}" itemValue="CourseTypeId" itemLabel="CourseType"/>
 </cf:select>
 
@@ -322,7 +339,7 @@ font-weight: normal; line-height: 1.42857143; text-align: center; white-space: n
  -moz-user-select: none; -ms-user-select: none; user-select: none; background-image: none; border: 1px solid transparent;
   background: #ef580d !important; color: #fff; border: 1px solid transparent; transition: all 0.8s linear;">Update</a>
 
-<a href="#testt" class="pull-right" onclick="searchManageCourse();">Search</a>
+<a href="#testt" class="pull-right" onclick="searchManageCourse('SELECTED');">Search</a>
                                                
                                                 </div>
                                             </div>

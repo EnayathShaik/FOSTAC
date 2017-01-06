@@ -113,6 +113,7 @@ function changeStatus(){
 function searchDistrict(){
 	$('.displayNone').css('display', 'block');
 	var stateId =  $("#stateId").val();
+	console.log("stateId"+stateId);
 	var disName =  $("#DistrictName").val();
 	var result="";
 		var total = "stateId="+stateId +"&disName="+disName;

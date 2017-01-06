@@ -9,19 +9,21 @@ window.onload = OnStart;
 </script>
 <script type='text/javascript'>
 
-function editRegion(distid,stateid,regionid,cityid,regionName){
+function editRegion(distid,stateid,regionid,cityid,regionName,status){
 	//$('#cityName').attr('readonly', 'true');
 	document.getElementById('btnUpdate').style.display = 'block';
 	document.getElementById('btnCreate').style.display = 'none';
 	//var c = document.getElementById('statusH').value;
 	
-	document.getElementById('districtId').value = distid;
+	document.getElementById('districtId').value = distid
+	;
 	$("#districtId").trigger("change");
 	document.getElementById('stateId').value = stateid;
 	document.getElementById('RegionidH').value = regionid;
 	
 	document.getElementById('cityId').value = cityid;
 	document.getElementById('regionName').value = regionName;
+	document.getElementById('status').value = status;
 	/* $("#stateId").prop("disabled", true);
 	stateId.options[0].text = stateName;
 	$("#stateId").prop('selectedIndex',0); */
@@ -29,7 +31,13 @@ function editRegion(distid,stateid,regionid,cityid,regionName){
 	/* $("#districtId").prop("disabled", true);
 	$("#cityId").prop("disabled", true); */
 	
-		
+	 if(status=="Active"){
+			$('#status option').remove();
+			$('#status').append('<option value="A" selected="true">Active</option><option value="I">In-active</option>');
+			}else{
+			$('#status option').remove();
+			$('#status').append('<option value="A">Active</option><option value="I"  selected="true">In-active</option>');
+			} 
 }
 
 
@@ -58,7 +66,7 @@ function onLoadRegion(){
 			}else{
 				status = 'In-Active';
 			}
-			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[3]+'</td><td>'+obj[0]+'</td><td>'+obj[4]+'</td><td>'+obj[1]+'</td><td>'+status+'</td><td><a href="#" onclick="editRegion(\''+obj[6]+'\',\''+obj[7]+'\',\''+obj[2]+'\',\''+obj[5]+'\',\''+obj[1]+'\');">edit</a></td></tr>');	
+			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[3]+'</td><td>'+obj[0]+'</td><td>'+obj[4]+'</td><td>'+obj[1]+'</td><td><input type="hidden" id="statusLabel" value="'+status+'">'+status+'</td><td><a href="#" onclick="editRegion(\''+obj[6]+'\',\''+obj[7]+'\',\''+obj[2]+'\',\''+obj[5]+'\',\''+obj[1]+'\',\''+status+'\');">edit</a></td></tr>');	
 		});
 		}
 		}); 
@@ -79,7 +87,7 @@ function editRegionData(){
 	 {
 		var result="";
 		var total = "regionId="+regionId+"&regionName="+regionName+"&status="+status;
-		alert(total);
+		//alert(total);
 		$('#newTable').hide();
 		$.ajax({
 		type: 'post',
@@ -93,8 +101,10 @@ function editRegionData(){
 		      });
 		//alert (result);
 		onLoadRegion();
+		
 	return true;
 	location.reload();
+	onLoadRegion();
 	}
 }
 

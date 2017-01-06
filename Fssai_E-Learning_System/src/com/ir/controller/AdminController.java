@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -67,7 +68,7 @@ public class AdminController {
 	@Autowired
 	@Qualifier("adminService")
 	AdminService adminService; 
-	
+	Long PLACE_KEY;
 	
 	@ModelAttribute("stateList")
 	public List<State> stateList(){
@@ -117,6 +118,12 @@ public class AdminController {
 	
 	@RequestMapping(value = "/stateMasterSave", method = RequestMethod.POST)
 	public String stateSave(@Valid @ModelAttribute("stateMaster") StateForm stateForm,BindingResult result, Model model , HttpSession session){
+		if (((Long) session.getAttribute("LAST_PLACE_KEY"))!=null && ((Long) session.getAttribute("LAST_PLACE_KEY")).equals(PLACE_KEY)) {
+			return "redirect:stateMaster.fssai";
+			}
+		
+			session.setAttribute("LAST_PLACE_KEY", PLACE_KEY);
+		
 		if(result.hasErrors()){
 			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
 			System.out.println(result.getErrorCount());
@@ -126,14 +133,23 @@ public class AdminController {
 		String stateMasterSave = adminService.stateMasterSave(stateForm);
 		if(stateMasterSave.equalsIgnoreCase("created")){
 			model.addAttribute("created"," State insertion successfull !!!");
-			session.setAttribute("created"," State insertion successfull !!!");
+			//session.setAttribute("created"," State insertion successfull !!!");
+			model.addAttribute("stateMaster", new StateForm());
 			return "stateMaster";
 		}else{
 			model.addAttribute("created" , "State already exists in reord !!!");
-			session.setAttribute("created" , "State already exists in reord !!!");
+			//session.setAttribute("created" , "State already exists in reord !!!");
 			return "stateMaster";
 		}	
 	}
+	
+	
+	@RequestMapping(value = "/stateMasterSave", method = RequestMethod.GET )
+	public String showForm() {
+		PLACE_KEY = (new Random()).nextLong();
+		return "redirect:stateMaster.fssai";
+		}
+	
 	
 	@RequestMapping(value="/districtMaster" , method=RequestMethod.GET)
 	public String districtMaster(@ModelAttribute("districtMaster") DistrictForm districtForm , Model model , HttpSession session){
@@ -243,9 +259,11 @@ public class AdminController {
 		String manageCourse1 = adminService.manageCourse(manageCourse);
 		if(manageCourse1.equalsIgnoreCase("created")){
 			model.addAttribute("created" ,"New course inserted successfully !!!");
+			model.addAttribute("manageCourse", new ManageCourse());
 			return "manageCourse";
 		}else{
 			model.addAttribute("created" ,"This course already inserted !!!");
+			model.addAttribute("manageCourse", new ManageCourse());
 			return "manageCourse";
 		}	
 	}
@@ -579,6 +597,13 @@ public class AdminController {
 	
 	@RequestMapping(value="/saveFeedbackMaster" , method=RequestMethod.POST)
 	public String saveFeedbackMaster(@ModelAttribute("feedbackMaster") FeedbackMaster feedbackMaster, HttpSession session,  BindingResult result,Model model ){
+		if (((Long) session.getAttribute("LAST_PLACE_KEY"))!=null && ((Long) session.getAttribute("LAST_PLACE_KEY")).equals(PLACE_KEY)) {
+			return "redirect:feedbackMaster.fssai";
+			}
+		
+			session.setAttribute("LAST_PLACE_KEY", PLACE_KEY);
+		
+		
 		if(result.hasErrors()){
 			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
 			System.out.println(result.getErrorCount());
@@ -590,6 +615,13 @@ public class AdminController {
 		return "feedbackMaster";
 	
 	}
+	
+	@RequestMapping(value = "/saveFeedbackMaster", method = RequestMethod.GET )
+	public String showFeedbackMaster() {
+		
+		PLACE_KEY = (new Random()).nextLong();
+		return "redirect:feedbackMaster.fssai";
+		}
 	
 	// Rishi
 	@RequestMapping(value="/contactTrainingPTSave" , method=RequestMethod.POST)

@@ -46,45 +46,57 @@ public class SearchManageCourse extends HttpServlet {
 		String name = (request.getQueryString());
 		System.out.println("passing name   :" + name);
 		String[] totalConnected = name.split("&");
-		String courseType,courseName , freePaid  , status,online,classroom;
-		
-		courseType = (totalConnected[0].split("="))[1];
-
-		if( (totalConnected[1].split("=")).length == 1){
-			courseName = "%";
-		}else{
-			courseName = (totalConnected[1].split("="))[1].replaceAll("%20", " ").trim();
-		}
-
-		if(totalConnected[2].split("=")[1].equalsIgnoreCase("0")){
-			freePaid = "%";
-		}else{
-			freePaid = (totalConnected[2].split("="))[1];
-		}
-		
-		status = (totalConnected[3].split("="))[1];
+		String courseType="",courseName="" , freePaid ="" , status="",duration = "" ;
+		if(!name.equalsIgnoreCase("ALL")){
 			
-		if(totalConnected[4].split("=")[1].equalsIgnoreCase("false")){
-			online = "%";
-		}else{
-			online = totalConnected[4].split("=")[1];
+			try{
+				courseType = (totalConnected[0].split("="))[1];
+			}
+			catch(Exception e)
+			{
+				courseType ="%" ;
+			}
+			
+			try{
+				courseName = (totalConnected[1].split("="))[1].replaceAll("%20", " ").trim();
+			}
+			catch(Exception e)
+			{
+				courseName = "%";
+			}
+			
+			try{
+				freePaid = (totalConnected[2].split("="))[1];
+			}
+			catch(Exception e)
+			{
+				freePaid = "%";
+			}
+			
+				status = (totalConnected[3].split("="))[1];
+				try{
+					duration =totalConnected[4].split("=")[1];
+				}catch(Exception e){
+					duration = "%";	
+				}
+			
 		}
-		
-		if(totalConnected[5].split("=")[1].equalsIgnoreCase("false")){
-			classroom = "%";
-		}else{
-			classroom = (totalConnected[5].split("="))[1];
-		}
-		
-		CourseName courseName1 = new CourseName();
+			CourseName courseName1 = new CourseName();
 		Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
-		String sql ="select ct.coursetype , cn.coursename , cn.courseduration , cn.paidunpaid ,  cn.status ,cn.coursenameid , cn.online , cn.classroom"+
+		String sql = null;
+		if(!name.equalsIgnoreCase("ALL"))
+		sql ="select cn.coursetypeid,ct.coursetype , cn.coursename , cn.courseduration , cn.paidunpaid ,  cn.status ,cn.coursenameid , cn.online , cn.classroom"+
 					" from coursename as cn inner join coursetype as ct on ct.coursetypeid= cn.coursetypeid "+
-					" where cn.coursetypeid = '"+ Integer.parseInt(courseType) +"' and  upper(cn.coursename) like '"+ courseName.toUpperCase()+"'"+
-					" and status like'"+status+"' and online like'"+online+"' and classroom like'" +classroom+"' and paidunpaid like'"+freePaid+"'";
+					" where cast(cn.coursetypeid as varchar(10)) like '"+courseType+"%' and upper(cn.coursename) like '"+ courseName.toUpperCase()+"%'"+
+					"  and paidunpaid like'"+freePaid+"%' and cn.courseduration like '"+duration+"%' and cn.status like '"+status+"%'  ";
+		
+		else
+		
+			sql ="select cn.coursetypeid,ct.coursetype , cn.coursename , cn.courseduration , cn.paidunpaid ,  cn.status ,cn.coursenameid , cn.online , cn.classroom"+
+						" from coursename as cn inner join coursetype as ct on ct.coursetypeid= cn.coursetypeid " ;
 		
 		Query query = session.createSQLQuery(sql);
 		List<CourseName> list = query.list();

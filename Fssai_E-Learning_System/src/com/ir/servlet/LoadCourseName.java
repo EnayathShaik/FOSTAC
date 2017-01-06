@@ -53,7 +53,7 @@ public class LoadCourseName extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 		String name = (request.getQueryString());
-		System.out.println("passing name   :" + name);
+		System.out.println("passing name  1 :" + name);
 		
 		Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
@@ -61,6 +61,7 @@ public class LoadCourseName extends HttpServlet {
 		Session session = sf.openSession();
 		String sql="select coursenameid , coursename from coursename where coursetypeid = '"+name+"'" ;
 		Query query = session.createSQLQuery(sql);
+		System.out.println("sql>"+sql);
 		List list = query.list();
 		Gson g =new Gson();
 		String newList = g.toJson(list); 

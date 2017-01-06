@@ -43,9 +43,10 @@ public class CheckState extends HttpServlet {
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
-		String sql="select * from State where upper(stateName) like '" + name.replaceAll("%20", " ").toUpperCase() + "'"; 
+		String sql="select * from State where upper(stateName) like '" + name.replaceAll("%20", " ").toUpperCase() + "%'"; 
 		  
 		Query query = session.createSQLQuery(sql);
+		System.out.println("query>"+query);
 		List l = query.list();
 		if(l != null && l.size() > 0){
 			System.out.println("available in data base cannot use");

@@ -21,6 +21,7 @@ function searchCity(indicator){
 			total = "stateId=0&districtName=0&cityName=&status="+status;
 		}else{ 
 			total = "stateId="+stateId +"&districtName="+districtName+"&cityName="+cityName+"&status="+status;
+			console.log("total>"+total)
 		}
 		$.ajax({
 		type: 'post',
@@ -40,7 +41,7 @@ function searchCity(indicator){
 			}else{
 				status = 'In-Active';
 			}
-			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><input type="hidden" id="stateH" value="'+obj[0]+'">'+obj[0]+'</td><td><input type="hidden" id="districtH" value="'+obj[1]+'">'+obj[1]+'</td><td><input type="hidden" id="cityNameH" value="'+obj[2]+'">'+obj[2]+'</td><td><input type="hidden" id="statusH" value="'+obj[3]+'">'+status+'</td><td><input type="hidden" id="id" value="'+obj[4]+'"><a href="#" onclick="editCity(\''+obj[0]+'\',\''+obj[1]+'\',\''+obj[2]+'\',\''+status+'\');">edit</a></td></tr>');	
+			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><input type="hidden" id="stateH" value="'+obj[0]+'">'+obj[0]+'</td><td><input type="hidden" id="districtH" value="'+obj[1]+'">'+obj[1]+'</td><td><input type="hidden" id="cityNameH" value="'+obj[2]+'">'+obj[2]+'</td><td><input type="hidden" id="statusH" value="'+obj[3]+'">'+status+'</td><td><input type="hidden" id="id" value="'+obj[4]+'"><a href="#" onclick="editCity(\''+obj[0]+'\',\''+obj[1]+'\',\''+obj[2]+'\',\''+obj[5]+'\',\''+status+'\');">edit</a></td><td><input type="hidden" id="districtHID" value="'+obj[5]+'"></tr>');	
 		});
 		}
 		});
@@ -48,23 +49,29 @@ function searchCity(indicator){
 	}
 }
 
-function editCity(state , district , city , status){
+function editCity(state , district , city ,districtHid ,status){
 	$('.error-red').html('');
+	 document.getElementById('btnUpdate').style.display = 'block';
+	 document.getElementById('btnCreate').style.display = 'none';
+		
 	//$('#cityName').attr('readonly', 'true');
 	console.log("state "+state);
+	
 	$("#stateId option").filter(function() {
 	    return this.text == state; 
 	}).attr('selected', true);
 	//stateId.options[0].text = state;	
-	$("#stateId").trigger("change");
+	//$("#stateId").trigger("change");
 	$("#cityName").val(city);
 	
+	 document.getElementById('districtId').value = districtHid;
 	$("#status option").filter(function() {
 	    return this.text == status; 
 	}).attr('selected', true);
 	
-	 document.getElementById('btnUpdate').style.display = 'block';
-	document.getElementById('btnCreate').style.display = 'none';
+	
+	$(".displayNone").css("display","block");
+	$("#btnUpdate").css("display","block");
 	/*var a = document.getElementById('stateH').value;
 	var b = document.getElementById('districtH').value;
 	var c = document.getElementById('statusH').value;
@@ -275,7 +282,7 @@ function validateFields() {
                                                     </div>
 											<cf:select path="districtId" class="form-control" >
 											<cf:option value="0" label="Select District" />
-											<%-- <cf:options items="${districtList}" itemValue="districtId" itemLabel="districtName"/> --%>
+											 <cf:options items="${districtList}" itemValue="districtId" itemLabel="districtName"/> 
 											</cf:select>
                                                 </div>
                                                <div class="form-group">

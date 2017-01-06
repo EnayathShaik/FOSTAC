@@ -234,7 +234,7 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public String regionMasterSave(RegionForm regionForm) {
 		Session session = sessionFactory.openSession();
-		String sql = "select * from region where regionname = '"+regionForm.getRegionName()+"' and districtid = '"+regionForm.getDistrictId()+"'";
+		String sql = "select * from region where regionname = '"+regionForm.getRegionName()+"' and districtid = '"+regionForm.getDistrictId()+"' and status = '"+regionForm.getStatus()+"'";
 		Query query = session.createSQLQuery(sql);
 		List l = query.list();
 		Integer stateId = null ;
@@ -247,6 +247,7 @@ public class AdminDAOImpl implements AdminDAO {
 			region.setDistrictId(regionForm.getDistrictId());
 			region.setCityId(regionForm.getCityId());
 			region.setStateId(regionForm.getStateId());
+			region.setStatus(regionForm.getStatus());
 			stateId = (Integer)session.save(region);
 			tx.commit();
 			session.close();

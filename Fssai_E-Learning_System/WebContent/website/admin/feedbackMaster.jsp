@@ -60,6 +60,7 @@ function searchAssessmentAgencyList(){
 <script type='text/javascript'>
 var feedbackMasterArr=["feedbackTypeID","courseType","catogery","feedback","status"];
 function editFeedbackMaster(feedbackTypeID){
+	$('.error-red').html('');
 	$('#feedbackTypeID').val(feedbackTypeID);
 	$('#courseType option:contains(' + $(':hidden#'+feedbackTypeID+'courseType').val() + ')').prop({selected: true});
 	$('#catogery option:contains(' + $(':hidden#'+feedbackTypeID+'hiddencatogery').val() + ')').prop({selected: true});
@@ -69,7 +70,7 @@ function editFeedbackMaster(feedbackTypeID){
 }
 
 function onFeedbackMasterSearchClick(indicator){
-	
+	$('.error-red').html('');
 	var courseType = $("#courseType").val();
 	var catogery = $("#catogery").val();
 	var feedback = $("#feedback").val();
@@ -90,6 +91,7 @@ function onFeedbackMasterSearchClick(indicator){
 			var feedbackList=jQuery.parseJSON(data);
 			var feedbackCount=feedbackList.length;
 			$('#newTable tr').remove();
+			$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>User Type</th><th>Feedback</th><th>Feedback Category</th><th>Status</th><th>Edit</th></tr>')
 			if(feedbackCount>0){
 				for(var index=0;index<feedbackCount;index++){
 					var trStr="<tr>";
