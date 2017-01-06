@@ -14,6 +14,7 @@ import com.ir.form.RegistrationFormTrainingPartner;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.ManageTrainingPartner;
+import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.service.RegistrationServiceTrainingPartner;
@@ -110,6 +111,13 @@ public class RegistrationServiceTrainingPartnerImpl implements RegistrationServi
 	public boolean changePasswordTraineeSave(ChangePasswordForm changePasswordForm, String id) {
 		boolean changePasswordTCSave = registrationTrainingPartnerDAO.changePasswordTCSave(changePasswordForm , id);
 		return changePasswordTCSave;
+	}
+	
+	@Override
+	public PersonalInformationTrainingPartner FullDetailtrainingpartner(int loginId) {
+		// TODO Auto-generated method stub
+		PersonalInformationTrainingPartner personalInformationTrainingPartner = registrationTrainingPartnerDAO.fulldetailtainingpartner(loginId);
+		return personalInformationTrainingPartner;
 	}
 	// Rishi
 	

@@ -895,7 +895,7 @@ function ck_aadhar() {
 												path="Title" cssClass="error" /></li>
 									</ul>
 								</div>
-								System.out.println("------> "+${titleList} );
+								
 								<cf:select path="Title" class="form-control">
 									<cf:option value="0" label="Select Title" />
 									<cf:options items="${titleList}" itemValue="titleId"

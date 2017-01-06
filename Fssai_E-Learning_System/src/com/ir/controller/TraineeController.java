@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ir.constantes.Constantes;
+import com.ir.constantes.TableLink;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
@@ -60,13 +61,14 @@ public class TraineeController {
 	
 	// Rishi 
 	@RequestMapping(value="/contactTrainee" , method=RequestMethod.GET)
-	public String contactTrainee(@ModelAttribute("contactTraineee") ContactTrainee contactTrainee , HttpSession session){
+	public String contactTrainee(@ModelAttribute("contactTraineee") ContactTrainee contactTrainee, Model model , HttpSession session){
 		System.out.println("My Mail == "+contactTrainee.getEmailAddress());
 		System.out.println("My Address == "+contactTrainee.getMessageDetails());
 		Integer userId = (Integer) session.getAttribute("userId");
 		Integer profileId = (Integer) session.getAttribute("profileId");
 		String defaultMail = traineeService.getDefaultMailID(userId, profileId);
-		
+		model.addAttribute("defaultMail", defaultMail);
+		System.out.println("Default mail : "+defaultMail);
 		return "contactTrainee";
 	}
 	@RequestMapping(value="/changePasswordTrainee" , method=RequestMethod.GET)
@@ -105,8 +107,23 @@ public class TraineeController {
 		return "courseTraining";
 	}
 	@RequestMapping(value="/training" , method=RequestMethod.GET)
-	public String training(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer )
+	public String training(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer , HttpSession session)
 	{
+		
+		//update Step
+				Integer profileID = 0;
+				Integer userId = 0;
+				int loginId = 0;
+				try{
+					profileID = (Integer) session.getAttribute("profileId");
+					loginId = (int) session.getAttribute("loginIdUnique");
+					userId = (Integer) session.getAttribute("userId");
+				}catch(Exception e){
+					System.out.println("Exception while course details save : "+ e.getMessage());
+				}
+				int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
+				traineeService.updateSteps(tableID, profileID, 3);
+				session.setAttribute("traineeSteps", 3);
 		return "training";
 	}
 
@@ -122,23 +139,31 @@ public class TraineeController {
 	public String basicSave(@ModelAttribute("basicTrainee") CourseEnrolledUserForm courseEnrolledUserForm,
 			@ModelAttribute("rft") PersonalInformationTrainee loginUser ,BindingResult result , HttpSession httpSession,Model model){
 		int loginId = 0;
+		Integer profileId = 0;
+		Integer userId = 0;
 		try{
+			profileId = (Integer) httpSession.getAttribute("profileId");
 			loginId = (int) httpSession.getAttribute("loginIdUnique");
+			userId = (Integer) httpSession.getAttribute("userId");
 		}catch(Exception e){
 			System.out.println("Exception while course details save : "+ e.getMessage());
 		}
-		int personalinformationtraineeid = courseEnrolledUserForm.getPersonalinformationtraineeid();
+		//int tableID = courseEnrolledUserForm.getPersonalinformationtraineeid();
+		int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileId);
 		System.out.println("loginid   :"+ loginId);
-		System.out.println("personalinformationtraineeid  :"+ personalinformationtraineeid);
-		long basicEnroll = traineeService.basicSave(courseEnrolledUserForm , loginId , personalinformationtraineeid);
+		System.out.println("tableID  :"+ tableID);
+		long basicEnroll = traineeService.basicSave(courseEnrolledUserForm , loginId , tableID,profileId);
 			if(basicEnroll  > 1){
-			model.addAttribute("created", "You have successfully enrolled !!!");
-			model.addAttribute("roll", basicEnroll);
-		
+				Boolean status = traineeService.updateSteps(tableID, profileId, 1);
+				httpSession.setAttribute("traineeSteps", 1);
+				if(status){
+					model.addAttribute("created", "You have successfully enrolled !!!");
+					model.addAttribute("roll", basicEnroll);
+				}else{
+					model.addAttribute("created", "Oops , something went wrong !!!");
+					model.addAttribute("roll", basicEnroll);
+				}
 			}else{
-			model.addAttribute("created", "Oops , something went wrong !!!");
-			model.addAttribute("roll", basicEnroll);
-		
 		}
 		 return "traineeHomepage";
 	}
@@ -219,8 +244,11 @@ public class TraineeController {
 	}
 	@RequestMapping(value="/updateInformation" , method=RequestMethod.GET)
 	public String updateInformation(@ModelAttribute("updateInformation") RegistrationFormTrainee registrationFormTrainee, HttpSession session, Model model ){		
-		Integer ss = (Integer)session.getAttribute("loginUser1");
-		PersonalInformationTrainee personalInformationTrainee = (PersonalInformationTrainee) session.getAttribute("loginUser");
+		Integer userId = (Integer) session.getAttribute("userId");
+		 if(userId > 0){
+			PersonalInformationTrainee personalInformationTrainee = traineeService.FullDetail(userId);
+			session.setAttribute("loginUser", personalInformationTrainee);
+		 }
 		return "updateInformation";
 	}
 	@RequestMapping(value="/updateTrainee" , method=RequestMethod.POST)
@@ -261,17 +289,47 @@ public class TraineeController {
 	@RequestMapping(value="/admit-cardtrainee" , method=RequestMethod.GET)
 	public String admitcardtrainee(@ModelAttribute("basicTrainee") CourseEnrolledUserForm courseEnrolledUserForm ,
 			@ModelAttribute("state") State state , @ModelAttribute("tp") TrainingPartner tp,BindingResult result ,HttpSession session, Model model ){
+		//update Step
+		Integer profileID = 0;
+		Integer userId = 0;
+		int loginId = 0;
+		try{
+			profileID = (Integer) session.getAttribute("profileId");
+			loginId = (int) session.getAttribute("loginIdUnique");
+			userId = (Integer) session.getAttribute("userId");
+		}catch(Exception e){
+			System.out.println("Exception while course details save : "+ e.getMessage());
+		}
+		int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
 		if(session.getAttribute("loginIdUnique")!=null){
 			String loginid=session.getAttribute("loginIdUnique").toString();
 			AdmitCardForm admitCardForm=traineeService.generateAdmitCard(Integer.parseInt(loginid),Profiles.TRAINEE.value());
+			traineeService.updateSteps(tableID, profileID, 2);
+			session.setAttribute("traineeSteps", 2);
 			model.addAttribute("admitCardForm", admitCardForm);
 		}
 		return "admit-cardtrainee";
 	}
 	
 	@RequestMapping(value="/certificatetrainee" , method=RequestMethod.GET)
-	public String certificatetrainee(@ModelAttribute("basicTrainee") CourseEnrolledUserForm courseEnrolledUserForm ,
-			@ModelAttribute("state") State state , @ModelAttribute("tp") TrainingPartner tp ){
+	public String certificatetrainee(HttpSession session){
+		//update Step
+				Integer profileID = 0;
+				Integer userId = 0;
+				int loginId = 0;
+				try{
+					profileID = (Integer) session.getAttribute("profileId");
+					loginId = (int) session.getAttribute("loginIdUnique");
+					userId = (Integer) session.getAttribute("userId");
+				}catch(Exception e){
+					System.out.println("Exception while course details save : "+ e.getMessage());
+				}
+				int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
+				traineeService.updateSteps(tableID, profileID, 6);
+				session.setAttribute("traineeSteps", 6);
+		
+		
+		
 		return "certificatetrainee";
 	}
 
@@ -364,9 +422,11 @@ public class TraineeController {
 	}
 	@RequestMapping(value="/feedbackForm" , method=RequestMethod.GET)
 	public String feedback(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm ,BindingResult bindingResult, HttpSession session , Model model){
+		Integer profileId = (Integer) session.getAttribute("profileId");
+		TableLink data = TableLink.getByprofileID(profileId);
 		int loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
 		CourseName courseName=traineeService.getCourseName(loginId);
-		List<FeedbackMaster> feedbackMasters=traineeService.getFeedMasterList(Profiles.TRAINEE.value());
+		List<FeedbackMaster> feedbackMasters=traineeService.getFeedMasterList(profileId);
 		model.addAttribute("courseName",courseName);
 		model.addAttribute("feedbackMasters",feedbackMasters);
 		return "feedbackForm";
@@ -412,4 +472,25 @@ public class TraineeController {
 //		model.addAttribute("feedbackMasters",feedbackMasters);
 		return "feedbackForm";
 	}
+	
+	@RequestMapping(value="/afterFeedbackSubmit" , method=RequestMethod.GET)
+	public String saveFeedbackForm(HttpSession session){
+		//update Step
+				Integer profileID = 0;
+				Integer userId = 0;
+				int loginId = 0;
+				try{
+					profileID = (Integer) session.getAttribute("profileId");
+					loginId = (int) session.getAttribute("loginIdUnique");
+					userId = (Integer) session.getAttribute("userId");
+				}catch(Exception e){
+					System.out.println("Exception while course details save : "+ e.getMessage());
+				}
+				int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
+				traineeService.updateSteps(tableID, profileID, 5);
+				session.setAttribute("traineeSteps", 5);
+		return "redirect:/loginProcess.fssai";
+	}
+	
+	
 }

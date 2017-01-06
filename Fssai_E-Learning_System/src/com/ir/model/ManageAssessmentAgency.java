@@ -35,7 +35,7 @@ public class ManageAssessmentAgency {
 	private String email;
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="stateId")
 	private State state;
-	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="id")
+	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="loginDetails")
 	private LoginDetails loginDetails;
 	public int getManageAssessmentAgencyId() {
 		return manageAssessmentAgencyId;

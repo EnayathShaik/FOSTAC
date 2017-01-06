@@ -194,8 +194,8 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 		personalInformationAssessor.setReleventExpOfAuditInYear(registrationFormAssessor.getReleventExpOfAuditInYear());
 		personalInformationAssessor.setReleventExpOfAuditInMonth(registrationFormAssessor.getReleventExpOfAuditInMonth());
 		personalInformationAssessor.setHowManyAssessmentConductInAMonth(registrationFormAssessor.getHowManyAssessmentConductInAMonth());
-		personalInformationAssessor.setAssessmentAgencyName(maan);
-		personalInformationAssessor.setLoginDetails(loginDetails);
+		//personalInformationAssessor.setAssessmentAgencyName(maan);
+		//personalInformationAssessor.setLoginDetails(loginDetails);
 		//personalInformationAssessor.setCoursesEnrolled(coursesEnrolled);
 		
 		try{
@@ -342,22 +342,15 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 		District pd = getDistrict(registrationFormAssessor.getAssessorPermanentDistrict());
 		City cc = getCity(registrationFormAssessor.getAssessorCorrespondenceCity());
 		City pc = getCity(registrationFormAssessor.getAssessorPermanentCity());
-		Title tt = getTitle(registrationFormAssessor.getTitle());
-		ManageAssessmentAgency maan = getAssessmentAgencyName(registrationFormAssessor.getAssessmentAgencyName());
+		//Title tt = getTitle(registrationFormAssessor.getTitle());
+		//ManageAssessmentAgency maan = getAssessmentAgencyName(registrationFormAssessor.getAssessmentAgencyName());
 		
 		System.out.println("Assessor login id to update information : "+ loginId);
 		
-		Query q= session.createQuery("select personalInformationAssessorId from PersonalInformationAssessor  where loginId ='"+loginId+"' ");
-		List<Integer> listLoginIds	=q.list();
-		int personaldetailsId=0;
-		for(int i=0;i<listLoginIds.size();i++){
-		//	PersonalInformationAssessor pas=(PersonalInformationAssessor) logDetailsLog.get(i);
-			personaldetailsId =	listLoginIds.get(i);
-		}
-		PersonalInformationAssessor   personalInformationAssessor=(PersonalInformationAssessor) session.load(PersonalInformationAssessor.class, personaldetailsId);
+		PersonalInformationAssessor   personalInformationAssessor=(PersonalInformationAssessor) session.load(PersonalInformationAssessor.class, loginId);
 		
 	//	personalInformationAssessor.setAadharNumber(registrationFormAssessor.getAadharNumber());
-		personalInformationAssessor.setAssessmentAgencyName(maan);
+		//personalInformationAssessor.setAssessmentAgencyName(maan);
 		personalInformationAssessor.setAssessorCorrespondenceCity(cc);
 		personalInformationAssessor.setAssessorCorrespondenceDistrict(cd);
 	    personalInformationAssessor.setAssessorCorrespondenceState(cs);
@@ -378,7 +371,7 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 	    personalInformationAssessor.setReleventExpOfAuditInMonth(registrationFormAssessor.getReleventExpOfAuditInMonth());
 		personalInformationAssessor.setHowManyAssessmentConductInAMonth(registrationFormAssessor.getHowManyAssessmentConductInAMonth());
 		
-		personalInformationAssessor.setMiddleName(registrationFormAssessor.getMiddleName());
+		//personalInformationAssessor.setMiddleName(registrationFormAssessor.getMiddleName());
 		System.out.println("reachec down");
 		session.update(personalInformationAssessor);
 		session.beginTransaction().commit();
@@ -460,6 +453,21 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 		
 		
 		return confirm;
+	}
+	
+	@Override
+	public PersonalInformationAssessor fullDetailAssesser(int id) {
+		Session session = sessionFactory.openSession();
+		Integer i = id;
+		System.out.println("search " + id);
+		Query query = session.createQuery("from PersonalInformationAssessor where loginDetails = '"+ i +"'");
+		List<PersonalInformationAssessor> list = query.list();
+		session.close();
+		PersonalInformationAssessor personalInformationAssessor = null;
+		for(PersonalInformationAssessor personalInformationAssessor1: list){
+			personalInformationAssessor=personalInformationAssessor1;
+		}
+		return personalInformationAssessor;
 	}
 	// Rishi
 }

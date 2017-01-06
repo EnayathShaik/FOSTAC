@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import com.ir.dao.RegistrationTrainerDAO;
 import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.RegistrationFormTrainer;
+import com.ir.model.PersonalInformationTrainer;
+import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.service.RegistrationServiceTrainer;
 
 
@@ -44,6 +46,11 @@ public class RegistrationServiceTrainerImpl implements RegistrationServiceTraine
 	public long specialTrainerSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid) {
 		long basicCouseTrainer1 = registrationTrainerDAO.specialTrainerSave(courseEnrolledUserForm,loginid);
 		return basicCouseTrainer1;
+	}
+	@Override
+	public PersonalInformationTrainer FullDetailTrainer(int loginId) {
+		PersonalInformationTrainer personalInformationTrainer = registrationTrainerDAO.fullDetailtrainer(loginId);
+		return personalInformationTrainer;
 	}
 	//by Rishi
 }

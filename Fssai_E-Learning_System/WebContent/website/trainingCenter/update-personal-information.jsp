@@ -39,7 +39,7 @@ window.onload=getstateid;
  	      $.each(mainData2 , function(i , obj)
  	  		{	
  	    	  if(ss == obj.stateId){
- 	    		  $('#TrainingPartnerPermanentState').append('<option value='+obj.stateId+'>'+obj.stateName+' selected="true" </option>');	
+ 	    		  $('#TrainingPartnerPermanentState').append('<option  selected="true" value='+obj.stateId+'>'+obj.stateName+' </option>');	
  	    	  }else{
  	    		  $('#TrainingPartnerPermanentState').append('<option value='+obj.stateId+'>'+obj.stateName+' </option>');	
  	    	  }	
@@ -63,7 +63,7 @@ window.onload=getstateid;
  	      $.each(mainData1 , function(i , obj)
  	  		{
  	    	  if(dd == obj.districtId){
- 	    		  $('#TrainingPartnerPermanentDistrict').append('<option value='+obj.districtId+'>'+obj.districtName+' selected="true" </option>');
+ 	    		  $('#TrainingPartnerPermanentDistrict').append('<option selected="true" value='+obj.districtId+'>'+obj.districtName+'  </option>');
  	    	  }else{
  	    		  $('#TrainingPartnerPermanentDistrict').append('<option value='+obj.districtId+'>'+obj.districtName+' </option>');
  	    	  }	
@@ -85,7 +85,7 @@ window.onload=getstateid;
  	      $.each(mainData1 , function(i ,obj)
  	  		{
  	    	  if(cc == obj.cityId){
- 	    		  $('#TrainingPartnerPermanentCity').append('<option value='+obj.cityId+'>'+obj.cityName+' selected="true" </option>');
+ 	    		  $('#TrainingPartnerPermanentCity').append('<option selected="true" value='+obj.cityId+'>'+obj.cityName+'  </option>');
  	    	  }else{
  	    		  $('#TrainingPartnerPermanentCity').append('<option value='+obj.cityId+'>'+obj.cityName+' </option>');
  	    	  }	

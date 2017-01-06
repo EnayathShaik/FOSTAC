@@ -26,7 +26,8 @@ function onFeedbackSave(feedbackMasterList){
 	    	  feedbackMastersIds:feedbackMastersIds.join()
 	      },
 	      success: function (response) {
-	    	  window.location.href ='/Fssai_E-Learning_System/redirectHome.fssai'
+	    	  alert('Thanks for your feedback.');
+	    	  window.location.href ='/Fssai_E-Learning_System/afterFeedbackSubmit.fssai'
 	      }
 	      });
 	

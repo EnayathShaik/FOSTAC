@@ -3,7 +3,9 @@ package com.ir.dao.impl;
 
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -133,6 +135,7 @@ private Title title;
 				
 				PersonalInformationTrainer personalInformationTrainer = new PersonalInformationTrainer();
 				personalInformationTrainer.setTitle(tt);
+				personalInformationTrainer.setSteps(0);
 				personalInformationTrainer.setAadharNumber(registrationFormTrainer.getAadharNumber());
 				personalInformationTrainer.setFirstName(registrationFormTrainer.getFirstName());
 				personalInformationTrainer.setLastName(registrationFormTrainer.getLastName());
@@ -245,49 +248,67 @@ private Title title;
 		State ps = getState(registrationFormTrainer.getTrainingCenterPermanentState()); 
 		State cs = getState(registrationFormTrainer.getTrainingCenterCorrespondenceState());
 		District pd = getDistrict(registrationFormTrainer.getTrainingCenterPermanentDistrict());
-		District cd = getDistrict(registrationFormTrainer.getTrainingCenterCorrespondenceCity());
+		District cd = getDistrict(registrationFormTrainer.getTrainingCenterCorrespondenceDistrict());
 		City pc = getCity(registrationFormTrainer.getTrainingCenterPermanentCity());
 		City cc = getCity(registrationFormTrainer.getTrainingCenterCorrespondenceCity());
-		Title tt = getTitle(registrationFormTrainer.getTitle());
+		//Title tt = getTitle(registrationFormTrainer.getTitle());
 		ManageTrainingPartner mtp = getTP(registrationFormTrainer.getAssociatedTrainingpartnerName());
 		
 		
 		Session s=sessionFactory.openSession();
 		
 		PersonalInformationTrainer personalinformationtrainer= (PersonalInformationTrainer) s.load(PersonalInformationTrainer.class, id);
-		System.out.println("id is"+id);
-		System.out.println("aadhar si"+registrationFormTrainer.getTrainingCenterCorrespondenceCity());
-		//personalinformationtrainer.setAadharNumber(registrationFormTrainer.getAadharNumber());
-		personalinformationtrainer.setAdvanceCourse(registrationFormTrainer.getAdvanceCourse1());
-		personalinformationtrainer.setAssociatedTrainingpartnerName(mtp);
-		personalinformationtrainer.setBasicCourse(registrationFormTrainer.getBasicCourse1());
-		//personalinformationtrainer.setDOB(registrationFormTrainer.getDOB());
-		personalinformationtrainer.setExpInFoodSafefyTimeMonth(registrationFormTrainer.getExpInFoodSafefyTimeMonth());
-		//personalinformationtrainer.setGender(registrationFormTrainer.getGender());
-		//personalinformationtrainer.setFirstName(registrationFormTrainer.getFirstName());
-		personalinformationtrainer.setFoodSafetyExpBackground(registrationFormTrainer.getFoodSafetyExpBackground());
-		//personalinformationtrainer.setMiddleName(registrationFormTrainer.getMiddleName());
-		//personalinformationtrainer.setLastName(registrationFormTrainer.getLastName());
-		personalinformationtrainer.setNoOfTrainingSessionConducted(registrationFormTrainer.getNoOfTrainingSessionConducted());
-		personalinformationtrainer.setSpecialCourse(registrationFormTrainer.getSpecialCourse1());
-		personalinformationtrainer.setTitle(tt);
-		personalinformationtrainer.setCorrespondencecity(cc);
-		personalinformationtrainer.setCorrespondencedistrict(cd);
-		personalinformationtrainer.setCorrespondencestate(cs);
-		personalinformationtrainer.setFathername(registrationFormTrainer.getFatherName());
-		personalinformationtrainer.setTrainingCenterPermanentLine1(registrationFormTrainer.getTrainingCenterPermanentLine1());
-		personalinformationtrainer.setTrainingCenterPermanentLine2(registrationFormTrainer.getTrainingCenterPermanentLine2());
-		personalinformationtrainer.setTrainingCenterCorrespondenceLine1(registrationFormTrainer.getTrainingCenterCorrespondenceLine1());
+		
+		/*personalinformationtrainer.setTrainingCenterCorrespondenceLine1(registrationFormTrainer.getTrainingCenterCorrespondenceLine1());
 		personalinformationtrainer.setTrainingCenterCorrespondenceLine2(registrationFormTrainer.getTrainingCenterCorrespondenceLine2());
-		personalinformationtrainer.setPermanentcity(pc);
-		personalinformationtrainer.setPermanentdistrict(pd);
-		personalinformationtrainer.setPermanentstate(ps);
+		personalinformationtrainer.setCorrespondencestate(cs);
+		personalinformationtrainer.setCorrespondencedistrict(cd);
+		personalinformationtrainer.setCorrespondencecity(cc);
 		personalinformationtrainer.setTrainingCenterPermanentEmail(registrationFormTrainer.getTrainingCenterPermanentEmail());
 		personalinformationtrainer.setTrainingCenterPermanentMobile(registrationFormTrainer.getTrainingCenterPermanentMobile());
+		personalinformationtrainer.setTrainingCenterCorrespondencePincode(registrationFormTrainer.getTrainingCenterCorrespondencePincode());
+		
+		
+		personalinformationtrainer.setTrainingCenterPermanentLine1(registrationFormTrainer.getTrainingCenterPermanentLine1());
+		personalinformationtrainer.setTrainingCenterPermanentLine2(registrationFormTrainer.getTrainingCenterPermanentLine2());
+		personalinformationtrainer.setPermanentstate(ps);
+		personalinformationtrainer.setPermanentdistrict(pd);
+		personalinformationtrainer.setPermanentcity(pc);
+		personalinformationtrainer.setTrainingCenterPermanentPincode(registrationFormTrainer.getTrainingCenterPermanentPincode());
+		*/
+		boolean checkPeramanent=registrationFormTrainer.isCheckPermanent();
+		if(checkPeramanent){
+			personalinformationtrainer.setTrainingCenterPermanentLine1(registrationFormTrainer.getTrainingCenterCorrespondenceLine1());
+			personalinformationtrainer.setTrainingCenterPermanentLine2(registrationFormTrainer.getTrainingCenterCorrespondenceLine2());
+			personalinformationtrainer.setPermanentcity(cc);
+			personalinformationtrainer.setPermanentdistrict(cd);
+			personalinformationtrainer.setPermanentstate(cs);
+			personalinformationtrainer.setCheckAddress("true");
+			personalinformationtrainer.setTrainingCenterPermanentPincode(registrationFormTrainer.getTrainingCenterCorrespondencePincode());
+		}
+		else{
+			personalinformationtrainer.setTrainingCenterPermanentLine1(registrationFormTrainer.getTrainingCenterPermanentLine1());
+			personalinformationtrainer.setTrainingCenterPermanentLine2(registrationFormTrainer.getTrainingCenterPermanentLine2());
+			personalinformationtrainer.setPermanentstate(ps);
+			personalinformationtrainer.setPermanentdistrict(pd);
+			personalinformationtrainer.setPermanentcity(pc);
+			personalinformationtrainer.setCheckAddress("false");
+			personalinformationtrainer.setTrainingCenterPermanentPincode(registrationFormTrainer.getTrainingCenterPermanentPincode());
+		}
+		
+		
+		
+		personalinformationtrainer.setBasicCourse(registrationFormTrainer.getBasicCourse1());
+		personalinformationtrainer.setAdvanceCourse(registrationFormTrainer.getAdvanceCourse1());
+		personalinformationtrainer.setSpecialCourse(registrationFormTrainer.getSpecialCourse1());
+		personalinformationtrainer.setAssociatedTrainingpartnerName(mtp);
+		personalinformationtrainer.setExpInFoodSafefyTimeMonth(registrationFormTrainer.getExpInFoodSafefyTimeMonth());
+		personalinformationtrainer.setFoodSafetyExpBackground(registrationFormTrainer.getFoodSafetyExpBackground());
+		personalinformationtrainer.setNoOfTrainingSessionConducted(registrationFormTrainer.getNoOfTrainingSessionConducted());
 		personalinformationtrainer.setTrainingSessionWishToConduct(registrationFormTrainer.getTrainingSessionWishToConduct());
 		personalinformationtrainer.setAssociatedWithAnyTrainingPartner(registrationFormTrainer.getAssociatedWithAnyTrainingPartner());
 		personalinformationtrainer.setTrainingSessionWishToConduct(registrationFormTrainer.getTrainingSessionWishToConduct());
-		personalinformationtrainer.setTrainingCenterCorrespondencePincode(registrationFormTrainer.getTrainingCenterCorrespondencePincode());
+		
 		personalinformationtrainer.setExpInFoodSafefyTimeYear(registrationFormTrainer.getExpInFoodSafefyTimeYear());
 		s.update(personalinformationtrainer);
 		s.beginTransaction().commit();
@@ -368,6 +389,23 @@ private Title title;
 		session.beginTransaction().commit();
 		session.close();
 		return date;
+	}
+	@Override
+	public PersonalInformationTrainer fullDetailtrainer(int loginId) {
+		// TODO Auto-generated method stub
+		System.out.println("LogintrainerDAOImpl full detail process start ");
+		Session session = sessionFactory.openSession();
+		Integer i = loginId;
+		System.out.println("search " + loginId);
+		Query query = session.createQuery("from PersonalInformationTrainer where loginDetails = '"+ i +"'");
+		List<PersonalInformationTrainer> list = query.list();
+		session.close();
+		PersonalInformationTrainer personalInformationTrainer = null;
+		for(PersonalInformationTrainer personalInformationTrainer1: list){
+			personalInformationTrainer=personalInformationTrainer1;
+		}
+		return personalInformationTrainer;
+
 	}
 	// Rishi end
 	}

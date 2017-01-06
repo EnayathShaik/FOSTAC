@@ -9,7 +9,6 @@ import javax.validation.Valid;
 //import org.apache.tomcat.util.net.jsse.openssl.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,10 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
-import com.ir.bean.common.IntStringBean;
 import com.ir.form.LoginForm;
-import com.ir.form.RegistrationFormTrainer;
-import com.ir.model.CourseEnrolled;
 import com.ir.model.LoginDetails;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageTrainingPartner;
@@ -31,11 +27,9 @@ import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
-import com.ir.model.State;
 import com.ir.model.PostVacancyTrainingCenter;
 import com.ir.model.PostVacancyTrainingCenterBean;
 import com.ir.model.TrainingPartner;
-import com.ir.service.AdminService;
 import com.ir.service.LoginService;
 import com.ir.service.TrainingPartnerService;
 import com.ir.service.UpdateService;
@@ -75,6 +69,10 @@ public class LoginController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginForm(@ModelAttribute("login") LoginForm loginForm , HttpSession session) {
+		Integer profileID = (Integer) session.getAttribute("profileId");
+		if(profileID != null && profileID > 0){
+			return "redirect:loginProcess.fssai";
+		}
 		System.out.println("LoginController loginForm begin .");
 		return "login";
 	}
@@ -167,9 +165,11 @@ public class LoginController {
 			session.setAttribute("logId", personalInformationTrainee.getLoginDetails().getLoginId());
 			session.setAttribute("profileId", loginDetails.getProfileId());
 			session.setAttribute("userId", loginDetails.getId());
+			session.setAttribute("traineeSteps", personalInformationTrainee.getSteps());
 			return "traineeHomepage";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 4 && loginDetails.getStatus().equalsIgnoreCase("A")){
 			PersonalInformationTrainer personalInformationTrainer = loginService.FullDetailTrainer(loginDetails.getId());
+			session.setAttribute("loginUser", personalInformationTrainer);
 			System.out.println("in trainer login");
 			session.setAttribute("loginUr", personalInformationTrainer);
 			session.setAttribute("personalInformationTrainerid", personalInformationTrainer.getPersonalInformationTrainerId());
@@ -198,6 +198,7 @@ public class LoginController {
 			}
 			model.addAttribute("postVacancyTrainingCenter", new Gson().toJson(postVacancyTrainingCenter));
 			model.addAttribute("vacancyTrainingCenterBeans", new Gson().toJson(vacancyTrainingCenterBeans));
+			session.setAttribute("traineeSteps", personalInformationTrainer.getSteps());
 			return "trainerHomepage";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 5){
 			if(loginDetails.getStatus().equalsIgnoreCase("A")){
@@ -228,7 +229,7 @@ public class LoginController {
 				session.setAttribute("loginUser", personalInformationAssessor);
 				// added by abhay
 				session.setAttribute("loginUr", personalInformationAssessor);
-//				session.setAttribute("loginUser2", personalInformationAssessor.getPersonalInformationAssessorId());
+				session.setAttribute("loginUserAssessor", personalInformationAssessor.getId());
 				model.addAttribute("loginUser", personalInformationAssessor);
 				session.setAttribute("logId", personalInformationAssessor.getLoginDetails().getLoginId());
 				// commenet after abhay code
@@ -267,6 +268,7 @@ public class LoginController {
 			session.setAttribute("logId", manageTrainingPartner.getLoginDetails().getLoginId());
 			//rishi
 			session.setAttribute("profileId", loginDetails.getProfileId());
+			session.setAttribute("userId", loginDetails.getId());
 			return "trainingPartnerDashboard";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 8 && loginDetails.getStatus().equalsIgnoreCase("A")){
 			// Assessment Agency  //// Assessment Agency  //// Assessment Agency  //// Assessment Agency  //
@@ -289,6 +291,39 @@ public class LoginController {
 			return "login";
 		}
 
+	}
+	
+	/**
+	 * @param loginForm
+	 * @param result
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "/loadData", method = RequestMethod.GET)
+	public String loadData(@Valid @ModelAttribute("login") LoginForm loginForm,BindingResult result, Model model, HttpSession session) {
+		Integer profileID = (Integer) session.getAttribute("profileId");
+		
+		if(profileID != null && profileID > 0){
+			if(profileID == 1){
+				return "adminHomepage";
+			}else if(profileID == 2){
+				return "adminHomepage";
+			}else if(profileID == 3){
+				return "traineeHomepage";
+			}else if(profileID == 4){
+				return "trainerHomepage";
+			}else if(profileID == 5){
+				return "trainingPartnerHomepage";
+			}else if(profileID == 6){
+				return "AssessorPage";
+			}else if(profileID == 7){
+				return "trainingPartnerDashboard";
+			}else if(profileID == 8){
+				return "assessmentAgencyHomepage";
+			}
+		}
+		return "login";
 	}
 	
 	/**

@@ -151,6 +151,7 @@
 				<value>com.ir.model.trainee.TraineeAssessmentEvaluation</value>
 				<value>com.ir.model.trainer.TrainerAssessmentEvaluation</value>
 				<value>com.ir.model.TrainingPartnerCalendarForm</value>
+				<value>com.ir.model.TrainingStatus</value>
 <!-- 				<value>com.ir.form.AssessmentAnswerCriteria</value> -->
 				<!-- 
 				

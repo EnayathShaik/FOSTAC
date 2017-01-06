@@ -21,6 +21,7 @@ import com.ir.model.CourseEnrolledUser;
 import com.ir.model.CourseName;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationTrainee;
+import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.service.PageLoadServiceTrainer;
@@ -214,18 +215,26 @@ public class RegistrationControllerTrainer implements Serializable{
 
 @RequestMapping(value="/update-profile" , method=RequestMethod.GET)
    	public String updateInformation(Model model ,@ModelAttribute("updateInformation") RegistrationFormTrainer registrationFormTrainer, HttpSession session ){		
-   		//String ss = (String)session.getAttribute("loginUr");
-   		//System.out.println("nnb is aaaaa   " +ss);
-   		System.out.println(registrationFormTrainer.getDOB());
+	Integer userId = (Integer) session.getAttribute("userId");
+	 if(userId > 0){
+		 PersonalInformationTrainer personalInformationTrainer = registrationServiceTrainer.FullDetailTrainer(userId);
+			session.setAttribute("loginUr", personalInformationTrainer);
+	 }
+	
    		model.addAttribute("update", "");
    		return "update-profile";
    	}
     
     @RequestMapping(value="/updateTrainer11" , method=RequestMethod.POST)
 	public String updateTrainer(@Valid @ModelAttribute("updateInformation") RegistrationFormTrainer registrationFormTrainer ,BindingResult bindingResult, HttpSession session){
-		Integer ss = (Integer)session.getAttribute("loginUser2");
+		if(session == null){
+			return "login";
+		}
+    	
+    	Integer ss = (Integer)session.getAttribute("loginUser2");
 	//	Integer ss=	(Integer) session.getAttribute("Id");
 		System.out.println("nnb is  " +ss);
+		System.out.println("----------"+registrationFormTrainer.getFatherName());
 		String updateTrainer = registrationServiceTrainer.UpdateTrainer(registrationFormTrainer , ss);
 		if(!updateTrainer.equalsIgnoreCase(""))
 		{

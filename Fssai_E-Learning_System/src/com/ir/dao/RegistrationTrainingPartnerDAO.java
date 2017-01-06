@@ -51,6 +51,8 @@ boolean changePasswordTCSave(ChangePasswordForm changePasswordForm, String id);
 	// Rishi
 
 PersonalInformationTrainingPartner getPersonalInformationTrainingPartner(int id);
+public PersonalInformationTrainingPartner fulldetailtainingpartner(int id);
+
 
 
 

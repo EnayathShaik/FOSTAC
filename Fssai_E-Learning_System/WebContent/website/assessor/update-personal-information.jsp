@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
        	<%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 		<%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %>
 		<%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -42,14 +44,14 @@ function getStateUpdate(psid , pdid , pcid)
 	      success: function (response) {      
 	      var mainData2 = jQuery.parseJSON(response);
 	      $('#AssessorrPermanentState option').remove();
-	      $('#AssessorrPermanentState').append('<option value="0" label="Select Stateeeeee" />');
+	      $('#AssessorrPermanentState').append('<option value="0" >Select Stateeeeee </option>');
 	  	  
 	      $.each(mainData2 , function(i , obj)
 	  		{	
 	    	  if(psid == obj.stateId){
-	    		  $('#AssessorrPermanentState').append('<option value='+obj.stateId+' label='+obj.stateName+' selected="true" />');	
+	    		  $('#AssessorrPermanentState').append('<option selected="true" value='+obj.stateId+'>'+obj.stateName+'  </option>');	
 	    	  }else{
-	    		  $('#AssessorrPermanentState').append('<option value='+obj.stateId+' label='+obj.stateName+' />');	
+	    		  $('#AssessorrPermanentState').append('<option value='+obj.stateId+'>'+obj.stateName+' </option>');	
 	    	  }	
 	  		});
 	      }
@@ -71,9 +73,9 @@ function getDistrictUpdate(ss , dd , cc)
 	      $.each(mainData1 , function(i , obj)
 	  		{
 	    	  if(dd == obj.districtId){
-	    		  $('#AssessorPermanentDistrict').append('<option value='+obj.districtId+' label='+obj.districtName+' selected="true"/>');
+	    		  $('#AssessorPermanentDistrict').append('<option selected="true" value='+obj.districtId+'>'+obj.districtName+' </option>');
 	    	  }else{
-	    		  $('#AssessorPermanentDistrict').append('<option value='+obj.districtId+' label='+obj.districtName+' />');
+	    		  $('#AssessorPermanentDistrict').append('<option value='+obj.districtId+'>'+obj.districtName+' </option>');
 	    	  }	
 	  		});
 	      }
@@ -93,9 +95,9 @@ function getCityUpdate(dd , cc)
 	      $.each(mainData1 , function(i ,obj)
 	  		{
 	    	  if(cc == obj.cityId){
-	    		  $('#AssessorPermanentCity').append('<option value='+obj.cityId+' label='+obj.cityName+' selected="true"/>');
+	    		  $('#AssessorPermanentCity').append('<option selected="true" value='+obj.cityId+'>'+obj.cityName+' </option>');
 	    	  }else{
-	    		  $('#AssessorPermanentCity').append('<option value='+obj.cityId+' label='+obj.cityName+' />');
+	    		  $('#AssessorPermanentCity').append('<option value='+obj.cityId+'>'+obj.cityName+'</option>');
 	    	  }	
 	  		});
 	      }
@@ -113,7 +115,6 @@ function getCityUpdate(dd , cc)
 		var ccid=${loginUr.assessorCorrespondenceCity.cityId};
 		
 		getCorrespondanceStateUpdate(csid,cdid,ccid);
-		alert('hii');
 		
 	}
 	
@@ -130,16 +131,15 @@ function getCityUpdate(dd , cc)
 		      $.each(mainData2 , function(i , obj)
 		  		{	
 		    	  if(csid == obj.stateId){
-		    		  $('#AssessorCorrespondenceState').append('<option value='+obj.stateId+' label='+obj.stateName+' selected="true" />');	
+		    		  $('#AssessorCorrespondenceState').append('<option selected="true" value='+obj.stateId+'>'+obj.stateName+'  </option>');	
 		    	  }else{
-		    		  $('#AssessorCorrespondenceState').append('<option value='+obj.stateId+' label='+obj.stateName+' />');	
+		    		  $('#AssessorCorrespondenceState').append('<option value='+obj.stateId+'>'+obj.stateName+' </option>');	
 		    	  }	
 		  		});
 		      }
 		      });
-		alert('hhhhhhpk');
+		
 		CorrDistrictUpdate(csid,cdid,ccid);
-		alert('hhhhhh');
 	}
 
 	function CorrDistrictUpdate(csid,cdid,ccid)
@@ -159,11 +159,11 @@ function getCityUpdate(dd , cc)
 		    	 // $("#TrainingCenterCorrespondenceDistrict").prop('selectedIndex', cdid);
 		    	  if(cdid == obj.districtId){
 		    		  //TrainingCenterCorrespondenceDistrict.options[0].text = cdname;
-		    		  $('#AssessorCorrespondenceDistrict').append('<option value='+obj.districtId+' label='+obj.districtName+' selected="true"/>');
+		    		  $('#AssessorCorrespondenceDistrict').append('<option selected="true" value='+obj.districtId+'>'+obj.districtName+' </option>');
 		    		 //alert("cd is "+cdid);
 		    		  
 		    	  }else{
-		    		  $('#AssessorCorrespondenceDistrict').append('<option value='+obj.districtId+' label='+obj.districtName+' />');
+		    		  $('#AssessorCorrespondenceDistrict').append('<option value='+obj.districtId+'>'+obj.districtName+' </option>');
 		    	  }	
 		  		});
 		      }
@@ -183,14 +183,14 @@ function getCityUpdate(dd , cc)
 		      $.each(mainData1 , function(i ,obj)
 		  		{
 		    	  if(ccid == obj.cityId){
-		    		  $('#AssessorCorrespondenceCity').append('<option value='+obj.cityId+' label='+obj.cityName+' selected="true"/>');
+		    		  $('#AssessorCorrespondenceCity').append('<option selected="true" value='+obj.cityId+'>'+obj.cityName+' </option>');
 		    	  }else{
-		    		  $('#AssessorCorrespondenceCity').append('<option value='+obj.cityId+' label='+obj.cityName+' />');
+		    		  $('#AssessorCorrespondenceCity').append('<option value='+obj.cityId+'>'+obj.cityName+' </option>');
 		    	  }	
 		  		});
 		      }
 		      });  
-		alert("corresep city");
+		
 	}
 	
 	
@@ -219,7 +219,7 @@ function getCityUpdate(dd , cc)
        	      $.each(mainData1 , function(i , obj)
        	  		{
        	  		
-       	  				$('#AssessorCorrespondenceDistrict').append('<option value='+obj.districtId+' label='+obj.districtName+' />');		
+       	  				$('#AssessorCorrespondenceDistrict').append('<option value='+obj.districtId+'>'+obj.districtName+' </option>');		
        	  		});
        	      }
        	      });     
@@ -236,7 +236,7 @@ function getCityUpdate(dd , cc)
        	  	  $.each(mainData1 , function(i , obj)
        	  		{
        	  		
-       	  				$("#AssessorCorrespondenceCity").append('<option value='+obj.cityId+' label='+obj.cityName+' />');		
+       	  				$("#AssessorCorrespondenceCity").append('<option value='+obj.cityId+'>'+obj.cityName+' </option>');		
        	  		});
        	      }
        	      });     
@@ -258,7 +258,7 @@ function getCityUpdate(dd , cc)
     	      $.each(mainData1 , function(i , obj)
     	  		{
     	  		
-    	  				$('#AssessorPermanentDistrict').append('<option value='+obj.districtId+' label='+obj.districtName+' />');		
+    	  				$('#AssessorPermanentDistrict').append('<option value='+obj.districtId+'>'+obj.districtName+' </option>');		
     	  		});
     	      }
     	      });     
@@ -275,7 +275,7 @@ function getCityUpdate(dd , cc)
     	  	  $.each(mainData1 , function(i , obj)
     	  		{
     	  		
-    	  				$('#AssessorPermanentCity').append('<option value='+obj.cityId+' label='+obj.cityName+' />');		
+    	  				$('#AssessorPermanentCity').append('<option value='+obj.cityId+'>'+obj.cityName+' </option>');		
     	  		});
     	      }
     	      });     
@@ -558,7 +558,7 @@ function getCityUpdate(dd , cc)
 
                         <!-- Sidebar -->
                        <%@include file="../roles/slider.jsp" %>
-                        </div>
+                        
                         <!-- /#sidebar-wrapper -->
                         <!-- Page Content -->
                         <div id="page-content-wrapper">

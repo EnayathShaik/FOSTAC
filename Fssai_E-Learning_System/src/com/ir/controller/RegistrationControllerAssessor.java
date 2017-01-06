@@ -23,6 +23,7 @@ import com.ir.form.RegistrationFormTrainer;
 import com.ir.model.AssessmentAgency;
 import com.ir.model.CourseName;
 import com.ir.model.ManageAssessmentAgency;
+import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.service.PageLoadServiceTrainer;
@@ -121,10 +122,14 @@ public class RegistrationControllerAssessor implements Serializable{
 	
 	 @RequestMapping(value="/updateAssessor" , method=RequestMethod.GET)
 		public String updateAssessor(Model model ,@ModelAttribute("updateAssessor") RegistrationFormAssessor registrationFormAssessor, HttpSession session ){		
-			//String ss = (String)session.getAttribute("loginUr");
-			//System.out.println("nnb is aaaaa   " +ss);
-			System.out.println(registrationFormAssessor.getDOB());
-			model.addAttribute("update", "");
+		 Integer userId = (Integer) session.getAttribute("userId");
+		 if(userId > 0){
+				PersonalInformationAssessor personalInformationAssessor ;
+				personalInformationAssessor = registrationServiceAssessor.fullDetailAssessor(userId);
+				session.setAttribute("loginUr", personalInformationAssessor);
+			 
+		 }
+		 	model.addAttribute("update", "");
 			return "updateAssessor";
 		}
 	
@@ -144,9 +149,10 @@ public class RegistrationControllerAssessor implements Serializable{
 	 //@RequestMapping(value="/updateAssessorData" , method=RequestMethod.POST)
 		public String updateAssessorData(@Valid @ModelAttribute("updateAssessor") RegistrationFormAssessor registrationFormAssessor ,BindingResult bindingResult, HttpSession session){
 		 int  loginId = (Integer) session.getAttribute("loginIdUnique");
+		 int  assessorId = (Integer) session.getAttribute("loginUserAssessor");
 			//Integer ss = (Integer)session.getAttribute("loginUser2");
 			System.out.println("Logged in Id for assessor is  " +loginId);
-			String updateAssessor = registrationServiceAssessor.UpdateAssessor(registrationFormAssessor , loginId);
+			String updateAssessor = registrationServiceAssessor.UpdateAssessor(registrationFormAssessor , assessorId);
 			if(!updateAssessor.equalsIgnoreCase(""))
 			{
 				System.out.println("Data are updated successfully");

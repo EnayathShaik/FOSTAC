@@ -84,7 +84,7 @@ window.onload = OnStart;
     <!-- main section -->
     <section class="section-form-margin-top">
         <div class="container">
-
+<div clas="col-md-4  col-xs-12">
 <cf:form name="myForm" class="registration-box" style ="margin:0px auto; width:35%; margin-top:15%; margin-top:5%;" action="loginProcess.fssai" method="post" commandName="login" onsubmit="return validateFields()">
 
             <!-- login form -->
@@ -144,7 +144,7 @@ window.onload = OnStart;
             </div>
 </cf:form>      
         </div>
-
+ </div>
     </section>
 
     <!-- footer -->
@@ -152,7 +152,7 @@ window.onload = OnStart;
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 text-center">
-                    <h6>Design and Developed by &nbsp;<a href="http://www.zentechinfo.com/" target="_blank" style="color:#1c1b1b; text-decoration:underline;">Zentech Info Solutions Pvt. Ltd.</a> © FSSAI 2016- All Right Reserved.</h6>
+                    <h6>Desig23543543ped by &nbsp;<a href="http://www.zentechinfo.com/" target="_blank" style="color:#1c1b1b; text-decoration:underline;">Zentech Info Solutions Pvt. Ltd.</a> © FSSAI 2016- All Right Reserved.</h6>
                 </div>
             </div>
         </div>

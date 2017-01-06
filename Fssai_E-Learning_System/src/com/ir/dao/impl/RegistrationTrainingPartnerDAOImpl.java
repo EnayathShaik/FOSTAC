@@ -282,6 +282,8 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 		
 		PersonalInformationTrainingPartner personalInformationTrainingPartner=(PersonalInformationTrainingPartner) s.load(PersonalInformationTrainingPartner.class,id);
 		
+		System.out.println("ID == "+personalInformationTrainingPartner.getPersonalInformationTrainingPartnerId());
+		
 		System.out.println("id is in dao "+id);
 		//personalInformationTrainingPartner.setAvailabiltyOfInHouseTrainersInFoodSafety(registrationFormTrainingPartner.getAvailabiltyOfInHouseTrainersInFoodSafety());
 		//personalInformationTrainingPartner.setAvailabiltyOfTVProjector(registrationFormTrainingPartner.getAvailabiltyOfTVProjector());
@@ -440,6 +442,23 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 			
 			
 			return confirm;
+		}
+		
+		@Override
+		public PersonalInformationTrainingPartner fulldetailtainingpartner(int id) {
+			System.out.println("LogintrainerpartnerDAOImpl full detail process start ");
+			Session session = sessionFactory.openSession();
+			Integer i = id;
+			
+			Query query = session.createQuery("from PersonalInformationTrainingPartner where loginDetails = '"+ i +"'");
+			List<PersonalInformationTrainingPartner> list1 = query.list();
+			
+			PersonalInformationTrainingPartner personalInformationTrainingPartner11 = null;
+			for(PersonalInformationTrainingPartner personalInformationTrainingPartner:list1){
+				personalInformationTrainingPartner11=personalInformationTrainingPartner;
+			}
+			//session.close();
+			return personalInformationTrainingPartner11;
 		}
 	// rishi
 }

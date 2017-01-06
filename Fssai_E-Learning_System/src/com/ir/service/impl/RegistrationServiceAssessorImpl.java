@@ -18,6 +18,7 @@ import com.ir.model.AssessmentAgency;
 import com.ir.model.CourseEnrolled;
 import com.ir.model.CourseName;
 import com.ir.model.ManageAssessmentAgency;
+import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.service.RegistrationServiceAssessor;
@@ -121,6 +122,12 @@ public class RegistrationServiceAssessorImpl implements RegistrationServiceAsses
 	public boolean changePasswordASSSave(ChangePasswordForm changePasswordForm, String id) {
 		boolean changePassword = registrationAssessorDAO.cotactAssessorSave(changePasswordForm,id);
 		return changePassword;
+	}
+
+	@Override
+	public PersonalInformationAssessor fullDetailAssessor(int id) {
+		PersonalInformationAssessor personalInformationAssessor = registrationAssessorDAO.fullDetailAssesser(id);
+		return personalInformationAssessor;
 	}
 
 

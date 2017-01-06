@@ -21,5 +21,6 @@ public interface RegistrationTrainerDAO {
 	long basicCourseTrainer(CourseEnrolledUserForm courseEnrolledUserForm, int loginid);
 	long advanceTrainerSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid);
 	long specialTrainerSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid);
+	public PersonalInformationTrainer fullDetailtrainer(int loginId);
 
 }

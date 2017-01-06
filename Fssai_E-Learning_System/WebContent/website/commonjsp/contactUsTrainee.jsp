@@ -10,8 +10,8 @@ window.onload=OnStart;
 </script>
 <script>
 function BlankFields(){
-	document.getElementById("emailAddress").value='';
-	document.getElementById("messageDetails").value='';
+	//document.getElementById("emailAddress").value='';
+	//document.getElementById("messageDetails").value='';
 }
 </script>
 <script type='text/javascript'>
@@ -88,7 +88,7 @@ function validateFields() {
                      
                         <label>Your Email Address: &nbsp;&nbsp;</label><label class="error"  style="color:red;"> ${created }</label>
                         <label class="error visibility" id="emailAddressError" style="color:red;">* enter your email address </label>
-                        <cf:input type="emailAddress" path="emailAddress" class="form-control" placeholder="Enter Your Email"/>
+                        <cf:input type="emailAddress" path="emailAddress" class="form-control" value="${defaultMail}" placeholder="Enter Your Email"/>
                       </div>
                       <div class="form-group">
                         <label>Message Details</label>

@@ -17,6 +17,7 @@ import com.ir.model.CourseTrainee;
 import com.ir.model.FeedbackForm;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.ManageTrainingPartner;
+import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.State;
 import com.ir.model.Utility;
 import com.ir.service.TraineeService;
@@ -77,8 +78,8 @@ public class TraineeServiceImpl implements TraineeService {
 	}
 
 	@Override
-	public long basicSave(CourseEnrolledUserForm courseEnrolledUserForm ,int loginid, int personalinformationtraineeid) {
-		long basicEnroll= traineeDAO.basicSave(courseEnrolledUserForm , loginid , personalinformationtraineeid);
+	public long basicSave(CourseEnrolledUserForm courseEnrolledUserForm ,int loginid, int tableID,Integer profileID) {
+		long basicEnroll= traineeDAO.basicSave(courseEnrolledUserForm , loginid , tableID, profileID);
 		return basicEnroll;
 	}
 	@Override
@@ -132,5 +133,20 @@ public class TraineeServiceImpl implements TraineeService {
 	public String getDefaultMailID(int loginId, int profileId) {
 		// TODO Auto-generated method stub
 		return traineeDAO.getDefaultMailID(loginId, profileId);
+	}
+	@Override
+	public PersonalInformationTrainee FullDetail(int loginId) {
+		PersonalInformationTrainee personalInformationTrainee = traineeDAO.fullDetail(loginId);
+		return personalInformationTrainee;
+	}
+	@Override
+	public int getTableIdForEnrolmentID(int loginId, int profileId) {
+		// TODO Auto-generated method stub
+		return traineeDAO.getTableIdForEnrolmentID(loginId, profileId);
+	}
+	@Override
+	public Boolean updateSteps(int tableID, int profileID, int steps) {
+		// TODO Auto-generated method stub
+		return traineeDAO.updateSteps(tableID, profileID,steps);
 	}
 }

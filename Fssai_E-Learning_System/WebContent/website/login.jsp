@@ -1,7 +1,10 @@
 
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %>
+
+
 <%
+
 response.setHeader("Pragma","No-cache");     
 response.setHeader("Cache-Control","no-cache");     
 response.setDateHeader("Expires",   0); 
@@ -83,7 +86,7 @@ window.onload = OnStart;
     <!-- main section -->
     <section class="section-form-margin-top">
         <div class="container">
-
+ <div clas="col-md-4  col-xs-12">
 <cf:form name="myForm" class="registration-box" style ="margin:0px auto; width:35%; margin-top:15%; margin-top:5%; margin-bottom: 40px;" action="loginProcess.fssai" method="post" commandName="login" onsubmit="return validateFields()">
 
             <!-- login form -->
@@ -95,13 +98,13 @@ window.onload = OnStart;
                             <label for="user id">User Id:</label>
 								<cf:errors path="userId" cssClass="error" />
                             <label id="UserError" class="error visibility">Please enter user id</label>
-                             <cf:input path="userId" onKeyUP="this.value = this.value.toUpperCase();" class="form-control" id="userId" placeholder="Enter Your User ID" value = "SETTRAINER"/>
+                             <cf:input path="userId" onKeyUP="this.value = this.value.toUpperCase();" class="form-control" id="userId" placeholder="Enter Your User ID"/>
                         </div>
                         <div class="form-group">
                             <label for="pwd">Password:</label>
                             <cf:errors path="password" cssClass="error" />
                             <label id="pwdError" class="error visibility">Please enter Password</label>
-                            <cf:password path="password" class="form-control" id="password" placeholder="Enter Your Password" value = "YZgLKl"/>
+                            <cf:password path="password" class="form-control" id="password" placeholder="Enter Your Password" />
                         </div> 
                         
                         
@@ -144,7 +147,7 @@ window.onload = OnStart;
             </div>
 </cf:form>      
         </div>
-
+ </div>
     </section>
 
     <!-- footer -->

@@ -23,6 +23,7 @@ import com.ir.form.RegistrationFormTrainingPartner;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.ManageTrainingPartner;
+import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.service.RegistrationServiceTrainingPartner;
@@ -138,8 +139,14 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 
 	  @RequestMapping(value="/update-personal-information" , method=RequestMethod.GET)
 		public String updateInformation(Model model ,@ModelAttribute("updateInformation") RegistrationFormTrainingPartner registrationFormTrainingPartner, HttpSession session ){		
-			System.out.println(registrationFormTrainingPartner.getFirstName());
-			model.addAttribute("update", "");
+		  Integer userId = (Integer) session.getAttribute("userId");
+			 if(userId > 0){
+				  PersonalInformationTrainingPartner personalInformationTrainingPartner ;
+					personalInformationTrainingPartner = registrationServiceTrainingPartner.FullDetailtrainingpartner(userId);
+					session.setAttribute("loginUr", personalInformationTrainingPartner);
+			
+			 }
+				model.addAttribute("update", "");
 			return "update-personal-information";
 		}
 		/*@RequestMapping(value="/contactTPSave" , method=RequestMethod.POST)

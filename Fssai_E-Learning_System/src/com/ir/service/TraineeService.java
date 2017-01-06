@@ -28,7 +28,7 @@ public interface TraineeService {
 	public String updateTrainee(RegistrationFormTrainee registrationFormTrainee , Integer ss);
 	public String contactTraineeSave(ContactTrainee contactTrainee , String id);
 	public boolean changePasswordTraineeSave(ChangePasswordForm changePasswordForm, String id);
-	public long basicSave(CourseEnrolledUserForm courseEnrolledUserForm , int loginid, int personalinformationtraineeid);
+	public long basicSave(CourseEnrolledUserForm courseEnrolledUserForm , int loginid, int tableID,Integer profileId);
 	public long advanceTraineeSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid,
 			int personalinformationtraineeid);
 	public long specialTrainee(CourseEnrolledUserForm courseEnrolledUserForm, int loginid,
@@ -42,4 +42,7 @@ public interface TraineeService {
 	public int getCurrentCourseId(int loginId);
 	public AdmitCardForm generateTrainerAdmitCard(int loginId,int profileId);
 	public String getDefaultMailID(int loginId,int profileId);
+	public int getTableIdForEnrolmentID(int loginId,int profileId);
+	public PersonalInformationTrainee FullDetail(int loginId);
+	public Boolean updateSteps(int tableID, int profileID, int steps);
 }

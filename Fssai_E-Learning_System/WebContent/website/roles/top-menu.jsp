@@ -30,7 +30,7 @@
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
-							<li class="active hori"><a href="redirectHome.fssai">Home</a></li>
+							<li class="active hori"><a href="loginProcess.fssai">Home</a></li>
 							<li class="hori"><a href="updateInformation.fssai">Update
 									Information</a></li>
 							<li class="hori"><a href="contactTrainee.fssai">Contact
@@ -74,7 +74,7 @@
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
-							<li class="active hori"><a href="trainerHome.fssai">Home</a></li>
+							<li class="active hori"><a href="loginProcess.fssai">Home</a></li>
 							<li class="hori"><a href="search-and-apply.fssai">Search
 									& Apply Vacancy</a></li>
 							<li class="hori"><a href="update-profile.fssai">Update
@@ -121,7 +121,7 @@
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
-							<li class="hori"><a href="#">Home</a></li>
+							<li class="hori"><a href="loginProcess.fssai">Home</a></li>
 							<li class="hori"><a href="update-personal-information.fssai">Update
 									Personal Information</a></li>
 							<li class="hori"><a href="viewFeedbackDetails.fssai">View
@@ -161,7 +161,7 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active hori"><a href="assessorHoomePage.fssai">Home</a></li>
+                    <li class="active hori"><a href="loginProcess.fssai">Home</a></li>
                     <li class="hori"><a href="updateAssessor.fssai">Update Personal Information</a></li>
                    <li class="hori"><a href="contactTrainee.fssai">Contact
 									Us</a></li>
@@ -206,7 +206,7 @@
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
 							<li></li>
-							<li class="active hori"><a href="#">Home</a></li>
+							<li class="active hori"><a href="loginProcess.fssai">Home</a></li>
 							<li><a href="tcm.fssai">Training
 									Center Management</a></li>
 							<li class="hori"><a href="contactTrainee.fssai">Contact
@@ -253,7 +253,7 @@
 						<ul class="nav navbar-nav">
 							<li></li>
 							<li class="active hori"><a
-								href="assessmentAgencyHomepage.fssai">Home</a></li>
+								href="loginProcess.fssai">Home</a></li>
 							<li><a href="trainingCenterManagement.fssai">Assessor
 									User Management</a></li>
 							<li class="hori"><a href="contactTrainee.fssai">Contact
@@ -292,7 +292,7 @@
                             <div id="navbar" class="navbar-collapse collapse">
                                 <ul class="nav navbar-nav">
                                     <li></li>
-                                    <li class="active hori"><a href="adminHomepage.fssai">Home</a></li>
+                                    <li class="active hori"><a href="loginProcess.fssai">Home</a></li>
                                     <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Management<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="traineeUserManagementForm.fssai" class="clr">Trainee</a></li>
@@ -345,7 +345,7 @@
                             <div id="navbar" class="navbar-collapse collapse">
                                 <ul class="nav navbar-nav">
                                     <li></li>
-                                    <li class="active hori"><a href="adminHomepage.fssai">Home</a></li>
+                                    <li class="active hori"><a href="loginProcess.fssai">Home</a></li>
                                     <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Management<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="traineeUserManagementForm.fssai" class="clr">Trainee</a></li>

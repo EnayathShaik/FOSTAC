@@ -4,8 +4,11 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+
 %>
 <html lang="en">
+
+
 <script type = "text/javascript" >
        function preventBack(){window.history.forward();}
         setTimeout("preventBack()", 10);

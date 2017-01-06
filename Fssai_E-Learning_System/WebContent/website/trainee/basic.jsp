@@ -81,11 +81,9 @@ function getCourseDetails(){
 
 
 function gettid(value){
-		 
 		  document.getElementById("trainingCalendarId").value = value;
-		  alert(value);
-		  
-		} 
+	
+} 
 
 
 

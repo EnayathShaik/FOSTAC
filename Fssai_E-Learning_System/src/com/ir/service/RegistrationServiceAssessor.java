@@ -12,6 +12,7 @@ import com.ir.model.AssessmentAgency;
 import com.ir.model.CourseEnrolled;
 import com.ir.model.CourseName;
 import com.ir.model.ManageAssessmentAgency;
+import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.State;
 import com.ir.model.Title;
 
@@ -40,5 +41,7 @@ public interface RegistrationServiceAssessor {
 	//public String contactAssesorSave(ContactTrainee contactTrainee, String id);
 
 	/*public String contactAssesorSave(ContactFormAssessor contactFormAssessor, int id);*/
+	
+	public PersonalInformationAssessor fullDetailAssessor(int id );
 
 }

@@ -1,0 +1,133 @@
+@Override
+	public String updateTrainee(
+			RegistrationFormTrainee registrationFormTrainee, Integer ss) {
+		try{
+			Session session = sessionFactory.openSession();
+
+			System.out.println("iddddd  " + ss);
+			State ps = getState(registrationFormTrainee.getResState());
+			State cs = getState(registrationFormTrainee.getResState());
+			State bs = getState(registrationFormTrainee.getBussState());
+			District pd = getDistrict(registrationFormTrainee
+					.getResidentialDistrict());
+			District cd = getDistrict(registrationFormTrainee
+					.getResidentialDistrict());
+			District bd = getDistrict(registrationFormTrainee.getBussDistrict());
+			City pc = getCity(registrationFormTrainee.getResCity());
+			City cc = getCity(registrationFormTrainee.getCorrespondenceCity());
+			City bc = getCity(registrationFormTrainee.getBussCity());
+			// Title tt = getTitle(registrationFormTrainee.getTitle());
+			KindOfBusiness kob = getKid(registrationFormTrainee.getKindOfBusiness());
+			System.out.println("Kind Of Business 1== "+registrationFormTrainee.getKindOfBusiness());
+			//System.out.println("Kind Of Business 2== "+kob);
+			
+			PersonalInformationTrainee personalInformationTrainee = (PersonalInformationTrainee) session
+					.load(PersonalInformationTrainee.class, ss);
+			
+			
+			boolean correspondADD=registrationFormTrainee.isCheckCorrespondence();
+			boolean checkCompany=registrationFormTrainee.isCheckCompany();
+			
+
+			//Business
+			/*personalInformationTrainee.setKindOfBusiness(kob);
+			personalInformationTrainee.setBusinessAddressLine1(registrationFormTrainee.getBusinessAddressLine1());
+			personalInformationTrainee.setBusinessAddressLine2(registrationFormTrainee.getBusinessAddressLine2());
+			personalInformationTrainee.setBussState(bs);
+			personalInformationTrainee.setBussCity(bc);
+			personalInformationTrainee.setBussDistrict(bd);
+			personalInformationTrainee.setBussPincode(registrationFormTrainee.getBussPincode());
+			personalInformationTrainee.setCompanyName(registrationFormTrainee.getCompanyName());
+			personalInformationTrainee.setDesignation(registrationFormTrainee.getDesignation());
+			personalInformationTrainee.setRegistrationNo(registrationFormTrainee.getRegistrationNo());*/
+			
+			
+			
+			if(registrationFormTrainee.getKindOfBusiness() == 6){
+				KindOfBusiness koFbusiness = new KindOfBusiness(6, "Not in business");
+				personalInformationTrainee.setKindOfBusiness(koFbusiness);
+				personalInformationTrainee.setDesignation(null);
+				personalInformationTrainee.setCompanyName(null);
+				personalInformationTrainee.setRegistrationNo(null);
+				personalInformationTrainee.setBusinessAddressLine1(null);
+				personalInformationTrainee.setBusinessAddressLine2(null);
+				personalInformationTrainee.setBussCity(null);
+				personalInformationTrainee.setBussDistrict(null);
+				personalInformationTrainee.setBussState(null);
+				personalInformationTrainee.setBussPincode(null);
+				
+			}
+			else{
+				System.out.println("Else Kind of business");
+				personalInformationTrainee.setCompanyName(registrationFormTrainee.getCompanyName());
+				personalInformationTrainee.setDesignation(registrationFormTrainee.getDesignation());
+				personalInformationTrainee.setRegistrationNo(registrationFormTrainee.getRegistrationNo());
+				personalInformationTrainee.setKindOfBusiness(kob);
+
+				if(checkCompany){
+					personalInformationTrainee.setBusinessAddressLine1(registrationFormTrainee.getCorrespondenceAddress1());
+					personalInformationTrainee.setBusinessAddressLine2(registrationFormTrainee.getCorrespondenceAddress2());
+					personalInformationTrainee.setBussCity(cc);
+					personalInformationTrainee.setBussDistrict(cd);
+					personalInformationTrainee.setBussState(cs);
+					personalInformationTrainee.setBussPincode(registrationFormTrainee.getCorrespondencePincode());
+					personalInformationTrainee.setCheckCompany("true");
+					
+				}else{
+					personalInformationTrainee.setBusinessAddressLine1(registrationFormTrainee.getBusinessAddressLine1());
+					personalInformationTrainee.setBusinessAddressLine2(registrationFormTrainee.getBusinessAddressLine2());
+					personalInformationTrainee.setDesignation(registrationFormTrainee.getDesignation());
+				
+					personalInformationTrainee.setBussState(bs);
+					personalInformationTrainee.setBussCity(bc);
+					personalInformationTrainee.setBussDistrict(bd);
+					personalInformationTrainee.setBussPincode(registrationFormTrainee.getBussPincode());
+					personalInformationTrainee.setCheckCompany("false");
+		}
+			}
+			
+			
+			personalInformationTrainee.setCorrespondenceAddress1(registrationFormTrainee.getCorrespondenceAddress1());
+			personalInformationTrainee.setCorrespondenceAddress2(registrationFormTrainee.getCorrespondenceAddress2());
+			personalInformationTrainee.setCorrespondenceState(cs);
+			personalInformationTrainee.setCorrespondenceDistrict(cd);
+			personalInformationTrainee.setCorrespondenceCity(cc);
+			personalInformationTrainee.setEmail(registrationFormTrainee.getEmail());
+			personalInformationTrainee.setMobile(registrationFormTrainee.getMobile());
+			personalInformationTrainee.setCorrespondencePincode(registrationFormTrainee.getCorrespondencePincode());
+			//personalInformationTrainee.setCorrespondenceState(adminDAO.getState(registrationFormTrainee.getCorrespondenceState()));
+			
+			
+			//Permanent Block
+			/*personalInformationTrainee.setResidentialLine1(registrationFormTrainee.getResidentialAddressLine1());
+			personalInformationTrainee.setResidentialLine2(registrationFormTrainee.getResidentialAddressLine2());
+			personalInformationTrainee.setResState(ps);
+			personalInformationTrainee.setResidentialDistrict(pd);
+			personalInformationTrainee.setResCity(pc);
+			personalInformationTrainee.setResPincode(registrationFormTrainee.getResPincode());*/
+			if(correspondADD){
+				personalInformationTrainee.setResidentialLine1(registrationFormTrainee.getCorrespondenceAddress1());
+				personalInformationTrainee.setResidentialLine2(registrationFormTrainee.getCorrespondenceAddress2());
+				personalInformationTrainee.setResState(cs);
+				personalInformationTrainee.setResCity(cc);
+				personalInformationTrainee.setResidentialDistrict(cd);
+				personalInformationTrainee.setResPincode(registrationFormTrainee.getCorrespondencePincode());
+				personalInformationTrainee.setCheckPermanent("true");
+			}else{
+				personalInformationTrainee.setResidentialLine1(registrationFormTrainee.getResidentialAddressLine1());
+				personalInformationTrainee.setResidentialLine2(registrationFormTrainee.getResidentialAddressLine2());
+				personalInformationTrainee.setResState(ps);
+				personalInformationTrainee.setResCity(pc);
+				personalInformationTrainee.setResidentialDistrict(pd);
+				personalInformationTrainee.setResPincode(registrationFormTrainee.getResPincode());
+				personalInformationTrainee.setCheckPermanent("false");
+				}
+			session.update(personalInformationTrainee);
+			session.beginTransaction().commit();
+			session.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return null;
+	}

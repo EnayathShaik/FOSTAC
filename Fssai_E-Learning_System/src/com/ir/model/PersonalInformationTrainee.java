@@ -441,6 +441,7 @@ public class PersonalInformationTrainee {
 	public void setCheckCorrespondence(boolean checkCorrespondence) {
 		this.checkCorrespondence = checkCorrespondence;
 	}
+	
 	private int steps;
 
 	public int getSteps() {

@@ -175,7 +175,34 @@ public class PersonalInformationTrainer implements Serializable {
 	private String AssociatedWithAnyTrainingPartner;
 	@NotNull
 	private int NoOfTrainingSessionConducted;
+	@Column(columnDefinition="int default 0")
+	private int steps;
 	
+	public int getTrainingCenterPermanentState() {
+		return TrainingCenterPermanentState;
+	}
+	public void setTrainingCenterPermanentState(int trainingCenterPermanentState) {
+		TrainingCenterPermanentState = trainingCenterPermanentState;
+	}
+	public int getTrainingCenterPermanentDistrict() {
+		return TrainingCenterPermanentDistrict;
+	}
+	public void setTrainingCenterPermanentDistrict(
+			int trainingCenterPermanentDistrict) {
+		TrainingCenterPermanentDistrict = trainingCenterPermanentDistrict;
+	}
+	public int getTrainingCenterPermanentCity() {
+		return TrainingCenterPermanentCity;
+	}
+	public void setTrainingCenterPermanentCity(int trainingCenterPermanentCity) {
+		TrainingCenterPermanentCity = trainingCenterPermanentCity;
+	}
+	public int getSteps() {
+		return steps;
+	}
+	public void setSteps(int steps) {
+		this.steps = steps;
+	}
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="AssociatedTrainingpartnerName")
 	private ManageTrainingPartner AssociatedTrainingpartnerName;
 	//@NotNull

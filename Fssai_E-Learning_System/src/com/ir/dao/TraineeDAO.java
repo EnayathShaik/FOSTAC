@@ -40,7 +40,7 @@ public interface TraineeDAO {
 
 	public boolean changePasswordTraineeSave(ChangePasswordForm changePasswordForm, String id);
 
-	public long basicSave(CourseEnrolledUserForm courseEnrolledUserForm  , int loginid, int personalinformationtraineeid);
+	public long basicSave(CourseEnrolledUserForm courseEnrolledUserForm  , int loginid, int tableID, Integer profileID);
 
 	Title getTitle(int id);
 
@@ -70,4 +70,8 @@ public interface TraineeDAO {
 	public AdmitCardForm generateTrainerAdmitCard(int loginId,int profileId);
 	
 	public String getDefaultMailID(int loginId,int profileId);
+	public int getTableIdForEnrolmentID(int loginId,int profileId);
+	public PersonalInformationTrainee fullDetail(int loginId);
+	public Boolean updateSteps(int tableID, int profileID, int steps);
+	
 }

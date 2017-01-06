@@ -9,6 +9,7 @@ import com.ir.form.RegistrationFormTrainingPartner;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.ManageTrainingPartner;
+import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.State;
 import com.ir.model.Title;
 
@@ -41,5 +42,8 @@ public interface RegistrationServiceTrainingPartner {
 	public List<CourseName> courseNameList();
 	// Rishi
 	public boolean changePasswordTraineeSave(ChangePasswordForm changePasswordForm, String id);
+	
+	
+	public PersonalInformationTrainingPartner FullDetailtrainingpartner(int loginId);
 	// Rishi end
 }

@@ -137,9 +137,9 @@ function getDistrict(val)
 	      var mainData1 = jQuery.parseJSON(response);
 	      alert(mainData1);
 	      $('#district option').remove();
-	      $('#district').append('<option value="0" label="Select State" />');
+	      $('#district').append('<option value="0">Select State</option>');
 	      $('#city option').remove();
-	      $('#city').append('<option value="0" label="Select City" />');
+	      $('#city').append('<option value="0">Select City</option>');
 	  	  $.each(mainData1 , function(i , obj)
 	  		{
 	  		
@@ -281,9 +281,9 @@ function getStateUpdate(s , d , c)
 	      $.each(mainData2 , function(i , obj)
 	  		{	
 	    	  if(s == obj.stateId){
-	    		  $('#state').append('<option value='+obj.stateId+' label='+obj.stateName+' selected="true" />');	
+	    		  $('#state').append('<option selected="true" value='+obj.stateId+'>'+obj.stateName+'  </option>');	
 	    	  }else{
-	    		  $('#state').append('<option value='+obj.stateId+' label='+obj.stateName+' />');	
+	    		  $('#state').append('<option value='+obj.stateId+'>'+obj.stateName+' </option>');	
 	    	  }	
 	  		});
 	      }
@@ -303,9 +303,9 @@ function getDistrictUpdate(s , d , c)
 	      $.each(mainData1 , function(i , obj)
 	  		{
 	    	  if(d == obj.districtId){
-	    		  $('#district').append('<option value='+obj.districtId+' label='+obj.districtName+' selected="true"/>');
+	    		  $('#district').append('<option selected="true" value='+obj.districtId+'>'+obj.districtName+'</option>');
 	    	  }else{
-	    		  $('#district').append('<option value='+obj.districtId+' label='+obj.districtName+' />');
+	    		  $('#district').append('<option value='+obj.districtId+'>'+obj.districtName+' </option>');
 	    	  }	
 	  		});
 	      }
@@ -320,14 +320,14 @@ function getCityUpdate(d , c)
 	      success: function (response) {      
 	      var mainData1 = jQuery.parseJSON(response);
 	      $('#city option').remove();
-	      $('#city').append('<option value="0" label="Select District" />');
+	      $('#city').append('<option value="0">Select District</option>');
 	  	  
 	      $.each(mainData1 , function(i , obj)
 	  		{
 	    	  if(c == obj.cityId){
-	    		  $('#city').append('<option value='+obj.cityId+' label='+obj.cityName+' selected="true"/>');
+	    		  $('#city').append('<option selected="true" value='+obj.cityId+'>'+obj.cityName+' </option>');
 	    	  }else{
-	    		  $('#city').append('<option value='+obj.cityId+' label='+obj.cityName+' />');
+	    		  $('#city').append('<option value='+obj.cityId+'>'+obj.cityName+' </option>');
 	    	  }	
 	  		});
 	      }

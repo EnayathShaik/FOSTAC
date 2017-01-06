@@ -12,6 +12,7 @@ import com.ir.model.CourseName;
 import com.ir.model.District;
 import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageAssessmentAgency;
+import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.State;
 import com.ir.model.Title;
 
@@ -42,6 +43,7 @@ public interface RegistrationAssessorDAO {
 	String cotactAssessorSave(ContactTrainee contactTrainee, String id);
 
 	boolean cotactAssessorSave(ChangePasswordForm changePasswordForm, String id);
+	public PersonalInformationAssessor fullDetailAssesser(int id );
 
 	/*String cotactAssessorSave(ContactFormAssessor contactFormAssessor, int id);*/
 
