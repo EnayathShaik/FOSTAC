@@ -156,7 +156,7 @@ public class SearchManageCourseContent extends HttpServlet {
 		String name = (request.getQueryString());
 		System.out.println("passing name   :" + name);
 		String[] totalConnected = name.split("&");
-		String contentLocation="" , courseType="",courseName="",modeOfTraining="",contentType="";
+		String contentLocation="" , courseType="",courseName="",modeOfTraining="",contentType="",contentLink="",contentName="";
 		// "contentLocation=0&courseType=0&courseName=&modeOfTraining=&contentType=0";
 		
 		if(!name.equalsIgnoreCase("ALL")){
@@ -199,6 +199,22 @@ public class SearchManageCourseContent extends HttpServlet {
 				contentType = "%" ;	
 			}
 			
+			try{
+				contentLink = (totalConnected[5].split("="))[1];	
+			}
+			catch(Exception e)
+			{
+				contentLink = "%" ;	
+			}
+			
+			try{
+				contentName = (totalConnected[6].split("="))[1];	
+			}
+			catch(Exception e)
+			{
+				contentName = "%" ;	
+			}
+			
 			
 		
 		
@@ -221,7 +237,7 @@ public class SearchManageCourseContent extends HttpServlet {
 				"mcm.modeoftraininginput , mcm.contenttypeinput , mcm.contentnameinput , mcm.managecoursecontentid from ManageCoursecontent as mcm "+
 				"inner join coursetype as ct on ct.coursetypeid = mcm.coursetypeinput "+
 				"inner join coursename as cn on cn.coursenameid = mcm.coursenameinput "+
-				"where cast(mcm.contentlocationinput as varchar) like '"+ contentLocation+"' and cast(mcm.coursetypeinput as varchar) like '"+courseType+"' and cast(mcm.coursenameinput as varchar) like '"+courseName  +"' and cast(mcm.modeoftraininginput as varchar) like '"+modeOfTraining+"' and cast(mcm.contenttypeinput as varchar) like '"+contentType+ "'";
+				"where cast(mcm.contentlocationinput as varchar) like '"+ contentLocation+"' and cast(mcm.coursetypeinput as varchar) like '"+courseType+"' and cast(mcm.coursenameinput as varchar) like '"+courseName  +"' and cast(mcm.modeoftraininginput as varchar) like '"+modeOfTraining+"' and cast(mcm.contenttypeinput as varchar) like '"+contentType+ "' and mcm.contentnameinput like '"+contentName+"%' and cast(mcm.contentlinkinput as varchar) like '"+contentLink+"%'";
 		else
 			 sql= "select cn.coursename , ct.coursetype , mcm.contentlinkinput , mcm.contentlocationinput, "+
 						"mcm.modeoftraininginput , mcm.contenttypeinput , mcm.contentnameinput , mcm.managecoursecontentid from ManageCoursecontent as mcm "+

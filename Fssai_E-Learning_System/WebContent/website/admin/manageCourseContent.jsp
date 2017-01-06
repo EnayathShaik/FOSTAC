@@ -86,6 +86,8 @@ function searchManageCourseContent(indicator){
 	var modeOfTraining = $("#modeOfTraining").val();
 	var contentType =  $("#contentType").val(); 
 
+	var contentLink =  $("#contentLink").val(); 
+	var contentName =  $("#contentName").val(); 
 	if(contentLocation==0)
 		contentLocation="";
 	if(courseType==0)
@@ -103,7 +105,7 @@ function searchManageCourseContent(indicator){
 		if(indicator.match('ALL')){
 			total = "ALL";//"contentLocation=0&courseType=0&courseName=&modeOfTraining=&contentType=0";
 		}else{
-			total = "contentLocation="+contentLocation+"&courseType="+courseType+"&courseName="+courseName+"&modeOfTraining="+modeOfTraining+"&contentType="+contentType+"";
+			total = "contentLocation="+contentLocation+"&courseType="+courseType+"&courseName="+courseName+"&modeOfTraining="+modeOfTraining+"&contentType="+contentType+"&contentLink="+contentLink+"&contentName="+contentName+"";
 		}
 		$.ajax({
 		type: 'post',
@@ -272,11 +274,8 @@ function deleteCourseContent(i){
                                                             <cf:errors path="contentName" cssClass="error" /></li>
                                                         </ul>
                                                     </div>
-<%-- <cf:input path="contentName" class="form-control" /> --%>
-<cf:select path="contentName" class="form-control" >
-											<cf:option value="0" label="Select Content Name" />
-											 <cf:options items="${contentNameList}" itemValue="contentName" itemLabel="contentDesc"/> 
-											</cf:select>
+<cf:input path="contentName" class="form-control" /> 
+
                                                 </div>                                                
                                                 
                                             </div> <!-- left side ends -->
