@@ -416,14 +416,22 @@
   <servlet-name>onLoadRegion</servlet-name> 
   <servlet-class>com.ir.servlet.OnLoadRegion</servlet-class> 
   </servlet>
+  <servlet>
+  <servlet-name>searchRegion</servlet-name> 
+  <servlet-class>com.ir.servlet.SearchRegion</servlet-class> 
+  </servlet>
   <servlet-mapping>
   <servlet-name>onLoadRegion</servlet-name> 
   <url-pattern>/onLoadRegion.jspp</url-pattern> 
   </servlet-mapping>
   <servlet>
-  <servlet-name>searchRegion</servlet-name> 
-  <servlet-class>com.ir.servlet.SearchRegion</servlet-class> 
+  <servlet-name>EditRegion</servlet-name> 
+  <servlet-class>com.ir.servlet.EditRegion</servlet-class> 
   </servlet>
+   <servlet-mapping>
+  <servlet-name>EditRegion</servlet-name> 
+  <url-pattern>/editRegionData.jspp</url-pattern> 
+  </servlet-mapping>
   <servlet-mapping>
   <servlet-name>searchRegion</servlet-name> 
   <url-pattern>/searchRegion.jspp</url-pattern> 
