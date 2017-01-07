@@ -13,15 +13,18 @@ function editRegion(distid,stateid,regionid,cityid,regionName,status){
 	//$('#cityName').attr('readonly', 'true');
 	document.getElementById('btnUpdate').style.display = 'block';
 	document.getElementById('btnCreate').style.display = 'none';
-	//var c = document.getElementById('statusH').value;
-	
-	document.getElementById('districtId').value = distid
-	;
-	$("#districtId").trigger("change");
 	document.getElementById('stateId').value = stateid;
-	document.getElementById('RegionidH').value = regionid;
+	document.getElementById('districtId').value = distid;
+	$("#districtId").trigger("change");
+	console.log("cityId "+cityid);
+	window.setTimeout(function(){
+		$('#cityId').val(cityid);    
+         }, 3000);
 	
 	document.getElementById('cityId').value = cityid;
+	document.getElementById('RegionidH').value = regionid;
+	
+	
 	document.getElementById('regionName').value = regionName;
 	document.getElementById('status').value = status;
 	/* $("#stateId").prop("disabled", true);
@@ -81,16 +84,21 @@ function editRegionData(){
 	var regionId = $("#RegionidH").val();
 	
 	var regionName = $('#regionName').val();
+	
+	var stateName = $('#stateId').val();
+	var districtName = $('#districtId').val();
+	var cityName = $('#cityId').val();
 	document.getElementById('btnUpdate').style.display = 'none';
 	document.getElementById('btnCreate').style.display = 'block';
 	$(".displayNone").css("display","block");
 	 {
 		var result="";
-		var total = "regionId="+regionId+"&regionName="+regionName+"&status="+status;
+		var total = "regionId="+regionId+"&regionName="+regionName+"&status="+status+"&stateName="+stateName+"&districtName="+districtName+"&cityName="+cityName+"";
 		//alert(total);
 		$('#newTable').hide();
 		$.ajax({
 		type: 'post',
+		async : false,
 		url: 'editRegionData.jspp?'+ total,
 		data: {
 		       user_name:name,
@@ -100,11 +108,10 @@ function editRegionData(){
 		      }
 		      });
 		//alert (result);
+		location.reload();
 		onLoadRegion();
-		
 	return true;
-	location.reload();
-	onLoadRegion();
+
 	}
 }
 
@@ -198,7 +205,7 @@ function searchRegion(){
 		$.ajax({
 		type: 'post',
 		url: 'searchRegion.jspp?'+ total,
-		async: false, 
+		async: false,
 		success: function (data){
 		
 		$('#newTable').show();
@@ -336,8 +343,8 @@ function searchRegion(){
                                                     
     <cf:input path="regionName"   placeholder="Region Name" class="form-control"   />
                                     <div class="form-group">
-                                                    <button id="btnCreate" style="margin-top:20px;" class="btn login-btn">Create</button>
-                                                      <a href="#testt" style="margin-top:20px;" onclick="searchRegion();"  class="btn login-btn">Search</a>
+                                                    <button id="btnCreate" style="margin-top:71px;" class="btn login-btn">Create</button>
+                                                      <a href="#testt" style="margin-top: 36px;margin-left: 108px;margin-bottom: -33px;" onclick="searchRegion();"  class="btn login-btn">Search</a>
                                                     <input type="hidden" id="RegionidH" value="">
                                                     
                                                     <a href="#" onclick="editRegionData();" id="btnUpdate" style="display: none; padding: 6px 7px; width: 20%; margin-bottom: 0; font-size: 14px; 

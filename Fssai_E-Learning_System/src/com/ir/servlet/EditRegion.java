@@ -59,13 +59,16 @@ public class EditRegion extends HttpServlet {
 		System.out.println("passing name   :" + name);
 		String[] totalConnected = name.split("&");
 		String regionName,status;
-		int  regionId;
+		int  regionId,stateId,districtId,cityId;
 		//status = (totalConnected[0].split("="))[1];
 		
 		regionId = Integer.parseInt((totalConnected[0].split("="))[1]);
 		regionName = (totalConnected[1].split("="))[1];
 		status = (totalConnected[2].split("="))[1];
-		System.out.println("checkkk data==>"+regionId+regionName);
+		stateId =  Integer.parseInt((totalConnected[3].split("="))[1]);
+		districtId =  Integer.parseInt((totalConnected[4].split("="))[1]);
+		cityId =  Integer.parseInt((totalConnected[5].split("="))[1]);
+		System.out.println("checkkk data==>"+regionId+regionName+stateId+districtId+cityId);
 		Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
@@ -77,6 +80,9 @@ public class EditRegion extends HttpServlet {
 		
 		r.setRegionName(regionName);
 		r.setStatus("A");
+		r.setStateId(stateId);
+		r.setDistrictId(districtId);
+		r.setCityId(cityId);
 		session.update(r);
 		session.beginTransaction().commit();
 		session.close();
@@ -87,6 +93,9 @@ public class EditRegion extends HttpServlet {
 			
 			r.setRegionName(regionName);
 			r.setStatus("I");
+			r.setStateId(stateId);
+			r.setDistrictId(districtId);
+			r.setCityId(cityId);
 			session.update(r);
 			session.beginTransaction().commit();
 			session.close();
