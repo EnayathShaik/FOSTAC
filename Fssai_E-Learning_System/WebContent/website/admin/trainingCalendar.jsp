@@ -1,6 +1,12 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript">
+function OnStart(){
+	getTrainingCalender('ALL');
+}
+window.onload = OnStart;
+</script>
 <script>
 function getCourseName(val)
 {
@@ -9,7 +15,7 @@ function getCourseName(val)
 	      url: 'loadCourseName.jspp?'+ val,
 	      success: function (response) {      
 	      var mainData1 = jQuery.parseJSON(response);
-	      alert(mainData1);
+	     // alert(mainData1);
 	      $('#courseName option').remove();
 	      $('#courseName').append('<option value="0" label="Select Course name" />')
 	  	  $.each(mainData1 , function(i , obj)
@@ -41,7 +47,7 @@ function getTrainingCenter(val)
 }
 </script>
 <script>
-function getTrainingCalender(){
+function getTrainingCalender(indicator){
 	var courseType = $("#courseType").val();
 	var courseName = $("#courseName").val();
 	var trainingPartner = $("#trainingPartner").val();
@@ -50,15 +56,25 @@ function getTrainingCalender(){
 	var trainingTime = $("#trainingTime").val();
 	var trainerName = $("#trainerName").val();
 	var trainingType = $("#trainingType").val();
-	var total ="courseType="+courseType+"&courseName="+courseName+"&trainingPartner="+trainingPartner+ 
+	var result="";
+	
+	var total=""; 
+	
+	if(indicator.match('ALL')){
+		total = "ALL";//"contentLocation=0&courseType=0&courseName=&modeOfTraining=&contentType=0";
+	}else{
+	
+	total="courseType="+courseType+"&courseName="+courseName+"&trainingPartner="+trainingPartner+ 
 	"&trainingCenter="+trainingCenter+"&trainingDate="+trainingDate+"&trainingTime="+trainingTime+
 	"&trainerName="+trainerName+"&trainingType="+trainingType;
+	}
+	//alert("total>"+total);
 	$.ajax({
 	      type: 'post',
 	      url: 'getTrainingCalender.jspp?'+ total,
 	      success: function (response) {      
 	      var mainData1 = jQuery.parseJSON(response);
-	      alert(mainData1);
+	      //alert(mainData1);
 	      var j = 1;
 	      $('#newTable tr').remove();
 	      $('#newTable').append('<tr class="background-open-vacancies"><td>S.No.</td><td>Training Type</td><td>Course Type</td><td>Course Name</td><td>Training Partner Name</td><td>Training Center name</td><td>Training Date</td><td>Training Time</td><td>Trainer Name</td><tr>')
@@ -214,7 +230,7 @@ function getTrainingCalender(){
 <input type="submit"  class="form-control login-btn" value="Create" style="width: 200px;
     margin-left: 13px;" />  
                                           
-<a href="#" onclick="getTrainingCalender();" class="btn btn-default pull-right show-details-vacancy collapsed" style="margin-top: -36px;
+<a href="#" onclick="getTrainingCalender('SELECTED');" class="btn btn-default pull-right show-details-vacancy collapsed" style="margin-top: -36px;
     margin-right: 15px; background:#ef580d" data-toggle="collapse" data-target="#show-result"
      aria-expanded="false">Show Calendar</a>
                                        

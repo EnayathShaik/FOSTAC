@@ -496,8 +496,10 @@ public class AdminController {
 		String trainingCalendar = adminService.trainingCalendarForm(trainingCalendarForm);
 		if(trainingCalendar.equalsIgnoreCase("created")){
 			model.addAttribute("created", "Calender saved successfully !!!");
+			model.addAttribute("trainingCalendarForm", new TrainingCalendarForm());
 		}else{
 			model.addAttribute("created", "Oops , something went wrong !!!");
+			model.addAttribute("trainingCalendarForm", new TrainingCalendarForm());
 		}
 		return "trainingCalendarForm";
 	}

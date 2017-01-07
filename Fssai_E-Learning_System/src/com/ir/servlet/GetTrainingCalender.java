@@ -45,8 +45,9 @@ public class GetTrainingCalender extends HttpServlet {
 		String name = (request.getQueryString());
 		System.out.println("passing name   :" + name);
 		String[] totalConnected = name.split("&");
-		String courseType,courseName,trainingPartner,trainingCenter,trainingDate = null,trainingTime = null,trainerName = null,trainingType;
+		String courseType="",courseName="",trainingPartner="",trainingCenter="",trainingDate = null,trainingTime = null,trainerName = null,trainingType="";
 		
+		if(!name.equalsIgnoreCase("ALL")){
 		courseType = (totalConnected[0].split("="))[1];
 		if(courseType.equals("0")){		courseType = "%";	}
 		courseName = (totalConnected[1].split("="))[1];
@@ -85,12 +86,27 @@ public class GetTrainingCalender extends HttpServlet {
 		
 		System.out.println(trainerName);
 		
-		
+		}
 		Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
-		String sql ="select tc.trainingcalendarid ,mtp.trainingpartnername ,  "+
+		String sql = "";
+		if(name.equalsIgnoreCase("ALL"))
+
+			sql="select tc.trainingcalendarid ,mtp.trainingpartnername ,  "+
+						" concat(pitp.firstname ,  '  ' , pitp.middlename , ' ' , PITP.lastname) as name, "+
+						" cn.coursename , ct.coursetype , tc.trainingdate ,tc.trainingtime , pitp.seatcapacitypersession , pitp.seatcapacityavailable , "+
+						"   tc.trainingtype  , pitp.trainingcentrename "+
+						" from trainingcalendar as tc "+
+						" inner join coursename as cn on cn.coursenameid = tc.coursename "+
+						" inner join coursetype as ct on ct.coursetypeid = tc.coursetype "+
+						" inner join managetrainingpartner as mtp on mtp.managetrainingpartnerid = tc.trainingpartner "+
+						" inner join personalinformationtrainingpartner as pitp on mtp.managetrainingpartnerid = pitp.trainingpartnername "+
+						" and tc.trainingcenter = pitp.personalinformationtrainingpartnerid " ;
+						else
+							
+		sql="select tc.trainingcalendarid ,mtp.trainingpartnername ,  "+
 					" concat(pitp.firstname ,  '  ' , pitp.middlename , ' ' , PITP.lastname) as name, "+
 					" cn.coursename , ct.coursetype , tc.trainingdate ,tc.trainingtime , pitp.seatcapacitypersession , pitp.seatcapacityavailable , "+
 					"   tc.trainingtype  , pitp.trainingcentrename "+
