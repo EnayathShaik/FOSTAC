@@ -54,38 +54,40 @@ public class SearchVacancy extends HttpServlet {
 		String [] n1 = name.split("&");
 		
 		String courseType,courseName , trainingDate , requiredExp ,noOfVacancy,selectAll;
-		if(n1[0].split("=")[1].equals("0")){
-			courseType = "%";
-		}else{
+		try{
 			courseType = n1[0].split("=")[1];
 		}
-		
-		if(n1[1].split("=")[1].equals("0")){
-			courseName = "%";
-		}else{
-			courseName = n1[0].split("=")[1];
+		catch(Exception e){
+			courseType = "%";	
 		}
 		
-		//////////////////
-		if(n1[2].split("=").length == 1){
+		try{
+			courseName = n1[1].split("=")[1];	
+		}catch(Exception e){
+			courseName = "%";	
+		}
+		
+	
+		try{
+			trainingDate = n1[2].split("=")[1];
+		}
+		catch(Exception e){
 			trainingDate = "%";
-		}else{
-			trainingDate = n1[0].split("=")[1];
 		}
 		
-		
-		////////////////
-		if(n1[3].split("=")[1].equals("0")){
+		try{
+			requiredExp = n1[3].split("=")[1];
+		}
+		catch(Exception e){
 			requiredExp = "%";
-		}else{
-			requiredExp = n1[0].split("=")[1];
-		}
-		if(n1[4].split("=")[1].equals("0")){
-			noOfVacancy = "%";
-		}else{
-			noOfVacancy = n1[0].split("=")[1];
 		}
 		
+		try{
+			noOfVacancy = n1[4].split("=")[1];
+		}
+		catch(Exception e){
+			noOfVacancy = "%";
+		}
 		
 		Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
@@ -108,7 +110,7 @@ public class SearchVacancy extends HttpServlet {
 		
 		
 		sql = " select pvtc.postvacancytrainingcenterid , ct.coursetype , cn.coursename , pvtc.trainingdate ,pvtc.requiredexp , pvtc.noofvacancy,pvtc.loginid  from postvacancytrainingcenter as pvtc   inner join coursetype as ct on ct.coursetypeid = pvtc.coursetype    inner join coursename as cn on cn.coursenameid = pvtc.coursename inner join personalinformationtrainingpartner D on(pvtc.trainingcenter=D.personalinformationtrainingpartnerid) inner join logindetails E on(D.logindetails=E.ID) " +
-				"where 1=1";//E.loginid ='"+loginId+"'";
+				"where E.loginid ='"+loginId+"' and CAST(ct.coursetype AS VARCHAR(10)) like '"+courseType+"%' and CAST(cn.coursename AS VARCHAR(10)) like '"+courseName+"%' and CAST(pvtc.trainingdate AS VARCHAR(10)) like '"+trainingDate+"%'  and cast(pvtc.requiredexp as varchar(10))  like '"+requiredExp+"%' and cast(pvtc.noofvacancy as varchar(10)) like '"+noOfVacancy+"%' ";
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
 		System.out.println(list.size());

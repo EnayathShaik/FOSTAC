@@ -62,12 +62,6 @@
     <servlet-name>editCityData</servlet-name>
     <url-pattern>/editCityData.jspp</url-pattern>
   </servlet-mapping>
-  
-  
-  
-  
-  
-  
   <servlet>
     <servlet-name>searctAsAgency</servlet-name>
     <servlet-class>com.ir.servlet.SearchAssesAgency</servlet-class>

@@ -80,8 +80,7 @@ public class OnLoadRegion extends HttpServlet {
 		}
 		ResultSet rs = null;
 		PreparedStatement stmt = null;
-		String sql = "select  d.districtName , r.regionname , r.id ,s.statename ,c.cityname,r.cityid,r.districtid,r.stateid,r.status from region as r "
-				+ "inner join district as d  on d.districtid= r.districtid inner join city as c on c.districtid = d.districtid inner join state as s on s.stateid = d.stateid" ;
+		String sql = "select d.districtName , r.regionname ,r.id , s.statename , c.cityname ,r.cityid , r.districtid , r.stateid , r.status  from region r left join city c on c.cityid = r.cityid left join district d on d.districtid = r.districtid left join state s on s.stateid = r.stateid  ";
 		List list = new ArrayList<>();
 		try {
 			stmt = conn.prepareStatement(sql);

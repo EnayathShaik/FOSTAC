@@ -4,7 +4,7 @@
 <script type="text/javascript">
 
 function OnStart(){
-	searchVacancy();
+	searchVacancy('ALL');
 }
 window.onload = OnStart;
 </script>
@@ -81,15 +81,15 @@ function validateFields(){
 }
 </script>
 <script type="text/javascript">
-function searchVacancy(){
+function searchVacancy(indicator){
 	var loginID = $("#loginId").val();
 	
 	
-	var courseType =  $("#courseType").val();
-	var courseName =  $("#courseName").val();
+	var courseType =  $("#courseType").find('option:selected').text();
+	var courseName =  $("#courseName").find('option:selected').text();
 	var trainingDate = $("#trainingDate").val().replace("-","/").replace("-","/");
-	var requiredExp =  $("#requiredExp").val();
-	var noOfVacancy =  $("#noOfVacancy").val();
+	var requiredExp =  ($("#requiredExp").val() == 0 ? "" : $("#requiredExp").val());
+	var noOfVacancy =  ($("#noOfVacancy").val() == 0 ? "" : $("#noOfVacancy").val());
 	
 	/* alert('courseType == '+courseType);
 	alert('courseName == '+courseName);
@@ -97,11 +97,14 @@ function searchVacancy(){
 	alert('requiredExp == '+requiredExp);
 	alert('noOfVacancy == '+noOfVacancy); */
 	
-	
+	var total = null;
 	$(".displayNone").css("display","block");
 	
-	var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy+"&loginid="+loginID;
-//	alert("total "+total);
+	if(indicator == "ALL")
+		 total = "courseType=&courseName=&trainingDate=&requiredExp=&noOfVacancy=&loginid="+loginID;
+	else
+		 total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy+"&loginid="+loginID;
+	alert("total "+total);
 	var result="";
 		$.ajax({
 		type: 'post',
@@ -146,7 +149,7 @@ function searchVacancy(){
           
           <!-- vertical button -->
           <div class="row">
-            <div class="col-lg-12"> <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome Training Center</span> </a> </div>
+            <div class="col-lg-12"> <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome ${logId}</span> </a> </div>
           </div>
           
           <!-- add the content here for main body --> 
@@ -238,12 +241,12 @@ function searchVacancy(){
                                </li>
                             </ul>
                           </div>
-                           <cf:input path="loginId" id="loginId" type="hidden" class="form-control" value="${loginUserS.loginDetails.loginId }" />
+                           <cf:input path="loginId" id="loginId" type="hidden" class="form-control" value="${loginUserS.loginDetails.loginId}" />
                          <cf:input path="noOfVacancy" type="text" maxlength="3" class="form-control" />
                         </div>
                       </div>
                       <input type="submit" style="margin-top:20px;"  class="btn login-btn pull-right show-details-vacancy collapsed"  data-target="#show-result" aria-expanded="false" value="Create">
-                      <a href="#testt"  onclick="searchVacancy();" style="margin-top:20px; margin-right: 20px;"  class="btn login-btn pull-right"   >Search</a>
+                      <a href="#testt"  onclick="searchVacancy('');" style="margin-top:20px; margin-right: 20px;"  class="btn login-btn pull-right"   >Search</a>
                  	  <input type="button" id="btnExport" style="margin-top:20px; margin-right: 20px;"  class="btn login-btn pull-right" value="Download" />
                     
                     </div>

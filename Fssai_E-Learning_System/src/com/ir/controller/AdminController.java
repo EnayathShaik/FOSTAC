@@ -184,7 +184,13 @@ public class AdminController {
 		}	
 	}
 	@RequestMapping(value = "/districtMasterSave", method = RequestMethod.POST)
-	public String stateSave(@Valid @ModelAttribute("districtMaster") DistrictForm districtForm,BindingResult result, Model model){
+	public String stateSave(@Valid @ModelAttribute("districtMaster") DistrictForm districtForm,BindingResult result, Model model , HttpSession session){
+		
+		if (((Long) session.getAttribute("LAST_PLACE_KEY"))!=null && ((Long) session.getAttribute("LAST_PLACE_KEY")).equals(PLACE_KEY)) {
+			return "redirect:districtMaster.fssai";
+			}
+		
+		
 		if(result.hasErrors()){
 			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
 			System.out.println(result.getErrorCount());
@@ -194,19 +200,33 @@ public class AdminController {
 		String districtMasterSave = adminService.districtMasterSave(districtForm);
 		if(districtMasterSave.equalsIgnoreCase("created")){
 			model.addAttribute("created" , "District inserted successfully !!!");
+			model.addAttribute("districtMaster", new DistrictForm());
 			return "districtMaster";
 		}else{
 			model.addAttribute("created" , "District already exists in records !!!");
 			return "districtMaster";
 		}	
 	}
+	
+	@RequestMapping(value = "/districtMasterSave", method = RequestMethod.GET )
+	public String showDistrctForm() {
+		PLACE_KEY = (new Random()).nextLong();
+		return "redirect:districtMaster.fssai";
+		}
+	
 	@RequestMapping(value="/cityMaster" , method=RequestMethod.GET)
 	public String districtMaster(@ModelAttribute("cityMaster") CityForm cityForm){
 		return "cityMaster";
 	}
 	
 	@RequestMapping(value = "/cityMasterSave", method = RequestMethod.POST)
-	public String stateSave(@Valid @ModelAttribute("cityMaster") CityForm cityForm,BindingResult result, Model model){
+	public String stateSave(@Valid @ModelAttribute("cityMaster") CityForm cityForm,BindingResult result, Model model , HttpSession session){
+		
+		if (((Long) session.getAttribute("LAST_PLACE_KEY"))!=null && ((Long) session.getAttribute("LAST_PLACE_KEY")).equals(PLACE_KEY)) {
+			return "redirect:cityMaster.fssai";
+			}
+		
+			session.setAttribute("LAST_PLACE_KEY", PLACE_KEY);
 		if(result.hasErrors()){
 			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
 			System.out.println(result.getErrorCount());
@@ -216,19 +236,35 @@ public class AdminController {
 		String cityMasterSave = adminService.cityMasterSave(cityForm);
 		if(cityMasterSave.equalsIgnoreCase("created")){
 			model.addAttribute("created"," City insertion successfull !!!");
+			model.addAttribute("cityMaster", new CityForm());
 			return "cityMaster";
 		}else{
 			model.addAttribute("created"," City already exists !!!");
 			return "cityMaster";
 		}	
 	}
+	
+	@RequestMapping(value="/cityMasterSave" , method=RequestMethod.GET)
+	public String showCityForm(){
+		PLACE_KEY = (new Random()).nextLong();
+		return "redirect:cityMaster.fssai";
+		
+	}
+	
+	
 	@RequestMapping(value="/regionMappingMaster" , method=RequestMethod.GET)
 	public String districtMaster(@ModelAttribute("regionMappingMaster") RegionForm regionForm){
 		return "regionMappingMaster";
 	}
 	
 	@RequestMapping(value = "/regionMasterSave", method = RequestMethod.POST)
-	public String stateSave(@Valid @ModelAttribute("regionMappingMaster") RegionForm regionForm,BindingResult result, Model model){
+	public String stateSave(@Valid @ModelAttribute("regionMappingMaster") RegionForm regionForm,BindingResult result, Model model , HttpSession session){
+		
+		if (((Long) session.getAttribute("LAST_PLACE_KEY"))!=null && ((Long) session.getAttribute("LAST_PLACE_KEY")).equals(PLACE_KEY)) {
+			return "redirect:regionMappingMaster.fssai";
+			}
+		
+			session.setAttribute("LAST_PLACE_KEY", PLACE_KEY);
 		if(result.hasErrors()){
 			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
 			System.out.println(result.getErrorCount());
@@ -241,9 +277,18 @@ public class AdminController {
 			return "regionMappingMaster";
 		}else{
 			model.addAttribute("created", "Region name successfully mapped !!!");
+			model.addAttribute("regionMappingMaster", new RegionForm());
 			return "regionMappingMaster";
 		}	
 	}
+	
+	@RequestMapping(value="/regionMasterSave" , method=RequestMethod.GET)
+	public String showregionForm(){
+		PLACE_KEY = (new Random()).nextLong();
+		return "redirect:regionMappingMaster.fssai";
+		
+	}
+	
 	@RequestMapping(value="/manageCourse" , method=RequestMethod.GET)
 	public String districtMaster(@ModelAttribute("manageCourse") ManageCourse manageCourse ,  Model model) throws JsonGenerationException, JsonMappingException, IOException{
 		return "manageCourse";
