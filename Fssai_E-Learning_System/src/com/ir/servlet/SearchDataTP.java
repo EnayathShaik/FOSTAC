@@ -46,35 +46,116 @@ public class SearchDataTP extends HttpServlet {
 		String name = (request.getQueryString());
 		System.out.println("passing name   :" + name);
 		String[] totalConnected = name.split("&");
-		String id,tpname;
-		if(totalConnected[0].split("=").length==1){
-			id ="%";
-		}else{
-			id = (totalConnected[0].split("="))[1];
+		String id="",tpname="", fcn = "",websiteURL= "",pan= "",email="",headOfficeDataAddress1="",headOfficeDataAddress2="",pin="",stateId="",district="",city="",status="";
+		
+		
+		if(!name.equalsIgnoreCase("ALL")){
+			try{
+				id = (totalConnected[0].split("="))[1];	
+			}
+			catch(Exception e){
+				id ="%";	
+			}
+			try{
+				tpname = (totalConnected[1].split("="))[1];
+			}
+			catch(Exception e)
+			{
+				tpname = "%";	
+			}
+			try{
+				websiteURL = (totalConnected[2].split("="))[1];	
+			}catch(Exception e)
+			{
+				websiteURL = "%";
+			}
+		try{
+			pan = (totalConnected[3].split("="))[1];
 		}
-		if(totalConnected[1].split("=").length == 1){
-			tpname = "%";
-		}else{
-			tpname = (totalConnected[1].split("="))[1];
+		catch(Exception e)
+		{
+			pan = "%";
 		}
-
+		try{
+			email = (totalConnected[4].split("="))[1];
+		}
+		catch(Exception e){
+			email = "%";
+		}
+		try{
+			headOfficeDataAddress1 = (totalConnected[5].split("="))[1];
+		}catch(Exception e)
+		{
+			headOfficeDataAddress1 = "%";
+		}
+		try{
+			headOfficeDataAddress2 = (totalConnected[6].split("="))[1];
+		}
+		catch(Exception e){
+			headOfficeDataAddress2 = "%";
+		}
+		try{
+			pin = (totalConnected[1].split("="))[7];	
+		}
+		catch(Exception e){
+			pin = "%";
+		}
+		try{
+			stateId = (totalConnected[8].split("="))[1];
+		}
+		catch(Exception e){
+			stateId = "%";
+		}
+		try{
+			district = (totalConnected[9].split("="))[1];
+		}
+		catch(Exception e){
+			district = "%";
+		}
+		try{
+			city = (totalConnected[10].split("="))[1];
+		}
+		catch(Exception e){
+			city = "%";
+		}
+		try{
+			status = (totalConnected[11].split("="))[1];
+		}
+		catch(Exception e){
+			status = "%";
+		}
+		
 		String[] tpnameA  = tpname.split("%20");
 		String cn = "";
 		for(int i = 0 ; i < tpnameA.length ; i++){
 			cn = cn + tpnameA[i] + " ";
 		}
-		String fcn = cn.substring(0, cn.length()-1);
-		System.out.println(fcn.length()  + "   "+ fcn);
 		
+		fcn = cn.substring(0, cn.length()-1);
+		System.out.println(fcn.length()  + "   "+ fcn);
+		}
 		Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
-		String sql ="select mtp.managetrainingpartnerid  , ld.loginid  , mtp.trainingpartnername , mtp.pan , "+
+		
+		String sql = null;
+		if(!name.equalsIgnoreCase("ALL"))
+		 sql ="select mtp.managetrainingpartnerid  , ld.loginid  , mtp.trainingpartnername , mtp.pan , "+
 					" mtp.websiteurl , ld.status from managetrainingpartner as mtp "+
 					" inner join logindetails as ld on ld.id=mtp.logindetails "+
-					" where upper(mtp.trainingpartnername) like '"+fcn.toUpperCase() +"' and ld.loginid like '"+id+"'";
+					" where upper(mtp.trainingpartnername) like '"+fcn.toUpperCase() +"%' and ld.loginid like '"+id+"%' "+
+					 " and mtp.trainingpartnername like '"+tpname+"%' and mtp.pan like '"+pan+"%' and mtp.websiteurl like '"+websiteURL+"%' " +
+					 " and mtp.email like '"+email+"%' and mtp.headOfficeDataAddress1 like '"+headOfficeDataAddress1+"%' " +
+					 " and mtp.headOfficeDataAddress2 like '"+headOfficeDataAddress2+"%' and mtp.pin like '"+pin+"%' and cast(mtp.state as varchar) like '"+stateId+"'" +
+					 "and cast(mtp.district as varchar) like '"+district+"' and cast(mtp.city as varchar) like '"+city+"' and ld.status like '"+status+"%'" ;
+		else
+			 sql ="select mtp.managetrainingpartnerid  , ld.loginid  , mtp.trainingpartnername , mtp.pan , "+
+						" mtp.websiteurl , ld.status from managetrainingpartner as mtp "+
+						" inner join logindetails as ld on ld.id=mtp.logindetails ";
+			
 		Query query = session.createSQLQuery(sql);
+		System.out.println("sql===>"+sql);
 		List<CourseName> list = query.list();
 		System.out.println(list.size());
 		session.close();

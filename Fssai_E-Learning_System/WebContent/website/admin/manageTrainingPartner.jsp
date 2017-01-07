@@ -66,7 +66,8 @@ function validate() {
 }
 function OnStart(){
 	////alert('s');
-	updateDiv();
+	//updateDiv();
+	searchDataTP('ALL');
 }
 window.onload = OnStart;
 </script>
@@ -181,13 +182,41 @@ if(regpan.test(pan) == false)
 }
 }
 
-function searchDataTP(){
-	var userId =  $("#userId").val();
+function searchDataTP(indicator){
+
+	var userId = $("#userId").val();
+	//alert("userId>"+userId);
 	var tpn = $("#trainingPartnerName").val();
-	$(".displayNone").css("display","block");
+	var websiteURL = $("#websiteUrl").val();
+	var pan = $("#PAN").val();
+	var email = $("#email").val();
+	var headOfficeDataAddress1 = $("#headOfficeDataAddress1").val();
+	var headOfficeDataAddress2 = $("#headOfficeDataAddress2").val();
+	var pin = $("#pin").val();
+	var stateId = $("#state").val();
+	var district = $("#district").val();
+	var city = $("#city").val();
+	var status =  $("#status").val();
+	//alert(status);
+	if(stateId==0)
+		stateId="";
+	if(district==0)
+		district="";
+	if(city==0)
+		city="";
+	
+	//$(".displayNone").css("display","block");
 	 {
 		var result="";
-		var total = "userId="+userId+"&assessmentAgencyName="+tpn;
+		var total="";
+		
+		if(indicator.match('ALL')){
+			$('#updateDiv').hide();
+			
+			total = "ALL";//"contentLocation=0&courseType=0&courseName=&modeOfTraining=&contentType=0";
+		}else{
+		total = "userId="+userId+"&assessmentAgencyName="+tpn+"&websiteURL="+websiteURL+"&pan="+pan+"&email="+email+"&headOfficeDataAddress1="+headOfficeDataAddress1+"&headOfficeDataAddress2="+headOfficeDataAddress2+"&pin="+pin+"&stateId="+stateId+"&district="+district+"&city="+city+"&status="+status;
+		}
 		$.ajax({
 		type: 'post',
 		url: 'searchDataTP.jspp?'+ total,
@@ -195,18 +224,19 @@ function searchDataTP(){
 		success: function (data){
 		$('#newTable').show();
 		var mainData1 = jQuery.parseJSON(data);
-		////alert(mainData1);
+		console.log(mainData1);
 		var j=1;
 		$('#newTable tr').remove();
 		$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Training Partner Id</th><th>Training Partner Name</th><th>Weblink</th><th>Status</th><th>Option</th></tr>')
 		$.each(mainData1 , function(i , obj)
 		{
+			var stat ;
 			if(obj[5] == 'A'){
 				stat = 'Active';
 			}else{
 				stat = 'In-Active';
 			}
-			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[4]+'</td><td>'+stat+'</td><td><input type="hidden" id="mtpId" value="'+obj[0]+'" /><a href="#" onClick="editManageTrainingPartner();">edit</a> </td></tr>');	
+			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[4]+'</td><td>'+stat+'</td><td><input type="hidden" id="mtpId" value="'+obj[0]+'" /><a href="#" onClick="editManageTrainingPartner(\''+obj[0]+'\');">edit</a> </td></tr>');	
 		});
 		}
 		});
@@ -214,13 +244,15 @@ function searchDataTP(){
 	}
 }
 
-function editManageTrainingPartner(){
+function editManageTrainingPartner(id){
 	var userId =  $("#mtpId").val();
 	//alert(userId);
+	  
+	
 	$(".displayNone").css("display","block");
 	 {
 		var result="";
-		var total = userId;
+		var total = id;
 		$.ajax({
 		type: 'post',
 		url: 'editMTP.jspp?'+ total,
@@ -243,7 +275,7 @@ function editManageTrainingPartner(){
 			document.getElementById("headOfficeDataAddress1").value = obj[6];
 			document.getElementById("headOfficeDataAddress2").value = obj[7];
 			document.getElementById("pin").value = obj[8];
-			
+			document.getElementById("idHiddenUser").value = id;
 			var s = obj[9];
 			var d = obj[10];
 			var c = obj[11];
@@ -347,7 +379,9 @@ function updateMTP()
 	var district = $("#district").val();;
 	var city = $("#city").val();
 	var mtpId = $('#mtpId').val();
-	var total = status+','+url+','+email+','+address1+','+address2+','+pin+','+state+','+district+','+city+','+mtpId;
+	var idHiddenUser = $('#idHiddenUser').val();
+	var result = "";
+	var total = status+','+url+','+email+','+address1+','+address2+','+pin+','+state+','+district+','+city+','+idHiddenUser;
 	$.ajax({
 	      type: 'post',
 	      url: 'updateMTP.jspp?'+ total,
@@ -358,6 +392,9 @@ function updateMTP()
 	    	  $( '#name_status' ).html(response);  
 	      }
 	      }); 
+
+	location.reload();
+return result;
 }
 </script>
 <cf:form action="manageTrainingPartnerSave.fssai" name="myForm" method="POST" commandName="manageTrainingPartnerForm" onsubmit="return validateFields();"> 
@@ -403,7 +440,7 @@ function updateMTP()
                                                         </li>
                                                     </ul>
                                                 </div>
- <cf:input path="userId" onkeypress="return AvoidSpace(event)"  placeholder="UserId" class="form-control" onblur  ="checkname();" onKeyUP="this.value = this.value.toUpperCase();" />
+ <cf:input path="userId" onkeypress="return AvoidSpace(event)"  placeholder="UserId" class="form-control" onchange  ="checkname();" onKeyUP="this.value = this.value.toUpperCase();" />
                                             </div>
                                             
                                             <div class="form-group">
@@ -570,16 +607,19 @@ function updateMTP()
                                         
 <div id="createDiv" style="float:left;">
 <input type="submit" id="register" onclick="return validate();" class="btn login-btn" value="Create" />
+<input type="hidden" id="idHiddenUser" value="">
 </div>
 <div id="updateDiv" style=" float:left; margin-left: 20px;">
 <a href="#" onclick="updateMTP();" class="btn btn-default pull-right show-details-vacancy collapsed" 
 data-toggle="collapse" data-target="#show-result" aria-expanded="false" style="margin-right: 0px;  ">
 Update</a>
 </div>
-<div id="searchDiv" style=" float:left; margin-left: 20px;">
-<a href="#" onclick="searchDataTP();" class="btn btn-default pull-right show-details-vacancy collapsed" 
+
+<a href="#testt" onclick="searchDataTP('SELECTED');" class="pull-right">Search</a>
+<!-- <div id="searchDiv" style=" float:left; margin-left: 20px;">
+<a href="#" onclick="searchDataTP('SELECTED');" class="btn btn-default pull-right show-details-vacancy collapsed" 
 data-toggle="collapse" data-target="#show-result" aria-expanded="false" style="margin-right: 15px; ">
-Search</a>
+Search</a> -->
 </div>                                        
                             </div>
                                 </div>

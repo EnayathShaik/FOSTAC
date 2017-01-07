@@ -60,6 +60,8 @@ public class UpdateMTP extends HttpServlet {
 		String district = total[7];
 		String city = total[8];
 		String mtpId = total[9];
+		
+		System.out.println("status>"+status+url+email+address1+address2+pin+state+district+city+mtpId);
 
 		State s = new State();
 		s.setStateId(Integer.parseInt(state));
@@ -86,11 +88,16 @@ public class UpdateMTP extends HttpServlet {
 				" websiteurl='"+url+"' "+
 				" WHERE managetrainingpartnerid = '"+mtpId+"' ";
 
-		String sqlLD = "update logindetails set status ='"+status+"' where logindetails ='"+selectSel+"'"; 
+		String sqlLD = "update logindetails set status ='"+status+"' where id =("+selectSel+")"; 
 		Query query = session.createSQLQuery(sql);
+		Query query2 = session.createSQLQuery(sqlLD);
 		System.out.println(sql);
+		
 		Integer i = query.executeUpdate();
 		System.out.println("i  :"+ i);
+		Integer j = query2.executeUpdate();
+		System.out.println("j  :"+ j);
+		System.out.println("sql==>"+sqlLD);
 		session.beginTransaction().commit();
 		session.close();
 		String newList = null ;
