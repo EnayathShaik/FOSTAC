@@ -64,7 +64,7 @@ public class LoadTrainingCenter extends HttpServlet {
 				" inner join managetrainingpartner as mtp on pitp.trainingpartnername = mtp.managetrainingpartnerid "+
 				" inner join logindetails as ld on ld.id = pitp.logindetails "+
 				"  inner join state as s on s.stateid = pitp.trainingpartnerpermanentstate"+
-				" where ld.status = 'A' and pitp.trainingpartnername = '"+name+"'" ;	
+				" where pitp.trainingpartnername = '"+name+"'" ;	
 	 
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
