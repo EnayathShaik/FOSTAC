@@ -27,11 +27,11 @@ function showDetails(){
 	alert('Data......'); */
 	var courseType =  $("#selCourseType").val();
 	var courseName =  $("#selCourseName").val();
-	var trainingDate = $("#traineeDate").val().replace("-","/").replace("-","/");
+	var trainingDate = $("#traineeDate").val();/* .replace("-","/").replace("-","/"); */
 	var trainingTime =  $("#traineeTime").val();
-
 	
-	var total = courseType+"&"+courseName+"&"+trainingDate+"&"+trainingTime;
+ 	var total = courseType+"&"+courseName+"&"+trainingDate+"&"+trainingTime;
+	
 	/* alert("total "+total); */
 	$(".displayNone").css("display","block");
 	var result="";
@@ -258,6 +258,8 @@ return result;
                                                     </div>
                                                      <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails();return false">Show Details</button>
                                                 		<input type="button" id="btnExport" style="margin-right: 20px;"  class="btn login-btn pull-right" value="Download" />
+                                                		
+                                                		<!-- <a href="#testt" class="pull-right" onclick="showDetails();">Search</a> -->
                                                 </div>
                                                
                                             </div>
@@ -297,7 +299,7 @@ return result;
                         </tbody>
                       </table>
                       </div>
-                      <a href="#" class="btn login-btn pull-right">Save</a>
+                      <!-- <a href="#" class="btn login-btn pull-right">Save</a> -->
                     </fieldset>
                     <div style="width: 95px;">
                       <ul class="pager">

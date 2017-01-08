@@ -50,23 +50,23 @@ public class TraineeCenterViewTraineeLists extends HttpServlet {
         String name = (request.getQueryString());
         System.out.println("Append Data = "+name);
         StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append("WHERE 1=1 ");
-        stringBuffer.append(" AND E.loginid ='"+loginId+"' AND F.enrolledby='Trainee'");
-        if(name != null && name.length() > 0){
+       // stringBuffer.append("WHERE 1=1 ");
+        stringBuffer.append(" WHERE F.loginid ='"+loginId+"'");
+        if(name != null && name.length() > 0 ){
         	String[] whereList = name.split("&");
         	for(int i=0;i<whereList.length;i++){
         		if(i==0){
-        			stringBuffer.append(whereList[0] != null & !whereList[0].equals("null") & whereList[0].length() > 0 ? " AND B.COURSETYPEID="+whereList[0] : "");
+        			stringBuffer.append(whereList[0] != null & !whereList[0].equals("null") & whereList[0].length() > 0 ? " AND E.coursetypeid="+whereList[0] : "");
         		}else if(i==1){
-        			stringBuffer.append(whereList[1] != null & !whereList[1].equals("null") & whereList[1].length() > 0 ? " AND C.COURSENAMEID="+whereList[1] : "");
+        			stringBuffer.append(whereList[1] != null & !whereList[1].equals("null") & whereList[1].length() > 0 & whereList[1] == "0"  ? " AND D.COURSENAMEID="+whereList[1] : "");
         		}else if(i==2){
-        			stringBuffer.append(whereList[2] != null & !whereList[2].equals("null") & whereList[2].length() > 0 ? " AND A.TRAININGDATE='"+whereList[2]+"'" : "");
+        			stringBuffer.append(whereList[2] != null & !whereList[2].equals("null") & whereList[2].length() > 0 ? " AND B.TRAININGDATE='"+whereList[2]+"'" : "");
         		}else if(i==3){
-        			stringBuffer.append(whereList[3] != null & !whereList[3].equals("null") & whereList[3].length() > 0 ? " AND A.TRAININGTIME='"+whereList[3]+"'" : "");
+        			stringBuffer.append(whereList[3] != null & !whereList[3].equals("null") & whereList[3].length() > 0 ? " AND B.TRAININGTIME='"+whereList[3]+"'" : "");
         		}else if(i==4){
         			//stringBuffer.append(whereList[4] != null & whereList[4].equals("null") & whereList[4].length() > 0 ? " AND B.COURSETYPEID"+whereList[4] : "");
         		}else if(i==5){
-        			stringBuffer.append(whereList[5] != null & !whereList[5].equals("null") & whereList[5].length() > 0 ? " AND F.PAYMENTSTATUS='"+whereList[5]+"'" : "");
+        			stringBuffer.append(whereList[5] != null & !whereList[5].equals("null") & whereList[5].length() > 0 ? " AND A.PAYMENTSTATUS='"+whereList[5]+"'" : "");
         		}
         	}
         }
@@ -87,7 +87,16 @@ public class TraineeCenterViewTraineeLists extends HttpServlet {
 				"inner join coursename C on(A.coursename=C.coursenameid) ";
 				//"inner join personalinformationtrainer D on(A.trainername::int=D.personalinformationtrainerid)";
 	*/	
-		sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,A.trainername," +
+		
+		sql = "select  E.coursetype,D.coursename,B.trainingdate,B.trainingtime,C.firstname || ' '|| C.middlename ||' '|| C.lastname as participantName,D.modeoftraining,D.status from courseenrolleduser  A"
+				+ " inner join trainingcalendar B on(A.trainingcalendarid= B.trainingcalendarid)"
+				+ " inner join personalinformationtrainingpartner C on (C.personalinformationtrainingpartnerid = B.trainingcenter)"
+				+ " inner join coursename D on (D.coursenameid = B.coursename)"
+				+ " inner join coursetype E on (E.coursetypeid = B.coursetype)"
+				+ " inner join logindetails F on (F.ID = C.logindetails)  " ;
+		
+		
+/*		sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,A.trainername," +
 				"G.firstname||G.middlename||G.lastname," +
 				"F.paymentstatus from trainingcalendar A " +
 				"inner join coursetype B on(A.coursetype=B.coursetypeid)  " +
@@ -96,6 +105,7 @@ public class TraineeCenterViewTraineeLists extends HttpServlet {
 				"inner join logindetails E on(D.logindetails=E.ID) " +
 				"inner join courseenrolleduser F on(A.trainingcalendarid=F.trainingcalendarid) " +
 				"inner join personalinformationtrainee G on(CAST(CAST (F.logindetails AS NUMERIC(19,4)) AS INT)=G.logindetails) ";
+*/		
 		sql = sql + stringBuffer.toString();
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
