@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.ir.form.CourseEnrolledUserForm;
@@ -214,11 +215,23 @@ public class RegistrationControllerTrainer implements Serializable{
     
 
 @RequestMapping(value="/update-profile" , method=RequestMethod.GET)
-   	public String updateInformation(Model model ,@ModelAttribute("updateInformation") RegistrationFormTrainer registrationFormTrainer, HttpSession session ){		
-	Integer userId = (Integer) session.getAttribute("userId");
+   	public String updateInformation(@RequestParam(value = "userId", required = true)  Integer userId ,Model model ,@ModelAttribute("updateInformation") RegistrationFormTrainer registrationFormTrainer, HttpSession session ){		
+	Integer profileID = 0;
+	try{
+		profileID = (Integer) session.getAttribute("profileId");
+		if(profileID == 1 || profileID == 2){
+			//Bases On User
+		}else{
+			userId = (Integer) session.getAttribute("userId");
+		}
+		
+	 }catch(Exception e){
+		System.out.println("Exception while course details save : "+ e.getMessage());
+	 }
 	 if(userId > 0){
 		 PersonalInformationTrainer personalInformationTrainer = registrationServiceTrainer.FullDetailTrainer(userId);
-			session.setAttribute("loginUr", personalInformationTrainer);
+		System.out.println("=== "+personalInformationTrainer.getDOB());	
+			 session.setAttribute("loginUr", personalInformationTrainer);
 	 }
 	
    		model.addAttribute("update", "");
@@ -226,12 +239,17 @@ public class RegistrationControllerTrainer implements Serializable{
    	}
     
     @RequestMapping(value="/updateTrainer11" , method=RequestMethod.POST)
-	public String updateTrainer(@Valid @ModelAttribute("updateInformation") RegistrationFormTrainer registrationFormTrainer ,BindingResult bindingResult, HttpSession session){
+	public String updateTrainer(@RequestParam(value = "id", required = true)  Integer id,@Valid @ModelAttribute("updateInformation") RegistrationFormTrainer registrationFormTrainer ,BindingResult bindingResult, HttpSession session){
 		if(session == null){
 			return "login";
 		}
-    	
-    	Integer ss = (Integer)session.getAttribute("loginUser2");
+		Integer ss = 0;
+		if(id <= 0){
+			 ss = (Integer)session.getAttribute("loginUser2");
+		}else{
+			ss = id;
+		}
+
 	//	Integer ss=	(Integer) session.getAttribute("Id");
 		System.out.println("nnb is  " +ss);
 		System.out.println("----------"+registrationFormTrainer.getFatherName());

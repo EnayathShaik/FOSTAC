@@ -56,6 +56,9 @@ function getTrainingCalender(indicator){
 	var trainingTime = $("#trainingTime").val();
 	var trainerName = $("#trainerName").val();
 	var trainingType = $("#trainingType").val();
+	
+	alert(trainingType);
+	alert($("#trainingType").val());
 	var result="";
 	
 	var total=""; 
@@ -221,6 +224,7 @@ function getTrainingCalender(indicator){
                                                     </ul>
                                                 </div>
 <cf:select path="trainingType" class="form-control">
+<cf:option value="0" label="Please Select" />
 <cf:option value="Trainer"  label="Trainer"/>
 <cf:option value="Trainee" label="Trainee" />
 </cf:select>

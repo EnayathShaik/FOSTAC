@@ -136,7 +136,7 @@
 <ct:choose>
 <ct:when test="${not empty searchTrainerUsermanagement }">
 <ct:forEach var="listValue" items="${searchTrainerUsermanagement}" varStatus="loop"><tr>
-<td><label><a href="#" value="${listValue[0]}">${listValue[1]}</a></label></td>
+<td><label><a href="update-profile.fssai?userId=${listValue[6]}" value="${listValue[0]}">${listValue[1]}</a></label></td>
 <td><label>${listValue[2] }</label></td>
 <td><label>${listValue[3]}</label></td>
 <td><label>${listValue[4]}</label></td>

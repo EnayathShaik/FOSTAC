@@ -247,9 +247,9 @@ else{
 
 <script>
 function getstateid(){
+	
 	getstat2();
-getstateid1();
-
+	getstateid1();
 }
 window.onload=getstateid;
 </script>
@@ -264,7 +264,9 @@ function getstateid1(){
 		document.getElementById("permanent1").style.display = 'block';
 		document.getElementById("permanent2").style.display = 'block';
 	}  */
-	var psid = ${stateid};
+	
+	//var psid = ${stateid};
+	var psid ='${loginUr.permanentstate.stateId}';
 	var psname='${loginUr.permanentstate.stateName}';
 	var pdid='${loginUr.permanentdistrict.districtId}';
 	var pdname='${loginUr.permanentdistrict.districtName}';
@@ -272,7 +274,7 @@ function getstateid1(){
 	var pcname='${loginUr.permanentcity.cityName}';
 	var title='${loginUr.title.titleName}';
 	var tp = '${tp}';
-	var safety=${loginUr.foodSafetyExpBackground};
+	var safety='${loginUr.foodSafetyExpBackground}';
 	var month=${loginUr.expInFoodSafefyTimeMonth};
 	$("#FoodSafetyExpBackground").prop('selectedIndex', safety);  
 	$("#ExpInFoodSafefyTimeMonth").prop('selectedIndex', month);  
@@ -285,7 +287,7 @@ function getstateid1(){
 	   // TrainingCenterPermanentDistrict.options[0].text = pdname;
 		//TrainingCenterPermanentCity.options[0].text = pcname;
 		Title.options[0].text = title;
-		associatedTrainingpartnerName.options[0].text = tp;
+		//associatedTrainingpartnerName.options[0].text = tp;
 	}
 	
 function getStateUpdate(psid , pdid , pcid)
@@ -570,7 +572,7 @@ function getCityUpdate(dd , cc)
     </script>
 
     <!-- horizontal navigation -->
-    <cf:form   action="updateTrainer11.fssai" name="myForm" method="POST" commandName="updateInformation" onsubmit="return validateFields();"> 
+    <cf:form   action="updateTrainer11.fssai?id=${loginUr.personalInformationTrainerId}" name="myForm" method="POST" commandName="updateInformation" onsubmit="return validateFields();"> 
     <section>
         <%@include file="../roles/top-menu.jsp"%>
     </section>
@@ -630,19 +632,19 @@ function getCityUpdate(dd , cc)
                                                                 <li class="style-li"><strong>Date of Birth:</strong></li>
                                                             </ul>
                                                         </div>
-                                                        <input type="date" class="form-control" placeholder="Date"  disabled="disabled"  value="${loginUr.DOB}">
+                                                        <input type="text" class="form-control" placeholder="Date"  disabled="disabled"  value="${loginUr.DOB}">
                                                     </div>
                                                     
                                                   
                                                     
-                                                    <div class="form-group">
+                                                    <!-- <div class="form-group">
                                                         <div>
                                                             <ul class="lab-no">
                                                                 <li class="style-li"><strong>Upload Your Profile:</strong></li>
                                                             </ul>
                                                         </div>
                                                         <input type="file" id="myFile">
-                                                    </div>
+                                                    </div> -->
                                                     
                                                     
                                                     
@@ -1131,8 +1133,9 @@ function getCityUpdate(dd , cc)
                                                             </ul>
                                                         </div>
                                                    <%-- <cf:input type="text" class="form-control" path="associatedTrainingpartnerName" placeholder="Partner Name"  value="${loginUr.associatedTrainingpartnerName}"/> --%>
+                                        
                                          <cf:select path="associatedTrainingpartnerName" class="form-control">
-					<cf:options items="${trainingPartnerNameList}" itemValue="manageTrainingPartnerId" itemLabel="trainingPartnerName" />
+                   <cf:options items="${trainingPartnerNameList}" itemValue="manageTrainingPartnerId" itemLabel="trainingPartnerName" />
 					</cf:select> 
                                                        
                                                         </div>
@@ -1141,128 +1144,7 @@ function getCityUpdate(dd , cc)
                                             </fieldset>
                                         </div>
                                         <div class="row" style="height: 20px;"> </div>
-                                        <!-- Basic courses -->
-                                        <div class="personel-info">
-                                            <h4>Courses wish to conduct ?</h4>
-                                            <fieldset>
-                                                <legend>
-                                                    <h3>Basic Courses</h3> </legend>
-                                                <!-- left -->
-                                                <div class="col-md-6 col-xs-12">
-                                                   <%--  <div class="checkbox">
-                                                     <ct:forEach var="listValue" items="${basicCourseList}">
- <ct:if test="${listValue.coursetypeid == 1}">
- <label> <input type="checkbox" value="${loginUr.basicCourse}"  value="${listValue.coursenameid }" name="BasicCourse"  id="${listValue.coursenameid }"  onclick=" return myBasic();">${listValue.coursename}  </label><br>
- </ct:if>
- </ct:forEach>
-
- <cf:hidden path="BasicCourse1" value=""/>
-                                                    </div>
-                                                </div>
-                                                <!-- right -->
-                                                <div class="col-md-6 col-xs-12"></div>
-                                            </fieldset>
-                                        </div>
-                                        <!-- basic course -->
-                                        <!-- Advanced courses -->
-                                        <div class="personel-info">
-                                            <fieldset>
-                                                <legend>
-                                                    <h3>Advanced Courses</h3> </legend>
-                                                <!-- left -->
-                                                <div class="col-md-6 col-xs-12">
-                                                     <ct:forEach var="listValue" items="${basicCourseList}">
- <ct:if test="${listValue.coursetypeid == 2}">
- <label> <input type="checkbox" value="${listValue.coursenameid }" name="AdvanceCourse" id="${listValue.coursenameid }" onclick=" return myAdvance();">${listValue.coursename}</label><br>
- </ct:if>
- </ct:forEach>
- <cf:hidden path="AdvanceCourse1" value=""/>
-                                                    </div>
-                                                </div>
-                                                <!-- right -->
-                                                <div class="col-md-6 col-xs-12"></div>
-                                            </fieldset>
-                                        </div>
-                                        <!-- advanced course -->
-                                        <!-- special courses -->
-                                        <div class="personel-info">
-                                            <fieldset>
-                                                <legend>
-                                                    <h3>Special Courses</h3> </legend>
-                                                <!-- left -->
-                                                <div class="col-md-6 col-xs-12">
-                                                    <div class="checkbox">
-                                                       <ct:forEach var="listValue" items="${basicCourseList}">
- <ct:if test="${listValue.coursetypeid == 3}">
- <label> <input type="checkbox"  value="${listValue.coursenameid }" name="SpecialCourse"  id="${listValue.coursenameid }"  onclick=" return mySpecial();">${listValue.coursename}</label><br>
- </ct:if>
-</ct:forEach>
-<cf:hidden path="SpecialCourse1" value=""/>
-                                                    </div>
-                                                </div>
-                                                <!-- right -->
-                                                <div class="col-md-6 col-xs-12"> </div>
-                                            </fieldset>
-                                        </div> --%>
-                                        <div class="checkbox">
-<ct:if test="${not empty basicCourseList }">
- <ct:forEach var="listValue" items="${basicCourseList}">
- <ct:if test="${listValue[0] == 1}">
- <label> <input type="checkbox"  value="${listValue[2] }" name="BasicCourse"  id="${listValue[2] }"  onclick=" return myBasic();">${listValue[1]}</label><br>
- </ct:if>
- </ct:forEach>
-</ct:if>
- <cf:hidden path="BasicCourse1" value=""/>
-</div>
- </div>
-<!-- right -->
-<div class="col-md-6 col-xs-12"></div>
-</fieldset>
-</div>
-<!-- basic course -->           
-<!-- Advanced courses -->          
-<div class="personel-info">
-<fieldset>
-<legend>Advanced Courses</legend>
-<!-- left -->
-<div class="col-md-6 col-xs-12" style="width:100%;">
-<div class="checkbox">
-<ct:if test="${not empty basicCourseList }">
- <ct:forEach var="listValue" items="${basicCourseList}">
- <ct:if test="${listValue[0] == 2}">
- <label> <input type="checkbox" value="${listValue[2] }" name="AdvanceCourse" id="${listValue[2] }" onclick=" return myAdvance();">${listValue[1]}</label><br>
- </ct:if>
- </ct:forEach>
- </ct:if>
- <cf:hidden path="AdvanceCourse1" value=""/>
-</div>
-<!-- right -->
-<div class="col-md-6 col-xs-12"></div></div>
-</fieldset>
-</div>
-<!-- advanced course --> 
-          
-<!-- special courses -->
-<div class="personel-info">
-<fieldset>
-<legend>Special Courses</legend>
-<!-- left -->
-<div class="col-md-6 col-xs-12" style="width:100%;">
-<div class="checkbox">
-<ct:if test="${not empty basicCourseList }">
- <ct:forEach var="listValue" items="${basicCourseList}">
- <ct:if test="${listValue[0] == 3}">
- <label> <input type="checkbox"  value="${listValue[0] }" name="SpecialCourse"  id="${listValue[2] }"  onclick=" return mySpecial();">${listValue[1]}</label><br>
- </ct:if>
-</ct:forEach>
-</ct:if>
-<cf:hidden path="SpecialCourse1" value=""/>
-</div>
-</div>              
-<!-- right -->
-<div class="col-md-6 col-xs-12"> </div>
-</fieldset>
-</div>
+                                        
                                         <!-- special course -->
                                         <div class="row" style="height: 20px;"> </div>
                                         <div class="col-xs-12">

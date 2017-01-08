@@ -138,7 +138,7 @@ window.onload=getstateid;
     </script>
       
     <!-- horizontal navigation -->
-     <cf:form   action="updateTrainingpartner.fssai" name="myForm" method="POST" commandName="updateInformation" onsubmit="return validateFields();"> 
+     <cf:form   action="updateTrainingpartner.fssai?id=${loginUr.personalInformationTrainingPartnerId}" name="myForm" method="POST" commandName="updateInformation" onsubmit="return validateFields();"> 
     <section>
    <%@include file="../roles/top-menu.jsp"%>
 </section>

@@ -258,6 +258,16 @@
   <url-pattern>/onLoadTrainingPartnerCenterId.jspp</url-pattern> 
   </servlet-mapping>
   
+  
+  <servlet>
+  <servlet-name>getSingleAssessmentQuestions</servlet-name> 
+  <servlet-class>com.ir.servlet.GetAssessmentQuestion</servlet-class> 
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>getSingleAssessmentQuestions</servlet-name> 
+  <url-pattern>/getSingleAssessmentQuestions.jspp</url-pattern> 
+  </servlet-mapping>
+  
      <servlet>
     <servlet-name>saveFeedbackForm</servlet-name>
     <servlet-class>com.ir.servlet.SaveFeedbackForm</servlet-class>

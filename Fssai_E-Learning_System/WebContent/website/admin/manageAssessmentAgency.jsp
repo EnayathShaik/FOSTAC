@@ -227,11 +227,11 @@
 											if (ss == obj.stateId) {
 												$('#stateId')
 														.append(
-																'<option value='+obj.stateId+' label='+obj.stateName+' selected="true" />');
+																'<option selected="true" value='+obj.stateId+'>'+obj.stateName+'  </option>');
 											} else {
 												$('#stateId')
 														.append(
-																'<option value='+obj.stateId+' label='+obj.stateName+' />');
+																'<option value='+obj.stateId+'>'+obj.stateName+' </option>');
 											}
 										});
 					}
@@ -256,11 +256,11 @@
 											if (dd == obj.districtId) {
 												$('#district')
 														.append(
-																'<option value='+obj.districtId+' label='+obj.districtName+' selected="true"/>');
+																'<option selected="true" value='+obj.districtId+'>'+obj.districtName+' </option>');
 											} else {
 												$('#district')
 														.append(
-																'<option value='+obj.districtId+' label='+obj.districtName+' />');
+																'<option value='+obj.districtId+'>'+obj.districtName+' </option>');
 											}
 										});
 					}
@@ -285,11 +285,11 @@
 											if (cc == obj.cityId) {
 												$('#city')
 														.append(
-																'<option value='+obj.cityId+' label='+obj.cityName+' selected="true"/>');
+																'<option selected="true" value='+obj.cityId+'>'+obj.cityName+' </option>');
 											} else {
 												$('#city')
 														.append(
-																'<option value='+obj.cityId+' label='+obj.cityName+' />');
+																'<option value='+obj.cityId+'>'+obj.cityName+' </option>');
 											}
 										});
 					}

@@ -227,13 +227,10 @@ public class LoginController {
 				PersonalInformationAssessor personalInformationAssessor ;
 				personalInformationAssessor = loginService.fullDetailAssessor(loginDetails.getId());
 				session.setAttribute("loginUser", personalInformationAssessor);
-				// added by abhay
 				session.setAttribute("loginUr", personalInformationAssessor);
 				session.setAttribute("loginUserAssessor", personalInformationAssessor.getId());
 				model.addAttribute("loginUser", personalInformationAssessor);
 				session.setAttribute("logId", personalInformationAssessor.getLoginDetails().getLoginId());
-				// commenet after abhay code
-				//return "personalInformationAssessor";
 				session.setAttribute("profileId", loginDetails.getProfileId());
 				session.setAttribute("userId", loginDetails.getId());
 				return "AssessorPage";

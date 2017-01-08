@@ -647,6 +647,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 				+ " inner join district district on district.districtid = pitp.trainingpartnerpermanentdistrict "
 				+ " inner join coursename cn on cn.coursenameid = tcal.coursename "
 				+ " inner join coursetype ctype on ctype.coursetypeid = cn.coursetypeid "
+				//+ " inner join managecoursecontent mcc on mcc.coursetypeid = cn.coursetypeid "
 				+ "where ce.logindetails = " + loginId;
 
 		Session session = sessionFactory.openSession();
@@ -876,5 +877,20 @@ public class TraineeDAOImpl implements TraineeDAO {
 		session.beginTransaction().commit();
 		session.close();
 		return true;
+	}
+
+	@Override
+	public String isCourseOnline(int userID) {
+		// TODO Auto-generated method stub
+		String status = "";
+		Session session = sessionFactory.openSession();
+		String sql = "select C.classroom||C.online course from courseenrolleduser A inner join trainingcalendar B on(A.trainingcalendarid=B.trainingcalendarid) inner join coursename C on(B.coursename=C.coursenameid)"
+				+ " where A.logindetails = " + userID;
+		Query query = session.createSQLQuery(sql);
+		List list = query.list();
+		System.out.println(list.size());
+		status = (String) list.get(0);
+		session.close();
+		return status;
 	}
 }

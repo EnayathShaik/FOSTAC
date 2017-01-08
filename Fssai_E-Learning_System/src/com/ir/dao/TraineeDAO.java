@@ -73,5 +73,6 @@ public interface TraineeDAO {
 	public int getTableIdForEnrolmentID(int loginId,int profileId);
 	public PersonalInformationTrainee fullDetail(int loginId);
 	public Boolean updateSteps(int tableID, int profileID, int steps);
+	public String isCourseOnline(int userID);
 	
 }

@@ -41,7 +41,7 @@ function searchCity(indicator){
 			}else{
 				status = 'In-Active';
 			}
-			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><input type="hidden" id="stateH" value="'+obj[0]+'">'+obj[0]+'</td><td><input type="hidden" id="districtH" value="'+obj[1]+'">'+obj[1]+'</td><td><input type="hidden" id="cityNameH" value="'+obj[2]+'">'+obj[2]+'</td><td><input type="hidden" id="statusH" value="'+obj[3]+'">'+status+'</td><td><input type="hidden" id="id" value="'+obj[4]+'"><a href="#" onclick="editCity(\''+obj[0]+'\',\''+obj[1]+'\',\''+obj[2]+'\',\''+obj[5]+'\',\''+status+'\');">edit</a></td><td><input type="hidden" id="districtHID" value="'+obj[5]+'"></tr>');	
+			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><input type="hidden" id="stateH" value="'+obj[0]+'">'+obj[0]+'</td><td><input type="hidden" id="districtH" value="'+obj[1]+'">'+obj[1]+'</td><td><input type="hidden" id="cityNameH" value="'+obj[2]+'">'+obj[2]+'</td><td><input type="hidden" id="statusH" value="'+obj[3]+'">'+status+'</td><td><input type="hidden" id="id" value="'+obj[4]+'"><a href="#" onclick="editCity(\''+obj[0]+'\',\''+obj[1]+'\',\''+obj[2]+'\',\''+obj[5]+'\',\''+status+'\',\''+obj[4]+'\');">edit</a></td><td><input type="hidden" id="districtHID" value="'+obj[5]+'"></tr>');	
 		});
 		}
 		});
@@ -49,11 +49,12 @@ function searchCity(indicator){
 	}
 }
 
-function editCity(state , district , city ,districtHid ,status){
+function editCity(state , district , city ,districtHid ,status,cityID){
 	$('.error-red').html('');
 	 document.getElementById('btnUpdate').style.display = 'block';
 	 document.getElementById('btnCreate').style.display = 'none';
-		
+	 
+	 document.getElementById('idHidden').value = cityID;
 	//$('#cityName').attr('readonly', 'true');
 	console.log("state "+state);
 	
@@ -92,8 +93,10 @@ function editCity(state , district , city ,districtHid ,status){
 }
 
 function editCityData(){
+	
 	var status =  $("#status").val();
-	var cityId = $("#id").val();
+	var cityId = $("#idHidden").val();
+	alert(cityId)
 	var cityName = $("#cityName").val();
 	var districtId= $("#districtId").val();
 	var showResponse = "";

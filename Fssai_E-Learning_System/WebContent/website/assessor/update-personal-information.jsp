@@ -546,7 +546,7 @@ function getCityUpdate(dd , cc)
     
     </script>
             <!-- horizontal navigation -->
-             <cf:form   action="updateAssessorDatavalue.fssai" name="myForm" method="POST" commandName="updateAssessor">
+             <cf:form   action="updateAssessorDatavalue.fssai?id=${loginUr.id}" name="myForm" method="POST" commandName="updateAssessor">
             <section>
                 <%@include file="../roles/top-menu.jsp"%>
             </section>

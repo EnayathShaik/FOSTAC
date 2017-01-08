@@ -45,4 +45,5 @@ public interface TraineeService {
 	public int getTableIdForEnrolmentID(int loginId,int profileId);
 	public PersonalInformationTrainee FullDetail(int loginId);
 	public Boolean updateSteps(int tableID, int profileID, int steps);
+	public String isCourseOnline(int userID);
 }

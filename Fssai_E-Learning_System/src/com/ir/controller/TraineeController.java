@@ -103,8 +103,10 @@ public class TraineeController {
 			CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(Integer.parseInt(courseTypeId));
 			model.addAttribute("courseTrainee", courseTrainee);
 		}
+		System.out.println("Course training  ======********************** ");
+		
 		//session.setAttribute("uniqueId", uniqueId);
-		return "courseTraining";
+		return "courseTraining12";
 	}
 	@RequestMapping(value="/training" , method=RequestMethod.GET)
 	public String training(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer , HttpSession session)
@@ -243,17 +245,38 @@ public class TraineeController {
 		//return null;
 	}
 	@RequestMapping(value="/updateInformation" , method=RequestMethod.GET)
-	public String updateInformation(@ModelAttribute("updateInformation") RegistrationFormTrainee registrationFormTrainee, HttpSession session, Model model ){		
-		Integer userId = (Integer) session.getAttribute("userId");
+	public String updateInformation(@RequestParam(value = "userId", required = true)  Integer userId ,@ModelAttribute("updateInformation") RegistrationFormTrainee registrationFormTrainee, HttpSession session, Model model ){		
+		Integer profileID = 0;
+		try{
+			profileID = (Integer) session.getAttribute("profileId");
+			if(profileID == 1 || profileID == 2){
+				//Bases On User
+			}else{
+				userId = (Integer) session.getAttribute("userId");
+			}
+			
+		}catch(Exception e){
+			System.out.println("Exception while course details save : "+ e.getMessage());
+		}
+		System.out.println("userID = "+userId);
+		System.out.println("profileID = "+profileID);
+		
+		System.out.println("userID = "+userId);
 		 if(userId > 0){
 			PersonalInformationTrainee personalInformationTrainee = traineeService.FullDetail(userId);
 			session.setAttribute("loginUser", personalInformationTrainee);
+			
 		 }
 		return "updateInformation";
 	}
 	@RequestMapping(value="/updateTrainee" , method=RequestMethod.POST)
-	public String updateTrainee(@ModelAttribute("updateInformation") RegistrationFormTrainee registrationFormTrainee ,BindingResult bindingResult, HttpSession session , Model model  ){
-		Integer ss = (Integer)session.getAttribute("loginUser1");
+	public String updateTrainee(@RequestParam(value = "id", required = true)  Integer id,@ModelAttribute("updateInformation") RegistrationFormTrainee registrationFormTrainee ,BindingResult bindingResult, HttpSession session , Model model  ){
+		Integer ss = 0;
+		if(id <= 0){
+			 ss = (Integer)session.getAttribute("loginUser1");
+		}else{
+			ss = id;
+		}
 		System.out.println("nnb   " +ss);
 		String updateTrainee = traineeService.updateTrainee(registrationFormTrainee , ss);
 		if(updateTrainee != "")
@@ -448,6 +471,20 @@ public class TraineeController {
 		//Need to write service for AsssessorAgency 
 		model.addAttribute("courseName",courseName);
 		model.addAttribute("utility",utility);
+		Integer userId = 0;
+		try{
+			userId = (Integer) session.getAttribute("userId");
+			System.out.println("user id = "+userId);
+			String isOnline=traineeService.isCourseOnline(userId);
+			System.out.println("Online == "+isOnline);
+			if(isOnline != null && isOnline.toUpperCase().contains("ONLINE")){
+				model.addAttribute("ISONLINE","YES");
+			}else{
+				model.addAttribute("ISONLINE","NO");
+			}
+		}catch(Exception e){
+			System.out.println("Exception while course details save : "+ e.getMessage());
+		}
 		return "assessment-instructions-trainee";
 	}
 	@RequestMapping(value="/feedback-form" , method=RequestMethod.GET)
@@ -456,9 +493,35 @@ public class TraineeController {
 		return "feedback-form-trainee";
 	}
 	@RequestMapping(value="/course-training" , method=RequestMethod.GET)
-	public String coursetraining(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer )
+	public String coursetraining(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer, HttpSession session, Model model )
 	{
+		System.out.println("************************8");
+		Integer userId = 0;
+		int loginId= 0;
+		try{
+			loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
+			CourseName courseName=traineeService.getCourseName(loginId);
+			Utility utility=new Utility();
+			//Need to write service for AsssessorAgency 
+			model.addAttribute("courseName",courseName);
+			model.addAttribute("utility",utility);
+			
+			userId = (Integer) session.getAttribute("userId");
+			System.out.println("user id = "+userId);
+			String isOnline=traineeService.isCourseOnline(userId);
+			System.out.println("Online == "+isOnline);
+			if(isOnline != null && isOnline.toUpperCase().contains("ONLINE")){
+				model.addAttribute("ISONLINE","YES");
+			}else{
+				model.addAttribute("ISONLINE","NO");
+			}
+		}catch(Exception e){
+			System.out.println("Exception while course details save : "+ e.getMessage());
+		}
+		
+		
 		return "course-training-trainee";
+		
 	}
 	@RequestMapping(value="/saveFeedbackForm" , method=RequestMethod.POST)
 	public String saveFeedbackForm(@ModelAttribute("feedbackforms") List<FeedbackForm> feedbackforms ,BindingResult bindingResult, HttpSession session , Model model){

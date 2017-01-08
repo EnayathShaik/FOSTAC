@@ -31,7 +31,7 @@
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
 							<li class="active hori"><a href="loginProcess.fssai">Home</a></li>
-							<li class="hori"><a href="updateInformation.fssai">Update
+							<li class="hori"><a href="updateInformation.fssai?userId=0">Update
 									Information</a></li>
 							<li class="hori"><a href="contactTrainee.fssai">Contact
 									Us</a></li>
@@ -77,7 +77,7 @@
 							<li class="active hori"><a href="loginProcess.fssai">Home</a></li>
 							<li class="hori"><a href="search-and-apply.fssai">Search
 									& Apply Vacancy</a></li>
-							<li class="hori"><a href="update-profile.fssai">Update
+							<li class="hori"><a href="update-profile.fssai?userId=0">Update
 									Profile</a></li>
 							<li class="hori"><a href="contactTrainee.fssai">Contact
 									Us</a></li>
@@ -122,7 +122,7 @@
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
 							<li class="hori"><a href="loginProcess.fssai">Home</a></li>
-							<li class="hori"><a href="update-personal-information.fssai">Update
+							<li class="hori"><a href="update-personal-information.fssai?userId=0">Update
 									Personal Information</a></li>
 							<li class="hori"><a href="viewFeedbackDetails.fssai">View
 									Feedback Details</a></li>
@@ -162,7 +162,7 @@
                 <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="active hori"><a href="loginProcess.fssai">Home</a></li>
-                    <li class="hori"><a href="updateAssessor.fssai">Update Personal Information</a></li>
+                    <li class="hori"><a href="updateAssessor.fssai?userId=0">Update Personal Information</a></li>
                    <li class="hori"><a href="contactTrainee.fssai">Contact
 									Us</a></li>
                   </ul>

@@ -652,7 +652,7 @@
 </script>
 
 
-<cf:form action="updateTrainee.fssai" name="myForm" method="POST"
+<cf:form action="updateTrainee.fssai?id=${loginUser.id}" name="myForm" method="POST"
 	commandName="updateInformation" onsubmit="return validateFields();">
 	<section>
 		<%@include file="../roles/top-menu.jsp"%>

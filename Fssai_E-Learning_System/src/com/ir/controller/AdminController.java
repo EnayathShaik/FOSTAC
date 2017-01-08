@@ -68,7 +68,7 @@ public class AdminController {
 	@Autowired
 	@Qualifier("adminService")
 	AdminService adminService; 
-	Long PLACE_KEY;
+	
 	
 	@ModelAttribute("stateList")
 	public List<State> stateList(){
@@ -118,11 +118,6 @@ public class AdminController {
 	
 	@RequestMapping(value = "/stateMasterSave", method = RequestMethod.POST)
 	public String stateSave(@Valid @ModelAttribute("stateMaster") StateForm stateForm,BindingResult result, Model model , HttpSession session){
-		if (((Long) session.getAttribute("LAST_PLACE_KEY"))!=null && ((Long) session.getAttribute("LAST_PLACE_KEY")).equals(PLACE_KEY)) {
-			return "redirect:stateMaster.fssai";
-			}
-		
-			session.setAttribute("LAST_PLACE_KEY", PLACE_KEY);
 		
 		if(result.hasErrors()){
 			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
@@ -146,7 +141,7 @@ public class AdminController {
 	
 	@RequestMapping(value = "/stateMasterSave", method = RequestMethod.GET )
 	public String showForm() {
-		PLACE_KEY = (new Random()).nextLong();
+		
 		return "redirect:stateMaster.fssai";
 		}
 	
@@ -176,7 +171,7 @@ public class AdminController {
 		}
 		String manageAssessmentQuestionsSave = adminService.manageAssessmentQuestionsSave(assessmentQuestionForm);
 		if(manageAssessmentQuestionsSave.equalsIgnoreCase("created")){
-			model.addAttribute("created" , "Question inserted successfully !!!");
+			model.addAttribute("created" , "Question Saved successfully !!!");
 			return "manageAssessmentQuestions";
 		}else{
 			model.addAttribute("created" , "Question already exists in records !!!");
@@ -185,10 +180,6 @@ public class AdminController {
 	}
 	@RequestMapping(value = "/districtMasterSave", method = RequestMethod.POST)
 	public String stateSave(@Valid @ModelAttribute("districtMaster") DistrictForm districtForm,BindingResult result, Model model , HttpSession session){
-		
-		if (((Long) session.getAttribute("LAST_PLACE_KEY"))!=null && ((Long) session.getAttribute("LAST_PLACE_KEY")).equals(PLACE_KEY)) {
-			return "redirect:districtMaster.fssai";
-			}
 		
 		
 		if(result.hasErrors()){
@@ -210,7 +201,7 @@ public class AdminController {
 	
 	@RequestMapping(value = "/districtMasterSave", method = RequestMethod.GET )
 	public String showDistrctForm() {
-		PLACE_KEY = (new Random()).nextLong();
+		
 		return "redirect:districtMaster.fssai";
 		}
 	
@@ -222,11 +213,7 @@ public class AdminController {
 	@RequestMapping(value = "/cityMasterSave", method = RequestMethod.POST)
 	public String stateSave(@Valid @ModelAttribute("cityMaster") CityForm cityForm,BindingResult result, Model model , HttpSession session){
 		
-		if (((Long) session.getAttribute("LAST_PLACE_KEY"))!=null && ((Long) session.getAttribute("LAST_PLACE_KEY")).equals(PLACE_KEY)) {
-			return "redirect:cityMaster.fssai";
-			}
-		
-			session.setAttribute("LAST_PLACE_KEY", PLACE_KEY);
+	
 		if(result.hasErrors()){
 			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
 			System.out.println(result.getErrorCount());
@@ -246,7 +233,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/cityMasterSave" , method=RequestMethod.GET)
 	public String showCityForm(){
-		PLACE_KEY = (new Random()).nextLong();
+		
 		return "redirect:cityMaster.fssai";
 		
 	}
@@ -260,11 +247,7 @@ public class AdminController {
 	@RequestMapping(value = "/regionMasterSave", method = RequestMethod.POST)
 	public String stateSave(@Valid @ModelAttribute("regionMappingMaster") RegionForm regionForm,BindingResult result, Model model , HttpSession session){
 		
-		if (((Long) session.getAttribute("LAST_PLACE_KEY"))!=null && ((Long) session.getAttribute("LAST_PLACE_KEY")).equals(PLACE_KEY)) {
-			return "redirect:regionMappingMaster.fssai";
-			}
 		
-			session.setAttribute("LAST_PLACE_KEY", PLACE_KEY);
 		if(result.hasErrors()){
 			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
 			System.out.println(result.getErrorCount());
@@ -284,7 +267,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/regionMasterSave" , method=RequestMethod.GET)
 	public String showregionForm(){
-		PLACE_KEY = (new Random()).nextLong();
+		
 		return "redirect:regionMappingMaster.fssai";
 		
 	}
@@ -646,12 +629,6 @@ public class AdminController {
 	
 	@RequestMapping(value="/saveFeedbackMaster" , method=RequestMethod.POST)
 	public String saveFeedbackMaster(@ModelAttribute("feedbackMaster") FeedbackMaster feedbackMaster, HttpSession session,  BindingResult result,Model model ){
-		if (((Long) session.getAttribute("LAST_PLACE_KEY"))!=null && ((Long) session.getAttribute("LAST_PLACE_KEY")).equals(PLACE_KEY)) {
-			return "redirect:feedbackMaster.fssai";
-			}
-		
-			session.setAttribute("LAST_PLACE_KEY", PLACE_KEY);
-		
 		
 		if(result.hasErrors()){
 			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
@@ -668,7 +645,6 @@ public class AdminController {
 	@RequestMapping(value = "/saveFeedbackMaster", method = RequestMethod.GET )
 	public String showFeedbackMaster() {
 		
-		PLACE_KEY = (new Random()).nextLong();
 		return "redirect:feedbackMaster.fssai";
 		}
 	
@@ -738,5 +714,11 @@ public class AdminController {
 			return "success";
 		else
 			return "Error occured while updating the accessment";
+	}
+	
+	@RequestMapping(value="/getSingleAssessmentQuestion", method=RequestMethod.GET)
+	public String getSingleAssessmentQuestion(Model model, HttpServletRequest request){
+		model.addAttribute("updateTrainerAssessment", "Test Ajax");
+		return "updateTrainerAssessment";
 	}
 }

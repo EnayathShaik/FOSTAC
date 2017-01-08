@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class AssessmentQuestionForm {
 	
+	private int id;
 	@NotNull
 	private int courseTypeId;
 	@NotNull
@@ -121,6 +122,14 @@ public class AssessmentQuestionForm {
 	public void setCorrectAnswer(int correctAnswer) {
 		this.correctAnswer = correctAnswer;
 	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	
 	
 	
 }

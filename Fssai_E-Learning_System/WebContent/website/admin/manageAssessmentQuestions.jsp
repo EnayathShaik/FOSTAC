@@ -10,7 +10,6 @@
 function getQuestions(){
 	var courseTypeSearch =  $("#courseTypeSearch").val();
 	var courseNameSearch =  $("#courseNameSearch").val();
-	alert(courseTypeSearch+'   '+ courseNameSearch)
 	var total = "courseNameSearch="+courseNameSearch+"&courseTypeSearch="+courseTypeSearch;
 	var result="";
 	$.ajax({
@@ -26,13 +25,62 @@ function getQuestions(){
 	$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Course Type</th><th>Course Name</th><th>Question Number</th></tr>')
 	$.each(mainData1 , function(i , obj)
 	{
-		$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td><a href="" onClick="onLoadTrainingPartnerCenterId.fssai?id='+obj[0]+'">'+obj[1]+'</a></td><td>'+obj[2]+'</td></tr>');
+		$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[3]+')">'+obj[1]+'</a></td><td>'+obj[2]+'</td></tr>');
 		
 	});
 	}
 	});
 return result;
 }
+
+
+function editAssessmentQuestion(id){
+	var result="";
+	$.ajax({
+	type: 'post',
+	url: 'getSingleAssessmentQuestions.jspp?'+ id,
+	async: false, 
+	success: function (data){
+	//var mainData = JSON.stringify(data);
+	var mainData1 = jQuery.parseJSON(data);
+	$.each(mainData1 , function(i , obj)
+	{
+		document.getElementById('id').value = obj[0];
+		document.getElementById('courseTypeId').value = obj[1];
+		$("#courseTypeId").trigger("change");
+		window.setTimeout(function(){
+			document.getElementById('courseName').value = obj[2];
+	    }, 3000);
+		document.getElementById('questionNumber').value = obj[3];
+		document.getElementById('questionHint').value = obj[4];
+		document.getElementById('questionTitle').value = obj[5];
+		document.getElementById('noOfAssesmentQues').value = obj[6];
+		$("#noOfAssesmentQues").trigger("change");
+		window.setTimeout(function(){
+			for(j=1;j<=obj[6];j++){
+				if(j==1){
+					document.getElementById('optionOne').value = obj[8];
+				}else if(j==2){
+					document.getElementById('optionTwo').value = obj[9];
+				}else if(j==3){
+					document.getElementById('optionThree').value = obj[10];
+				}else if(j==4){
+					document.getElementById('optionFour').value = obj[11];
+				}else if(j==5){
+					document.getElementById('optionFive').value = obj[12];
+				}else if(j==6){
+					document.getElementById('optionSix').value = obj[13];
+				}
+			}
+	    }, 1000);
+		document.getElementById('correctAnswer').value = obj[7];
+	});
+	}
+	});
+	return false;
+}
+
+
 function searchCourse(val)
 {
 	$.ajax({
@@ -72,7 +120,19 @@ function searchCourse1(val)
     	$('#assAnsTable').html("");
     	var noOfAssmentQ =  $("#noOfAssesmentQues").val();
     	for(i=1;i<=noOfAssmentQ;i++){
-    		$('#assAnsTable').append('<tr><td>'+i+'</td><td><cf:input path="optionOne" class="form-control" /></td></tr>')
+    		if(i==1){
+    			$('#assAnsTable').append('<tr><td>'+i+'</td><td><cf:input path="optionOne" class="form-control" /></td></tr>')
+    		}else if(i==2){
+    			$('#assAnsTable').append('<tr><td>'+i+'</td><td><cf:input path="optionTwo" class="form-control" /></td></tr>')
+    		}else if(i==3){
+    			$('#assAnsTable').append('<tr><td>'+i+'</td><td><cf:input path="optionThree" class="form-control" /></td></tr>')
+    		}else if(i==4){
+    			$('#assAnsTable').append('<tr><td>'+i+'</td><td><cf:input path="optionFour" class="form-control" /></td></tr>')
+    		}else if(i==5){
+    			$('#assAnsTable').append('<tr><td>'+i+'</td><td><cf:input path="optionFive" class="form-control" /></td></tr>')
+    		}else if(i==6){
+    			$('#assAnsTable').append('<tr><td>'+i+'</td><td><cf:input path="optionSix" class="form-control" /></td></tr>')
+    		}
     	}
     }
     </script>
@@ -308,6 +368,7 @@ function searchCourse1(val)
                                                         <cf:input path="correctAnswer" onkeyup="allnumeric(this.id,this.value);" class="form-control" placeholder="Answer Number" />
                                                         
                                                     </div>
+                                                    <cf:input type="hidden" path="id" class="form-control" placeholder="Help Text" />
                                                     <button class="btn login-btn pull-right">Save</button>
                                                 </div> 
                                                 

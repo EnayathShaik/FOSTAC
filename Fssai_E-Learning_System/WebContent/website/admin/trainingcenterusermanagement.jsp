@@ -139,7 +139,7 @@
 <ct:choose>
 <ct:when test="${not empty searchTrainingCenterUsermanagement }">
 <ct:forEach var="listValue" items="${searchTrainingCenterUsermanagement}" varStatus="loop"><tr>
-<td><label><a href="#" value="${listValue[0]}">${listValue[1]}</a></label></td>
+<td><label><a href="update-personal-information.fssai?userId=${listValue[6]}" value="${listValue[0]}">${listValue[1]}</a></label></td>
 <td><label>${listValue[2] }</label></td>
 <td><label>${listValue[3]}</label></td>
 <td><label>${listValue[4]}</label></td>

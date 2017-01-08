@@ -1,4 +1,13 @@
-      
+<script type="text/javascript">
+function OnStart(){
+	var isOnline = "${ISONLINE}";
+	if(isOnline == 'NO'){
+		alert('Content will be available in class');
+   	  	window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
+	}
+}
+window.onload = OnStart;
+</script>      
 
         <!-- horizontal navigation -->
         <section>

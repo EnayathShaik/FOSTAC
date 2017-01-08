@@ -476,7 +476,7 @@ public class AdminDAOImpl implements AdminDAO {
 		String join = " inner join loginDetails as ld on pitp.loginDetails = ld.id";
 		String like= " where upper(pitp.FirstName) like '"+FirstName.toUpperCase()+"' and pitp.MiddleName like '"+MiddleName+"' and pitp.LastName like '"+LastName+"' and "
 				+ "pitp.AadharNumber like '"+AadharNumber +"' and ld.status like '"+ status+"'";
-		String select = "pitp.personalInformationTraineeId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber ";
+		String select = "pitp.personalInformationTraineeId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails ";
 		
 		String sql= "Select "+ select + "  from PersonalInformationTrainee as pitp "+ join + like;
 		Query query = session.createSQLQuery(sql);
@@ -525,7 +525,7 @@ public class AdminDAOImpl implements AdminDAO {
 		String join = " inner join loginDetails as ld on pitp.loginDetails = ld.id";
 		String like= " where upper(pitp.FirstName) like '"+FirstName.toUpperCase()+"' and pitp.MiddleName like '"+MiddleName+"' and pitp.LastName like '"+LastName+"' and "
 				+ "pitp.AadharNumber like '"+AadharNumber +"' and ld.status like '"+ status+"'";
-		String select = "pitp.personalInformationTrainerId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber ";
+		String select = "pitp.personalInformationTrainerId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails ";
 		
 		String sql= "Select "+ select + "  from PersonalInformationTrainer as pitp "+ join + like;
 		Query query = session.createSQLQuery(sql);
@@ -575,7 +575,7 @@ public class AdminDAOImpl implements AdminDAO {
 		String join = " inner join loginDetails as ld on pitp.loginDetails = ld.id";
 		String like= " where upper(pitp.FirstName) like '"+FirstName.toUpperCase()+"' and pitp.MiddleName like '"+MiddleName+"' and pitp.LastName like '"+LastName+"' and "
 				+ "pitp.AadharNumber like '"+AadharNumber +"' and pitp.AadharNumber  like '"+ AadharNumber+"'";
-		String select = "pitp.personalInformationAssessorId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber ";
+		String select = "pitp.personalInformationAssessorId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails ";
 		
 		String sql= "Select "+ select + "  from PersonalInformationAssessor as pitp "+ join + like;
 		Query query = session.createSQLQuery(sql);
@@ -626,7 +626,7 @@ public class AdminDAOImpl implements AdminDAO {
 		String join = " inner join loginDetails as ld on pitp.loginDetails = ld.id";
 		String like= " where upper(pitp.FirstName) like '"+FirstName.toUpperCase()+"' and pitp.MiddleName like '"+MiddleName+"' and pitp.LastName like '"+LastName+"' and "
 				+ "pitp.PAN like '"+PanNumber +"' and ld.status like '"+ status+"'";
-		String select = "pitp.personalInformationTrainingPartnerId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.PAN ";
+		String select = "pitp.personalInformationTrainingPartnerId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.PAN,pitp.logindetails ";
 		
 		String sql= "Select "+ select + "  from PersonalInformationTrainingPartner as pitp "+ join + like;
 		Query query = session.createSQLQuery(sql);
@@ -841,45 +841,51 @@ public class AdminDAOImpl implements AdminDAO {
 	public String manageAssessmentQuestionsSave(AssessmentQuestionForm assessmentQuestionForm) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
+		AssessmentQuestion assessmentQuestion = null;
+		System.out.println("Assessment Question == "+assessmentQuestionForm.getId());
+		if(assessmentQuestionForm.getId() <= 0){
+			assessmentQuestion = new AssessmentQuestion();
+		}else{
+			assessmentQuestion = (AssessmentQuestion) session
+					.load(AssessmentQuestion.class, assessmentQuestionForm.getId());
+		}
 		
 		CourseType ct = getCourseType(assessmentQuestionForm.getCourseTypeId());
 		CourseName cn = getCourseName(assessmentQuestionForm.getCourseName());
-
-		AssessmentQuestion assessmentQuestion = new AssessmentQuestion();
+		
 		assessmentQuestion.setCourseType(ct);
 		assessmentQuestion.setCourseName(cn);
 		assessmentQuestion.setQuestionNumber(assessmentQuestionForm.getQuestionNumber());
 		assessmentQuestion.setQuestionHint(assessmentQuestionForm.getQuestionHint());
 		assessmentQuestion.setQuestionTitle(assessmentQuestionForm.getQuestionTitle());
-		List<String> items = Arrays.asList(assessmentQuestionForm.getOptionOne().split("\\s*,\\s*"));
-		System.out.println("Size Of Items : "+items.size());
-		for(int i=0;i<items.size();i++){
-			if(i==0){
-				assessmentQuestion.setOptionOne(items.get(i));
-			}else if(i==1){
-				assessmentQuestion.setOptionTwo(items.get(i));
-			}else if(i==2){
-				assessmentQuestion.setOptionThree(items.get(i));
-			}else if(i==3){
-				assessmentQuestion.setOptionFour(items.get(i));
-			}else if(i==4){
-				assessmentQuestion.setOptionFive(items.get(i));
-			}else if(i==5){
-				assessmentQuestion.setOptionSix(items.get(i));
-			}
-		}
+		assessmentQuestion.setNoOfOption(assessmentQuestionForm.getNoOfOption());
+		assessmentQuestion.setOptionOne(assessmentQuestionForm.getOptionOne());
+		assessmentQuestion.setOptionTwo(assessmentQuestionForm.getOptionTwo());
+		assessmentQuestion.setOptionThree(assessmentQuestionForm.getOptionThree());
+		assessmentQuestion.setOptionFour(assessmentQuestionForm.getOptionFour());
+		assessmentQuestion.setOptionFive(assessmentQuestionForm.getOptionFive());
+		assessmentQuestion.setOptionSix(assessmentQuestionForm.getOptionSix());
 		assessmentQuestion.setCorrectAnswer(assessmentQuestionForm.getCorrectAnswer());
 		assessmentQuestion.setAssessmentType("Post");
+		
 		Integer assessmentQuestionIdd = null ;
+		
 		String where = " where coursetype = '"+assessmentQuestionForm.getCourseTypeId()+"' and coursename = '"+assessmentQuestionForm.getCourseName()+"' and questionTitle = '"+assessmentQuestionForm.getQuestionTitle()+"'";
 		String sql = "select assessmenttype from AssessmentQuestion " + where ;
 		Query query = session.createSQLQuery(sql);
 		List l = query.list();
-		if(l != null && l.size() >0){
+		if(l != null && l.size() > 0 && assessmentQuestionForm.getId() <= 0){
 			session.close();
 			return "already";
 		}else{
-			assessmentQuestionIdd = (Integer)session.save(assessmentQuestion);
+			if(assessmentQuestionForm.getId() > 0){
+				//assessmentQuestion.setAssessmentQuestionId(assessmentQuestionForm.getId());
+				session.update(assessmentQuestion);
+				assessmentQuestionIdd = assessmentQuestionForm.getId();
+			}else{
+				assessmentQuestionIdd = (Integer)session.save(assessmentQuestion);
+			}
+			
 			tx.commit();
 			session.close();
 			if(assessmentQuestionIdd != 0 ){

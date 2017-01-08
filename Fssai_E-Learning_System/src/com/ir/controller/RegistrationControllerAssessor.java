@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.ir.form.ChangePasswordForm;
@@ -121,8 +122,19 @@ public class RegistrationControllerAssessor implements Serializable{
 	}*/
 	
 	 @RequestMapping(value="/updateAssessor" , method=RequestMethod.GET)
-		public String updateAssessor(Model model ,@ModelAttribute("updateAssessor") RegistrationFormAssessor registrationFormAssessor, HttpSession session ){		
-		 Integer userId = (Integer) session.getAttribute("userId");
+		public String updateAssessor(@RequestParam(value = "userId", required = true)  Integer userId ,Model model ,@ModelAttribute("updateAssessor") RegistrationFormAssessor registrationFormAssessor, HttpSession session ){		
+		 Integer profileID = 0;
+			try{
+				profileID = (Integer) session.getAttribute("profileId");
+				if(profileID == 1 || profileID == 2){
+					//Bases On User
+				}else{
+					userId = (Integer) session.getAttribute("userId");
+				}
+				
+			}catch(Exception e){
+				System.out.println("Exception while course details save : "+ e.getMessage());
+			}
 		 if(userId > 0){
 				PersonalInformationAssessor personalInformationAssessor ;
 				personalInformationAssessor = registrationServiceAssessor.fullDetailAssessor(userId);
@@ -147,11 +159,13 @@ public class RegistrationControllerAssessor implements Serializable{
 	*/
 	 @RequestMapping(value="/updateAssessorDatavalue" , method=RequestMethod.POST)
 	 //@RequestMapping(value="/updateAssessorData" , method=RequestMethod.POST)
-		public String updateAssessorData(@Valid @ModelAttribute("updateAssessor") RegistrationFormAssessor registrationFormAssessor ,BindingResult bindingResult, HttpSession session){
-		 int  loginId = (Integer) session.getAttribute("loginIdUnique");
-		 int  assessorId = (Integer) session.getAttribute("loginUserAssessor");
-			//Integer ss = (Integer)session.getAttribute("loginUser2");
-			System.out.println("Logged in Id for assessor is  " +loginId);
+		public String updateAssessorData(@RequestParam(value = "id", required = true)  Integer id,@Valid @ModelAttribute("updateAssessor") RegistrationFormAssessor registrationFormAssessor ,BindingResult bindingResult, HttpSession session){
+		 Integer assessorId = 0;
+			if(id <= 0){
+				assessorId = (Integer) session.getAttribute("loginUserAssessor");
+			}else{
+				assessorId = id;
+			}
 			String updateAssessor = registrationServiceAssessor.UpdateAssessor(registrationFormAssessor , assessorId);
 			if(!updateAssessor.equalsIgnoreCase(""))
 			{

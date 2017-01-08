@@ -71,11 +71,19 @@ public class GetQuestions extends HttpServlet {
 		
 		System.out.println("contentLocationInput  "+courseNameSearch + "  "+ courseNameSearch1);
 		System.out.println("courseTypeInput   "+courseTypeSearch + "  "+ courseTypeSearch1);
+		StringBuffer wherebuffer = new StringBuffer();
+		wherebuffer.append(" WHERE 1=1 ");
+		if(courseTypeSearch > 0){
+			wherebuffer.append(" AND ct.coursetypeid="+courseTypeSearch);
+		}
+		if(courseNameSearch > 0){
+			wherebuffer.append(" AND cn.coursenameid="+courseNameSearch);
+		}
 		
-		String sql = "select ct.coursetype , cn.coursename , aq.questionnumber from assessmentquestion as aq "+
+		String sql = "select ct.coursetype , cn.coursename , aq.questionnumber, aq.assessmentquestionid  from assessmentquestion as aq "+
 					" inner join coursetype as ct on ct.coursetypeid = aq.coursetype"+
 					" inner join coursename as cn on cn.coursenameid = aq.coursename";
-					//"where CAST(aq.coursetype AS varchar(10))  like '"+courseTypeSearch1+"' and CAST(aq.coursename AS varchar(10))  like '"+ courseNameSearch1+"'";
+		sql = sql + wherebuffer.toString();
 		Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();

@@ -80,7 +80,7 @@
     <td width="50%"><table width="100%" border="0">
         <tr>
           <td width="52%" style="border-top: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold; margin:0px;">Category: ${admitCardForm.category }</td>
-          <td width="48%" style="border-top: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold; margin:0px;">Gender: ${admitCardForm.gender }</td>
+          <td width="48%" style="border-top: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold; margin:0px;">Gender: ${admitCardForm.title }</td>
         </tr>
         <tr>
           <td width="52%" style="border-top: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold; margin:0px;">&nbsp;</td>
