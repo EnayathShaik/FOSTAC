@@ -96,21 +96,10 @@ public class SearchVacancy extends HttpServlet {
 		String newList=null;
 		System.out.println("district 0");
 		String sql ="";
-		/*if(n1.length==5 && profileCode==5){
-			sql = "select pvtc.postvacancytrainingcenterid , ct.coursetype , cn.coursename , pvtc.trainingdate , pvtc.requiredexp , pvtc.noofvacancy,pvtc.loginid "+
-					" from postvacancytrainingcenter as pvtc "+
-					" inner join coursetype as ct on ct.coursetypeid = pvtc.coursetype "+
-					" inner join coursename as cn on cn.coursenameid = pvtc.coursename and pvtc.loginid='"+loginId+"'";
-		}else{ sql = "select pvtc.postvacancytrainingcenterid , ct.coursetype , cn.coursename , pvtc.trainingdate , pvtc.requiredexp , pvtc.noofvacancy,pvtc.loginid "+
-				" from postvacancytrainingcenter as pvtc "+
-				" inner join coursetype as ct on ct.coursetypeid = pvtc.coursetype "+
-				" inner join coursename as cn on cn.coursenameid = pvtc.coursename ";
-			
-		}*/
+		sql = "select pvtc.postvacancytrainingcenterid , ct.coursetype , cn.coursename , pvtc.trainingdate ,pvtc.requiredexp , pvtc.noofvacancy,pvtc.loginid  from postvacancytrainingcenter pvtc left join coursetype as ct on ct.coursetypeid = pvtc.coursetype left join coursename as cn on cn.coursenameid = pvtc.coursename left join personalinformationtrainingpartner D on(pvtc.trainingcenter=D.personalinformationtrainingpartnerid)  left join  logindetails E on(D.logindetails=E.ID) " +
+				" where E.loginid ='"+loginId+"'  and  cast(ct.coursetypeid as varchar(10))  like '"+courseType+"%' and CAST(cn.coursenameid AS VARCHAR(10)) like '"+courseName+"%' and  CAST(pvtc.trainingdate AS VARCHAR(10)) like '"+trainingDate+"%'   and cast(pvtc.requiredexp as varchar(10))  like '"+requiredExp+"%' and cast(pvtc.noofvacancy as varchar(10)) like '"+noOfVacancy+"%' ";
 		
-		
-		sql = " select pvtc.postvacancytrainingcenterid , ct.coursetype , cn.coursename , pvtc.trainingdate ,pvtc.requiredexp , pvtc.noofvacancy,pvtc.loginid  from postvacancytrainingcenter as pvtc   inner join coursetype as ct on ct.coursetypeid = pvtc.coursetype    inner join coursename as cn on cn.coursenameid = pvtc.coursename inner join personalinformationtrainingpartner D on(pvtc.trainingcenter=D.personalinformationtrainingpartnerid) inner join logindetails E on(D.logindetails=E.ID) " +
-				"where E.loginid ='"+loginId+"' and CAST(ct.coursetype AS VARCHAR(10)) like '"+courseType+"%' and CAST(cn.coursename AS VARCHAR(10)) like '"+courseName+"%' and CAST(pvtc.trainingdate AS VARCHAR(10)) like '"+trainingDate+"%'  and cast(pvtc.requiredexp as varchar(10))  like '"+requiredExp+"%' and cast(pvtc.noofvacancy as varchar(10)) like '"+noOfVacancy+"%' ";
+		System.out.println(" sql "+sql);
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
 		System.out.println(list.size());

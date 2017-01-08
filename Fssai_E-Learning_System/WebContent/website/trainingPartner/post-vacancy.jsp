@@ -85,17 +85,11 @@ function searchVacancy(indicator){
 	var loginID = $("#loginId").val();
 	
 	
-	var courseType =  $("#courseType").find('option:selected').text();
-	var courseName =  $("#courseName").find('option:selected').text();
-	var trainingDate = $("#trainingDate").val().replace("-","/").replace("-","/");
+	var courseType =  ($("#courseType").val() == 0 ? "" : $("#courseType").val());
+	var courseName =  ($("#courseName").val() == 0 ? "" : $("#courseName").val());
+	var trainingDate = $("#trainingDate").val(); /* .replace("-","/").replace("-","/"); */
 	var requiredExp =  ($("#requiredExp").val() == 0 ? "" : $("#requiredExp").val());
 	var noOfVacancy =  ($("#noOfVacancy").val() == 0 ? "" : $("#noOfVacancy").val());
-	
-	/* alert('courseType == '+courseType);
-	alert('courseName == '+courseName);
-	alert('trainingDate == '+trainingDate);
-	alert('requiredExp == '+requiredExp);
-	alert('noOfVacancy == '+noOfVacancy); */
 	
 	var total = null;
 	$(".displayNone").css("display","block");
@@ -104,8 +98,8 @@ function searchVacancy(indicator){
 		 total = "courseType=&courseName=&trainingDate=&requiredExp=&noOfVacancy=&loginid="+loginID;
 	else
 		 total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy+"&loginid="+loginID;
-	alert("total "+total);
-	var result="";
+	//alert("total "+total);
+ 	var result="";
 		$.ajax({
 		type: 'post',
 		url: 'searchVacancy.jspp?'+ total,
@@ -122,7 +116,7 @@ function searchVacancy(indicator){
 			
 		});
 		}
-		});
+		}); 
 	return result;
 }
 
