@@ -4,11 +4,8 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-
 %>
 <html lang="en">
-
-
 <script type = "text/javascript" >
        function preventBack(){window.history.forward();}
         setTimeout("preventBack()", 10);
@@ -278,7 +275,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        <div class="col-md-3 col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
           <div class="feature-wrap training-box center-block">
             <h3 class="box-heading">Find your Nearest Training Centre</h3>
-            <div style="margin:10px 0px 0px 0px;"><img src="website/images/google-map.png" width="224" height="124"></div>
+<!--             <div style="margin:10px 0px 0px 0px;"><img src="website/images/google-map.png" width="224" height="124"></div> -->
+			<div style="margin:10px 0px 0px 0px;"><jsp:include page="website/website/index.html" /></div> 
           </div>
         </div>
         <!--/.col-md-4--> 
