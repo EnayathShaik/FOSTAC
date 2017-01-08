@@ -138,6 +138,7 @@ function gettid(value){
                         <div class="form-group">
                           <label>Course Name</label> &nbsp;&nbsp;<label> ${created}</label>
 							<cf:select path="courseName" class="form-control" onchange="getCourseTrainingType();">
+							<cf:option value="0" label="Select Course Name" />
 								<cf:options items="${courseNameListB}" itemValue="coursenameid" itemLabel="coursename" />
 							</cf:select>
                         </div>
