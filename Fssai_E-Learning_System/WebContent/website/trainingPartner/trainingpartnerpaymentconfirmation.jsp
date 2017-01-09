@@ -21,37 +21,69 @@ function getCourseName(val){
 
 </script>
 <script>
+function confirmStatus(trainingid,courseid){
+	
+	var paymentstatus = $("input[type='radio'][name='paymentstatus']:checked").val();
+	console.log("stsists=>"+paymentstatus);
+	if(paymentstatus=="true")
+		paymentstatus ='Confirm';
+	else
+		paymentstatus = 'Pending' ;
+	 
+		var result="";
+		var total = "paymentstatus="+paymentstatus+"&courseid="+courseid ;
+		console.log("total "+total);
+		//alert(idHidden);
+		$('#newTable').hide();
+		
+	 	$.ajax({
+		type: 'post',
+		url: 'savePaymentStatus.jspp?'+ total,
+		data: {
+		       user_name:name,
+		      },
+		      success: function (response) {
+		       $( '#name_status' ).html(response);
+		      }
+		      });
+	 	location.reload();
+	 	return true;
+}
+
+</script>
+<script>
 
 function showDetails(){
 		var courseType =  $("#selCourseType").val();
 		var courseName =  $("#selCourseName").val();
-		var trainingDate = $("#traningDate").val().replace("-","/").replace("-","/");
+		var trainingDate = $("#traningDate").val();
 		var traningTime =  $("#traningTime").val();
 		var status = $('#selTraineeStatus').val();
+	
+		//alert("courseType "+courseType);
+		//alert("courseName "+courseName);
+		//alert("trainingDate "+trainingDate);
+		//alert("traningTime "+traningTime);
+		//alert("status "+status); 
 		
-		/* alert("courseType "+courseType);
-		alert("courseName "+courseName);
-		alert("trainingDate "+trainingDate);
-		alert("traningTime "+traningTime);
-		alert("status "+status); */
-		
-		$(".displayNone").css("display","block");
-		//var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy;
-		var total = "";
-		var result="";
-			$.ajax({
-			type: 'post',
-			url: 'traineeCenterViewTrainee.jspp?'+ total,
-			async: false, 
-			success: function (data){
-			$('#newTable').show();
-			//var mainData = JSON.stringify(data);
-			var mainData1 = jQuery.parseJSON(data);
-			var j=1;
-			$('#newTable tr').remove();
+	/* alert("total "+total); */
+	$(".displayNone").css("display","block");
+	//var	total = courseType+"&"+courseName+"&"+trainingDate+"&"+trainingTime+"&"+status;
+	var total = "";
+	var result="";
+	$.ajax({
+		type: 'post',
+		url: 'traineeCenterViewTrainee.jspp?'+ total,
+		async: false, 
+		success: function (data){              
+		$('#newTable').show();
+		//var mainData = JSON.stringify(data);
+		var mainData1 = jQuery.parseJSON(data);
+		var j=1;
+		$('#newTable tr').remove();
 			$.each(mainData1 , function(i , obj)
 			{
-				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td><input type="checkbox">YES</td><td>Confirm</td></tr>');
+				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td><input type="radio" id="paymentstatus" name="paymentstatus" value="true">YES</td><td>'+obj[6]+'</td><td><a href="#" onClick="confirmStatus(\''+j+'\',\''+obj[7]+'\');">Save</a> </td></tr>');
 				
 			});
 			}
@@ -270,13 +302,14 @@ return result;
                             <th>Participant Name</th>
                             <th>Payment Received</th>
                             <th>Status</th>
+                            <th>Save</th>
                           </tr>
                         </thead>
                         <tbody id="newTable">
                         </tbody>
                       </table>
                        </div>
-                      <a href="#" class="btn login-btn pull-right">Save</a>
+                     <!--  <a href="#" class="btn login-btn pull-right" onclick="saveDetails();">Save</a> -->
                     </fieldset>
                     <div style="width: 95px;">
                       <ul class="pager">

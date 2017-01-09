@@ -604,6 +604,15 @@
   <servlet-name>trainingpartnermanagetrainer</servlet-name> 
   <url-pattern>/trainingpartnermanagetrainer.jspp</url-pattern> 
   </servlet-mapping>
+  
+  <servlet>
+  <servlet-name>savePaymentStatus</servlet-name> 
+  <servlet-class>com.ir.servlet.savePaymentStatus</servlet-class> 
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>savePaymentStatus</servlet-name> 
+  <url-pattern>/savePaymentStatus.jspp</url-pattern> 
+  </servlet-mapping>
   <servlet>
   
   <servlet-name>traineeCenterViewTraineeList</servlet-name> 
