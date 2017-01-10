@@ -655,4 +655,22 @@
     <servlet-name>editCourseContentDataMCC</servlet-name>
     <url-pattern>/editCourseContentDataMCC.jspp</url-pattern>
   </servlet-mapping>
+  <servlet>
+  <servlet-name>searchMarkAttendance</servlet-name> 
+  <servlet-class>com.ir.servlet.SearchMarkAttendance</servlet-class> 
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>searchMarkAttendance</servlet-name> 
+  <url-pattern>/searchMarkAttendance.jspp</url-pattern> 
+  </servlet-mapping>
+  
+   <servlet>
+  <servlet-name>updateAttendanceStatus</servlet-name> 
+  <servlet-class>com.ir.servlet.updateAttendanceStatus</servlet-class> 
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>updateAttendanceStatus</servlet-name> 
+  <url-pattern>/updateAttendanceStatus.jspp</url-pattern> 
+  </servlet-mapping>
+  
 </web-app>

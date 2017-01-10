@@ -2,6 +2,12 @@
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
+function OnStart(){
+	showDetails('ALL');
+}
+window.onload = OnStart;
+
+
 function getCourseName(val){
 	 $('#selCourseName option').remove();
 	$.ajax({
@@ -22,28 +28,42 @@ function getCourseName(val){
 </script>
 <script>
 
-function showDetails(){
-	
-	
-	 	var courseType =  $("#selCourseType").val();
-		var courseName =  $("#selCourseName").val();
+function ck_aadhar(thisValue){
+	var id=$(thisValue).closest('tr').children('td:first').text();
+	var value = thisValue.value;
+	var validAadhar =$(thisValue).closest('td').find('input[id="validAadhar"]').val();
+	alert(value ==validAadhar )
+	if(value ==validAadhar ){
+		$("#attendanceRow"+id).val("A");
+	}else{
+		
+		$("#attendanceRow"+id).val("I");
+		
+	}
+
+}
+function showDetails(indicator){
+	 	var courseType =  ($("#selCourseType").val() == null ) ? "" : $("#selCourseType").val() ;
+		var courseName =  ($("#selCourseName").val() == null) ? "" :$("#selCourseName").val() ;
 		var trainingDate = $("#trainingDate").val().replace("-","/").replace("-","/");
 		var trainingTime =  $("#trainingDate").val();
 		var status = $('#selTraineeStatus').val(); 
-		
-		/* alert("courseType "+courseType);
-		alert("courseName "+courseName);
-		alert("trainingDate "+trainingDate);
-		alert("trainingTime "+trainingTime);
-		alert("status "+status); */
+		 var total = "";
 		
 		$(".displayNone").css("display","block");
-		 var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&trainingTime"+trainingTime;
+		
+		if(indicator == "ALL")
+			{
+			total = "courseType=&courseName=&trainingDate=&trainingTime=";
+			}else{
+			total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&trainingTime"+trainingTime;		
+			}
+		 
 		
 		var result="";
 			$.ajax({
 			type: 'post',
-			url: 'traineeCenterViewTrainee.jspp?'+ total,
+			url: 'searchMarkAttendance.jspp?'+ total,
 			async: false, 
 			success: function (data){
 			$('#newTable').show();
@@ -53,12 +73,41 @@ function showDetails(){
 			$('#newTable tr').remove();
 			$.each(mainData1 , function(i , obj)
 			{
-				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td></tr>');
+		
+				$('#newTable').append('<tr id="tableRow"><td>'+j+'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td><input type="hidden" value='+obj[5]+' name="validAadhar" id="validAadhar" /><input path="AadharNumber" id="AadharNumber" name="AadharNumber" class="form-control" maxlength="12" placeholder="Aadhar Number" onblur=ck_aadhar(this); /></td><td><select style="width:100px;height:34px;font-size:12px;" name =attendanceRow'+j+'  id=attendanceRow'+j+'><option name="present" value ="A">Present</option><option name="absent" value="I">Absent</option></td><td><button onclick="updateAttendance('+obj[6]+' , '+j+');return false;">Update</button></td></tr>');
 				
 			});
 			}
 			});
+			
+			$('input[id="AadharNumber"]').keyup(function(e)
+			        {
+			if (/\D/g.test(this.value))
+			{
+			this.value = this.value.replace(/\D/g, '');
+			}
+			});
 		return result;
+	}
+	
+	
+	function updateAttendance(courseEnrolledid , id){
+		
+		alert("id "+ id + " courseEnrolledid  "+courseEnrolledid);
+		var status = $("#attendanceRow"+id).val();
+		var total =  "courseenrolledId="+courseEnrolledid+"&status="+status ;
+	 	$.ajax({
+			type: 'post',
+			url: 'updateAttendanceStatus.jspp?'+ total,
+			data: {
+			       user_name:name,
+			      },
+			      success: function (response) {
+			       $( '#name_status' ).html(response);
+			      }
+			      });
+		 	location.reload();
+		 	return true;
 	}
 
 function showDetail(){
@@ -218,7 +267,7 @@ return result;
                                                         <input type="date" class="form-control" id="trainingDate" name="trainingDate">
                                                     </div>                              
                                                     
-                                                     <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails();return false">Show Details</button>
+                                                     <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails('');return false">Show Details</button>
                                                      <input type="button" id="btnExport" style="margin-right: 20px;"  class="btn login-btn pull-right" value="Download" />
                                                 </div>
                                                
@@ -251,6 +300,9 @@ return result;
                             <th>Training Date</th>
                             <th>Training Time</th>
                             <th>Participant Name</th>
+                            <th>Aadhar No.</th>
+                            <th>Attendance</th>
+                            <th>Save</th>
                            
                           </tr>
                         </thead>
@@ -258,7 +310,7 @@ return result;
                         </tbody>
                       </table>
                       </div>
-                      <a href="#" class="btn login-btn pull-right">Save</a>
+             
                     </fieldset>
                     <div style="width: 95px;">
                       <ul class="pager">

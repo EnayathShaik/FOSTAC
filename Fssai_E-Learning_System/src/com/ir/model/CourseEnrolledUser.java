@@ -23,10 +23,19 @@ public class CourseEnrolledUser {
 	private long rollno; 
 	private String paymentstatus;
 	private String enrolledby;
+	private String userStaus;
 	
 	
 	
 	
+
+	public String getUserStaus() {
+		return userStaus;
+	}
+
+	public void setUserStaus(String userStaus) {
+		this.userStaus = userStaus;
+	}
 
 	public String getPaymentstatus() {
 		return paymentstatus;

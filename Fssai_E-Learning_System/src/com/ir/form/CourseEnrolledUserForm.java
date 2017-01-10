@@ -12,7 +12,14 @@ public class CourseEnrolledUserForm {
 	private int personalinformationtraineeid;
 	private int trainingCalendarId;
 	private String loginId;
+	private String userstatus;
 	
+	public String getUserstatus() {
+		return userstatus;
+	}
+	public void setUserstatus(String userstatus) {
+		this.userstatus = userstatus;
+	}
 	public int getPersonalinformationtraineeid() {
 		return personalinformationtraineeid;
 	}
