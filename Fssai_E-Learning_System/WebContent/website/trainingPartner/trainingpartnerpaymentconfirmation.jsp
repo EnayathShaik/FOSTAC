@@ -61,15 +61,15 @@ function showDetails(){
 		var status = $('#selTraineeStatus').val();
 	
 		//alert("courseType "+courseType);
-		//alert("courseName "+courseName);
-		//alert("trainingDate "+trainingDate);
-		//alert("traningTime "+traningTime);
-		//alert("status "+status); 
+		/* alert("courseName "+courseName);
+		alert("trainingDate "+trainingDate);
+		alert("traningTime "+traningTime);
+		alert("status "+status);  */
 		
-	/* alert("total "+total); */
 	$(".displayNone").css("display","block");
-	//var	total = courseType+"&"+courseName+"&"+trainingDate+"&"+trainingTime+"&"+status;
-	var total = "";
+	var	total = courseType+"&"+courseName+"&"+trainingDate+"&"+traningTime+"&"+status;
+	console.log("total "+total);
+	//var total = "";
 	var result="";
 	$.ajax({
 		type: 'post',
@@ -80,7 +80,7 @@ function showDetails(){
 		//var mainData = JSON.stringify(data);
 		var mainData1 = jQuery.parseJSON(data);
 		var j=1;
-		$('#newTable tr').remove();
+		//$('#newTable tr').remove();
 			$.each(mainData1 , function(i , obj)
 			{
 				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td><input type="radio" id="paymentstatus" name="paymentstatus" value="true">YES</td><td>'+obj[6]+'</td><td><a href="#" onClick="confirmStatus(\''+j+'\',\''+obj[7]+'\');">Save</a> </td></tr>');
