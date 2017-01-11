@@ -29,16 +29,17 @@ function getCourseDetails(){
 	var trainingCenterDistrict =  $("#trainingCenterCity").val();
 	//alert(courseName + "  "+ modeOfTraining+"  "+ trainingPatrtner);
 	//alert(trainingDate + "  "+ trainingCenterState+"  "+ trainingCenterDistrict);
+	var result;
 	var total="courseName="+courseName+"&modeOfTraining="+modeOfTraining+"&trainingPatrtner="+trainingPatrtner+"&trainingDate="+trainingDate+"&trainingCenterState="+trainingCenterState+"&trainingCenterDistrict="+trainingCenterDistrict;
-	alert(total);
+	//alert(total);
 	
 	$.ajax({
 	      type: 'post',
 	      url: 'getCourseDetails.jspp?'+ total,
 	      success: function (response) { 
-	    	  alert('kjgkghghhggjkgkggkggjhg');
+	    	  //alert('kjgkghghhggjkgkggkggjhg');
 	      var mainData1 = jQuery.parseJSON(response);
-	      alert(mainData1);
+	     // alert(mainData1);
 	     $('#newTable').show();
 	     $(".displayNone").css("display","block");
 	      var j=1;
@@ -46,8 +47,8 @@ function getCourseDetails(){
 			$('#newTable').append('<tr  class="background-open-vacancies"><th>Select</th><th>Training Center Name & Address</th><th>Training Schedule</th><th>	Center Contact Person Name, Mobile & Email Id</th><th>Seating Capacity</th><th>Seats available</th></tr>')
 			$.each(mainData1 , function(i , obj)
 			{
-			$('#newTable').append('<tr id="tableRow"><td><input type="text" name="getCalander" id="h" value="'+obj[0]+'" />'+i+'<input type="radio" name="getCalander" onclick="gettid();" id="trainingCalendarIdd"  value="'+obj[0]+'"/></td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td></tr>');	
-			document.getElementById("trainingCalendarId").value = i;
+			$('#newTable').append('<tr id="tableRow"><td><input type="text" name="getCalander" id="h" value="'+obj[0]+'" />'+i+'<input type="radio" name="getCalander" onclick="gettid(this.value);" id="trainingCalendarIdd"  value="'+obj[0]+'"/></td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td></tr>');	
+			//document.getElementById("trainingCalendarId").value = i;
 			}); 
 			}
 			});
@@ -55,25 +56,8 @@ function getCourseDetails(){
 }
 </script>
 <script>
-function gettid(){
-	if (document.getElementById('trainingCalendarIdd').checked) {
-		  calValue = document.getElementById('trainingCalendarIdd').value;
-		  alert(calValue);
-		  document.getElementById("trainingCalendarId").value = calValue;
-	 }
-	
-// 	if (document.getElementById('trainingCalendarIdd').checked) {
-// 		// alert(calValue);
-// 		  calValue = document.getElementById('trainingCalendarIdd').value;
-// 		  document.getElementById("trainingCalendarId").value = calValue;
-// 		  alert(calValue);
-		  
-// 		}
-	
-	/*document.getElementById("trainingCalendarId").value = document.getElementById("h").value;
-	var a = document.getElementById("trainingCalendarId").value;
-	var b = document.getElementById("iii").value;
-	alert(a + '   '+ b); */
+function gettid(value){
+		document.getElementById("trainingCalendarId").value = value;
 }
 </script>
 <cf:form action="advanceTraineeSave.fssai" name="myForm" method="POST" commandName="advanceTrainee" >
