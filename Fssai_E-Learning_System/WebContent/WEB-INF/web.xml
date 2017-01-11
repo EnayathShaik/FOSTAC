@@ -673,4 +673,23 @@
   <url-pattern>/updateAttendanceStatus.jspp</url-pattern> 
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>loadFeedbackMaster</servlet-name>
+    <servlet-class>com.ir.servlet.loadFeedbackMaster</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>loadFeedbackMaster</servlet-name>
+    <url-pattern>/loadFeedbackMaster.jspp</url-pattern>
+  </servlet-mapping>
+  
+  
+    <servlet>
+    <servlet-name>getFeedbackDetails</servlet-name>
+    <servlet-class>com.ir.servlet.getFeedbackDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getFeedbackDetails</servlet-name>
+    <url-pattern>/getFeedbackDetails.jspp</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

@@ -2,6 +2,12 @@
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
+
+function OnStart(){
+	loadTrainingCenter();
+}
+window.onload = OnStart;
+
 function getCourseName(val){
 	 $('#selCourseName option').remove();
 	$.ajax({
@@ -19,37 +25,48 @@ function getCourseName(val){
 	      });
 }
 
+function loadTrainingCenter(){
+	var trainingCenter = $("#userId").val();
+	$('#personalInformationTrainingPartnerId').val(trainingCenter);
+	
+	$.ajax({
+	
+		type:'post',
+		url : 'loadFeedbackMaster.jspp',
+		success: function (response){
+			
+			var data =  jQuery.parseJSON(response);
+			console.log("data "+data);
+			   $('#trainee').append('<option value="0" label="--Select Trainee--" />');
+		        $.each(data , function(i , obj)
+		  		{
+		  				$('#trainee').append('<option value='+obj[0]+' >'+obj[1]+'</option>');		
+		  		});
+			
+		} 
+		
+	})
+	
+}
+
+
+
 </script>
 <script>
 
 function showDetails(){
-	alert("Fetching details to mark attendance..");
-	
-	$('#tblAssessorCourses tr').remove();
-	$('#tblAssessorCourses').append('<thead>'+
-    '<tr class="background-open-vacancies">'+
-        '<th>S.No.</th>'+
-        '<th>Course Type</th>'+
-        '<th>Course Name</th>'+
-        '<th>Training Date</th>'+
-        '<th>Training Time</th>'+
-        '<th>Trainer Name</th>'+
-        '<th>&nbsp;&nbsp;</th>'+
-    '</tr>'+
-	'</thead>');
-	//var id = document.getElementById("assessmentAgencyId").value;
-	var data=JSON.stringify({
-		courseTypeId:$('#selCourseType').val()==null?0:$('#selCourseType').val(),
-		courseNameId:$('#selCourseName').val()==null?0:$('#selCourseName').val(),
-		trainingDate:$('#trainingdate').val(),
-		feedbackId:$('#personalInformationTrainingPartnerId').val()==null?0:$('#personalInformationTrainingPartnerId').val()
-		
-  });
+	var trainingCenter = $("#userId").val();
+	var trainee = $("#trainee").val();
+	var courseid = $("#selCourseType").val();
+	var courseName = $("#selCourseName").val();
+	var trainingDate = $("#trainingdate").val();
+	var value = trainingCenter+"&"+trainee+"&"+courseid+"&"+courseName+"&"+trainingDate+"&";
+	alert("value "+value);
+	$(".displayNone").css("display","block");
 	$.ajax({
 	      type: 'post',
-	      url: 'getFeedbackDetails.fssai',
-	      contentType : "application/json",
-	      data: data,
+	      url: 'getFeedbackDetails.jspp?'+ value,
+	      async: false, 
 	      success: function (response) {
 	    	 response=JSON.parse(response);
 	    	 if(response.length==0){
@@ -57,6 +74,11 @@ function showDetails(){
 	    	 }else{
 	    		 $('#show-result').show();
 	    	 }
+	    	 
+	    	    $.each(response , function(i , obj)
+	    		  		{
+	    		  				console.log(obj +" "+ i);		
+	    		  		});
 	    	 for(index=0;index<response.length;index++){
 				var objec=response[index];
 				var rdStr=""
@@ -67,6 +89,7 @@ function showDetails(){
 						rdStr+='<td class="text-center"><input type="radio" name="'+index+'" value="'+radioIndex+'"/></td> '
 					}
 				}
+				
 	    		 $('#feedbackDetails').append('<tr>'+
            		'<td>'+objec[1]+'</td>'+rdStr+'</tr>');
              }
@@ -96,11 +119,11 @@ function showDetails(){
                             <div class="row">
                                 <div class="col-lg-12">
                                     <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle">
-                                        <i class="fa fa-bars"></i> <span class="orange-font">Welcome : ${loginUser.loginDetails.loginId}</span>
+                                    <input type="hidden" id="userId" value='${loginUsertrainingpartner}' /> 
+                                        <i class="fa fa-bars"></i> <span class="orange-font">Welcome : ${loginUserS.loginDetails.loginId}</span>
                                     </a>
                                 </div>
                             </div>
-
                             <!-- add the content here for main body -->
                             <!-- timeline  -->
                             <div class="container-fluid">
@@ -141,10 +164,23 @@ function showDetails(){
                                                             </ul>
                                                         </div>
                                                         <select class="form-control" name="selCourseName" id = "selCourseName"> </select>
-														
+								 						
                                                     </div>
+                                                    
+                                                     <div class="form-group">
+                                                        <div>
+                                                            <ul class="lab-no">
+                                                                <li class="style-li"><strong>Trainee Name:</strong></li>
+                                                                
+                                                            </ul>
+                                                        </div>
+                                                 
+														<select class="form-control" name="trainee" id = "trainee"> </select>
+                                                    </div>
+                                                    
                                                 </div>
-
+                                                
+                                                     
                                                 <!-- right side -->
                                                 <div class="col-md-6 col-xs-12">
                                                  
@@ -200,7 +236,7 @@ function showDetails(){
 
 <!--                                     search Results -->
 <!--                         search Results -->
-              <div class="col-xs-12 collapse table-overflow-responsive" id="show-result" aria-expanded="false" style="height: 0px;"> 
+              <div class="col-xs-12 displayNone"  style="display:none;">
 <!--                 table -->
                 <div class="row">
                   <div class="col-xs-12">
@@ -208,9 +244,9 @@ function showDetails(){
                       <legend>
                       <h4>Feed back details</h4>
                       </legend>
-                                <table class="table table-bordered table-striped table-responsive table-hover paginated">
+                                <table class="table table-bordered table-responsive table-striped table-hover">
                           <thead>
-                        <tr class="blue-table-head">
+                        <tr class="background-open-vacancies">
                               <th>Feedback Point</th>
                               <th class="text-center">1</th>
                               <th class="text-center">2</th>
@@ -220,14 +256,23 @@ function showDetails(){
                             </tr>
                       </thead>
                           <tbody id="feedbackDetails">
-<!-- 						    <tr>       -->
-<%-- 						        <td>${feedbackMaster[1]}</td> --%>
-<%-- 							  <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="1"></td> --%>
-<%--                               <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="2"></td> --%>
-<%--                               <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="3"></td> --%>
-<%--                               <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="4"></td> --%>
-<%--                               <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="5"></td> --%>
-<!-- 						    </tr> -->
+						    <tr id="Good">  
+						    
+					        <td>Good</td>
+							  <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="1"></td> 
+                             <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="2"></td> 
+                             <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="3"></td>
+                             <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="4"></td> 
+                            <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="5"></td> 
+						    </tr>
+						      <tr id="vgood">  
+					        <td> Very Good</td>
+							  <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="1"></td> 
+                             <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="2"></td> 
+                             <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="3"></td>
+                             <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="4"></td> 
+                            <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="5"></td> 
+						    </tr>
                       </tbody>
                         </table>
                     <div class="col-xs-12">
