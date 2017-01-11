@@ -97,25 +97,27 @@ public class GetTrainingCalender extends HttpServlet {
 			sql="select tc.trainingcalendarid ,mtp.trainingpartnername ,  "+
 						" concat(pitp.firstname ,  '  ' , pitp.middlename , ' ' , PITP.lastname) as name, "+
 						" cn.coursename , ct.coursetype , tc.trainingdate ,tc.trainingtime , pitp.seatcapacitypersession , pitp.seatcapacityavailable , "+
-						"   tc.trainingtype  , pitp.trainingcentrename "+
+						"   tc.trainingtype  , pitp.trainingcentrename,  concat(pitr.firstname ,  '  ' , pitr.middlename , ' ' , pitr.lastname) "+
 						" from trainingcalendar as tc "+
 						" inner join coursename as cn on cn.coursenameid = tc.coursename "+
 						" inner join coursetype as ct on ct.coursetypeid = tc.coursetype "+
 						" inner join managetrainingpartner as mtp on mtp.managetrainingpartnerid = tc.trainingpartner "+
-						" inner join personalinformationtrainingpartner as pitp on mtp.managetrainingpartnerid = pitp.trainingpartnername "+
-						" and tc.trainingcenter = pitp.personalinformationtrainingpartnerid " ;
+						" inner join personalinformationtrainingpartner as pitp on mtp.managetrainingpartnerid = pitp.trainingpartnername and tc.trainingcenter = pitp.personalinformationtrainingpartnerid"+
+						" inner join personalinformationtrainer as pitr on CAST(CAST (tc.trainername AS NUMERIC(19,4)) AS INT) = pitr.personalinformationtrainerid "+
+						" " ;
 						else
 							
 		sql="select tc.trainingcalendarid ,mtp.trainingpartnername ,  "+
 					" concat(pitp.firstname ,  '  ' , pitp.middlename , ' ' , PITP.lastname) as name, "+
 					" cn.coursename , ct.coursetype , tc.trainingdate ,tc.trainingtime , pitp.seatcapacitypersession , pitp.seatcapacityavailable , "+
-					"   tc.trainingtype  , pitp.trainingcentrename "+
+					"   tc.trainingtype  , pitp.trainingcentrename , concat(pitr.firstname ,  '  ' , pitr.middlename , ' ' , pitr.lastname)"+
 					" from trainingcalendar as tc "+
 					" inner join coursename as cn on cn.coursenameid = tc.coursename "+
 					" inner join coursetype as ct on ct.coursetypeid = tc.coursetype "+
 					" inner join managetrainingpartner as mtp on mtp.managetrainingpartnerid = tc.trainingpartner "+
-					" inner join personalinformationtrainingpartner as pitp on mtp.managetrainingpartnerid = pitp.trainingpartnername "+
-					" and tc.trainingcenter = pitp.personalinformationtrainingpartnerid "+
+					" inner join personalinformationtrainingpartner as pitp on mtp.managetrainingpartnerid = pitp.trainingpartnername and tc.trainingcenter = pitp.personalinformationtrainingpartnerid"+
+					" inner join personalinformationtrainer as pitr on CAST(CAST (tc.trainername AS NUMERIC(19,4)) AS INT) = pitr.personalinformationtrainerid "+
+					"  "+
 					" where CAST(tc.coursename AS varchar(10)) like '"+courseName+"' "+
 					//--and cn.modeoftraining like 'Online'
 					" and CAST(tc.courseType AS varchar(10)) like '"+courseType+"' "+ 

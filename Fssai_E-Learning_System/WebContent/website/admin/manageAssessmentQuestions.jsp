@@ -4,7 +4,18 @@
 
 
 <script>
+function OnStart(){
+	document.getElementById('id').value = 0;
+document.getElementById('courseTypeId').value = 0;
+document.getElementById('courseName').value = 0;
+document.getElementById('questionNumber').value = '';
+document.getElementById('questionHint').value = '';
+document.getElementById('questionTitle').value = '';
+document.getElementById('noOfAssesmentQues').value = 0;
+document.getElementById('correctAnswer').value = '';
 
+}
+window.onload = OnStart;
 
 
 function getQuestions(){
@@ -122,17 +133,28 @@ function searchCourse1(val)
     	for(i=1;i<=noOfAssmentQ;i++){
     		if(i==1){
     			$('#assAnsTable').append('<tr><td>'+i+'</td><td><cf:input path="optionOne" class="form-control" /></td></tr>')
+    			document.getElementById('optionOne').value = '';
+    			
     		}else if(i==2){
     			$('#assAnsTable').append('<tr><td>'+i+'</td><td><cf:input path="optionTwo" class="form-control" /></td></tr>')
+    			document.getElementById('optionTwo').value = '';
+    			
     		}else if(i==3){
     			$('#assAnsTable').append('<tr><td>'+i+'</td><td><cf:input path="optionThree" class="form-control" /></td></tr>')
+    			document.getElementById('optionThree').value = '';
+    			
     		}else if(i==4){
     			$('#assAnsTable').append('<tr><td>'+i+'</td><td><cf:input path="optionFour" class="form-control" /></td></tr>')
+    			document.getElementById('optionFour').value = '';
+    			
     		}else if(i==5){
     			$('#assAnsTable').append('<tr><td>'+i+'</td><td><cf:input path="optionFive" class="form-control" /></td></tr>')
+    			document.getElementById('optionFive').value = '';
+    			
     		}else if(i==6){
     			$('#assAnsTable').append('<tr><td>'+i+'</td><td><cf:input path="optionSix" class="form-control" /></td></tr>')
-    		}
+    			document.getElementById('optionSix').value = '';
+    	}
     	}
     }
     </script>

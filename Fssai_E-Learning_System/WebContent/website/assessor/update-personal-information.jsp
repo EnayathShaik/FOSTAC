@@ -972,7 +972,7 @@ function getCityUpdate(dd , cc)
         </div>
 <div class="row" style="height: 20px;"> </div>
 <!-- Basic courses -->
-<div class="personel-info">
+<%-- <div class="personel-info">
 <h4>Courses wish to conduct assessment on it ?</h4>
 <fieldset>
 <legend>Basic Courses</legend>
@@ -1039,7 +1039,7 @@ function getCityUpdate(dd , cc)
 <!-- right -->
 <div class="col-md-6 col-xs-12"> </div>
 </fieldset>
-</div>
+</div> --%>
         <!-- special courses ends -->
                         
         <!-- button -->

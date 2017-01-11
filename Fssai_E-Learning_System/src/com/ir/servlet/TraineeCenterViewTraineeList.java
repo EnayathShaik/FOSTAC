@@ -53,7 +53,7 @@ public class TraineeCenterViewTraineeList extends HttpServlet {
         System.out.println("Append Data = "+name);
         StringBuffer stringBuffer = new StringBuffer();
        // stringBuffer.append("WHERE 1=1 ");
-        stringBuffer.append(" WHERE F.loginid ='"+loginId+"'");
+        stringBuffer.append(" WHERE A.status = 'N' AND F.loginid ='"+loginId+"'");
         if(name != null && name.length() > 0 ){
         	String[] whereList = name.split("&");
         	for(int i=0;i<whereList.length;i++){

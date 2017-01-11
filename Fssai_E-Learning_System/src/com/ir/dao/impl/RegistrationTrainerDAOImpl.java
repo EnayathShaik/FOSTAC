@@ -259,7 +259,7 @@ private Title title;
 		
 		PersonalInformationTrainer personalinformationtrainer= (PersonalInformationTrainer) s.load(PersonalInformationTrainer.class, id);
 		
-		/*personalinformationtrainer.setTrainingCenterCorrespondenceLine1(registrationFormTrainer.getTrainingCenterCorrespondenceLine1());
+		personalinformationtrainer.setTrainingCenterCorrespondenceLine1(registrationFormTrainer.getTrainingCenterCorrespondenceLine1());
 		personalinformationtrainer.setTrainingCenterCorrespondenceLine2(registrationFormTrainer.getTrainingCenterCorrespondenceLine2());
 		personalinformationtrainer.setCorrespondencestate(cs);
 		personalinformationtrainer.setCorrespondencedistrict(cd);
@@ -267,7 +267,7 @@ private Title title;
 		personalinformationtrainer.setTrainingCenterPermanentEmail(registrationFormTrainer.getTrainingCenterPermanentEmail());
 		personalinformationtrainer.setTrainingCenterPermanentMobile(registrationFormTrainer.getTrainingCenterPermanentMobile());
 		personalinformationtrainer.setTrainingCenterCorrespondencePincode(registrationFormTrainer.getTrainingCenterCorrespondencePincode());
-		
+		/*
 		
 		personalinformationtrainer.setTrainingCenterPermanentLine1(registrationFormTrainer.getTrainingCenterPermanentLine1());
 		personalinformationtrainer.setTrainingCenterPermanentLine2(registrationFormTrainer.getTrainingCenterPermanentLine2());

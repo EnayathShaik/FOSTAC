@@ -77,17 +77,26 @@
 					.getElementById('AssessorCorrespondenceLine2').value;
 			document.getElementById('AssessorPermanentPincode').value = document
 					.getElementById('AssessorCorrespondencePincode').value;
-			document.getElementById('').value = document.getElementById('').value;
-			document.getElementById('').value = document.getElementById('').value;
-			document.getElementById('').value = document.getElementById('').value;
+			document.getElementById('AssessorrPermanentState').value = document.getElementById('AssessorCorrespondenceState').value;
+			$("#AssessorrPermanentState").trigger("change");
+			window.setTimeout(function(){
+				document.getElementById('AssessorPermanentDistrict').value = document.getElementById('AssessorCorrespondenceDistrict').value;
+				$("#AssessorPermanentDistrict").trigger("change");
+				window.setTimeout(function(){
+					document.getElementById('AssessorPermanentCity').value = document.getElementById('AssessorCorrespondenceCity').value;
+			    }, 2000);
+			}, 2000);
+			
+			
+			
 		}
 		if (x == false) {
 			document.getElementById('AssessorPermanentLine1').value = "";
 			document.getElementById('AssessorPermanentLine2').value = "";
 			document.getElementById('AssessorPermanentPincode').value = "";
-			document.getElementById('').value = document.getElementById('').value = "";
-			document.getElementById('').value = document.getElementById('').value = "";
-			document.getElementById('').value = document.getElementById('').value = "";
+			document.getElementById('AssessorrPermanentState').value = "";
+			document.getElementById('AssessorPermanentDistrict').value = "";
+			document.getElementById('AssessorPermanentCity').value = "";
 		}
 	}
 

@@ -154,4 +154,9 @@ public class TraineeServiceImpl implements TraineeService {
 		// TODO Auto-generated method stub
 		return traineeDAO.isCourseOnline(userID);
 	}
+	@Override
+	public Boolean closeCourse(int userId, int profileID, String status) {
+		// TODO Auto-generated method stub
+		return traineeDAO.closeCourse(userId, profileID, status);
+	}
 }

@@ -1,5 +1,6 @@
 package com.ir.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -35,6 +36,7 @@ import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.State;
+import com.ir.model.Title;
 import com.ir.model.TraineeAssessment;
 import com.ir.model.TrainingPartner;
 import com.ir.model.Utility;
@@ -51,9 +53,13 @@ public class TraineeController {
 	@Qualifier("pageLoadService")
 	PageLoadService pageLoadService;
 	
+	
+	
 	@Autowired
 	@Qualifier("traineeService")
 	public TraineeService traineeService;
+	
+	
 	
 	@Autowired
 	@Qualifier("assessmentService")
@@ -264,7 +270,13 @@ public class TraineeController {
 		System.out.println("userID = "+userId);
 		 if(userId > 0){
 			PersonalInformationTrainee personalInformationTrainee = traineeService.FullDetail(userId);
+			Title title = new Title();
+			title.setTitleId(personalInformationTrainee.getTitle().getTitleId());
+			title.setTitleName(personalInformationTrainee.getTitle().getTitleName());
+			List<Title> titleList = new ArrayList<Title>();
+			titleList.add(title);
 			session.setAttribute("loginUser", personalInformationTrainee);
+			session.setAttribute("titleList", titleList);
 			
 		 }
 		return "updateInformation";
@@ -348,8 +360,11 @@ public class TraineeController {
 					System.out.println("Exception while course details save : "+ e.getMessage());
 				}
 				int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
-				traineeService.updateSteps(tableID, profileID, 6);
-				session.setAttribute("traineeSteps", 6);
+				traineeService.updateSteps(tableID, profileID, 0);
+				//Close Course
+				traineeService.closeCourse(userId, profileID, "Y");
+				
+				session.setAttribute("traineeSteps", 0);
 		
 		
 		
@@ -459,6 +474,8 @@ public class TraineeController {
 		int loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
 		CourseName courseName=traineeService.getCourseName(loginId);
 		model.addAttribute("courseName",courseName);
+		
+		
 		
 		return "generateCertificatetrainee";
 	}

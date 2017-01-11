@@ -11,16 +11,16 @@ import javax.mail.internet.MimeMessage;
 
 public class SendContectMail {
 	
-	 private String from ="rahulkrdevchodhry@gmail.com";
-	 String password ="9934397821";
+	 private String from ="fics@fssai.gov.in";
+	 String password ="F$$@i2014";
 	   private String to ;
-	   private String subject="user message";
+	   private String subject="FSSAI Support";
 	   private String body;
 	
 	   static Properties properties = new Properties();
 	   static
 	   {
-	      properties.put("mail.smtp.host", "smtp.gmail.com");
+	      properties.put("mail.smtp.host", "mail.gov.in");
 	      properties.put("mail.smtp.socketFactory.port", "465");
 	      properties.put("mail.smtp.socketFactory.class",
 	                     "javax.net.ssl.SSLSocketFactory");
@@ -33,7 +33,7 @@ public class SendContectMail {
 		
 		boolean flag=false;
 		this.body=msg;
-		String toEmail="anshraj801@ymail.com";
+		String toEmail="fics@fssai.gov.in";
 		  
 		this.to=toEmail;
 		     String ret = "success";

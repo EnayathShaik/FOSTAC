@@ -2,6 +2,29 @@
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
+function OnStart(){
+	var steps = 1;
+	var traineeSteps =
+		<%=(Integer) session.getAttribute("traineeSteps")%>
+	if(steps > traineeSteps){
+	}else{
+		if(steps-1 == traineeSteps){
+			alert('Please Complete Your Previous Training First')
+		}else{
+			alert('Please Flow Step By Step..');
+		}
+		window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
+	}
+}
+window.onload = OnStart;
+
+function confirmTrainee(){
+	if(confirm("(Trainee can enroll to one course at one time,another course enrollment will be done after the completion of last step i.e. Generate Certificate).?")){
+    }
+    else{
+        return false;
+    }
+}
 function getDistrict(val)
 {
 	$.ajax({
@@ -10,11 +33,11 @@ function getDistrict(val)
 	      success: function (response) {      
 	      var mainData1 = jQuery.parseJSON(response);
 	      $('#trainingCenterCity option').remove();
-	      $('#trainingCenterCity').append('<option value="0" label="Select District a" />');
+	      $('#trainingCenterCity').append('<option value="0">Select District</option>');
 	  	  $.each(mainData1 , function(i , obj)
 	  		{
 	  		
-	  				$('#trainingCenterCity').append('<option value='+obj.districtId+' label='+obj.districtName+' />');		
+	  				$('#trainingCenterCity').append('<option value='+obj.districtId+'>'+obj.districtName+' </option>');		
 	  		});
 	      }
 	      });     
@@ -221,7 +244,7 @@ function gettid(value){
                         </thead><tbody></tbody>
                       </table>
                        <div class="col-xs-12 pull-right">
-                        <input style="margin-top:20px; width:100px;"  type="submit" class="form-control login-btn btn" value="Enroll" />
+                        <input style="margin-top:20px; width:100px;"  type="submit" onclick="return confirmTrainee();"  class="form-control login-btn btn" value="Enroll" />
                       </div>
                     </fieldset>                  
 

@@ -3,6 +3,21 @@
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
 <%System.out.print("trainee home page jsp"); %>
 <script type="text/javascript">
+function OnStart(){
+	var steps = 5;
+	var traineeSteps =
+		<%=(Integer) session.getAttribute("traineeSteps")%>
+	if(steps > traineeSteps){
+	}else{
+		if(steps-1 == traineeSteps){
+			alert('Please Complete Your Previous Training First')
+		}else{
+			alert('Please Flow Step By Step..');
+		}
+		window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
+	}
+}
+window.onload = OnStart;
 function onFeedbackSave(feedbackMasterList){
 	var courseId=$('#courseId').val();
 	var feedbackMastersIds=[];

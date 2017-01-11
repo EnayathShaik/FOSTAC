@@ -272,8 +272,10 @@ function getstateid1(){
 	var pdname='${loginUr.permanentdistrict.districtName}';
 	var pcid='${loginUr.permanentcity.cityId}';
 	var pcname='${loginUr.permanentcity.cityName}';
-	var title='${loginUr.title.titleName}';
-	var tp = '${tp}';
+	var title='${loginUr.title.titleId}';
+	//var tp = '${tp}';
+	var tp = '${trainingPartnerID}';
+	
 	var safety='${loginUr.foodSafetyExpBackground}';
 	var month=${loginUr.expInFoodSafefyTimeMonth};
 	$("#FoodSafetyExpBackground").prop('selectedIndex', safety);  
@@ -286,7 +288,9 @@ function getstateid1(){
 	   
 	   // TrainingCenterPermanentDistrict.options[0].text = pdname;
 		//TrainingCenterPermanentCity.options[0].text = pcname;
-		Title.options[0].text = title;
+		
+		$("#Title").prop('value', title);  
+		$("#associatedTrainingpartnerName").prop('value', tp);  
 		//associatedTrainingpartnerName.options[0].text = tp;
 	}
 	
@@ -671,7 +675,7 @@ function getCityUpdate(dd , cc)
                                                             </ul>
                                                         </div>
                                                         <cf:select path="Title" class="form-control" disabled="true">
-<cf:option value="0" label="Select Title"  />
+
 <cf:options items="${titleList}" itemValue="titleId" itemLabel="titleName" />
 </cf:select>
                                                          </div>

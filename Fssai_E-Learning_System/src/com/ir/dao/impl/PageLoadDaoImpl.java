@@ -32,7 +32,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 	public List<State> loadState() {
 		System.out.println("Page Load DAOImpl process start in state");
 		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("from State");
+		Query query = session.createQuery("from State where status = 'A'");
 		List listState = query.list();
 		session.close();
 		System.out.println("state list dao     :"+ listState);
@@ -46,12 +46,12 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		System.out.println("Page Load DAOImpl process start in city ");
 		Session session = sessionFactory.openSession();
 		//Query query = session.createQuery("Select cityid , cityname from City where stateid = "+ stat);
-		Query query = session.createQuery("from City");
+		Query query = session.createQuery("from City  where status = 'A'");
 		List listCity = query.list();
 		session.close();
 		System.out.println("city  ************* list dao     :"+ listCity);
 		return listCity;
-	}
+	}	
 
 
 	@Override
@@ -83,7 +83,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		// TODO Auto-generated method stub
 		System.out.println("Page Load DAOImpl process start in course name ");
 		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("from CourseName");
+		Query query = session.createQuery("from CourseName  where status = 'A'");
 		List courseNameList = query.list();
 		session.close();
 		System.out.println("CourseName  ************* list dao     :"+ courseNameList);
@@ -96,7 +96,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		// TODO Auto-generated method stub
 		System.out.println("Page Load DAOImpl process start in district name ");
 		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("from District");
+		Query query = session.createQuery("from District where status = 'A'");
 		//Query query = session.createQuery("select districtId , districtName from District");
 		List districtList = query.list();
 		session.close();

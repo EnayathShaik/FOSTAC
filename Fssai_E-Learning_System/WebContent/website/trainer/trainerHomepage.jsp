@@ -166,8 +166,8 @@ function applyForVacancy(index){
               </div>
               <br>
               <!-- job application -->
-              <div class="col-xs-12"> <br>
-                <!-- table -->
+              <!-- <div class="col-xs-12"> <br>
+                table
                 <div class="row">
                   <div class="col-xs-12 table-overflow-responsive">
                     <fieldset>
@@ -181,7 +181,7 @@ function applyForVacancy(index){
                             <th>S.No</th>
                             <th width="15%">Course Type</th>
                             <th>Course Name</th>
-<!--                             <th width="29%">Training Date &amp; Time</th> -->
+                            <th width="29%">Training Date &amp; Time</th>
 							<th width="29%">Training Date &amp;</th>
                             <th width="23%">Training Center Name &amp; Address</th>
                             <th>Status</th>
@@ -193,7 +193,7 @@ function applyForVacancy(index){
                     </fieldset>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <script type="text/javascript">
                   $(document).ready(function(){    
                 	  var postVacancyList=${postVacancyTrainingCenter};

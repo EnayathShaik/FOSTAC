@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -52,6 +53,14 @@ public class SearchUpcomingTraining extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+				
+				
+		HttpSession httpSession=request.getSession(false);
+		Integer userId=0;
+		if(null!=httpSession.getAttribute("userId")){
+			userId= (Integer) httpSession.getAttribute("userId");
+		}
+		System.out.println("userId == "+userId);
 				System.out.println("onload training center list");
 				response.setContentType("text/html;charset=UTF-8");
 		        PrintWriter out = response.getWriter();
@@ -69,10 +78,12 @@ public class SearchUpcomingTraining extends HttpServlet {
 						" inner join coursetype as ct on ct.coursetypeid = tc.coursetype "+
 						" inner join managetrainingpartner as mtp on mtp.managetrainingpartnerid = tc.trainingpartner "+
 						" inner join personalinformationtrainingpartner as pitp on mtp.managetrainingpartnerid = pitp.trainingpartnername "+
+						" inner join logindetails as log on log.id = pitp.logindetails "+
 						" inner join state as s on s.stateid = pitp.trainingpartnerpermanentstate "+
 						" inner join city as c on c.cityid = pitp.trainingpartnerpermanentcity "+
 						" inner join district as d on d.districtid = pitp.trainingpartnerpermanentdistrict "+
-						" and tc.trainingcenter = pitp.personalinformationtrainingpartnerid ";
+						" and tc.trainingcenter = pitp.personalinformationtrainingpartnerid "+
+						" WHERE log.id = "+userId;
 			System.out.println("before query");
 			Query query = session.createSQLQuery(sql);
 			System.out.println("after query");

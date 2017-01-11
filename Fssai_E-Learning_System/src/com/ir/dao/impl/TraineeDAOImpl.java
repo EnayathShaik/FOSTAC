@@ -222,7 +222,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		String sql = "select cn.coursename, cn.coursenameid, cn.courseduration "
 				+ "from courseenrolleduser  ceu "
 				+ "inner join trainingcalendar tc on tc.trainingcalendarid =   ceu.trainingcalendarid "
-				+ "inner join coursename cn on cn.coursenameid = tc.coursename where ceu.logindetails = "
+				+ "inner join coursename cn on cn.coursenameid = tc.coursename where ceu.status = 'N' AND ceu.logindetails = "
 				+ loginId;
 		Query query = session.createSQLQuery(sql);
 		List<Object[]> courseNameList = (List<Object[]>) query.list();
@@ -503,6 +503,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		courseEnrolledUser.setTrainingCalendarId(courseEnrolledUserForm
 				.getTrainingCalendarId());
 		courseEnrolledUser.setRollno(date);
+		courseEnrolledUser.setStatus("N");
 		courseEnrolledUser.setPaymentstatus("Pending");
 		if(profileID != null && profileID == 3){
 			courseEnrolledUser.setEnrolledby("Trainee");
@@ -648,7 +649,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 				+ " inner join coursename cn on cn.coursenameid = tcal.coursename "
 				+ " inner join coursetype ctype on ctype.coursetypeid = cn.coursetypeid "
 				//+ " inner join managecoursecontent mcc on mcc.coursetypeid = cn.coursetypeid "
-				+ "where ce.logindetails = " + loginId;
+				+ "where ce.status = 'N' AND ce.logindetails = " + loginId;
 
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
@@ -892,5 +893,22 @@ public class TraineeDAOImpl implements TraineeDAO {
 		status = (String) list.get(0);
 		session.close();
 		return status;
+	}
+
+	@Override
+	public Boolean closeCourse(int userId, int profileID, String status) {
+		// TODO Auto-generated method stub
+		int courseenrolleduserid = 0;
+		Session session = sessionFactory.openSession();
+		String sql = "select courseenrolleduserid from courseenrolleduser where logindetails  = " + userId;
+		Query query = session.createSQLQuery(sql);
+		List list = query.list();
+		courseenrolleduserid = (Integer) list.get(0);
+		CourseEnrolledUser courseEnrolledUser = (CourseEnrolledUser) session.load(CourseEnrolledUser.class, courseenrolleduserid);
+		courseEnrolledUser.setStatus(status);
+		session.update(courseEnrolledUser);
+		session.beginTransaction().commit();
+		session.close();
+		return true;
 	}
 }

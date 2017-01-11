@@ -117,169 +117,176 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 	
 	@Override
 	public String register(RegistrationFormAssessor registrationFormAssessor ) {
-		Integer personalInformationTrainerId=null;
-		Integer personalInformationTrainerIdd = null  ;
-		State cs = getState(registrationFormAssessor.getAssessorCorrespondenceState());
-		State ps = getState(registrationFormAssessor.getAssessorrPermanentState());
-		District cd = getDistrict(registrationFormAssessor.getAssessorCorrespondenceDistrict());
-		District pd = getDistrict(registrationFormAssessor.getAssessorPermanentDistrict());
-		City cc = getCity(registrationFormAssessor.getAssessorCorrespondenceCity());
-		City pc = getCity(registrationFormAssessor.getAssessorPermanentCity());
-		Title tt = getTitle(registrationFormAssessor.getTitle());
-		ManageAssessmentAgency maan = getAssessmentAgencyName(registrationFormAssessor.getAssessmentAgencyName());
-		
-		List<String> registeredCourses = registrationFormAssessor.getBasicCourses();
-		
-		if(registrationFormAssessor.getAdvanceCourses() != null)
-			registeredCourses.addAll(registrationFormAssessor.getAdvanceCourses());
-		if(registrationFormAssessor.getSpecialCourses() != null)
-			registeredCourses.addAll(registrationFormAssessor.getSpecialCourses());
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-		long date = System.currentTimeMillis();
-		
-		PasswordGenerator passwordGenerator = new PasswordGenerator(6);
-		char[] pass = passwordGenerator.get();
-		String passwordString = String.valueOf(pass);
-		String encryprPassword = null;
 		try{
-			EncryptionPasswordANDVerification encryptionPasswordANDVerification = new EncryptionPasswordANDVerification();
-			encryprPassword = encryptionPasswordANDVerification.encryptPass(passwordString);
+			Integer personalInformationTrainerId=null;
+			Integer personalInformationTrainerIdd = null  ;
+			State cs = getState(registrationFormAssessor.getAssessorCorrespondenceState());
+			State ps = getState(registrationFormAssessor.getAssessorrPermanentState());
+			District cd = getDistrict(registrationFormAssessor.getAssessorCorrespondenceDistrict());
+			District pd = getDistrict(registrationFormAssessor.getAssessorPermanentDistrict());
+			City cc = getCity(registrationFormAssessor.getAssessorCorrespondenceCity());
+			City pc = getCity(registrationFormAssessor.getAssessorPermanentCity());
+			Title tt = getTitle(registrationFormAssessor.getTitle());
+			ManageAssessmentAgency maan = getAssessmentAgencyName(registrationFormAssessor.getAssessmentAgencyName());
 			
-		}catch(NoSuchAlgorithmException e){
-			System.out.println( " no such algo exception error catch ");
-		}
-		
-		
-		LoginDetails loginDetails = new LoginDetails();
-		loginDetails.setPassword(passwordString);
-		loginDetails.setEncrypted_Password(encryprPassword.trim());
-		loginDetails.setProfileId(6);
-		loginDetails.setStatus("I");
-		loginDetails.setLoginId(registrationFormAssessor.getUserId());
-		
-//		List <CourseEnrolled> coursesEnrolled = new ArrayList<CourseEnrolled>();
-//		for(int i=0;i<registeredCourses.size(); i++){
-//			if(Util.isNotNull(registeredCourses.get(i)) ){
-//				
-//				int course = Integer.valueOf(registeredCourses.get(i));
-//				CourseEnrolled courseEnrolled = new CourseEnrolled();
-//				courseEnrolled.setLoginDetails(loginDetails);
-//				courseEnrolled.setCoursenameid(course);
-//			}
-//		}	
-
-		PersonalInformationAssessor personalInformationAssessor = new PersonalInformationAssessor();
-		personalInformationAssessor.setTitle(tt);
-		personalInformationAssessor.setAadharNumber(registrationFormAssessor.getAadharNumber());
-		personalInformationAssessor.setFirstName(registrationFormAssessor.getFirstName());
-		personalInformationAssessor.setLastName(registrationFormAssessor.getLastName());
-		personalInformationAssessor.setMiddleName(registrationFormAssessor.getMiddleName());
-		personalInformationAssessor.setDOB(registrationFormAssessor.getDOB());
-		personalInformationAssessor.setGender(registrationFormAssessor.getGender());
-		personalInformationAssessor.setAssessorPermanentLine1(registrationFormAssessor.getAssessorPermanentLine1());
-		personalInformationAssessor.setAssessorPermanentLine2(registrationFormAssessor.getAssessorPermanentLine2());
-		personalInformationAssessor.setAssessorrPermanentState(ps);
-		personalInformationAssessor.setAssessorPermanentDistrict(pd);
-		personalInformationAssessor.setAssessorPermanentCity(pc);
-		personalInformationAssessor.setAssessorPermanentPincode(registrationFormAssessor.getAssessorPermanentPincode());
-		personalInformationAssessor.setAssessorPermanentEmail(registrationFormAssessor.getAssessorPermanentEmail());
-		personalInformationAssessor.setAssessorPermanentMobile(registrationFormAssessor.getAssessorPermanentMobile());
-		personalInformationAssessor.setAssessorCorrespondenceLine1(registrationFormAssessor.getAssessorCorrespondenceLine1());
-		personalInformationAssessor.setAssessorCorrespondenceLine2(registrationFormAssessor.getAssessorCorrespondenceLine2());
-		personalInformationAssessor.setAssessorCorrespondenceState(cs);
-		personalInformationAssessor.setAssessorCorrespondenceDistrict(cd);
-		personalInformationAssessor.setAssessorCorrespondenceCity(cc);
-		personalInformationAssessor.setAssessorCorrespondencePincode(registrationFormAssessor.getAssessorCorrespondencePincode());
-		personalInformationAssessor.setReleventExpOfAuditInYear(registrationFormAssessor.getReleventExpOfAuditInYear());
-		personalInformationAssessor.setReleventExpOfAuditInMonth(registrationFormAssessor.getReleventExpOfAuditInMonth());
-		personalInformationAssessor.setHowManyAssessmentConductInAMonth(registrationFormAssessor.getHowManyAssessmentConductInAMonth());
-		//personalInformationAssessor.setAssessmentAgencyName(maan);
-		//personalInformationAssessor.setLoginDetails(loginDetails);
-		//personalInformationAssessor.setCoursesEnrolled(coursesEnrolled);
-		
-		try{
-			Session session = sessionFactory.openSession();
-			//Transaction transaction=session.beginTransaction(); 
-			personalInformationTrainerIdd = (Integer)session.save(personalInformationAssessor);
-			System.out.println("RegistrationDAOImpl [register] begin for registration assessor login   :"+ personalInformationAssessor);
-			session.beginTransaction().commit();
-			session.close();
-		}catch (Exception e) {
-			System.out.println("Exception while saving accessor :" + e.getMessage());
-		}
-		
-		Session session1 = sessionFactory.openSession();
-		Transaction transaction1= session1.beginTransaction();
-		try{
+			List<String> registeredCourses = registrationFormAssessor.getBasicCourses();
 			
-			List<String> listCourses = new ArrayList<String>();
+			if(registrationFormAssessor.getAdvanceCourses() != null)
+				registeredCourses.addAll(registrationFormAssessor.getAdvanceCourses());
+			if(registrationFormAssessor.getSpecialCourses() != null)
+				registeredCourses.addAll(registrationFormAssessor.getSpecialCourses());
 			
+			SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+			long date = System.currentTimeMillis();
 			
-			if(registrationFormAssessor.getBasicCourses() != null &&  registrationFormAssessor.getBasicCourses().size() >0)
-				listCourses.addAll(registrationFormAssessor.getBasicCourses());
-			if(registrationFormAssessor.getAdvanceCourses() != null &&  registrationFormAssessor.getAdvanceCourses().size() >0)
-				listCourses.addAll(registrationFormAssessor.getAdvanceCourses());
-			if(registrationFormAssessor.getSpecialCourses() != null &&  registrationFormAssessor.getSpecialCourses().size() >0)
-				listCourses.addAll(registrationFormAssessor.getSpecialCourses());
-			
-			for (int i = 0; i < listCourses.size(); i++) {
-				String strBasicCourse = listCourses.get(i);
-//					String[] BasicCoursesplited = BasicCourse.split(",");
-					System.out.println("basic course length   "+ strBasicCourse);
-							CourseEnrolled courseEnrolledBasic = new CourseEnrolled();
-							courseEnrolledBasic.setLoginDetails(loginDetails);
-							courseEnrolledBasic.setCoursenameid(Integer.parseInt(strBasicCourse));
-							System.out.println("BasicCoursesplited  "+ strBasicCourse);
-							long courseenrolledbasic = (Integer)session1.save(courseEnrolledBasic);
+			PasswordGenerator passwordGenerator = new PasswordGenerator(6);
+			char[] pass = passwordGenerator.get();
+			String passwordString = String.valueOf(pass);
+			String encryprPassword = null;
+			try{
+				EncryptionPasswordANDVerification encryptionPasswordANDVerification = new EncryptionPasswordANDVerification();
+				encryprPassword = encryptionPasswordANDVerification.encryptPass(passwordString);
+				
+			}catch(NoSuchAlgorithmException e){
+				System.out.println( " no such algo exception error catch ");
 			}
-//			List<String> listAdvCourses = registrationFormAssessor.getAdvanceCourses();
-//			for (int i = 0; i < listBasicCourses.size(); i++) {
-//			String AdvanceCourse = listAdvCourses.get(i);
-//			if(AdvanceCourse.length() == 0){
-//				String[] AdvanceCoursesplited = AdvanceCourse.split(",");
-//				System.out.println("advance course length   "+ AdvanceCoursesplited.length);
-//				if(AdvanceCoursesplited.length >= 1){
-//					for(int i=0 ; i < AdvanceCoursesplited.length ; i++){
-//						CourseEnrolled courseEnrolledAdvance = new CourseEnrolled();
-//						courseEnrolledAdvance.setLoginDetails(loginDetails);
-//						courseEnrolledAdvance.setCoursenameid(Integer.parseInt(AdvanceCoursesplited[i]));
-//						System.out.println("AdvanceCoursesplited  "+ AdvanceCoursesplited[i]);
-//						Integer courseenrolledadvance = (Integer)session1.save(courseEnrolledAdvance);
-//					}
-//				}
-//			}
-//			String SpecialCourse = registrationFormAssessor.getSpecialCourse1();
-//			if(SpecialCourse.length() == 0){
-//				String[] SpecialCoursesplited = SpecialCourse.split(",");
-//				System.out.println("SpecialCourse course length   "+ SpecialCoursesplited.length);
-//				if(SpecialCoursesplited.length >= 1){
-//					for(int i=0 ; i < SpecialCoursesplited.length ; i++){
-//						CourseEnrolled courseEnrolledSpecial = new CourseEnrolled();
-//						courseEnrolledSpecial.setLoginDetails(loginDetails);
-//						courseEnrolledSpecial.setCoursenameid(Integer.parseInt(SpecialCoursesplited[i]));
-//						System.out.println("SpecialCoursesplited  "+ SpecialCoursesplited[i]);
-//						Integer courseenrolledspecial = (Integer)session1.save(courseEnrolledSpecial);
-//					}
-//				}
-//			}
 			
-		}catch (Exception e) {
-			System.out.println("Oops !! course basic" + e.getMessage());
-		}
-		System.out.println("lllll     "+ registrationFormAssessor.getUserId() + "      "+ personalInformationTrainerIdd);
-		System.out.println("all insert done");
-		transaction1.commit();
-		session1.close();
-		
+			
+			LoginDetails loginDetails = new LoginDetails();
+			loginDetails.setPassword(passwordString);
+			loginDetails.setEncrypted_Password(encryprPassword.trim());
+			loginDetails.setProfileId(6);
+			loginDetails.setStatus("I");
+			loginDetails.setLoginId(registrationFormAssessor.getUserId());
+			
+//			List <CourseEnrolled> coursesEnrolled = new ArrayList<CourseEnrolled>();
+//			for(int i=0;i<registeredCourses.size(); i++){
+//				if(Util.isNotNull(registeredCourses.get(i)) ){
+//					
+//					int course = Integer.valueOf(registeredCourses.get(i));
+//					CourseEnrolled courseEnrolled = new CourseEnrolled();
+//					courseEnrolled.setLoginDetails(loginDetails);
+//					courseEnrolled.setCoursenameid(course);
+//				}
+//			}	
 
-		if(personalInformationTrainerIdd >0 ){
-			SendMail sendMail = new SendMail();
-			sendMail.mailProperty(passwordString, registrationFormAssessor.getAssessorPermanentEmail(), registrationFormAssessor.getFirstName()+ " " + registrationFormAssessor.getLastName());
-			return passwordString+"&"+registrationFormAssessor.getUserId();
-		}else{
-			return passwordString+"&"+registrationFormAssessor.getUserId();
+			PersonalInformationAssessor personalInformationAssessor = new PersonalInformationAssessor();
+			personalInformationAssessor.setTitle(tt);
+			personalInformationAssessor.setAadharNumber(registrationFormAssessor.getAadharNumber());
+			personalInformationAssessor.setFirstName(registrationFormAssessor.getFirstName());
+			personalInformationAssessor.setLastName(registrationFormAssessor.getLastName());
+			personalInformationAssessor.setMiddleName(registrationFormAssessor.getMiddleName());
+			personalInformationAssessor.setDOB(registrationFormAssessor.getDOB());
+			personalInformationAssessor.setGender(registrationFormAssessor.getGender());
+			personalInformationAssessor.setAssessorPermanentLine1(registrationFormAssessor.getAssessorPermanentLine1());
+			personalInformationAssessor.setAssessorPermanentLine2(registrationFormAssessor.getAssessorPermanentLine2());
+			personalInformationAssessor.setAssessorrPermanentState(ps);
+			personalInformationAssessor.setAssessorPermanentDistrict(pd);
+			personalInformationAssessor.setAssessorPermanentCity(pc);
+			personalInformationAssessor.setAssessorPermanentPincode(registrationFormAssessor.getAssessorPermanentPincode());
+			personalInformationAssessor.setAssessorPermanentEmail(registrationFormAssessor.getAssessorPermanentEmail());
+			personalInformationAssessor.setAssessorPermanentMobile(registrationFormAssessor.getAssessorPermanentMobile());
+			personalInformationAssessor.setAssessorCorrespondenceLine1(registrationFormAssessor.getAssessorCorrespondenceLine1());
+			personalInformationAssessor.setAssessorCorrespondenceLine2(registrationFormAssessor.getAssessorCorrespondenceLine2());
+			personalInformationAssessor.setAssessorCorrespondenceState(cs);
+			personalInformationAssessor.setAssessorCorrespondenceDistrict(cd);
+			personalInformationAssessor.setAssessorCorrespondenceCity(cc);
+			personalInformationAssessor.setAssessorCorrespondencePincode(registrationFormAssessor.getAssessorCorrespondencePincode());
+			personalInformationAssessor.setReleventExpOfAuditInYear(registrationFormAssessor.getReleventExpOfAuditInYear());
+			personalInformationAssessor.setReleventExpOfAuditInMonth(registrationFormAssessor.getReleventExpOfAuditInMonth());
+			personalInformationAssessor.setHowManyAssessmentConductInAMonth(registrationFormAssessor.getHowManyAssessmentConductInAMonth());
+			//personalInformationAssessor.setAssessmentAgencyName(maan);
+			personalInformationAssessor.setLoginDetails(loginDetails);
+			//personalInformationAssessor.setCoursesEnrolled(coursesEnrolled);
+			
+			try{
+				Session session = sessionFactory.openSession();
+				//Transaction transaction=session.beginTransaction(); 
+				personalInformationTrainerIdd = (Integer)session.save(personalInformationAssessor);
+				System.out.println("RegistrationDAOImpl [register] begin for registration assessor login   :"+ personalInformationAssessor);
+				session.beginTransaction().commit();
+				session.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("Exception while saving accessor :" + e.getMessage());
+			}
+			
+			Session session1 = sessionFactory.openSession();
+			Transaction transaction1= session1.beginTransaction();
+			try{
+				
+				List<String> listCourses = new ArrayList<String>();
+				
+				
+				if(registrationFormAssessor.getBasicCourses() != null &&  registrationFormAssessor.getBasicCourses().size() >0)
+					listCourses.addAll(registrationFormAssessor.getBasicCourses());
+				if(registrationFormAssessor.getAdvanceCourses() != null &&  registrationFormAssessor.getAdvanceCourses().size() >0)
+					listCourses.addAll(registrationFormAssessor.getAdvanceCourses());
+				if(registrationFormAssessor.getSpecialCourses() != null &&  registrationFormAssessor.getSpecialCourses().size() >0)
+					listCourses.addAll(registrationFormAssessor.getSpecialCourses());
+				
+				for (int i = 0; i < listCourses.size(); i++) {
+					String strBasicCourse = listCourses.get(i);
+//						String[] BasicCoursesplited = BasicCourse.split(",");
+						System.out.println("basic course length   "+ strBasicCourse);
+								CourseEnrolled courseEnrolledBasic = new CourseEnrolled();
+								courseEnrolledBasic.setLoginDetails(loginDetails);
+								courseEnrolledBasic.setCoursenameid(Integer.parseInt(strBasicCourse));
+								System.out.println("BasicCoursesplited  "+ strBasicCourse);
+								long courseenrolledbasic = (Integer)session1.save(courseEnrolledBasic);
+				}
+//				List<String> listAdvCourses = registrationFormAssessor.getAdvanceCourses();
+//				for (int i = 0; i < listBasicCourses.size(); i++) {
+//				String AdvanceCourse = listAdvCourses.get(i);
+//				if(AdvanceCourse.length() == 0){
+//					String[] AdvanceCoursesplited = AdvanceCourse.split(",");
+//					System.out.println("advance course length   "+ AdvanceCoursesplited.length);
+//					if(AdvanceCoursesplited.length >= 1){
+//						for(int i=0 ; i < AdvanceCoursesplited.length ; i++){
+//							CourseEnrolled courseEnrolledAdvance = new CourseEnrolled();
+//							courseEnrolledAdvance.setLoginDetails(loginDetails);
+//							courseEnrolledAdvance.setCoursenameid(Integer.parseInt(AdvanceCoursesplited[i]));
+//							System.out.println("AdvanceCoursesplited  "+ AdvanceCoursesplited[i]);
+//							Integer courseenrolledadvance = (Integer)session1.save(courseEnrolledAdvance);
+//						}
+//					}
+//				}
+//				String SpecialCourse = registrationFormAssessor.getSpecialCourse1();
+//				if(SpecialCourse.length() == 0){
+//					String[] SpecialCoursesplited = SpecialCourse.split(",");
+//					System.out.println("SpecialCourse course length   "+ SpecialCoursesplited.length);
+//					if(SpecialCoursesplited.length >= 1){
+//						for(int i=0 ; i < SpecialCoursesplited.length ; i++){
+//							CourseEnrolled courseEnrolledSpecial = new CourseEnrolled();
+//							courseEnrolledSpecial.setLoginDetails(loginDetails);
+//							courseEnrolledSpecial.setCoursenameid(Integer.parseInt(SpecialCoursesplited[i]));
+//							System.out.println("SpecialCoursesplited  "+ SpecialCoursesplited[i]);
+//							Integer courseenrolledspecial = (Integer)session1.save(courseEnrolledSpecial);
+//						}
+//					}
+//				}
+				
+			}catch (Exception e) {
+				System.out.println("Oops !! course basic" + e.getMessage());
+			}
+			System.out.println("lllll     "+ registrationFormAssessor.getUserId() + "      "+ personalInformationTrainerIdd);
+			System.out.println("all insert done");
+			transaction1.commit();
+			session1.close();
+			
+
+			if(personalInformationTrainerIdd >0 ){
+				SendMail sendMail = new SendMail();
+				sendMail.mailProperty(passwordString, registrationFormAssessor.getAssessorPermanentEmail(), registrationFormAssessor.getFirstName()+ " " + registrationFormAssessor.getLastName());
+				return passwordString+"&"+registrationFormAssessor.getUserId();
+			}else{
+				return passwordString+"&"+registrationFormAssessor.getUserId();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
+		return null;
+		
 	}
 
 	@Override

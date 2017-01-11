@@ -1,5 +1,6 @@
 package com.ir.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +25,8 @@ public class CourseEnrolledUser {
 	private String paymentstatus;
 	private String enrolledby;
 	private String userStaus;
+	@Column(columnDefinition="varchar(1) default 'N'")
+	private String status;
 	
 	
 	
@@ -93,6 +96,16 @@ public class CourseEnrolledUser {
 	public void setLoginDetails(int loginDetails) {
 		this.loginDetails = loginDetails;
 	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	
 	
 	
 	

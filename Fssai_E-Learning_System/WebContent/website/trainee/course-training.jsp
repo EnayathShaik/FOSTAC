@@ -1,6 +1,21 @@
 
 <script type="text/javascript">
+
 function OnStart(){
+	var steps = 3;
+	var traineeSteps =
+		<%=(Integer) session.getAttribute("traineeSteps")%>
+	
+	if(steps > traineeSteps){
+	}else{
+		if(steps-1 == traineeSteps){
+			alert('Please Complete Your Previous Training First')
+		}else{
+			alert('Please Flow Step By Step..');
+		}
+		window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
+	}
+	
 	var isOnline = "${ISONLINE}";
 	if(isOnline == 'NO'){
 		alert('Content will be available in Classroom');

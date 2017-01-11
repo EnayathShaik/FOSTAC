@@ -360,7 +360,7 @@ window.onload=getstateid;
                           
                         </ul>
                       </div>
-                      <cf:input type="text" class="form-control" path="TrainingPartnerPermanentPincode" placeholder="Pincode" value=" ${loginUr.trainingPartnerPermanentPincode}"/>
+                      <cf:input type="text" maxlength="6" class="form-control" path="TrainingPartnerPermanentPincode" placeholder="Pincode" value=" ${loginUr.trainingPartnerPermanentPincode}"/>
                     </div>
 
                      <div class="form-group">
@@ -457,7 +457,7 @@ window.onload=getstateid;
                 </fieldset>
               </div>
               <!-- Basic courses -->
-              <div class="personel-info">
+              <%-- <div class="personel-info">
                 <h4>Courses wish to conduct ?</h4>
                 <fieldset>
                   <legend><h3>Basic Courses</h3></legend>
@@ -477,10 +477,10 @@ window.onload=getstateid;
               <!-- right -->
               <div class="col-md-6 col-xs-12">
             </fieldset>
-          </div>
+          </div> --%>
           <!-- basic course -->           
           <!-- Advanced courses -->          
-          <div class="personel-info">
+          <%-- <div class="personel-info">
             <fieldset>
               <legend>Advanced Courses</legend>
               <!-- left -->
@@ -499,10 +499,10 @@ window.onload=getstateid;
               <!-- right -->
               <div class="col-md-6 col-xs-12">
             </fieldset>
-          </div>
+          </div> --%>
           <!-- advanced course -->           
           <!-- special courses -->          
-          <div class="personel-info">
+          <%-- <div class="personel-info">
             <fieldset>
               <legend>Special Courses</legend>
               <!-- left -->
@@ -521,7 +521,7 @@ window.onload=getstateid;
               <!-- right -->
               <div class="col-md-6 col-xs-12"> </div>
             </fieldset>
-              </div>
+              </div> --%>
               <!-- special course -->           
               <!-- captcha -->
               <div class="col-xs-12">

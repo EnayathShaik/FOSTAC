@@ -49,7 +49,7 @@ public class EventsCreater {
 		Query query = session.createSQLQuery("select cn.coursename,tc.trainingdate,tc.trainingtime,SUM(CAST(cn.courseduration AS DECIMAL(10, 2))) as courseduration ,tc.coursetype from trainingcalendar tc inner join coursename cn on tc.coursetype=cn.coursetypeid  GROUP BY tc.trainingdate,tc.trainingtime,tc.coursetype,cn.coursename");
 		List<Object[]> eventList = query.list();
 		session.close();
-		for(int index=0;index<eventList.size();index++){
+		/*for(int index=0;index<eventList.size();index++){
 			Object[] objArr=eventList.get(index);
 			// staff elements
 			Element event = doc.createElement("event");
@@ -71,32 +71,35 @@ public class EventsCreater {
 			String[] convetedTime;
 			try {
 				String ed = objArr[1].toString();  // Start date
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				Calendar c = Calendar.getInstance();
-				String formateDate = ed.substring(6,10) + "-" + ed.substring(3,5)+ "-" + ed.substring(0,2);
-				c.setTime(sdf.parse(formateDate));
-				startdate.appendChild(doc.createTextNode(formateDate));
-				event.appendChild(startdate);
+				if(ed != null && ed.length() >0){
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					Calendar c = Calendar.getInstance();
+					String formateDate = ed.substring(6,10) + "-" + ed.substring(3,5)+ "-" + ed.substring(0,2);
+					c.setTime(sdf.parse(formateDate));
+					startdate.appendChild(doc.createTextNode(formateDate));
+					event.appendChild(startdate);
+					
+					convetedTime = timeConvert((int)Double.parseDouble(objArr[3].toString())).split(":");
+					c.add(Calendar.DATE,Integer.parseInt(convetedTime[0]));  // number of days to add
+					
+					ed = sdf.format(c.getTime());
 				
-				convetedTime = timeConvert((int)Double.parseDouble(objArr[3].toString())).split(":");
-				c.add(Calendar.DATE,Integer.parseInt(convetedTime[0]));  // number of days to add
+					// enddate elements
+					Element enddate = doc.createElement("enddate");
+					enddate.appendChild(doc.createTextNode(ed));
+					event.appendChild(enddate);
+		
+					// starttime elements
+					Element starttime = doc.createElement("starttime");
+					starttime.appendChild(doc.createTextNode(objArr[2].toString()));
+					event.appendChild(starttime);
+		
+					// endtime elements
+					Element endtime = doc.createElement("endtime");
+					endtime.appendChild(doc.createTextNode(convetedTime[1]+":"+convetedTime[2]));
+					event.appendChild(endtime);
+				}
 				
-				ed = sdf.format(c.getTime());
-			
-				// enddate elements
-				Element enddate = doc.createElement("enddate");
-				enddate.appendChild(doc.createTextNode(ed));
-				event.appendChild(enddate);
-	
-				// starttime elements
-				Element starttime = doc.createElement("starttime");
-				starttime.appendChild(doc.createTextNode(objArr[2].toString()));
-				event.appendChild(starttime);
-	
-				// endtime elements
-				Element endtime = doc.createElement("endtime");
-				endtime.appendChild(doc.createTextNode(convetedTime[1]+":"+convetedTime[2]));
-				event.appendChild(endtime);
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
@@ -110,7 +113,7 @@ public class EventsCreater {
 			event.appendChild(url);
 
 
-		}
+		}*/
 				// write the content into xml file
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();

@@ -56,11 +56,7 @@ function getTrainingCalender(indicator){
 	var trainingTime = $("#trainingTime").val();
 	var trainerName = $("#trainerName").val();
 	var trainingType = $("#trainingType").val();
-	
-	alert(trainingType);
-	alert($("#trainingType").val());
 	var result="";
-	
 	var total=""; 
 	
 	if(indicator.match('ALL')){
@@ -83,7 +79,7 @@ function getTrainingCalender(indicator){
 	      $('#newTable').append('<tr class="background-open-vacancies"><td>S.No.</td><td>Training Type</td><td>Course Type</td><td>Course Name</td><td>Training Partner Name</td><td>Training Center name</td><td>Training Date</td><td>Training Time</td><td>Trainer Name</td><tr>')
 	  	  $.each(mainData1 , function(i , obj)
 	  		{
-	  				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[9]+'</td><td>'+obj[4]+'</td><td>'+obj[3]+'</td><td>'+obj[1]+'</td><td>'+obj[10]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td><td>'+obj[2]+'</td><tr>');		
+	  				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[9]+'</td><td>'+obj[4]+'</td><td>'+obj[3]+'</td><td>'+obj[1]+'</td><td>'+obj[10]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td><td>'+obj[11]+'</td><tr>');		
 	  		});
 	      }
 	      });  

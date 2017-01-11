@@ -766,9 +766,9 @@
 													</div>
 													<cf:select path="Title" class="form-control"
 														disabled="true">
-														<cf:option value="0" label="Mr." />
-														<cf:option value="1" label="Mrs." />
-														<%-- <cf:options items="${titleList}" itemValue="titleId" itemLabel="titleName" /> --%>
+														
+<cf:options items="${titleList}" itemValue="titleId" itemLabel="titleName" />
+														 
 													</cf:select>
 												</div>
 												<div class="form-group">

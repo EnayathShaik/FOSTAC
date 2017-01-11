@@ -160,7 +160,7 @@ public class AdminDAOImpl implements AdminDAO {
 	public List<State> stateList() {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		Query query = session.createQuery("from State");
+		Query query = session.createQuery("from State where status = 'A'");
 		List<State> stateList = query.list();
 		session.close();
 		return stateList;
@@ -264,7 +264,7 @@ public class AdminDAOImpl implements AdminDAO {
 	public List<CourseName> courseNameList() {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		Query query = session.createQuery("from CourseName");
+		Query query = session.createQuery("from CourseName  where status = 'A'");
 		List<CourseName> courseNameList = query.list();
 		session.close();
 		return courseNameList;
@@ -806,7 +806,7 @@ public class AdminDAOImpl implements AdminDAO {
 	public List<District> districtList() {
 				Session session = sessionFactory.openSession();
 				Transaction tx = session.beginTransaction();
-				Query query = session.createQuery("from District");
+				Query query = session.createQuery("from District  where status = 'A'");
 				List<District> districtList = query.list();
 				session.close();
 				return districtList;

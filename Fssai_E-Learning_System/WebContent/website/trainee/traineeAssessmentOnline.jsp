@@ -49,7 +49,7 @@
 					
 					//var noOption=questionList.listAssessmentQuestion[index].noOfOption;
 					assessmentQuestions.push(questionList.listAssessmentQuestion[index].assessmentQuestionId);
-					var noOption=6;
+					var noOption=questionList.listAssessmentQuestion[index].noOfOption;
 					$('#questionsTable').append('<table width="200" border="0">');
 					for(var noOptionIndex=1; noOptionIndex<=noOption; noOptionIndex++){
 						var questionOption = "option";

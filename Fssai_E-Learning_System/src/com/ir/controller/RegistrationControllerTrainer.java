@@ -230,8 +230,9 @@ public class RegistrationControllerTrainer implements Serializable{
 	 }
 	 if(userId > 0){
 		 PersonalInformationTrainer personalInformationTrainer = registrationServiceTrainer.FullDetailTrainer(userId);
-		System.out.println("=== "+personalInformationTrainer.getDOB());	
-			 session.setAttribute("loginUr", personalInformationTrainer);
+		model.addAttribute("trainingPartnerID", personalInformationTrainer.getAssociatedTrainingpartnerName().getManageTrainingPartnerId());
+		 session.setAttribute("loginUr", personalInformationTrainer);
+		 
 	 }
 	
    		model.addAttribute("update", "");
