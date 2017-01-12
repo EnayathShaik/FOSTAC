@@ -127,24 +127,15 @@
 	}
 
 	function showDetails() {
-		//alert('data');
-		var courseType = $("#selCourseType").val();
-		var courseName = $("#selCourseName").val();
-		var trainingDate = $("#trainingDate").val().replace("-", "/").replace(
-				"-", "/");
-		var trainerName = $("#selTrainerNames").val();
-		var trainingtime = $("#trainingtime").val();
-		/* alert('courseType ' + courseType);
-		alert('courseName ' + courseName);
-		alert('trainingDate ' + trainingDate);
-		alert('trainerName ' + trainerName);
-		alert('trainingtime ' + trainingtime);
- */
+		
 		$(".displayNone").css("display", "block");
-		var total = "courseType=" + courseType + "&courseName=" + courseName
-				+ "&trainingDate=" + trainingDate + "&trainingTime"
-				+ trainingtime;
-		alert("total " + total);
+		var courseType = ($("#selCourseType").val()== 0 ? "" : $("#selCourseType").val());
+		var courseName =  ($("#selCourseName").val() == 0 ? "" : $("#selCourseName").val());
+		var trainingDate = (($("#trainingDate").val() == 'undefined' || $("#trainingDate").val() == null ) ? "" : $("#trainingDate").val() );
+		var trainerName = ($("#selTrainerNames").val() == null ? "" : $("#selTrainerNames").val());
+		var trainingtime = (($("#trainingtime").val() == 'undefined' || $("#trainingtime").val() == null ) ? "" : $("#trainingtime").val() );
+
+		var total = "courseType="+courseType + "&courseName=" + courseName+ "&trainingDate=" + trainingDate + "&trainingtime="+ trainingtime+"&trainerName="+trainerName;
 		var result = "";
 		$.ajax({
 			type : 'post',
@@ -166,7 +157,7 @@
 
 				});
 			}
-		});
+		}); 
 		return result;
 	}
 </script>
@@ -280,7 +271,7 @@
 															id="selTrainerNames">
 														</select>
 														<script>
-															var selectTrainerOptions = "";
+															var selectTrainerOptions = "<option disabled selected value='0'> -- select Trainer -- </option>";
 															for ( var i = 0; i < trainerList.length; i++) {
 																selectTrainerOptions += "<option value="+trainerList[i].id+">"
 																		+ trainerList[i].value

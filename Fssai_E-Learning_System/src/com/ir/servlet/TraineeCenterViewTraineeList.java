@@ -50,30 +50,47 @@ public class TraineeCenterViewTraineeList extends HttpServlet {
         PrintWriter out = response.getWriter();
 		System.out.println("*******"+loginId);
 		String name = (request.getQueryString());
+		String [] n1 = name.split("&");
         System.out.println("Append Data = "+name);
-        StringBuffer stringBuffer = new StringBuffer();
-       // stringBuffer.append("WHERE 1=1 ");
-        stringBuffer.append(" WHERE A.status = 'N' AND F.loginid ='"+loginId+"'");
-        if(name != null && name.length() > 0 ){
-        	String[] whereList = name.split("&");
-        	for(int i=0;i<whereList.length;i++){
-        		if(i==0){
-        			stringBuffer.append(whereList[0] != null & !whereList[0].equals("null") & whereList[0].length() > 0 ? " AND E.coursetypeid="+whereList[0] : "");
-        		}else if(i==1){
-        			stringBuffer.append(whereList[1] != null & !whereList[1].equals("null") & whereList[1].length() > 0 & whereList[1] == "0"  ? " AND D.COURSENAMEID="+whereList[1] : "");
-        		}else if(i==2){
-        			stringBuffer.append(whereList[2] != null & !whereList[2].equals("null") & whereList[2].length() > 0 ? " AND B.TRAININGDATE='"+whereList[2]+"'" : "");
-        		}else if(i==3){
-        			stringBuffer.append(whereList[3] != null & !whereList[3].equals("null") & whereList[3].length() > 0 ? " AND B.TRAININGTIME='"+whereList[3]+"'" : "");
-        		}else if(i==4){
-        			//stringBuffer.append(whereList[4] != null & whereList[4].equals("null") & whereList[4].length() > 0 ? " AND B.COURSETYPEID"+whereList[4] : "");
-        		}else if(i==5){
-        			stringBuffer.append(whereList[5] != null & !whereList[5].equals("null") & whereList[5].length() > 0 ? " AND A.PAYMENTSTATUS='"+whereList[5]+"'" : "");
-        		}
-        	}
-        }
+  
         
-        System.out.println("String -- "+stringBuffer.toString());
+        
+        String courseType,courseName , trainingDate , trainingtime,trainer ;
+		try{
+			courseType = n1[0].split("=")[1];
+		}
+		catch(Exception e){
+			courseType = "%";	
+		}
+		
+		try{
+			courseName = n1[1].split("=")[1];	
+		}catch(Exception e){
+			courseName = "%";	
+		}
+		
+	
+		try{
+			trainingDate = n1[2].split("=")[1];
+		}
+		catch(Exception e){
+			trainingDate = "%";
+		}
+		
+		try{
+			trainingtime = n1[3].split("=")[1];
+		}
+		catch(Exception e){
+			trainingtime = "%";
+		}
+        
+		try{
+			trainer = n1[4].split("=")[1];
+		}
+		catch(Exception e){
+			trainer = "%";
+		}
+    
 		
 		
 		Configuration conf = new Configuration();
@@ -89,9 +106,10 @@ public class TraineeCenterViewTraineeList extends HttpServlet {
 				+ " inner join personalinformationtrainingpartner C on (C.personalinformationtrainingpartnerid = B.trainingcenter)"
 				+ " inner join coursename D on (D.coursenameid = B.coursename)"
 				+ " inner join coursetype E on (E.coursetypeid = B.coursetype)"
-				+ " inner join logindetails F on (F.ID = C.logindetails)";
+				+ " inner join logindetails F on (F.ID = C.logindetails)"
+				+" WHERE A.status = 'N' and  cast(E.coursetypeid  as varchar(10)) like '"+courseType+"%' and cast(D.COURSENAMEID as varchar(10))  like '"+courseName+"%'  and  cast(B.TRAININGDATE as varchar(10)) like '"+trainingDate+"%' and  cast(B.TRAININGTIME as varchar(10)) like '"+trainingtime+"%'  and cast(B.trainername as varchar(10)) like '"+trainer+"%'   AND F.loginid ='"+loginId+"' ";
 		
-		sql = sql + stringBuffer.toString();
+	
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
 		System.out.println(list.size());
