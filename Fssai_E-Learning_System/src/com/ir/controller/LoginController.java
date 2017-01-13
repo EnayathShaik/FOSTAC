@@ -176,6 +176,10 @@ public class LoginController {
 			session.setAttribute("loginUserS", personalInformationTrainer);
 			session.setAttribute("stateid", personalInformationTrainer.getPermanentstate().getStateId());
 			session.setAttribute("statename", personalInformationTrainer.getPermanentstate().getStateName());
+			System.out.println("-----> "+ personalInformationTrainer.getPermanentdistrict().getDistrictId());
+			int stateid = personalInformationTrainer.getPermanentstate().getStateId();
+			int districtId = personalInformationTrainer.getPermanentdistrict().getDistrictId();
+			int cityId = personalInformationTrainer.getPermanentcity().getCityId();
 			session.setAttribute("tp", personalInformationTrainer.getAssociatedTrainingpartnerName() == null ? "" : personalInformationTrainer.getAssociatedTrainingpartnerName().getTrainingPartnerName());
 			session.setAttribute("loginId", personalInformationTrainer.getLoginDetails().getLoginId());
 			session.setAttribute("profileId", loginDetails.getProfileId());
@@ -196,9 +200,14 @@ public class LoginController {
 					vacancyTrainingCenterBeans.add(applicationStatusBean);
 				}
 			}
+			
+			
 			model.addAttribute("postVacancyTrainingCenter", new Gson().toJson(postVacancyTrainingCenter));
 			model.addAttribute("vacancyTrainingCenterBeans", new Gson().toJson(vacancyTrainingCenterBeans));
 			session.setAttribute("traineeSteps", personalInformationTrainer.getSteps());
+			model.addAttribute("trainerState", stateid);
+			model.addAttribute("trainerDistrict",districtId );
+			model.addAttribute("trainerCity", cityId);
 			return "trainerHomepage";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 5){
 			if(loginDetails.getStatus().equalsIgnoreCase("A")){

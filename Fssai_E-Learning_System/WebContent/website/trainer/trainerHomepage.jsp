@@ -149,7 +149,6 @@ function applyForVacancy(index){
                       <table class="table table-bordered table-responsive table-striped table-hover">
                         <thead>
                           <tr class="background-open-vacancies">
-                            <th width="8%">S.No</th>
                             <th width="15%">Course Type</th>
                             <th width="14%">Course Name</th>
                             <th width="29%">Training Date &amp; Time</th>
@@ -197,6 +196,9 @@ function applyForVacancy(index){
               <script type="text/javascript">
                   $(document).ready(function(){    
                 	  var postVacancyList=${postVacancyTrainingCenter};
+                	  var trainerState = ${trainerState};
+                	  var trainerDistrict = ${trainerDistrict};
+                	  var trainerCity = ${trainerCity};
                 	  var statusList=['Selected','Rejected','Under Process']
                 	  var applicationStatusList=${vacancyTrainingCenterBeans};
                 	  for(var index=0;index<applicationStatusList.length;index++){
@@ -214,17 +216,20 @@ function applyForVacancy(index){
                           	    '<td><p><strong>Date:</strong>'+postVacancyList[index].trainingDate.replace("-","/").replace("-","/")+'</td>'+
                           	    '<td>'+applicationStatusList[index].personalInformationTrainingPartner.TrainingCentreName+','+applicationStatusList[index].personalInformationTrainingPartner.TrainingPartnerPermanentLine1+' '+applicationStatusList[index].personalInformationTrainingPartner.TrainingPartnerPermanentLine2+'</td> '+statusTR+'</tr>');
                 	  }
+            
                 	  
-                	  console.log(applicationStatusList);
-                      for(index=0;index<postVacancyList.length;index++){
-                    	  console.log(postVacancyList[index]);
+                  for(index=0;index<postVacancyList.length;index++){
+                    	
+                    	  if(trainerState == postVacancyList[index].trainingCenter.TrainingPartnerPermanentState && trainerDistrict == postVacancyList[index].trainingCenter.TrainingPartnerPermanentDistrict &&  trainerCity == postVacancyList[index].trainingCenter.TrainingPartnerPermanentCity  );
                     	  $('#traineePostVacancy').append('<tr>'+
-                    		'<td>'+(index+1)+'</td><td>'+postVacancyList[index].courseType.CourseType+'</td>'+
+                    		'<td>'+postVacancyList[index].courseType.CourseType+'</td>'+
                     	    '<td>'+postVacancyList[index].courseName.coursename+'</td>'+
                     	    '<td><p><strong>Date:</strong>'+postVacancyList[index].trainingDate.replace("-","/").replace("-","/")+'</td>'+
                     	    '<td>'+postVacancyList[index].trainingCenter.TrainingCentreName+','+postVacancyList[index].trainingCenter.TrainingPartnerPermanentLine1+' '+postVacancyList[index].trainingCenter.TrainingPartnerPermanentLine2+'</td> '+
                     	    '<td> <button id=button'+index+' onclick="applyForVacancy('+index+')" class="btn btn-default">Apply</button></td>'+
                     	  	'</tr>');
+                      }
+                    	  
                       }
                   });
               
