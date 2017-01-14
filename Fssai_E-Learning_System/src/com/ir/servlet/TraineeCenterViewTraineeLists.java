@@ -51,7 +51,7 @@ public class TraineeCenterViewTraineeLists extends HttpServlet {
         System.out.println("Append Data = "+name);
         StringBuffer stringBuffer = new StringBuffer();
        // stringBuffer.append("WHERE 1=1 ");
-        stringBuffer.append(" WHERE F.loginid ='"+loginId+"'");
+        //stringBuffer.append(" WHERE F.loginid ='"+loginId+"'");
         if(name != null && name.length() > 0 ){
         	String[] whereList = name.split("&");
         	for(int i=0;i<whereList.length;i++){
@@ -88,12 +88,13 @@ public class TraineeCenterViewTraineeLists extends HttpServlet {
 				//"inner join personalinformationtrainer D on(A.trainername::int=D.personalinformationtrainerid)";
 	*/	
 		
-		sql = "select  E.coursetype,D.coursename,B.trainingdate,B.trainingtime,C.firstname || ' '|| C.middlename ||' '|| C.lastname as participantName,D.modeoftraining,D.status from courseenrolleduser  A"
+		sql = "select  E.coursetype,D.coursename,B.trainingdate,B.trainingtime,C.firstname || ' '|| C.middlename ||' '|| C.lastname as participantName,replace(D.classroom ||' '|| D.online,'Nil',''),D.status from courseenrolleduser  A"
 				+ " inner join trainingcalendar B on(A.trainingcalendarid= B.trainingcalendarid)"
-				+ " inner join personalinformationtrainingpartner C on (C.personalinformationtrainingpartnerid = B.trainingcenter)"
 				+ " inner join coursename D on (D.coursenameid = B.coursename)"
 				+ " inner join coursetype E on (E.coursetypeid = B.coursetype)"
-				+ " inner join logindetails F on (F.ID = C.logindetails)  " ;
+				+ "  inner join personalinformationtrainee C on (C.logindetails = A.logindetails)  "
+				+ " inner join logindetails F on(F.id=C.logindetails)";
+		
 		
 		
 /*		sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,A.trainername," +

@@ -1,5 +1,6 @@
 package com.ir.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,8 @@ public class PostVacancyTrainingCenterBean {
 	private int noOfVacancy;
 	private String trainingDate;
 	private String loginId;
+	@Column(columnDefinition="int default 0")
+	private int postvacancyID;
 	private int trainingCenter;
 	private String status;
 	@Transient
@@ -159,5 +162,13 @@ public class PostVacancyTrainingCenterBean {
 	public void setTrainingTime(String trainingTime) {
 		this.trainingTime = trainingTime;
 	}
+	public int getPostvacancyID() {
+		return postvacancyID;
+	}
+	public void setPostvacancyID(int postvacancyID) {
+		this.postvacancyID = postvacancyID;
+	}
+	
+	
 
 }

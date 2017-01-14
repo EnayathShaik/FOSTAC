@@ -14,6 +14,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import com.google.gson.Gson;
+import com.ir.model.CourseEnrolledUser;
+import com.ir.model.PersonalInformationTrainee;
+import com.ir.model.TrainingCalendar;
 import com.ir.trainingcenter.model.AssesmentCalender;
 
 /**
@@ -42,6 +45,7 @@ public class SaveTPAssementCalender extends HttpServlet {
         String name = (request.getQueryString());
         System.out.println("Append Data = "+name);
 		AssesmentCalender assesmentCalender = new AssesmentCalender();
+		Integer trainingID = 0;
         
         if(name != null && name.length() > 0){
         	String[] whereList = name.split("&");
@@ -59,25 +63,29 @@ public class SaveTPAssementCalender extends HttpServlet {
         			assesmentCalender.setAssessmentDate(whereList[3] != null & !whereList[3].equals("null") & whereList[3].length() > 0 ? whereList[3] : "");
         			//stringBuffer.append(whereList[3] != null & !whereList[3].equals("null") & whereList[3].length() > 0 ? " AND A.TRAININGTIME='"+whereList[3]+"'" : "");
         		}else if(i==4){
-        			assesmentCalender.setAssessmentTime(whereList[4] != null & whereList[4].equals("null") & whereList[4].length() > 0 ? whereList[4] : "");
+        			System.out.println("-----------"+whereList[4]);
+        			assesmentCalender.setAssessmentTime(whereList[4] != null & !whereList[4].equals("null") & whereList[4].length() > 0 ? whereList[4] : "");
+        			//stringBuffer.append(whereList[4] != null & whereList[4].equals("null") & whereList[4].length() > 0 ? " AND B.COURSETYPEID"+whereList[4] : "");
+        		}else if(i==5){
+        			trainingID = Integer.parseInt(whereList[5]);
         			//stringBuffer.append(whereList[4] != null & whereList[4].equals("null") & whereList[4].length() > 0 ? " AND B.COURSETYPEID"+whereList[4] : "");
         		}
         	}
         }
         
+        System.out.println("=== "+assesmentCalender.getAssessmentTime());
+        
 		Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
-		Transaction tx = session.beginTransaction();
-		int i = (Integer) session.save(assesmentCalender);
-		tx.commit();
-		session.close();
-		if(i >0){
-			out.write("Inserted");
-		}else{
-			out.write("Not Inserted");
-		}	
+				TrainingCalendar trainingCalendar = (TrainingCalendar) session
+				.load(TrainingCalendar.class, trainingID);
+				trainingCalendar.setAssessmentDate(assesmentCalender.getAssessmentDate());
+				trainingCalendar.setAssessmentTime(assesmentCalender.getAssessmentTime());
+		session.update(trainingCalendar);
+		session.beginTransaction().commit();
+		session.close();	
 		out.flush();		
 	}
 

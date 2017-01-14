@@ -73,7 +73,7 @@ function showDetails(){
 	var result="";
 	$.ajax({
 		type: 'post',
-		url: 'traineeCenterViewTrainee.jspp?'+ total,
+		url: 'traineeCenterPaymentConfirmation.jspp?'+ total,
 		async: false, 
 		success: function (data){              
 		$('#newTable').show();
@@ -89,7 +89,7 @@ function showDetails(){
 			}
 			});
 		return result;
-	}
+}
 
 function showDetail(){
 	//alert("Fetching details to mark attendance..");
@@ -257,6 +257,7 @@ return result;
                                                         <select class="form-control" name="selTraineeStatus" id = "selTraineeStatus"> </select>
 														<script>
 															var selTraineeStatusOptions = "";
+															selTraineeStatusOptions += "<option value='0'>Please Select</option>"
 															for(var i=0 ; i < statusList.length; i++)
 																{
 																	console.log(statusList[i].id + " -- "+ statusList[i].value);

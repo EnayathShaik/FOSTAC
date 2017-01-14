@@ -59,65 +59,21 @@ public class ViewAssessmentAgencyCalendar extends HttpServlet {
 				String agencyId = request.getParameter("agencyId");
 		        PrintWriter out = response.getWriter();
 			
-				try {
-					Class.forName("org.postgresql.Driver");
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+		        Configuration conf = new Configuration();
+				conf.configure("/hibernate.cfg.xml");
+				SessionFactory sf = conf.buildSessionFactory();
+				Session session = sf.openSession();
+				String newList=null;
+				String sql = " select B.coursetype,C.coursename,A.assessmentdate,F.statename,E.firstname || ' '|| E.middlename ||' '|| E.lastname ,CASE WHEN G.status = 'A' THEN 'ACTIVE' ELSE 'IN-ACTIVE' END	from trainingcalendar A inner join coursetype B on(A.coursetype=B.coursetypeid)	inner join coursename C on(A.coursename=C.coursenameid)        inner join personalinformationtrainingpartner D on(A.trainingcenter=D.personalinformationtrainingpartnerid) inner join personalinformationassessor E on(A.assessor=E.personalinformationassessorid) inner join state F on(E.assessorcorrespondencestate=F.stateid)  inner join logindetails G on(E.logindetails=G.id)";
+				Query query = session.createSQLQuery(sql);
+				List list = query.list();
+				System.out.println(list.size());
+				session.close();
+				if(list.size() > 0 || list != null){
+					System.out.println(list);
+					Gson g =new Gson();
+					newList = g.toJson(list); 
 				}
-				Connection conn = null;
-				try {
-					conn = DriverManager.getConnection(DBUtil.databaseUrl,DBUtil.dbUsername,DBUtil.dbPassword);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				ResultSet rs = null;
-				PreparedStatement stmt = null;
-				System.out.println("before sql query");
-				String sql = "select mag.manageassessmentagencyid,ct.coursetype,  cn.coursename ,"
-						+ "concat(mag.headofficedataaddress1, ', ', headofficedataaddress2) as address "
-						+ ",concat(pia.firstname, ' ', pia.middlename, ' ' , pia.lastname) as assessorname "
-						+ ", case when logind.status='A' then 'Active' else 'In-active' end as status "
-						+ "from manageassessmentagency mag "
-						+ "inner join personalinformationassessor pia on pia.assessmentagencyname = mag.manageassessmentagencyid "
-						+ "inner join logindetails logind on logind.id = pia.logindetails "
-						+ "inner join courseenrolled ce on ce.logindetails = pia.logindetails "
-						+ "inner join coursename cn on cn.coursenameid = ce.coursenameid "
-						+ "inner join coursetype ct on ct.coursetypeid = cn.coursetypeid "
-						+ "where mag.manageassessmentagencyid ="+agencyId;
-				System.out.println(sql);
-				List listUpcomingAssessments = new ArrayList<>();
-				try {
-					stmt = conn.prepareStatement(sql);
-					System.out.println(stmt.toString());
-					rs = stmt.executeQuery();
-					
-					while(rs.next()){
-						List upcomingAssessment = new ArrayList<>();
-						upcomingAssessment.add(rs.getInt(1));
-						upcomingAssessment.add(rs.getString(2));
-						upcomingAssessment.add(rs.getString(3));
-						upcomingAssessment.add(rs.getString(4));
-						upcomingAssessment.add(rs.getString(5));
-						upcomingAssessment.add(rs.getString(6));
-						listUpcomingAssessments.add(upcomingAssessment);
-					}
-				} catch (SQLException e) {
-					System.out.println("Error while fetching upcoming assement calendars : "+e.getMessage());
-				}finally{
-					try {
-						if(rs != null){
-							rs.close();
-						}
-						if(conn != null){
-							conn.close();
-						}
-					} catch (SQLException e) {
-					}
-				}
-				Gson g =new Gson();
-				String newList = g.toJson(listUpcomingAssessments); 
 				out.write(newList);
 				out.flush();
 		

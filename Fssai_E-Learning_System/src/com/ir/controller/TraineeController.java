@@ -276,6 +276,7 @@ public class TraineeController {
 			List<Title> titleList = new ArrayList<Title>();
 			titleList.add(title);
 			session.setAttribute("loginUser", personalInformationTrainee);
+			System.out.println(personalInformationTrainee.getGender());
 			session.setAttribute("titleList", titleList);
 			
 		 }
@@ -381,23 +382,30 @@ public class TraineeController {
 			@ModelAttribute("rft") PersonalInformationTrainee loginUser ,BindingResult result ,HttpSession httpSession, Model model){
 		
 		int loginId = 0;
+		Integer profileId = 0;
+		Integer userId = 0;
 		try{
 			loginId = (int) httpSession.getAttribute("loginIdUnique");
+			profileId = (Integer) httpSession.getAttribute("profileId");
+			userId = (Integer) httpSession.getAttribute("userId");
 		}catch(Exception e){
 			System.out.println("Exception while course details save : "+ e.getMessage());
 		}
-		
-		int personalinformationtraineeid = courseEnrolledUserForm.getPersonalinformationtraineeid();
-		System.out.println("loginid   :"+ loginId);
-		System.out.println("personalinformationtraineeid  :"+ personalinformationtraineeid);
-		long basicEnroll = traineeService.advanceTraineeSave(courseEnrolledUserForm , loginId , personalinformationtraineeid);
+		int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileId);
+		long basicEnroll = traineeService.advanceTraineeSave(courseEnrolledUserForm , loginId , tableID,profileId);
 		if(basicEnroll  > 1){
-			model.addAttribute("created", "You have successfully enrolled !!!");
-			model.addAttribute("roll", basicEnroll);
+			Boolean status = traineeService.updateSteps(tableID, profileId, 1);
+			httpSession.setAttribute("traineeSteps", 1);
+			if(status){
+				model.addAttribute("created", "You have successfully enrolled !!!");
+				model.addAttribute("roll", basicEnroll);
+			}else{
+				model.addAttribute("created", "Oops , something went wrong !!!");
+				model.addAttribute("roll", basicEnroll);
+			}
 		}else{
-			model.addAttribute("created", "Oops , something went wrong !!!");
-			model.addAttribute("roll", basicEnroll);
-		}
+	}
+	
 		return "traineeHomepage";
 	}
 	@RequestMapping(value="/specialTrainee" , method=RequestMethod.GET)
@@ -410,22 +418,29 @@ public class TraineeController {
 	public String specialTraineeSave(@ModelAttribute("specialTrainee") CourseEnrolledUserForm courseEnrolledUserForm,
 			@ModelAttribute("rft") PersonalInformationTrainee loginUser ,BindingResult result ,HttpSession httpSession, Model model){
 		int loginId = 0;
+		Integer profileId = 0;
+		Integer userId = 0;
 		try{
+			profileId = (Integer) httpSession.getAttribute("profileId");
 			loginId = (int) httpSession.getAttribute("loginIdUnique");
+			userId = (Integer) httpSession.getAttribute("userId");
 		}catch(Exception e){
 			System.out.println("Exception while course details save : "+ e.getMessage());
 		}
-		int personalinformationtraineeid = courseEnrolledUserForm.getPersonalinformationtraineeid();
-		System.out.println("loginid   :"+ loginId);
-		System.out.println("personalinformationtraineeid  :"+ personalinformationtraineeid);
-		long basicEnroll = traineeService.specialTrainee(courseEnrolledUserForm , loginId , personalinformationtraineeid);
+		int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileId);
+		long basicEnroll = traineeService.basicSave(courseEnrolledUserForm , loginId , tableID,profileId);
 		if(basicEnroll  > 1){
-			model.addAttribute("created", "You have successfully enrolled !!!");
-			model.addAttribute("roll", basicEnroll);
+			Boolean status = traineeService.updateSteps(tableID, profileId, 1);
+			httpSession.setAttribute("traineeSteps", 1);
+			if(status){
+				model.addAttribute("created", "You have successfully enrolled !!!");
+				model.addAttribute("roll", basicEnroll);
+			}else{
+				model.addAttribute("created", "Oops , something went wrong !!!");
+				model.addAttribute("roll", basicEnroll);
+			}
 		}else{
-			model.addAttribute("created", "Oops , something went wrong !!!");
-			model.addAttribute("roll", basicEnroll);
-		}
+	}
 		return "traineeHomepage";
 	}
 	

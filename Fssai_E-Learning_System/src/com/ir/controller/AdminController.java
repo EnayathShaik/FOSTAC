@@ -504,14 +504,22 @@ public class AdminController {
 		}	
 	}
 	@RequestMapping(value = "/trainingCetnterUserManagementSearch", method = RequestMethod.POST)
-	public String trainingCetnterUserManagementSearch(@Valid @ModelAttribute("trainingCenterUserManagementForm") TrainingCenterUserManagementForm trainingCenterUserManagementForm,BindingResult result, Model model){
+	public String trainingCetnterUserManagementSearch(@Valid @ModelAttribute("trainingCenterUserManagementForm") TrainingCenterUserManagementForm trainingCenterUserManagementForm,BindingResult result, HttpSession httpSession, Model model){
 		if(result.hasErrors()){
 			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
 			System.out.println(result.getErrorCount());
 			System.out.println(result.getAllErrors());
 			return "trainingCenterUserManagementForm";
 		}
-		List<PersonalInformationTrainingPartner> trainingCetnterUserManagementSearch = adminService.trainingCenterUserManagementSearch(trainingCenterUserManagementForm);
+		Integer profileId = 0;
+		Integer userId = 0;
+		try{
+			profileId = (Integer) httpSession.getAttribute("profileId");
+			userId = (Integer) httpSession.getAttribute("userId");
+		}catch(Exception e){
+			System.out.println("Exception while course details save : "+ e.getMessage());
+		}
+		List<PersonalInformationTrainingPartner> trainingCetnterUserManagementSearch = adminService.trainingCenterUserManagementSearch(trainingCenterUserManagementForm,profileId,userId);
 		if(trainingCetnterUserManagementSearch != null && trainingCetnterUserManagementSearch.size() > 0){
 			model.addAttribute("searchTrainingCenterUsermanagement" , trainingCetnterUserManagementSearch);
 			return "trainingCenterUserManagementForm";
@@ -520,14 +528,22 @@ public class AdminController {
 		}	
 	}
 	@RequestMapping(value = "/assessorUserManagementSearch", method = RequestMethod.POST)
-	public String assessorUserManagementSearch(@Valid @ModelAttribute("assessorUserManagementForm") AssessorUserManagementForm assessorUserManagementForm,BindingResult result, Model model){
+	public String assessorUserManagementSearch(@Valid @ModelAttribute("assessorUserManagementForm") AssessorUserManagementForm assessorUserManagementForm,BindingResult result, HttpSession httpSession, Model model){
 		if(result.hasErrors()){
 			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
 			System.out.println(result.getErrorCount());
 			System.out.println(result.getAllErrors());
 			return "assessorUserManagementForm";
 		}
-		List<PersonalInformationAssessor> assessorUserManagementSearch = adminService.assessorUserManagementSearch(assessorUserManagementForm);
+		Integer profileId = 0;
+		Integer userId = 0;
+		try{
+			profileId = (Integer) httpSession.getAttribute("profileId");
+			userId = (Integer) httpSession.getAttribute("userId");
+		}catch(Exception e){
+			System.out.println("Exception while course details save : "+ e.getMessage());
+		}
+		List<PersonalInformationAssessor> assessorUserManagementSearch = adminService.assessorUserManagementSearch(assessorUserManagementForm,profileId,userId);
 		if(assessorUserManagementSearch != null && assessorUserManagementSearch.size() > 0){
 			model.addAttribute("searchassessorUsermanagement" , assessorUserManagementSearch);
 			return "assessorUserManagementForm";

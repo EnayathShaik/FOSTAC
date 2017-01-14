@@ -8,36 +8,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.criterion.Restrictions;
-
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.reflect.TypeToken;
-import com.ir.model.City;
-import com.ir.model.CourseName;
-import com.ir.model.State;
 import com.ir.model.PostVacancyTrainingCenterBean;
 
 /**
  * Servlet implementation class DeleteState
  */
 
-public class TrainingPartnerManageTrainer extends HttpServlet {
+public class TraineeCenterViewFeedBackList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TrainingPartnerManageTrainer() {
+    public TraineeCenterViewFeedBackList() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -50,32 +38,34 @@ public class TrainingPartnerManageTrainer extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String name = (request.getQueryString());
-        Integer id = 0;
-        if(name!=null && name.length() > 0){
-        	id = Integer.valueOf(name);
+        String [] n1 = name.split("&");
+        System.out.println("Append Data = "+name);
+        String courseType,courseName;
+        StringBuffer whereCondition = new StringBuffer();
+        whereCondition.append(" WHERE 1=1");
+        for(int i=0;i<n1.length;i++){
+        	if(n1[i] != null && n1[i].toUpperCase().equals("NULL")){
+        		if(i==0){
+            		whereCondition.append(" AND D.coursetypeid="+n1[i]);
+            	}else if(i==1){
+            		whereCondition.append(" AND C.coursenameid="+n1[i]);
+            	}
+        	}
         }
-		
-		Configuration conf = new Configuration();
+     	Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
 		String newList=null;
 		System.out.println("district 0");
-		if(id > 0){
-			System.out.println("ID == "+id);
-			PostVacancyTrainingCenterBean centerBean = (PostVacancyTrainingCenterBean) session.load(PostVacancyTrainingCenterBean.class, id);
-			session.delete(centerBean);
-			
-			session.beginTransaction().commit();
-		
-			out.write("Successfully Removed");
-		}else{
 			String sql ="";
-			sql = "select C.coursetype,D.coursename,E.firstname || ' '|| E.middlename ||' '|| E.lastname,B.vacancyenrolledid from postvacancytrainingcenter A" +
-					" inner join trainingcentervacancyenrolled B on(A.postvacancytrainingcenterid=B.postvacancyid)" +
-					" inner join coursetype C on(A.coursetype=C.coursetypeid) "+
-					" inner join coursename D on(A.coursename=D.coursenameid) "+
-					" inner join personalinformationtrainer E on (E.logindetails = CAST(CAST (B.loginid AS NUMERIC(19,4)) AS INT))";
+			sql = "select E.firstname || ' '|| E.middlename ||' '|| E.lastname, D.coursetype,C.coursename, B.feedback,A.feedbackrating  from feedbackdetail A" +
+					" inner join feedbackmaster B on(CAST(CAST (A.feedbackid AS NUMERIC(19,4)) AS INT) = B.feedbacktypeid)" +
+					" inner join coursename C on(CAST(CAST (A.courseid AS NUMERIC(19,4)) AS INT)=C.coursenameid) "+
+					" inner join coursetype D on(C.coursetypeid=D.coursetypeid) "+
+					" inner join personalinformationtrainee E on(CAST(CAST (A.userid AS NUMERIC(19,4)) AS INT)=E.logindetails)";
+			sql = sql+whereCondition.toString();
+					
 					
 			Query query = session.createSQLQuery(sql);
 			
@@ -88,7 +78,7 @@ public class TrainingPartnerManageTrainer extends HttpServlet {
 				newList = g.toJson(list); 
 			}
 			out.write(newList);
-		}
+		
 		
 		session.close();
 		

@@ -73,7 +73,7 @@ public class GetCourseDetails extends HttpServlet {
 		String sql ="select tc.trainingcalendarid , concat(pitp.trainingpartnerpermanentline1 , ' ' , pitp.trainingpartnerpermanentline2 , ' ' , s.statename , ' ' , d.districtname , ' ' , c.cityname) as address, "+
 					" concat(tc.trainingdate , ' / ' , tc.trainingtime) as schedule , "+
 					" concat(pitp.firstname , ' ' , pitp.middlename , ' ' , pitp.lastname ) ,concat( pitp.trainingpartnerpermanentmobile , ' / ' , pitp.trainingpartnerpermanentemail)  as contact, "+
-					" pitp.seatcapacitypersession , pitp.seatcapacityavailable "+
+					" pitp.seatcapacitypersession ,(CAST(CAST (pitp.seatcapacitypersession AS NUMERIC(19,4)) AS INT) - ( select count(1) from courseenrolleduser where trainingcalendarid = tc.trainingcalendarid)) "+
 					" from trainingcalendar as tc "+
 					" inner join coursename as cn on cn.coursenameid = tc.coursename "+
 					" inner join coursetype as ct on ct.coursetypeid = tc.coursetype "+
@@ -89,7 +89,8 @@ public class GetCourseDetails extends HttpServlet {
 					" and CAST(tc.trainingpartner AS varchar(10)) like '"+trainingPatrtner+"'  "+
 					" and CAST(tc.trainingdate AS varchar(10)) like '"+trainingDate+"' "+
 					" and CAST(s.stateid AS varchar(10)) like '"+trainingCenterState+"' "+
-					" and CAST(d.districtid AS varchar(10)) like '"+trainingCenterDistrict+"' ";
+					" and CAST(d.districtid AS varchar(10)) like '"+trainingCenterDistrict+"' "+
+					"  and  (CAST(CAST (pitp.seatcapacitypersession AS NUMERIC(19,4)) AS INT) - ( select count(1) from courseenrolleduser where trainingcalendarid = tc.trainingcalendarid) > 0)";
 		System.out.println("before query");
 		Query query = session.createSQLQuery(sql);
 		System.out.println("after query");

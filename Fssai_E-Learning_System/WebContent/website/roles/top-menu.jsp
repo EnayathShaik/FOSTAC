@@ -207,7 +207,7 @@
 						<ul class="nav navbar-nav">
 							<li></li>
 							<li class="active hori"><a href="loginProcess.fssai">Home</a></li>
-							<li><a href="tcm.fssai">Training
+							<li><a href="trainingCenterUserManagementForm.fssai">Training
 									Center Management</a></li>
 							<li class="hori"><a href="contactTrainee.fssai">Contact
 									Us</a></li>
@@ -254,7 +254,7 @@
 							<li></li>
 							<li class="active hori"><a
 								href="loginProcess.fssai">Home</a></li>
-							<li><a href="trainingCenterManagement.fssai">Assessor
+							<li><a href="assessorUserManagementForm.fssai">Assessor
 									User Management</a></li>
 							<li class="hori"><a href="contactTrainee.fssai">Contact
 									Us</a></li>

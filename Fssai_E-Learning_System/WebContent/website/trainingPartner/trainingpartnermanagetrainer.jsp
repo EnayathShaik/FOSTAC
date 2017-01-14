@@ -116,13 +116,33 @@
 				$('#newTable tr').remove();
 				$.each(mainData1, function(i, obj) {
 					$('#newTable').append(
-							'<tr id="tableRow"><td>' + j++ + '</td><td>'+ obj[0] + '</td><td>' + obj[1]+ '</td><td>' + obj[2] + '</td><td><input type="checkbox">Remove Trainer</td></tr>');
+							'<tr id="tableRow"><td>' + j++ + '</td><td>'+ obj[0] + '</td><td>' + obj[1]+ '</td><td>' + obj[2] + '</td><td><a href="#" onClick="removeTrainer(\''+obj[3]+'\');">Remove Trainer</a> </td></tr>');
 
 				});
 			}
 		});
 		return result;
 	}
+	
+	function removeTrainer(id){
+			if(confirm("Are You Sure!!")){
+				$.ajax({
+					type : 'post',
+					url : 'trainingpartnermanagetrainer.jspp?'+id,
+					async : false,
+					success : function(data) {
+					alert(data);
+					}
+				});
+				showDetails();
+		    }
+		    else{
+		        return false;
+		    }
+		
+		
+	}
+	
 </script>
 <section>
 	 <%@include file="../roles/top-menu.jsp"%>
@@ -219,6 +239,7 @@
 																		.log(trainerList[i].CourseTypeId
 																				+ " -- "
 																				+ trainerList[i].CourseType);
+																selectTrainerOptions += "<option value='0'>Please Select</option>"
 																selectTrainerOptions += "<option value="+trainerList[i].id+">"
 																		+ trainerList[i].value
 																		+ "</option>"

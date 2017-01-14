@@ -54,8 +54,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 
 	@Autowired
 	public CourseEnrolledUser courseEnrolledUser;
-	
-	
 
 	@Autowired
 	@Qualifier("state")
@@ -344,24 +342,36 @@ public class TraineeDAOImpl implements TraineeDAO {
 		System.out.println("this is state     "
 				+ registrationFormTrainee.getResState());
 		System.out.println(registrationFormTrainee.getBusinessAddressLine1());
-		boolean correspondADD=registrationFormTrainee.isCheckCorrespondence();
-		boolean checkCompany=registrationFormTrainee.isCheckCompany();
-		
-		//Business
-		/*personalInformationTrainee.setKindOfBusiness(kob);
-		personalInformationTrainee.setBusinessAddressLine1(registrationFormTrainee.getBusinessAddressLine1());
-		personalInformationTrainee.setBusinessAddressLine2(registrationFormTrainee.getBusinessAddressLine2());
-		personalInformationTrainee.setBussState(bs);
-		personalInformationTrainee.setBussCity(bc);
-		personalInformationTrainee.setBussDistrict(bd);
-		personalInformationTrainee.setBussPincode(registrationFormTrainee.getBussPincode());
-		personalInformationTrainee.setCompanyName(registrationFormTrainee.getCompanyName());
-		personalInformationTrainee.setDesignation(registrationFormTrainee.getDesignation());
-		personalInformationTrainee.setRegistrationNo(registrationFormTrainee.getRegistrationNo());*/
-		
-		
-		
-		if(registrationFormTrainee.getKindOfBusiness() == 6){
+		boolean correspondADD = registrationFormTrainee.isCheckCorrespondence();
+		boolean checkCompany = registrationFormTrainee.isCheckCompany();
+
+		// Business
+		/*
+		 * personalInformationTrainee.setKindOfBusiness(kob);
+		 * personalInformationTrainee
+		 * .setBusinessAddressLine1(registrationFormTrainee
+		 * .getBusinessAddressLine1());
+		 * personalInformationTrainee.setBusinessAddressLine2
+		 * (registrationFormTrainee.getBusinessAddressLine2());
+		 * personalInformationTrainee.setBussState(bs);
+		 * personalInformationTrainee.setBussCity(bc);
+		 * personalInformationTrainee.setBussDistrict(bd);
+		 * personalInformationTrainee
+		 * .setBussPincode(registrationFormTrainee.getBussPincode());
+		 * personalInformationTrainee
+		 * .setCompanyName(registrationFormTrainee.getCompanyName());
+		 * personalInformationTrainee
+		 * .setDesignation(registrationFormTrainee.getDesignation());
+		 * personalInformationTrainee
+		 * .setRegistrationNo(registrationFormTrainee.getRegistrationNo());
+		 */
+
+		personalInformationTrainee.setGender(registrationFormTrainee
+				.getGender());
+
+		System.out.println("==== " + registrationFormTrainee.getGender());
+
+		if (registrationFormTrainee.getKindOfBusiness() == 6) {
 			personalInformationTrainee.setKindOfBusiness(kob);
 			personalInformationTrainee.setDesignation(null);
 			personalInformationTrainee.setCompanyName(null);
@@ -372,73 +382,110 @@ public class TraineeDAOImpl implements TraineeDAO {
 			personalInformationTrainee.setBussDistrict(null);
 			personalInformationTrainee.setBussState(null);
 			personalInformationTrainee.setBussPincode(null);
-			
-		}
-		else{
+
+		} else {
 			System.out.println("Else Kind of business");
-			personalInformationTrainee.setCompanyName(registrationFormTrainee.getCompanyName());
-			personalInformationTrainee.setDesignation(registrationFormTrainee.getDesignation());
-			personalInformationTrainee.setRegistrationNo(registrationFormTrainee.getRegistrationNo());
+			personalInformationTrainee.setCompanyName(registrationFormTrainee
+					.getCompanyName());
+			personalInformationTrainee.setDesignation(registrationFormTrainee
+					.getDesignation());
+			personalInformationTrainee
+					.setRegistrationNo(registrationFormTrainee
+							.getRegistrationNo());
 			personalInformationTrainee.setKindOfBusiness(kob);
 
-			if(checkCompany){
-				personalInformationTrainee.setBusinessAddressLine1(registrationFormTrainee.getCorrespondenceAddress1());
-				personalInformationTrainee.setBusinessAddressLine2(registrationFormTrainee.getCorrespondenceAddress2());
+			if (checkCompany) {
+				personalInformationTrainee
+						.setBusinessAddressLine1(registrationFormTrainee
+								.getCorrespondenceAddress1());
+				personalInformationTrainee
+						.setBusinessAddressLine2(registrationFormTrainee
+								.getCorrespondenceAddress2());
 				personalInformationTrainee.setBussCity(cc);
 				personalInformationTrainee.setBussDistrict(cd);
 				personalInformationTrainee.setBussState(cs);
-				personalInformationTrainee.setBussPincode(registrationFormTrainee.getCorrespondencePincode());
+				personalInformationTrainee
+						.setBussPincode(registrationFormTrainee
+								.getCorrespondencePincode());
 				personalInformationTrainee.setCheckCompany("true");
-				
-			}else{
-				personalInformationTrainee.setBusinessAddressLine1(registrationFormTrainee.getBusinessAddressLine1());
-				personalInformationTrainee.setBusinessAddressLine2(registrationFormTrainee.getBusinessAddressLine2());
-				personalInformationTrainee.setDesignation(registrationFormTrainee.getDesignation());
-			
+
+			} else {
+				personalInformationTrainee
+						.setBusinessAddressLine1(registrationFormTrainee
+								.getBusinessAddressLine1());
+				personalInformationTrainee
+						.setBusinessAddressLine2(registrationFormTrainee
+								.getBusinessAddressLine2());
+				personalInformationTrainee
+						.setDesignation(registrationFormTrainee
+								.getDesignation());
+
 				personalInformationTrainee.setBussState(bs);
 				personalInformationTrainee.setBussCity(bc);
 				personalInformationTrainee.setBussDistrict(bd);
-				personalInformationTrainee.setBussPincode(registrationFormTrainee.getBussPincode());
+				personalInformationTrainee
+						.setBussPincode(registrationFormTrainee
+								.getBussPincode());
 				personalInformationTrainee.setCheckCompany("false");
-	}
+			}
 		}
-		
-		
-		personalInformationTrainee.setCorrespondenceAddress1(registrationFormTrainee.getCorrespondenceAddress1());
-		personalInformationTrainee.setCorrespondenceAddress2(registrationFormTrainee.getCorrespondenceAddress2());
+
+		personalInformationTrainee
+				.setCorrespondenceAddress1(registrationFormTrainee
+						.getCorrespondenceAddress1());
+		personalInformationTrainee
+				.setCorrespondenceAddress2(registrationFormTrainee
+						.getCorrespondenceAddress2());
 		personalInformationTrainee.setCorrespondenceState(cs);
 		personalInformationTrainee.setCorrespondenceDistrict(cd);
 		personalInformationTrainee.setCorrespondenceCity(cc);
 		personalInformationTrainee.setEmail(registrationFormTrainee.getEmail());
-		personalInformationTrainee.setMobile(registrationFormTrainee.getMobile());
-		personalInformationTrainee.setCorrespondencePincode(registrationFormTrainee.getCorrespondencePincode());
-		//personalInformationTrainee.setCorrespondenceState(adminDAO.getState(registrationFormTrainee.getCorrespondenceState()));
-		
-		
-		//Permanent Block
-		/*personalInformationTrainee.setResidentialLine1(registrationFormTrainee.getResidentialAddressLine1());
-		personalInformationTrainee.setResidentialLine2(registrationFormTrainee.getResidentialAddressLine2());
-		personalInformationTrainee.setResState(ps);
-		personalInformationTrainee.setResidentialDistrict(pd);
-		personalInformationTrainee.setResCity(pc);
-		personalInformationTrainee.setResPincode(registrationFormTrainee.getResPincode());*/
-		if(correspondADD){
-			personalInformationTrainee.setResidentialLine1(registrationFormTrainee.getCorrespondenceAddress1());
-			personalInformationTrainee.setResidentialLine2(registrationFormTrainee.getCorrespondenceAddress2());
+		personalInformationTrainee.setMobile(registrationFormTrainee
+				.getMobile());
+		personalInformationTrainee
+				.setCorrespondencePincode(registrationFormTrainee
+						.getCorrespondencePincode());
+		// personalInformationTrainee.setCorrespondenceState(adminDAO.getState(registrationFormTrainee.getCorrespondenceState()));
+
+		// Permanent Block
+		/*
+		 * personalInformationTrainee.setResidentialLine1(registrationFormTrainee
+		 * .getResidentialAddressLine1());
+		 * personalInformationTrainee.setResidentialLine2
+		 * (registrationFormTrainee.getResidentialAddressLine2());
+		 * personalInformationTrainee.setResState(ps);
+		 * personalInformationTrainee.setResidentialDistrict(pd);
+		 * personalInformationTrainee.setResCity(pc);
+		 * personalInformationTrainee.
+		 * setResPincode(registrationFormTrainee.getResPincode());
+		 */
+		if (correspondADD) {
+			personalInformationTrainee
+					.setResidentialLine1(registrationFormTrainee
+							.getCorrespondenceAddress1());
+			personalInformationTrainee
+					.setResidentialLine2(registrationFormTrainee
+							.getCorrespondenceAddress2());
 			personalInformationTrainee.setResState(cs);
 			personalInformationTrainee.setResCity(cc);
 			personalInformationTrainee.setResidentialDistrict(cd);
-			personalInformationTrainee.setResPincode(registrationFormTrainee.getCorrespondencePincode());
+			personalInformationTrainee.setResPincode(registrationFormTrainee
+					.getCorrespondencePincode());
 			personalInformationTrainee.setCheckPermanent("true");
-		}else{
-			personalInformationTrainee.setResidentialLine1(registrationFormTrainee.getResidentialAddressLine1());
-			personalInformationTrainee.setResidentialLine2(registrationFormTrainee.getResidentialAddressLine2());
+		} else {
+			personalInformationTrainee
+					.setResidentialLine1(registrationFormTrainee
+							.getResidentialAddressLine1());
+			personalInformationTrainee
+					.setResidentialLine2(registrationFormTrainee
+							.getResidentialAddressLine2());
 			personalInformationTrainee.setResState(ps);
 			personalInformationTrainee.setResCity(pc);
 			personalInformationTrainee.setResidentialDistrict(pd);
-			personalInformationTrainee.setResPincode(registrationFormTrainee.getResPincode());
+			personalInformationTrainee.setResPincode(registrationFormTrainee
+					.getResPincode());
 			personalInformationTrainee.setCheckPermanent("false");
-			}
+		}
 
 		// session.createQuery("update com. ir.model.PersonalInformationTrainee set title='"+personalInformationTrainee.getTitle()+"', Email='"+personalInformationTrainee.getEmail()+"' ");
 
@@ -484,40 +531,38 @@ public class TraineeDAOImpl implements TraineeDAO {
 
 	@Override
 	public long basicSave(CourseEnrolledUserForm courseEnrolledUserForm,
-			int loginid, int tableID,Integer profileID) {
-		
-		
+			int loginid, int tableID, Integer profileID) {
+
 		System.out.println("course enrolled");
 		Session session = sessionFactory.openSession();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 		long date = System.currentTimeMillis();
 		System.out.println("roll nu  :" + date);
 		System.out.println("loginid  :" + loginid);
-		System.out.println("tableID   :"
-				+ tableID);
+		System.out.println("tableID   :" + tableID);
 		System.out.println("TrainingCalendarId()   :"
 				+ courseEnrolledUserForm.getTrainingCalendarId());
 
 		courseEnrolledUser.setLoginDetails(loginid);
-		
+
 		courseEnrolledUser.setTrainingCalendarId(courseEnrolledUserForm
 				.getTrainingCalendarId());
 		courseEnrolledUser.setRollno(date);
 		courseEnrolledUser.setStatus("N");
 		courseEnrolledUser.setPaymentstatus("Pending");
-		if(profileID != null && profileID == 3){
+		if (profileID != null && profileID == 3) {
 			courseEnrolledUser.setEnrolledby("Trainee");
 			courseEnrolledUser.setProfileId(profileID);
-		}else if(profileID != null && profileID == 4){
+		} else if (profileID != null && profileID == 4) {
 			courseEnrolledUser.setEnrolledby("Trainer");
 			courseEnrolledUser.setProfileId(profileID);
 		}
-		
 
 		// Integer ce =0;
 		Integer ce = (Integer) session.save(courseEnrolledUser);
 		session.beginTransaction().commit();
-		if (ce != null && ce.intValue() > 0) {}
+		if (ce != null && ce.intValue() > 0) {
+		}
 		session.close();
 		return date;
 	}
@@ -525,16 +570,15 @@ public class TraineeDAOImpl implements TraineeDAO {
 	@Override
 	public long advanceTraineeSave(
 			CourseEnrolledUserForm courseEnrolledUserForm, int loginid,
-			int personalinformationtraineeid) {
+			int tableID, Integer profileID) {
 		System.out.println("course enrolled");
 		Session session = sessionFactory.openSession();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 		long date = System.currentTimeMillis();
 		System.out.println("roll nu  :" + date);
 		System.out.println("loginid  :" + loginid);
-		System.out.println("personalinformationtraineeid   :"
-				+ personalinformationtraineeid);
-		System.out.println("calander id is  "
+		System.out.println("tableID   :" + tableID);
+		System.out.println("TrainingCalendarId()   :"
 				+ courseEnrolledUserForm.getTrainingCalendarId());
 
 		courseEnrolledUser.setLoginDetails(loginid);
@@ -542,18 +586,20 @@ public class TraineeDAOImpl implements TraineeDAO {
 		courseEnrolledUser.setTrainingCalendarId(courseEnrolledUserForm
 				.getTrainingCalendarId());
 		courseEnrolledUser.setRollno(date);
+		courseEnrolledUser.setStatus("N");
 		courseEnrolledUser.setPaymentstatus("Pending");
-		courseEnrolledUser.setEnrolledby("Trainee");
-
-		Integer ce = (Integer) session.save(courseEnrolledUser);
-		if (ce > 0) {
-			PersonalInformationTrainee personalInformationTrainee = (PersonalInformationTrainee) session
-					.load(PersonalInformationTrainee.class,
-							personalinformationtraineeid);
-			// personalInformationTrainee.setSteps(2);
-			session.update(personalInformationTrainee);
+		if (profileID != null && profileID == 3) {
+			courseEnrolledUser.setEnrolledby("Trainee");
+			courseEnrolledUser.setProfileId(profileID);
+		} else if (profileID != null && profileID == 4) {
+			courseEnrolledUser.setEnrolledby("Trainer");
+			courseEnrolledUser.setProfileId(profileID);
 		}
+		// Integer ce =0;
+		Integer ce = (Integer) session.save(courseEnrolledUser);
 		session.beginTransaction().commit();
+		if (ce != null && ce.intValue() > 0) {
+		}
 		session.close();
 		return date;
 	}
@@ -561,15 +607,14 @@ public class TraineeDAOImpl implements TraineeDAO {
 	@Override
 	public long specialTraineeSave(
 			CourseEnrolledUserForm courseEnrolledUserForm, int loginid,
-			int personalinformationtraineeid) {
+			int tableID, Integer profileID) {
 		Session session = sessionFactory.openSession();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 		long date = System.currentTimeMillis();
 		System.out.println("roll nu  :" + date);
 		System.out.println("loginid  :" + loginid);
-		System.out.println("personalinformationtraineeid   :"
-				+ personalinformationtraineeid);
-		System.out.println("calander id is  "
+		System.out.println("tableID   :" + tableID);
+		System.out.println("TrainingCalendarId()   :"
 				+ courseEnrolledUserForm.getTrainingCalendarId());
 
 		courseEnrolledUser.setLoginDetails(loginid);
@@ -577,18 +622,21 @@ public class TraineeDAOImpl implements TraineeDAO {
 		courseEnrolledUser.setTrainingCalendarId(courseEnrolledUserForm
 				.getTrainingCalendarId());
 		courseEnrolledUser.setRollno(date);
-		courseEnrolledUser.setEnrolledby("Trainee");
+		courseEnrolledUser.setStatus("N");
+		if (profileID != null && profileID == 3) {
+			courseEnrolledUser.setEnrolledby("Trainee");
+			courseEnrolledUser.setProfileId(profileID);
+		} else if (profileID != null && profileID == 4) {
+			courseEnrolledUser.setEnrolledby("Trainer");
+			courseEnrolledUser.setProfileId(profileID);
+		}
 		courseEnrolledUser.setPaymentstatus("Pending");
 
+		// Integer ce =0;
 		Integer ce = (Integer) session.save(courseEnrolledUser);
-		if (ce > 0) {
-			PersonalInformationTrainee personalInformationTrainee = (PersonalInformationTrainee) session
-					.load(PersonalInformationTrainee.class,
-							personalinformationtraineeid);
-			// personalInformationTrainee.setSteps(2);
-			session.update(personalInformationTrainee);
-		}
 		session.beginTransaction().commit();
+		if (ce != null && ce.intValue() > 0) {
+		}
 		session.close();
 		return date;
 	}
@@ -648,7 +696,8 @@ public class TraineeDAOImpl implements TraineeDAO {
 				+ " inner join district district on district.districtid = pitp.trainingpartnerpermanentdistrict "
 				+ " inner join coursename cn on cn.coursenameid = tcal.coursename "
 				+ " inner join coursetype ctype on ctype.coursetypeid = cn.coursetypeid "
-				//+ " inner join managecoursecontent mcc on mcc.coursetypeid = cn.coursetypeid "
+				// +
+				// " inner join managecoursecontent mcc on mcc.coursetypeid = cn.coursetypeid "
 				+ "where ce.status = 'N' AND ce.logindetails = " + loginId;
 
 		Session session = sessionFactory.openSession();
@@ -827,12 +876,12 @@ public class TraineeDAOImpl implements TraineeDAO {
 		System.out.println("Table Name == " + data.tableName());
 		Session session = sessionFactory.openSession();
 		String sql = "";
-		if(profileId == 3){
-			sql = "select personalinformationtraineeid from " + data.tableName()
-					+ " where logindetails = " + loginId;
-		}else if(profileId == 4){
-			sql = "select personalinformationtrainerid from " + data.tableName()
-					+ " where logindetails = " + loginId;
+		if (profileId == 3) {
+			sql = "select personalinformationtraineeid from "
+					+ data.tableName() + " where logindetails = " + loginId;
+		} else if (profileId == 4) {
+			sql = "select personalinformationtrainerid from "
+					+ data.tableName() + " where logindetails = " + loginId;
 		}
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
@@ -845,35 +894,36 @@ public class TraineeDAOImpl implements TraineeDAO {
 	@Override
 	public Boolean updateSteps(int tableID, int profileID, int steps) {
 		// TODO Auto-generated method stub
-		System.out.println("**************Steps == "+steps);
+		System.out.println("**************Steps == " + steps);
 		Session session = sessionFactory.openSession();
-		if(profileID == 3){
+		if (profileID == 3) {
 			PersonalInformationTrainee personalInformationTrainee = (PersonalInformationTrainee) session
-					.load(PersonalInformationTrainee.class,
-							tableID);
-			System.out.println("personalInformationTrainer.getSteps() "+personalInformationTrainee.getSteps());
-			System.out.println("personalInformationTrainer.getSteps() "+steps);
-			if(personalInformationTrainee.getSteps() < steps){
+					.load(PersonalInformationTrainee.class, tableID);
+			System.out.println("personalInformationTrainer.getSteps() "
+					+ personalInformationTrainee.getSteps());
+			System.out
+					.println("personalInformationTrainer.getSteps() " + steps);
+			if (personalInformationTrainee.getSteps() < steps) {
 				System.out.println("IF");
 				personalInformationTrainee.setSteps(steps);
-			}else{
+			} else {
 				System.out.println("ELSE");
 			}
 			session.update(personalInformationTrainee);
-		}else if(profileID == 4){
-					PersonalInformationTrainer personalInformationTrainer = (PersonalInformationTrainer) session
-					.load(PersonalInformationTrainer.class,
-							tableID);
-					
-					System.out.println("personalInformationTrainer.getSteps() "+personalInformationTrainer.getSteps());
-					System.out.println("personalInformationTrainer.getSteps() "+steps);
-					if(personalInformationTrainer.getSteps() < steps){
-						personalInformationTrainer.setSteps(steps);
-					}
-					
-					
+		} else if (profileID == 4) {
+			PersonalInformationTrainer personalInformationTrainer = (PersonalInformationTrainer) session
+					.load(PersonalInformationTrainer.class, tableID);
+
+			System.out.println("personalInformationTrainer.getSteps() "
+					+ personalInformationTrainer.getSteps());
+			System.out
+					.println("personalInformationTrainer.getSteps() " + steps);
+			if (personalInformationTrainer.getSteps() < steps) {
+				personalInformationTrainer.setSteps(steps);
+			}
+
 			session.update(personalInformationTrainer);
-			
+
 		}
 		session.beginTransaction().commit();
 		session.close();
@@ -900,11 +950,13 @@ public class TraineeDAOImpl implements TraineeDAO {
 		// TODO Auto-generated method stub
 		int courseenrolleduserid = 0;
 		Session session = sessionFactory.openSession();
-		String sql = "select courseenrolleduserid from courseenrolleduser where logindetails  = " + userId;
+		String sql = "select courseenrolleduserid from courseenrolleduser where logindetails  = "
+				+ userId;
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
 		courseenrolleduserid = (Integer) list.get(0);
-		CourseEnrolledUser courseEnrolledUser = (CourseEnrolledUser) session.load(CourseEnrolledUser.class, courseenrolleduserid);
+		CourseEnrolledUser courseEnrolledUser = (CourseEnrolledUser) session
+				.load(CourseEnrolledUser.class, courseenrolleduserid);
 		courseEnrolledUser.setStatus(status);
 		session.update(courseEnrolledUser);
 		session.beginTransaction().commit();

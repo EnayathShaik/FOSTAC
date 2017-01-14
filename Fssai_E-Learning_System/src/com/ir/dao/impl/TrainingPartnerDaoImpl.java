@@ -165,7 +165,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	public List<IntStringBean> getTrainerList(){
 		Session session = sessionFactory.openSession();
 		List<IntStringBean> trinerNameList=new ArrayList<>();
-		String sql="select distinct pitp.personalinformationtrainingpartnerid,pitp.firstname,pitp.middlename,pitp.lastname from personalinformationtrainingpartner pitp , logindetails pit";
+		String sql="select distinct pitp.personalinformationtrainerid,pitp.firstname,pitp.middlename,pitp.lastname from personalinformationtrainer pitp , logindetails pit";
 				
 		//"select pit.logindetails,pit.firstname,pit.middlename,pit.lastname from personalinformationtrainer pit,personalinformationtrainingpartner pitp";// where pit.logindetails=pitp.logindetails";
 		Query query = session.createSQLQuery(sql);
@@ -405,6 +405,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		for(int index=0;index<trainerList.length;index++){
 			Transaction tx=session.beginTransaction();
 			PostVacancyTrainingCenterBean pvtcb = (PostVacancyTrainingCenterBean)session.load(PostVacancyTrainingCenterBean.class, Integer.parseInt(trainerList[index]));
+			System.out.println("****************************"+statusList[index]);
 			pvtcb.setStatus(statusList[index]);
 			session.update(pvtcb);
 			tx.commit();
@@ -478,6 +479,12 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		tc.setTrainingTime(trainingCalendarForm.getTrainingTime());
 		tc.setTrainerName(trainingCalendarForm.getTrainerName());
 		tc.setTrainingType(trainingCalendarForm.getTrainingType());
+		
+		//assessment
+		tc.setAssessmentDate(trainingCalendarForm.getTrainingDate());
+		tc.setAssessmentTime(trainingCalendarForm.getTrainingTime());
+		
+		
 		int i = (Integer) session.save(tc);
 		tx.commit();
 		session.close();

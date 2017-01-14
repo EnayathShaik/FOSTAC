@@ -2,6 +2,29 @@
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
+function OnStart(){
+	var steps = 1;
+	var traineeSteps =
+		<%=(Integer) session.getAttribute("traineeSteps")%>
+	if(steps > traineeSteps){
+	}else{
+		if(steps-1 == traineeSteps){
+			alert('Please Complete Your Previous Training First')
+		}else{
+			alert('Please Flow Step By Step..');
+		}
+		window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
+	}
+}
+window.onload = OnStart;
+
+function confirmTrainee(){
+	if(confirm("(Trainee can enroll to one course at one time,another course enrollment will be done after the completion of last step i.e. Generate Certificate).?")){
+    }
+    else{
+        return false;
+    }
+}
 function getDistrict(val)
 {
 	$.ajax({
@@ -47,7 +70,7 @@ function getCourseDetails(){
 			$('#newTable').append('<tr  class="background-open-vacancies"><th>Select</th><th>Training Center Name & Address</th><th>Training Schedule</th><th>	Center Contact Person Name, Mobile & Email Id</th><th>Seating Capacity</th><th>Seats available</th></tr>')
 			$.each(mainData1 , function(i , obj)
 			{
-			$('#newTable').append('<tr id="tableRow"><td><input type="text" name="getCalander" id="h" value="'+obj[0]+'" />'+i+'<input type="radio" name="getCalander" onclick="gettid(this.value);" id="trainingCalendarIdd"  value="'+obj[0]+'"/></td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td></tr>');	
+			$('#newTable').append('<tr id="tableRow"><td><input type="hidden" name="getCalander" id="h" value="'+obj[0]+'" /><input type="radio" name="getCalander" onclick="gettid(this.value);" id="trainingCalendarIdd"  value="'+obj[0]+'"/></td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td></tr>');	
 			//document.getElementById("trainingCalendarId").value = i;
 			}); 
 			}
@@ -190,7 +213,7 @@ function gettid(value){
                         </thead><tbody></tbody>
                       </table>
                        <div class="col-xs-12 pull-right">
-                        <input style="margin-top:20px; width:100px;"  type="submit" class="form-control login-btn btn" value="Enroll" />
+                        <input style="margin-top:20px; width:100px;" onclick="return confirmTrainee();" type="submit" class="form-control login-btn btn" value="Enroll" />
                       </div>
                     </fieldset>                  
 

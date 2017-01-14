@@ -3,6 +3,7 @@ package com.ir.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,13 +30,13 @@ import com.ir.model.State;
  * Servlet implementation class DeleteState
  */
 
-public class SearchMarkAttendance extends HttpServlet {
+public class TraineeCenterPaymentConfirmation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchMarkAttendance() {
+    public TraineeCenterPaymentConfirmation() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,15 +46,16 @@ public class SearchMarkAttendance extends HttpServlet {
 	 */
 	protected void callPost(HttpServletRequest request, HttpServletResponse response,String loginId,int profileCode) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		System.out.println("loginId == "+loginId);
-		
 		response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+		System.out.println("*******"+loginId);
 		String name = (request.getQueryString());
 		String [] n1 = name.split("&");
-		
-		String courseType,courseName , trainingDate , trainingTime ;
+        System.out.println("Append Data = "+name);
+  
+        
+        
+        String courseType,courseName , trainingDate , trainingtime,trainer ;
 		try{
 			courseType = n1[0].split("=")[1];
 		}
@@ -76,12 +78,20 @@ public class SearchMarkAttendance extends HttpServlet {
 		}
 		
 		try{
-			trainingTime = n1[3].split("=")[1];
+			trainingtime = n1[3].split("=")[1];
 		}
 		catch(Exception e){
-			trainingTime = "%";
+			trainingtime = "%";
 		}
-	
+        
+		try{
+			trainer = n1[4].split("=")[1];
+		}
+		catch(Exception e){
+			trainer = "%";
+		}
+    
+		
 		
 		Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
@@ -90,14 +100,21 @@ public class SearchMarkAttendance extends HttpServlet {
 		String newList=null;
 		System.out.println("district 0");
 		String sql ="";
-		sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,G.firstname||' ' ||G.middlename|| ' ' ||G.lastname as participantName ,G.aadharnumber , courseenrolleduserid  " +
-				"from trainingcalendar A inner join coursetype B on(A.coursetype=B.coursetypeid)  inner join coursename C on(A.coursename=C.coursenameid)   inner join personalinformationtrainingpartner D on(A.trainingcenter=D.personalinformationtrainingpartnerid) "+
-				"inner join logindetails E on(D.logindetails=E.ID) inner join courseenrolleduser F on(A.trainingcalendarid=F.trainingcalendarid) inner join personalinformationtrainee G on(CAST(CAST (F.logindetails AS NUMERIC(19,4)) AS INT)=G.logindetails)  " +
-				//"where E.loginid ='"+loginId+"' " +
-				"where 1=1 " +
-				"and cast(B.coursetypeid as varchar(10)) like '"+courseType+"%'  and cast( C.coursenameid as varchar(10)) like  '"+courseName+"%' and cast(trainingdate as varchar(10)) like '"+trainingDate+"%' and trainingtime  like '"+trainingTime+"%'   ";
+		/*sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,pitr.firstname || ' '|| pitr.middlename ||' '|| pitr.lastname as participantName " +
+				"from trainingcalendar A " +
+				" inner join coursetype B on(A.coursetype=B.coursetypeid)" +
+				" inner join coursename C on(A.coursename=C.coursenameid)"+
+				" inner join personalinformationtrainer as pitr on CAST(CAST (A.trainername AS NUMERIC(19,4)) AS INT) = pitr.personalinformationtrainerid ";
+	*/	sql = "select  E.coursetype,D.coursename,B.trainingdate,B.trainingtime,C.firstname || ' '|| C.middlename ||' '|| C.lastname as participantName,D.modeoftraining,A.paymentstatus,A.courseenrolleduserid from courseenrolleduser  A"
+				+ " inner join trainingcalendar B on(A.trainingcalendarid= B.trainingcalendarid)"
+				+ " inner join personalinformationtrainingpartner C on (C.personalinformationtrainingpartnerid = B.trainingcenter)"
+				+ " inner join coursename D on (D.coursenameid = B.coursename)"
+				+ " inner join coursetype E on (E.coursetypeid = B.coursetype)"
+				+ " inner join logindetails F on (F.ID = C.logindetails)"
+				+" WHERE A.status = 'N' and  cast(E.coursetypeid  as varchar(10)) like '"+courseType+"%' and cast(D.COURSENAMEID as varchar(10))  like '"+courseName+"%'  and  cast(B.TRAININGDATE as varchar(10)) like '"+trainingDate+"%' and  cast(B.TRAININGTIME as varchar(10)) like '"+trainingtime+"%'  and cast(B.trainername as varchar(10)) like '"+trainer+"%' "; 
+					//	"  AND F.loginid ='"+loginId+"' ";
 		
-		System.out.println(" sql "+sql);
+	
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
 		System.out.println(list.size());

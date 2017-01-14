@@ -197,6 +197,7 @@ public class LoginController {
 					applicationStatusBean.setStrCourseName(pvtc.getCourseName().getCoursename());
 					applicationStatusBean.setTrainingDate(pvtc.getTrainingDate());
 					applicationStatusBean.setPersonalInformationTrainingPartner(pvtc.getTrainingCenter());
+					applicationStatusBean.setPostvacancyID(pvtc.getId());
 					vacancyTrainingCenterBeans.add(applicationStatusBean);
 				}
 			}

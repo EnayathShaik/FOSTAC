@@ -544,7 +544,7 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 	
 	@Override
-	public List<PersonalInformationAssessor> assessorUserManagementSearch(AssessorUserManagementForm assessorUserManagementForm) {
+	public List<PersonalInformationAssessor> assessorUserManagementSearch(AssessorUserManagementForm assessorUserManagementForm,Integer profileid,Integer userID) {
 		Session session = sessionFactory.openSession();
 		String FirstName = assessorUserManagementForm.getFirstName();
 		String MiddleName = assessorUserManagementForm.getMiddleName();
@@ -571,10 +571,21 @@ public class AdminDAOImpl implements AdminDAO {
 		{
 			status="%";
 		}
-		
+		StringBuffer userBuffer = new StringBuffer();
+		if(profileid == 8){
+			int perAssessorAgencyID = 0;
+			String sql = "select manageassessmentagencyid from manageassessmentagency where logindetails ="
+					+ userID;
+			Query query = session.createSQLQuery(sql);
+			List list = query.list();
+			perAssessorAgencyID = (Integer) list.get(0);
+			userBuffer.append(" AND pitp.assessmentagencyname="+perAssessorAgencyID);
+		}
 		String join = " inner join loginDetails as ld on pitp.loginDetails = ld.id";
 		String like= " where upper(pitp.FirstName) like '"+FirstName.toUpperCase()+"' and pitp.MiddleName like '"+MiddleName+"' and pitp.LastName like '"+LastName+"' and "
 				+ "pitp.AadharNumber like '"+AadharNumber +"' and pitp.AadharNumber  like '"+ AadharNumber+"'";
+		
+		like = like + userBuffer.toString();
 		String select = "pitp.personalInformationAssessorId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails ";
 		
 		String sql= "Select "+ select + "  from PersonalInformationAssessor as pitp "+ join + like;
@@ -594,7 +605,7 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 	
 	@Override
-	public List<PersonalInformationTrainingPartner> trainingCenterUserManagementSearch(TrainingCenterUserManagementForm trainingCenterUserManagementForm) {
+	public List<PersonalInformationTrainingPartner> trainingCenterUserManagementSearch(TrainingCenterUserManagementForm trainingCenterUserManagementForm,Integer profileid,Integer userID) {
 		Session session = sessionFactory.openSession();
 		String FirstName = trainingCenterUserManagementForm.getFirstName();
 		String MiddleName = trainingCenterUserManagementForm.getMiddleName();
@@ -622,10 +633,20 @@ public class AdminDAOImpl implements AdminDAO {
 		{
 			status="%";
 		}
-		
+		StringBuffer userBuffer = new StringBuffer();
+		if(profileid == 7){
+			int perTrainingPartnerID = 0;
+			String sql = "select managetrainingpartnerid from managetrainingpartner where logindetails ="
+					+ userID;
+			Query query = session.createSQLQuery(sql);
+			List list = query.list();
+			perTrainingPartnerID = (Integer) list.get(0);
+			userBuffer.append(" AND pitp.trainingpartnername="+perTrainingPartnerID);
+		}
 		String join = " inner join loginDetails as ld on pitp.loginDetails = ld.id";
 		String like= " where upper(pitp.FirstName) like '"+FirstName.toUpperCase()+"' and pitp.MiddleName like '"+MiddleName+"' and pitp.LastName like '"+LastName+"' and "
 				+ "pitp.PAN like '"+PanNumber +"' and ld.status like '"+ status+"'";
+		like = like + userBuffer.toString();
 		String select = "pitp.personalInformationTrainingPartnerId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.PAN,pitp.logindetails ";
 		
 		String sql= "Select "+ select + "  from PersonalInformationTrainingPartner as pitp "+ join + like;
@@ -827,6 +848,9 @@ public class AdminDAOImpl implements AdminDAO {
 		tc.setTrainingTime(trainingCalendarForm.getTrainingTime());
 		tc.setTrainerName(trainingCalendarForm.getTrainerName());
 		tc.setTrainingType(trainingCalendarForm.getTrainingType());
+		tc.setAssessmentDate(trainingCalendarForm.getTrainingDate());
+		tc.setAssessmentTime(trainingCalendarForm.getTrainingTime());
+		
 		int i = (Integer) session.save(tc);
 		tx.commit();
 		session.close();

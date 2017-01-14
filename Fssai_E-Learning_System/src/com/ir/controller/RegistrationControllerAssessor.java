@@ -126,7 +126,7 @@ public class RegistrationControllerAssessor implements Serializable{
 		 Integer profileID = 0;
 			try{
 				profileID = (Integer) session.getAttribute("profileId");
-				if(profileID == 1 || profileID == 2){
+				if(profileID == 1 || profileID == 2 || profileID == 8){
 					//Bases On User
 				}else{
 					userId = (Integer) session.getAttribute("userId");

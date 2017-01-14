@@ -56,11 +56,9 @@ public interface TraineeDAO {
 
 //	public boolean changePasswordTraineeSave(ChangePasswordForm changePasswordForm, String id);
 	// Rishi
-	public long advanceTraineeSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid,
-			int personalinformationtraineeid);
+	public long advanceTraineeSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid, int tableID, Integer profileID);
 
-	public long specialTraineeSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid,
-			int personalinformationtraineeid);
+	public long specialTraineeSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid, int tableID, Integer profileId);
 
 	public boolean changePasswordAssesorSave(ChangePasswordForm changePasswordForm, String id);
 	public AdmitCardForm generateAdmitCard(int loginId,int profileId);

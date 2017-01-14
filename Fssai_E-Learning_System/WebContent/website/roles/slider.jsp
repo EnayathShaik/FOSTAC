@@ -92,8 +92,8 @@
       <ul class="sidebar-nav">
           <!-- <li class="sidebar-brand">
                     </li> -->
-          <li> <a href="assessment-calendar.fssai">Assessment Calendar</a> </li>
-          <li> <a href="mark-attendance.fssai">Mark Attendance</a> </li>
+          <li> <a href="viewAssessmentAgencyCalendar.fssai">Assessment Calendar</a> </li>
+          <li> <a href="trainingpartnermarkAttendence.fssai">Mark Attendance</a> </li>
           <li> <a href="update-result.fssai">Update Result</a> </li>
       </ul>
 </div>
@@ -107,7 +107,7 @@
                         </li> -->
           <li> <a href="postVacancyTrainingPartner.fssai">Post Vacancy for Trainer</a> </li>
           <li> <a href="trainingpartnerapplicationstatus.fssai">Application Status</a> </li>
-           <li><a href="viewtrainingpartnertrainingcalendar.fssai">View Training Calendar</a></li>
+           <li><a href="trainingCalendarForm.fssai">View Training Calendar</a></li>
            <li><a href="viewFeedbackDetails.fssai">View Feedback</a></li>
         </ul>
       </div>

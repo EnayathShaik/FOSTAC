@@ -77,7 +77,7 @@ public class SearchCity extends HttpServlet {
 		String sql = "select s.statename , d.districtname , c.cityname , c.status , c.cityId,d.districtid from city as c "+
 					" inner join district d on d.districtid = c.districtid "+
 					" inner join state as s on s.stateid = d.stateid"+
-					" where CAST(s.stateid AS varchar(10)) like'"+ stateId +"'"+
+					" where c.status='A' AND CAST(s.stateid AS varchar(10)) like'"+ stateId +"'"+
 					" and c.cityName like '"+cityName+"%' and  CAST(d.districtid AS varchar(10)) like '"+districtId+"'";
 
 			Query query = session.createSQLQuery(sql);

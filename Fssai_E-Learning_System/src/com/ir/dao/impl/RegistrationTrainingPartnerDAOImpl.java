@@ -92,7 +92,7 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 	@Override
 	public List<State> loadState() {
 		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("from State");
+		Query query = session.createQuery("from State  where status = 'A'");
 		List listState = query.list();
 		session.close();
 		System.out.println("state list dao     :"+ listState);

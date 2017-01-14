@@ -150,7 +150,7 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 		  Integer profileID = 0;
 			try{
 				profileID = (Integer) session.getAttribute("profileId");
-				if(profileID == 1 || profileID == 2){
+				if(profileID == 1 || profileID == 2 || profileID == 7){
 					//Bases On User
 				}else{
 					userId = (Integer) session.getAttribute("userId");
@@ -160,6 +160,7 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 				System.out.println("Exception while course details save : "+ e.getMessage());
 			}
 			 
+			System.out.println("*******************"+userId+"*******************");
 		  
 		  if(userId > 0){
 				  PersonalInformationTrainingPartner personalInformationTrainingPartner ;

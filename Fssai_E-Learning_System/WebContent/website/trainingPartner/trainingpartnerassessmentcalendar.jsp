@@ -2,7 +2,7 @@
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
-function saveAssesmentCalender(i,courseType,courseName,trainer){
+function saveAssesmentCalender(i,courseType,courseName,trainer,traininingCalandar){
 	var assmntDate = $('#assesmentdate'+i).val();
 	var assmntTime = $('#assesmenttime'+i).val();
 	alert(assmntDate)
@@ -16,7 +16,7 @@ function saveAssesmentCalender(i,courseType,courseName,trainer){
 		return false;
 	}
 	
-	var total = courseType+'&'+courseName+'&'+trainer+'&'+assmntDate+'&'+assmntTime;
+	var total = courseType+'&'+courseName+'&'+trainer+'&'+assmntDate+'&'+assmntTime+'&'+traininingCalandar;
 	var result="";
 		$.ajax({
 		type: 'post',
@@ -131,7 +131,7 @@ function showDetails(){
 			$('#newTable tr').remove();
 			$.each(mainData1 , function(i , obj)
 			{
-				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td><input id="assesmentdate'+i+'" type="date"/></td><td><input id="assesmenttime'+i+'" type="time"/></td><td>'+obj[2]+'</td><td><a href="#" onClick="saveAssesmentCalender('+i+',\''+obj[0]+'\',\''+obj[1]+'\',\''+obj[2]+'\');">Save</a> </td></tr>');
+				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td><input id="assesmentdate'+i+'" value='+obj[3]+' type="date"/></td><td><input id="assesmenttime'+i+'" value='+obj[4]+' type="time"/></td><td>'+obj[5]+'</td><td><a href="#" onClick="saveAssesmentCalender('+i+',\''+obj[0]+'\',\''+obj[1]+'\',\''+obj[2]+'\',\''+obj[6]+'\');">Save</a> </td></tr>');
 				
 			});
 			}
@@ -172,7 +172,7 @@ function showDetails(){
                                     <!-- search and apply vacancies -->
                                     <div class="col-xs-12">
                                         <fieldset>
-                                        <legend><h3>Training Calendar</h3></legend>
+                                        <legend><h3>Assesment Calendar</h3></legend>
                                         <script type="text/javascript">
                                         var formObj = '${trainingpartnerassessmentcalendar}';
                                         var formData = JSON.parse(formObj);
@@ -226,6 +226,7 @@ function showDetails(){
                                                         <select class="form-control" name="selTrainerNames" id = "selTrainerNames"> </select>
 														<script>
 															var selectTrainerOptions = "";
+															selectTrainerOptions += "<option value='0'>Please Select</option>"
 															for(var i=0 ; i < trainerList.length; i++)
 																{
 																	selectTrainerOptions += "<option value="+trainerList[i].id+">"+trainerList[i].value+"</option>"
@@ -292,6 +293,7 @@ function showDetails(){
                             <th>Assessment Date</th>
                             <th>Assessment Time</th>
                             <th>Trainer Name</th>
+                            <th>Assessor</th>
                              <th>Save</th>
                           </tr>
                         </thead>

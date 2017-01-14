@@ -61,7 +61,7 @@ public class CityFill extends HttpServlet {
 				conf.configure("/hibernate.cfg.xml");
 				SessionFactory sf = conf.buildSessionFactory();
 				Session session = sf.openSession();
-				Query query = session.createQuery("from City where districtid ='"+name+"'");
+				Query query = session.createQuery("from City where status='A' and districtid ='"+name+"'");
 				List<City> list = query.list();
 				System.out.println("after list load city");
 				

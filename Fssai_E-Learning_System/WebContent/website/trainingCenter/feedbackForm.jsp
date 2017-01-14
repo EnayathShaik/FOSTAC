@@ -55,47 +55,42 @@ function loadTrainingCenter(){
 <script>
 
 function showDetails(){
-	var trainingCenter = $("#userId").val();
-	var trainee = $("#trainee").val();
-	var courseid = $("#selCourseType").val();
-	var courseName = $("#selCourseName").val();
-	var trainingDate = $("#trainingdate").val();
-	var value = trainingCenter+"&"+trainee+"&"+courseid+"&"+courseName+"&"+trainingDate+"&";
-	alert("value "+value);
-	$(".displayNone").css("display","block");
-	$.ajax({
-	      type: 'post',
-	      url: 'getFeedbackDetails.jspp?'+ value,
-	      async: false, 
-	      success: function (response) {
-	    	 response=JSON.parse(response);
-	    	 if(response.length==0){
-	    		 $('#show-result').hide();
-	    	 }else{
-	    		 $('#show-result').show();
-	    	 }
-	    	 
-	    	    $.each(response , function(i , obj)
-	    		  		{
-	    		  				console.log(obj +" "+ i);		
-	    		  		});
-	    	 for(index=0;index<response.length;index++){
-				var objec=response[index];
-				var rdStr=""
-				for(var radioIndex=0;radioIndex<5;radioIndex++){
-					if((radioIndex+1)==parseInt(objec[2])){
-					rdStr+='<td class="text-center"><input type="radio" name="'+index+'" value="'+radioIndex+'" checked="checked" /></td> ';				
-					}else{
-						rdStr+='<td class="text-center"><input type="radio" name="'+index+'" value="'+radioIndex+'"/></td> '
-					}
-				}
-				
-	    		 $('#feedbackDetails').append('<tr>'+
-           		'<td>'+objec[1]+'</td>'+rdStr+'</tr>');
-             }
-	      }
-	      });
+	var courseType =  $("#selCourseType").val();
+	var courseName =  $("#selCourseName").val();
+	/* var trainingDate = $("#traningDate").val();
+	var traningTime =  $("#traningTime").val();
+	var status = $('#selTraineeStatus').val(); */
 
+	//alert("courseType "+courseType);
+	/* alert("courseName "+courseName);
+	alert("trainingDate "+trainingDate);
+	alert("traningTime "+traningTime);
+	alert("status "+status);  */
+	
+$(".displayNone").css("display","block");
+//var	total = courseType+"&"+courseName+"&"+trainingDate+"&"+traningTime+"&"+status;
+var	total = courseType+"&"+courseName;
+console.log("total "+total);
+//var total = "";
+var result="";
+$.ajax({
+	type: 'post',
+	url: 'traineeCenterViewFeedBack.jspp?'+ total,
+	async: false, 
+	success: function (data){              
+	$('#newTable').show();
+	//var mainData = JSON.stringify(data);
+	var mainData1 = jQuery.parseJSON(data);
+	var j=1;
+	//$('#newTable tr').remove();
+		$.each(mainData1 , function(i , obj)
+		{
+			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td></tr>');
+			
+		});
+		}
+		});
+	return false;
 }
 
 
@@ -156,7 +151,7 @@ function showDetails(){
                                                         <select class="form-control" onchange="getCourseName(this.value);" name="selCourseType" id = "selCourseType"> </select>
                                                     </div>
                                                     
-                                                    <div class="form-group">
+                                                    <!-- <div class="form-group">
                                                         <div>
                                                             <ul class="lab-no">
                                                                 <li class="style-li"><strong>Course Name:</strong></li>
@@ -176,15 +171,24 @@ function showDetails(){
                                                         </div>
                                                  
 														<select class="form-control" name="trainee" id = "trainee"> </select>
-                                                    </div>
+                                                    </div> -->
                                                     
                                                 </div>
                                                 
                                                      
                                                 <!-- right side -->
                                                 <div class="col-md-6 col-xs-12">
-                                                 
-                                                    <div class="form-group">
+                                                  <div class="form-group">
+                                                        <div>
+                                                            <ul class="lab-no">
+                                                                <li class="style-li"><strong>Course Name:</strong></li>
+                                                                
+                                                            </ul>
+                                                        </div>
+                                                        <select class="form-control" name="selCourseName" id = "selCourseName"> </select>
+								 						
+                                                    </div>
+                                                    <!-- <div class="form-group">
                                                         <div>
                                                             <ul class="lab-no">
                                                                 <li class="style-li"><strong>Training Date:</strong></li>
@@ -202,8 +206,8 @@ function showDetails(){
                                                         </div>
                                                         <select class="form-control" name="TrainingCentreName" id = "personalInformationTrainingPartnerId"> </select>
 														
-                                                    </div>
-                                                     <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails();">Show Details</button>
+                                                    </div> -->
+                                                     <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="return showDetails();">Show Details</button>
                                                 </div>
                                                
                                             </div>
@@ -236,61 +240,40 @@ function showDetails(){
 
 <!--                                     search Results -->
 <!--                         search Results -->
-              <div class="col-xs-12 displayNone"  style="display:none;">
-<!--                 table -->
+                         <!-- search Results -->
+              <div class="col-xs-12 collapse table-overflow-responsive" id="show-result" aria-expanded="false" style="height: 0px;"> 
+                <!-- table -->
                 <div class="row">
                   <div class="col-xs-12">
                     <fieldset style="margin-top: 20px;">
                       <legend>
-                      <h4>Feed back details</h4>
+                      <h4>Search results</h4>
                       </legend>
-                                <table class="table table-bordered table-responsive table-striped table-hover">
-                          <thead>
-                        <tr class="background-open-vacancies">
-                              <th>Feedback Point</th>
-                              <th class="text-center">1</th>
-                              <th class="text-center">2</th>
-                              <th class="text-center">3</th>
-                              <th class="text-center">4</th>
-                              <th class="text-center">5</th>
-                            </tr>
-                      </thead>
-                          <tbody id="feedbackDetails">
-						    <tr id="Good">  
-						    
-					        <td>Good</td>
-							  <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="1"></td> 
-                             <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="2"></td> 
-                             <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="3"></td>
-                             <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="4"></td> 
-                            <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="5"></td> 
-						    </tr>
-						      <tr id="vgood">  
-					        <td> Very Good</td>
-							  <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="1"></td> 
-                             <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="2"></td> 
-                             <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="3"></td>
-                             <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="4"></td> 
-                            <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="5"></td> 
-						    </tr>
-                      </tbody>
-                        </table>
-                    <div class="col-xs-12">
-                          <ul class="feed-no">
-                        <li class="feed-li"><span><strong>1</strong></span>&nbsp;<span>Poor</span></li>
-                        <li class="feed-li"><span><strong>2</strong></span>&nbsp;<span>Good</span></li>
-                        <li class="feed-li"><span><strong>3</strong></span>&nbsp;<span>Better</span></li>
-                        <li class="feed-li"><span><strong>4</strong></span>&nbsp;<span>Best</span></li>
-                        <li class="feed-li"><span><strong>5</strong></span>&nbsp;<span>Excellent</span></li>
+                      <div id="dvData">
+                      <table  class="table table-bordered table-responsive table-striped table-hover">
+                        <thead>
+                          <tr class="background-open-vacancies">
+                            <th>S.No.</th>
+                            <th>Trainee</th>
+                            <th>Course Type</th>
+                            <th>Course Name</th>
+                            <th>Feedback Question</th>
+                            <th>Points</th>
+                          </tr>
+                        </thead>
+                        <tbody id="newTable">
+                        </tbody>
+                      </table>
+                       </div>
+                     <!--  <a href="#" class="btn login-btn pull-right" onclick="saveDetails();">Save</a> -->
+                    </fieldset>
+                    <div style="width: 95px;">
+                      <ul class="pager">
                       </ul>
-                        </div>
-                    <div class="col-md-4 col-x-12"></div>
-                    <div class="col-md-4 col-x-12"></div>
-                    
-</fieldset>
-</div>
-</div>
-</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 <%-- </cf:form> --%>
                                 </div>
                             </div>

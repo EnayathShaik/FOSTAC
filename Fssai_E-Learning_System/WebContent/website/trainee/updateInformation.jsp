@@ -2,6 +2,8 @@
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
+
+
 	function getDistrict(val) {
 		////alert('jjh');
 		$.ajax({
@@ -587,6 +589,7 @@
 </script>
 
 <script>
+   
 	function myCompany(val) {
 		//alert("Inside My Company");
 		businessID3.style.display = checkCompany.checked ? "none" : "block";
@@ -748,8 +751,8 @@
 														</ul>
 													</div>
 													<label class="radio-inline"> <cf:radiobutton
-															path="gender" value="M" checked="true" />Male&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-														<cf:radiobutton path="gender" value="F" />Female
+															path="gender" id="male" value="M" />Male&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<cf:radiobutton id="female" path="gender" value="F" />Female
 														</td>
 													</label>
 												</div>
@@ -1458,3 +1461,11 @@
 		</div>
 	</section>
 </cf:form>
+<script type="text/javascript">
+var gender = '${loginUser.gender}';
+if(gender == 'M'){
+	document.getElementById('male').checked = true;
+}else if(gender = 'F'){
+	document.getElementById('female').checked = true;
+}
+</script>

@@ -27,7 +27,7 @@ public class PageLoadDaoTrainerImpl implements PageLoadDaoTrainer {
 	public List<State> loadState() {
 		System.out.println("Page Load DAOImpl process start in state");
 		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("from State");
+		Query query = session.createQuery("from State where status = 'A'");
 		List listState = query.list();
 		session.close();
 		System.out.println("state list dao     :"+ listState);

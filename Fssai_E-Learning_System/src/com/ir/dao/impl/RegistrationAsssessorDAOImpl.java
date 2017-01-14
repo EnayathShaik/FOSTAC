@@ -293,7 +293,7 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 	public List<State> loadState() {
 		System.out.println("Page Load DAOImpl process start in state");
 		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("from State");
+		Query query = session.createQuery("from State  where status = 'A'");
 		List listState = query.list();
 		session.close();
 		System.out.println("state list dao     :"+ listState);
@@ -377,7 +377,7 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 		personalInformationAssessor.setReleventExpOfAuditInYear(registrationFormAssessor.getReleventExpOfAuditInYear());
 	    personalInformationAssessor.setReleventExpOfAuditInMonth(registrationFormAssessor.getReleventExpOfAuditInMonth());
 		personalInformationAssessor.setHowManyAssessmentConductInAMonth(registrationFormAssessor.getHowManyAssessmentConductInAMonth());
-		
+		personalInformationAssessor.setGender(registrationFormAssessor.getGender());
 		//personalInformationAssessor.setMiddleName(registrationFormAssessor.getMiddleName());
 		System.out.println("reachec down");
 		session.update(personalInformationAssessor);

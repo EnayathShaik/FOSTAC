@@ -3,6 +3,13 @@
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
 function OnStart(){
+	var profileId =
+		<%=(Integer) session.getAttribute("profileId")%>
+	if(profileId == 7){
+		var inputSubmit = document.getElementById("CreateTraineeCalender"); 
+		inputSubmit.style.display = "none";
+		
+	}
 	getTrainingCalender('ALL');
 }
 window.onload = OnStart;
@@ -227,10 +234,11 @@ function getTrainingCalender(indicator){
                                             </div>
                                             
                                         </div>
-<input type="submit"  class="form-control login-btn" value="Create" style="width: 200px;
+                                        
+<input type="submit"  class="form-control login-btn" id="CreateTraineeCalender" value="Create" style="width: 200px;
     margin-left: 13px;" />  
                                           
-<a href="#" onclick="getTrainingCalender('SELECTED');" class="btn btn-default pull-right show-details-vacancy collapsed" style="margin-top: -36px;
+<a href="#" onclick="getTrainingCalender('SELECTED');" class="btn btn-default pull-right show-details-vacancy collapsed" style="margin-top: 0px;
     margin-right: 15px; background:#ef580d" data-toggle="collapse" data-target="#show-result"
      aria-expanded="false">Show Calendar</a>
                                        

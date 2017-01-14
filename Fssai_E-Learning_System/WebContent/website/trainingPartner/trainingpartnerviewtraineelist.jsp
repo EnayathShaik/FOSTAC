@@ -31,8 +31,6 @@ function showDetails(){
 	var trainingTime =  $("#traineeTime").val();
 	
  	var total = courseType+"&"+courseName+"&"+trainingDate+"&"+trainingTime;
-	
-	/* alert("total "+total); */
 	$(".displayNone").css("display","block");
 	var result="";
 	$.ajax({

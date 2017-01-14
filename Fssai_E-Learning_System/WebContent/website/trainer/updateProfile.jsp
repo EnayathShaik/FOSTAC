@@ -660,8 +660,8 @@ function getCityUpdate(dd , cc)
                                                         <label class="radio-inline">
                                                             <input type="radio" name="optradio"> No </label> -->
                                                             <label class="radio-inline">
-<cf:radiobutton path="gender" value="M" checked="true" />Male&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- <cf:radiobutton path="gender" value="F" />Female
+<cf:radiobutton path="gender" id="male" value="M" />Male&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <cf:radiobutton path="gender" id="female" value="F" />Female
 </label>
                                                     </div>
                                                     
@@ -1179,3 +1179,11 @@ function getCityUpdate(dd , cc)
     </cf:form>
     <!-- scripts -->
    
+<script type="text/javascript">
+var gender = '${loginUr.gender}';
+if(gender == 'M'){
+	document.getElementById('male').checked = true;
+}else if(gender = 'F'){
+	document.getElementById('female').checked = true;
+}
+</script>

@@ -93,16 +93,14 @@ public class TraineeServiceImpl implements TraineeService {
 		return contactTraineeSave;
 	}
 @Override
-	public long advanceTraineeSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid,
-			int personalinformationtraineeid) {
-		long advanceEnroll= traineeDAO.advanceTraineeSave(courseEnrolledUserForm , loginid , personalinformationtraineeid);
+	public long advanceTraineeSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid, int tableID,Integer profileID) {
+		long advanceEnroll= traineeDAO.advanceTraineeSave(courseEnrolledUserForm , loginid , tableID, profileID);
 		return advanceEnroll;
 	}
 
 	@Override
-	public long specialTrainee(CourseEnrolledUserForm courseEnrolledUserForm, int loginid,
-			int personalinformationtraineeid) {
-		long specialEnroll= traineeDAO.specialTraineeSave(courseEnrolledUserForm , loginid , personalinformationtraineeid);
+	public long specialTrainee(CourseEnrolledUserForm courseEnrolledUserForm, int loginid,int tableID, Integer profileId) {
+		long specialEnroll= traineeDAO.specialTraineeSave(courseEnrolledUserForm , loginid , tableID,profileId);
 		return specialEnroll;
 	}
 	

@@ -72,7 +72,7 @@ public class GetStateUpdate extends HttpServlet {
 				}
 				ResultSet rs = null;
 				PreparedStatement stmt = null;
-				 String sql="select * from state" ;
+				 String sql="select * from state  where status = 'A'" ;
 				 List<State> list = new ArrayList<>();
 				try {
 					stmt = conn.prepareStatement(sql);

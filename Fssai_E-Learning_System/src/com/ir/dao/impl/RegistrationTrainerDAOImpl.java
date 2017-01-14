@@ -308,7 +308,7 @@ private Title title;
 		personalinformationtrainer.setTrainingSessionWishToConduct(registrationFormTrainer.getTrainingSessionWishToConduct());
 		personalinformationtrainer.setAssociatedWithAnyTrainingPartner(registrationFormTrainer.getAssociatedWithAnyTrainingPartner());
 		personalinformationtrainer.setTrainingSessionWishToConduct(registrationFormTrainer.getTrainingSessionWishToConduct());
-		
+		personalinformationtrainer.setGender(registrationFormTrainer.getGender());
 		personalinformationtrainer.setExpInFoodSafefyTimeYear(registrationFormTrainer.getExpInFoodSafefyTimeYear());
 		s.update(personalinformationtrainer);
 		s.beginTransaction().commit();

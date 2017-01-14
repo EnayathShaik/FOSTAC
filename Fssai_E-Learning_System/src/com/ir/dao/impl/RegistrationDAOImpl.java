@@ -222,6 +222,7 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 		personalInformationTrainee.setLastName(registrationFormTrainee.getLastName().trim());
 		personalInformationTrainee.setMiddleName(registrationFormTrainee.getMiddleName().trim());
 		personalInformationTrainee.setDob(registrationFormTrainee.getDob().trim());
+		System.out.println("Gender == "+registrationFormTrainee.getGender());
 		personalInformationTrainee.setGender(registrationFormTrainee.getGender().trim());
 		personalInformationTrainee.setEmail(registrationFormTrainee.getEmail().trim());
 		personalInformationTrainee.setMobile(registrationFormTrainee.getMobile().trim());		

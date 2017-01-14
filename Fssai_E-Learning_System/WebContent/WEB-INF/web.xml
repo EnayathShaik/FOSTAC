@@ -591,6 +591,24 @@
   </servlet-mapping>
   <servlet>
   
+  <servlet-name>traineeCenterPaymentConfirmation</servlet-name> 
+  <servlet-class>com.ir.servlet.TraineeCenterPaymentConfirmation</servlet-class> 
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>traineeCenterPaymentConfirmation</servlet-name> 
+  <url-pattern>/traineeCenterPaymentConfirmation.jspp</url-pattern> 
+  </servlet-mapping>
+  <servlet>
+  
+   <servlet-name>traineeCenterViewFeedBack</servlet-name> 
+  <servlet-class>com.ir.servlet.TraineeCenterViewFeedBackList</servlet-class> 
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>traineeCenterViewFeedBack</servlet-name> 
+  <url-pattern>/traineeCenterViewFeedBack.jspp</url-pattern> 
+  </servlet-mapping>
+  <servlet>
+  
    <servlet-name>traineeAssessmentCalender</servlet-name> 
   <servlet-class>com.ir.servlet.TraineeCenterAssessmentCalender</servlet-class> 
   </servlet>

@@ -3,6 +3,7 @@ package com.ir.model;
 import java.sql.Date;
 import java.sql.Time;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,6 +27,12 @@ public class TrainingCalendar {
 	private String status;
 	private String trainingType;
 	private int personalinformationassessorid;
+	private String assessmentDate;
+	private String assessmentTime;
+	@Column(columnDefinition="int default 0")
+	private int assessor;
+	@Column(columnDefinition="int default 0")
+	private int assessorAgency;
 	
 	
 	public int getTrainingCalendarId() {
@@ -101,6 +108,32 @@ public class TrainingCalendar {
 	public void setPersonalinformationassessorid(int personalinformationassessorid) {
 		this.personalinformationassessorid = personalinformationassessorid;
 	}
+	public String getAssessmentDate() {
+		return assessmentDate;
+	}
+	public void setAssessmentDate(String assessmentDate) {
+		this.assessmentDate = assessmentDate;
+	}
+	public String getAssessmentTime() {
+		return assessmentTime;
+	}
+	public void setAssessmentTime(String assessmentTime) {
+		this.assessmentTime = assessmentTime;
+	}
+	public int getAssessor() {
+		return assessor;
+	}
+	public void setAssessor(int assessor) {
+		this.assessor = assessor;
+	}
+	public int getAssessorAgency() {
+		return assessorAgency;
+	}
+	public void setAssessorAgency(int assessorAgency) {
+		this.assessorAgency = assessorAgency;
+	}
+	
+	
 	
 	
 }

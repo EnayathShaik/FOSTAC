@@ -45,6 +45,7 @@ function applyForVacancy(index){
 	var vacancyObj=${postVacancyTrainingCenter}[index];
 	var buttonID=window.event.currentTarget.id;
 	var data=JSON.stringify({
+		postvacancyID:vacancyObj.id,
 		courseType:vacancyObj.courseType.CourseTypeId,
 		courseName:vacancyObj.courseName.coursenameid,
 		noOfVacancy:vacancyObj.noOfVacancy,
@@ -149,6 +150,7 @@ function applyForVacancy(index){
                       <table class="table table-bordered table-responsive table-striped table-hover">
                         <thead>
                           <tr class="background-open-vacancies">
+                            <th width="8%">S.No</th>
                             <th width="15%">Course Type</th>
                             <th width="14%">Course Name</th>
                             <th width="29%">Training Date &amp; Time</th>

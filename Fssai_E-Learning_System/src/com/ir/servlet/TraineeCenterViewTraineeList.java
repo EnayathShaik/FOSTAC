@@ -100,16 +100,12 @@ public class TraineeCenterViewTraineeList extends HttpServlet {
 		String newList=null;
 		System.out.println("district 0");
 		String sql ="";
-		//sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,A.trainername from trainingcalendar A inner join coursetype B on(A.coursetype=B.coursetypeid)inner join coursename C on(A.coursename=C.coursenameid)";
-		sql = "select  E.coursetype,D.coursename,B.trainingdate,B.trainingtime,C.firstname || ' '|| C.middlename ||' '|| C.lastname as participantName,D.modeoftraining,A.paymentstatus,A.courseenrolleduserid from courseenrolleduser  A"
-				+ " inner join trainingcalendar B on(A.trainingcalendarid= B.trainingcalendarid)"
-				+ " inner join personalinformationtrainingpartner C on (C.personalinformationtrainingpartnerid = B.trainingcenter)"
-				+ " inner join coursename D on (D.coursenameid = B.coursename)"
-				+ " inner join coursetype E on (E.coursetypeid = B.coursetype)"
-				+ " inner join logindetails F on (F.ID = C.logindetails)"
-				+" WHERE A.status = 'N' and  cast(E.coursetypeid  as varchar(10)) like '"+courseType+"%' and cast(D.COURSENAMEID as varchar(10))  like '"+courseName+"%'  and  cast(B.TRAININGDATE as varchar(10)) like '"+trainingDate+"%' and  cast(B.TRAININGTIME as varchar(10)) like '"+trainingtime+"%'  and cast(B.trainername as varchar(10)) like '"+trainer+"%'   AND F.loginid ='"+loginId+"' ";
+		sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,pitr.firstname || ' '|| pitr.middlename ||' '|| pitr.lastname as participantName " +
+				"from trainingcalendar A " +
+				" inner join coursetype B on(A.coursetype=B.coursetypeid)" +
+				" inner join coursename C on(A.coursename=C.coursenameid)"+
+				" inner join personalinformationtrainer as pitr on CAST(CAST (A.trainername AS NUMERIC(19,4)) AS INT) = pitr.personalinformationtrainerid ";
 		
-	
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
 		System.out.println(list.size());

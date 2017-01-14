@@ -57,7 +57,7 @@ public class LoadDistrict extends HttpServlet {
 			conf.configure("/hibernate.cfg.xml");
 			SessionFactory sf = conf.buildSessionFactory();
 			Session session = sf.openSession();
-			Query query = session.createQuery("from District where stateid ='"+name+"'");
+			Query query = session.createQuery("from District where status='A' and stateid ='"+name+"'");
 			List<District> list = query.list();
 			System.out.println("after list load district");
 			Gson g =new Gson();
