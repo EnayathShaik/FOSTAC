@@ -4,8 +4,8 @@
 <%System.out.print("trainee home page jsp"); %>
 <!--/#footer-->
 <script src="website/js/jquery.js"></script> 
-<script src="website/js/bootstrap.min.js"></script> 
-<script src="website/js/jquery.isotope.min.js"></script> 
+<!-- <script src="website/js/bootstrap.min.js"></script> 
+<script src="website/js/jquery.isotope.min.js"></script>  -->
 <!-- horizontal navigation -->
 
 <script type="text/javascript">
@@ -222,7 +222,7 @@ function applyForVacancy(index){
                 	  
                   for(index=0;index<postVacancyList.length;index++){
                     	
-                    	  if(trainerState == postVacancyList[index].trainingCenter.TrainingPartnerPermanentState && trainerDistrict == postVacancyList[index].trainingCenter.TrainingPartnerPermanentDistrict &&  trainerCity == postVacancyList[index].trainingCenter.TrainingPartnerPermanentCity  );
+                    	  if(trainerState == postVacancyList[index].trainingCenter.TrainingPartnerPermanentState && trainerDistrict == postVacancyList[index].trainingCenter.TrainingPartnerPermanentDistrict &&  trainerCity == postVacancyList[index].trainingCenter.TrainingPartnerPermanentCity  ){
                     	  $('#traineePostVacancy').append('<tr>'+
                     		'<td>'+postVacancyList[index].courseType.CourseType+'</td>'+
                     	    '<td>'+postVacancyList[index].courseName.coursename+'</td>'+
@@ -231,7 +231,7 @@ function applyForVacancy(index){
                     	    '<td> <button id=button'+index+' onclick="applyForVacancy('+index+')" class="btn btn-default">Apply</button></td>'+
                     	  	'</tr>');
                       }
-                    	  
+                   
                       }
                   });
               
