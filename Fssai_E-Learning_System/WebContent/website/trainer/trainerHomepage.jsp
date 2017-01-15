@@ -150,7 +150,6 @@ function applyForVacancy(index){
                       <table class="table table-bordered table-responsive table-striped table-hover">
                         <thead>
                           <tr class="background-open-vacancies">
-                            <th width="8%">S.No</th>
                             <th width="15%">Course Type</th>
                             <th width="14%">Course Name</th>
                             <th width="29%">Training Date &amp; Time</th>
@@ -179,7 +178,6 @@ function applyForVacancy(index){
                       <table class="table table-bordered table-responsive table-striped table-hover">
                         <thead>
                           <tr class="background-open-vacancies">
-                            <th>S.No</th>
                             <th width="15%">Course Type</th>
                             <th>Course Name</th>
                             <th width="29%">Training Date &amp; Time</th>
