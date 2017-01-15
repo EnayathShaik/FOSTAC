@@ -97,15 +97,11 @@ function showDetail(){
 }
 function showDetails() {
 	
-		var courseType =  $("#selCourseType").val();
-		var courseName =  $("#selCourseName").val();
-		var trainingDate = $("#trainingdate").val().replace("-","/").replace("-","/");
-	 /* 
-		alert('courseType == '+courseType);
-		alert('courseName == '+courseName);
-		alert('trainingDate == '+trainingDate);
-	 */	
-		
+		var courseType =  ($("#selCourseType").val() == null ? "" : $("#selCourseType").val());
+		var courseName =  ($("#selCourseName").val() == 0 ? "" :  $("#selCourseName").val());
+		alert(courseName);
+		var trainingDate = $("#trainingdate").val(); //  .replace("-","/").replace("-","/");
+	
 		
 	$(".displayNone").css("display", "block");
 	var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate;
@@ -116,7 +112,6 @@ function showDetails() {
 		async : false,
 		success : function(data) {
 			$('#newTable').show();
-			//var mainData = JSON.stringify(data);
 			var mainData1 = jQuery.parseJSON(data);
 			var j = 1;
 			$('#newTable tr').remove();
@@ -248,7 +243,7 @@ function showDetails() {
                       </legend>
                       
 <div id="dvData">
-                      <table class="table table-bordered table-responsive table-striped table-hover">
+                      <table id ="tableData" class="table table-bordered table-responsive table-striped table-hover">
                         <thead>
                           <tr class="background-open-vacancies">
 						    <th>S.No</th>

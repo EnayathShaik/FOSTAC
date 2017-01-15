@@ -3,6 +3,7 @@ package com.ir.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -54,10 +55,36 @@ public class TrainingPartnerApplicationStatus extends HttpServlet {
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
 		String newList=null;
-		System.out.println("district 0");
+		String name = (request.getQueryString());
+		String [] n1 = name.split("&");	
+		
+		String courseType,courseName , trainingDate ;
+		try{
+			courseType = n1[0].split("=")[1];
+		}
+		catch(Exception e){
+			courseType = "%";	
+		}
+		
+		try{
+			courseName = n1[1].split("=")[1];	
+		}catch(Exception e){
+			courseName = "%";	
+		}
+		
+	
+		try{
+			trainingDate = n1[2].split("=")[1];
+		}
+		catch(Exception e){
+			trainingDate = "%";
+		}
+	
+	
 		String sql ="";
-		sql = "select B.coursetype,C.coursename,A.trainingdate,A.noofvacancy from postvacancytrainingcenter A inner join coursetype B on(A.coursetype=B.coursetypeid) inner join coursename C on(A.coursename=C.coursetypeid)";
-				
+		sql = "select B.coursetype,C.coursename,A.trainingdate,A.noofvacancy from postvacancytrainingcenter A inner join coursetype B on(A.coursetype=B.coursetypeid) inner join coursename C on(A.coursename=C.coursetypeid)" +
+		" where cast(B.coursetypeid as varchar(10)) like  '"+courseType+"%' and  cast( C.coursenameid as varchar(10)) like  '"+courseName+"%'  and  cast(A.trainingdate as varchar(10)) like  '"+trainingDate+"%' ";
+		System.out.println(" sql "+sql);		
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
 		System.out.println(list.size());

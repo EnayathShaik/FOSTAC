@@ -98,17 +98,18 @@ public class TraineeCenterViewTraineeList extends HttpServlet {
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
 		String newList=null;
-		System.out.println("district 0");
 		String sql ="";
 		sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,pitr.firstname || ' '|| pitr.middlename ||' '|| pitr.lastname as participantName " +
 				"from trainingcalendar A " +
 				" inner join coursetype B on(A.coursetype=B.coursetypeid)" +
 				" inner join coursename C on(A.coursename=C.coursenameid)"+
-				" inner join personalinformationtrainer as pitr on CAST(CAST (A.trainername AS NUMERIC(19,4)) AS INT) = pitr.personalinformationtrainerid ";
+				" inner join personalinformationtrainer as pitr on CAST(CAST (A.trainername AS NUMERIC(19,4)) AS INT) = pitr.personalinformationtrainerid "
+				+" where cast( B.coursetype  as varchar(10)) like '"+courseType+"%' and  cast(C.coursename as varchar(10)) like '"+courseName+"%' and  cast(A.trainingdate as varchar(10)) like '"+trainingDate+"%' and cast(A.trainingtime as varchar(10)) like '"+trainingtime+"%' ";
 		
+		System.out.println("sql "+sql);
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
-		System.out.println(list.size());
+		
 		session.close();
 		if(list.size() > 0 || list != null){
 			System.out.println(list);

@@ -127,7 +127,6 @@
 	}
 
 	function showDetails() {
-		
 		$(".displayNone").css("display", "block");
 		var courseType = ($("#selCourseType").val()== 0 ? "" : $("#selCourseType").val());
 		var courseName =  ($("#selCourseName").val() == 0 ? "" : $("#selCourseName").val());
@@ -140,6 +139,7 @@
 		$.ajax({
 			type : 'post',
 			url : 'traineeCenterViewTrainee.jspp?' + total,
+			
 			async : false,
 			success : function(data) {
 				$('#newTable').show();

@@ -49,7 +49,7 @@ function getCourseName(val){
 
 </script>
 <script>
-function showDetails(){
+/* function showDetails(){
 	alert("Fetching details to mark attendance..");
 	
 	$('#tblAssessorCourses tr').remove();
@@ -100,7 +100,7 @@ function showDetails(){
 	});
 return result;	
 }
-
+ */
 function showDetails(){
 	
 	 	var courseType =  $("#selCourseType").val();
@@ -109,15 +109,10 @@ function showDetails(){
 		var assesmentDate = $('#assessmentDate').val();
 		var assesmentTime = $('#assessmentTime').val();
 		
-		/* alert("courseType" + courseType);
-		alert("courseName" + courseName);
-		alert("TrainerNames" + TrainerNames);
-		alert("assesmentDate" + assesmentDate);
-		alert("assesmentTime" + assesmentTime); */
 		
 		$(".displayNone").css("display","block");
-		//var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy;
-		var total = "";
+		var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy;
+		//var total = "";
 		var result="";
 			$.ajax({
 			type: 'post',

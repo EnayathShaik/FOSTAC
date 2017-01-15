@@ -23,7 +23,7 @@
 	}
 </script>
 <script>
-	function showDetails() {
+/* 	function showDetails() {
 		alert("Fetching details to mark attendance..");
 
 		$('#tblAssessorCourses tr').remove();
@@ -88,29 +88,23 @@
 					}
 				});
 		return result;
-	}
+	} */
 	function showDetails() {
 		
 		
-		 	var courseType =  $("#selCourseType").val();
-		 	var trainername =  $('#selTrainerName').val();
-			var courseName =  $("#selCourseName").val();
-			/* alert("courseType "+courseType); 
-			alert("trainername "+trainername);
-			alert("courseName "+courseName); */
-			
-			
+		 	var courseType =  ($("#selCourseType").val() == null ? "" : $("#selCourseType").val());
+		 	var trainername =  ($('#selTrainerName').val() == 0 ? "" : $('#selTrainerName').val() );
+			var courseName =  ($("#selCourseName").val() == 0 ? "" : $("#selCourseName").val()) ;
+			var result = "";
 		$(".displayNone").css("display", "block");
-		//var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy;
-		var total = "";
-		var result = "";
+		var total = "courseType="+courseType+"&courseName="+courseName+"&trainerName="+trainername;
+		alert("total "+total);
 		$.ajax({
 			type : 'post',
 			url : 'trainingpartnermanagetrainer.jspp?' + total,
 			async : false,
 			success : function(data) {
 				$('#newTable').show();
-				//var mainData = JSON.stringify(data);
 				var mainData1 = jQuery.parseJSON(data);
 				var j = 1;
 				$('#newTable tr').remove();
@@ -235,10 +229,6 @@
 														<script>
 															var selectTrainerOptions = "";
 															for ( var i = 0; i < trainerList.length; i++) {
-																console
-																		.log(trainerList[i].CourseTypeId
-																				+ " -- "
-																				+ trainerList[i].CourseType);
 																selectTrainerOptions += "<option value='0'>Please Select</option>"
 																selectTrainerOptions += "<option value="+trainerList[i].id+">"
 																		+ trainerList[i].value
@@ -270,10 +260,10 @@
 													<button
 														class="btn login-btn pull-right show-details-vacancy collapsed"
 														data-toggle="collapse" data-target="#show-result"
-														aria-expanded="false" onclick="showDetails();return false">Show
+														aria-expanded="false" style=" margin-right: 131px;" onclick="showDetails();">Show
 														Details</button>
 												</div>
-												<input type="button" id="btnExport"  style="margin-top:20px; margin-right: 20px;"  class="btn login-btn pull-right" value="Download" />
+												<input type="button" id="btnExport"  style="margin-top:-34px; margin-right: 15px;"  class="btn login-btn pull-right" value="Download" />
 
 												<div class="col-md-3 hidden-xs"></div>
 											</div>
