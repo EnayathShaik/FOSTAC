@@ -54,22 +54,16 @@ function confirmStatus(trainingid,courseid){
 <script>
 
 function showDetails(){
-		var courseType =  $("#selCourseType").val();
-		var courseName =  $("#selCourseName").val();
-		var trainingDate = $("#traningDate").val();
-		var traningTime =  $("#traningTime").val();
-		var status = $('#selTraineeStatus').val();
-	
-		//alert("courseType "+courseType);
-		/* alert("courseName "+courseName);
-		alert("trainingDate "+trainingDate);
-		alert("traningTime "+traningTime);
-		alert("status "+status);  */
+		var courseType =  ($("#selCourseType").val() == null ? "" : $("#selCourseType").val() );
+		var courseName =  ($("#selCourseName").val() == 0 ? "" : $("#selCourseType").val() ) ;
+		var trainingDate = ($("#traningDate").val() == 0 ?  "" : $("#traningDate").val() );
+		var traningTime =  ($("#traningTime").val() == 0 ? "" : $("#traningTime").val()) ;
+		var status = 		($('#selTraineeStatus').val() ==0 ? "" :$('#selTraineeStatus').val()) ;
+
 		
 	$(".displayNone").css("display","block");
-	var	total = courseType+"&"+courseName+"&"+trainingDate+"&"+traningTime+"&"+status;
+	var total = "courseType="+courseType+"&courseName="+courseName+"&trainingdate="+trainingDate+"&trainingTime="+traningTime+"&status="+status;
 	console.log("total "+total);
-	//var total = "";
 	var result="";
 	$.ajax({
 		type: 'post',

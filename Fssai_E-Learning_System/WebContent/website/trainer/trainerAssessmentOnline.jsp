@@ -24,7 +24,7 @@
         <div id="wrapper">
 
         <!-- Sidebar -->
-      <%@include file="leftMenuTrainee.jspf"%>
+      
         <!-- /#sidebar-wrapper --> 
         <!-- Page Content -->
         <div id="page-content-wrapper">

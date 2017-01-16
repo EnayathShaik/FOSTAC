@@ -3,15 +3,18 @@ package com.ir.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+
 import com.google.gson.Gson;
 import com.ir.model.PostVacancyTrainingCenterBean;
 
@@ -37,38 +40,39 @@ public class TraineeCenterViewFeedBackList extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String name = (request.getQueryString());
-        String [] n1 = name.split("&");
-        System.out.println("Append Data = "+name);
         String courseType,courseName;
-        StringBuffer whereCondition = new StringBuffer();
-        whereCondition.append(" WHERE 1=1");
-        for(int i=0;i<n1.length;i++){
-        	if(n1[i] != null && n1[i].toUpperCase().equals("NULL")){
-        		if(i==0){
-            		whereCondition.append(" AND D.coursetypeid="+n1[i]);
-            	}else if(i==1){
-            		whereCondition.append(" AND C.coursenameid="+n1[i]);
-            	}
-        	}
-        }
+    	String name = (request.getQueryString());
+		String [] n1 = name.split("&");
+        System.out.println("Append Data = "+name);
+		try{
+			courseType = n1[0].split("=")[1];
+		}
+		catch(Exception e){
+			courseType = "%";	
+		}
+		
+		try{
+			courseName = n1[1].split("=")[1];	
+		}catch(Exception e){
+			courseName = "%";	
+		}
+	
      	Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
 		String newList=null;
-		System.out.println("district 0");
+		
 			String sql ="";
 			sql = "select E.firstname || ' '|| E.middlename ||' '|| E.lastname, D.coursetype,C.coursename, B.feedback,A.feedbackrating  from feedbackdetail A" +
 					" inner join feedbackmaster B on(CAST(CAST (A.feedbackid AS NUMERIC(19,4)) AS INT) = B.feedbacktypeid)" +
 					" inner join coursename C on(CAST(CAST (A.courseid AS NUMERIC(19,4)) AS INT)=C.coursenameid) "+
 					" inner join coursetype D on(C.coursetypeid=D.coursetypeid) "+
-					" inner join personalinformationtrainee E on(CAST(CAST (A.userid AS NUMERIC(19,4)) AS INT)=E.logindetails)";
-			sql = sql+whereCondition.toString();
-					
+					" inner join personalinformationtrainee E on(CAST(CAST (A.userid AS NUMERIC(19,4)) AS INT)=E.logindetails)"
+					+" WHERE cast( D.coursetypeid  as varchar(10)) like '"+courseType+"%' and cast(C.coursenameid as varchar(10))  like '"+courseName+"%' ";
 					
 			Query query = session.createSQLQuery(sql);
-			
+			System.out.println(query);
 			List list = query.list();
 			System.out.println(list.size());
 			

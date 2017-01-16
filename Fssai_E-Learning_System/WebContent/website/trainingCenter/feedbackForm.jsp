@@ -55,21 +55,13 @@ function loadTrainingCenter(){
 <script>
 
 function showDetails(){
-	var courseType =  $("#selCourseType").val();
-	var courseName =  $("#selCourseName").val();
-	/* var trainingDate = $("#traningDate").val();
-	var traningTime =  $("#traningTime").val();
-	var status = $('#selTraineeStatus').val(); */
-
-	//alert("courseType "+courseType);
-	/* alert("courseName "+courseName);
-	alert("trainingDate "+trainingDate);
-	alert("traningTime "+traningTime);
-	alert("status "+status);  */
+	
+	var courseType =  ($("#selCourseType").val() == null ? "" : $("#selCourseType").val());
+ 	var courseName =  ($('#selCourseName').val() == 0 ? "" : $('#selCourseName').val() );
 	
 $(".displayNone").css("display","block");
 //var	total = courseType+"&"+courseName+"&"+trainingDate+"&"+traningTime+"&"+status;
-var	total = courseType+"&"+courseName;
+var	total = "courseType="+courseType+"&courseName="+courseName;
 console.log("total "+total);
 //var total = "";
 var result="";
@@ -207,7 +199,7 @@ $.ajax({
                                                         <select class="form-control" name="TrainingCentreName" id = "personalInformationTrainingPartnerId"> </select>
 														
                                                     </div> -->
-                                                     <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="return showDetails();">Show Details</button>
+                                                     <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails();return false">Show Details</button>
                                                 </div>
                                                
                                             </div>

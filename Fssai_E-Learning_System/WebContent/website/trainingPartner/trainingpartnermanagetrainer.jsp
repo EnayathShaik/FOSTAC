@@ -95,6 +95,7 @@
 		 	var courseType =  ($("#selCourseType").val() == null ? "" : $("#selCourseType").val());
 		 	var trainername =  ($('#selTrainerName').val() == 0 ? "" : $('#selTrainerName').val() );
 			var courseName =  ($("#selCourseName").val() == 0 ? "" : $("#selCourseName").val()) ;
+			alert(courseName);
 			var result = "";
 		$(".displayNone").css("display", "block");
 		var total = "courseType="+courseType+"&courseName="+courseName+"&trainerName="+trainername;
@@ -257,11 +258,7 @@
 															id="selCourseName">
 														</select>
 													</div>
-													<button
-														class="btn login-btn pull-right show-details-vacancy collapsed"
-														data-toggle="collapse" data-target="#show-result"
-														aria-expanded="false" style=" margin-right: 131px;" onclick="showDetails();">Show
-														Details</button>
+													 <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails();return false">Show Details</button>
 												</div>
 												<input type="button" id="btnExport"  style="margin-top:-34px; margin-right: 15px;"  class="btn login-btn pull-right" value="Download" />
 

@@ -103,16 +103,15 @@ return result;
  */
 function showDetails(){
 	
-	 	var courseType =  $("#selCourseType").val();
-		var courseName =  $("#selCourseName").val();
-		var TrainerNames =  $("#selTrainerNames").val(); 
+	 	var courseType =  ($("#selCourseType").val()== null? "" : $("#selCourseType").val());
+		var courseName =  ($("#selCourseName").val()== 0 ? "" : $("#selCourseName").val()) ;
+		var TrainerNames =  ($("#selTrainerNames").val()== 0 ? "": $("#selTrainerNames").val() ); 
 		var assesmentDate = $('#assessmentDate').val();
 		var assesmentTime = $('#assessmentTime').val();
 		
 		
 		$(".displayNone").css("display","block");
-		var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy;
-		//var total = "";
+		var total = "courseType="+courseType+"&courseName="+courseName+"&assDate="+assesmentDate+"&assTime="+assesmentTime+"&trainerName="+TrainerNames;
 		var result="";
 			$.ajax({
 			type: 'post',

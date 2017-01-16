@@ -3,6 +3,7 @@ package com.ir.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -47,7 +48,42 @@ public class TraineeCenterAssessmentCalender extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+		String name =  request.getQueryString();
+    	String [] n1 = name.split("&");
+		System.out.println("n1 "+n1);
+		System.out.println(" "+n1[0].split("=")[1]);
+		String courseType,courseName , trainerName, assDate , assTime ;
+		try{
+			courseType = n1[0].split("=")[1];
+		}
+		catch(Exception e){
+			courseType = "%";	
+		}
 		
+		try{
+			courseName = n1[1].split("=")[1];	
+		}catch(Exception e){
+			courseName = "%";	
+		}
+		
+		try{
+			trainerName = n1[2].split("=")[1];	
+		}catch(Exception e){
+			trainerName = "%";	
+		}
+		
+		
+		try{
+			assDate = n1[3].split("=")[1];	
+		}catch(Exception e){
+			assDate = "%";	
+		}
+		
+		try{
+			assTime = n1[4].split("=")[1];	
+		}catch(Exception e){
+			assTime = "%";	
+		}
 		
 		Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
@@ -59,8 +95,9 @@ public class TraineeCenterAssessmentCalender extends HttpServlet {
 		sql = "select B.coursetype,C.coursename,A.trainername,A.assessmentdate,A.assessmenttime,D.firstname || D.middlename || D.lastname,A.trainingcalendarid  from trainingcalendar A  " +
 				" inner join coursetype B on(A.coursetype=B.coursetypeid)  " +
 				"inner join coursename C on(A.coursename=C.coursenameid)"+
-				"inner join personalinformationtrainer D on(CAST(CAST (A.trainername AS NUMERIC(19,4)) AS INT)=D.personalinformationtrainerid)";
-				
+				"inner join personalinformationtrainer D on(CAST(CAST (A.trainername AS NUMERIC(19,4)) AS INT)=D.personalinformationtrainerid)" +
+				" where  cast(B.coursetypeid as varchar(10)) like '"+courseType+"%'  and cast(C.coursenameid as varchar(10)) like  '"+courseName+"%' and (D.firstname || ' '|| D.middlename ||' '|| D.lastname)  like  '"+trainerName+"%'  and  cast(A.assessmentdate as varchar(10)) like  '"+assDate+"%'  and cast(assessmenttime as varchar(10)) like '"+assTime+"%'  " ;
+		System.out.println("sql "+sql);
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
 		System.out.println(list.size());

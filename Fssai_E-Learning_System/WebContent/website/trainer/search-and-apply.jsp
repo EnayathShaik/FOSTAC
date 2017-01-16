@@ -1,4 +1,5 @@
-  
+
+  <cf:form action="basicSave.fssai" name="myForm" method="POST" commandName="basicTrainee" >
     <!-- horizontal navigation -->
     <section>
       <%@include file="../roles/top-menu.jsp"%>
@@ -27,6 +28,7 @@
               <div class="container-fluid">
                 <fieldset>
                   <legend>
+                 <%--  System.out.println("bean "+${basicCourseList}); --%>
                   <h3>Search and Apply Vacancies</h3>
                   </legend>
                   <div class="row"> 
@@ -47,11 +49,10 @@
                             </div>
                             <div class="form-group">
                               <label>Course Name:</label>
-                              <select class="form-control">
-                                <option>GHP-GMP* Certification Course</option>
-                                <option>GHP-GMP* Certification Course (GHP-GMP Advance)</option>
-                                <option>HACCP* Course for Milk Industry</option>
-                              </select>
+                     		<cf:select path="courseName" class="form-control" onchange="getCourseTrainingType();">
+							<cf:option value="0" label="Select Course Name" />
+							<cf:options items="${courseNameList}" itemValue="coursenameid" itemLabel="coursename" />
+							</cf:select>
                             </div>
                             <div class="form-group">
                               <label>Training Partner:</label>
@@ -155,6 +156,6 @@
           </div>
         </div>
       </div>
-    </section>
+    </section></cf:form>
 
     <!-- scripts --> 

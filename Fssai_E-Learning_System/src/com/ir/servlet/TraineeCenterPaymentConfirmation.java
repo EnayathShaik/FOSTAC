@@ -55,7 +55,7 @@ public class TraineeCenterPaymentConfirmation extends HttpServlet {
   
         
         
-        String courseType,courseName , trainingDate , trainingtime,trainer ;
+        String courseType,courseName , trainingDate , trainingtime,status ;
 		try{
 			courseType = n1[0].split("=")[1];
 		}
@@ -85,10 +85,10 @@ public class TraineeCenterPaymentConfirmation extends HttpServlet {
 		}
         
 		try{
-			trainer = n1[4].split("=")[1];
+			status = n1[4].split("=")[1];
 		}
 		catch(Exception e){
-			trainer = "%";
+			status = "%";
 		}
     
 		
@@ -111,10 +111,10 @@ public class TraineeCenterPaymentConfirmation extends HttpServlet {
 				+ " inner join coursename D on (D.coursenameid = B.coursename)"
 				+ " inner join coursetype E on (E.coursetypeid = B.coursetype)"
 				+ " inner join logindetails F on (F.ID = C.logindetails)"
-				+" WHERE A.status = 'N' and  cast(E.coursetypeid  as varchar(10)) like '"+courseType+"%' and cast(D.COURSENAMEID as varchar(10))  like '"+courseName+"%'  and  cast(B.TRAININGDATE as varchar(10)) like '"+trainingDate+"%' and  cast(B.TRAININGTIME as varchar(10)) like '"+trainingtime+"%'  and cast(B.trainername as varchar(10)) like '"+trainer+"%' "; 
+				+" WHERE A.status = 'N' and  cast(E.coursetypeid  as varchar(10)) like '"+courseType+"%' and cast(D.COURSENAMEID as varchar(10))  like '"+courseName+"%'  and  cast(B.TRAININGDATE as varchar(10)) like '"+trainingDate+"%' and  cast(B.TRAININGTIME as varchar(10)) like '"+trainingtime+"%'  and cast(A.paymentstatus as varchar(10)) like '"+status+"%' "; 
 					//	"  AND F.loginid ='"+loginId+"' ";
 		
-	
+	System.out.println(sql);
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
 		System.out.println(list.size());
