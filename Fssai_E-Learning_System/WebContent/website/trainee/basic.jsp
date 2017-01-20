@@ -44,24 +44,19 @@ function getDistrict(val)
 }
 
 function getCourseTrainingType(){
-	getCourseTrainingType
-	var courseName =  $("#courseName").val();
+	
+	var data =  $("#courseName").val();
 	$.ajax({
 		type: 'post',
-	    data:{
-	    	courseNameId: courseName
-	    },
-	    url: 'getCourseTrainingType.fssai',
+	    url: 'getCourseTrainingMode.jspp?'+data,
 	    success: function (response) {      
 	    	console.log("Success respose" + response);
-	    	if(response != "Both" && response != ""){
-	    		$("#modeOfTraining").val(response);
-	    	    $("#modeOfTraining").prop('disabled', 'disabled');
-    		}
-	    	else {
-	    		$("#modeOfTraining").val("0");
-	    	    $("#modeOfTraining").removeAttr("disabled");
-    	    }
+	    if(response == "Online"){
+	    	$("#modeOfTraining").val("Online");
+	    }else{
+	    	$("#modeOfTraining").val("Classroom");
+	    }
+	   
 		},
 		failure: function (response){
 			console.log("Failure response:" + response);
@@ -188,7 +183,7 @@ function gettid(value){
                       <div class="col-md-6 col-xs-12">
                         <div class="form-group">
                           <label>Mode of Training</label>
-<cf:select path="modeOfTraining" class="form-control">
+<cf:select path="modeOfTraining" id="modeOfTraining" name="modeOfTraining" class="form-control">
 <cf:option value="0" label="Select Mode of Training"></cf:option>
 <cf:option value="Online" label="Online" />
 <cf:option value="Classroom" label="Classroom" />

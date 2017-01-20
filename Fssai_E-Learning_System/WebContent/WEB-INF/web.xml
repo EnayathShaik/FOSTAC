@@ -722,4 +722,14 @@
     <url-pattern>/getFeedbackDetails.jspp</url-pattern>
   </servlet-mapping>
   
+  
+    <servlet>
+    <servlet-name>getCourseTrainingMode</servlet-name>
+    <servlet-class>com.ir.servlet.getCourseTrainingMode</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getCourseTrainingMode</servlet-name>
+    <url-pattern>/getCourseTrainingMode.jspp</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

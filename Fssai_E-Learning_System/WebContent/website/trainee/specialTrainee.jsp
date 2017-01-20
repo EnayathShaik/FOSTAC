@@ -75,6 +75,31 @@ function getCourseDetails(){
 			});
 	return result; 
 }
+
+
+
+function getCourseTrainingType(){
+	
+	var data =  $("#courseName").val();
+	console.log("data "+data);
+	$.ajax({
+		type: 'post',
+	    url: 'getCourseTrainingMode.jspp?'+data,
+	    success: function (response) {      
+	    	console.log("Success respose" + response);
+	    if(response == "Online"){
+	    	$("#modeOfTraining").val("Online");
+	    }else{
+	    	$("#modeOfTraining").val("Classroom");
+	    }
+	   
+		},
+		failure: function (response){
+			console.log("Failure response:" + response);
+		}
+	});
+}
+
 </script>
 <script>
 function gettid(value){
@@ -127,7 +152,7 @@ function gettid(value){
                       <div class="col-md-6 col-xs-12">
                         <div class="form-group">
                           <label>Course Name</label> &nbsp;&nbsp;<label> ${created}</label>
-								<cf:select path="courseName" class="form-control">
+								<cf:select path="courseName" class="form-control" onchange="getCourseTrainingType();">
 								<cf:option value="0" label="Select Course" />
 								<cf:options items="${specialCourseNameList}" itemValue="coursenameid" itemLabel="coursename" />
 								</cf:select>
