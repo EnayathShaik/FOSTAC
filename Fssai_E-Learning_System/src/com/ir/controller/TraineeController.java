@@ -2,9 +2,12 @@ package com.ir.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -43,6 +49,7 @@ import com.ir.model.Utility;
 import com.ir.service.AssessmentService;
 import com.ir.service.PageLoadService;
 import com.ir.service.TraineeService;
+import com.ir.util.JavaMail;
 import com.ir.util.Profiles;
 
 @Controller
@@ -100,13 +107,84 @@ public class TraineeController {
 		return "basic";
 	}
 	
+	@RequestMapping(value="/uploadImage" , method=RequestMethod.GET)
+	public String uploadImage(@ModelAttribute("uploadImage") CourseEnrolledUserForm courseEnrolledUserForm ,
+		 @ModelAttribute("loginUser") PersonalInformationTrainee pit ){
+		
+		
+		
+		return "upload-image";
+	}
+	
+	 @RequestMapping(value="savefile",method=RequestMethod.POST)  
+	    public String saveimage( @RequestParam CommonsMultipartFile file,  
+	           HttpSession session) throws Exception{  
+		 	String UPLOAD_DIRECTORY = "/Trainee";
+		 	String userName = "";
+			int loginId = 0;
+			try{
+				userName = (String) session.getAttribute("userName");
+				//String ss = session.getServletContext().getContextPath();
+				String ss = session.getServletContext().getRealPath("/WEB-INF/");
+				
+				System.out.println("**********************"+ss);
+				File dir = new File(ss + File.separator + "traineeImage");
+				if (!dir.exists())
+					dir.mkdirs();
+			 	  
+		    byte[] bytes = file.getBytes();  
+		    BufferedOutputStream stream =new BufferedOutputStream(new FileOutputStream(  
+		         new File(ss + File.separator + userName+".png")));  
+		    stream.write(bytes);  
+		    stream.flush();  
+		    stream.close();  
+			}catch(Exception e){
+				e.printStackTrace();
+				System.out.println("Exception while course details save : "+ e.getMessage());
+			}
+			
+			
+			
+			
+	           
+	    return "upload-image";  
+	    }  
+	
+	@RequestMapping(value="/saveImage" , method=RequestMethod.POST)
+	public String Savemage(@RequestParam("name") String name,
+			@RequestParam("file") MultipartFile file){
+		if (!file.isEmpty()) {
+			try {
+				byte[] bytes = file.getBytes();
 
+				// Creating the directory to store file
+				String rootPath = System.getProperty("catalina.home");
+				File dir = new File(rootPath + File.separator + "tmpFiles");
+				if (!dir.exists())
+					dir.mkdirs();
 
+				// Create the file on server
+				File serverFile = new File(dir.getAbsolutePath()
+						+ File.separator + name);
+				BufferedOutputStream stream = new BufferedOutputStream(
+						new FileOutputStream(serverFile));
+				stream.write(bytes);
+				stream.close();
+				System.out.println("Server File Location="
+						+ serverFile.getAbsolutePath());
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return "upload-image";
+	}
 	@RequestMapping(value="/courseTraining" , method=RequestMethod.GET)
 	public String courseTraining(@RequestParam(value = "courseTypeId", required = true)  String courseTypeId , Model model, HttpSession session){
-		int loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
-		if(loginId>0){
-			CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(Integer.parseInt(courseTypeId));
+		Integer userId=Integer.parseInt(session.getAttribute("userId").toString());
+		if(userId>0){
+			CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
+			//Get Module
 			model.addAttribute("courseTrainee", courseTrainee);
 		}
 		System.out.println("Course training  ======********************** ");
@@ -309,9 +387,13 @@ public class TraineeController {
 	@RequestMapping(value="/generateAdmitCardtrainee" , method=RequestMethod.GET)
 	public String generateAdmitCardtrainee(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm ,BindingResult bindingResult, HttpSession session , Model model ){
 		try{
-			int loginId = (int) session.getAttribute("loginIdUnique");
-			CourseName courseName=traineeService.getCourseName(loginId);
-			model.addAttribute("courseName", courseName);
+			JavaMail javaMail = new JavaMail();
+			javaMail.mailProperty("Hello", "manindramishra.seven@gmail.com", "10002");
+			Integer userId=Integer.parseInt(session.getAttribute("userId").toString());
+			if(userId>0){
+				CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
+				model.addAttribute("courseTrainee", courseTrainee);
+			}
 		}catch(NullPointerException npe){
 			System.out.println("1 - Exception while fetching card details generating admit card course: "+npe.getMessage());
 		}catch(NumberFormatException nfe){
@@ -329,10 +411,17 @@ public class TraineeController {
 		Integer profileID = 0;
 		Integer userId = 0;
 		int loginId = 0;
+		String imagePath = "";
+		String userName = "";
 		try{
 			profileID = (Integer) session.getAttribute("profileId");
 			loginId = (int) session.getAttribute("loginIdUnique");
 			userId = (Integer) session.getAttribute("userId");
+			userName = (String) session.getAttribute("userName");
+			String rootPath = System.getProperty("catalina.home");
+			File dir = new File(rootPath + File.separator + "Trainee");
+			imagePath = dir.getAbsolutePath() + File.separator + userName+".png";
+			
 		}catch(Exception e){
 			System.out.println("Exception while course details save : "+ e.getMessage());
 		}
@@ -342,6 +431,7 @@ public class TraineeController {
 			AdmitCardForm admitCardForm=traineeService.generateAdmitCard(Integer.parseInt(loginid),Profiles.TRAINEE.value());
 			traineeService.updateSteps(tableID, profileID, 2);
 			session.setAttribute("traineeSteps", 2);
+			session.setAttribute("traineeImage", imagePath);
 			model.addAttribute("admitCardForm", admitCardForm);
 		}
 		return "admit-cardtrainee";
@@ -476,32 +566,31 @@ public class TraineeController {
 	@RequestMapping(value="/feedbackForm" , method=RequestMethod.GET)
 	public String feedback(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm ,BindingResult bindingResult, HttpSession session , Model model){
 		Integer profileId = (Integer) session.getAttribute("profileId");
+		Integer userId=Integer.parseInt(session.getAttribute("userId").toString());
+		if(userId>0){
+			CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
+			model.addAttribute("courseTrainee", courseTrainee);
+		}
+		
 		TableLink data = TableLink.getByprofileID(profileId);
-		int loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
-		CourseName courseName=traineeService.getCourseName(loginId);
 		List<FeedbackMaster> feedbackMasters=traineeService.getFeedMasterList(profileId);
-		model.addAttribute("courseName",courseName);
 		model.addAttribute("feedbackMasters",feedbackMasters);
 		return "feedbackForm";
 	}
 	@RequestMapping(value="/generateCertificatetrainee" , method=RequestMethod.GET)
 	public String generateCertificatetrainee(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm ,BindingResult bindingResult, HttpSession session , Model model){
-		int loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
-		CourseName courseName=traineeService.getCourseName(loginId);
-		model.addAttribute("courseName",courseName);
-		
-		
-		
+		Integer userId=Integer.parseInt(session.getAttribute("userId").toString());
+		if(userId>0){
+			CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
+			model.addAttribute("courseTrainee", courseTrainee);
+		}
 		return "generateCertificatetrainee";
 	}
 	@RequestMapping(value="/assessment-instructions-trainee" , method=RequestMethod.GET)
 	public String assessmentinstructionstrainee(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer,BindingResult bindingResult, HttpSession session , Model model )
 	{
-		int loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
-		CourseName courseName=traineeService.getCourseName(loginId);
 		Utility utility=new Utility();
 		//Need to write service for AsssessorAgency 
-		model.addAttribute("courseName",courseName);
 		model.addAttribute("utility",utility);
 		Integer userId = 0;
 		try{
@@ -509,6 +598,8 @@ public class TraineeController {
 			System.out.println("user id = "+userId);
 			String isOnline=traineeService.isCourseOnline(userId);
 			System.out.println("Online == "+isOnline);
+			CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
+			model.addAttribute("courseTrainee", courseTrainee);
 			if(isOnline != null && isOnline.toUpperCase().contains("ONLINE")){
 				model.addAttribute("ISONLINE","YES");
 			}else{
@@ -531,14 +622,16 @@ public class TraineeController {
 		Integer userId = 0;
 		int loginId= 0;
 		try{
+			userId = (Integer) session.getAttribute("userId");
 			loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
-			CourseName courseName=traineeService.getCourseName(loginId);
+			CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
+			model.addAttribute("courseTrainee", courseTrainee);
 			Utility utility=new Utility();
 			//Need to write service for AsssessorAgency 
-			model.addAttribute("courseName",courseName);
+			model.addAttribute("courseTrainee",courseTrainee);
 			model.addAttribute("utility",utility);
 			
-			userId = (Integer) session.getAttribute("userId");
+			
 			System.out.println("user id = "+userId);
 			String isOnline=traineeService.isCourseOnline(userId);
 			System.out.println("Online == "+isOnline);

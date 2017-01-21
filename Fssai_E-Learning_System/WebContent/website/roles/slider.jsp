@@ -46,6 +46,9 @@
 %>
 <div id="sidebar-wrapper">
 	<ul class="sidebar-nav">
+	<li><a href="search-and-apply.fssai">Search	& Apply Vacancy</a></li>
+	
+	<!-- 
 		<li class="dropdown active"><a href="#" class="dropdown-toggle"
 			data-toggle="dropdown" role="button" aria-haspopup="true"
 			aria-expanded="false">Course Enrollment <span class="caret"></span></a>
@@ -63,7 +66,7 @@
 		</li>
 		<li><a href="feedbackForm.fssai">Feedback</a></li>
 		<li><a href="generateCertificatetrainee.fssai">Certification</a>
-		</li>
+		</li> -->
 	</ul>
 </div>
 
@@ -135,7 +138,7 @@
                         <li><a href="manageCourse.fssai">Manage Course</a></li>
                         <li><a href="manageCourseContent.fssai">Manage Course Content</a></li>
                         <li> <a href="trainingCalendarForm.fssai">Training Calendar</a> </li>
-                        <li> <a href="assessmentSchedule.fssai">Update Assessor</a> </li>
+                        <li> <a href="trainingpartnerassessmentcalendar.fssai">Update Assessor</a> </li>
                         <li> <a href="manageAssessmentQuestions.fssai">Assessment Questions</a> </li>
                         <li> <a href="updateTrainerAssessmentForm.fssai">TOT Assessment</a> </li>
                         <li> <a href="feedbackMaster.fssai">Feedback Master</a> </li>
@@ -151,9 +154,9 @@
                         <li><a href="manageCourse.fssai">Manage Course</a></li>
                         <li><a href="manageCourseContent.fssai">Manage Course Content</a></li>
                         <li> <a href="trainingCalendarForm.fssai">Training Calendar</a> </li>
-                        <li> <a href="assessmentSchedule.fssai">Update Assessor</a> </li>
+                        <li> <a href="trainingpartnerassessmentcalendar.fssai">Update Assessor</a> </li>
                         <li> <a href="manageAssessmentQuestions.fssai">Assessment Questions</a> </li>
-                        <li> <a href="updateTrainerAssessmentForm.fssai">TOT Assessment</a> </li>
+                        <!-- <li> <a href="updateTrainerAssessmentForm.fssai">TOT Assessment</a> </li> -->
                         <li> <a href="feedbackMaster.fssai">Feedback Master</a> </li>
                     </ul>
                 </div>

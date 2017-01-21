@@ -55,13 +55,23 @@ function loadTrainingCenter(){
 <script>
 
 function showDetails(){
-	
-	var courseType =  ($("#selCourseType").val() == null ? "" : $("#selCourseType").val());
- 	var courseName =  ($('#selCourseName').val() == 0 ? "" : $('#selCourseName').val() );
+	$("#viewfeedback > tbody").html("");
+	var courseType =  $("#selCourseType").val();
+	var courseName =  $("#selCourseName").val();
+	var trainee =  $("#selTrainee").val();
+	/* var trainingDate = $("#traningDate").val();
+	var traningTime =  $("#traningTime").val();
+	var status = $('#selTraineeStatus').val(); */
+
+	//alert("courseType "+courseType);
+	/* alert("courseName "+courseName);
+	alert("trainingDate "+trainingDate);
+	alert("traningTime "+traningTime);
+	alert("status "+status);  */
 	
 $(".displayNone").css("display","block");
 //var	total = courseType+"&"+courseName+"&"+trainingDate+"&"+traningTime+"&"+status;
-var	total = "courseType="+courseType+"&courseName="+courseName;
+var	total = courseType+"&"+courseName+"&"+trainee;
 console.log("total "+total);
 //var total = "";
 var result="";
@@ -125,6 +135,7 @@ $.ajax({
                                         var formData = JSON.parse(formObj);
                                         var courseTypes = formData.courseTypes;
                                         var trainingCenterList=formData.trainingCenterList;
+                                        var traineeList=formData.traineeList;
                                         console.log(trainingCenterList);
                                         </script>
                                         
@@ -180,6 +191,27 @@ $.ajax({
                                                         <select class="form-control" name="selCourseName" id = "selCourseName"> </select>
 								 						
                                                     </div>
+                                                    
+                                                    <div class="form-group">
+                                                        <div>
+                                                            <ul class="lab-no">
+                                                                <li class="style-li"><strong>Select Trainee:</strong></li>
+                                                                
+                                                            </ul>
+                                                        </div>
+                                                        <select class="form-control"   name="selTrainee" id = "selTrainee"> </select>
+														<script>
+															var selectctpeOptions = "<option disabled selected value> -- select trainee -- </option>";
+															for(var i=0 ; i < courseTypes.length; i++)
+																{
+																	console.log(courseTypes[i].CourseTypeId + " -- "+ courseTypes[i].CourseType);
+																	selectctpeOptions += "<option value="+traineeList[i].id+">"+traineeList[i].value+"</option>"
+																	
+																}
+															document.getElementById('selTrainee').innerHTML += selectctpeOptions; 
+														</script>
+														
+                                                    </div>
                                                     <!-- <div class="form-group">
                                                         <div>
                                                             <ul class="lab-no">
@@ -199,7 +231,7 @@ $.ajax({
                                                         <select class="form-control" name="TrainingCentreName" id = "personalInformationTrainingPartnerId"> </select>
 														
                                                     </div> -->
-                                                     <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails();return false">Show Details</button>
+                                                     <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="return showDetails();">Show Details</button>
                                                 </div>
                                                
                                             </div>
@@ -242,7 +274,7 @@ $.ajax({
                       <h4>Search results</h4>
                       </legend>
                       <div id="dvData">
-                      <table  class="table table-bordered table-responsive table-striped table-hover">
+                      <table id="viewfeedback" class="table table-bordered table-responsive table-striped table-hover">
                         <thead>
                           <tr class="background-open-vacancies">
                             <th>S.No.</th>
@@ -266,6 +298,15 @@ $.ajax({
                   </div>
                 </div>
               </div>
+              <div class="col-xs-12">
+                          <ul class="feed-no">
+                        <li class="feed-li"><span><strong>1</strong></span>&nbsp;<span>Poor</span></li>
+                        <li class="feed-li"><span><strong>2</strong></span>&nbsp;<span>Good</span></li>
+                        <li class="feed-li"><span><strong>3</strong></span>&nbsp;<span>Better</span></li>
+                        <li class="feed-li"><span><strong>4</strong></span>&nbsp;<span>Best</span></li>
+                        <li class="feed-li"><span><strong>5</strong></span>&nbsp;<span>Excellent</span></li>
+                      </ul>
+                        </div>
 <%-- </cf:form> --%>
                                 </div>
                             </div>

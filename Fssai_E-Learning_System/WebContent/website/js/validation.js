@@ -68,4 +68,26 @@ $(document).ready(function() {
     });
 });
 
+function displayPreview(files) {
 
+    var reader = new FileReader();
+    var img = new Image();
+
+
+    reader.onload = function (e) {
+        img.src = e.target.result;
+        fileSize = Math.round(files.size / 1024);
+        alert("File size is " + fileSize + " kb");
+
+        img.onload = function () {
+            alert("width=" + this.width + " height=" + this.height);
+            $('#preview').append('<img src="' + e.target.result + '"/>');
+        };
+
+
+
+
+    };
+    reader.readAsDataURL(files);
+
+}

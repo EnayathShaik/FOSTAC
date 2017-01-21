@@ -3,6 +3,7 @@
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
 function saveAssesmentCalender(i,courseType,courseName,trainer,traininingCalandar){
+	var assessor =  $('#assRow'+traininingCalandar).val();
 	var assmntDate = $('#assesmentdate'+i).val();
 	var assmntTime = $('#assesmenttime'+i).val();
 	alert(assmntDate)
@@ -15,8 +16,12 @@ function saveAssesmentCalender(i,courseType,courseName,trainer,traininingCalanda
 		alert('Please Select Assessment time');
 		return false;
 	}
+	if(assessor <= 0){
+		alert('Please Select Assessor');
+		return false;
+	}
 	
-	var total = courseType+'&'+courseName+'&'+trainer+'&'+assmntDate+'&'+assmntTime+'&'+traininingCalandar;
+	var total = courseType+'&'+courseName+'&'+trainer+'&'+assmntDate+'&'+assmntTime+'&'+traininingCalandar+'&'+assessor;
 	var result="";
 		$.ajax({
 		type: 'post',
@@ -49,7 +54,7 @@ function getCourseName(val){
 
 </script>
 <script>
-/* function showDetails(){
+function showDetails(){
 	alert("Fetching details to mark attendance..");
 	
 	$('#tblAssessorCourses tr').remove();
@@ -100,18 +105,24 @@ function getCourseName(val){
 	});
 return result;	
 }
- */
+
 function showDetails(){
-	
-	 	var courseType =  ($("#selCourseType").val()== null? "" : $("#selCourseType").val());
-		var courseName =  ($("#selCourseName").val()== 0 ? "" : $("#selCourseName").val()) ;
-		var TrainerNames =  ($("#selTrainerNames").val()== 0 ? "": $("#selTrainerNames").val() ); 
+	 
+	 	var courseType =  $("#selCourseType").val();
+		var courseName =  $("#selCourseName").val();
+		var TrainerNames =  $("#selTrainerNames").val(); 
 		var assesmentDate = $('#assessmentDate').val();
 		var assesmentTime = $('#assessmentTime').val();
 		
+		/* alert("courseType" + courseType);
+		alert("courseName" + courseName);
+		alert("TrainerNames" + TrainerNames);
+		alert("assesmentDate" + assesmentDate);
+		alert("assesmentTime" + assesmentTime); */
 		
 		$(".displayNone").css("display","block");
-		var total = "courseType="+courseType+"&courseName="+courseName+"&assDate="+assesmentDate+"&assTime="+assesmentTime+"&trainerName="+TrainerNames;
+		//var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy;
+		var total = "";
 		var result="";
 			$.ajax({
 			type: 'post',
@@ -125,8 +136,20 @@ function showDetails(){
 			$('#newTable tr').remove();
 			$.each(mainData1 , function(i , obj)
 			{
-				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td><input id="assesmentdate'+i+'" value='+obj[3]+' type="date"/></td><td><input id="assesmenttime'+i+'" value='+obj[4]+' type="time"/></td><td>'+obj[5]+'</td><td><a href="#" onClick="saveAssesmentCalender('+i+',\''+obj[0]+'\',\''+obj[1]+'\',\''+obj[2]+'\',\''+obj[6]+'\');">Save</a> </td></tr>');
+				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td><input id="assesmentdate'+i+'" value='+obj[3]+' type="date"/></td><td><input id="assesmenttime'+i+'" value='+obj[4]+' type="time"/></td><td>'+obj[5]+'</td>'+
+						'<td><select id =assRow'+obj[6]+'><option value="0">Select Assessor</option>'+
+						'</td>'+
+						'<td><a href="#" onClick="saveAssesmentCalender('+i+',\''+obj[0]+'\',\''+obj[1]+'\',\''+obj[2]+'\',\''+obj[6]+'\');">Save</a> </td></tr>');
+				for(var i=0 ; i < assessorList.length; i++){
+					//$('#assRow'+obj[6]+').append('<option value='+obj.districtId+'>'+obj.districtName+' </option>');
+					if(obj[7]==assessorList[i].id){
+						$('#assRow'+obj[6]+'').append('<option selected="true"  value ='+assessorList[i].id+'>'+assessorList[i].value+'</option>');
+					}else{
+						$('#assRow'+obj[6]+'').append('<option value ='+assessorList[i].id+'>'+assessorList[i].value+'</option>');
+					}
+					
 				
+				}   
 			});
 			}
 			});
@@ -153,7 +176,7 @@ function showDetails(){
                             <div class="row">
                                 <div class="col-lg-12">
                                     <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle">
-                                        <i class="fa fa-bars"></i> <span class="orange-font">Welcome : ${loginUser.loginDetails.loginId}</span>
+                                        <i class="fa fa-bars"></i> <span class="orange-font">Welcome</span>
                                     </a>
                                 </div>
                             </div>
@@ -172,6 +195,7 @@ function showDetails(){
                                         var formData = JSON.parse(formObj);
                                         var courseTypes = formData.courseTypes;
                                         var trainerList = formData.trainerList;
+                                        var assessorList = formData.assessorList;
                                         </script>
                                         
                                         <div class="row">

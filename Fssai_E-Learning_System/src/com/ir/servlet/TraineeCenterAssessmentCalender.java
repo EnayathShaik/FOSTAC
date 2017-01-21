@@ -3,7 +3,6 @@ package com.ir.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -92,7 +91,7 @@ public class TraineeCenterAssessmentCalender extends HttpServlet {
 		String newList=null;
 		System.out.println("district 0");
 		String sql ="";
-		sql = "select B.coursetype,C.coursename,A.trainername,A.assessmentdate,A.assessmenttime,D.firstname || D.middlename || D.lastname,A.trainingcalendarid  from trainingcalendar A  " +
+		sql = "select B.coursetype,C.coursename,A.trainername,A.assessmentdate,A.assessmenttime,D.firstname || D.middlename || D.lastname,A.trainingcalendarid,A.assessor  from trainingcalendar A  " +
 				" inner join coursetype B on(A.coursetype=B.coursetypeid)  " +
 				"inner join coursename C on(A.coursename=C.coursenameid)"+
 				"inner join personalinformationtrainer D on(CAST(CAST (A.trainername AS NUMERIC(19,4)) AS INT)=D.personalinformationtrainerid)" +

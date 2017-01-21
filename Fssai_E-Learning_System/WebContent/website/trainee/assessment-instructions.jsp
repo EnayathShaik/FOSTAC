@@ -50,11 +50,9 @@ window.onload = OnStart;
                   <div class="col-md-6  col-xs-12"> 
                       <fieldset>
                     <legend><h3>Course Details</h3></legend>
-                    <h4>Course Name: <span class="f16">${courseName.coursename }</span></h4>
-                    <h4>Course Code: <span class="f16">${courseName.coursenameid }</span></h4>
-                    <h4>Course Duration: <span class="f16">${courseName.courseduration }</span></h4>
-                    <h4>Assessment Agency Name: <span class="f16">${utility.assessmentAgencyName }</span></h4>
-                    <h4>Assessor Name: <span class="f16">${utility.assessorName}</span></h4>
+                   <%@include file="../commonjsp/course.jsp" %>
+                    <h4>Assessment Agency Name: <span class="f16">${courseTrainee.assessorAgency }</span></h4>
+                    <h4>Assessor Name: <span class="f16">${courseTrainee.assessor}</span></h4>
                   </fieldset>
                      <br>
               <h3 class="text-capitalize heading-3-padding">Assesment Instructions</h3>

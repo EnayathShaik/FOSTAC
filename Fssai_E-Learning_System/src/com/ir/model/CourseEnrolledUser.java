@@ -25,6 +25,9 @@ public class CourseEnrolledUser {
 	private String paymentstatus;
 	private String enrolledby;
 	private String userStaus;
+	private String userStausAssessor;
+	private String result;
+	private String assessorComment;
 	@Column(columnDefinition="varchar(1) default 'N'")
 	private String status;
 	
@@ -104,9 +107,30 @@ public class CourseEnrolledUser {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
-	
+
+	public String getUserStausAssessor() {
+		return userStausAssessor;
+	}
+
+	public void setUserStausAssessor(String userStausAssessor) {
+		this.userStausAssessor = userStausAssessor;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
+	public String getAssessorComment() {
+		return assessorComment;
+	}
+
+	public void setAssessorComment(String assessorComment) {
+		this.assessorComment = assessorComment;
+	}
 	
 	
 	

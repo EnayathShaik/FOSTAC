@@ -143,6 +143,7 @@ public class LoginController {
 			session.setAttribute("logId",loginDetails.getLoginId());
 			session.setAttribute("profileId", loginDetails.getProfileId());
 			session.setAttribute("userId", loginDetails.getId());
+			session.setAttribute("userName", loginDetails.getLoginId());
 			System.out.println("in super admin admin login");
 			return "adminHomepage";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 2 && loginDetails.getStatus().equalsIgnoreCase("A")){
@@ -151,6 +152,7 @@ public class LoginController {
 			session.setAttribute("logId",loginDetails.getLoginId());
 			session.setAttribute("profileId", loginDetails.getProfileId());
 			session.setAttribute("userId", loginDetails.getId());
+			session.setAttribute("userName", loginDetails.getLoginId());
 			return "adminHomepage";
 		}else if(loginDetails !=null && loginDetails.getProfileId() == 3 && loginDetails.getStatus().equalsIgnoreCase("A"))
 		{
@@ -165,7 +167,12 @@ public class LoginController {
 			session.setAttribute("logId", personalInformationTrainee.getLoginDetails().getLoginId());
 			session.setAttribute("profileId", loginDetails.getProfileId());
 			session.setAttribute("userId", loginDetails.getId());
+			session.setAttribute("userName", loginDetails.getLoginId());
 			session.setAttribute("traineeSteps", personalInformationTrainee.getSteps());
+		
+			//Set Course Details IF user Already Enrolled.
+			
+			
 			return "traineeHomepage";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 4 && loginDetails.getStatus().equalsIgnoreCase("A")){
 			PersonalInformationTrainer personalInformationTrainer = loginService.FullDetailTrainer(loginDetails.getId());
@@ -177,13 +184,14 @@ public class LoginController {
 			session.setAttribute("stateid", personalInformationTrainer.getPermanentstate().getStateId());
 			session.setAttribute("statename", personalInformationTrainer.getPermanentstate().getStateName());
 			System.out.println("-----> "+ personalInformationTrainer.getPermanentdistrict().getDistrictId());
-			int stateid = personalInformationTrainer.getPermanentstate().getStateId();
-			int districtId = personalInformationTrainer.getPermanentdistrict().getDistrictId();
-			int cityId = personalInformationTrainer.getPermanentcity().getCityId();
+			//int stateid = personalInformationTrainer.getPermanentstate().getStateId();
+			//int districtId = personalInformationTrainer.getPermanentdistrict().getDistrictId();
+			//int cityId = personalInformationTrainer.getPermanentcity().getCityId();
 			session.setAttribute("tp", personalInformationTrainer.getAssociatedTrainingpartnerName() == null ? "" : personalInformationTrainer.getAssociatedTrainingpartnerName().getTrainingPartnerName());
 			session.setAttribute("loginId", personalInformationTrainer.getLoginDetails().getLoginId());
 			session.setAttribute("profileId", loginDetails.getProfileId());
 			session.setAttribute("userId", loginDetails.getId());
+			session.setAttribute("userName", loginDetails.getLoginId());
 			model.addAttribute("logintrainer", personalInformationTrainer);
 			session.setAttribute("loginUser2", personalInformationTrainer.getPersonalInformationTrainerId());
 			session.setAttribute("logId", personalInformationTrainer.getLoginDetails().getLoginId());
@@ -206,9 +214,9 @@ public class LoginController {
 			model.addAttribute("postVacancyTrainingCenter", new Gson().toJson(postVacancyTrainingCenter));
 			model.addAttribute("vacancyTrainingCenterBeans", new Gson().toJson(vacancyTrainingCenterBeans));
 			session.setAttribute("traineeSteps", personalInformationTrainer.getSteps());
-			model.addAttribute("trainerState", stateid);
+			/*model.addAttribute("trainerState", stateid);
 			model.addAttribute("trainerDistrict",districtId );
-			model.addAttribute("trainerCity", cityId);
+			model.addAttribute("trainerCity", cityId);*/
 			return "trainerHomepage";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 5){
 			if(loginDetails.getStatus().equalsIgnoreCase("A")){
@@ -223,6 +231,7 @@ public class LoginController {
 				session.setAttribute("logId", personalInformationTrainingPartner.getLoginDetails().getLoginId());
 				session.setAttribute("profileId", loginDetails.getProfileId());
 				session.setAttribute("userId", loginDetails.getId());
+				session.setAttribute("userName", loginDetails.getLoginId());
 				System.out.println("id of trainpartner is "+personalInformationTrainingPartner.getPersonalInformationTrainingPartnerId());	
 				return "trainingPartnerHomepage";
 			}else{
@@ -243,6 +252,7 @@ public class LoginController {
 				session.setAttribute("logId", personalInformationAssessor.getLoginDetails().getLoginId());
 				session.setAttribute("profileId", loginDetails.getProfileId());
 				session.setAttribute("userId", loginDetails.getId());
+				session.setAttribute("userName", loginDetails.getLoginId());
 				return "AssessorPage";
 			}else{
 				model.addAttribute("error" , "Oops , you are not authorized !!!");
@@ -276,6 +286,7 @@ public class LoginController {
 			//rishi
 			session.setAttribute("profileId", loginDetails.getProfileId());
 			session.setAttribute("userId", loginDetails.getId());
+			session.setAttribute("userName", loginDetails.getLoginId());
 			return "trainingPartnerDashboard";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 8 && loginDetails.getStatus().equalsIgnoreCase("A")){
 			// Assessment Agency  //// Assessment Agency  //// Assessment Agency  //// Assessment Agency  //
@@ -292,6 +303,7 @@ public class LoginController {
 			System.out.println("id Is "+manageAssessmentAgency.getLoginDetails().getLoginId());
 			session.setAttribute("profileId", loginDetails.getProfileId());
 			session.setAttribute("userId", loginDetails.getId());
+			session.setAttribute("userName", loginDetails.getLoginId());
 			return "assessmentAgencyHomepage";
 		}else{
 			model.addAttribute("error" , "Oops , wrong Id and password !!!");

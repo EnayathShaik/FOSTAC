@@ -32,19 +32,43 @@ function showDetails(){
 // 	var accessorId;
 	$.each(jsonData , function(i , obj)
 	{
-		var recId = obj[8];
-		$('#tblUpdateResult').append('<tr id="tableRow"><td>'+j++ +'</td>'+
-				'<td>'+obj[4]+'</td>'+
-				'<td>'+obj[2]+'</td>'+
-				'<td>'+obj[5]+'</td>'+
-				'<td>'+obj[7]+'</td>'+
-				'<td><select id=traineeRes'+obj[8]+'><option  value ="P">Pass</option>'+
-				'<option  value="F">Fail</option></td>'+
-				'<td><input type="text" class="form-control" id = "comments'+obj[8]+'"/>'+
-				'<td> <button onclick="updateAssessmentResult('+obj[0]+','+obj[1]+','+obj[8]+');return false;">Update</button></td>'+
-				'</tr>');
-		console.log("0-"+obj[0] +" #1-" +obj[1] +" #2-" +obj[2] +" #3-"+obj[3] +" #4-"+obj[4]+" #5-"+obj[5]+" #6-"+obj[6]+" #7-"+obj[7]+" #8-"+obj[8]);
-		currentAssessorId = obj[0];
+		var recId = obj[1];
+		
+		if(obj[6] == 'P'){
+			$('#tblUpdateResult').append('<tr id="tableRow"><td>'+j++ +'</td>'+
+					'<td>'+obj[2]+'</td>'+
+					'<td>'+obj[3]+'</td>'+
+					'<td>'+obj[4]+'</td>'+
+					'<td>'+obj[5]+'</td>'+
+					'<td><select id='+obj[1]+'><option  value ="0">Please Select</option><option selected="true"  value ="P">Pass</option>'+
+					'<option  value="F">Fail</option></td>'+
+					'<td><input type="text" class="form-control" value="'+obj[7]+'"   id = "comments'+obj[1]+'"/>'+
+					'<td> <button onclick="updateTraineeAssessmentResult('+obj[1]+');return false;">Update</button></td>'+
+					'</tr>');
+		}else if(obj[6] == 'F'){
+			$('#tblUpdateResult').append('<tr id="tableRow"><td>'+j++ +'</td>'+
+					'<td>'+obj[2]+'</td>'+
+					'<td>'+obj[3]+'</td>'+
+					'<td>'+obj[4]+'</td>'+
+					'<td>'+obj[5]+'</td>'+
+					'<td><select id='+obj[1]+'><option  value ="0">Please Select</option><option  value ="P">Pass</option>'+
+					'<option selected="true"  value="F">Fail</option></td>'+
+					'<td><input type="text" class="form-control" value="'+obj[7]+'" id = "comments'+obj[1]+'"/>'+
+					'<td> <button onclick="updateTraineeAssessmentResult('+obj[1]+');return false;">Update</button></td>'+
+					'</tr>');
+		}else{
+			$('#tblUpdateResult').append('<tr id="tableRow"><td>'+j++ +'</td>'+
+					'<td>'+obj[2]+'</td>'+
+					'<td>'+obj[3]+'</td>'+
+					'<td>'+obj[4]+'</td>'+
+					'<td>'+obj[5]+'</td>'+
+					'<td><select id='+obj[1]+'><option  value ="0">Please Select</option><option  value ="P">Pass</option>'+
+					'<option  value="F">Fail</option></td>'+
+					'<td><input type="text" class="form-control" value="'+obj[7]+'"  id = "comments'+obj[1]+'"/>'+
+					'<td> <button onclick="updateTraineeAssessmentResult('+obj[1]+');return false;">Update</button></td>'+
+					'</tr>');
+		}
+		
 	});
 	
 	},
@@ -56,32 +80,26 @@ function showDetails(){
 return result;	
 }
 
-function updateAssessmentResult(assessorId,trainingcalId, traineeId){
-	var comments = document.getElementById("comments"+traineeId).value;
-	var resultValue = document.getElementById("traineeRes"+traineeId).value;
+function updateTraineeAssessmentResult(courseEnrolledid , status){
 	
-	$.ajax({
+	var status = $("#"+courseEnrolledid).val();
+	var comment = $("#comments"+courseEnrolledid).val();
+	var total =  "courseenrolledId="+courseEnrolledid+"&status="+status+"&comment="+comment ;
+	alert(total)
+ 	$.ajax({
 		type: 'post',
-		url: 'updateAssessmentResult.jspp',
-		data:{
-			assessorId: assessorId,
-			trainingcalId:trainingcalId,
-			traineeId : traineeId,
-			comments : comments,
-			result : resultValue
-		},
-		async: false, 
-		success: function (data){
-			console.log("Data received..");
-			console.log(data);
-			$( '#resultResponse' ).html(data);
-// 			 <li class="style-li error-red">${created}<span id="name_status"></span></li>
-		},
-		failure: function(data){
-			alert ("failure:" + data);
-			}
-});
+		url: 'updateTraineeAssessmentResult.jspp?'+ total,
+		data: {
+		       user_name:name,
+		      },
+		      success: function (response) {
+		       $( '#name_status' ).html(response);
+		      }
+		      });
+	 	return false;
 }
+
+
 </script>
 
 <cf:form name="myForm" commandName="markAttendance" >

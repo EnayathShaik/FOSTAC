@@ -238,6 +238,23 @@ function searchVacancy(indicator){
                            <cf:input path="loginId" id="loginId" type="hidden" class="form-control" value="${loginUserS.loginDetails.loginId}" />
                          <cf:input path="noOfVacancy" type="text" maxlength="3" class="form-control" />
                         </div>
+                        <div class="form-group">
+                          <div>
+                            <ul class="lab-no">
+                              <li class="style-li"><strong>Trainee Center:<span style="color:red;">*</span></strong></li>
+                               <li class="style-li error-red">
+                               <label id="traineeCenterError" class="error visibility">Select Trainee Center</label>
+                                                            
+                                                           
+								 <cf:errors path="trainingCenter" cssclass="error"/>
+                                                            </li>
+                            </ul>
+                          </div>
+						<cf:select path="trainingCenter" class="form-control" >
+						<cf:option value="0" label="Select Course Type" />
+						<cf:options items="${trainingCenterList}" itemValue="id" itemLabel="value"/>
+						</cf:select>
+                        </div>
                       </div>
                       <input type="submit" style="margin-top:20px;"  class="btn login-btn pull-right show-details-vacancy collapsed"  data-target="#show-result" aria-expanded="false" value="Create">
                       <a href="#testt"  onclick="searchVacancy('');" style="margin-top:20px; margin-right: 20px;"  class="btn login-btn pull-right"   >Search</a>

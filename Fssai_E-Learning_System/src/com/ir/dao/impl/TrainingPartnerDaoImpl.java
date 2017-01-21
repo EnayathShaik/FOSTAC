@@ -127,11 +127,11 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		}
 	}
 	@Override
-	public int saveVacancy(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean){
+	public int saveVacancy(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean,Integer profileID, Integer userId){
 		Session session = sessionFactory.openSession();
 		Integer isapplied=0;
 		Transaction tx=session.beginTransaction();
-		Query sql=session.createSQLQuery("select * from trainingcentervacancyenrolled where coursetype= "+postVacancyTrainingCenterBean.getCourseType()+" AND coursename="+postVacancyTrainingCenterBean.getCourseName()+" AND trainingcenter="+postVacancyTrainingCenterBean.getTrainingCenter());
+		Query sql=session.createSQLQuery("select * from trainingcentervacancyenrolled where postvacancyid="+postVacancyTrainingCenterBean.getPostvacancyID()+" AND CAST(CAST (loginid AS NUMERIC(19,4)) AS INT)="+userId);
 		List<Object[]> list=sql.list();
 		if(list.size()>0){
 			postVacancyTrainingCenterBean.setVacancyEnrolledId(Integer.parseInt(list.get(0)[0].toString()));
@@ -181,6 +181,78 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		}
 		session.close();
 		return trinerNameList;
+	}
+	@Override
+	public List<IntStringBean> getTraineeList(){
+		Session session = sessionFactory.openSession();
+		List<IntStringBean> trinerNameList=new ArrayList<>();
+		String sql="select distinct pitp.personalinformationtraineeid,pitp.firstname,pitp.middlename,pitp.lastname from personalinformationtrainee pitp , logindetails pit";
+				
+		//"select pit.logindetails,pit.firstname,pit.middlename,pit.lastname from personalinformationtrainer pit,personalinformationtrainingpartner pitp";// where pit.logindetails=pitp.logindetails";
+		Query query = session.createSQLQuery(sql);
+		List<Object[]> courseTypeList = query.list();
+		if(courseTypeList.size()>0){
+			for(int index=0;index<courseTypeList.size();index++){
+				IntStringBean bean=new IntStringBean();
+				Object[] objecList=courseTypeList.get(index);
+				bean.setId(Integer.parseInt(objecList[0].toString()));
+				bean.setValue(objecList[1].toString().concat(" ").concat(objecList[2].toString()).concat(" ").concat(objecList[3].toString()));
+				trinerNameList.add(bean);
+			}
+		}
+		session.close();
+		return trinerNameList;
+	}
+	
+	@Override
+	public List<IntStringBean> getTrainingCenterList(Integer userId,Integer profileId){
+		Session session = sessionFactory.openSession();
+		List<IntStringBean> trainingCenterList=new ArrayList<>();
+		StringBuffer userCondition = new StringBuffer();
+		if(profileId == 5){
+			userCondition.append("Where B.ID = "+userId);
+		}else{
+			userCondition.append("");
+		}
+		String sql="select distinct A.personalinformationtrainingpartnerid,A.firstname,A.middlename,A.lastname  from personalinformationtrainingpartner A " +
+				" inner join logindetails B on(A.logindetails=B.id) ";
+		sql	= sql + userCondition.toString();
+		//"select pit.logindetails,pit.firstname,pit.middlename,pit.lastname from personalinformationtrainer pit,personalinformationtrainingpartner pitp";// where pit.logindetails=pitp.logindetails";
+		Query query = session.createSQLQuery(sql);
+		List<Object[]> courseTypeList = query.list();
+		if(courseTypeList.size()>0){
+			for(int index=0;index<courseTypeList.size();index++){
+				IntStringBean bean=new IntStringBean();
+				Object[] objecList=courseTypeList.get(index);
+				bean.setId(Integer.parseInt(objecList[0].toString()));
+				bean.setValue(objecList[1].toString().concat(" ").concat(objecList[2].toString()).concat(" ").concat(objecList[3].toString()));
+				trainingCenterList.add(bean);
+			}
+		}
+		session.close();
+		return trainingCenterList;
+	}
+	
+	@Override
+	public List<IntStringBean> getAssessorList(){
+		Session session = sessionFactory.openSession();
+		List<IntStringBean> assessorList=new ArrayList<>();
+		String sql="select distinct pitp.personalinformationassessorid,pitp.firstname,pitp.middlename,pitp.lastname from personalinformationassessor pitp , logindetails pit";
+				
+		//"select pit.logindetails,pit.firstname,pit.middlename,pit.lastname from personalinformationtrainer pit,personalinformationtrainingpartner pitp";// where pit.logindetails=pitp.logindetails";
+		Query query = session.createSQLQuery(sql);
+		List<Object[]> courseTypeList = query.list();
+		if(courseTypeList.size()>0){
+			for(int index=0;index<courseTypeList.size();index++){
+				IntStringBean bean=new IntStringBean();
+				Object[] objecList=courseTypeList.get(index);
+				bean.setId(Integer.parseInt(objecList[0].toString()));
+				bean.setValue(objecList[1].toString().concat(" ").concat(objecList[2].toString()).concat(" ").concat(objecList[3].toString()));
+				assessorList.add(bean);
+			}
+		}
+		session.close();
+		return assessorList;
 	}
 	@Override
 	public List<StringStringBean> getStatusList(){
@@ -251,7 +323,17 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		utility.setTrainingDate(list.get(0)[0].toString());
 		utility.setNoOfVacancy(Integer.parseInt(list.get(0)[1].toString()));
 		List<StringStringBean> trainerList=new ArrayList<>();
-		for(Object[] obj:list){
+		for(int i=0;i<list.size();i++){
+			String loginSQL=" select ve.vacancyenrolledid , concat(pit.firstname,' ',pit.middlename,' ',pit.lastname) as name, ve.status from personalinformationtrainer pit , trainingcentervacancyenrolled ve where logindetails="+list.get(i)[2];
+			Query loginSQLSQuery = session.createSQLQuery(loginSQL);
+			List<Object[]> loginSQLSQuerylist = loginSQLSQuery.list();
+			StringStringBean e=new StringStringBean();
+			e.setId(loginSQLSQuerylist.get(i)[0].toString());
+			e.setValue(loginSQLSQuerylist.get(i)[1].toString());
+			e.setStatus(loginSQLSQuerylist.get(i)[2].toString());
+			trainerList.add(e);
+		}
+		/*for(Object[] obj:list){
 			String loginSQL=" select ve.vacancyenrolledid , concat(pit.firstname,' ',pit.middlename,' ',pit.lastname) as name from personalinformationtrainer pit , trainingcentervacancyenrolled ve where logindetails="+Integer.parseInt(list.get(0)[2].toString());
 			Query loginSQLSQuery = session.createSQLQuery(loginSQL);
 			List<Object[]> loginSQLSQuerylist = loginSQLSQuery.list();
@@ -259,7 +341,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			e.setId(loginSQLSQuerylist.get(0)[0].toString());
 			e.setValue(loginSQLSQuerylist.get(0)[1].toString());
 			trainerList.add(e);
-		}
+		}*/
 		
 		utility.setTrainerList(trainerList);
 		session.close();

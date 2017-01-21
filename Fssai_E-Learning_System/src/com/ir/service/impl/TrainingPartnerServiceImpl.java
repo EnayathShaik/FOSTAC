@@ -66,6 +66,24 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 		return trainerList;
 	}
 	@Override
+	public List<IntStringBean> getTraineeList() {
+		System.out.println("TrainingPartnerServiceImpl");
+		List<IntStringBean> traineeList = trainingPartnerDAO.getTraineeList();
+		return traineeList;
+	}
+	@Override
+	public List<IntStringBean> getTrainingCenterList(Integer userId,Integer profileId) {
+		System.out.println("TrainingPartnerServiceImpl");
+		List<IntStringBean> trainingCenterList = trainingPartnerDAO.getTrainingCenterList(userId,profileId);
+		return trainingCenterList;
+	}
+	@Override
+	public List<IntStringBean> getAssessorList() {
+		System.out.println("TrainingPartnerServiceImpl");
+		List<IntStringBean> assessorList = trainingPartnerDAO.getAssessorList();
+		return assessorList;
+	}
+	@Override
 	public Utility editApplicationStatus(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean){
 		return trainingPartnerDAO.editApplicationStatus(postVacancyTrainingCenterBean);
 	}
@@ -97,8 +115,8 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 	}
 
 	@Override
-	public int saveVacancy(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean) {
-		return  trainingPartnerDAO.saveVacancy(postVacancyTrainingCenterBean);
+	public int saveVacancy(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean,Integer profileID, Integer userId) {
+		return  trainingPartnerDAO.saveVacancy(postVacancyTrainingCenterBean,profileID,userId);
 	}
 
 	@Override

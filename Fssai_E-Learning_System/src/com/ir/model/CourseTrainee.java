@@ -5,8 +5,11 @@ public class CourseTrainee {
 	private String courseName;
 	private String courseTypeId;
 	private String courseDuration;
+	private String courseNameID;
 	private String contentLinkInput;
 	private String contentNameInput;
+	private String assessor;
+	private String assessorAgency;
 	/**
 	 * @return the courseName
 	 */
@@ -67,5 +70,25 @@ public class CourseTrainee {
 	public void setContentNameInput(String contentNameInput) {
 		this.contentNameInput = contentNameInput;
 	}
+	public String getAssessor() {
+		return assessor;
+	}
+	public void setAssessor(String assessor) {
+		this.assessor = assessor;
+	}
+	public String getAssessorAgency() {
+		return assessorAgency;
+	}
+	public void setAssessorAgency(String assessorAgency) {
+		this.assessorAgency = assessorAgency;
+	}
+	public String getCourseNameID() {
+		return courseNameID;
+	}
+	public void setCourseNameID(String courseNameID) {
+		this.courseNameID = courseNameID;
+	}
+	
+	
 
 }

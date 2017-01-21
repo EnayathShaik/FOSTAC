@@ -44,10 +44,8 @@ window.onload = OnStart;
                 <div class="col-xs-12">
                   <fieldset>
                     <legend><h3>Generate Certificate</h3></legend>
-                    <h4>Course Name: <span class="f16">${courseName.coursename}</span></h4>
-                    <h4>Course Code: <span class="f16">${courseName.coursenameid}</span></h4>
-                    <h4>Course Duration: <span class="f16">${courseName.courseduration}</span></h4><br>
-                    <h4><a class="link-bg text-center" href="certificatetrainee.fssai">Generate Certificate</a></h4>
+                    <%@include file="../commonjsp/course.jsp" %>
+                     <h4><a class="link-bg text-center" href="certificatetrainee.fssai">Generate Certificate</a></h4>
                   </fieldset>
                   <br>
                   

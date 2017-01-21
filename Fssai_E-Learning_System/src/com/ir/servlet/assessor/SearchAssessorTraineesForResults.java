@@ -59,75 +59,35 @@ public class SearchAssessorTraineesForResults extends HttpServlet {
 				String id = request.getQueryString();
 		        PrintWriter out = response.getWriter();
 			
-				try {
-					Class.forName("org.postgresql.Driver");
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				Connection conn = null;
-				try {
-					conn = DriverManager.getConnection(DBUtil.databaseUrl,DBUtil.dbUsername,DBUtil.dbPassword);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				ResultSet rs = null;
-				PreparedStatement stmt = null;
-				System.out.println("before sql query");
-				int assessorId=710;
-				String sql = "select pia.personalinformationassessorid, tc.trainingcalendarid, "
-						+ "tc.trainingdate, cn.coursenameid, cn.coursename "
-						+ ",concat(pit.trainingpartnerpermanentline1, ', ', trainingpartnerpermanentline2) as address, "
-						+ "ce.logindetails ,concat(pite.firstname, ' ' ,pite.middlename, ' ', pite.lastname) as name , logind.id "
-						+ "from personalinformationassessor pia "
-						+ "inner join courseenrolled ce on ce.logindetails = pia.logindetails "
-						+ "inner join trainingcalendar tc on tc.coursename = ce.coursenameid "
-						+ "inner join coursename cn on cn.coursenameid = tc.coursename "
-						+ "inner join personalinformationtrainingpartner pit on pit.personalinformationtrainingpartnerid = tc.trainingcenter "
-						+ "inner join courseenrolleduser ceu on ceu.trainingcalendarid = tc.trainingcalendarid "
-						+ "inner join logindetails logind on logind.id= ceu.courseenrolleduserid "
-						+ "inner join personalinformationtrainee pite on pite.logindetails = logind.id "
-						+ "where pia.personalinformationassessorid = "+assessorId +" "
-						+ "group by pia.personalinformationassessorid, tc.trainingcalendarid, tc.trainingdate, cn.coursenameid, cn.coursename "
-						+ ",address, ce.logindetails ,name , logind.id ";
-				System.out.println(sql);
-				List listUpcomingAssessments = new ArrayList<>();
-				try {
-					stmt = conn.prepareStatement(sql);
-					System.out.println(stmt.toString());
-					rs = stmt.executeQuery();
-					
-					while(rs.next()){
-						List traineeData = new ArrayList<>();
-						traineeData.add(rs.getInt(1));
-						traineeData.add(rs.getInt(2));
-						traineeData.add(rs.getString(3));
-						traineeData.add(rs.getInt(4));
-						traineeData.add(rs.getString(5));
-						traineeData.add(rs.getString(6));
-						traineeData.add(rs.getInt(7));
-						traineeData.add(rs.getString(8));
-						traineeData.add(rs.getInt(9));
-						listUpcomingAssessments.add(traineeData);
-					}
-				} catch (SQLException e) {
-					System.out.println("Error while fetching upcoming assement calendars : "+e.getMessage());
-				}finally{
-					try {
-						if(rs != null){
-							rs.close();
-						}
-						if(conn != null){
-							conn.close();
-						}
-					} catch (SQLException e) {
-					}
-				}
-				Gson g =new Gson();
-				String newList = g.toJson(listUpcomingAssessments); 
-				out.write(newList);
-				out.flush();
+		        Configuration conf = new Configuration();
+				conf.configure("/hibernate.cfg.xml");
+				SessionFactory sf = conf.buildSessionFactory();
+				Session session = sf.openSession();
+				String newList=null;
+				String sql = "select A.trainingcalendarid,B.courseenrolleduserid, C.coursename,A.trainingdate,"
+						+ " concat(D.firstname , ' ' , D.middlename , ' ' , D.lastname ) TraineeCenter, "
+						+ " concat(F.firstname , ' ' , F.middlename , ' ' , F.lastname ) Trainee "
+						+ " ,B.result,B.assessorcomment "
+						+ " from trainingcalendar A "
+						+ " inner join courseenrolleduser B on(A.trainingcalendarid=B.trainingcalendarid) "
+						+ " inner join coursename C on(A.coursename=C.coursenameid) "
+						+ " inner join personalinformationtrainingpartner D on(A.trainingcenter=D.personalinformationtrainingpartnerid) "
+						+ " inner join logindetails E on(D.logindetails=E.id)"
+						+ " inner join personalinformationtrainee F on(F.logindetails=B.logindetails) ";
+						
+
+				Query query = session.createSQLQuery(sql);
+				List list = query.list();
+				System.out.println(list.size());
+				session.close();
+
+					System.out.println("data selected finally  " );
+					System.out.println(list);
+					Gson g =new Gson();
+					newList = g.toJson(list); 
+			
+			out.write(newList);
+			out.flush();		
 	}
 
 	/**

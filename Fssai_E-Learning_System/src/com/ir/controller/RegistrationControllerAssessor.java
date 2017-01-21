@@ -30,6 +30,7 @@ import com.ir.model.Title;
 import com.ir.service.PageLoadServiceTrainer;
 import com.ir.service.RegistrationServiceAssessor;
 import com.ir.service.RegistrationServiceTrainer;
+import com.ir.util.JavaMail;
 
 @Controller
 @SessionAttributes
@@ -106,6 +107,9 @@ public class RegistrationControllerAssessor implements Serializable{
 			model.addAttribute("id" , all[1]);
 			model.addAttribute("pwd" , all[0]);
 			//return "registrationFormTrainee";
+				JavaMail javaMail = new JavaMail();
+				javaMail.mailProperty("Thanks", registrationFormAssessor.getAssessorPermanentEmail(), registrationFormAssessor.getUserId());
+				
 			return "welcome";
 		}else{
 			model.addAttribute("id" , "Oops, something went wrong !!!");

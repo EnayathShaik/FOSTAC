@@ -19,7 +19,7 @@ public interface TrainingPartnerDao {
 
 	public List<PersonalInformationTrainingPartner> trainingCenterList();
 	public List<PostVacancyTrainingCenter> getPostVacancyTrainingList();
-	public int saveVacancy(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
+	public int saveVacancy(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean,Integer profileID, Integer userId);
 
 	public List<CourseType> courseTypeList();
 
@@ -34,6 +34,9 @@ public interface TrainingPartnerDao {
 	boolean changePasswordTrainingPartnerSave(ChangePasswordForm changePasswordForm, String id);
 	public List<CourseType> courseTypes();
 	public List<IntStringBean> getTrainerList();
+	public List<IntStringBean> getTraineeList();
+	public List<IntStringBean> getTrainingCenterList(Integer userId,Integer profileId);
+	public List<IntStringBean> getAssessorList();
 	public List<CourseName> getCourseNameList();
 	public List<StringStringBean> getStatusList();
 	public List<StringStringBean> getModeOfTrainingList();

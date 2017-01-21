@@ -29,8 +29,8 @@
       </div>
       <div class="collapse navbar-collapse navbar-left text-center">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="fostac.fssai">HOME</a></li>
-          <li><a href="about.fssai">ABOUT</a></li>
+          <li id="homepagefssai"><a onclick="setID('homepagefssai')" href="fostac.fssai">HOME</a></li>
+          <li id="aboutpagefssai"><a onclick="setID('aboutpagefssai')" href="about.fssai">ABOUT</a></li>
           <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">COURSES <i class="fa fa-angle-down"></i></a>
             <ul class="dropdown-menu">
               <li><a href="basic-level.fssai">BASIC LEVEL</a></li>
@@ -38,8 +38,8 @@
               <li><a href="special-level.fssai">SPECIAL LEVEL</a></li>
             </ul>
           </li>
-          <li><a href="#">FAQ</a></li>
-           <li><a href="contact.fssai">CONTACT</a></li>
+          <li><a href="faq.fssai">FAQ</a></li>
+           <li id="contactpagefssai"><a onclick="setID('contactpagefssai')" href="contact.fssai">CONTACT</a></li>
           <li><a href="login.fssai">LOGIN</a></li>
         </ul>
         <div class="search">

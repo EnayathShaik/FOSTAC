@@ -2,6 +2,7 @@
 <script type="text/javascript">
 
 function OnStart(){
+	var imagePath = <%= getServletContext().getRealPath("/WEB-INF/traineeImage/MANNUT1.png") %> 
 	var steps = 3;
 	var traineeSteps =
 		<%=(Integer) session.getAttribute("traineeSteps")%>
@@ -55,11 +56,19 @@ window.onload = OnStart;
               <div class="table-responsive">
                 <div class="col-xs-12">
                   <fieldset>
-                    <legend><h3>Course Training1324</h3></legend>
-                    <h4>Course Name: <span class="f16">${courseName.coursename }</span></h4>
-                    <h4>Course Code: <span class="f16">${courseName.coursenameid }</span></h4>
-                    <h4>Course Duration: <span class="f16">${courseName.courseduration }</span></h4>
-                    <h4><a class="link-bg text-center" href="training.fssai">Training Video</a></h4>
+                    <legend><h3>Course Training</h3></legend>
+                    <%@include file="../commonjsp/course.jsp" %>
+                    <!-- <h4><a class="link-bg text-center" href="training.fssai">Online Training Video</a></h4>
+                 	 -->
+                 	<!-- <video width="750" height="750" autoplay>
+  						<source src="pdf/Sath.mp4" type="video/mp4">
+  						Your browser does not support the video tag.
+					</video> -->
+					<h4><a href="pdf/A.mp4?autoPlay=true" target="_blank" data-webm="images/Big_Buck_Bunny_2.webm" class="html5lightbox" >Video Offline</a></h4>
+					<h4><a href="pdf/Fostac.pdf" target="_blank" >Fostac In PDF</a></h4>
+					<h4><a href="pdf/FostacPPT.pptx" target="_blank" >Fostac In PPT</a></h4>
+					
+					
                   </fieldset>
                   <br>
                   

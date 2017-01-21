@@ -43,10 +43,11 @@ public class SearchVacancy extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void callPost(HttpServletRequest request, HttpServletResponse response,String loginId,int profileCode) throws ServletException, IOException {
+	protected void callPost(HttpServletRequest request, HttpServletResponse response,String loginId,int profileCode,int userId) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
 		System.out.println("loginId == "+loginId);
+		System.out.println("userId == "+userId);
 		
 		response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
@@ -95,9 +96,18 @@ public class SearchVacancy extends HttpServlet {
 		Session session = sf.openSession();
 		String newList=null;
 		System.out.println("district 0");
+		String loginCK = "";
+		if(profileCode == 7){
+			loginCK = "1=1";
+		}else{
+			loginCK = "1=1";
+			//loginCK = "E.loginid ='"+loginId+"'";
+		}
+		
+		
 		String sql ="";
 		sql = "select pvtc.postvacancytrainingcenterid , ct.coursetype , cn.coursename , pvtc.trainingdate ,pvtc.requiredexp , pvtc.noofvacancy,pvtc.loginid  from postvacancytrainingcenter pvtc left join coursetype as ct on ct.coursetypeid = pvtc.coursetype left join coursename as cn on cn.coursenameid = pvtc.coursename left join personalinformationtrainingpartner D on(pvtc.trainingcenter=D.personalinformationtrainingpartnerid)  left join  logindetails E on(D.logindetails=E.ID) " +
-				" where E.loginid ='"+loginId+"'  and  cast(ct.coursetypeid as varchar(10))  like '"+courseType+"%' and CAST(cn.coursenameid AS VARCHAR(10)) like '"+courseName+"%' and  CAST(pvtc.trainingdate AS VARCHAR(10)) like '"+trainingDate+"%'   and cast(pvtc.requiredexp as varchar(10))  like '"+requiredExp+"%' and cast(pvtc.noofvacancy as varchar(10)) like '"+noOfVacancy+"%' ";
+				" where "+loginCK+"  and  cast(ct.coursetypeid as varchar(10))  like '"+courseType+"%' and CAST(cn.coursenameid AS VARCHAR(10)) like '"+courseName+"%' and  CAST(pvtc.trainingdate AS VARCHAR(10)) like '"+trainingDate+"%'   and cast(pvtc.requiredexp as varchar(10))  like '"+requiredExp+"%' and cast(pvtc.noofvacancy as varchar(10)) like '"+noOfVacancy+"%' ";
 		
 		System.out.println(" sql "+sql);
 		Query query = session.createSQLQuery(sql);
@@ -120,13 +130,15 @@ public class SearchVacancy extends HttpServlet {
 		HttpSession httpSession=request.getSession(false);
 		String loginId="";
 		int profileId=0;
+		Integer userId = 0;
 		if(null!=httpSession.getAttribute("logId")){
 			 loginId=httpSession.getAttribute("logId").toString();
 			 profileId=Integer.parseInt(httpSession.getAttribute("profileId").toString());
+			 userId = (Integer) httpSession.getAttribute("userId");
 		}
 		
 		// TODO Auto-generated method stub
-		callPost(request, response,loginId,profileId);
+		callPost(request, response,loginId,profileId,userId);
 	}
 
 }

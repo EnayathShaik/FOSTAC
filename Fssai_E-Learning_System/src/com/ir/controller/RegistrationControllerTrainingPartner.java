@@ -28,6 +28,7 @@ import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.service.RegistrationServiceTrainingPartner;
+import com.ir.util.JavaMail;
 
 @Controller
 @SessionAttributes
@@ -122,6 +123,9 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 			String[] all = personalInformationTrainingPartner.split("&");
 			model.addAttribute("id" , all[1]);
 			model.addAttribute("pwd" , all[0]);
+				JavaMail javaMail = new JavaMail();
+				javaMail.mailProperty("Thanks", registrationFormTrainingPartner.getTrainingPartnerPermanentEmail(), registrationFormTrainingPartner.getUserId());
+				
 			return "welcome";
 		}else{
 			model.addAttribute("created" , "Oops , Something went wrong !!!");

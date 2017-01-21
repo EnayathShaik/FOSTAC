@@ -703,6 +703,15 @@
   <url-pattern>/updateAttendanceStatus.jspp</url-pattern> 
   </servlet-mapping>
   
+   <servlet>
+  <servlet-name>updateTraineeAssessmentResult</servlet-name> 
+  <servlet-class>com.ir.servlet.UpdateTraineeAssessmentResult</servlet-class> 
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>updateTraineeAssessmentResult</servlet-name> 
+  <url-pattern>/updateTraineeAssessmentResult.jspp</url-pattern> 
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>loadFeedbackMaster</servlet-name>
     <servlet-class>com.ir.servlet.loadFeedbackMaster</servlet-class>

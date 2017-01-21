@@ -24,6 +24,7 @@ import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.service.PageLoadService;
 import com.ir.service.RegistrationServiceTrainee;
+import com.ir.util.JavaMail;
 
 
 @Controller
@@ -157,6 +158,8 @@ public class RegistrationController {
 			String[] all = personalInformationTrainee.split("&");
 			model.addAttribute("id" , all[1]);
 			model.addAttribute("pwd" , all[0]);
+			JavaMail javaMail = new JavaMail();
+			javaMail.mailProperty("Thanks", registrationFormTrainee.getEmail(), registrationFormTrainee.getUserId());
 			//return "registrationFormTrainee";
 			return "welcome";
 		}else{

@@ -3,6 +3,7 @@ package com.ir.bean.common;
 public class StringStringBean {
 	private String id;
 	private String value;
+	private String status;
 	/**
 	 * @return the id
 	 */
@@ -27,6 +28,14 @@ public class StringStringBean {
 	public void setValue(String value) {
 		this.value = value;
 	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	
 	
 
 }

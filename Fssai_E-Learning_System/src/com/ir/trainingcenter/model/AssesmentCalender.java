@@ -1,5 +1,6 @@
 package com.ir.trainingcenter.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,8 @@ public class AssesmentCalender {
 	private String trainerName;
 	private String assessmentDate;
 	private String assessmentTime;
+	@Column(columnDefinition="int default 0")
+	private int assessorID;
 	public int getId() {
 		return id;
 	}
@@ -52,6 +55,12 @@ public class AssesmentCalender {
 	}
 	public void setAssessmentTime(String assessmentTime) {
 		this.assessmentTime = assessmentTime;
+	}
+	public int getAssessorID() {
+		return assessorID;
+	}
+	public void setAssessorID(int assessorID) {
+		this.assessorID = assessorID;
 	}
 	
 }

@@ -60,6 +60,8 @@ import com.ir.model.State;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
 import com.ir.service.AdminService;
+import com.ir.util.JavaMail;
+import com.ir.util.SendContectMail;
 
 @Controller
 public class AdminController {
@@ -314,6 +316,11 @@ public class AdminController {
 			String[] all = manageTrainingPartnerSave.split("&");
 			model.addAttribute("id" , all[1]);
 			model.addAttribute("pwd" , all[0]);
+				JavaMail javaMail = new JavaMail();
+				//javaMail.mailProperty("Thanks", manageTrainingPartnerForm.getEmail(), manageTrainingPartnerForm.getUserId());
+				javaMail.mailProperty("Hello", "manindramishra.seven@gmail.com", "10002");
+				
+			
 			return "welcomeManageTrainingPartner";
 		}else{
 			model.addAttribute("id" , "User id created successfully !!");
@@ -341,6 +348,9 @@ public class AdminController {
 			String[] all = manageAssessmentAgencySave.split("&");
 			model.addAttribute("id" , all[1]);
 			model.addAttribute("pwd" , all[0]);
+			JavaMail javaMail = new JavaMail();
+			javaMail.mailProperty("Thanks", manageAssessmentAgencyForm.getEmail(), manageAssessmentAgencyForm.getUserId());
+			
 			return "welcomeManageTrainingPartner";
 		}else{
 			model.addAttribute("id" , "User id created successfully !!");

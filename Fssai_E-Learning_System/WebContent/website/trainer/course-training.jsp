@@ -62,6 +62,8 @@
                     <h4>Course Code: <span class="f16">0034</span></h4>
                     <h4>Course Duration: <span class="f16">2 Hours</span></h4><br>
                     <h4><a class="link-bg text-center" href="playvedio.fssai">Training Video</a></h4>
+                    <input type="file" accept="pdf/Sath.mp4"/>
+					<video controls autoplay></video>
                   </fieldset>
                   <br>
                   

@@ -46,6 +46,7 @@ public class SaveTPAssementCalender extends HttpServlet {
         System.out.println("Append Data = "+name);
 		AssesmentCalender assesmentCalender = new AssesmentCalender();
 		Integer trainingID = 0;
+		Integer assessorID = 0;
         
         if(name != null && name.length() > 0){
         	String[] whereList = name.split("&");
@@ -69,6 +70,10 @@ public class SaveTPAssementCalender extends HttpServlet {
         		}else if(i==5){
         			trainingID = Integer.parseInt(whereList[5]);
         			//stringBuffer.append(whereList[4] != null & whereList[4].equals("null") & whereList[4].length() > 0 ? " AND B.COURSETYPEID"+whereList[4] : "");
+        		}else if(i==6){
+        			assessorID = Integer.parseInt(whereList[6]);
+        			assesmentCalender.setAssessorID(assessorID);
+        			//stringBuffer.append(whereList[4] != null & whereList[4].equals("null") & whereList[4].length() > 0 ? " AND B.COURSETYPEID"+whereList[4] : "");
         		}
         	}
         }
@@ -83,6 +88,7 @@ public class SaveTPAssementCalender extends HttpServlet {
 				.load(TrainingCalendar.class, trainingID);
 				trainingCalendar.setAssessmentDate(assesmentCalender.getAssessmentDate());
 				trainingCalendar.setAssessmentTime(assesmentCalender.getAssessmentTime());
+				trainingCalendar.setAssessor(assesmentCalender.getAssessorID());
 		session.update(trainingCalendar);
 		session.beginTransaction().commit();
 		session.close();	

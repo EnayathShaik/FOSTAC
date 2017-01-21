@@ -97,7 +97,7 @@ function onFeedbackSave(feedbackMasterList){
 			<!-- Page Content -->
 			<div id="page-content-wrapper">
 				<div class="container-fluid">
-				 <input type="hidden" id="courseId" value="${courseName.coursenameid}">
+				 <input type="hidden" id="courseId" value="${courseTrainee.courseNameID}">
 				 <div class="row">
                   <div class="table-responsive">
                 <div class="col-xs-12">
@@ -105,10 +105,8 @@ function onFeedbackSave(feedbackMasterList){
                     <legend>
                     <h3>Course Details</h3>
                     </legend>
-                    <h4>Course Name: <span class="f16">${courseName.coursename}</span></h4>
-                    <h4>Course Code: <span class="f16">${courseName.coursenameid}</span></h4>
-                    <h4>Course Duration: <span class="f16">${courseName.courseduration}</span></h4>
-                  </fieldset>
+                   <%@include file="../commonjsp/course.jsp" %>
+                     </fieldset>
                   <br>
                       <fieldset>
                     <legend>

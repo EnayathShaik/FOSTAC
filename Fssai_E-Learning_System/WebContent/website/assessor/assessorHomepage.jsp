@@ -8,7 +8,7 @@ window.onload = OnStart;
 function searchUpcomingTrainings(){
 	
 	$('#tblUpcomingAssessments tr').remove();
-	$('#tblUpcomingAssessments').append('<thead> <tr class="background-open-vacancies"> <th>S.No</th> <th>Traning Course Name</th> <th>Training Date</th> <th>Training Course Address</th> <th>No. Of Participants</th><th> &nbsp;</th></tr> </thead>');
+	$('#tblUpcomingAssessments').append('<thead> <tr class="background-open-vacancies"> <th>S.No</th> <th>Traning Course Name</th> <th>Training Date</th> <th>Training Course Address</th> <th>No. Of Participants</th></tr> </thead>');
 	var result="";
 	//var id = document.getElementById("assessmentAgencyId").value;
 	var assessorId =$('currentAssessorId').value;
@@ -28,16 +28,11 @@ function searchUpcomingTrainings(){
 	$.each(jsonData , function(i , obj)
 	{
 		$('#tblUpcomingAssessments').append('<tr id="tableRow"><td>'+j++ +'</td>'+
+				'<td>'+obj[0]+'</td>'+
 				'<td>'+obj[1]+'</td>'+
 				'<td>'+obj[2]+'</td>'+
-				'<td>'+obj[5]+'</td>'+
-				'<td>'+obj[6]+'</td>'+
-				//'<td><input type="hidden" id="statusHidden'+obj[4]+'" value="'+obj[5]+'"/><a href="#" onclick="applyAssessment('+obj[4]+');">'+'Apply'+'</a></td>'+
-// 				'<td><input type="hidden" id="calendarId'+obj[4]+'" value="'+ obj[4]+'" /></td>'+
-				'<td><input type = "checkbox" name ="assessments" value ='+obj[3]+'></td>'+
+				'<td>'+obj[3]+'</td>'+
 				'</tr>');
-		console.log("0-"+obj[0] +" #1-" +obj[1] +" #2-" +obj[2] +" #3-"+obj[3] +" #4-"+obj[4]+" #5-"+obj[5]);
-		currentAssessorId = obj[0];
 	});
 	
 	},
@@ -99,8 +94,8 @@ function applyAssessments(){
 
                   <!-- vertical button -->
                   <div class="row">
-                <div class="col-lg-12"> <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome Training Partner</span> </a> </div>
-              </div>
+                	<div class="col-lg-12"> <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome Asessor</span> </a> </div>
+             	  </div>
 
                   <!-- add the content here for main body --> 
                   <!-- timeline  -->
@@ -129,7 +124,7 @@ function applyAssessments(){
                             </table>
                         </div>
                         </div>
-                        <button type="submit" class="btn login-btn pull-right show-details-vacancy collapsed" onclick="applyAssessments();">Accept</button>
+                        <!-- <button type="submit" class="btn login-btn pull-right show-details-vacancy collapsed" onclick="applyAssessments();">Accept</button> -->
                           </fieldset>               
                   </div>
                     </div>

@@ -120,7 +120,7 @@
       </table></td>
     <td align="center" style="border-top: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;"><table width="100%" border="0">
         <tr>
-          <td width="61%" align="center"><img src="${pageContext.request.contextPath}/website/img/admit-card-candidate-photo.png" width="76" height="93"  alt=""/><br>
+          <td width="61%" align="center"><img src="<%=getServletContext().getRealPath("/WEB-INF/")/traineeImage/MANNUT1.png")%>" width="76" height="93"  alt=""/><br>
             <strong>Candidate Photo</strong></td>
           <td width="39%"><img src="${pageContext.request.contextPath}/website/img/admit-card-candidate-signature.png" width="108" height="55"  alt=""/><br>
             <strong>Canditate Signature</strong></td>

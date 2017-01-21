@@ -221,9 +221,11 @@ return result;
                                                                 
                                                             </ul>
                                                         </div>
-                                                        <select class="form-control" name="selTraineeStatus" id = "selTraineeStatus"> </select>
+                                                        <select class="form-control" name="selTraineeStatus" id = "selTraineeStatus"><option value="0">Please Select</option> </select>
+														
 														<script>
 															var selTraineeStatusOptions = "";
+															//selTraineeStatusOptions += "<option value="0">Please Select</option>"
 															for(var i=0 ; i < statusList.length; i++)
 																{
 																	console.log(statusList[i].id + " -- "+ statusList[i].value);

@@ -143,6 +143,10 @@ public class MainRedirect {
 	   public String feedback() {
 		   return "feedback";
 	   }
+	   @RequestMapping(value="/faq" ,method = RequestMethod.GET)
+	   public String faq() {
+		   return "faq";
+	   }
 	   @RequestMapping(value="/knowYourTrainingPartner" ,method = RequestMethod.GET)
 	   public String knowYourTrainingPartner() {
 		   return "knowYourTrainingPartner";

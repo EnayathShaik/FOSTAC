@@ -58,15 +58,16 @@
                             <th>Trainer Name</th>
                             <th class="text-center">View Profile</th>
                             <th>Status</th>
+                            <th></th>
                           </tr>
                         </thead>
                         <tbody id="applicationStatusInner">
                      
                         </tbody>
                       </table>
-                      <a href="#" onClick="updateApplicationStatusForEnrolledVacancy()">
+                     <!--  <a href="#" onClick="updateApplicationStatusForEnrolledVacancy()">
                       <input style="width:200px;" type="button" class="form-control login-btn" value="Save" />
-                      </a>
+                      </a> -->
                     </fieldset>
                   </div>
                   
@@ -101,21 +102,49 @@
                 
  for(index=0;index<list.length;index++){
 	 $('#hiddenVaraibles').append('<input type="hidden" id="trainerId_'+index+'" name="trainerId_'+index+'" value="'+list[index].id+'">'); 
-	  $('#applicationStatusInner').append('<tr>'+
-			  '<td>'+(index+1)+'</td><td>'+list[index].value+'</td><td align="center"><input class="login-btn" type="button" value="Open"></td>'+
-			  '<td><select class="form-control" id="selectOption_'+index+'"><option >Selected</option> <option>Rejected</option><option>Under Process</option>'+
-			  '<option>Cancelled</option></select></td></tr>');
+	 if(list[index].status == 'CON'){
+		 $('#applicationStatusInner').append('<tr>'+
+				  '<td>'+(index+1)+'</td><td>'+list[index].value+'</td><td align="center"><input class="login-btn" type="button" value="Open"></td>'+
+				  '<td><select class="form-control" id="selectOption_'+index+'"><option value="0">Please Select</option><option selected="true"  value="CON">Selected</option> <option value="REJ">Rejected</option><option value="PEN">Under Process</option>'+
+				  '<option value="CAN">Cancelled</option></select></td><td><a href="#" onClick="updateApplicationStatusForEnrolledVacancySingle(\''+list[index].id+'\',\''+index+'\');">Save</a> </td></tr>');
+
+	 } else  if(list[index].status == 'CAN'){
+		 $('#applicationStatusInner').append('<tr>'+
+				  '<td>'+(index+1)+'</td><td>'+list[index].value+'</td><td align="center"><input class="login-btn" type="button" value="Open"></td>'+
+				  '<td><select class="form-control" id="selectOption_'+index+'"><option value="0">Please Select</option><option value="CON">Selected</option> <option value="REJ">Rejected</option><option value="PEN">Under Process</option>'+
+				  '<option selected="true"  value="CAN">Cancelled</option></select></td><td><a href="#" onClick="updateApplicationStatusForEnrolledVacancySingle(\''+list[index].id+'\',\''+index+'\');">Save</a> </td></tr>');
+
+	 } else  if(list[index].status == 'REJ'){
+		 $('#applicationStatusInner').append('<tr>'+
+				  '<td>'+(index+1)+'</td><td>'+list[index].value+'</td><td align="center"><input class="login-btn" type="button" value="Open"></td>'+
+				  '<td><select class="form-control" id="selectOption_'+index+'"><option value="0">Please Select</option><option value="CON">Selected</option> <option selected="true"  value="REJ">Rejected</option><option value="PEN">Under Process</option>'+
+				  '<option value="CAN">Cancelled</option></select></td><td><a href="#" onClick="updateApplicationStatusForEnrolledVacancySingle(\''+list[index].id+'\',\''+index+'\');">Save</a> </td></tr>');
+
+	 } else  if(list[index].status == 'PEN'){
+		 $('#applicationStatusInner').append('<tr>'+
+				  '<td>'+(index+1)+'</td><td>'+list[index].value+'</td><td align="center"><input class="login-btn" type="button" value="Open"></td>'+
+				  '<td><select class="form-control" id="selectOption_'+index+'"><option value="0">Please Select</option><option value="CON">Selected</option> <option value="REJ">Rejected</option><option selected="true"  value="PEN">Under Process</option>'+
+				  '<option value="CAN">Cancelled</option></select></td><td><a href="#" onClick="updateApplicationStatusForEnrolledVacancySingle(\''+list[index].id+'\',\''+index+'\');">Save</a> </td></tr>');
+
+	 } else {
+		 $('#applicationStatusInner').append('<tr>'+
+				  '<td>'+(index+1)+'</td><td>'+list[index].value+'</td><td align="center"><input class="login-btn" type="button" value="Open"></td>'+
+				  '<td><select class="form-control" id="selectOption_'+index+'"><option value="0">Please Select</option><option value="CON">Selected</option> <option value="REJ">Rejected</option><option value="PEN">Under Process</option>'+
+				  '<option value="CAN">Cancelled</option></select></td><td><a href="#" onClick="updateApplicationStatusForEnrolledVacancySingle(\''+list[index].id+'\',\''+index+'\');">Save</a> </td></tr>');
+
+	 }
  }
- function updateApplicationStatusForEnrolledVacancy(){
-	 var strIdList=[];
+ function updateApplicationStatusForEnrolledVacancySingle(id,index){
+	 var status = $("#selectOption_"+index+"").val();
+	 /* var strIdList=[];
 	 var statusList=[];
 	 for(index=0;index<list.length;index++){
 		 strIdList.push($("#trainerId_"+index+"").val());
 		 statusList.push($("#selectOption_"+index+"").val());
-	 }
+	 } */
 	 var data=JSON.stringify({
-		 	loginId:strIdList.join(),
-			status:statusList.join(),
+		 	loginId:id,
+			status:status,
 	});
 		$.ajax({
 		      type: 'post',

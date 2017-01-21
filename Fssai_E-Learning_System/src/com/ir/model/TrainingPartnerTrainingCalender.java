@@ -12,6 +12,8 @@ public class TrainingPartnerTrainingCalender {
 	private List<StringStringBean> statusList;
 	private List<StringStringBean> modeOfTrainingList;
 	private List<PersonalInformationTrainingPartner> trainingCenterList;
+	private List<IntStringBean> assessorList;
+	private List<IntStringBean> traineeList;
 	/**
 	 * @return the statusList
 	 */
@@ -85,5 +87,19 @@ public class TrainingPartnerTrainingCalender {
 	public void setTrainingCenterList(List<PersonalInformationTrainingPartner> trainingCenterList) {
 		this.trainingCenterList = trainingCenterList;
 	}
+	public List<IntStringBean> getAssessorList() {
+		return assessorList;
+	}
+	public void setAssessorList(List<IntStringBean> assessorList) {
+		this.assessorList = assessorList;
+	}
+	public List<IntStringBean> getTraineeList() {
+		return traineeList;
+	}
+	public void setTraineeList(List<IntStringBean> traineeList) {
+		this.traineeList = traineeList;
+	}
+	
+	
 
 }

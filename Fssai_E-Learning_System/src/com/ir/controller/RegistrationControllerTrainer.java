@@ -1,6 +1,7 @@
 package com.ir.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.google.gson.Gson;
 import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.RegistrationFormTrainer;
 import com.ir.model.CourseEnrolledUser;
@@ -23,12 +25,16 @@ import com.ir.model.CourseName;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
+import com.ir.model.PostVacancyTrainingCenter;
+import com.ir.model.PostVacancyTrainingCenterBean;
 import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.service.PageLoadServiceTrainer;
 import com.ir.service.RegistrationServiceTrainer;
 import com.ir.service.RegistrationServiceTrainingPartner;
 import com.ir.service.TraineeService;
+import com.ir.service.TrainingPartnerService;
+import com.ir.util.JavaMail;
 import com.ir.util.Profiles;
 
 @Controller
@@ -49,6 +55,10 @@ public class RegistrationControllerTrainer implements Serializable{
 	@Autowired
 	@Qualifier("traineeService")
 	public TraineeService traineeService;
+	
+	@Autowired
+	@Qualifier("trainingPartnerService")
+	TrainingPartnerService trainingPartnerService; 
 	
 	
 	@ModelAttribute("trainingPartnerNameList" )
@@ -113,6 +123,8 @@ public class RegistrationControllerTrainer implements Serializable{
 			String[] all = personalInformationTrainer.split("&");
 			model.addAttribute("id" , all[1]);
 			model.addAttribute("pwd" , all[0]);
+			JavaMail javaMail = new JavaMail();
+			javaMail.mailProperty("Thanks", registrationFormTrainer.getTrainingCenterPermanentEmail(), registrationFormTrainer.getUserId());
 			//return "registrationFormTrainee";
 			return "welcome";
 		}else{
@@ -123,8 +135,29 @@ public class RegistrationControllerTrainer implements Serializable{
 	}
 	
 	@RequestMapping(value="/search-and-apply" , method=RequestMethod.GET)
-	public String searchandapply(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer )
+	public String searchandapply(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer, Model model,HttpSession session )
 	{
+		
+		Integer userId = (Integer) session.getAttribute("userId");
+		Integer profileId = (Integer) session.getAttribute("profileId");
+		List<PostVacancyTrainingCenter> postVacancyTrainingCenter=trainingPartnerService.getPostVacancyTrainingList();
+		List<PostVacancyTrainingCenterBean> vacancyTrainingCenterBeans=new ArrayList<>();
+		for(PostVacancyTrainingCenter pvtc:postVacancyTrainingCenter){
+			PostVacancyTrainingCenterBean applicationStatusBean=trainingPartnerService.getApplicationStatusBean(String.valueOf(userId),pvtc.getCourseName().getCoursenameid(),pvtc.getCourseType().getCourseTypeId());
+			if(applicationStatusBean.getStatus()!=null){
+				applicationStatusBean.setCoursetypeName(pvtc.getCourseType().getCourseType());
+				applicationStatusBean.setStrCourseName(pvtc.getCourseName().getCoursename());
+				applicationStatusBean.setTrainingDate(pvtc.getTrainingDate());
+				applicationStatusBean.setPersonalInformationTrainingPartner(pvtc.getTrainingCenter());
+				applicationStatusBean.setPostvacancyID(pvtc.getId());
+				vacancyTrainingCenterBeans.add(applicationStatusBean);
+			}
+		}
+		
+		
+		model.addAttribute("postVacancyTrainingCenter", new Gson().toJson(postVacancyTrainingCenter));
+		model.addAttribute("vacancyTrainingCenterBeans", new Gson().toJson(vacancyTrainingCenterBeans));
+		
 		return "search-and-apply";
 	}
 	

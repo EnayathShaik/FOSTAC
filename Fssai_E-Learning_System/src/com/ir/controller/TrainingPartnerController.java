@@ -63,6 +63,11 @@ public class TrainingPartnerController {
 	
 	@RequestMapping(value="/postVacancyTrainingPartner" , method=RequestMethod.GET)
 	public String postVacancy(@ModelAttribute("postVacancyTrainingCenterForm") PostVacancyTrainingCenterForm postVacancyTrainingCenterForm,HttpSession session,BindingResult result , Model model ){
+		Integer userId = (Integer) session.getAttribute("userId");
+		Integer profileId = (Integer) session.getAttribute("profileId");
+		List<IntStringBean> trainingCenterList = trainingPartnerService.getTrainingCenterList(userId,profileId);
+		model.addAttribute("trainingCenterList" , trainingCenterList);
+		
 		return "postVacancyTrainingPartner";
 		
 	}
@@ -93,6 +98,10 @@ public class TrainingPartnerController {
 		trainingpartnerapplicationstatus.setCourseTypes(courseTypes);
 		List<PersonalInformationTrainingPartner> trainingCenterList=trainingCenterList();
 		trainingpartnerapplicationstatus.setTrainingCenterList(trainingCenterList);
+		List<IntStringBean> traineeList = trainingPartnerService.getTraineeList();
+		trainingpartnerapplicationstatus.setTraineeList(traineeList);
+		
+		
 //		trainingpartnerapplicationstatus.setCourseNames(courseNames);
 		Gson gson = new Gson();
 		model.addAttribute("trainingpartnerapplicationstatus" , gson.toJson(trainingpartnerapplicationstatus));
@@ -169,16 +178,19 @@ public class TrainingPartnerController {
 		}
 		
 		List<CourseType> courseTypes = trainingPartnerService.courseTypes();
+		
 		//List<CourseName> courseNames = trainingPartnerService.getCourseNameList();
 		trainingpartnerassessmentcalendar.setCourseTypes(courseTypes);
 		List<IntStringBean> trainerList = trainingPartnerService.getTrainerList();
+		List<IntStringBean> assessorList = trainingPartnerService.getAssessorList();
 		trainingpartnerassessmentcalendar.setTrainerList(trainerList);
+		trainingpartnerassessmentcalendar.setAssessorList(assessorList);
 //		trainingpartnerassessmentcalendar.setCourseNames(courseNames);
 		Gson gson = new Gson();
 		model.addAttribute("trainingpartnerassessmentcalendar" , gson.toJson(trainingpartnerassessmentcalendar));
 		return "trainingpartnerassessmentcalendar";
 	}
-	@RequestMapping(value="/trainingpartnerapplicationstatus" , method=RequestMethod.GET)
+	/*@RequestMapping(value="/trainingpartnerapplicationstatus" , method=RequestMethod.GET)
 	public String trainingpartnerapplicationstatus(@ModelAttribute("trainingpartnerapplicationstatus") TrainingPartnerTrainingCalender trainingpartnerapplicationstatus,HttpSession session,BindingResult result , Model model){
 		if(result.hasErrors()){
 			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
@@ -193,8 +205,16 @@ public class TrainingPartnerController {
 //		trainingpartnerapplicationstatus.setCourseNames(courseNames);
 		Gson gson = new Gson();
 		model.addAttribute("trainingpartnerapplicationstatus" , gson.toJson(trainingpartnerapplicationstatus));
+		
+		return "trainingpartnerapplicationstatus";
+	}*/
+	
+	@RequestMapping(value="/trainingpartnerapplicationstatus" , method=RequestMethod.GET)
+	public String trainingpartnerapplicationstatus(@ModelAttribute("trainingpartnerapplicationstatus") TrainingPartnerTrainingCalender trainingpartnerapplicationstatus,HttpSession session,BindingResult result , Model model){
+	
 		return "trainingpartnerapplicationstatus";
 	}
+	
 	@RequestMapping(value="/trainingpartnerapplicationstatus1" , method=RequestMethod.GET)
 	public String trainingpartnerapplicationstatus1(@ModelAttribute("trainingpartnerapplicationstatus") TrainingPartnerTrainingCalender trainingpartnerapplicationstatus,HttpSession session,BindingResult result , Model model){
 		if(result.hasErrors()){
@@ -361,7 +381,9 @@ public class TrainingPartnerController {
 		if(postVacancyTrainingCenterForm.getTrainingCenter()==0){
 			isPostVacancyTrainingPartner=false;
 			int loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
-			postVacancyTrainingCenterForm.setTrainingCenter(loginService.FullDetailtrainingpartner(loginId).getPersonalInformationTrainingPartnerId());
+			
+			//postVacancyTrainingCenterForm.setTrainingCenter(loginService.FullDetailtrainingpartner(loginId).getPersonalInformationTrainingPartnerId());
+			//postVacancyTrainingCenterForm.setTrainingCenter(trainingCenter)
 		}
 		String postVacancy = trainingPartnerService.postVacancyTrainingPartner(postVacancyTrainingCenterForm);
 		  if(postVacancy.equalsIgnoreCase("created")){
@@ -441,10 +463,14 @@ public class TrainingPartnerController {
 	public void applyForVacancy(@RequestBody PostVacancyTrainingCenterBean postVacancyTrainingCenterBean,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
 		JsonResponse responseObj=new JsonResponse();
 		responseObj.setId(postVacancyTrainingCenterBean.getTrainingCenter());
+		Integer profileID = 0;
+		Integer userId = 0;
 		try{
 			HttpSession session=httpServletRequest.getSession(false);
+			profileID = (Integer) session.getAttribute("profileId");
+			userId = (Integer) session.getAttribute("userId");
 			postVacancyTrainingCenterBean.setLoginId(session.getAttribute("loginIdUnique").toString());
-			int appliedId = trainingPartnerService.saveVacancy(postVacancyTrainingCenterBean);
+			int appliedId = trainingPartnerService.saveVacancy(postVacancyTrainingCenterBean,profileID,userId);
 			if(appliedId>0){
 				responseObj.setMessage("Vacancy applyed successfully");
 			}else{

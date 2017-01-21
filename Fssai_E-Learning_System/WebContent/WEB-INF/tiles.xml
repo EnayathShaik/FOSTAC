@@ -65,6 +65,10 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/contact.jsp" />
 	</definition>
+	<definition name="faq" extends="base.before.login">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/faq.jsp" />
+	</definition>
 	<definition name="login" extends="base.before.login">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/login.jsp" />
@@ -163,6 +167,10 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainee/contact.jsp" />
 	</definition> -->
+	<definition name="upload-image" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainee/upload-image.jsp" />
+	</definition>
 	<definition name="basic" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainee/basic.jsp" />
@@ -491,8 +499,12 @@
 	</definition>
 	<definition name="trainingpartnerapplicationstatus" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
-		<put-attribute name="body" value="/website/trainingPartner/trainingpartnerapplicationstatus.jsp" />
+		<put-attribute name="body" value="/website/commonjsp/applicationstatus.jsp" />
 	</definition>
+	<!-- <definition name="trainingpartnerapplicationstatus" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainingPartner/trainingpartnerapplicationstatus.jsp" />
+	</definition> -->
 	<definition name="trainingpartnerapplicationstatus1" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainingCenter/trainingpartnerapplicationstatus.jsp" />

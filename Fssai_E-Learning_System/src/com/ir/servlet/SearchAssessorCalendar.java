@@ -58,68 +58,29 @@ public class SearchAssessorCalendar extends HttpServlet {
 				response.setContentType("text/html;charset=UTF-8");
 				String id = request.getQueryString();
 		        PrintWriter out = response.getWriter();
+		        Configuration conf = new Configuration();
+				conf.configure("/hibernate.cfg.xml");
+				SessionFactory sf = conf.buildSessionFactory();
+				Session session = sf.openSession();
+				String newList=null;
+				String sql = "select B.coursename,A.trainingdate, "
+						+ "concat(C.trainingpartnerpermanentline1, ', ', C.trainingpartnerpermanentline2, ' -', dt.districtname) as address, "
+						+ "(select count(1) from courseenrolleduser where trainingcalendarid=A.trainingcalendarid) "
+						+ "from trainingcalendar A "
+						+ "inner join coursename B on(A.coursename=B.coursenameid) "
+						+ "inner join personalinformationtrainingpartner C on(A.trainingcenter=C.personalinformationtrainingpartnerid) "
+						+ "inner join district dt on dt.districtid = C.trainingpartnerpermanentdistrict  ";
 			
-				try {
-					Class.forName("org.postgresql.Driver");
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				Connection conn = null;
-				try {
-					conn = DriverManager.getConnection(DBUtil.databaseUrl,DBUtil.dbUsername,DBUtil.dbPassword);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				ResultSet rs = null;
-				PreparedStatement stmt = null;
-				System.out.println("before sql query");
-				String sql = "select pia.personalinformationassessorid,cn.coursename, tc.trainingdate, "
-						+ "pia.assessorcorrespondencedistrict , tc.trainingcalendarid,ce.coursenameid,"
-						+ "concat(pit.trainingpartnerpermanentline1, ', ', pit.trainingpartnerpermanentline2, ' -', dt.districtname) as address , count(ceu.courseenrolleduserid) "
-						+ "from personalinformationassessor pia "
-						+ "inner join courseenrolled ce on ce.logindetails = pia.logindetails "
-						+ "inner join trainingcalendar tc on tc.coursename = ce.coursenameid and tc.personalinformationassessorid is null "
-						+ "inner join personalinformationtrainingpartner pit on pit.personalinformationtrainingpartnerid = tc.trainingcenter "
-						+ "inner join courseenrolleduser ceu on ceu.trainingcalendarid = tc.trainingcalendarid "
-						+ "inner join coursename cn on cn.coursenameid = tc.coursename "
-						+ "inner join district dt on dt.districtid = pit.trainingpartnerpermanentdistrict "
-						+ "where pia.personalinformationassessorid = '710' "
-						+ "group by pia.personalinformationassessorid, pia.assessorcorrespondencedistrict , tc.trainingcalendarid,ce.coursenameid, tc.trainingdate, cn.coursename, address";
-				System.out.println(sql);
-				List listUpcomingAssessments = new ArrayList<>();
-				try {
-					stmt = conn.prepareStatement(sql);
-					System.out.println(stmt.toString());
-					rs = stmt.executeQuery();
-					
-					while(rs.next()){
-						List upcomingAssessment = new ArrayList<>();
-						upcomingAssessment.add(rs.getString(1));
-						upcomingAssessment.add(rs.getString(2));
-						upcomingAssessment.add(rs.getString(3));
-						upcomingAssessment.add(rs.getInt(5));
-						upcomingAssessment.add(rs.getString(6));
-						upcomingAssessment.add(rs.getString(7));
-						upcomingAssessment.add(rs.getString(8));
-						listUpcomingAssessments.add(upcomingAssessment);
-					}
-				} catch (SQLException e) {
-					System.out.println("Error while fetching upcoming assement calendars : "+e.getMessage());
-				}finally{
-					try {
-						if(rs != null){
-							rs.close();
-						}
-						if(conn != null){
-							conn.close();
-						}
-					} catch (SQLException e) {
-					}
-				}
-				Gson g =new Gson();
-				String newList = g.toJson(listUpcomingAssessments); 
+					Query query = session.createSQLQuery(sql);
+					List list = query.list();
+					System.out.println(list.size());
+					session.close();
+
+						System.out.println("data selected finally  " );
+						System.out.println(list);
+						Gson g =new Gson();
+						newList = g.toJson(list); 
+				
 				out.write(newList);
 				out.flush();
 		

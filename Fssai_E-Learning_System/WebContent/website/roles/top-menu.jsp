@@ -42,6 +42,7 @@
 								aria-haspopup="true" aria-expanded="false"><i
 									class="fa fa-cog fa-spin"></i> <span class="caret"></span></a>
 								<ul class="dropdown-menu">
+								<li><a href="uploadImage.fssai">Upload Image</a></li>
 									<li><a href="changePasswordTrainee.fssai">Change
 											Password</a></li>
 									<li><a href="fostac.fssai">Logout</a></li>
@@ -75,8 +76,8 @@
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
 							<li class="active hori"><a href="loginProcess.fssai">Home</a></li>
-							<li class="hori"><a href="search-and-apply.fssai">Search
-									& Apply Vacancy</a></li>
+							<!-- <li class="hori"><a href="search-and-apply.fssai">Search
+									& Apply Vacancy</a></li> -->
 							<li class="hori"><a href="update-profile.fssai?userId=0">Update
 									Profile</a></li>
 							<li class="hori"><a href="contactTrainee.fssai">Contact

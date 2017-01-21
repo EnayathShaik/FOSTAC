@@ -9,7 +9,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class SendContectMail {
+public class JavaMail {
 
 	private String from = "fics@fssai.gov.in";
 	String password = "F$$@i2014";
@@ -31,9 +31,6 @@ public class SendContectMail {
 
 		boolean flag = false;
 		this.body = msg;
-		String toEmail = "fics@fssai.gov.in";
-
-		this.to = toEmail;
 		String ret = "success";
 		try {
 			Session session = Session.getDefaultInstance(properties,
@@ -48,9 +45,9 @@ public class SendContectMail {
 					InternetAddress.parse(email));
 			message.setSubject(subject);
 			System.out.println("in send mail class");
-			message.setText("Hello my  Id is  :- " + id
-					+ ",  My EmailId is :- " + email
-					+ ", My message to You:-  " + body);
+			message.setText("Dear " + id
+					+ ",  Your EmailId is :- " + email
+					+ ", Your ID Created Successfully.:-  " + body);
 			Transport.send(message);
 			System.out.println("after sent mail");
 

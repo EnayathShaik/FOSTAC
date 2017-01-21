@@ -31,13 +31,13 @@ import com.ir.model.PersonalInformationTrainee;
  * Servlet implementation class DeleteState
  */
 
-public class updateAttendanceStatus extends HttpServlet {
+public class UpdateTraineeAssessmentResult extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public updateAttendanceStatus() {
+    public UpdateTraineeAssessmentResult() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -66,25 +66,22 @@ public class updateAttendanceStatus extends HttpServlet {
 		}
 		
 		String[] updateDetails = name.split("&");
-		String id , status ;	
+		String id , status , comment ;	
 		id= (updateDetails[0].split("="))[1];
 		
 		status = (updateDetails[1].split("="))[1];
+		comment = (updateDetails[2].split("="))[1];
 		System.out.println("courseenroledId "+id);
-		System.out.println("payment==>"+status);
+		System.out.println("result==>"+status);
+		System.out.println("comment==>"+comment);
 		Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
 		
 		CourseEnrolledUser courseEnrolledUser = (CourseEnrolledUser) session.load(CourseEnrolledUser.class, Integer.parseInt(id));
-		if(profileID == 5){
-			courseEnrolledUser.setUserStaus(status);
-		}else if(profileID == 6){
-			courseEnrolledUser.setUserStausAssessor(status);
-		}
-		
-		
+		courseEnrolledUser.setResult(status);
+		courseEnrolledUser.setAssessorComment(comment);
 		session.update(courseEnrolledUser);
 		session.beginTransaction().commit();
 		session.close();
