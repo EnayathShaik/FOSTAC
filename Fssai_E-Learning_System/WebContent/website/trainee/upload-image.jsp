@@ -1,3 +1,6 @@
+<%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- horizontal navigation -->
 <section>
 	<%@include file="../roles/top-menu.jsp"%>
@@ -36,15 +39,27 @@
 							<div class="table-responsive">
 								<div class="col-xs-12">
 									<fieldset>
+										<% 
+										String actionName = "";
+										String uploadHeader = "";
+										if (session.getAttribute("profileId").equals(3)) {
+											
+											 actionName = "saveImage.fssai";
+											 uploadHeader = "Upload Image";
+										} else if(session.getAttribute("profileId").equals(4)){ 
+											actionName = "saveFile.fssai";
+											 uploadHeader = "Upload Profile";
+										}
+										%>
 										<legend>
-											<h3>Upload Image</h3>
+											<h3><%=uploadHeader%></h3>
 										</legend>
-										<form method="POST" action="savefile.fssai"
-											enctype="multipart/form-data">
+										
+										<cf:form method="POST" action="<%=actionName%>" enctype="multipart/form-data">
 											<span id="preview"></span> 
 											<input type="file" id="file" name="file" />
 											<p><input type="submit" value="Upload"></p>  
-										</form>
+										</cf:form>
 
 									</fieldset>
 									<br>

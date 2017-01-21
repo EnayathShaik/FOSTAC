@@ -5,9 +5,11 @@ import java.util.List;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.file.FileSystems;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -110,25 +112,65 @@ public class TraineeController {
 	@RequestMapping(value="/uploadImage" , method=RequestMethod.GET)
 	public String uploadImage(@ModelAttribute("uploadImage") CourseEnrolledUserForm courseEnrolledUserForm ,
 		 @ModelAttribute("loginUser") PersonalInformationTrainee pit ){
-		
-		
-		
 		return "upload-image";
 	}
 	
-	 @RequestMapping(value="savefile",method=RequestMethod.POST)  
-	    public String saveimage( @RequestParam CommonsMultipartFile file,  
+	
+	@RequestMapping(value="/uploadProfile" , method=RequestMethod.GET)
+	public String uploadProfiles(@ModelAttribute("uploadImage") CourseEnrolledUserForm courseEnrolledUserForm ,
+		 @ModelAttribute("loginUser") PersonalInformationTrainee pit ){
+		return "upload-image";
+	}
+	
+	 @RequestMapping(value="saveFile",method=RequestMethod.POST)  
+	    public String saveFile( @RequestParam CommonsMultipartFile file,  
 	           HttpSession session) throws Exception{  
-		 	String UPLOAD_DIRECTORY = "/Trainee";
 		 	String userName = "";
 			int loginId = 0;
 			try{
+			userName = (String) session.getAttribute("userName");
+			// String ss = session.getServletContext().getContextPath();
+			String ss = session.getServletContext().getRealPath("")
+					.replace("Fssai_E-Learning_System", "uploadProfile");
+			System.out.println("**********************" + ss);
+			File dir = new File(ss);
+			if (!dir.exists())
+				dir.mkdirs();
+			String extension = "";
+			String fileName = file.getOriginalFilename();
+			int i = fileName.lastIndexOf('.');
+			if (i > 0) {
+				extension = fileName.substring(i + 1);
+			}
+			byte[] bytes = file.getBytes();
+			System.out.println("file name " + file.getOriginalFilename() + "  "
+					+ file.getContentType());
+			BufferedOutputStream stream = new BufferedOutputStream(
+					new FileOutputStream(new File(ss + File.separator
+							+ userName + "." +extension)));
+			stream.write(bytes);
+			stream.flush();
+			stream.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Exception while course details save : "
+					+ e.getMessage());
+		}
+
+		return "upload-image";
+	    }  
+	
+	 
+	 
+	 @RequestMapping(value="saveImage",method=RequestMethod.POST)  
+	    public String saveImage( @RequestParam CommonsMultipartFile file,  
+	           HttpSession session) throws Exception{  
+		 	String userName = "";
+			try{
 				userName = (String) session.getAttribute("userName");
 				//String ss = session.getServletContext().getContextPath();
-				String ss = session.getServletContext().getRealPath("/WEB-INF/");
-				
-				System.out.println("**********************"+ss);
-				File dir = new File(ss + File.separator + "traineeImage");
+				String ss = session.getServletContext().getRealPath("").replace("Fssai_E-Learning_System", "uploadImages");
+				File dir = new File(ss);
 				if (!dir.exists())
 					dir.mkdirs();
 			 	  
@@ -142,15 +184,10 @@ public class TraineeController {
 				e.printStackTrace();
 				System.out.println("Exception while course details save : "+ e.getMessage());
 			}
-			
-			
-			
-			
-	           
+			     
 	    return "upload-image";  
 	    }  
-	
-	@RequestMapping(value="/saveImage" , method=RequestMethod.POST)
+/*	@RequestMapping(value="/saveImage" , method=RequestMethod.POST)
 	public String Savemage(@RequestParam("name") String name,
 			@RequestParam("file") MultipartFile file){
 		if (!file.isEmpty()) {
@@ -178,7 +215,7 @@ public class TraineeController {
 			}
 		}
 		return "upload-image";
-	}
+	}*/
 	@RequestMapping(value="/courseTraining" , method=RequestMethod.GET)
 	public String courseTraining(@RequestParam(value = "courseTypeId", required = true)  String courseTypeId , Model model, HttpSession session){
 		Integer userId=Integer.parseInt(session.getAttribute("userId").toString());
@@ -680,5 +717,8 @@ public class TraineeController {
 		return "redirect:/loginProcess.fssai";
 	}
 	
+	
+	
+
 	
 }

@@ -713,5 +713,9 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/addHotel.jsp" />
 	</definition>
 
+<definition name="upload-profile" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainee/upload-image.jsp" />
+	</definition>
 
 </tiles-definitions>

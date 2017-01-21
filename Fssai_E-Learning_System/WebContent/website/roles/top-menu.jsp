@@ -89,6 +89,7 @@
 								aria-haspopup="true" aria-expanded="false"><i
 									class="fa fa-cog fa-spin"></i> <span class="caret"></span></a>
 								<ul class="dropdown-menu">
+								<li><a href="uploadProfile.fssai">Upload Profile</a></li>
 									<li><a href="changePasswordTrainee.fssai">Change
 											Password</a></li>
 									<li><a href="fostac.fssai">Logout</a></li>
