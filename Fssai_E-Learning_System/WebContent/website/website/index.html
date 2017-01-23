@@ -1,41 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="website/website/css/map.css" />
-  </head>
+</head>
 
-  <body>
-    
+<body>
+
     <div id="store-locator-container">
-      <div id="form-container">
-        <form id="user-location" method="post" action="#">
-            <div id="form-input">
-              <label for="address">Address or Zip Code:</label>
-             </div>
-             <input type="text" id="address" name="address" value ="110001" />
-            <button id="submit" type="submit" style="float:right;">Submit</button>
-        </form>
-      </div>
-
-      <div id="map-container">
-        <div id="loc-list">
-            <ul id="list"></ul>
+        <div id="form-container">
+            <form id="user-location" method="post" action="#">
+                <div id="form-input">
+                    <label for="address">Address or Zip Code:</label>
+                </div>
+                <input type="text" id="address" name="address" value="110001" />
+                <button id="submit" type="submit" style="float:right;">Submit</button>
+            </form>
         </div>
-        <div id="map" style="height:400px;width:400px;"></div>
-      </div>
+
+
     </div>
 
-<!--     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script> -->
-	<script src="website/website/js/jquery-1.10.1.min.js"></script>
+    <!--     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script> -->
+    <script src="website/website/js/jquery-1.10.1.min.js"></script>
     <script src="website/website/js/handlebars-1.0.0.min.js"></script>
     <script src="http://maps.google.com/maps/api/js?key=AIzaSyBYR9sMHXU4sgSB74aP2aUsjquQ4MMmpHY&sensor=false&region=IN"></script>
     <script src="website/website/js/jquery.storelocator.js"></script>
-      <script>
+    <script>
         $(function() {
-          $('#map-container').storeLocator();
+            $('#map-container').storeLocator();
         });
-      </script>
 
-  </body>
+    </script>
+
+</body>
+
 </html>
