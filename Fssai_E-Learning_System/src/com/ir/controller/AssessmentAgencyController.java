@@ -38,14 +38,18 @@ public class AssessmentAgencyController {
 	@RequestMapping(value="/contactAssessorSave" , method=RequestMethod.POST)
 	public String contactAssessorSave(@ModelAttribute("contactTrainee") ContactTrainee contactTrainee,
 			HttpSession session , Model modal){
-		System.out.println("in controller contact assessor agency save");
-		String id = contactTrainee.getUserId();
-		System.out.println("id    :"+ id);
-		String contactAssessorSave = assessmentAgencyService.contactAssessorSave(contactTrainee , id);
-		if(contactAssessorSave.equalsIgnoreCase("created")){
-			modal.addAttribute("created" , "Your contact details has been sent");
-		}else{
-			modal.addAttribute("created" , "Oops , something went wrong !!!");
+		try{
+			System.out.println("in controller contact assessor agency save");
+			String id = contactTrainee.getUserId();
+			System.out.println("id    :"+ id);
+			String contactAssessorSave = assessmentAgencyService.contactAssessorSave(contactTrainee , id);
+			if(contactAssessorSave.equalsIgnoreCase("created")){
+				modal.addAttribute("created" , "Your contact details has been sent");
+			}else{
+				modal.addAttribute("created" , "Oops , something went wrong !!!");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		return "contactAA";
 	}
@@ -53,15 +57,19 @@ public class AssessmentAgencyController {
 	@RequestMapping(value="/contactSave" , method=RequestMethod.POST)
 	public String contactSave(@ModelAttribute("contactTraineee") ContactTrainee contactTrainee,
 			HttpSession session , Model modal){
-		System.out.println("in controller contact assessor agency save");
-		String id = (String) session.getAttribute("logId");
-		//String id = contactTrainee.getUserId();
-		System.out.println("id    :"+ id);
-		String contactSave = assessmentAgencyService.contactAssessorSave(contactTrainee , id);
-		if(contactSave.equalsIgnoreCase("created")){
-			modal.addAttribute("created" , "Your mail has been sent");
-		}else{
-			modal.addAttribute("created" , "Oops , something went wrong !!!");
+		try{
+			System.out.println("in controller contact assessor agency save");
+			String id = (String) session.getAttribute("logId");
+			//String id = contactTrainee.getUserId();
+			System.out.println("id    :"+ id);
+			String contactSave = assessmentAgencyService.contactAssessorSave(contactTrainee , id);
+			if(contactSave.equalsIgnoreCase("created")){
+				modal.addAttribute("created" , "Your mail has been sent");
+			}else{
+				modal.addAttribute("created" , "Oops , something went wrong !!!");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		return "contactAA";
 	}
@@ -77,49 +85,62 @@ public class AssessmentAgencyController {
 	@RequestMapping(value="/passwordChangeAssesAgency" , method=RequestMethod.POST)
 	public String changePassword(@ModelAttribute("changePasswordForm") ChangePasswordForm changePasswordForm,HttpSession session,
 				 Model model){
-		String getConfirmation=null;
-		boolean getConfirm=false;
-		//String id=(String) session.getAttribute("loginUser");
-			System.out.println("in controller change password assessor agency save");
-			String id = (String) session.getAttribute("logId");
-			String loginClass= (String) session.getAttribute("logerClass");
-			System.out.println("id    :"+ id);
-			 getConfirm = assessmentAgencyService.changePasswordData(changePasswordForm, id);
-			if(getConfirm){
-				System.out.println("PASSWORD HAS BEEN CHANGED");
-				model.addAttribute("changed" , "Great , your password has been changed !!!");
-				System.out.println("PASSWORD HAS BEEN CHANGED");
-				return"changePasswordAssesAgency";}
-			else{
-				model.addAttribute("changed" , "Oops , Password doesn't Match !!!");
-				return "changePasswordAssesAgency";
-			}
+		try{
+			String getConfirmation=null;
+			boolean getConfirm=false;
+			//String id=(String) session.getAttribute("loginUser");
+				System.out.println("in controller change password assessor agency save");
+				String id = (String) session.getAttribute("logId");
+				String loginClass= (String) session.getAttribute("logerClass");
+				System.out.println("id    :"+ id);
+				 getConfirm = assessmentAgencyService.changePasswordData(changePasswordForm, id);
+				if(getConfirm){
+					System.out.println("PASSWORD HAS BEEN CHANGED");
+					model.addAttribute("changed" , "Great , your password has been changed !!!");
+					System.out.println("PASSWORD HAS BEEN CHANGED");
+				}
+				else{
+					model.addAttribute("changed" , "Oops , Password doesn't Match !!!");
+				}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "changePasswordAssesAgency";
 				
 			//return getConfirmation;
 			
 	}
 	@RequestMapping(value = "/logoutAssessor", method = RequestMethod.GET)
 	public String logout(@Validated @ModelAttribute("loginAssessor") LoginForm loginForm,HttpSession session,Model model) {
-		System.out.println("logout assessor");
-		model.addAttribute("created"," You have successfully logout");
-		session.invalidate();
+		try{
+			System.out.println("logout assessor");
+			model.addAttribute("created"," You have successfully logout");
+			session.invalidate();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return "loginAssessor";
 	}
 	
 	@RequestMapping(value="/viewAssessmentAgencyCalendar", method=RequestMethod.GET)
 	public String viewAssessmentAgencyCalendar(@Validated @ModelAttribute("assessmentAgencyForm") AssessmentAgencyForm assessmentAgencyForm,HttpSession httpSession,Model model){
 		int agencyId = (Integer)httpSession.getAttribute("loginIdUnique");
-		if(agencyId >0 ){
-			assessmentAgencyForm = assessmentAgencyService.getAssessmentAgencyForm(agencyId);
-			Gson gson = new Gson();
-			String assessmentAgencyFormData = gson.toJson(assessmentAgencyForm);
-			model.addAttribute("viewAssessmentAgencyCalendar" , assessmentAgencyFormData);
-			return "viewAssessmentAgencyCalendar";
-		} 
-		else{
-			model.addAttribute("error" , "Oops , You are not authorized !!!");
-			return "login";
+		try{
+			if(agencyId >0 ){
+				assessmentAgencyForm = assessmentAgencyService.getAssessmentAgencyForm(agencyId);
+				Gson gson = new Gson();
+				String assessmentAgencyFormData = gson.toJson(assessmentAgencyForm);
+				model.addAttribute("viewAssessmentAgencyCalendar" , assessmentAgencyFormData);
+				return "viewAssessmentAgencyCalendar";
+			} 
+			else{
+				model.addAttribute("error" , "Oops , You are not authorized !!!");
+				return "login";
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
+		return "login";
 	}
 	
 }

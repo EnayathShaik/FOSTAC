@@ -26,8 +26,12 @@ public class CommonController {
 	@RequestMapping(value= "/getCourseTrainingType", method=RequestMethod.POST)	
 	@ResponseBody
 	public String getCourseTrainingType(@RequestParam String courseNameId, Model model , HttpSession session){
-		
-		String modeOfTraining = commonService.getCourseTrainingType(courseNameId);
+		String modeOfTraining = "";
+		try{
+			modeOfTraining = commonService.getCourseTrainingType(courseNameId);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return modeOfTraining;
 	}
 	
@@ -41,12 +45,17 @@ public class CommonController {
 			System.out.println(result.getAllErrors());
 			return "changePasswordTrainee";
 		}
-		String id =(String) session.getAttribute("logId");
-		boolean changePasswordTraineeSave = commonService.changePasswordSave(changePasswordForm , id);
-		if(changePasswordTraineeSave){
-			model.addAttribute("created" , "Your password has changed !!!");
-		}else{
-			model.addAttribute("created" , "Oops, something went wrong !!!");
+		
+		try{
+			String id =(String) session.getAttribute("logId");
+			boolean changePasswordTraineeSave = commonService.changePasswordSave(changePasswordForm , id);
+			if(changePasswordTraineeSave){
+				model.addAttribute("created" , "Your password has changed !!!");
+			}else{
+				model.addAttribute("created" , "Oops, something went wrong !!!");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		return "changePasswordTrainee";
 	}

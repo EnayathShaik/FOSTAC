@@ -56,49 +56,31 @@ public class OnLoadAdminTrainingPartnerList extends HttpServlet {
 				System.out.println("onload admin trainer list in pending");
 				response.setContentType("text/html;charset=UTF-8");
 		        PrintWriter out = response.getWriter();
-			
-				try {
-					Class.forName("org.postgresql.Driver");
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				Connection conn = null;
-				try {
-					conn = DriverManager.getConnection(DBUtil.databaseUrl,DBUtil.dbUsername,DBUtil.dbPassword);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				ResultSet rs = null;
-				PreparedStatement stmt = null;
-				String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername , count(pitp.trainingpartnername) from personalinformationtrainingpartner as pitp "+ 
-							" inner join managetrainingpartner as mtp on pitp.trainingpartnername = mtp.managetrainingpartnerid "+
-							"  inner join logindetails as ld on pitp.logindetails = ld.id where ld.status='I' "+
-							" group by mtp.trainingpartnername , mtp.managetrainingpartnerid ";		
-				List list = new ArrayList<>();
-				try {
-					stmt = conn.prepareStatement(sql);
-					System.out.println(stmt.toString());
-					rs = stmt.executeQuery();
-					
+		        
+		        
+		        Configuration conf = new Configuration();
+				conf.configure("/hibernate.cfg.xml");
+				SessionFactory sf = conf.buildSessionFactory();
+				Session session = sf.openSession();
+				String newList=null;
 				
-					while(rs.next()){
-						List l = new ArrayList<>();
-						l.add(rs.getInt(1));
-						l.add(rs.getString(2));
-						l.add(rs.getInt(3));
-						list.add(l);
-					}
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername , count(pitp.trainingpartnername) from personalinformationtrainingpartner as pitp "+ 
+						" inner join managetrainingpartner as mtp on pitp.trainingpartnername = mtp.managetrainingpartnerid "+
+						"  inner join logindetails as ld on pitp.logindetails = ld.id where ld.status='I' "+
+						" group by mtp.trainingpartnername , mtp.managetrainingpartnerid ";		
+		
+				Query query = session.createSQLQuery(sql);
+				List list = query.list();
+				System.out.println(list.size());
+				session.close();
+				if(list.size() > 0 || list != null){
+					System.out.println(list);
+					Gson g =new Gson();
+					newList = g.toJson(list); 
 				}
-				Gson g =new Gson();
-				String newList = g.toJson(list); 
 				out.write(newList);
 				out.flush();
-		
+			
 	}
 
 	/**

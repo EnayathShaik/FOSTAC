@@ -273,7 +273,7 @@ return result;
                                                     </div>                              
                                                     
                                                      <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails('');return false">Show Details</button>
-                                                     <input type="button" id="btnExport" style="margin-right: 20px;"  class="btn login-btn pull-right" value="Download" />
+                                                     <!-- <input type="button" id="btnExport" style="margin-right: 20px;"  class="btn login-btn pull-right" value="Download" /> -->
                                                 </div>
                                                
                                             </div>

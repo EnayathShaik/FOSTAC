@@ -191,14 +191,14 @@ public class TraineeDAOImpl implements TraineeDAO {
 		CourseTrainee courseTrainee = new CourseTrainee();
 		StringBuffer sql = new StringBuffer();
 		sql.append("Select D.coursenameid,D.coursename,D.courseduration ");
-		sql.append(" ,concat(E.firstname , ' ' , E.middlename , ' ' , E.lastname ) ,F.assessmentagencyname,G.contentnameinput, G.contentlinkinput");
+		sql.append(" ,concat(E.firstname , ' ' , E.middlename , ' ' , E.lastname ) ,F.assessmentagencyname,G.contentnameinput, G.contentlinkinput, G.contenttypeinput, C.coursetype");
 		sql.append(" from courseenrolleduser A");
 		sql.append(" inner join trainingcalendar B on(A.trainingcalendarid=B.trainingcalendarid)");
 		sql.append(" inner join coursetype C on(B.coursetype=C.coursetypeid)");
 		sql.append(" inner join coursename D on(B.coursename=D.coursenameid)");
 		sql.append(" left outer join personalinformationassessor E on(B.assessor=E.personalinformationassessorid)");
 		sql.append(" left outer join manageassessmentagency F on(E.assessmentagencyname=F.manageassessmentagencyid)");
-		sql.append(" inner join managecoursecontent G on(D.coursenameid=G.coursenameinput)");
+		sql.append(" left outer join managecoursecontent G on(D.coursenameid=G.coursenameinput)");
 		sql.append(" Where A.logindetails = "+typeId+" and A.status = 'N'");
 		
 		/*String sql = "select c.coursename, c.courseduration ,c.coursenameid, mgid.contentlinkinput ,mgid.contentnameinput from  coursename as c inner join managecoursecontent as mgid on mgid.coursetypeinput = c.coursetypeid where c.coursetypeid="
@@ -209,15 +209,15 @@ public class TraineeDAOImpl implements TraineeDAO {
 		session.close();
 		if (courseTraineeList.size() > 0) {
 			Object[] o = courseTraineeList.get(0);
-			//courseTrainee.setCourseTypeId(o[0].toString());
-			courseTrainee.setCourseNameID(o[0].toString());
-			courseTrainee.setCourseName(o[1].toString());
-			courseTrainee.setCourseDuration(o[2].toString());
-			courseTrainee.setAssessor(o[3].toString());
-			courseTrainee.setAssessorAgency(o[4].toString());
-			courseTrainee.setContentNameInput(o[5].toString());
-			courseTrainee.setContentLinkInput(o[6].toString());
-			
+			courseTrainee.setCourseNameID(o[0] == null ? "" : o[0].toString());
+			courseTrainee.setCourseName(o[1] == null ? "" : o[1].toString());
+			courseTrainee.setCourseDuration(o[2] == null ? "" : o[2].toString());
+			courseTrainee.setAssessor(o[3] == null ? "" : o[3].toString());
+			courseTrainee.setAssessorAgency(o[4] == null ? "" : o[4].toString());
+			courseTrainee.setContentNameInput(o[5] == null ? "" : o[5].toString());
+			courseTrainee.setContentLinkInput(o[6] == null ? "" : o[6].toString());
+			courseTrainee.setContentNameInput(o[7] == null ? "" : o[7].toString());
+			courseTrainee.setCourseTypeId(o[8] == null ? "" : o[8].toString());
 			return courseTrainee;
 		} else {
 			return courseTrainee;

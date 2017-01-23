@@ -46,17 +46,32 @@ public class MainRedirect {
 	
 	   @ModelAttribute("tpList")
 	   public List<ManageTrainingPartner> tpList() {
-		   List<ManageTrainingPartner> tpList = pageLoadService.tpList();
+		   List<ManageTrainingPartner> tpList = null;
+		   try{
+			   tpList = pageLoadService.tpList();
+		   }catch(Exception e){
+			   e.printStackTrace();
+		   }
 		   return tpList;
 	   }
 	   @ModelAttribute("aaList")
 	   public List<ManageAssessmentAgency> aaList() {
-		   List<ManageAssessmentAgency> aaList = pageLoadService.aaList();
+		   List<ManageAssessmentAgency> aaList = null;
+		   try{
+			   aaList = pageLoadService.aaList();
+		   }catch(Exception e){
+			   e.printStackTrace();
+		   }
 		   return aaList;
 	   }
 	   @ModelAttribute("basicCourseList")
 	   public List basicCourseList() {
-		   List basicCourseList = pageLoadService.basicCourseList();
+		   List basicCourseList = null;
+		   try{
+			   basicCourseList = pageLoadService.basicCourseList();
+		   }catch(Exception e){
+			   e.printStackTrace();
+		   }
 		   return basicCourseList;
 	   }
 	   @RequestMapping(value="/showTrainingCalendarDetails" , method=RequestMethod.POST)
@@ -64,63 +79,80 @@ public class MainRedirect {
 		public void getApplicationStatusDetails(@RequestBody Utility utility,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
 			
 			System.out.println("Get Application Status............");
-			
 			List<Object[]> list=new ArrayList<>();
 			try{
 				 list = pageLoadService.loadTrainingDetails(utility);
+				 response.setContentType("text/html;charset=UTF-8");
+			        PrintWriter out = response.getWriter();
+			        out.print(new Gson().toJson(list));
+			        out.flush();
 			}catch(Exception e){
+				e.printStackTrace();
 			}
-			response.setContentType("text/html;charset=UTF-8");
-	        PrintWriter out = response.getWriter();
-	        out.print(new Gson().toJson(list));
-	        out.flush();
+			
 		}
 	   
 	   @RequestMapping(value="/calendarSearch" ,method = RequestMethod.GET)
 	   public String calendarSearch(@ModelAttribute("utility")Utility utility,HttpSession session,BindingResult result ,  Model model) {
-		   List<CourseName> courseNameList=pageLoadService.getCouserNameList(utility.getCourseTypeId());
-		   List<IntStringBean> mangePartnerList=pageLoadService.getTrainingPartnerList(utility.getCourseTypeId());
-		   List<City> citys=pageLoadService.loadCity(0);
-		   List<State> states=pageLoadService.loadState();
-		   model.addAttribute("courseNameList", new Gson().toJson(courseNameList));
-		   model.addAttribute("mangePartnerList", new Gson().toJson(mangePartnerList));
-		   model.addAttribute("citys", new Gson().toJson(citys));
-		   model.addAttribute("states", new Gson().toJson(states));
-		   model.addAttribute("courseTypeId", utility.getCourseTypeId());
-		   model.addAttribute("trainingDate", utility.getTrainingDate());
+		   try{
+			   List<CourseName> courseNameList=pageLoadService.getCouserNameList(utility.getCourseTypeId());
+			   List<IntStringBean> mangePartnerList=pageLoadService.getTrainingPartnerList(utility.getCourseTypeId());
+			   List<City> citys=pageLoadService.loadCity(0);
+			   List<State> states=pageLoadService.loadState();
+			   model.addAttribute("courseNameList", new Gson().toJson(courseNameList));
+			   model.addAttribute("mangePartnerList", new Gson().toJson(mangePartnerList));
+			   model.addAttribute("citys", new Gson().toJson(citys));
+			   model.addAttribute("states", new Gson().toJson(states));
+			   model.addAttribute("courseTypeId", utility.getCourseTypeId());
+			   model.addAttribute("trainingDate", utility.getTrainingDate());
+		   }catch(Exception e){
+			   e.printStackTrace();
+		   }
 		   return "calendarSearch";
 	   }
 	   
 	   @RequestMapping(value="/basic-level" ,method = RequestMethod.GET)
 	   public String basicLevel(@ModelAttribute("login") LoginForm loginForm,HttpSession session,BindingResult result ,  Model model) {
-		   List<CourseName> courseNameList=pageLoadService.getCouserNameList(Integer.parseInt(PropertyUtils.basicLevel));
-		   List<String> trainingPartnerNameList=pageLoadService.getTrainingPartnerNameList();
-		   List<ManageCourseContent> manageCourseContents=pageLoadService.getManageCourseContentList(Integer.parseInt(PropertyUtils.basicLevel));
-		   model.addAttribute("courseNameList", new Gson().toJson(courseNameList));
-		   model.addAttribute("trainingPartnerNameList", new Gson().toJson(trainingPartnerNameList));
-		   model.addAttribute("manageCourseContents", new Gson().toJson(manageCourseContents));
-		   return "basic-level";
+		   try{
+			   List<CourseName> courseNameList=pageLoadService.getCouserNameList(Integer.parseInt(PropertyUtils.basicLevel));
+			   List<String> trainingPartnerNameList=pageLoadService.getTrainingPartnerNameList();
+			   List<ManageCourseContent> manageCourseContents=pageLoadService.getManageCourseContentList(Integer.parseInt(PropertyUtils.basicLevel));
+			   model.addAttribute("courseNameList", new Gson().toJson(courseNameList));
+			   model.addAttribute("trainingPartnerNameList", new Gson().toJson(trainingPartnerNameList));
+			   model.addAttribute("manageCourseContents", new Gson().toJson(manageCourseContents));
+		   }catch(Exception e){
+			   e.printStackTrace();
+		   }
+		    return "basic-level";
 	   }
 	   
 	   @RequestMapping(value="/advance-level" ,method = RequestMethod.GET)
 	   public String advanceLevel(@ModelAttribute("login") LoginForm loginForm,HttpSession session,BindingResult result ,  Model model) {
-		   List<CourseName> courseNameList=pageLoadService.getCouserNameList(Integer.parseInt(PropertyUtils.advanceLevel));
-		   List<String> trainingPartnerNameList=pageLoadService.getTrainingPartnerNameList();
-		   List<ManageCourseContent> manageCourseContents=pageLoadService.getManageCourseContentList(Integer.parseInt(PropertyUtils.advanceLevel));
-		   model.addAttribute("courseNameList", new Gson().toJson(courseNameList));
-		   model.addAttribute("trainingPartnerNameList", new Gson().toJson(trainingPartnerNameList));
-		   model.addAttribute("manageCourseContents", new Gson().toJson(manageCourseContents));
-		   return "advance-level";
+		   try{
+			   List<CourseName> courseNameList=pageLoadService.getCouserNameList(Integer.parseInt(PropertyUtils.advanceLevel));
+			   List<String> trainingPartnerNameList=pageLoadService.getTrainingPartnerNameList();
+			   List<ManageCourseContent> manageCourseContents=pageLoadService.getManageCourseContentList(Integer.parseInt(PropertyUtils.advanceLevel));
+			   model.addAttribute("courseNameList", new Gson().toJson(courseNameList));
+			   model.addAttribute("trainingPartnerNameList", new Gson().toJson(trainingPartnerNameList));
+			   model.addAttribute("manageCourseContents", new Gson().toJson(manageCourseContents));
+		   }catch(Exception e){
+			   e.printStackTrace();
+		   }
+	     return "advance-level";
 	   }
 	   @RequestMapping(value="/special-level" ,method = RequestMethod.GET)
 	   public String specialLevel(@ModelAttribute("login") LoginForm loginForm,HttpSession session,BindingResult result ,  Model model) {
-		   List<CourseName> courseNameList=pageLoadService.getCouserNameList(Integer.parseInt(PropertyUtils.specialLevel));
-		   List<String> trainingPartnerNameList=pageLoadService.getTrainingPartnerNameList();
-		   List<ManageCourseContent> manageCourseContents=pageLoadService.getManageCourseContentList(Integer.parseInt(PropertyUtils.specialLevel));
-		   model.addAttribute("courseNameList", new Gson().toJson(courseNameList));
-		   model.addAttribute("trainingPartnerNameList", new Gson().toJson(trainingPartnerNameList));
-		   model.addAttribute("manageCourseContents", new Gson().toJson(manageCourseContents));
-		   return "special-level";
+		   try{
+			   List<CourseName> courseNameList=pageLoadService.getCouserNameList(Integer.parseInt(PropertyUtils.specialLevel));
+			   List<String> trainingPartnerNameList=pageLoadService.getTrainingPartnerNameList();
+			   List<ManageCourseContent> manageCourseContents=pageLoadService.getManageCourseContentList(Integer.parseInt(PropertyUtils.specialLevel));
+			   model.addAttribute("courseNameList", new Gson().toJson(courseNameList));
+			   model.addAttribute("trainingPartnerNameList", new Gson().toJson(trainingPartnerNameList));
+			   model.addAttribute("manageCourseContents", new Gson().toJson(manageCourseContents));
+		   }catch(Exception e){
+			   e.printStackTrace();
+		   }
+	     return "special-level";
 	   }
 	   @RequestMapping(value="/fostac" ,method = RequestMethod.GET)
 	   public String fostac(HttpSession session) {

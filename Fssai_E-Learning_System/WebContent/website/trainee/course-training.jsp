@@ -1,8 +1,9 @@
-
+<%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
 
 function OnStart(){
-	var imagePath = <%= getServletContext().getRealPath("/WEB-INF/traineeImage/MANNUT1.png") %> 
 	var steps = 3;
 	var traineeSteps =
 		<%=(Integer) session.getAttribute("traineeSteps")%>
@@ -64,10 +65,31 @@ window.onload = OnStart;
   						<source src="pdf/Sath.mp4" type="video/mp4">
   						Your browser does not support the video tag.
 					</video> -->
-					<h4><a href="pdf/A.mp4?autoPlay=true" target="_blank" data-webm="images/Big_Buck_Bunny_2.webm" class="html5lightbox" >Video Offline</a></h4>
-					<h4><a href="pdf/Fostac.pdf" target="_blank" >Fostac In PDF</a></h4>
+					<fieldset>
+                    <legend><h3>Course Content</h3></legend>
+					<ct:choose>
+						<ct:when
+							test="${contentPath.contains('pdf')}">
+							<h4><a href="${contentPath}" target="_blank" >${contentName}</a></h4>
+						</ct:when>
+					</ct:choose>
+					<ct:choose>
+						<ct:when
+							test="${contentPath.contains('mp4')}">
+							<h4><a href="${contentPath}" target="_blank" data-webm="images/Big_Buck_Bunny_2.webm" class="html5lightbox" >${contentName}</a></h4>
+						</ct:when>
+					</ct:choose>
+					<ct:choose>
+						<ct:when
+							test="${contentPath.contains('ppt')}">
+							<h4><a href="${contentPath}" target="_blank" >${contentName}</a></h4>
+						</ct:when>
+					</ct:choose>
+					<fieldset>
+					<!-- <h4><a href="pdf/A.mp4?autoPlay=true" target="_blank" data-webm="images/Big_Buck_Bunny_2.webm" class="html5lightbox" >Video Offline</a></h4>
+					<h4><a href="pdf/Fostac.pdf" target="_blank" >Fostac1 In PDF</a></h4>
 					<h4><a href="pdf/FostacPPT.pptx" target="_blank" >Fostac In PPT</a></h4>
-					
+				 -->	
 					
                   </fieldset>
                   <br>

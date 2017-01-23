@@ -56,7 +56,7 @@
                           <tr class="background-open-vacancies">
                             <th>S.No</th>
                             <th>Trainer Name</th>
-                            <th class="text-center">View Profile</th>
+                            <th class="text-center">View Pro11file</th>
                             <th>Status</th>
                             <th></th>
                           </tr>
@@ -104,35 +104,39 @@
 	 $('#hiddenVaraibles').append('<input type="hidden" id="trainerId_'+index+'" name="trainerId_'+index+'" value="'+list[index].id+'">'); 
 	 if(list[index].status == 'CON'){
 		 $('#applicationStatusInner').append('<tr>'+
-				  '<td>'+(index+1)+'</td><td>'+list[index].value+'</td><td align="center"><input class="login-btn" type="button" value="Open"></td>'+
+				  '<td>'+(index+1)+'</td><td>'+list[index].value+'</td><td align="center"><a href="#" onClick="viewProfile(\''+list[index].link+'\');" >View Profile</a></td>'+
 				  '<td><select class="form-control" id="selectOption_'+index+'"><option value="0">Please Select</option><option selected="true"  value="CON">Selected</option> <option value="REJ">Rejected</option><option value="PEN">Under Process</option>'+
 				  '<option value="CAN">Cancelled</option></select></td><td><a href="#" onClick="updateApplicationStatusForEnrolledVacancySingle(\''+list[index].id+'\',\''+index+'\');">Save</a> </td></tr>');
 
 	 } else  if(list[index].status == 'CAN'){
 		 $('#applicationStatusInner').append('<tr>'+
-				  '<td>'+(index+1)+'</td><td>'+list[index].value+'</td><td align="center"><input class="login-btn" type="button" value="Open"></td>'+
+				  '<td>'+(index+1)+'</td><td>'+list[index].value+'</td><td align="center"><a href="#" onClick="viewProfile(\''+list[index].link+'\');" >View Profile</a></td>'+
 				  '<td><select class="form-control" id="selectOption_'+index+'"><option value="0">Please Select</option><option value="CON">Selected</option> <option value="REJ">Rejected</option><option value="PEN">Under Process</option>'+
 				  '<option selected="true"  value="CAN">Cancelled</option></select></td><td><a href="#" onClick="updateApplicationStatusForEnrolledVacancySingle(\''+list[index].id+'\',\''+index+'\');">Save</a> </td></tr>');
 
 	 } else  if(list[index].status == 'REJ'){
 		 $('#applicationStatusInner').append('<tr>'+
-				  '<td>'+(index+1)+'</td><td>'+list[index].value+'</td><td align="center"><input class="login-btn" type="button" value="Open"></td>'+
+				  '<td>'+(index+1)+'</td><td>'+list[index].value+'</td><td align="center"><a href="#" onClick="viewProfile(\''+list[index].link+'\');" >View Profile</a></td>'+
 				  '<td><select class="form-control" id="selectOption_'+index+'"><option value="0">Please Select</option><option value="CON">Selected</option> <option selected="true"  value="REJ">Rejected</option><option value="PEN">Under Process</option>'+
 				  '<option value="CAN">Cancelled</option></select></td><td><a href="#" onClick="updateApplicationStatusForEnrolledVacancySingle(\''+list[index].id+'\',\''+index+'\');">Save</a> </td></tr>');
 
 	 } else  if(list[index].status == 'PEN'){
 		 $('#applicationStatusInner').append('<tr>'+
-				  '<td>'+(index+1)+'</td><td>'+list[index].value+'</td><td align="center"><input class="login-btn" type="button" value="Open"></td>'+
+				  '<td>'+(index+1)+'</td><td>'+list[index].value+'</td><td align="center"><a href="#" onClick="viewProfile(\''+list[index].link+'\');" >View Profile</a></td>'+
 				  '<td><select class="form-control" id="selectOption_'+index+'"><option value="0">Please Select</option><option value="CON">Selected</option> <option value="REJ">Rejected</option><option selected="true"  value="PEN">Under Process</option>'+
 				  '<option value="CAN">Cancelled</option></select></td><td><a href="#" onClick="updateApplicationStatusForEnrolledVacancySingle(\''+list[index].id+'\',\''+index+'\');">Save</a> </td></tr>');
 
 	 } else {
 		 $('#applicationStatusInner').append('<tr>'+
-				  '<td>'+(index+1)+'</td><td>'+list[index].value+'</td><td align="center"><input class="login-btn" type="button" value="Open"></td>'+
+				  '<td>'+(index+1)+'</td><td>'+list[index].value+'</td><td align="center"><a href="#" onClick="viewProfile(\''+list[index].link+'\');" >View Profile</a></td>'+
 				  '<td><select class="form-control" id="selectOption_'+index+'"><option value="0">Please Select</option><option value="CON">Selected</option> <option value="REJ">Rejected</option><option value="PEN">Under Process</option>'+
 				  '<option value="CAN">Cancelled</option></select></td><td><a href="#" onClick="updateApplicationStatusForEnrolledVacancySingle(\''+list[index].id+'\',\''+index+'\');">Save</a> </td></tr>');
 
 	 }
+ }
+ 
+ function viewProfile(userName){
+	 var myWindow = window.open('${resumePath}/'+userName+".pdf", "", "width=500,height=500");
  }
  function updateApplicationStatusForEnrolledVacancySingle(id,index){
 	 var status = $("#selectOption_"+index+"").val();

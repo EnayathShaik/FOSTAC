@@ -133,7 +133,7 @@
  for(index=0;index<list.length;index++){
 	 $('#hiddenVaraibles').append('<input type="hidden" id="trainerId_'+index+'" name="trainerId_'+index+'" value="'+list[index].id+'">'); 
 	  $('#applicationStatusInner').append('<tr>'+
-			  '<td>'+(index+1)+'</td><td>'+list[index].value+'</td><td align="center"><input class="login-btn" type="button" value="Open"></td>'+
+			  '<td>'+(index+1)+'</td><td>'+list[index].value+'</td><td align="center"><input class="login-btn" type="button" value="Opsen"></td>'+
 			  '<td><select class="form-control" id="selectOption_'+index+'"><option >Selected</option> <option>Rejected</option><option>Under Process</option>'+
 			  '<option>Cancelled</option></select></td></tr>');
  }

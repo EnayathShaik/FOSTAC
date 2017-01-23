@@ -10,6 +10,7 @@ public class CourseTrainee {
 	private String contentNameInput;
 	private String assessor;
 	private String assessorAgency;
+	private String contentType;
 	/**
 	 * @return the courseName
 	 */
@@ -88,7 +89,11 @@ public class CourseTrainee {
 	public void setCourseNameID(String courseNameID) {
 		this.courseNameID = courseNameID;
 	}
+	public String getContentType() {
+		return contentType;
+	}
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
 	
-	
-
 }

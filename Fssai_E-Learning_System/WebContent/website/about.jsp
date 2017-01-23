@@ -117,7 +117,8 @@
         <div class="col-md-6 col-sm-12">
             <ol style="line-height:25px;">
                 <li>Online Registration</li>
-                <li>Training to be provided by Training Partner</li>
+                <li>
+ to be provided by Training Partner</li>
                 <li>Assessment by FSSAI accredited Assessment Agency</li>
                 <li>Certification validated by FSSAI</li>
             </ol>

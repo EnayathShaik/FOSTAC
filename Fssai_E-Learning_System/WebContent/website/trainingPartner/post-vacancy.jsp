@@ -258,7 +258,7 @@ function searchVacancy(indicator){
                       </div>
                       <input type="submit" style="margin-top:20px;"  class="btn login-btn pull-right show-details-vacancy collapsed"  data-target="#show-result" aria-expanded="false" value="Create">
                       <a href="#testt"  onclick="searchVacancy('');" style="margin-top:20px; margin-right: 20px;"  class="btn login-btn pull-right"   >Search</a>
-                 	  <input type="button" id="btnExport" style="margin-top:20px; margin-right: 20px;"  class="btn login-btn pull-right" value="Download" />
+                 	  <!-- <input type="button" id="btnExport" style="margin-top:20px; margin-right: 20px;"  class="btn login-btn pull-right" value="Download" /> -->
                     
                     </div>
                     <div class="col-md-3 hidden-xs"></div>

@@ -129,6 +129,7 @@ public class LoginController {
 			session.invalidate();
 			return "login";
 		}
+		
 		LoginDetails loginDetails = loginService.login(loginForm);
 		if(loginDetails == null){
 			model.addAttribute("error" , "Oops , You are not authorized !!!");
@@ -390,8 +391,12 @@ public class LoginController {
 	
 	//@ModelAttribute("trainingPartnerCountList")
 	public List<TrainingPartner> trainingPartnerList(){
-		List<TrainingPartner> trainingPartnerList = loginService.trainingPartnerCountList();
-		System.out.println("course name list   :   "+ trainingPartnerList);
+		List<TrainingPartner> trainingPartnerList = null;
+		try{
+			trainingPartnerList = loginService.trainingPartnerCountList();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return trainingPartnerList;
 	}
 	

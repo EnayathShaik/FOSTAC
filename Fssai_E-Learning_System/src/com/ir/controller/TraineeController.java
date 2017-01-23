@@ -62,7 +62,8 @@ public class TraineeController {
 	@Qualifier("pageLoadService")
 	PageLoadService pageLoadService;
 	
-	
+	@Autowired
+	ServletContext servletContext;
 	
 	@Autowired
 	@Qualifier("traineeService")
@@ -77,13 +78,14 @@ public class TraineeController {
 	// Rishi 
 	@RequestMapping(value="/contactTrainee" , method=RequestMethod.GET)
 	public String contactTrainee(@ModelAttribute("contactTraineee") ContactTrainee contactTrainee, Model model , HttpSession session){
-		System.out.println("My Mail == "+contactTrainee.getEmailAddress());
-		System.out.println("My Address == "+contactTrainee.getMessageDetails());
-		Integer userId = (Integer) session.getAttribute("userId");
-		Integer profileId = (Integer) session.getAttribute("profileId");
-		String defaultMail = traineeService.getDefaultMailID(userId, profileId);
-		model.addAttribute("defaultMail", defaultMail);
-		System.out.println("Default mail : "+defaultMail);
+		try{
+			Integer userId = (Integer) session.getAttribute("userId");
+			Integer profileId = (Integer) session.getAttribute("profileId");
+			String defaultMail = traineeService.getDefaultMailID(userId, profileId);
+			model.addAttribute("defaultMail", defaultMail);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return "contactTrainee";
 	}
 	@RequestMapping(value="/changePasswordTrainee" , method=RequestMethod.GET)
@@ -94,8 +96,12 @@ public class TraineeController {
 
 	@ModelAttribute("kindOfBusinessList")
 	public List<KindOfBusiness> populateKindOfBusiness() {
-		
-		List<KindOfBusiness> kindOfBusinessList=pageLoadService.loadKindOfBusiness();
+		List<KindOfBusiness> kindOfBusinessList = null;
+		try{
+			kindOfBusinessList=pageLoadService.loadKindOfBusiness();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return kindOfBusinessList;
 	}
 	
@@ -131,8 +137,7 @@ public class TraineeController {
 			userName = (String) session.getAttribute("userName");
 			// String ss = session.getServletContext().getContextPath();
 			String ss = session.getServletContext().getRealPath("")
-					.replace("Fssai_E-Learning_System", "uploadProfile");
-			System.out.println("**********************" + ss);
+					.replace("Fssai_E-Learning_System", "Fostac/Trainer");
 			File dir = new File(ss);
 			if (!dir.exists())
 				dir.mkdirs();
@@ -143,8 +148,6 @@ public class TraineeController {
 				extension = fileName.substring(i + 1);
 			}
 			byte[] bytes = file.getBytes();
-			System.out.println("file name " + file.getOriginalFilename() + "  "
-					+ file.getContentType());
 			BufferedOutputStream stream = new BufferedOutputStream(
 					new FileOutputStream(new File(ss + File.separator
 							+ userName + "." +extension)));
@@ -153,10 +156,7 @@ public class TraineeController {
 			stream.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Exception while course details save : "
-					+ e.getMessage());
 		}
-
 		return "upload-image";
 	    }  
 	
@@ -169,7 +169,7 @@ public class TraineeController {
 			try{
 				userName = (String) session.getAttribute("userName");
 				//String ss = session.getServletContext().getContextPath();
-				String ss = session.getServletContext().getRealPath("").replace("Fssai_E-Learning_System", "uploadImages");
+				String ss = session.getServletContext().getRealPath("").replace("Fssai_E-Learning_System", "Fostac/Trainee");
 				File dir = new File(ss);
 				if (!dir.exists())
 					dir.mkdirs();
@@ -182,7 +182,6 @@ public class TraineeController {
 		    stream.close();  
 			}catch(Exception e){
 				e.printStackTrace();
-				System.out.println("Exception while course details save : "+ e.getMessage());
 			}
 			     
 	    return "upload-image";  
@@ -219,14 +218,52 @@ public class TraineeController {
 	@RequestMapping(value="/courseTraining" , method=RequestMethod.GET)
 	public String courseTraining(@RequestParam(value = "courseTypeId", required = true)  String courseTypeId , Model model, HttpSession session){
 		Integer userId=Integer.parseInt(session.getAttribute("userId").toString());
-		if(userId>0){
-			CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
-			//Get Module
-			model.addAttribute("courseTrainee", courseTrainee);
+		try{
+				String docPath = "";
+				String contentName = "";
+				String pdf = ".pdf";
+				String mp4 = ".mp4";
+				String ppt = ".ppt";
+				docPath = servletContext.getContextPath().replace("Fssai_E-Learning_System", "Fostac/Course/");
+				if(userId>0){
+					CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
+					System.out.println("courseTrainee == "+courseTrainee.getCourseTypeId());
+					System.out.println("courseTrainee == "+courseTrainee.getContentNameInput());
+					System.out.println("courseTrainee == "+courseTrainee.getContentLinkInput());
+					
+					if(courseTrainee != null && courseTrainee.getCourseTypeId() != null && courseTrainee.getCourseTypeId().toUpperCase().contains("BASIC")){
+						if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentLinkInput().toUpperCase().contains("STUDY")){
+							docPath = docPath + "BASIC/PDF/"+courseTrainee.getContentLinkInput()+pdf;
+						}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentLinkInput().toUpperCase().contains("PPT")){
+							docPath = docPath + "BASIC/PPT/"+courseTrainee.getContentLinkInput()+ppt;
+						}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentLinkInput().toUpperCase().contains("VIDEO")){
+							docPath = docPath + "BASIC/VIDEO/"+courseTrainee.getContentLinkInput()+mp4;
+						}
+					}else if(courseTrainee != null && courseTrainee.getCourseTypeId() != null && courseTrainee.getCourseTypeId().toUpperCase().contains("ADVANCE")){
+						if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentLinkInput().toUpperCase().contains("STUDY")){
+							docPath = docPath + "ADVANCE/PDF/"+courseTrainee.getContentLinkInput()+pdf;
+						}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentLinkInput().toUpperCase().contains("PPT")){
+							docPath = docPath + "ADVANCE/PPT/"+courseTrainee.getContentLinkInput()+ppt;
+						}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentLinkInput().toUpperCase().contains("VIDEO")){
+							docPath = docPath + "ADVANCE/VIDEO/"+courseTrainee.getContentLinkInput()+mp4;
+						}
+					}else if(courseTrainee != null && courseTrainee.getCourseTypeId() != null && courseTrainee.getCourseTypeId().toUpperCase().contains("SPECIAL")){
+						if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentLinkInput().toUpperCase().contains("STUDY")){
+							docPath = docPath + "SPECIAL/PDF/"+courseTrainee.getContentLinkInput()+pdf;
+						}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentLinkInput().toUpperCase().contains("PPT")){
+							docPath = docPath + "SPECIAL/PPT/"+courseTrainee.getContentLinkInput()+mp4;
+						}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentLinkInput().toUpperCase().contains("VIDEO")){
+							docPath = docPath + "SPECIAL/VIDEO/"+courseTrainee.getContentLinkInput();
+						}
+					}
+					contentName = (courseTrainee != null ? "" :  courseTrainee.getContentNameInput());
+					model.addAttribute("contentName", contentName);
+					model.addAttribute("contentPath", docPath);
+					model.addAttribute("courseTrainee", courseTrainee);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
-		System.out.println("Course training  ======********************** ");
-		
-		//session.setAttribute("uniqueId", uniqueId);
 		return "courseTraining12";
 	}
 	@RequestMapping(value="/training" , method=RequestMethod.GET)
@@ -241,12 +278,12 @@ public class TraineeController {
 					profileID = (Integer) session.getAttribute("profileId");
 					loginId = (int) session.getAttribute("loginIdUnique");
 					userId = (Integer) session.getAttribute("userId");
+					int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
+					traineeService.updateSteps(tableID, profileID, 3);
+					session.setAttribute("traineeSteps", 3);
 				}catch(Exception e){
-					System.out.println("Exception while course details save : "+ e.getMessage());
+					e.printStackTrace();
 				}
-				int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
-				traineeService.updateSteps(tableID, profileID, 3);
-				session.setAttribute("traineeSteps", 3);
 		return "training";
 	}
 
@@ -268,25 +305,25 @@ public class TraineeController {
 			profileId = (Integer) httpSession.getAttribute("profileId");
 			loginId = (int) httpSession.getAttribute("loginIdUnique");
 			userId = (Integer) httpSession.getAttribute("userId");
-		}catch(Exception e){
-			System.out.println("Exception while course details save : "+ e.getMessage());
-		}
-		//int tableID = courseEnrolledUserForm.getPersonalinformationtraineeid();
-		int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileId);
-		System.out.println("loginid   :"+ loginId);
-		System.out.println("tableID  :"+ tableID);
-		long basicEnroll = traineeService.basicSave(courseEnrolledUserForm , loginId , tableID,profileId);
-			if(basicEnroll  > 1){
-				Boolean status = traineeService.updateSteps(tableID, profileId, 1);
-				httpSession.setAttribute("traineeSteps", 1);
-				if(status){
-					model.addAttribute("created", "You have successfully enrolled !!!");
-					model.addAttribute("roll", basicEnroll);
+			//int tableID = courseEnrolledUserForm.getPersonalinformationtraineeid();
+			int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileId);
+			System.out.println("loginid   :"+ loginId);
+			System.out.println("tableID  :"+ tableID);
+			long basicEnroll = traineeService.basicSave(courseEnrolledUserForm , loginId , tableID,profileId);
+				if(basicEnroll  > 1){
+					Boolean status = traineeService.updateSteps(tableID, profileId, 1);
+					httpSession.setAttribute("traineeSteps", 1);
+					if(status){
+						model.addAttribute("created", "You have successfully enrolled !!!");
+						model.addAttribute("roll", basicEnroll);
+					}else{
+						model.addAttribute("created", "Oops , something went wrong !!!");
+						model.addAttribute("roll", basicEnroll);
+					}
 				}else{
-					model.addAttribute("created", "Oops , something went wrong !!!");
-					model.addAttribute("roll", basicEnroll);
-				}
-			}else{
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		 return "traineeHomepage";
 	}
@@ -300,14 +337,16 @@ public class TraineeController {
 			System.out.println(result.getAllErrors());
 			return "changePasswordTrainee";
 		}
-		String id =(String) session.getAttribute("logId");
-		//System.out.println(changePasswordForm.getLoginid());
-		//int id = 1;
-		boolean changePasswordTraineeSave = traineeService.changePasswordTraineeSave(changePasswordForm , id);
-		if(changePasswordTraineeSave){
-			model.addAttribute("created" , "Your password has changed !!!");
-		}else{
-			model.addAttribute("created" , "Oops, something went wrong !!!");
+		try{
+			String id =(String) session.getAttribute("logId");
+			boolean changePasswordTraineeSave = traineeService.changePasswordTraineeSave(changePasswordForm , id);
+			if(changePasswordTraineeSave){
+				model.addAttribute("created" , "Your password has changed !!!");
+			}else{
+				model.addAttribute("created" , "Oops, something went wrong !!!");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		return "changePasswordTrainee";
 	}
@@ -320,50 +359,79 @@ public class TraineeController {
 			System.out.println(result.getErrorCount());
 			System.out.println(result.getAllErrors());
 			return "contactTrainee";
-		}//String id = contactTrainee.getUserId();
-		String id=(String) session.getAttribute("logId");
-		System.out.println("userid   "+ id);
-		String contactTraineeSave = traineeService.contactTraineeSave(contactTrainee , id);
-		if(contactTraineeSave.equalsIgnoreCase("created")){
-			model.addAttribute("created" , "Your request has been sent successfully !!!");
-		}else{
-			model.addAttribute("created" , "Oops, something went wrong !!!");
+		}
+		try{
+			String id=(String) session.getAttribute("logId");
+			System.out.println("userid   "+ id);
+			String contactTraineeSave = traineeService.contactTraineeSave(contactTrainee , id);
+			if(contactTraineeSave.equalsIgnoreCase("created")){
+				model.addAttribute("created" , "Your request has been sent successfully !!!");
+			}else{
+				model.addAttribute("created" , "Oops, something went wrong !!!");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		return "contactTrainee";
 	}
 
 	@ModelAttribute("courseNameListB")
 	public List<CourseName> courseNameList(){
-		List<CourseName> courseNameListB = traineeService.courseNameList();
-		System.out.println("course name list   :   "+ courseNameListB);
+		List<CourseName> courseNameListB = null;
+		try{
+			courseNameListB = traineeService.courseNameList();
+			System.out.println("courseNameListB course name list   :   "+ courseNameListB);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return courseNameListB;
 	}
 	
 	@ModelAttribute("advanceCourseNameList")
 	public List<CourseName> advanceCourseNameList(){
-		List<CourseName> advanceCourseNameList = traineeService.courseNameListByType(Constantes.COURSETYPE_ADVANCE);
-		System.out.println("Advance course name list   :   "+ advanceCourseNameList);
+		List<CourseName> advanceCourseNameList = null;
+		try{
+			advanceCourseNameList = traineeService.courseNameListByType(Constantes.COURSETYPE_ADVANCE);
+			System.out.println("Advance course name list   :   "+ advanceCourseNameList);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return advanceCourseNameList;
 	}
 
 	@ModelAttribute("specialCourseNameList")
 	public List<CourseName> specialCourseNameList(){
-		List<CourseName> specialCourseNameList = traineeService.courseNameListByType(Constantes.COURSETYPE_SPECIAL);
-		System.out.println("Advance course name list   :   "+ specialCourseNameList);
+		List<CourseName> specialCourseNameList = null;
+		try{
+			specialCourseNameList = traineeService.courseNameListByType(Constantes.COURSETYPE_SPECIAL);
+			System.out.println("specialCourseNameList course name list   :   "+ specialCourseNameList);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return specialCourseNameList;
 	}
 	@ModelAttribute("trainingPartnerList")
 	public List<ManageTrainingPartner> trainingPartnerList(){
-		List<ManageTrainingPartner> trainingPartnerList = traineeService.trainingPartnerList();
-		System.out.println("training partner name list   :   "+ trainingPartnerList);
+		List<ManageTrainingPartner> trainingPartnerList = null;
+		try{
+			trainingPartnerList = traineeService.trainingPartnerList();
+			System.out.println("training partner name list   :   "+ trainingPartnerList);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return trainingPartnerList;
 	}
 	@ModelAttribute("trainingCenterStateList")
 	public List<State> trainingCenterStateList(){
-		List<State> trainingCenterStateList = traineeService.trainingCenterStateList();
-		System.out.println("training partner state list   :   "+ trainingCenterStateList);
+		List<State> trainingCenterStateList = null;
+		try{
+			trainingCenterStateList = traineeService.trainingCenterStateList();
+			System.out.println("training partner state list   :   "+ trainingCenterStateList);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return trainingCenterStateList;
-		//return null;
 	}
 	@RequestMapping(value="/updateInformation" , method=RequestMethod.GET)
 	public String updateInformation(@RequestParam(value = "userId", required = true)  Integer userId ,@ModelAttribute("updateInformation") RegistrationFormTrainee registrationFormTrainee, HttpSession session, Model model ){		
@@ -376,67 +444,67 @@ public class TraineeController {
 				userId = (Integer) session.getAttribute("userId");
 			}
 			
+			 if(userId > 0){
+					PersonalInformationTrainee personalInformationTrainee = traineeService.FullDetail(userId);
+					Title title = new Title();
+					title.setTitleId(personalInformationTrainee.getTitle().getTitleId());
+					title.setTitleName(personalInformationTrainee.getTitle().getTitleName());
+					List<Title> titleList = new ArrayList<Title>();
+					titleList.add(title);
+					session.setAttribute("loginUser", personalInformationTrainee);
+					session.setAttribute("titleList", titleList);
+				 }
 		}catch(Exception e){
+			e.printStackTrace();
 			System.out.println("Exception while course details save : "+ e.getMessage());
 		}
-		System.out.println("userID = "+userId);
-		System.out.println("profileID = "+profileID);
-		
-		System.out.println("userID = "+userId);
-		 if(userId > 0){
-			PersonalInformationTrainee personalInformationTrainee = traineeService.FullDetail(userId);
-			Title title = new Title();
-			title.setTitleId(personalInformationTrainee.getTitle().getTitleId());
-			title.setTitleName(personalInformationTrainee.getTitle().getTitleName());
-			List<Title> titleList = new ArrayList<Title>();
-			titleList.add(title);
-			session.setAttribute("loginUser", personalInformationTrainee);
-			System.out.println(personalInformationTrainee.getGender());
-			session.setAttribute("titleList", titleList);
-			
-		 }
 		return "updateInformation";
 	}
 	@RequestMapping(value="/updateTrainee" , method=RequestMethod.POST)
 	public String updateTrainee(@RequestParam(value = "id", required = true)  Integer id,@ModelAttribute("updateInformation") RegistrationFormTrainee registrationFormTrainee ,BindingResult bindingResult, HttpSession session , Model model  ){
 		Integer ss = 0;
-		if(id <= 0){
-			 ss = (Integer)session.getAttribute("loginUser1");
-		}else{
-			ss = id;
+		try{
+			if(id <= 0){
+				 ss = (Integer)session.getAttribute("loginUser1");
+			}else{
+				ss = id;
+			}
+			System.out.println("nnb   " +ss);
+			String updateTrainee = traineeService.updateTrainee(registrationFormTrainee , ss);
+			if(updateTrainee != "")
+			{
+				System.out.println("Data are updated successfully");
+			}
+			model.addAttribute("update", "Updated successfully !!!");
+		}catch(Exception e){
+			e.printStackTrace();
 		}
-		System.out.println("nnb   " +ss);
-		String updateTrainee = traineeService.updateTrainee(registrationFormTrainee , ss);
-		if(updateTrainee != "")
-		{
-			System.out.println("Data are updated successfully");
-		}
-		model.addAttribute("update", "Updated successfully !!!");
 		return "welcomeupdatetrainee";
 	}
 	
 	@ModelAttribute("stateList")
 	public List<State> populateStateList() {
-		List<State> stateList = pageLoadService.loadState();
-		System.out.println("state list   :   "+ stateList);
+		List<State> stateList = null;
+		try{
+			stateList = pageLoadService.loadState();
+			System.out.println("state list   :   "+ stateList);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return stateList;
 	}
 	@RequestMapping(value="/generateAdmitCardtrainee" , method=RequestMethod.GET)
 	public String generateAdmitCardtrainee(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm ,BindingResult bindingResult, HttpSession session , Model model ){
 		try{
-			JavaMail javaMail = new JavaMail();
+			/*JavaMail javaMail = new JavaMail();
 			javaMail.mailProperty("Hello", "manindramishra.seven@gmail.com", "10002");
-			Integer userId=Integer.parseInt(session.getAttribute("userId").toString());
+			*/Integer userId=Integer.parseInt(session.getAttribute("userId").toString());
 			if(userId>0){
 				CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
 				model.addAttribute("courseTrainee", courseTrainee);
 			}
-		}catch(NullPointerException npe){
-			System.out.println("1 - Exception while fetching card details generating admit card course: "+npe.getMessage());
-		}catch(NumberFormatException nfe){
-			System.out.println("2 - Exception while fetching card details generating admit card course: "+nfe.getMessage());
 		}catch(Exception e){
-			System.out.println("3- Exception while fetching card details generating admit card course: "+e.getMessage());
+			e.printStackTrace();
 		}
 		return "generateAdmitCardtrainee";
 	}
@@ -455,22 +523,21 @@ public class TraineeController {
 			loginId = (int) session.getAttribute("loginIdUnique");
 			userId = (Integer) session.getAttribute("userId");
 			userName = (String) session.getAttribute("userName");
-			String rootPath = System.getProperty("catalina.home");
-			File dir = new File(rootPath + File.separator + "Trainee");
-			imagePath = dir.getAbsolutePath() + File.separator + userName+".png";
-			
+			String ss = servletContext.getContextPath().replace("Fssai_E-Learning_System", "Fostac/Trainee");
+			imagePath = ss + File.separator + userName+".png";
+			int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
+			if(session.getAttribute("loginIdUnique")!=null){
+				String loginid=session.getAttribute("loginIdUnique").toString();
+				AdmitCardForm admitCardForm=traineeService.generateAdmitCard(Integer.parseInt(loginid),Profiles.TRAINEE.value());
+				traineeService.updateSteps(tableID, profileID, 2);
+				session.setAttribute("traineeSteps", 2);
+				model.addAttribute("imagePath", imagePath);
+				model.addAttribute("admitCardForm", admitCardForm);
+			}
 		}catch(Exception e){
 			System.out.println("Exception while course details save : "+ e.getMessage());
 		}
-		int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
-		if(session.getAttribute("loginIdUnique")!=null){
-			String loginid=session.getAttribute("loginIdUnique").toString();
-			AdmitCardForm admitCardForm=traineeService.generateAdmitCard(Integer.parseInt(loginid),Profiles.TRAINEE.value());
-			traineeService.updateSteps(tableID, profileID, 2);
-			session.setAttribute("traineeSteps", 2);
-			session.setAttribute("traineeImage", imagePath);
-			model.addAttribute("admitCardForm", admitCardForm);
-		}
+		
 		return "admit-cardtrainee";
 	}
 	
@@ -484,18 +551,15 @@ public class TraineeController {
 					profileID = (Integer) session.getAttribute("profileId");
 					loginId = (int) session.getAttribute("loginIdUnique");
 					userId = (Integer) session.getAttribute("userId");
+					int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
+					traineeService.updateSteps(tableID, profileID, 0);
+					//Close Course
+					traineeService.closeCourse(userId, profileID, "Y");
+					session.setAttribute("traineeSteps", 0);
 				}catch(Exception e){
+					e.printStackTrace();
 					System.out.println("Exception while course details save : "+ e.getMessage());
 				}
-				int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
-				traineeService.updateSteps(tableID, profileID, 0);
-				//Close Course
-				traineeService.closeCourse(userId, profileID, "Y");
-				
-				session.setAttribute("traineeSteps", 0);
-		
-		
-		
 		return "certificatetrainee";
 	}
 
@@ -515,24 +579,24 @@ public class TraineeController {
 			loginId = (int) httpSession.getAttribute("loginIdUnique");
 			profileId = (Integer) httpSession.getAttribute("profileId");
 			userId = (Integer) httpSession.getAttribute("userId");
+			int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileId);
+			long basicEnroll = traineeService.advanceTraineeSave(courseEnrolledUserForm , loginId , tableID,profileId);
+			if(basicEnroll  > 1){
+				Boolean status = traineeService.updateSteps(tableID, profileId, 1);
+				httpSession.setAttribute("traineeSteps", 1);
+				if(status){
+					model.addAttribute("created", "You have successfully enrolled !!!");
+					model.addAttribute("roll", basicEnroll);
+				}else{
+					model.addAttribute("created", "Oops , something went wrong !!!");
+					model.addAttribute("roll", basicEnroll);
+				}
+			}else{
+		}
 		}catch(Exception e){
+			e.printStackTrace();
 			System.out.println("Exception while course details save : "+ e.getMessage());
 		}
-		int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileId);
-		long basicEnroll = traineeService.advanceTraineeSave(courseEnrolledUserForm , loginId , tableID,profileId);
-		if(basicEnroll  > 1){
-			Boolean status = traineeService.updateSteps(tableID, profileId, 1);
-			httpSession.setAttribute("traineeSteps", 1);
-			if(status){
-				model.addAttribute("created", "You have successfully enrolled !!!");
-				model.addAttribute("roll", basicEnroll);
-			}else{
-				model.addAttribute("created", "Oops , something went wrong !!!");
-				model.addAttribute("roll", basicEnroll);
-			}
-		}else{
-	}
-	
 		return "traineeHomepage";
 	}
 	@RequestMapping(value="/specialTrainee" , method=RequestMethod.GET)
@@ -551,23 +615,24 @@ public class TraineeController {
 			profileId = (Integer) httpSession.getAttribute("profileId");
 			loginId = (int) httpSession.getAttribute("loginIdUnique");
 			userId = (Integer) httpSession.getAttribute("userId");
+			int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileId);
+			long basicEnroll = traineeService.basicSave(courseEnrolledUserForm , loginId , tableID,profileId);
+			if(basicEnroll  > 1){
+				Boolean status = traineeService.updateSteps(tableID, profileId, 1);
+				httpSession.setAttribute("traineeSteps", 1);
+				if(status){
+					model.addAttribute("created", "You have successfully enrolled !!!");
+					model.addAttribute("roll", basicEnroll);
+				}else{
+					model.addAttribute("created", "Oops , something went wrong !!!");
+					model.addAttribute("roll", basicEnroll);
+				}
+			}else{
+		}
 		}catch(Exception e){
+			e.printStackTrace();
 			System.out.println("Exception while course details save : "+ e.getMessage());
 		}
-		int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileId);
-		long basicEnroll = traineeService.basicSave(courseEnrolledUserForm , loginId , tableID,profileId);
-		if(basicEnroll  > 1){
-			Boolean status = traineeService.updateSteps(tableID, profileId, 1);
-			httpSession.setAttribute("traineeSteps", 1);
-			if(status){
-				model.addAttribute("created", "You have successfully enrolled !!!");
-				model.addAttribute("roll", basicEnroll);
-			}else{
-				model.addAttribute("created", "Oops , something went wrong !!!");
-				model.addAttribute("roll", basicEnroll);
-			}
-		}else{
-	}
 		return "traineeHomepage";
 	}
 	
@@ -582,10 +647,6 @@ public class TraineeController {
 		int loginId = -1;
 		try{
 		loginId = (int)httpSession.getAttribute("loginIdUnique");
-		}catch(Exception e){
-			responseText = "generic_error";
-			System.out.println("Exception while fetching assessment details for trainee - "+e.getMessage());
-		}
 		if(loginId > 0){
 			TraineeAssessment traineeAssessment = new TraineeAssessment();
 			int courseType = 1;
@@ -598,28 +659,41 @@ public class TraineeController {
 			responseText = "traineeAssessmentOnline";
 			model.addAttribute("traineeAssessment",list);
 		}
+		}catch(Exception e){
+			e.printStackTrace();
+			responseText = "generic_error";
+			System.out.println("Exception while fetching assessment details for trainee - "+e.getMessage());
+		}
 		return responseText;
 	}
 	@RequestMapping(value="/feedbackForm" , method=RequestMethod.GET)
 	public String feedback(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm ,BindingResult bindingResult, HttpSession session , Model model){
 		Integer profileId = (Integer) session.getAttribute("profileId");
 		Integer userId=Integer.parseInt(session.getAttribute("userId").toString());
-		if(userId>0){
-			CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
-			model.addAttribute("courseTrainee", courseTrainee);
+		try{
+			if(userId>0){
+				CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
+				model.addAttribute("courseTrainee", courseTrainee);
+			}
+			
+			TableLink data = TableLink.getByprofileID(profileId);
+			List<FeedbackMaster> feedbackMasters=traineeService.getFeedMasterList(profileId);
+			model.addAttribute("feedbackMasters",feedbackMasters);
+		}catch(Exception e){
+			e.printStackTrace();
 		}
-		
-		TableLink data = TableLink.getByprofileID(profileId);
-		List<FeedbackMaster> feedbackMasters=traineeService.getFeedMasterList(profileId);
-		model.addAttribute("feedbackMasters",feedbackMasters);
 		return "feedbackForm";
 	}
 	@RequestMapping(value="/generateCertificatetrainee" , method=RequestMethod.GET)
 	public String generateCertificatetrainee(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm ,BindingResult bindingResult, HttpSession session , Model model){
 		Integer userId=Integer.parseInt(session.getAttribute("userId").toString());
-		if(userId>0){
-			CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
-			model.addAttribute("courseTrainee", courseTrainee);
+		try{
+			if(userId>0){
+				CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
+				model.addAttribute("courseTrainee", courseTrainee);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		return "generateCertificatetrainee";
 	}
@@ -643,6 +717,7 @@ public class TraineeController {
 				model.addAttribute("ISONLINE","NO");
 			}
 		}catch(Exception e){
+			e.printStackTrace();
 			System.out.println("Exception while course details save : "+ e.getMessage());
 		}
 		return "assessment-instructions-trainee";
@@ -661,11 +736,50 @@ public class TraineeController {
 		try{
 			userId = (Integer) session.getAttribute("userId");
 			loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
-			CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
-			model.addAttribute("courseTrainee", courseTrainee);
+			String docPath = "";
+			String contentName = "";
+			String pdf = ".pdf";
+			String mp4 = ".mp4";
+			String ppt = ".ppt";
+			docPath = servletContext.getContextPath().replace("Fssai_E-Learning_System", "Fostac/Course/");
+			if(userId>0){
+				CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
+				if(courseTrainee != null && courseTrainee.getCourseTypeId() != null && courseTrainee.getCourseTypeId().toUpperCase().contains("BASIC")){
+					System.out.println("Enter Basic");
+					System.out.println(courseTrainee.getContentLinkInput().toUpperCase());
+					System.out.println(courseTrainee.getContentLinkInput().toUpperCase().contains("STUDY"));
+					if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentNameInput().toUpperCase().contains("STUDY")){
+						System.out.println("Enter Study");
+						docPath = docPath + "BASIC/PDF/"+courseTrainee.getContentLinkInput()+pdf;
+					}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentNameInput().toUpperCase().contains("PPT")){
+						docPath = docPath + "BASIC/PPT/"+courseTrainee.getContentLinkInput()+ppt;
+					}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentNameInput().toUpperCase().contains("VIDEO")){
+						docPath = docPath + "BASIC/VIDEO/"+courseTrainee.getContentLinkInput()+mp4;
+					}
+				}else if(courseTrainee != null && courseTrainee.getCourseTypeId() != null && courseTrainee.getCourseTypeId().toUpperCase().contains("ADVANCE")){
+					
+					if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentNameInput().toUpperCase().contains("STUDY")){
+						docPath = docPath + "ADVANCE/PDF/"+courseTrainee.getContentLinkInput()+pdf;
+					}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentNameInput().toUpperCase().contains("PPT")){
+						docPath = docPath + "ADVANCE/PPT/"+courseTrainee.getContentLinkInput()+ppt;
+					}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentNameInput().toUpperCase().contains("VIDEO")){
+						docPath = docPath + "ADVANCE/VIDEO/"+courseTrainee.getContentLinkInput()+mp4;
+					}
+				}else if(courseTrainee != null && courseTrainee.getCourseTypeId() != null && courseTrainee.getCourseTypeId().toUpperCase().contains("SPECIAL")){
+					if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentNameInput().toUpperCase().contains("STUDY")){
+						docPath = docPath + "SPECIAL/PDF/"+courseTrainee.getContentLinkInput()+pdf;
+					}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentNameInput().toUpperCase().contains("PPT")){
+						docPath = docPath + "SPECIAL/PPT/"+courseTrainee.getContentLinkInput()+mp4;
+					}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentNameInput().toUpperCase().contains("VIDEO")){
+						docPath = docPath + "SPECIAL/VIDEO/"+courseTrainee.getContentLinkInput();
+					}
+				}
+				model.addAttribute("contentName", courseTrainee.getContentNameInput());
+				model.addAttribute("contentPath", docPath);
+				model.addAttribute("courseTrainee", courseTrainee);
+			
 			Utility utility=new Utility();
 			//Need to write service for AsssessorAgency 
-			model.addAttribute("courseTrainee",courseTrainee);
 			model.addAttribute("utility",utility);
 			
 			
@@ -677,7 +791,9 @@ public class TraineeController {
 			}else{
 				model.addAttribute("ISONLINE","NO");
 			}
+			}
 		}catch(Exception e){
+			e.printStackTrace();
 			System.out.println("Exception while course details save : "+ e.getMessage());
 		}
 		
@@ -687,9 +803,14 @@ public class TraineeController {
 	}
 	@RequestMapping(value="/saveFeedbackForm" , method=RequestMethod.POST)
 	public String saveFeedbackForm(@ModelAttribute("feedbackforms") List<FeedbackForm> feedbackforms ,BindingResult bindingResult, HttpSession session , Model model){
-		for(FeedbackForm feedbackForm:feedbackforms){
-			feedbackForm.setUserId(session.getAttribute("loginIdUnique").toString());			
+		try{
+			for(FeedbackForm feedbackForm:feedbackforms){
+				feedbackForm.setUserId(session.getAttribute("loginIdUnique").toString());			
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
+		
 		
 //		CourseName courseName=traineeService.getCourseDetails(loginId);
 //		List<FeedbackMaster> feedbackMasters=traineeService.getFeedMasterList();
@@ -708,17 +829,12 @@ public class TraineeController {
 					profileID = (Integer) session.getAttribute("profileId");
 					loginId = (int) session.getAttribute("loginIdUnique");
 					userId = (Integer) session.getAttribute("userId");
+					int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
+					traineeService.updateSteps(tableID, profileID, 5);
+					session.setAttribute("traineeSteps", 5);
 				}catch(Exception e){
 					System.out.println("Exception while course details save : "+ e.getMessage());
 				}
-				int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
-				traineeService.updateSteps(tableID, profileID, 5);
-				session.setAttribute("traineeSteps", 5);
 		return "redirect:/loginProcess.fssai";
 	}
-	
-	
-	
-
-	
 }

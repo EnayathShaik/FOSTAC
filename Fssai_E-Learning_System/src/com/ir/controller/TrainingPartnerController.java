@@ -1,10 +1,12 @@
 package com.ir.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -51,6 +53,9 @@ public class TrainingPartnerController {
 	@Autowired
 	@Qualifier("trainingPartnerService")
 	TrainingPartnerService trainingPartnerService; 
+	
+	@Autowired
+	ServletContext servletContext;
 	
 	@Autowired
 	@Qualifier("traineeService")
@@ -364,10 +369,13 @@ public class TrainingPartnerController {
 	
 	@RequestMapping(value="/editApplicationStatusDetails" , method=RequestMethod.GET)
 	  public String editApplicationStatusDetails(@ModelAttribute("PostVacancyTrainingCenterBean") PostVacancyTrainingCenterBean postVacancyTrainingCenterBean ,HttpSession session,BindingResult result ,  Model model) {	
-		
+		String resumePath = "";
 		Utility utilityList=new Utility();
 		utilityList=trainingPartnerService.editApplicationStatus(postVacancyTrainingCenterBean);
 		model.addAttribute("utilityList", new Gson().toJson(utilityList));
+		
+		resumePath = servletContext.getContextPath().replace("Fssai_E-Learning_System", "Fostac/Trainer");
+		model.addAttribute("resumePath", resumePath);
 		if(postVacancyTrainingCenterBean.getTrainingCenter()>0){
 			return "editApplicationStatusDetails1";
 		}else{
@@ -416,7 +424,9 @@ public class TrainingPartnerController {
 		List<PostVacancyTrainingCenter> list=new ArrayList<>();
 		try{
 			 list = trainingPartnerService.getAppliedCount(postVacancyTrainingCenterBean);
+			 System.out.println("List Size == "+list.size());
 		}catch(Exception e){
+			e.printStackTrace();
 		}
 		response.setContentType("text/html;charset=UTF-8");
 		List<Utility> utilityList=new ArrayList<>();

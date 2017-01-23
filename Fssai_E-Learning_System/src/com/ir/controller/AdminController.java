@@ -74,47 +74,81 @@ public class AdminController {
 	
 	@ModelAttribute("stateList")
 	public List<State> stateList(){
-		List<State> stateList = adminService.stateList();
-		System.out.println("state list   :   "+ stateList);
+		List<State> stateList = null;
+		try{
+			stateList = adminService.stateList();
+			System.out.println("state list   :   "+ stateList);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return stateList;
 	}
 	
 	@ModelAttribute("districtList")
 	public List<District> districtList(){
-		List<District> districtList = adminService.districtList();
-		System.out.println("state list   :   "+ districtList);
+		List<District> districtList = null;
+		try{
+			districtList = adminService.districtList();
+			System.out.println("districtList list   :   "+ districtList);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return districtList;
 	}
 	
 	@ModelAttribute("trainingPartnerList")
 	public List<ManageTrainingPartner> trainingPartnerList(){
-		List<ManageTrainingPartner> trainingPartnerList = adminService.trainingPartnerList();
+		List<ManageTrainingPartner> trainingPartnerList = null;
+		try{
+			trainingPartnerList = adminService.trainingPartnerList();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return trainingPartnerList;
 	}
 	
 	@ModelAttribute("trainingNameList")
 	public List<PersonalInformationTrainer> trainingNameList(){
-		List<PersonalInformationTrainer> trainingNameList = adminService.trainingNameList();
+		List<PersonalInformationTrainer> trainingNameList = null;
+		try{
+			trainingNameList = adminService.trainingNameList();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return trainingNameList;
 	}
 	
 	@ModelAttribute("courseNameList")
 	public List<CourseName> courseNameList(){
-		List<CourseName> courseNameList = adminService.courseNameList();
+		List<CourseName> courseNameList = null;
+		try{
+			courseNameList = adminService.courseNameList();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return courseNameList;
 	}
 	
 	@ModelAttribute("courseTypeList")
 	public List<CourseType> courseTypeList(){
-		List<CourseType> courseTypeList = adminService.courseTypeList();
+		List<CourseType> courseTypeList = null;
+		try{
+			 courseTypeList = adminService.courseTypeList();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return courseTypeList;
 	}
 		
 	
 	@RequestMapping(value="/stateMaster" , method=RequestMethod.GET)
 	public String stateMaster(@ModelAttribute("stateMaster") StateForm stateForm , Model model , HttpSession session){
-		model.addAttribute("created"," ");
-		session.setAttribute("created", " ");
+		try{
+			model.addAttribute("created"," ");
+			session.setAttribute("created", " ");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return "stateMaster";
 	}
 	
@@ -127,17 +161,20 @@ public class AdminController {
 			System.out.println(result.getAllErrors());
 			return "stateMaster";
 		}
-		String stateMasterSave = adminService.stateMasterSave(stateForm);
-		if(stateMasterSave.equalsIgnoreCase("created")){
-			model.addAttribute("created"," State insertion successfull !!!");
-			//session.setAttribute("created"," State insertion successfull !!!");
-			model.addAttribute("stateMaster", new StateForm());
-			return "stateMaster";
-		}else{
-			model.addAttribute("created" , "State already exists in reord !!!");
-			//session.setAttribute("created" , "State already exists in reord !!!");
-			return "stateMaster";
-		}	
+		try{
+			String stateMasterSave = adminService.stateMasterSave(stateForm);
+			if(stateMasterSave.equalsIgnoreCase("created")){
+				model.addAttribute("created"," State insertion successfull !!!");
+				//session.setAttribute("created"," State insertion successfull !!!");
+				model.addAttribute("stateMaster", new StateForm());
+			}else{
+				model.addAttribute("created" , "State already exists in reord !!!");
+				//session.setAttribute("created" , "State already exists in reord !!!");
+			}	
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "stateMaster";
 	}
 	
 	
@@ -150,8 +187,12 @@ public class AdminController {
 	
 	@RequestMapping(value="/districtMaster" , method=RequestMethod.GET)
 	public String districtMaster(@ModelAttribute("districtMaster") DistrictForm districtForm , Model model , HttpSession session){
-		model.addAttribute("created", " ");
-		session.setAttribute("created", " ");
+		try{
+			model.addAttribute("created", " ");
+			session.setAttribute("created", " ");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return "districtMaster";
 	}
 	
@@ -161,24 +202,23 @@ public class AdminController {
 	}
 	@RequestMapping(value = "/manageAssessmentQuestionsSave", method = RequestMethod.POST)
 	public String stateSave(@Valid @ModelAttribute("assessmentQuestionForm") AssessmentQuestionForm assessmentQuestionForm,BindingResult result, Model model){
-		
-		System.out.println(assessmentQuestionForm.getOptionOne());
-		System.out.println(assessmentQuestionForm.getOptionTwo());
-		
 		if(result.hasErrors()){
 			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
 			System.out.println(result.getErrorCount());
 			System.out.println(result.getAllErrors());
 			return "manageAssessmentQuestions";
 		}
-		String manageAssessmentQuestionsSave = adminService.manageAssessmentQuestionsSave(assessmentQuestionForm);
-		if(manageAssessmentQuestionsSave.equalsIgnoreCase("created")){
-			model.addAttribute("created" , "Question Saved successfully !!!");
-			return "manageAssessmentQuestions";
-		}else{
-			model.addAttribute("created" , "Question already exists in records !!!");
-			return "manageAssessmentQuestions";
-		}	
+		try{
+			String manageAssessmentQuestionsSave = adminService.manageAssessmentQuestionsSave(assessmentQuestionForm);
+			if(manageAssessmentQuestionsSave.equalsIgnoreCase("created")){
+				model.addAttribute("created" , "Question Saved successfully !!!");
+			}else{
+				model.addAttribute("created" , "Question already exists in records !!!");
+			}	
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "manageAssessmentQuestions";
 	}
 	@RequestMapping(value = "/districtMasterSave", method = RequestMethod.POST)
 	public String stateSave(@Valid @ModelAttribute("districtMaster") DistrictForm districtForm,BindingResult result, Model model , HttpSession session){
@@ -190,15 +230,18 @@ public class AdminController {
 			System.out.println(result.getAllErrors());
 			return "districtMaster";
 		}
-		String districtMasterSave = adminService.districtMasterSave(districtForm);
-		if(districtMasterSave.equalsIgnoreCase("created")){
-			model.addAttribute("created" , "District inserted successfully !!!");
-			model.addAttribute("districtMaster", new DistrictForm());
-			return "districtMaster";
-		}else{
-			model.addAttribute("created" , "District already exists in records !!!");
-			return "districtMaster";
-		}	
+		try{
+			String districtMasterSave = adminService.districtMasterSave(districtForm);
+			if(districtMasterSave.equalsIgnoreCase("created")){
+				model.addAttribute("created" , "District inserted successfully !!!");
+				model.addAttribute("districtMaster", new DistrictForm());
+			}else{
+				model.addAttribute("created" , "District already exists in records !!!");
+			}	
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "districtMaster";
 	}
 	
 	@RequestMapping(value = "/districtMasterSave", method = RequestMethod.GET )
@@ -222,15 +265,18 @@ public class AdminController {
 			System.out.println(result.getAllErrors());
 			return "cityMaster";
 		}
-		String cityMasterSave = adminService.cityMasterSave(cityForm);
-		if(cityMasterSave.equalsIgnoreCase("created")){
-			model.addAttribute("created"," City insertion successfull !!!");
-			model.addAttribute("cityMaster", new CityForm());
-			return "cityMaster";
-		}else{
-			model.addAttribute("created"," City already exists !!!");
-			return "cityMaster";
-		}	
+		try{
+			String cityMasterSave = adminService.cityMasterSave(cityForm);
+			if(cityMasterSave.equalsIgnoreCase("created")){
+				model.addAttribute("created"," City insertion successfull !!!");
+				model.addAttribute("cityMaster", new CityForm());
+			}else{
+				model.addAttribute("created"," City already exists !!!");
+			}	
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "cityMaster";
 	}
 	
 	@RequestMapping(value="/cityMasterSave" , method=RequestMethod.GET)
@@ -256,15 +302,18 @@ public class AdminController {
 			System.out.println(result.getAllErrors());
 			return "regionMappingMaster";
 		}
-		String regionMasterSave = adminService.regionMasterSave(regionForm);
-		if(regionMasterSave.equalsIgnoreCase("Oops")){
-			model.addAttribute("created", "Region already mapped with this district !!!");
-			return "regionMappingMaster";
-		}else{
-			model.addAttribute("created", "Region name successfully mapped !!!");
-			model.addAttribute("regionMappingMaster", new RegionForm());
-			return "regionMappingMaster";
-		}	
+		try{
+			String regionMasterSave = adminService.regionMasterSave(regionForm);
+			if(regionMasterSave.equalsIgnoreCase("Oops")){
+				model.addAttribute("created", "Region already mapped with this district !!!");
+			}else{
+				model.addAttribute("created", "Region name successfully mapped !!!");
+				model.addAttribute("regionMappingMaster", new RegionForm());
+			}	
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "regionMappingMaster";
 	}
 	
 	@RequestMapping(value="/regionMasterSave" , method=RequestMethod.GET)
@@ -286,16 +335,19 @@ public class AdminController {
 			System.out.println(result.getAllErrors());
 			return "manageCourse";
 		}
-		String manageCourse1 = adminService.manageCourse(manageCourse);
-		if(manageCourse1.equalsIgnoreCase("created")){
-			model.addAttribute("created" ,"New course inserted successfully !!!");
-			model.addAttribute("manageCourse", new ManageCourse());
-			return "manageCourse";
-		}else{
-			model.addAttribute("created" ,"This course already inserted !!!");
-			model.addAttribute("manageCourse", new ManageCourse());
-			return "manageCourse";
-		}	
+		try{
+			String manageCourse1 = adminService.manageCourse(manageCourse);
+			if(manageCourse1.equalsIgnoreCase("created")){
+				model.addAttribute("created" ,"New course inserted successfully !!!");
+				model.addAttribute("manageCourse", new ManageCourse());
+			}else{
+				model.addAttribute("created" ,"This course already inserted !!!");
+				model.addAttribute("manageCourse", new ManageCourse());
+			}	
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "manageCourse";
 	}
 	
 	@RequestMapping(value="/manageTrainingPartnerForm" , method=RequestMethod.GET)
@@ -370,14 +422,16 @@ public class AdminController {
 			System.out.println(result.getAllErrors());
 			return "traineeUserManagementForm";
 		}
-		List<PersonalInformationTrainee> traineeUserManagementSearch = adminService.traineeUserManagementSearch(traineeUserManagementForm);
-		//System.out.println("traineeUserManagementSearch controller" +traineeUserManagementSearch.get(0).getLoginDetails().getLoginId());
-		if(traineeUserManagementSearch != null && traineeUserManagementSearch.size() > 0){
-			model.addAttribute("searchTraineeUsermanagement" , traineeUserManagementSearch);
-			return "traineeUserManagementForm";
-		}else{
-			return "traineeUserManagementForm";
-		}	
+		try{
+			List<PersonalInformationTrainee> traineeUserManagementSearch = adminService.traineeUserManagementSearch(traineeUserManagementForm);
+			//System.out.println("traineeUserManagementSearch controller" +traineeUserManagementSearch.get(0).getLoginDetails().getLoginId());
+			if(traineeUserManagementSearch != null && traineeUserManagementSearch.size() > 0){
+				model.addAttribute("searchTraineeUsermanagement" , traineeUserManagementSearch);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "traineeUserManagementForm";	
 	}
 	@RequestMapping(value="/trainerUserManagementForm" , method=RequestMethod.GET)
 	public String trainerUserManagementForm(@ModelAttribute("trainerUserManagementForm") TrainerUserManagementForm trainerUserManagementForm){
@@ -389,21 +443,33 @@ public class AdminController {
 	}
 	@RequestMapping(value="/assessorUserManagementForm" , method=RequestMethod.GET)
 	public String assessorUserManagementForm(Model model){
-		AssessorUserManagementForm assessorUserManagementForm = new AssessorUserManagementForm();
-		model.addAttribute("assessorUserManagementForm", assessorUserManagementForm);
+		try{
+			AssessorUserManagementForm assessorUserManagementForm = new AssessorUserManagementForm();
+			model.addAttribute("assessorUserManagementForm", assessorUserManagementForm);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return "assessorUserManagementForm";
 	}
 	@RequestMapping(value="/traineeRegistration" , method=RequestMethod.GET)
 	public String traineeRegistration(Model model){
-		PersonalInformationTrainee personalInformationTrainee = new PersonalInformationTrainee();
-		model.addAttribute("traineeRegistration", personalInformationTrainee);
+		try{
+			PersonalInformationTrainee personalInformationTrainee = new PersonalInformationTrainee();
+			model.addAttribute("traineeRegistration", personalInformationTrainee);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return "traineeRegistration";
 	}
 	
 	@RequestMapping(value="/adminUserManagementForm" , method=RequestMethod.GET)
 	public String adminUserManagementForm(Model model){
-		AdminUserManagementForm adminUserManagementForm = new AdminUserManagementForm();
-		model.addAttribute("adminUserManagementForm", adminUserManagementForm);
+		try{
+			AdminUserManagementForm adminUserManagementForm = new AdminUserManagementForm();
+			model.addAttribute("adminUserManagementForm", adminUserManagementForm);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return "adminUserManagementForm";
 	}
 	
@@ -415,14 +481,17 @@ public class AdminController {
 			System.out.println(result.getAllErrors());
 			return "adminUserManagementForm";
 		}
-		String adminUserManagementSave = adminService.adminUserManagementSave(adminUserManagementForm);
-		if(adminUserManagementSave.equalsIgnoreCase("created")){
-			model.addAttribute("created" , "UserId created successfully !!!");
-			return "adminUserManagementForm";
-		}else{
-			model.addAttribute("created" , "This user Id already exists !!!");
-			return "adminUserManagementForm";
-		}	
+		try{
+			String adminUserManagementSave = adminService.adminUserManagementSave(adminUserManagementForm);
+			if(adminUserManagementSave.equalsIgnoreCase("created")){
+				model.addAttribute("created" , "UserId created successfully !!!");
+			}else{
+				model.addAttribute("created" , "This user Id already exists !!!");
+			}	
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "adminUserManagementForm";
 	}
 	
 	@RequestMapping(value = "/assessorUserManagementSave", method = RequestMethod.POST)
@@ -433,14 +502,17 @@ public class AdminController {
 			System.out.println(result.getAllErrors());
 			return "registrationFormAssessor";
 		}
-		String assessorUserManagement = adminService.assessorUserManagementSave(assessorUserManagementForm);
-		if(assessorUserManagement.equalsIgnoreCase("created")){
-			model.addAttribute("created" , "UserId created successfully !!!");
-			return "registrationFormAssessor";
-		}else{
-			model.addAttribute("error" , "Already exists !!!");
-			return "registrationFormAssessor";
+		try{
+			String assessorUserManagement = adminService.assessorUserManagementSave(assessorUserManagementForm);
+			if(assessorUserManagement.equalsIgnoreCase("created")){
+				model.addAttribute("created" , "UserId created successfully !!!");
+			}else{
+				model.addAttribute("error" , "Already exists !!!");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
+		return "registrationFormAssessor";
 	}
 	
 	
@@ -459,21 +531,29 @@ public class AdminController {
 			System.out.println(result.getAllErrors());
 			return "manageCourseContent";
 		}
-		String manageCourseContentSearch= adminService.manageCourseContentSearch(manageCourseContentForm);
-		if(manageCourseContentSearch.equalsIgnoreCase("created")){
-			model.addAttribute("created" , "Data inserted successfully !!!");
-			model.addAttribute("manageCourseContent", new ManageCourseContentForm());
-		}else{
-			model.addAttribute("created" , "Data updated successfully !!!");
-			model.addAttribute("manageCourseContent", new ManageCourseContentForm());
+		try{
+			String manageCourseContentSearch= adminService.manageCourseContentSearch(manageCourseContentForm);
+			if(manageCourseContentSearch.equalsIgnoreCase("created")){
+				model.addAttribute("created" , "Data inserted successfully !!!");
+				model.addAttribute("manageCourseContent", new ManageCourseContentForm());
+			}else{
+				model.addAttribute("created" , "Data updated successfully !!!");
+				model.addAttribute("manageCourseContent", new ManageCourseContentForm());
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		return "manageCourseContent";
 	}
 	
 	@RequestMapping(value="/trainingCalendarForm" , method=RequestMethod.GET)
 	public String trainingCalendarForm( Model model){
-		TrainingCalendarForm trainingCalendarForm = new TrainingCalendarForm();
-		model.addAttribute("trainingCalendarForm", trainingCalendarForm);
+		try{
+			TrainingCalendarForm trainingCalendarForm = new TrainingCalendarForm();
+			model.addAttribute("trainingCalendarForm", trainingCalendarForm);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return "trainingCalendarForm";
 	}
 	@RequestMapping(value="/trainingCalenderSave" , method=RequestMethod.POST)
@@ -485,15 +565,20 @@ public class AdminController {
 			System.out.println(result.getAllErrors());
 			return "trainingCalendarForm";
 		}
-		System.out.println(trainingCalendarForm.getTrainingDate()+"   "+ trainingCalendarForm.getTrainingTime());
-		String trainingCalendar = adminService.trainingCalendarForm(trainingCalendarForm);
-		if(trainingCalendar.equalsIgnoreCase("created")){
-			model.addAttribute("created", "Calender saved successfully !!!");
-			model.addAttribute("trainingCalendarForm", new TrainingCalendarForm());
-		}else{
-			model.addAttribute("created", "Oops , something went wrong !!!");
-			model.addAttribute("trainingCalendarForm", new TrainingCalendarForm());
+		try{
+			System.out.println(trainingCalendarForm.getTrainingDate()+"   "+ trainingCalendarForm.getTrainingTime());
+			String trainingCalendar = adminService.trainingCalendarForm(trainingCalendarForm);
+			if(trainingCalendar.equalsIgnoreCase("created")){
+				model.addAttribute("created", "Calender saved successfully !!!");
+				model.addAttribute("trainingCalendarForm", new TrainingCalendarForm());
+			}else{
+				model.addAttribute("created", "Oops , something went wrong !!!");
+				model.addAttribute("trainingCalendarForm", new TrainingCalendarForm());
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
+		
 		return "trainingCalendarForm";
 	}
 	
@@ -505,13 +590,15 @@ public class AdminController {
 			System.out.println(result.getAllErrors());
 			return "trainerUserManagementForm";
 		}
-		List<PersonalInformationTrainer> trainerUserManagementSearch = adminService.trainerUserManagementSearch(trainerUserManagementForm);
-		if(trainerUserManagementSearch != null && trainerUserManagementSearch.size() > 0){
-			model.addAttribute("searchTrainerUsermanagement" , trainerUserManagementSearch);
-			return "trainerUserManagementForm";
-		}else{
-			return "trainerUserManagementForm";
-		}	
+		try{
+			List<PersonalInformationTrainer> trainerUserManagementSearch = adminService.trainerUserManagementSearch(trainerUserManagementForm);
+			if(trainerUserManagementSearch != null && trainerUserManagementSearch.size() > 0){
+				model.addAttribute("searchTrainerUsermanagement" , trainerUserManagementSearch);
+			}	
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "trainerUserManagementForm";
 	}
 	@RequestMapping(value = "/trainingCetnterUserManagementSearch", method = RequestMethod.POST)
 	public String trainingCetnterUserManagementSearch(@Valid @ModelAttribute("trainingCenterUserManagementForm") TrainingCenterUserManagementForm trainingCenterUserManagementForm,BindingResult result, HttpSession httpSession, Model model){
@@ -526,16 +613,15 @@ public class AdminController {
 		try{
 			profileId = (Integer) httpSession.getAttribute("profileId");
 			userId = (Integer) httpSession.getAttribute("userId");
+			List<PersonalInformationTrainingPartner> trainingCetnterUserManagementSearch = adminService.trainingCenterUserManagementSearch(trainingCenterUserManagementForm,profileId,userId);
+			if(trainingCetnterUserManagementSearch != null && trainingCetnterUserManagementSearch.size() > 0){
+				model.addAttribute("searchTrainingCenterUsermanagement" , trainingCetnterUserManagementSearch);
+			}
 		}catch(Exception e){
+			e.printStackTrace();
 			System.out.println("Exception while course details save : "+ e.getMessage());
 		}
-		List<PersonalInformationTrainingPartner> trainingCetnterUserManagementSearch = adminService.trainingCenterUserManagementSearch(trainingCenterUserManagementForm,profileId,userId);
-		if(trainingCetnterUserManagementSearch != null && trainingCetnterUserManagementSearch.size() > 0){
-			model.addAttribute("searchTrainingCenterUsermanagement" , trainingCetnterUserManagementSearch);
-			return "trainingCenterUserManagementForm";
-		}else{
-			return "trainingCenterUserManagementForm";
-		}	
+		return "trainingCenterUserManagementForm";	
 	}
 	@RequestMapping(value = "/assessorUserManagementSearch", method = RequestMethod.POST)
 	public String assessorUserManagementSearch(@Valid @ModelAttribute("assessorUserManagementForm") AssessorUserManagementForm assessorUserManagementForm,BindingResult result, HttpSession httpSession, Model model){
@@ -550,16 +636,14 @@ public class AdminController {
 		try{
 			profileId = (Integer) httpSession.getAttribute("profileId");
 			userId = (Integer) httpSession.getAttribute("userId");
+			List<PersonalInformationAssessor> assessorUserManagementSearch = adminService.assessorUserManagementSearch(assessorUserManagementForm,profileId,userId);
+			if(assessorUserManagementSearch != null && assessorUserManagementSearch.size() > 0){
+				model.addAttribute("searchassessorUsermanagement" , assessorUserManagementSearch);
+			}
 		}catch(Exception e){
 			System.out.println("Exception while course details save : "+ e.getMessage());
 		}
-		List<PersonalInformationAssessor> assessorUserManagementSearch = adminService.assessorUserManagementSearch(assessorUserManagementForm,profileId,userId);
-		if(assessorUserManagementSearch != null && assessorUserManagementSearch.size() > 0){
-			model.addAttribute("searchassessorUsermanagement" , assessorUserManagementSearch);
-			return "assessorUserManagementForm";
-		}else{
-			return "assessorUserManagementForm";
-		}	
+		return "assessorUserManagementForm";
 	}
 	
 	
@@ -602,14 +686,18 @@ public class AdminController {
 			System.out.println(result.getAllErrors());
 			return "changePasswordAdminPage";
 		}
-		String id =(String) session.getAttribute("logId");
-		//System.out.println(changePasswordForm.getLoginid());
-		//int id = 1;
-		boolean changePasswordTraineeSave = adminService.changePasswordadminSave(changePasswordForm , id);
-		if(changePasswordTraineeSave){
-			model.addAttribute("created" , "Your password has changed !!!");
-		}else{
-			model.addAttribute("created" , "Oops, something went wrong !!!");
+		try{
+			String id =(String) session.getAttribute("logId");
+			//System.out.println(changePasswordForm.getLoginid());
+			//int id = 1;
+			boolean changePasswordTraineeSave = adminService.changePasswordadminSave(changePasswordForm , id);
+			if(changePasswordTraineeSave){
+				model.addAttribute("created" , "Your password has changed !!!");
+			}else{
+				model.addAttribute("created" , "Oops, something went wrong !!!");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		return "changePasswordAdminPage";
 	}
@@ -629,14 +717,18 @@ public class AdminController {
 			System.out.println(result.getAllErrors());
 			return "changePasswordTp";
 		}
-		String id =(String) session.getAttribute("logId");
-		//System.out.println(changePasswordForm.getLoginid());
-		//int id = 1;
-		boolean changePasswordTraineeSave = adminService.changePasswordTPSave(changePasswordForm , id);
-		if(changePasswordTraineeSave){
-			model.addAttribute("created" , "Your password has changed !!!");
-		}else{
-			model.addAttribute("created" , "Oops, something went wrong !!!");
+		try{
+			String id =(String) session.getAttribute("logId");
+			//System.out.println(changePasswordForm.getLoginid());
+			//int id = 1;
+			boolean changePasswordTraineeSave = adminService.changePasswordTPSave(changePasswordForm , id);
+			if(changePasswordTraineeSave){
+				model.addAttribute("created" , "Your password has changed !!!");
+			}else{
+				model.addAttribute("created" , "Oops, something went wrong !!!");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		return "changePasswordTp";
 	}
@@ -662,8 +754,12 @@ public class AdminController {
 			System.out.println(result.getAllErrors());
 			return "feedbackMaster";
 		}
-		String created=adminService.saveFeedbackMaster(feedbackMaster);
-		model.addAttribute("created", created);
+		try{
+			String created=adminService.saveFeedbackMaster(feedbackMaster);
+			model.addAttribute("created", created);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return "feedbackMaster";
 	
 	}
@@ -685,57 +781,85 @@ public class AdminController {
 			System.out.println(result.getAllErrors());
 			return "contactTPartner";
 		}//String id = contactTrainee.getUserId();
-		String id=(String) session.getAttribute("logId");
-		System.out.println("userid   "+ id);
-		String contactTainingPtSave = adminService.contactTraningPTSave(contactTrainee , id);
-		if(contactTainingPtSave.equalsIgnoreCase("created")){
-			model.addAttribute("created" , "Your request has been sent successfully !!!");
-		}else{
-			model.addAttribute("created" , "Oops, something went wrong !!!");
+		
+		try{
+			String id=(String) session.getAttribute("logId");
+			System.out.println("userid   "+ id);
+			String contactTainingPtSave = adminService.contactTraningPTSave(contactTrainee , id);
+			if(contactTainingPtSave.equalsIgnoreCase("created")){
+				model.addAttribute("created" , "Your request has been sent successfully !!!");
+			}else{
+				model.addAttribute("created" , "Oops, something went wrong !!!");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
+		
 		return "contactTrainee";
 	}
 	
 	@RequestMapping(value="/updateTrainerAssessmentForm", method=RequestMethod.GET)
 	public String updateTrainerAssessment(Model model, HttpServletRequest request){
-		UpdateTrainerAssessmentForm updateTrainerAssessmentForm = new UpdateTrainerAssessmentForm();
-		model.addAttribute("updateTrainerAssessment", updateTrainerAssessmentForm);
+		try{
+			UpdateTrainerAssessmentForm updateTrainerAssessmentForm = new UpdateTrainerAssessmentForm();
+			model.addAttribute("updateTrainerAssessment", updateTrainerAssessmentForm);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return "updateTrainerAssessment";
 	}
 	
 	@RequestMapping (value = "/trainingCenterByCoursenameId", method = RequestMethod.POST)
 	@ResponseBody
 	public String getTrainingCentersByCourse(@RequestParam Integer courseNameId, HttpServletRequest request, HttpServletResponse response){
-		List <IntStringBean> listTrainingCenters = adminService.getTrainingCentersByCourse(courseNameId);
-		Gson gson = new Gson();
-		String strData = gson.toJson(listTrainingCenters);
+		List <IntStringBean> listTrainingCenters = null;
+		String strData = "";
+		try{
+			listTrainingCenters = adminService.getTrainingCentersByCourse(courseNameId);
+			Gson gson = new Gson();
+			strData = gson.toJson(listTrainingCenters);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return strData;
 	}
 	
 	@RequestMapping (value = "/searchTrainerForAssessmentValidation", method = RequestMethod.POST)
 	@ResponseBody
 	public String searchTrainerForAssessmentValidation(@RequestParam Integer courseNameId, @RequestParam Integer tpId, HttpServletRequest request, HttpServletResponse response){
-		List <TrainerAssessmentSearchForm> listTrainersForAssessmentEval = adminService.searchTrainerForAssessmentValidation(courseNameId, tpId);
-		Gson gson = new Gson();
-		String strData = gson.toJson(listTrainersForAssessmentEval);
+		List <TrainerAssessmentSearchForm> listTrainersForAssessmentEval = null;
+		String strData = "";
+		try{
+			listTrainersForAssessmentEval = adminService.searchTrainerForAssessmentValidation(courseNameId, tpId);
+			Gson gson = new Gson();
+			strData = gson.toJson(listTrainersForAssessmentEval);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return strData;
 	}
 	
 	@RequestMapping(value="/saveTrainerAssessment", method= RequestMethod.POST)
 	@ResponseBody
 	public String saveTrainerAssessment(@Valid @ModelAttribute("trainerAssessmentForm") TrainerAssessmentSearchForm trainerAssessmentForm, Model model){
-		trainerAssessmentForm = adminService.evaluateTrainerAssessment(trainerAssessmentForm);
+		int response = 0 ;
+		try{
+			trainerAssessmentForm = adminService.evaluateTrainerAssessment(trainerAssessmentForm);
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy"); 
+			String date = simpleDateFormat.format(new Date());
+			TrainerAssessmentEvaluation trainerAssessmentEvaluation = new TrainerAssessmentEvaluation();
+			trainerAssessmentEvaluation.setTrainerId(trainerAssessmentForm.getTrainerId());
+			trainerAssessmentEvaluation.setCourseNameId(trainerAssessmentForm.getCourseNameId());
+			trainerAssessmentEvaluation.setTrainingPartnerId(trainerAssessmentForm.getTrainingPartnerId());
+			trainerAssessmentEvaluation.setRating(trainerAssessmentForm.getRating());
+			trainerAssessmentEvaluation.setResult(trainerAssessmentForm.getResult());
+			trainerAssessmentEvaluation.setAssessmentDate(date);
+			response = adminService.saveTrainerAssessment(trainerAssessmentEvaluation);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy"); 
-		String date = simpleDateFormat.format(new Date());
-		TrainerAssessmentEvaluation trainerAssessmentEvaluation = new TrainerAssessmentEvaluation();
-		trainerAssessmentEvaluation.setTrainerId(trainerAssessmentForm.getTrainerId());
-		trainerAssessmentEvaluation.setCourseNameId(trainerAssessmentForm.getCourseNameId());
-		trainerAssessmentEvaluation.setTrainingPartnerId(trainerAssessmentForm.getTrainingPartnerId());
-		trainerAssessmentEvaluation.setRating(trainerAssessmentForm.getRating());
-		trainerAssessmentEvaluation.setResult(trainerAssessmentForm.getResult());
-		trainerAssessmentEvaluation.setAssessmentDate(date);
-		int response = adminService.saveTrainerAssessment(trainerAssessmentEvaluation);
 		if(response >0)
 			return "success";
 		else

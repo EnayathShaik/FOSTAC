@@ -52,19 +52,22 @@ public class AssessorController {
 			System.out.println(result.getAllErrors());
 			return "markAttendance";
 		}
-		PersonalInformationAssessor assessorInfo = (PersonalInformationAssessor)httpSession.getAttribute("loginUser");
-		int assessorId = assessorInfo.getId();
-		/**TODO Training center list of assessor needs to be implemented*/
-		List<IntStringBean> listTc = new ArrayList<IntStringBean>();
-		listTc = assessmentService.getTrainingPartners(assessorId);
-		markAttendance.setTrainingCenters(listTc);
-		
-		List<CourseType> courseTypes = assessmentService.courseTypes();
-		markAttendance.setCourseType(courseTypes);
-		markAttendance.setAssessorId(assessorId);
-		Gson gson = new Gson();
-		model.addAttribute("markAttendance" , gson.toJson(markAttendance));
-		
+		try{
+			PersonalInformationAssessor assessorInfo = (PersonalInformationAssessor)httpSession.getAttribute("loginUser");
+			int assessorId = assessorInfo.getId();
+			/**TODO Training center list of assessor needs to be implemented*/
+			List<IntStringBean> listTc = new ArrayList<IntStringBean>();
+			listTc = assessmentService.getTrainingPartners(assessorId);
+			markAttendance.setTrainingCenters(listTc);
+			
+			List<CourseType> courseTypes = assessmentService.courseTypes();
+			markAttendance.setCourseType(courseTypes);
+			markAttendance.setAssessorId(assessorId);
+			Gson gson = new Gson();
+			model.addAttribute("markAttendance" , gson.toJson(markAttendance));
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return "markAttendance";
 	}
 	
@@ -76,15 +79,17 @@ public class AssessorController {
 			System.out.println(result.getAllErrors());
 			return "updateResult";
 		}
-		
-		int assessorId= (int)httpSession.getAttribute("loginIdUnique");
-		
-		List<CourseType> courseTypes = assessmentService.courseTypes();
-		List<IntStringBean> listTc = assessmentService.getTrainingPartners(assessorId);
-		markAttendance.setCourseType(courseTypes);
-		markAttendance.setTrainingCenters(listTc);
-		Gson gson = new Gson();
-		model.addAttribute("updateResult" , gson.toJson(markAttendance));
+		try{
+			int assessorId= (int)httpSession.getAttribute("loginIdUnique");
+			List<CourseType> courseTypes = assessmentService.courseTypes();
+			List<IntStringBean> listTc = assessmentService.getTrainingPartners(assessorId);
+			markAttendance.setCourseType(courseTypes);
+			markAttendance.setTrainingCenters(listTc);
+			Gson gson = new Gson();
+			model.addAttribute("updateResult" , gson.toJson(markAttendance));
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return "updateResult";
 	}
 	
@@ -101,14 +106,21 @@ public class AssessorController {
 			System.out.println(result.getErrorCount());
 			System.out.println(result.getAllErrors());
 			return "contactTrainee";
-		}String id = contactTrainee.getUserId();
-		System.out.println("userid   "+ id);
-		String contactTraineeSave = traineeService.contactTraineeSave(contactTrainee , id);
-		if(contactTraineeSave.equalsIgnoreCase("created")){
-			model.addAttribute("created" , "Your request has been sent successfully !!!");
-		}else{
-			model.addAttribute("created" , "Oops, something went wrong !!!");
+		}
+		try{
+			String id = contactTrainee.getUserId();
+			System.out.println("userid   "+ id);
+			String contactTraineeSave = traineeService.contactTraineeSave(contactTrainee , id);
+			if(contactTraineeSave.equalsIgnoreCase("created")){
+				model.addAttribute("created" , "Your request has been sent successfully !!!");
+			}else{
+				model.addAttribute("created" , "Oops, something went wrong !!!");
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		return "contactA";
+		
 	}
 }

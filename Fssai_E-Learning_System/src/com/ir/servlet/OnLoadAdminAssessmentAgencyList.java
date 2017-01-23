@@ -57,49 +57,29 @@ public class OnLoadAdminAssessmentAgencyList extends HttpServlet {
 				response.setContentType("text/html;charset=UTF-8");
 		        PrintWriter out = response.getWriter();
 			
-				try {
-					Class.forName("org.postgresql.Driver");
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				Connection conn = null;
-				try {
-					conn = DriverManager.getConnection(DBUtil.databaseUrl,DBUtil.dbUsername,DBUtil.dbPassword);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				ResultSet rs = null;
-				PreparedStatement stmt = null;
+		        Configuration conf = new Configuration();
+				conf.configure("/hibernate.cfg.xml");
+				SessionFactory sf = conf.buildSessionFactory();
+				Session session = sf.openSession();
+				String newList=null;
+				
 				String sql = "select maa.manageassessmentagencyid ,  maa.assessmentagencyname , "+
 							" count(pia.assessmentagencyname) from personalinformationassessor as pia "+
   " inner join manageassessmentagency as maa on pia.assessmentagencyname = maa.manageassessmentagencyid  "+
   " inner join logindetails as ld on pia.logindetails = ld.id where ld.status='I' "+
  " group by maa.assessmentagencyname , maa.manageassessmentagencyid ";
-				List list = new ArrayList<>();
-				try {
-					stmt = conn.prepareStatement(sql);
-					System.out.println(stmt.toString());
-					rs = stmt.executeQuery();
-					
-				
-					while(rs.next()){
-						List l = new ArrayList<>();
-						l.add(rs.getInt(1));
-						l.add(rs.getString(2));
-						l.add(rs.getInt(3));
-						list.add(l);
-					}
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				Query query = session.createSQLQuery(sql);
+				List list = query.list();
+				System.out.println(list.size());
+				session.close();
+				if(list.size() > 0 || list != null){
+					System.out.println(list);
+					Gson g =new Gson();
+					newList = g.toJson(list); 
 				}
-				Gson g =new Gson();
-				String newList = g.toJson(list); 
 				out.write(newList);
 				out.flush();
-		
+			
 	}
 
 	/**

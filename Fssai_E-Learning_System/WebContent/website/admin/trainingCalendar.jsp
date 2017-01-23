@@ -241,6 +241,7 @@ function getTrainingCalender(indicator){
 <a href="#" onclick="getTrainingCalender('SELECTED');" class="btn btn-default pull-right show-details-vacancy collapsed" style="margin-top: 0px;
     margin-right: 15px; background:#ef580d" data-toggle="collapse" data-target="#show-result"
      aria-expanded="false">Show Calendar</a>
+     <input type="button" id="btnExport" style="margin-right: 20px;"  class="btn login-btn pull-right" value="Download" />
                                        
                                     </fieldset>
                                     
@@ -251,7 +252,7 @@ function getTrainingCalender(indicator){
                                     <h1>Search Results</h1>
                                     <!-- table -->
                                     <div class="row">
-                                        <div class="col-xs-12">
+                                        <div id="dvData" class="col-xs-12">
                                             <table id="newTable" class="table table-bordered table-responsive table-striped table-hover">
                                                 <thead>
                                                     <tr class="background-open-vacancies">

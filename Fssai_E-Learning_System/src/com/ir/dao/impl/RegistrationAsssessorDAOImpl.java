@@ -195,7 +195,7 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 			personalInformationAssessor.setReleventExpOfAuditInYear(registrationFormAssessor.getReleventExpOfAuditInYear());
 			personalInformationAssessor.setReleventExpOfAuditInMonth(registrationFormAssessor.getReleventExpOfAuditInMonth());
 			personalInformationAssessor.setHowManyAssessmentConductInAMonth(registrationFormAssessor.getHowManyAssessmentConductInAMonth());
-			//personalInformationAssessor.setAssessmentAgencyName(maan);
+			personalInformationAssessor.setAssessmentAgencyName(maan);
 			personalInformationAssessor.setLoginDetails(loginDetails);
 			//personalInformationAssessor.setCoursesEnrolled(coursesEnrolled);
 			

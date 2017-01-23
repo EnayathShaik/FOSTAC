@@ -4,6 +4,7 @@ public class StringStringBean {
 	private String id;
 	private String value;
 	private String status;
+	private String link;
 	/**
 	 * @return the id
 	 */
@@ -33,6 +34,12 @@ public class StringStringBean {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getLink() {
+		return link;
+	}
+	public void setLink(String link) {
+		this.link = link;
 	}
 	
 	

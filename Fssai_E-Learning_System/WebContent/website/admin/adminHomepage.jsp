@@ -57,7 +57,7 @@ function searchAssessmentAgencyList(){
 }
 </script>
 
-<script>
+<!-- <script>
 function onLoadTrainingPartnerCenterId(){
 	var  id = document.getElementById("idHiddenTrainingPartner").value;
 	var result="";
@@ -83,7 +83,7 @@ function onLoadTrainingPartnerCenterId(){
 	});
 return result;
 }
-</script>
+</script> -->
 
     <section>
          <%@include file="../roles/top-menu.jsp"%>
@@ -149,7 +149,7 @@ return result;
                             <!-- add the content here for main body -->
                         <!-- timeline  -->
                      
-                            <div class="col-xs-12">
+                            <!-- <div class="col-xs-12">
                                 
                                 <fieldset>
                                     <legend>List of Pending Training Center ID Activation</legend>
@@ -166,7 +166,7 @@ return result;
                                 </table>
                                
                                 </fieldset>
-                                </div>
+                                </div> -->
                             
                             <div class="col-md-2 hidden-xs"></div>
                         </div>
