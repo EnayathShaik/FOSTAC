@@ -192,6 +192,11 @@
     <script src="js/jquery.isotope.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/wow.min.js"></script>
+    <script>
+        var id = localStorage.getItem('activeID');
+        document.getElementById(id).className = "active";
+
+    </script>
 </body>
 
 </html>
