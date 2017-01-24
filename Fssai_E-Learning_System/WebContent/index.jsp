@@ -84,14 +84,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <li><a href="special-level.fssai">SPECIAL LEVEL</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="faq.fssai">FAQ</a></li>
+                                    <li id="faqpagefssai"><a onclick="setID('faqpagefssai')" href="faq.fssai">FAQ</a></li>
                                     <li id="contactpagefssai"><a onclick="setID('contactpagefssai')" href="contact.fssai">CONTACT</a></li>
-                                    <li><a href="login.fssai">LOGIN</a></li>
+                                    <li id="loginpagefssai"><a onclick="setID('loginpagefssai')" href="login.fssai">LOGIN</a></li>
                                 </ul>
                                 <div class="search">
                                     <form role="form" class="searchbar">
                                         <input type="text" class="search-form" autocomplete="off" placeholder="Search...">
-                                        <i style="color:#71b44b;" class="fa fa-search"></i>
+                                        <i style="color:#71b44b; margin-right: 10px;" class="fa fa-search"></i>
                                     </form>
                                 </div>
                             </div>
@@ -319,13 +319,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <div class="col-xs-12">
                                 <div id="map-container">
                                     <div class="row">
-                                        <div class="col-md-3 col-xs-12">
+                                        <div class="col-md-4 col-xs-12">
                                             <div id="loc-list">
                                                 <ul id="list"></ul>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-9 col-xs-12">
+                                        <div class="col-md-8 col-xs-12">
                                             <div id="map" style="height:200px;width:100%;"></div>
                                         </div>
                                     </div>
@@ -462,8 +462,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </script>
 
             </body>
-<script>
-var id = localStorage.getItem('activeID');
-document.getElementById(id).className = "active";
-</script>
+            <script>
+                var id = localStorage.getItem('activeID');
+                document.getElementById(id).className = "active";
+
+            </script>
+
             </html>
