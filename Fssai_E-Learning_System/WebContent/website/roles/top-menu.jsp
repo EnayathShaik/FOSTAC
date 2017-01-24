@@ -66,12 +66,12 @@
                                     </div>
                                     <div id="navbar" class="navbar-collapse collapse">
                                         <ul class="nav navbar-nav">
-                                            <li class="active hori"><a href="loginProcess.fssai">Home</a></li>
+                                            <li id="homepagefssai" class="hori"><a onclick="setID('homepagefssai')" href="loginProcess.fssai">Home</a></li>
                                             <!-- <li class="hori"><a href="search-and-apply.fssai">Search
 									& Apply Vacancy</a></li> -->
-                                            <li class="hori"><a href="update-profile.fssai?userId=0">Update
+                                            <li id="updatepagefssai" class="hori"><a onclick="setID('updatepagefssai')" href="update-profile.fssai?userId=0">Update
 									Profile</a></li>
-                                            <li class="hori"><a href="contactTrainee.fssai">Contact
+                                            <li id="contactpagefssai" class="hori"><a href="contactTrainee.fssai" onclick="setID('contactpagefssai')">Contact
 									Us</a></li>
                                         </ul>
                                         <ul class="nav navbar-nav navbar-right">
@@ -108,12 +108,12 @@
                                         </div>
                                         <div id="navbar" class="navbar-collapse collapse">
                                             <ul class="nav navbar-nav">
-                                                <li class="hori"><a href="loginProcess.fssai">Home</a></li>
-                                                <li class="hori"><a href="update-personal-information.fssai?userId=0">Update
+                                                <li id="homepagefssai" class="hori"><a onclick="setID('homepagefssai')" href="loginProcess.fssai">Home</a></li>
+                                                <li id="updatepesonalpagefssai" class="hori"><a onclick="setID('updatepesonalpagefssai')" href="update-personal-information.fssai?userId=0">Update
 									Personal Information</a></li>
-                                                <li class="hori"><a href="viewFeedbackDetails.fssai">View
+                                                <li id="viewfeedpagefssai" class="hori"><a onclick="setID('viewfeedpagefssai')" href="viewFeedbackDetails.fssai">View
 									Feedback Details</a></li>
-                                                <li class="hori"><a href="contactTrainee.fssai">Contact
+                                                <li id="contactpagefssai" class="hori"><a onclick="setID('contactpagefssai')" href="contactTrainee.fssai">Contact
 									Us</a></li>
                                             </ul>
                                             <ul class="nav navbar-nav navbar-right">
@@ -147,9 +147,11 @@
                                             </div>
                                             <div id="navbar" class="navbar-collapse collapse">
                                                 <ul class="nav navbar-nav">
-                                                    <li class="active hori"><a href="loginProcess.fssai">Home</a></li>
-                                                    <li class="hori"><a href="updateAssessor.fssai?userId=0">Update Personal Information</a></li>
-                                                    <li class="hori"><a href="contactTrainee.fssai">Contact
+                                                    <li id="homepagefssai" class=" hori"><a onclick="setID('homepagefssai')" href="loginProcess.fssai">Home</a></li>
+
+                                                    <li id="updatepagefssai" class="hori"><a onclick="setID('updatepagefssai')" href="updateAssessor.fssai?userId=0">Update Personal Information</a></li>
+
+                                                    <li id="contactpagefssai" class="hori"><a onclick="setID('contactpagefssai')" href="contactTrainee.fssai">Contact
 									Us</a></li>
                                                 </ul>
                                                 <ul class="nav navbar-nav navbar-right">
@@ -186,10 +188,12 @@
                                                 <div id="navbar" class="navbar-collapse collapse">
                                                     <ul class="nav navbar-nav">
                                                         <li></li>
-                                                        <li class="active hori"><a href="loginProcess.fssai">Home</a></li>
-                                                        <li><a href="trainingCenterUserManagementForm.fssai">Training
+                                                        <li id="homepagefssai" class="hori"><a onclick="setID('homepagefssai')" href="loginProcess.fssai">Home</a></li>
+
+                                                        <li id="trainingcentpagefssai"><a onclick="setID('trainingcentpagefssai')" href="trainingCenterUserManagementForm.fssai">Training
 									Center Management</a></li>
-                                                        <li class="hori"><a href="contactTrainee.fssai">Contact
+
+                                                        <li id="contactpagefssai" class="hori"><a onclick="setID('contactpagefssai')" href="contactTrainee.fssai">Contact
 									Us</a></li>
                                                     </ul>
                                                     <ul class="nav navbar-nav navbar-right">
@@ -226,10 +230,10 @@
                                                     <div id="navbar" class="navbar-collapse collapse">
                                                         <ul class="nav navbar-nav">
                                                             <li></li>
-                                                            <li class="active hori"><a href="loginProcess.fssai">Home</a></li>
-                                                            <li><a href="assessorUserManagementForm.fssai">Assessor
+                                                            <li id="homepagefssai" class="hori"><a onclick="setID('homepagefssai')" href="loginProcess.fssai">Home</a></li>
+                                                            <li id="assessorpagefssai"><a onclick="setID('assessorpagefssai')" href="assessorUserManagementForm.fssai">Assessor
 									User Management</a></li>
-                                                            <li class="hori"><a href="contactTrainee.fssai">Contact
+                                                            <li id="contactpagefssai" class="hori"><a onclick="setID('contactpagefssai')" href="contactTrainee.fssai">Contact
 									Us</a></li>
                                                         </ul>
                                                         <ul class="nav navbar-nav navbar-right">
@@ -264,7 +268,7 @@
                                                         <div id="navbar" class="navbar-collapse collapse">
                                                             <ul class="nav navbar-nav">
                                                                 <li></li>
-                                                                <li class="active hori"><a href="loginProcess.fssai">Home</a></li>
+                                                                <li class=" hori"><a href="loginProcess.fssai">Home</a></li>
                                                                 <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Management<span class="caret"></span></a>
                                                                     <ul class="dropdown-menu">
                                                                         <li><a href="traineeUserManagementForm.fssai" class="clr">Trainee</a></li>
@@ -316,7 +320,7 @@
                                                             <div id="navbar" class="navbar-collapse collapse">
                                                                 <ul class="nav navbar-nav">
                                                                     <li></li>
-                                                                    <li class="active hori"><a href="loginProcess.fssai">Home</a></li>
+                                                                    <li class="hori"><a href="loginProcess.fssai">Home</a></li>
                                                                     <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Management<span class="caret"></span></a>
                                                                         <ul class="dropdown-menu">
                                                                             <li><a href="traineeUserManagementForm.fssai" class="clr">Trainee</a></li>

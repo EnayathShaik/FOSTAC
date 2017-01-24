@@ -219,4 +219,8 @@ function searchUpcomingTraining(){
   </div>
 </section>
 <!-- scripts --> 
+<script>
+                var id = localStorage.getItem('activeID');
+                document.getElementById(id).className = "active";
 
+            </script>

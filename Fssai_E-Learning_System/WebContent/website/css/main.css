@@ -521,7 +521,7 @@ a:focus {
 }
 .partner-box .box-heading {
     color: #fff !important;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: bold;
     line-height: 24px;
     margin: 0;
@@ -824,15 +824,14 @@ a:focus {
     background: #fff;
     color: #8d9faa;
 }
-.panel-body {
-    padding: 0px;
-}
 .panel-group .panel+.panel {
     margin-top: 0;
     border-top: 1px solid #d9d9d9;
 }
 .panel-group .panel {
     border-radius: 0;
+    margin-bottom: 8px;
+    margin-top: 8px;
 }
 .panel-group {
     margin-bottom: 5px;
