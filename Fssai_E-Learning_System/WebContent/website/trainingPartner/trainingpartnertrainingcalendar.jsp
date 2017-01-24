@@ -128,10 +128,10 @@
 
 	function showDetails() {
 		$(".displayNone").css("display", "block");
-		var courseType = ($("#selCourseType").val()== 0 ? "" : $("#selCourseType").val());
-		var courseName =  ($("#selCourseName").val() == 0 ? "" : $("#selCourseName").val());
+		var courseType = ($("#selCourseType").val()== 0 ||  $("#selCourseType").val() == null ? "" : $("#selCourseType").val());
+		var courseName =  ($("#selCourseName").val() == 0 || $("#selCourseName").val() == null ? "" : $("#selCourseName").val());
 		var trainingDate = (($("#trainingDate").val() == 'undefined' || $("#trainingDate").val() == null ) ? "" : $("#trainingDate").val() );
-		var trainerName = ($("#selTrainerNames").val() == null ? "" : $("#selTrainerNames").val());
+		var trainerName = ($("#selTrainerNames").val() == 0 || $("#selTrainerNames").val() == null ? "" : $("#selTrainerNames").val());
 		var trainingtime = (($("#trainingtime").val() == 'undefined' || $("#trainingtime").val() == null ) ? "" : $("#trainingtime").val() );
 
 		var total = "courseType="+courseType + "&courseName=" + courseName+ "&trainingDate=" + trainingDate + "&trainingtime="+ trainingtime+"&trainerName="+trainerName;
@@ -228,7 +228,7 @@
 															name="selCourseType" id="selCourseType">
 														</select>
 														<script>
-															var selectctpeOptions = "<option disabled selected value> -- select courseType -- </option>";
+															var selectctpeOptions = "<option disabled selected value='0'> -- select courseType -- </option>";
 															for ( var i = 0; i < courseTypes.length; i++) {
 																console
 																		.log(courseTypes[i].CourseTypeId

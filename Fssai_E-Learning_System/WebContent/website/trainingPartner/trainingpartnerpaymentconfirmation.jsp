@@ -54,11 +54,11 @@ function confirmStatus(trainingid,courseid){
 <script>
 
 function showDetails(){
-		var courseType =  ($("#selCourseType").val() == null ? "" : $("#selCourseType").val() );
-		var courseName =  ($("#selCourseName").val() == 0 ? "" : $("#selCourseType").val() ) ;
+		var courseType =  ($("#selCourseType").val() == null || $("#selCourseType").val() == 0 ? "" : $("#selCourseType").val() );
+		var courseName =  ($("#selCourseName").val() == null || $("#selCourseName").val() == 0 ? "" : $("#selCourseType").val() ) ;
 		var trainingDate = ($("#traningDate").val() == 0 ?  "" : $("#traningDate").val() );
 		var traningTime =  ($("#traningTime").val() == 0 ? "" : $("#traningTime").val()) ;
-		var status = 		($('#selTraineeStatus').val() ==0 ? "" :$('#selTraineeStatus').val()) ;
+		var status = 		($('#selTraineeStatus').val() == 0 ? "" :$('#selTraineeStatus').val()) ;
 
 		
 	$(".displayNone").css("display","block");

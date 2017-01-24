@@ -385,25 +385,17 @@ public class TrainingPartnerController {
 	 }
 	@RequestMapping(value="/postVacancyTrainingPartnerSave" , method=RequestMethod.POST)
 	  public String postVacancySave(@ModelAttribute("postVacancyTrainingCenterForm") PostVacancyTrainingCenterForm postVacancyTrainingCenterForm ,HttpSession session,BindingResult result ,  Model model){		
-		boolean isPostVacancyTrainingPartner=true;
-		if(postVacancyTrainingCenterForm.getTrainingCenter()==0){
-			isPostVacancyTrainingPartner=false;
 			int loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
 			
-			//postVacancyTrainingCenterForm.setTrainingCenter(loginService.FullDetailtrainingpartner(loginId).getPersonalInformationTrainingPartnerId());
-			//postVacancyTrainingCenterForm.setTrainingCenter(trainingCenter)
-		}
 		String postVacancy = trainingPartnerService.postVacancyTrainingPartner(postVacancyTrainingCenterForm);
 		  if(postVacancy.equalsIgnoreCase("created")){
 			  model.addAttribute("created", "Vacancy created successfull !!!");
 		  }else{
 			  model.addAttribute("created", "vacancy already created !!!");
 		  }
-		  if(isPostVacancyTrainingPartner){
-			  return "postVacancyTrangCenter";
-		  }else{
-			  return "postVacancyTrainingPartner";	
-		  }
+		  
+		  return "redirect:/postVacancyTrainingPartner.fssai";
+		  
 	 }
 	@ModelAttribute("trainingCenterList")
 	public List<PersonalInformationTrainingPartner> trainingCenterList(){

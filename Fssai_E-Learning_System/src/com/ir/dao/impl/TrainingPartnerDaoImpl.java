@@ -310,64 +310,67 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		return courseNameList;
 	}
 	public Utility editApplicationStatus(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean){
-		Session session = sessionFactory.openSession();
-		
-		String sql="select trainingdate,noofvacancy,loginid from trainingcentervacancyenrolled where coursetype="+postVacancyTrainingCenterBean.getCourseType()+" AND coursename="+postVacancyTrainingCenterBean.getCourseName();
-		Query query = session.createSQLQuery(sql);
 		Utility utility=new Utility();
-		List<Object[]> list = query.list();
-		List<CourseType> courseTypeList=courseTypes();
-		List<CourseName> courseNames=getCourseNameList();
-		
-		
-		utility.setTrainingDate(list.get(0)[0].toString());
-		utility.setNoOfVacancy(Integer.parseInt(list.get(0)[1].toString()));
-		List<StringStringBean> trainerList=new ArrayList<>();
-		for(int i=0;i<list.size();i++){
-			StringBuffer sqlBuffer = new StringBuffer();
-			sqlBuffer.append("select A.vacancyenrolledid , concat(B.firstname,' ',B.middlename,' ',B.lastname) as name,A.status,C.loginid ");
-			sqlBuffer.append(" from trainingcentervacancyenrolled A");
-			sqlBuffer.append(" inner join personalinformationtrainer B on(CAST(CAST (A.loginid AS NUMERIC(19,4)) AS INT)=B.logindetails)");
-			sqlBuffer.append(" inner join logindetails C on(B.logindetails=C.id)");
-			sqlBuffer.append(" where B.logindetails="+list.get(i)[2]);
-			//String loginSQL=" select ve.vacancyenrolledid , concat(pit.firstname,' ',pit.middlename,' ',pit.lastname) as name, ve.status from personalinformationtrainer pit , trainingcentervacancyenrolled ve where logindetails="+list.get(i)[2];
-			Query loginSQLSQuery = session.createSQLQuery(sqlBuffer.toString());
-			List<Object[]> loginSQLSQuerylist = loginSQLSQuery.list();
-			StringStringBean e=new StringStringBean();
-			e.setId(loginSQLSQuerylist.get(i)[0] == null ? "" : loginSQLSQuerylist.get(i)[0].toString());
-			e.setValue(loginSQLSQuerylist.get(i)[1] == null ? "" : loginSQLSQuerylist.get(i)[1].toString());
-			e.setStatus(loginSQLSQuerylist.get(i)[2] == null ? "" : loginSQLSQuerylist.get(i)[2].toString());
-			e.setLink(loginSQLSQuerylist.get(i)[3] == null ? "" : loginSQLSQuerylist.get(i)[3].toString());
-			trainerList.add(e);
+		if(postVacancyTrainingCenterBean.getPostvacancyID() <= 0){
+			return utility;
 		}
-		/*for(Object[] obj:list){
-			String loginSQL=" select ve.vacancyenrolledid , concat(pit.firstname,' ',pit.middlename,' ',pit.lastname) as name from personalinformationtrainer pit , trainingcentervacancyenrolled ve where logindetails="+Integer.parseInt(list.get(0)[2].toString());
-			Query loginSQLSQuery = session.createSQLQuery(loginSQL);
-			List<Object[]> loginSQLSQuerylist = loginSQLSQuery.list();
-			StringStringBean e=new StringStringBean();
-			e.setId(loginSQLSQuerylist.get(0)[0].toString());
-			e.setValue(loginSQLSQuerylist.get(0)[1].toString());
-			trainerList.add(e);
-		}*/
-		
-		utility.setTrainerList(trainerList);
-		session.close();
-		for(CourseType ctpe:courseTypeList){
-			if(ctpe.getCourseTypeId()==postVacancyTrainingCenterBean.getCourseType()){
-				utility.setCourseTypeId(ctpe.getCourseTypeId());
-				utility.setCourseTypeName(ctpe.getCourseType());
-				break;
+		Session session = sessionFactory.openSession();
+		try{
+			//String sql="select trainingdate,noofvacancy,loginid from trainingcentervacancyenrolled where postvacancyid="+postVacancyTrainingCenterBean.getPostvacancyID();
+			StringBuffer sql = new StringBuffer();
+			sql.append(" select trainingdate,noofvacancy,loginid,B.coursetypeid,B.coursetype,C.coursenameid,C.coursename from trainingcentervacancyenrolled A");
+			sql.append(" inner join coursetype B on(A.coursetype=B.coursetypeid)");
+			sql.append(" inner join coursename C on(A.coursename=C.coursenameid)");
+			sql.append(" where postvacancyid="+postVacancyTrainingCenterBean.getPostvacancyID());
+			
+			Query query = session.createSQLQuery(sql.toString());
+			
+			List<Object[]> list = query.list();
+			List<CourseType> courseTypeList=courseTypes();
+			List<CourseName> courseNames=getCourseNameList();
+			if(list.size() > 0){
+				utility.setTrainingDate(list.get(0)[0] == null ? "" : list.get(0)[0].toString());
+				utility.setNoOfVacancy(Integer.parseInt(list.get(0)[1].toString()));
+				utility.setCourseTypeId(Integer.parseInt(list.get(0)[3].toString()));
+				utility.setCourseTypeName(list.get(0)[4].toString());
+				utility.setCourseNameId(Integer.parseInt(list.get(0)[5].toString()));
+				utility.setCourseName(list.get(0)[6].toString());
+				List<StringStringBean> trainerList=new ArrayList<>();
+				for(int i=0;i<list.size();i++){
+					StringBuffer sqlBuffer = new StringBuffer();
+					sqlBuffer.append("select A.vacancyenrolledid , concat(B.firstname,' ',B.middlename,' ',B.lastname) as name,A.status,C.loginid ");
+					sqlBuffer.append(" from trainingcentervacancyenrolled A");
+					sqlBuffer.append(" inner join personalinformationtrainer B on(CAST(CAST (A.loginid AS NUMERIC(19,4)) AS INT)=B.logindetails)");
+					sqlBuffer.append(" inner join logindetails C on(B.logindetails=C.id)");
+					sqlBuffer.append(" where A.postvacancyid="+postVacancyTrainingCenterBean.getPostvacancyID());
+					//String loginSQL=" select ve.vacancyenrolledid , concat(pit.firstname,' ',pit.middlename,' ',pit.lastname) as name, ve.status from personalinformationtrainer pit , trainingcentervacancyenrolled ve where logindetails="+list.get(i)[2];
+					Query loginSQLSQuery = session.createSQLQuery(sqlBuffer.toString());
+					List<Object[]> loginSQLSQuerylist = loginSQLSQuery.list();
+					StringStringBean e=new StringStringBean();
+					e.setId(loginSQLSQuerylist.get(i)[0] == null ? "" : loginSQLSQuerylist.get(i)[0].toString());
+					e.setValue(loginSQLSQuerylist.get(i)[1] == null ? "" : loginSQLSQuerylist.get(i)[1].toString());
+					e.setStatus(loginSQLSQuerylist.get(i)[2] == null ? "" : loginSQLSQuerylist.get(i)[2].toString());
+					e.setLink(loginSQLSQuerylist.get(i)[3] == null ? "" : loginSQLSQuerylist.get(i)[3].toString());
+					trainerList.add(e);
+				}
+				/*for(Object[] obj:list){
+					String loginSQL=" select ve.vacancyenrolledid , concat(pit.firstname,' ',pit.middlename,' ',pit.lastname) as name from personalinformationtrainer pit , trainingcentervacancyenrolled ve where logindetails="+Integer.parseInt(list.get(0)[2].toString());
+					Query loginSQLSQuery = session.createSQLQuery(loginSQL);
+					List<Object[]> loginSQLSQuerylist = loginSQLSQuery.list();
+					StringStringBean e=new StringStringBean();
+					e.setId(loginSQLSQuerylist.get(0)[0].toString());
+					e.setValue(loginSQLSQuerylist.get(0)[1].toString());
+					trainerList.add(e);
+				}*/
+				
+				utility.setTrainerList(trainerList);
+				session.close();
 			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
-		for(CourseName cn:courseNames){
-			if(cn.getCoursenameid()==postVacancyTrainingCenterBean.getCourseName()){
-				utility.setCourseNameId(cn.getCoursenameid());
-				utility.setCourseName(cn.getCoursename());
-				break;
-			}
-		}
+		
 		return utility;
-		
 	}
 	
 	@Override

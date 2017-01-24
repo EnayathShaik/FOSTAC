@@ -29,13 +29,21 @@ function searchCurrentAppliactionStatus(){
            	    '<td>'+response[index].courseName+'</td>'+
            	    '<td>'+response[index].trainingDate.replace("-","/").replace("-","/")+'</td>'+
            	     '<td>'+response[index].noOfVacancy+'</td>'+
-           	    '<td><a href="editApplicationStatusDetails.fssai?courseType='+response[index].courseTypeId+'&&courseName='+response[index].courseNameId+'">'+response[index].noOfApplications+'</td> '+
+           	    '<td><a  href="editApplicationStatusDetails.fssai?postvacancyID='+response[index].loginId+'">'+response[index].noOfApplications+'</td> '+
            	  	'</tr>');
              }
 	      }
 	      });
 
 }
+//onClick="ck_NoOfTrainer('+response[index].noOfApplications+'); return false;"
+/* function ck_NoOfTrainer(noOfApplicant){
+	if(noOfApplicant <= 0){
+		alert('No Applicant Found');
+		return false;
+	}
+	
+} */
 </script>
 <section>
   <div class="container-fluid">

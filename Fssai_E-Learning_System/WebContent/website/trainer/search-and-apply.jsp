@@ -4,8 +4,8 @@
 <%System.out.print("trainee home page jsp"); %>
 <!--/#footer-->
 <script src="website/js/jquery.js"></script> 
-<script src="website/js/bootstrap.min.js"></script> 
-<script src="website/js/jquery.isotope.min.js"></script> 
+<!-- <script src="website/js/bootstrap.min.js"></script> 
+<script src="website/js/jquery.isotope.min.js"></script>  -->
 <!-- horizontal navigation -->
 
 <script type="text/javascript">

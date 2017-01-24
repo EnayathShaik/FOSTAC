@@ -92,14 +92,12 @@
 	function showDetails() {
 		
 		
-		 	var courseType =  ($("#selCourseType").val() == null ? "" : $("#selCourseType").val());
-		 	var trainername =  ($('#selTrainerName').val() == 0 ? "" : $('#selTrainerName').val() );
-			var courseName =  ($("#selCourseName").val() == 0 ? "" : $("#selCourseName").val()) ;
-			alert(courseName);
+		 	var courseType =  ($("#selCourseType").val() == 0 || $("#selCourseType").val() == null ? "" : $("#selCourseType").val());
+		 	var trainername =  ($('#selTrainerName').val() == 0 || $('#selTrainerName').val() == null ? "" : $('#selTrainerName').val() );
+			var courseName =  ($("#selCourseName").val() == 0 || $("#selCourseName").val() == null ? "" : $("#selCourseName").val()) ;
 			var result = "";
 		$(".displayNone").css("display", "block");
 		var total = "courseType="+courseType+"&courseName="+courseName+"&trainerName="+trainername;
-		alert("total "+total);
 		$.ajax({
 			type : 'post',
 			url : 'trainingpartnermanagetrainer.jspp?' + total,

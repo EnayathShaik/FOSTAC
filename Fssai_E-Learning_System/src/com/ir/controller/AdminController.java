@@ -368,9 +368,15 @@ public class AdminController {
 			String[] all = manageTrainingPartnerSave.split("&");
 			model.addAttribute("id" , all[1]);
 			model.addAttribute("pwd" , all[0]);
-				JavaMail javaMail = new JavaMail();
+			Thread t1 = new Thread(new Runnable() {
+		         public void run() {
+		              // code goes here.
+		        		JavaMail javaMail = new JavaMail();
+		        		javaMail.mailProperty("Hello", "manindramishra.seven@gmail.com", "153");
+		         }
+		    });  
+		    t1.start();
 				//javaMail.mailProperty("Thanks", manageTrainingPartnerForm.getEmail(), manageTrainingPartnerForm.getUserId());
-				javaMail.mailProperty("Hello", "manindramishra.seven@gmail.com", "10002");
 				
 			
 			return "welcomeManageTrainingPartner";
