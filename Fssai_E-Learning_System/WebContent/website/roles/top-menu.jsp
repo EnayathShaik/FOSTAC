@@ -268,8 +268,8 @@
                                                         <div id="navbar" class="navbar-collapse collapse">
                                                             <ul class="nav navbar-nav">
                                                                 <li></li>
-                                                                <li class=" hori"><a href="loginProcess.fssai">Home</a></li>
-                                                                <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Management<span class="caret"></span></a>
+                                                                <li id="homepagefssai" class="hori"><a onclick="setID('homepagefssai')" href="loginProcess.fssai">Home</a></li>
+                                                                <li id="userpagefssai"> <a href="#" onclick="setID('userpagefssai')" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Management<span class="caret"></span></a>
                                                                     <ul class="dropdown-menu">
                                                                         <li><a href="traineeUserManagementForm.fssai" class="clr">Trainee</a></li>
                                                                         <li><a href="trainerUserManagementForm.fssai" class="clr">Trainer</a></li>
@@ -278,7 +278,7 @@
                                                                         <li><a href="adminUserManagementForm.fssai" class="clr">Admin</a></li>
                                                                     </ul>
                                                                 </li>
-                                                                <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master Data<span class="caret"></span></a>
+                                                                <li id="masterpagefssai"> <a onclick="setID('masterpagefssai')" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master Data<span class="caret"></span></a>
                                                                     <ul class="dropdown-menu">
                                                                         <li><a href="stateMaster.fssai" class="clr">State</a></li>
                                                                         <li><a href="districtMaster.fssai" class="clr">District</a></li>
@@ -286,8 +286,8 @@
                                                                         <li><a href="regionMappingMaster.fssai" class="clr">Region Mapping</a></li>
                                                                     </ul>
                                                                 </li>
-                                                                <li><a href="manageTrainingPartnerForm.fssai">Manage Training Partner</a></li>
-                                                                <li><a href="manageAssessmentAgencyForm.fssai">Manage Assessment Agency</a></li>
+                                                                <li id="managepagefssai"><a onclick="setID('managepagefssai')" href="manageTrainingPartnerForm.fssai">Manage Training Partner</a></li>
+                                                                <li id="manageasspagefssai"><a onclick="setID('manageasspagefssai')" href="manageAssessmentAgencyForm.fssai">Manage Assessment Agency</a></li>
                                                             </ul>
                                                             <ul class="nav navbar-nav navbar-right">
                                                                 <li class="dropdown active"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i
