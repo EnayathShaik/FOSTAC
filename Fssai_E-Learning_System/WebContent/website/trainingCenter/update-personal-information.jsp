@@ -1,210 +1,210 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %>
+        <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<script>
-function getstateid(){
-getState()
-}
-window.onload=getstateid;
-</script>
+            <script>
+                function getstateid() {
+                    getState()
+                }
+                window.onload = getstateid;
+
+            </script>
 
 
 
 
 
-<script>
- 
- function getState()
- {
-	var ss= ${loginUr.trainingPartnerPermanentState};
-	 var dd=${loginUr.trainingPartnerPermanentDistrict};
-	 var cc=${loginUr.trainingPartnerPermanentCity};
-	
-	getStateUpdate(ss , dd , cc);
-	
- }
- 
- function getStateUpdate(ss , dd , cc)
- {
- 	$.ajax({
- 	      type: 'post',
- 	      url: 'getStateUpdate.jspp',
- 	      success: function (response) {      
- 	      var mainData2 = jQuery.parseJSON(response);
- 	      $('#TrainingPartnerPermanentState option').remove();
- 	      $('#TrainingPartnerPermanentState').append('<option value="0" label="Select Stateeeeee" />');
- 	  	  
- 	      $.each(mainData2 , function(i , obj)
- 	  		{	
- 	    	  if(ss == obj.stateId){
- 	    		  $('#TrainingPartnerPermanentState').append('<option  selected="true" value='+obj.stateId+'>'+obj.stateName+' </option>');	
- 	    	  }else{
- 	    		  $('#TrainingPartnerPermanentState').append('<option value='+obj.stateId+'>'+obj.stateName+' </option>');	
- 	    	  }	
- 	  		});
- 	      }
- 	      });
- 	getDistrictUpdate(ss , dd , cc)
- 	
- }
+            <script>
+                function getState() {
+                    var ss = $ {
+                        loginUr.trainingPartnerPermanentState
+                    };
+                    var dd = $ {
+                        loginUr.trainingPartnerPermanentDistrict
+                    };
+                    var cc = $ {
+                        loginUr.trainingPartnerPermanentCity
+                    };
 
- function getDistrictUpdate(ss , dd , cc)
- {
- 	$.ajax({
- 	      type: 'post',
- 	      url: 'getDistrictUpdate.jspp?'+ ss,
- 	      success: function (response) {      
- 	      var mainData1 = jQuery.parseJSON(response);
- 	      $('#TrainingPartnerPermanentDistrict option').remove();
- 	      $('#TrainingPartnerPermanentDistrict').append('<option value="0" label="Select District" />');
- 	  	  
- 	      $.each(mainData1 , function(i , obj)
- 	  		{
- 	    	  if(dd == obj.districtId){
- 	    		  $('#TrainingPartnerPermanentDistrict').append('<option selected="true" value='+obj.districtId+'>'+obj.districtName+'  </option>');
- 	    	  }else{
- 	    		  $('#TrainingPartnerPermanentDistrict').append('<option value='+obj.districtId+'>'+obj.districtName+' </option>');
- 	    	  }	
- 	  		});
- 	      }
- 	      }); 
- 	getCityUpdate(dd , cc);
- }
- function getCityUpdate(dd , cc)
- {
- 	$.ajax({
- 	      type: 'post',
- 	      url: 'getCityUpdate.jspp?'+dd,
- 	      success: function (response) {      
- 	      var mainData1 = jQuery.parseJSON(response);
- 	      $('#TrainingPartnerPermanentCity option').remove();
- 	      $('#TrainingPartnerPermanentCity').append('<option value="0" label="Select City" />');
- 	  	  
- 	      $.each(mainData1 , function(i ,obj)
- 	  		{
- 	    	  if(cc == obj.cityId){
- 	    		  $('#TrainingPartnerPermanentCity').append('<option selected="true" value='+obj.cityId+'>'+obj.cityName+'  </option>');
- 	    	  }else{
- 	    		  $('#TrainingPartnerPermanentCity').append('<option value='+obj.cityId+'>'+obj.cityName+' </option>');
- 	    	  }	
- 	  		});
- 	      }
- 	      });     
+                    getStateUpdate(ss, dd, cc);
 
- }
- 	
- </script>
- <script>
- 
- function getDistrict(val)
-    {
-    	$.ajax({
-    	      type: 'post',
-    	      url: 'loadDistrict.jspp?'+ val,
-    	      success: function (response) {      
-    	      var mainData1 = jQuery.parseJSON(response);
-    	      $('#TrainingPartnerPermanentDistrict option').remove();
-    	      $('#TrainingPartnerPermanentDistrict').append('<option value="0" label="Select District" />');
-    	      $('#TrainingPartnerPermanentCity option').remove();
-    	      $('#TrainingPartnerPermanentCity').append('<option value="0" label="Select City" />');
-    	  	 
-    	      $.each(mainData1 , function(i , obj)
-    	  		{
-    	  		
-    	  				$('#TrainingPartnerPermanentDistrict').append('<option value='+obj.districtId+'>'+obj.districtName+' </option>');		
-    	  		});
-    	      }
-    	      });     
-    }
-    function getCity(val)
-    {
-    	$.ajax({
-    	      type: 'post',
-    	      url: 'loadCity.jspp?'+ val,
-    	      success: function (response) {      
-    	      var mainData1 = jQuery.parseJSON(response);
-    	      $('#TrainingPartnerPermanentCity option').remove();
-    	      $('#TrainingPartnerPermanentCity').append('<option value="0" label="Select City" />');
-    	  	  $.each(mainData1 , function(i , obj)
-    	  		{
-    	  		
-    	  				$('#TrainingPartnerPermanentCity').append('<option value='+obj.cityId+'>'+obj.cityName+' </option>');		
-    	  		});
-    	      }
-    	      });     
-    }
-    </script>
-      
-    <!-- horizontal navigation -->
-     <cf:form   action="updateTrainingpartner.fssai?id=${loginUr.personalInformationTrainingPartnerId}" name="myForm" method="POST" commandName="updateInformation" onsubmit="return validateFields();"> 
-    <section>
-   <%@include file="../roles/top-menu.jsp"%>
-</section>
+                }
 
-    <!-- main body -->
-    <section class="main-section-margin-top">
-      <div class="container-fluid">
-        <div id="wrapper"> 
+                function getStateUpdate(ss, dd, cc) {
+                    $.ajax({
+                        type: 'post',
+                        url: 'getStateUpdate.jspp',
+                        success: function(response) {
+                            var mainData2 = jQuery.parseJSON(response);
+                            $('#TrainingPartnerPermanentState option').remove();
+                            $('#TrainingPartnerPermanentState').append('<option value="0" label="Select Stateeeeee" />');
 
-          <!-- Sidebar -->
-          <%@include file="../roles/slider.jsp" %>
-          <!-- /#sidebar-wrapper --> 
-          <!-- Page Content -->
-          <div id="page-content-wrapper">
-            <div class="container-fluid"> 
+                            $.each(mainData2, function(i, obj) {
+                                if (ss == obj.stateId) {
+                                    $('#TrainingPartnerPermanentState').append('<option  selected="true" value=' + obj.stateId + '>' + obj.stateName + ' </option>');
+                                } else {
+                                    $('#TrainingPartnerPermanentState').append('<option value=' + obj.stateId + '>' + obj.stateName + ' </option>');
+                                }
+                            });
+                        }
+                    });
+                    getDistrictUpdate(ss, dd, cc)
 
-              <!-- vertical button -->
-              <div class="row">
-                <div class="col-lg-12"> <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome Mr. Anuj</span> </a> </div>
-              </div>
+                }
 
-              <!-- add the content here for main body --> 
-              <!-- timeline  -->
+                function getDistrictUpdate(ss, dd, cc) {
+                    $.ajax({
+                        type: 'post',
+                        url: 'getDistrictUpdate.jspp?' + ss,
+                        success: function(response) {
+                            var mainData1 = jQuery.parseJSON(response);
+                            $('#TrainingPartnerPermanentDistrict option').remove();
+                            $('#TrainingPartnerPermanentDistrict').append('<option value="0" label="Select District" />');
 
-              <div class="container-fluid">
-                <div class="row"> 
+                            $.each(mainData1, function(i, obj) {
+                                if (dd == obj.districtId) {
+                                    $('#TrainingPartnerPermanentDistrict').append('<option selected="true" value=' + obj.districtId + '>' + obj.districtName + '  </option>');
+                                } else {
+                                    $('#TrainingPartnerPermanentDistrict').append('<option value=' + obj.districtId + '>' + obj.districtName + ' </option>');
+                                }
+                            });
+                        }
+                    });
+                    getCityUpdate(dd, cc);
+                }
 
-                  <!-- upcoming trainings -->
-                  <div class="col-xs-12 collapse in" id="show-result" aria-expanded="true" style="">
-                    <fieldset>
-                      <legend>
-                      <h3>Update Personal Information</h3>
-                      </legend>
-                      
-              <!-- personal information -->
-              <div class="personel-info">
-                <fieldset>
-                  <legend><h3>Personal Information</h3></legend>
-                  <!-- left side -->
-                  <div class="col-md-6 col-xs-12">
-                    <div class="form-group">
-                      <div>
-                        <ul class="lab-no">
-                          <li class="style-li"><strong>User Id:</strong></li>
-                          
-                        </ul>
-                      </div>
-                      <input type="text" class="form-control"  placeholder="User ID" disabled="disabled" id="UserId"   value=" ${loginUr.loginDetails.loginId}">
-                    </div>
-      <div class="form-group">
-                      <div>
-                        <ul class="lab-no">
-                          <li class="style-li"><strong>Training Center name:</strong></li>
-                          <li class="style-li error-red"> </li>
-                        </ul>
-                      </div>
-                      <input type="text" class="form-control" placeholder="Training Center Name" value="${loginUr.trainingCentreName}" disabled="disabled">
-                    </div>
-                    <div class="form-group">
-                      <div>
-                        <ul class="lab-no">
-                          <li class="style-li"><strong>Training Partner Name:</strong></li>
-                          <li class="style-li error-red"> </li>
-                        </ul>
-                      </div>
-                      <!-- <Select class="form-control">
+                function getCityUpdate(dd, cc) {
+                    $.ajax({
+                        type: 'post',
+                        url: 'getCityUpdate.jspp?' + dd,
+                        success: function(response) {
+                            var mainData1 = jQuery.parseJSON(response);
+                            $('#TrainingPartnerPermanentCity option').remove();
+                            $('#TrainingPartnerPermanentCity').append('<option value="0" label="Select City" />');
+
+                            $.each(mainData1, function(i, obj) {
+                                if (cc == obj.cityId) {
+                                    $('#TrainingPartnerPermanentCity').append('<option selected="true" value=' + obj.cityId + '>' + obj.cityName + '  </option>');
+                                } else {
+                                    $('#TrainingPartnerPermanentCity').append('<option value=' + obj.cityId + '>' + obj.cityName + ' </option>');
+                                }
+                            });
+                        }
+                    });
+
+                }
+
+            </script>
+            <script>
+                function getDistrict(val) {
+                    $.ajax({
+                        type: 'post',
+                        url: 'loadDistrict.jspp?' + val,
+                        success: function(response) {
+                            var mainData1 = jQuery.parseJSON(response);
+                            $('#TrainingPartnerPermanentDistrict option').remove();
+                            $('#TrainingPartnerPermanentDistrict').append('<option value="0" label="Select District" />');
+                            $('#TrainingPartnerPermanentCity option').remove();
+                            $('#TrainingPartnerPermanentCity').append('<option value="0" label="Select City" />');
+
+                            $.each(mainData1, function(i, obj) {
+
+                                $('#TrainingPartnerPermanentDistrict').append('<option value=' + obj.districtId + '>' + obj.districtName + ' </option>');
+                            });
+                        }
+                    });
+                }
+
+                function getCity(val) {
+                    $.ajax({
+                        type: 'post',
+                        url: 'loadCity.jspp?' + val,
+                        success: function(response) {
+                            var mainData1 = jQuery.parseJSON(response);
+                            $('#TrainingPartnerPermanentCity option').remove();
+                            $('#TrainingPartnerPermanentCity').append('<option value="0" label="Select City" />');
+                            $.each(mainData1, function(i, obj) {
+
+                                $('#TrainingPartnerPermanentCity').append('<option value=' + obj.cityId + '>' + obj.cityName + ' </option>');
+                            });
+                        }
+                    });
+                }
+
+            </script>
+
+            <!-- horizontal navigation -->
+            <cf:form action="updateTrainingpartner.fssai?id=${loginUr.personalInformationTrainingPartnerId}" name="myForm" method="POST" commandName="updateInformation" onsubmit="return validateFields();">
+                <section>
+                    <%@include file="../roles/top-menu.jsp"%>
+                </section>
+
+                <!-- main body -->
+                <section class="main-section-margin-top">
+                    <div class="container-fluid">
+                        <div id="wrapper">
+
+                            <!-- Sidebar -->
+                            <%@include file="../roles/slider.jsp" %>
+                                <!-- /#sidebar-wrapper -->
+                                <!-- Page Content -->
+                                <div id="page-content-wrapper">
+                                    <div class="container-fluid">
+
+                                        <!-- vertical button -->
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome Mr. Anuj</span> </a>
+                                            </div>
+                                        </div>
+
+                                        <!-- add the content here for main body -->
+                                        <!-- timeline  -->
+
+                                        <div class="container-fluid">
+                                            <div class="row">
+
+                                                <!-- upcoming trainings -->
+                                                <div class="col-xs-12 collapse in" id="show-result" aria-expanded="true" style="">
+                                                    <fieldset>
+                                                        <legend>
+                                                            <h3>Update Personal Information</h3>
+                                                        </legend>
+
+                                                        <!-- personal information -->
+                                                        <div class="personel-info">
+                                                            <fieldset>
+                                                                <legend>
+                                                                    <h3>Personal Information</h3></legend>
+                                                                <!-- left side -->
+                                                                <div class="col-md-6 col-xs-12">
+                                                                    <div class="form-group">
+                                                                        <div>
+                                                                            <ul class="lab-no">
+                                                                                <li class="style-li"><strong>User Id:</strong></li>
+
+                                                                            </ul>
+                                                                        </div>
+                                                                        <input type="text" class="form-control" placeholder="User ID" disabled="disabled" id="UserId" value=" ${loginUr.loginDetails.loginId}">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div>
+                                                                            <ul class="lab-no">
+                                                                                <li class="style-li"><strong>Training Center name:</strong></li>
+                                                                                <li class="style-li error-red"> </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <input type="text" class="form-control" placeholder="Training Center Name" value="${loginUr.trainingCentreName}" disabled="disabled">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div>
+                                                                            <ul class="lab-no">
+                                                                                <li class="style-li"><strong>Training Partner Name:</strong></li>
+                                                                                <li class="style-li error-red"> </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <!-- <Select class="form-control">
                         <option>Lorem Ipsum</option>
                         <option>Lorem Ipsum</option>
                         <option>Lorem Ipsum</option>
@@ -212,252 +212,250 @@ window.onload=getstateid;
                         <option>Lorem Ipsum</option>
                         <option>Lorem Ipsum</option>
                       </Select> -->
-                      <cf:select path="TrainingPartnerName" class="form-control" disabled="true">
-					<cf:options items="${trainingPartnerNameList}" itemValue="manageTrainingPartnerId" itemLabel="trainingPartnerName" />
-					</cf:select>
-                    </div>
-                    <div class="form-group">
-                      <div>
-                        <ul class="lab-no">
-                          <li class="style-li"><strong>PAN:</strong></li>
-                          <li class="style-li error-red"> </li>
-                        </ul>
-                      </div>
-                      <input type="text" class="form-control" placeholder="PAN" disabled="disabled" value="${loginUr.PAN}">
-                    </div>
-                  </div>              
-                  <!-- right side -->
-                  <div class="col-md-6 col-xs-12">
-                    <div class="form-group">
-                      <div>
-                        <ul class="lab-no">
-                          <li class="style-li"><strong>Title:</strong></li>
-                          
-                        </ul>
-                      </div>
-                      <cf:select path="Title" class="form-control" disabled="true">
-					<cf:options items="${titleList}" itemValue="titleId" itemLabel="titleName" />
-					</cf:select>
-                    </div>
-                    <div class="form-group">
-                      <div>
-                        <ul class="lab-no">
-                          <li class="style-li"><strong>First Name:(Training Center Head) </strong></li>
-                          
-                        </ul>
-                      </div>
-                      <input type="text" class="form-control" placeholder="First Name" disabled="disabled"  value=" ${loginUr.firstName}">
-                    </div>
-                    <div class="form-group">
-                      <div>
-                        <ul class="lab-no">
-                          <li class="style-li"><strong>Middle Name:(Training Center Head)</strong></li>
-                          
-                        </ul>
-                      </div>
-                      <input type="text" class="form-control" placeholder="Middle Name" disabled="disabled"  value=" ${loginUr.middleName}">
-                    </div>
-                    <div class="form-group">
-                      <div>
-                        <ul class="lab-no">
-                          <li class="style-li"><strong>Last Name:(Training Center Head)</strong></li>
-                          
-                        </ul>
-                      </div>
-                      <input type="text" class="form-control" placeholder="Last Name" disabled="disabled"  value=" ${loginUr.lastName}">
-                    </div>
-                  </div>
-                  <!-- personal information ends -->
-                </fieldset>
-              </div>
-              <!-- personal information ends -->
-              <div class="row" style="height: 20px;"></div>
-              <!-- contact details -->
-              <div class="personel-info">
-                <fieldset>
-                  <legend><h3>Contact Details</h3></legend>
-                  <!-- left side -->
-                  <div class="col-md-6 col-xs-12">
+                                                                        <cf:select path="TrainingPartnerName" class="form-control" disabled="true">
+                                                                            <cf:options items="${trainingPartnerNameList}" itemValue="manageTrainingPartnerId" itemLabel="trainingPartnerName" />
+                                                                        </cf:select>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div>
+                                                                            <ul class="lab-no">
+                                                                                <li class="style-li"><strong>PAN:</strong></li>
+                                                                                <li class="style-li error-red"> </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <input type="text" class="form-control" placeholder="PAN" disabled="disabled" value="${loginUr.PAN}">
+                                                                    </div>
+                                                                </div>
+                                                                <!-- right side -->
+                                                                <div class="col-md-6 col-xs-12">
+                                                                    <div class="form-group">
+                                                                        <div>
+                                                                            <ul class="lab-no">
+                                                                                <li class="style-li"><strong>Title:</strong></li>
 
-                    <div class="form-group">
-                      <div>
-                        <ul class="lab-no">
-                          <li class="style-li"><strong>Training Center Address Line 1:</strong></li>
-                          
-                        </ul>
-                      </div>
-                      <cf:input type="text" class="form-control" path="TrainingPartnerPermanentLine1" placeholder="Training Center Line 1"   value=" ${loginUr.trainingPartnerPermanentLine1}"/>
-                    </div>
-                    <div class="form-group">
-                      <div>
-                        <ul class="lab-no">
-                          <li class="style-li"><strong>Training Center Address Line 2:</strong></li>
-                          
-                        </ul>
-                      </div>
-                      <cf:input type="text" class="form-control" path="TrainingPartnerPermanentLine2" placeholder="Training Center Line 2"  value=" ${loginUr.trainingPartnerPermanentLine2}"/>
-                    </div>
-                    <div class="form-group">
-                      <div>
-                        <ul class="lab-no">
-                          <li class="style-li"><strong>State:</strong></li>
-                          
-                        </ul>
-                      </div>
-                     <!--  <select class="form-control">
-                        <option value="">Lorem</option>
-                        <option value="">Lorem</option>
-                        <option value="">Lorem</option>
-                        <option value="">Lorem</option>
-                      </select> -->
-                      <cf:select path="TrainingPartnerPermanentState" class="form-control" onchange="getDistrict(this.value);">
-					<cf:option value="0" label="Select State" />
-					<cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName" />
-					</cf:select>
-                    </div>
-                     <div class="form-group">
-                      <div>
-                        <ul class="lab-no">
-                          <li class="style-li"><strong>District:</strong></li>
-                          
-                        </ul>
-                      </div>
-                     <!--  <select class="form-control">
-                        <option value="">Lorem</option>
-                        <option value="">Lorem</option>
-                        <option value="">Lorem</option>
-                        <option value="">Lorem</option>
-                      </select> -->
-                       <cf:select path="TrainingPartnerPermanentDistrict" class="form-control" onchange="getCity(this.value);">
-                 <cf:option value="0" label="Select District" />
-					</cf:select>
-                    </div>
-                  </div>
-                  <!-- left side ends --> 
-                  <!-- right side -->
-                  <div class="col-md-6 col-xs-12">
-                    <div class="form-group">
-                      <div>
-                        <ul class="lab-no">
-                          <li class="style-li"><strong>Closest City:</strong></li>
-                          
-                        </ul>
-                      </div>
-                     <!--  <select class="form-control">
-                        <option value="">Lorem</option>
-                        <option value="">Lorem</option>
-                        <option value="">Lorem</option>
-                        <option value="">Lorem</option>
-                      </select> -->
-                      <cf:select path="TrainingPartnerPermanentCity" class="form-control">
-                  <cf:option value="0" label="Select City" />
-					</cf:select>
-                    </div>
-                    <div class="form-group">
-                      <div>
-                        <ul class="lab-no">
-                          <li class="style-li"><strong>PIN Code:</strong></li>
-                          
-                        </ul>
-                      </div>
-                      <cf:input type="text" maxlength="6" class="form-control" path="TrainingPartnerPermanentPincode" placeholder="Pincode" value=" ${loginUr.trainingPartnerPermanentPincode}"/>
-                    </div>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <cf:select path="Title" class="form-control" disabled="true">
+                                                                            <cf:options items="${titleList}" itemValue="titleId" itemLabel="titleName" />
+                                                                        </cf:select>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div>
+                                                                            <ul class="lab-no">
+                                                                                <li class="style-li"><strong>First Name:(Training Center Head) </strong></li>
 
-                     <div class="form-group">
-                      <div>
-                        <ul class="lab-no">
-                          <li class="style-li"><strong>Email:</strong></li>
-                          
-                        </ul>
-                      </div>
-                      <cf:input type="text" class="form-control" path="TrainingPartnerPermanentEmail" placeholder="Email" value=" ${loginUr.trainingPartnerPermanentEmail}"/>
-                    </div>
-                     <div class="form-group">
-                      <div>
-                        <ul class="lab-no">
-                          <li class="style-li"><strong>Mobile:</strong></li>
-                          
-                        </ul>
-                      </div>
-                      <cf:input type="text" class="form-control" path="TrainingPartnerPermanentMobile" placeholder="Mobile" value=" ${loginUr.trainingPartnerPermanentMobile}"/>
-                    </div>
-                  <!-- right side ends -->
-                </fieldset>
-              </div>
-              <!-- contact details ends -->          
-              <div class="row" style="height: 20px;"></div>          
-              <!-- Training center Details  -->          
-              <div class="personel-info">
-                <fieldset>
-                  <legend><h3>Training Center Details</h3></legend>              
-                  <!-- left side -->
-                  <div class="col-md-6 col-xs-12">
-                    <div class="form-group">
-                      <div>
-                        <ul class="lab-no">
-                          <li class="style-li"><strong>Seating capacity Per session?</strong></li>
-                          <li class="style-li error-red"> </li>
-                        </ul>
-                      </div>
-                      <cf:input type="text" class="form-control" path="SeatCapacityPerSession" placeholder="Number of Seats" value=" ${loginUr.seatCapacityPerSession}"/>
-                    </div>
-                    <div class="form-group">
-                      <label>Availability of TV/ Projector in training center ?</label>
-                      <br>
-                      <label class="radio-inline">
-                        <input type="radio" name="optradio">
-                        Yes </label>
-                      <label class="radio-inline">
-                        <input type="radio" name="optradio">
-                        No </label>
-                    </div>
-                    <div class="form-group">
-                      <label>Availability of in-house trainers in food safety ?</label>
-                      <br>
-                      <label class="radio-inline">
-                        <input type="radio" name="optradio">
-                        Yes </label>
-                      <label class="radio-inline">
-                        <input type="radio" name="optradio">
-                        No </label>
-                    </div>
-                  </div>
-                  <!-- left side ends --> 
-                  <!-- right side -->
-                  <div class="col-md-6 col-xs-12">
-                    <div class="form-group">
-                      <div>
-                        <ul class="lab-no">
-                          <li class="style-li"><strong>Number of in-house trainers ?</strong></li>
-                          
-                        </ul>
-                      </div>
-                      <cf:input type="text" placeholder="Number of trainers" path="NoOfInHouseTrainers" class="form-control" value=" ${loginUr.noOfInHouseTrainers}"/>
-                    </div>
-                    <div class="form-group">
-                      <div>
-                        <ul class="lab-no">
-                          <li class="style-li"><strong>Numbe of years in Business of training ?</strong></li>
-                          
-                        </ul>
-                      </div>
-                      <cf:input type="text" placeholder="Number of years" path="NoOfYearsInBusinessOfTraining" class="form-control" value=" ${loginUr.noOfYearsInBusinessOfTraining}"/>
-                    </div>
-                    <div class="form-group">
-                      <div>
-                        <ul class="lab-no">
-                          <li class="style-li"><strong>How many training (4hrs) sessions wish to conduct in a month ?</strong></li>
-                          
-                        </ul>
-                      </div>
-                      <cf:input type="text" placeholder="Number of trainers" path="NoOfTrainingSessionWishToConductInAMonth" class="form-control" value=" ${loginUr.noOfTrainingSessionWishToConductInAMonth}"/>
-                    </div>
-                  </div>
-                  <!-- right side ends -->
-                </fieldset>
-              </div>
-              <!-- Basic courses -->
-              <%-- <div class="personel-info">
+                                                                            </ul>
+                                                                        </div>
+                                                                        <input type="text" class="form-control" placeholder="First Name" disabled="disabled" value=" ${loginUr.firstName}">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div>
+                                                                            <ul class="lab-no">
+                                                                                <li class="style-li"><strong>Middle Name:(Training Center Head)</strong></li>
+
+                                                                            </ul>
+                                                                        </div>
+                                                                        <input type="text" class="form-control" placeholder="Middle Name" disabled="disabled" value=" ${loginUr.middleName}">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div>
+                                                                            <ul class="lab-no">
+                                                                                <li class="style-li"><strong>Last Name:(Training Center Head)</strong></li>
+
+                                                                            </ul>
+                                                                        </div>
+                                                                        <input type="text" class="form-control" placeholder="Last Name" disabled="disabled" value=" ${loginUr.lastName}">
+                                                                    </div>
+                                                                </div>
+                                                                <!-- personal information ends -->
+                                                            </fieldset>
+                                                        </div>
+                                                        <!-- personal information ends -->
+                                                        <div class="row" style="height: 20px;"></div>
+                                                        <!-- contact details -->
+                                                        <div class="personel-info">
+                                                            <fieldset>
+                                                                <legend>
+                                                                    <h3>Contact Details</h3></legend>
+                                                                <!-- left side -->
+                                                                <div class="col-md-6 col-xs-12">
+
+                                                                    <div class="form-group">
+                                                                        <div>
+                                                                            <ul class="lab-no">
+                                                                                <li class="style-li"><strong>Training Center Address Line 1:</strong></li>
+
+                                                                            </ul>
+                                                                        </div>
+                                                                        <cf:input type="text" class="form-control" path="TrainingPartnerPermanentLine1" placeholder="Training Center Line 1" value=" ${loginUr.trainingPartnerPermanentLine1}" />
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div>
+                                                                            <ul class="lab-no">
+                                                                                <li class="style-li"><strong>Training Center Address Line 2:</strong></li>
+
+                                                                            </ul>
+                                                                        </div>
+                                                                        <cf:input type="text" class="form-control" path="TrainingPartnerPermanentLine2" placeholder="Training Center Line 2" value=" ${loginUr.trainingPartnerPermanentLine2}" />
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div>
+                                                                            <ul class="lab-no">
+                                                                                <li class="style-li"><strong>State:</strong></li>
+
+                                                                            </ul>
+                                                                        </div>
+                                                                        <!--  <select class="form-control">
+                        <option value="">Lorem</option>
+                        <option value="">Lorem</option>
+                        <option value="">Lorem</option>
+                        <option value="">Lorem</option>
+                      </select> -->
+                                                                        <cf:select path="TrainingPartnerPermanentState" class="form-control" onchange="getDistrict(this.value);">
+                                                                            <cf:option value="0" label="Select State" />
+                                                                            <cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName" />
+                                                                        </cf:select>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div>
+                                                                            <ul class="lab-no">
+                                                                                <li class="style-li"><strong>District:</strong></li>
+
+                                                                            </ul>
+                                                                        </div>
+                                                                        <!--  <select class="form-control">
+                        <option value="">Lorem</option>
+                        <option value="">Lorem</option>
+                        <option value="">Lorem</option>
+                        <option value="">Lorem</option>
+                      </select> -->
+                                                                        <cf:select path="TrainingPartnerPermanentDistrict" class="form-control" onchange="getCity(this.value);">
+                                                                            <cf:option value="0" label="Select District" />
+                                                                        </cf:select>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- left side ends -->
+                                                                <!-- right side -->
+                                                                <div class="col-md-6 col-xs-12">
+                                                                    <div class="form-group">
+                                                                        <div>
+                                                                            <ul class="lab-no">
+                                                                                <li class="style-li"><strong>Closest City:</strong></li>
+
+                                                                            </ul>
+                                                                        </div>
+                                                                        <!--  <select class="form-control">
+                        <option value="">Lorem</option>
+                        <option value="">Lorem</option>
+                        <option value="">Lorem</option>
+                        <option value="">Lorem</option>
+                      </select> -->
+                                                                        <cf:select path="TrainingPartnerPermanentCity" class="form-control">
+                                                                            <cf:option value="0" label="Select City" />
+                                                                        </cf:select>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div>
+                                                                            <ul class="lab-no">
+                                                                                <li class="style-li"><strong>PIN Code:</strong></li>
+
+                                                                            </ul>
+                                                                        </div>
+                                                                        <cf:input type="text" maxlength="6" class="form-control" path="TrainingPartnerPermanentPincode" placeholder="Pincode" value=" ${loginUr.trainingPartnerPermanentPincode}" />
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div>
+                                                                            <ul class="lab-no">
+                                                                                <li class="style-li"><strong>Email:</strong></li>
+
+                                                                            </ul>
+                                                                        </div>
+                                                                        <cf:input type="text" class="form-control" path="TrainingPartnerPermanentEmail" placeholder="Email" value=" ${loginUr.trainingPartnerPermanentEmail}" />
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div>
+                                                                            <ul class="lab-no">
+                                                                                <li class="style-li"><strong>Mobile:</strong></li>
+
+                                                                            </ul>
+                                                                        </div>
+                                                                        <cf:input type="text" class="form-control" path="TrainingPartnerPermanentMobile" placeholder="Mobile" value=" ${loginUr.trainingPartnerPermanentMobile}" />
+                                                                    </div>
+                                                                    <!-- right side ends -->
+                                                            </fieldset>
+                                                            </div>
+                                                            <!-- contact details ends -->
+                                                            <div class="row" style="height: 20px;"></div>
+                                                            <!-- Training center Details  -->
+                                                            <div class="personel-info">
+                                                                <fieldset>
+                                                                    <legend>
+                                                                        <h3>Training Center Details</h3></legend>
+                                                                    <!-- left side -->
+                                                                    <div class="col-md-6 col-xs-12">
+                                                                        <div class="form-group">
+                                                                            <div>
+                                                                                <ul class="lab-no">
+                                                                                    <li class="style-li"><strong>Seating capacity Per session?</strong></li>
+                                                                                    <li class="style-li error-red"> </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                            <cf:input type="text" class="form-control" path="SeatCapacityPerSession" placeholder="Number of Seats" value=" ${loginUr.seatCapacityPerSession}" />
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label>Availability of TV/ Projector in training center ?</label>
+                                                                            <br>
+                                                                            <label class="radio-inline">
+                                                                                <input type="radio" name="optradio"> Yes </label>
+                                                                            <label class="radio-inline">
+                                                                                <input type="radio" name="optradio"> No </label>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label>Availability of in-house trainers in food safety ?</label>
+                                                                            <br>
+                                                                            <label class="radio-inline">
+                                                                                <input type="radio" name="optradio"> Yes </label>
+                                                                            <label class="radio-inline">
+                                                                                <input type="radio" name="optradio"> No </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- left side ends -->
+                                                                    <!-- right side -->
+                                                                    <div class="col-md-6 col-xs-12">
+                                                                        <div class="form-group">
+                                                                            <div>
+                                                                                <ul class="lab-no">
+                                                                                    <li class="style-li"><strong>Number of in-house trainers ?</strong></li>
+
+                                                                                </ul>
+                                                                            </div>
+                                                                            <cf:input type="text" placeholder="Number of trainers" path="NoOfInHouseTrainers" class="form-control" value=" ${loginUr.noOfInHouseTrainers}" />
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div>
+                                                                                <ul class="lab-no">
+                                                                                    <li class="style-li"><strong>Numbe of years in Business of training ?</strong></li>
+
+                                                                                </ul>
+                                                                            </div>
+                                                                            <cf:input type="text" placeholder="Number of years" path="NoOfYearsInBusinessOfTraining" class="form-control" value=" ${loginUr.noOfYearsInBusinessOfTraining}" />
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div>
+                                                                                <ul class="lab-no">
+                                                                                    <li class="style-li"><strong>How many training (4hrs) sessions wish to conduct in a month ?</strong></li>
+
+                                                                                </ul>
+                                                                            </div>
+                                                                            <cf:input type="text" placeholder="Number of trainers" path="NoOfTrainingSessionWishToConductInAMonth" class="form-control" value=" ${loginUr.noOfTrainingSessionWishToConductInAMonth}" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- right side ends -->
+                                                                </fieldset>
+                                                            </div>
+                                                            <!-- Basic courses -->
+                                                            <%-- <div class="personel-info">
                 <h4>Courses wish to conduct ?</h4>
                 <fieldset>
                   <legend><h3>Basic Courses</h3></legend>
@@ -478,9 +476,9 @@ window.onload=getstateid;
               <div class="col-md-6 col-xs-12">
             </fieldset>
           </div> --%>
-          <!-- basic course -->           
-          <!-- Advanced courses -->          
-          <%-- <div class="personel-info">
+                                                                <!-- basic course -->
+                                                                <!-- Advanced courses -->
+                                                                <%-- <div class="personel-info">
             <fieldset>
               <legend>Advanced Courses</legend>
               <!-- left -->
@@ -500,9 +498,9 @@ window.onload=getstateid;
               <div class="col-md-6 col-xs-12">
             </fieldset>
           </div> --%>
-          <!-- advanced course -->           
-          <!-- special courses -->          
-          <%-- <div class="personel-info">
+                                                                    <!-- advanced course -->
+                                                                    <!-- special courses -->
+                                                                    <%-- <div class="personel-info">
             <fieldset>
               <legend>Special Courses</legend>
               <!-- left -->
@@ -522,35 +520,40 @@ window.onload=getstateid;
               <div class="col-md-6 col-xs-12"> </div>
             </fieldset>
               </div> --%>
-              <!-- special course -->           
-              <!-- captcha -->
-              <div class="col-xs-12">
-                <!-- <div class="checkbox">
+                                                                        <!-- special course -->
+                                                                        <!-- captcha -->
+                                                                        <div class="col-xs-12">
+                                                                            <!-- <div class="checkbox">
                   <label>
                     <input type="checkbox">
                     <a href="#" target="_blank" class="terms-font-size"> I have read and understood the Terms &amp; Conditions
                     and the Privacy Policy of FSSAI. </a> </label>
                 </div> -->
-              </div>          
-              <!-- buttons -->
-              <div class="col-md-4 hidden-xs"></div>
-              <div class="col-md-4 col-xs-12">
-                <input type="submit" class="form-control login-btn" value="Update">
-                </a> </div>
-              <div class="col-md-4 hidden-xs"></div>          
-              <!-- training center details ends -->
-           
-                    </fieldset>
-                  </div>
-                  <!-- upcoming training ends --> 
+                                                                        </div>
+                                                                        <!-- buttons -->
+                                                                        <div class="col-md-4 hidden-xs"></div>
+                                                                        <div class="col-md-4 col-xs-12">
+                                                                            <input type="submit" class="form-control login-btn" value="Update">
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="col-md-4 hidden-xs"></div>
+                                                                        <!-- training center details ends -->
 
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    </cf:form>
-    <!-- scripts --> 
-    
+                                                    </fieldset>
+                                                    </div>
+                                                    <!-- upcoming training ends -->
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                </section>
+            </cf:form>
+            <!-- scripts -->
+            <script>
+                var id = localStorage.getItem('activeID');
+                document.getElementById(id).className = "active";
+
+            </script>
