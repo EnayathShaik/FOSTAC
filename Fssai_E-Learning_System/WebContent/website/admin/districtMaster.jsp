@@ -1,275 +1,279 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
-<%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
-<script type="text/javascript">
-function OnStart(){
-	onLoadDistrict();
-}
-window.onload = OnStart;
-</script>
+    <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %>
+        <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+            <script type="text/javascript">
+                function OnStart() {
+                    onLoadDistrict();
+                }
+                window.onload = OnStart;
 
-<script>
-function onLoadDistrict(){
-	 	var result="";
-		$.ajax({
-		type: 'post',
-		url: 'onLoadDistrict.jspp?',
-		async: false, 
-		success: function (data){
-		$('#newTable').show();
-		var mainData1 = jQuery.parseJSON(data);
-		var j=1;
-		$('#newTable tr').remove();
-		$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>State Name</th><th>District Name</th><th>Status</th><th>Edit</th></tr>')
-		$.each(mainData1 , function(i , obj)
-		{
-			var status ;
-	 		if(obj[2] == 'A'){
-				status = 'Active';
-			}else{
-				status = 'In-Active';
-			}
-			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><input type="hidden" id="stateName" value="'+obj[0]+'">'+obj[0]+'</td><td><input type="hidden" id="districtName" value="'+obj[1]+'">'+obj[1]+'</td><td><input type="hidden" id="statusLabel" value="'+status+'">'+status+'</td><td><input type="hidden" id="idCity" value="'+obj[3]+'" /><a href="#" onClick="editDistrict(\''+obj[0]+'\',\''+obj[1]+'\',\''+status+'\',\''+obj[3]+'\');">Edit</a></td></tr>');
-			
-		});
-		}
-		});
-	return result;
-}
-</script>
+            </script>
 
-<script type='text/javascript'>
-function validateFields() {
-	$('.displayNone').css('display', 'block');
-	if(document.getElementById("stateId").value=="0") {
-	document.getElementById("stateId").style.borderColor = "red";
-	document.getElementById("stateIdError").style.display = 'block';
-	document.getElementById("stateId").focus();
-	return false;
-	}else{
-	    document.getElementById('stateId').style.borderColor = "#ccc";
-	    document.getElementById("stateIdError").style.display = 'none';
-	    }
-	if(document.getElementById("DistrictName").value=="") {
-		document.getElementById("DistrictName").style.borderColor = "red";
-		document.getElementById("DistrictNameError").style.display = 'block';
-		document.getElementById("DistrictName").focus();
-		return false;
-		}else{
-		    document.getElementById('DistrictName').style.borderColor = "#ccc";
-		    document.getElementById("DistrictNameError").style.display = 'none';
-		    }
-	if(document.getElementById("status").value=="0") {
-		document.getElementById("status").style.borderColor = "red";
-		document.getElementById("statusError").style.display = 'block';
-		document.getElementById("status").focus();
-		return false;
-		}else{
-		    document.getElementById('status').style.borderColor = "#ccc";
-		    document.getElementById("statusError").style.display = 'none';
-		    }
-	return( true );
-}
+            <script>
+                function onLoadDistrict() {
+                    var result = "";
+                    $.ajax({
+                        type: 'post',
+                        url: 'onLoadDistrict.jspp?',
+                        async: false,
+                        success: function(data) {
+                            $('#newTable').show();
+                            var mainData1 = jQuery.parseJSON(data);
+                            var j = 1;
+                            $('#newTable tr').remove();
+                            $('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>State Name</th><th>District Name</th><th>Status</th><th>Edit</th></tr>')
+                            $.each(mainData1, function(i, obj) {
+                                var status;
+                                if (obj[2] == 'A') {
+                                    status = 'Active';
+                                } else {
+                                    status = 'In-Active';
+                                }
+                                $('#newTable').append('<tr id="tableRow"><td>' + j++ + '</td><td><input type="hidden" id="stateName" value="' + obj[0] + '">' + obj[0] + '</td><td><input type="hidden" id="districtName" value="' + obj[1] + '">' + obj[1] + '</td><td><input type="hidden" id="statusLabel" value="' + status + '">' + status + '</td><td><input type="hidden" id="idCity" value="' + obj[3] + '" /><a href="#" onClick="editDistrict(\'' + obj[0] + '\',\'' + obj[1] + '\',\'' + status + '\',\'' + obj[3] + '\');">Edit</a></td></tr>');
 
-function updateDistrict(){
-	
-}
-</script>
+                            });
+                        }
+                    });
+                    return result;
+                }
 
-<script type="text/javascript">
-function changeStatus(){
-	var districtLabel = $("#DistrictIdH").val();
-	console.log("districtLabel>>"+districtLabel);
-	var stateName =  $("#stateName").val();
-	var disName =  $("#DistrictName").val();
-	var statusLabel = $("#status").val();
-	console.log("statusLabel>>"+statusLabel);
-	//var districtIdHidden = $("#DistrictIdH").val();
-	document.getElementById('btnUpdate').style.display = 'none';
-	document.getElementById('btnCreate').style.display = 'block';
-	$(".displayNone").css("display","block");
-		var total = "id="+districtLabel+"&status="+ statusLabel+ "&disName="+disName+"&stateName="+stateName;
-		$('#newTable').hide();
-		$.ajax({
-		type: 'post',
-		async : false,
-		url: 'changeStatusDistrict.jspp?'+ total,
-		data: {
-		       user_name:name,
-		      },
-		      success: function (response) {
-		    	  console.log("response "+response);
-		       $( '#name_status' ).html(response);
-		      }
-		      });
-	return true;
-	
-	$("#newTable").empty();
-	onLoadDistrict();
-}
+            </script>
+
+            <script type='text/javascript'>
+                function validateFields() {
+                    $('.displayNone').css('display', 'block');
+                    if (document.getElementById("stateId").value == "0") {
+                        document.getElementById("stateId").style.borderColor = "red";
+                        document.getElementById("stateIdError").style.display = 'block';
+                        document.getElementById("stateId").focus();
+                        return false;
+                    } else {
+                        document.getElementById('stateId').style.borderColor = "#ccc";
+                        document.getElementById("stateIdError").style.display = 'none';
+                    }
+                    if (document.getElementById("DistrictName").value == "") {
+                        document.getElementById("DistrictName").style.borderColor = "red";
+                        document.getElementById("DistrictNameError").style.display = 'block';
+                        document.getElementById("DistrictName").focus();
+                        return false;
+                    } else {
+                        document.getElementById('DistrictName').style.borderColor = "#ccc";
+                        document.getElementById("DistrictNameError").style.display = 'none';
+                    }
+                    if (document.getElementById("status").value == "0") {
+                        document.getElementById("status").style.borderColor = "red";
+                        document.getElementById("statusError").style.display = 'block';
+                        document.getElementById("status").focus();
+                        return false;
+                    } else {
+                        document.getElementById('status').style.borderColor = "#ccc";
+                        document.getElementById("statusError").style.display = 'none';
+                    }
+                    return (true);
+                }
+
+                function updateDistrict() {
+
+                }
+
+            </script>
+
+            <script type="text/javascript">
+                function changeStatus() {
+                    var districtLabel = $("#DistrictIdH").val();
+                    console.log("districtLabel>>" + districtLabel);
+                    var stateName = $("#stateName").val();
+                    var disName = $("#DistrictName").val();
+                    var statusLabel = $("#status").val();
+                    console.log("statusLabel>>" + statusLabel);
+                    //var districtIdHidden = $("#DistrictIdH").val();
+                    document.getElementById('btnUpdate').style.display = 'none';
+                    document.getElementById('btnCreate').style.display = 'block';
+                    $(".displayNone").css("display", "block");
+                    var total = "id=" + districtLabel + "&status=" + statusLabel + "&disName=" + disName + "&stateName=" + stateName;
+                    $('#newTable').hide();
+                    $.ajax({
+                        type: 'post',
+                        async: false,
+                        url: 'changeStatusDistrict.jspp?' + total,
+                        data: {
+                            user_name: name,
+                        },
+                        success: function(response) {
+                            console.log("response " + response);
+                            $('#name_status').html(response);
+                        }
+                    });
+                    return true;
+
+                    $("#newTable").empty();
+                    onLoadDistrict();
+                }
 
 
 
-function searchDistrict(){
-	$('.displayNone').css('display', 'block');
-	var stateId =  $("#stateId").val();
-	console.log("stateId"+stateId);
-	var disName =  $("#DistrictName").val();
-	var result="";
-		var total = "stateId="+stateId +"&disName="+disName;
-		$.ajax({
-		type: 'post',
-		url: 'searchDistrict.jspp?'+ total,
-		async: false, 
-		success: function (data){
-		$('#newTable').show();
-		var mainData1 = jQuery.parseJSON(data);
-		var j=1;
-		$('#newTable tr').remove();
-		$('#newTable').append('<tr  class="background-open-vacancies" style="background-color:#000077;"><th>S.No.</th><th>State Name</th><th>District Name</th><th>Status</th><th>Edit</th></tr>')
-		$.each(mainData1 , function(i , obj)
-		{
-			
-			var status ;
-	 		if(obj[2] == 'A'){
-				status = 'Active';
-			}else{
-				status = 'In-Active';
-			}
-			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><input type="hidden" id="stateName" value="'+obj[0]+'">'+obj[0]+'</td><td><input type="hidden" id="stateName" value="'+obj[1]+'">'+obj[1]+'</td><td><input type="hidden" id="idCity" value="'+obj[0]+'"><a href="#" onclick="editDistrict(\''+obj[0]+'\',\''+obj[1]+'\',\''+status+'\',\''+obj[3]+'\');"">edit</a></td><td><a href="#" onclick="changeStatus();">'+status+'</a></td></tr>');	
-		});
-		}
-		});
-	return result;
-}
+                function searchDistrict() {
+                    $('.displayNone').css('display', 'block');
+                    var stateId = $("#stateId").val();
+                    console.log("stateId" + stateId);
+                    var disName = $("#DistrictName").val();
+                    var result = "";
+                    var total = "stateId=" + stateId + "&disName=" + disName;
+                    $.ajax({
+                        type: 'post',
+                        url: 'searchDistrict.jspp?' + total,
+                        async: false,
+                        success: function(data) {
+                            $('#newTable').show();
+                            var mainData1 = jQuery.parseJSON(data);
+                            var j = 1;
+                            $('#newTable tr').remove();
+                            $('#newTable').append('<tr  class="background-open-vacancies" style="background-color:#000077;"><th>S.No.</th><th>State Name</th><th>District Name</th><th>Status</th><th>Edit</th></tr>')
+                            $.each(mainData1, function(i, obj) {
 
-function editDistrict(state,districtName,statuslabel,distID){
+                                var status;
+                                if (obj[2] == 'A') {
+                                    status = 'Active';
+                                } else {
+                                    status = 'In-Active';
+                                }
+                                $('#newTable').append('<tr id="tableRow"><td>' + j++ + '</td><td><input type="hidden" id="stateName" value="' + obj[0] + '">' + obj[0] + '</td><td><input type="hidden" id="stateName" value="' + obj[1] + '">' + obj[1] + '</td><td><input type="hidden" id="idCity" value="' + obj[0] + '"><a href="#" onclick="editDistrict(\'' + obj[0] + '\',\'' + obj[1] + '\',\'' + status + '\',\'' + obj[3] + '\');"">edit</a></td><td><a href="#" onclick="changeStatus();">' + status + '</a></td></tr>');
+                            });
+                        }
+                    });
+                    return result;
+                }
 
-	document.getElementById('btnUpdate').style.display = 'block';
-	document.getElementById('btnCreate').style.display = 'none';
-	//document.getElementById('stateId').value = state;
-	//document.getElementById('stateLabel').value = statuslabel;
-	
-	document.getElementById('DistrictName').value = districtName;
-	document.getElementById('DistrictIdH').value = distID;
-	/* var a =document.getElementById('stateName').value;
-	console.log("stateId.options[0].text"+stateId.options[0].text);
-	 *///
-	 stateId.options[0].text = state;
-	
-	console.log("status>"+statuslabel);
-	if(statuslabel=="Active"){
-		$('#status option').remove();
-		$('#status').append('<option value="A" selected="true">Active</option><option value="I">In-active</option>');
-	}else{
-		$('#status option').remove();
-		$('#status').append('<option value="A">Active</option><option value="I"  selected="true">In-active</option>');
-	}
-}
-</script>
-  
-   <cf:form action="districtMasterSave.fssai" name="myForm" method="POST" commandName="districtMaster" onsubmit="return validateFields();"> 
-   
-   
-    <section>
-        <%@include file="../roles/top-menu.jsp"%>
-    </section>
-    <!-- main body -->
-    <section class="main-section-margin-top">
-        <div class="container-fluid">
-            <div id="wrapper">
-                <!-- Sidebar -->
-                <%@include file="../roles/slider.jsp" %>
-                <!-- /#sidebar-wrapper -->
-                <!-- Page Content -->
-                <div id="page-content-wrapper">
+                function editDistrict(state, districtName, statuslabel, distID) {
+
+                    document.getElementById('btnUpdate').style.display = 'block';
+                    document.getElementById('btnCreate').style.display = 'none';
+                    //document.getElementById('stateId').value = state;
+                    //document.getElementById('stateLabel').value = statuslabel;
+
+                    document.getElementById('DistrictName').value = districtName;
+                    document.getElementById('DistrictIdH').value = distID;
+                    /* var a =document.getElementById('stateName').value;
+                    console.log("stateId.options[0].text"+stateId.options[0].text);
+                     */ //
+                    stateId.options[0].text = state;
+
+                    console.log("status>" + statuslabel);
+                    if (statuslabel == "Active") {
+                        $('#status option').remove();
+                        $('#status').append('<option value="A" selected="true">Active</option><option value="I">In-active</option>');
+                    } else {
+                        $('#status option').remove();
+                        $('#status').append('<option value="A">Active</option><option value="I"  selected="true">In-active</option>');
+                    }
+                }
+
+            </script>
+
+            <cf:form action="districtMasterSave.fssai" name="myForm" method="POST" commandName="districtMaster" onsubmit="return validateFields();">
+
+
+                <section>
+                    <%@include file="../roles/top-menu.jsp"%>
+                </section>
+                <!-- main body -->
+                <section class="main-section-margin-top">
                     <div class="container-fluid">
-                        <!-- vertical button -->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome Admin</span> </a>
-                            </div>
-                        </div>
-                        <!-- add the content here for main body -->
-                        <!-- timeline  -->
-                        <div class="row">
+                        <div id="wrapper">
+                            <!-- Sidebar -->
+                            <%@include file="../roles/slider.jsp" %>
+                                <!-- /#sidebar-wrapper -->
+                                <!-- Page Content -->
+                                <div id="page-content-wrapper">
+                                    <div class="container-fluid">
+                                        <!-- vertical button -->
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome Admin</span> </a>
+                                            </div>
+                                        </div>
+                                        <!-- add the content here for main body -->
+                                        <!-- timeline  -->
+                                        <div class="row">
 
-                                <div class="col-xs-12">
-                                    <h1>District Master</h1>
-                                    <div class="row">
-                                        <div class="col-xs-12">
+                                            <div class="col-xs-12">
+                                                <h1>District Master</h1>
+                                                <div class="row">
+                                                    <div class="col-xs-12">
 
-                                            <!-- left side -->
-                                            <div class="col-xs-6">
-                                                  <div class="form-group">
-                                                    <div>
-                                                        <ul class="lab-no">
-                                                            <li class="style-li"><strong>State Name:
+                                                        <!-- left side -->
+                                                        <div class="col-xs-6">
+                                                            <div class="form-group">
+                                                                <div>
+                                                                    <ul class="lab-no">
+                                                                        <li class="style-li"><strong>State Name:
                                                             <span style="color:red;">*</span>
                                                             </strong></li>
-                                                            <li class="style-li error-red">
-                                                            <label id="created" class="error">${created }</label>
-                                                            <label class="error visibility" id="stateIdError"> error</label>
-                                                                  </li>
-                                                        </ul>
-                                                    </div>
-<cf:select path="stateId" class="form-control">
-<cf:option value="0" label="Select State" />
-<cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName"/>
-</cf:select>
-                                                </div>
-                                                
-                                                
-  <div class="form-group">
-                                                    <div>
-                                                        <ul class="lab-no">
-                                                            <li class="style-li"><strong>Status:
-                                                            <span style="color:red;">*</span>
-                                                            </strong></li>
-                                                    <li class="style-li error-red">
-                                                            <label class="error visibility" id="statusError">error</label>
-                                                                  </li>
-                                                        </ul>
-                                                    </div>
-<cf:select path="status" class="form-control">
-<cf:option value="A" label="Active" />
-<cf:option value="I" label="In-Active" />
-</cf:select>
-                                                </div>                                                
-                                           
-                                            </div> <!-- left side ends -->
+                                                                        <li class="style-li error-red">
+                                                                            <label id="created" class="error">${created }</label>
+                                                                            <label class="error visibility" id="stateIdError"> error</label>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <cf:select path="stateId" class="form-control">
+                                                                    <cf:option value="0" label="Select State" />
+                                                                    <cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName" />
+                                                                </cf:select>
+                                                            </div>
 
-                                            <!-- right side -->
-                                            <div class="col-xs-6">
-                                                
-                                                   <div class="form-group">
-                                                    <div>
-                                                        <ul class="lab-no">
-                                                            <li class="style-li"><strong>District Name:
+
+                                                            <div class="form-group">
+                                                                <div>
+                                                                    <ul class="lab-no">
+                                                                        <li class="style-li"><strong>Status:
                                                             <span style="color:red;">*</span>
                                                             </strong></li>
-                                                            <li class="style-li error-red">
-                                                             <label class="error visibility" id="DistrictNameError">error</label>
-                                                     
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-  <cf:input path="DistrictName"   placeholder="District Name" class="form-control"   />
-                                            
-                                                </div>
-                                                
-                                              
-                                            </div> <!-- rigth side ends -->
-                                            
-                                            <!-- button -->
-                                            
-                                            <div class="row">
-                                                <div class="col-md-6 hidden-xs"></div>
-                                                <!-- create button -->
-                                                <div class="col-md-3 col-xs-12">
-                                                <input type="hidden" id="DistrictIdH" value="" />
-                                                    <input type="submit" id="btnCreate" class="btn login-btn" value="Create" />
-<a href="" onclick="changeStatus();" id="btnUpdate" style="display: none; padding: 6px 7px; width: 40%; 
+                                                                        <li class="style-li error-red">
+                                                                            <label class="error visibility" id="statusError">error</label>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <cf:select path="status" class="form-control">
+                                                                    <cf:option value="A" label="Active" />
+                                                                    <cf:option value="I" label="In-Active" />
+                                                                </cf:select>
+                                                            </div>
+
+                                                        </div>
+                                                        <!-- left side ends -->
+
+                                                        <!-- right side -->
+                                                        <div class="col-xs-6">
+
+                                                            <div class="form-group">
+                                                                <div>
+                                                                    <ul class="lab-no">
+                                                                        <li class="style-li"><strong>District Name:
+                                                            <span style="color:red;">*</span>
+                                                            </strong></li>
+                                                                        <li class="style-li error-red">
+                                                                            <label class="error visibility" id="DistrictNameError">error</label>
+
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <cf:input path="DistrictName" placeholder="District Name" class="form-control" />
+
+                                                            </div>
+
+
+                                                        </div>
+                                                        <!-- rigth side ends -->
+
+                                                        <!-- button -->
+
+                                                        <div class="row">
+                                                            <div class="col-md-6 hidden-xs"></div>
+                                                            <!-- create button -->
+                                                            <div class="col-md-3 col-xs-12">
+                                                                <input type="hidden" id="DistrictIdH" value="" />
+                                                                <input type="submit" id="btnCreate" class="btn login-btn" value="Create" />
+                                                                <a href="" onclick="changeStatus();" id="btnUpdate" style="display: none; padding: 6px 7px; width: 40%; 
 margin-bottom: 0; font-size: 14px; font-weight: normal; line-height: 1.42857143; 
 text-align: center; white-space: nowrap; vertical-align: middle; 
 -ms-touch-action: manipulation; touch-action: manipulation; cursor: pointer; 
@@ -277,41 +281,42 @@ text-align: center; white-space: nowrap; vertical-align: middle;
 user-select: none; background-image: none; border: 1px solid transparent; 
 background: #ef580d !important; color: #fff; border: 1px solid transparent; 
 transition: all 0.8s linear;">
-Update</a>                                                    
-<a href="#" onclick="searchDistrict();" class="pull-right">Search</a>
+Update</a>
+                                                                <a href="#" onclick="searchDistrict();" class="pull-right">Search</a>
+
+                                                            </div>
+                                                            <!-- show details -->
+
+
+
+                                                        </div>
+                                                        <!-- button row ends -->
+                                                    </div>
+
 
                                                 </div>
-                                                <!-- show details -->
+                                            </div>
 
-    
-                                                
-                                            </div> <!-- button row ends -->
-                                        </div>
+                                            <!-- search Results -->
+                                            <div class="col-xs-12 displayNone" id="show-result" aria-expanded="false" style="height: 0px;">
 
-                                       
-                                    </div>
-                                </div>
+                                                <!-- table -->
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <fieldset>
+                                                            <legend>Search Result</legend>
 
-                                <!-- search Results -->
-                                <div class="col-xs-12 displayNone"   id="show-result" aria-expanded="false" style="height: 0px;">
-                                    
-                                    <!-- table -->
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <fieldset>
-                                                <legend>Search Result</legend>
-                                                
-                                                <table id="newTable" class="table table-bordered table-responsive">
-                                                <thead>
-                                                    <tr class="background-open-vacancies">
-                                                        <th>S.No.</th>
-                                                        <th>State Name</th>
-                                                        <th>District Name</th>
-                                                        <th>Option</th>
-                                                    </tr>
-                                                </thead>
-  <tbody>                                            
-<%-- <ct:forEach var="listValue" items="${districtShowList}" varStatus="loop"><tr>
+                                                            <table id="newTable" class="table table-bordered table-responsive">
+                                                                <thead>
+                                                                    <tr class="background-open-vacancies">
+                                                                        <th>S.No.</th>
+                                                                        <th>State Name</th>
+                                                                        <th>District Name</th>
+                                                                        <th>Option</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <%-- <ct:forEach var="listValue" items="${districtShowList}" varStatus="loop"><tr>
 <td>${loop.count} </td>
 <td>loop[0] </td>
 <td>
@@ -330,20 +335,26 @@ Update</a>
 </tr>
  </ct:forEach> --%>
 
-                                                
-                                                </tbody>
-                                            </table>
-                                            </fieldset>
-                                            
-                                        </div>
-                                    </div>
-                                </div> <!-- search div ends -->
 
-                            </div>
-                        <!-- row ends -->
+                                                                </tbody>
+                                                            </table>
+                                                        </fieldset>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- search div ends -->
+
+                                        </div>
+                                        <!-- row ends -->
+                                    </div>
+                                </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    </cf:form>
+                </section>
+            </cf:form>
+            <script>
+                var id = localStorage.getItem('activeID');
+                document.getElementById(id).className = "active";
+
+            </script>
