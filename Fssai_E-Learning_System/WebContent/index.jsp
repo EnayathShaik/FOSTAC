@@ -77,7 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <ul class="nav navbar-nav">
                                     <li id="homepagefssai"><a onclick="setID('homepagefssai')" href="fostac.fssai">HOME</a></li>
                                     <li id="aboutpagefssai"><a onclick="setID('aboutpagefssai')" href="about.fssai">ABOUT</a></li>
-                                    <li class="dropdown"> <a href="courses.html" class="dropdown-toggle" data-toggle="dropdown">COURSES <i class="fa fa-angle-down"></i></a>
+                                    <li id="coursespagefssai" class="dropdown"> <a onclick="setID('coursespagefssai')" href="courses.html" class="dropdown-toggle" data-toggle="dropdown">COURSES <i class="fa fa-angle-down"></i></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="basic-level.fssai">BASIC LEVEL</a></li>
                                             <li><a href="advance-level.fssai">ADVANCE LEVEL</a></li>
