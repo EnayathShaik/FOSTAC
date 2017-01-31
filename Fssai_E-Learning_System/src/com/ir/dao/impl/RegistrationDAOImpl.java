@@ -1,10 +1,12 @@
 package com.ir.dao.impl;
+import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import org.apache.tomcat.util.buf.UEncoder;
 import org.hibernate.HibernateException;
@@ -31,6 +33,7 @@ import com.ir.model.Title;
 import com.ir.util.EncryptionPasswordANDVerification;
 import com.ir.util.PasswordGenerator;
 import com.ir.util.SendMail;
+import com.zentect.ajax.AjaxRequest;
 
 
 @Component("registrationDAO")
@@ -130,7 +133,43 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 	@Override
 	public String registerUserIdCheck(RegistrationFormTrainee registrationFormTrainee)  {
 		// TODO Auto-generated method stub
-		String ret = null;
+		String ret = "";
+		List list = null;
+		try{
+			Session session = sessionFactory.openSession();
+			String sqlQuery = "select password from personalinformationtrainee where userid = " + registrationFormTrainee.getUserId() + " ";
+			String newList=null;
+			Transaction transaction = null;
+			try {       
+		        transaction = session.beginTransaction();
+		        System.out.println("sqlQuery "+sqlQuery);
+				Query query = session.createSQLQuery(sqlQuery);
+				list = query.list();
+		        transaction.commit();
+		    }
+		    catch(Exception re){
+		        transaction.rollback();
+		    }
+		    finally {
+		        if(session != null){
+		            Transaction tran = session.getTransaction();
+		            if(tran != null && tran.isActive() && !tran.wasCommitted() && tran.wasRolledBack()){
+		                tran.rollback();
+		            }
+		            session.close();
+		        }
+		    }
+			if(list.size() > 0){
+				System.out.println("not available to use");
+				ret = "already";
+			}else{
+				System.out.println("not in database");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		/*String ret = null;
 		ResultSet rs = null;
 		String q = "select password from personalinformationtrainee where userid = " + registrationFormTrainee.getUserId() + " ";
 		 try {
@@ -165,7 +204,7 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			System.out.println("RegistrationDAOImpl user id check begin *** :" + ret);
+			System.out.println("RegistrationDAOImpl user id check begin *** :" + ret);*/
 			return ret;
 	}
 

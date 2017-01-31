@@ -8,10 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -25,6 +21,7 @@ import com.google.gson.reflect.TypeToken;
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.State;
+import com.zentect.ajax.AjaxRequest;
 /**
  * Servlet implementation class DeleteState
  */
@@ -45,10 +42,8 @@ public class SearchVacancy extends HttpServlet {
 	 */
 	protected void callPost(HttpServletRequest request, HttpServletResponse response,String loginId,int profileCode,int userId) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
 		System.out.println("loginId == "+loginId);
 		System.out.println("userId == "+userId);
-		
 		response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 		String name = (request.getQueryString());
@@ -103,17 +98,12 @@ public class SearchVacancy extends HttpServlet {
 			loginCK = "1=1";
 			//loginCK = "E.loginid ='"+loginId+"'";
 		}
-		
-		
 		String sql ="";
 		sql = "select pvtc.postvacancytrainingcenterid , ct.coursetype , cn.coursename , pvtc.trainingdate ,pvtc.requiredexp , pvtc.noofvacancy,pvtc.loginid  from postvacancytrainingcenter pvtc left join coursetype as ct on ct.coursetypeid = pvtc.coursetype left join coursename as cn on cn.coursenameid = pvtc.coursename left join personalinformationtrainingpartner D on(pvtc.trainingcenter=D.personalinformationtrainingpartnerid)  left join  logindetails E on(D.logindetails=E.ID) " +
 				" where "+loginCK+"  and  cast(ct.coursetypeid as varchar(10))  like '"+courseType+"%' and CAST(cn.coursenameid AS VARCHAR(10)) like '"+courseName+"%' and  CAST(pvtc.trainingdate AS VARCHAR(10)) like '"+trainingDate+"%'   and cast(pvtc.requiredexp as varchar(10))  like '"+requiredExp+"%' and cast(pvtc.noofvacancy as varchar(10)) like '"+noOfVacancy+"%' ";
 		
-		System.out.println(" sql "+sql);
-		Query query = session.createSQLQuery(sql);
-		List list = query.list();
+		List list = new AjaxRequest().returnList(sql);
 		System.out.println(list.size());
-		session.close();
 		if(list.size() > 0 || list != null){
 			System.out.println(list);
 			Gson g =new Gson();

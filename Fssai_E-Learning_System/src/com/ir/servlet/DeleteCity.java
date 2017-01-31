@@ -23,6 +23,7 @@ import com.google.gson.reflect.TypeToken;
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.PersonalInformationTrainee;
+import com.ir.util.HibernateUtil;
 /**
  * Servlet implementation class DeleteState
  */
@@ -48,9 +49,10 @@ public class DeleteCity extends HttpServlet {
 		String name = (request.getQueryString());
 		System.out.println("passing name   :" + name);
 		
-		Configuration conf = new Configuration();
+		/*Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
-		SessionFactory sf = conf.buildSessionFactory();
+		SessionFactory sf = conf.buildSessionFactory();*/
+		SessionFactory sf = new HibernateUtil().getSessionFactory();
 		Session session = sf.openSession();
 		City   cityNameee=(City) session.load(City.class, Integer.parseInt(name));
 		session.delete(cityNameee);

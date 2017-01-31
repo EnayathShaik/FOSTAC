@@ -29,6 +29,7 @@ import com.ir.model.District;
 import com.ir.service.PageLoadService;
 import com.ir.service.impl.PageLoadServiceImpl;
 import com.itextpdf.text.log.SysoCounter;
+import com.zentect.ajax.AjaxRequest;
 
 /**
  * Servlet implementation class MyServlt
@@ -82,7 +83,18 @@ public class getFeedbackDetails extends HttpServlet {
 		}catch(Exception e){
 			trainingdate = "%";
 		}
-		Configuration conf = new Configuration();
+		String sql="select fdm.feedback as feedbackId,fbd.feedbackrating as feedbackRating from feedbackdetail fbd left join feedbackmaster fdm on (fbd.feedbackid = cast(fdm.feedbacktypeid as varchar(10) ) ) left join courseenrolleduser ceu on fbd.userid = cast(ceu.logindetails as varchar(10)) left join trainingcalendar tc on (tc.trainingcalendarid = ceu.trainingcalendarid) left join personalinformationtrainingpartner ptp on (ptp.personalinformationtrainingpartnerid = tc.trainingcenter) left join logindetails ld on  ld.id = ptp.logindetails"+
+				" where  fbd.courseid  like '"+courseid+"%'  and cast(tc.coursename as varchar(10))  like '"+coursename+"%' and tc.trainingdate like'"+trainingdate+"%' and cast(tc.trainingcenter as varchar(10)) like '"+trainingcenter+"%' and fbd.userid like '"+userid+"%'  order by fbd.feedbackid  " ;
+		String newList = "";
+		List list = new AjaxRequest().returnList(sql);
+		if(list.size()>0){
+			Gson g =new Gson();
+			newList = g.toJson(list); 
+		}
+		out.write(newList);
+		out.flush();
+		
+		/*Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
@@ -94,7 +106,7 @@ public class getFeedbackDetails extends HttpServlet {
 		Gson g =new Gson();
 		String newList = g.toJson(list); 
 		out.write(newList);
-		out.flush();
+		out.flush();*/
 	}
 
 	/**

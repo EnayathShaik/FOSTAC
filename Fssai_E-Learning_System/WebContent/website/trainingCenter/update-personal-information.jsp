@@ -17,15 +17,9 @@
 
             <script>
                 function getState() {
-                    var ss = $ {
-                        loginUr.trainingPartnerPermanentState
-                    };
-                    var dd = $ {
-                        loginUr.trainingPartnerPermanentDistrict
-                    };
-                    var cc = $ {
-                        loginUr.trainingPartnerPermanentCity
-                    };
+                    var ss = ${loginUr.trainingPartnerPermanentState};
+                    var dd = ${loginUr.trainingPartnerPermanentDistrict};
+                    var cc = ${loginUr.trainingPartnerPermanentCity};
 
                     getStateUpdate(ss, dd, cc);
 

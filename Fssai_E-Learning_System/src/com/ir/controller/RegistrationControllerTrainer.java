@@ -124,7 +124,7 @@ public class RegistrationControllerTrainer implements Serializable{
 			model.addAttribute("id" , all[1]);
 			model.addAttribute("pwd" , all[0]);
 			JavaMail javaMail = new JavaMail();
-			javaMail.mailProperty("Thanks", registrationFormTrainer.getTrainingCenterPermanentEmail(), registrationFormTrainer.getUserId());
+			javaMail.mailProperty("Thanks", registrationFormTrainer.getTrainingCenterPermanentEmail(), registrationFormTrainer.getUserId(),all[0]);
 			//return "registrationFormTrainee";
 			return "welcome";
 		}else{
@@ -140,7 +140,7 @@ public class RegistrationControllerTrainer implements Serializable{
 		
 		Integer userId = (Integer) session.getAttribute("userId");
 		Integer profileId = (Integer) session.getAttribute("profileId");
-		List<PostVacancyTrainingCenter> postVacancyTrainingCenter=trainingPartnerService.getPostVacancyTrainingList();
+		List<PostVacancyTrainingCenter> postVacancyTrainingCenter=trainingPartnerService.getPostVacancyTrainingList(userId);
 		List<PostVacancyTrainingCenterBean> vacancyTrainingCenterBeans=new ArrayList<>();
 		for(PostVacancyTrainingCenter pvtc:postVacancyTrainingCenter){
 			PostVacancyTrainingCenterBean applicationStatusBean=trainingPartnerService.getApplicationStatusBean(String.valueOf(userId),pvtc.getCourseName().getCoursenameid(),pvtc.getCourseType().getCourseTypeId());

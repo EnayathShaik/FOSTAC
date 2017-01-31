@@ -689,8 +689,14 @@ public class TraineeController {
 		Integer userId=Integer.parseInt(session.getAttribute("userId").toString());
 		try{
 			if(userId>0){
-				CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
-				model.addAttribute("courseTrainee", courseTrainee);
+				String isEligible = "";
+				isEligible = traineeService.isTraineeEligible(userId);
+				if(isEligible != null && isEligible.equals("Y")){
+					CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
+					model.addAttribute("courseTrainee", courseTrainee);
+				}
+				System.out.println("isEligible ==== "+isEligible);
+				model.addAttribute("Eligible", isEligible);
 			}
 		}catch(Exception e){
 			e.printStackTrace();

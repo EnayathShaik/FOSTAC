@@ -196,8 +196,7 @@
                                                                     <select class="form-control" name="selTrainee" id="selTrainee"> </select>
                                                                     <script>
                                                                         var selectctpeOptions = "<option disabled selected value> -- select trainee -- </option>";
-                                                                        for (var i = 0; i < courseTypes.length; i++) {
-                                                                            console.log(courseTypes[i].CourseTypeId + " -- " + courseTypes[i].CourseType);
+                                                                        for (var i = 0; i < traineeList.length; i++) {
                                                                             selectctpeOptions += "<option value=" + traineeList[i].id + ">" + traineeList[i].value + "</option>"
 
                                                                         }
@@ -241,7 +240,7 @@
 
                                                     }
                                                     document.getElementById('selCourseType').innerHTML += selectctpeOptions;
-
+                                                    
                                                     var selectctTCpeOptions = "<option disabled selected value> -- select Training Center -- </option>";
                                                     for (var i = 0; i < trainingCenterList.length; i++) {
                                                         console.log(trainingCenterList[i].personalInformationTrainingPartnerId + " -- " + trainingCenterList[i].TrainingCentreName);

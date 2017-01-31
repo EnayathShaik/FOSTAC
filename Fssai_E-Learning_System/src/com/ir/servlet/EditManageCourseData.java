@@ -22,6 +22,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import com.ir.model.CourseName;
 import com.ir.model.PersonalInformationTrainee;
+import com.ir.util.HibernateUtil;
 /**
  * Servlet implementation class DeleteState
  */
@@ -69,12 +70,12 @@ public class EditManageCourseData extends HttpServlet {
 		
 		System.out.println(courseName + " "+courseDuration + " "+ online + "  "+ classroom + " "+ status + "  "+id);
 		
-		Configuration conf = new Configuration();
+		/*Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
-		SessionFactory sf = conf.buildSessionFactory();
+		SessionFactory sf = conf.buildSessionFactory();*/
+		SessionFactory sf = new HibernateUtil().getSessionFactory();
 		Session session = sf.openSession();
 		CourseName   courseNameee=(CourseName) session.load(CourseName.class, Integer.parseInt(id));
-		
 		courseNameee.setCoursename(courseName);
 		courseNameee.setCourseduration(courseDuration);
 		courseNameee.setOnline(online);

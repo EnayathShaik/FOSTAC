@@ -26,6 +26,7 @@ import com.google.gson.reflect.TypeToken;
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.State;
+import com.zentect.ajax.AjaxRequest;
 /**
  * Servlet implementation class DeleteState
  */
@@ -90,22 +91,38 @@ public class TraineeCenterPaymentConfirmation extends HttpServlet {
 		catch(Exception e){
 			status = "%";
 		}
-    
+		String sql = "";
+		sql = "select  E.coursetype,D.coursename,B.trainingdate,B.trainingtime,C.firstname || ' '|| C.middlename ||' '|| C.lastname as participantName,D.modeoftraining,A.paymentstatus,A.courseenrolleduserid from courseenrolleduser  A"
+				+ " inner join trainingcalendar B on(A.trainingcalendarid= B.trainingcalendarid)"
+				+ " inner join personalinformationtrainingpartner C on (C.personalinformationtrainingpartnerid = B.trainingcenter)"
+				+ " inner join coursename D on (D.coursenameid = B.coursename)"
+				+ " inner join coursetype E on (E.coursetypeid = B.coursetype)"
+				+ " inner join logindetails F on (F.ID = C.logindetails)"
+				+" WHERE A.status = 'N' and  cast(E.coursetypeid  as varchar(10)) like '"+courseType+"%' and cast(D.COURSENAMEID as varchar(10))  like '"+courseName+"%'  and  cast(B.TRAININGDATE as varchar(10)) like '"+trainingDate+"%' and  cast(B.TRAININGTIME as varchar(10)) like '"+trainingtime+"%'  and cast(A.paymentstatus as varchar(10)) like '"+status+"%' "; 
+					//	"  AND F.loginid ='"+loginId+"' ";
+		String newList = "";
+		List list = new AjaxRequest().returnList(sql);
+		if(list.size() > 0 || list != null){
+			System.out.println(list);
+			Gson g =new Gson();
+			newList = g.toJson(list); 
+		}
+		out.write(newList);
+		out.flush();
 		
-		
-		Configuration conf = new Configuration();
+		/*Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
 		String newList=null;
 		System.out.println("district 0");
 		String sql ="";
-		/*sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,pitr.firstname || ' '|| pitr.middlename ||' '|| pitr.lastname as participantName " +
+		sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,pitr.firstname || ' '|| pitr.middlename ||' '|| pitr.lastname as participantName " +
 				"from trainingcalendar A " +
 				" inner join coursetype B on(A.coursetype=B.coursetypeid)" +
 				" inner join coursename C on(A.coursename=C.coursenameid)"+
 				" inner join personalinformationtrainer as pitr on CAST(CAST (A.trainername AS NUMERIC(19,4)) AS INT) = pitr.personalinformationtrainerid ";
-	*/	sql = "select  E.coursetype,D.coursename,B.trainingdate,B.trainingtime,C.firstname || ' '|| C.middlename ||' '|| C.lastname as participantName,D.modeoftraining,A.paymentstatus,A.courseenrolleduserid from courseenrolleduser  A"
+		sql = "select  E.coursetype,D.coursename,B.trainingdate,B.trainingtime,C.firstname || ' '|| C.middlename ||' '|| C.lastname as participantName,D.modeoftraining,A.paymentstatus,A.courseenrolleduserid from courseenrolleduser  A"
 				+ " inner join trainingcalendar B on(A.trainingcalendarid= B.trainingcalendarid)"
 				+ " inner join personalinformationtrainingpartner C on (C.personalinformationtrainingpartnerid = B.trainingcenter)"
 				+ " inner join coursename D on (D.coursenameid = B.coursename)"
@@ -114,7 +131,7 @@ public class TraineeCenterPaymentConfirmation extends HttpServlet {
 				+" WHERE A.status = 'N' and  cast(E.coursetypeid  as varchar(10)) like '"+courseType+"%' and cast(D.COURSENAMEID as varchar(10))  like '"+courseName+"%'  and  cast(B.TRAININGDATE as varchar(10)) like '"+trainingDate+"%' and  cast(B.TRAININGTIME as varchar(10)) like '"+trainingtime+"%'  and cast(A.paymentstatus as varchar(10)) like '"+status+"%' "; 
 					//	"  AND F.loginid ='"+loginId+"' ";
 		
-	System.out.println(sql);
+		System.out.println(sql);
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
 		System.out.println(list.size());
@@ -125,7 +142,7 @@ public class TraineeCenterPaymentConfirmation extends HttpServlet {
 			newList = g.toJson(list); 
 		}
 		out.write(newList);
-		out.flush();		
+		out.flush();	*/	
 	}
 
 	/**

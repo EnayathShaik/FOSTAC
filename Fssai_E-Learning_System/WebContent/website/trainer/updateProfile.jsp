@@ -266,9 +266,10 @@
                                         var tp = '${trainingPartnerID}';
 
                                         var safety = '${loginUr.foodSafetyExpBackground}';
-                                        var month = $ {
-                                            loginUr.expInFoodSafefyTimeMonth
-                                        };
+                                        var month=${loginUr.expInFoodSafefyTimeMonth};
+                                        /* var month = $ {
+                                            loginUr.expInFoodSafefyTimeMonth;
+                                        }; */
                                         $("#FoodSafetyExpBackground").prop('selectedIndex', safety);
                                         $("#ExpInFoodSafefyTimeMonth").prop('selectedIndex', month);
                                         //$("#TrainingCenterPermanentState").prop('selectedIndex', psid);  

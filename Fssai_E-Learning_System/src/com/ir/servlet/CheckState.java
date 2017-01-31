@@ -15,6 +15,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import com.ir.util.HibernateUtil;
+
 /**
  * Servlet implementation class CheckState
  */
@@ -39,9 +41,10 @@ public class CheckState extends HttpServlet {
         PrintWriter out = response.getWriter();
 		String name = (request.getQueryString());
 		System.out.println("passing name   :" + name);
-		Configuration conf = new Configuration();
+		/*Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
-		SessionFactory sf = conf.buildSessionFactory();
+		SessionFactory sf = conf.buildSessionFactory();*/
+		SessionFactory sf = new HibernateUtil().getSessionFactory();
 		Session session = sf.openSession();
 		String sql="select * from State where upper(stateName) like '" + name.replaceAll("%20", " ").toUpperCase() + "%'"; 
 		  

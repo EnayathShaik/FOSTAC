@@ -22,6 +22,7 @@ import org.hibernate.cfg.Configuration;
 
 import com.google.gson.Gson;
 import com.ir.model.CourseName;
+import com.zentect.ajax.AjaxRequest;
 
 /**
  * Servlet implementation class DeleteState
@@ -48,7 +49,29 @@ public class EditMTP extends HttpServlet {
 		String name = (request.getQueryString());
 		System.out.println("kk");
 		String id = request.getQueryString();
-		Configuration conf = new Configuration();
+		
+		String sql=" select mtp.managetrainingpartnerid  , ld.loginid  ,  mtp.pan , mtp.trainingpartnername , ld.status , "+
+				" mtp.websiteurl , mtp.headofficedataaddress1 , mtp.headofficedataaddress2 ,mtp.pin ,  "+
+			  " s.stateid , d.districtid , c.cityid , mtp.email "+
+				" from managetrainingpartner as mtp "+
+				" inner join logindetails as ld on ld.id = mtp.logindetails "+
+				" inner join district as d on d.districtid = mtp.district "+
+				" inner join city as c on c.cityId = mtp.city "+
+				" inner join state as s on s.stateid = mtp.state "+
+				" where mtp.managetrainingpartnerid = '"+ name+"' ";
+		
+		List<CourseName> list = new AjaxRequest().returnList(sql);
+		String newList = null ;
+		if(list.size() > 0 || list != null){
+			System.out.println("data selected finally  " );
+			System.out.println(list);
+			Gson g =new Gson();
+			newList = g.toJson(list); 
+		}
+		out.write(newList);
+		out.flush();
+		
+		/*Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
@@ -74,7 +97,7 @@ public class EditMTP extends HttpServlet {
 			newList = g.toJson(list); 
 		}
 		out.write(newList);
-		out.flush();
+		out.flush();*/
 	}
 
 	/**

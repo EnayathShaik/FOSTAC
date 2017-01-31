@@ -197,7 +197,8 @@ public class LoginController {
 			session.setAttribute("loginUser2", personalInformationTrainer.getPersonalInformationTrainerId());
 			session.setAttribute("logId", personalInformationTrainer.getLoginDetails().getLoginId());
 			session.setAttribute("Id",personalInformationTrainer.getLoginDetails().getId());
-			List<PostVacancyTrainingCenter> postVacancyTrainingCenter=trainingPartnerService.getPostVacancyTrainingList();
+			
+			/*List<PostVacancyTrainingCenter> postVacancyTrainingCenter=trainingPartnerService.getPostVacancyTrainingList();
 			List<PostVacancyTrainingCenterBean> vacancyTrainingCenterBeans=new ArrayList<>();
 			for(PostVacancyTrainingCenter pvtc:postVacancyTrainingCenter){
 				PostVacancyTrainingCenterBean applicationStatusBean=trainingPartnerService.getApplicationStatusBean(String.valueOf(loginDetails.getId()),pvtc.getCourseName().getCoursenameid(),pvtc.getCourseType().getCourseTypeId());
@@ -210,10 +211,9 @@ public class LoginController {
 					vacancyTrainingCenterBeans.add(applicationStatusBean);
 				}
 			}
-			
-			
 			model.addAttribute("postVacancyTrainingCenter", new Gson().toJson(postVacancyTrainingCenter));
 			model.addAttribute("vacancyTrainingCenterBeans", new Gson().toJson(vacancyTrainingCenterBeans));
+			*/
 			session.setAttribute("traineeSteps", personalInformationTrainer.getSteps());
 			/*model.addAttribute("trainerState", stateid);
 			model.addAttribute("trainerDistrict",districtId );

@@ -18,7 +18,7 @@ import com.ir.model.Utility;
 public interface TrainingPartnerDao {
 
 	public List<PersonalInformationTrainingPartner> trainingCenterList();
-	public List<PostVacancyTrainingCenter> getPostVacancyTrainingList();
+	public List<PostVacancyTrainingCenter> getPostVacancyTrainingList(Integer userId);
 	public int saveVacancy(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean,Integer profileID, Integer userId);
 
 	public List<CourseType> courseTypeList();

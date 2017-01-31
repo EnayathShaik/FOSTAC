@@ -30,6 +30,7 @@ import com.ir.model.City;
 import com.ir.model.District;
 import com.ir.service.PageLoadService;
 import com.ir.service.impl.PageLoadServiceImpl;
+import com.zentect.ajax.AjaxRequest;
 
 /**
  * Servlet implementation class MyServlt
@@ -57,8 +58,14 @@ public class getCourseTrainingMode extends HttpServlet {
 		        String mode = "";
 				String courseNameId = (request.getQueryString());
 				System.out.println("passing name   :" + courseNameId);
-				
-				Configuration conf = new Configuration();
+				String sql = "select online from coursename where coursenameid ="+courseNameId;
+				List list = new AjaxRequest().returnList(sql);
+				if(list.size()>0){
+					mode = (String)list.get(0);	
+				}
+				out.write(mode);
+				out.flush();
+				/*Configuration conf = new Configuration();
 				conf.configure("/hibernate.cfg.xml");
 				SessionFactory sf = conf.buildSessionFactory();
 				Session session = sf.openSession();
@@ -69,7 +76,7 @@ public class getCourseTrainingMode extends HttpServlet {
 					mode = (String)list.get(0);	
 				}	
 				out.write(mode);
-				out.flush();
+				out.flush();*/
 		
 	}
 

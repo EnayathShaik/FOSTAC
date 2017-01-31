@@ -27,6 +27,7 @@ import com.ir.form.TrainingpartnerpaymentconfirmationForm;
 import com.ir.model.CourseEnrolledUser;
 import com.ir.model.CourseName;
 import com.ir.model.PersonalInformationTrainee;
+import com.ir.util.HibernateUtil;
 /**
  * Servlet implementation class DeleteState
  */
@@ -74,19 +75,21 @@ public class UpdateTraineeAssessmentResult extends HttpServlet {
 		System.out.println("courseenroledId "+id);
 		System.out.println("result==>"+status);
 		System.out.println("comment==>"+comment);
-		Configuration conf = new Configuration();
+		
+		
+		/*Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
+	*/	
+		SessionFactory sf = new HibernateUtil().getSessionFactory();
 		Session session = sf.openSession();
-		
 		CourseEnrolledUser courseEnrolledUser = (CourseEnrolledUser) session.load(CourseEnrolledUser.class, Integer.parseInt(id));
 		courseEnrolledUser.setResult(status);
 		courseEnrolledUser.setAssessorComment(comment);
 		session.update(courseEnrolledUser);
 		session.beginTransaction().commit();
 		session.close();
-
-		String newList = "Recors successfully updated !!!" ; 
+		String newList = "Records successfully updated !!!" ; 
 		out.write(newList);
 		out.flush();
 		

@@ -30,6 +30,7 @@ import com.ir.model.City;
 import com.ir.model.District;
 import com.ir.service.PageLoadService;
 import com.ir.service.impl.PageLoadServiceImpl;
+import com.ir.util.HibernateUtil;
 
 /**
  * Servlet implementation class MyServlt
@@ -57,14 +58,14 @@ public class CityFill extends HttpServlet {
 				String name = (request.getQueryString());
 				System.out.println("passing name   :" + name);
 				
-				Configuration conf = new Configuration();
+				/*Configuration conf = new Configuration();
 				conf.configure("/hibernate.cfg.xml");
-				SessionFactory sf = conf.buildSessionFactory();
+				SessionFactory sf = conf.buildSessionFactory();*/
+				SessionFactory sf = new HibernateUtil().getSessionFactory();
 				Session session = sf.openSession();
 				Query query = session.createQuery("from City where status='A' and districtid ='"+name+"'");
 				List<City> list = query.list();
 				System.out.println("after list load city");
-				
 				Gson g =new Gson();
 				String newList = g.toJson(list); 
 				out.write(newList);

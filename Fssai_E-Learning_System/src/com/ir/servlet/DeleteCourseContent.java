@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import com.ir.model.ManageCourseContent;
+import com.ir.util.HibernateUtil;
 /**
  * Servlet implementation class DeleteState
  */
@@ -38,9 +39,10 @@ public class DeleteCourseContent extends HttpServlet {
 		String  id  = name ;
 		String newList = null;
 	
-			Configuration conf = new Configuration();
+			/*Configuration conf = new Configuration();
 			conf.configure("/hibernate.cfg.xml");
-			SessionFactory sf = conf.buildSessionFactory();
+			SessionFactory sf = conf.buildSessionFactory();*/
+			SessionFactory sf = new HibernateUtil().getSessionFactory();
 			Session session = sf.openSession();
 			ManageCourseContent manageCourseContent = (ManageCourseContent) session.load(ManageCourseContent.class, Integer.parseInt(id));
 			session.delete(manageCourseContent);

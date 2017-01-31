@@ -25,6 +25,7 @@ import com.google.gson.reflect.TypeToken;
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.State;
+import com.zentect.ajax.AjaxRequest;
 /**
  * Servlet implementation class DeleteState
  */
@@ -83,8 +84,24 @@ public class TraineeCenterAssessmentCalender extends HttpServlet {
 		}catch(Exception e){
 			assTime = "%";	
 		}
+		String sql ="";
+		sql = "select B.coursetype,C.coursename,A.trainername,A.assessmentdate,A.assessmenttime,D.firstname || D.middlename || D.lastname,A.trainingcalendarid,A.assessor  from trainingcalendar A  " +
+				" inner join coursetype B on(A.coursetype=B.coursetypeid)  " +
+				"inner join coursename C on(A.coursename=C.coursenameid)"+
+				"inner join personalinformationtrainer D on(CAST(CAST (A.trainername AS NUMERIC(19,4)) AS INT)=D.personalinformationtrainerid)" +
+				" where  cast(B.coursetypeid as varchar(10)) like '"+courseType+"%'  and cast(C.coursenameid as varchar(10)) like  '"+courseName+"%' and (D.firstname || ' '|| D.middlename ||' '|| D.lastname)  like  '"+trainerName+"%'  and  cast(A.assessmentdate as varchar(10)) like  '"+assDate+"%'  and cast(assessmenttime as varchar(10)) like '"+assTime+"%'  " ;
 		
-		Configuration conf = new Configuration();
+		List list = new AjaxRequest().returnList(sql);
+		String newList = "";
+		if(list.size() > 0 || list != null){
+			System.out.println(list);
+			Gson g =new Gson();
+			newList = g.toJson(list); 
+		}
+		out.write(newList);
+		out.flush();	
+		
+		/*Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
@@ -107,7 +124,7 @@ public class TraineeCenterAssessmentCalender extends HttpServlet {
 			newList = g.toJson(list); 
 		}
 		out.write(newList);
-		out.flush();		
+		out.flush();	*/	
 	}
 
 	/**

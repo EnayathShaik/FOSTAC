@@ -110,8 +110,8 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 	}
 
 	@Override
-	public List<PostVacancyTrainingCenter> getPostVacancyTrainingList() {
-		return  trainingPartnerDAO.getPostVacancyTrainingList();
+	public List<PostVacancyTrainingCenter> getPostVacancyTrainingList(Integer userId) {
+		return  trainingPartnerDAO.getPostVacancyTrainingList(userId);
 	}
 
 	@Override

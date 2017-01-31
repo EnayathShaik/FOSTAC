@@ -124,7 +124,7 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 			model.addAttribute("id" , all[1]);
 			model.addAttribute("pwd" , all[0]);
 				JavaMail javaMail = new JavaMail();
-				javaMail.mailProperty("Thanks", registrationFormTrainingPartner.getTrainingPartnerPermanentEmail(), registrationFormTrainingPartner.getUserId());
+				javaMail.mailProperty("Thanks", registrationFormTrainingPartner.getTrainingPartnerPermanentEmail(), registrationFormTrainingPartner.getUserId(),all[0]);
 				
 			return "welcome";
 		}else{

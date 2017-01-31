@@ -22,6 +22,8 @@ import org.hibernate.cfg.Configuration;
 
 import com.google.gson.Gson;
 import com.ir.model.CourseName;
+import com.ir.util.HibernateUtil;
+import com.zentect.ajax.AjaxRequest;
 
 /**
  * Servlet implementation class DeleteState
@@ -48,10 +50,10 @@ public class EditMAA extends HttpServlet {
 		String name = (request.getQueryString());
 		System.out.println("kk");
 		String id = request.getQueryString();
-		Configuration conf = new Configuration();
+		/*Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
-		SessionFactory sf = conf.buildSessionFactory();
-		Session session = sf.openSession();
+		SessionFactory sf = conf.buildSessionFactory();*/
+		
 		String sql="select maa.manageassessmentagencyid  , ld.loginid ,maa.assessmentagencyname , maa.websiteurl , ld.status , "+
     			" maa.pan , maa.email , maa.headofficedataaddress1 , maa.headofficedataaddress2 , maa.pin ,s.statename , "+
     			" d.districtname  , c.cityname ,"+
@@ -62,8 +64,17 @@ public class EditMAA extends HttpServlet {
 				" inner join city as c on c.cityId = maa.city "+
 				" inner join state as s on s.stateid = maa.stateid "+
 				" where maa.manageassessmentagencyid = '"+ id+"' ";
-
-		Query query = session.createSQLQuery(sql);
+		List<CourseName> list = new AjaxRequest().returnList(sql);
+		String newList = null ;
+		if(list.size() > 0 || list != null){
+			System.out.println("data selected finally  " );
+			System.out.println(list);
+			Gson g =new Gson();
+			newList = g.toJson(list); 
+		}
+		out.write(newList);
+		out.flush();
+		/*Query query = session.createSQLQuery(sql);
 		List<CourseName> list = query.list();
 		System.out.println(list.size());
 		session.close();
@@ -75,7 +86,7 @@ public class EditMAA extends HttpServlet {
 			newList = g.toJson(list); 
 		}
 		out.write(newList);
-		out.flush();
+		out.flush();*/
 	}
 
 	/**

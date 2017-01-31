@@ -43,6 +43,12 @@ public class TraineeServiceImpl implements TraineeService {
 			CourseTrainee courseTrainee = traineeDAO.getCourseTrainingByCourseTypeID(typeId);
 			return courseTrainee;
 		}
+	
+	@Override
+	public String isTraineeEligible(int userID) {
+		String eligible = traineeDAO.isTraineeEligible(userID);
+		return eligible;
+	}
 	@Override
 	public CourseName getCourseName(int loginId) {
 		CourseName courseName = traineeDAO.getCourseName(loginId);

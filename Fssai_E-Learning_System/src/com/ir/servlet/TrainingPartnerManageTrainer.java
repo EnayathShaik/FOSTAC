@@ -25,7 +25,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import com.ir.model.City;
 import com.ir.model.CourseName;
+import com.ir.model.PostVacancyTrainingCenterBean;
 import com.ir.model.State;
+import com.ir.util.HibernateUtil;
+import com.zentect.ajax.AjaxRequest;
 /**
  * Servlet implementation class DeleteState
  */
@@ -50,6 +53,10 @@ public class TrainingPartnerManageTrainer extends HttpServlet {
         PrintWriter out = response.getWriter();
 		System.out.println("*******"+loginId);
 		String name = (request.getQueryString());
+		Integer id = 0;
+		if(name!=null && name.length() > 0 && !name.contains("&")){
+		     id = Integer.valueOf(name);
+		}
 		String [] n1 = name.split("&");
         System.out.println("Append Data = "+name);
   
@@ -74,35 +81,38 @@ public class TrainingPartnerManageTrainer extends HttpServlet {
 		}catch(Exception e){
 			trainerName = "%";	
 		}
-    
 		
 		
-		Configuration conf = new Configuration();
-		conf.configure("/hibernate.cfg.xml");
-		SessionFactory sf = conf.buildSessionFactory();
-		Session session = sf.openSession();
-		String newList=null;
-		System.out.println("district 0");
-		String sql ="";
-		sql = "select C.coursetype,D.coursename,E.firstname || ' '|| E.middlename ||' '|| E.lastname,B.vacancyenrolledid from postvacancytrainingcenter A" +
-				" inner join trainingcentervacancyenrolled B on(A.postvacancytrainingcenterid=B.postvacancyid)" +
-				" inner join coursetype C on(A.coursetype=C.coursetypeid) "+
-				" inner join coursename D on(A.coursename=D.coursenameid) "+
-				" inner join personalinformationtrainer E on (E.logindetails = CAST(CAST (B.loginid AS NUMERIC(19,4)) AS INT))" +
-				" where  cast(C.coursetypeid as varchar(10)) like '"+courseType+"%'  and cast(D.coursename as varchar(10)) like  '"+courseName+"%' and cast((E.firstname || ' '|| E.middlename ||' '|| E.lastname) as varchar(100)) like  '"+trainerName+"%'   " ;
-				
-		System.out.println(sql);
-		Query query = session.createSQLQuery(sql);
-		List list = query.list();
-		System.out.println(list.size());
-		session.close();
-		if(list.size() > 0 || list != null){
-			System.out.println(list);
-			Gson g =new Gson();
-			newList = g.toJson(list); 
+		if(id > 0){
+			SessionFactory sf = new HibernateUtil().getSessionFactory();
+			Session session = sf.openSession();
+			System.out.println("ID == "+id);
+			PostVacancyTrainingCenterBean centerBean = (PostVacancyTrainingCenterBean) session.load(PostVacancyTrainingCenterBean.class, id);
+			session.delete(centerBean);
+			session.beginTransaction().commit();
+			out.write("Successfully Removed");
+			out.flush();
+		}else{
+			String sql ="";
+			sql = "select C.coursetype,D.coursename,E.firstname || ' '|| E.middlename ||' '|| E.lastname,B.vacancyenrolledid from postvacancytrainingcenter A" +
+					" inner join trainingcentervacancyenrolled B on(A.postvacancytrainingcenterid=B.postvacancyid)" +
+					" inner join coursetype C on(A.coursetype=C.coursetypeid) "+
+					" inner join coursename D on(A.coursename=D.coursenameid) "+
+					" inner join personalinformationtrainer E on (E.logindetails = CAST(CAST (B.loginid AS NUMERIC(19,4)) AS INT))" +
+					" where  cast(C.coursetypeid as varchar(10)) like '"+courseType+"%'  and cast(D.coursename as varchar(10)) like  '"+courseName+"%' and cast((E.firstname || ' '|| E.middlename ||' '|| E.lastname) as varchar(100)) like  '"+trainerName+"%'   " ;
+		
+			List list = new AjaxRequest().returnList(sql);
+			String newList=null;
+			if(list.size() > 0 || list != null){
+				System.out.println(list);
+				Gson g =new Gson();
+				newList = g.toJson(list); 
+			}
+			out.write(newList);
+			out.flush();	
 		}
-		out.write(newList);
-		out.flush();		
+		
+		
 	}
 
 	/**

@@ -25,6 +25,7 @@ import com.google.gson.reflect.TypeToken;
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.State;
+import com.zentect.ajax.AjaxRequest;
 /**
  * Servlet implementation class DeleteState
  */
@@ -72,21 +73,38 @@ public class TraineeCenterViewTraineeLists extends HttpServlet {
         }
         
         System.out.println("String -- "+stringBuffer.toString());
-		
-		Configuration conf = new Configuration();
+        String sql ="";
+        sql = "select  E.coursetype,D.coursename,B.trainingdate,B.trainingtime,C.firstname || ' '|| C.middlename ||' '|| C.lastname as participantName,replace(D.classroom ||' '|| D.online,'Nil',''),D.status from courseenrolleduser  A"
+				+ " inner join trainingcalendar B on(A.trainingcalendarid= B.trainingcalendarid)"
+				+ " inner join coursename D on (D.coursenameid = B.coursename)"
+				+ " inner join coursetype E on (E.coursetypeid = B.coursetype)"
+				+ "  inner join personalinformationtrainee C on (C.logindetails = A.logindetails)  "
+				+ " inner join logindetails F on(F.id=C.logindetails)";
+        sql = sql + stringBuffer.toString();
+		List list = new AjaxRequest().returnList(sql);
+		String newList=null;
+		if(list.size() > 0 || list != null){
+			System.out.println(list);
+			Gson g =new Gson();
+			newList = g.toJson(list); 
+		}
+		out.write(newList);
+		out.flush();	
+        
+		/*Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
 		String newList=null;
 		System.out.println("district 0");
 		String sql ="";
-		/*sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,A.trainername," +
+		sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,A.trainername," +
 				//"concat(D.firstname,' ',D.middlename,' ',D.lastname),C.modeoftraining,'' from trainingcalendar A " +
 				"C.modeoftraining from trainingcalendar A " +
 				"inner join coursetype B on(A.coursetype=B.coursetypeid) " +
 				"inner join coursename C on(A.coursename=C.coursenameid) ";
 				//"inner join personalinformationtrainer D on(A.trainername::int=D.personalinformationtrainerid)";
-	*/	
+		
 		
 		sql = "select  E.coursetype,D.coursename,B.trainingdate,B.trainingtime,C.firstname || ' '|| C.middlename ||' '|| C.lastname as participantName,replace(D.classroom ||' '|| D.online,'Nil',''),D.status from courseenrolleduser  A"
 				+ " inner join trainingcalendar B on(A.trainingcalendarid= B.trainingcalendarid)"
@@ -97,7 +115,7 @@ public class TraineeCenterViewTraineeLists extends HttpServlet {
 		
 		
 		
-/*		sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,A.trainername," +
+		sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,A.trainername," +
 				"G.firstname||G.middlename||G.lastname," +
 				"F.paymentstatus from trainingcalendar A " +
 				"inner join coursetype B on(A.coursetype=B.coursetypeid)  " +
@@ -106,7 +124,7 @@ public class TraineeCenterViewTraineeLists extends HttpServlet {
 				"inner join logindetails E on(D.logindetails=E.ID) " +
 				"inner join courseenrolleduser F on(A.trainingcalendarid=F.trainingcalendarid) " +
 				"inner join personalinformationtrainee G on(CAST(CAST (F.logindetails AS NUMERIC(19,4)) AS INT)=G.logindetails) ";
-*/		
+		
 		sql = sql + stringBuffer.toString();
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
@@ -118,7 +136,7 @@ public class TraineeCenterViewTraineeLists extends HttpServlet {
 			newList = g.toJson(list); 
 		}
 		out.write(newList);
-		out.flush();		
+		out.flush();	*/	
 	}
 
 	/**

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+
+import com.ir.util.HibernateUtil;
 /**
  * Servlet implementation class DeleteState
  */
@@ -46,9 +48,10 @@ public class EditCourseContentDataMCC extends HttpServlet {
 		contentName = totalConnected[7].replaceAll("%20", " ").trim();
 		
 		
-		Configuration conf = new Configuration();
+		/*Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
-		SessionFactory sf = conf.buildSessionFactory();
+		SessionFactory sf = conf.buildSessionFactory();*/
+		SessionFactory sf = new HibernateUtil().getSessionFactory();
 		Session session = sf.openSession();
 		com.ir.model.ManageCourseContent   mcc= (com.ir.model.ManageCourseContent) session.load(com.ir.model.ManageCourseContent.class, Integer.parseInt(mccId));
 		mcc.setContentLocationInput(contentLocation);

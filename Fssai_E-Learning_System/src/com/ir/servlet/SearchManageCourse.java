@@ -21,6 +21,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import com.ir.model.CourseName;
+import com.zentect.ajax.AjaxRequest;
 /**
  * Servlet implementation class DeleteState
  */
@@ -81,8 +82,29 @@ public class SearchManageCourse extends HttpServlet {
 				}
 			
 		}
-			CourseName courseName1 = new CourseName();
-		Configuration conf = new Configuration();
+		CourseName courseName1 = new CourseName();
+		String sql = null;
+		if(!name.equalsIgnoreCase("ALL"))
+			sql ="select cn.coursetypeid,ct.coursetype , cn.coursename , cn.courseduration , cn.paidunpaid ,  cn.status ,cn.coursenameid , cn.online , cn.classroom"+
+						" from coursename as cn inner join coursetype as ct on ct.coursetypeid= cn.coursetypeid "+
+						" where cast(cn.coursetypeid as varchar(10)) like '"+courseType+"%' and upper(cn.coursename) like '"+ courseName.toUpperCase()+"%'"+
+						"  and paidunpaid like'"+freePaid+"%' and cn.courseduration like '"+duration+"%' and cn.status like '"+status+"%'  ";
+			else
+			sql ="select cn.coursetypeid,ct.coursetype , cn.coursename , cn.courseduration , cn.paidunpaid ,  cn.status ,cn.coursenameid , cn.online , cn.classroom"+
+							" from coursename as cn inner join coursetype as ct on ct.coursetypeid= cn.coursetypeid " ;
+			
+		List<CourseName> list = new AjaxRequest().returnList(sql);
+		String newList = null ;
+		if(list.size() > 0 || list != null){
+			System.out.println("data selected finally  " );
+			System.out.println(list);
+			Gson g =new Gson();
+			newList = g.toJson(list); 
+		}
+		out.write(newList);
+		out.flush();
+		
+		/*Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
@@ -110,7 +132,7 @@ public class SearchManageCourse extends HttpServlet {
 			newList = g.toJson(list); 
 		}
 		out.write(newList);
-		out.flush();
+		out.flush();*/
 		
 	}
 

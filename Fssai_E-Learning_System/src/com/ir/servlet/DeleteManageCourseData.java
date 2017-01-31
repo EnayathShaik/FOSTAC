@@ -22,6 +22,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import com.ir.model.CourseName;
 import com.ir.model.PersonalInformationTrainee;
+import com.ir.util.HibernateUtil;
 import com.itextpdf.text.log.SysoCounter;
 /**
  * Servlet implementation class DeleteState
@@ -56,9 +57,10 @@ public class DeleteManageCourseData extends HttpServlet {
 		if(status.equalsIgnoreCase("I")){
 			newList = "Record is already inactive !!!" ;
 		}else{
-			Configuration conf = new Configuration();
+			/*Configuration conf = new Configuration();
 			conf.configure("/hibernate.cfg.xml");
-			SessionFactory sf = conf.buildSessionFactory();
+			SessionFactory sf = conf.buildSessionFactory();*/
+			SessionFactory sf = new HibernateUtil().getSessionFactory();
 			Session session = sf.openSession();
 			CourseName   courseNameee=(CourseName) session.load(CourseName.class, Integer.parseInt(id));
 			courseNameee.setStatus("I");

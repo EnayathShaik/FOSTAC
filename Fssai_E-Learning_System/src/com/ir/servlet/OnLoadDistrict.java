@@ -71,7 +71,7 @@ public class OnLoadDistrict extends HttpServlet {
 				}
 				ResultSet rs = null;
 				PreparedStatement stmt = null;
-				String sql = "select s.statename , d.districtName , d.status , d.districtId from district as d inner join state as s on s.stateid = d.stateid" ;
+				String sql = "select s.statename1 , d.districtName , d.status , d.districtId from district as d inner join state as s on s.stateid = d.stateid" ;
 				List list = new ArrayList<>();
 				try {
 					stmt = conn.prepareStatement(sql);

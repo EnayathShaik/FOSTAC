@@ -31,6 +31,7 @@ import com.ir.model.District;
 import com.ir.model.TrainingPartner;
 import com.ir.service.PageLoadService;
 import com.ir.service.impl.PageLoadServiceImpl;
+import com.zentect.ajax.AjaxRequest;
 
 /**
  * Servlet implementation class MyServlt
@@ -54,20 +55,29 @@ public class GetCourseName extends HttpServlet {
 				System.out.println("onload training center post vacancy load course name list");
 				response.setContentType("text/html;charset=UTF-8");
 		        PrintWriter out = response.getWriter();
-		        Configuration conf = new Configuration();
+		        String sql = "select cn.coursenameid , cn.coursename from coursename as cn inner join coursetype as ct on ct.coursetypeid = cn.coursetypeid where cn.coursetypeid  = '"+ request.getQueryString() +"'" ;
+		        List list = new AjaxRequest().returnList(sql);
+		        String newList = "";
+		        if(list.size() > 0 || list != null){
+					System.out.println("data selected finally  " );
+					System.out.println(list);
+					Gson g =new Gson();
+					newList = g.toJson(list); 
+				}
+				out.write(newList);
+				out.flush();
+				
+		        /*Configuration conf = new Configuration();
 				conf.configure("/hibernate.cfg.xml");
 				SessionFactory sf = conf.buildSessionFactory();
 				Session session = sf.openSession();
 				String sql = "select cn.coursenameid , cn.coursename from coursename as cn inner join coursetype as ct on ct.coursetypeid = cn.coursetypeid where cn.coursetypeid  = '"+ request.getQueryString() +"'" ;
 				Query query = session.createSQLQuery(sql);
 				List list = query.list();
-				
-				
-				
 				Gson g =new Gson();
 				String newList = g.toJson(list); 
 				out.write(newList);
-				out.flush();
+				out.flush();*/
 		
 	}
 

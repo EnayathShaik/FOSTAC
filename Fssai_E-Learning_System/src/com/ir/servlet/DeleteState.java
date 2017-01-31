@@ -20,6 +20,7 @@ import org.hibernate.cfg.Configuration;
 
 import com.ir.model.CourseName;
 import com.ir.model.State;
+import com.ir.util.HibernateUtil;
 
 /**
  * Servlet implementation class DeleteState
@@ -62,9 +63,10 @@ public class DeleteState extends HttpServlet {
 		state = (totalConnected[2].split("="))[1].replaceAll("%20", " ");
 		System.out.println(Integer.parseInt(id) + "  "+ status + "   "+ state);
 		String newList = null;
-			Configuration conf = new Configuration();
+			/*Configuration conf = new Configuration();
 			conf.configure("/hibernate.cfg.xml");
-			SessionFactory sf = conf.buildSessionFactory();
+			SessionFactory sf = conf.buildSessionFactory();*/
+			SessionFactory sf = new HibernateUtil().getSessionFactory();
 			Session session = sf.openSession();
 			State   stateNameee=(State) session.load(State.class, Integer.parseInt(id));
 			stateNameee.setStatus(status);

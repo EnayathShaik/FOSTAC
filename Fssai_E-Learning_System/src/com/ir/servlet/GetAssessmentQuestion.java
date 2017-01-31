@@ -25,6 +25,7 @@ import com.google.gson.reflect.TypeToken;
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.State;
+import com.zentect.ajax.AjaxRequest;
 /**
  * Servlet implementation class DeleteState
  */
@@ -50,7 +51,23 @@ public class GetAssessmentQuestion extends HttpServlet {
         String id = (request.getQueryString());
 		System.out.println("passing id   :" + id);
 		
-		Configuration conf = new Configuration();
+		String sql ="";
+		//sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,A.trainername from trainingcalendar A inner join coursetype B on(A.coursetype=B.coursetypeid)inner join coursename C on(A.coursename=C.coursenameid)";
+		sql = "select A.assessmentquestionid,A.coursetype,A.coursename,A.questionnumber,A.questionhint," +
+				" A.questiontitle,A.noofoption,A.correctanswer,A.optionone,A.optiontwo,A.optionthree,A.optionfour, " +
+				" A.optionfive,A.optionsix from assessmentquestion A where A.assessmentquestionid = "+id;
+		String newList=null;
+		List list = new AjaxRequest().returnList(sql);
+		System.out.println(list.size());
+		if(list.size() > 0 || list != null){
+			System.out.println(list);
+			Gson g =new Gson();
+			newList = g.toJson(list); 
+		}
+		out.write(newList);
+		out.flush();
+		
+		/*Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
@@ -71,7 +88,7 @@ public class GetAssessmentQuestion extends HttpServlet {
 			newList = g.toJson(list); 
 		}
 		out.write(newList);
-		out.flush();		
+		out.flush();*/		
 	}
 
 	/**

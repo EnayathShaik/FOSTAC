@@ -25,6 +25,7 @@ import com.ir.model.LoginDetails;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainingPartner;
+import com.ir.util.HibernateUtil;
 /**
  * Servlet implementation class DeleteState
  */
@@ -51,9 +52,10 @@ public class ChangeAssessor1 extends HttpServlet {
 		System.out.println("passing name   :" + name);
 		
 		
-		Configuration conf = new Configuration();
+		/*Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
-		SessionFactory sf = conf.buildSessionFactory();
+		SessionFactory sf = conf.buildSessionFactory();*/
+		SessionFactory sf = new HibernateUtil().getSessionFactory();
 		Session session = sf.openSession();
 		
 		String newList = null;

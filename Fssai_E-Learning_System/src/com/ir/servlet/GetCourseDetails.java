@@ -21,6 +21,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import com.ir.model.CourseName;
+import com.zentect.ajax.AjaxRequest;
 /**
  * Servlet implementation class DeleteState
  */
@@ -65,8 +66,39 @@ public class GetCourseDetails extends HttpServlet {
 		trainingCenterDistrict = (totalConnected[5].split("="))[1];
 		if(trainingCenterDistrict.equals("0")){		trainingCenterDistrict = "%";	}
 		
-		
-		Configuration conf = new Configuration();
+		String sql ="select tc.trainingcalendarid , concat(pitp.trainingpartnerpermanentline1 , ' ' , pitp.trainingpartnerpermanentline2 , ' ' , s.statename , ' ' , d.districtname , ' ' , c.cityname) as address, "+
+				" concat(tc.trainingdate , ' / ' , tc.trainingtime) as schedule , "+
+				" concat(pitp.firstname , ' ' , pitp.middlename , ' ' , pitp.lastname ) ,concat( pitp.trainingpartnerpermanentmobile , ' / ' , pitp.trainingpartnerpermanentemail)  as contact, "+
+				" pitp.seatcapacitypersession ,(CAST(CAST (pitp.seatcapacitypersession AS NUMERIC(19,4)) AS INT) - ( select count(1) from courseenrolleduser where trainingcalendarid = tc.trainingcalendarid)) "+
+				" from trainingcalendar as tc "+
+				" inner join coursename as cn on cn.coursenameid = tc.coursename "+
+				" inner join coursetype as ct on ct.coursetypeid = tc.coursetype "+
+				" inner join managetrainingpartner as mtp on mtp.managetrainingpartnerid = tc.trainingpartner "+
+				" inner join personalinformationtrainingpartner as pitp on mtp.managetrainingpartnerid = pitp.trainingpartnername "+
+				" inner join state as s on s.stateid = pitp.trainingpartnerpermanentstate "+
+				" inner join city as c on c.cityid = pitp.trainingpartnerpermanentcity "+
+				" inner join district as d on d.districtid = pitp.trainingpartnerpermanentdistrict "+
+				" and tc.trainingcenter = pitp.personalinformationtrainingpartnerid "+
+				" where CAST(tc.coursename AS varchar(10)) like '"+courseName+"' "+
+				//--and CAST(tc.courseType AS varchar(10)) like '%' 
+				//" and cn.modeoftraining like '"+modeOfTraining+"' "+
+				" and CAST(tc.trainingpartner AS varchar(10)) like '"+trainingPatrtner+"'  "+
+				" and CAST(tc.trainingdate AS varchar(10)) like '"+trainingDate+"' "+
+				" and CAST(s.stateid AS varchar(10)) like '"+trainingCenterState+"' "+
+				" and CAST(d.districtid AS varchar(10)) like '"+trainingCenterDistrict+"' "+
+				"  and  (CAST(CAST (pitp.seatcapacitypersession AS NUMERIC(19,4)) AS INT) - ( select count(1) from courseenrolleduser where trainingcalendarid = tc.trainingcalendarid) > 0)";
+	
+		List list = new AjaxRequest().returnList(sql);
+		String newList = null ;
+		if(list.size() > 0 || list != null){
+			System.out.println("data selected finally  " );
+			System.out.println(list);
+			Gson g =new Gson();
+			newList = g.toJson(list); 
+		}
+		out.write(newList);
+		out.flush();
+		/*Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
@@ -106,7 +138,7 @@ public class GetCourseDetails extends HttpServlet {
 		}
 		out.write(newList);
 		out.flush();
-		
+		*/
 	}
 
 	/**

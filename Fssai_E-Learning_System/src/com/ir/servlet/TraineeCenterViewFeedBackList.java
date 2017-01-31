@@ -17,6 +17,7 @@ import org.hibernate.cfg.Configuration;
 
 import com.google.gson.Gson;
 import com.ir.model.PostVacancyTrainingCenterBean;
+import com.zentect.ajax.AjaxRequest;
 
 /**
  * Servlet implementation class DeleteState
@@ -57,7 +58,24 @@ public class TraineeCenterViewFeedBackList extends HttpServlet {
             	}
         	}
         }
-     	Configuration conf = new Configuration();
+        String sql ="";
+		sql = "select E.firstname || ' '|| E.middlename ||' '|| E.lastname, D.coursetype,C.coursename, B.feedback,A.feedbackrating  from feedbackdetail A" +
+				" inner join feedbackmaster B on(CAST(CAST (A.feedbackid AS NUMERIC(19,4)) AS INT) = B.feedbacktypeid)" +
+				" inner join coursename C on(CAST(CAST (A.courseid AS NUMERIC(19,4)) AS INT)=C.coursenameid) "+
+				" inner join coursetype D on(C.coursetypeid=D.coursetypeid) "+
+				" inner join personalinformationtrainee E on(CAST(CAST (A.userid AS NUMERIC(19,4)) AS INT)=E.logindetails)";
+		sql = sql+whereCondition.toString();
+				
+		String newList = "";
+        List list = new AjaxRequest().returnList(sql);
+        if(list.size() > 0 || list != null){
+    		System.out.println(list);
+    		Gson g =new Gson();
+    		newList = g.toJson(list); 
+    	}
+    	out.write(newList);
+    	out.flush();		
+     	/*Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
@@ -87,7 +105,7 @@ public class TraineeCenterViewFeedBackList extends HttpServlet {
 		
 		session.close();
 		
-		out.flush();		
+		out.flush();		*/
 	}
 
 	/**

@@ -980,4 +980,22 @@ public class TraineeDAOImpl implements TraineeDAO {
 		session.close();
 		return true;
 	}
+
+	@Override
+	public String isTraineeEligible(int userID) {
+		// TODO Auto-generated method stub
+				String eligible = "";
+				Session session = sessionFactory.openSession();
+				String sql = "select A.logindetails  from assessmentevaluationtrainee A"
+						+ " where A.totalscore >= (select AA.eligibility from assessmenteligibility AA where AA.coursenameid=A.coursenameid) and A.logindetails = " + userID;
+				Query query = session.createSQLQuery(sql);
+				List list = query.list();
+				System.out.println(list.size());
+				if(list.size() > 0){
+					eligible = "Y";
+					//eligible = (String) list.get(0);
+				}
+				session.close();
+				return eligible;
+	}
 }

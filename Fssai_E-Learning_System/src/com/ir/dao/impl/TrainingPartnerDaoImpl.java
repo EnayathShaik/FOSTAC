@@ -269,9 +269,24 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		return statusList;
 	}
 	@Override
-	public List<PostVacancyTrainingCenter> getPostVacancyTrainingList(){
+	public List<PostVacancyTrainingCenter> getPostVacancyTrainingList(Integer userID){
 		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("from PostVacancyTrainingCenter");
+		double trainerExp = 0;
+		String sql = "select (CAST(AA.expinfoodsafefytimeyear AS VARCHAR(10) ) ||'.'|| CAST(AA.expinfoodsafefytimemonth AS VARCHAR(10) )) from personalinformationtrainer AA where AA.logindetails ='"+userID+"'";
+		System.out.println("sql "+sql);
+		Query query1 = session.createSQLQuery(sql);
+		List<String> status = query1.list();
+		try{
+			if(status.size()>0){
+				System.out.println("status.get(0).toString() == "+status.get(0).toString());
+				trainerExp = Float.parseFloat(status.get(0).toString());
+			}	
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println("e "+e.getMessage());
+		}
+		
+		Query query = session.createQuery("from PostVacancyTrainingCenter A where A.requiredExp <= "+trainerExp);
 		List<PostVacancyTrainingCenter> postVacancyTrainingCenter = query.list();
 		session.close();
 		return postVacancyTrainingCenter;

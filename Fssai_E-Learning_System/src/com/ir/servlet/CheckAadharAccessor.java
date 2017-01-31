@@ -24,6 +24,7 @@ import com.ir.constantes.DBUtil;
 import com.ir.model.City;
 import com.ir.service.PageLoadService;
 import com.ir.service.impl.PageLoadServiceImpl;
+import com.zentect.ajax.AjaxRequest;
 
 /**
  * Servlet implementation class MyServlt
@@ -45,12 +46,25 @@ public class CheckAadharAccessor extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-				response.setContentType("text/html;charset=UTF-8");
-		        PrintWriter out = response.getWriter();
-				String name = (request.getQueryString());
-				System.out.println("passing name   :" + name);
+				try{
+					response.setContentType("text/html;charset=UTF-8");
+			        PrintWriter out = response.getWriter();
+					String name = (request.getQueryString());
+					System.out.println("passing name   :" + name);
+					String sql="select * from personalinformationassessor where aadharnumber = '" + name + "'";
+					List list = new AjaxRequest().returnList(sql);
+					if(list.size() > 0){
+						System.out.println("not available to use");
+						out.println("Already");
+					}else{
+						System.out.println("not in database");
+					}
+				}catch(Exception e){
+					e.printStackTrace();
+				}
 				
-				try {
+				
+				/*try {
 					Class.forName("org.postgresql.Driver");
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
@@ -93,7 +107,7 @@ public class CheckAadharAccessor extends HttpServlet {
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}*/
 	
 	}
 

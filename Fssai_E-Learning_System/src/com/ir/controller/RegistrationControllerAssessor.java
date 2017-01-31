@@ -108,7 +108,7 @@ public class RegistrationControllerAssessor implements Serializable{
 			model.addAttribute("pwd" , all[0]);
 			//return "registrationFormTrainee";
 				JavaMail javaMail = new JavaMail();
-				javaMail.mailProperty("Thanks", registrationFormAssessor.getAssessorPermanentEmail(), registrationFormAssessor.getUserId());
+				javaMail.mailProperty("Thanks", registrationFormAssessor.getAssessorPermanentEmail(), registrationFormAssessor.getUserId(),all[0]);
 				
 			return "welcome";
 		}else{

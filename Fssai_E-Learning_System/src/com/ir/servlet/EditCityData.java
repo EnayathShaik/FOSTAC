@@ -23,6 +23,7 @@ import com.google.gson.reflect.TypeToken;
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.PersonalInformationTrainee;
+import com.ir.util.HibernateUtil;
 /**
  * Servlet implementation class DeleteState
  */
@@ -66,13 +67,12 @@ public class EditCityData extends HttpServlet {
 		cityName = (totalConnected[2].split("="))[1];
 		String districtId = (totalConnected[3].split("="))[1];
 		System.out.println("checkkk data==>"+cityName+" " +cityId+" "+status + " districtId "+districtId);
-		Configuration conf = new Configuration();
+		/*Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
-		SessionFactory sf = conf.buildSessionFactory();
+		SessionFactory sf = conf.buildSessionFactory();*/
+		SessionFactory sf = new HibernateUtil().getSessionFactory();
 		Session session = sf.openSession();
 		City   cityNameee=(City) session.load(City.class, cityId);
-		
-		
 		cityNameee.setStatus(status);
 		cityNameee.setCityName(cityName);
 		session.update(cityNameee);

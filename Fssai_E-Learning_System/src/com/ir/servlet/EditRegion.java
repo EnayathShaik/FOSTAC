@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
+import org.hibernate.HibernateError;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -23,6 +24,7 @@ import com.google.gson.reflect.TypeToken;
 import com.ir.model.Region;
 import com.ir.model.CourseName;
 import com.ir.model.PersonalInformationTrainee;
+import com.ir.util.HibernateUtil;
 /**
  * Servlet implementation class DeleteState
  */
@@ -69,9 +71,11 @@ public class EditRegion extends HttpServlet {
 		districtId =  Integer.parseInt((totalConnected[4].split("="))[1]);
 		cityId =  Integer.parseInt((totalConnected[5].split("="))[1]);
 		System.out.println("checkkk data==>"+regionId+regionName+stateId+districtId+cityId);
-		Configuration conf = new Configuration();
+		
+		/*Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
-		SessionFactory sf = conf.buildSessionFactory();
+		SessionFactory sf = conf.buildSessionFactory();*/
+		SessionFactory sf = new HibernateUtil().getSessionFactory();
 		Session session = sf.openSession();
 		System.out.println("status=>"+status);
 		if(status.equals("A")){

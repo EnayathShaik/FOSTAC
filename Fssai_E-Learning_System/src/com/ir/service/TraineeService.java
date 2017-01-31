@@ -23,6 +23,7 @@ public interface TraineeService {
 	public List<CourseName> courseNameList();
 	public List<CourseName> courseNameListByType(int courseType);
 	public CourseTrainee getCourseTrainingByCourseTypeID(int typeId);
+	public String isTraineeEligible(int userID);
 	public List<ManageTrainingPartner> trainingPartnerList();
 	public List<State> trainingCenterStateList();
 	public String updateTrainee(RegistrationFormTrainee registrationFormTrainee , Integer ss);
