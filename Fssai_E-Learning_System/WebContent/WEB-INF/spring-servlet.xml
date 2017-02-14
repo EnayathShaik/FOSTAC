@@ -242,4 +242,9 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 	<bean id="assessmentEvaluationTrainee" class="com.ir.model.trainee.TraineeAssessmentEvaluation"  scope="prototype"/>
 	<bean id="assessmentEvaluationTrainer" class="com.ir.model.trainer.TrainerAssessmentEvaluation"  scope="prototype"/>
 	
+	<bean id="generateID" class="com.ir.util.GenerateUniqueID">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+</bean>
+	
+	
 </beans>

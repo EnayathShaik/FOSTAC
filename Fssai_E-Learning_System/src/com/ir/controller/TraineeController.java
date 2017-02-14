@@ -51,6 +51,7 @@ import com.ir.model.Utility;
 import com.ir.service.AssessmentService;
 import com.ir.service.PageLoadService;
 import com.ir.service.TraineeService;
+import com.ir.util.GenerateUniqueID;
 import com.ir.util.JavaMail;
 import com.ir.util.Profiles;
 
@@ -553,6 +554,9 @@ public class TraineeController {
 					userId = (Integer) session.getAttribute("userId");
 					int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
 					traineeService.updateSteps(tableID, profileID, 0);
+					String getId = GenerateUniqueID.getNextCombinationId("TCR");
+					System.out.println("getId "+getId);
+					
 					//Close Course
 					traineeService.closeCourse(userId, profileID, "Y");
 					session.setAttribute("traineeSteps", 0);
