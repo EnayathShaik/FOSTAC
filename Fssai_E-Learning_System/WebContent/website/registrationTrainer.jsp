@@ -753,6 +753,22 @@ return true;
 							<cf:input path="DOB" type="text" id="dateP" readonly="true"
 								class="form-control" placeholder="DOB" />
 						</div>
+						
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.Caste" /></strong></li>
+										<li class="style-li error-red"><label id="casteError"
+											class="error visibility">* select your Caste </label> <cf:errors
+												path="caste" cssClass="error" /></li>
+									</ul>
+								</div>
+									<cf:select path="caste" class="form-control">
+									<cf:option value="0" label="Select Caste" />
+									<cf:options items="${casteList}"  />
+								</cf:select>
+							</div>
 
 						<div class="form-group">
 							<div>

@@ -1,6 +1,7 @@
 package com.ir.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.model.City;
@@ -33,4 +34,6 @@ public interface PageLoadDao {
 	public List<ManageCourseContent> getManageCourseContentList(int coursetypeid);
 	public List<IntStringBean> getTrainingPartnerList(int courseTypeId);
 	public List<Object[]> loadTrainingDetails(Utility utility);
+	public  List<String> loadCaste(); 
+	
 }

@@ -2,6 +2,7 @@ package com.ir.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.model.City;
@@ -19,6 +20,7 @@ import com.ir.model.Utility;
 public interface PageLoadService {
 	
 	public List<State> loadState();
+	public  List<String> loadCaste();
 	public List<City> loadCity(int stat);
 	public List<Title> loadTitle();
 	public List<KindOfBusiness> loadKindOfBusiness();
@@ -35,4 +37,5 @@ public interface PageLoadService {
 	public List<ManageCourseContent> getManageCourseContentList(int i);
 	public List<IntStringBean> getTrainingPartnerList(int courseTypeId);
 	public List<Object[]> loadTrainingDetails(Utility utility);
+	 
 }

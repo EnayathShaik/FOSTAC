@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -71,6 +72,13 @@ public class RegistrationControllerTrainer implements Serializable{
 		List<State> stateList = pageLoadServiceTrainer.loadState();
 		System.out.println("state list   :   "+ stateList);
 		return stateList;
+	}
+	
+	@ModelAttribute("casteList")
+	public List<String> populateCaste() {
+		List<String> casteList = pageLoadServiceTrainer.loadCaste();
+		System.out.println("casteList    :   "+ casteList);
+		return casteList;
 	}
 	/*@ModelAttribute("districtList")
 	public List<District> districtList() {

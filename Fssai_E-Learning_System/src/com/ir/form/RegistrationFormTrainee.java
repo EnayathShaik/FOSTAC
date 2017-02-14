@@ -87,6 +87,16 @@ public class RegistrationFormTrainee {
 	@NotNull
 	private int correspondenceDistrict;
 	
+	public String getCaste() {
+		return caste;
+	}
+
+	public void setCaste(String caste) {
+		this.caste = caste;
+	}
+
+	private String caste;
+	
 //	@NotNull
 	private int bussDistrict;
 	/**Constructor */

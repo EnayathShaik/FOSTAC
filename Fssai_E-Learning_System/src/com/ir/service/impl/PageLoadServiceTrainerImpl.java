@@ -67,5 +67,11 @@ public class PageLoadServiceTrainerImpl implements PageLoadServiceTrainer {
 		List<CourseName> specialCourseList= pageLoadDaoTrainer.specialCourseList();
 		return specialCourseList;
 	}*/
+	
+	@Override
+	public List<String> loadCaste() {
+		List<String> listCaste = pageLoadDaoTrainer.loadCaste();
+		return listCaste;
+	}
 
 }

@@ -2,6 +2,7 @@ package com.ir.service.impl;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -131,5 +132,14 @@ public class PageLoadServiceImpl implements PageLoadService {
 	public List<Object[]> loadTrainingDetails(Utility utility) {
 		return  pageLoadDao.loadTrainingDetails(utility);
 	}
+	
+	//	public  Map<String, String> casteMap()
+	
+	@Override
+	public  List<String> loadCaste() {
+		System.out.println("inside cast map");
+		return  pageLoadDao.loadCaste();
+	}
+	
 
 }

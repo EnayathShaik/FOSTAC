@@ -26,7 +26,14 @@ public class PersonalInformationTrainer implements Serializable {
 	
 	@Transient
 	private boolean checkPermanent;
+	private String caste;
 	
+	public String getCaste() {
+		return caste;
+	}
+	public void setCaste(String caste) {
+		this.caste = caste;
+	}
 	public boolean isCheckPermanent() {
 		return checkPermanent;
 	}

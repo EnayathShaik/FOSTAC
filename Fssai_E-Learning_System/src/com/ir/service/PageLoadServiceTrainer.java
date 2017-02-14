@@ -1,6 +1,7 @@
 package com.ir.service;
 
 import java.util.List;
+
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.District;
@@ -14,6 +15,7 @@ public interface PageLoadServiceTrainer {
 	public List<Title> loadTitle();
 	//public List<District> loadDistrict();
 	public List<CourseName> basicCourseName();
+	public  List<String> loadCaste();
 	//public List<CourseName> advanceCourseList();
 	//public List<CourseName> specialCourseList();
 }

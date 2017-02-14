@@ -1,5 +1,6 @@
 package com.ir.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -9,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+
 import com.ir.dao.PageLoadDaoTrainer;
 import com.ir.model.CourseName;
 import com.ir.model.State;
@@ -116,6 +118,17 @@ public class PageLoadDaoTrainerImpl implements PageLoadDaoTrainer {
 	}
 
 */
+	
+	@Override
+	public List<String> loadCaste() {
+		System.out.println("Page Load DAOImpl process start in Caste");
+		List<String> listCaste = new ArrayList<String>();
+		listCaste.add("ST");
+		listCaste.add("SC");
+		listCaste.add("OBC");
+		return listCaste;
+	}
+
 
 
 }

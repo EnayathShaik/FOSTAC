@@ -31,6 +31,16 @@ public class PersonalInformationTrainee {
 	
 	 private String checkCompany;
 	 private String checkPermanent;
+	 public String getCaste() {
+		return caste;
+	}
+
+	public void setCaste(String caste) {
+		this.caste = caste;
+	}
+
+	private String caste;
+	 
 	 
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="loginDetails")
 	private LoginDetails loginDetails;

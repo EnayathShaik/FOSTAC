@@ -125,6 +125,14 @@ public class RegistrationController {
 		return titleList;
 	}
 	
+	
+	@ModelAttribute("casteList")
+	public List<String> populateCaste() {
+		List<String> casteList = pageLoadService.loadCaste();
+		System.out.println("casteList    :   "+ casteList);
+		return casteList;
+	}
+	
 	/*@ModelAttribute("courseNameList")
 	public List<CourseName> courseNameList() {
 		List<CourseName> courseNameList = pageLoadService.loadCourseName();

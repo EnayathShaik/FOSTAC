@@ -256,6 +256,7 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 		PersonalInformationTrainee personalInformationTrainee = new PersonalInformationTrainee();
 		personalInformationTrainee.setSteps(0);
 		personalInformationTrainee.setTitle(tt);
+		personalInformationTrainee.setCaste(registrationFormTrainee.getCaste());
 		personalInformationTrainee.setAadharNumber(registrationFormTrainee.getAadharNumber().trim());
 		personalInformationTrainee.setFirstName(registrationFormTrainee.getFirstName().trim());
 		personalInformationTrainee.setLastName(registrationFormTrainee.getLastName().trim());

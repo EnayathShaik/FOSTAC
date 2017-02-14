@@ -1,7 +1,10 @@
 package com.ir.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -251,5 +254,28 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		session.close();
 		return trainingCalendarList;
 	}
+	
+
+	  public  Map<String, String> casteMap() {
+		  System.out.println("inside cast mappppp");
+	        Map<String, String> auserTypeMap = new HashMap<String, String>();
+	        auserTypeMap.put("ST", "ST");
+	        auserTypeMap.put("SC", "SC");
+	        auserTypeMap.put("OBC", "OBC");
+	        return Collections.unmodifiableMap(auserTypeMap);
+	    }
+	  
+	  
+		@Override
+		public List<String> loadCaste() {
+			System.out.println("Page Load DAOImpl process start in Caste");
+			List<String> listCaste = new ArrayList<String>();
+			listCaste.add("ST");
+			listCaste.add("SC");
+			listCaste.add("OBC");
+			return listCaste;
+		}
+	
+	
 
 }

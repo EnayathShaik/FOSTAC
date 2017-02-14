@@ -141,6 +141,7 @@ private Title title;
 				personalInformationTrainer.setLastName(registrationFormTrainer.getLastName());
 				personalInformationTrainer.setMiddleName(registrationFormTrainer.getMiddleName());
 				personalInformationTrainer.setDOB(registrationFormTrainer.getDOB());
+				personalInformationTrainer.setCaste(registrationFormTrainer.getCaste());
 				personalInformationTrainer.setGender(registrationFormTrainer.getGender());
 				personalInformationTrainer.setTrainingCenterCorrespondenceLine1(registrationFormTrainer.getTrainingCenterCorrespondenceLine1());
 				personalInformationTrainer.setTrainingCenterCorrespondenceLine2(registrationFormTrainer.getTrainingCenterCorrespondenceLine2());

@@ -9,6 +9,7 @@ import com.ir.model.Title;
 
 public interface PageLoadDaoTrainer {
 	public List<State> loadState();
+	public List<String> loadCaste();
 	//public List<City> loadCity();
 	public List<Title> loadTitle();
 	//public List<District> District();
