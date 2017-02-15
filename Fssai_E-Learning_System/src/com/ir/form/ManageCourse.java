@@ -7,6 +7,8 @@ public class ManageCourse {
 	private String online;
 	private String classroom;
 	private String modeOfTraining;
+	private String courseCode;
+	private int seqNo;
 	
 	public String getOnline() {
 		return online;
@@ -73,4 +75,17 @@ public class ManageCourse {
 	public void setModeOfTraining(String modeOfTraining) {
 		this.modeOfTraining = modeOfTraining;
 	}
+	public String getCourseCode() {
+		return courseCode;
+	}
+	public void setCourseCode(String courseCode) {
+		this.courseCode = courseCode;
+	}
+	public int getSeqNo() {
+		return seqNo;
+	}
+	public void setSeqNo(int seqNo) {
+		this.seqNo = seqNo;
+	}
+	
 }

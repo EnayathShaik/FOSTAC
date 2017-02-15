@@ -1,15 +1,20 @@
 package com.ir.dao.impl;
 
+
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,7 +71,7 @@ import com.ir.util.SendContectMail;
 import com.ir.util.SendMail;
 import com.zentech.spring.dao.MasterDAOImpl;
 
-
+import org.apache.commons.lang.StringUtils;
 @Repository
 public class AdminDAOImpl implements AdminDAO {
 
@@ -281,9 +286,20 @@ public class AdminDAOImpl implements AdminDAO {
 	public String manageCourse(ManageCourse manageCourse) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
+		//Get Next Seq
 		
-		CourseType ct = getCourseType(manageCourse.getCourseType());
+		String sql = "select max(seqNo) + 1 from coursename";
+		int maxId = 0 ;
+		Query maxIDList = session.createSQLQuery(sql);
+		List list = maxIDList.list();
+		System.out.println(list.size());
+		if(list.size() > 0){
+			maxId = (int) list.get(0);
+			//eligible = (String) list.get(0);
+		}
 		
+		CourseType ct = (CourseType) session.load(CourseType.class, manageCourse.getCourseType());
+		String coursetype = ct.getCourseType();
 		CourseName courseName= new CourseName();
 		courseName.setCourseduration(manageCourse.getDuration());
 		courseName.setCoursename(manageCourse.getCourseName());
@@ -291,6 +307,17 @@ public class AdminDAOImpl implements AdminDAO {
 		courseName.setStatus(manageCourse.getStatus());
 		courseName.setPaidunpaid(manageCourse.getFreePaid());
 		courseName.setModeOfTraining(manageCourse.getModeOfTraining());
+		if(manageCourse != null && manageCourse.getCourseName() != null && manageCourse.getCourseName().length() > 1
+				&& coursetype != null && coursetype.length() > 1){
+			courseName.setCourseCode(ct.getCourseType().substring(0, 1).toUpperCase()+ manageCourse.getCourseName().substring(0, 2).toUpperCase()+StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
+			
+			courseName.setSeqNo(maxId);
+		}
+		
+		
+		
+		
+		
 		if(manageCourse.getOnline()==null||manageCourse.getOnline().equals("false")){
 			courseName.setOnline("Nil");
 		}else{

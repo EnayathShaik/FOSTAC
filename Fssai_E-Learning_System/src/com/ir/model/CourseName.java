@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,10 +34,12 @@ public class CourseName implements Serializable{
 	private int updatedby;
 	private String paidunpaid;
 	private Date createddate;
-	
+	private String courseCode;
 	private String online;
 	private String classroom;
 	private String modeOfTraining;
+	@Column(columnDefinition="int default 0")
+	private int seqNo;
 	public int getCoursenameid() {
 		return coursenameid;
 	}
@@ -125,6 +128,18 @@ public class CourseName implements Serializable{
 	 */
 	public void setCourseTypeS(CourseType courseTypeS) {
 		this.courseTypeS = courseTypeS;
+	}
+	public String getCourseCode() {
+		return courseCode;
+	}
+	public void setCourseCode(String courseCode) {
+		this.courseCode = courseCode;
+	}
+	public int getSeqNo() {
+		return seqNo;
+	}
+	public void setSeqNo(int seqNo) {
+		this.seqNo = seqNo;
 	}
 	
 }
