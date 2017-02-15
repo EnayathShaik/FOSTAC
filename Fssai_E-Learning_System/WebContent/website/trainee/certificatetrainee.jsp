@@ -4,7 +4,7 @@
     <title></title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript">
-        $("#btnPrint").live("click", function() {
+        $("#btnPrint").live("click", function () {
             var divContents = $("#dvContainer").html();
             var printWindow = window.open('', '', 'height=400,width=800');
             /* printWindow.document.write('<html><head><title>DIV Contents</title>'); */
@@ -14,7 +14,6 @@
             printWindow.document.close();
             printWindow.print();
         });
-
     </script>
 </head>
 
@@ -45,79 +44,42 @@
                                 <!-- timeline  -->
                                 <div class="container-fluid">
                                     <div class="row">
+                                        <!-- html code to add from here -->
                                         <div class="col-xs-12">
-                                            <div class="page-header" style="border-bottom: 1px solid transparent">
-                                                <h1 id="timeline">Your Certificate</h1>
-                                                <div id="dvContainer">
-                                                    <table align="left" width="800" border="0" style="background:url(${pageContext.request.contextPath}/website/img/certificate-bg.jpg) no-repeat; height:461px; border:1px solid #CCC;">
-                                                        <tr>
-                                                            <td width="25%">
-                                                                <table align="center" width="100%" border="0">
-                                                                    <tr>
-                                                                        <td class="heading">FOOD HYGIENE RATINGS</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <table border="0" align="center">
-                                                                                <tr>
-                                                                                    <td><img src="${pageContext.request.contextPath}/website/img/yellow-star.png" width="25" height="24" alt="" /></td>
-                                                                                    <td><img src="${pageContext.request.contextPath}/website/img/yellow-star.png" width="25" height="24" alt="" /></td>
-                                                                                    <td><img src="${pageContext.request.contextPath}/website/img/yellow-star.png" width="25" height="24" alt="" /></td>
-                                                                                    <td><img src="${pageContext.request.contextPath}/website/img/gray-star.png" width="25" height="24" alt="" /></td>
-                                                                                    <td><img src="${pageContext.request.contextPath}/website/img/gray-star.png" width="25" height="24" alt="" /></td>
-                                                                                </tr>
-                                                                            </table>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                            <td width="60%" valign="top">
-                                                                <table width="100%" border="0" style="margin-top: 71px;">
-                                                                    <tr>
-                                                                        <td align="center"><img src="${pageContext.request.contextPath}/website/img/certificate-logo.png" /></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td valign="top" align="center">
-                                                                            <h2 class="sub-heading">BASIC FOOD SAFETY CERTIFICATION</h2> <img src="${pageContext.request.contextPath}/website/img/top-bar.png" width="360" height="8" alt="" /></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <p class="certi-cate">Mr. ${loginUser.firstName }</p>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <p class="certi-cate"></p>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <table width="100%" border="0" align="center">
-                                                                                <tr>
-                                                                                    <td valign="bottom"><img style="padding-left:35px;" src="${pageContext.request.contextPath}/website/img/certificate-fostac-logo.png" alt="" /></td>
-                                                                                    <td><img src="${pageContext.request.contextPath}/website/img/foodsafety-logo.png" alt="" /></td>
-                                                                                    <td><img src="${pageContext.request.contextPath}/website/img/fssai.png" alt="" /></td>
-                                                                                </tr>
-                                                                            </table>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+                                            <div class="col-xs-12"><img src="website/img/certificate.jpg" class="img-responsive"></div>
+                                            <div class="col-xs-12 this-certify">
+                                                <h3 class="text-center th-pos">This is to certify that</h3>
+                                                <p class="text-center for-p"><span><strong>Mr. Vijay Sharma</strong></span></p>
+                                                <hr class="nam-hr">
+                                                <div class="di-msg">
+                                                    <p>has successfully completed the required competency to be appointed as</p>
+                                                    <p>Trainer for Food Safety Supervisor Training, the training was held on <span class="on-dat">12/02/2016</span><span><hr class="on-hr"></span></p>
+                                                    <p>at <span class="add-pos">Fssai Bhavan, New Delhi</span><span><hr class="at-hr"></span><span class="full-stop">.</span></p>
                                                 </div>
+                                            </div>
+                                            <div class="col-xs-12 sign-pos">
+                                                <div class="col-md-6 col-xs-12">
+                                                    <hr class="left-sign">
+                                                    <p class="left-p">Training Partner</p>
+                                                </div>
+                                                <div class="col-md-6 col-xs-12">
+                                                    <hr class="right-sign">
+                                                    <p class="right-p text-center">Training Coordinator
+                                                        <br><span>FSSAI</span></p>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 cert-btm">
+                                                <p class="btm-p">Certificate Number : BCA001</p>
+                                                <p class="btm-p">Date Issued : 10/2/2017</p>
+                                                <p class="btm-p">Refresher Due : 2 years from date of issue.</p>
+                                            </div>
+                                            <div class="row">
                                                 <div class="col-md-4 col-xs-12"></div>
-                                                <!-- <div class="col-md-4 col-xs-12"><br><br><a href="training-timeline.fssai" style="width:100%;" class="login-btn btn">Next</a></div> -->
-                                                </br>
-
-                                                <div class="col-md-4 col-xs-12" align="center">
-                                                    <input type="button" value="Download Certificate" class="btn login-btn" id="btnPrint" style="margin-top: 10px;" />
-                                                </div>
+                                                <div class="col-md-4 col-xs-12" style="position: relative; top: -25em;"> <a href="#" class="btn login-btn" style="width: 100%;">Download</a> </div>
                                                 <div class="col-md-4 col-xs-12"></div>
                                             </div>
-
-                                            <!-- <div align-items:center> <input type="button" value="Download Certificate" id="btnPrint" />  </div> -->
                                         </div>
+                                        <!-- html code ends here -->
                                     </div>
                                 </div>
                             </div>
