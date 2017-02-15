@@ -123,6 +123,7 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 				<value>com.ir.model.FeedbackForm</value>
 				<value>com.ir.model.ManageAssessmentAgency</value>
 				<value>com.ir.model.State</value>
+				<value>com.zentech.spring.hb.model.NState</value>
 				<value>com.ir.model.District</value>
 				<value>com.ir.model.City</value>
 				<value>com.ir.model.Title</value>
@@ -184,6 +185,14 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 		</property>
 		<property name="defaultErrorView" value="generic_error"/>
 	</bean> -->
+	<!-- <bean id="masterService" class="com.zentech.spring.service.MasterServiceImpl">
+	<property name="masterDAO" ref="masterDAO"></property>
+	</bean>
+	<bean id="masterDAO" class="com.zentech.spring.dao.MasterDAOImpl">
+	<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" ></property>
+	</bean> -->
+	
+	
 	
 	<bean id="changePasswordUtility" class="com.ir.util.ChangePasswordUtility"  scope="prototype"/>
 	<bean id="adminService" class="com.ir.service.impl.AdminServiceImpl" />
@@ -248,3 +257,4 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 	
 	
 </beans>
+

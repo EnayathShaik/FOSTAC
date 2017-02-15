@@ -43,6 +43,23 @@ function pan_validate(id, pan) {
 
 
 $(document).ready(function() {
+	var table = $(document).ready(function () {
+        $("#stateMasterData").DataTable({
+            "bAutoWidth": false
+            , "bProcessing": true
+            , "iDisplayLength": 5
+            , "bPaginate": true
+            , "sPaginationType": "full_numbers"
+            , "bJQueryUI": true
+            , "dom": 'Bfrtip'
+            , "buttons": [
+                'csv',
+
+            ],
+			"colReorder" : true,
+        });
+    });
+	
     $("#btnExport").click(function(e) {
         //getting values of current time for generating the file name
         var dt = new Date();

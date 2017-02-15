@@ -129,8 +129,12 @@ public class LoginController {
 			session.invalidate();
 			return "login";
 		}
-		
-		LoginDetails loginDetails = loginService.login(loginForm);
+		LoginDetails loginDetails = null;
+		try{
+			loginDetails = loginService.login(loginForm);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		if(loginDetails == null){
 			model.addAttribute("error" , "Oops , You are not authorized !!!");
 			return "login";

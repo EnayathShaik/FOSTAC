@@ -570,6 +570,12 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/stateMaster.jsp" />
 	</definition>
+	
+	<definition name="master_state" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/users/superadmin/stateMaster.jsp" />
+	</definition>
+	
 	<definition name="districtMaster" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/districtMaster.jsp" />

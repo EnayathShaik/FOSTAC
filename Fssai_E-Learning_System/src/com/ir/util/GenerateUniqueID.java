@@ -57,4 +57,9 @@ public class GenerateUniqueID {
 		 String output = myFormatter.format(getNextId);
 		 return output;
 	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println(getNextCombinationId("TE"));
+	}
 }

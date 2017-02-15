@@ -18,6 +18,11 @@
     <link href="website/afterLogin/css/swipebox.css" rel="stylesheet" />
     <link href="website/css/visibility.css" rel="stylesheet" />
     
+    <!-- <link href="css/custom.css" rel="stylesheet" /> -->
+	<link href="website/afterLogin/css/demo_table.css" rel="stylesheet" type="text/css" />
+	<link href="website/afterLogin/css/demo_table_jui.css" rel="stylesheet" type="text/css" />
+	<link href="website/afterLogin/css/jquery-ui-1.8.24.custom.css" rel="stylesheet" type="text/css" media="all" />
+    
     <style>
         #news .item img {
             display: block;

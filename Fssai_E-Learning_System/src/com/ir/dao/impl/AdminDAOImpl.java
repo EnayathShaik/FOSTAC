@@ -11,6 +11,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -62,10 +64,14 @@ import com.ir.util.EncryptionPasswordANDVerification;
 import com.ir.util.PasswordGenerator;
 import com.ir.util.SendContectMail;
 import com.ir.util.SendMail;
+import com.zentech.spring.dao.MasterDAOImpl;
+
 
 @Repository
 public class AdminDAOImpl implements AdminDAO {
 
+	private static final Logger logger = LoggerFactory
+			.getLogger(MasterDAOImpl.class);
 	@Autowired
 	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
@@ -1091,5 +1097,53 @@ public class AdminDAOImpl implements AdminDAO {
 		tx.commit();
 		session.close();
 		return trainerAssessmentEvaluationId;
+	}
+	
+	@Override
+	public void addState(State p) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		session.persist(p);
+		logger.info("State saved successfully, State Details=" + p);
+	}
+
+	@Override
+	public void updateState(State p) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		session.update(p);
+		logger.info("State updated successfully, State Details=" + p);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<State> listStates() {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		List<State> statesList = session.createQuery("from State").list();
+		for (State p : statesList) {
+			logger.info("State List::" + p);
+		}
+		return statesList;
+	}
+
+	@Override
+	public State getStateById(int id) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		State p = (State) session.load(State.class, new Integer(id));
+		logger.info("State loaded successfully, State details=" + p);
+		return p;
+	}
+
+	@Override
+	public void removeState(int id) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		State p = (State) session.load(State.class, new Integer(id));
+		if (null != p) {
+			session.delete(p);
+		}
+		logger.info("State deleted successfully, State details=" + p);
 	}
 }

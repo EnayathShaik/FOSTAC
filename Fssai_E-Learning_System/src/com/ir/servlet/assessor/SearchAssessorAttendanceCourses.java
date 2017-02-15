@@ -1,4 +1,4 @@
-package com.ir.servlet.assessor;
+/*package com.ir.servlet.assessor;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,24 +38,24 @@ import com.ir.service.PageLoadService;
 import com.ir.service.impl.PageLoadServiceImpl;
 import com.itextpdf.text.log.SysoCounter;
 
-/**
+*//**
  * Servlet implementation class MyServlt
- */
+ *//*
 
 public class SearchAssessorAttendanceCourses extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
+    *//**
      * @see HttpServlet#HttpServlet()
-     */
+     *//*
     public SearchAssessorAttendanceCourses() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
+	*//**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	 *//*
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 				System.out.println("Updating attendance for accessor..");
@@ -91,7 +91,7 @@ public class SearchAssessorAttendanceCourses extends HttpServlet {
 						+ "inner join trainingcalendar tc on tc.coursename = ce.coursenameid "
 						+ "inner join coursename cn on cn.coursenameid = tc.coursename "
 						+ "where pia.personalinformationassessorid ="+assessorId;
-				System.out.println(sql);
+				System.out.println("Search === "+sql);
 				List listCourseCalendar = new ArrayList<>();
 				try {
 					stmt = conn.prepareStatement(sql);
@@ -128,12 +128,13 @@ public class SearchAssessorAttendanceCourses extends HttpServlet {
 		
 	}
 
-	/**
+	*//**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	 *//*
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
 }
+*/

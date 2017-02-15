@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,10 +21,8 @@
             width: 100%;
             height: auto;
         }
-
     </style>
 </head>
-
 <body>
     <!-- logos -->
     <section>
@@ -75,7 +72,7 @@
                             <div id="navbar" class="navbar-collapse collapse">
                                 <ul class="nav navbar-nav">
                                     <li></li>
-                                    <li class="hori"><a href="index.html">Home</a></li>
+                                    <li class="active hori"><a href="index.html">Home</a></li>
                                     <li class="hori"><a href="view-enrolled-course.html">View Enrolled Course</a></li>
                                     <li class="hori"><a href="#">Update Information</a></li>
                                     <li class="hori"><a href="contact.html">Contact Us</a></li>
@@ -90,8 +87,7 @@
                                         </ul>
                                     </li>
                                 </ul>
-                            </div>
-                            <!--/.nav-collapse -->
+                            </div><!--/.nav-collapse -->
                         </div>
                     </div>
                 </div>
@@ -101,7 +97,7 @@
     <!-- main body -->
     <section class="main-section-margin-top">
         <div class="container-fluid">
-            <div id="wrapper">
+            <div id="wrapper">                
                 <!-- Page Content -->
                 <div id="page-content-wrapper">
                     <div class="container-fluid">
@@ -121,12 +117,11 @@
     <script src="website/js/validation.js"></script>
     <script>
         AOS.init();
-
     </script>
     <!-- carousel -->
     <script src="js/owl.carousel.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             $("#news").owlCarousel({
 
@@ -146,29 +141,24 @@
             });
 
         });
-
     </script>
 
     <!-- gallery -->
     <script src="website/afterLogin/js/jquery.swipebox.js"></script>
     <script type="text/javascript">
-        ;
-        (function($) {
+        ; (function ($) {
 
             $('.swipebox').swipebox();
 
         })(jQuery);
-
     </script>
 
     <!-- Menu Toggle Script -->
     <script>
-        $("#menu-toggle").click(function(e) {
+        $("#menu-toggle").click(function (e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });
-
     </script>
 </body>
-
 </html>

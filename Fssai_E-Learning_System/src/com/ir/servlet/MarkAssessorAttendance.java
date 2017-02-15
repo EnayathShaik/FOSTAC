@@ -38,6 +38,7 @@ import com.ir.model.assessor.AssessorAttendance;
 import com.ir.model.assessor.MarkAttendanceForm;
 import com.ir.service.PageLoadService;
 import com.ir.service.impl.PageLoadServiceImpl;
+import com.ir.util.HibernateUtil;
 import com.itextpdf.text.log.SysoCounter;
 
 /**
@@ -71,24 +72,10 @@ public class MarkAssessorAttendance extends HttpServlet {
 		        if(strAssessorId != null && strTrainingcalId!=null){
 		        	assessorId = Integer.parseInt(strAssessorId);
 		        	trainingCalId = Integer.parseInt(strTrainingcalId);
-				try {
-					Class.forName("org.postgresql.Driver");
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				Connection conn = null;
-				try {
-					conn = DriverManager.getConnection(DBUtil.databaseUrl,DBUtil.dbUsername,DBUtil.dbPassword);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				
-				Configuration conf = new Configuration();
+				/*Configuration conf = new Configuration();
 				conf.configure("/hibernate.cfg.xml");
-				SessionFactory sf = conf.buildSessionFactory();
+				SessionFactory sf = conf.buildSessionFactory();*/
+		        SessionFactory sf = new HibernateUtil().getSessionFactory();
 				Session session = sf.openSession();
 				Transaction tx = session.beginTransaction();
 				String pattern = "dd-MM-yyyy"; 

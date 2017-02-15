@@ -86,14 +86,11 @@ window.onload = OnStart;
 						</ct:when>
 					</ct:choose>
 					<fieldset>
-					<!-- <h4><a href="pdf/A.mp4?autoPlay=true" target="_blank" data-webm="images/Big_Buck_Bunny_2.webm" class="html5lightbox" >Video Offline</a></h4>
-					<h4><a href="pdf/Fostac.pdf" target="_blank" >Fostac1 In PDF</a></h4>
-					<h4><a href="pdf/FostacPPT.pptx" target="_blank" >Fostac In PPT</a></h4>
-				 -->	
-					
-                  </fieldset>
+					<h4><a href="pdf/temp1.m4v?autoPlay=true" target="_blank" data-webm="images/Big_Buck_Bunny_2.webm" class="html5lightbox" >Temp Mv4</a></h4>
+					<h4><a href="pdf/temp.pdf" target="_blank" >Temp PDF</a></h4>
+					<h4><a href="pdf/catering.pptx" target="_blank" >Catering</a></h4>
+			      </fieldset>
                   <br>
-                  
                 </div>
               </div>
             </div>
