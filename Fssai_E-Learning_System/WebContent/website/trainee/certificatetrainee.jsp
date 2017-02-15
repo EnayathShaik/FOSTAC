@@ -1,5 +1,14 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
+<%
+String strNewDate = null;
+try{
 
+	strNewDate=new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+}catch(Exception e){
+}
+%>
 <head>
     <title></title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -14,6 +23,8 @@
             printWindow.document.close();
             printWindow.print();
         });
+        
+        
     </script>
 </head>
 
@@ -49,11 +60,11 @@
                                             <div class="col-xs-12"><img src="website/img/certificate.jpg" class="img-responsive"></div>
                                             <div class="col-xs-12 this-certify">
                                                 <h3 class="text-center th-pos">This is to certify that</h3>
-                                                <p class="text-center for-p"><span><strong>Mr. Vijay Sharma</strong></span></p>
+                                                <p class="text-center for-p"><span><strong>Mr. ${loginUser.firstName }</strong></span></p>
                                                 <hr class="nam-hr">
                                                 <div class="di-msg">
                                                     <p>has successfully completed the required competency to be appointed as</p>
-                                                    <p>Trainer for Food Safety Supervisor Training, the training was held on <span class="on-dat">12/02/2016</span><span><hr class="on-hr"></span></p>
+                                                    <p>Trainer for Food Safety Supervisor Training, the training was held on <span class="on-dat"><%=strNewDate%></span><span><hr class="on-hr"></span></p>
                                                     <p>at <span class="add-pos">Fssai Bhavan, New Delhi</span><span><hr class="at-hr"></span><span class="full-stop">.</span></p>
                                                 </div>
                                             </div>

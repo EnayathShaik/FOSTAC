@@ -14,6 +14,114 @@ body {
     font-size: 15px;
 }
 
+/* new certificatecss */
+
+/* new certificate style*/
+
+.this-certify {
+    position: relative;
+    top: -32em;
+}
+.sign-pos {
+    position: relative;
+    top: -30em;
+}
+.cert-btm {
+    position: relative;
+    top: -31em;
+    line-height: 12px;
+}
+.nam-hr {
+    width: 80%;
+    margin-top: 32px;
+    border-top: 1px solid #bdbcbc;
+}
+.di-msg {
+    position: relative;
+    left: 5.5em;
+    font-size: 17px;
+    line-height: 18px
+}
+.on-dat {
+    font-weight: 600;
+    position: relative;
+    left: 75px;
+}
+.on-hr {
+    width: 24%;
+    border-top: 1px solid #bdbcbc;
+    margin-top: -10px;
+    margin-right: 190px;
+}
+.at-hr {
+    border-top: 1px solid #bdbcbc;
+    width: 45%;
+    margin-top: -10px;
+    margin-left: 22px;
+}
+.full-stop {
+    position: relative;
+    top: -46px;
+    left: 48%;
+    font-size: 25px;
+}
+.left-sign {
+    border-top: 1px solid #bdbcbc;
+    margin-top: 10px;
+    width: 50%;
+    position: relative;
+    left: -29px;
+}
+.right-sign {
+    border-top: 1px solid #bdbcbc;
+    margin-top: 10px;
+    width: 50%;
+    position: relative;
+    left: 26px;
+}
+.left-p {
+    position: relative;
+    left: 137px;
+    top: -15px;
+}
+.right-p {
+    position: relative;
+    right: -30px;
+    top: -15px;
+}
+.btm-p {
+    position: relative;
+    left: 95px;
+    letter-spacing: 0.1px;
+}
+.for-p {
+    font-size: 20px;
+    position: relative;
+    top: 32px;
+}
+.add-pos {
+    position: relative;
+    font-weight: 600;
+    left: 5%;
+}
+.login-btn {
+    background: #000077;
+    color: #fff;
+    border: 1px solid transparent;
+    transition: all 0.8s linear;
+}
+.th-pos {
+    position: relative;
+    top: 0.5em;
+}
+
+/* new certificate style ends*/
+
+
+
+
+/* new certificate css ends*/
+
 /* Toggle Styles */
 
 .sub-heading {
