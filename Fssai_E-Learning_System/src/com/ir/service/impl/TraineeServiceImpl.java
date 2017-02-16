@@ -12,6 +12,7 @@ import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.RegistrationFormTrainee;
 import com.ir.model.AdmitCardForm;
+import com.ir.model.CertificateInfo;
 import com.ir.model.CourseName;
 import com.ir.model.CourseTrainee;
 import com.ir.model.FeedbackForm;
@@ -162,5 +163,10 @@ public class TraineeServiceImpl implements TraineeService {
 	public Boolean closeCourse(int userId, int profileID, String status) {
 		// TODO Auto-generated method stub
 		return traineeDAO.closeCourse(userId, profileID, status);
+	}
+	@Override
+	public CertificateInfo getCertificateID(int userId, int profileID) {
+		// TODO Auto-generated method stub
+		return traineeDAO.getCertificateID(userId, profileID);
 	}
 }

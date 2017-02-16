@@ -43,7 +43,7 @@ window.onload = OnStart;
           <!-- add the content here for main body --> 
           <!-- feedback form  -->
           
-          <%-- <div class="container-fluid">
+          <div class="container-fluid">
             <div class="row">
               <div class="table-responsive">
                 <div class="col-xs-12">
@@ -58,56 +58,8 @@ window.onload = OnStart;
               </div>
             </div>
             <!-- row ends --> 
-          </div> --%>
-          <div class="container-fluid">
-                            <!-- insert certificate -->
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="col-xs-12"><img src="images/certificate.jpg" class="img-responsive"></div>
-                                    <div class="col-xs-12 this-certify">
-                                        <h3 class="text-center th-pos">This is to certify that</h3>
-                                        <p class="text-center for-p"><span><strong>Mr. Vijay Sharma</strong></span></p>
-                                        <hr class="nam-hr">
-                                        <div class="di-msg">
-                                            <p>has successfully completed the required competency to be appointed as</p>
-                                            <p>Trainer for Food Safety Supervisor Training, the training was held on
-                                                <span class="on-dat">12/02/2016</span><span><hr class="on-hr"></span></p>
-                                            <p>at
-                                                <span class="add-pos">Fssai Bhavan, New Delhi</span><span><hr class="at-hr"></span><span class="full-stop">.</span></p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-xs-12 sign-pos">
-                                        <div class="col-md-6 col-xs-12">
-                                            <hr class="left-sign">
-                                            <p class="left-p">Training Partner</p>
-                                        </div>
-                                        <div class="col-md-6 col-xs-12">
-                                            <hr class="right-sign">
-                                            <p class="right-p text-center">Training Coordinator
-                                                <br><span>FSSAI</span></p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-xs-12 cert-btm">
-                                        <p class="btm-p">Certificate Number : BCA001</p>
-                                        <p class="btm-p">Date Issued : 10/2/2017</p>
-                                        <p class="btm-p">Refresher Due : 2 years from date of issue.</p>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4 col-xs-12"></div>
-                                        <div class="col-md-4 col-xs-12" style="position: relative; top: -25em;">
-                                            <a href="#" class="btn login-btn" style="width: 100%;">Download</a>
-                                        </div>
-                                        <div class="col-md-4 col-xs-12"></div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-
-                        </div>
+          </div>
+          
           <!-- fluid ends --> 
         </div>
       </div>

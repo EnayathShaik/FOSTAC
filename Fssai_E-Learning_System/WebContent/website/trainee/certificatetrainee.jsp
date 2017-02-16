@@ -64,7 +64,7 @@ try{
                                                 <hr class="nam-hr">
                                                 <div class="di-msg">
                                                     <p>has successfully completed the required competency to be appointed as</p>
-                                                    <p>Trainer for Food Safety Supervisor Training, the training was held on <span class="on-dat"><%=strNewDate%></span><span><hr class="on-hr"></span></p>
+                                                    <p>Trainer for Food Safety Supervisor Training, the training was held on <span class="on-dat">${trainingDate}</span><span><hr class="on-hr"></span></p>
                                                     <p>at <span class="add-pos">Fssai Bhavan, New Delhi</span><span><hr class="at-hr"></span><span class="full-stop">.</span></p>
                                                 </div>
                                             </div>
@@ -80,8 +80,8 @@ try{
                                                 </div>
                                             </div>
                                             <div class="col-xs-12 cert-btm">
-                                                <p class="btm-p">Certificate Number : BCA001</p>
-                                                <p class="btm-p">Date Issued : 10/2/2017</p>
+                                                <p class="btm-p">Certificate Number : ${certificateID}</p>
+                                                <p class="btm-p">Date Issued : <%=strNewDate%></p>
                                                 <p class="btm-p">Refresher Due : 2 years from date of issue.</p>
                                             </div>
                                             <div class="row">

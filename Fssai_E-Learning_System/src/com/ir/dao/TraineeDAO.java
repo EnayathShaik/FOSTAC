@@ -8,6 +8,7 @@ import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.RegistrationFormTrainee;
 import com.ir.model.AdmitCardForm;
+import com.ir.model.CertificateInfo;
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.CourseTrainee;
@@ -73,5 +74,6 @@ public interface TraineeDAO {
 	public Boolean updateSteps(int tableID, int profileID, int steps);
 	public String isCourseOnline(int userID);
 	public Boolean closeCourse(int tableID, int profileID, String status);
+	public CertificateInfo getCertificateID(int userID, int profileID);
 	
 }

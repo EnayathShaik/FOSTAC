@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -23,6 +24,7 @@ import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.RegistrationFormTrainee;
 import com.ir.model.AdmitCardForm;
+import com.ir.model.CertificateInfo;
 import com.ir.model.City;
 import com.ir.model.ContactTraineee;
 import com.ir.model.CourseEnrolledUser;
@@ -997,5 +999,65 @@ public class TraineeDAOImpl implements TraineeDAO {
 				}
 				session.close();
 				return eligible;
+	}
+	
+	@Override
+	public CertificateInfo getCertificateID(int userID, int profileID) {
+		// TODO Auto-generated method stub
+				String certificateID = "";
+				Session session = sessionFactory.openSession();
+				//Get Next Seq
+				
+				String sqlSeq = "select max(certificateseqno) + 1 from courseenrolleduser";
+				int maxIdSeq  = 0 ;
+				Query maxIDListSeq  = session.createSQLQuery(sqlSeq);
+				List list = maxIDListSeq .list();
+				System.out.println(list.size());
+				if(list.size() > 0){
+					maxIdSeq  = (int) list.get(0);
+					//eligible = (String) list.get(0);
+				}
+				
+				
+				//max SeqNo
+				String sql = "Select C.coursecode,B.trainingdate," +
+						"A.courseenrolleduserid from courseenrolleduser A " +
+						"inner join trainingcalendar B on(A.trainingcalendarid=B.trainingcalendarid) " +
+						"inner join coursename C on(B.coursename=C.coursenameid) " +
+						"Where A.status='N' AND A.logindetails = "+userID;
+				int courseEnrolledUserID = 0;
+				String courseCode = "";
+				Query query = session.createSQLQuery(sql);
+				List<Object[]> records = (List<Object[]>) query.list();
+				CertificateInfo certificateInfo = new CertificateInfo();
+				try {
+					if (records.size() > 0) {
+
+						Object[] obj = records.get(0);
+						courseCode =  obj[0].toString();
+						certificateInfo.setTrainingDate(obj[1].toString());
+						courseEnrolledUserID = (int) obj[2];
+					}
+				} catch (Exception e) {
+					System.out
+							.println("Exception while retrieving admit card details : "
+									+ e.getMessage());
+				}
+				if(courseCode != null && courseCode.length() > 0){
+					certificateID = courseCode + StringUtils.leftPad(String.valueOf(maxIdSeq), 6, "0") + "17";
+				}
+				
+				certificateInfo.setCertificateID(certificateID);
+				if(courseEnrolledUserID > 0){
+					CourseEnrolledUser courseEnrolledUser = (CourseEnrolledUser) session
+							.load(CourseEnrolledUser.class, courseEnrolledUserID);
+					courseEnrolledUser.setCertificateID(certificateID);
+					courseEnrolledUser.setCertificateSeqNo(maxIdSeq);
+					session.update(courseEnrolledUser);
+				}
+				session.beginTransaction().commit();
+				session.close();
+		
+				return certificateInfo;
 	}
 }

@@ -35,6 +35,7 @@ import com.ir.form.RegistrationFormTrainee;
 import com.ir.form.RegistrationFormTrainer;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.AssessmentQuestion;
+import com.ir.model.CertificateInfo;
 import com.ir.model.CourseName;
 import com.ir.model.CourseTrainee;
 import com.ir.model.CourseType;
@@ -543,7 +544,7 @@ public class TraineeController {
 	}
 	
 	@RequestMapping(value="/certificatetrainee" , method=RequestMethod.GET)
-	public String certificatetrainee(HttpSession session){
+	public String certificatetrainee(HttpSession session, Model model){
 		//update Step
 				Integer profileID = 0;
 				Integer userId = 0;
@@ -554,11 +555,16 @@ public class TraineeController {
 					userId = (Integer) session.getAttribute("userId");
 					int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
 					traineeService.updateSteps(tableID, profileID, 0);
-					String getId = GenerateUniqueID.getNextCombinationId("TCR");
-					System.out.println("getId "+getId);
-					
+					/*String getId = GenerateUniqueID.getNextCombinationId("TCR");
+					System.out.println("getId "+getId);*/
+					//System.out.println(traineeService.getCertificateID(userId, profileID));
+					CertificateInfo certificateInfo = traineeService.getCertificateID(userId, profileID);
+					System.out.println("Certificate ID = "+certificateInfo.getCertificateID());
+					System.out.println("Training Date = "+certificateInfo.getTrainingDate());
 					//Close Course
 					traineeService.closeCourse(userId, profileID, "Y");
+					model.addAttribute("certificateID", certificateInfo.getCertificateID());
+					model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
 					session.setAttribute("traineeSteps", 0);
 				}catch(Exception e){
 					e.printStackTrace();

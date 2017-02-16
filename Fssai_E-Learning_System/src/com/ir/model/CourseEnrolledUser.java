@@ -30,7 +30,11 @@ public class CourseEnrolledUser {
 	private String assessorComment;
 	@Column(columnDefinition="varchar(1) default 'N'")
 	private String status;
-	
+	private String certificateID; 
+	@Column(columnDefinition="int default 0")
+	private int rollSeqNo; 
+	@Column(columnDefinition="int default 0")
+	private int certificateSeqNo; 
 	
 	
 	
@@ -130,6 +134,30 @@ public class CourseEnrolledUser {
 
 	public void setAssessorComment(String assessorComment) {
 		this.assessorComment = assessorComment;
+	}
+
+	public String getCertificateID() {
+		return certificateID;
+	}
+
+	public void setCertificateID(String certificateID) {
+		this.certificateID = certificateID;
+	}
+
+	public int getRollSeqNo() {
+		return rollSeqNo;
+	}
+
+	public void setRollSeqNo(int rollSeqNo) {
+		this.rollSeqNo = rollSeqNo;
+	}
+
+	public int getCertificateSeqNo() {
+		return certificateSeqNo;
+	}
+
+	public void setCertificateSeqNo(int certificateSeqNo) {
+		this.certificateSeqNo = certificateSeqNo;
 	}
 	
 	

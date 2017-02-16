@@ -8,6 +8,7 @@ import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.RegistrationFormTrainee;
 import com.ir.model.AdmitCardForm;
+import com.ir.model.CertificateInfo;
 import com.ir.model.CourseName;
 import com.ir.model.CourseTrainee;
 import com.ir.model.FeedbackForm;
@@ -46,4 +47,5 @@ public interface TraineeService {
 	public Boolean updateSteps(int tableID, int profileID, int steps);
 	public Boolean closeCourse(int userId, int profileID, String status);
 	public String isCourseOnline(int userID);
+	public CertificateInfo getCertificateID(int userID, int profileID);
 }
