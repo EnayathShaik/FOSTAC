@@ -1021,9 +1021,10 @@ public class TraineeDAOImpl implements TraineeDAO {
 				
 				//max SeqNo
 				String sql = "Select C.coursecode,B.trainingdate," +
-						"A.courseenrolleduserid from courseenrolleduser A " +
+						"A.courseenrolleduserid ,D.firstname || ' '|| D.middlename ||' '|| D.lastname from courseenrolleduser A " +
 						"inner join trainingcalendar B on(A.trainingcalendarid=B.trainingcalendarid) " +
 						"inner join coursename C on(B.coursename=C.coursenameid) " +
+						"inner join personalinformationtrainee D on(A.logindetails=D.logindetails) "+
 						"Where A.status='N' AND A.logindetails = "+userID;
 				int courseEnrolledUserID = 0;
 				String courseCode = "";
@@ -1037,6 +1038,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 						courseCode =  obj[0].toString();
 						certificateInfo.setTrainingDate(obj[1].toString());
 						courseEnrolledUserID = (int) obj[2];
+						certificateInfo.setName(obj[3].toString());
 					}
 				} catch (Exception e) {
 					System.out

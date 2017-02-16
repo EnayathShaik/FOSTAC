@@ -59,7 +59,7 @@
 <script src="website/js/main.js"></script> 
 <script src="website/js/wow.min.js"></script>
 <script src="website/js/validation.js"></script>
-
+<script src="website/js/jspdf.min.js"></script>
 <script src="website/js/jquery-ui.js"></script>
     <script>
         $(function () {
@@ -71,6 +71,23 @@
 <script src="website/js/jquery.swipebox.js"></script> 
 <script>
         $(document).ready(function () {
+        	
+
+        	var doc = new jsPDF();
+        	var specialElementHandlers = {
+        	    '#editor': function (element, renderer) {
+        	        return true;
+        	    }
+        	};
+
+        	$('#certificateIDD').click(function () {
+        	    doc.fromHTML($('#certificate').html(), 15, 15, {
+        	        'width': 170,
+        	            'elementHandlers': specialElementHandlers
+        	    });
+        	    doc.save('Certificate.pdf');
+        	});
+
 
         	/* $(function() {
       		  $( "#dateP" ).datepicker({  maxDate: 0 });

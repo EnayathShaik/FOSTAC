@@ -565,6 +565,7 @@ public class TraineeController {
 					traineeService.closeCourse(userId, profileID, "Y");
 					model.addAttribute("certificateID", certificateInfo.getCertificateID());
 					model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
+					model.addAttribute("traineeCertificateName", certificateInfo.getName());
 					session.setAttribute("traineeSteps", 0);
 				}catch(Exception e){
 					e.printStackTrace();

@@ -22,6 +22,7 @@
     <script src="website/afterLogin/js/aos.js"></script>
     <script src="website/afterLogin/js/owl.carousel.js"></script>
     <script src="website/afterLogin/js/jquery.swipebox.js"></script>
+    <script src="website/js/jspdf.min.js"></script>
     <!-- <script src="js/jquery-1.12.3.js" type="text/javascript"></script>  -->
 	<script src="website/afterLogin/js/jquery.dataTables.min.js" type="text/javascript"></script> 
 
@@ -32,6 +33,21 @@
     
     <script>
         $(document).ready(function () {
+        	
+        	var doc = new jsPDF();
+        	var specialElementHandlers = {
+        	    '#editor': function (element, renderer) {
+        	        return true;
+        	    }
+        	};
+
+        	$('#cmd').click(function () {
+        	    doc.fromHTML($('#content').html(), 15, 15, {
+        	        'width': 170,
+        	            'elementHandlers': specialElementHandlers
+        	    });
+        	    doc.save('sample-file.pdf');
+        	});
         	
         	var table = $(document).ready(function () {
                 $("#zentechDatatables").DataTable({
