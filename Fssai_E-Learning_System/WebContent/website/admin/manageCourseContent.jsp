@@ -4,6 +4,12 @@
 <script type='text/javascript'>
 function OnStart(){
 	searchManageCourseContent('ALL');
+	console.log("PROFILEID "+PROFILEID);
+	if(PROFILEID=="1"){
+		$("#btnCreate").css("display" , "none");
+		$(".edit").css("display" , "none");
+		$(".delete").css("display" , "none");
+	}
 }
 window.onload = OnStart;
 function validateFields() {
@@ -120,7 +126,7 @@ function searchManageCourseContent(indicator){
 		$.each(mainData1 , function(i , obj)
 		{
 
-			$('#newTable').append('<tr id="tableRow"><td>'+ j++ +'</td><td>'+ obj[3]+'</td><td>'+ obj[1] +'</td><td>'+ obj[0] +'</td><td>'+ obj[4] +'</td><td>'+ obj[5] +'</td><td><input type="hidden" id="contentNameLabel" value="'+ obj[6] +'" />'+  obj[6] +'</td><td><input type="hidden" id="contentLinkLabel" value="'+ obj[2] +'" />'+ obj[2] +'</td><td><input type="hidden" id="idLabel'+i+'" value="'+ obj[7] +'" /> <a href="#" onClick="editCourseContent(\''+obj[3]+'\',\''+obj[1]+'\',\''+obj[0]+'\',\''+obj[4]+'\',\''+obj[5]+'\',\''+obj[2]+'\',\''+obj[6]+'\',\''+i+'\');">edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onClick="deleteCourseContent('+i+');">delete</a></td></tr>');
+			$('#newTable').append('<tr id="tableRow"><td>'+ j++ +'</td><td>'+ obj[3]+'</td><td>'+ obj[1] +'</td><td>'+ obj[0] +'</td><td>'+ obj[4] +'</td><td>'+ obj[5] +'</td><td><input type="hidden" id="contentNameLabel" value="'+ obj[6] +'" />'+  obj[6] +'</td><td><input type="hidden" id="contentLinkLabel" value="'+ obj[2] +'" />'+ obj[2] +'</td><td><input type="hidden" id="idLabel'+i+'" value="'+ obj[7] +'" /> <a href="#" class="edit" onClick="editCourseContent(\''+obj[3]+'\',\''+obj[1]+'\',\''+obj[0]+'\',\''+obj[4]+'\',\''+obj[5]+'\',\''+obj[2]+'\',\''+obj[6]+'\',\''+i+'\');">edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="delete" onClick="deleteCourseContent('+i+');">delete</a></td></tr>');
 		});
 		}
 		});

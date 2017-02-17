@@ -113,6 +113,9 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			postVacancyTrainingCenter.setTrainingDate(postVacancyTrainingCenterForm.getTrainingDate());
 			postVacancyTrainingCenter.setCourseName(cn);
 			postVacancyTrainingCenter.setCourseType(ct);
+			postVacancyTrainingCenter.setVacancyType(postVacancyTrainingCenterForm.getVacancyType());
+			postVacancyTrainingCenter.setTrainingStartTime(postVacancyTrainingCenterForm.getTrainingStartTime());
+			postVacancyTrainingCenter.setTrainingEndTime(postVacancyTrainingCenterForm.getTrainingEndTime());
 			postVacancyTrainingCenter.setLoginId(postVacancyTrainingCenterForm.getLoginId());
 			postVacancyTrainingCenter.setTrainingCenter(p);
 			postVacancyTrainingCenterIdd = (Integer) session.save(postVacancyTrainingCenter);

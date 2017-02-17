@@ -179,5 +179,16 @@ public class ListConstant {
         auserTypeMap.put("Update", "Update");
         TypeMap = Collections.unmodifiableMap(auserTypeMap);
     }
+    
+    
+    //User Type
+    public static final Map<String, String> vacancyMap;
+    static {
+        Map<String, String> avacancyMap = new HashMap<String, String>();
+        avacancyMap.put("P", "Part time");
+        avacancyMap.put("F", "Full time");
+        vacancyMap = Collections.unmodifiableMap(avacancyMap);
+    }
+    
 
 }

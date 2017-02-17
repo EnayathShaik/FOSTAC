@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +46,7 @@ import com.ir.model.Utility;
 import com.ir.service.LoginService;
 import com.ir.service.TraineeService;
 import com.ir.service.TrainingPartnerService;
+import com.zentect.list.constant.ListConstant;
 
 @Controller
 public class TrainingPartnerController {
@@ -66,12 +68,16 @@ public class TrainingPartnerController {
 	@Qualifier("loginService")
 	LoginService loginService; 
 	
+	ListConstant lst = new ListConstant();
+	
 	@RequestMapping(value="/postVacancyTrainingPartner" , method=RequestMethod.GET)
 	public String postVacancy(@ModelAttribute("postVacancyTrainingCenterForm") PostVacancyTrainingCenterForm postVacancyTrainingCenterForm,HttpSession session,BindingResult result , Model model ){
 		Integer userId = (Integer) session.getAttribute("userId");
 		Integer profileId = (Integer) session.getAttribute("profileId");
 		List<IntStringBean> trainingCenterList = trainingPartnerService.getTrainingCenterList(userId,profileId);
+		Map<String , String> vacancyMap = lst.vacancyMap;
 		model.addAttribute("trainingCenterList" , trainingCenterList);
+		model.addAttribute("vacancyMap",vacancyMap);
 		
 		return "postVacancyTrainingPartner";
 		

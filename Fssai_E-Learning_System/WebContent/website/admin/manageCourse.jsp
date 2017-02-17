@@ -6,7 +6,12 @@
 <script type='text/javascript'>
 function OnStart(){
 	searchManageCourse('ALL');
+	console.log("PROFILEID "+PROFILEID);
+	if(PROFILEID=="1"){
+		$("#btnCreate").css("display" , "none");
+	}
 }
+
 
 window.onload = OnStart;
 

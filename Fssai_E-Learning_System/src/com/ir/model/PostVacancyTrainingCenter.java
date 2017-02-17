@@ -21,6 +21,15 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity @Table(name="postVacancyTrainingCenter")
 public class PostVacancyTrainingCenter{
 	
@@ -47,7 +56,30 @@ public class PostVacancyTrainingCenter{
 	@Transient
 	private int noOfApplications;
 	
+	private String vacancyType;
+	private String trainingStartTime;
+	private String trainingEndTime;
 	
+	
+	
+	public String getVacancyType() {
+		return vacancyType;
+	}
+	public void setVacancyType(String vacancyType) {
+		this.vacancyType = vacancyType;
+	}
+	public String getTrainingStartTime() {
+		return trainingStartTime;
+	}
+	public void setTrainingStartTime(String trainingStartTime) {
+		this.trainingStartTime = trainingStartTime;
+	}
+	public String getTrainingEndTime() {
+		return trainingEndTime;
+	}
+	public void setTrainingEndTime(String trainingEndTime) {
+		this.trainingEndTime = trainingEndTime;
+	}
 	public PersonalInformationTrainingPartner getTrainingCenter() {
 		return trainingCenter;
 	}

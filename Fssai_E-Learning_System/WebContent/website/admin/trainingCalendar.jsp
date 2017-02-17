@@ -11,6 +11,10 @@ function OnStart(){
 		
 	}
 	getTrainingCalender('ALL');
+	console.log("PROFILEID "+PROFILEID);
+	if(PROFILEID=="1"){
+		$("#CreateTraineeCalender").css("display" , "none");
+	}
 }
 window.onload = OnStart;
 </script>

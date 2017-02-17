@@ -17,7 +17,8 @@
     <link href="website/afterLogin/css/owl.transitions.css" rel="stylesheet" />
     <link href="website/afterLogin/css/swipebox.css" rel="stylesheet" />
     <link href="website/css/visibility.css" rel="stylesheet" />
-    
+    <link href="website/css/flatpickr.css" rel="stylesheet" />
+    <script src="website/js/flatpickr.js"></script>
     <style>
         #news .item img {
             display: block;
@@ -28,6 +29,7 @@
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 </head>
 <body>
+<script type="text/javascript">window.PROFILEID = ${profileId} </script>
 		<div><tiles:insertAttribute name="header" /></div>
 		
 		<div style="width:100%; float:left;padding:0px; height:100px;">
@@ -37,4 +39,5 @@
     	<div style="clear:both; float:left;"><tiles:insertAttribute name="footer" /></div>
 </body>
 <script src="website/js/validation.js"></script>
+
 </html>

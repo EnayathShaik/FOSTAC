@@ -5,10 +5,35 @@
 
 function OnStart(){
 	searchVacancy('ALL');
+	var today = jQuery.now();
+	console.log("today "+today);
+	flatpickr("#trainingEndTime" , {
+		//defaultDate: today, // Date objects and date strings are also accepted
+		enableTime: true
+	});
+	
+	flatpickr("#trainingStartTime" , {
+		//defaultDate: today, // Date objects and date strings are also accepted
+		enableTime: true
+	});	
 }
 window.onload = OnStart;
 </script>
 <script>
+
+function checkVacancyType(){
+	
+	var vacancyType = $("#vacancyType").val();
+	console.log("vacancyType "+vacancyType);
+	
+	if(vacancyType=="P"){
+		
+		$("#displayStartDate").css("display","block");
+		$("#displayEndDate").css("display","block");
+	}
+	
+}
+
 function getCourseName(val){
 	$.ajax({
 	      type: 'post',
@@ -80,6 +105,7 @@ function validateFields(){
 	}
 }
 </script>
+
 <script type="text/javascript">
 function searchVacancy(indicator){
 	var loginID = $("#loginId").val();
@@ -120,8 +146,11 @@ function searchVacancy(indicator){
 	return result;
 }
 
-
 </script>
+
+
+
+
 
 <cf:form action="postVacancyTrainingPartnerSave.fssai" name="myForm" method="POST" commandName="postVacancyTrainingCenterForm" onsubmit="return validateFields();" >
 
@@ -208,6 +237,37 @@ function searchVacancy(indicator){
                           </div>
                           <cf:input path="trainingDate" type="date" class="form-control" />
                         </div>
+                          <div class="form-group">
+                          <div>
+                            <ul class="lab-no">
+                              <li class="style-li"><strong>Vacancy Type:<span style="color:red;">*</span></strong></li>
+                               <li class="style-li error-red">
+                               <label id="vacancyTypeError" class="error visibility">select vacancy type</label>
+                                                            <span id="name_status"> ${created } </span>
+                                                           
+								 <cf:errors path="vacancyType" cssclass="error"/>
+                                                            </li>
+                            </ul>
+                          </div>
+						<cf:select path="vacancyType" class="form-control" onchange="checkVacancyType()">
+						<cf:option value="0" label="Select Vacancy Type" />
+						<cf:options items="${vacancyMap}" />
+						</cf:select>
+                        </div>
+                        
+                          <div class="form-group" id="displayEndDate" style="display:none">
+                          <div>
+                            <ul class="lab-no">
+                              <li class="style-li"><strong>Training End Date:</strong></li>
+                              <li class="style-li error-red">
+                               <label id="trainingDateError" class="error visibility">Enter End Date</label>
+                               <cf:errors path="trainingEndTime" cssclass="error"/>
+                               </li>
+                            </ul>
+                          </div>
+                          <cf:input path="trainingEndTime" id="trainingEndTime" type="text" class="form-control" />
+                        </div>
+                        
                       </div>
                       <!-- right side -->
                       <div class="col-md-6 col-xs-12">
@@ -255,6 +315,20 @@ function searchVacancy(indicator){
 						<cf:options items="${trainingCenterList}" itemValue="id" itemLabel="value"/>
 						</cf:select>
                         </div>
+                           <div class="form-group" id="displayStartDate" style="display:none">
+                          <div>
+                            <ul class="lab-no">
+                              <li class="style-li"><strong>Training Start Date:</strong></li>
+                              <li class="style-li error-red">
+                               <label id="trainingDateError" class="error visibility">Enter Start Date</label>
+                               <cf:errors path="trainingStartTime" cssclass="error"/>
+                               </li>
+                            </ul>
+                          </div>
+                          <cf:input path="trainingStartTime" type="text" class="form-control" />
+                        </div>
+                        
+                        
                       </div>
                       <input type="submit" style="margin-top:20px;"  class="btn login-btn pull-right show-details-vacancy collapsed"  data-target="#show-result" aria-expanded="false" value="Create">
                       <a href="#testt"  onclick="searchVacancy('');" style="margin-top:20px; margin-right: 20px;"  class="btn login-btn pull-right"   >Search</a>
