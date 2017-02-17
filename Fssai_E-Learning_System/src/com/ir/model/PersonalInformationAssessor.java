@@ -33,9 +33,15 @@ public class PersonalInformationAssessor {
 	private LoginDetails loginDetails;
 	
 
-	
+	private String  userId;
 	public LoginDetails getLoginDetails() {
 		return loginDetails;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	public void setLoginDetails(LoginDetails loginDetails) {
 		this.loginDetails = loginDetails;

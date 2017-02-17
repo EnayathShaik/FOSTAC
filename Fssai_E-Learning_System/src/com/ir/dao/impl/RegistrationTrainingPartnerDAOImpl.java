@@ -3,12 +3,14 @@ package com.ir.dao.impl;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+
 import com.ir.dao.RegistrationTrainingPartnerDAO;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
@@ -26,6 +28,7 @@ import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.util.ChangePasswordUtility;
 import com.ir.util.EncryptionPasswordANDVerification;
+import com.ir.util.GenerateUniqueID;
 import com.ir.util.PasswordGenerator;
 import com.ir.util.SendContectMail;
 import com.ir.util.SendMail;
@@ -162,8 +165,15 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 			System.out.println( " no such algo exception error catch ");
 		}
 		
+		//registrationTrainingPartner
+		PersonalInformationTrainingPartner personalInformationTrainingPartner = new PersonalInformationTrainingPartner();
+		String TPName =  registrationFormTrainingPartner.getTPName();  
+		String preFix = "TCTP"+TPName;
+		System.out.println("preFix "+preFix);
+		String nextSequenceUserID  =  GenerateUniqueID.getNextCombinationId(preFix, "personalInformationTrainingPartner", "00");
+		
 		LoginDetails loginDetails = new LoginDetails();
-		loginDetails.setLoginId(registrationFormTrainingPartner.getUserId());
+		loginDetails.setLoginId(nextSequenceUserID);
 		/**TODO - change the status to I initially */
 		
 		loginDetails.setStatus("I");
@@ -171,7 +181,8 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 		loginDetails.setEncrypted_Password(encryprPassword);
 		loginDetails.setProfileId(5);
 		
-		PersonalInformationTrainingPartner personalInformationTrainingPartner = new PersonalInformationTrainingPartner();
+		
+		personalInformationTrainingPartner.setUserID(nextSequenceUserID);
 		personalInformationTrainingPartner.setTitle(registrationFormTrainingPartner.getTitle());
 		personalInformationTrainingPartner.setTrainingCentreName(registrationFormTrainingPartner.getTrainingCentreName());
 		personalInformationTrainingPartner.setTrainingPartnerName(registrationFormTrainingPartner.getTrainingPartnerName());
@@ -260,10 +271,10 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 			SendMail sendMail = new SendMail();
 			sendMail.mailProperty(passwordString, registrationFormTrainingPartner.getTrainingPartnerPermanentEmail(), registrationFormTrainingPartner.getFirstName()+ " " + registrationFormTrainingPartner.getLastName());
 
-			return passwordString+"&"+registrationFormTrainingPartner.getUserId();
+			return passwordString+"&"+nextSequenceUserID;
 			//return "created";
 		}else{
-			return passwordString+"&"+registrationFormTrainingPartner.getUserId();
+			return passwordString+"&"+nextSequenceUserID;
 			//return "error";
 		}
 	}
@@ -461,4 +472,8 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 			return personalInformationTrainingPartner11;
 		}
 	// rishi
+		
+		
+		
+		
 }

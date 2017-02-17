@@ -10,7 +10,7 @@
             <script type="text/javascript">
                 function validate() {
                     var status = true;
-                    var userID = $("#userId").val();
+                   // var userID = $("#userId").val();
                     var assAgencyName = $("#assessmentAgencyName").val();
                     var websiteURL = $("#websiteUrl").val();
                     var pan = $("#PAN").val();
@@ -21,10 +21,10 @@
                     var stateId = $("#stateId").val();
                     var district = $("#district").val();
                     var city = $("#city").val();
-                    if (userID == "" || userID.length <= 0) {
+                   /*  if (userID == "" || userID.length <= 0) {
                         alert('Please Enter User ID')
                         status = false;
-                    } else if (assAgencyName == "" || assAgencyName.length <= 0) {
+                    } else  */if (assAgencyName == "" || assAgencyName.length <= 0) {
                         alert('Please Enter Assessment Agency Name.')
                         status = false;
                     } else if (websiteURL == "" || websiteURL.length <= 0) {
@@ -450,7 +450,7 @@
                                                     <div class="col-xs-12">
                                                         <!-- left side -->
                                                         <div class="col-xs-6">
-                                                            <div class="form-group">
+                                                            <div class="form-group" style="display:none">
                                                                 <div>
                                                                     <ul class="lab-no">
                                                                         <li class="style-li"><strong>User ID:</strong></li>
@@ -459,7 +459,7 @@
                                                                         </li>
                                                                     </ul>
                                                                 </div>
-                                                                <cf:input path="userId" onkeypress="return AvoidSpace(event)" onKeyUP="this.value = this.value.toUpperCase();" placeholder="UserId" class="form-control" onblur="checkname();" />
+                                                                <cf:input path="userId"  placeholder="UserId" class="form-control" />
                                                             </div>
 
                                                             <div class="form-group">

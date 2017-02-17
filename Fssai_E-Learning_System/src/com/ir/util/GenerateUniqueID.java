@@ -26,21 +26,22 @@ public class GenerateUniqueID {
 	}
 
 
-	public static  String getNextCombinationId(String prefix)
+	public static  String getNextCombinationId(String prefix , String tableName , String pattern)
 	{
 		String combinationId =  null;
-		BigInteger getNextId =  getNextId();
-		combinationId =prefix+ getFourDigitFormat(getNextId) ;
+		BigInteger getNextId =  getNextId(tableName);
+		combinationId =prefix+ getFourDigitFormat(getNextId , pattern) ;
 		
 		return combinationId;
 
 	}
 	
 	
-	public static BigInteger getNextId(){
+	public static BigInteger getNextId(String tableName){
 		BigInteger count = new BigInteger("0");
 		Session session = sessionFactory.openSession();
-		String sql = "select count(1)+1 from personalinformationtrainee";
+		String sql = "select count(1)+1 from  "+tableName ;
+		System.out.println(" query "+sql);
 		Query query = session.createSQLQuery(sql);
 		List listCount = query.list();
 		if(listCount.size()>0){
@@ -50,9 +51,9 @@ public class GenerateUniqueID {
 	}
 	
 	
-	private static String getFourDigitFormat(BigInteger getNextId)
+	private static String getFourDigitFormat(BigInteger getNextId , String pattern)
 	{
-		 String pattern="00000";
+		 
 		 DecimalFormat myFormatter = new DecimalFormat(pattern);
 		 String output = myFormatter.format(getNextId);
 		 return output;
@@ -60,6 +61,6 @@ public class GenerateUniqueID {
 	
 	public static void main(String[] args) {
 		
-		System.out.println(getNextCombinationId("TE"));
+		//System.out.println(getNextCombinationId("TE"));
 	}
 }

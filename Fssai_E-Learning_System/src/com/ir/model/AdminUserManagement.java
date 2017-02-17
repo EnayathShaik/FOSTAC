@@ -16,7 +16,14 @@ public class AdminUserManagement {
 	@Id @GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int adminUserManagementId;
 	
+	private String userId;
 	private String firstName;
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	private String middleName;
 	private String lastName;
 	private String aadharNumber;

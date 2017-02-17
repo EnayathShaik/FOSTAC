@@ -10,7 +10,7 @@
             <script type="text/javascript">
                 function validate() {
                     var status = true;
-                    var userID = $("#userId").val();
+                   // var userID = $("#userId").val();
                     var trainingPartnerName = $("#trainingPartnerName").val();
                     var websiteURL = $("#websiteUrl").val();
                     var pan = $("#PAN").val();
@@ -21,10 +21,10 @@
                     var stateId = $("#state").val();
                     var district = $("#district").val();
                     var city = $("#city").val();
-                    if (userID == "" || userID.length <= 0) {
+                  /*   if (userID == "" || userID.length <= 0) {
                         alert('Please Enter User ID')
                         status = false;
-                    } else if (trainingPartnerName == "" || trainingPartnerName.length <= 0) {
+                    } else */ if (trainingPartnerName == "" || trainingPartnerName.length <= 0) {
                         alert('Please Enter Training Partner Name.')
                         status = false;
                     } else if (websiteURL == "" || websiteURL.length <= 0) {
@@ -131,7 +131,6 @@
                         url: 'loadDistrict.jspp?' + val,
                         success: function(response) {
                             var mainData1 = jQuery.parseJSON(response);
-                            alert(mainData1);
                             $('#district option').remove();
                             $('#district').append('<option value="0">Select State</option>');
                             $('#city option').remove();
@@ -416,7 +415,7 @@
                                                             <!-- left side -->
                                                             <div class="col-md-6 col-xs-12">
 
-                                                                <div class="form-group">
+                                                                <div class="form-group" style="display:none">
                                                                     <div>
                                                                         <ul class="lab-no">
                                                                             <li class="style-li"><strong><cs:message code="lbl.Trainee.UserId" /></strong></li>
@@ -425,7 +424,7 @@
                                                                             </li>
                                                                         </ul>
                                                                     </div>
-                                                                    <cf:input path="userId" onkeypress="return AvoidSpace(event)" placeholder="UserId" class="form-control" onchange="checkname();" onKeyUP="this.value = this.value.toUpperCase();" />
+                                                                    <cf:input path="userId"  placeholder="UserId" class="form-control" />
                                                                 </div>
 
                                                                 <div class="form-group">

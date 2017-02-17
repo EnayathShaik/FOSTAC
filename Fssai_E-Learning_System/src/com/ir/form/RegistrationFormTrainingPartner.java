@@ -7,10 +7,19 @@ import org.hibernate.validator.constraints.Email;
 
 public class RegistrationFormTrainingPartner {
 	
-	@NotNull @Size(min=1, max=20 , message="* Enter UserId")
+	
+	//@NotNull @Size(min=1, max=20 , message="* Enter UserId")
 	private String UserId;
+	
+	private String TPName;
 	@NotNull
 	private int Title;
+	public String getTPName() {
+		return TPName;
+	}
+	public void setTPName(String tPName) {
+		TPName = tPName;
+	}
 	@NotNull @Size(min=1, max=50 , message="* Enter Training Centre Name")
 	private String TrainingCentreName;
 	@NotNull(message="* Enter Training Partner Name")

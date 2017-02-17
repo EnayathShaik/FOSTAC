@@ -18,6 +18,15 @@ public class ManageTrainingPartner {
 
 	@Id @GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int manageTrainingPartnerId;
+	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	private String userId;
+	
 	@NotNull
 	private String PAN;
 	@NotNull

@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.Email;
 
 public class RegistrationFormAssessor {
 	
-	@NotNull
+	//@NotNull
 	private String UserId;
 	@NotNull
 	private int Title;

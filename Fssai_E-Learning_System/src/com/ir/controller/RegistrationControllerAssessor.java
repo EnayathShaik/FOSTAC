@@ -30,6 +30,7 @@ import com.ir.model.Title;
 import com.ir.service.PageLoadServiceTrainer;
 import com.ir.service.RegistrationServiceAssessor;
 import com.ir.service.RegistrationServiceTrainer;
+import com.ir.util.GenerateUniqueID;
 import com.ir.util.JavaMail;
 
 @Controller
@@ -88,6 +89,14 @@ public class RegistrationControllerAssessor implements Serializable{
 		model.addAttribute("registrationFormAssessor", registrationFormAssessor);
 		return "registrationFormAssessor";
 	}
+	
+	@ModelAttribute("userId")
+	public String getUniqueId(){
+		String uniqueID = GenerateUniqueID.getNextCombinationId("AS", "personalInformationAssessor" , "000000");		
+		System.out.println(" Assessor  " + uniqueID);
+		return uniqueID;
+	}
+	
 	
 	@RequestMapping(value = "/registrationAsssessor", method = RequestMethod.POST)
 	public String registerTrainer(@Valid @ModelAttribute("registrationFormAssessor") RegistrationFormAssessor registrationFormAssessor, BindingResult bindingResult,Model model)  {

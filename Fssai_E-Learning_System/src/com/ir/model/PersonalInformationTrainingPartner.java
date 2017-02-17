@@ -21,10 +21,20 @@ public class PersonalInformationTrainingPartner {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int personalInformationTrainingPartnerId;
+	
+	private String userID;
 
 	
+	public String getUserID() {
+		return userID;
+	}
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="loginDetails")
 	private LoginDetails loginDetails;
+	
 	
 	
 	

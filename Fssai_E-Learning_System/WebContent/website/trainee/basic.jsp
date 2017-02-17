@@ -2,7 +2,7 @@
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
-function OnStart(){
+<%-- function OnStart(){
 	var steps = 1;
 	var traineeSteps =
 		<%=(Integer) session.getAttribute("traineeSteps")%>
@@ -17,7 +17,26 @@ function OnStart(){
 	}
 }
 window.onload = OnStart;
-
+ --%>
+ 
+ function getcourseType(){
+	 
+	 var courseType = $("#courseType").val();
+	 console.log(" courseType "+courseType);
+	 if(courseType=="Basic"){
+	
+		 $('#myForm').attr("action", "basicSave.fssai");
+	 }else if(courseType == "Advance"){
+		 $('#myForm').attr("action", "advanceTrainee.fssai"); 
+		 console.log($('#myForm').attr("action"));
+	 }else if(courseType == "Special"){
+		 $('#myForm').attr("action", "specialTrainee.fssai"); 
+		 console.log($('#myForm').attr("action"));
+	 }
+	
+	 
+ }
+ 
 function confirmTrainee(){
 	if(confirm("(Trainee can enroll to one course at one time,another course enrollment will be done after the completion of last step i.e. Generate Certificate).?")){
     }
@@ -108,7 +127,7 @@ function gettid(value){
 
 </script>
 
-<cf:form action="basicSave.fssai" name="myForm" method="POST" commandName="basicTrainee" >
+<cf:form action="" name="myForm" id="myForm" method="POST" commandName="basicTrainee" >
     <section>
      <%@include file="../roles/top-menu.jsp"%>
     </section>
@@ -151,14 +170,25 @@ function gettid(value){
                     <div class="row"></div>
                     <form>
                       <!-- left side -->
-                      
+
                       <div class="col-md-6 col-xs-12">
+                         <div class="form-group">
+                          <label>Course Type</label> &nbsp;&nbsp;<label> ${created}</label>
+							<cf:select path="courseType" class="form-control" onchange="getcourseType()">
+									<cf:option value="0" label="Select Course Type" />
+									<cf:options items="${courseTypes}"  />
+								</cf:select>
+							
+                        </div>
+                      
+                      
                         <div class="form-group">
                           <label>Course Name</label> &nbsp;&nbsp;<label> ${created}</label>
 							<cf:select path="courseName" class="form-control" onchange="getCourseTrainingType();">
 							<cf:option value="0" label="Select Course Name" />
 								<cf:options items="${courseNameListB}" itemValue="coursenameid" itemLabel="coursename" />
-							</cf:select>
+							</cf:select> 
+							
                         </div>
                         <div class="form-group">
                           <label>Training Partner</label>

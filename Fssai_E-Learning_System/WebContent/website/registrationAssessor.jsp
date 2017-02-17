@@ -551,7 +551,7 @@
 								placeholder="Aadhar Number" onblur="ck_aadhar();"
 								onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" />
 						</div>
-						<div class="form-group">
+						<div class="form-group" style="display:none">
 							<div>
 								<ul class="lab-no">
 									<li class="style-li"><strong><cs:message
@@ -563,9 +563,8 @@
 												path="UserId" cssClass="error" /></li>
 								</ul>
 							</div>
-							<cf:input path="UserId" onkeypress="return AvoidSpace(event)"
-								onKeyUP="this.value = this.value.toUpperCase();"
-								class="form-control" placeholder="User Id" onblur="checkname();" />
+							<cf:input path="UserId" 
+								class="form-control" type="hidden" placeholder="User Id" value="${userId}" />
 						</div>
 						<div class="form-group">
 							<div>

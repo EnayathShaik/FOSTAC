@@ -30,6 +30,7 @@ import com.ir.model.ContactTraineee;
 import com.ir.model.CourseEnrolledUser;
 import com.ir.model.CourseName;
 import com.ir.model.CourseTrainee;
+import com.ir.model.CourseType;
 import com.ir.model.District;
 import com.ir.model.FeedbackForm;
 import com.ir.model.FeedbackMaster;
@@ -1061,5 +1062,18 @@ public class TraineeDAOImpl implements TraineeDAO {
 				session.close();
 		
 				return certificateInfo;
+	}
+	
+	
+	public List<String> courseTypes(){
+		Session session = sessionFactory.openSession();
+		List<String> courseTList = new ArrayList<String>();
+		Query query = session.createQuery("from CourseType");
+		List<CourseType> courseTypeList = query.list();
+		for(CourseType c : courseTypeList){
+			courseTList.add(c.getCourseType());
+		}
+		session.close();
+		return courseTList;
 	}
 }

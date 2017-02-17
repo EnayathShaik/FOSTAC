@@ -60,6 +60,7 @@ import com.ir.model.State;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
 import com.ir.service.AdminService;
+import com.ir.util.GenerateUniqueID;
 import com.ir.util.JavaMail;
 import com.ir.util.SendContectMail;
 
@@ -515,6 +516,13 @@ public class AdminController {
 		return "trainingCenterUserManagementForm";
 	}
 
+	@ModelAttribute("userId")
+	public String getUniqueId(){
+		String uniqueID = GenerateUniqueID.getNextCombinationId("ADM", "adminusermanagement" , "00");		
+		System.out.println(" Admin ID " + uniqueID);
+		return uniqueID;
+	}
+	
 	@RequestMapping(value = "/assessorUserManagementForm", method = RequestMethod.GET)
 	public String assessorUserManagementForm(Model model) {
 		try {

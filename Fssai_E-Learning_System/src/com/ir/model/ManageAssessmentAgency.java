@@ -16,8 +16,16 @@ public class ManageAssessmentAgency {
 	
 	@Id @GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int manageAssessmentAgencyId;
+	
+	private String agencyUniqueID;
 	@NotNull
 	private String PAN;
+	public String getAgencyUniqueID() {
+		return agencyUniqueID;
+	}
+	public void setAgencyUniqueID(String agencyUniqueID) {
+		this.agencyUniqueID = agencyUniqueID;
+	}
 	@NotNull
 	private String assessmentAgencyName;
 	@NotNull

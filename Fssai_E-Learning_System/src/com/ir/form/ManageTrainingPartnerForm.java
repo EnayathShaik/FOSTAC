@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class ManageTrainingPartnerForm {
 	
-	@NotNull(message="* error")
+	//@NotNull(message="* error")
 	private String userId;
 	@NotNull(message="* error")
 	private String PAN;

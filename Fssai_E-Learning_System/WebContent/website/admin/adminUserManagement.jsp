@@ -111,7 +111,7 @@
                                                                     </div>
                                                                     <!-- right side -->
                                                                     <div class="col-md-6 col-xs-12">
-                                                                        <div class="form-group">
+                                                                        <div class="form-group" style="display:none">
                                                                             <div>
                                                                                 <ul class="lab-no">
                                                                                     <li class="style-li"><strong>User ID:</strong></li>
@@ -121,7 +121,7 @@
                                                                                     </li>
                                                                                 </ul>
                                                                             </div>
-                                                                            <cf:input path="userId" onblur="checkname();" placeholder="UserId" class="form-control" required="required" onkeypress="return AvoidSpace(event)" onKeyUP="this.value = this.value.toUpperCase();" />
+                                                                            <cf:input path="userId" value="${ userId }"  placeholder="UserId" class="form-control"  />
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <div>

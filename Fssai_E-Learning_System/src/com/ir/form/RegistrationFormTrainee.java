@@ -7,8 +7,8 @@ import org.hibernate.validator.constraints.*;
 
 public class RegistrationFormTrainee {
 	
-	@NotNull
-	@Size(min=1, max=20 , message="enter your userId")
+	//@NotNull
+	//@Size(min=1, max=20 , message="enter your userId")
 	private String UserId;
 	@NotNull
 	private int title;

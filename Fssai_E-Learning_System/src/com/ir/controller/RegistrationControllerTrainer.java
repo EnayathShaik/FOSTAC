@@ -35,6 +35,7 @@ import com.ir.service.RegistrationServiceTrainer;
 import com.ir.service.RegistrationServiceTrainingPartner;
 import com.ir.service.TraineeService;
 import com.ir.service.TrainingPartnerService;
+import com.ir.util.GenerateUniqueID;
 import com.ir.util.JavaMail;
 import com.ir.util.Profiles;
 
@@ -111,6 +112,14 @@ public class RegistrationControllerTrainer implements Serializable{
 		RegistrationFormTrainer registrationFormTrainer=new RegistrationFormTrainer();
 		model.addAttribute("registrationFormTrainer", registrationFormTrainer);
 		return "registrationFormTrainer";
+	}
+	
+	
+	@ModelAttribute("userId")
+	public String getUniqueId(){
+		String uniqueID = GenerateUniqueID.getNextCombinationId("TR", "personalinformationtrainer" , "000000");		
+		System.out.println(" Trainer ID " + uniqueID);
+		return uniqueID;
 	}
 	
 	@RequestMapping(value = "/registrationTrainer", method = RequestMethod.POST)

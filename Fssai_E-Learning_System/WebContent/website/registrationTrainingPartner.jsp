@@ -46,6 +46,15 @@ function checkname()
   return false;
  }
 } 
+
+function getTPName(){
+	
+	var TPName = $("#TrainingPartnerName option:selected").text();
+	TPName = TPName.substring(0,3).toUpperCase();
+	console.log(" TPName  "+TPName);
+	$("#TPName").val(TPName);
+	
+}
 function DrawCaptcha()
 {
     var a = Math.ceil(Math.random() * 10)+ '';
@@ -66,7 +75,7 @@ function ValidCaptcha(){
     if (str1 == str2) 
 {
     	return checkagree();
-return true;
+//return true;
 }     else
 	{
 	alert("Please Enter correct captcha");
@@ -196,7 +205,7 @@ function AvoidSpace(event) {
    
     function validateFields() {
     	//alert("userid")
-    	if(document.getElementById('UserId').value == '') {
+  /*   	if(document.getElementById('UserId').value == '') {
     	document.getElementById("UserId").style.borderColor = "red";
     	document.getElementById("UserIdError").style.display = 'block';
     	document.getElementById("UserId").focus();
@@ -205,7 +214,7 @@ function AvoidSpace(event) {
     		//alert("userid**************")
     	    document.getElementById('UserId').style.borderColor = "#ccc";
     	    document.getElementById("UserIdError").style.display = 'none';
-    	    }
+    	    } */
     	
     	
     	//alert("Training Centre Name");
@@ -494,7 +503,7 @@ function AvoidSpace(event) {
     <div class="row">
       <div class="col-md-2 hidden-xs"></div>
       <div class="col-md-8  col-xs-12">
-        <h3 class="text-capitalize heading-3-padding">ATraining Center Registration Form</h3>
+        <h3 class="text-capitalize heading-3-padding">A Training Center Registration Form</h3>
 
           <!-- personal information -->
           <div class="personel-info">
@@ -502,7 +511,7 @@ function AvoidSpace(event) {
               <legend>Personal Information</legend>
               <!-- left side -->
               <div class="col-md-6 col-xs-12">
-                <div class="form-group">
+                <div class="form-group" style="display:none">
                 
                   <div>
                     <ul class="lab-no">
@@ -513,7 +522,7 @@ function AvoidSpace(event) {
                       </li>
                     </ul>
                   </div>
-                  <cf:input path="UserId" maxlength="20" onkeypress="return AvoidSpace(event)" onKeyUP="this.value = this.value.toUpperCase();" class="form-control" onblur  ="checkname();" placeholder="User ID"/>
+                  <cf:input path="UserId" maxlength="20"  class="form-control"  placeholder="User ID"/>
                 </div>
                 
                 <div class="form-group">
@@ -536,7 +545,8 @@ function AvoidSpace(event) {
                       <li class="style-li error-red"><cf:errors path="TrainingPartnerName" cssClass="error" /> </li>
                     </ul>
                   </div>
-                    <cf:select path="TrainingPartnerName" class="form-control">
+                  <cf:input  type="hidden" path="TPName" id="TPName"/>
+                    <cf:select path="TrainingPartnerName" class="form-control" onchange="getTPName()">
                     <cf:option value="0" label="Select Training Partner Name" />
 					<cf:options items="${trainingPartnerNameList}" itemValue="manageTrainingPartnerId" itemLabel="trainingPartnerName" />
 					</cf:select>

@@ -172,6 +172,7 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 
 			PersonalInformationAssessor personalInformationAssessor = new PersonalInformationAssessor();
 			personalInformationAssessor.setTitle(tt);
+			personalInformationAssessor.setUserId(registrationFormAssessor.getUserId());
 			personalInformationAssessor.setAadharNumber(registrationFormAssessor.getAadharNumber());
 			personalInformationAssessor.setFirstName(registrationFormAssessor.getFirstName());
 			personalInformationAssessor.setLastName(registrationFormAssessor.getLastName());

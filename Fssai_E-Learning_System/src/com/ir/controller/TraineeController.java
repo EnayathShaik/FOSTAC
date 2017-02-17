@@ -114,8 +114,18 @@ public class TraineeController {
 		//String uniqueId = courseEnrolledUserForm.getUniqueId();
 		//modal.addAttribute("uniqueId", uniqueId);
 		//session.setAttribute("uniqueId", uniqueId);
+		
+		
 		return "basic";
 	}
+	
+	@ModelAttribute("courseTypes")
+	public List<String> populateCourseType() {
+		List<String> courseTypes  = traineeService.courseTypes();
+		System.out.println("courseTypes    :   "+ courseTypes);
+		return courseTypes;
+	}
+	
 	
 	@RequestMapping(value="/uploadImage" , method=RequestMethod.GET)
 	public String uploadImage(@ModelAttribute("uploadImage") CourseEnrolledUserForm courseEnrolledUserForm ,

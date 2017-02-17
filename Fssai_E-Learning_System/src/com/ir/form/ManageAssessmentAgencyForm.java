@@ -3,7 +3,7 @@ package com.ir.form;
 import javax.validation.constraints.NotNull;
 
 public class ManageAssessmentAgencyForm {
-	@NotNull
+	//@NotNull
 	private String userId;
 	@NotNull
 	private String PAN;

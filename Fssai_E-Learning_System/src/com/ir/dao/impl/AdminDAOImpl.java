@@ -66,6 +66,7 @@ import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
 import com.ir.util.ChangePasswordUtility;
 import com.ir.util.EncryptionPasswordANDVerification;
+import com.ir.util.GenerateUniqueID;
 import com.ir.util.PasswordGenerator;
 import com.ir.util.SendContectMail;
 import com.ir.util.SendMail;
@@ -383,8 +384,16 @@ public class AdminDAOImpl implements AdminDAO {
 		}catch(NoSuchAlgorithmException e){
 			System.out.println( " no such algo exception error catch ");
 		}
+		
+		
+		String TPPrefix = "TP"+   manageTrainingPartnerForm.getTrainingPartnerName().toUpperCase().substring(0, 3);
+		System.out.println(" TPPrefix "+TPPrefix);
+		String nextSequenceUserID  =  GenerateUniqueID.getNextCombinationId(TPPrefix, "manageTrainingPartner", "00");
+		System.out.println(" nextSequenceUserID "+nextSequenceUserID);
+		
+		
 		LoginDetails loginDetails = new LoginDetails();
-		loginDetails.setLoginId(manageTrainingPartnerForm.getUserId());
+		loginDetails.setLoginId(nextSequenceUserID);
 		loginDetails.setPassword(passwordString);
 		loginDetails.setEncrypted_Password(encryprPassword);
 		loginDetails.setStatus("A");
@@ -397,6 +406,7 @@ public class AdminDAOImpl implements AdminDAO {
 		ManageTrainingPartner manageTrainingPartner = new ManageTrainingPartner();
 		manageTrainingPartner.setPAN(manageTrainingPartnerForm.getPAN());
 		manageTrainingPartner.setTrainingPartnerName(manageTrainingPartnerForm.getTrainingPartnerName());
+		manageTrainingPartner.setUserId(nextSequenceUserID);
 		manageTrainingPartner.setWebsiteUrl(manageTrainingPartnerForm.getWebsiteUrl());
 		manageTrainingPartner.setHeadOfficeDataAddress1(manageTrainingPartnerForm.getHeadOfficeDataAddress1());
 		manageTrainingPartner.setHeadOfficeDataAddress2(manageTrainingPartnerForm.getHeadOfficeDataAddress2());
@@ -416,9 +426,9 @@ public class AdminDAOImpl implements AdminDAO {
 			SendMail sendMail = new SendMail();
 			sendMail.mailProperty(passwordString, manageTrainingPartnerForm.getEmail(), manageTrainingPartnerForm.getTrainingPartnerName()+ " " + manageTrainingPartnerForm.getUserId());
 
-			return passwordString+"&"+manageTrainingPartnerForm.getUserId();
+			return passwordString+"&"+nextSequenceUserID;
 		}else{
-			return passwordString+"&"+manageTrainingPartnerForm.getUserId();
+			return passwordString+"&"+nextSequenceUserID;
 		}
 	}
 
@@ -443,14 +453,18 @@ public class AdminDAOImpl implements AdminDAO {
 		District d = getDistrict(manageAssessmentAgencyForm.getDistrict());
 		City c = getCity(manageAssessmentAgencyForm.getCity());
 		
+		ManageAssessmentAgency manageAssessmentAgency = new ManageAssessmentAgency();
+		String APPrefix = "AP"+   manageAssessmentAgencyForm.getAssessmentAgencyName().toUpperCase().substring(0, 3);
+		System.out.println(" APPrefix "+APPrefix);
+		String nextSequenceUserID  =  GenerateUniqueID.getNextCombinationId(APPrefix, "manageAssessmentAgency", "00");
+		System.out.println(" nextSequenceUserID "+nextSequenceUserID);
 		LoginDetails loginDetails = new LoginDetails();
-		loginDetails.setLoginId(manageAssessmentAgencyForm.getUserId());
+		loginDetails.setLoginId(nextSequenceUserID);
 		loginDetails.setPassword(passwordString);
 		loginDetails.setEncrypted_Password(encryprPassword);
 		loginDetails.setProfileId(8);
 		loginDetails.setStatus("A");
-		
-		ManageAssessmentAgency manageAssessmentAgency = new ManageAssessmentAgency();
+		manageAssessmentAgency.setAgencyUniqueID(nextSequenceUserID);
 		manageAssessmentAgency.setPAN(manageAssessmentAgencyForm.getPAN());
 		manageAssessmentAgency.setAssessmentAgencyName(manageAssessmentAgencyForm.getAssessmentAgencyName());
 		manageAssessmentAgency.setWebsiteUrl(manageAssessmentAgencyForm.getWebsiteUrl());
@@ -469,9 +483,9 @@ public class AdminDAOImpl implements AdminDAO {
 			SendMail sendMail = new SendMail();
 			sendMail.mailProperty(passwordString, manageAssessmentAgencyForm.getEmail(), manageAssessmentAgencyForm.getAssessmentAgencyName()+ " " + manageAssessmentAgencyForm.getUserId());
 
-			return passwordString+"&"+manageAssessmentAgencyForm.getUserId();
+			return passwordString+"&"+nextSequenceUserID;
 		}else{
-			return passwordString+"&"+manageAssessmentAgencyForm.getUserId();
+			return passwordString+"&"+nextSequenceUserID;
 		}
 	}
 
@@ -737,6 +751,7 @@ public class AdminDAOImpl implements AdminDAO {
 			loginDetails.setStatus("A");
 			
 			AdminUserManagement adminUserManagement = new AdminUserManagement();
+			adminUserManagement.setUserId(adminUserManagementForm.getUserId());
 			adminUserManagement.setAadharNumber(adminUserManagementForm.getAadharNumber());
 			adminUserManagement.setFirstName(adminUserManagementForm.getFirstName());
 			adminUserManagement.setLastName(adminUserManagementForm.getLastName());

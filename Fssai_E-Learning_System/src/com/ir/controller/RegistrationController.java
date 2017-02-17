@@ -24,6 +24,7 @@ import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.service.PageLoadService;
 import com.ir.service.RegistrationServiceTrainee;
+import com.ir.util.GenerateUniqueID;
 import com.ir.util.JavaMail;
 
 
@@ -91,32 +92,7 @@ public class RegistrationController {
 		System.out.println("state list   :   "+ stateList);
 		return stateList;
 	}
-	/*@ModelAttribute("districtList")
-	public List<District> districtList() {
-		List<District> districtList = pageLoadService.loadDistrict();
-		System.out.println("district list   :   "+ districtList);
-		return districtList;
-	}*/
 	
-	/*@RequestMapping(value="/loadCity" , method = RequestMethod.GET )
-	public @ResponseBody List<City> populateCityList1(){
-		int stat=1;
-		System.out.println("load city method call and valu pf parameter : "+stat);
-		List<City> loadCity = pageLoadService.loadCity(stat);
-		return loadCity;
-	}*/
-	
-	/*@ModelAttribute("cityList")
-	public List<City> populateCityList() {
-		
-		List<City> cityList=new ArrayList<City>();
-		cityList.add(new City(1, "New Delhi"));
-		cityList.add(new City(2, "Gurgaon"));
-		cityList.add(new City(3, "Noida"));
-		cityList.add(new City(4, "Varanasi"));
-		
-		return cityList;
-	}*/
 	
 	@ModelAttribute("titleList")
 	public List<Title> populateTitle() {
@@ -133,12 +109,13 @@ public class RegistrationController {
 		return casteList;
 	}
 	
-	/*@ModelAttribute("courseNameList")
-	public List<CourseName> courseNameList() {
-		List<CourseName> courseNameList = pageLoadService.loadCourseName();
-		System.out.println("CourseName  list   :   "+ courseNameList);
-		return courseNameList;
-	}*/
+	@ModelAttribute("userId")
+	public String getUniqueId(){
+		String uniqueID = GenerateUniqueID.getNextCombinationId("TE", "personalinformationtrainee" , "000000");		
+		System.out.println(" Trainee ID " + uniqueID);
+		return uniqueID;
+	}
+	
 	
 	@ModelAttribute("kindOfBusinessList")
 	public List<KindOfBusiness> populateKindOfBusiness() {

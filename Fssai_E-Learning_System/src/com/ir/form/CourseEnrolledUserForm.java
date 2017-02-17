@@ -2,10 +2,17 @@ package com.ir.form;
 
 public class CourseEnrolledUserForm {
 	
+	private String courseType;
 	private int courseName;
 	private String modeOfTraining;
 	private int trainingPartner;
 	private int trainingDate;
+	public String getCourseType() {
+		return courseType;
+	}
+	public void setCourseType(String courseType) {
+		this.courseType = courseType;
+	}
 	private int trainingCenterState;
 	private int trainingCenterCity;
 	

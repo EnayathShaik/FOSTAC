@@ -11,6 +11,7 @@ import com.ir.model.AdmitCardForm;
 import com.ir.model.CertificateInfo;
 import com.ir.model.CourseName;
 import com.ir.model.CourseTrainee;
+import com.ir.model.CourseType;
 import com.ir.model.FeedbackForm;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.ManageTrainingPartner;
@@ -22,6 +23,7 @@ import com.ir.model.Utility;
 
 public interface TraineeService {
 	public List<CourseName> courseNameList();
+	public List<String> courseTypes();
 	public List<CourseName> courseNameListByType(int courseType);
 	public CourseTrainee getCourseTrainingByCourseTypeID(int typeId);
 	public String isTraineeEligible(int userID);

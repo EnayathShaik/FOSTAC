@@ -706,7 +706,7 @@ return true;
 					<legend>Personal Information</legend>
 					<!-- left side -->
 					<div class="col-md-6 col-xs-12">
-						<div class="form-group">
+						<div class="form-group" style="display:none;">
 							<div>
 								<ul class="lab-no">
 									<li class="style-li"><strong><cs:message
@@ -720,7 +720,7 @@ return true;
 							<cf:input path="UserId" onkeypress="return AvoidSpace(event)"
 								class="form-control"
 								onKeyUP="this.value = this.value.toUpperCase();"
-								placeholder="User Id" onblur="checkname();" />
+								placeholder="User Id" readonly="true"  value="${userId }" />
 						</div>
 
 						<div class="form-group">

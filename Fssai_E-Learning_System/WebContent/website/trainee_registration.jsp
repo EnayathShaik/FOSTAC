@@ -815,9 +815,9 @@ function ck_aadhar() {
 						<!-- left side -->
 						<div class="col-md-6 col-xs-12">
 
-							<div class="form-group">
+							<div class="form-group" style="display:none">
 								<div>
-									<ul class="lab-no">
+									<ul class="lab-no" >
 										<li class="style-li"><strong><cs:message
 													code="lbl.Trainee.UserId" /></strong></li>
 										<li class="style-li error-red"><span id="name_status">
@@ -826,10 +826,8 @@ function ck_aadhar() {
 												path="userId" cssClass="error" />${created }</li>
 									</ul>
 								</div>
-								<cf:input path="userId" maxlength="20"
-									onkeypress="return AvoidSpace(event)"
-									onKeyUP="this.value = this.value.toUpperCase();"
-									class="form-control" onblur="checkname();"
+								<cf:input path="userId" maxlength="20" type="hidden"
+									class="form-control" readonly="true" value="${userId}"
 									placeholder="User Id" />
 							</div>
 

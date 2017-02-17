@@ -21,7 +21,8 @@
 %>
 <div id="sidebar-wrapper">
 	<ul class="sidebar-nav">
-		<li class="dropdown active"><a href="#" class="dropdown-toggle"
+		 <li><a href="basic.fssai">Course Enrollment</a></li> 
+	<!-- 	<li class="dropdown active"><a href="#" class="dropdown-toggle"
 			data-toggle="dropdown" role="button" aria-haspopup="true"
 			aria-expanded="false">Course Enrollment <span class="caret"></span></a>
 			<ul disabled disa class="dropdown-menu">
@@ -30,7 +31,7 @@
 						Course</a></li>
 				<li><a href="specialTrainee.fssai" class="clr">Special
 						Course</a></li>
-			</ul></li>
+			</ul></li>  -->
 		<li><a href="generateAdmitCardtrainee.fssai">Generate Admit
 				Card</a></li>
 		<li><a href="course-training.fssai?courseTypeId=1">Training</a></li>
