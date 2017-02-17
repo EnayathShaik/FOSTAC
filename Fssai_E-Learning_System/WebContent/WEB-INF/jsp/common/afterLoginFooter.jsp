@@ -18,53 +18,19 @@
     <script src="website/afterLogin/js/jquery-2.1.0.min.js"></script>
     <script src="website/afterLogin/js/bootstrap.js"></script>
     <script src="website/afterLogin/js/jquery.isotope.min.js"></script> 
-	<script src="website/afterLogin/js/wow.min.js"></script>
-    <script src="website/afterLogin/js/aos.js"></script>
-    <script src="website/afterLogin/js/owl.carousel.js"></script>
-    <script src="website/afterLogin/js/jquery.swipebox.js"></script>
-    <script src="website/js/jspdf.min.js"></script>
-    <!-- <script src="js/jquery-1.12.3.js" type="text/javascript"></script>  -->
-	<script src="website/afterLogin/js/jquery.dataTables.min.js" type="text/javascript"></script> 
 
+<script src="website/afterLogin/js/wow.min.js"></script>
+    <!-- on scroll animation -->
+    <script src="website/afterLogin/js/aos.js"></script>
     <script>
         AOS.init();
     </script>
     <!-- carousel -->
-    
+    <script src="website/afterLogin/js/owl.carousel.js"></script>
     <script>
         $(document).ready(function () {
         	
-        	var doc = new jsPDF();
-        	var specialElementHandlers = {
-        	    '#editor': function (element, renderer) {
-        	        return true;
-        	    }
-        	};
-
-        	$('#cmd').click(function () {
-        	    doc.fromHTML($('#content').html(), 15, 15, {
-        	        'width': 170,
-        	            'elementHandlers': specialElementHandlers
-        	    });
-        	    doc.save('sample-file.pdf');
-        	});
         	
-        	var table = $(document).ready(function () {
-                $("#zentechDatatables").DataTable({
-                    "bAutoWidth": false
-                    , "bProcessing": true
-                    , "iDisplayLength": 5
-                    , "bPaginate": true
-                    , "sPaginationType": "full_numbers"
-                    , "bJQueryUI": true
-                    , "dom": 'Bfrtip'
-                    , "buttons": [
-                        'csv',
-
-                    ],
-    				"colReorder" : true,
-                });
-            });
         	
         	$(function(){
         	    var dtToday = new Date();
@@ -100,7 +66,7 @@
     </script>
 
     <!-- gallery -->
-    
+    <script src="website/afterLogin/js/jquery.swipebox.js"></script>
     <script type="text/javascript">
         ; (function ($) {
 

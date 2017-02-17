@@ -43,7 +43,7 @@ function pan_validate(id, pan) {
 
 
 $(document).ready(function() {
-	var table = $(document).ready(function () {
+	/*var table = $(document).ready(function () {
         $("#stateMasterData").DataTable({
             "bAutoWidth": false
             , "bProcessing": true
@@ -58,7 +58,7 @@ $(document).ready(function() {
             ],
 			"colReorder" : true,
         });
-    });
+    });*/
 	
     $("#btnExport").click(function(e) {
         //getting values of current time for generating the file name
