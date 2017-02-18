@@ -5,12 +5,19 @@ import java.sql.Time;
 
 public class TrainingCalendarForm {
 	
+	private int tcid;
 	private int courseType;
 	private int courseName;
 	private int trainingPartner;
 	private int trainingCenter;
-	private String trainingDate;
-	private String trainingTime;
+	private String trainingStartDate;
+	private String trainingEndDate;
+	public int getTcid() {
+		return tcid;
+	}
+	public void setTcid(int tcid) {
+		this.tcid = tcid;
+	}
 	private String trainerName;
 	private String trainingType;
 	public int getCourseType() {
@@ -37,18 +44,7 @@ public class TrainingCalendarForm {
 	public void setTrainingCenter(int trainingCenter) {
 		this.trainingCenter = trainingCenter;
 	}
-	public String getTrainingDate() {
-		return trainingDate;
-	}
-	public void setTrainingDate(String trainingDate) {
-		this.trainingDate = trainingDate;
-	}
-	public String getTrainingTime() {
-		return trainingTime;
-	}
-	public void setTrainingTime(String trainingTime) {
-		this.trainingTime = trainingTime;
-	}
+
 	public String getTrainerName() {
 		return trainerName;
 	}
@@ -66,9 +62,21 @@ public class TrainingCalendarForm {
 		return "TrainingCalendarForm [courseType=" + courseType
 				+ ", courseName=" + courseName + ", trainingPartner="
 				+ trainingPartner + ", trainingCenter=" + trainingCenter
-				+ ", trainingDate=" + trainingDate + ", trainingTime="
-				+ trainingTime + ", trainerName=" + trainerName
+				+ ", trainingDate=" + trainingEndDate + ", trainingTime="
+				+ trainingStartDate + ", trainerName=" + trainerName
 				+ ", trainingType=" + trainingType + "]";
+	}
+	public String getTrainingStartDate() {
+		return trainingStartDate;
+	}
+	public void setTrainingStartDate(String trainingStartDate) {
+		this.trainingStartDate = trainingStartDate;
+	}
+	public String getTrainingEndDate() {
+		return trainingEndDate;
+	}
+	public void setTrainingEndDate(String trainingEndDate) {
+		this.trainingEndDate = trainingEndDate;
 	}
 	
 	

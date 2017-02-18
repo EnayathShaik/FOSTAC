@@ -1,15 +1,22 @@
 package com.ir.model;
 
 public class TrainingPartnerCalendarForm {
+	private int tcid;
 	private int selCourseType;
 	private int selCourseName;
-	private String seltraineeDate;
-	private String seltrainingtime;
+	private String trainingStartDate;
+	private String trainingEndDate;
 	private String selTrainerNames;
 	private String loginId;
 	
 	public String getLoginId() {
 		return loginId;
+	}
+	public int getTcid() {
+		return tcid;
+	}
+	public void setTcid(int tcid) {
+		this.tcid = tcid;
 	}
 	public void setLoginId(String loginId) {
 		this.loginId = loginId;
@@ -26,29 +33,30 @@ public class TrainingPartnerCalendarForm {
 	public void setSelCourseName(int selCourseName) {
 		this.selCourseName = selCourseName;
 	}
+	public String getTrainingStartDate() {
+		return trainingStartDate;
+	}
+	public void setTrainingStartDate(String trainingStartDate) {
+		this.trainingStartDate = trainingStartDate;
+	}
+	public String getTrainingEndDate() {
+		return trainingEndDate;
+	}
+	public void setTrainingEndDate(String trainingEndDate) {
+		this.trainingEndDate = trainingEndDate;
+	}
 	public String getSelTrainerNames() {
 		return selTrainerNames;
 	}
 	public void setSelTrainerNames(String selTrainerNames) {
 		this.selTrainerNames = selTrainerNames;
 	}
-	public String getSeltraineeDate() {
-		return seltraineeDate;
-	}
-	public void setSeltraineeDate(String seltraineeDate) {
-		this.seltraineeDate = seltraineeDate;
-	}
-	public String getSeltrainingtime() {
-		return seltrainingtime;
-	}
-	public void setSeltrainingtime(String seltrainingtime) {
-		this.seltrainingtime = seltrainingtime;
-	}
+
 	@Override
 	public String toString() {
 		return "TrainingPartnerCalendarForm [selCourseType=" + selCourseType
 				+ ", selCourseName=" + selCourseName + ", seltraineeDate="
-				+ seltraineeDate + ", seltrainingtime=" + seltrainingtime
+				+ trainingStartDate + ", seltrainingtime=" + trainingEndDate
 				+ ", selTrainerNames=" + selTrainerNames + "]";
 	}
 	

@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -201,25 +202,7 @@ public class TrainingPartnerController {
 		model.addAttribute("trainingpartnerassessmentcalendar" , gson.toJson(trainingpartnerassessmentcalendar));
 		return "trainingpartnerassessmentcalendar";
 	}
-	/*@RequestMapping(value="/trainingpartnerapplicationstatus" , method=RequestMethod.GET)
-	public String trainingpartnerapplicationstatus(@ModelAttribute("trainingpartnerapplicationstatus") TrainingPartnerTrainingCalender trainingpartnerapplicationstatus,HttpSession session,BindingResult result , Model model){
-		if(result.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
-			return "trainingpartnerapplicationstatus";
-		}
-		
-		List<CourseType> courseTypes = trainingPartnerService.courseTypes();
-		//List<CourseName> courseNames = trainingPartnerService.getCourseNameList();
-		trainingpartnerapplicationstatus.setCourseTypes(courseTypes);
-//		trainingpartnerapplicationstatus.setCourseNames(courseNames);
-		Gson gson = new Gson();
-		model.addAttribute("trainingpartnerapplicationstatus" , gson.toJson(trainingpartnerapplicationstatus));
-		
-		return "trainingpartnerapplicationstatus";
-	}*/
-	
+
 	@RequestMapping(value="/trainingpartnerapplicationstatus" , method=RequestMethod.GET)
 	public String trainingpartnerapplicationstatus(@ModelAttribute("trainingpartnerapplicationstatus") TrainingPartnerTrainingCalender trainingpartnerapplicationstatus,HttpSession session,BindingResult result , Model model){
 	
@@ -358,6 +341,9 @@ public class TrainingPartnerController {
         out.print(newJSON);
         out.flush();
 	 }
+	
+	
+	
 	@RequestMapping(value="/getTrainingCalenderList" , method=RequestMethod.POST)
 	@ResponseBody
 	  public void getTrainingCalenderList(@RequestBody PostVacancyTrainingCenterBean postVacancyTrainingCenterBean ,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException {	
@@ -535,10 +521,13 @@ public class TrainingPartnerController {
 		trainingCalendarForm.setCourseName(trainingPartnerCalendarForm.getSelCourseName());
 		trainingCalendarForm.setCourseType(trainingPartnerCalendarForm.getSelCourseType());
 		trainingCalendarForm.setTrainerName(trainingPartnerCalendarForm.getSelTrainerNames());
-		trainingCalendarForm.setTrainingDate(trainingPartnerCalendarForm.getSeltraineeDate());
-		trainingCalendarForm.setTrainingTime(trainingPartnerCalendarForm.getSeltrainingtime());
+		trainingCalendarForm.setTrainingStartDate(trainingPartnerCalendarForm.getTrainingStartDate());
+		trainingCalendarForm.setTrainingEndDate(trainingPartnerCalendarForm.getTrainingEndDate());
+		System.out.println("tcid "+trainingPartnerCalendarForm.getTcid());
+		trainingCalendarForm.setTcid(trainingPartnerCalendarForm.getTcid());
 		String trainingCalendar = trainingPartnerService.trainingCalendarForm(trainingCalendarForm);
 		
+		model.addAttribute(new TrainingPartnerCalendarForm()); 
 		if(trainingCalendar.equalsIgnoreCase("created")){
 			model.addAttribute("created", "Calender saved successfully !!!");
 		}else{
@@ -547,6 +536,13 @@ public class TrainingPartnerController {
 		return "redirect:/trainingpartnertrainingcalendar.fssai";
 	}
 	
+	
+	@RequestMapping("/trainingCalendarRemove" )
+    public String removeManageCourseCarricullum(@Valid @ModelAttribute("trainingPartnerCalendarForm") TrainingPartnerCalendarForm trainingPartnerCalendarForm){
+		System.out.println("id "+trainingPartnerCalendarForm.getTcid());
+        //trainingPartnerService.removeManageCourseCarricullum(id);
+		return "redirect:/trainingpartnertrainingcalendar.fssai";
+    }
 	
 	
 	//

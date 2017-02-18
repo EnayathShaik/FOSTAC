@@ -597,17 +597,25 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		tc.setCourseName(trainingCalendarForm.getCourseName());
 		tc.setTrainingPartner(trainingCalendarForm.getTrainingPartner());
 		tc.setTrainingCenter(trainingCalendarForm.getTrainingCenter());
-		tc.setTrainingDate(trainingCalendarForm.getTrainingDate());
-		tc.setTrainingTime(trainingCalendarForm.getTrainingTime());
+		tc.setTrainingDate(trainingCalendarForm.getTrainingStartDate());
+		tc.setTrainingTime(trainingCalendarForm.getTrainingEndDate());
 		tc.setTrainerName(trainingCalendarForm.getTrainerName());
 		tc.setTrainingType(trainingCalendarForm.getTrainingType());
 		
 		//assessment
-		tc.setAssessmentDate(trainingCalendarForm.getTrainingDate());
-		tc.setAssessmentTime(trainingCalendarForm.getTrainingTime());
+		tc.setAssessmentDate(trainingCalendarForm.getTrainingStartDate());
+		tc.setAssessmentTime(trainingCalendarForm.getTrainingEndDate());
+		System.out.println("---->"+trainingCalendarForm.getTcid());
+		int i = 0;
+	if(trainingCalendarForm.getTcid()==0){
+		System.out.println("inside create");
+	 i = (Integer) session.save(tc);
+	}else{
+		System.out.println(" inside update");
+		tc.setTrainingCalendarId(trainingCalendarForm.getTcid());
+		 session.update(tc);
+	}
 		
-		
-		int i = (Integer) session.save(tc);
 		tx.commit();
 		session.close();
 		if(i >0){

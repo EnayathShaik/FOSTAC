@@ -51,7 +51,7 @@ function showDetails(){
 			$('#newTable tr').remove();
 			$.each(mainData1 , function(i , obj)
 			{
-				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td><input type="checkbox">YES</td><td>Confirm</td></tr>');
+				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td>'+obj[5]+'</td><td><input type="checkbox">YES</td><td>Confirm</td></tr>');
 				
 			});
 			}

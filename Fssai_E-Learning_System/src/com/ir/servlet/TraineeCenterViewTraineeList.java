@@ -56,7 +56,7 @@ public class TraineeCenterViewTraineeList extends HttpServlet {
   
         
         
-        String courseType,courseName , trainingDate , trainingtime,trainer ;
+        String courseType,courseName , trainingStartDate , trainingEndDate,trainer ;
 		try{
 			courseType = n1[0].split("=")[1];
 		}
@@ -72,17 +72,17 @@ public class TraineeCenterViewTraineeList extends HttpServlet {
 		
 	
 		try{
-			trainingDate = n1[2].split("=")[1];
+			trainingStartDate = n1[2].split("=")[1];
 		}
 		catch(Exception e){
-			trainingDate = "%";
+			trainingStartDate = "%";
 		}
 		
 		try{
-			trainingtime = n1[3].split("=")[1];
+			trainingEndDate = n1[3].split("=")[1];
 		}
 		catch(Exception e){
-			trainingtime = "%";
+			trainingEndDate = "%";
 		}
         
 		try{
@@ -94,15 +94,16 @@ public class TraineeCenterViewTraineeList extends HttpServlet {
     
 		
 		 String sql ="";
-			sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,pitr.firstname || ' '|| pitr.middlename ||' '|| pitr.lastname as participantName " +
-					"from trainingcalendar A " +
+			sql = "select A.trainingcalendarid , B.coursetype,C.coursename,A.trainingdate,A.trainingtime,pitr.firstname || ' '|| pitr.middlename ||' '|| pitr.lastname as participantName  " +
+					" , A.coursetype as coursetypeid  , A.coursename as coursenameid , A.trainername as trainernameid from trainingcalendar A " +
 					" inner join coursetype B on(A.coursetype=B.coursetypeid)" +
 					" inner join coursename C on(A.coursename=C.coursenameid)"+
 					" inner join personalinformationtrainer as pitr on CAST(CAST (A.trainername AS NUMERIC(19,4)) AS INT) = pitr.personalinformationtrainerid "
-					+" where cast( B.coursetype  as varchar(10)) like '"+courseType+"%' and  cast(C.coursename as varchar(10)) like '"+courseName+"%' and  cast(A.trainingdate as varchar(10)) like '"+trainingDate+"%' and cast(A.trainingtime as varchar(10)) like '"+trainingtime+"%' ";
+					+" where cast( B.coursetype  as varchar(10)) like '"+courseType+"%' and  cast(C.coursename as varchar(10)) like '"+courseName+"%' and  cast(A.trainingdate as varchar(10)) like '"+trainingStartDate+"%' and cast(A.trainingtime as varchar(10)) like '"+trainingEndDate+"%' ";
 		String newList=null;
 		List list = new AjaxRequest().returnList(sql);
-		if(list.size() > 0 || list != null){
+		System.out.println("list "+list);
+		if(list != null || list.size() > 0 ){
 			System.out.println(list);
 			Gson g =new Gson();
 			newList = g.toJson(list); 

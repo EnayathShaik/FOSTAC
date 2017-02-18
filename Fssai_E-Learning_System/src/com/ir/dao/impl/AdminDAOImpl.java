@@ -892,12 +892,12 @@ public class AdminDAOImpl implements AdminDAO {
 		tc.setCourseName(trainingCalendarForm.getCourseName());
 		tc.setTrainingPartner(trainingCalendarForm.getTrainingPartner());
 		tc.setTrainingCenter(trainingCalendarForm.getTrainingCenter());
-		tc.setTrainingDate(trainingCalendarForm.getTrainingDate());
-		tc.setTrainingTime(trainingCalendarForm.getTrainingTime());
+		tc.setTrainingDate(trainingCalendarForm.getTrainingStartDate());
+		tc.setTrainingTime(trainingCalendarForm.getTrainingEndDate());
 		tc.setTrainerName(trainingCalendarForm.getTrainerName());
 		tc.setTrainingType(trainingCalendarForm.getTrainingType());
-		tc.setAssessmentDate(trainingCalendarForm.getTrainingDate());
-		tc.setAssessmentTime(trainingCalendarForm.getTrainingTime());
+		tc.setAssessmentDate(trainingCalendarForm.getTrainingStartDate());
+		tc.setAssessmentTime(trainingCalendarForm.getTrainingEndDate());
 		
 		int i = (Integer) session.save(tc);
 		tx.commit();

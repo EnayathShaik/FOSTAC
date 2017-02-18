@@ -670,8 +670,8 @@ public class AdminController {
 			return "trainingCalendarForm";
 		}
 		try {
-			System.out.println(trainingCalendarForm.getTrainingDate() + "   "
-					+ trainingCalendarForm.getTrainingTime());
+			System.out.println(trainingCalendarForm.getTrainingStartDate() + "   "
+					+ trainingCalendarForm.getTrainingEndDate());
 			String trainingCalendar = adminService
 					.trainingCalendarForm(trainingCalendarForm);
 			if (trainingCalendar.equalsIgnoreCase("created")) {
