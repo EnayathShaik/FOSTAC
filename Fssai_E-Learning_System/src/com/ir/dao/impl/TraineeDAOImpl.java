@@ -40,6 +40,7 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.State;
 import com.ir.model.Title;
+import com.ir.model.TrainingCalendar;
 import com.ir.model.TrainingStatus;
 import com.ir.model.Utility;
 import com.ir.util.ChangePasswordUtility;
@@ -550,33 +551,34 @@ public class TraineeDAOImpl implements TraineeDAO {
 	}
 
 	@Override
-	public long basicSave(CourseEnrolledUserForm courseEnrolledUserForm,
+	public String basicSave(CourseEnrolledUserForm courseEnrolledUserForm,
 			int loginid, int tableID, Integer profileID) {
 
 		System.out.println("course enrolled");
 		Session session = sessionFactory.openSession();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-		long date = System.currentTimeMillis();
-		System.out.println("roll nu  :" + date);
-		System.out.println("loginid  :" + loginid);
-		System.out.println("tableID   :" + tableID);
-		System.out.println("TrainingCalendarId()   :"
-				+ courseEnrolledUserForm.getTrainingCalendarId());
-
+		int maxId = 0 ;
+		String sql = "select max(seqNo) + 1 from coursename";
+		Query maxIDList = session.createSQLQuery(sql);
+		List list = maxIDList.list();
+		System.out.println(list.size());
+		if(list.size() > 0){
+			maxId = (int) list.get(0);
+			//eligible = (String) list.get(0);
+		}
+		TrainingCalendar tc = (TrainingCalendar) session.load(TrainingCalendar.class, courseEnrolledUserForm.getTrainingCalendarId());
+		CourseName ct = (CourseName) session.load(CourseName.class, tc.getCourseName());
+		String rollNo = "";
+		rollNo = ct.getCourseCode()+""+StringUtils.leftPad(String.valueOf(maxId), 5, "0");
+		courseEnrolledUser.setRollno(rollNo);
+		courseEnrolledUser.setRollSeqNo(maxId);
 		courseEnrolledUser.setLoginDetails(loginid);
-
 		courseEnrolledUser.setTrainingCalendarId(courseEnrolledUserForm
 				.getTrainingCalendarId());
-		courseEnrolledUser.setRollno(date);
 		courseEnrolledUser.setStatus("N");
 		courseEnrolledUser.setPaymentstatus("Pending");
-		if (profileID != null && profileID == 3) {
-			courseEnrolledUser.setEnrolledby("Trainee");
-			courseEnrolledUser.setProfileId(profileID);
-		} else if (profileID != null && profileID == 4) {
-			courseEnrolledUser.setEnrolledby("Trainer");
-			courseEnrolledUser.setProfileId(profileID);
-		}
+		courseEnrolledUser.setEnrolledby("Trainee");
+		courseEnrolledUser.setProfileId(profileID);
 
 		// Integer ce =0;
 		Integer ce = (Integer) session.save(courseEnrolledUser);
@@ -584,7 +586,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		if (ce != null && ce.intValue() > 0) {
 		}
 		session.close();
-		return date;
+		return rollNo;
 	}
 
 	@Override
@@ -605,7 +607,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		courseEnrolledUser.setProfileId(3);
 		courseEnrolledUser.setTrainingCalendarId(courseEnrolledUserForm
 				.getTrainingCalendarId());
-		courseEnrolledUser.setRollno(date);
+		//courseEnrolledUser.setRollno(date);
 		courseEnrolledUser.setStatus("N");
 		courseEnrolledUser.setPaymentstatus("Pending");
 		if (profileID != null && profileID == 3) {
@@ -641,7 +643,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		courseEnrolledUser.setProfileId(3);
 		courseEnrolledUser.setTrainingCalendarId(courseEnrolledUserForm
 				.getTrainingCalendarId());
-		courseEnrolledUser.setRollno(date);
+		//courseEnrolledUser.setRollno(date);
 		courseEnrolledUser.setStatus("N");
 		if (profileID != null && profileID == 3) {
 			courseEnrolledUser.setEnrolledby("Trainee");
@@ -703,7 +705,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 				" tcal.trainingcenter as trainingCenterCode,"
 				+ " pitp.trainingpartnerpermanentline1||','|| pitp.trainingpartnerpermanentline2 as address,"
 				+ " ce.rollno as rollNo  , cty.cityname  "
-				+ ", district.districtname as district , coalesce(cn.coursecode, '') as coursecode , state.statename  , tcal.trainingdate as trainingstartdate , tcal.trainingtime as trainingenddate , cn.courseduration as courseduration , pitp.firstname || ' ' || pitp.middlename || ' ' || pitp.lastname as trainingcentername , case when gender='M' then 'MALE' else 'FEMALE' end , pit.mobile "
+				+ ", district.districtname as district , '' as coursecode , state.statename  , tcal.trainingdate as trainingstartdate , tcal.trainingtime as trainingenddate , '' as courseduration , pitp.firstname || ' ' || pitp.middlename || ' ' || pitp.lastname as trainingcentername"
 				+
 
 				" from courseenrolleduser ce "
@@ -738,8 +740,8 @@ public class TraineeDAOImpl implements TraineeDAO {
 				admitcard.setName(obj[4].toString());
 				admitcard.setTrainingCenterCode((int) obj[5]);
 				admitcard.setAddress(obj[6].toString());
-				BigInteger rollNo = (BigInteger) obj[7];
-				admitcard.setRollNo(rollNo.longValue());
+				//BigInteger rollNo = (BigInteger) obj[7];
+				admitcard.setRollNo(obj[7].toString());
 				admitcard.setCity(obj[8].toString());
 				admitcard.setDistrict(obj[9].toString());
 				admitcard.setCourseCode(obj[10].toString());
@@ -846,8 +848,8 @@ public class TraineeDAOImpl implements TraineeDAO {
 				admitcard.setName(obj[4].toString());
 				admitcard.setTrainingCenterCode((int) obj[5]);
 				admitcard.setAddress(obj[6].toString());
-				BigInteger rollNo = (BigInteger) obj[7];
-				admitcard.setRollNo(rollNo.longValue());
+				//BigInteger rollNo = (BigInteger) obj[7];
+				admitcard.setRollNo(obj[7].toString());
 				admitcard.setCity(obj[8].toString());
 			}
 		} catch (Exception e) {

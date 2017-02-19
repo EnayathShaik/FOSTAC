@@ -7,7 +7,7 @@ public class AdmitCardForm {
 	private int admitCardId;
 	private int loginId;
 	private String loginUserId;
-	private long rollNo;
+	private String rollNo;
 	private String courseName;
 	private String name;
 	private String category;
@@ -116,13 +116,13 @@ public class AdmitCardForm {
 	/**
 	 * @return the rollNo
 	 */
-	public long getRollNo() {
+	public String getRollNo() {
 		return rollNo;
 	}
 	/**
 	 * @param rollNo the rollNo to set
 	 */
-	public void setRollNo(long rollNo) {
+	public void setRollNo(String rollNo) {
 		this.rollNo = rollNo;
 	}
 	/**

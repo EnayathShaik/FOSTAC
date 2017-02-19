@@ -333,7 +333,7 @@ private Title title;
 		ceu.setLoginDetails(loginid);
 		ceu.setProfileId(4);
 		ceu.setTrainingCalendarId(courseEnrolledUserForm.getTrainingCalendarId());
-		ceu.setRollno(date);
+		//ceu.setRollno(date);
 //		ceu.setStatus("Pending");
 		
 		Integer ce = (Integer) session.save(ceu);
@@ -361,7 +361,7 @@ private Title title;
 		//ceu.setLoginDetails(loginid);
 		ceu.setProfileId(4);
 		ceu.setTrainingCalendarId(courseEnrolledUserForm.getTrainingCalendarId());
-		ceu.setRollno(date);
+		//ceu.setRollno(date);
 		//abhay ceu.setStatus("Pending");
 		
 		Integer ce = (Integer) session.save(ceu);
@@ -383,7 +383,7 @@ private Title title;
 		//ceu.setLoginDetails(loginid);
 		ceu.setProfileId(4);
 		ceu.setTrainingCalendarId(courseEnrolledUserForm.getTrainingCalendarId());
-		ceu.setRollno(date);
+		//ceu.setRollno(date);
 		//abhay ceu.setStatus("Pending");
 		
 		Integer ce = (Integer) session.save(ceu);

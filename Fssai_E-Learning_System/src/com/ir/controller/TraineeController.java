@@ -321,8 +321,8 @@ public class TraineeController {
 			int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileId);
 			System.out.println("loginid   :"+ loginId);
 			System.out.println("tableID  :"+ tableID);
-			long basicEnroll = traineeService.basicSave(courseEnrolledUserForm , loginId , tableID,profileId);
-				if(basicEnroll  > 1){
+			String basicEnroll = traineeService.basicSave(courseEnrolledUserForm , loginId , tableID,profileId);
+				if(basicEnroll != null && basicEnroll.length()  > 1){
 					Boolean status = traineeService.updateSteps(tableID, profileId, 1);
 					httpSession.setAttribute("traineeSteps", 1);
 					if(status){
@@ -637,8 +637,8 @@ public class TraineeController {
 			loginId = (int) httpSession.getAttribute("loginIdUnique");
 			userId = (Integer) httpSession.getAttribute("userId");
 			int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileId);
-			long basicEnroll = traineeService.basicSave(courseEnrolledUserForm , loginId , tableID,profileId);
-			if(basicEnroll  > 1){
+			String basicEnroll = traineeService.basicSave(courseEnrolledUserForm , loginId , tableID,profileId);
+			if(basicEnroll != null && basicEnroll.length()  > 1){
 				Boolean status = traineeService.updateSteps(tableID, profileId, 1);
 				httpSession.setAttribute("traineeSteps", 1);
 				if(status){

@@ -43,7 +43,7 @@ public interface TraineeDAO {
 
 	public boolean changePasswordTraineeSave(ChangePasswordForm changePasswordForm, String id);
 
-	public long basicSave(CourseEnrolledUserForm courseEnrolledUserForm  , int loginid, int tableID, Integer profileID);
+	public String basicSave(CourseEnrolledUserForm courseEnrolledUserForm  , int loginid, int tableID, Integer profileID);
 
 	Title getTitle(int id);
 

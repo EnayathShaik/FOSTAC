@@ -93,8 +93,8 @@ public class TraineeServiceImpl implements TraineeService {
 	}
 
 	@Override
-	public long basicSave(CourseEnrolledUserForm courseEnrolledUserForm ,int loginid, int tableID,Integer profileID) {
-		long basicEnroll= traineeDAO.basicSave(courseEnrolledUserForm , loginid , tableID, profileID);
+	public String basicSave(CourseEnrolledUserForm courseEnrolledUserForm ,int loginid, int tableID,Integer profileID) {
+		String basicEnroll= traineeDAO.basicSave(courseEnrolledUserForm , loginid , tableID, profileID);
 		return basicEnroll;
 	}
 	@Override

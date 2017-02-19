@@ -28,7 +28,7 @@ public class CourseEnrolledUser {
 	private int loginDetails;
 
 	private int profileId;
-	private long rollno; 
+	private String rollno; 
 	private String paymentstatus;
 	private String enrolledby;
 	private String userStaus;
@@ -78,11 +78,11 @@ public class CourseEnrolledUser {
 		this.profileId = profileId;
 	}
 
-	public long getRollno() {
+	public String getRollno() {
 		return rollno;
 	}
 
-	public void setRollno(long rollno) {
+	public void setRollno(String rollno) {
 		this.rollno = rollno;
 	}
 

@@ -32,7 +32,7 @@ public interface TraineeService {
 	public String updateTrainee(RegistrationFormTrainee registrationFormTrainee , Integer ss);
 	public String contactTraineeSave(ContactTrainee contactTrainee , String id);
 	public boolean changePasswordTraineeSave(ChangePasswordForm changePasswordForm, String id);
-	public long basicSave(CourseEnrolledUserForm courseEnrolledUserForm , int loginid, int tableID,Integer profileId);
+	public String basicSave(CourseEnrolledUserForm courseEnrolledUserForm , int loginid, int tableID,Integer profileId);
 	public long advanceTraineeSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid, int tableID,Integer profileId);
 	public long specialTrainee(CourseEnrolledUserForm courseEnrolledUserForm, int loginid, int tableID, Integer profileId);
 	public boolean changePasswordAssesorSave(ChangePasswordForm changePasswordForm, String id);
