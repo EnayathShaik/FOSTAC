@@ -95,7 +95,7 @@ public class SearchMarkAttendance extends HttpServlet {
 		String newList=null;
 		System.out.println("district 0");
 		String sql ="";
-		sql = "select B.coursetype,C.coursename,A.trainingdate,A.trainingtime,G.firstname||' ' ||G.middlename|| ' ' ||G.lastname as participantName ,G.aadharnumber , courseenrolleduserid , " +userstatus+ " "+
+		sql = "select A.batchCode,C.courseCode,A.trainingdate,A.trainingtime,G.firstname||' ' ||G.middlename|| ' ' ||G.lastname as participantName ,G.aadharnumber , courseenrolleduserid , " +userstatus+ " "+
 				"from trainingcalendar A inner join coursetype B on(A.coursetype=B.coursetypeid)  inner join coursename C on(A.coursename=C.coursenameid)   inner join personalinformationtrainingpartner D on(A.trainingcenter=D.personalinformationtrainingpartnerid) "+
 				"inner join logindetails E on(D.logindetails=E.ID) inner join courseenrolleduser F on(A.trainingcalendarid=F.trainingcalendarid) inner join personalinformationtrainee G on(CAST(CAST (F.logindetails AS NUMERIC(19,4)) AS INT)=G.logindetails)  " +
 				//"where E.loginid ='"+loginId+"' " +

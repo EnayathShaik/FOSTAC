@@ -99,7 +99,7 @@ public class SearchVacancy extends HttpServlet {
 			//loginCK = "E.loginid ='"+loginId+"'";
 		}
 		String sql ="";
-		sql = "select pvtc.postvacancytrainingcenterid , ct.coursetype , cn.coursename , pvtc.trainingstarttime , pvtc.trainingendtime ,pvtc.requiredexp , pvtc.noofvacancy,pvtc.loginid   from postvacancytrainingcenter pvtc left join coursetype as ct on ct.coursetypeid = pvtc.coursetype left join coursename as cn on cn.coursenameid = pvtc.coursename left join personalinformationtrainingpartner D on(pvtc.trainingcenter=D.personalinformationtrainingpartnerid)  left join  logindetails E on(D.logindetails=E.ID) " +
+		sql = "select pvtc.postvacancytrainingcenterid , ct.coursetype , cn.coursecode , pvtc.trainingstarttime , pvtc.trainingendtime ,pvtc.requiredexp , pvtc.noofvacancy,pvtc.loginid   from postvacancytrainingcenter pvtc left join coursetype as ct on ct.coursetypeid = pvtc.coursetype left join coursename as cn on cn.coursenameid = pvtc.coursename left join personalinformationtrainingpartner D on(pvtc.trainingcenter=D.personalinformationtrainingpartnerid)  left join  logindetails E on(D.logindetails=E.ID) " +
 				" where "+loginCK+"  and  cast(ct.coursetypeid as varchar(10))  like '"+courseType+"%' and CAST(cn.coursenameid AS VARCHAR(10)) like '"+courseName+"%' and  CAST(pvtc.trainingdate AS VARCHAR(10)) like '"+trainingDate+"%'   and cast(pvtc.requiredexp as varchar(10))  like '"+requiredExp+"%' and cast(pvtc.noofvacancy as varchar(10)) like '"+noOfVacancy+"%' ";
 		
 		List list = new AjaxRequest().returnList(sql);

@@ -525,6 +525,8 @@ public class TraineeController {
 	public String admitcardtrainee(@ModelAttribute("basicTrainee") CourseEnrolledUserForm courseEnrolledUserForm ,
 			@ModelAttribute("state") State state , @ModelAttribute("tp") TrainingPartner tp,BindingResult result ,HttpSession session, Model model ){
 		//update Step
+		System.out.println("Generate Admit Card ..........................");
+		
 		Integer profileID = 0;
 		Integer userId = 0;
 		int loginId = 0;
@@ -541,12 +543,14 @@ public class TraineeController {
 			if(session.getAttribute("loginIdUnique")!=null){
 				String loginid=session.getAttribute("loginIdUnique").toString();
 				AdmitCardForm admitCardForm=traineeService.generateAdmitCard(Integer.parseInt(loginid),Profiles.TRAINEE.value());
-				traineeService.updateSteps(tableID, profileID, 2);
+				System.out.println("&&&&&&&&&&&&& "+admitCardForm);
+				//traineeService.updateSteps(tableID, profileID, 2);
 				session.setAttribute("traineeSteps", 2);
 				model.addAttribute("imagePath", imagePath);
 				model.addAttribute("admitCardForm", admitCardForm);
 			}
 		}catch(Exception e){
+			e.printStackTrace();
 			System.out.println("Exception while course details save : "+ e.getMessage());
 		}
 		

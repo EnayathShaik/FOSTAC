@@ -424,6 +424,7 @@ public class TrainingPartnerController {
 				e.setNoOfVacancy(pvtc.getNoOfVacancy());
 				e.setLoginId(pvtc.getLoginId());
 				e.setNoOfApplications(pvtc.getNoOfApplications());
+				e.setCourseCode(pvtc.getCourseName().getCourseCode());
 				utilityList.add(e);
 		}
         PrintWriter out = response.getWriter();

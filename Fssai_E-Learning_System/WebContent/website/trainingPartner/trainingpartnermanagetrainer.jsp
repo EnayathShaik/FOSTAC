@@ -109,7 +109,7 @@
 				$('#newTable tr').remove();
 				$.each(mainData1, function(i, obj) {
 					$('#newTable').append(
-							'<tr id="tableRow"><td>' + j++ + '</td><td>'+ obj[0] + '</td><td>' + obj[1]+ '</td><td>' + obj[2] + '</td><td><a href="#" onClick="removeTrainer(\''+obj[3]+'\');">Remove Trainer</a> </td></tr>');
+							'<tr id="tableRow"><td>' + j++ + '</td><td>' + obj[1]+ '</td><td>' + obj[2] + '</td><td><a href="#" onClick="removeTrainer(\''+obj[3]+'\');">Remove Trainer</a> </td></tr>');
 
 				});
 			}
@@ -284,8 +284,7 @@
 													<thead>
 														<tr class="background-open-vacancies">
 															<th>S.No.</th>
-															<th>Course Type</th>
-															<th>Course Name</th>
+															<th>Course Code</th>
 															<th>Trainer Name</th>
 															<th>Remove Trainer</th>
 														</tr>

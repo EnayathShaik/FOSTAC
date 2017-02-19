@@ -92,7 +92,7 @@ public class TraineeCenterPaymentConfirmation extends HttpServlet {
 			status = "%";
 		}
 		String sql = "";
-		sql = "select  E.coursetype,D.coursename,B.trainingdate,B.trainingtime,C.firstname || ' '|| C.middlename ||' '|| C.lastname as participantName,D.modeoftraining,A.paymentstatus,A.courseenrolleduserid from courseenrolleduser  A"
+		sql = "select  B.batchcode,D.coursecode,B.trainingdate,B.trainingtime,C.firstname || ' '|| C.middlename ||' '|| C.lastname as participantName,D.modeoftraining,A.paymentstatus,A.courseenrolleduserid from courseenrolleduser  A"
 				+ " inner join trainingcalendar B on(A.trainingcalendarid= B.trainingcalendarid)"
 				+ " inner join personalinformationtrainingpartner C on (C.personalinformationtrainingpartnerid = B.trainingcenter)"
 				+ " inner join coursename D on (D.coursenameid = B.coursename)"

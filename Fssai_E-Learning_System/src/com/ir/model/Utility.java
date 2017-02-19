@@ -19,8 +19,10 @@ private int courseNameId ;
 private int feedbackId;
 private String courseTypeName;
 private String courseName ;
+private String courseCode ;
 private int noOfVacancy;
 private String trainingDate;
+private String endDate;
 private int noOfApplications;
 private String loginId;
 private int cityId;
@@ -30,8 +32,23 @@ private List<StringStringBean> trainerList;
 /**
  * @return the courseTypeId
  */
+
+
+
 public int getCourseTypeId() {
 	return courseTypeId;
+}
+public String getEndDate() {
+	return endDate;
+}
+public void setEndDate(String endDate) {
+	this.endDate = endDate;
+}
+public String getCourseCode() {
+	return courseCode;
+}
+public void setCourseCode(String courseCode) {
+	this.courseCode = courseCode;
 }
 /**
  * @param courseTypeId the courseTypeId to set

@@ -300,10 +300,10 @@ return result;
                         <thead>
                           <tr class="background-open-vacancies">
                             <th>S.No.</th>
-                            <th>Course Type</th>
+                            <th>Batch Code</th>
                             <th>Course Name</th>
-                            <th>Training Date</th>
-                            <th>Training Time</th>
+                            <th>Training Start Date</th>
+                            <th>Training End Date</th>
                             <th>Participant Name</th>
                             <th>Aadhar No.</th>
                             <th>Attendance</th>

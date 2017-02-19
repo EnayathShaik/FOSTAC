@@ -245,5 +245,21 @@ public class AdmitCardForm {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	@Override
+	public String toString() {
+		return "AdmitCardForm [admitCardId=" + admitCardId + ", loginId="
+				+ loginId + ", loginUserId=" + loginUserId + ", rollNo="
+				+ rollNo + ", courseName=" + courseName + ", name=" + name
+				+ ", category=" + category + ", gender=" + gender + ", city="
+				+ city + ", fatherName=" + fatherName + ", courseContent="
+				+ courseContent + ", trainingCenterCode=" + trainingCenterCode
+				+ ", address=" + address + ", title=" + title + ", courseCode="
+				+ courseCode + ", district=" + district + ", state=" + state
+				+ ", trainingStartDate=" + trainingStartDate
+				+ ", trainingEndDate=" + trainingEndDate + ", courseDuration="
+				+ courseDuration + ", trainingCenterName=" + trainingCenterName
+				+ ", mobile=" + mobile + "]";
+	}
+	
 	
 }

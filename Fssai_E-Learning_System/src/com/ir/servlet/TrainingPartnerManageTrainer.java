@@ -94,7 +94,7 @@ public class TrainingPartnerManageTrainer extends HttpServlet {
 			out.flush();
 		}else{
 			String sql ="";
-			sql = "select C.coursetype,D.coursename,E.firstname || ' '|| E.middlename ||' '|| E.lastname,B.vacancyenrolledid from postvacancytrainingcenter A" +
+			sql = "select C.coursetype,D.coursecode,E.firstname || ' '|| E.middlename ||' '|| E.lastname,B.vacancyenrolledid from postvacancytrainingcenter A" +
 					" inner join trainingcentervacancyenrolled B on(A.postvacancytrainingcenterid=B.postvacancyid)" +
 					" inner join coursetype C on(A.coursetype=C.coursetypeid) "+
 					" inner join coursename D on(A.coursename=D.coursenameid) "+

@@ -721,18 +721,22 @@ public class TraineeDAOImpl implements TraineeDAO {
 				// +
 				// " inner join managecoursecontent mcc on mcc.coursetypeid = cn.coursetypeid "
 				+ "where ce.status = 'N' AND ce.logindetails = " + loginId;
-
+		AdmitCardForm admitcard = new AdmitCardForm();
+		try {
+		System.out.println("&&&&&&&&&&&&&&&&&& = "+str_query);
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		AdmitCardForm admitcard = new AdmitCardForm();
+		
 		Query query = session.createSQLQuery(str_query);
 		// List records = query.list();
 		List<Object[]> records = (List<Object[]>) query.list();
+		System.out.println("records == : "+records);
 		session.close();
-		try {
+		
 			if (records.size() > 0) {
 
 				Object[] obj = records.get(0);
+				
 				admitcard.setCourseName(obj[0].toString());
 				admitcard.setCategory(obj[1].toString());
 				admitcard.setFatherName(obj[2].toString());
@@ -754,10 +758,12 @@ public class TraineeDAOImpl implements TraineeDAO {
 				admitcard.setMobile(obj[17].toString());
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out
 					.println("Exception while retrieving admit card details : "
 							+ e.getMessage());
 		}
+		System.out.println("Admin Card Form : "+admitcard);
 		return admitcard;
 	}
 

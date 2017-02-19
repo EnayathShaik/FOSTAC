@@ -138,7 +138,7 @@ function searchVacancy(indicator){
 		$('#newTable tr').remove();
 		$.each(mainData1 , function(i , obj)
 		{
-			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td style="display:none;">'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td></tr>');
+			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td style="display:none;">'+obj[0]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td></tr>');
 			
 		});
 		}
@@ -353,8 +353,7 @@ function searchVacancy(indicator){
                         <thead>
                           <tr class="background-open-vacancies">
                             <th>S.No.</th>
-                            <th>Course Type</th>
-                            <th>Course Name</th>
+                            <th>Course Code</th>
                             <th>Training Start Date</th>
                             <th>Training End Date</th>
                             <th>Required Experience</th>

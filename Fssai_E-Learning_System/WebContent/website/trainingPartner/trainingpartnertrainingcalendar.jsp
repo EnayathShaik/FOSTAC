@@ -418,13 +418,13 @@ window.onload = OnStart;
 													<thead>
 														<tr class="background-open-vacancies">
 															<th>S.No.</th>
-															<th>Course Type</th>
-															<th>Course Name</th>
+															<th>Batch Code</th>
+															<th>Course Code</th>
 															<th>Training Start Date</th>
 															<th>Training End Date</th>
 															<th>Trainer Name</th>
 															<th >Reschedule</th>
-															<th >Option</th>
+															<th >Cancel</th>
 														</tr>
 													</thead>
 													<tbody id="newTable">

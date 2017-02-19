@@ -94,7 +94,7 @@ public class TraineeCenterViewTraineeList extends HttpServlet {
     
 		
 		 String sql ="";
-			sql = "select A.trainingcalendarid , B.coursetype,C.coursename,A.trainingdate,A.trainingtime,pitr.firstname || ' '|| pitr.middlename ||' '|| pitr.lastname as participantName  " +
+			sql = "select A.trainingcalendarid , A.batchcode,C.coursecode,A.trainingdate,A.trainingtime,pitr.firstname || ' '|| pitr.middlename ||' '|| pitr.lastname as participantName  " +
 					" , A.coursetype as coursetypeid  , A.coursename as coursenameid , A.trainername as trainernameid from trainingcalendar A " +
 					" inner join coursetype B on(A.coursetype=B.coursetypeid)" +
 					" inner join coursename C on(A.coursename=C.coursenameid)"+

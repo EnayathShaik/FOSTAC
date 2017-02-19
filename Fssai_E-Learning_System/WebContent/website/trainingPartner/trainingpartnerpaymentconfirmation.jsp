@@ -290,10 +290,10 @@ return result;
                         <thead>
                           <tr class="background-open-vacancies">
                             <th>S.No.</th>
-                            <th>Course Type</th>
-                            <th>Course Name</th>
-                            <th>Training Date</th>
-                            <th>Training Time</th>
+                            <th>Btach Code</th>
+                            <th>Course Code</th>
+                            <th>Training Start Date</th>
+                            <th>Training End Date</th>
                             <th>Participant Name</th>
                             <th>Payment Received</th>
                             <th>Status</th>
