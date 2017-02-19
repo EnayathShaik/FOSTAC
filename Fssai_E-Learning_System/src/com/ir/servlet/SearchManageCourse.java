@@ -86,12 +86,12 @@ public class SearchManageCourse extends HttpServlet {
 		String sql = null;
 		if(!name.equalsIgnoreCase("ALL"))
 			sql ="select cn.coursetypeid,ct.coursetype , cn.coursename , cn.courseduration , cn.paidunpaid ,  cn.status ,cn.coursenameid , cn.online , cn.classroom"+
-						" from coursename as cn inner join coursetype as ct on ct.coursetypeid= cn.coursetypeid "+
+						" ,cn.courseCode from coursename as cn inner join coursetype as ct on ct.coursetypeid= cn.coursetypeid "+
 						" where cast(cn.coursetypeid as varchar(10)) like '"+courseType+"%' and upper(cn.coursename) like '"+ courseName.toUpperCase()+"%'"+
 						"  and paidunpaid like'"+freePaid+"%' and cn.courseduration like '"+duration+"%' and cn.status like '"+status+"%'  ";
 			else
 			sql ="select cn.coursetypeid,ct.coursetype , cn.coursename , cn.courseduration , cn.paidunpaid ,  cn.status ,cn.coursenameid , cn.online , cn.classroom"+
-							" from coursename as cn inner join coursetype as ct on ct.coursetypeid= cn.coursetypeid " ;
+							" ,cn.courseCode from coursename as cn inner join coursetype as ct on ct.coursetypeid= cn.coursetypeid " ;
 			
 		List<CourseName> list = new AjaxRequest().returnList(sql);
 		String newList = null ;

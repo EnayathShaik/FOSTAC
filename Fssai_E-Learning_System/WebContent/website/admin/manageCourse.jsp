@@ -80,7 +80,7 @@ function searchManageCourse(indicator){
 		var mainData1 = jQuery.parseJSON(data);
 		var j=1;
 		$('#newTable tr').remove();
-		$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Course Type</th><th>Course Name</th><th>Duration</th><th>Free/ Paid</th><th>Online</th><th>Classroom</th><th>Status</th><th>Option</th></tr>')
+		$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Course Code</th><th>Course Type</th><th>Course Name</th><th>Duration</th><th>Free/ Paid</th><th>Online</th><th>Classroom</th><th>Status</th><th>Option</th></tr>')
 		$.each(mainData1 , function(i , obj)
 		{
 			var stat ;
@@ -89,7 +89,7 @@ function searchManageCourse(indicator){
 			}else{
 				stat ='In-Active';
 			}
-			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><input type="hidden" id="courseTypeVal'+i+'" value="'+obj[0]+'">'+obj[0]+'<td><input type="hidden" id="courseTypeL'+i+'" value="'+obj[1]+'">'+obj[1]+'</td><td><input type="hidden" id="courseNameL'+i+'" value="'+obj[2]+'">'+obj[2]+'</td><td><input type="hidden" id="durationL'+i+'" value="'+obj[3]+'">'+obj[3]+'</td><td><input type="hidden" id="freepaidL'+i+'" value="'+obj[4]+'">'+obj[4]+'</td><td><input type="hidden" id="onlineL'+i+'" value="'+obj[7]+'">'+obj[7]+'</td><td><input type="hidden" id="classroomL'+i+'" value="'+obj[8]+'">'+obj[8]+'</td><td><input type="hidden" id="statusL'+i+'" value="'+stat+'">'+stat+'</td><td><input type="hidden" id="cnid'+i+'" value="'+obj[6]+'"><a href="#" onClick="editManageCourse(\''+i+'\',\''+obj[0]+'\');">edit</a> </td></tr>');	
+			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><input type="hidden" id="courseTypeVal'+i+'" value="'+obj[0]+'">'+obj[0]+'<td>'+obj[9]+'</td><td><input type="hidden" id="courseTypeL'+i+'" value="'+obj[1]+'">'+obj[1]+'</td><td><input type="hidden" id="courseNameL'+i+'" value="'+obj[2]+'">'+obj[2]+'</td><td><input type="hidden" id="durationL'+i+'" value="'+obj[3]+'">'+obj[3]+'</td><td><input type="hidden" id="freepaidL'+i+'" value="'+obj[4]+'">'+obj[4]+'</td><td><input type="hidden" id="onlineL'+i+'" value="'+obj[7]+'">'+obj[7]+'</td><td><input type="hidden" id="classroomL'+i+'" value="'+obj[8]+'">'+obj[8]+'</td><td><input type="hidden" id="statusL'+i+'" value="'+stat+'">'+stat+'</td><td><input type="hidden" id="cnid'+i+'" value="'+obj[6]+'"><a href="#" onClick="editManageCourse(\''+i+'\',\''+obj[0]+'\');">edit</a> </td></tr>');	
 		});
 		}
 		});
