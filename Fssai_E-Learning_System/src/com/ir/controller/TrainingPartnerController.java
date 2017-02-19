@@ -540,7 +540,7 @@ public class TrainingPartnerController {
 	@RequestMapping("/trainingCalendarRemove" )
     public String removeManageCourseCarricullum(@Valid @ModelAttribute("trainingPartnerCalendarForm") TrainingPartnerCalendarForm trainingPartnerCalendarForm){
 		System.out.println("id "+trainingPartnerCalendarForm.getTcid());
-        //trainingPartnerService.removeManageCourseCarricullum(id);
+        trainingPartnerService.cancelTrainingCalendar(trainingPartnerCalendarForm.getTcid());
 		return "redirect:/trainingpartnertrainingcalendar.fssai";
     }
 	

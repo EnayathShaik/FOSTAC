@@ -155,4 +155,9 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 	}
 	
 	
+	@Override
+	public void cancelTrainingCalendar(int id) {
+		trainingPartnerDAO.cancelTrainingCalndar(id);
+	}
+	
 }

@@ -202,7 +202,7 @@ window.onload = OnStart;
 									+ obj[1] + '</td><td> <input type="hidden" value='+obj[7]+' id=selCourseName'+i+' />' + obj[2]
 									+ '</td><td id=trainingStartDate'+i+'>' + obj[3] + '</td><td id=trainingEndDate'+i+'>'
 									+ obj[4] + '</td><td><input type="hidden" value='+obj[8]+'  id=selTrainerNames'+i+' />' + obj[5]	
-									+ '</td><td><input type="button"  onClick="editTrainingCalendar(\''+i+'\',\''+obj[0]+'\',\''+obj[1]+'\');" value="Reschedule"/></td><td><select style="width:160px;height:41px;font-size:14px;" name =attendanceRow'+j+'  id=attendanceRow'+j+'><option value ="0">Please Select</option><option selected="true" name="present" value ="A">Activate Training</option><option name="absent" value="I">Cancel Training</option><button onclick="updateAttendance('+obj[6]+' , '+j+');return false;">Update</button></td></tr>');
+									+ '</td><td><input type="button"  onClick="editTrainingCalendar(\''+i+'\',\''+obj[0]+'\',\''+obj[1]+'\');" value="Reschedule"/></td><td> <input type="submit"  onclick=" return setId('+obj[0]+')" value="Cancel Training"/> </td></tr>');
 
 				});
 			}

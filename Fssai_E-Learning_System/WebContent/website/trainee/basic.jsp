@@ -37,6 +37,28 @@ window.onload = OnStart;
 	 
  }
  
+ 
+	function getCourseName(val) {
+		$('#courseName option').remove();
+		$.ajax({
+			type : 'post',
+			url : 'getCourseName.jspp?' + val,
+			success : function(response) {
+				var mainData1 = jQuery.parseJSON(response);
+				$('#courseName option').remove();
+				$('#courseName').append(
+						'<option value="0" label="--Select Course Name--" />');
+				$.each(mainData1, function(i, obj) {
+					$('#courseName')
+							.append(
+									'<option value='+obj[0]+' >' + obj[1]
+											+ '</option>');
+				});
+			}
+		});
+	}
+
+ 
 function confirmTrainee(){
 	if(confirm("(Trainee can enroll to one course at one time,another course enrollment will be done after the completion of last step i.e. Generate Certificate).?")){
     }
@@ -174,7 +196,7 @@ function gettid(value){
                       <div class="col-md-6 col-xs-12">
                          <div class="form-group">
                           <label>Course Type</label> &nbsp;&nbsp;<label> ${created}</label>
-							<cf:select path="courseType" class="form-control" onchange="getcourseType()">
+							<cf:select path="courseType" class="form-control" onchange="getcourseType();getCourseName(this.value);">
 									<cf:option value="0" label="Select Course Type" />
 									<cf:options items="${courseTypes}"  />
 								</cf:select>

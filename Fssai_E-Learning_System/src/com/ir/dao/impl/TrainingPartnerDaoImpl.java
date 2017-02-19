@@ -663,5 +663,19 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		session.close();
 	}
 	
+	
+	//cancelTrainingCalndar
+	
+	@Override
+	public void cancelTrainingCalndar(int id) {
+		Session session = sessionFactory.openSession();
+			Transaction tx=session.beginTransaction();
+			String sql="update trainingCalendar set tcStatus='I' where trainingCalendarId="+id;
+			Query query = session.createSQLQuery(sql);
+			query.executeUpdate();
+			tx.commit();
+			session.close();
+		
+	}
 
 }

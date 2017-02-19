@@ -35,6 +35,14 @@ public class TrainingCalendar {
 	private int personalinformationassessorid;
 	private String assessmentDate;
 	private String assessmentTime;
+	private String tcStatus;
+	
+	public String getTcStatus() {
+		return tcStatus;
+	}
+	public void setTcStatus(String tcStatus) {
+		this.tcStatus = tcStatus;
+	}
 	@Column(columnDefinition="int default 0")
 	private int assessor;
 	@Column(columnDefinition="int default 0")

@@ -49,5 +49,5 @@ public interface TrainingPartnerDao {
 	public List<TrainingPartnerSearch> getTrainingPartnerDetails(int trainingPartnerId);
 	public String trainingCalendarForm(TrainingCalendarForm trainingCalendarForm);
 	public void setTrainingCalanderDeatils(TrainingCalendarForm trainingCalendarForm , String loginId);
-
+	public void cancelTrainingCalndar(int id);
 }

@@ -99,7 +99,7 @@ public class TraineeCenterViewTraineeList extends HttpServlet {
 					" inner join coursetype B on(A.coursetype=B.coursetypeid)" +
 					" inner join coursename C on(A.coursename=C.coursenameid)"+
 					" inner join personalinformationtrainer as pitr on CAST(CAST (A.trainername AS NUMERIC(19,4)) AS INT) = pitr.personalinformationtrainerid "
-					+" where cast( B.coursetype  as varchar(10)) like '"+courseType+"%' and  cast(C.coursename as varchar(10)) like '"+courseName+"%' and  cast(A.trainingdate as varchar(10)) like '"+trainingStartDate+"%' and cast(A.trainingtime as varchar(10)) like '"+trainingEndDate+"%' ";
+					+" where A.tcStatus is null  and  cast( B.coursetype  as varchar(10)) like '"+courseType+"%' and  cast(C.coursename as varchar(10)) like '"+courseName+"%' and  cast(A.trainingdate as varchar(10)) like '"+trainingStartDate+"%' and cast(A.trainingtime as varchar(10)) like '"+trainingEndDate+"%' ";
 		String newList=null;
 		List list = new AjaxRequest().returnList(sql);
 		System.out.println("list "+list);
