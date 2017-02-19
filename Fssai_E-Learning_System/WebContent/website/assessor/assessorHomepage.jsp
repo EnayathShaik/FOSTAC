@@ -9,7 +9,7 @@
     function searchUpcomingTrainings() {
 
         $('#tblUpcomingAssessments tr').remove();
-        $('#tblUpcomingAssessments').append('<thead> <tr class="background-open-vacancies"> <th>S.No</th> <th>Traning Course Name</th> <th>Training Date</th> <th>Training Course Address</th> <th>No. Of Participants</th></tr> </thead>');
+        $('#tblUpcomingAssessments').append('<thead> <tr class="background-open-vacancies"> <th>S.No</th> <th>Batch Code</th><th>Assessment Date</th><th>Course Name</th> <th>Training Date</th> <th>Training Course Address</th> <th>No. Of Participants</th></tr> </thead>');
         var result = "";
         //var id = document.getElementById("assessmentAgencyId").value;
         var assessorId = $('currentAssessorId').value;
@@ -28,6 +28,8 @@
                 // 	$('#tblUpcomingAssessments').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Assessment Agency Name</th><th>Assessor Name</th><th>Assessor Id</th><th>Active / In-Active</th><th>Detail</th></tr>')
                 $.each(jsonData, function(i, obj) {
                     $('#tblUpcomingAssessments').append('<tr id="tableRow"><td>' + j++ + '</td>' +
+                    		'<td>' + obj[4] + '</td>' +
+                    		'<td>' + obj[5] + '</td>' +
                         '<td>' + obj[0] + '</td>' +
                         '<td>' + obj[1] + '</td>' +
                         '<td>' + obj[2] + '</td>' +

@@ -196,7 +196,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		StringBuffer sql = new StringBuffer();
 		sql.append("Select D.coursenameid,D.coursename,D.courseduration ");
 		sql.append(" ,concat(E.firstname , ' ' , E.middlename , ' ' , E.lastname ) ,F.assessmentagencyname,G.contentnameinput, G.contentlinkinput, G.contenttypeinput, C.coursetype");
-		sql.append(" from courseenrolleduser A");
+		sql.append(" ,D.courseCode from courseenrolleduser A");
 		sql.append(" inner join trainingcalendar B on(A.trainingcalendarid=B.trainingcalendarid)");
 		sql.append(" inner join coursetype C on(B.coursetype=C.coursetypeid)");
 		sql.append(" inner join coursename D on(B.coursename=D.coursenameid)");
@@ -222,6 +222,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 			courseTrainee.setContentLinkInput(o[6] == null ? "" : o[6].toString());
 			courseTrainee.setContentNameInput(o[7] == null ? "" : o[7].toString());
 			courseTrainee.setCourseTypeId(o[8] == null ? "" : o[8].toString());
+			courseTrainee.setCourseCode(o[9] == null ? "" : o[9].toString());
 			return courseTrainee;
 		} else {
 			return courseTrainee;
@@ -737,7 +738,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 
 				Object[] obj = records.get(0);
 				
-				admitcard.setCourseName(obj[0].toString());
+				admitcard.setCourseName(obj[0] == null ? "" : obj[0].toString());
 				admitcard.setCategory(obj[1].toString());
 				admitcard.setFatherName(obj[2].toString());
 				admitcard.setTitle(obj[3].toString());
@@ -745,7 +746,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 				admitcard.setTrainingCenterCode((int) obj[5]);
 				admitcard.setAddress(obj[6].toString());
 				//BigInteger rollNo = (BigInteger) obj[7];
-				admitcard.setRollNo(obj[7].toString());
+				admitcard.setRollNo(obj[7] == null ? "" : obj[7].toString());
 				admitcard.setCity(obj[8].toString());
 				admitcard.setDistrict(obj[9].toString());
 				admitcard.setCourseCode(obj[10].toString());

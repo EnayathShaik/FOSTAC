@@ -6,8 +6,8 @@
 <script src="website/js/bootstrap.min.js"></script> 
 
 <script src="website/js/jquery.js"></script> 
-<!-- <script src="website/js/bootstrap.min.js"></script> 
-<script src="website/js/jquery.isotope.min.js"></script>  -->
+ <script src="website/js/bootstrap.min.js"></script> 
+<!-- <script src="website/js/jquery.isotope.min.js"></script>  -->
 <!-- horizontal navigation -->
 
 <script type="text/javascript">
@@ -220,7 +220,7 @@ function searchUpcomingTraining(){
 </section>
 <!-- scripts --> 
 <script>
-                var id = localStorage.getItem('activeID');
-                document.getElementById(id).className = "active";
+                /* var id = localStorage.getItem('activeID');
+                document.getElementById(id).className = "active"; */
 
             </script>

@@ -82,8 +82,8 @@ public class SearchUpcomingTraining extends HttpServlet {
 						" inner join state as s on s.stateid = pitp.trainingpartnerpermanentstate "+
 						" inner join city as c on c.cityid = pitp.trainingpartnerpermanentcity "+
 						" inner join district as d on d.districtid = pitp.trainingpartnerpermanentdistrict "+
-						" and tc.trainingcenter = pitp.personalinformationtrainingpartnerid "+
-						" WHERE log.id = "+userId;
+						" and tc.trainingcenter = pitp.personalinformationtrainingpartnerid ";
+						//" WHERE log.id = "+userId;
 			System.out.println("before query");
 			Query query = session.createSQLQuery(sql);
 			System.out.println("after query");

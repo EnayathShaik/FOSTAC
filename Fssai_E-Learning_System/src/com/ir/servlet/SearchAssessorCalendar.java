@@ -63,9 +63,10 @@ public class SearchAssessorCalendar extends HttpServlet {
 				SessionFactory sf = conf.buildSessionFactory();
 				Session session = sf.openSession();
 				String newList=null;
-				String sql = "select B.coursename,A.trainingdate, "
+				String sql = "select B.coursecode,A.trainingdate, "
 						+ "concat(C.trainingpartnerpermanentline1, ', ', C.trainingpartnerpermanentline2, ' -', dt.districtname) as address, "
 						+ "(select count(1) from courseenrolleduser where trainingcalendarid=A.trainingcalendarid) "
+						+ " ,A.batchCode, A.assessmentdate "
 						+ "from trainingcalendar A "
 						+ "inner join coursename B on(A.coursename=B.coursenameid) "
 						+ "inner join personalinformationtrainingpartner C on(A.trainingcenter=C.personalinformationtrainingpartnerid) "

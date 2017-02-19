@@ -127,10 +127,10 @@ function getCourseDetails(){
 	      $(".displayNone").css("display","block");
 	      var j=1;
 			$('#newTable tr').remove();
-			$('#newTable').append('<tr  class="background-open-vacancies"><th>Select</th><th>Training Center Name & Address</th><th>Training Schedule</th><th>	Center Contact Person Name, Mobile & Email Id</th><th>Seating Capacity</th><th>Seats available</th></tr>')
+			$('#newTable').append('<tr  class="background-open-vacancies"><th>Select</th><th>Course Code</th><th>Training Center Name & Address</th><th>Training Schedule</th><th>	Center Contact Person Name, Mobile & Email Id</th><th>Seating Capacity</th><th>Seats available</th></tr>')
 			$.each(mainData1 , function(i , obj)
 			{
-			$('#newTable').append('<tr id="tableRow"><td><input type="hidden" name="getCalander" id="h" value="'+obj[0]+'" /><input type="radio" name="getCalander" onclick="gettid(this.value);" id="trainingCalendarIdd'+i+'"  value="'+obj[0]+'"/></td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td></tr>');	
+			$('#newTable').append('<tr id="tableRow"><td><input type="hidden" name="getCalander" id="h" value="'+obj[0]+'" /><input type="radio" name="getCalander" onclick="gettid(this.value);" id="trainingCalendarIdd'+i+'"  value="'+obj[0]+'"/></td><td>'+obj[7]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td></tr>');	
 			document.getElementById("trainingCalendarId").value = i;
 			});
 			}
@@ -151,7 +151,7 @@ function gettid(value){
 
 </script>
 
-<cf:form action="" name="myForm" id="myForm" method="POST" commandName="basicTrainee" >
+<cf:form action="basicSave.fssai" name="myForm" id="myForm" method="POST" commandName="basicTrainee" >
     <section>
      <%@include file="../roles/top-menu.jsp"%>
     </section>

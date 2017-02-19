@@ -164,7 +164,7 @@ public class RegistrationControllerTrainer implements Serializable{
 			if(applicationStatusBean.getStatus()!=null){
 				applicationStatusBean.setCoursetypeName(pvtc.getCourseType().getCourseType());
 				applicationStatusBean.setStrCourseName(pvtc.getCourseName().getCoursename());
-				applicationStatusBean.setTrainingDate(pvtc.getTrainingDate());
+				applicationStatusBean.setTrainingDate(pvtc.getTrainingStartTime());
 				applicationStatusBean.setPersonalInformationTrainingPartner(pvtc.getTrainingCenter());
 				applicationStatusBean.setPostvacancyID(pvtc.getId());
 				vacancyTrainingCenterBeans.add(applicationStatusBean);

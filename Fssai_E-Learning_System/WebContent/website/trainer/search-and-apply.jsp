@@ -74,9 +74,9 @@ function applyForVacancy(index){
                         <thead>
                           <tr class="background-open-vacancies">
                             <th width="8%">S.No</th>
-                            <th width="15%">Course Type</th>
-                            <th width="14%">Course Name</th>
-                            <th width="29%">Training Date &amp; Time</th>
+                            <th width="15%">Course Code</th>
+                            <th width="14%">Training Start Date</th>
+                            <th width="29%">Training End Date</th>
                             <th width="23%">Training Center Name &amp; Address</th>
                             <th width="11%"></th>
                           </tr>

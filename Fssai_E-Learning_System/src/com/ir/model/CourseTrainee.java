@@ -12,6 +12,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 public class CourseTrainee {
 	/**courseName*/
 	private String courseName;
+	private String courseCode;
 	private String courseTypeId;
 	private String courseDuration;
 	private String courseNameID;
@@ -20,6 +21,14 @@ public class CourseTrainee {
 	private String assessor;
 	private String assessorAgency;
 	private String contentType;
+	
+	
+	public String getCourseCode() {
+		return courseCode;
+	}
+	public void setCourseCode(String courseCode) {
+		this.courseCode = courseCode;
+	}
 	/**
 	 * @return the courseName
 	 */
