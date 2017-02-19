@@ -29,6 +29,8 @@ private int cityId;
 private int stateId;
 private int trainingCenterId;
 private List<StringStringBean> trainerList;
+private String trainingStartDate;
+private String trainingEndDate;
 /**
  * @return the courseTypeId
  */
@@ -37,6 +39,18 @@ private List<StringStringBean> trainerList;
 
 public int getCourseTypeId() {
 	return courseTypeId;
+}
+public String getTrainingStartDate() {
+	return trainingStartDate;
+}
+public void setTrainingStartDate(String trainingStartDate) {
+	this.trainingStartDate = trainingStartDate;
+}
+public String getTrainingEndDate() {
+	return trainingEndDate;
+}
+public void setTrainingEndDate(String trainingEndDate) {
+	this.trainingEndDate = trainingEndDate;
 }
 public String getEndDate() {
 	return endDate;

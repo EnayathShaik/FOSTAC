@@ -25,13 +25,14 @@
                             response = JSON.parse(response);
                             for (index = 0; index < response.length; index++) {
                                 console.log(response[index]);
-                                $('#applicaionStatus').append('<tr>' +
-                                    '<td>' + (index + 1) + '</td><td>' + response[index].courseTypeName + '</td>' +
-                                    '<td>' + response[index].courseName + '</td>' +
-                                    '<td>' + response[index].trainingDate.replace("-", "/").replace("-", "/") + '</td>' +
-                                    '<td>' + response[index].noOfVacancy + '</td>' +
-                                    '<td><a href="editApplicationStatusDetails.fssai?courseType=' + response[index].courseTypeId + '&&courseName=' + response[index].courseNameId + '">' + response[index].noOfApplications + '</td> ' +
-                                    '</tr>');
+                                $('#applicaionStatus').append('<tr>'+
+                                   		'<td>'+(index+1)+'</td>'+
+                                   	    '<td>'+response[index].courseCode+'</td>'+
+                                   	    '<td>'+response[index].trainingStartDate+'</td>'+
+                                   	 '<td>'+response[index].trainingEndDate+'</td>'+
+                                   	     '<td>'+response[index].noOfVacancy+'</td>'+
+                                   	    '<td><a  href="editApplicationStatusDetails.fssai?postvacancyID='+response[index].loginId+'">'+response[index].noOfApplications+'</td> '+
+                                   	  	'</tr>');
                             }
                         }
                     });
@@ -179,13 +180,13 @@
                                                                 <table class="table table-bordered table-responsive table-hover table-striped">
                                                                     <thead>
                                                                         <tr class="background-open-vacancies">
-                                                                            <th>S.No</th>
-                                                                            <th>Course Type</th>
-                                                                            <th>Course Name</th>
-                                                                            <th>Training Date</th>
-                                                                            <th>No. of Vacancies</th>
-                                                                            <th>No. Of Applications</th>
-                                                                        </tr>
+                              <th>S.No</th>
+                              <th>Course Code</th>
+                              <th>Training Start Date</th>
+                              <th>Training End Date</th>
+                              <th>No. of Vacancies</th>
+                              <th>No. Of Applications</th>
+                            </tr>
                                                                     </thead>
                                                                     <tbody id="applicaionStatus">
                                                                 </table>
