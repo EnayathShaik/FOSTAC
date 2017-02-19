@@ -1,4 +1,4 @@
-<%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
+\<%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
@@ -106,13 +106,15 @@ function getCourseTrainingType(){
 }
 
 function getCourseDetails(){
+	var courseType=$("#courseType").val();
+	console.log("courseType "+courseType);
 	var courseName =  $("#courseName").val();
 	var modeOfTraining =  $("#modeOfTraining").val();
 	var trainingPatrtner =  $("#trainingPartner").val();
-	var trainingDate =  $("#trainingDate").val();
+	//var trainingDate =  $("#trainingDate").val();
 	var trainingCenterState =  $("#trainingCenterState").val();
 	var trainingCenterDistrict =  $("#trainingCenterCity").val();
-	var total="courseName="+courseName+"&modeOfTraining="+modeOfTraining+"&trainingPatrtner="+trainingPatrtner+"&trainingDate="+trainingDate+"&trainingCenterState="+trainingCenterState+"&trainingCenterDistrict="+trainingCenterDistrict;
+	var total="courseName="+courseName+"&modeOfTraining="+modeOfTraining+"&trainingPatrtner="+trainingPatrtner+"&trainingCenterState="+trainingCenterState+"&trainingCenterDistrict="+trainingCenterDistrict+"&courseType="+courseType;
 	var courseNameEl = document.getElementById('courseName');
 	var courseTitle = courseNameEl.options[courseNameEl.selectedIndex].innerHTML;
 	$('#certificationCourse').text(courseTitle);
@@ -196,10 +198,10 @@ function gettid(value){
                       <div class="col-md-6 col-xs-12">
                          <div class="form-group">
                           <label>Course Type</label> &nbsp;&nbsp;<label> ${created}</label>
-							<cf:select path="courseType" class="form-control" onchange="getcourseType();getCourseName(this.value);">
-									<cf:option value="0" label="Select Course Type" />
-									<cf:options items="${courseTypes}"  />
-								</cf:select>
+					<cf:select path="courseType" class="form-control" onchange="getCourseName(this.value);">
+					<cf:option value="0" label="Select Course" />
+					<cf:options items="${courseTypeList}" itemValue="CourseTypeId" itemLabel="CourseType"/>
+					</cf:select>
 							
                         </div>
                       

@@ -127,6 +127,18 @@ public class TraineeController {
 	}
 	
 	
+	@ModelAttribute("courseTypeList")
+	public List<CourseType> courseTypeList() {
+		List<CourseType> courseTypeList = null;
+		try {
+			courseTypeList = traineeService.courseTypeList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return courseTypeList;
+	}
+
+	
 	@RequestMapping(value="/uploadImage" , method=RequestMethod.GET)
 	public String uploadImage(@ModelAttribute("uploadImage") CourseEnrolledUserForm courseEnrolledUserForm ,
 		 @ModelAttribute("loginUser") PersonalInformationTrainee pit ){

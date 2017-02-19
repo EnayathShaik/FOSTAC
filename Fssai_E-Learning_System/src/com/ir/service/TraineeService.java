@@ -24,6 +24,7 @@ import com.ir.model.Utility;
 public interface TraineeService {
 	public List<CourseName> courseNameList();
 	public List<String> courseTypes();
+	List<CourseType> courseTypeList();
 	public List<CourseName> courseNameListByType(int courseType);
 	public CourseTrainee getCourseTrainingByCourseTypeID(int typeId);
 	public String isTraineeEligible(int userID);

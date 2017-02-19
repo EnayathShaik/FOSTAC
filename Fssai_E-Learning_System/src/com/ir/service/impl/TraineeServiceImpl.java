@@ -42,6 +42,14 @@ public class TraineeServiceImpl implements TraineeService {
 		List<String> courseTypeList = traineeDAO.courseTypes();
 		return courseTypeList;
 	}
+	
+	
+	@Override
+	public List<CourseType> courseTypeList() {
+		System.out.println("traineeDAO");
+		List<CourseType> courseTypeList = traineeDAO.courseTypeList();
+		return courseTypeList;
+	}
 	@Override
 	public List<CourseName> courseNameListByType(int courseType) {
 		List<CourseName> courseNameList = traineeDAO.courseNameListByType(courseType);

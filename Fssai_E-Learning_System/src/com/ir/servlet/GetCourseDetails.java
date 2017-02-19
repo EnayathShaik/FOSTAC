@@ -47,7 +47,7 @@ public class GetCourseDetails extends HttpServlet {
 		String name = (request.getQueryString());
 		System.out.println("passing name   :" + name);
 		String[] totalConnected = name.split("&");
-		String courseName,modeOfTraining,trainingPatrtner,trainingDate = null,trainingCenterState,trainingCenterDistrict;
+		String courseName,modeOfTraining,trainingPatrtner,trainingDate = null,trainingCenterState,trainingCenterDistrict , courseType;
 		
 		courseName = (totalConnected[0].split("="))[1];
 		if(courseName.equals("0")){		courseName = "%";	}
@@ -56,16 +56,17 @@ public class GetCourseDetails extends HttpServlet {
 		trainingPatrtner = (totalConnected[2].split("="))[1];
 		if(trainingPatrtner.equals("0")){		trainingPatrtner = "%";	}
 		String[] trainingDate1 = totalConnected[3].split("=");
-		if(trainingDate1.length == 1){
+	/*	if(trainingDate1.length == 1){
 			trainingDate = "%";
 		}else{
 			trainingDate = totalConnected[3].split("=")[1];
-		}
-		trainingCenterState = (totalConnected[4].split("="))[1];
+		}*/
+		trainingCenterState = (totalConnected[3].split("="))[1];
 		if(trainingCenterState.equals("0")){		trainingCenterState = "%";	}
-		trainingCenterDistrict = (totalConnected[5].split("="))[1];
+		trainingCenterDistrict = (totalConnected[4].split("="))[1];
 		if(trainingCenterDistrict.equals("0")){		trainingCenterDistrict = "%";	}
-		
+		courseType = (totalConnected[5].split("="))[1];
+		if(courseType.equals("0")){		courseType = "%";	}
 		String sql ="select tc.trainingcalendarid , concat(pitp.trainingpartnerpermanentline1 , ' ' , pitp.trainingpartnerpermanentline2 , ' ' , s.statename , ' ' , d.districtname , ' ' , c.cityname) as address, "+
 				" concat(tc.trainingdate , ' / ' , tc.trainingtime) as schedule , "+
 				" concat(pitp.firstname , ' ' , pitp.middlename , ' ' , pitp.lastname ) ,concat( pitp.trainingpartnerpermanentmobile , ' / ' , pitp.trainingpartnerpermanentemail)  as contact, "+
@@ -80,10 +81,10 @@ public class GetCourseDetails extends HttpServlet {
 				" inner join district as d on d.districtid = pitp.trainingpartnerpermanentdistrict "+
 				" and tc.trainingcenter = pitp.personalinformationtrainingpartnerid "+
 				" where CAST(tc.coursename AS varchar(10)) like '"+courseName+"' "+
-				//--and CAST(tc.courseType AS varchar(10)) like '%' 
+				" and CAST(tc.courseType AS varchar(10)) like  '"+courseType+"' "+
 				//" and cn.modeoftraining like '"+modeOfTraining+"' "+
 				" and CAST(tc.trainingpartner AS varchar(10)) like '"+trainingPatrtner+"'  "+
-				" and CAST(tc.trainingdate AS varchar(10)) like '"+trainingDate+"' "+
+				//" and CAST(tc.trainingdate AS varchar(10)) like '"+trainingDate+"' "+
 				" and CAST(s.stateid AS varchar(10)) like '"+trainingCenterState+"' "+
 				" and CAST(d.districtid AS varchar(10)) like '"+trainingCenterDistrict+"' "+
 				"  and  (CAST(CAST (pitp.seatcapacitypersession AS NUMERIC(19,4)) AS INT) - ( select count(1) from courseenrolleduser where trainingcalendarid = tc.trainingcalendarid) > 0)";
