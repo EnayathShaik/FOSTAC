@@ -106,7 +106,7 @@ function checkagree()
 
 
 function myBasic(oCheckbox){
-	alert('basic');
+	//alert('basic');
 	var y = [];
 	$("input[name='BasicCourse']:checked").each(function (){
 	    y.push($(this).val());
@@ -124,7 +124,7 @@ function myAdvance(oCheckbox){
 	return y;
 }
 function mySpecial(oCheckbox){
-	alert('special');
+	//alert('special');
 	var y = [];
 	$("input[name='SpecialCourse']:checked").each(function (){
 	    y.push($(this).val());
@@ -412,22 +412,7 @@ function AvoidSpace(event) {
        	    document.getElementById('SeatCapacityPerSession').style.borderColor = "#ccc";
        	    document.getElementById("SeatCapacityPerSessionError").style.display = 'none';
        	    } 
-       	
-/* //    	AvailabiltyOfTVProjector
-             alert("AvailabiltyOfTVProjector Name");
-          	if(document.getElementById('AvailabiltyOfTVProjector').value == '') {
-          	document.getElementById("AvailabiltyOfTVProjector").style.borderColor = "red";
-          	document.getElementById("AvailabiltyOfTVProjectorError").style.display = 'block';
-          	document.getElementById("AvailabiltyOfTVProjector").focus();
-          	return false;
-          	}else{
-          		//alert("AvailabiltyOfTVProjector Name*********");
-          	    document.getElementById('AvailabiltyOfTVProjector').style.borderColor = "#ccc";
-          	    document.getElementById("AvailabiltyOfTVProjectorError").style.display = 'none';
-          	    }  */
-          	    
-          	 // NoOfInHouseTrainers
-          	//alert("NoOfInHouseTrainers");
+
           	if(document.getElementById('NoOfInHouseTrainers').value == '') {
           	document.getElementById("NoOfInHouseTrainers").style.borderColor = "red";
           	document.getElementById("NoOfInHouseTrainersError").style.display = 'block';
@@ -480,14 +465,14 @@ function AvoidSpace(event) {
          	    } 
          	
          	//txtCaptcha
-         	alert("txtCaptcha");
+         	
          	if(document.getElementById('txtCaptcha').value == '') {
          	document.getElementById("txtCaptcha").style.borderColor = "red";
          	document.getElementById("txtCaptchaError").style.display = 'block';
          	document.getElementById("txtCaptcha").focus();
          	return false;
          	}else{
-         		alert("txtCaptcha *********");
+         		
          	    document.getElementById('txtCaptcha').style.borderColor = "#ccc";
          	    document.getElementById("txtCaptchaError").style.display = 'none';
          	    } 
