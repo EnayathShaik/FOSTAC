@@ -63,8 +63,8 @@ function getTrainingCalender(indicator){
 	var courseName = $("#courseName").val();
 	var trainingPartner = $("#trainingPartner").val();
 	var trainingCenter = $("#trainingCenter").val();
-	var trainingDate = $("#trainingDate").val();
-	var trainingTime = $("#trainingTime").val();
+	var trainingDate = $("#trainingStartDate").val();
+	var trainingTime = $("#trainingEndDate").val();
 	var trainerName = $("#trainerName").val();
 	var trainingType = $("#trainingType").val();
 	var result="";
@@ -197,7 +197,7 @@ function getTrainingCalender(indicator){
                                                         <li class="style-li error-red"></li>
                                                     </ul>
                                                 </div>
-                                                <cf:input path="trainingDate" type="date" class="form-control" required="required" />
+                                                <cf:input path="trainingStartDate" type="date" class="form-control" required="required" />
                                             </div>
                                             
                                             <div class="form-group">
@@ -207,7 +207,7 @@ function getTrainingCalender(indicator){
                                                         <li class="style-li error-red"></li>
                                                     </ul>
                                                 </div>
-                                                <cf:input path="trainingTime" type="time" class="form-control" required="required" />
+                                                <cf:input path="trainingEndDate" type="time" class="form-control" required="required" />
                                             </div>
                                             
                                             <div class="form-group">

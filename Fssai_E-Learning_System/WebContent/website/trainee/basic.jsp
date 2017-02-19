@@ -166,7 +166,7 @@ function gettid(value){
                 <div class="row">
                 <div class="col-xs-12">
                   <fieldset >
-                    <legend><h3>Course Enrollment: Basic Course</h3></legend>              
+                    <legend><h3>Course Enrollment</h3></legend>              
                     <div class="row"></div>
                     <form>
                       <!-- left side -->
@@ -219,10 +219,7 @@ function gettid(value){
 <cf:option value="Classroom" label="Classroom" />
 </cf:select>
                         </div>
-                        <div class="form-group">
-                          <label>Training Date</label>
-                          <input type="date" id="trainingDate" class="form-control" placeholder="Training Date">
-                        </div>
+                   
                         <div class="form-group">
                           <label>Training Centre: District</label>
 <cf:select path="trainingCenterCity" class="form-control">

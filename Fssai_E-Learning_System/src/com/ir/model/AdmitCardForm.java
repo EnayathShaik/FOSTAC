@@ -18,6 +18,58 @@ public class AdmitCardForm {
 	private int trainingCenterCode;
 	private String address;
 	private String title;
+	/*
+	 * new fields added by Jyoti Mekal on  19/02/2017 -- bug fix
+	 * */
+	private String courseCode;
+	private String district;
+	private String state;
+	private String trainingStartDate;
+	private String trainingEndDate;
+	private String courseDuration;
+	private String trainingCenterName;
+	public String getCourseCode() {
+		return courseCode;
+	}
+	public void setCourseCode(String courseCode) {
+		this.courseCode = courseCode;
+	}
+	public String getDistrict() {
+		return district;
+	}
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public String getTrainingStartDate() {
+		return trainingStartDate;
+	}
+	public void setTrainingStartDate(String trainingStartDate) {
+		this.trainingStartDate = trainingStartDate;
+	}
+	public String getTrainingEndDate() {
+		return trainingEndDate;
+	}
+	public void setTrainingEndDate(String trainingEndDate) {
+		this.trainingEndDate = trainingEndDate;
+	}
+	public String getCourseDuration() {
+		return courseDuration;
+	}
+	public void setCourseDuration(String courseDuration) {
+		this.courseDuration = courseDuration;
+	}
+	public String getTrainingCenterName() {
+		return trainingCenterName;
+	}
+	public void setTrainingCenterName(String trainingCenterName) {
+		this.trainingCenterName = trainingCenterName;
+	}
 	/**
 	 * @return the admitCardId
 	 */

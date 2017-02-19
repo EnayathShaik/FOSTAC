@@ -702,8 +702,8 @@ public class TraineeDAOImpl implements TraineeDAO {
 				// " pit.correspondenceaddress1 || ' '|| pit.correspondenceaddress2 as address ,"+
 				" tcal.trainingcenter as trainingCenterCode,"
 				+ " pitp.trainingpartnerpermanentline1||','|| pitp.trainingpartnerpermanentline2 as address,"
-				+ " ce.rollno as rollNo "
-				+ ", district.districtname as city"
+				+ " ce.rollno as rollNo  , cty.cityname  "
+				+ ", district.districtname as district , '' as coursecode , state.statename  , tcal.trainingdate as trainingstartdate , tcal.trainingtime as trainingenddate , '' as courseduration , pitp.firstname || ' ' || pitp.middlename || ' ' || pitp.lastname as trainingcentername"
 				+
 
 				" from courseenrolleduser ce "
@@ -715,7 +715,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 				+ " inner join personalinformationtrainingpartner pitp on pitp.personalinformationtrainingpartnerid = tcal.trainingcenter "
 				+ " inner join district district on district.districtid = pitp.trainingpartnerpermanentdistrict "
 				+ " inner join coursename cn on cn.coursenameid = tcal.coursename "
-				+ " inner join coursetype ctype on ctype.coursetypeid = cn.coursetypeid "
+				+ " inner join coursetype ctype on ctype.coursetypeid = cn.coursetypeid  inner join state state on (state.stateid = district.stateid)  inner join city cty on (cty.cityid = pit.rescity)  "
 				// +
 				// " inner join managecoursecontent mcc on mcc.coursetypeid = cn.coursetypeid "
 				+ "where ce.status = 'N' AND ce.logindetails = " + loginId;
@@ -741,6 +741,13 @@ public class TraineeDAOImpl implements TraineeDAO {
 				BigInteger rollNo = (BigInteger) obj[7];
 				admitcard.setRollNo(rollNo.longValue());
 				admitcard.setCity(obj[8].toString());
+				admitcard.setDistrict(obj[9].toString());
+				admitcard.setCourseCode(obj[10].toString());
+				admitcard.setState(obj[11].toString());
+				admitcard.setTrainingStartDate(obj[12].toString());
+				admitcard.setTrainingEndDate(obj[13].toString());
+				admitcard.setCourseDuration(obj[14].toString());
+				admitcard.setTrainingCenterName(obj[15].toString());
 			}
 		} catch (Exception e) {
 			System.out
