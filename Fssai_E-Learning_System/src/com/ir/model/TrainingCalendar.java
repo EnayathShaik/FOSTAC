@@ -39,6 +39,9 @@ public class TrainingCalendar {
 	private int assessor;
 	@Column(columnDefinition="int default 0")
 	private int assessorAgency;
+	private String batchCode;
+	@Column(columnDefinition="int default 0")
+	private int seqNo;
 	
 	
 	public int getTrainingCalendarId() {
@@ -163,7 +166,17 @@ public class TrainingCalendar {
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
 	}
-	
-	
-	
+	public String getBatchCode() {
+		return batchCode;
+	}
+	public void setBatchCode(String batchCode) {
+		this.batchCode = batchCode;
+	}
+	public int getSeqNo() {
+		return seqNo;
+	}
+	public void setSeqNo(int seqNo) {
+		this.seqNo = seqNo;
+	}
+			
 }

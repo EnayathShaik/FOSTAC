@@ -73,7 +73,7 @@ public class SearchUpcomingTraining extends HttpServlet {
 						" concat(tc.trainingdate , ' / ' , tc.trainingtime) as schedule , "+
 						" concat(pitp.firstname , ' ' , pitp.middlename , ' ' , pitp.lastname ) ,concat( pitp.trainingpartnerpermanentmobile , ' / ' , pitp.trainingpartnerpermanentemail)  as contact, "+
 						" pitp.seatcapacitypersession , pitp.seatcapacityavailable , ct.coursetype "+
-						"  , cn.coursename  , tc.status from trainingcalendar as tc "+
+						"  , cn.coursename  , tc.status,cn.coursecode,tc.batchcode from trainingcalendar as tc "+
 						" inner join coursename as cn on cn.coursenameid = tc.coursename "+
 						" inner join coursetype as ct on ct.coursetypeid = tc.coursetype "+
 						" inner join managetrainingpartner as mtp on mtp.managetrainingpartnerid = tc.trainingpartner "+

@@ -97,7 +97,7 @@ public class GetTrainingCalender extends HttpServlet {
 			sql="select tc.trainingcalendarid ,mtp.trainingpartnername ,  "+
 						" concat(pitp.firstname ,  '  ' , pitp.middlename , ' ' , PITP.lastname) as name, "+
 						" cn.coursename , ct.coursetype , tc.trainingdate ,tc.trainingtime , pitp.seatcapacitypersession , pitp.seatcapacityavailable , "+
-						"   tc.trainingtype  , pitp.trainingcentrename,  concat(pitr.firstname ,  '  ' , pitr.middlename , ' ' , pitr.lastname) "+
+						"   tc.trainingtype  , pitp.trainingcentrename,  concat(pitr.firstname ,  '  ' , pitr.middlename , ' ' , pitr.lastname), tc.batchcode "+
 						" from trainingcalendar as tc "+
 						" inner join coursename as cn on cn.coursenameid = tc.coursename "+
 						" inner join coursetype as ct on ct.coursetypeid = tc.coursetype "+
@@ -110,7 +110,7 @@ public class GetTrainingCalender extends HttpServlet {
 		sql="select tc.trainingcalendarid ,mtp.trainingpartnername ,  "+
 					" concat(pitp.firstname ,  '  ' , pitp.middlename , ' ' , PITP.lastname) as name, "+
 					" cn.coursename , ct.coursetype , tc.trainingdate ,tc.trainingtime , pitp.seatcapacitypersession , pitp.seatcapacityavailable , "+
-					"   tc.trainingtype  , pitp.trainingcentrename , concat(pitr.firstname ,  '  ' , pitr.middlename , ' ' , pitr.lastname)"+
+					"   tc.trainingtype  , pitp.trainingcentrename , concat(pitr.firstname ,  '  ' , pitr.middlename , ' ' , pitr.lastname), tc.batchcode"+
 					" from trainingcalendar as tc "+
 					" inner join coursename as cn on cn.coursenameid = tc.coursename "+
 					" inner join coursetype as ct on ct.coursetypeid = tc.coursetype "+

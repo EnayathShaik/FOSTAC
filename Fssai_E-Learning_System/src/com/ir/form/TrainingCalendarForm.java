@@ -19,7 +19,6 @@ public class TrainingCalendarForm {
 		this.tcid = tcid;
 	}
 	private String trainerName;
-	private String trainingType;
 	public int getCourseType() {
 		return courseType;
 	}
@@ -51,21 +50,6 @@ public class TrainingCalendarForm {
 	public void setTrainerName(String trainerName) {
 		this.trainerName = trainerName;
 	}
-	public String getTrainingType() {
-		return trainingType;
-	}
-	public void setTrainingType(String trainingType) {
-		this.trainingType = trainingType;
-	}
-	@Override
-	public String toString() {
-		return "TrainingCalendarForm [courseType=" + courseType
-				+ ", courseName=" + courseName + ", trainingPartner="
-				+ trainingPartner + ", trainingCenter=" + trainingCenter
-				+ ", trainingDate=" + trainingEndDate + ", trainingTime="
-				+ trainingStartDate + ", trainerName=" + trainerName
-				+ ", trainingType=" + trainingType + "]";
-	}
 	public String getTrainingStartDate() {
 		return trainingStartDate;
 	}
@@ -78,6 +62,8 @@ public class TrainingCalendarForm {
 	public void setTrainingEndDate(String trainingEndDate) {
 		this.trainingEndDate = trainingEndDate;
 	}
+	
+	
 	
 	
 	

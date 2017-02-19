@@ -74,7 +74,7 @@
                             // 		alert(mainData1);
                             var j = 1;
                             $('#newTable tr').remove();
-                            $('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Course Type</th><th>Course Name</th><th>Training Date</th><th>No. Of Seats</th><th>No. Of Enrollments</th><th>Required Seat</th><th>Status</th></tr>')
+                            $('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Course Code</th><th>Batch Code</th><th>Training Date</th><th>No. Of Seats</th><th>No. Of Enrollments</th><th>Required Seat</th><th>Status</th></tr>')
                             $.each(mainData1, function(i, obj) {
                                 var a = null;
                                 var statuss = obj[9];
@@ -83,7 +83,7 @@
                                 } else {
                                     a = '<a href="#"  onClick=confirmStatus(' + obj[0] + '); id=confirm_' + obj[0] + ' >Confirm</a>';
                                 }
-                                $('#newTable').append('<tr id="tableRow"><td>' + j++ + '</td><td>' + obj[7] + '</td><td>' + obj[8] + '</td><td>' + obj[2] + '</td><td>' + obj[6] + '</td><td>' + obj[2] + '</td><td>' + obj[6] + '</td><td>' + a + '</td></tr>');
+                                $('#newTable').append('<tr id="tableRow"><td>' + j++ + '</td><td>' + obj[10] + '</td><td>' + obj[11] + '</td><td>' + obj[2] + '</td><td>' + obj[6] + '</td><td>' + obj[2] + '</td><td>' + obj[6] + '</td><td>' + a + '</td></tr>');
 
                             });
                         }

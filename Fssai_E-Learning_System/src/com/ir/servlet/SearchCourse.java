@@ -52,7 +52,7 @@ public class SearchCourse extends HttpServlet {
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
-		String sql="select coursenameid , coursename from coursename"+
+		String sql="select coursenameid , coursecode from coursename"+
 				" where coursetypeid = '"+ id+"' and status = 'A' ";
 
 		Query query = session.createSQLQuery(sql);

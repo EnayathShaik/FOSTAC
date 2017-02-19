@@ -3,6 +3,7 @@ package com.ir.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -591,7 +592,17 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	public String trainingCalendarForm(TrainingCalendarForm trainingCalendarForm) {
 		System.out.println("********  "+trainingCalendarForm.getCourseName());
 		Session session = sessionFactory.openSession();
+		
 		Transaction tx = session.beginTransaction();
+		String sql = "select max(seqNo) + 1 from trainingcalendar";
+		int maxId = 0 ;
+		Query maxIDList = session.createSQLQuery(sql);
+		List list = maxIDList.list();
+		System.out.println(list.size());
+		if(list.size() > 0){
+			maxId = (int) list.get(0);
+			//eligible = (String) list.get(0);
+		}
 		TrainingCalendar tc = new TrainingCalendar();
 		tc.setCourseType(trainingCalendarForm.getCourseType());
 		tc.setCourseName(trainingCalendarForm.getCourseName());
@@ -600,12 +611,17 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		tc.setTrainingDate(trainingCalendarForm.getTrainingStartDate());
 		tc.setTrainingTime(trainingCalendarForm.getTrainingEndDate());
 		tc.setTrainerName(trainingCalendarForm.getTrainerName());
-		tc.setTrainingType(trainingCalendarForm.getTrainingType());
+		
 		
 		//assessment
 		tc.setAssessmentDate(trainingCalendarForm.getTrainingStartDate());
 		tc.setAssessmentTime(trainingCalendarForm.getTrainingEndDate());
 		System.out.println("---->"+trainingCalendarForm.getTcid());
+		CourseName courseName = (CourseName) session.load(CourseName.class, trainingCalendarForm.getCourseName());
+		if(courseName != null && courseName.getCourseCode() != null && courseName.getCourseCode().length() > 1){
+			tc.setBatchCode(courseName.getCourseCode()+"/"+StringUtils.leftPad(String.valueOf(maxId), 5, "0"));
+			tc.setSeqNo(maxId);
+		}
 		int i = 0;
 	if(trainingCalendarForm.getTcid()==0){
 		System.out.println("inside create");

@@ -59,7 +59,7 @@ public class LoadCourseName extends HttpServlet {
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
-		String sql="select coursenameid , coursename from coursename where coursetypeid = '"+name+"'" ;
+		String sql="select coursenameid , coursecode from coursename where coursetypeid = '"+name+"'" ;
 		Query query = session.createSQLQuery(sql);
 		System.out.println("sql>"+sql);
 		List list = query.list();

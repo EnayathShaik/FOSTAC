@@ -55,7 +55,8 @@ public class GetCourseName extends HttpServlet {
 				System.out.println("onload training center post vacancy load course name list");
 				response.setContentType("text/html;charset=UTF-8");
 		        PrintWriter out = response.getWriter();
-		        String sql = "select cn.coursenameid , cn.coursename from coursename as cn inner join coursetype as ct on ct.coursetypeid = cn.coursetypeid where cn.coursetypeid  = '"+ request.getQueryString() +"'" ;
+		      //  String sql = "select cn.coursenameid , cn.coursename from coursename as cn inner join coursetype as ct on ct.coursetypeid = cn.coursetypeid where cn.coursetypeid  = '"+ request.getQueryString() +"'" ;
+		        String sql = "select cn.coursenameid , cn.coursecode from coursename as cn inner join coursetype as ct on ct.coursetypeid = cn.coursetypeid where cn.coursetypeid  = '"+ request.getQueryString() +"'" ;
 		        List list = new AjaxRequest().returnList(sql);
 		        String newList = "";
 		        if(list.size() > 0 || list != null){
