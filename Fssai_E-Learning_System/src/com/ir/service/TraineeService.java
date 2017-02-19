@@ -50,4 +50,6 @@ public interface TraineeService {
 	public Boolean closeCourse(int userId, int profileID, String status);
 	public String isCourseOnline(int userID);
 	public CertificateInfo getCertificateID(int userID, int profileID);
+
+
 }

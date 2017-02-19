@@ -177,4 +177,7 @@ public class TraineeServiceImpl implements TraineeService {
 		// TODO Auto-generated method stub
 		return traineeDAO.getCertificateID(userId, profileID);
 	}
+	
+	
+
 }

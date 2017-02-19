@@ -69,8 +69,8 @@
                                                                 <tr>
                                                                     <td align="center" style="font-size: 14px;">
                                                                         <Strong>Training Center Address:</Strong> ${admitCardForm.trainingCenterName },
-                                                                        <br> Kotla Road, New Delhi - 110002 India.
-                                                                        <br> Phone: 1800112100
+                                                                        <br> ${admitCardForm.address }
+                                                                        <br> Mob. No : ${admitCardForm.mobile }
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -102,27 +102,27 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td width="35%" style="border-top: 1px solid #CCC; border-bottom: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;">Father's Name:</td>
-                                                        <td width="50%" style="border-top: 1px solid #CCC; border-bottom: 1px solid #CCC; padding: 10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;"><strong>Examination Center:</strong>
-                                                            <p style="font-weight:normal;"><strong>Centre Code:</strong> 0
+                                                        <td width="35%" style="border-top: 1px solid #CCC; border-bottom: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;">Father's Name: ${admitCardForm.fatherName }</td>
+                                                        <td width="50%" style="border-top: 1px solid #CCC; border-bottom: 1px solid #CCC; padding: 10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;"><strong>Examination Center: ${admitCardForm.trainingCenterName} </strong>
+                                                            <p style="font-weight:normal;"><strong>Centre Code:  ${admitCardForm.trainingCenterCode}</strong> 
                                                                 <br> 
                                                             </p>
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td style="border-top: 1px solid #CCC; border-bottom: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;">Gender: </td>
+                                                        <td style="border-top: 1px solid #CCC; border-bottom: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;">Gender:  ${admitCardForm.gender} </td>
 
-                                                        <td style="border-top: 1px solid #CCC; border-bottom: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;">Course Duration:</td>
+                                                        <td style="border-top: 1px solid #CCC; border-bottom: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;">Course Duration:  ${admitCardForm.courseDuration}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td style="border-top: 1px solid #CCC; border-bottom: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;">State:</td>
+                                                        <td style="border-top: 1px solid #CCC; border-bottom: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;">State:  ${admitCardForm.state}</td>
 
-                                                        <td style="border-top: 1px solid #CCC; border-bottom: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;">Start Date:</td>
+                                                        <td style="border-top: 1px solid #CCC; border-bottom: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;">Start Date:  ${admitCardForm.trainingStartDate}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td style="border-top: 1px solid #CCC; border-bottom: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;">District:</td>
+                                                        <td style="border-top: 1px solid #CCC; border-bottom: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;">District:  ${admitCardForm.district}</td>
 
-                                                        <td style="border-top: 1px solid #CCC; border-bottom: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;">End Date:</td>
+                                                        <td style="border-top: 1px solid #CCC; border-bottom: 1px solid #CCC; border-right: 1px solid #CCC; padding:10px; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold;">End Date:  ${admitCardForm.trainingEndDate}</td>
                                                     </tr>
 
                                                     <tr>
@@ -131,7 +131,7 @@
                                                                 <tr>
                                                                     <td style="padding:10px; border-right: 1px solid #CCC; font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px; font-weight:bold; border-top: 1px solid transparent;">
 
-                                                                        City:
+                                                                        City:  ${admitCardForm.city}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>

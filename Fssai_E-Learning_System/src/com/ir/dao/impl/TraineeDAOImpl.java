@@ -703,7 +703,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 				" tcal.trainingcenter as trainingCenterCode,"
 				+ " pitp.trainingpartnerpermanentline1||','|| pitp.trainingpartnerpermanentline2 as address,"
 				+ " ce.rollno as rollNo  , cty.cityname  "
-				+ ", district.districtname as district , '' as coursecode , state.statename  , tcal.trainingdate as trainingstartdate , tcal.trainingtime as trainingenddate , '' as courseduration , pitp.firstname || ' ' || pitp.middlename || ' ' || pitp.lastname as trainingcentername"
+				+ ", district.districtname as district , coalesce(cn.coursecode, '') as coursecode , state.statename  , tcal.trainingdate as trainingstartdate , tcal.trainingtime as trainingenddate , cn.courseduration as courseduration , pitp.firstname || ' ' || pitp.middlename || ' ' || pitp.lastname as trainingcentername , case when gender='M' then 'MALE' else 'FEMALE' end , pit.mobile "
 				+
 
 				" from courseenrolleduser ce "
@@ -748,6 +748,8 @@ public class TraineeDAOImpl implements TraineeDAO {
 				admitcard.setTrainingEndDate(obj[13].toString());
 				admitcard.setCourseDuration(obj[14].toString());
 				admitcard.setTrainingCenterName(obj[15].toString());
+				admitcard.setGender(obj[16].toString());
+				admitcard.setMobile(obj[17].toString());
 			}
 		} catch (Exception e) {
 			System.out

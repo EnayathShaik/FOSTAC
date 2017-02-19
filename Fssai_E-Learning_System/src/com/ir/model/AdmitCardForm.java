@@ -28,6 +28,13 @@ public class AdmitCardForm {
 	private String trainingEndDate;
 	private String courseDuration;
 	private String trainingCenterName;
+	private String mobile;
+	public String getMobile() {
+		return mobile;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
 	public String getCourseCode() {
 		return courseCode;
 	}
