@@ -71,7 +71,7 @@ public class GetCourseDetails extends HttpServlet {
 				" concat(tc.trainingdate , ' / ' , tc.trainingtime) as schedule , "+
 				" concat(pitp.firstname , ' ' , pitp.middlename , ' ' , pitp.lastname ) ,concat( pitp.trainingpartnerpermanentmobile , ' / ' , pitp.trainingpartnerpermanentemail)  as contact, "+
 				" pitp.seatcapacitypersession ,(CAST(CAST (pitp.seatcapacitypersession AS NUMERIC(19,4)) AS INT) - ( select count(1) from courseenrolleduser where trainingcalendarid = tc.trainingcalendarid)) "+
-				" ,cn.courseCode , tc.trainingDate  "+
+				" ,cn.courseCode , tc.trainingDate, tc.batchCode  "+
 				" from trainingcalendar as tc "+
 				" inner join coursename as cn on cn.coursenameid = tc.coursename "+
 				" inner join coursetype as ct on ct.coursetypeid = tc.coursetype "+

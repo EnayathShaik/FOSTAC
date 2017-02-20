@@ -559,7 +559,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		Session session = sessionFactory.openSession();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 		int maxId = 0 ;
-		String sql = "select max(seqNo) + 1 from coursename";
+		String sql = "select max(rollseqNo) + 1 from courseenrolleduser";
 		Query maxIDList = session.createSQLQuery(sql);
 		List list = maxIDList.list();
 		System.out.println(list.size());
@@ -569,8 +569,12 @@ public class TraineeDAOImpl implements TraineeDAO {
 		}
 		TrainingCalendar tc = (TrainingCalendar) session.load(TrainingCalendar.class, courseEnrolledUserForm.getTrainingCalendarId());
 		CourseName ct = (CourseName) session.load(CourseName.class, tc.getCourseName());
+		CourseType ctype = (CourseType) session.load(CourseType.class, tc.getCourseType());
 		String rollNo = "";
 		rollNo = ct.getCourseCode()+""+StringUtils.leftPad(String.valueOf(maxId), 5, "0");
+		if(ctype != null && ctype.getCourseType().toUpperCase().equals("TOT")){
+			rollNo = "T"+rollNo;
+		}
 		courseEnrolledUser.setRollno(rollNo);
 		courseEnrolledUser.setRollSeqNo(maxId);
 		courseEnrolledUser.setLoginDetails(loginid);
