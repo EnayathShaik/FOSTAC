@@ -2,8 +2,6 @@
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
-
-
 function OnStart(){
 
 	flatpickr('[name="trainingEndDate"]' , {
@@ -14,23 +12,21 @@ function OnStart(){
 	flatpickr('[name="trainingStartDate"]' , {
 		//defaultDate: today, // Date objects and date strings are also accepted
 		enableTime: true
-	});	
-}
+	});
 
-function updateTrainingCalendar(){
 	
-	
+	flatpickr('[name="assessmentDateTime"]' , {
+		//defaultDate: today, // Date objects and date strings are also accepted
+		enableTime: true
+	});
 }
-
 
 
 function editTrainingCalendar( srNo , id, courseType){
 	
 	console.log("i "+i + "   courseType "+courseType);
 	
-	console.log($("#selCourseType"+srNo).val());
-	console.log($("#selCourseName"+srNo).val());
-	console.log($("#selTrainerNames"+srNo).val());
+	
 	var tcid = i;
 	
 	$("#selCourseType").val($("#selCourseType"+srNo).val());
@@ -44,6 +40,21 @@ function editTrainingCalendar( srNo , id, courseType){
 	$("#selTrainerNames").val($("#selTrainerNames"+srNo).val());
 	$("#trainingStartDate").val($("#trainingStartDate"+srNo).text());
 	$("#trainingEndDate").val($("#trainingEndDate"+srNo).text());
+	console.log("datetime "+$("#assessmentDateTime"+srNo).text());
+	
+	$("#assessmentDateTime").val($("#assessmentDateTime"+srNo).text());
+	console.log("agency name "+$("#assessmentAgencyname"+srNo).val());
+	
+	$("#assessmentAgencyName").val($("#assessmentAgencyname"+srNo).val());
+	
+	$("#assessmentAgencyName").trigger("change");
+	  window.setTimeout(function() {
+          $('#assessorName').val($("#assessorName"+srNo).val());
+      }, 2000);
+
+	$("#seatCapacity").val($("#seatCapacity"+srNo).text());
+	$("#type").val($("#type"+srNo).val());
+	
 	
 	document.getElementById('btnUpdate').style.display = 'block';
 	document.getElementById('btnCreate').style.display = 'none';
@@ -60,7 +71,7 @@ window.onload = OnStart;
 				var mainData1 = jQuery.parseJSON(response);
 				$('#selCourseName option').remove();
 				$('#selCourseName').append(
-						'<option value="0" label="--Select Course Code--" />');
+						'<option value="0" label="--Select Course Name--" />');
 				$.each(mainData1, function(i, obj) {
 					$('#selCourseName')
 							.append(
@@ -88,6 +99,27 @@ window.onload = OnStart;
 			}
 		});
 	}
+	
+	//getAssessorName.jspp
+		function getAssessorName(val) {
+		$.ajax({
+			type : 'post',
+			url : 'getAssessorName.jspp?' + val,
+			success : function(response) {
+				var mainData1 = jQuery.parseJSON(response);
+				
+				$('#assessorName option').remove();
+			/* 	$('#assessorName').append(
+						'<option value="0" label="Select Assessor Name" />'); */
+				$.each(mainData1, function(i, obj) {
+					$('#assessorName')
+					.append(
+							'<option value='+obj[0]+' >' + obj[1]
+									+ '</option>');
+				});
+			}
+		});
+	}
 </script>
 <script>
 	function saveDetails() {
@@ -106,7 +138,7 @@ window.onload = OnStart;
 		$('#tblAssessorCourses').append(
 				'<thead>' + '<tr class="background-open-vacancies">'
 						+ '<th>S.No.</th>' + '<th>Course Type</th>'
-						+ '<th>Course Code</th>' + '<th>Training Date</th>'
+						+ '<th>Course Name</th>' + '<th>Training Date</th>'
 						+ '<th>Training Time</th>' + '<th>Trainer Name</th>'
 						+ '<th>&nbsp;&nbsp;</th>' + '</tr>' + '</thead>');
 		var result = "";
@@ -197,11 +229,17 @@ window.onload = OnStart;
 				var j = 1;
 				$('#newTable tr').remove();
 				$.each(mainData1, function(i, obj) {
+					console.log(" --> "+obj[9] + ' 10  '+obj[10] + '  11 '+obj[11] + '  12 '+obj[12]);
 					$('#newTable').append(
 							'<tr id="tableRow"><td><input id='+obj[0]+' type="hidden"/>' + j++ + '</td><td><input type="hidden" value='+obj[6]+' id=selCourseType'+i+' />'
 									+ obj[1] + '</td><td> <input type="hidden" value='+obj[7]+' id=selCourseName'+i+' />' + obj[2]
-									+ '</td><td id=trainingStartDate'+i+'>' + obj[3] + '</td><td id=trainingEndDate'+i+'>'
-									+ obj[4] + '</td><td><input type="hidden" value='+obj[8]+'  id=selTrainerNames'+i+' />' + obj[5]	
+									+ '</td><td id=trainingStartDate'+i+'>' + obj[3] + '</td><td id=trainingEndDate'+i+'>'+ obj[4] 
+									+'</td><td id=assessmentDateTime'+i+'>' + obj[9]	
+									+'</td><td><input type="hidden" value='+obj[10]+'  id=assessmentAgencyname'+i+' />' + obj[11]	
+									+'</td><td><input type="hidden" value='+obj[12]+'  id=assessorName'+i+' />' + obj[13]	
+									+'</td><td><input type="hidden" value='+obj[8]+'  id=selTrainerNames'+i+' />' + obj[5]	
+									+'</td><td id=seatCapacity'+i+'>' + obj[14]
+									+'</td><td><input type="hidden" value='+obj[16]+'  id=type'+i+' />' + obj[15]	
 									+ '</td><td><input type="button"  onClick="editTrainingCalendar(\''+i+'\',\''+obj[0]+'\',\''+obj[1]+'\');" value="Reschedule"/></td><td> <input type="submit"  onclick=" return setId('+obj[0]+')" value="Cancel Training"/> </td></tr>');
 
 				});
@@ -263,6 +301,8 @@ window.onload = OnStart;
 											var formData = JSON.parse(formObj);
 											var courseTypes = formData.courseTypes;
 											var trainerList = formData.trainerList;
+											var assessmentAgencyNameList = formData.assessmentAgencyName;
+											
 										</script>
 
 										<div class="row">
@@ -304,11 +344,11 @@ window.onload = OnStart;
 													<div class="form-group">
 														<div>
 															<ul class="lab-no">
-																<li class="style-li"><strong>Course Code:<span
+																<li class="style-li"><strong>Course Name:<span
 																		style="color: red;">*</span></strong></li>
 																<li class="style-li error-red"><label
 																	id="courseNameError" class="error visibility">select
-																		course name</label> <%-- 						                               <cf:errors path="courseName" cssclass="error"/> --%>
+																		course name</label> <%--  <cf:errors path="courseName" cssclass="error"/> --%>
 																</li>
 															</ul>
 														</div>
@@ -339,7 +379,36 @@ window.onload = OnStart;
 														</script>
 
 													</div>
-
+													
+														<div class="form-group">
+														<div>
+															<ul class="lab-no">
+																<li class="style-li"><strong>Seat Capacity:</strong></li>
+																<li class="style-li error-red"></li>
+															</ul>
+														</div>
+														<input type="text" value="" name="seatCapacity" 
+															id="seatCapacity" class="form-control">
+													</div>
+													
+															<div class="form-group">
+														<div>
+															<ul class="lab-no">
+																<li class="style-li"><strong> Type:<span
+																		style="color: red;">*</span></strong></li>
+																<li class="style-li error-red"><label
+																	id="courseNameError" class="error visibility">select
+																		Type</label> <%--  <cf:errors path="type" cssclass="error"/> --%>
+																</li>
+															</ul>
+														</div>
+														<select class="form-control" name="type" id="type">
+														<option value="0">Select Type</option>
+														<option value="P">Paid</option>
+														<option value="U">Un-Paid</option>
+														</select>
+													</div>
+					
 												</div>
 
 												<!-- right side -->
@@ -369,6 +438,54 @@ window.onload = OnStart;
 															<input type="hidden" name="loginId"
 															id="loginId" value="${loginUserS.loginDetails.loginId}" class="form-control">
 													</div>
+													
+													           <div class="form-group">
+                                                        <div>
+                                                            <ul class="lab-no">
+                                                                <li class="style-li"><strong>Assessment Date and Time:</strong></li>
+                                                                <li class="style-li error-red"> </li>
+                                                            </ul>
+                                                        </div>
+                                                        <input type="text"  id="assessmentDateTime" value="" name="assessmentDateTime" class="form-control">
+                                                    </div>
+                      
+                      
+                      							 <div class="form-group">
+                          						<label>Assesment Agency Name</label> &nbsp;&nbsp;
+											 	<select class="form-control" name="assessmentAgencyName" onchange="getAssessorName(this.value)"
+															id="assessmentAgencyName">
+														</select>
+														<script>
+														console.log("length "+assessmentAgencyNameList.length);
+															var assessmentAgencyNameOptions = "<option disabled selected value='0'> -- select Agency Name -- </option>";
+															for ( var i = 0; i < assessmentAgencyNameList.length; i++) {
+																assessmentAgencyNameOptions += "<option value="+assessmentAgencyNameList[i].id+">"
+																		+ assessmentAgencyNameList[i].value
+																		+ "</option>"
+
+															}
+															document
+																	.getElementById('assessmentAgencyName').innerHTML += assessmentAgencyNameOptions;
+														</script>
+ 
+                       							 </div>
+                       							 
+                       							 	<div class="form-group">
+														<div>
+															<ul class="lab-no">
+																<li class="style-li"><strong>Assessor Name:<span
+																		style="color: red;">*</span></strong></li>
+																<li class="style-li error-red"><label
+																	id="assessorNameError" class="error visibility">select
+																		Assessor name</label> 
+																</li>
+															</ul>
+														</div>
+														<select class="form-control" name="assessorName"
+															id="assessorName">
+														</select>
+													</div>
+                                                
 													<input type="hidden" path="tcid" name="tcid" value="0" id="tcid">
 													<input type="submit" onclick="return saveDetails();"
 														style="margin-top: 20px;"
@@ -422,7 +539,12 @@ window.onload = OnStart;
 															<th>Course Code</th>
 															<th>Training Start Date</th>
 															<th>Training End Date</th>
+															<th>Assessment Date Time</th> 
+															<th>Assessment Agency Name</th>
+															<th>Assessor Name</th>
 															<th>Trainer Name</th>
+															<th>Seat Capacity</th>
+															<th>Type</th>
 															<th >Reschedule</th>
 															<th >Cancel</th>
 														</tr>

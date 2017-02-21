@@ -23,6 +23,7 @@ import com.ir.form.TrainingCalendarForm;
 import com.ir.form.trainingPartner.TrainingPartnerSearch;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
+import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.PostVacancyTrainingCenter;
 import com.ir.model.PostVacancyTrainingCenterBean;
@@ -313,7 +314,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	public List<CourseName> getCourseNameList(){
 		Session session = sessionFactory.openSession();
 		List<CourseName> courseNameList=new ArrayList<>();
-		String sql="select coursenameid,coursename,coursecode from coursename";
+		String sql="select coursenameid ,coalesce(coursename,''),coalesce(coursecode , '') from coursename";
 		Query query = session.createSQLQuery(sql);
 		List<Object[]> courseTypeList = query.list();
 		if(courseTypeList.size()>0){
@@ -614,11 +615,16 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		tc.setTrainingDate(trainingCalendarForm.getTrainingStartDate());
 		tc.setTrainingTime(trainingCalendarForm.getTrainingEndDate());
 		tc.setTrainerName(trainingCalendarForm.getTrainerName());
-		
-		
+		tc.setAssessmentPartnerName(trainingCalendarForm.getAssessmentAgencyName());
+		System.out.println("---> "+trainingCalendarForm.getSeatCapacity());
+		tc.setSeatCapacity(trainingCalendarForm.getSeatCapacity());
+		tc.setAssessmentDateTime(trainingCalendarForm.getAssessmentDateTime());
+		tc.setType(trainingCalendarForm.getType());
+		tc.setAssessor(trainingCalendarForm.getAssessor());
 		//assessment
-		tc.setAssessmentDate(trainingCalendarForm.getTrainingStartDate());
-		tc.setAssessmentTime(trainingCalendarForm.getTrainingEndDate());
+		tc.setAssessmentDateTime(trainingCalendarForm.getAssessmentDateTime());
+		//tc.setAssessmentTime(trainingCalendarForm.getTrainingEndDate());
+		
 		System.out.println("---->"+trainingCalendarForm.getTcid());
 		CourseName courseName = (CourseName) session.load(CourseName.class, trainingCalendarForm.getCourseName());
 		if(courseName != null && courseName.getCourseCode() != null && courseName.getCourseCode().length() > 1){
@@ -679,6 +685,42 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			tx.commit();
 			session.close();
 		
+	}
+	
+/*	@Override
+	public List<ManageAssessmentAgency> loadAssessmentAgency() {
+		System.out.println("Page Load DAOImpl process start in Assessment Agency");
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery("from ManageAssessmentAgency");
+		List loadAssessmentAgency = query.list();
+		session.close();
+		System.out.println("state list dao     :"+ loadAssessmentAgency);
+		// TODO Auto-generated method stub
+		return loadAssessmentAgency;
+	}
+	*/
+	
+	
+	
+	@Override
+	public List<IntStringBean> loadAssessmentAgency(){
+		Session session = sessionFactory.openSession();
+		List<IntStringBean> trinerNameList=new ArrayList<>();
+		String sql="select manageassessmentagencyid , assessmentagencyname from ManageAssessmentAgency";
+				
+		Query query = session.createSQLQuery(sql);
+		List<Object[]> courseTypeList = query.list();
+		if(courseTypeList.size()>0){
+			for(int index=0;index<courseTypeList.size();index++){
+				IntStringBean bean=new IntStringBean();
+				Object[] objecList=courseTypeList.get(index);
+				bean.setId(Integer.parseInt(objecList[0].toString()));
+				bean.setValue(objecList[1].toString());
+				trinerNameList.add(bean);
+			}
+		}
+		session.close();
+		return trinerNameList;
 	}
 
 }

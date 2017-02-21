@@ -8,7 +8,47 @@ public class TrainingPartnerCalendarForm {
 	private String trainingEndDate;
 	private String selTrainerNames;
 	private String loginId;
+	private String assessmentDateTime;
+	private String assessmentAgencyName;
+	private int assessorName;
+	private String seatCapacity;
+	private String type;
 	
+
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	public String getSeatCapacity() {
+		return seatCapacity;
+	}
+	public void setSeatCapacity(String seatCapacity) {
+		this.seatCapacity = seatCapacity;
+	}
+
+
+	public int getAssessorName() {
+		return assessorName;
+	}
+	public void setAssessorName(int assessorName) {
+		this.assessorName = assessorName;
+	}
+	public String getAssessmentAgencyName() {
+		return assessmentAgencyName;
+	}
+	public void setAssessmentAgencyName(String assessmentAgencyName) {
+		this.assessmentAgencyName = assessmentAgencyName;
+	}
+	public String getAssessmentDateTime() {
+		return assessmentDateTime;
+	}
+	public void setAssessmentDateTime(String assessmentDateTime) {
+		this.assessmentDateTime = assessmentDateTime;
+	}
 	public String getLoginId() {
 		return loginId;
 	}

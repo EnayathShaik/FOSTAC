@@ -14,6 +14,14 @@ public class TrainingPartnerTrainingCalender {
 	private List<PersonalInformationTrainingPartner> trainingCenterList;
 	private List<IntStringBean> assessorList;
 	private List<IntStringBean> traineeList;
+	private List<IntStringBean>assessmentAgencyName;
+	public List<IntStringBean> getAssessmentAgencyName() {
+		return assessmentAgencyName;
+	}
+	public void setAssessmentAgencyName(
+			List<IntStringBean> assessmentAgencyName) {
+		this.assessmentAgencyName = assessmentAgencyName;
+	}
 	/**
 	 * @return the statusList
 	 */

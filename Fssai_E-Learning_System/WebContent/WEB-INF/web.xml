@@ -572,6 +572,16 @@
   <servlet-name>getCourseName</servlet-name> 
   <url-pattern>/getCourseName.jspp</url-pattern> 
   </servlet-mapping>
+  
+   <servlet>
+   <servlet-name>getAssessorName</servlet-name> 
+  <servlet-class>com.ir.servlet.GetAssessorName</servlet-class> 
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>getAssessorName</servlet-name> 
+  <url-pattern>/getAssessorName.jspp</url-pattern> 
+  </servlet-mapping>
+
   <servlet>
   <servlet-name>searchVacancy</servlet-name> 
   <servlet-class>com.ir.servlet.SearchVacancy</servlet-class> 

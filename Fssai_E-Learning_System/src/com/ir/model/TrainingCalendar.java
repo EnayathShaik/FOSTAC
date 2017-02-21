@@ -28,13 +28,43 @@ public class TrainingCalendar {
 	private int trainingPartner;
 	private int trainingCenter;
 	private String trainingDate;
+	private String assessmentDateTime;
 	private String trainingTime;
+	private String seatCapacity;
+	private String type;
+	
+	public String getAssessmentDateTime() {
+		return assessmentDateTime;
+	}
+	public void setAssessmentDateTime(String assessmentDateTime) {
+		this.assessmentDateTime = assessmentDateTime;
+	}
+
+	public String getSeatCapacity() {
+		return seatCapacity;
+	}
+	public void setSeatCapacity(String seatCapacity) {
+		this.seatCapacity = seatCapacity;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getAssessmentPartnerName() {
+		return assessmentPartnerName;
+	}
+	public void setAssessmentPartnerName(String assessmentPartnerName) {
+		this.assessmentPartnerName = assessmentPartnerName;
+	}
 	private String trainerName;
 	private String status;
 	private String trainingType;
 	private int personalinformationassessorid;
 	private String assessmentDate;
 	private String assessmentTime;
+	private String assessmentPartnerName;
 	private String tcStatus;
 	
 	public String getTcStatus() {
@@ -43,9 +73,9 @@ public class TrainingCalendar {
 	public void setTcStatus(String tcStatus) {
 		this.tcStatus = tcStatus;
 	}
-	@Column(columnDefinition="int default 0")
+	
 	private int assessor;
-	@Column(columnDefinition="int default 0")
+	
 	private int assessorAgency;
 	private String batchCode;
 	@Column(columnDefinition="int default 0")

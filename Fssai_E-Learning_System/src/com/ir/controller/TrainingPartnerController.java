@@ -38,6 +38,7 @@ import com.ir.form.trainingPartner.TrainingPartnerSearch;
 import com.ir.form.trainingPartner.TrainingPartnerSearchForm;
 import com.ir.model.CourseType;
 import com.ir.model.FeedbackForm;
+import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.PostVacancyTrainingCenter;
 import com.ir.model.PostVacancyTrainingCenterBean;
@@ -150,10 +151,14 @@ public class TrainingPartnerController {
 			return "trainingpartnertrainingcalendar";
 		}
 		
+		
+		
 		List<CourseType> courseTypes = trainingPartnerService.courseTypes();
 		//List<CourseName> courseNames = trainingPartnerService.getCourseNameList();
 		trainingPartnerTrainingCalender.setCourseTypes(courseTypes);
 		List<IntStringBean> trainerList = trainingPartnerService.getTrainerList();
+		List<IntStringBean> assessmentAgencyNameList = trainingPartnerService.loadAssessmentAgency();
+		trainingPartnerTrainingCalender.setAssessmentAgencyName(assessmentAgencyNameList);
 		trainingPartnerTrainingCalender.setTrainerList(trainerList);
 //		trainingPartnerTrainingCalender.setCourseNames(courseNames);
 		Gson gson = new Gson();
@@ -528,8 +533,15 @@ public class TrainingPartnerController {
 		trainingCalendarForm.setTrainerName(trainingPartnerCalendarForm.getSelTrainerNames());
 		trainingCalendarForm.setTrainingStartDate(trainingPartnerCalendarForm.getTrainingStartDate());
 		trainingCalendarForm.setTrainingEndDate(trainingPartnerCalendarForm.getTrainingEndDate());
+		trainingCalendarForm.setAssessmentAgencyName(trainingPartnerCalendarForm.getAssessmentAgencyName());
 		System.out.println("tcid "+trainingPartnerCalendarForm.getTcid());
 		trainingCalendarForm.setTcid(trainingPartnerCalendarForm.getTcid());
+		System.out.println(trainingPartnerCalendarForm.getSeatCapacity());
+		trainingCalendarForm.setSeatCapacity(trainingPartnerCalendarForm.getSeatCapacity());
+		trainingCalendarForm.setType(trainingPartnerCalendarForm.getType());
+		trainingCalendarForm.setAssessor(trainingPartnerCalendarForm.getAssessorName());
+		System.out.println("date time "+trainingPartnerCalendarForm.getAssessmentDateTime());
+		trainingCalendarForm.setAssessmentDateTime(trainingPartnerCalendarForm.getAssessmentDateTime());
 		String trainingCalendar = trainingPartnerService.trainingCalendarForm(trainingCalendarForm);
 		
 		model.addAttribute(new TrainingPartnerCalendarForm()); 
@@ -575,8 +587,13 @@ public class TrainingPartnerController {
 	 }
 	*/
 	
-	
-	
+	/*
+	@ModelAttribute("assessmentAgencyNameList")
+	public List<ManageAssessmentAgency> assessmentAgencyNameList() {
+		List<ManageAssessmentAgency> assessmentAgencyNameList = trainingPartnerService.loadAssessmentAgency();
+		System.out.println("assessment Agency Name List    :   "+ assessmentAgencyNameList);
+		return assessmentAgencyNameList;
+	}*/
 	
 	
 }
