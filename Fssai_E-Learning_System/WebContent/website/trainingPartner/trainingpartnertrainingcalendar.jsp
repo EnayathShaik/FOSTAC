@@ -344,11 +344,11 @@ window.onload = OnStart;
 													<div class="form-group">
 														<div>
 															<ul class="lab-no">
-																<li class="style-li"><strong>Course Name:<span
+																<li class="style-li"><strong>Course Code:<span
 																		style="color: red;">*</span></strong></li>
 																<li class="style-li error-red"><label
 																	id="courseNameError" class="error visibility">select
-																		course name</label> <%--  <cf:errors path="courseName" cssclass="error"/> --%>
+																		course code</label> <%--  <cf:errors path="courseName" cssclass="error"/> --%>
 																</li>
 															</ul>
 														</div>

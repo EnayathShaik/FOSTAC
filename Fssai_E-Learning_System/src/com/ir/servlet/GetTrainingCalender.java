@@ -80,8 +80,7 @@ public class GetTrainingCalender extends HttpServlet {
 		}
 		
 		
-		trainingType = (totalConnected[7].split("="))[1];
-		if(trainingType.equals("0")){		trainingType = "%";	}
+		
 		
 		
 		System.out.println(trainerName);
@@ -98,7 +97,7 @@ public class GetTrainingCalender extends HttpServlet {
 						" concat(pitp.firstname ,  '  ' , pitp.middlename , ' ' , PITP.lastname) as name, "+
 						" cn.coursename , ct.coursetype , tc.trainingdate ,tc.trainingtime , pitp.seatcapacitypersession , pitp.seatcapacityavailable , "+
 						"   tc.trainingtype  , pitp.trainingcentrename,  concat(pitr.firstname ,  '  ' , pitr.middlename , ' ' , pitr.lastname), tc.batchcode "+
-						" from trainingcalendar as tc "+
+						" ,cn.courseCode from trainingcalendar as tc "+
 						" inner join coursename as cn on cn.coursenameid = tc.coursename "+
 						" inner join coursetype as ct on ct.coursetypeid = tc.coursetype "+
 						" inner join managetrainingpartner as mtp on mtp.managetrainingpartnerid = tc.trainingpartner "+
@@ -111,7 +110,7 @@ public class GetTrainingCalender extends HttpServlet {
 					" concat(pitp.firstname ,  '  ' , pitp.middlename , ' ' , PITP.lastname) as name, "+
 					" cn.coursename , ct.coursetype , tc.trainingdate ,tc.trainingtime , pitp.seatcapacitypersession , pitp.seatcapacityavailable , "+
 					"   tc.trainingtype  , pitp.trainingcentrename , concat(pitr.firstname ,  '  ' , pitr.middlename , ' ' , pitr.lastname), tc.batchcode"+
-					" from trainingcalendar as tc "+
+					"  ,cn.courseCode  from trainingcalendar as tc "+
 					" inner join coursename as cn on cn.coursenameid = tc.coursename "+
 					" inner join coursetype as ct on ct.coursetypeid = tc.coursetype "+
 					" inner join managetrainingpartner as mtp on mtp.managetrainingpartnerid = tc.trainingpartner "+
@@ -125,8 +124,7 @@ public class GetTrainingCalender extends HttpServlet {
 					" and CAST(tc.trainingcenter AS varchar(10)) like '"+trainingCenter+"' "+ 
 					" and CAST(tc.trainingdate AS varchar(10)) like '"+trainingDate+"' "+ 
 					" and CAST(tc.trainingTime AS varchar(10)) like '"+trainingTime+"' "+ 
-					" and CAST(tc.trainerName AS varchar(10)) like '"+trainerName+"' "+ 
-					" and upper(tc.trainingType) like '"+trainingType.toUpperCase()+"' "; 
+					" and CAST(tc.trainerName AS varchar(10)) like '"+trainerName+"' "; 
 		Query query = session.createSQLQuery(sql);
 		List<CourseName> list = query.list();
 		System.out.println(list.size());

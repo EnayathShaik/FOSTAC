@@ -30,19 +30,19 @@ window.onload = OnStart;
 				$('#tblAACalendar tr').remove();
 				$('#tblAACalendar').append(
 						'<thead>' + '<tr class="background-open-vacancies">'
-								+ '<th>S.No.</th>' + '<th>Course Type</th>'
-								+ '<th>Course Name</th>'
+								+ '<th>S.No.</th>' + '<th>Batch Code</th>'
+								+ '<th>Course Code</th>'
 								+ '<th>Assessment Date</th>'
 								+ '<th>Assessment Center</th>'
-								+ '<th>Assessor</th>' + '<th>Status</th>'
+								+ '<th>Assessor</th>'
 								+ '</tr>' + '</thead>');
 				$.each(calendarData, function(i, obj) {
 					$('#tblAACalendar').append(
 							'<tr id="tableRow"><td>' + j++ + '</td><td>'
-									+ obj[0] + '</td><td>' + obj[1]
+									+ obj[7] + '</td><td>' + obj[6]
 									+ '</td><td>' + obj[2] + '</td><td>'
 									+ obj[3] + '</td><td>' + obj[4]
-									+ '</td><td>' + obj[5] + '</td></tr>');
+									+ '</td></tr>');
 
 				});
 			}

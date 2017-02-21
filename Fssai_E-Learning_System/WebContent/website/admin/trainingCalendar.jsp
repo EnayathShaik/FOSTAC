@@ -28,7 +28,7 @@ function getCourseName(val)
 	      var mainData1 = jQuery.parseJSON(response);
 	     // alert(mainData1);
 	      $('#courseName option').remove();
-	      $('#courseName').append('<option value="0" label="Select Course name" />')
+	      $('#courseName').append('<option value="0" label="Select Course Code" />')
 	  	  $.each(mainData1 , function(i , obj)
 	  		{
 	  				$('#courseName').append('<option value='+obj[0]+'>'+obj[1]+'</option>');		
@@ -66,7 +66,6 @@ function getTrainingCalender(indicator){
 	var trainingDate = $("#trainingStartDate").val();
 	var trainingTime = $("#trainingEndDate").val();
 	var trainerName = $("#trainerName").val();
-	var trainingType = $("#trainingType").val();
 	var result="";
 	var total=""; 
 	
@@ -76,7 +75,7 @@ function getTrainingCalender(indicator){
 	
 	total="courseType="+courseType+"&courseName="+courseName+"&trainingPartner="+trainingPartner+ 
 	"&trainingCenter="+trainingCenter+"&trainingDate="+trainingDate+"&trainingTime="+trainingTime+
-	"&trainerName="+trainerName+"&trainingType="+trainingType;
+	"&trainerName="+trainerName;
 	}
 	//alert("total>"+total);
 	$.ajax({
@@ -87,10 +86,10 @@ function getTrainingCalender(indicator){
 	      //alert(mainData1);
 	      var j = 1;
 	      $('#newTable tr').remove();
-	      $('#newTable').append('<tr class="background-open-vacancies"><td>S.No.</td><td>Training Type</td><td>Course Type</td><td>Course Name</td><td>Training Partner Name</td><td>Training Center name</td><td>Training Date</td><td>Training Time</td><td>Trainer Name</td><tr>')
+	      $('#newTable').append('<tr class="background-open-vacancies"><td>S.No.</td><td>Batch Code</td><td>Course Code</td><td>Training Partner Name</td><td>Training Center name</td><td>Training Date</td><td>Training Time</td><td>Trainer Name</td><tr>')
 	  	  $.each(mainData1 , function(i , obj)
 	  		{
-	  				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[9]+'</td><td>'+obj[4]+'</td><td>'+obj[3]+'</td><td>'+obj[1]+'</td><td>'+obj[10]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td><td>'+obj[11]+'</td><tr>');		
+	  				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[12]+'</td><td>'+obj[13]+'</td><td>'+obj[1]+'</td><td>'+obj[10]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td><td>'+obj[11]+'</td><tr>');		
 	  		});
 	      }
 	      });  
@@ -150,12 +149,12 @@ function getTrainingCalender(indicator){
                                             <div class="form-group">
                                                 <div>
                                                     <ul class="lab-no">
-                                                        <li class="style-li"><strong>Course Name:</strong></li>
+                                                        <li class="style-li"><strong>Course Code:</strong></li>
                                                         <li class="style-li error-red"></li>
                                                     </ul>
                                                 </div>
 													<cf:select path="courseName" class="form-control">
-														<cf:option value="0" label="Select Course Name" />
+														<cf:option value="0" label="Select Course Code" />
 													</cf:select>
                                             </div>
                                             
@@ -193,7 +192,7 @@ function getTrainingCalender(indicator){
                                             <div class="form-group">
                                                 <div>
                                                     <ul class="lab-no">
-                                                        <li class="style-li"><strong>Training Date:</strong></li>
+                                                        <li class="style-li"><strong>Training Start Date:</strong></li>
                                                         <li class="style-li error-red"></li>
                                                     </ul>
                                                 </div>
@@ -203,7 +202,7 @@ function getTrainingCalender(indicator){
                                             <div class="form-group">
                                                 <div>
                                                     <ul class="lab-no">
-                                                        <li class="style-li"><strong>Training Time</strong></li>
+                                                        <li class="style-li"><strong>Training Start Time</strong></li>
                                                         <li class="style-li error-red"></li>
                                                     </ul>
                                                 </div>
@@ -222,22 +221,7 @@ function getTrainingCalender(indicator){
 <cf:options items="${trainingNameList}" itemValue="personalInformationTrainerId" itemLabel="FirstName"/>
 </cf:select>
                                             </div>
-                                            
-                                            <div class="form-group">
-                                                <div>
-                                                    <ul class="lab-no">
-                                                        <li class="style-li"><strong>Training Type:</strong></li>
-                                                        <li class="style-li error-red"></li>
-                                                    </ul>
-                                                </div>
-<cf:select path="trainingType" class="form-control">
-<cf:option value="0" label="Please Select" />
-<cf:option value="Trainer"  label="Trainer"/>
-<cf:option value="Trainee" label="Trainee" />
-</cf:select>
-                                            </div>
-                                            
-                                        </div>
+                                       </div>
                                         
 <input type="submit"  class="form-control login-btn" id="CreateTraineeCalender" value="Create" style="width: 200px;
     margin-left: 13px;" />  
@@ -261,13 +245,12 @@ function getTrainingCalender(indicator){
                                                 <thead>
                                                     <tr class="background-open-vacancies">
                                                         <th>S.No.</th>
-                                                        <th>Training Type</th>
-                                                        <th>Course Type</th>
-                                                        <th>Course Name</th>
+                                                        <th>Batch Code</th>
+                                                        <th>Course Code</th>
                                                         <th>Training Partner Name</th>
                                                         <th>Training Center name</th>
-                                                        <th>Training Date</th>
-                                                        <th>Training Time</th>
+                                                        <th>Training Start Date</th>
+                                                        <th>Training End Date</th>
                                                         <th>Trainer Name</th>
                                                     </tr>
                                                 </thead>
