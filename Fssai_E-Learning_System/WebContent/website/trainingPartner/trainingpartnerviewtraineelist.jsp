@@ -193,7 +193,7 @@ return result;
                                                     <div class="form-group">
                                                         <div>
                                                             <ul class="lab-no">
-                                                                <li class="style-li"><strong>Training Date:</strong></li>
+                                                                <li class="style-li"><strong>Training Start Date:</strong></li>
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
@@ -207,7 +207,7 @@ return result;
                                                     <div class="form-group">
                                                         <div>
                                                             <ul class="lab-no">
-                                                                <li class="style-li"><strong>Training Time</strong></li>
+                                                                <li class="style-li"><strong>Training Start Time</strong></li>
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>

@@ -97,11 +97,11 @@ public class SearchManageCourseContent extends HttpServlet {
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
 		
-		String sql = "select cn.coursename , ct.coursetype , mcm.contentlinkinput , mcm.contentlocationinput, "+
+		String sql = "select cn.coursecode , ct.coursetype , mcm.contentlinkinput , mcm.contentlocationinput, "+
 				"mcm.modeoftraininginput , mcm.contenttypeinput , mcm.contentnameinput from ManageCoursecontent as mcm "+
 				"inner join coursetype as ct on ct.coursetypeid = mcm.coursetypeinput "+
 				"inner join coursename as cn on cn.coursenameid = mcm.coursenameinput "+
-				"where mcm.contentlocationinput = '"+ contentLocation+"%' and mcm.coursetypeinput = '"+courseType+"%' and mcm.coursenameinput = '"+courseName  +"%' and mcm.modeoftraininginput = '"+modeOfTraining+"%' and mcm.contenttypeinput = '"+contentType+ "%'";
+				"where mcm.contentlocationinput = '"+ contentLocation+"%' and mcm.coursetypeinput = '"+courseType+"%' and mcm.coursenameinput = '"+courseName  +"%' and mcm.modeoftraininginput = '"+modeOfTraining+"%' and mcm.contenttypeinput = '"+contentType+ "%'  order by mcm.managecoursecontentid desc";
 		
 		Query query = session.createSQLQuery(sql);
 		/*query.setString(1, contentLocation);
@@ -233,16 +233,16 @@ public class SearchManageCourseContent extends HttpServlet {
 		
 		
 		if(!name.equalsIgnoreCase("ALL"))
-		 sql= "select cn.coursename , ct.coursetype , mcm.contentlinkinput , mcm.contentlocationinput, "+
+		 sql= "select cn.coursecode , ct.coursetype , mcm.contentlinkinput , mcm.contentlocationinput, "+
 				"mcm.modeoftraininginput , mcm.contenttypeinput , mcm.contentnameinput , mcm.managecoursecontentid from ManageCoursecontent as mcm "+
 				"inner join coursetype as ct on ct.coursetypeid = mcm.coursetypeinput "+
 				"inner join coursename as cn on cn.coursenameid = mcm.coursenameinput "+
-				"where cast(mcm.contentlocationinput as varchar) like '"+ contentLocation+"' and cast(mcm.coursetypeinput as varchar) like '"+courseType+"' and cast(mcm.coursenameinput as varchar) like '"+courseName  +"' and cast(mcm.modeoftraininginput as varchar) like '"+modeOfTraining+"' and cast(mcm.contenttypeinput as varchar) like '"+contentType+ "' and mcm.contentnameinput like '"+contentName+"%' and cast(mcm.contentlinkinput as varchar) like '"+contentLink+"%'";
+				"where cast(mcm.contentlocationinput as varchar) like '"+ contentLocation+"' and cast(mcm.coursetypeinput as varchar) like '"+courseType+"' and cast(mcm.coursenameinput as varchar) like '"+courseName  +"' and cast(mcm.modeoftraininginput as varchar) like '"+modeOfTraining+"' and cast(mcm.contenttypeinput as varchar) like '"+contentType+ "' and mcm.contentnameinput like '"+contentName+"%' and cast(mcm.contentlinkinput as varchar) like '"+contentLink+"%'  order by mcm.managecoursecontentid desc";
 		else
-			 sql= "select cn.coursename , ct.coursetype , mcm.contentlinkinput , mcm.contentlocationinput, "+
+			 sql= "select cn.coursecode , ct.coursetype , mcm.contentlinkinput , mcm.contentlocationinput, "+
 						"mcm.modeoftraininginput , mcm.contenttypeinput , mcm.contentnameinput , mcm.managecoursecontentid from ManageCoursecontent as mcm "+
 						"inner join coursetype as ct on ct.coursetypeid = mcm.coursetypeinput "+
-						"inner join coursename as cn on cn.coursenameid = mcm.coursenameinput ";	
+						"inner join coursename as cn on cn.coursenameid = mcm.coursenameinput order by mcm.managecoursecontentid desc";	
 		
 		
 		Query query = session.createSQLQuery(sql);

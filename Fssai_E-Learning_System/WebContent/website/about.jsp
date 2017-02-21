@@ -130,7 +130,7 @@
         <div class="col-md-8 col-sm-12">&nbsp;</div>
     </div>
 </section>
-<script>
+<!-- <script>
 var id = localStorage.getItem('activeID');
 document.getElementById(id).className = "active";
-</script>
+</script> -->

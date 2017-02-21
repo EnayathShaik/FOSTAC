@@ -228,7 +228,7 @@ function searchVacancy(indicator){
                         <div class="form-group">
                           <div>
                             <ul class="lab-no">
-                              <li class="style-li"><strong>Training Date:</strong></li>
+                              <li class="style-li"><strong>Training Start Date:</strong></li>
                               <li class="style-li error-red">
                                <label id="trainingDateError" class="error visibility">enter training date</label>
                                <cf:errors path="trainingDate" cssclass="error"/>

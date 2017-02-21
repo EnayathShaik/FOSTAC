@@ -353,8 +353,8 @@ Update</a>
                     </div>
                 </section>
             </cf:form>
-            <script>
+            <!-- <script>
                 var id = localStorage.getItem('activeID');
                 document.getElementById(id).className = "active";
 
-            </script>
+            </script> -->

@@ -84,7 +84,7 @@
           <li> <a href="postVacancyTrainingPartner.fssai">Post Vacancy for Trainer</a> </li>
           <li> <a href="trainingpartnerapplicationstatus.fssai">Application Status</a> </li>
           <li> <a href="trainingpartnermanagetrainer.fssai">Manage Trainer</a> </li>
-          <li> <a href="trainingpartnerassessmentcalendar.fssai">Assessment Calendar</a></li>
+          <!-- <li> <a href="trainingpartnerassessmentcalendar.fssai">Assessment Calendar</a></li> -->
           <li> <a href="trainingpartnerpaymentconfirmation.fssai">Fees</a> </li>
         </ul>
       </div>

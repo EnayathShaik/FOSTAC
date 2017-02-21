@@ -33,10 +33,10 @@ function getQuestions(){
 	var mainData1 = jQuery.parseJSON(data);
 	var j=1;
 	$('#newTable tr').remove();
-	$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Course Type</th><th>Course Code</th><th>Question Number</th></tr>')
+	$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Course Code</th><th>Question Number</th></tr>')
 	$.each(mainData1 , function(i , obj)
 	{
-		$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[3]+')">'+obj[1]+'</a></td><td>'+obj[2]+'</td></tr>');
+		$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[3]+')">'+obj[4]+'</a></td><td>'+obj[2]+'</td></tr>');
 		
 	});
 	}
@@ -256,7 +256,6 @@ function searchCourse1(val)
 
                                                             <tr class="background-open-vacancies">
                                                                 <th class="text-center"><input type="checkbox"> </th>
-                                                                <th>Course Type</th>
                                                                 <th>Course Code</th>
                                                                 <th>Question Number</th>
                                                             </tr>

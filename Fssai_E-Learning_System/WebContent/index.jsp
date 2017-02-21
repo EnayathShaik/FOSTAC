@@ -119,30 +119,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <div class="col-sm-6 hidden-xs animation animated-item-4">
                                             <div class="slider-img"> </div>
                                         </div>
-                                        <div class="col-xs-12">
-                                            <div class="col-md-3 xs-hidden">
-
-                                            </div>
-                                            <div class="col-md-6 col-xs-12">
-                                                <div class="col-md-4 col-xs-12" align="center">
+                                        <div class="circle-wrap center-block">
+                                            <ul>
+                                                <li>
                                                     <a href="trainee.fssai"><img src="website/images/trainee.png"></a>
-                                                </div>
-                                                <div class="col-md-4 col-xs-12" align="center">
-                                                    <a href="trainer.fssai"><img src="website/images/trainer.png"></a>
-                                                </div>
-                                                <div class="col-md-4 col-xs-12" align="center">
-                                                    <a href="assessor.fssai"><img src="website/images/assessor.png"></a>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-md-3 xs-hidden">
-
-                                            </div>
-
-                                            <!--  <li>
+                                                    <li>
+                                                        <a href="trainer.fssai"><img src="website/images/trainer.png"></a>
+                                                    </li>
+                                                   <!--  <li>
                                                         <a href="trainingPartner.fssai"><img src="website/images/training-partner.png"></a>
                                                     </li> -->
-
+                                                    <li>
+                                                        <a href="assessor.fssai"><img src="website/images/assessor.png"></a>
+                                                    </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -472,10 +462,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </script>
 
             </body>
-            <script>
+            <!-- <script>
                 var id = localStorage.getItem('activeID');
                 document.getElementById(id).className = "active";
 
-            </script>
+            </script> -->
 
             </html>

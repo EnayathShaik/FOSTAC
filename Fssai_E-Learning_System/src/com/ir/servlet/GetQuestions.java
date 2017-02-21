@@ -80,7 +80,7 @@ public class GetQuestions extends HttpServlet {
 			wherebuffer.append(" AND cn.coursenameid="+courseNameSearch);
 		}
 		
-		String sql = "select ct.coursetype , cn.coursename , aq.questionnumber, aq.assessmentquestionid  from assessmentquestion as aq "+
+		String sql = "select ct.coursetype , cn.coursename , aq.questionnumber, aq.assessmentquestionid, cn.coursecode   from assessmentquestion as aq "+
 					" inner join coursetype as ct on ct.coursetypeid = aq.coursetype"+
 					" inner join coursename as cn on cn.coursenameid = aq.coursename";
 		sql = sql + wherebuffer.toString();

@@ -362,8 +362,8 @@ font-weight: normal; line-height: 1.42857143; text-align: center; white-space: n
                     </div>
                 </section>
             </cf:form>
-            <script>
+            <!-- <script>
                 var id = localStorage.getItem('activeID');
                 document.getElementById(id).className = "active";
 
-            </script>
+            </script> -->

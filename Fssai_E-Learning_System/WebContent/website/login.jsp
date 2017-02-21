@@ -162,11 +162,11 @@ response.setDateHeader("Expires",   0);
 
             <!-- footer -->
 
-            <script>
+           <!--  <script>
                 var id = localStorage.getItem('activeID');
                 document.getElementById(id).className = "active";
 
-            </script>
+            </script> -->
 
             </body>
 

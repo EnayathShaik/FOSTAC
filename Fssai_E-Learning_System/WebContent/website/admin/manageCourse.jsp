@@ -80,7 +80,7 @@ function searchManageCourse(indicator){
 		var mainData1 = jQuery.parseJSON(data);
 		var j=1;
 		$('#newTable tr').remove();
-		$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Course Code</th><th>Course Type</th><th>Course Code</th><th>Duration</th><th>Free/ Paid</th><th>Online</th><th>Classroom</th><th>Status</th><th>Option</th></tr>')
+		$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Course Code</th><th>Course Type</th><th>Course Name</th><th>Duration</th><th>Free/ Paid</th><th>Online</th><th>Classroom</th><th>Status</th><th>Option</th></tr>')
 		$.each(mainData1 , function(i , obj)
 		{
 			var stat ;
