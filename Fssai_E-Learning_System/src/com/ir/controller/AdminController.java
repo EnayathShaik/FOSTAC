@@ -46,6 +46,7 @@ import com.ir.form.TrainerUserManagementForm;
 import com.ir.form.TrainingCalendarForm;
 import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.UpdateTrainerAssessmentForm;
+import com.ir.model.ActivateDeActivateUsersForm;
 import com.ir.model.AdminUserManagement;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
@@ -57,6 +58,7 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.State;
+import com.ir.model.TrainingPartnerCalendarForm;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
 import com.ir.service.AdminService;
@@ -1039,4 +1041,11 @@ public class AdminController {
 		model.addAttribute("updateTrainerAssessment", "Test Ajax");
 		return "updateTrainerAssessment";
 	}
+	
+	@RequestMapping("/activateDeActivateUsers" )
+    public String activateDeActivateUsers(@Valid @ModelAttribute("traineeUserManagementForm") TraineeUserManagementForm traineeUserManagementForm){
+		System.out.println("Login ID Details :  "+traineeUserManagementForm.getLogindetails());
+        //trainingPartnerService.cancelTrainingCalendar(trainingPartnerCalendarForm.getTcid());
+		return "redirect:/traineeUserManagementForm.fssai";
+    }
 }

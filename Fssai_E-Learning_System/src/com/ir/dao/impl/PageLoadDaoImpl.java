@@ -273,6 +273,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			listCaste.add("ST");
 			listCaste.add("SC");
 			listCaste.add("OBC");
+			listCaste.add("GENERAL");
 			return listCaste;
 		}
 	

@@ -11,7 +11,7 @@
 				var mainData1 = jQuery.parseJSON(response);
 				$('#selCourseName option').remove();
 				$('#selCourseName').append(
-						'<option value="0" label="--Select Course Name--" />');
+						'<option value="0" label="--Select Course Code--" />');
 				$.each(mainData1, function(i, obj) {
 					$('#selCourseName')
 							.append(
@@ -248,7 +248,7 @@
 													<div class="form-group">
 														<div>
 															<ul class="lab-no">
-																<li class="style-li"><strong>Course Name:</strong></li>
+																<li class="style-li"><strong>Course Code:</strong></li>
 
 															</ul>
 														</div>

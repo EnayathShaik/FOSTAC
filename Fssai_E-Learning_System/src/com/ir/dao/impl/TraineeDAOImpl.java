@@ -1,8 +1,10 @@
 package com.ir.dao.impl;
 
 import java.math.BigInteger;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -564,7 +566,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		List list = maxIDList.list();
 		System.out.println(list.size());
 		if(list.size() > 0){
-			maxId = (int) list.get(0);
+			maxId = (int) (list.get(0) == null ? "1" : list.get(0));
 			//eligible = (String) list.get(0);
 		}
 		TrainingCalendar tc = (TrainingCalendar) session.load(TrainingCalendar.class, courseEnrolledUserForm.getTrainingCalendarId());
@@ -1044,7 +1046,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 				
 				//max SeqNo
 				String sql = "Select C.coursecode,B.trainingdate," +
-						"A.courseenrolleduserid ,D.firstname || ' '|| D.middlename ||' '|| D.lastname from courseenrolleduser A " +
+						"A.courseenrolleduserid ,D.firstname || ' '|| D.middlename ||' '|| D.lastname,A.issueDate,A.certificateid from courseenrolleduser A " +
 						"inner join trainingcalendar B on(A.trainingcalendarid=B.trainingcalendarid) " +
 						"inner join coursename C on(B.coursename=C.coursenameid) " +
 						"inner join personalinformationtrainee D on(A.logindetails=D.logindetails) "+
@@ -1058,28 +1060,36 @@ public class TraineeDAOImpl implements TraineeDAO {
 					if (records.size() > 0) {
 
 						Object[] obj = records.get(0);
-						courseCode =  obj[0].toString();
-						certificateInfo.setTrainingDate(obj[1].toString());
+						courseCode =  obj[0] == null ? "" : obj[0].toString();
+						certificateInfo.setTrainingDate(obj[1] == null ? "" : obj[1].toString());
 						courseEnrolledUserID = (int) obj[2];
-						certificateInfo.setName(obj[3].toString());
+						certificateInfo.setName(obj[3] == null ? "" : obj[3].toString());
+						certificateInfo.setIssueDate(obj[4] == null ? "" : obj[4].toString());
+						certificateInfo.setCertificateID(obj[5] == null ? "" : obj[5].toString());
 					}
 				} catch (Exception e) {
 					System.out
 							.println("Exception while retrieving admit card details : "
 									+ e.getMessage());
 				}
-				if(courseCode != null && courseCode.length() > 0){
-					certificateID = courseCode + StringUtils.leftPad(String.valueOf(maxIdSeq), 6, "0") + "17";
+				if(certificateInfo != null && certificateInfo.getCertificateID() != null && certificateInfo.getCertificateID().length() > 0){
+					if(courseCode != null && courseCode.length() > 0){
+						certificateID = courseCode + StringUtils.leftPad(String.valueOf(maxIdSeq), 6, "0") + "17";
+					}
+					certificateInfo.setCertificateID(certificateID);
+					if(courseEnrolledUserID > 0){
+						CourseEnrolledUser courseEnrolledUser = (CourseEnrolledUser) session
+								.load(CourseEnrolledUser.class, courseEnrolledUserID);
+						courseEnrolledUser.setCertificateID(certificateID);
+						courseEnrolledUser.setCertificateSeqNo(maxIdSeq);
+						DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+						Date dateobj = new Date();
+						courseEnrolledUser.setIssueDate(df.format(dateobj));
+						certificateInfo.setIssueDate(df.format(dateobj));
+						session.update(courseEnrolledUser);
+					}
 				}
 				
-				certificateInfo.setCertificateID(certificateID);
-				if(courseEnrolledUserID > 0){
-					CourseEnrolledUser courseEnrolledUser = (CourseEnrolledUser) session
-							.load(CourseEnrolledUser.class, courseEnrolledUserID);
-					courseEnrolledUser.setCertificateID(certificateID);
-					courseEnrolledUser.setCertificateSeqNo(maxIdSeq);
-					session.update(courseEnrolledUser);
-				}
 				session.beginTransaction().commit();
 				session.close();
 		

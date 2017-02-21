@@ -83,6 +83,8 @@ public class TrainingPartnerController {
 		return "postVacancyTrainingPartner";
 		
 	}
+	
+	
 	@RequestMapping(value="/postVacancyTrainingCenter" , method=RequestMethod.GET)
 	public String postVacancyTrainingCenter(@ModelAttribute("postVacancyTrainingCenterForm") PostVacancyTrainingCenterForm postVacancyTrainingCenterForm,HttpSession session,BindingResult result , Model model ){
 		return "postVacancyTrangCenter";

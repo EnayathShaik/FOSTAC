@@ -46,7 +46,7 @@ function getContentName(val)
 	      var mainData1 = jQuery.parseJSON(response);
 	    
 	      $('#courseName option').remove();
-	     $('#courseName').append('<option value="0" label="Select Course Name" />');
+	     $('#courseName').append('<option value="0" label="Select Course Code" />');
 	      $.each(mainData1 , function(i , obj)
 	  		{                                                                                                                                         
 	  				$('#courseName').append('<option value='+obj[0]+'>'+obj[1]+'</option>');		
@@ -122,7 +122,7 @@ function searchManageCourseContent(indicator){
 		var mainData1 = jQuery.parseJSON(data);
 		var j=1;
 		$('#newTable tr').remove();
-		$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Content Location</th><th>Course Type</th><th>Course Name</th><th>Mode of Training</th><th>Content Type</th><th>Content Name</th><th>Content Link</th><th>Option	</th></tr>')
+		$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Content Location</th><th>Course Type</th><th>Course Code</th><th>Mode of Training</th><th>Content Type</th><th>Content Name</th><th>Content Link</th><th>Option	</th></tr>')
 		$.each(mainData1 , function(i , obj)
 		{
 
@@ -244,12 +244,12 @@ function deleteCourseContent(i){
                                                  <div class="form-group">
                                                     <div>
                                                         <ul class="lab-no">
-                                                            <li class="style-li"><strong>Course Name:</strong></li>
+                                                            <li class="style-li"><strong>Course Code:</strong></li>
                                                             <li class="style-li error-red"></li>
                                                         </ul>
                                                     </div>
 <cf:select path="courseName" class="form-control">
-<cf:option value="0" label="Select Course Name" />
+<cf:option value="0" label="Select Course Code" />
 <cf:options items="${courseNameList}" itemValue="coursenameid" itemLabel="coursename"/>
 </cf:select> 
                                                 </div>
@@ -378,7 +378,7 @@ font-weight: normal; line-height: 1.42857143; text-align: center; white-space: n
                                                        
                                                         <th>Content Location</th>
                                                         <th>Course Type</th>
-                                                        <th>Course Name</th>
+                                                        <th>Course Code</th>
                                                         <th>Mode of Training</th>
                                                         <th>Content Name</th>
                                                         <th>Content Link</th>

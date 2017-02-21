@@ -6,6 +6,56 @@
         var k = event ? event.which : window.event.keyCode;
         if (k == 32) return false;
     }
+    
+    function isAadharCorrect(){
+    	var aadhar=document.getElementById( "AadharNumber" ).value;
+    	if(aadhar != ''){
+    		if(aadhar.length == 12){
+    			localStorage.setItem("traineeAadhar", aadhar);
+    		}else{
+    			alert('Aadhar Number Must be 12 Digit.');
+        		return false;
+    		}
+    	}else{
+    		alert('Please enter Aadhar Number');
+    		return false;
+    	}
+    	
+    }
+    function ck_aadhar() {
+    	var name=document.getElementById( "AadharNumber" ).value;
+        if(name)
+        {
+         $.ajax({
+         type: 'post',
+         url: 'checkaadhartrainee.jspp?'+ name,
+         data: {
+          user_name:name,
+         },
+         success: function (response) {
+          $( '#aadhar_status' ).html(response);
+          if(response.trim() == 'Already')	
+          {
+       	   document.getElementById('AadharNumber').value="";
+       	   document.getElementById("register").style.display = 'none';
+              return false;
+       	   
+          }
+          else
+          {
+       	   var aa = $('#aadhar_status').html(response);
+       	   document.getElementById("register").style.display = 'block';
+              return true;	
+          }
+       	  
+          }  
+         })
+         }else{
+       	  $( '#aadhar_status' ).html("");
+             document.getElementById("register").style.display = 'none';
+             return false;
+         }
+    }
 </script>
 <cf:form action="registrationForm.fssai"  name="myForm" method="POST" commandName="aadharDetails" > 
 
@@ -26,14 +76,21 @@
             <!-- left side -->
             <div class="col-md-6 col-xs-12">
               <div class="form-group">
-                <div>
-                  <ul class="lab-no">
-                    <li class="style-li"><strong>Aadhar Number:</strong></li>
-                    <li class="style-li error-red"><cf:errors id="aadharNumber" /> </li>
-                  </ul>
-                </div>
-                <cf:input path="aadharNumber" class="form-control" onkeypress="return AvoidSpace(event)" placeholder="Aadhar Number"   maxlength="12" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" />
-              </div>
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong><cs:message
+													code="lbl.Trainee.AadharNumber" /></strong></li>
+										<li class="style-li error-red"><span id="aadhar_status"><label
+												id=AadharNumberError class="error visibility">*
+													Enter your aadharNumber </label> <cf:errors path="AadharNumber"
+													cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:input path="AadharNumber" class="form-control"
+									maxlength="12" placeholder="Aadhar Number"
+									onblur="ck_aadhar();" value=""
+									onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" />
+							</div>
               <div class="form-group">
                 <div>
                   <ul class="lab-no">
@@ -74,7 +131,7 @@
 </div>
             </div>
             
-            <div class="col-xs-12" style="margin-top: 20px; text-align: -webkit-center;"> <a href="registrationFormTrainee.fssai" class="btn login-btn" data-toggle="modal" data-target="#aadhar-verification" style="width: 40%;">Verify</a> 
+            <div class="col-xs-12" style="margin-top: 20px; text-align: -webkit-center;"> <a href="registrationFormTrainee.fssai" onclick="return isAadharCorrect();" class="btn login-btn" data-toggle="modal" data-target="#aadhar-verification" style="width: 40%;">Verify</a> 
               
               <!-- details of modal -->
               <!-- <div id="aadhar-verification" class="modal fade" role="dialog">

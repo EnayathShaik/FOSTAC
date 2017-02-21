@@ -96,7 +96,8 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 		System.out.println("registerForm training partner begins ");
 		RegistrationFormTrainingPartner registrationFormTrainingPartner=new RegistrationFormTrainingPartner();
 		model.addAttribute("registrationFormTrainingPartner", registrationFormTrainingPartner);
-		return "registrationFormTrainingPartner";
+		return "registerTrainingCenter";
+		//return "registrationFormTrainingPartner";
 	}
 	
 	/*@RequestMapping(value = "/contactTP", method = RequestMethod.GET)
@@ -126,7 +127,7 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 				JavaMail javaMail = new JavaMail();
 				javaMail.mailProperty("Thanks", registrationFormTrainingPartner.getTrainingPartnerPermanentEmail(), registrationFormTrainingPartner.getUserId(),all[0]);
 				
-			return "welcome";
+			return "welcomeTrainingCenter";
 		}else{
 			model.addAttribute("created" , "Oops , Something went wrong !!!");
 			return "registrationFormTrainingPartner";
@@ -145,7 +146,7 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 		
 		System.out.println("nnb is ****** " +ss);
 		String updateTrainingPartner = registrationServiceTrainingPartner.UpdateTrainingPartner(registrationFormTrainingPartner , ss);
-		
+		//return "welcomeupdatetrainingCenter";
 		return "welcomeupdatetrainee";
 	}
 

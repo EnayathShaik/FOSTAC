@@ -41,6 +41,8 @@ public class LoginDetails {
 	private int profileId;
 	
 	private String status;
+	@Column(columnDefinition="varchar(1) default 'Y'")
+	private String isActive;
 	
 	public String getStatus() {
 		return status;
@@ -102,7 +104,11 @@ public class LoginDetails {
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
 	}
-	
-	
+	public String getIsActive() {
+		return isActive;
+	}
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
 	
 }

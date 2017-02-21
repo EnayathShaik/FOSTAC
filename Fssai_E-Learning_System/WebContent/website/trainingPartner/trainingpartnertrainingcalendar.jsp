@@ -60,7 +60,7 @@ window.onload = OnStart;
 				var mainData1 = jQuery.parseJSON(response);
 				$('#selCourseName option').remove();
 				$('#selCourseName').append(
-						'<option value="0" label="--Select Course Name--" />');
+						'<option value="0" label="--Select Course Code--" />');
 				$.each(mainData1, function(i, obj) {
 					$('#selCourseName')
 							.append(
@@ -106,7 +106,7 @@ window.onload = OnStart;
 		$('#tblAssessorCourses').append(
 				'<thead>' + '<tr class="background-open-vacancies">'
 						+ '<th>S.No.</th>' + '<th>Course Type</th>'
-						+ '<th>Course Name</th>' + '<th>Training Date</th>'
+						+ '<th>Course Code</th>' + '<th>Training Date</th>'
 						+ '<th>Training Time</th>' + '<th>Trainer Name</th>'
 						+ '<th>&nbsp;&nbsp;</th>' + '</tr>' + '</thead>');
 		var result = "";
@@ -304,7 +304,7 @@ window.onload = OnStart;
 													<div class="form-group">
 														<div>
 															<ul class="lab-no">
-																<li class="style-li"><strong>Course Name:<span
+																<li class="style-li"><strong>Course Code:<span
 																		style="color: red;">*</span></strong></li>
 																<li class="style-li error-red"><label
 																	id="courseNameError" class="error visibility">select

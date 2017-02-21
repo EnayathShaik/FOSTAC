@@ -113,6 +113,7 @@
           <li> <a href="trainingpartnerapplicationstatus.fssai">Application Status</a> </li>
            <li><a href="trainingCalendarForm.fssai">View Training Calendar</a></li>
            <li><a href="viewFeedbackDetails.fssai">View Feedback</a></li>
+           <li><a href="registrationFormTrainingPartner.fssai">Register Training Center</a></li>
         </ul>
       </div>
 

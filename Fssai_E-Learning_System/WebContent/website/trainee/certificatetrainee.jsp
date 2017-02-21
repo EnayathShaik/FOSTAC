@@ -60,7 +60,7 @@ try{
                                                         <div class="col-xs-12"><img src="website/img/certificate.jpg" class="img-responsive"></div>
                                                         <div class="col-xs-12 this-certify">
                                                             <h3 class="text-center th-pos">This is to certify that</h3>
-                                                            <p class="text-center for-p"><span><strong>Mr. ${traineeCertificateName}</strong></span></p>
+                                                            <p class="text-center for-p"><span><strong>${traineeCertificateName}</strong></span></p>
                                                             <hr class="nam-hr">
                                                             <div class="di-msg">
                                                                 <p>has successfully completed the required competency to be appointed as Trainer for Food</p>

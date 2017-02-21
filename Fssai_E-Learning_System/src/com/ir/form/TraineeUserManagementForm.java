@@ -7,6 +7,7 @@ public class TraineeUserManagementForm {
 	private String middleName;
 	private String lastName;
 	private String aadharNumber;
+	private String logindetails;
 	
 	private String status;
 	
@@ -46,6 +47,14 @@ public class TraineeUserManagementForm {
 	public void setAadharNumber(String aadharNumber) {
 		this.aadharNumber = aadharNumber;
 	}
+	public String getLogindetails() {
+		return logindetails;
+	}
+	public void setLogindetails(String logindetails) {
+		this.logindetails = logindetails;
+	}
+	
+	
 	
 	
 

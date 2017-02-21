@@ -16,7 +16,7 @@ function getCourseName(val){
 	      success: function (response) {      
 	      var mainData1 = jQuery.parseJSON(response);
 	       $('#selCourseName option').remove();
-	      $('#selCourseName').append('<option value="0" label="--Select Course Name--" />');
+	      $('#selCourseName').append('<option value="0" label="--Select Course Code--" />');
 	        $.each(mainData1 , function(i , obj)
 	  		{
 	  				$('#selCourseName').append('<option value='+obj[0]+' >'+obj[1]+'</option>');		
@@ -123,7 +123,7 @@ function showDetail(){
     '<tr class="background-open-vacancies">'+
         '<th>S.No.</th>'+
         '<th>Course Type</th>'+
-        '<th>Course Name</th>'+
+        '<th>Course Code</th>'+
         '<th>Training Date</th>'+
         '<th>Training Time</th>'+
         '<th>Trainer Name</th>'+
@@ -240,7 +240,7 @@ return result;
                                                     <div class="form-group">
                                                         <div>
                                                             <ul class="lab-no">
-                                                                <li class="style-li"><strong>Course Name:</strong></li>
+                                                                <li class="style-li"><strong>Course Code:</strong></li>
                                                                 
                                                             </ul>
                                                         </div>
@@ -301,7 +301,7 @@ return result;
                           <tr class="background-open-vacancies">
                             <th>S.No.</th>
                             <th>Batch Code</th>
-                            <th>Course Name</th>
+                            <th>Course Code</th>
                             <th>Training Start Date</th>
                             <th>Training End Date</th>
                             <th>Participant Name</th>

@@ -515,7 +515,7 @@ public class AdminDAOImpl implements AdminDAO {
 		{
 			AadharNumber="%";
 		}
-		if(status.equals("0"))
+		if(status != null && status.equals("0"))
 		{
 			status="%";
 		}
@@ -523,7 +523,7 @@ public class AdminDAOImpl implements AdminDAO {
 		String join = " inner join loginDetails as ld on pitp.loginDetails = ld.id";
 		String like= " where upper(pitp.FirstName) like '"+FirstName.toUpperCase()+"' and pitp.MiddleName like '"+MiddleName+"' and pitp.LastName like '"+LastName+"' and "
 				+ "pitp.AadharNumber like '"+AadharNumber +"' and ld.status like '"+ status+"'";
-		String select = "pitp.personalInformationTraineeId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails ";
+		String select = "pitp.personalInformationTraineeId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) ";
 		
 		String sql= "Select "+ select + "  from PersonalInformationTrainee as pitp "+ join + like;
 		Query query = session.createSQLQuery(sql);

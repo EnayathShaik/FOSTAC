@@ -42,6 +42,7 @@ public class CourseEnrolledUser {
 	private int rollSeqNo; 
 	@Column(columnDefinition="int default 0")
 	private int certificateSeqNo; 
+	private String issueDate;
 	
 	
 	
@@ -192,5 +193,14 @@ public class CourseEnrolledUser {
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
 	}
+
+	public String getIssueDate() {
+		return issueDate;
+	}
+
+	public void setIssueDate(String issueDate) {
+		this.issueDate = issueDate;
+	}
+	
 	
 }

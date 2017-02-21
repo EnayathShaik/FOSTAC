@@ -10,6 +10,8 @@
  ?>
  
  <script type="text/javascript">
+ 	
+ 
 function OnStart(){
 	DrawCaptcha();
 	if(document.getElementById('checkCorrespondence').checked == true){
@@ -842,10 +844,12 @@ function ck_aadhar() {
 													cssClass="error" /></li>
 									</ul>
 								</div>
-								<cf:input path="AadharNumber" class="form-control"
+								<%-- <cf:input path="AadharNumber" class="form-control"
 									maxlength="12" placeholder="Aadhar Number"
-									onblur="ck_aadhar();" value="${aadharDetails.AadharNumber}"
-									onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" />
+									onblur="ck_aadhar();" value="0"
+									onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" /> --%>
+							
+							<cf:input type="text" path="AadharNumber" class="form-control" placeholder="Aadhar Number" value="" disabled="true" />
 							</div>
 
 							<div class="form-group">
@@ -869,12 +873,12 @@ function ck_aadhar() {
 										<li class="style-li"><strong><cs:message
 													code="lbl.Trainee.Caste" /></strong></li>
 										<li class="style-li error-red"><label id="casteError"
-											class="error visibility">* select your Caste </label> <cf:errors
+											class="error visibility">* select your Category </label> <cf:errors
 												path="caste" cssClass="error" /></li>
 									</ul>
 								</div>
 									<cf:select path="caste" class="form-control">
-									<cf:option value="0" label="Select Caste" />
+									<cf:option value="0" label="Select Category" />
 									<cf:options items="${casteList}"  />
 								</cf:select>
 							</div>
@@ -1595,3 +1599,10 @@ function ck_aadhar() {
 
 		<div class="col-md-2 hidden-xs"></div>
 	</cf:form>
+	
+	<script type="text/javascript">
+	var traineeAadhar = localStorage.getItem('traineeAadhar');
+ 	document.getElementById( "AadharNumber" ).value = traineeAadhar;
+ 	localStorage.removeItem('traineeAadhar');
+ 	
+	</script>

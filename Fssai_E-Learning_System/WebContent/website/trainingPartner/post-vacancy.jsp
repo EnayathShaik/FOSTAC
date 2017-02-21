@@ -41,7 +41,7 @@ function getCourseName(val){
 	      success: function (response) {      
 	      var mainData1 = jQuery.parseJSON(response);
 	       $('#courseName option').remove();
-	      $('#courseName').append('<option value="0" label="Select Course Name" />');
+	      $('#courseName').append('<option value="0" label="Select Course Code" />');
 	        $.each(mainData1 , function(i , obj)
 	  		{
 	  				$('#courseName').append('<option value='+obj[0]+' >'+obj[1]+'</option>');		
@@ -213,7 +213,7 @@ function searchVacancy(indicator){
                         <div class="form-group">
                           <div>
                             <ul class="lab-no">
-                              <li class="style-li"><strong>Course Name:<span style="color:red;">*</span></strong></li>
+                              <li class="style-li"><strong>Course Code:<span style="color:red;">*</span></strong></li>
                               <li class="style-li error-red">
                                <label id="courseNameError" class="error visibility">select course name</label>
                                <cf:errors path="courseName" cssclass="error"/>
@@ -221,7 +221,7 @@ function searchVacancy(indicator){
                             </ul>
                           </div>
 					<cf:select path="courseName" class="form-control">
-					<cf:option value="0" label="Select Course Name" />
+					<cf:option value="0" label="Select Course Code" />
 					<%-- <cf:options items="${courseNameList}" itemValue="coursenameid" itemLabel="coursename"/> --%>
 					</cf:select>
                         </div>

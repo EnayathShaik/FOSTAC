@@ -80,7 +80,7 @@ function searchManageCourse(indicator){
 		var mainData1 = jQuery.parseJSON(data);
 		var j=1;
 		$('#newTable tr').remove();
-		$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Course Code</th><th>Course Type</th><th>Course Name</th><th>Duration</th><th>Free/ Paid</th><th>Online</th><th>Classroom</th><th>Status</th><th>Option</th></tr>')
+		$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Course Code</th><th>Course Type</th><th>Course Code</th><th>Duration</th><th>Free/ Paid</th><th>Online</th><th>Classroom</th><th>Status</th><th>Option</th></tr>')
 		$.each(mainData1 , function(i , obj)
 		{
 			var stat ;
@@ -261,11 +261,11 @@ function deleteManageCourse(){
                                                 <div class="form-group">
                                                     <div>
                                                         <ul class="lab-no">
-                                                            <li class="style-li"><strong>Course Name:</strong></li>
+                                                            <li class="style-li"><strong>Course Code:</strong></li>
                                                             <li class="style-li error-red"><label class="error visibility" id="courseError">* error</label></li>
                                                         </ul>
                                                     </div>
-                                                   <cf:input path="courseName"   placeholder="Course Name" class="form-control"   />
+                                                   <cf:input path="courseName"   placeholder="Course Code" class="form-control"   />
                                                 </div>
                                                 
                                                  <div class="form-group">
@@ -370,7 +370,7 @@ font-weight: normal; line-height: 1.42857143; text-align: center; white-space: n
                                                         <th>S.No.</th>
                                                         <!-- <th>Course Code</th> -->
                                                         <th>Course Type</th>
-                                                        <th>Course Name</th>
+                                                        <th>Course Code</th>
                                                         <th>Duration</th>
                                                         <th>Free/ Paid</th>
                                                         <th>Mode of Training</th>

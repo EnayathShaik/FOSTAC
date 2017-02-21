@@ -33,7 +33,7 @@ function getQuestions(){
 	var mainData1 = jQuery.parseJSON(data);
 	var j=1;
 	$('#newTable tr').remove();
-	$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Course Type</th><th>Course Name</th><th>Question Number</th></tr>')
+	$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Course Type</th><th>Course Code</th><th>Question Number</th></tr>')
 	$.each(mainData1 , function(i , obj)
 	{
 		$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[3]+')">'+obj[1]+'</a></td><td>'+obj[2]+'</td></tr>');
@@ -100,7 +100,7 @@ function searchCourse(val)
 	      success: function (response) {      
 	      var mainData1 = jQuery.parseJSON(response);
 	      $('#courseName option').remove();
-	      $('#courseName').append('<option value="0" label="Select Course Name" />');
+	      $('#courseName').append('<option value="0" label="Select Course Code" />');
 	      $.each(mainData1 , function(i , obj)
 	  		{
 	  				$('#courseName').append('<option value='+obj[0]+' >'+obj[1]+'</option>');		
@@ -116,7 +116,7 @@ function searchCourse1(val)
 	      success: function (response) {      
 	      var mainData1 = jQuery.parseJSON(response);
 	      $('#courseNameSearch option').remove();
-	      $('#courseNameSearch').append('<option value="0" label="Select Course Name" />');
+	      $('#courseNameSearch').append('<option value="0" label="Select Course Code" />');
 	      $.each(mainData1 , function(i , obj)
 	  		{
 	  				$('#courseNameSearch').append('<option value='+obj[0]+'  >'+obj[1]+'</option>');		
@@ -212,12 +212,12 @@ function searchCourse1(val)
                                                 <div class="form-group">
                                                     <div>
                                                         <ul class="lab-no">
-                                                            <li class="style-li"><strong>Course Name:</strong></li>
+                                                            <li class="style-li"><strong>Course Code:</strong></li>
                                                             <li class="style-li error-red"> </li>
                                                         </ul>
                                                     </div>
                                                   <cf:select path="courseNameSearch" class="form-control">
-												<cf:option value="0" label="Select Course Name" />
+												<cf:option value="0" label="Select Course Code" />
 												 </cf:select>
                                                 </div>                                                 
                                                
@@ -257,7 +257,7 @@ function searchCourse1(val)
                                                             <tr class="background-open-vacancies">
                                                                 <th class="text-center"><input type="checkbox"> </th>
                                                                 <th>Course Type</th>
-                                                                <th>Course Name</th>
+                                                                <th>Course Code</th>
                                                                 <th>Question Number</th>
                                                             </tr>
 
@@ -330,12 +330,12 @@ function searchCourse1(val)
                                                 <div class="form-group">
                                                         <div>
                                                             <ul class="lab-no">
-                                                                <li class="style-li"><strong>Course Name:</strong></li>
+                                                                <li class="style-li"><strong>Course Code:</strong></li>
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
                                                       <cf:select path="courseName" class="form-control">
-														<cf:option value="0" label="Select Course Name" />
+														<cf:option value="0" label="Select Course Code" />
 													    </cf:select>
                                                     </div>
                                                     <div class="form-group">

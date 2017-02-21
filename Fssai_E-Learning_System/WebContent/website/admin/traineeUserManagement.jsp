@@ -148,6 +148,7 @@
                                                                 <th>Middle Name</th>
                                                                 <th>Last Name</th>
                                                                 <th>Aadhar Number</th>
+                                                                <th>Status</th>
                                                             </thead>
                                                             <tbody>
                                                                 <ct:choose>
@@ -169,12 +170,15 @@
                                                                                 <td>
                                                                                     <label>${listValue[5]}</label>
                                                                                 </td>
+                                                                                <td>
+                                                                                    <label><input type="submit"  onclick=" return activateDeActivateUser('${listValue[6]}','${listValue[7]}','1');" value="${listValue[7]}"/></label>
+                                                                                </td>
                                                                             </tr>
                                                                         </ct:forEach>
                                                                     </ct:when>
                                                                     <ct:otherwise>
                                                                         <tr>
-                                                                            <td colspan="5">
+                                                                            <td colspan="6">
                                                                                 <label>No records available</label>
                                                                             </td>
                                                                         </tr>
@@ -195,7 +199,17 @@
                 </section>
             </cf:form>
             <script>
-                var id = localStorage.getItem('activeID');
-                document.getElementById(id).className = "active";
-
+                /* var id = localStorage.getItem('activeID');
+                document.getElementById(id).className = "active"; */
+                function activateDeActivateUser(loginDetails,status,profileID){
+                	if(confirm("Are you Sure ?")){
+                		$("#logindetails").val(loginDetails);	
+                		$("#status").val(status);	
+                		$("#profileID").val(profileID);	
+                		alert($("#logindetails").val());
+                		$("#traineeUserManagementForm").attr("action" , "activateDeActivateUsers.fssai");
+                    } else{
+                        return false;
+                    }
+                }
             </script>

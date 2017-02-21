@@ -108,3 +108,5 @@ function displayPreview(files) {
     reader.readAsDataURL(files);
 
 }
+
+
