@@ -52,52 +52,52 @@ try{
                                             </div>
                                             <!-- add the content here for main body -->
                                             <!-- timeline  -->
-                                           <div id="dvContainer">
-                                            <div  class="container-fluid">
-                                                <div class="row">
-                                                    <!-- html code to add from here -->
-                                                    <div class="col-xs-12">
-                                                        <div class="col-xs-12"><img src="website/img/certificate.jpg" class="img-responsive"></div>
-                                                        <div class="col-xs-12 this-certify">
-                                                            <h3 class="text-center th-pos">This is to certify that</h3>
-                                                            <p class="text-center for-p"><span><strong>${traineeCertificateName}</strong></span></p>
-                                                            <hr class="nam-hr">
-                                                            <div class="di-msg">
-                                                                <p>has successfully completed the required competency to be appointed as Trainer for Food</p>
-                                                                <p>Safety Supervisor Training, the training was held on <span class="on-dat">${trainingDate}</span><span><hr class="on-hr"></span></p>
-                                                                <p>at <span class="add-pos">Fssai Bhavan, New Delhi</span><span><hr class="at-hr"></span><span class="full-stop">.</span></p>
+                                            <div id="dvContainer">
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <!-- html code to add from here -->
+                                                        <div class="col-xs-12">
+                                                            <div class="col-xs-12"><img src="website/img/certificate.jpg" class="img-responsive"></div>
+                                                            <div class="col-xs-12 this-certify">
+                                                                <h3 class="text-center th-pos">This is to certify that</h3>
+                                                                <p class="text-center for-p"><span><strong>${traineeCertificateName}</strong></span></p>
+                                                                <hr class="nam-hr">
+                                                                <div class="di-msg">
+                                                                    <p>has successfully completed the required competency to be appointed as Trainer for Food</p>
+                                                                    <p>Safety Supervisor Training, the training was held on <span class="on-dat">${trainingDate}</span><span><hr class="on-hr"></span></p>
+                                                                    <p>at <span class="add-pos">Fssai Bhavan, New Delhi</span><span><hr class="at-hr"></span><span class="full-stop">.</span></p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-xs-12 sign-pos">
-                                                            <div class="col-md-6 col-xs-12">
-                                                                <hr class="left-sign">
-                                                                <p class="left-p">Training Partner</p>
+                                                            <div class="col-xs-12 sign-pos">
+                                                                <div class="col-md-6 col-xs-6">
+                                                                    <hr class="left-sign">
+                                                                    <p class="left-p">Training Partner</p>
+                                                                </div>
+                                                                <div class="col-md-6 col-xs-6">
+                                                                    <hr class="right-sign">
+                                                                    <p class="right-p text-center">Training Coordinator
+                                                                        <br><span>FSSAI</span></p>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-md-6 col-xs-12">
-                                                                <hr class="right-sign">
-                                                                <p class="right-p text-center">Training Coordinator
-                                                                    <br><span>FSSAI</span></p>
+                                                            <div class="col-xs-12 cert-btm">
+                                                                <p class="btm-p">Certificate Number : ${certificateID}</p>
+                                                                <p class="btm-p">Date Issued :
+                                                                    <%=strNewDate%>
+                                                                </p>
+                                                                <p class="btm-p">Refresher Due : 2 years from date of issue.</p>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-xs-12 cert-btm">
-                                                            <p class="btm-p">Certificate Number : ${certificateID}</p>
-                                                            <p class="btm-p">Date Issued :
-                                                                <%=strNewDate%>
-                                                            </p>
-                                                            <p class="btm-p">Refresher Due : 2 years from date of issue.</p>
-                                                        </div>
-                                                        <div class="row">
-                                                            <!-- <div class="col-md-4 col-xs-12"></div>
+                                                            <div class="row">
+                                                                <!-- <div class="col-md-4 col-xs-12"></div>
                                                             <div class="col-md-4 col-xs-12" style="position: relative; top: -25em;"> <a href="#" class="btn login-btn" style="width: 100%;">Download</a> </div>
                                                             <div class="col-md-4 col-xs-12"></div> -->
-                                                            <div style="margin-top: 2em;" align="center">
-                                                <input type="button" class="btn login-btn" value="Download AdmitCard" id="btnPrint" /> </div>
-                                            <div class="col-md-4 col-xs-12"></div>
+                                                                <div style="margin-top: 2em;" align="center">
+                                                                    <input type="button" class="btn login-btn" value="Download AdmitCard" id="btnPrint" /> </div>
+                                                                <div class="col-md-4 col-xs-12"></div>
+                                                            </div>
                                                         </div>
+                                                        <!-- html code ends here -->
                                                     </div>
-                                                    <!-- html code ends here -->
                                                 </div>
-                                            </div>
                                             </div>
                                         </div>
                                     </div>
