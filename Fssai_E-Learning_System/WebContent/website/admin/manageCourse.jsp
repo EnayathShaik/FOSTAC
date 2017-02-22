@@ -276,7 +276,7 @@ function deleteManageCourse(){
                                                             <label class="error visibility" id="durationError">* error</label></li>
                                                         </ul>
                                                     </div>
-                                                  <cf:input path="duration"  onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"   placeholder="In Minutes" class="form-control"   />
+                                                  <cf:input path="duration"  onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"   placeholder="In Hours" class="form-control"   />
                                                 </div>
                                             </div> <!-- left side ends -->
 

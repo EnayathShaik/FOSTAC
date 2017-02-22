@@ -9,7 +9,7 @@
     function searchUpcomingTrainings() {
 
         $('#tblUpcomingAssessments tr').remove();
-        $('#tblUpcomingAssessments').append('<thead> <tr class="background-open-vacancies"> <th>S.No</th> <th>Batch Code</th><th>Assessment Date</th><th>Course Name</th> <th>Training Date</th> <th>Training Course Address</th> <th>No. Of Participants</th></tr> </thead>');
+        $('#tblUpcomingAssessments').append('<thead> <tr class="background-open-vacancies"> <th>S.No</th> <th>Batch Code</th><th>Assessment Date</th><th>Course Code</th> <th>Training Start Date</th> <th>Training Course Address</th> <th>No. Of Participants</th></tr> </thead>');
         var result = "";
         //var id = document.getElementById("assessmentAgencyId").value;
         var assessorId = $('currentAssessorId').value;

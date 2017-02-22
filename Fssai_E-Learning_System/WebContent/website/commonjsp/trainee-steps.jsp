@@ -31,11 +31,12 @@
 									<ct:when
 										test="${traineeSteps < 1}">
 										<a href="basic.fssai">Basic</a> | <a
-											href="advanceTrainee.fssai">Advance</a> | <a
-											href="specialTrainee.fssai">Special</a>
+											href="basic.fssai">Advance</a> | <a
+											href="basic.fssai">Special</a> | <a
+											href="basic.fssai">TOT</a>
 									</ct:when>
 									<ct:otherwise>
-Basic | Advance | Special
+Basic | Advance | Special | TOT
 </ct:otherwise>
 								</ct:choose>
 							</p>

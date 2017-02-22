@@ -6,7 +6,7 @@
 function OnStart(){
 	document.getElementById("detailListOfTP").style.display ='none';
 	document.getElementById("fullListOfTP").style.display ='block';
-	searchTrainingCenterList1();
+	//searchTrainingCenterList1();
 }
 window.onload = OnStart;
 </script>

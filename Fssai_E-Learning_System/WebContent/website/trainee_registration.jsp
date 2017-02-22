@@ -848,8 +848,8 @@ function ck_aadhar() {
 									maxlength="12" placeholder="Aadhar Number"
 									onblur="ck_aadhar();" value="0"
 									onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" /> --%>
-							
-							<cf:input type="text" path="AadharNumber" class="form-control" placeholder="Aadhar Number" value="" disabled="true" />
+							<input type="text" id="AadharNumberShow" class="form-control" placeholder="Aadhar Number" value="" disabled="true"  />
+							<cf:input type="hidden" path="AadharNumber" class="form-control" placeholder="Aadhar Number" value="" />
 							</div>
 
 							<div class="form-group">
@@ -1603,6 +1603,7 @@ function ck_aadhar() {
 	<script type="text/javascript">
 	var traineeAadhar = localStorage.getItem('traineeAadhar');
  	document.getElementById( "AadharNumber" ).value = traineeAadhar;
+ 	document.getElementById( "AadharNumberShow" ).value = traineeAadhar;
  	localStorage.removeItem('traineeAadhar');
  	
 	</script>

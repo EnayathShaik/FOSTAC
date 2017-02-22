@@ -67,7 +67,7 @@ public class JavaMail {
 	                emailFromAddress=from.trim();
 	                strCCMail=ccMail.trim();
 	                emailSubjectTxt = "FSSAI Support";
-	                emailMsgTxt = "Dear "+id + " Your ID created Succesfully with Password : "+pass;
+	                emailMsgTxt = "To "+id + " Your User ID "+id+" has been created successfully with password : "+pass;
 	                try{
 	                	postMail( mail, emailSubjectTxt, emailMsgTxt, emailFromAddress,strCCMail);	
 	                }catch(Exception e){

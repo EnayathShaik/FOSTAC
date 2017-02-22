@@ -48,6 +48,7 @@
                             $('#newTable1').show();
                             //var mainData = JSON.stringify(data);
                             var mainData1 = jQuery.parseJSON(data);
+                            alert(mainData1);
                             //alert(mainData1);
                             var j = 1;
                             $('#newTable1 tr').remove();
@@ -141,8 +142,8 @@
                                         <div class="col-xs-12">
                                             <span id=name_status "></span>
                                 <div class="page-header ">
-                                    <h1 id="timeline ">List of Pending Assessor ID Activation</h1> </div>
-                                <table id="newTable1 "  class="table-bordered table-hover table table-responsive ">
+                                    <h1 id="timeline">List of Pending Assessor ID Activation</h1> </div>
+                                <table id="newTable1"  class="table-bordered table-hover table table-responsive ">
                                     <thead>
                                         <tr class="background-open-vacancies ">
                                             <td>S. No.</td>
