@@ -171,7 +171,7 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 		String preFix = "TCTP"+TPName;
 		System.out.println("preFix "+preFix);
 		String nextSequenceUserID  =  GenerateUniqueID.getNextCombinationId(preFix, "personalInformationTrainingPartner", "00");
-		
+		System.out.println("nextSequenceUserID "+nextSequenceUserID);
 		LoginDetails loginDetails = new LoginDetails();
 		loginDetails.setLoginId(nextSequenceUserID);
 		/**TODO - change the status to I initially */
@@ -201,11 +201,16 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 		personalInformationTrainingPartner.setSeatCapacityPerSession(registrationFormTrainingPartner.getSeatCapacityPerSession());
 		personalInformationTrainingPartner.setSeatcapacityAvailable(Integer.parseInt(registrationFormTrainingPartner.getSeatCapacityPerSession()));
 		
-		personalInformationTrainingPartner.setNoOfInHouseTrainers(registrationFormTrainingPartner.getNoOfInHouseTrainers());
+		//personalInformationTrainingPartner.setNoOfInHouseTrainers(registrationFormTrainingPartner.getNoOfInHouseTrainers());
 		personalInformationTrainingPartner.setAvailabiltyOfTVProjector(registrationFormTrainingPartner.getAvailabiltyOfInHouseTrainersInFoodSafety());
-		personalInformationTrainingPartner.setNoOfYearsInBusinessOfTraining(registrationFormTrainingPartner.getNoOfYearsInBusinessOfTraining());
+		personalInformationTrainingPartner.setFacilityOfElectricityAndAirCondition(registrationFormTrainingPartner.getFacilityOfElectricityAndAirCondition());
+		System.out.println("drinking water "+registrationFormTrainingPartner.getFacilityOfDrinkingWater());
+		personalInformationTrainingPartner.setTrainingPartnerPermanentLandLine(registrationFormTrainingPartner.getTrainingPartnerPermanentLandLine());
+		personalInformationTrainingPartner.setFacilityOfDrinkingWater(registrationFormTrainingPartner.getFacilityOfDrinkingWater());
+		personalInformationTrainingPartner.setFacilityOfWashroom(registrationFormTrainingPartner.getFacilityOfWashroom());
+		//personalInformationTrainingPartner.setNoOfYearsInBusinessOfTraining(registrationFormTrainingPartner.getNoOfYearsInBusinessOfTraining());
 		personalInformationTrainingPartner.setAvailabiltyOfInHouseTrainersInFoodSafety(registrationFormTrainingPartner.getAvailabiltyOfInHouseTrainersInFoodSafety());
-		personalInformationTrainingPartner.setNoOfTrainingSessionWishToConductInAMonth(registrationFormTrainingPartner.getNoOfTrainingSessionWishToConductInAMonth());
+		//personalInformationTrainingPartner.setNoOfTrainingSessionWishToConductInAMonth(registrationFormTrainingPartner.getNoOfTrainingSessionWishToConductInAMonth());
 		personalInformationTrainingPartner.setLoginDetails(loginDetails);
 		personalInformationTrainingPartner.setProfileCode(5);
 		
@@ -214,6 +219,7 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 			transaction.commit();
 			session.close();
 		}catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("Oops !!");
 		}
 		Session session1 = sessionFactory.openSession();
@@ -319,11 +325,11 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 		personalInformationTrainingPartner.setSeatCapacityPerSession(registrationFormTrainingPartner.getSeatCapacityPerSession().trim());
 	//	personalInformationTrainingPartner.setSeatcapacityAvailable(Integer.parseInt(registrationFormTrainingPartner.getSeatCapacityPerSession()));
 		
-		personalInformationTrainingPartner.setNoOfInHouseTrainers(registrationFormTrainingPartner.getNoOfInHouseTrainers().trim());
+		//personalInformationTrainingPartner.setNoOfInHouseTrainers(registrationFormTrainingPartner.getNoOfInHouseTrainers().trim());
 		//personalInformationTrainingPartner.setAvailabiltyOfTVProjector(registrationFormTrainingPartner.getAvailabiltyOfInHouseTrainersInFoodSafety().trim());
-		personalInformationTrainingPartner.setNoOfYearsInBusinessOfTraining(registrationFormTrainingPartner.getNoOfYearsInBusinessOfTraining().trim());
+		//personalInformationTrainingPartner.setNoOfYearsInBusinessOfTraining(registrationFormTrainingPartner.getNoOfYearsInBusinessOfTraining().trim());
 		//personalInformationTrainingPartner.setAvailabiltyOfInHouseTrainersInFoodSafety(registrationFormTrainingPartner.getAvailabiltyOfInHouseTrainersInFoodSafety().trim());
-		personalInformationTrainingPartner.setNoOfTrainingSessionWishToConductInAMonth(registrationFormTrainingPartner.getNoOfTrainingSessionWishToConductInAMonth().trim());		
+		//personalInformationTrainingPartner.setNoOfTrainingSessionWishToConductInAMonth(registrationFormTrainingPartner.getNoOfTrainingSessionWishToConductInAMonth().trim());		
 		s.update(personalInformationTrainingPartner);
 		s.beginTransaction().commit();
 		s.close();

@@ -60,3 +60,6 @@ INSERT INTO ASSESSMENTELIGIBILITYTRAINER(COURSENAMEID, ELIGIBILITY) VALUES (?, ?
 
 --- RUNNING
 ----alter table courseenrolled add column trainingstatus character varying(10);
+--ALTER TABLE public.personalinformationtrainingpartner drop COLUMN NoOfTrainingSessionWishToConductInAMonth
+--ALTER TABLE public.personalinformationtrainingpartner drop COLUMN NoOfYearsInBusinessOfTraining
+--ALTER TABLE public.personalinformationtrainingpartner drop COLUMN noofinhousetrainers
