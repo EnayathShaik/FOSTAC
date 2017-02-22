@@ -96,12 +96,15 @@ public class PersonalInformationTrainingPartner {
 
 	
 	@NotNull @Size(min=1, max=1 , message="* Enter Facility of Electricity + Air-Conditioner ")
+	@Column(columnDefinition="varchar(1) default ''")
 	private String FacilityOfElectricityAndAirCondition;
 	
 	@NotNull @Size(min=1, max=1 , message="* Facility of Drinking Water")
+	@Column(columnDefinition="varchar(1) default ''")
 	private String FacilityOfDrinkingWater;
 	
 	@NotNull @Size(min=1, max=1 , message="* Enter Facility of Washroom ")
+	@Column(columnDefinition="varchar(1) default ''")
 	private String FacilityOfWashroom;
 
 	
