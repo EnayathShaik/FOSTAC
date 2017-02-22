@@ -72,7 +72,7 @@ public class SearchUpcomingTraining extends HttpServlet {
 				String sql ="select tc.trainingcalendarid , concat(pitp.trainingpartnerpermanentline1 , ' ' , pitp.trainingpartnerpermanentline2 , ' ' , s.statename , ' ' , d.districtname , ' ' , c.cityname) as address, "+
 						" concat(tc.trainingdate , ' / ' , tc.trainingtime) as schedule , "+
 						" concat(pitp.firstname , ' ' , pitp.middlename , ' ' , pitp.lastname ) ,concat( pitp.trainingpartnerpermanentmobile , ' / ' , pitp.trainingpartnerpermanentemail)  as contact, "+
-						" pitp.seatcapacitypersession , pitp.seatcapacityavailable , ct.coursetype "+
+						" (select count(1) from courseenrolleduser A where A.trainingcalendarid = tc.trainingcalendarid) , tc.seatcapacity , ct.coursetype "+
 						"  , cn.coursename  , tc.status,cn.coursecode,tc.batchcode from trainingcalendar as tc "+
 						" inner join coursename as cn on cn.coursenameid = tc.coursename "+
 						" inner join coursetype as ct on ct.coursetypeid = tc.coursetype "+
@@ -82,7 +82,7 @@ public class SearchUpcomingTraining extends HttpServlet {
 						" inner join state as s on s.stateid = pitp.trainingpartnerpermanentstate "+
 						" inner join city as c on c.cityid = pitp.trainingpartnerpermanentcity "+
 						" inner join district as d on d.districtid = pitp.trainingpartnerpermanentdistrict "+
-						" and tc.trainingcenter = pitp.personalinformationtrainingpartnerid ";
+						" and tc.trainingcenter = pitp.personalinformationtrainingpartnerid where to_timestamp(COALESCE(tc.trainingdate, '19900101010101'),'DD-MM-YYYY') > now()";
 						//" WHERE log.id = "+userId;
 			System.out.println("before query");
 			Query query = session.createSQLQuery(sql);

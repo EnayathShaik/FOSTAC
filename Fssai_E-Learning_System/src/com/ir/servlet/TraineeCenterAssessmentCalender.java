@@ -51,7 +51,6 @@ public class TraineeCenterAssessmentCalender extends HttpServlet {
 		String name =  request.getQueryString();
     	String [] n1 = name.split("&");
 		System.out.println("n1 "+n1);
-		System.out.println(" "+n1[0].split("=")[1]);
 		String courseType,courseName , trainerName, assDate , assTime ;
 		try{
 			courseType = n1[0].split("=")[1];

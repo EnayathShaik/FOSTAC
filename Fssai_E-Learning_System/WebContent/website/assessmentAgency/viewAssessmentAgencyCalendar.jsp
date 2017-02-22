@@ -32,7 +32,7 @@ window.onload = OnStart;
 						'<thead>' + '<tr class="background-open-vacancies">'
 								+ '<th>S.No.</th>' + '<th>Batch Code</th>'
 								+ '<th>Course Code</th>'
-								+ '<th>Assessment Date</th>'
+								+ '<th>Assessment Date and Time</th>'
 								+ '<th>Assessment Center</th>'
 								+ '<th>Assessor</th>'
 								+ '</tr>' + '</thead>');

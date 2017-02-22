@@ -314,7 +314,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	public List<CourseName> getCourseNameList(){
 		Session session = sessionFactory.openSession();
 		List<CourseName> courseNameList=new ArrayList<>();
-		String sql="select coursenameid ,coalesce(coursename,''),coalesce(coursecode , '') from coursename";
+		String sql="select A.coursenameid ,coalesce(A.coursename,''),coalesce(A.coursecode , '') from coursename A";
 		Query query = session.createSQLQuery(sql);
 		List<Object[]> courseTypeList = query.list();
 		if(courseTypeList.size()>0){

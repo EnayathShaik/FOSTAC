@@ -64,7 +64,7 @@ public class ViewAssessmentAgencyCalendar extends HttpServlet {
 				SessionFactory sf = conf.buildSessionFactory();
 				Session session = sf.openSession();
 				String newList=null;
-				String sql = " select B.coursetype,C.coursename,A.assessmentdate,F.statename,E.firstname || ' '|| E.middlename ||' '|| E.lastname ,CASE WHEN G.status = 'A' THEN 'ACTIVE' ELSE 'IN-ACTIVE' END,C.coursecode,A.batchCode	from trainingcalendar A inner join coursetype B on(A.coursetype=B.coursetypeid)	inner join coursename C on(A.coursename=C.coursenameid)        inner join personalinformationtrainingpartner D on(A.trainingcenter=D.personalinformationtrainingpartnerid) inner join personalinformationassessor E on(A.assessor=E.personalinformationassessorid) inner join state F on(E.assessorcorrespondencestate=F.stateid)  inner join logindetails G on(E.logindetails=G.id)";
+				String sql = " select B.coursetype,C.coursename,A.assessmentdatetime,F.statename,E.firstname || ' '|| E.middlename ||' '|| E.lastname ,CASE WHEN G.status = 'A' THEN 'ACTIVE' ELSE 'IN-ACTIVE' END,C.coursecode,A.batchCode	from trainingcalendar A inner join coursetype B on(A.coursetype=B.coursetypeid)	inner join coursename C on(A.coursename=C.coursenameid)        inner join personalinformationtrainingpartner D on(A.trainingcenter=D.personalinformationtrainingpartnerid) inner join personalinformationassessor E on(A.assessor=E.personalinformationassessorid) inner join state F on(E.assessorcorrespondencestate=F.stateid)  inner join logindetails G on(E.logindetails=G.id) where to_timestamp(COALESCE(A.trainingdate, '19900101010101'),'DD-MM-YYYY') > now()";
 				Query query = session.createSQLQuery(sql);
 				List list = query.list();
 				System.out.println(list.size());

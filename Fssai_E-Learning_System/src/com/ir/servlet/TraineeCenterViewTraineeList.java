@@ -139,7 +139,7 @@ public class TraineeCenterViewTraineeList extends HttpServlet {
 					+" where A.tcStatus is null  and  cast( B.coursetype  as varchar(10)) like '"+courseType+"%' " +
 							"and  cast(C.coursename as varchar(10)) like '"+courseName+"%' and  " +
 									"cast(A.trainingdate as varchar(10)) like '"+trainingStartDate+"%' " +
-											"and cast(A.trainingtime as varchar(10)) like '"+trainingEndDate+"%' Order By A.trainingdate asc";
+											"and cast(A.trainingtime as varchar(10)) like '"+trainingEndDate+"%' AND to_timestamp(COALESCE(trainingdate, '19900101010101'),'DD-MM-YYYY') > now() Order By A.trainingcalendarid desc";
 		String newList=null;
 		List list = new AjaxRequest().returnList(sql);
 		System.out.println("list "+list);

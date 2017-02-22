@@ -103,7 +103,7 @@ public class GetTrainingCalender extends HttpServlet {
 						" inner join managetrainingpartner as mtp on mtp.managetrainingpartnerid = tc.trainingpartner "+
 						" inner join personalinformationtrainingpartner as pitp on mtp.managetrainingpartnerid = pitp.trainingpartnername and tc.trainingcenter = pitp.personalinformationtrainingpartnerid"+
 						" inner join personalinformationtrainer as pitr on CAST(CAST (tc.trainername AS NUMERIC(19,4)) AS INT) = pitr.personalinformationtrainerid "+
-						" " ;
+						" Where to_timestamp(COALESCE(tc.trainingdate, '19900101010101'),'DD-MM-YYYY') > now()" ;
 						else
 							
 		sql="select tc.trainingcalendarid ,mtp.trainingpartnername ,  "+
@@ -117,7 +117,7 @@ public class GetTrainingCalender extends HttpServlet {
 					" inner join personalinformationtrainingpartner as pitp on mtp.managetrainingpartnerid = pitp.trainingpartnername and tc.trainingcenter = pitp.personalinformationtrainingpartnerid"+
 					" inner join personalinformationtrainer as pitr on CAST(CAST (tc.trainername AS NUMERIC(19,4)) AS INT) = pitr.personalinformationtrainerid "+
 					"  "+
-					" where CAST(tc.coursename AS varchar(10)) like '"+courseName+"' "+
+					" where to_timestamp(COALESCE(tc.trainingdate, '19900101010101'),'DD-MM-YYYY') > now() AND CAST(tc.coursename AS varchar(10)) like '"+courseName+"' "+
 					//--and cn.modeoftraining like 'Online'
 					" and CAST(tc.courseType AS varchar(10)) like '"+courseType+"' "+ 
 					" and CAST(tc.trainingpartner AS varchar(10)) like '"+trainingPartner+"' "+ 

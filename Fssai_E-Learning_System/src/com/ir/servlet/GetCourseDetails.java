@@ -88,7 +88,7 @@ public class GetCourseDetails extends HttpServlet {
 				//" and CAST(tc.trainingdate AS varchar(10)) like '"+trainingDate+"' "+
 				" and CAST(s.stateid AS varchar(10)) like '"+trainingCenterState+"' "+
 				" and CAST(d.districtid AS varchar(10)) like '"+trainingCenterDistrict+"' "+
-				"  and  (CAST(CAST (pitp.seatcapacitypersession AS NUMERIC(19,4)) AS INT) - ( select count(1) from courseenrolleduser where trainingcalendarid = tc.trainingcalendarid) > 0)";
+				" and  to_timestamp(COALESCE(tc.trainingdate, '19900101010101'),'DD-MM-YYYY') > now() and  (CAST(CAST (pitp.seatcapacitypersession AS NUMERIC(19,4)) AS INT) - ( select count(1) from courseenrolleduser where trainingcalendarid = tc.trainingcalendarid) > 0)";
 	
 		List list = new AjaxRequest().returnList(sql);
 		String newList = null ;
