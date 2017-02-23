@@ -7,7 +7,8 @@ function showDetails(){
 	$('#tblUpdateResult').append('<thead>'+
     '<tr class="background-open-vacancies">'+
         '<th>S.No.</th>'+
-        '<th>Course Name</th>'+
+        '<th>Batch Code</th>'+
+        '<th>Course Code</th>'+
         '<th>Training Date</th>'+
         '<th>Training Center</th>'+
         '<th>Trainee Name</th>'+
@@ -36,35 +37,38 @@ function showDetails(){
 		
 		if(obj[6] == 'P'){
 			$('#tblUpdateResult').append('<tr id="tableRow"><td>'+j++ +'</td>'+
-					'<td>'+obj[2]+'</td>'+
+					'<td>'+obj[9]+'</td>'+
+					'<td>'+obj[8]+'</td>'+
 					'<td>'+obj[3]+'</td>'+
 					'<td>'+obj[4]+'</td>'+
 					'<td>'+obj[5]+'</td>'+
 					'<td><select id='+obj[1]+'><option  value ="0">Please Select</option><option selected="true"  value ="P">Pass</option>'+
 					'<option  value="F">Fail</option></td>'+
-					'<td><input type="text" class="form-control" value="'+obj[7]+'"   id = "comments'+obj[1]+'"/>'+
+					'<td><input type="text" class="form-control" value="'+(obj[7] == null || obj[7] == "null" ? "" : obj[7])+'"   id = "comments'+obj[1]+'"/>'+
 					'<td> <button onclick="updateTraineeAssessmentResult('+obj[1]+');return false;">Update</button></td>'+
 					'</tr>');
 		}else if(obj[6] == 'F'){
 			$('#tblUpdateResult').append('<tr id="tableRow"><td>'+j++ +'</td>'+
-					'<td>'+obj[2]+'</td>'+
+					'<td>'+obj[9]+'</td>'+
+					'<td>'+obj[8]+'</td>'+
 					'<td>'+obj[3]+'</td>'+
 					'<td>'+obj[4]+'</td>'+
 					'<td>'+obj[5]+'</td>'+
 					'<td><select id='+obj[1]+'><option  value ="0">Please Select</option><option  value ="P">Pass</option>'+
 					'<option selected="true"  value="F">Fail</option></td>'+
-					'<td><input type="text" class="form-control" value="'+obj[7]+'" id = "comments'+obj[1]+'"/>'+
+					'<td><input type="text" class="form-control" value="'+(obj[7] == null || obj[7] == "null" ? "" : obj[7])+'" id = "comments'+obj[1]+'"/>'+
 					'<td> <button onclick="updateTraineeAssessmentResult('+obj[1]+');return false;">Update</button></td>'+
 					'</tr>');
 		}else{
 			$('#tblUpdateResult').append('<tr id="tableRow"><td>'+j++ +'</td>'+
-					'<td>'+obj[2]+'</td>'+
+					'<td>'+obj[9]+'</td>'+
+					'<td>'+obj[8]+'</td>'+
 					'<td>'+obj[3]+'</td>'+
 					'<td>'+obj[4]+'</td>'+
 					'<td>'+obj[5]+'</td>'+
 					'<td><select id='+obj[1]+'><option  value ="0">Please Select</option><option  value ="P">Pass</option>'+
 					'<option  value="F">Fail</option></td>'+
-					'<td><input type="text" class="form-control" value="'+obj[7]+'"  id = "comments'+obj[1]+'"/>'+
+					'<td><input type="text" class="form-control" value="'+(obj[7] == null || obj[7] == "null" ? "" : obj[7])+'"  id = "comments'+obj[1]+'"/>'+
 					'<td> <button onclick="updateTraineeAssessmentResult('+obj[1]+');return false;">Update</button></td>'+
 					'</tr>');
 		}

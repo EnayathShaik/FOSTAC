@@ -3,7 +3,7 @@ function OnStart(){
 	var isEligible = "${Eligible}";
 	if(isEligible == ''){
 		alert('Need to Clear Exam First.');
-   	  	window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
+   	  	//window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
 	}
 	var steps = 6;
 	var traineeSteps =

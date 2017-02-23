@@ -189,7 +189,6 @@ return result;
                                                         </ul>
                                                     </div>
                                                    <cf:select id="courseType" path="courseType" class="form-control">
-	                                                   <cf:option value="Trainer" label="Trainer" />
 	                                                   <cf:option value="Trainee" label="Trainee" />
                                                     </cf:select>
                                                 </div>
@@ -202,7 +201,6 @@ return result;
                                                         </ul>
                                                     </div>
                                                   <cf:select id="catogery" path="catogery" class="form-control">
-		                                                   <cf:option value="Trainer" label="Trainer" />
 		                                                   <cf:option value="Trainee" label="Trainee" />
                                                     </cf:select>
                                                 </div>

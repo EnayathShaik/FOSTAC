@@ -172,6 +172,9 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				
+				
+				
 				<!-- <prop key="connection.pool_size">1000</prop> -->
 				<!-- <prop key="hibernate.hbm2ddl.import_files">sql/default.sql</prop> -->
 			</props>

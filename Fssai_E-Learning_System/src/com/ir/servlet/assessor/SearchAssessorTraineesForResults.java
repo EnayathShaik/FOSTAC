@@ -67,7 +67,7 @@ public class SearchAssessorTraineesForResults extends HttpServlet {
 				String sql = "select A.trainingcalendarid,B.courseenrolleduserid, C.coursename,A.trainingdate,"
 						+ " concat(D.firstname , ' ' , D.middlename , ' ' , D.lastname ) TraineeCenter, "
 						+ " concat(F.firstname , ' ' , F.middlename , ' ' , F.lastname ) Trainee "
-						+ " ,B.result,B.assessorcomment "
+						+ " ,B.result,B.assessorcomment,C.courseCode,A.batchCode "
 						+ " from trainingcalendar A "
 						+ " inner join courseenrolleduser B on(A.trainingcalendarid=B.trainingcalendarid) "
 						+ " inner join coursename C on(A.coursename=C.coursenameid) "
