@@ -231,7 +231,9 @@ window.onload = OnStart;
 				$.each(mainData1, function(i, obj) {
 					console.log(" --> "+obj[9] + ' 10  '+obj[10] + '  11 '+obj[11] + '  12 '+obj[12]);
 					$('#newTable').append(
-							'<tr id="tableRow"><td><input id='+obj[0]+' type="hidden"/>' + j++ + '</td><td><input type="hidden" value='+obj[6]+' id=selCourseType'+i+' />'
+							'<tr id="tableRow"><td><input id='+obj[0]+' type="hidden"/>' + j++ 
+										
+									+ '</td><td><input type="hidden" value='+obj[6]+' id=selCourseType'+i+' />'
 									+ obj[1] + '</td><td> <input type="hidden" value='+obj[7]+' id=selCourseName'+i+' />' + obj[2]
 									+ '</td><td id=trainingStartDate'+i+'>' + obj[3] + '</td><td id=trainingEndDate'+i+'>'+ obj[4] 
 									+'</td><td id=assessmentDateTime'+i+'>' + obj[9]	
@@ -239,7 +241,7 @@ window.onload = OnStart;
 									+'</td><td><input type="hidden" value='+obj[12]+'  id=assessorName'+i+' />' + obj[13]	
 									+'</td><td><input type="hidden" value='+obj[8]+'  id=selTrainerNames'+i+' />' + obj[5]	
 									+'</td><td id=seatCapacity'+i+'>' + obj[14]
-									+'</td><td><input type="hidden" value='+obj[16]+'  id=type'+i+' />' + obj[15]	
+									+'</td><td><input type="hidden" value='+obj[16]+'  id=type'+i+' />' + obj[15]
 									+ '</td><td><input type="button"  onClick="editTrainingCalendar(\''+i+'\',\''+obj[0]+'\',\''+obj[1]+'\');" value="Reschedule"/></td><td> <input type="submit"  onclick=" return setId('+obj[0]+')" value="Cancel Training"/> </td></tr>');
 
 				});
@@ -535,6 +537,7 @@ window.onload = OnStart;
 													<thead>
 														<tr class="background-open-vacancies">
 															<th>S.No.</th>
+															
 															<th>Batch Code</th>
 															<th>Course Code</th>
 															<th>Training Start Date</th>

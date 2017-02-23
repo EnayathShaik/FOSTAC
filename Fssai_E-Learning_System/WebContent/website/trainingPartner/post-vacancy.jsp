@@ -225,18 +225,7 @@ function searchVacancy(indicator){
 					<%-- <cf:options items="${courseNameList}" itemValue="coursenameid" itemLabel="coursename"/> --%>
 					</cf:select>
                         </div>
-                        <div class="form-group">
-                          <div>
-                            <ul class="lab-no">
-                              <li class="style-li"><strong>Training Start Date:</strong></li>
-                              <li class="style-li error-red">
-                               <label id="trainingDateError" class="error visibility">enter training date</label>
-                               <cf:errors path="trainingDate" cssclass="error"/>
-                               </li>
-                            </ul>
-                          </div>
-                          <cf:input path="trainingDate" type="date" class="form-control" />
-                        </div>
+                     
                           <div class="form-group">
                           <div>
                             <ul class="lab-no">
@@ -315,17 +304,18 @@ function searchVacancy(indicator){
 						<cf:options items="${trainingCenterList}" itemValue="id" itemLabel="value"/>
 						</cf:select>
                         </div>
+
                            <div class="form-group" id="displayStartDate" style="display:none">
                           <div>
                             <ul class="lab-no">
                               <li class="style-li"><strong>Training Start Date:</strong></li>
                               <li class="style-li error-red">
-                               <label id="trainingDateError" class="error visibility">Enter Start Date</label>
-                               <cf:errors path="trainingStartTime" cssclass="error"/>
+                               <label id="trainingDateError" class="error visibility">enter training date</label>
+                               <cf:errors path="trainingDate" cssclass="error"/>
                                </li>
                             </ul>
                           </div>
-                          <cf:input path="trainingStartTime" type="text" class="form-control" />
+                          <cf:input path="trainingDate" type="date" class="form-control" />
                         </div>
                         
                         

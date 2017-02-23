@@ -302,15 +302,6 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 		System.out.println("ID == "+personalInformationTrainingPartner.getPersonalInformationTrainingPartnerId());
 		
 		System.out.println("id is in dao "+id);
-		//personalInformationTrainingPartner.setAvailabiltyOfInHouseTrainersInFoodSafety(registrationFormTrainingPartner.getAvailabiltyOfInHouseTrainersInFoodSafety());
-		//personalInformationTrainingPartner.setAvailabiltyOfTVProjector(registrationFormTrainingPartner.getAvailabiltyOfTVProjector());
-		//personalInformationTrainingPartner.setFirstName(registrationFormTrainingPartner.getFirstName());
-		//personalInformationTrainingPartner.setLastName(registrationFormTrainingPartner.getLastName());
-		//personalInformationTrainingPartner.setMiddleName(registrationFormTrainingPartner.getMiddleName());
-		//personalInformationTrainingPartner.setNoOfInHouseTrainers(registrationFormTrainingPartner.getNoOfInHouseTrainers());
-		//personalInformationTrainingPartner.setNoOfTrainingSessionWishToConductInAMonth(registrationFormTrainingPartner.getNoOfTrainingSessionWishToConductInAMonth());
-		//personalInformationTrainingPartner.setNoOfYearsInBusinessOfTraining(registrationFormTrainingPartner.getNoOfYearsInBusinessOfTraining());
-		//personalInformationTrainingPartner.setPAN(registrationFormTrainingPartner.getPAN());
 		personalInformationTrainingPartner.setTrainingPartnerPermanentLine1(registrationFormTrainingPartner.getTrainingPartnerPermanentLine1());
 		personalInformationTrainingPartner.setTrainingPartnerPermanentLine2(registrationFormTrainingPartner.getTrainingPartnerPermanentLine2());
 		personalInformationTrainingPartner.setTrainingPartnerPermanentState(registrationFormTrainingPartner.getTrainingPartnerPermanentState());
@@ -321,15 +312,19 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 		String email= registrationFormTrainingPartner.getTrainingPartnerPermanentEmail();
 		System.out.println("email is"+email);
 		personalInformationTrainingPartner.setTrainingPartnerPermanentEmail(email.trim());
+		System.out.println(" mobile "+registrationFormTrainingPartner.getTrainingPartnerPermanentMobile());
 		personalInformationTrainingPartner.setTrainingPartnerPermanentMobile(registrationFormTrainingPartner.getTrainingPartnerPermanentMobile());
-		personalInformationTrainingPartner.setSeatCapacityPerSession(registrationFormTrainingPartner.getSeatCapacityPerSession().trim());
-	//	personalInformationTrainingPartner.setSeatcapacityAvailable(Integer.parseInt(registrationFormTrainingPartner.getSeatCapacityPerSession()));
-		
-		//personalInformationTrainingPartner.setNoOfInHouseTrainers(registrationFormTrainingPartner.getNoOfInHouseTrainers().trim());
-		//personalInformationTrainingPartner.setAvailabiltyOfTVProjector(registrationFormTrainingPartner.getAvailabiltyOfInHouseTrainersInFoodSafety().trim());
-		//personalInformationTrainingPartner.setNoOfYearsInBusinessOfTraining(registrationFormTrainingPartner.getNoOfYearsInBusinessOfTraining().trim());
-		//personalInformationTrainingPartner.setAvailabiltyOfInHouseTrainersInFoodSafety(registrationFormTrainingPartner.getAvailabiltyOfInHouseTrainersInFoodSafety().trim());
-		//personalInformationTrainingPartner.setNoOfTrainingSessionWishToConductInAMonth(registrationFormTrainingPartner.getNoOfTrainingSessionWishToConductInAMonth().trim());		
+		//personalInformationTrainingPartner.setSeatCapacityPerSession(registrationFormTrainingPartner.getSeatCapacityPerSession().trim());
+		System.out.println("seat capacity "+registrationFormTrainingPartner.getSeatCapacityPerSession());
+		personalInformationTrainingPartner.setSeatcapacityAvailable(Integer.parseInt(registrationFormTrainingPartner.getSeatCapacityPerSession().trim()));
+		System.out.println(" --> in house "+registrationFormTrainingPartner.getAvailabiltyOfInHouseTrainersInFoodSafety());
+		personalInformationTrainingPartner.setAvailabiltyOfTVProjector(registrationFormTrainingPartner.getAvailabiltyOfInHouseTrainersInFoodSafety());
+		personalInformationTrainingPartner.setFacilityOfElectricityAndAirCondition(registrationFormTrainingPartner.getFacilityOfElectricityAndAirCondition());
+		System.out.println("drinking water "+registrationFormTrainingPartner.getFacilityOfDrinkingWater());
+		personalInformationTrainingPartner.setTrainingPartnerPermanentLandLine(registrationFormTrainingPartner.getTrainingPartnerPermanentLandLine());
+		personalInformationTrainingPartner.setFacilityOfDrinkingWater(registrationFormTrainingPartner.getFacilityOfDrinkingWater());
+		personalInformationTrainingPartner.setFacilityOfWashroom(registrationFormTrainingPartner.getFacilityOfWashroom());
+		personalInformationTrainingPartner.setAvailabiltyOfInHouseTrainersInFoodSafety(registrationFormTrainingPartner.getAvailabiltyOfInHouseTrainersInFoodSafety());		
 		s.update(personalInformationTrainingPartner);
 		s.beginTransaction().commit();
 		s.close();

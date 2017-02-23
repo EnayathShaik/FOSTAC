@@ -428,7 +428,7 @@ public class TrainingPartnerController {
 				e.setCourseNameId(pvtc.getCourseName().getCoursenameid());
 				e.setCourseName(pvtc.getCourseName().getCoursename());
 				e.setTrainingDate(pvtc.getTrainingDate());
-				e.setTrainingStartDate(pvtc.getTrainingStartTime());
+				//e.setTrainingStartDate(pvtc.getTrainingDate());
 				e.setTrainingEndDate(pvtc.getTrainingEndTime());
 				e.setNoOfVacancy(pvtc.getNoOfVacancy());
 				e.setLoginId(pvtc.getLoginId());

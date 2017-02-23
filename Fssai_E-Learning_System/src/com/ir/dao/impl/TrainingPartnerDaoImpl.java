@@ -112,11 +112,11 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			//LoginDetails loginDetails = loginDetails.setLoginId(postVacancyTrainingCenterForm.getLoginId());
 			postVacancyTrainingCenter.setNoOfVacancy(postVacancyTrainingCenterForm.getNoOfVacancy());
 			postVacancyTrainingCenter.setRequiredExp(postVacancyTrainingCenterForm.getRequiredExp());
-			postVacancyTrainingCenter.setTrainingDate(postVacancyTrainingCenterForm.getTrainingDate());
+			//postVacancyTrainingCenter.setTrainingDate(postVacancyTrainingCenterForm.getTrainingDate());
 			postVacancyTrainingCenter.setCourseName(cn);
 			postVacancyTrainingCenter.setCourseType(ct);
 			postVacancyTrainingCenter.setVacancyType(postVacancyTrainingCenterForm.getVacancyType());
-			postVacancyTrainingCenter.setTrainingStartTime(postVacancyTrainingCenterForm.getTrainingStartTime());
+			postVacancyTrainingCenter.setTrainingDate(postVacancyTrainingCenterForm.getTrainingDate());
 			postVacancyTrainingCenter.setTrainingEndTime(postVacancyTrainingCenterForm.getTrainingEndTime());
 			postVacancyTrainingCenter.setLoginId(postVacancyTrainingCenterForm.getLoginId());
 			postVacancyTrainingCenter.setTrainingCenter(p);
@@ -401,7 +401,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		StringBuffer sqlBuffer = new StringBuffer();
 		sqlBuffer.append("select B.coursetypeid,C.coursenameid,A.trainingdate,A.noofvacancy,");
 		sqlBuffer.append("A.postvacancytrainingcenterid, (select count(1) from trainingcentervacancyenrolled AA where AA.postvacancyid = A.postvacancytrainingcenterid)");
-		sqlBuffer.append(" ,A.trainingstarttime,A.trainingendtime");
+		sqlBuffer.append(" ,A.trainingdate,A.trainingendtime");
 		sqlBuffer.append(" from postvacancytrainingcenter A");
 		sqlBuffer.append(" inner join coursetype B on(A.coursetype=B.coursetypeid)");
 		sqlBuffer.append(" inner join coursename C on(A.coursename=C.coursenameid) ");
@@ -448,7 +448,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			postVacancyTrainingBean.setNoOfVacancy(Integer.parseInt(list.get(i)[3].toString()));
 			postVacancyTrainingBean.setLoginId(list.get(i)[4].toString());
 			postVacancyTrainingBean.setNoOfApplications(Integer.parseInt(list.get(i)[5].toString()));
-			postVacancyTrainingBean.setTrainingStartTime(list.get(i)[6] == null ? "" : list.get(i)[6].toString());
+			postVacancyTrainingBean.setTrainingDate(list.get(i)[6] == null ? "" : list.get(i)[6].toString());
 			postVacancyTrainingBean.setTrainingEndTime(list.get(i)[7] == null ? "" : list.get(i)[7].toString());
 			beans.add(postVacancyTrainingBean);
 		}

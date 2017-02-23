@@ -10,19 +10,14 @@ public class PostVacancyTrainingCenterForm {
 	private String loginId;
 	private int trainingCenter;
 	private String vacancyType;
-	public String getTrainingStartTime() {
-		return trainingStartTime;
-	}
-	public void setTrainingStartTime(String trainingStartTime) {
-		this.trainingStartTime = trainingStartTime;
-	}
+
 	public String getTrainingEndTime() {
 		return trainingEndTime;
 	}
 	public void setTrainingEndTime(String trainingEndTime) {
 		this.trainingEndTime = trainingEndTime;
 	}
-	private String trainingStartTime;
+	
 	private String trainingEndTime;
 	
 	

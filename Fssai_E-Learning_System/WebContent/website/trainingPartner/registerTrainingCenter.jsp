@@ -859,7 +859,7 @@ function AvoidSpace(event) {
 															path="FacilityOfDrinkingWater" value="N" />No
 													</label>
 												</div>
-														<div class="form-group">
+													<div class="form-group">
 													<label>Facility of Washroom ?</label> <br>
 													 <label class="radio-inline"> <cf:radiobutton
 															path="FacilityOfWashroom" value="Y"

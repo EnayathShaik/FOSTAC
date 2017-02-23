@@ -488,12 +488,12 @@ function AvoidSpace(event) {
     <div class="row">
       <div class="col-md-2 hidden-xs"></div>
       <div class="col-md-8  col-xs-12">
-        <h3 class="text-capitalize heading-3-padding">A Training Center Registration Form</h3>
+        <h3 class="text-capitalize heading-3-padding">A Training Center Registration Form......</h3>
 
           <!-- personal information -->
           <div class="personel-info">
             <fieldset>
-              <legend>Personal Information</legend>
+              <legend>Personal Information......</legend>
               <!-- left side -->
               <div class="col-md-6 col-xs-12">
                 <div class="form-group" style="display:none">
@@ -507,7 +507,7 @@ function AvoidSpace(event) {
                       </li>
                     </ul>
                   </div>
-                  <cf:input path="UserId" maxlength="20"  class="form-control"  placeholder="User ID"/>
+                  <cf:input path="UserId" maxlength="20"  class="form-control"  placeholder="User  ID"/>
                 </div>
                 
                 <div class="form-group">

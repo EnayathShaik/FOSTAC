@@ -57,7 +57,7 @@ public class PostVacancyTrainingCenter{
 	private int noOfApplications;
 	
 	private String vacancyType;
-	private String trainingStartTime;
+	
 	private String trainingEndTime;
 	
 	
@@ -68,12 +68,7 @@ public class PostVacancyTrainingCenter{
 	public void setVacancyType(String vacancyType) {
 		this.vacancyType = vacancyType;
 	}
-	public String getTrainingStartTime() {
-		return trainingStartTime;
-	}
-	public void setTrainingStartTime(String trainingStartTime) {
-		this.trainingStartTime = trainingStartTime;
-	}
+
 	public String getTrainingEndTime() {
 		return trainingEndTime;
 	}
