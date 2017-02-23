@@ -12,7 +12,7 @@
         $('#tblUpcomingAssessments').append('<thead> <tr class="background-open-vacancies"> <th>S.No</th> <th>Batch Code</th><th>Assessment Date</th><th>Course Code</th> <th>Training Start Date</th> <th>Training Course Address</th> <th>No. Of Participants</th></tr> </thead>');
         var result = "";
         //var id = document.getElementById("assessmentAgencyId").value;
-        var assessorId = $('currentAssessorId').value;
+        var assessorId = ${loginUserAssessor};
         $.ajax({
             type: 'post',
             url: 'searchAssessorCalendar.jspp?' + assessorId,
@@ -98,7 +98,7 @@
                         <!-- vertical button -->
                         <div class="row">
                             <div class="col-lg-12">
-                                <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome Asessor</span> </a>
+                                <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome : ${loginUser.loginDetails.loginId}</span> </a>
                             </div>
                         </div>
 

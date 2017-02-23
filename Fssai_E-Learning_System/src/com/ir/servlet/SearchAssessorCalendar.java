@@ -57,6 +57,7 @@ public class SearchAssessorCalendar extends HttpServlet {
 				System.out.println("Retrieve upcoming calendar");
 				response.setContentType("text/html;charset=UTF-8");
 				String id = request.getQueryString();
+				System.out.println(" id "+id);
 		        PrintWriter out = response.getWriter();
 		        Configuration conf = new Configuration();
 				conf.configure("/hibernate.cfg.xml");
@@ -70,7 +71,7 @@ public class SearchAssessorCalendar extends HttpServlet {
 						+ "from trainingcalendar A "
 						+ "inner join coursename B on(A.coursename=B.coursenameid) "
 						+ "inner join personalinformationtrainingpartner C on(A.trainingcenter=C.personalinformationtrainingpartnerid) "
-						+ "inner join district dt on dt.districtid = C.trainingpartnerpermanentdistrict  ";
+						+ "inner join district dt on dt.districtid = C.trainingpartnerpermanentdistrict where A.assessor= '"+id+"'";
 			
 					Query query = session.createSQLQuery(sql);
 					List list = query.list();

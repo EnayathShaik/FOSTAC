@@ -3,17 +3,21 @@
         <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
             <script type="text/javascript">
                 function OnStart() {
+                	window.trainingcenterId = ${loginUsertrainingpartner};
                     searchUpcomingTraining();
                     searchCurrentAppliactionStatus();
                 }
                 window.onload = OnStart;
+                
 
             </script>
             <script type="text/javascript">
                 function searchCurrentAppliactionStatus() {
+                	alert("window.trainingcenterId "+window.trainingcenterId)
                     var data = JSON.stringify({
-                        courseType: 0,
-                        courseName: 0
+                     /*    courseType: 0,
+                        courseName: 0, */
+                        name:window.trainingcenterId
                     })
 
                     $.ajax({
@@ -22,6 +26,7 @@
                         contentType: "application/json",
                         data: data,
                         success: function(response) {
+                        	
                             response = JSON.parse(response);
                             for (index = 0; index < response.length; index++) {
                                 console.log(response[index]);
@@ -66,7 +71,7 @@
                     var result = "";
                     $.ajax({
                         type: 'post',
-                        url: 'searchUpcomingTraining.jspp',
+                        url: 'searchUpcomingTraining.jspp?'+window.trainingcenterId,
                         async: false,
                         success: function(data) {
                             $('#newTable').show();
@@ -126,7 +131,7 @@
                                     <!-- vertical button -->
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome Training Center</span> </a>
+                                            <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome ${userName }</span> </a>
                                         </div>
                                     </div>
                                     <!-- add the content here for main body -->

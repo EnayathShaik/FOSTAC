@@ -79,11 +79,12 @@ public class TrainingPartnerApplicationStatus extends HttpServlet {
 		catch(Exception e){
 			trainingDate = "%";
 		}
-	
+	String id = request.getQueryString();
+	System.out.println(" current stat "+id);
 	
 		String sql ="";
 		sql = "select B.coursetype,C.coursename,A.trainingdate,A.noofvacancy from postvacancytrainingcenter A inner join coursetype B on(A.coursetype=B.coursetypeid) inner join coursename C on(A.coursename=C.coursetypeid)" +
-		" where cast(B.coursetypeid as varchar(10)) like  '"+courseType+"%' and  cast( C.coursenameid as varchar(10)) like  '"+courseName+"%'  and  cast(A.trainingdate as varchar(10)) like  '"+trainingDate+"%' ";
+		" where A.trainingcenter = '"+id+"' cast(B.coursetypeid as varchar(10)) like  '"+courseType+"%' and  cast( C.coursenameid as varchar(10)) like  '"+courseName+"%'  and  cast(A.trainingdate as varchar(10)) like  '"+trainingDate+"%' ";
 		System.out.println(" sql "+sql);		
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();

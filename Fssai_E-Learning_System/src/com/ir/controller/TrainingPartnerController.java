@@ -408,9 +408,9 @@ public class TrainingPartnerController {
 	}
 	@RequestMapping(value="/getApplicationStatusDetails" , method=RequestMethod.POST)
 	@ResponseBody
-	public void getApplicationStatusDetails(@RequestBody PostVacancyTrainingCenterBean postVacancyTrainingCenterBean,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+	public void getApplicationStatusDetails(@RequestParam("name") String name ,@RequestBody PostVacancyTrainingCenterBean postVacancyTrainingCenterBean,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
 		
-		System.out.println("Get Application Status............");
+		System.out.println("Get Application Status............" + name);
 		
 		List<PostVacancyTrainingCenter> list=new ArrayList<>();
 		try{

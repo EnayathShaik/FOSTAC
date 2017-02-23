@@ -1605,5 +1605,13 @@ function ck_aadhar() {
  	document.getElementById( "AadharNumber" ).value = traineeAadhar;
  	document.getElementById( "AadharNumberShow" ).value = traineeAadhar;
  	localStorage.removeItem('traineeAadhar');
+ 	var DOB = localStorage.getItem('DOB');
+ 	document.getElementById( "dateP" ).value = DOB;
+ 	localStorage.removeItem('DOB');
+ 	
+ 	var firstname = localStorage.getItem('name');
+ 	document.getElementById( "traineeFirstName" ).value =firstname;
+ 	localStorage.removeItem('name');
+ 	
  	
 	</script>

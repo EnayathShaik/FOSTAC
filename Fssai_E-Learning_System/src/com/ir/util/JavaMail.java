@@ -49,7 +49,7 @@ public class JavaMail {
 	String fileName = "";
     String strCCMail = "";
      
-	public void mailProperty(String emailMsgTxt , String mail,String id, String pass)
+	public void mailProperty(String emailMsgTxt , String mail,String id, String pass , String username )
 	{	   
 				 
 	                String hostname= SMTP_HOST_NAME;
@@ -67,7 +67,9 @@ public class JavaMail {
 	                emailFromAddress=from.trim();
 	                strCCMail=ccMail.trim();
 	                emailSubjectTxt = "FSSAI Support";
-	                emailMsgTxt = "To "+id + " Your User ID "+id+" has been created successfully with password : "+pass;
+	                emailMsgTxt = "Dear  "+username +", "+" \r\n "+"\n"+System.getProperty("line.separator")+
+	                		" Your User ID "+id+" has been created successfully with password : "+pass+"\r\n "+"\n"+System.getProperty("line.separator")+
+	                		" Regards";
 	                try{
 	                	postMail( mail, emailSubjectTxt, emailMsgTxt, emailFromAddress,strCCMail);	
 	                }catch(Exception e){

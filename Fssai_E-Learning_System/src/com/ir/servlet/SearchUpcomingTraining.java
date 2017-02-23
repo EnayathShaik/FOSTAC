@@ -68,6 +68,7 @@ public class SearchUpcomingTraining extends HttpServlet {
 				conf.configure("/hibernate.cfg.xml");
 				SessionFactory sf = conf.buildSessionFactory();
 				Session session = sf.openSession();
+				String id = request.getQueryString();
 				
 				String sql ="select tc.trainingcalendarid , concat(pitp.trainingpartnerpermanentline1 , ' ' , pitp.trainingpartnerpermanentline2 , ' ' , s.statename , ' ' , d.districtname , ' ' , c.cityname) as address, "+
 						" concat(tc.trainingdate , ' / ' , tc.trainingtime) as schedule , "+
@@ -82,7 +83,7 @@ public class SearchUpcomingTraining extends HttpServlet {
 						" inner join state as s on s.stateid = pitp.trainingpartnerpermanentstate "+
 						" inner join city as c on c.cityid = pitp.trainingpartnerpermanentcity "+
 						" inner join district as d on d.districtid = pitp.trainingpartnerpermanentdistrict "+
-						" and tc.trainingcenter = pitp.personalinformationtrainingpartnerid where to_timestamp(COALESCE(tc.trainingdate, '19900101010101'),'DD-MM-YYYY') > now()";
+						" and tc.trainingcenter = pitp.personalinformationtrainingpartnerid where to_timestamp(COALESCE(tc.trainingdate, '19900101010101'),'DD-MM-YYYY') > now() and tc.trainingcenter='"+id+"'";
 						//" WHERE log.id = "+userId;
 			System.out.println("before query");
 			Query query = session.createSQLQuery(sql);

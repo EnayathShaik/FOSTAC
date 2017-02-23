@@ -9,6 +9,12 @@
     
     function isAadharCorrect(){
     	var aadhar=document.getElementById( "AadharNumber" ).value;
+    	//dateP,name
+    	var DOB = $("#dateP").val();
+    	localStorage.setItem("DOB", DOB);
+    	
+    	var name = $("#name").val();
+    	localStorage.setItem("name", name);
     	if(aadhar != ''){
     		if(aadhar.length == 12){
     			localStorage.setItem("traineeAadhar", aadhar);

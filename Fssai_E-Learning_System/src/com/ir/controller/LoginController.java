@@ -36,6 +36,7 @@ import com.ir.service.UpdateService;
 
 /**
  * Controller to handle login process
+ * 
  */
 @Controller
 @SessionAttributes
@@ -202,26 +203,7 @@ public class LoginController {
 			session.setAttribute("logId", personalInformationTrainer.getLoginDetails().getLoginId());
 			session.setAttribute("Id",personalInformationTrainer.getLoginDetails().getId());
 			
-			/*List<PostVacancyTrainingCenter> postVacancyTrainingCenter=trainingPartnerService.getPostVacancyTrainingList();
-			List<PostVacancyTrainingCenterBean> vacancyTrainingCenterBeans=new ArrayList<>();
-			for(PostVacancyTrainingCenter pvtc:postVacancyTrainingCenter){
-				PostVacancyTrainingCenterBean applicationStatusBean=trainingPartnerService.getApplicationStatusBean(String.valueOf(loginDetails.getId()),pvtc.getCourseName().getCoursenameid(),pvtc.getCourseType().getCourseTypeId());
-				if(applicationStatusBean.getStatus()!=null){
-					applicationStatusBean.setCoursetypeName(pvtc.getCourseType().getCourseType());
-					applicationStatusBean.setStrCourseName(pvtc.getCourseName().getCoursename());
-					applicationStatusBean.setTrainingDate(pvtc.getTrainingDate());
-					applicationStatusBean.setPersonalInformationTrainingPartner(pvtc.getTrainingCenter());
-					applicationStatusBean.setPostvacancyID(pvtc.getId());
-					vacancyTrainingCenterBeans.add(applicationStatusBean);
-				}
-			}
-			model.addAttribute("postVacancyTrainingCenter", new Gson().toJson(postVacancyTrainingCenter));
-			model.addAttribute("vacancyTrainingCenterBeans", new Gson().toJson(vacancyTrainingCenterBeans));
-			*/
-			session.setAttribute("traineeSteps", personalInformationTrainer.getSteps());
-			/*model.addAttribute("trainerState", stateid);
-			model.addAttribute("trainerDistrict",districtId );
-			model.addAttribute("trainerCity", cityId);*/
+			
 			return "trainerHomepage";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 5){
 			if(loginDetails.getStatus().equalsIgnoreCase("A")){
@@ -265,20 +247,7 @@ public class LoginController {
 			}
 			
 		}
-			/*else if(loginDetails!=null && loginDetails.getProfileId() == 6 && loginDetails.getStatus().equalsIgnoreCase("A")){
-			PersonalInformationAssessor personalInformationAssessor = new PersonalInformationAssessor();
-			
-			personalInformationAssessor = loginService.FullDetailAssessor(loginDetails.getId());
-			session.setAttribute("logId", personalInformationAssessor.getLoginDetails().getLoginId());
-			//session.setAttribute("loginUser", "hellooo");
-			
-			session.setAttribute("loginUr", personalInformationAssessor);
-			model.addAttribute("loginAssessor", personalInformationAssessor);
-	System.out.println("**************"+personalInformationAssessor.getPersonalInformationAssessorId());
-			session.setAttribute("loginUser2", personalInformationAssessor.getPersonalInformationAssessorId());
-			session.setAttribute("logId", personalInformationAssessor.getLoginDetails().getLoginId());
-			return "AssessorHomepage";
-		}*/else if(loginDetails!=null && loginDetails.getProfileId() == 7 && loginDetails.getStatus().equalsIgnoreCase("A")){
+		else if(loginDetails!=null && loginDetails.getProfileId() == 7 && loginDetails.getStatus().equalsIgnoreCase("A")){
 			// TRAINING PARTNER  //// TRAINING PARTNER  //// TRAINING PARTNER  //// TRAINING PARTNER  //
 			//session.invalidate();
 			ManageTrainingPartner manageTrainingPartner = new ManageTrainingPartner();

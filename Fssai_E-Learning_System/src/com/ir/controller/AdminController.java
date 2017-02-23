@@ -413,7 +413,7 @@ public class AdminController {
 			model.addAttribute("pwd", all[0]);
 			JavaMail javaMail = new JavaMail();
 			javaMail.mailProperty("Thanks",
-					email, manageTrainingPartnerForm.getUserId(), all[0]);
+					email, manageTrainingPartnerForm.getUserId(), all[0],manageTrainingPartnerForm.getUserId());
 			/*Thread t1 = new Thread(new Runnable() {
 				public void run() {
 					// code goes here.
@@ -463,7 +463,7 @@ public class AdminController {
 			JavaMail javaMail = new JavaMail();
 			javaMail.mailProperty("Thanks",
 					manageAssessmentAgencyForm.getEmail(),
-					manageAssessmentAgencyForm.getUserId(),all[0]);
+					manageAssessmentAgencyForm.getUserId(),all[0] ,manageAssessmentAgencyForm.getAssessmentAgencyName() );
 
 			return "welcomeManageTrainingPartner";
 		} else {
