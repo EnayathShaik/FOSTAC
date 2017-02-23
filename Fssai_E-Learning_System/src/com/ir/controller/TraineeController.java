@@ -111,11 +111,6 @@ public class TraineeController {
 	@RequestMapping(value="/basic" , method=RequestMethod.GET)
 	public String basic(@ModelAttribute("basicTrainee") CourseEnrolledUserForm courseEnrolledUserForm ,
 		 @ModelAttribute("loginUser") PersonalInformationTrainee pit ){// , Model modal , HttpSession session ){
-		//String uniqueId = courseEnrolledUserForm.getUniqueId();
-		//modal.addAttribute("uniqueId", uniqueId);
-		//session.setAttribute("uniqueId", uniqueId);
-		
-		
 		return "basic";
 	}
 	

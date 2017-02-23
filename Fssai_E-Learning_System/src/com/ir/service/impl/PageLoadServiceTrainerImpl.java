@@ -39,13 +39,7 @@ public class PageLoadServiceTrainerImpl implements PageLoadServiceTrainer {
 		return titleList;
 	}
 
-	
-	/*@Override
-	public List<District> loadDistrict() {
-		// TODO Auto-generated method stub
-		List<District> districtList = pageLoadDaoTrainer.District();
-		return districtList;
-	}*/
+
 
 	@Override
 	public List<CourseName> basicCourseName() {
@@ -54,20 +48,7 @@ public class PageLoadServiceTrainerImpl implements PageLoadServiceTrainer {
 		return basicCourseName;
 	}
 
-	/*@Override
-	public List<CourseName> advanceCourseList() {
-		// TODO Auto-generated method stub
-		List<CourseName> advanceCourseName= pageLoadDaoTrainer.advanceCourseName();
-		return advanceCourseName;
-	}*/
 
-	/*@Override
-	public List<CourseName> specialCourseList() {
-		// TODO Auto-generated method stub
-		List<CourseName> specialCourseList= pageLoadDaoTrainer.specialCourseList();
-		return specialCourseList;
-	}*/
-	
 	@Override
 	public List<String> loadCaste() {
 		List<String> listCaste = pageLoadDaoTrainer.loadCaste();

@@ -126,7 +126,9 @@ public class RegistrationController {
 	
 	@RequestMapping(value = "/registerTrainee", method = RequestMethod.POST)
 	public String registerTrainee(@Valid @ModelAttribute("registrationFormTrainee") RegistrationFormTrainee registrationFormTrainee, BindingResult bindingResult,Model model)  {
-		
+	 	
+	
+			
 		System.out.println("Entering Registration ...............");
 		System.out.println("register controller before bind");
 		if(bindingResult.hasErrors()){
@@ -137,9 +139,14 @@ public class RegistrationController {
 		}
 		System.out.println("registrationFormTrainee controller");
 		System.out.println(registrationFormTrainee);
-		//RegisterTraineeInformationFull registerTraineeInformationFull = registrationServiceTrainee.registerTraineeInformationFull(registrationFormTrainee);
-		String personalInformationTrainee = registrationServiceTrainee.registerPersonalInformationTrainee(registrationFormTrainee);
+		String personalInformationTrainee = null;
+		try{
+		 personalInformationTrainee = registrationServiceTrainee.registerPersonalInformationTrainee(registrationFormTrainee);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		System.out.println("array");
+		
 		if(! personalInformationTrainee.equalsIgnoreCase("")){
 			String[] all = personalInformationTrainee.split("&");
 			model.addAttribute("id" , all[1]);
@@ -151,5 +158,8 @@ public class RegistrationController {
 		}else{
 			return "registrationFormTrainee";
 		}
+		
+		
+		
 	}
 }

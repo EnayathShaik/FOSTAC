@@ -103,14 +103,18 @@ public class RegistrationControllerAssessor implements Serializable{
 		
 		System.out.println("register controller before bind trainer");
 		if(bindingResult.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+bindingResult.hasErrors());
-			System.out.println(bindingResult.getErrorCount());
-			System.out.println(bindingResult.getAllErrors());
+	
 			return "registrationFormAssessor";
 		}
 		System.out.println("registrationForm assessor controller");
 		System.out.println(registrationFormAssessor);
-		String personalInformationAssessor = registrationServiceAssessor.registerPersonalInformationAssessor(registrationFormAssessor);
+		String personalInformationAssessor = null;
+		try{
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		 personalInformationAssessor = registrationServiceAssessor.registerPersonalInformationAssessor(registrationFormAssessor);
 		if(! personalInformationAssessor.equalsIgnoreCase("")){
 			String[] all = personalInformationAssessor.split("&");
 			model.addAttribute("id" , all[1]);
@@ -126,13 +130,7 @@ public class RegistrationControllerAssessor implements Serializable{
 			return "personalInformationAssessor";
 		}
 	}
-	/*@RequestMapping(value = "/updateAssessor", method = RequestMethod.GET)
-	public String updateAssessor(Model model) {
-		System.out.println("registerForm trainer begins ");
-		RegistrationFormAssessor registrationFormAssessor=new RegistrationFormAssessor();
-		model.addAttribute("registrationFormAssessor", registrationFormAssessor);
-		return "updateAssessor";
-	}*/
+
 	
 	 @RequestMapping(value="/updateAssessor" , method=RequestMethod.GET)
 		public String updateAssessor(@RequestParam(value = "userId", required = true)  Integer userId ,Model model ,@ModelAttribute("updateAssessor") RegistrationFormAssessor registrationFormAssessor, HttpSession session ){		

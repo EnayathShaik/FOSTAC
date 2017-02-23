@@ -54,34 +54,6 @@ public class RegistrationServiceAssessorImpl implements RegistrationServiceAsses
 
 	@Override
 	public String registerPersonalInformationAssessor(RegistrationFormAssessor registrationFormAssessor ) {
-		/*String basicCourse2 =registrationFormAssessor.getBasicCourse1();
-		String [] basicCourse3 = basicCourse2.split(",");
-		String advanceCourse2 =registrationFormAssessor.getAdvanceCourse1();
-		String [] advanceCourse3 = advanceCourse2.split(",");
-		String specialCourse2 =registrationFormAssessor.getSpecialCourse1();
-		String [] specialCourse3 = specialCourse2.split(",");
-		
-		Set ceS = new HashSet<>();
-		List ceLB = new ArrayList<>();
-		for(int i = 0 ; i < basicCourse3.length ; i++ ){
-			ceLB.add(basicCourse3[i]);
-		}
-		ceS.add(ceLB);
-		
-		List ceLA = new ArrayList<>();
-		for(int i = 0 ; i < advanceCourse3.length ; i++ ){
-			ceLA.add(advanceCourse3[i]);
-		}
-		ceS.add(ceLA);
-		
-		List ceLS = new ArrayList<>();
-		for(int i = 0 ; i < specialCourse3.length ; i++ ){
-			ceLS.add(specialCourse3[i]);
-		}
-		ceS.add(ceLS);*/
-		
-		
-		
 		String personalInformationassessor = registrationAssessorDAO.register(registrationFormAssessor );
 		return personalInformationassessor;
 	}
@@ -98,13 +70,7 @@ public class RegistrationServiceAssessorImpl implements RegistrationServiceAsses
 		return personalInformationassessor;
 	}
 
-	/*@Override
-	public String contactAssesorSave(ContactFormAssessor contactFormAssessor, int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-*/
-	
+
 	
 	// Rishi
 	@Override
@@ -131,10 +97,5 @@ public class RegistrationServiceAssessorImpl implements RegistrationServiceAsses
 	}
 
 
-	/*@Override
-	public String contactAssesorSave(ContactFormAssessor contactFormAssessor, int id) {
-		String contactFormAssessor1 = registrationAssessorDAO.cotactAssessorSave(contactFormAssessor,id);
-		return contactFormAssessor1;
-	}*/
 	
 }

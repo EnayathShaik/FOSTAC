@@ -121,22 +121,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 		return tt;
 	}
 
-	/*
-	 * @Override public String contactTraineeSave(ContactTrainee contactTrainee
-	 * , String id) { SendContectMail traineeMaail= new SendContectMail();
-	 * Session session = sessionFactory.openSession(); Transaction tx =
-	 * session.beginTransaction(); ContactTraineee contactTraineeModel = new
-	 * ContactTraineee(); String email=contactTrainee.getEmailId(); String
-	 * msg=contactTrainee.getMessage(); //String ss=contactTrainee.getUserId();
-	 * System.out.println("user id in dao impl  :::::" + id);
-	 * traineeMaail.mailProperty(msg, email,id);
-	 * contactTraineeModel.setEmailAddress(email);
-	 * contactTraineeModel.setMessageDetails(msg);
-	 * contactTraineeModel.setUserId(id); Integer contactTraineeModelId =
-	 * (Integer) session.save(contactTraineeModel); tx.commit();
-	 * session.close(); if(contactTraineeModelId >0 && contactTraineeModelId !=
-	 * null){ return "created"; }else{ return "error"; } }
-	 */
 
 	@Override
 	public String contactTraineeSave(ContactTrainee contactTrainee, String id) {
@@ -156,6 +140,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		contactTraineeModel.setDescription("Hello my  Id is  :- " + id
 				+ "  My EmailId is :- " + email + " My message to You:-  "
 				+ msg);
+		
 		Integer contactTraineeModelId = (Integer) session
 				.save(contactTraineeModel);
 		tx.commit();
@@ -171,9 +156,15 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public List<CourseName> courseNameList() {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		Query query = session
-				.createQuery("from CourseName where coursetypeid = '" + 1 + "'");
-		List<CourseName> courseNameList = query.list();
+		List<CourseName> courseNameList = null;
+		try{
+			Query query = session
+					.createQuery("from CourseName where coursetypeid = '" + 1 + "'");
+			 courseNameList = query.list();	
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
 		session.close();
 		return courseNameList;
 	}
@@ -267,6 +258,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		Session session = sessionFactory.openSession();
 		String sql = "select cn.coursename,cn.coursenameid,cn.courseduration from coursename cn,courseenrolled cnrld where cn.coursenameid=cnrld.coursenameid and cnrld.logindetails="
 				+ loginId;
+		
 		Query query = session.createSQLQuery(sql);
 		List<Object[]> courseNameList = (List<Object[]>) query.list();
 		session.close();

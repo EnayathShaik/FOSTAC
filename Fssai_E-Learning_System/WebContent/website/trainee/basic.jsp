@@ -127,7 +127,7 @@ function getCourseDetails(){
 	      $(".displayNone").css("display","block");
 	      var j=1;
 			$('#newTable tr').remove();
-			$('#newTable').append('<tr  class="background-open-vacancies"><th>Select</th><th>Batch Code Code</th><th>Course Code</th><th>Course Duration</th><th>Training Center Name & Address</th><th>Training Schedule</th><th>	Center Contact Person Name, Mobile & Email Id</th><th>Seating Capacity</th><th>Seats available</th></tr>')
+			$('#newTable').append('<tr  class="background-open-vacancies"><th>Select</th><th>Batch Code Code</th><th>Course Code</th><th>Course Duration</th><th>Training Center Name & Address</th><th>Training Schedule</th><th>Training Center</th><th>Seating Capacity</th><th>Seats available</th></tr>')
 			$.each(mainData1 , function(i , obj)
 			{
 			$('#newTable').append('<tr id="tableRow"><td><input type="hidden" name="getCalander" id="h" value="'+obj[0]+'" /><input type="radio" name="getCalander" onclick="gettid(this.value);" id="trainingCalendarIdd'+i+'"  value="'+obj[0]+'"/></td><td>'+obj[9]+'</td><td>'+obj[7]+'</td><td>'+obj[10]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td></tr>');	

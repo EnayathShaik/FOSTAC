@@ -119,7 +119,13 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 			System.out.println(bindingResult.getAllErrors());
 			return "registrationFormTrainingPartner";
 		}
-		String personalInformationTrainingPartner = registrationServiceTrainingPartner.registerPersonalInformationTrainingPartner(registrationFormTrainingPartner);
+		String personalInformationTrainingPartner = null;
+		try{
+			personalInformationTrainingPartner = registrationServiceTrainingPartner.registerPersonalInformationTrainingPartner(registrationFormTrainingPartner);	
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		 
 		if(!personalInformationTrainingPartner.equalsIgnoreCase("")){
 			String[] all = personalInformationTrainingPartner.split("&");
 			model.addAttribute("id" , all[1]);
@@ -168,32 +174,20 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 			System.out.println("*******************"+userId+"*******************");
 		  
 		  if(userId > 0){
-				  PersonalInformationTrainingPartner personalInformationTrainingPartner ;
-					personalInformationTrainingPartner = registrationServiceTrainingPartner.FullDetailtrainingpartner(userId);
+				  PersonalInformationTrainingPartner personalInformationTrainingPartner = null ;
+				  try{
+					  personalInformationTrainingPartner = registrationServiceTrainingPartner.FullDetailtrainingpartner(userId);  
+				  }catch(Exception e){
+					  e.printStackTrace();
+				  }
+					
 					session.setAttribute("loginUr", personalInformationTrainingPartner);
 			
 			 }
 				model.addAttribute("update", "");
 			return "update-personal-information";
 		}
-		/*@RequestMapping(value="/contactTPSave" , method=RequestMethod.POST)
-		public String contactTrainee1(@ModelAttribute("contactTrainee") ContactTrainee contactTrainee
-				,BindingResult result , Model model
-				){
-			if(result.hasErrors()){
-				System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-				System.out.println(result.getErrorCount());
-				System.out.println(result.getAllErrors());
-				return "contactTrainee";
-			}int id = 1;
-			String contactTraineeSave = registrationServiceTrainingPartner.contactTraineeSave(contactTrainee , id);
-			if(contactTraineeSave.equalsIgnoreCase("created")){
-				model.addAttribute("created" , "Your request has been sent successfully !!!");
-			}else{
-				model.addAttribute("created" , "Oops, something went wrong !!!");
-			}
-			return "contactTC";
-		}*/
+
 	  @RequestMapping(value="/contactTPSave" , method=RequestMethod.POST)
 		public String contactTrainee1(@ModelAttribute("contactTrainee") ContactTrainee contactTrainee,HttpSession session
 				,BindingResult result , Model model
@@ -205,7 +199,13 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 				return "contactTrainee";
 			}//int id = 1;
 			String id=(String) session.getAttribute("logId");
-			String contactTraineeSave = registrationServiceTrainingPartner.contactTraineeSave(contactTrainee , id);
+			String contactTraineeSave = null;
+			try{
+				contactTraineeSave = registrationServiceTrainingPartner.contactTraineeSave(contactTrainee , id);	
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
 			if(contactTraineeSave.equalsIgnoreCase("created")){
 				model.addAttribute("created" , "Your request has been sent successfully !!!");
 			}else{
@@ -222,8 +222,15 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 	 }
 	  
 	  @RequestMapping(value="/postVacancyTrainingCenterSave" , method=RequestMethod.POST)
-	  public String postVacancySave(@ModelAttribute("postVacancy") PostVacancyTrainingCenterForm postVacancyTrainingCenterForm , Model model){		
-		  String postVacancy = registrationServiceTrainingPartner.postVacancyTrainingCenter(postVacancyTrainingCenterForm);
+	  public String postVacancySave(@ModelAttribute("postVacancy") PostVacancyTrainingCenterForm postVacancyTrainingCenterForm , Model model){
+		  String postVacancy = null;
+		  
+		  try{
+			  postVacancy = registrationServiceTrainingPartner.postVacancyTrainingCenter(postVacancyTrainingCenterForm);  
+		  }catch(Exception e){
+			  e.printStackTrace();
+		  }
+		   
 		  if(postVacancy.equalsIgnoreCase("created")){
 			  model.addAttribute("created", "Vacancy created successfull !!!");
 		  }else{
@@ -248,7 +255,12 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 			String id =(String) session.getAttribute("logId");
 			//System.out.println(changePasswordForm.getLoginid());
 			//int id = 1;
-			boolean changePasswordTraineeSave = registrationServiceTrainingPartner.changePasswordTraineeSave(changePasswordForm , id);
+			boolean changePasswordTraineeSave = false ;
+			try{
+			 changePasswordTraineeSave = registrationServiceTrainingPartner.changePasswordTraineeSave(changePasswordForm , id);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 			if(changePasswordTraineeSave){
 				model.addAttribute("created" , "Your password has been changed !!!");
 			}else{
