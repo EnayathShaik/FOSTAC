@@ -54,7 +54,7 @@
                             $('#newTable1 tr').remove();
                             $('#newTable1').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Assessment Agency Name</th><th>Assessor Name</th><th>Assessor Id</th><th>Activate</th><th>Detail</th></tr>')
                             $.each(mainData1, function(i, obj) {
-                                $('#newTable1').append('<tr id="tableRow"><td>' + j++ + '</td><td>' + obj[0] + '</td><td>' + obj[1] + '</td><td>' + obj[2] + '</td><td><input type="hidden" id="statusHidden' + obj[4] + '" value="' + obj[5] + '"/><a href="#" onclick="statusChange(' + obj[4] + ');">' + obj[3] + '</a></td><td><input type="hidden" id="assessorId' + obj[4] + '" value="' + obj[4] + '" /><a href="#" onclick="showDetail();">' + obj[4] + '</a></td></tr>');
+                                $('#newTable1').append('<tr id="tableRow"><td>' + j++ + '</td><td>' + obj[0] + '</td><td>' + obj[1] + '</td><td>' + obj[2] + '</td><td><input type="hidden" id="statusHidden' + obj[4] + '" value="' + obj[5] + '"/><a href="#" onclick="statusChange(' + obj[4] + ');">Activate</a></td><td><input type="hidden" id="assessorId' + obj[4] + '" value="' + obj[4] + '" /><a href="#" onclick="showDetail();">' + obj[4] + '</a></td></tr>');
                                 console.log(obj[0] + " -" + obj[1] + " -" + obj[2] + " -" + obj[3] + " -" + obj[4]);
 
                             });

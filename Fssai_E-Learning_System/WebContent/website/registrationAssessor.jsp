@@ -73,26 +73,30 @@
 		if (x == true) {
 			document.getElementById('AssessorPermanentLine1').value = document
 					.getElementById('AssessorCorrespondenceLine1').value;
-			$("#AssessorPermanentLine1").prop('readonly',true);
+			$("#AssessorPermanentLine1").attr('readonly',true);
 			document.getElementById('AssessorPermanentLine2').value = document
 					.getElementById('AssessorCorrespondenceLine2').value;
-			$("#AssessorPermanentLine2").prop('readonly',true);
+			$("#AssessorPermanentLine2").attr('readonly',true);
 			document.getElementById('AssessorPermanentPincode').value = document
 					.getElementById('AssessorCorrespondencePincode').value;
-			$("#AssessorPermanentPincode").prop('readonly',true);
+			$("#AssessorPermanentPincode").attr('readonly',true);
 			document.getElementById('AssessorrPermanentState').value = document.getElementById('AssessorCorrespondenceState').value;
 			$("#AssessorrPermanentState").trigger("change");
+			$("#AssessorrPermanentState").attr("disabled" , true);
 			window.setTimeout(function(){
-				document.getElementById('AssessorPermanentDistrict').value = document.getElementById('AssessorCorrespondenceDistrict').value;
-				$("#AssessorPermanentDistrict").prop('readonly',true);
-				
+				//console.log("district "+ document.getElementById('AssessorCorrespondenceDistrict').value);
+				$("#AssessorPermanentDistrict").val($("#AssessorCorrespondenceDistrict").val());
 				$("#AssessorPermanentDistrict").trigger("change");
-				window.setTimeout(function(){
-					document.getElementById('AssessorPermanentCity').value = document.getElementById('AssessorCorrespondenceCity').value;
-					$("#AssessorPermanentCity").prop('readonly',true);
-			    }, 2000);
-			}, 2000);
+				$("#AssessorPermanentDistrict").attr('disabled',true);
+			 }, 3000);
 			
+				window.setTimeout(function(){
+					//console.log(" city "+ document.getElementById('AssessorCorrespondenceCity').value);
+					$("#AssessorPermanentCity").val($("#AssessorCorrespondenceCity").val())
+					//document.getElementById('AssessorPermanentCity').value = document.getElementById('AssessorCorrespondenceCity').value;
+					
+					$("#AssessorPermanentCity").attr('disabled',true);
+			}, 4000);
 			
 			
 		}

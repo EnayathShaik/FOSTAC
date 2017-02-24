@@ -13,7 +13,7 @@
             </script>
             <script type="text/javascript">
                 function searchCurrentAppliactionStatus() {
-                	alert("window.trainingcenterId "+window.trainingcenterId)
+           
                     var data = JSON.stringify({
                      /*    courseType: 0,
                         courseName: 0, */
