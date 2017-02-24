@@ -57,7 +57,7 @@ try{
                                                     <div class="row">
                                                         <!-- html code to add from here -->
                                                         <div class="col-xs-12">
-                                                            <div class="col-xs-12"><img src="website/img/certificate.jpg" class="img-responsive"></div>
+                                                            <div class="col-xs-12"><img src="website/img/hra-wi1.jpg" class="img-responsive"></div>
                                                             <div class="col-xs-12 this-certify">
                                                                 <h3 class="text-center th-pos">This is to certify that</h3>
                                                                 <p class="text-center for-p"><span><strong>${traineeCertificateName}</strong></span></p>
@@ -86,13 +86,14 @@ try{
                                                                 </p>
                                                                 <p class="btm-p">Refresher Due : 2 years from date of issue.</p>
                                                             </div>
-                                                            <div class="row">
-                                                                <!-- <div class="col-md-4 col-xs-12"></div>
-                                                            <div class="col-md-4 col-xs-12" style="position: relative; top: -25em;"> <a href="#" class="btn login-btn" style="width: 100%;">Download</a> </div>
-                                                            <div class="col-md-4 col-xs-12"></div> -->
-                                                                <div style="margin-top: 2em;" align="center">
-                                                                    <input type="button" class="btn login-btn" value="Download AdmitCard" id="btnPrint" /> </div>
+                                                            <div class="row" style="position: relative; top: -25em;">
                                                                 <div class="col-md-4 col-xs-12"></div>
+                                                           <div class="col-md-4 col-xs-12">
+                                                            <input type="button" class="btn login-btn" value="Download AdmitCard" id="btnPrint" />
+                                                           </div>
+                                                            <div class="col-md-4 col-xs-12"></div> 
+                                                               
+                                                              
                                                             </div>
                                                         </div>
                                                         <!-- html code ends here -->

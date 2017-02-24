@@ -20,294 +20,147 @@ body {
 
 /* new certificate style*/
 
-@media screen {
-    .this-certify {
-        position: relative;
-        top: -32em;
-    }
-    .sign-pos {
-        position: relative;
-        top: -28.1em;
-    }
-    .cert-btm {
-        position: relative;
-        top: -28em;
-        line-height: 12px;
-    }
-    .nam-hr {
-        width: 80%;
-        margin-top: 32px;
-        border-top: 1px solid #bdbcbc;
-    }
-    .di-msg {
-        position: relative;
-        left: 5.5em;
-        font-size: 17px;
-        line-height: 18px
-    }
-    .on-dat {
-        font-weight: 600;
-        position: relative;
-        left: 80px;
-    }
-    .on-dat-general {
-        font-weight: 600;
-        position: relative;
-        left: 30px;
-    }
-    .on-hr {
-        width: 33.5%;
-        border-top: 1px solid #bdbcbc;
-        margin-top: -10px;
-        margin-right: 190px;
-    }
-    .on-hr-general {
-        width: 14%;
-        border-top: 1px solid #bdbcbc;
-        margin-top: -10px;
-        margin-left: 102px;
-    }
-    .at-general {
-        position: relative;
-        left: 3.5em;
-    }
-    .at-hr {
-        border-top: 1px solid #bdbcbc;
-        width: 45%;
-        margin-top: -10px;
-        margin-left: 22px;
-    }
-    .full-stop {
-        position: relative;
-        top: -38px;
-        left: 48%;
-        font-size: 25px;
-    }
-    .left-sign {
-        border-top: 1px solid #bdbcbc;
-        margin-top: 10px;
-        width: 50%;
-        position: relative;
-        left: -29px;
-    }
-    .right-sign {
-        border-top: 1px solid #bdbcbc;
-        margin-top: 10px;
-        width: 50%;
-        position: relative;
-        left: 26px;
-    }
-    .left-p {
-        position: relative;
-        left: 137px;
-        top: -15px;
-    }
-    .right-p {
-        position: relative;
-        right: -30px;
-        top: -15px;
-    }
-    .btm-p {
-        position: relative;
-        left: 95px;
-        letter-spacing: 0.1px;
-    }
-    .for-p {
-        font-size: 20px;
-        position: relative;
-        top: 32px;
-    }
-    .add-pos {
-        position: relative;
-        font-weight: 600;
-        left: 5%;
-    }
-    .add-pos-general {
-        position: relative;
-        font-weight: 600;
-        left: 43%;
-        top: -38px;
-    }
-    .at-hr-general {
-        border-top: 1px solid #bdbcbc;
-        width: 49%;
-        margin-top: -39px;
-        margin-left: 275px;
-    }
-    .login-btn {
-        background: #000077;
-        color: #fff;
-        border: 1px solid transparent;
-        transition: all 0.8s linear;
-    }
-    .th-pos {
-        position: relative;
-        top: 0.5em;
-    }
-    .full-stop-general {
-        position: relative;
-        top: -42px;
-        left: 79%;
-        font-size: 2em;
-    }
-    .sign-pos-general {
-        position: relative;
-        top: -28em;
-    }
-    .cert-btm-general {
-        position: relative;
-        top: -28.5em;
-        line-height: 12px;
-    }
+.this-certify {
+    position: relative;
+    top: -32em;
 }
-
-
-/* print css*/
-
-@media print {
-    .this-certify {
-        position: relative;
-        top: -32em;
-    }
-    .sign-pos {
-        position: relative;
-        top: -28em;
-    }
-    .cert-btm {
-        position: relative;
-        top: -28.5em;
-        line-height: 12px;
-    }
-    .nam-hr {
-        width: 80%;
-        margin-top: 32px;
-        border-top: 1px solid #bdbcbc;
-    }
-    .di-msg {
-        position: relative;
-        left: 5.5em;
-        font-size: 17px;
-        line-height: 18px;
-        width: 780px;
-    }
-    .on-dat {
-        font-weight: 600;
-        position: relative;
-        left: 155px;
-    }
-    .on-dat-general {
-        font-weight: 600;
-        position: relative;
-        left: 30px;
-    }
-    .on-hr {
-        width: 45.8%;
-        border-top: 1px solid #bdbcbc;
-        margin-top: -10px;
-        margin-right: -12px;
-    }
-    .on-hr-general {
-        width: 18%;
-        border-top: 1px solid #bdbcbc;
-        margin-top: -10px;
-        margin-left: 98px;
-    }
-    .at-general {
-        position: relative;
-        left: 3.5em;
-    }
-    .at-hr {
-        border-top: 1px solid #bdbcbc;
-        width: 45%;
-        margin-top: -10px;
-        margin-left: 22px;
-    }
-    .full-stop {
-        position: relative;
-        top: -38px;
-        left: 48%;
-        font-size: 25px;
-    }
-    .left-sign {
-        border-top: 1px solid #bdbcbc;
-        margin-top: 10px;
-        width: 50%;
-        position: relative;
-        left: -29px;
-    }
-    .right-sign {
-        border-top: 1px solid #bdbcbc;
-        margin-top: 10px;
-        width: 50%;
-        position: relative;
-        left: 26px;
-    }
-    .left-p {
-        position: relative;
-        left: 137px;
-        top: -15px;
-    }
-    .right-p {
-        position: relative;
-        right: -30px;
-        top: -15px;
-    }
-    .btm-p {
-        position: relative;
-        left: 95px;
-        letter-spacing: 0.1px;
-    }
-    .for-p {
-        font-size: 20px;
-        position: relative;
-        top: 32px;
-    }
-    .add-pos {
-        position: relative;
-        font-weight: 600;
-        left: 5%;
-    }
-    .add-pos-general {
-        position: relative;
-        font-weight: 600;
-        left: 43%;
-        top: -38px;
-    }
-    .at-hr-general {
-        border-top: 1px solid #bdbcbc;
-        width: 63%;
-        margin-top: -39px;
-        margin-left: 266px;
-    }
-    .login-btn {
-        background: #000077;
-        color: #fff;
-        border: 1px solid transparent;
-        transition: all 0.8s linear;
-    }
-    .th-pos {
-        position: relative;
-        top: 0.5em;
-    }
-    .full-stop-general {
-        position: relative;
-        top: -42px;
-        left: 97.8%;
-        font-size: 2em;
-    }
-    .sign-pos-general {
-        position: relative;
-        top: -28em;
-    }
-    .cert-btm-general {
-        position: relative;
-        top: -28.7em;
-        line-height: 12px;
-    }
+.sign-pos {
+    position: relative;
+    top: -30em;
 }
-
+.cert-btm {
+    position: relative;
+    top: -31em;
+    line-height: 12px;
+}
+.nam-hr {
+    width: 80%;
+    margin-top: 32px;
+    border-top: 1px solid #bdbcbc;
+}
+.di-msg {
+    position: relative;
+    left: 5.5em;
+    font-size: 17px;
+    line-height: 18px
+}
+.on-dat {
+    font-weight: 600;
+    position: relative;
+    left: 155px;
+}
+.on-dat-general {
+    font-weight: 600;
+    position: relative;
+    left: 30px;
+}
+.on-hr {
+    width: 43%;
+    border-top: 1px solid #bdbcbc;
+    margin-top: -10px;
+    margin-right: 190px;
+}
+.on-hr-general {
+    width: 14%;
+    border-top: 1px solid #bdbcbc;
+    margin-top: -10px;
+    margin-left: 102px;
+}
+.at-general {
+    position: relative;
+    left: 3.5em;
+}
+.at-hr {
+    border-top: 1px solid #bdbcbc;
+    width: 45%;
+    margin-top: -10px;
+    margin-left: 22px;
+}
+.full-stop {
+    position: relative;
+    top: -46px;
+    left: 48%;
+    font-size: 25px;
+}
+.left-sign {
+    border-top: 1px solid #bdbcbc;
+    margin-top: 10px;
+    width: 50%;
+    position: relative;
+    left: -29px;
+}
+.right-sign {
+    border-top: 1px solid #bdbcbc;
+    margin-top: 10px;
+    width: 50%;
+    position: relative;
+    left: 26px;
+}
+.left-p {
+    position: relative;
+    left: 137px;
+    top: -15px;
+}
+.right-p {
+    position: relative;
+    right: -30px;
+    top: -15px;
+}
+.btm-p {
+    position: relative;
+    left: 95px;
+    letter-spacing: 0.1px;
+}
+.for-p {
+    font-size: 20px;
+    position: relative;
+    top: 32px;
+}
+.add-pos {
+    position: relative;
+    font-weight: 600;
+    left: 5%;
+}
+.add-pos-general {
+    position: relative;
+    font-weight: 600;
+    left: 43%;
+    top: -38px;
+}
+.at-hr-general {
+    border-top: 1px solid #bdbcbc;
+    width: 49%;
+    margin-top: -39px;
+    margin-left: 275px;
+}
+.login-btn {
+    background: #000077;
+    color: #fff;
+    border: 1px solid transparent;
+    transition: all 0.8s linear;
+}
+.th-pos {
+    position: relative;
+    top: 0.5em;
+}
+.full-stop-general {
+    position: relative;
+    top: -42px;
+    left: 79%;
+    font-size: 2em;
+}
+.sign-pos-general {
+    position: relative;
+    top: -28em;
+}
+.cert-btm-general {
+    position: relative;
+    top: -28.5em;
+    line-height: 12px;
+}
 
 /* new certificate style ends*/
+
 
 
 /* Toggle Styles */
