@@ -83,7 +83,7 @@ public class SearchUpcomingTraining extends HttpServlet {
 						" inner join state as s on s.stateid = pitp.trainingpartnerpermanentstate "+
 						" inner join city as c on c.cityid = pitp.trainingpartnerpermanentcity "+
 						" inner join district as d on d.districtid = pitp.trainingpartnerpermanentdistrict "+
-						" and tc.trainingcenter = pitp.personalinformationtrainingpartnerid where to_timestamp(COALESCE(tc.trainingdate, '19900101010101'),'DD-MM-YYYY') > now()";// and tc.trainingcenter='"+id+"'";
+						" and tc.trainingcenter = pitp.personalinformationtrainingpartnerid where to_timestamp(COALESCE(tc.trainingdate, '19900101010101'),'DD-MM-YYYY HH24:MI') > now()";// and tc.trainingcenter='"+id+"'";
 						//" WHERE log.id = "+userId;
 			System.out.println("before query");
 			Query query = session.createSQLQuery(sql);

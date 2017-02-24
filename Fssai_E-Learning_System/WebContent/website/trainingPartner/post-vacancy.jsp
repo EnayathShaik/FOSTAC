@@ -244,17 +244,19 @@ function searchVacancy(indicator){
 						</cf:select>
                         </div>
                         
-                          <div class="form-group" id="displayEndDate" style="display:none">
+                        
+                        
+                               <div class="form-group" id="displayStartDate" style="display:none">
                           <div>
                             <ul class="lab-no">
-                              <li class="style-li"><strong>Training End Date:</strong></li>
+                              <li class="style-li"><strong>Training Start Date:</strong></li>
                               <li class="style-li error-red">
-                               <label id="trainingDateError" class="error visibility">Enter End Date</label>
-                               <cf:errors path="trainingEndTime" cssclass="error"/>
+                               <label id="trainingDateError" class="error visibility">enter training date</label>
+                               <cf:errors path="trainingDate" cssclass="error"/>
                                </li>
                             </ul>
                           </div>
-                          <cf:input path="trainingEndTime" id="trainingEndTime" type="text" class="form-control" />
+                          <cf:input path="trainingDate" type="date" id="trainingStartTime"  class="form-control" />
                         </div>
                         
                       </div>
@@ -300,22 +302,22 @@ function searchVacancy(indicator){
                             </ul>
                           </div>
 						<cf:select path="trainingCenter" class="form-control" >
-						<cf:option value="0" label="Select Course Type" />
-						<cf:options items="${trainingCenterList}" itemValue="id" itemLabel="value"/>
+						<cf:option value="${triningCenter}" label="${logId}" />
+						
 						</cf:select>
                         </div>
 
-                           <div class="form-group" id="displayStartDate" style="display:none">
+                      <div class="form-group" id="displayEndDate" style="display:none">
                           <div>
                             <ul class="lab-no">
-                              <li class="style-li"><strong>Training Start Date:</strong></li>
+                              <li class="style-li"><strong>Training End Date:</strong></li>
                               <li class="style-li error-red">
-                               <label id="trainingDateError" class="error visibility">enter training date</label>
-                               <cf:errors path="trainingDate" cssclass="error"/>
+                               <label id="trainingDateError" class="error visibility">Enter End Date</label>
+                               <cf:errors path="trainingEndTime" cssclass="error"/>
                                </li>
                             </ul>
                           </div>
-                          <cf:input path="trainingDate" type="date" id="trainingStartTime"  class="form-control" />
+                          <cf:input path="trainingEndTime" id="trainingEndTime" type="text" class="form-control" />
                         </div>
                         
                         

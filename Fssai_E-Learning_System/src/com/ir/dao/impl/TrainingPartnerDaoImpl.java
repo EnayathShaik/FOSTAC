@@ -223,6 +223,30 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		return trainingCenterList;
 	}
 	
+	
+
+	@Override
+	public int getTrainingCenter(Integer userId,Integer profileId){
+		Session session = sessionFactory.getCurrentSession();
+		int trainingCenter=0;
+		StringBuffer userCondition = new StringBuffer();
+	
+		String sql="select distinct A.personalinformationtrainingpartnerid  from personalinformationtrainingpartner A " +
+				" inner join logindetails B on(A.logindetails=B.id) where logindetails='"+userId+"'";
+		
+	System.out.println(" sql "+sql);
+		Query query = session.createSQLQuery(sql);
+		List list = query.list();
+		
+			if(list.size() > 0){
+				trainingCenter = (int) list.get(0);
+				System.out.println("trainingCenter "+trainingCenter);
+			}
+		
+		return trainingCenter;
+	}
+	
+	
 	@Override
 	public List<IntStringBean> getAssessorList(){
 		Session session = sessionFactory.getCurrentSession();
@@ -274,9 +298,13 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			e.printStackTrace();
 			System.out.println("e "+e.getMessage());
 		}
-		
-		Query query = session.createQuery("from PostVacancyTrainingCenter A where to_timestamp(COALESCE(A..trainingdate, '19900101010101'),'DD-MM-YYYY') > now() AND A.requiredExp <= "+trainerExp);
-		List<PostVacancyTrainingCenter> postVacancyTrainingCenter = query.list();
+		List<PostVacancyTrainingCenter> postVacancyTrainingCenter = null;
+		try{
+		Query query = session.createQuery("from PostVacancyTrainingCenter A where  to_timestamp(COALESCE(A.trainingdate, '19900101010101'),'DD-MM-YYYY HH24:MI')  > now() AND A.requiredExp <= "+trainerExp);
+		 postVacancyTrainingCenter = query.list();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return postVacancyTrainingCenter;
 	}
 	@Override

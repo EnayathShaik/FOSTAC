@@ -73,6 +73,8 @@ public class TraineeCenterViewTraineeList extends HttpServlet {
 	
 		try{
 			trainingStartDate = n1[2].split("=")[1];
+			trainingStartDate = "%"+trainingStartDate.replaceAll("%20", " ");
+			System.out.println("trainingStartDate "+trainingStartDate);
 		}
 		catch(Exception e){
 			trainingStartDate = "%";
@@ -80,6 +82,7 @@ public class TraineeCenterViewTraineeList extends HttpServlet {
 		
 		try{
 			trainingEndDate = n1[3].split("=")[1];
+			trainingEndDate = "%"+trainingEndDate.replaceAll("%20", " ");
 		}
 		catch(Exception e){
 			trainingEndDate = "%";
@@ -94,6 +97,7 @@ public class TraineeCenterViewTraineeList extends HttpServlet {
 		
 		try{
 			assessmentDateTime = n1[5].split("=")[1];
+			assessmentDateTime = "%"+assessmentDateTime.replaceAll("%20", " ");
 		}
 		catch(Exception e){
 			assessmentDateTime = "%";
@@ -136,10 +140,10 @@ public class TraineeCenterViewTraineeList extends HttpServlet {
 					" left join ManageAssessmentAgency D on(cast(A.assessmentpartnername as numeric)=D.manageassessmentagencyid)"+
 					" left join personalInformationAssessor E on(A.assessor=E.personalinformationassessorid)"+
 					" inner join personalinformationtrainer as pitr on CAST(CAST (A.trainername AS NUMERIC(19,4)) AS INT) = pitr.personalinformationtrainerid "
-					+" where A.tcStatus is null  and  cast( B.coursetype  as varchar(10)) like '"+courseType+"%' " +
-							"and  cast(C.coursename as varchar(10)) like '"+courseName+"%' and  " +
-									"cast(A.trainingdate as varchar(10)) like '"+trainingStartDate+"%' " +
-											"and cast(A.trainingtime as varchar(10)) like '"+trainingEndDate+"%' AND to_timestamp(COALESCE(trainingdate, '19900101010101'),'DD-MM-YYYY') > now() Order By A.trainingcalendarid desc";
+					+" where A.tcStatus is null  and  cast( B.coursetypeid  as varchar(10)) like '"+courseType+"%' " +
+							"and  cast(C.coursenameid as varchar(10)) like '"+courseName+"%' and  " +
+									"cast(A.trainingdate as varchar(100)) like '"+trainingStartDate+"%' " +
+											"and cast(A.trainingtime as varchar(100)) like '"+trainingEndDate+"%' and cast(A.trainername as varchar(100)) like '"+trainer+"%'  and cast(coalesce(A.assessmentdatetime , '') as varchar(100)) like '"+assessmentDateTime+"%' and  cast(A.assessmentpartnername as varchar(100)) like '"+assessmentAgencyName+"%' and  cast(A.assessor as varchar(100)) like '"+assessorName+"%' and  cast(A.seatcapacity as varchar(100)) like '"+seatCapacity+"%'   AND to_timestamp(COALESCE(trainingdate, '19900101010101'),'DD-MM-YYYY') > now() Order By A.trainingcalendarid desc";
 		String newList=null;
 		List list = new AjaxRequest().returnList(sql);
 		System.out.println("list "+list);

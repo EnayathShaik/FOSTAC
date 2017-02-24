@@ -214,8 +214,11 @@ window.onload = OnStart;
 		var trainingStartDate = (($("#trainingStartDate").val() == 'undefined' || $("#trainingStartDate").val() == null ) ? "" : $("#trainingStartDate").val() );
 		var trainerName = ($("#selTrainerNames").val() == 0 || $("#selTrainerNames").val() == null ? "" : $("#selTrainerNames").val());
 		var trainingEndDate = (($("#trainingEndDate").val() == 'undefined' || $("#trainingEndDate").val() == null ) ? "" : $("#trainingEndDate").val() );
-
-		var total = "courseType="+courseType + "&courseName=" + courseName+ "&trainingStartDate=" + trainingStartDate + "&trainingEndDate="+ trainingEndDate+"&trainerName="+trainerName;
+		var assessmentDateTime = (($("#assessmentDateTime").val() == 'undefined' || $("#assessmentDateTime").val() == null ) ? "" : $("#assessmentDateTime").val() );
+		var assessmentAgencyName = ($("#assessmentAgencyName").val()== 0 ||  $("#assessmentAgencyName").val() == null ? "" : $("#assessmentAgencyName").val());
+		var assessorName = ($("#assessorName").val()== 0 ||  $("#assessorName").val() == null ? "" : $("#assessorName").val());
+		var seatCapacity = ($("#seatCapacity").val()== 0 ||  $("#seatCapacity").val() == null ? "" : $("#seatCapacity").val());
+		var total = "courseType="+courseType + "&courseName=" + courseName+ "&trainingStartDate=" + trainingStartDate + "&trainingEndDate="+ trainingEndDate+"&trainerName="+trainerName+"&assessmentDateTime="+assessmentDateTime+"&assessmentAgencyName="+assessmentAgencyName+"&assessorName="+assessorName+"&seatCapacity="+seatCapacity;
 		var result = "";
 		$.ajax({
 			type : 'post',

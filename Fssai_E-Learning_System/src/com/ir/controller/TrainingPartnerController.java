@@ -76,7 +76,11 @@ public class TrainingPartnerController {
 	public String postVacancy(@ModelAttribute("postVacancyTrainingCenterForm") PostVacancyTrainingCenterForm postVacancyTrainingCenterForm,HttpSession session,BindingResult result , Model model ){
 		Integer userId = (Integer) session.getAttribute("userId");
 		Integer profileId = (Integer) session.getAttribute("profileId");
+		
+		
 		List<IntStringBean> trainingCenterList = trainingPartnerService.getTrainingCenterList(userId,profileId);
+		int trainingCenter = trainingPartnerService.getTrainingCenter(userId, profileId);
+		model.addAttribute("triningCenter", trainingCenter);
 		Map<String , String> vacancyMap = lst.vacancyMap;
 		model.addAttribute("trainingCenterList" , trainingCenterList);
 		model.addAttribute("vacancyMap",vacancyMap);
@@ -385,7 +389,6 @@ public class TrainingPartnerController {
 	@RequestMapping(value="/postVacancyTrainingPartnerSave" , method=RequestMethod.POST)
 	  public String postVacancySave(@ModelAttribute("postVacancyTrainingCenterForm") PostVacancyTrainingCenterForm postVacancyTrainingCenterForm ,HttpSession session,BindingResult result ,  Model model){		
 			int loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
-			
 		String postVacancy = trainingPartnerService.postVacancyTrainingPartner(postVacancyTrainingCenterForm);
 		  if(postVacancy.equalsIgnoreCase("created")){
 			  model.addAttribute("created", "Vacancy created successfull !!!");

@@ -78,6 +78,13 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 		List<IntStringBean> trainingCenterList = trainingPartnerDAO.getTrainingCenterList(userId,profileId);
 		return trainingCenterList;
 	}
+	//getTrainingCenter
+	@Override
+	public int getTrainingCenter(Integer userId,Integer profileId) {
+		System.out.println("TrainingPartnerServiceImpl");
+		int trainingCenter = trainingPartnerDAO.getTrainingCenter(userId,profileId);
+		return trainingCenter;
+	}
 	@Override
 	public List<IntStringBean> getAssessorList() {
 		System.out.println("TrainingPartnerServiceImpl");

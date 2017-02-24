@@ -49,6 +49,10 @@ public interface TrainingPartnerService {
 	@Transactional
 	public List<IntStringBean> getTrainingCenterList(Integer userId,Integer profileId);
 	
+	//getTrainingCenter
+	@Transactional
+	public int getTrainingCenter(Integer userId,Integer profileId);
+	
 	@Transactional
 	public List<IntStringBean> getAssessorList();
 	
