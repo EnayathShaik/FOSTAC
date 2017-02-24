@@ -67,11 +67,11 @@ public class SearchAssessorCalendar extends HttpServlet {
 				String sql = "select B.coursecode,A.trainingdate, "
 						+ "concat(C.trainingpartnerpermanentline1, ', ', C.trainingpartnerpermanentline2, ' -', dt.districtname) as address, "
 						+ "(select count(1) from courseenrolleduser where trainingcalendarid=A.trainingcalendarid) "
-						+ " ,A.batchCode, A.assessmentdate "
+						+ " ,A.batchCode, A.assessmentdatetime "
 						+ "from trainingcalendar A "
 						+ "inner join coursename B on(A.coursename=B.coursenameid) "
 						+ "inner join personalinformationtrainingpartner C on(A.trainingcenter=C.personalinformationtrainingpartnerid) "
-						+ "inner join district dt on dt.districtid = C.trainingpartnerpermanentdistrict where A.assessor= '"+id+"'";
+						+ "inner join district dt on dt.districtid = C.trainingpartnerpermanentdistrict where to_timestamp(COALESCE(A.assessmentdatetime, '19900101010101'),'DD-MM-YYYY') > now() AND A.assessor= '"+id+"'";
 			
 					Query query = session.createSQLQuery(sql);
 					List list = query.list();

@@ -275,7 +275,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			System.out.println("e "+e.getMessage());
 		}
 		
-		Query query = session.createQuery("from PostVacancyTrainingCenter A where A.requiredExp <= "+trainerExp);
+		Query query = session.createQuery("from PostVacancyTrainingCenter A where to_timestamp(COALESCE(A..trainingdate, '19900101010101'),'DD-MM-YYYY') > now() AND A.requiredExp <= "+trainerExp);
 		List<PostVacancyTrainingCenter> postVacancyTrainingCenter = query.list();
 		return postVacancyTrainingCenter;
 	}
@@ -380,7 +380,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		Session session = sessionFactory.getCurrentSession();
 		//String sql="select coursetype,coursename,trainingdate,noofvacancy,loginid from trainingcentervacancyenrolled tcev";
 		StringBuffer sqlBuffer = new StringBuffer();
-		sqlBuffer.append("select B.coursetypeid,C.coursenameid,A.trainingdate,A.noofvacancy,");
+		sqlBuffer.append("select B.coursetypeid,C.coursenameid,A.trainingdatetime,A.noofvacancy,");
 		sqlBuffer.append("A.postvacancytrainingcenterid, (select count(1) from trainingcentervacancyenrolled AA where AA.postvacancyid = A.postvacancytrainingcenterid)");
 		sqlBuffer.append(" ,A.trainingdate,A.trainingendtime");
 		sqlBuffer.append(" from postvacancytrainingcenter A");
