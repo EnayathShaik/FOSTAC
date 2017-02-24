@@ -35,8 +35,7 @@ public class AssessmentAgencyDaoImpl implements AssessmentAgencyDao {
 		SendContectMail traineeMaail=null;
 		 traineeMaail = new SendContectMail();
 			
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		ContactTraineee contactTrainerModel = new ContactTraineee();
 		String email=contactTrainee.getEmailAddress();
 		String msg=contactTrainee.getMessageDetails();
@@ -49,8 +48,6 @@ public class AssessmentAgencyDaoImpl implements AssessmentAgencyDao {
 		contactTrainerModel.setUserId(id);
 		Integer contactTrainerModelId = (Integer) session.save(contactTrainerModel);
 		System.out.println("contactTraineeSave after save");
-		tx.commit();
-		session.close();
 		if(contactTrainerModelId >0 && contactTrainerModelId != null){
 			return "created";
 		}else{
@@ -70,13 +67,12 @@ public class AssessmentAgencyDaoImpl implements AssessmentAgencyDao {
 	
 	@Override
 	public AssessmentAgencyForm getAssessmentAgencyForm(int agencyLoginId){
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		AssessmentAgencyForm agencyForm = new AssessmentAgencyForm(); 
 		String qry = "select mag.manageassessmentagencyid from manageassessmentagency mag "
 				+ "where mag.logindetails = "+agencyLoginId;
 		Query query = session.createSQLQuery(qry);
 		List<Object[]> agencyDataForm =(List<Object[]>) query.list();
-		session.close();
 		if(agencyForm != null && agencyDataForm.size() >0){
 			for(int i =0 ; i<agencyDataForm.size(); i++){
 				Object o = agencyDataForm.get(0);

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -103,31 +105,28 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public City getCity(int id){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		City cc = (City)s.load(City.class, id);
-		s.close();
 		return cc;
 	}
 	@Override
 	public District getDistrict(int id){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		District dd = (District)s.load(District.class, id);
-		s.close();
 		return dd;
 	}
+	@Transactional
 	@Override
 	public CourseType getCourseType(int id){
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		CourseType ct = (CourseType)session.load(CourseType.class, id);
-		session.close();
 		return  ct;
 		
 	}
 	@Override
 	public CourseName getCourseName(int id){
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		CourseName cn = (CourseName)session.load(CourseName.class, id);
-		session.close();
 		return cn;
 		
 	}
@@ -371,8 +370,7 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public String manageTrainingPartnerSave(ManageTrainingPartnerForm manageTrainingPartnerForm) {
-		Session session = sessionFactory.openSession();
-		Transaction transaction=session.beginTransaction(); 
+		Session session = sessionFactory.getCurrentSession();
 		PasswordGenerator passwordGenerator = new PasswordGenerator(6);
 		char[] pass = passwordGenerator.get();
 		String passwordString = String.valueOf(pass);
@@ -419,13 +417,10 @@ public class AdminDAOImpl implements AdminDAO {
 		Integer manageTrainingPartnerIdd = (Integer)session.save(manageTrainingPartner);
 		
 		System.out.println("all insert done");
-		transaction.commit();
-		session.close();
 		System.out.println("saved login "+ manageTrainingPartnerIdd);
 		if(manageTrainingPartnerIdd  != 0){
 			SendMail sendMail = new SendMail();
 			sendMail.mailProperty(passwordString, manageTrainingPartnerForm.getEmail(), manageTrainingPartnerForm.getTrainingPartnerName()+ " " + manageTrainingPartnerForm.getUserId());
-
 			return passwordString+"&"+nextSequenceUserID;
 		}else{
 			return passwordString+"&"+nextSequenceUserID;

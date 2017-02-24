@@ -37,16 +37,15 @@ public class AssessmentDaoImpl implements AssessmentDao{
 //		criteria.add(Restrictions.eq("courseName", courseName));
 //		criteria.add(Restrictions.eq("courseType", courseType));
 //		List <AssessmentQuestion> listAssessmentQuestions = criteria.list();
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 //		Query query = session.createQuery("from AssessmentQuestion where coursename = "+ courseName +" and courseType= "+courseType);
 		Query query = session.createQuery("from AssessmentQuestion where coursename = "+ courseName);
 		List<AssessmentQuestion> assessmentQuestions = query.list();
-		session.close();
 		return assessmentQuestions;
 	}
 
 	public String saveAssessment(List<AssessmentAnswerCriteria> answerCriterias){
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Transaction transaction=session.beginTransaction(); 
 		try{
 		for(int i= 0; i<answerCriterias.size(); i++){
@@ -54,9 +53,8 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		}
 		transaction.commit();
 		}catch(Exception e){
-			
+			e.printStackTrace();
 		}finally{
-			session.close();
 		}
 		
 		return "Success";
@@ -64,17 +62,14 @@ public class AssessmentDaoImpl implements AssessmentDao{
 	
 	@Override
 	public List<CourseType> courseTypes() {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from CourseType");
 		List<CourseType> courseTypeList = query.list();
-		session.close();
 		return courseTypeList;
 	}
 	@Override
 	public List<IntStringBean> getTrainingPartners(int assessorId){
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		List<IntStringBean> trainingPartnerList = new ArrayList<IntStringBean>();
 		String strQuery = "select pit.personalinformationtrainingpartnerid, pit.trainingcentrename "
 				+ "from personalinformationassessor pia "
@@ -88,7 +83,6 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		//List tpList = query.list();
 		List<Object[]> tpList =(List<Object[]>) query.list();
 		if(tpList != null && tpList.size() >0){
-			session.close();
 			for(int i =0 ; i<tpList.size(); i++){
 				
 				IntStringBean tc = new IntStringBean();
@@ -103,30 +97,26 @@ public class AssessmentDaoImpl implements AssessmentDao{
 
 	@Override
 	public List<AssessmentQuestion> getAssessmentAnswers(int courseType, List<Integer> questions) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String questionIds = questions.toString();
 		if(questionIds.length() >2){
 			questionIds = questionIds.substring(1,questionIds.length()-1);
 		}
 		Query query = session.createQuery("from AssessmentQuestion where coursename = "+ courseType +" and assessmentquestionid in ("+questionIds+")");
 		List<AssessmentQuestion> listAssessmentQuestions = query.list();
-		session.close();
 		
 		return listAssessmentQuestions;
 	}
 	@Override
 	public int saveTraineeAssessmentEvaluation(TraineeAssessmentEvaluation traineeAssessmentEvaluation){
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		Integer traineeAssessmentEvaluationId = (Integer) session.save(traineeAssessmentEvaluation);
-		tx.commit();
-		session.close();
 		return traineeAssessmentEvaluationId;
 	}
 
 	@Override
 	public int getElegibilityForAssessment(int coursenameid){
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql = "select eligibility from assessmenteligibility where coursenameid="+coursenameid;
 		Query query = session.createSQLQuery(sql);
 		List listEligibility = query.list();

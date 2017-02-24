@@ -34,10 +34,9 @@ public class PageLoadDaoImpl implements PageLoadDao {
 	@Override
 	public List<State> loadState() {
 		System.out.println("Page Load DAOImpl process start in state");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from State where status = 'A'");
 		List listState = query.list();
-		session.close();
 		System.out.println("state list dao     :"+ listState);
 		// TODO Auto-generated method stub
 		return listState;
@@ -47,11 +46,10 @@ public class PageLoadDaoImpl implements PageLoadDao {
 	@Override
 	public List<City> loadCity() {
 		System.out.println("Page Load DAOImpl process start in city ");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		//Query query = session.createQuery("Select cityid , cityname from City where stateid = "+ stat);
 		Query query = session.createQuery("from City  where status = 'A'");
 		List listCity = query.list();
-		session.close();
 		System.out.println("city  ************* list dao     :"+ listCity);
 		return listCity;
 	}	
@@ -60,10 +58,9 @@ public class PageLoadDaoImpl implements PageLoadDao {
 	@Override
 	public List<Title> loadTitle() {
 		System.out.println("Page Load DAOImpl process start in title ");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from Title");
 		List titleList = query.list();
-		session.close();
 		System.out.println("title  ************* list dao     :"+ titleList);
 		return titleList;
 	}
@@ -72,10 +69,9 @@ public class PageLoadDaoImpl implements PageLoadDao {
 	@Override
 	public List<KindOfBusiness> loadKindOfBusiness() {
 		System.out.println("Page Load DAOImpl process start in KindOfBusinessList ");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from KindOfBusiness");
 		List KindOfBusinessList = query.list();
-		session.close();
 		System.out.println("business  ************* list dao     :"+ KindOfBusinessList);
 		return KindOfBusinessList;
 	}
@@ -85,10 +81,9 @@ public class PageLoadDaoImpl implements PageLoadDao {
 	public List<CourseName> loadCourseName() {
 		// TODO Auto-generated method stub
 		System.out.println("Page Load DAOImpl process start in course name ");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from CourseName  where status = 'A'");
 		List courseNameList = query.list();
-		session.close();
 		System.out.println("CourseName  ************* list dao     :"+ courseNameList);
 		return courseNameList;
 	}
@@ -98,11 +93,10 @@ public class PageLoadDaoImpl implements PageLoadDao {
 	public List<com.ir.model.District> District() {
 		// TODO Auto-generated method stub
 		System.out.println("Page Load DAOImpl process start in district name ");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from District where status = 'A'");
 		//Query query = session.createQuery("select districtId , districtName from District");
 		List districtList = query.list();
-		session.close();
 		System.out.println("district  ************* list dao     :"+ districtList);
 		return districtList;
 	}
@@ -112,10 +106,9 @@ public class PageLoadDaoImpl implements PageLoadDao {
 	public List<CourseName> basicCourseName() {
 		// TODO Auto-generated method stub
 		System.out.println("Page Load DAOImpl process start in basicCourseName  ");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from CourseName where coursetypeid=1 ");
 		List basicCourseName = query.list();
-		session.close();
 		System.out.println("CourseName  ************* list dao     :"+ basicCourseName);
 		return basicCourseName;
 	}
@@ -125,10 +118,9 @@ public class PageLoadDaoImpl implements PageLoadDao {
 	public List<CourseName> advanceCourseName() {
 		// TODO Auto-generated method stub
 		System.out.println("Page Load DAOImpl process start in advanceCourseName  ");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from CourseName where coursetypeid=2 ");
 		List advanceCourseName = query.list();
-		session.close();
 		System.out.println("CourseName  ************* list dao     :"+ advanceCourseName);
 		return advanceCourseName;
 	}
@@ -138,10 +130,9 @@ public class PageLoadDaoImpl implements PageLoadDao {
 	public List<CourseName> specialCourseList() {
 		// TODO Auto-generated method stub
 		System.out.println("Page Load DAOImpl process start in specialCourseList  ");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from CourseName where coursetypeid=3 ");
 		List specialCourseList = query.list();
-		session.close();
 		System.out.println("CourseName  ************* list dao     :"+ specialCourseList);
 		return specialCourseList;
 
@@ -150,35 +141,32 @@ public class PageLoadDaoImpl implements PageLoadDao {
 
 	@Override
 	public List<ManageTrainingPartner> tpList() {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from ManageTrainingPartner");
 		List<ManageTrainingPartner> tpList = query.list();
-		session.close();
 		return tpList;
 	}
 
 
 	@Override
 	public List<ManageAssessmentAgency> aaList() {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from ManageAssessmentAgency");
 		List<ManageAssessmentAgency> aaList = query.list();
-		session.close();
 		return aaList;
 	}
 
 
 	@Override
 	public List basicCourseList() {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from ManageAssessmentAgency");
 		List basicCourseList = query.list();
-		session.close();
 		return basicCourseList;
 	}
 	@Override
 	public List<CourseName> getCouserNameList(int coursetypeid) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createSQLQuery("select coursename,courseduration,coursenameid from coursename where online ='Online' and status='A' and coursetypeid="+coursetypeid);
 		List<Object[]> courseNameList = query.list();
 		List<CourseName> courseNames=new ArrayList<>();
@@ -190,21 +178,19 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			courseName.setCoursenameid(Integer.parseInt(objects[2].toString()));
 			courseNames.add(courseName);
 		}
-		session.close();
 		return courseNames;
 	}
 	@Override
 	public List<String> getTrainingPartnerNameList() {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql="select trainingpartnername from ManageTrainingPartner";
 		Query query = session.createSQLQuery(sql);
 		List<String> trainingPartnerNameList = query.list();
-		session.close();
 		return trainingPartnerNameList;
 	}
 	@Override
 	public List<ManageCourseContent> getManageCourseContentList(int coursetypeid) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createSQLQuery("select contentnameinput,contentlinkinput,contenttypeinput from managecoursecontent  where coursetypeinput="+coursetypeid);
 		List<ManageCourseContent> manageCourseContents =new ArrayList<>();
 		List<Object[]> manageCourseObjArrContents = query.list();
@@ -216,14 +202,13 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			manageCourseContent.setContentTypeInput(mangeCntObArr[2].toString());
 			manageCourseContents.add(manageCourseContent);
 		}
-		session.close();
 		return manageCourseContents;
 	}
 
 
 	@Override
 	public List<IntStringBean> getTrainingPartnerList(int courseTypeId) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createSQLQuery("select mtp.managetrainingpartnerid,mtp.trainingpartnername from trainingcalendar tc inner join managetrainingpartner mtp on mtp.managetrainingpartnerid=tc.trainingpartner and tc.coursetype="+courseTypeId);
 		List<IntStringBean> mangeTrainingPartnerList =new ArrayList<>();
 		List<Object[]> mangeTrainingObjPartnerList = query.list();
@@ -234,14 +219,13 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			manageCourseContent.setValue(mangeCntObArr[1].toString());
 			mangeTrainingPartnerList.add(manageCourseContent);
 		}
-		session.close();
 		return mangeTrainingPartnerList;
 	}
 
 
 	@Override
 	public List<Object[]> loadTrainingDetails(Utility utility) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql="select cn.coursename,mtp.trainingpartnername,"
 				+ "concat(pitp.trainingpartnerpermanentline1,' , ',pitp.trainingpartnerpermanentline2,',pin : ',pitp.trainingpartnerpermanentpincode,',phone : ',pitp.trainingpartnerpermanentmobile),"
 				+ "pitp.seatcapacityavailable from trainingcalendar tc inner join managetrainingpartner mtp on mtp.managetrainingpartnerid=tc.trainingpartner"
@@ -251,7 +235,6 @@ public class PageLoadDaoImpl implements PageLoadDao {
 				+ "and mtp.state="+utility.getStateId()+" and mtp.managetrainingpartnerid="+utility.getTrainingCenterId();
 		Query query = session.createSQLQuery(sql);
 		List<Object[]> trainingCalendarList = query.list();
-		session.close();
 		return trainingCalendarList;
 	}
 	
@@ -262,6 +245,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 	        auserTypeMap.put("ST", "ST");
 	        auserTypeMap.put("SC", "SC");
 	        auserTypeMap.put("OBC", "OBC");
+	        auserTypeMap.put("GENERAL", "GENERAL");
 	        return Collections.unmodifiableMap(auserTypeMap);
 	    }
 	  

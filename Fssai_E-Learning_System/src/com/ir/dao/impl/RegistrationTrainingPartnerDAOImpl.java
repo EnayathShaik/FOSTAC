@@ -57,32 +57,28 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 	
 	@Override
 	public PersonalInformationTrainingPartner getPersonalInformationTrainingPartner(int id){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		PersonalInformationTrainingPartner personalInformationTrainingPartner = (PersonalInformationTrainingPartner)s.load(PersonalInformationTrainingPartner.class, id);
-		s.close();
 		return personalInformationTrainingPartner;
 	}
 	
 	@Override
 	public CourseType getCourseType(int id){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		CourseType courseType = (CourseType)s.load(CourseType.class, id);
-		s.close();
 		return courseType;
 	}
 	@Override
 	public LoginDetails getLoginDetails(String string){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		LoginDetails loginDetails = (LoginDetails)s.load(LoginDetails.class, string);
-		s.close();
 		return loginDetails;
 	}
 	
 	@Override
 	public CourseName getCourseName(int id){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		CourseName courseName = (CourseName)s.load(CourseName.class, id);
-		s.close();
 		return courseName;
 	}
 		
@@ -94,10 +90,9 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 
 	@Override
 	public List<State> loadState() {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from State  where status = 'A'");
 		List listState = query.list();
-		session.close();
 		System.out.println("state list dao     :"+ listState);
 		// TODO Auto-generated method stub
 		return listState;
@@ -110,40 +105,36 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 
 	@Override
 	public List<Title> loadTitle() {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from Title");
 		List titleList = query.list();
-		session.close();
 		return titleList;
 	}
 
 	@Override
 	public List<CourseName> basicCourseName() {
 		// TODO Auto-generated method stub
-				Session session = sessionFactory.openSession();
+				Session session = sessionFactory.getCurrentSession();
 				String sql = "select ct.coursetypeid ,cn.coursename , cn.coursenameid from coursename as cn inner join coursetype as ct"+
 						" on ct.coursetypeid = cn.coursetypeid";
 				
 				Query query = session.createSQLQuery(sql);
 				List courseNameList = query.list();
-				session.close();
 				return courseNameList;
 	}
 
 	@Override
 	public List<ManageTrainingPartner> trainingPartnerNameList() {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from ManageTrainingPartner");
 		List<ManageTrainingPartner> trainingPartnerNameList = query.list();
-		session.close();
 		return trainingPartnerNameList;
 	}
 
 	@Override
 	public String registerTrainingPartner(RegistrationFormTrainingPartner registrationFormTrainingPartner) {
 		int personalInformationTrainingPartnerIdd = 0;
-		Session session = sessionFactory.openSession();
-		Transaction transaction= session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		String passwordString = null;
 		try{
 			PasswordGenerator passwordGenerator = new PasswordGenerator(6);
@@ -216,14 +207,11 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 		
 		try{
 			personalInformationTrainingPartnerIdd = (Integer) session.save(personalInformationTrainingPartner);
-			transaction.commit();
-			session.close();
 		}catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Oops !!");
 		}
-		Session session1 = sessionFactory.openSession();
-		Transaction transaction1= session1.beginTransaction();
+		Session session1 = sessionFactory.getCurrentSession();
 		try{
 			String BasicCourse = registrationFormTrainingPartner.getBasicCourse1();
 			if(BasicCourse.length() > 0){
@@ -271,8 +259,6 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 			System.out.println("Oops !! course basic");
 		}
 		System.out.println("all insert done");
-		transaction1.commit();
-		session1.close();
 		if(personalInformationTrainingPartnerIdd > 0){
 			SendMail sendMail = new SendMail();
 			sendMail.mailProperty(passwordString, registrationFormTrainingPartner.getTrainingPartnerPermanentEmail(), registrationFormTrainingPartner.getFirstName()+ " " + registrationFormTrainingPartner.getLastName());
@@ -287,15 +273,14 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 
 	@Override
 	public List<ManageTrainingPartner> trainingCenterList() {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from ManageTrainingPartner");
 		List<ManageTrainingPartner> trainingCenterList = query.list();
-		session.close();
 		return trainingCenterList;
 	}	
 	@Override
 	public String updatetrainingPartner(RegistrationFormTrainingPartner registrationFormTrainingPartner, Integer id) {
-		Session s=sessionFactory.openSession();
+		Session s=sessionFactory.getCurrentSession();
 		
 		PersonalInformationTrainingPartner personalInformationTrainingPartner=(PersonalInformationTrainingPartner) s.load(PersonalInformationTrainingPartner.class,id);
 		
@@ -326,8 +311,6 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 		personalInformationTrainingPartner.setFacilityOfWashroom(registrationFormTrainingPartner.getFacilityOfWashroom());
 		personalInformationTrainingPartner.setAvailabiltyOfInHouseTrainersInFoodSafety(registrationFormTrainingPartner.getAvailabiltyOfInHouseTrainersInFoodSafety());		
 		s.update(personalInformationTrainingPartner);
-		s.beginTransaction().commit();
-		s.close();
 		return "updated";
 		
 	}
@@ -362,8 +345,7 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 		SendContectMail traineeMaail=null;
 		 traineeMaail = new SendContectMail();
 			
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		ContactTraineee contactTrainerModel = new ContactTraineee();
 		String email=contactTrainee.getEmailAddress();
 		String msg=contactTrainee.getMessageDetails();
@@ -374,8 +356,6 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 		contactTrainerModel.setUserId(id);
 		Integer contactTrainerModelId = (Integer) session.save(contactTrainerModel);
 		System.out.println("contactTraineeSave after save");
-		tx.commit();
-		session.close();
 		if(contactTrainerModelId >0 && contactTrainerModelId != null){
 			return "created";
 		}else{
@@ -386,7 +366,7 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 	@Override
 	public String postVacancyTrainingCenter(PostVacancyTrainingCenterForm postVacancyTrainingCenterForm) {
 		Integer postVacancyTrainingCenterIdd ;
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		PersonalInformationTrainingPartner p = getPersonalInformationTrainingPartner(postVacancyTrainingCenterForm.getTrainingCenter());
 		
 		System.out.println("hkhkhk");
@@ -394,10 +374,8 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 		Query query = session.createSQLQuery(sql);
 		List l = query.list();
 		if(l != null && l.size() > 0){
-			session.close();
 			return "error";
 		}else{
-			session.flush();
 			CourseType ct = getCourseType(postVacancyTrainingCenterForm.getCourseType());
 			CourseName cn = getCourseName(postVacancyTrainingCenterForm.getCourseName());
 			//LoginDetails loginDetails = loginDetails.setLoginId(postVacancyTrainingCenterForm.getLoginId());
@@ -410,8 +388,6 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 			postVacancyTrainingCenter.setTrainingCenter(p);
 			postVacancyTrainingCenterIdd = (Integer) session.save(postVacancyTrainingCenter);
 			System.out.println("post Vacancy TrainingCenter after save");
-			session.beginTransaction().commit();
-			session.close();
 			if(postVacancyTrainingCenterIdd >0 && postVacancyTrainingCenterIdd != null){
 				return "created";
 			}else{
@@ -423,22 +399,18 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 
 	@Override
 	public List<CourseName> courseNameList() {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from CourseName");
 		List<CourseName> courseNameList = query.list();
-		session.close();
 		return courseNameList;
 	}
 
 
 	@Override
 	public List<CourseType> courseTypeList() {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from CourseType");
 		List<CourseType> courseTypeList = query.list();
-		session.close();
 		return courseTypeList;
 	}
 		@Override
@@ -459,7 +431,7 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 		@Override
 		public PersonalInformationTrainingPartner fulldetailtainingpartner(int id) {
 			System.out.println("LogintrainerpartnerDAOImpl full detail process start ");
-			Session session = sessionFactory.openSession();
+			Session session = sessionFactory.getCurrentSession();
 			Integer i = id;
 			
 			Query query = session.createQuery("from PersonalInformationTrainingPartner where loginDetails = '"+ i +"'");
@@ -469,7 +441,6 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 			for(PersonalInformationTrainingPartner personalInformationTrainingPartner:list1){
 				personalInformationTrainingPartner11=personalInformationTrainingPartner;
 			}
-			//session.close();
 			return personalInformationTrainingPartner11;
 		}
 	// rishi

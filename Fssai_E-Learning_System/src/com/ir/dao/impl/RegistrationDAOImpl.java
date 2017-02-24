@@ -109,13 +109,10 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 		System.out.println("RegistrationDAOImpl [register] begin ");
 		Integer userId=null;
 		try{
-		Session session = sessionFactory.openSession();
-		Transaction transaction=session.beginTransaction(); 
+		Session session = sessionFactory.getCurrentSession();
 		System.out.println("state " +registrationFormTrainee.getResState());
 		userId = (Integer)session.save(registrationFormTrainee);
 		//registerTraineeInformationFull.setUserId(userId);
-		transaction.commit();
-		session.close();
 		System.out.println("savedPerson "+userId);
 		}catch(HibernateException he){
 			
@@ -136,29 +133,18 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 		String ret = "";
 		List list = null;
 		try{
-			Session session = sessionFactory.openSession();
+			Session session = sessionFactory.getCurrentSession();
 			String sqlQuery = "select password from personalinformationtrainee where userid = " + registrationFormTrainee.getUserId() + " ";
 			String newList=null;
-			Transaction transaction = null;
 			try {       
-		        transaction = session.beginTransaction();
 		        System.out.println("sqlQuery "+sqlQuery);
 				Query query = session.createSQLQuery(sqlQuery);
 				list = query.list();
-		        transaction.commit();
 		    }
 		    catch(Exception re){
-		        transaction.rollback();
+		    	re.printStackTrace();
 		    }
-		    finally {
-		        if(session != null){
-		            Transaction tran = session.getTransaction();
-		            if(tran != null && tran.isActive() && !tran.wasCommitted() && tran.wasRolledBack()){
-		                tran.rollback();
-		            }
-		            session.close();
-		        }
-		    }
+		    finally {}
 			if(list.size() > 0){
 				System.out.println("not available to use");
 				ret = "already";
@@ -212,8 +198,7 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 	public String registerPersonalInformationTrainee(
 			RegistrationFormTrainee registrationFormTrainee) {
 		System.out.println("RegistrationDAOImpl [register] begin for registration trainee");
-		Session session = sessionFactory.openSession();
-		Transaction transaction=session.beginTransaction(); 
+		Session session = sessionFactory.getCurrentSession();
 		
 		State ps = getState(registrationFormTrainee.getResState()); 
 		State cs = getState(registrationFormTrainee.getCorrespondenceState());
@@ -345,8 +330,6 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 		Integer personalInformationTraineeId = (Integer)session.save(personalInformationTrainee);
 		
 		System.out.println("all insert done");
-		transaction.commit();
-		session.close();
 		System.out.println("saved login "+ personalInformationTraineeId);
 		if(personalInformationTraineeId  != 0){
 			/*SendMail sendMail = new SendMail();

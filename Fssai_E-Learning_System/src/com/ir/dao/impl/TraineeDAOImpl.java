@@ -1,22 +1,16 @@
 package com.ir.dao.impl;
 
-import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import org.apache.commons.lang.StringUtils;
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-
 import com.ir.constantes.Constantes;
 import com.ir.constantes.TableLink;
 import com.ir.dao.AdminDAO;
@@ -43,10 +37,10 @@ import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.model.TrainingCalendar;
-import com.ir.model.TrainingStatus;
 import com.ir.model.Utility;
 import com.ir.util.ChangePasswordUtility;
 import com.ir.util.SendContectMail;
+
 
 public class TraineeDAOImpl implements TraineeDAO {
 
@@ -83,41 +77,36 @@ public class TraineeDAOImpl implements TraineeDAO {
 
 	@Override
 	public KindOfBusiness getKid(int id) {
-		Session ss = sessionFactory.openSession();
+		Session ss = sessionFactory.getCurrentSession();
 		KindOfBusiness kid = (KindOfBusiness) ss.load(KindOfBusiness.class, id);
-		ss.close();
 		return kid;
 	}
 
 	@Override
 	public State getState(int id) {
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		State ss = (State) s.load(State.class, id);
-		s.close();
 		return ss;
 	}
 
 	@Override
 	public City getCity(int id) {
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		City cc = (City) s.load(City.class, id);
-		s.close();
 		return cc;
 	}
 
 	@Override
 	public District getDistrict(int id) {
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		District dd = (District) s.load(District.class, id);
-		s.close();
 		return dd;
 	}
 
 	@Override
 	public Title getTitle(int id) {
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		Title tt = (Title) s.load(Title.class, id);
-		s.close();
 		return tt;
 	}
 
@@ -125,8 +114,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 	@Override
 	public String contactTraineeSave(ContactTrainee contactTrainee, String id) {
 		SendContectMail traineeMaail = new SendContectMail();
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		ContactTraineee contactTraineeModel = new ContactTraineee();
 		String email = contactTrainee.getEmailAddress();
 		String msg = contactTrainee.getMessageDetails();
@@ -143,8 +131,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 		
 		Integer contactTraineeModelId = (Integer) session
 				.save(contactTraineeModel);
-		tx.commit();
-		session.close();
 		if (contactTraineeModelId > 0 && contactTraineeModelId != null) {
 			return "created";
 		} else {
@@ -154,8 +140,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 
 	@Override
 	public List<CourseName> courseNameList() {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		List<CourseName> courseNameList = null;
 		try{
 			Query query = session
@@ -165,26 +150,22 @@ public class TraineeDAOImpl implements TraineeDAO {
 			e.printStackTrace();
 		}
 		
-		session.close();
 		return courseNameList;
 	}
 
 	@Override
 	public List<CourseName> courseNameListByType(int courseType) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session
 				.createQuery("from CourseName where coursetypeid = "
 						+ courseType);
 		List<CourseName> courseNameList = query.list();
-		session.close();
 		return courseNameList;
 	}
 
 	@Override
 	public CourseTrainee getCourseTrainingByCourseTypeID(int typeId) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		CourseTrainee courseTrainee = new CourseTrainee();
 		StringBuffer sql = new StringBuffer();
 		sql.append("Select D.coursenameid,D.coursename,D.courseduration ");
@@ -203,7 +184,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 		*/
 		Query query = session.createSQLQuery(sql.toString());
 		List<Object[]> courseTraineeList = (List<Object[]>) query.list();
-		session.close();
 		if (courseTraineeList.size() > 0) {
 			Object[] o = courseTraineeList.get(0);
 			courseTrainee.setCourseNameID(o[0] == null ? "" : o[0].toString());
@@ -226,7 +206,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 	@Override
 	public CourseName getCourseName(int loginId) {
 		CourseName courseName = new CourseName();
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		// String
 		// sql="select cn.coursename, ce.coursenameid, cn.courseduration "
 		// + "from courseenrolled ce "
@@ -239,7 +219,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 				+ loginId;
 		Query query = session.createSQLQuery(sql);
 		List<Object[]> courseNameList = (List<Object[]>) query.list();
-		session.close();
 		if (courseNameList.size() > 0) {
 			Object[] o = courseNameList.get(0);
 			courseName.setCoursename(o[0].toString());
@@ -255,13 +234,12 @@ public class TraineeDAOImpl implements TraineeDAO {
 	@Override
 	public CourseName getCourseDetails(int loginId) {
 		CourseName courseName = new CourseName();
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql = "select cn.coursename,cn.coursenameid,cn.courseduration from coursename cn,courseenrolled cnrld where cn.coursenameid=cnrld.coursenameid and cnrld.logindetails="
 				+ loginId;
 		
 		Query query = session.createSQLQuery(sql);
 		List<Object[]> courseNameList = (List<Object[]>) query.list();
-		session.close();
 		if (courseNameList.size() > 0) {
 			Object[] o = courseNameList.get(0);
 			courseName.setCoursename(o[0].toString());
@@ -276,7 +254,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 
 	@Override
 	public List<FeedbackMaster> getFeedMasterList(int profileId) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String profile = "";
 		if (profileId == 3) {
 			profile = Constantes.TRAINEE_LABEL;
@@ -288,25 +266,21 @@ public class TraineeDAOImpl implements TraineeDAO {
 				.createSQLQuery("select feedbacktypeid,feedback from feedbackmaster where upper(coursetype)='"
 						+ profile + "'");
 		List<FeedbackMaster> feedbackMasters = query.list();
-		session.close();
 		return feedbackMasters;
 	}
 
 	@Override
 	public List<ManageTrainingPartner> trainingPartnerList() {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from ManageTrainingPartner");
 		List<ManageTrainingPartner> trainingPartnerList = query.list();
-		session.close();
 		return trainingPartnerList;
 	}
 
 	@Override
 	public List<State> trainingCenterStateList() {
 		List<State> st = null;
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		String sql = "select s.stateid, s.statename  from  state as s  "
 				+ " inner join personalinformationtrainingpartner as pitp on pitp.trainingpartnerpermanentstate = s.stateid "
 				+ " inner join managetrainingpartner as mtp on mtp.managetrainingpartnerid  = pitp.trainingpartnername  ";
@@ -322,7 +296,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 			st.add(stt);
 
 		}
-		session.close();
 		System.out.println(st);
 		return st;
 	}
@@ -331,7 +304,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public String updateTrainee(
 			RegistrationFormTrainee registrationFormTrainee, Integer ss) {
 
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 
 		System.out.println("iddddd  " + ss);
 		State ps = getState(registrationFormTrainee.getResState());
@@ -506,9 +479,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 		// session.createQuery("update com. ir.model.PersonalInformationTrainee set title='"+personalInformationTrainee.getTitle()+"', Email='"+personalInformationTrainee.getEmail()+"' ");
 
 		session.update(personalInformationTrainee);
-		session.beginTransaction().commit();
-
-		session.close();
 		return null;
 	}
 
@@ -550,7 +520,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 			int loginid, int tableID, Integer profileID) {
 
 		System.out.println("course enrolled");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 		int maxId = 0 ;
 		String sql = "select max(rollseqNo) + 1 from courseenrolleduser";
@@ -584,7 +554,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 		session.beginTransaction().commit();
 		if (ce != null && ce.intValue() > 0) {
 		}
-		session.close();
 		return rollNo;
 	}
 
@@ -593,7 +562,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 			CourseEnrolledUserForm courseEnrolledUserForm, int loginid,
 			int tableID, Integer profileID) {
 		System.out.println("course enrolled");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 		long date = System.currentTimeMillis();
 		System.out.println("roll nu  :" + date);
@@ -618,10 +587,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 		}
 		// Integer ce =0;
 		Integer ce = (Integer) session.save(courseEnrolledUser);
-		session.beginTransaction().commit();
-		if (ce != null && ce.intValue() > 0) {
-		}
-		session.close();
 		return date;
 	}
 
@@ -629,7 +594,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public long specialTraineeSave(
 			CourseEnrolledUserForm courseEnrolledUserForm, int loginid,
 			int tableID, Integer profileID) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 		long date = System.currentTimeMillis();
 		System.out.println("roll nu  :" + date);
@@ -655,10 +620,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 
 		// Integer ce =0;
 		Integer ce = (Integer) session.save(courseEnrolledUser);
-		session.beginTransaction().commit();
-		if (ce != null && ce.intValue() > 0) {
-		}
-		session.close();
 		return date;
 	}
 
@@ -723,14 +684,12 @@ public class TraineeDAOImpl implements TraineeDAO {
 		AdmitCardForm admitcard = new AdmitCardForm();
 		try {
 		System.out.println("&&&&&&&&&&&&&&&&&& = "+str_query);
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		
 		Query query = session.createSQLQuery(str_query);
 		// List records = query.list();
 		List<Object[]> records = (List<Object[]>) query.list();
 		System.out.println("records == : "+records);
-		session.close();
 		
 			if (records.size() > 0) {
 
@@ -784,16 +743,15 @@ public class TraineeDAOImpl implements TraineeDAO {
 				+ utility.getCourseNameId()
 				+ " "
 				+ "inner join feedbackmaster fdm on fdm.feedbacktypeid=CAST(CAST (fbd.feedbackId AS NUMERIC(19,4)) AS INT)";
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createSQLQuery(str_query);
 		List<FeedbackForm> list = query.list();
-		session.close();
 		return list;
 	}
 
 	@Override
 	public int getCurrentCourseId(int loginId) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		/**
 		 * TODO - add training status change training status as 'A' while course
 		 * enrollment
@@ -835,13 +793,11 @@ public class TraineeDAOImpl implements TraineeDAO {
 				+ " inner join coursetype ctype on ctype.coursetypeid = cn.coursetypeid "
 				+ "where ce.logindetails = " + loginId;
 
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		AdmitCardForm admitcard = new AdmitCardForm();
 		Query query = session.createSQLQuery(str_query);
 		// List records = query.list();
 		List<Object[]> records = (List<Object[]>) query.list();
-		session.close();
 		try {
 			if (records.size() > 0) {
 
@@ -873,28 +829,26 @@ public class TraineeDAOImpl implements TraineeDAO {
 		System.out.println("profileId ID -- " + profileId);
 		TableLink data = TableLink.getByprofileID(profileId);
 		System.out.println("Table Name == " + data.tableName());
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql = "select " + data.email() + " from " + data.tableName()
 				+ " where logindetails = " + loginId;
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
 		System.out.println(list.size());
-		session.close();
-
+		
 		return (String) list.get(0);
 	}
 
 	@Override
 	public PersonalInformationTrainee fullDetail(int loginId) {
 		System.out.println("LoginDAOImpl full detail process start ");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Integer i = loginId;
 		System.out.println("search " + loginId);
 		Query query = session
 				.createQuery("from PersonalInformationTrainee where loginDetails = '"
 						+ i + "'");
 		List<PersonalInformationTrainee> list = query.list();
-		session.close();
 		PersonalInformationTrainee personalInformationTrainee = null;
 		for (PersonalInformationTrainee personalInformationTrainee1 : list) {
 			personalInformationTrainee = personalInformationTrainee1;
@@ -910,7 +864,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		System.out.println("profileId ID -- " + profileId);
 		TableLink data = TableLink.getByprofileID(profileId);
 		System.out.println("Table Name == " + data.tableName());
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql = "";
 		if (profileId == 3) {
 			sql = "select personalinformationtraineeid from "
@@ -922,8 +876,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
 		System.out.println(list.size());
-		session.close();
-
 		return (Integer) list.get(0);
 	}
 
@@ -931,7 +883,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public Boolean updateSteps(int tableID, int profileID, int steps) {
 		// TODO Auto-generated method stub
 		System.out.println("**************Steps == " + steps);
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		if (profileID == 3) {
 			PersonalInformationTrainee personalInformationTrainee = (PersonalInformationTrainee) session
 					.load(PersonalInformationTrainee.class, tableID);
@@ -961,8 +913,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 			session.update(personalInformationTrainer);
 
 		}
-		session.beginTransaction().commit();
-		session.close();
 		return true;
 	}
 
@@ -970,14 +920,13 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public String isCourseOnline(int userID) {
 		// TODO Auto-generated method stub
 		String status = "";
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql = "select C.classroom||C.online course from courseenrolleduser A inner join trainingcalendar B on(A.trainingcalendarid=B.trainingcalendarid) inner join coursename C on(B.coursename=C.coursenameid)"
 				+ " where A.logindetails = " + userID;
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
 		System.out.println(list.size());
 		status = (String) list.get(0);
-		session.close();
 		return status;
 	}
 
@@ -985,7 +934,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public Boolean closeCourse(int userId, int profileID, String status) {
 		// TODO Auto-generated method stub
 		int courseenrolleduserid = 0;
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql = "select courseenrolleduserid from courseenrolleduser where logindetails  = "
 				+ userId;
 		Query query = session.createSQLQuery(sql);
@@ -995,8 +944,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 				.load(CourseEnrolledUser.class, courseenrolleduserid);
 		courseEnrolledUser.setStatus(status);
 		session.update(courseEnrolledUser);
-		session.beginTransaction().commit();
-		session.close();
 		return true;
 	}
 
@@ -1004,7 +951,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public String isTraineeEligible(int userID) {
 		// TODO Auto-generated method stub
 				String eligible = "";
-				Session session = sessionFactory.openSession();
+				Session session = sessionFactory.getCurrentSession();
 				String sql = "select A.logindetails  from assessmentevaluationtrainee A"
 						+ " where A.totalscore >= (select AA.eligibility from assessmenteligibility AA where AA.coursenameid=A.coursenameid) and A.logindetails = " + userID;
 				Query query = session.createSQLQuery(sql);
@@ -1014,7 +961,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 					eligible = "Y";
 					//eligible = (String) list.get(0);
 				}
-				session.close();
 				return eligible;
 	}
 	
@@ -1022,7 +968,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public CertificateInfo getCertificateID(int userID, int profileID) {
 		// TODO Auto-generated method stub
 				String certificateID = "";
-				Session session = sessionFactory.openSession();
+				Session session = sessionFactory.getCurrentSession();
 				//Get Next Seq
 				
 				String sqlSeq = "select max(certificateseqno) + 1 from courseenrolleduser";
@@ -1082,22 +1028,18 @@ public class TraineeDAOImpl implements TraineeDAO {
 					}
 				}
 				
-				session.beginTransaction().commit();
-				session.close();
-		
 				return certificateInfo;
 	}
 	
 	
 	public List<String> courseTypes(){
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		List<String> courseTList = new ArrayList<String>();
 		Query query = session.createQuery("from CourseType");
 		List<CourseType> courseTypeList = query.list();
 		for(CourseType c : courseTypeList){
 			courseTList.add(c.getCourseType());
 		}
-		session.close();
 		return courseTList;
 	}
 	
@@ -1105,11 +1047,9 @@ public class TraineeDAOImpl implements TraineeDAO {
 	
 	@Override
 	public List<CourseType> courseTypeList() {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from CourseType");
 		List<CourseType> courseTypeList = query.list();
-		session.close();
 		return courseTypeList;
 	}
 }

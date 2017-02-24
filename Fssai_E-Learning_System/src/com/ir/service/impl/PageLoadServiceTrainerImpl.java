@@ -24,22 +24,12 @@ public class PageLoadServiceTrainerImpl implements PageLoadServiceTrainer {
 		return listState;
 	}
 
-	/*@Override
-	public List<City> loadCity(int stat) {
-		// TODO Auto-generated method stub
-		System.out.println("page load service");
-		List<City> cityList = pageLoadDaoTrainer.loadCity();
-		return cityList;
-	}*/
-
 	@Override
 	public List<Title> loadTitle() {
 		// TODO Auto-generated method stub
 		List<Title> titleList = pageLoadDaoTrainer.loadTitle();
 		return titleList;
 	}
-
-
 
 	@Override
 	public List<CourseName> basicCourseName() {
@@ -48,7 +38,8 @@ public class PageLoadServiceTrainerImpl implements PageLoadServiceTrainer {
 		return basicCourseName;
 	}
 
-
+	
+	
 	@Override
 	public List<String> loadCaste() {
 		List<String> listCaste = pageLoadDaoTrainer.loadCaste();

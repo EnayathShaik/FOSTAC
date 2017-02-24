@@ -28,10 +28,9 @@ public class PageLoadDaoTrainerImpl implements PageLoadDaoTrainer {
 	@Override
 	public List<State> loadState() {
 		System.out.println("Page Load DAOImpl process start in state");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from State where status = 'A'");
 		List listState = query.list();
-		session.close();
 		System.out.println("state list dao     :"+ listState);
 		// TODO Auto-generated method stub
 		return listState;
@@ -53,10 +52,9 @@ public class PageLoadDaoTrainerImpl implements PageLoadDaoTrainer {
 	@Override
 	public List<Title> loadTitle() {
 		System.out.println("Page Load DAOImpl process start in title ");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from Title");
 		List titleList = query.list();
-		session.close();
 		System.out.println("title  ************* list dao     :"+ titleList);
 		return titleList;
 	}
@@ -81,13 +79,12 @@ public class PageLoadDaoTrainerImpl implements PageLoadDaoTrainer {
 	public List<CourseName> basicCourseName() {
 		// TODO Auto-generated method stub
 		System.out.println("Page Load DAOImpl process start in basicCourseName  ");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql = "select ct.coursetypeid ,cn.coursename , cn.coursenameid from coursename as cn inner join coursetype as ct"+
 				" on ct.coursetypeid = cn.coursetypeid";
 		Query query = session.createSQLQuery(sql);
 		//Query query = session.createQuery("from CourseName");
 		List basicCourseName = query.list();
-		session.close();
 		System.out.println("CourseName  ************* list dao     :"+ basicCourseName);
 		return basicCourseName;
 	}
@@ -126,6 +123,7 @@ public class PageLoadDaoTrainerImpl implements PageLoadDaoTrainer {
 		listCaste.add("ST");
 		listCaste.add("SC");
 		listCaste.add("OBC");
+		listCaste.add("GENERAL");
 		return listCaste;
 	}
 

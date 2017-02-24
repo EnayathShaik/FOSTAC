@@ -44,7 +44,7 @@ public class LoginDAOImpl implements LoginDAO{
 	@Override
 	public LoginDetails login(LoginForm loginForm) {
 		System.out.println("LoginDAOImpl login() process start ");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		System.out.println(loginForm.getUserId()  +   "    "+  loginForm.getPassword());
 		String encryprPassword = null;
 		try{
@@ -61,7 +61,6 @@ public class LoginDAOImpl implements LoginDAO{
 			//criteria.add(Restrictions.eq("Encrypted_Password", encryprPassword));
 			System.out.println("encryprPassword  " +encryprPassword);
 			List<LoginDetails> list = criteria.list();
-			session.close();
 			System.out.println("list size  " + list.size()  + "      " + list);
 			LoginDetails loginDetailsinforation = null;
 			for(LoginDetails loginDetails: list){
@@ -80,7 +79,6 @@ public class LoginDAOImpl implements LoginDAO{
 			criteria.add(Restrictions.eq("Encrypted_Password", encryprPassword));
 			System.out.println("encryprPassword  " +encryprPassword);
 			List<LoginDetails> list = criteria.list();
-			session.close();
 			System.out.println("list size  " + list.size()  + "      " + list);
 			LoginDetails loginDetailsinforation = null;
 			for(LoginDetails loginDetails: list){
@@ -118,12 +116,11 @@ public class LoginDAOImpl implements LoginDAO{
 	@Override
 	public PersonalInformationTrainee fullDetail(int loginId ) {
 		System.out.println("LoginDAOImpl full detail process start ");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Integer i = loginId;
 		System.out.println("search " + loginId);
 		Query query = session.createQuery("from PersonalInformationTrainee where loginDetails = '"+ i +"'");
 		List<PersonalInformationTrainee> list = query.list();
-		session.close();
 		PersonalInformationTrainee personalInformationTrainee = null;
 		for(PersonalInformationTrainee personalInformationTrainee1: list){
 			personalInformationTrainee=personalInformationTrainee1;
@@ -134,23 +131,21 @@ public class LoginDAOImpl implements LoginDAO{
 	
 	@Override
 	public List<TrainingPartner> trainingPartnerCountList() {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql = "select trainingpartnername , count(trainingpartnername) from managetrainingpartner group by trainingpartnername";
 		Query query = session.createSQLQuery(sql);
 		List<TrainingPartner> trainingPartnerCountList = query.list();
-		session.close();
 		return trainingPartnerCountList;
 	}
 
 	@Override
 	public ManageAssessmentAgency fullDetailAssessmentAgency(int id) {
 		System.out.println("LoginDAOImpl full detail process start ");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Integer i = id;
 		System.out.println("search " + id);
 		Query query = session.createQuery("from ManageAssessmentAgency where loginDetails = '"+ i +"'");
 		List<ManageAssessmentAgency> list = query.list();
-		session.close();
 		ManageAssessmentAgency manageAssessmentAgency = null;
 		for(ManageAssessmentAgency manageAssessmentAgency1: list){
 			manageAssessmentAgency=manageAssessmentAgency1;
@@ -160,12 +155,11 @@ public class LoginDAOImpl implements LoginDAO{
 
 	@Override
 	public PersonalInformationAssessor fullDetailAssesser(int id) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Integer i = id;
 		System.out.println("search " + id);
 		Query query = session.createQuery("from PersonalInformationAssessor where loginDetails = '"+ i +"'");
 		List<PersonalInformationAssessor> list = query.list();
-		session.close();
 		PersonalInformationAssessor personalInformationAssessor = null;
 		for(PersonalInformationAssessor personalInformationAssessor1: list){
 			personalInformationAssessor=personalInformationAssessor1;
@@ -175,12 +169,11 @@ public class LoginDAOImpl implements LoginDAO{
 
 	@Override
 	public ManageTrainingPartner fullDetailTP(int id) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Integer i = id;
 		System.out.println("search " + id);
 		Query query = session.createQuery("from ManageTrainingPartner where loginDetails = '"+ i +"'");
 		List<ManageTrainingPartner> list = query.list();
-		session.close();
 		ManageTrainingPartner manageTrainingPartner = null;
 		for(ManageTrainingPartner manageTrainingPartner1: list){
 			manageTrainingPartner=manageTrainingPartner1;
@@ -191,12 +184,11 @@ public class LoginDAOImpl implements LoginDAO{
 	public PersonalInformationTrainer fullDetailtrainer(int loginId) {
 		// TODO Auto-generated method stub
 		System.out.println("LogintrainerDAOImpl full detail process start ");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Integer i = loginId;
 		System.out.println("search " + loginId);
 		Query query = session.createQuery("from PersonalInformationTrainer where loginDetails = '"+ i +"'");
 		List<PersonalInformationTrainer> list = query.list();
-		session.close();
 		PersonalInformationTrainer personalInformationTrainer = null;
 		for(PersonalInformationTrainer personalInformationTrainer1: list){
 			personalInformationTrainer=personalInformationTrainer1;
@@ -208,7 +200,7 @@ public class LoginDAOImpl implements LoginDAO{
 	@Override
 	public PersonalInformationTrainingPartner fulldetailtainingpartner(int id) {
 		System.out.println("LogintrainerpartnerDAOImpl full detail process start ");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Integer i = id;
 		
 		Query query = session.createQuery("from PersonalInformationTrainingPartner where loginDetails = '"+ i +"'");
@@ -218,7 +210,6 @@ public class LoginDAOImpl implements LoginDAO{
 		for(PersonalInformationTrainingPartner personalInformationTrainingPartner:list1){
 			personalInformationTrainingPartner11=personalInformationTrainingPartner;
 		}
-		//session.close();
 		return personalInformationTrainingPartner11;
 	}
 

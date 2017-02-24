@@ -21,12 +21,11 @@ public class UpdateDAOImpl implements UpdateDAO{
 	@Override
 	public List<PersonalInformationTrainer> FullInformation(LoginDetails loginDetails) {
 		System.out.println("update dao service starts");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		int logindetailsunique = loginDetails.getLoginDetailsUnique();
 		Query query = session.createQuery("from PersonalInformationTrainer where personalinformationtrainerid = "+ logindetailsunique);
 		List<PersonalInformationTrainer> list = query.list();
 		System.out.println(list);
-		session.close();
 		return list;
 	}
 

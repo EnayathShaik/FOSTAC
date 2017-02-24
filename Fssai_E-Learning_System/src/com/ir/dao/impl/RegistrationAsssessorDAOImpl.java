@@ -72,16 +72,14 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 	
 	@Override
 	public State getState(int id){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		State ss = (State)s.load(State.class, id);
-		s.close();
 		return ss;
 	}
 	@Override
 	public District getDistrict(int id){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		District dd = (District)s.load(District.class, id);
-		s.close();
 		return dd;
 	}
 	// Rishi 
@@ -94,23 +92,20 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 	
 	@Override
 	public City getCity(int id){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		City cc = (City)s.load(City.class, id);
-		s.close();
 		return cc;
 	}
 	@Override
 	public Title getTitle(int id){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		Title tt = (Title)s.load(Title.class, id);
-		s.close();
 		return tt;
 	}
 	@Override
 	public ManageAssessmentAgency getAssessmentAgencyName(int id){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		ManageAssessmentAgency manageAssessmentAgency = (ManageAssessmentAgency)s.load(ManageAssessmentAgency.class, id);
-		s.close();
 		return manageAssessmentAgency;
 	}
 	
@@ -201,19 +196,15 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 			//personalInformationAssessor.setCoursesEnrolled(coursesEnrolled);
 			
 			try{
-				Session session = sessionFactory.openSession();
-				//Transaction transaction=session.beginTransaction(); 
+				Session session = sessionFactory.getCurrentSession();
 				personalInformationTrainerIdd = (Integer)session.save(personalInformationAssessor);
 				System.out.println("RegistrationDAOImpl [register] begin for registration assessor login   :"+ personalInformationAssessor);
-				session.beginTransaction().commit();
-				session.close();
 			}catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("Exception while saving accessor :" + e.getMessage());
 			}
 			
-			Session session1 = sessionFactory.openSession();
-			Transaction transaction1= session1.beginTransaction();
+			Session session1 = sessionFactory.getCurrentSession();
 			try{
 				
 				List<String> listCourses = new ArrayList<String>();
@@ -272,10 +263,7 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 			}
 			System.out.println("lllll     "+ registrationFormAssessor.getUserId() + "      "+ personalInformationTrainerIdd);
 			System.out.println("all insert done");
-			transaction1.commit();
-			session1.close();
-			
-
+		
 			if(personalInformationTrainerIdd >0 ){
 				SendMail sendMail = new SendMail();
 				sendMail.mailProperty(passwordString, registrationFormAssessor.getAssessorPermanentEmail(), registrationFormAssessor.getFirstName()+ " " + registrationFormAssessor.getLastName());
@@ -293,10 +281,9 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 	@Override
 	public List<State> loadState() {
 		System.out.println("Page Load DAOImpl process start in state");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from State  where status = 'A'");
 		List listState = query.list();
-		session.close();
 		System.out.println("state list dao     :"+ listState);
 		// TODO Auto-generated method stub
 		return listState;
@@ -305,10 +292,9 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 	@Override
 	public List<Title> loadTitle() {
 		System.out.println("Page Load DAOImpl process start in title ");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from Title");
 		List titleList = query.list();
-		session.close();
 		System.out.println("title  ************* list dao     :"+ titleList);
 		return titleList;
 	}
@@ -317,12 +303,11 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 	public List<CourseName> basicCourseName() {
 		// TODO Auto-generated method stub
 		System.out.println("Page Load DAOImpl process start in course name ");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql = "select ct.coursetypeid ,cn.coursename , cn.coursenameid from coursename as cn inner join coursetype as ct"+
 					" on ct.coursetypeid = cn.coursetypeid";
 		Query query = session.createSQLQuery(sql);
 		List courseNameList = query.list();
-		session.close();
 		System.out.println("CourseName  ************* list dao     :"+ courseNameList);
 		return courseNameList;
 	}
@@ -330,10 +315,9 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 	@Override
 	public List<ManageAssessmentAgency> loadAssessmentAgency() {
 		System.out.println("Page Load DAOImpl process start in Assessment Agency");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from ManageAssessmentAgency");
 		List loadAssessmentAgency = query.list();
-		session.close();
 		System.out.println("state list dao     :"+ loadAssessmentAgency);
 		// TODO Auto-generated method stub
 		return loadAssessmentAgency;
@@ -343,7 +327,7 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 	public String updateAssessor(RegistrationFormAssessor registrationFormAssessor, int loginId) {
 		Integer id=null;
 		//Integer idd=id;
-		Session session =sessionFactory.openSession();
+		Session session =sessionFactory.getCurrentSession();
 		State cs = getState(registrationFormAssessor.getAssessorCorrespondenceState());
 		State ps = getState(registrationFormAssessor.getAssessorrPermanentState());
 		District cd = getDistrict(registrationFormAssessor.getAssessorCorrespondenceDistrict());
@@ -382,8 +366,6 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 		//personalInformationAssessor.setMiddleName(registrationFormAssessor.getMiddleName());
 		System.out.println("reachec down");
 		session.update(personalInformationAssessor);
-		session.beginTransaction().commit();
-		session.close();
 		
 		return "updated";
 	}
@@ -424,8 +406,7 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 			SendContectMail traineeMaail=null;
 			 traineeMaail = new SendContectMail();
 				
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
+			Session session = sessionFactory.getCurrentSession();
 			ContactTraineee contactTrainee1 = new ContactTraineee();
 			String email=contactTrainee.getEmailAddress();
 			String msg=contactTrainee.getMessageDetails();
@@ -438,8 +419,6 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 			contactTrainee1.setUserId(id);
 			Integer contactTrainerModelId = (Integer) session.save(contactTrainee1);
 			System.out.println("contactTraineeSave after save");
-			tx.commit();
-			session.close();
 			if(contactTrainerModelId >0 && contactTrainerModelId != null){
 				
 				
@@ -465,12 +444,11 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 	
 	@Override
 	public PersonalInformationAssessor fullDetailAssesser(int id) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Integer i = id;
 		System.out.println("search " + id);
 		Query query = session.createQuery("from PersonalInformationAssessor where loginDetails = '"+ i +"'");
 		List<PersonalInformationAssessor> list = query.list();
-		session.close();
 		PersonalInformationAssessor personalInformationAssessor = null;
 		for(PersonalInformationAssessor personalInformationAssessor1: list){
 			personalInformationAssessor=personalInformationAssessor1;

@@ -56,37 +56,32 @@ private Title title;
 
 	@Override
 	public State getState(int id){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		State ss = (State)s.load(State.class, id);
-		s.close();
 		return ss;
 	}
 	@Override
 	public ManageTrainingPartner getTP(int id){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		ManageTrainingPartner mtp = (ManageTrainingPartner)s.load(ManageTrainingPartner.class, id);
-		s.close();
 		return mtp;
 	}
 	@Override
 	public City getCity(int id){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		City cc = (City)s.load(City.class, id);
-		s.close();
 		return cc;
 	}
 	@Override
 	public District getDistrict(int id){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		District dd = (District)s.load(District.class, id);
-		s.close();
 		return dd;
 	}
 	@Override
 	public Title getTitle(int id){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		Title tt = (Title)s.load(Title.class, id);
-		s.close();
 		return tt;
 	}
 	
@@ -95,9 +90,7 @@ private Title title;
 		// TODO Auto-generated method stub
 				System.out.println("RegistrationDAOImpl [register] begin for registration trainer");
 				Integer personalInformationTrainerIdd=null;
-				Session session = sessionFactory.openSession();
-				Transaction transaction=session.beginTransaction(); 
-				
+				Session session = sessionFactory.getCurrentSession();
 				PasswordGenerator passwordGenerator = new PasswordGenerator(6);
 				char[] pass = passwordGenerator.get();
 				String passwordString = String.valueOf(pass);
@@ -232,8 +225,6 @@ private Title title;
 				}
 				
 				System.out.println("all insert done");
-				transaction.commit();
-				session.close();
 				if(personalInformationTrainerIdd != 0){
 					SendMail sendMail = new SendMail();
 					sendMail.mailProperty(passwordString, registrationFormTrainer.getTrainingCenterPermanentEmail(), registrationFormTrainer.getFirstName()+ " " + registrationFormTrainer.getLastName());
@@ -256,7 +247,7 @@ private Title title;
 		ManageTrainingPartner mtp = getTP(registrationFormTrainer.getAssociatedTrainingpartnerName());
 		
 		
-		Session s=sessionFactory.openSession();
+		Session s=sessionFactory.getCurrentSession();
 		
 		PersonalInformationTrainer personalinformationtrainer= (PersonalInformationTrainer) s.load(PersonalInformationTrainer.class, id);
 		
@@ -312,16 +303,13 @@ private Title title;
 		personalinformationtrainer.setGender(registrationFormTrainer.getGender());
 		personalinformationtrainer.setExpInFoodSafefyTimeYear(registrationFormTrainer.getExpInFoodSafefyTimeYear());
 		s.update(personalinformationtrainer);
-		s.beginTransaction().commit();
-		
-		s.close();
 		return "updated";
 		}
 
 	@Override
 	public long basicCourseTrainer(CourseEnrolledUserForm courseEnrolledUserForm, int loginid) {
 		
-		Session session =sessionFactory.openSession();
+		Session session =sessionFactory.getCurrentSession();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 		long date = System.currentTimeMillis();
 		System.out.println("roll nu  :"+date);
@@ -337,19 +325,11 @@ private Title title;
 //		ceu.setStatus("Pending");
 		
 		Integer ce = (Integer) session.save(ceu);
-		session.beginTransaction().commit();
-	/*	if(ce > 0){
-			PersonalInformationTrainee   personalInformationTrainee=(PersonalInformationTrainee) session.load(PersonalInformationTrainee.class, personalinformationtraineeid);
-			//personalInformationTrainee.setSteps(2);			
-			session.update(personalInformationTrainee);
-		}
-		*/
-		session.close();
 		return date;
 	}
 	@Override
 	public long advanceTrainerSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid) {
-		Session session =sessionFactory.openSession();
+		Session session =sessionFactory.getCurrentSession();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 		long date = System.currentTimeMillis();
 		System.out.println("roll nu  :"+date);
@@ -365,13 +345,11 @@ private Title title;
 		//abhay ceu.setStatus("Pending");
 		
 		Integer ce = (Integer) session.save(ceu);
-		session.beginTransaction().commit();
-		session.close();
 		return date;
 	}
 	@Override
 	public long specialTrainerSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid) {
-		Session session =sessionFactory.openSession();
+		Session session =sessionFactory.getCurrentSession();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 		long date = System.currentTimeMillis();
 		System.out.println("roll nu  :"+date);
@@ -387,20 +365,17 @@ private Title title;
 		//abhay ceu.setStatus("Pending");
 		
 		Integer ce = (Integer) session.save(ceu);
-		session.beginTransaction().commit();
-		session.close();
 		return date;
 	}
 	@Override
 	public PersonalInformationTrainer fullDetailtrainer(int loginId) {
 		// TODO Auto-generated method stub
 		System.out.println("LogintrainerDAOImpl full detail process start ");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Integer i = loginId;
 		System.out.println("search " + loginId);
 		Query query = session.createQuery("from PersonalInformationTrainer where loginDetails = '"+ i +"'");
 		List<PersonalInformationTrainer> list = query.list();
-		session.close();
 		PersonalInformationTrainer personalInformationTrainer = null;
 		for(PersonalInformationTrainer personalInformationTrainer1: list){
 			personalInformationTrainer=personalInformationTrainer1;

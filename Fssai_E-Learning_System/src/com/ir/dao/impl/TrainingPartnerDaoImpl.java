@@ -56,47 +56,42 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	
 	@Override
 	public CourseType getCourseType(int id){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		CourseType courseType = (CourseType)s.load(CourseType.class, id);
-		s.close();
 		return courseType;
 	}
 	@Override
 	public CourseName getCourseName(int id){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		CourseName courseName = (CourseName)s.load(CourseName.class, id);
-		s.close();
 		return courseName;
 	}
 	@Override
 	public PersonalInformationTrainingPartner getPersonalInformationTrainingPartner(int id){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		PersonalInformationTrainingPartner personalInformationTrainingPartner = (PersonalInformationTrainingPartner)s.load(PersonalInformationTrainingPartner.class, id);
-		s.close();
 		return personalInformationTrainingPartner;
 	}
 	@Override
 	public List<PersonalInformationTrainingPartner> trainingCenterList() {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from PersonalInformationTrainingPartner");
 		List<PersonalInformationTrainingPartner> personalInformationTrainingPartner = query.list();
-		session.close();
 		return personalInformationTrainingPartner;
 	}
 
 	@Override
 	public List<CourseType> courseTypeList() {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from CourseType");
 		List<CourseType> courseTypeList = query.list();
-		session.close();
 		return courseTypeList;
 	}
 
 	@Override
 	public String postVacancyTrainingPartner(PostVacancyTrainingCenterForm postVacancyTrainingCenterForm) {
 		Integer postVacancyTrainingCenterIdd ;
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		PersonalInformationTrainingPartner p = getPersonalInformationTrainingPartner(postVacancyTrainingCenterForm.getTrainingCenter());
 		
 		System.out.println("hkhkhk");
@@ -104,7 +99,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		Query query = session.createSQLQuery(sql);
 		List l = query.list();
 		if(l != null && l.size() > 0){
-			session.close();
 			return "error";
 		}else{
 			CourseType ct = getCourseType(postVacancyTrainingCenterForm.getCourseType());
@@ -122,8 +116,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			postVacancyTrainingCenter.setTrainingCenter(p);
 			postVacancyTrainingCenterIdd = (Integer) session.save(postVacancyTrainingCenter);
 			System.out.println("post Vacancy TrainingCenter after save");
-			session.beginTransaction().commit();
-			session.close();
 			if(postVacancyTrainingCenterIdd >0 && postVacancyTrainingCenterIdd != null){
 				return "created";
 			}else{
@@ -133,9 +125,8 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	}
 	@Override
 	public int saveVacancy(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean,Integer profileID, Integer userId){
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Integer isapplied=0;
-		Transaction tx=session.beginTransaction();
 		Query sql=session.createSQLQuery("select * from trainingcentervacancyenrolled where postvacancyid="+postVacancyTrainingCenterBean.getPostvacancyID()+" AND CAST(CAST (loginid AS NUMERIC(19,4)) AS INT)="+userId);
 		List<Object[]> list=sql.list();
 		if(list.size()>0){
@@ -144,8 +135,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		}else{
 			isapplied= (Integer) session.save(postVacancyTrainingCenterBean);
 		}
-		tx.commit();
-		session.close();
 		return isapplied;
 		
 	}
@@ -160,15 +149,14 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		return confirm;
 	}
 	public List<CourseType> courseTypes(){
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from CourseType");
 		List<CourseType> courseTypeList = query.list();
-		session.close();
 		return courseTypeList;
 	}
 	@Override
 	public List<IntStringBean> getTrainerList(){
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		List<IntStringBean> trinerNameList=new ArrayList<>();
 		String sql="select distinct pitp.personalinformationtrainerid,pitp.firstname,pitp.middlename,pitp.lastname from personalinformationtrainer pitp , logindetails pit";
 				
@@ -184,12 +172,11 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 				trinerNameList.add(bean);
 			}
 		}
-		session.close();
 		return trinerNameList;
 	}
 	@Override
 	public List<IntStringBean> getTraineeList(){
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		List<IntStringBean> trinerNameList=new ArrayList<>();
 		String sql="select distinct pitp.personalinformationtraineeid,pitp.firstname,pitp.middlename,pitp.lastname from personalinformationtrainee pitp , logindetails pit";
 				
@@ -205,13 +192,12 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 				trinerNameList.add(bean);
 			}
 		}
-		session.close();
 		return trinerNameList;
 	}
 	
 	@Override
 	public List<IntStringBean> getTrainingCenterList(Integer userId,Integer profileId){
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		List<IntStringBean> trainingCenterList=new ArrayList<>();
 		StringBuffer userCondition = new StringBuffer();
 		if(profileId == 5){
@@ -234,13 +220,12 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 				trainingCenterList.add(bean);
 			}
 		}
-		session.close();
 		return trainingCenterList;
 	}
 	
 	@Override
 	public List<IntStringBean> getAssessorList(){
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		List<IntStringBean> assessorList=new ArrayList<>();
 		String sql="select distinct pitp.personalinformationassessorid,pitp.firstname,pitp.middlename,pitp.lastname from personalinformationassessor pitp , logindetails pit";
 				
@@ -256,7 +241,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 				assessorList.add(bean);
 			}
 		}
-		session.close();
 		return assessorList;
 	}
 	@Override
@@ -275,7 +259,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	}
 	@Override
 	public List<PostVacancyTrainingCenter> getPostVacancyTrainingList(Integer userID){
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		double trainerExp = 0;
 		String sql = "select (CAST(AA.expinfoodsafefytimeyear AS VARCHAR(10) ) ||'.'|| CAST(AA.expinfoodsafefytimemonth AS VARCHAR(10) )) from personalinformationtrainer AA where AA.logindetails ='"+userID+"'";
 		System.out.println("sql "+sql);
@@ -293,7 +277,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		
 		Query query = session.createQuery("from PostVacancyTrainingCenter A where A.requiredExp <= "+trainerExp);
 		List<PostVacancyTrainingCenter> postVacancyTrainingCenter = query.list();
-		session.close();
 		return postVacancyTrainingCenter;
 	}
 	@Override
@@ -312,7 +295,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	}
 	@Override
 	public List<CourseName> getCourseNameList(){
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		List<CourseName> courseNameList=new ArrayList<>();
 		String sql="select A.coursenameid ,coalesce(A.coursename,''),coalesce(A.coursecode , '') from coursename A";
 		Query query = session.createSQLQuery(sql);
@@ -327,7 +310,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 				courseNameList.add(courseName);
 			}
 		}
-		session.close();
 		return courseNameList;
 	}
 	public Utility editApplicationStatus(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean){
@@ -335,7 +317,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		if(postVacancyTrainingCenterBean.getPostvacancyID() <= 0){
 			return utility;
 		}
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		try{
 			//String sql="select trainingdate,noofvacancy,loginid from trainingcentervacancyenrolled where postvacancyid="+postVacancyTrainingCenterBean.getPostvacancyID();
 			StringBuffer sql = new StringBuffer();
@@ -385,7 +367,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 				}*/
 				
 				utility.setTrainerList(trainerList);
-				session.close();
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -396,7 +377,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	
 	@Override
 	public List<PostVacancyTrainingCenter> getAppliedCount(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		//String sql="select coursetype,coursename,trainingdate,noofvacancy,loginid from trainingcentervacancyenrolled tcev";
 		StringBuffer sqlBuffer = new StringBuffer();
 		sqlBuffer.append("select B.coursetypeid,C.coursenameid,A.trainingdate,A.noofvacancy,");
@@ -452,15 +433,11 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			postVacancyTrainingBean.setTrainingEndTime(list.get(i)[7] == null ? "" : list.get(i)[7].toString());
 			beans.add(postVacancyTrainingBean);
 		}
-			
-		
-		session.close();
-		
 		return beans;
 	}
 	@Override
 	public List<PostVacancyTrainingCenterBean> getTrainingCalenderList(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql=" select tc.trainingdate,tc.trainingtime, pitp.trainingcentrename, concat(pit.firstname,' ',pit.middlename,' ',pit.lastname) as name, tc.status from personalinformationtrainingpartner pitp,personalinformationtrainer pit , trainingcentervacancyenrolled ve ,trainingcalendar tc";
 		String queryParam="";
 		List<PostVacancyTrainingCenterBean> beans=new ArrayList<>();
@@ -494,7 +471,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		List<Object[]> list = query.list();
 		List<CourseType> courseTypeList=courseTypes();
 		List<CourseName> courseNames=getCourseNameList();
-		session.close();
 		String couserName="";
 		String couserTypeName="";
 		for(CourseType ctpe:courseTypeList){
@@ -526,7 +502,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	}
 	@Override
 	public void updateApplicationStatusForEnrolledVacancy(PostVacancyTrainingCenterBean PostVacancyTrainingCenterBean) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String[] trainerList=PostVacancyTrainingCenterBean.getLoginId().split(",");
 		String[] statusList=PostVacancyTrainingCenterBean.getStatus().split(",");
 		for(int index=0;index<trainerList.length;index++){
@@ -535,39 +511,33 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			System.out.println("****************************"+statusList[index]);
 			pvtcb.setStatus(statusList[index]);
 			session.update(pvtcb);
-			tx.commit();
 		}
-		session.close();
 		
 	}
 	@Override
 	public PostVacancyTrainingCenterBean getApplicationStatusBean(String loginId,int coursename, int cousertype) {
 		PostVacancyTrainingCenterBean bean=new PostVacancyTrainingCenterBean();
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql="select status from trainingcentervacancyenrolled where loginid='"+loginId +"' AND coursename="+coursename+" AND coursetype="+cousertype;
 		Query query = session.createSQLQuery(sql);
 		List<String> status = query.list();
 		if(status.size()>0){
 			bean.setStatus(status.get(0));
 		}
-		session.close();
 		return bean;
 	}
 	@Override
 	public void updateUpcomingTrainingsStatus(int id) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 			Transaction tx=session.beginTransaction();
 			String sql="update trainingCalendar set status='A' where trainingCalendarId="+id;
 			Query query = session.createSQLQuery(sql);
 			query.executeUpdate();
-			tx.commit();
-			session.close();
-		
 	}
 	@Override
 	public List<TrainingPartnerSearch> getTrainingPartnerDetails(int trainingPartnerId){
 		List<TrainingPartnerSearch> listTp = new ArrayList<TrainingPartnerSearch>();
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql = "select  tp.trainingpartnername, pitp.trainingcentrename, "
 				+ "concat(pitp.trainingpartnerpermanentline1, ', ', pitp.trainingpartnerpermanentline2, ',Ph-', trainingpartnerpermanentmobile, ', ', trainingpartnerpermanentemail) as details, "
 				+ "cn.coursename "
@@ -588,16 +558,14 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			tpData.setCourseName(listObj[3].toString());
 			listTp.add(tpData);
 		}
-		session.close();
 		return listTp;
 	}
 	
 	@Override
 	public String trainingCalendarForm(TrainingCalendarForm trainingCalendarForm) {
 		System.out.println("********  "+trainingCalendarForm.getCourseName());
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		
-		Transaction tx = session.beginTransaction();
 		String sql = "select max(seqNo) + 1 from trainingcalendar";
 		int maxId = 0 ;
 		Query maxIDList = session.createSQLQuery(sql);
@@ -640,9 +608,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		tc.setTrainingCalendarId(trainingCalendarForm.getTcid());
 		 session.update(tc);
 	}
-		
-		tx.commit();
-		session.close();
 		if(i >0){
 			return "created";
 		}else{
@@ -653,7 +618,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	
 	public void setTrainingCalanderDeatils(TrainingCalendarForm trainingCalendarForm , String loginName){
 		
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql = "select personalinformationtrainingpartnerid , trainingpartnername   from personalinformationtrainingpartner ptp inner join  logindetails ld on ptp.logindetails = ld.id where ld.loginid ='"+loginName+"'";
 		System.out.println("sql "+sql);
 		Query query = session.createSQLQuery(sql);
@@ -669,7 +634,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			System.out.println("e "+e.getMessage());
 		}
 		
-		session.close();
 	}
 	
 	
@@ -677,14 +641,11 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	
 	@Override
 	public void cancelTrainingCalndar(int id) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 			Transaction tx=session.beginTransaction();
 			String sql="update trainingCalendar set tcStatus='I' where trainingCalendarId="+id;
 			Query query = session.createSQLQuery(sql);
 			query.executeUpdate();
-			tx.commit();
-			session.close();
-		
 	}
 	
 /*	@Override
@@ -704,7 +665,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	
 	@Override
 	public List<IntStringBean> loadAssessmentAgency(){
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		List<IntStringBean> trinerNameList=new ArrayList<>();
 		String sql="select manageassessmentagencyid , assessmentagencyname from ManageAssessmentAgency";
 				
@@ -719,7 +680,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 				trinerNameList.add(bean);
 			}
 		}
-		session.close();
 		return trinerNameList;
 	}
 

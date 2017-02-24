@@ -26,7 +26,7 @@ public class CommonDaoImpl implements CommonDao{
 	
 	@Override
 	public String getCourseTrainingType(String courseNameId){
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String response = "" ;
 		String strQuery = "select case "
 				+ "when online = 'Online' and classroom='Nil' THEN 'Online' "
@@ -43,7 +43,6 @@ public class CommonDaoImpl implements CommonDao{
 			System.out.println("Exception while retrieving mode of training for course id - " + courseNameId + ":" + e.getMessage());
 			response = "error";
 		}finally{
-			session.close();
 		}
 		return response;
 	}
