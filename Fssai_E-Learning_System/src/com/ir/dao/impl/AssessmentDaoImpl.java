@@ -46,12 +46,10 @@ public class AssessmentDaoImpl implements AssessmentDao{
 
 	public String saveAssessment(List<AssessmentAnswerCriteria> answerCriterias){
 		Session session = sessionFactory.getCurrentSession();
-		Transaction transaction=session.beginTransaction(); 
 		try{
 		for(int i= 0; i<answerCriterias.size(); i++){
 			session.save(answerCriterias.get(i));
 		}
-		transaction.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{

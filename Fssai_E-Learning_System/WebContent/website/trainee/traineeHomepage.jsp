@@ -32,8 +32,7 @@
                                         <!-- vertical button -->
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font"> Welcome Mr.
-									${loginUser.loginDetails.loginId}</span>
+                                                <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font"> Welcome Trainee</span>
                                                 </a>
                                             </div>
                                         </div>

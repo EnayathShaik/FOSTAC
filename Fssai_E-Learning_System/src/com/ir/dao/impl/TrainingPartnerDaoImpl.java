@@ -506,7 +506,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		String[] trainerList=PostVacancyTrainingCenterBean.getLoginId().split(",");
 		String[] statusList=PostVacancyTrainingCenterBean.getStatus().split(",");
 		for(int index=0;index<trainerList.length;index++){
-			Transaction tx=session.beginTransaction();
 			PostVacancyTrainingCenterBean pvtcb = (PostVacancyTrainingCenterBean)session.load(PostVacancyTrainingCenterBean.class, Integer.parseInt(trainerList[index]));
 			System.out.println("****************************"+statusList[index]);
 			pvtcb.setStatus(statusList[index]);
@@ -529,7 +528,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	@Override
 	public void updateUpcomingTrainingsStatus(int id) {
 		Session session = sessionFactory.getCurrentSession();
-			Transaction tx=session.beginTransaction();
 			String sql="update trainingCalendar set status='A' where trainingCalendarId="+id;
 			Query query = session.createSQLQuery(sql);
 			query.executeUpdate();
@@ -642,7 +640,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	@Override
 	public void cancelTrainingCalndar(int id) {
 		Session session = sessionFactory.getCurrentSession();
-			Transaction tx=session.beginTransaction();
 			String sql="update trainingCalendar set tcStatus='I' where trainingCalendarId="+id;
 			Query query = session.createSQLQuery(sql);
 			query.executeUpdate();

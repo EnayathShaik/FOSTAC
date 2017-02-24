@@ -133,8 +133,7 @@ public class AdminDAOImpl implements AdminDAO {
 	
 	@Override
 	public String stateMasterSave(StateForm stateForm) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		State state = new State();
 		state.setStateName(stateForm.getStateName().replaceAll("%20", " "));
 		state.setStatus(stateForm.getStatus());
@@ -148,8 +147,6 @@ public class AdminDAOImpl implements AdminDAO {
 			return "error";
 		}else{
 			stateIdd = (Integer)session.save(state);
-			tx.commit();
-			session.close();
 			if(stateIdd != 0 && stateIdd  != 0){
 				return "created";
 			}else{
@@ -160,27 +157,24 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public State getState(int id){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		State ss = (State)s.load(State.class, id);
-		s.close();
 		return ss;
 	}
 	
 	
 	@Override
 	public List<State> stateList() {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from State where status = 'A'");
 		List<State> stateList = query.list();
-		session.close();
 		return stateList;
 	}
 
 
 	@Override
 	public String districtMasterSave(DistrictForm districtForm) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String district1 = "select * from district where upper(districtname) ='"+districtForm.getDistrictName().replaceAll("%20", " ").toUpperCase()+"'";
 		//String sql = "select s.stateId from district as d inner join state as s on s.stateid = d.stateid where "+
 		//			 " s.stateId='" + districtForm.getStateId()+ "' and d.districtname='" +districtForm.getDistrictName().toUpperCase() +"'";
@@ -189,7 +183,6 @@ public class AdminDAOImpl implements AdminDAO {
 		State s = (State) session.load(State.class , districtForm.getStateId());
 		
 		List l = query.list();
-		session.close();
 		if(l != null && l.size() > 0){
 			return "District already exists !!!";
 		}else{
@@ -197,11 +190,8 @@ public class AdminDAOImpl implements AdminDAO {
 			district.setDistrictName(districtForm.getDistrictName());
 			district.setStatus(districtForm.getStatus());
 			district.setState(s);
-			Session session1 = sessionFactory.openSession();
-			Transaction tx1 = session1.beginTransaction();
+			Session session1 = sessionFactory.getCurrentSession();
 			Integer districtId = (Integer)session1.save(district);
-			tx1.commit();
-			session1.close();
 			if(districtId != 0 && districtId  != null){
 				return "created";
 			}else{
@@ -213,8 +203,7 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public String cityMasterSave(CityForm cityForm) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		
 		District d = (District) session.load(District.class, cityForm.getDistrictId());
 		City city = new City();
@@ -231,8 +220,6 @@ public class AdminDAOImpl implements AdminDAO {
 			return "error";
 		}else{
 			cityIdd = (Integer)session.save(city);
-			tx.commit();
-			session.close();
 			if(cityIdd != 0 && cityIdd  != 0){
 				return "created";
 			}else{
@@ -244,7 +231,7 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public String regionMasterSave(RegionForm regionForm) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql = "select * from region where regionname = '"+regionForm.getRegionName()+"' and districtid = '"+regionForm.getDistrictId()+"' and status = '"+regionForm.getStatus()+"'";
 		Query query = session.createSQLQuery(sql);
 		List l = query.list();
@@ -252,7 +239,6 @@ public class AdminDAOImpl implements AdminDAO {
 		if(l!= null && l.size() > 0){
 			return "Oops";
 		}else{
-			Transaction tx = session.beginTransaction();
 			Region region= new Region();
 			region.setRegionName(regionForm.getRegionName());
 			region.setDistrictId(regionForm.getDistrictId());
@@ -260,8 +246,6 @@ public class AdminDAOImpl implements AdminDAO {
 			region.setStateId(regionForm.getStateId());
 			region.setStatus(regionForm.getStatus());
 			stateId = (Integer)session.save(region);
-			tx.commit();
-			session.close();
 			if(stateId != 0 && stateId  != 0){
 				return "created";
 			}else{
@@ -273,19 +257,16 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public List<CourseName> courseNameList() {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from CourseName  where status = 'A'");
 		List<CourseName> courseNameList = query.list();
-		session.close();
 		return courseNameList;
 	}
 
 
 	@Override
 	public String manageCourse(ManageCourse manageCourse) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		//Get Next Seq
 		
 		String sql = "select max(seqNo) + 1 from coursename";
@@ -341,13 +322,10 @@ public class AdminDAOImpl implements AdminDAO {
 		Query query = session.createSQLQuery(sqlInsert);
 		List l = query.list();
 		if(l != null && l.size() >0){
-			session.close();
 			return "error";
 		}else{
 			courseNameId = (Integer)session.save(courseName);
 			System.out.println(courseName.getClassroom());
-			tx.commit();
-			session.close();
 			if(courseNameId != 0 && courseNameId  != 0){
 				return "created";
 			}else{
@@ -359,11 +337,9 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public List<CourseType> courseTypeList() {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from CourseType");
 		List<CourseType> courseTypeList = query.list();
-		session.close();
 		return courseTypeList;
 	}
 
@@ -430,8 +406,7 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public String manageAssessmentAgencySave(ManageAssessmentAgencyForm manageAssessmentAgencyForm) {
-		Session session = sessionFactory.openSession();
-		Transaction transaction=session.beginTransaction(); 
+		Session session = sessionFactory.getCurrentSession();
 		PasswordGenerator passwordGenerator = new PasswordGenerator(6);
 		char[] pass = passwordGenerator.get();
 		String passwordString = String.valueOf(pass);
@@ -473,8 +448,6 @@ public class AdminDAOImpl implements AdminDAO {
 		manageAssessmentAgency.setState(s);
 		Integer manageTrainingPartnerIdd = (Integer)session.save(manageAssessmentAgency);
 		if(manageTrainingPartnerIdd  != 0){
-			transaction.commit();
-			session.close();
 			SendMail sendMail = new SendMail();
 			sendMail.mailProperty(passwordString, manageAssessmentAgencyForm.getEmail(), manageAssessmentAgencyForm.getAssessmentAgencyName()+ " " + manageAssessmentAgencyForm.getUserId());
 
@@ -487,8 +460,7 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public List<PersonalInformationTrainee> traineeUserManagementSearch(TraineeUserManagementForm traineeUserManagementForm) {
-		Session session = sessionFactory.openSession();
-		Transaction transaction=session.beginTransaction(); 
+		Session session = sessionFactory.getCurrentSession();
 		String FirstName = traineeUserManagementForm.getFirstName();
 		String MiddleName = traineeUserManagementForm.getMiddleName();
 		String LastName = traineeUserManagementForm.getLastName() ;
@@ -524,8 +496,6 @@ public class AdminDAOImpl implements AdminDAO {
 		Query query = session.createSQLQuery(sql);
 		List<PersonalInformationTrainee> list = query.list();
 		System.out.println("all select done");
-		transaction.commit();
-		session.close();
 		System.out.println("list  "+ list);
 		if( list.size() > 0){
 			return list;
@@ -537,7 +507,7 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public List<PersonalInformationTrainer> trainerUserManagementSearch(TrainerUserManagementForm trainerUserManagementForm) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String FirstName = trainerUserManagementForm.getFirstName();
 		String MiddleName = trainerUserManagementForm.getMiddleName();
 		String LastName = trainerUserManagementForm.getLastName() ;
@@ -573,7 +543,6 @@ public class AdminDAOImpl implements AdminDAO {
 		Query query = session.createSQLQuery(sql);
 		List<PersonalInformationTrainer> list = query.list();
 		System.out.println("all select done");
-		session.close();
 		System.out.println("list  "+ list);
 		if( list.size() > 0){
 			System.out.println("list size gt thaan 0");
@@ -587,7 +556,7 @@ public class AdminDAOImpl implements AdminDAO {
 	
 	@Override
 	public List<PersonalInformationAssessor> assessorUserManagementSearch(AssessorUserManagementForm assessorUserManagementForm,Integer profileid,Integer userID) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String FirstName = assessorUserManagementForm.getFirstName();
 		String MiddleName = assessorUserManagementForm.getMiddleName();
 		String LastName = assessorUserManagementForm.getLastName() ;
@@ -634,7 +603,6 @@ public class AdminDAOImpl implements AdminDAO {
 		Query query = session.createSQLQuery(sql);
 		List<PersonalInformationAssessor> list = query.list();
 		System.out.println("all select done");
-		session.close();
 		System.out.println("list  "+ list);
 		if( list.size() > 0){
 			System.out.println("list size gt thaan 0");
@@ -648,7 +616,7 @@ public class AdminDAOImpl implements AdminDAO {
 	
 	@Override
 	public List<PersonalInformationTrainingPartner> trainingCenterUserManagementSearch(TrainingCenterUserManagementForm trainingCenterUserManagementForm,Integer profileid,Integer userID) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String FirstName = trainingCenterUserManagementForm.getFirstName();
 		String MiddleName = trainingCenterUserManagementForm.getMiddleName();
 		String LastName = trainingCenterUserManagementForm.getLastName() ;
@@ -695,7 +663,6 @@ public class AdminDAOImpl implements AdminDAO {
 		Query query = session.createSQLQuery(sql);
 		List<PersonalInformationTrainingPartner> list = query.list();
 		System.out.println("all select done");
-		session.close();
 		System.out.println("list  "+ list);
 		if( list.size() > 0){
 			System.out.println("list size gt thaan 0");
@@ -711,13 +678,10 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List<AdminUserManagement> adminUserManagementSearch() {
 		System.out.println("RegistrationDAOImpl [register] begin for registration trainee");
-		Session session = sessionFactory.openSession();
-		Transaction transaction=session.beginTransaction(); 
+		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(AdminUserManagement.class);
 		List<AdminUserManagement> list = criteria.list();
 		System.out.println("all select done");
-		transaction.commit();
-		session.close();
 		System.out.println("list  "+ list);
 		if( list.size() > 0){
 			return list;
@@ -730,15 +694,13 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public String adminUserManagementSave(AdminUserManagementForm adminUserManagementForm) {
 		System.out.println("admin DAO Impl atate input process start");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql = "select * from adminusermanagement as aum inner join logindetails as ld on ld.id = aum.logindetails where loginid = '"+adminUserManagementForm.getUserId()+"'";
 		Query query = session.createSQLQuery(sql);
 		List l = query.list();
 		if(l != null && l.size() > 0){
 			return "error";
 		}else{
-			Transaction tx = session.beginTransaction();
-			
 			LoginDetails loginDetails = new LoginDetails();
 			loginDetails.setLoginId(adminUserManagementForm.getUserId());
 			loginDetails.setPassword("Password");
@@ -753,8 +715,6 @@ public class AdminDAOImpl implements AdminDAO {
 			adminUserManagement.setMiddleName(adminUserManagementForm.getMiddleName());
 			adminUserManagement.setLoginDetails(loginDetails);
 			Integer adminUserManagementIdd = (Integer)session.save(adminUserManagement);
-			tx.commit();
-			session.close();
 			if(adminUserManagementIdd != 0 ){
 				return "created";
 			}else{
@@ -774,7 +734,7 @@ public class AdminDAOImpl implements AdminDAO {
 		String contentLink = manageCourseContentForm.getContentLink();
 		String contentName = manageCourseContentForm.getContentName();
 		
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 	
 		Criteria criteria = session.createCriteria(ManageCourseContent.class);
 		criteria.add(Restrictions.eq("contentLocationInput", contentLocation));
@@ -785,7 +745,7 @@ public class AdminDAOImpl implements AdminDAO {
 			session.close();
 			return "error";
 		}else{
-			Session session1 = sessionFactory.openSession();
+			Session session1 = sessionFactory.getCurrentSession();
 			ManageCourseContent mcc = new ManageCourseContent();
 			mcc.setContentLocationInput(contentLocation);
 			mcc.setCourseTypeInput(courseType);
@@ -795,8 +755,6 @@ public class AdminDAOImpl implements AdminDAO {
 			mcc.setContentLinkInput(contentLink);
 			mcc.setContentNameInput(contentName);
 			int mccId = (Integer)session1.save(mcc);
-			session1.beginTransaction().commit();
-			session1.close();
 			if(mccId > 0){
 				return "created";
 			}else{
@@ -810,29 +768,25 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public List<ManageTrainingPartner> trainingPartnerList() {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from ManageTrainingPartner");
 		List<ManageTrainingPartner> trainingPartnerList = query.list();
-		session.close();
 		return trainingPartnerList;
 	}
 
 
 	@Override
 	public List<PersonalInformationTrainer> trainingNameList() {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from PersonalInformationTrainer");
 		List<PersonalInformationTrainer> trainingNameList = query.list();
-		session.close();
 		return trainingNameList;
 	}
 
 
 	@Override
 	public String assessorUserManagementSave(AssessorUserManagementForm assessorUserManagementForm) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		String sqlInsert ="select ld.loginid  , aum.aadharnumber from assessorusermanagement as aum "+
 				  " inner join logindetails as ld on ld.id = aum.logindetails ";
 		Integer assessorId = null ;
@@ -855,8 +809,6 @@ public class AdminDAOImpl implements AdminDAO {
 			assessorUserManagement.setMiddleName(assessorUserManagementForm.getMiddleName());
 			assessorUserManagement.setLoginDetails(loginDetails);
 			Integer assessorUserManagementIdd = (Integer)session.save(assessorUserManagement);
-			tx.commit();
-			session.close();
 			if(assessorUserManagementIdd != 0 ){
 				return "created";
 			}else{
@@ -868,11 +820,9 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public List<District> districtList() {
-				Session session = sessionFactory.openSession();
-				Transaction tx = session.beginTransaction();
+				Session session = sessionFactory.getCurrentSession();
 				Query query = session.createQuery("from District  where status = 'A'");
 				List<District> districtList = query.list();
-				session.close();
 				return districtList;
 	}
 
@@ -880,8 +830,7 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public String trainingCalendarForm(TrainingCalendarForm trainingCalendarForm) {
 		System.out.println("********  "+trainingCalendarForm.getCourseName());
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		String sql = "select max(seqNo) + 1 from trainingcalendar";
 		int maxId = 0 ;
 		Query maxIDList = session.createSQLQuery(sql);
@@ -908,8 +857,6 @@ public class AdminDAOImpl implements AdminDAO {
 			tc.setSeqNo(maxId);
 		}
 		int i = (Integer) session.save(tc);
-		tx.commit();
-		session.close();
 		if(i >0){
 			return "created";
 		}else{
@@ -919,8 +866,7 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public String manageAssessmentQuestionsSave(AssessmentQuestionForm assessmentQuestionForm) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		AssessmentQuestion assessmentQuestion = null;
 		System.out.println("Assessment Question == "+assessmentQuestionForm.getId());
 		if(assessmentQuestionForm.getId() <= 0){
@@ -966,8 +912,6 @@ public class AdminDAOImpl implements AdminDAO {
 				assessmentQuestionIdd = (Integer)session.save(assessmentQuestion);
 			}
 			
-			tx.commit();
-			session.close();
 			if(assessmentQuestionIdd != 0 ){
 				return "created";
 			}else{
@@ -1009,8 +953,7 @@ public class AdminDAOImpl implements AdminDAO {
 		SendContectMail traineeMaail=null;
 		 traineeMaail = new SendContectMail();
 			
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		ContactTraineee contactTrainerModel = new ContactTraineee();
 		String email=contactTrainee.getEmailAddress();
 		String msg=contactTrainee.getMessageDetails();
@@ -1023,11 +966,7 @@ public class AdminDAOImpl implements AdminDAO {
 		contactTrainerModel.setUserId(id);
 		Integer contactTrainerModelId = (Integer) session.save(contactTrainerModel);
 		System.out.println("contactTraineeSave after save");
-		tx.commit();
-		session.close();
 		if(contactTrainerModelId >0 && contactTrainerModelId != null){
-			
-			
 			return "created";
 		}else{
 			return "error";
@@ -1037,8 +976,7 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public String saveFeedbackMaster(FeedbackMaster feedbackMaster) {
 		try{
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		Integer saveFeedbackMasterId =null;
 		if(feedbackMaster.getFeedbackTypeID()==0){
 			saveFeedbackMasterId= (Integer) session.save(feedbackMaster);
@@ -1047,8 +985,6 @@ public class AdminDAOImpl implements AdminDAO {
 		}
 		
 		System.out.println("saveFeedbackMaster after save");
-		tx.commit();
-		session.close();
 		if(saveFeedbackMasterId != null && saveFeedbackMasterId.intValue() >0){
 			return "Successfully created";
 		}else{
@@ -1060,13 +996,13 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 	@Override
 	public List<IntStringBean> getTrainingCentersByCourse(int courseNameId){
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String strQuery = "select pitp.personalinformationtrainingpartnerid, pitp.trainingcentrename "
 				+ "from courseenrolled ce "
 				+ "inner join logindetails login on login.id = ce.logindetails and profileid = 5 "
 				+ "inner join personalinformationtrainingpartner pitp on pitp.logindetails = login.id "
 				+ "where ce.coursenameid = "+courseNameId;
-;
+
 		Query query = session.createSQLQuery(strQuery);
 		List<IntStringBean> listTrainingCenters = new ArrayList<IntStringBean>();
 		List<Object[]> list =(List<Object[]>) query.list();
@@ -1082,7 +1018,7 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List<TrainerAssessmentSearchForm> searchTrainerForAssessmentValidation(int courseNameId, int trainingPartnerId){
 		List<TrainerAssessmentSearchForm> list = new ArrayList<TrainerAssessmentSearchForm>();
-		Session session = sessionFactory.openSession();	
+		Session session = sessionFactory.getCurrentSession();	
 		StringBuffer strQuery = new StringBuffer();
 		
 		strQuery.append("select pit.personalinformationtrainerid ,ct.coursetype ,cn.coursenameid, cn.coursename, "
@@ -1128,7 +1064,7 @@ public class AdminDAOImpl implements AdminDAO {
 	
 	@Override
 	public int getElegibilityForAssessment(int coursenameid){
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql = "select eligibility from assessmenteligibilitytrainer where coursenameid="+coursenameid;
 		Query query = session.createSQLQuery(sql);
 		List listEligibility = query.list();
@@ -1141,11 +1077,8 @@ public class AdminDAOImpl implements AdminDAO {
 	
 	@Override
 	public int saveTrainerAssessment(TrainerAssessmentEvaluation trainerAssessmentEvaluation){
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		Integer trainerAssessmentEvaluationId = (Integer) session.save(trainerAssessmentEvaluation);
-		tx.commit();
-		session.close();
 		return trainerAssessmentEvaluationId;
 	}
 	

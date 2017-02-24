@@ -2,7 +2,7 @@
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
-<%-- function OnStart(){
+function OnStart(){
 	var steps = 1;
 	var traineeSteps =
 		<%=(Integer) session.getAttribute("traineeSteps")%>
@@ -17,7 +17,7 @@
 	}
 }
 window.onload = OnStart;
- --%>
+
  
  function getcourseType(){
 	 

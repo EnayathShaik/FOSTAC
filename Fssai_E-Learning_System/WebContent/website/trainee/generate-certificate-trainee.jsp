@@ -15,7 +15,7 @@ function OnStart(){
 		}else{
 			alert('Please Flow Step By Step..');
 		}
-		window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
+		//window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
 	}
 }
 window.onload = OnStart;

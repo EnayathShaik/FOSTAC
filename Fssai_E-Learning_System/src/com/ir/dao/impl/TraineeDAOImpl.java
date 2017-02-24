@@ -551,7 +551,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 
 		// Integer ce =0;
 		Integer ce = (Integer) session.save(courseEnrolledUser);
-		session.beginTransaction().commit();
 		if (ce != null && ce.intValue() > 0) {
 		}
 		return rollNo;

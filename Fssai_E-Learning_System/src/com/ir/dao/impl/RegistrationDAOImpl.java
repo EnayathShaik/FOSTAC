@@ -67,37 +67,32 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 	
 	@Override
 	public KindOfBusiness getKid(int id){
-		Session ss = sessionFactory.openSession();
+		Session ss = sessionFactory.getCurrentSession();
 		KindOfBusiness kid=(KindOfBusiness) ss.load(KindOfBusiness.class, id);
-		ss.close();
 		return kid;
 	}
 	@Override
 	public State getState(int id){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		State ss = (State)s.load(State.class, id);
-		s.close();
 		return ss;
 	}
 	@Override
 	public City getCity(int id){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		City cc = (City)s.load(City.class, id);
-		s.close();
 		return cc;
 	}
 	@Override
 	public District getDistrict(int id){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		District dd = (District)s.load(District.class, id);
-		s.close();
 		return dd;
 	}
 	@Override
 	public Title getTitle(int id){
-		Session s = sessionFactory.openSession();
+		Session s = sessionFactory.getCurrentSession();
 		Title tt = (Title)s.load(Title.class, id);
-		s.close();
 		return tt;
 	}
 	@Autowired
