@@ -315,7 +315,7 @@ function searchVacancy(indicator){
                                </li>
                             </ul>
                           </div>
-                          <cf:input path="trainingDate" type="date" class="form-control" />
+                          <cf:input path="trainingDate" type="date" id="trainingStartTime"  class="form-control" />
                         </div>
                         
                         
