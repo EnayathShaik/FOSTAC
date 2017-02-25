@@ -67,11 +67,20 @@ public class JavaMail {
 	                emailFromAddress=from.trim();
 	                strCCMail=ccMail.trim();
 	                emailSubjectTxt = "FSSAI Support";
+	                
+	                StringBuffer emailMessage = new StringBuffer("Dear "+username);
+	                emailMessage.append("<br/>");
+	                emailMessage.append("<br/>");
+	                emailMessage.append("Your User ID "+id+" has been created successfully with password : "+pass);
+	                emailMessage.append("<br/>");
+	                emailMessage.append("<br/>");
+	                emailMessage.append("<br/>");
+	                emailMessage.append(" Regards");
 	                emailMsgTxt = "Dear  "+username +", "+" \r\n "+"\n"+System.getProperty("line.separator")+
 	                		" Your User ID "+id+" has been created successfully with password : "+pass+"\r\n "+"\n"+System.getProperty("line.separator")+
 	                		" Regards";
 	                try{
-	                	postMail( mail, emailSubjectTxt, emailMsgTxt, emailFromAddress,strCCMail);	
+	                	postMail( mail, emailSubjectTxt, emailMessage.toString(), emailFromAddress,strCCMail);	
 	                }catch(Exception e){
 	                	e.printStackTrace();
 	                }
@@ -121,7 +130,7 @@ public class JavaMail {
 }
 
 	
-	public boolean mailProperty1(String msg, String email, String id) {
+/*	public boolean mailProperty1(String msg, String email, String id) {
 
 		boolean flag = false;
 		this.body = msg;
@@ -153,7 +162,7 @@ public class JavaMail {
 		}
 		// return ret;
 		return flag;
-	}
+	}*/
 	
 
 	private class SMTPAuthenticator extends javax.mail.Authenticator
