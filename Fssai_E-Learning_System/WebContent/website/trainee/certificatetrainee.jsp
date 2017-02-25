@@ -86,14 +86,13 @@ try{
                                                                 </p>
                                                                 <p class="btm-p">Refresher Due : 2 years from date of issue.</p>
                                                             </div>
-                                                            <div class="row" style="position: relative; top: -25em;">
+                                                            <div class="col-xs-12" style="position: relative; top: -23em;">
                                                                 <div class="col-md-4 col-xs-12"></div>
-                                                           <div class="col-md-4 col-xs-12">
-                                                            <input type="button" class="btn login-btn" value="Download AdmitCard" id="btnPrint" />
-                                                           </div>
-                                                            <div class="col-md-4 col-xs-12"></div> 
-                                                               
-                                                              
+                                                                <div class="col-md-4 col-xs-12" align="center">
+                                                                    <button class="btn login-btn" onclick="window.print()">Print Certificate</button>
+                                                                    <!-- <input type="button" class="btn login-btn" value="Download AdmitCard" id="btnPrint" /> -->
+                                                                </div>
+                                                                <div class="col-md-4 col-xs-12"> </div>
                                                             </div>
                                                         </div>
                                                         <!-- html code ends here -->
