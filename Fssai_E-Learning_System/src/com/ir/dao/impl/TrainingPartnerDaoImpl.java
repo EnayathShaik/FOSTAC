@@ -299,7 +299,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			System.out.println("e "+e.getMessage());
 		}
 		
-		Query query = session.createQuery("from PostVacancyTrainingCenter A where  to_timestamp(COALESCE(A.trainingdate, '19900101010101'),'DD-MM-YYYY HH24:MI')  > now() AND A.requiredExp <= "+trainerExp);
+		Query query = session.createQuery("from PostVacancyTrainingCenter A where  to_timestamp(COALESCE(A.trainingDate, '19900101010101'),'DD-MM-YYYY HH24:MI')  > now() AND A.requiredExp <= "+trainerExp);
 		List<PostVacancyTrainingCenter> postVacancyTrainingCenter = query.list();
 		return postVacancyTrainingCenter;
 	}
