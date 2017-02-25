@@ -413,7 +413,7 @@ public class AdminController {
 			model.addAttribute("pwd", all[0]);
 			JavaMail javaMail = new JavaMail();
 			javaMail.mailProperty("Thanks",
-					email, manageTrainingPartnerForm.getUserId(), all[0],manageTrainingPartnerForm.getUserId());
+					email, manageTrainingPartnerForm.getUserId(), all[0],manageTrainingPartnerForm.getTrainingPartnerName());
 			/*Thread t1 = new Thread(new Runnable() {
 				public void run() {
 					// code goes here.
