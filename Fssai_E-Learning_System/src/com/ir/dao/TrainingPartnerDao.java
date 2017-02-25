@@ -36,6 +36,7 @@ public interface TrainingPartnerDao {
 	public List<CourseType> courseTypes();
 	public List<IntStringBean> getTrainerList();
 	public List<IntStringBean> getTraineeList();
+	public int getTrainingCenter(Integer userId,Integer profileId);
 	public List<IntStringBean> getTrainingCenterList(Integer userId,Integer profileId);
 	public List<IntStringBean> getAssessorList();
 	public List<CourseName> getCourseNameList();

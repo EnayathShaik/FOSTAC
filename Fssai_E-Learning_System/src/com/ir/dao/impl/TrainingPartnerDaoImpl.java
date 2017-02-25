@@ -298,13 +298,9 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			e.printStackTrace();
 			System.out.println("e "+e.getMessage());
 		}
-		List<PostVacancyTrainingCenter> postVacancyTrainingCenter = null;
-		try{
+		
 		Query query = session.createQuery("from PostVacancyTrainingCenter A where  to_timestamp(COALESCE(A.trainingdate, '19900101010101'),'DD-MM-YYYY HH24:MI')  > now() AND A.requiredExp <= "+trainerExp);
-		 postVacancyTrainingCenter = query.list();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		List<PostVacancyTrainingCenter> postVacancyTrainingCenter = query.list();
 		return postVacancyTrainingCenter;
 	}
 	@Override
