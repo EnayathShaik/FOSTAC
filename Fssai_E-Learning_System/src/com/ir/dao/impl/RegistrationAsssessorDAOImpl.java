@@ -227,38 +227,7 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 								System.out.println("BasicCoursesplited  "+ strBasicCourse);
 								long courseenrolledbasic = (Integer)session1.save(courseEnrolledBasic);
 				}
-//				List<String> listAdvCourses = registrationFormAssessor.getAdvanceCourses();
-//				for (int i = 0; i < listBasicCourses.size(); i++) {
-//				String AdvanceCourse = listAdvCourses.get(i);
-//				if(AdvanceCourse.length() == 0){
-//					String[] AdvanceCoursesplited = AdvanceCourse.split(",");
-//					System.out.println("advance course length   "+ AdvanceCoursesplited.length);
-//					if(AdvanceCoursesplited.length >= 1){
-//						for(int i=0 ; i < AdvanceCoursesplited.length ; i++){
-//							CourseEnrolled courseEnrolledAdvance = new CourseEnrolled();
-//							courseEnrolledAdvance.setLoginDetails(loginDetails);
-//							courseEnrolledAdvance.setCoursenameid(Integer.parseInt(AdvanceCoursesplited[i]));
-//							System.out.println("AdvanceCoursesplited  "+ AdvanceCoursesplited[i]);
-//							Integer courseenrolledadvance = (Integer)session1.save(courseEnrolledAdvance);
-//						}
-//					}
-//				}
-//				String SpecialCourse = registrationFormAssessor.getSpecialCourse1();
-//				if(SpecialCourse.length() == 0){
-//					String[] SpecialCoursesplited = SpecialCourse.split(",");
-//					System.out.println("SpecialCourse course length   "+ SpecialCoursesplited.length);
-//					if(SpecialCoursesplited.length >= 1){
-//						for(int i=0 ; i < SpecialCoursesplited.length ; i++){
-//							CourseEnrolled courseEnrolledSpecial = new CourseEnrolled();
-//							courseEnrolledSpecial.setLoginDetails(loginDetails);
-//							courseEnrolledSpecial.setCoursenameid(Integer.parseInt(SpecialCoursesplited[i]));
-//							System.out.println("SpecialCoursesplited  "+ SpecialCoursesplited[i]);
-//							Integer courseenrolledspecial = (Integer)session1.save(courseEnrolledSpecial);
-//						}
-//					}
-//				}
-				
-			}catch (Exception e) {
+		}catch (Exception e) {
 				System.out.println("Oops !! course basic" + e.getMessage());
 			}
 			System.out.println("lllll     "+ registrationFormAssessor.getUserId() + "      "+ personalInformationTrainerIdd);

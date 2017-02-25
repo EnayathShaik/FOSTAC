@@ -85,7 +85,7 @@ public class AdminController {
 		return stateList;
 	}
 
-	@ModelAttribute("districtList")
+	/*@ModelAttribute("districtList")
 	public List<District> districtList() {
 		List<District> districtList = null;
 		try {
@@ -95,7 +95,7 @@ public class AdminController {
 			e.printStackTrace();
 		}
 		return districtList;
-	}
+	}*/
 
 	@ModelAttribute("trainingPartnerList")
 	public List<ManageTrainingPartner> trainingPartnerList() {

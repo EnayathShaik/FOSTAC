@@ -576,9 +576,6 @@ public class TraineeController {
 					userId = (Integer) session.getAttribute("userId");
 					int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
 					traineeService.updateSteps(tableID, profileID, 0);
-					/*String getId = GenerateUniqueID.getNextCombinationId("TCR");
-					System.out.println("getId "+getId);*/
-					//System.out.println(traineeService.getCertificateID(userId, profileID));
 					CertificateInfo certificateInfo = traineeService.getCertificateID(userId, profileID);
 					System.out.println("Certificate ID = "+certificateInfo.getCertificateID());
 					System.out.println("Training Date = "+certificateInfo.getTrainingDate());
@@ -722,7 +719,16 @@ public class TraineeController {
 		try{
 			if(userId>0){
 				String isEligible = "";
-				isEligible = traineeService.isTraineeEligible(userId);
+				String isOnline=traineeService.isCourseOnline(userId);
+				System.out.println("Course Type ONLINE OR CLASSROOM : "+isOnline);
+				if(isOnline != null && isOnline.toUpperCase().contains("ONLINE")){
+					model.addAttribute("ISONLINE","YES");
+					isEligible = traineeService.isTraineeEligible(userId,"ONLINE");
+				}else{
+					model.addAttribute("ISONLINE","NO");
+					isEligible = traineeService.isTraineeEligible(userId,"CLASSROOM");
+				}
+				
 				if(isEligible != null && isEligible.equals("Y")){
 					CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
 					model.addAttribute("courseTrainee", courseTrainee);

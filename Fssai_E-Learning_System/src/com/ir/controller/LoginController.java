@@ -213,10 +213,6 @@ public class LoginController {
 				PersonalInformationTrainingPartner personalInformationTrainingPartner ;
 				personalInformationTrainingPartner = loginService.FullDetailtrainingpartner(loginDetails.getId());
 				System.out.println("in trainer login aadhar is "+personalInformationTrainingPartner.getFirstName());
-				
-				
-				
-				
 				/*session.setAttribute("loginUr", personalInformationTrainingPartner);
 				session.setAttribute("loginUserS", personalInformationTrainingPartner);
 				model.addAttribute("logintrainer", personalInformationTrainingPartner);*/
@@ -225,6 +221,7 @@ public class LoginController {
 				session.setAttribute("logId", personalInformationTrainingPartner.getLoginDetails().getLoginId());
 				session.setAttribute("profileId", loginDetails.getProfileId());
 				session.setAttribute("userId", loginDetails.getId());
+				session.setAttribute("userTableId", personalInformationTrainingPartner.getPersonalInformationTrainingPartnerId());
 				session.setAttribute("userName", loginDetails.getLoginId());
 				System.out.println("id of trainpartner is "+personalInformationTrainingPartner.getPersonalInformationTrainingPartnerId());	
 				return "trainingPartnerHomepage";

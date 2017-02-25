@@ -522,37 +522,49 @@ public class TrainingPartnerController {
 	}
 	
 	@RequestMapping(value="/trainingCenterCalenderSave" , method=RequestMethod.POST)
-	public String trainingCalenderSave(@Valid @ModelAttribute("trainingPartnerCalendarForm") TrainingPartnerCalendarForm trainingPartnerCalendarForm ,BindingResult result ,Model model) {
-		if(result.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
-			return "trainingpartnertrainingcalendar";
+	public String trainingCalenderSave(@Valid @ModelAttribute("trainingPartnerCalendarForm") TrainingPartnerCalendarForm trainingPartnerCalendarForm ,BindingResult result ,Model model , HttpSession session) {
+		try{
+			if(result.hasErrors()){
+				System.out.println(" bindingResult.hasErrors "+result.hasErrors());
+				System.out.println(result.getErrorCount());
+				System.out.println(result.getAllErrors());
+				return "trainingpartnertrainingcalendar";
+			}
+			Integer profileID = 0;
+			Integer userId = 0;
+			int loginId = 0;
+				profileID = (Integer) session.getAttribute("profileId");
+				loginId = (int) session.getAttribute("loginIdUnique");
+				userId = (Integer) session.getAttribute("userId");
+				int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
+		     
+			TrainingCalendarForm trainingCalendarForm = new TrainingCalendarForm();
+			trainingPartnerService.setTrainingCalanderDeatils(trainingCalendarForm, trainingPartnerCalendarForm.getLoginId());
+			trainingCalendarForm.setCourseName(trainingPartnerCalendarForm.getSelCourseName());
+			trainingCalendarForm.setCourseType(trainingPartnerCalendarForm.getSelCourseType());
+			trainingCalendarForm.setTrainerName(trainingPartnerCalendarForm.getSelTrainerNames());
+			trainingCalendarForm.setTrainingStartDate(trainingPartnerCalendarForm.getTrainingStartDate());
+			trainingCalendarForm.setTrainingEndDate(trainingPartnerCalendarForm.getTrainingEndDate());
+			trainingCalendarForm.setAssessmentAgencyName(trainingPartnerCalendarForm.getAssessmentAgencyName());
+			trainingCalendarForm.setTcid(trainingPartnerCalendarForm.getTcid());
+			trainingCalendarForm.setSeatCapacity(trainingPartnerCalendarForm.getSeatCapacity());
+			trainingCalendarForm.setType(trainingPartnerCalendarForm.getType());
+			trainingCalendarForm.setAssessor(trainingPartnerCalendarForm.getAssessorName());
+			trainingCalendarForm.setAssessmentDateTime(trainingPartnerCalendarForm.getAssessmentDateTime());
+			trainingCalendarForm.setTrainingCenter(tableID);
+			
+			String trainingCalendar = trainingPartnerService.trainingCalendarForm(trainingCalendarForm);
+			
+			model.addAttribute(new TrainingPartnerCalendarForm()); 
+			if(trainingCalendar.equalsIgnoreCase("created")){
+				model.addAttribute("created", "Calender saved successfully !!!");
+			}else{
+				model.addAttribute("created", "Oops , something went wrong !!!");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
-		TrainingCalendarForm trainingCalendarForm = new TrainingCalendarForm();
-		trainingPartnerService.setTrainingCalanderDeatils(trainingCalendarForm, trainingPartnerCalendarForm.getLoginId());
-		trainingCalendarForm.setCourseName(trainingPartnerCalendarForm.getSelCourseName());
-		trainingCalendarForm.setCourseType(trainingPartnerCalendarForm.getSelCourseType());
-		trainingCalendarForm.setTrainerName(trainingPartnerCalendarForm.getSelTrainerNames());
-		trainingCalendarForm.setTrainingStartDate(trainingPartnerCalendarForm.getTrainingStartDate());
-		trainingCalendarForm.setTrainingEndDate(trainingPartnerCalendarForm.getTrainingEndDate());
-		trainingCalendarForm.setAssessmentAgencyName(trainingPartnerCalendarForm.getAssessmentAgencyName());
-		System.out.println("tcid "+trainingPartnerCalendarForm.getTcid());
-		trainingCalendarForm.setTcid(trainingPartnerCalendarForm.getTcid());
-		System.out.println(trainingPartnerCalendarForm.getSeatCapacity());
-		trainingCalendarForm.setSeatCapacity(trainingPartnerCalendarForm.getSeatCapacity());
-		trainingCalendarForm.setType(trainingPartnerCalendarForm.getType());
-		trainingCalendarForm.setAssessor(trainingPartnerCalendarForm.getAssessorName());
-		System.out.println("date time "+trainingPartnerCalendarForm.getAssessmentDateTime());
-		trainingCalendarForm.setAssessmentDateTime(trainingPartnerCalendarForm.getAssessmentDateTime());
-		String trainingCalendar = trainingPartnerService.trainingCalendarForm(trainingCalendarForm);
 		
-		model.addAttribute(new TrainingPartnerCalendarForm()); 
-		if(trainingCalendar.equalsIgnoreCase("created")){
-			model.addAttribute("created", "Calender saved successfully !!!");
-		}else{
-			model.addAttribute("created", "Oops , something went wrong !!!");
-		}
 		return "redirect:/trainingpartnertrainingcalendar.fssai";
 	}
 	

@@ -62,8 +62,8 @@ public class TraineeServiceImpl implements TraineeService {
 		}
 	
 	@Override
-	public String isTraineeEligible(int userID) {
-		String eligible = traineeDAO.isTraineeEligible(userID);
+	public String isTraineeEligible(int userID,String isOnline) {
+		String eligible = traineeDAO.isTraineeEligible(userID,isOnline);
 		return eligible;
 	}
 	@Override

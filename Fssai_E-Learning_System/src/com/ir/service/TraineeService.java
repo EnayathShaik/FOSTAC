@@ -43,7 +43,7 @@ public interface TraineeService {
 	public CourseTrainee getCourseTrainingByCourseTypeID(int typeId);
 	
 	@Transactional
-	public String isTraineeEligible(int userID);
+	public String isTraineeEligible(int userID,String isOnline);
 	
 	@Transactional
 	public List<ManageTrainingPartner> trainingPartnerList();

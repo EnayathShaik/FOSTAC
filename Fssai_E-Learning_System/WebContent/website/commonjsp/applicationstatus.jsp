@@ -10,6 +10,7 @@ window.onload = OnStart;
 </script>
 <script type="text/javascript">
 function searchCurrentAppliactionStatus(){
+	alert('Start Application Status')
 	var data=JSON.stringify({
 		courseType:0,
 		courseName:0
@@ -17,7 +18,7 @@ function searchCurrentAppliactionStatus(){
 	
 	$.ajax({
 	      type: 'post',
-	      url: 'getApplicationStatusDetails.fssai',
+	      url: 'getApplicationStatusDetails.fssai?name=sdfds',
 	      contentType : "application/json",
 	      data:data,
 	      success: function (response) {
@@ -27,7 +28,7 @@ function searchCurrentAppliactionStatus(){
            	  $('#applicaionStatus').append('<tr>'+
            		'<td>'+(index+1)+'</td>'+
            	    '<td>'+response[index].courseCode+'</td>'+
-           	    '<td>'+response[index].trainingStartDate+'</td>'+
+           	    '<td>'+response[index].trainingDate+'</td>'+
            	 '<td>'+response[index].trainingEndDate+'</td>'+
            	     '<td>'+response[index].noOfVacancy+'</td>'+
            	    '<td><a  href="editApplicationStatusDetails.fssai?postvacancyID='+response[index].loginId+'">'+response[index].noOfApplications+'</td> '+

@@ -66,7 +66,7 @@
 			return false;
 	}
 
-	function myCheckPermanent() {
+	/* function myCheckPermanent() {
 		var x = document.getElementById('checkPermanent').checked;
 		//permanent1.style.display = checkPermanent.checked ? "none" : "block";
 		//permanent2.style.display = checkPermanent.checked ? "none" : "block";
@@ -101,6 +101,54 @@
 			
 		}
 		if (x == false) {
+			document.getElementById('AssessorPermanentLine1').value = "";
+			document.getElementById('AssessorPermanentLine2').value = "";
+			document.getElementById('AssessorPermanentPincode').value = "";
+			document.getElementById('AssessorrPermanentState').value = "";
+			document.getElementById('AssessorPermanentDistrict').value = "";
+			document.getElementById('AssessorPermanentCity').value = "";
+		}
+	} */
+	
+	function myCheckPermanent() {
+		var x = document.getElementById('checkPermanent').checked;
+		//permanent1.style.display = checkPermanent.checked ? "none" : "block";
+		//permanent2.style.display = checkPermanent.checked ? "none" : "block";
+		if (x == true) {
+			document.getElementById('permanent1').style.display = 'none';
+			document.getElementById('permanent2').style.display = 'none';
+			document.getElementById('AssessorPermanentLine1').value = document
+					.getElementById('AssessorCorrespondenceLine1').value;
+			//$("#AssessorPermanentLine1").attr('readonly',true);
+			document.getElementById('AssessorPermanentLine2').value = document
+					.getElementById('AssessorCorrespondenceLine2').value;
+			//$("#AssessorPermanentLine2").attr('readonly',true);
+			document.getElementById('AssessorPermanentPincode').value = document
+					.getElementById('AssessorCorrespondencePincode').value;
+			//$("#AssessorPermanentPincode").attr('readonly',true);
+			document.getElementById('AssessorrPermanentState').value = document.getElementById('AssessorCorrespondenceState').value;
+			$("#AssessorrPermanentState").trigger("change");
+			//$("#AssessorrPermanentState").attr("disabled" , true);
+			window.setTimeout(function(){
+				//console.log("district "+ document.getElementById('AssessorCorrespondenceDistrict').value);
+				$("#AssessorPermanentDistrict").val($("#AssessorCorrespondenceDistrict").val());
+				$("#AssessorPermanentDistrict").trigger("change");
+				//$("#AssessorPermanentDistrict").attr('disabled',true);
+			 }, 3000);
+			
+				window.setTimeout(function(){
+					//console.log(" city "+ document.getElementById('AssessorCorrespondenceCity').value);
+					$("#AssessorPermanentCity").val($("#AssessorCorrespondenceCity").val())
+					//document.getElementById('AssessorPermanentCity').value = document.getElementById('AssessorCorrespondenceCity').value;
+					
+					//$("#AssessorPermanentCity").attr('disabled',true);
+			}, 4000);
+			
+			
+		}
+		if (x == false) {
+			document.getElementById('permanent1').style.display  = 'block';
+			document.getElementById('permanent2').style.display  = 'block';
 			document.getElementById('AssessorPermanentLine1').value = "";
 			document.getElementById('AssessorPermanentLine2').value = "";
 			document.getElementById('AssessorPermanentPincode').value = "";

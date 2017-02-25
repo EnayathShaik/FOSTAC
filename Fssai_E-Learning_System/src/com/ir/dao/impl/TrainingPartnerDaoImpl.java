@@ -404,12 +404,14 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		Session session = sessionFactory.getCurrentSession();
 		//String sql="select coursetype,coursename,trainingdate,noofvacancy,loginid from trainingcentervacancyenrolled tcev";
 		StringBuffer sqlBuffer = new StringBuffer();
-		sqlBuffer.append("select B.coursetypeid,C.coursenameid,A.trainingdatetime,A.noofvacancy,");
+		sqlBuffer.append("select B.coursetypeid,C.coursenameid,A.trainingdate,A.noofvacancy,");
 		sqlBuffer.append("A.postvacancytrainingcenterid, (select count(1) from trainingcentervacancyenrolled AA where AA.postvacancyid = A.postvacancytrainingcenterid)");
-		sqlBuffer.append(" ,A.trainingdate,A.trainingendtime");
+		sqlBuffer.append(" ,A.trainingendtime");
 		sqlBuffer.append(" from postvacancytrainingcenter A");
 		sqlBuffer.append(" inner join coursetype B on(A.coursetype=B.coursetypeid)");
 		sqlBuffer.append(" inner join coursename C on(A.coursename=C.coursenameid) ");
+		
+		System.out.println("Application Status == "+sqlBuffer.toString());
 		
 		String queryParam="";
 		List<PostVacancyTrainingCenter> beans=new ArrayList<>();
@@ -453,8 +455,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			postVacancyTrainingBean.setNoOfVacancy(Integer.parseInt(list.get(i)[3].toString()));
 			postVacancyTrainingBean.setLoginId(list.get(i)[4].toString());
 			postVacancyTrainingBean.setNoOfApplications(Integer.parseInt(list.get(i)[5].toString()));
-			postVacancyTrainingBean.setTrainingDate(list.get(i)[6] == null ? "" : list.get(i)[6].toString());
-			postVacancyTrainingBean.setTrainingEndTime(list.get(i)[7] == null ? "" : list.get(i)[7].toString());
+			postVacancyTrainingBean.setTrainingEndTime(list.get(i)[6] == null ? "" : list.get(i)[6].toString());
 			beans.add(postVacancyTrainingBean);
 		}
 		return beans;
@@ -600,23 +601,21 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		TrainingCalendar tc = new TrainingCalendar();
 		tc.setCourseType(trainingCalendarForm.getCourseType());
 		tc.setCourseName(trainingCalendarForm.getCourseName());
-		tc.setTrainingPartner(trainingCalendarForm.getTrainingPartner());
 		tc.setTrainingCenter(trainingCalendarForm.getTrainingCenter());
 		tc.setTrainingDate(trainingCalendarForm.getTrainingStartDate());
 		tc.setTrainingTime(trainingCalendarForm.getTrainingEndDate());
 		tc.setTrainerName(trainingCalendarForm.getTrainerName());
 		tc.setAssessmentPartnerName(trainingCalendarForm.getAssessmentAgencyName());
-		System.out.println("---> "+trainingCalendarForm.getSeatCapacity());
 		tc.setSeatCapacity(trainingCalendarForm.getSeatCapacity());
 		tc.setAssessmentDateTime(trainingCalendarForm.getAssessmentDateTime());
 		tc.setType(trainingCalendarForm.getType());
 		tc.setAssessor(trainingCalendarForm.getAssessor());
-		//assessment
 		tc.setAssessmentDateTime(trainingCalendarForm.getAssessmentDateTime());
-		//tc.setAssessmentTime(trainingCalendarForm.getTrainingEndDate());
 		
 		System.out.println("---->"+trainingCalendarForm.getTcid());
 		CourseName courseName = (CourseName) session.load(CourseName.class, trainingCalendarForm.getCourseName());
+		PersonalInformationTrainingPartner personalInformationTrainingPartner = (PersonalInformationTrainingPartner) session.load(PersonalInformationTrainingPartner.class, trainingCalendarForm.getTrainingCenter());
+		tc.setTrainingPartner(personalInformationTrainingPartner.getTrainingPartnerName());
 		if(courseName != null && courseName.getCourseCode() != null && courseName.getCourseCode().length() > 1){
 			tc.setBatchCode(courseName.getCourseCode()+"/"+StringUtils.leftPad(String.valueOf(maxId), 5, "0"));
 			tc.setSeqNo(maxId);

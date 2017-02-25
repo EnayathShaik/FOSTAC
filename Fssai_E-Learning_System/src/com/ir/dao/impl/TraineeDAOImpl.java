@@ -871,6 +871,9 @@ public class TraineeDAOImpl implements TraineeDAO {
 		} else if (profileId == 4) {
 			sql = "select personalinformationtrainerid from "
 					+ data.tableName() + " where logindetails = " + loginId;
+		} else if (profileId == 5) {
+			sql = "select personalinformationtrainingpartnerid from "
+					+ data.tableName() + " where logindetails = " + loginId;
 		}
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
@@ -921,7 +924,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		String status = "";
 		Session session = sessionFactory.getCurrentSession();
 		String sql = "select C.classroom||C.online course from courseenrolleduser A inner join trainingcalendar B on(A.trainingcalendarid=B.trainingcalendarid) inner join coursename C on(B.coursename=C.coursenameid)"
-				+ " where A.logindetails = " + userID;
+				+ " where A.status = 'N' AND A.logindetails = " + userID;
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
 		System.out.println(list.size());
@@ -947,85 +950,114 @@ public class TraineeDAOImpl implements TraineeDAO {
 	}
 
 	@Override
-	public String isTraineeEligible(int userID) {
+	public String isTraineeEligible(int userID,String isOnline) {
 		// TODO Auto-generated method stub
 				String eligible = "";
 				Session session = sessionFactory.getCurrentSession();
-				String sql = "select A.logindetails  from assessmentevaluationtrainee A"
-						+ " where A.totalscore >= (select AA.eligibility from assessmenteligibility AA where AA.coursenameid=A.coursenameid) and A.logindetails = " + userID;
-				Query query = session.createSQLQuery(sql);
-				List list = query.list();
-				System.out.println(list.size());
-				if(list.size() > 0){
-					eligible = "Y";
-					//eligible = (String) list.get(0);
+				
+				
+				if(isOnline != null && isOnline.equals("ONLINE")){
+					String sql = "select A.logindetails  from assessmentevaluationtrainee A"
+							+ " where A.totalscore >= (select AA.eligibility from assessmenteligibility AA where AA.coursenameid=A.coursenameid) and A.logindetails = " + userID;
+					Query query = session.createSQLQuery(sql);
+					List list = query.list();
+					System.out.println(list.size());
+					if(list.size() > 0){
+						eligible = "Y";
+						//eligible = (String) list.get(0);
+					}
+				}else{
+					String sql = "select result from courseenrolleduser where logindetails = 20 and status = 'N'";
+					Query query = session.createSQLQuery(sql);
+					List list = query.list();
+					System.out.println(list.size());
+					if(list.size() > 0){
+						String result  = (String) list.get(0);
+						if(result != null && result.toUpperCase().equals("P")){
+							eligible = "Y";
+						}
+						//eligible = (String) list.get(0);
+					}
 				}
+				
 				return eligible;
 	}
 	
 	@Override
 	public CertificateInfo getCertificateID(int userID, int profileID) {
 		// TODO Auto-generated method stub
-				String certificateID = "";
-				Session session = sessionFactory.getCurrentSession();
-				//Get Next Seq
-				
-				String sqlSeq = "select max(certificateseqno) + 1 from courseenrolleduser";
-				int maxIdSeq  = 0 ;
-				Query maxIDListSeq  = session.createSQLQuery(sqlSeq);
-				List list = maxIDListSeq .list();
-				System.out.println(list.size());
-				if(list.size() > 0){
-					maxIdSeq  = (int) list.get(0);
-					//eligible = (String) list.get(0);
-				}
-				
-				
-				//max SeqNo
-				String sql = "Select C.coursecode,B.trainingdate," +
-						"A.courseenrolleduserid ,D.firstname || ' '|| D.middlename ||' '|| D.lastname,A.issueDate,A.certificateid from courseenrolleduser A " +
-						"inner join trainingcalendar B on(A.trainingcalendarid=B.trainingcalendarid) " +
-						"inner join coursename C on(B.coursename=C.coursenameid) " +
-						"inner join personalinformationtrainee D on(A.logindetails=D.logindetails) "+
-						"Where A.status='N' AND A.logindetails = "+userID;
-				int courseEnrolledUserID = 0;
-				String courseCode = "";
-				Query query = session.createSQLQuery(sql);
-				List<Object[]> records = (List<Object[]>) query.list();
-				CertificateInfo certificateInfo = new CertificateInfo();
-				try {
-					if (records.size() > 0) {
+		CertificateInfo certificateInfo = new CertificateInfo();
+		try{
+			String certificateID = "";
+			Session session = sessionFactory.getCurrentSession();
+			//Get Next Seq
+			
+			String sqlSeq = "select max(certificateseqno) + 1 from courseenrolleduser";
+			int maxIdSeq  = 0 ;
+			Query maxIDListSeq  = session.createSQLQuery(sqlSeq);
+			List list = maxIDListSeq .list();
+			System.out.println(list.size());
+			if(list.size() > 0){
+				maxIdSeq  = (int) list.get(0);
+				//eligible = (String) list.get(0);
+			}
+			
+			
+			//max SeqNo
+			String sql = "Select C.coursecode,B.trainingdate," +
+					"A.courseenrolleduserid ,D.firstname || ' '|| D.middlename ||' '|| D.lastname,A.issueDate,A.certificateid from courseenrolleduser A " +
+					"inner join trainingcalendar B on(A.trainingcalendarid=B.trainingcalendarid) " +
+					"inner join coursename C on(B.coursename=C.coursenameid) " +
+					"inner join personalinformationtrainee D on(A.logindetails=D.logindetails) "+
+					"Where A.status='N' AND A.logindetails = "+userID;
+			int courseEnrolledUserID = 0;
+			String courseCode = "";
+			Query query = session.createSQLQuery(sql);
+			List<Object[]> records = (List<Object[]>) query.list();
+			System.out.println("Record Size == "+records.size());
+			try {
+				if (records.size() > 0) {
 
-						Object[] obj = records.get(0);
-						courseCode =  obj[0] == null ? "" : obj[0].toString();
-						certificateInfo.setTrainingDate(obj[1] == null ? "" : obj[1].toString());
-						courseEnrolledUserID = (int) obj[2];
-						certificateInfo.setName(obj[3] == null ? "" : obj[3].toString());
-						certificateInfo.setIssueDate(obj[4] == null ? "" : obj[4].toString());
-						certificateInfo.setCertificateID(obj[5] == null ? "" : obj[5].toString());
-					}
-				} catch (Exception e) {
-					System.out
-							.println("Exception while retrieving admit card details : "
-									+ e.getMessage());
+					Object[] obj = records.get(0);
+					courseCode =  obj[0] == null ? "" : obj[0].toString();
+					certificateInfo.setTrainingDate(obj[1] == null ? "" : obj[1].toString());
+					courseEnrolledUserID = (int) obj[2];
+					System.out.println("courseEnrolledUserID -- "+courseEnrolledUserID);
+					certificateInfo.setName(obj[3] == null ? "" : obj[3].toString());
+					certificateInfo.setIssueDate(obj[4] == null ? "" : obj[4].toString());
+					certificateInfo.setCertificateID(obj[5] == null ? "" : obj[5].toString());
 				}
-				if(certificateInfo != null && certificateInfo.getCertificateID() != null && certificateInfo.getCertificateID().length() > 0){
-					if(courseCode != null && courseCode.length() > 0){
-						certificateID = courseCode + StringUtils.leftPad(String.valueOf(maxIdSeq), 6, "0") + "17";
-					}
-					certificateInfo.setCertificateID(certificateID);
-					if(courseEnrolledUserID > 0){
-						CourseEnrolledUser courseEnrolledUser = (CourseEnrolledUser) session
-								.load(CourseEnrolledUser.class, courseEnrolledUserID);
-						courseEnrolledUser.setCertificateID(certificateID);
-						courseEnrolledUser.setCertificateSeqNo(maxIdSeq);
-						DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-						Date dateobj = new Date();
-						courseEnrolledUser.setIssueDate(df.format(dateobj));
-						certificateInfo.setIssueDate(df.format(dateobj));
-						session.update(courseEnrolledUser);
-					}
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out
+						.println("Exception while retrieving admit card details : "
+								+ e.getMessage());
+			}
+			System.out.println("Certificate ID Before = "+certificateInfo.getCertificateID());
+			if(certificateInfo != null && certificateInfo.getCertificateID() == null || certificateInfo.getCertificateID().trim().length() <= 5  || certificateInfo.getCertificateID().toUpperCase().equals("NULL")){
+				if(courseCode != null && courseCode.length() > 0){
+					certificateID = courseCode + StringUtils.leftPad(String.valueOf(maxIdSeq), 6, "0") + "17";
+				
 				}
+				certificateInfo.setCertificateID(certificateID);
+				System.out.println("Method = "+certificateID);
+				System.out.println("Course EnrollUser ID == "+courseEnrolledUserID);
+				if(courseEnrolledUserID > 0){
+					CourseEnrolledUser courseEnrolledUser = (CourseEnrolledUser) session
+							.load(CourseEnrolledUser.class, courseEnrolledUserID);
+					courseEnrolledUser.setCertificateID(certificateID);
+					courseEnrolledUser.setCertificateSeqNo(maxIdSeq);
+					DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+					Date dateobj = new Date();
+					courseEnrolledUser.setIssueDate(df.format(dateobj));
+					certificateInfo.setIssueDate(df.format(dateobj));
+					session.update(courseEnrolledUser);
+				}
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 				
 				return certificateInfo;
 	}

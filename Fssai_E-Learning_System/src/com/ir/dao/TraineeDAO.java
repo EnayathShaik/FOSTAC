@@ -34,7 +34,7 @@ public interface TraineeDAO {
 	public CourseName getCourseName(int profileId);
 	public CourseName getCourseDetails(int loginId);
 	public CourseTrainee getCourseTrainingByCourseTypeID(int typeId);
-	public String isTraineeEligible(int userID);
+	public String isTraineeEligible(int userID,String isOnline);
 	public List<ManageTrainingPartner> trainingPartnerList();
 	public List<FeedbackMaster> getFeedMasterList(int profileId);
 
