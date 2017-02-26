@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
@@ -125,4 +126,12 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		return -1;
 	}
 	
+	
+	@Override
+	public List<CourseType> courseTypeList() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from CourseType");
+		List<CourseType> courseTypeList = query.list();
+		return courseTypeList;
+	}
 }

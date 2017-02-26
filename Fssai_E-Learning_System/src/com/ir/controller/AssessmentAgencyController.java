@@ -1,5 +1,8 @@
 package com.ir.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +13,13 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.google.gson.Gson;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.LoginForm;
+import com.ir.form.viewAssessmentAgencyCalendarForm;
+import com.ir.model.CourseType;
 import com.ir.model.assessmentagency.AssessmentAgencyForm;
 import com.ir.service.AssessmentAgencyService;
 
@@ -123,24 +129,26 @@ public class AssessmentAgencyController {
 	}
 	
 	@RequestMapping(value="/viewAssessmentAgencyCalendar", method=RequestMethod.GET)
-	public String viewAssessmentAgencyCalendar(@Validated @ModelAttribute("assessmentAgencyForm") AssessmentAgencyForm assessmentAgencyForm,HttpSession httpSession,Model model){
-		int agencyId = (Integer)httpSession.getAttribute("loginIdUnique");
+	public String viewAssessmentAgencyCalendar(@Validated @ModelAttribute("viewAssessmentAgencyCalendarForm") viewAssessmentAgencyCalendarForm viewAssessmentAgencyCalendarForm,HttpSession httpSession,Model model){
+		int agencyId = (Integer)httpSession.getAttribute("assessmentId");
+		System.out.println("agencyId "+agencyId);
 		try{
-			if(agencyId >0 ){
-				assessmentAgencyForm = assessmentAgencyService.getAssessmentAgencyForm(agencyId);
-				Gson gson = new Gson();
-				String assessmentAgencyFormData = gson.toJson(assessmentAgencyForm);
-				model.addAttribute("viewAssessmentAgencyCalendar" , assessmentAgencyFormData);
+
+				Map<String , String> assessorMap = assessmentAgencyService.assessorNameMap(agencyId);
+				model.addAttribute("assessorName" , assessorMap);
 				return "viewAssessmentAgencyCalendar";
-			} 
-			else{
-				model.addAttribute("error" , "Oops , You are not authorized !!!");
-				return "login";
-			}
+		
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		return "login";
+	}
+	
+	
+	@ModelAttribute("courseTypeList")
+	public List<CourseType> courseTypeList(){
+		List<CourseType> courseTypeList = assessmentAgencyService.courseTypeList();
+		return courseTypeList;
 	}
 	
 }

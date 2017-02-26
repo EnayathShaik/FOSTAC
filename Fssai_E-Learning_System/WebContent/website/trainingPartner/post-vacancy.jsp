@@ -76,15 +76,7 @@ function validateFields(){
 		document.getElementById('courseName').style.borderColor = "#ccc";
 	    document.getElementById("courseNameError").style.display = 'none';
 	}
-	/* if(trainingDate == 0){
-		document.getElementById('trainingDate').style.borderColor = "red";
-    	document.getElementById("trainingDateError").style.display = 'block';
-    	document.getElementById("trainingDate").focus();
-    	return false;
-	}else{
-		document.getElementById('trainingDate').style.borderColor = "#ccc";
-	    document.getElementById("trainingDateError").style.display = 'none';
-	} */
+	
 	if(requiredExp <= 0){
 		document.getElementById('requiredExp').style.borderColor = "red";
     	document.getElementById("requiredExpError").style.display = 'block';
@@ -108,12 +100,13 @@ function validateFields(){
 
 <script type="text/javascript">
 function searchVacancy(indicator){
-	var loginID = $("#loginId").val();
+	var loginID = '${triningCenter}';
 	
 	
 	var courseType =  ($("#courseType").val() == 0 ? "" : $("#courseType").val());
 	var courseName =  ($("#courseName").val() == 0 ? "" : $("#courseName").val());
-	var trainingDate = $("#trainingDate").val(); /* .replace("-","/").replace("-","/"); */
+	var trainingDate = (typeof $("#trainingStartTime").val() === "undefined"  ? "" : $("#trainingStartTime").val() ); 
+	var trainingTime = (typeof $("#trainingEndTime").val() === "undefined" ? "" : $("#trainingEndTime").val() ); 
 	var requiredExp =  ($("#requiredExp").val() == 0 ? "" : $("#requiredExp").val());
 	var noOfVacancy =  ($("#noOfVacancy").val() == 0 ? "" : $("#noOfVacancy").val());
 	
@@ -123,10 +116,9 @@ function searchVacancy(indicator){
 	if(indicator == "ALL")
 		 total = "courseType=&courseName=&trainingDate=&requiredExp=&noOfVacancy=&loginid="+loginID;
 	else
-		 total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy+"&loginid="+loginID;
-	//alert("total "+total);
+		 total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy+"&loginid="+loginID+"&trainingTime="+trainingTime;
  	var result="";
-		$.ajax({
+	 	$.ajax({
 		type: 'post',
 		url: 'searchVacancy.jspp?'+ total,
 		async: false, 
@@ -142,7 +134,7 @@ function searchVacancy(indicator){
 			
 		});
 		}
-		}); 
+		});  
 	return result;
 }
 

@@ -58,13 +58,55 @@ public class ViewAssessmentAgencyCalendar extends HttpServlet {
 				response.setContentType("text/html;charset=UTF-8");
 				String agencyId = request.getParameter("agencyId");
 		        PrintWriter out = response.getWriter();
+		        String name = (request.getQueryString());
+		        String [] n1 = name.split("&");
+		        String courseType,courseName,assessmentDateTime,assessmentAgencyName ,assessorName ;
+		        
+		        try{
+					courseType = n1[0].split("=")[1];
+				}
+				catch(Exception e){
+					courseType = "%";	
+				}
+				
+				try{
+					courseName = n1[1].split("=")[1];	
+				}catch(Exception e){
+					courseName = "%";	
+				}
+				
+				try{
+					assessmentDateTime = n1[2].split("=")[1];
+					assessmentDateTime = "%"+assessmentDateTime.replaceAll("%20", " ");
+				}
+				catch(Exception e){
+					assessmentDateTime = "%";
+				}
+				
+				try{
+					assessmentAgencyName = n1[3].split("=")[1];
+				}
+				catch(Exception e){
+					assessmentAgencyName = "%";
+				}
+				
+				try{
+					assessorName = n1[4].split("=")[1];
+				}
+				catch(Exception e){
+					assessorName = "%";
+				}
 			
 		        Configuration conf = new Configuration();
 				conf.configure("/hibernate.cfg.xml");
 				SessionFactory sf = conf.buildSessionFactory();
 				Session session = sf.openSession();
 				String newList=null;
-				String sql = " select B.coursetype,C.coursename,A.assessmentdatetime,F.statename,E.firstname || ' '|| E.middlename ||' '|| E.lastname ,CASE WHEN G.status = 'A' THEN 'ACTIVE' ELSE 'IN-ACTIVE' END,C.coursecode,A.batchCode	from trainingcalendar A inner join coursetype B on(A.coursetype=B.coursetypeid)	inner join coursename C on(A.coursename=C.coursenameid)        inner join personalinformationtrainingpartner D on(A.trainingcenter=D.personalinformationtrainingpartnerid) inner join personalinformationassessor E on(A.assessor=E.personalinformationassessorid) inner join state F on(E.assessorcorrespondencestate=F.stateid)  inner join logindetails G on(E.logindetails=G.id) where to_timestamp(COALESCE(A.trainingdate, '19900101010101'),'DD-MM-YYYY') > now()";
+				String sql = " select B.coursetype,C.coursename,A.assessmentdatetime,F.statename,E.firstname || ' '|| E.middlename ||' '|| E.lastname ,CASE WHEN G.status = 'A' THEN 'ACTIVE' ELSE 'IN-ACTIVE' END,C.coursecode,A.batchCode	from trainingcalendar A inner join coursetype B on(A.coursetype=B.coursetypeid)	inner join coursename C on(A.coursename=C.coursenameid)        inner join personalinformationtrainingpartner D on(A.trainingcenter=D.personalinformationtrainingpartnerid) inner join personalinformationassessor E on(A.assessor=E.personalinformationassessorid) inner join state F on(E.assessorcorrespondencestate=F.stateid)  inner join logindetails G on(E.logindetails=G.id) where to_timestamp(COALESCE(A.trainingdate, '19900101010101'),'DD-MM-YYYY') > now()"+
+				" and   cast(A.coursetype as varchar(10)) like '"+courseType+"%'  and  cast(A.coursename as varchar(10) ) like  '"+courseName+"%' "+
+				" and cast(coalesce(A.assessmentdatetime , '') as varchar(100)) like '"+assessmentDateTime+"%' and  cast(A.assessmentpartnername as varchar(100)) like '"+assessmentAgencyName+"%' and  cast(A.assessor as varchar(100)) like '"+assessorName+"%'";
+				
+				System.out.println(" sql "+sql);
 				Query query = session.createSQLQuery(sql);
 				List list = query.list();
 				System.out.println(list.size());

@@ -2,6 +2,21 @@
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
+function OnStart(){
+	flatpickr("#traningDate" , {
+		//defaultDate: today, // Date objects and date strings are also accepted
+		enableTime: true
+	});
+	
+	flatpickr("#traningTime" , {
+		//defaultDate: today, // Date objects and date strings are also accepted
+		enableTime: true
+	});	
+}
+window.onload = OnStart;
+</script>
+
+<script>
 function getCourseName(val){
 	 $('#selCourseName option').remove();
 	$.ajax({
@@ -224,7 +239,7 @@ return result;
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
-                                                        <input type="date" class="form-control" name="traningDate" id="traningDate">
+                                                        <input type="text" class="form-control" name="traningDate" id="traningDate">
                                                     </div>
 
                                                 </div>
@@ -234,11 +249,11 @@ return result;
                                                     <div class="form-group">
                                                         <div>
                                                             <ul class="lab-no">
-                                                                <li class="style-li"><strong>Training Start Time</strong></li>
+                                                                <li class="style-li"><strong>Training End Date</strong></li>
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
-                                                        <input type="time" class="form-control" name="traningTime" id ="traningTime">
+                                                        <input type="text" class="form-control" name="traningTime" id ="traningTime">
                                                     </div>
                                                                                 
                                                     <div class="form-group">

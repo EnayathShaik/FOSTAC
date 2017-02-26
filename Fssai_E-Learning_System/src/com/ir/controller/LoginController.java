@@ -171,16 +171,6 @@ public class LoginController {
 			session.setAttribute("traineeSteps", personalInformationTrainee.getSteps());
 			
 			
-			/*model.addAttribute("loginUser", personalInformationTrainee);
-			session.setAttribute("personalinformationtraineeid", personalInformationTrainee.getId());
-			session.setAttribute("loginId", personalInformationTrainee.getLoginDetails().getLoginId());
-			session.setAttribute("loginUserS", personalInformationTrainee);
-			session.setAttribute("loginUser", personalInformationTrainee);
-			session.setAttribute("loginUser1", personalInformationTrainee.getId());*/
-			
-		
-			//Set Course Details IF user Already Enrolled.
-			
 			
 			return "traineeHomepage";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 4 && loginDetails.getStatus().equalsIgnoreCase("A")){
@@ -194,19 +184,7 @@ public class LoginController {
 			session.setAttribute("loginUser2", personalInformationTrainer.getPersonalInformationTrainerId());
 			session.setAttribute("logId", personalInformationTrainer.getLoginDetails().getLoginId());
 			session.setAttribute("Id",personalInformationTrainer.getLoginDetails().getId());
-			
-			/*
-			model.addAttribute("logintrainer", personalInformationTrainer);
-			session.setAttribute("loginUser", personalInformationTrainer);
-			System.out.println("in trainer login");
-			session.setAttribute("loginUr", personalInformationTrainer);
-			session.setAttribute("personalInformationTrainerid", personalInformationTrainer.getPersonalInformationTrainerId());
-			session.setAttribute("loginUserS", personalInformationTrainer);
-			session.setAttribute("stateid", personalInformationTrainer.getPermanentstate().getStateId());
-			session.setAttribute("statename", personalInformationTrainer.getPermanentstate().getStateName());
-			System.out.println("-----> "+ personalInformationTrainer.getPermanentdistrict().getDistrictId());
-			session.setAttribute("tp", personalInformationTrainer.getAssociatedTrainingpartnerName() == null ? "" : personalInformationTrainer.getAssociatedTrainingpartnerName().getTrainingPartnerName());
-			*/
+		
 			return "trainerHomepage";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 5){
 			if(loginDetails.getStatus().equalsIgnoreCase("A")){
@@ -243,10 +221,10 @@ public class LoginController {
 				session.setAttribute("profileId", loginDetails.getProfileId());
 				session.setAttribute("userId", loginDetails.getId());
 				session.setAttribute("userName", loginDetails.getLoginId());
-				/*
-				session.setAttribute("loginUser", personalInformationAssessor);
-				session.setAttribute("loginUr", personalInformationAssessor);
-				model.addAttribute("loginUser", personalInformationAssessor);*/
+				System.out.println(" agency "+personalInformationAssessor.getAssessmentAgencyName().getManageAssessmentAgencyId());
+				session.setAttribute("assessmentId", personalInformationAssessor.getAssessmentAgencyName().getManageAssessmentAgencyId());
+				session.setAttribute("agencyName", personalInformationAssessor.getAssessmentAgencyName().getAssessmentAgencyName());
+				System.out.println(" agencyName "+personalInformationAssessor.getAssessmentAgencyName().getAssessmentAgencyName());
 				return "AssessorPage";
 			}else{
 				model.addAttribute("error" , "Oops , you are not authorized !!!");
@@ -287,6 +265,8 @@ public class LoginController {
 			session.setAttribute("profileId", loginDetails.getProfileId());
 			session.setAttribute("userId", loginDetails.getId());
 			session.setAttribute("userName", loginDetails.getLoginId());
+			session.setAttribute("assessmentId", manageAssessmentAgency.getManageAssessmentAgencyId());
+			session.setAttribute("agencyName", manageAssessmentAgency.getAssessmentAgencyName());
 			return "assessmentAgencyHomepage";
 		}else{
 			model.addAttribute("error" , "Oops , wrong Id and password !!!");

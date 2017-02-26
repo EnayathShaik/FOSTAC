@@ -5,23 +5,61 @@
 
 
 <script src="website/js/jquery-1.9.1.js"></script>
-<!-- <script type="text/javascript">
+ <script type="text/javascript">
 function OnStart(){
-	searchAssessmentAgencyCalendar();
+	//searchAssessmentAgencyCalendar();
+	
+	flatpickr("#assessmentDateTime" , {
+		//defaultDate: today, // Date objects and date strings are also accepted
+		enableTime: true
+	});	
+	
+	var profileid = '${profileId}';
+	
+	if(profileid == "6"){
+		$("#assessor").val('${loginUserAssessor}');
+	}
+	
 }
 window.onload = OnStart;
-</script> -->
+
+function getCourseName(val){
+	
+	$.ajax({
+	      type: 'post',
+	      url: 'getCourseName.jspp?'+ val,
+	      success: function (response) {  
+	          
+	      var mainData1 = jQuery.parseJSON(response);
+	       $('#courseName option').remove();
+	      $('#courseName').append('<option value="0" label="Select Course Code" />');
+	        $.each(mainData1 , function(i , obj)
+	  		{
+	  				$('#courseName').append('<option value='+obj[0]+' >'+obj[1]+'</option>');		
+	  		});
+	      }
+	      });
+}
+
+
+</script> 
 
 <script type="text/javascript">
 	function searchAssessmentAgencyCalendar() {
 		var result = "";
 		var agencyId =0;
+		var courseType = ($("#courseType").val()== 0 ||  $("#courseType").val() == null ? "" : $("#courseType").val());
+		var courseName =  ($("#courseName").val() == 0 || $("#courseName").val() == null ? "" : $("#courseName").val());
+		var assessmentDateTime = (($("#assessmentDateTime").val() == 'undefined' || $("#assessmentDateTime").val() == null ) ? "" : $("#assessmentDateTime").val() );
+		var assessmentAgencyName = ($("#assessmentAgency").val()== 0 ||  $("#assessmentAgency").val() == null ? "" : $("#assessmentAgency").val());
+		var assessorName = ($("#assessor").val()== 0 ||  $("#assessor").val() == null ? "" : $("#assessor").val());
+		var total = "courseType="+courseType + "&courseName=" + courseName+"&assessmentDateTime="+assessmentDateTime+"&assessmentAgencyName="+assessmentAgencyName+"&assessorName="+assessorName;
 		$.ajax({
 			type : 'post',
 			data : {
 				agencyId : agencyId
 			},
-			url : 'viewAssessmentAgencyCalendar.jspp?',
+			url : 'viewAssessmentAgencyCalendar.jspp?'+total,
 			async : false,
 			success : function(data) {
 				$('#tblAACalendar').show();
@@ -48,12 +86,12 @@ window.onload = OnStart;
 			}
 		});
 		return result;
-	}
+	}	
 </script>
 
 
 <cf:form name="viewAssessmentAgencyCalendar"
-	commandName="viewAssessmentAgencyCalendar">
+	commandName="viewAssessmentAgencyCalendarForm">
 
 	<section>
 		<%@include file="../roles/top-menu.jsp"%>
@@ -73,7 +111,7 @@ window.onload = OnStart;
 							<div class="col-lg-12">
 								<a href="#menu-toggle" class="vertical-menu-position-btn"
 									id="menu-toggle"> <i class="fa fa-bars"></i> <span
-									class="orange-font">Welcome :  ${loginUser.loginDetails.loginId} </span>
+									class="orange-font">Welcome :  ${userName} </span>
 								</a>
 							</div>
 						</div>
@@ -92,7 +130,7 @@ window.onload = OnStart;
 										<div class="personel-info">
 
 											<!-- left side -->
-											<!-- <div class="col-md-6 col-xs-12">
+											 <div class="col-md-6 col-xs-12">
 												<div class="form-group">
 													<div>
 														<ul class="lab-no">
@@ -100,9 +138,12 @@ window.onload = OnStart;
 
 														</ul>
 													</div>
-													<select class="form-control">
-														<option></option>
-													</select>
+													<cf:select path="courseType" class="form-control"
+														onchange="getCourseName(this.value);">
+														<cf:option value="0" label="Select Course Type" />
+														<cf:options items="${courseTypeList}"
+															itemValue="CourseTypeId" itemLabel="CourseType" />
+													</cf:select>
 												</div>
 												<div class="form-group">
 													<div>
@@ -111,27 +152,27 @@ window.onload = OnStart;
 															<li class="style-li error-red"></li>
 														</ul>
 													</div>
-													<select class="form-control">
-														<option></option>
-													</select>
+													<cf:select path="courseName" class="form-control">
+														<cf:option value="0" label="Select Course Code" />
+														<%-- <cf:options items="${courseNameList}" itemValue="coursenameid" itemLabel="coursename"/> --%>
+													</cf:select>
 												</div>
 												<div class="form-group">
 													<div>
 														<ul class="lab-no">
 															<li class="style-li"><strong>Assessment
-																	Date:</strong></li>
+																	Date Time:</strong></li>
 															<li class="style-li error-red"></li>
 														</ul>
 													</div>
-													<input type="date" class="form-control" placeholder="Date"
-														required>
+													<cf:input path="assessmentDateTime" type="date" id="assessmentDateTime"  class="form-control" />
 												</div>
 
-											</div> -->
+											</div> 
 											<!-- right side -->
 											<div class="col-md-6 col-xs-12">
 
-												<!-- <div class="form-group">
+												 <div class="form-group">
 													<div>
 														<ul class="lab-no">
 															<li class="style-li"><strong>Assessment
@@ -139,9 +180,9 @@ window.onload = OnStart;
 															<li class="style-li error-red"></li>
 														</ul>
 													</div>
-													<select class="form-control">
-														<option></option>
-													</select>
+													<cf:select path="assessmentAgency" class="form-control">
+													<cf:option value="${assessmentId}" label="${agencyName}" /> 
+													</cf:select>
 												</div>
 
 												<div class="form-group">
@@ -151,9 +192,13 @@ window.onload = OnStart;
 															<li class="style-li error-red"></li>
 														</ul>
 													</div>
-													<select class="form-control">
-														<option></option>
-													</select>
+													<cf:select path="assessor" class="form-control">
+														
+														<cf:option value="0" label="Select Assessor" />
+														<cf:options items="${assessorName}" />
+													</cf:select>
+												
+												
 												</div>
 
 												<div class="form-group">
@@ -168,7 +213,7 @@ window.onload = OnStart;
 														<option value="I">Inactive</option>
 													</select>
 												</div>
- -->
+ 
 
 												<!-- button -->
 												<div class="row">

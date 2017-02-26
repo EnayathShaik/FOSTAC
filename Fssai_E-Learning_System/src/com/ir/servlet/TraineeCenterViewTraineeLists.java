@@ -61,13 +61,20 @@ public class TraineeCenterViewTraineeLists extends HttpServlet {
         		}else if(i==1){
         			stringBuffer.append(whereList[1] != null & !whereList[1].equals("null") & whereList[1].length() > 0 & whereList[1] == "0"  ? " AND D.COURSENAMEID="+whereList[1] : "");
         		}else if(i==2){
-        			stringBuffer.append(whereList[2] != null & !whereList[2].equals("null") & whereList[2].length() > 0 ? " AND B.TRAININGDATE='"+whereList[2]+"'" : "");
+        			System.out.println("whereList[2] "+whereList[2]);
+        			stringBuffer.append(whereList[2] != null & !whereList[2].equals("null") & whereList[2].length() > 0 ? " AND B.TRAININGDATE='%"+whereList[2].replaceAll("%20", " ")+"'" : "");
         		}else if(i==3){
-        			stringBuffer.append(whereList[3] != null & !whereList[3].equals("null") & whereList[3].length() > 0 ? " AND B.TRAININGTIME='"+whereList[3]+"'" : "");
+        			System.out.println("whereList[3] "+whereList[3]);
+        			stringBuffer.append(whereList[3] != null & !whereList[3].equals("null") & whereList[3].length() > 0 ? " AND B.TRAININGTIME='%"+whereList[3].replaceAll("%20", " ")+"'" : "");
         		}else if(i==4){
-        			//stringBuffer.append(whereList[4] != null & whereList[4].equals("null") & whereList[4].length() > 0 ? " AND B.COURSETYPEID"+whereList[4] : "");
+        			System.out.println("whereList[4] "+whereList[4]);
+        			stringBuffer.append(whereList[4] != null & !whereList[4].equals("null") & whereList[4].length() > 0 ? " AND A.PAYMENTSTATUS='"+whereList[4]+"'" : "");
+        			
         		}else if(i==5){
-        			stringBuffer.append(whereList[5] != null & !whereList[5].equals("null") & whereList[5].length() > 0 ? " AND A.PAYMENTSTATUS='"+whereList[5]+"'" : "");
+        			System.out.println("whereList[5] "+whereList[5]);
+        			stringBuffer.append(whereList[5] != null & whereList[5].length() > 0 ? " AND  replace(D.classroom ||''|| D.online,'Nil','')= '"+whereList[5]+"'" : "");
+        			System.out.println("whereList[5].length() "+whereList[5].length());
+        			System.out.println("result "+(whereList[5] != null  & whereList[5].length() > 0 ? " AND  replace(D.classroom ||''|| D.online,'Nil','')= '"+whereList[5]+"'" : ""));
         		}
         	}
         }

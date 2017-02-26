@@ -271,7 +271,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	public List<StringStringBean> getStatusList(){
 		//TODO write query retrieve all Status of trainee
 		List<StringStringBean> statusList=new ArrayList<>();
-		String[] arrayValues={"confirm,Payment Confirm","confirmed,Auto Confirmed","pending,Payment Pending"};
+		String[] arrayValues={"Confirm,Payment Confirm","Confirmed,Auto Confirmed","Pending,Payment Pending"};
 		for(int index=0;index<arrayValues.length;index++){
 			StringStringBean bean=new StringStringBean();
 			String[] beanValues=arrayValues[index].split(",");
@@ -307,7 +307,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	public List<StringStringBean> getModeOfTrainingList(){
 		//TODO write query retrieve all Status of trainee
 		List<StringStringBean> statusList=new ArrayList<>();
-		String[] arrayValues={"classroom,Classroom","online,Online","both,Both"};
+		String[] arrayValues={"Classroom,Classroom","Online,Online","both,Both"};
 		for(int index=0;index<arrayValues.length;index++){
 			StringStringBean bean=new StringStringBean();
 			String[] beanValues=arrayValues[index].split(",");

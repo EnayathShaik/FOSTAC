@@ -2,6 +2,20 @@
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
+function OnStart(){
+flatpickr('[id="traineeTime"]' , {
+	//defaultDate: today, // Date objects and date strings are also accepted
+	enableTime: true
+});
+
+flatpickr('[id="traineeDate"]' , {
+	//defaultDate: today, // Date objects and date strings are also accepted
+	enableTime: true
+});
+
+}
+window.onload = OnStart;
+
 function getCourseName(val){
 	 $('#selCourseName option').remove();
 	$.ajax({
@@ -29,8 +43,10 @@ function showDetails(){
 	var courseName =  $("#selCourseName").val();
 	var trainingDate = $("#traineeDate").val();/* .replace("-","/").replace("-","/"); */
 	var trainingTime =  $("#traineeTime").val();
-	
- 	var total = courseType+"&"+courseName+"&"+trainingDate+"&"+trainingTime;
+	var selTraineeStatus = $("#selTraineeStatus").val();
+	var selTraineeModeOfTraining = $("#selTraineeModeOfTraining").val();
+	 
+ 	var total = courseType+"&"+courseName+"&"+trainingDate+"&"+trainingTime+"&"+selTraineeStatus+"&"+selTraineeModeOfTraining+"&";
 	$(".displayNone").css("display","block");
 	var result="";
 	$.ajax({

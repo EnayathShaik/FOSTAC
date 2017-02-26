@@ -3,6 +3,7 @@ package com.ir.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -49,8 +50,15 @@ public class SearchMarkAttendance extends HttpServlet {
 		System.out.println("loginId == "+loginId);
 		
 		response.setContentType("text/html;charset=UTF-8");
+		
         PrintWriter out = response.getWriter();
 		String name = (request.getQueryString());
+		Integer profileID = 0;
+		HttpSession httpSession=request.getSession(false);
+		if(null!=httpSession.getAttribute("profileId")){
+			profileID=Integer.parseInt(httpSession.getAttribute("profileId").toString());
+		}
+		System.out.println("profileID "+profileID);
 		String [] n1 = name.split("&");
 		
 		String courseType,courseName , trainingDate , trainingTime ;
@@ -69,14 +77,14 @@ public class SearchMarkAttendance extends HttpServlet {
 		
 	
 		try{
-			trainingDate = n1[2].split("=")[1];
+			trainingDate = "%"+n1[2].split("=")[1].replaceAll("%20", " ");
 		}
 		catch(Exception e){
 			trainingDate = "%";
 		}
 		
 		try{
-			trainingTime = n1[3].split("=")[1];
+			trainingTime ="%"+ n1[3].split("=")[1].replaceAll("%20", " ");
 		}
 		catch(Exception e){
 			trainingTime = "%";
@@ -95,12 +103,13 @@ public class SearchMarkAttendance extends HttpServlet {
 		String newList=null;
 		System.out.println("district 0");
 		String sql ="";
+		
 		sql = "select A.batchCode,C.courseCode,A.trainingdate,A.trainingtime,G.firstname||' ' ||G.middlename|| ' ' ||G.lastname as participantName ,G.aadharnumber , courseenrolleduserid , " +userstatus+ " "+
 				"from trainingcalendar A inner join coursetype B on(A.coursetype=B.coursetypeid)  inner join coursename C on(A.coursename=C.coursenameid)   inner join personalinformationtrainingpartner D on(A.trainingcenter=D.personalinformationtrainingpartnerid) "+
 				"inner join logindetails E on(D.logindetails=E.ID) inner join courseenrolleduser F on(A.trainingcalendarid=F.trainingcalendarid) inner join personalinformationtrainee G on(CAST(CAST (F.logindetails AS NUMERIC(19,4)) AS INT)=G.logindetails)  " +
-				//"where E.loginid ='"+loginId+"' " +
 				"where 1=1 " +
 				"and cast(B.coursetypeid as varchar(10)) like '"+courseType+"%'  and cast( C.coursenameid as varchar(10)) like  '"+courseName+"%' and cast(trainingdate as varchar(10)) like '"+trainingDate+"%' and trainingtime  like '"+trainingTime+"%'   ";
+		
 		
 		System.out.println(" sql "+sql);
 		Query query = session.createSQLQuery(sql);

@@ -1,6 +1,8 @@
 package com.ir.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -14,6 +16,7 @@ import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.model.ChangePassword;
 import com.ir.model.ContactTraineee;
+import com.ir.model.CourseType;
 import com.ir.model.assessmentagency.AssessmentAgencyForm;
 import com.ir.util.ChangePasswordUtility;
 import com.ir.util.SendContectMail;
@@ -81,4 +84,36 @@ public class AssessmentAgencyDaoImpl implements AssessmentAgencyDao {
 		}
 		return agencyForm;
 	}
+	
+	
+	
+	@Override
+	public List<CourseType> courseTypeList() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from CourseType");
+		List<CourseType> courseTypeList = query.list();
+		return courseTypeList;
+	}
+	
+	
+	@Override
+	public Map<String , String> assessorNameMap(int agencyId) {
+		HashMap<String , String> assessor = new HashMap<String , String>();
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createSQLQuery("select personalinformationassessorid , (firstname || ' '|| middlename || ' ' || lastname) from personalinformationassessor where assessmentagencyname= '"+agencyId+"'");
+		
+		List<Object[]> assessorList = query.list();
+		
+		if(assessorList.size()>0){
+			
+			for(Object[] s : assessorList ){
+				System.out.println( " s "+s[0].toString() + " 1 "+s[1].toString());
+				assessor.put(s[0].toString(),s[1].toString());
+			}
+			
+		}
+		
+		return assessor;
+	}
+	
 }

@@ -2,6 +2,8 @@ package com.ir.dao;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import com.ir.bean.common.IntStringBean;
 import com.ir.form.AssessmentAnswerCriteria;
 import com.ir.model.AssessmentQuestion;
@@ -17,5 +19,6 @@ public interface AssessmentDao {
 	public List<AssessmentQuestion> getAssessmentAnswers(int courseType, List<Integer> questions);
 	public int saveTraineeAssessmentEvaluation(TraineeAssessmentEvaluation traineeAssessmentEvaluation);
 	public int getElegibilityForAssessment(int coursetypeid);
+	public List<CourseType> courseTypeList();
 
 }

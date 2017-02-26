@@ -49,7 +49,7 @@ public class SearchVacancy extends HttpServlet {
 		String name = (request.getQueryString());
 		String [] n1 = name.split("&");
 		
-		String courseType,courseName , trainingDate , requiredExp ,noOfVacancy,selectAll;
+		String courseType,courseName , trainingDate , requiredExp ,noOfVacancy,selectAll, trainingendtime, trainingcenter;
 		try{
 			courseType = n1[0].split("=")[1];
 		}
@@ -65,7 +65,7 @@ public class SearchVacancy extends HttpServlet {
 		
 	
 		try{
-			trainingDate = n1[2].split("=")[1];
+			trainingDate = "%"+n1[2].split("=")[1].replaceAll("%20", " ");
 		}
 		catch(Exception e){
 			trainingDate = "%";
@@ -85,6 +85,20 @@ public class SearchVacancy extends HttpServlet {
 			noOfVacancy = "%";
 		}
 		
+		try{
+			trainingcenter = n1[5].split("=")[1];
+		}
+		catch(Exception e){
+			trainingcenter = "%";
+		}
+		
+		try{
+			trainingendtime = "%"+n1[6].split("=")[1].replaceAll("%20", " ");
+		}
+		catch(Exception e){
+			trainingendtime = "%";
+		}
+		
 		Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
@@ -100,7 +114,7 @@ public class SearchVacancy extends HttpServlet {
 		}
 		String sql ="";
 		sql = "select pvtc.postvacancytrainingcenterid , ct.coursetype , cn.coursecode , pvtc.trainingdate , pvtc.trainingendtime ,pvtc.requiredexp , pvtc.noofvacancy,pvtc.loginid   from postvacancytrainingcenter pvtc left join coursetype as ct on ct.coursetypeid = pvtc.coursetype left join coursename as cn on cn.coursenameid = pvtc.coursename left join personalinformationtrainingpartner D on(pvtc.trainingcenter=D.personalinformationtrainingpartnerid)  left join  logindetails E on(D.logindetails=E.ID) " +
-				" where "+loginCK+"  and  cast(ct.coursetypeid as varchar(10))  like '"+courseType+"%' and CAST(cn.coursenameid AS VARCHAR(10)) like '"+courseName+"%' and  CAST(pvtc.trainingdate AS VARCHAR(10)) like '"+trainingDate+"%'   and cast(pvtc.requiredexp as varchar(10))  like '"+requiredExp+"%' and cast(pvtc.noofvacancy as varchar(10)) like '"+noOfVacancy+"%' ";
+				" where "+loginCK+"  and pvtc.trainingcenter='"+trainingcenter+"'  and  cast(ct.coursetypeid as varchar(10))  like '"+courseType+"%' and CAST(cn.coursenameid AS VARCHAR(10)) like '"+courseName+"%' and  CAST(pvtc.trainingdate AS VARCHAR(100)) like '"+trainingDate+"%'   and cast(pvtc.requiredexp as varchar(10))  like '"+requiredExp+"%' and cast(pvtc.noofvacancy as varchar(10)) like '"+noOfVacancy+"%'  and cast(pvtc.trainingendtime as varchar(100)) like   '"+trainingendtime+"%'  ";
 		
 		List list = new AjaxRequest().returnList(sql);
 		System.out.println(list.size());

@@ -32,4 +32,7 @@ public interface AssessmentService {
 	
 	@Transactional
 	public int saveTraineeAssessmentEvaluation(TraineeAssessmentEvaluation traineeAssessmentEvaluation);
+	
+	@Transactional
+	public List<CourseType> courseTypeList();
 }

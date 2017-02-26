@@ -115,8 +115,8 @@
 		//permanent1.style.display = checkPermanent.checked ? "none" : "block";
 		//permanent2.style.display = checkPermanent.checked ? "none" : "block";
 		if (x == true) {
-			document.getElementById('permanent1').style.display = 'none';
-			document.getElementById('permanent2').style.display = 'none';
+			//document.getElementById('permanent1').style.display = 'none';
+			//document.getElementById('permanent2').style.display = 'none';
 			document.getElementById('AssessorPermanentLine1').value = document
 					.getElementById('AssessorCorrespondenceLine1').value;
 			//$("#AssessorPermanentLine1").attr('readonly',true);

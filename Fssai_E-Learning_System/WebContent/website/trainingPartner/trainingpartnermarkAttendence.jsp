@@ -4,6 +4,15 @@
 <script>
 function OnStart(){
 	showDetails('ALL');
+	flatpickr('[id="trainingTime"]' , {
+		//defaultDate: today, // Date objects and date strings are also accepted
+		enableTime: true
+	});
+
+	flatpickr('[id="trainingDate"]' , {
+		//defaultDate: today, // Date objects and date strings are also accepted
+		enableTime: true
+	});
 }
 window.onload = OnStart;
 
@@ -42,10 +51,10 @@ function ck_aadhar(thisValue){
 
 }
 function showDetails(indicator){
-	 	var courseType =  ($("#selCourseType").val() == null ) ? "" : $("#selCourseType").val() ;
+	 	var courseType = ( $("#selCourseType").val() == null ) ? "" : $("#selCourseType").val() ;
 		var courseName =  ($("#selCourseName").val() == null) ? "" :$("#selCourseName").val() ;
-		var trainingDate = $("#trainingDate").val().replace("-","/").replace("-","/");
-		var trainingTime =  $("#trainingDate").val();
+		var trainingDate = ($("#trainingDate").val() == null) ? "" :$("#trainingDate").val() ;
+		var trainingTime =  ($("#trainingTime").val() == null) ? "" :$("#trainingTime").val() ;
 		var status = $('#selTraineeStatus').val(); 
 		 var total = "";
 		
@@ -256,20 +265,20 @@ return result;
                                                     <div class="form-group">
                                                         <div>
                                                             <ul class="lab-no">
-                                                                <li class="style-li"><strong>Training Start Time</strong></li>
+                                                                <li class="style-li"><strong>Training Start Date</strong></li>
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
-                                                        <input type="time" class="form-control" id="trainingTime" name="trainingTime">
+                                                        <input type="text" class="form-control" id="trainingTime" name="trainingTime">
                                                     </div>
                                                   <div class="form-group">
                                                         <div>
                                                             <ul class="lab-no">
-                                                                <li class="style-li"><strong>Training Start Date:</strong></li>
+                                                                <li class="style-li"><strong>Training End Date:</strong></li>
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
-                                                        <input type="date" class="form-control" id="trainingDate" name="trainingDate">
+                                                        <input type="text" class="form-control" id="trainingDate" name="trainingDate">
                                                     </div>                              
                                                     
                                                      <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails('');return false">Show Details</button>

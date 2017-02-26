@@ -5,18 +5,15 @@
 function OnStart(){
 
 	flatpickr('[name="trainingEndDate"]' , {
-		//defaultDate: today, // Date objects and date strings are also accepted
 		enableTime: true
 	});
 	
 	flatpickr('[name="trainingStartDate"]' , {
-		//defaultDate: today, // Date objects and date strings are also accepted
 		enableTime: true
 	});
 
 	
 	flatpickr('[name="assessmentDateTime"]' , {
-		//defaultDate: today, // Date objects and date strings are also accepted
 		enableTime: true
 	});
 }

@@ -112,4 +112,10 @@ public class AssessmentServiceImpl implements AssessmentService {
 		return assessmentId;
 	}
 
+	
+	@Override
+	public List<CourseType> courseTypeList() {
+		List<CourseType> courseTypeList = assessmentDao.courseTypeList();
+		return courseTypeList;
+	}
 }

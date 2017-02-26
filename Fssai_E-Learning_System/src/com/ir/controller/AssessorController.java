@@ -123,4 +123,11 @@ public class AssessorController {
 		return "contactA";
 		
 	}
+	
+	
+	@ModelAttribute("courseTypeList")
+	public List<CourseType> courseTypeList(){
+		List<CourseType> courseTypeList = assessmentService.courseTypeList();
+		return courseTypeList;
+	}
 }

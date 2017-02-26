@@ -72,14 +72,14 @@ public class TraineeCenterPaymentConfirmation extends HttpServlet {
 		
 	
 		try{
-			trainingDate = n1[2].split("=")[1];
+			trainingDate = "%"+n1[2].split("=")[1].replaceAll("%20", " ");
 		}
 		catch(Exception e){
 			trainingDate = "%";
 		}
 		
 		try{
-			trainingtime = n1[3].split("=")[1];
+			trainingtime = "%"+n1[3].split("=")[1].replaceAll("%20", " ");
 		}
 		catch(Exception e){
 			trainingtime = "%";
