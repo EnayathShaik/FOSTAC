@@ -21,6 +21,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
 
 import com.ir.model.assessor.AssessmentResult;
+import com.ir.util.HibernateUtil;
 
 /**
  * Servlet implementation class MyServlt
@@ -57,9 +58,7 @@ public class UpdateAssessmentResult extends HttpServlet {
 		        	assessorId = Integer.parseInt(strAssessorId);
 		        	trainingCalId = Integer.parseInt(strTrainingcalId);
 		        	traineeLoginId = Integer.parseInt(strTraineeLogin);
-				Configuration conf = new Configuration();
-				conf.configure("/hibernate.cfg.xml");
-				SessionFactory sf = conf.buildSessionFactory();
+				SessionFactory sf = new HibernateUtil().getSessionFactory();
 				Session session = sf.openSession();
 				
 				Criteria assessmentResultCriteria = session.createCriteria(AssessmentResult.class)

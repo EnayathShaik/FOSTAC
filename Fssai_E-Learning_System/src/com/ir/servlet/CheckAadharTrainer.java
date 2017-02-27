@@ -64,57 +64,6 @@ public class CheckAadharTrainer extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		/*
-				response.setContentType("text/html;charset=UTF-8");
-		        PrintWriter out = response.getWriter();
-				String name = (request.getQueryString());
-				System.out.println("passing name   :" + name);
-				
-				try {
-					Class.forName("org.postgresql.Driver");
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				Connection conn = null;
-				try {
-					conn = DriverManager.getConnection(DBUtil.databaseUrl,DBUtil.dbUsername,DBUtil.dbPassword);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				Statement stmt = null;
-				try {
-					stmt = conn.createStatement();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				
-			    String sql="select * from personalinformationtrainer where aadharnumber = '" + name + "'"; 
-			    ResultSet rs = null;
-				try {
-					rs = stmt.executeQuery(sql);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				try {
-					if(rs.next()){
-						//String name_status= "OK";
-						System.out.println("not available to use");
-						out.println("Already");
-					}else{
-						//String name_status="";
-						//out.println(""+name+" is available to use");
-						System.out.println("not in database");
-					}
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}*/
-	
 	}
 
 	/**

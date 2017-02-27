@@ -77,13 +77,13 @@ public class DeployListener implements ServletContextListener, ServletContextAtt
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
     public void contextInitialized(ServletContextEvent arg0)  { 
-    	try {
+    	/*try {
 			Class.forName("org.postgresql.Driver");
 //			Connection conn = DriverManager.getConnection(DBUtil.databaseUrl,DBUtil.dbUsername,DBUtil.dbPassword);
 			Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost/FSSAI","postgres","Fss2iZentech");
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-		}
+		}*/
     	
     }
 

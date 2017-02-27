@@ -163,8 +163,6 @@ public class LoginController {
 			return "adminHomepage";
 		}else if(loginDetails !=null && loginDetails.getProfileId() == 3 && loginDetails.getStatus().equalsIgnoreCase("A"))
 		{
-			new ZLogger("Login", "Check Login", "LoginController.java").showInfoLog();
-			
 			PersonalInformationTrainee personalInformationTrainee = loginService.FullDetail(loginDetails.getId() );
 			System.out.println("in trainee login  "+ personalInformationTrainee.getFirstName());
 			session.setAttribute("logId", personalInformationTrainee.getLoginDetails().getLoginId());

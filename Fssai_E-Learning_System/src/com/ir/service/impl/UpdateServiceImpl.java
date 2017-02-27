@@ -2,6 +2,8 @@ package com.ir.service.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import com.ir.dao.UpdateDAO;
@@ -18,6 +20,7 @@ public class UpdateServiceImpl implements UpdateService {
 	private UpdateDAO updateDAO;
 	
 	@Override
+	@Transactional
 	public List<PersonalInformationTrainer> UpdateService(LoginDetails loginDetails) {
 		List<PersonalInformationTrainer> personalInformationTrainer = updateDAO.FullInformation(loginDetails);
 		return personalInformationTrainer;

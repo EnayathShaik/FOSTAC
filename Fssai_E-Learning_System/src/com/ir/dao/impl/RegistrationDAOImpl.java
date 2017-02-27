@@ -150,42 +150,6 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 			e.printStackTrace();
 		}
 		
-		/*String ret = null;
-		ResultSet rs = null;
-		String q = "select password from personalinformationtrainee where userid = " + registrationFormTrainee.getUserId() + " ";
-		 try {
-			Class.forName("org.postgresql.Driver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-         Connection con = null;
-		try {
-			con = DriverManager.getConnection(DBUtil.databaseUrl,DBUtil.dbUsername,DBUtil.dbPassword);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-         Statement st = null;
-		try {
-			st = con.createStatement();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		try {
-			rs = st.executeQuery(q);
-			System.out.println("******* :" + rs.next());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-			try {
-				if(rs.next()){
-					ret = "already";
-				}else{
-					ret = null;
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			System.out.println("RegistrationDAOImpl user id check begin *** :" + ret);*/
 			return ret;
 	}
 

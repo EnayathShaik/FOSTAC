@@ -32,6 +32,7 @@ import com.ir.model.District;
 import com.ir.model.TrainingPartner;
 import com.ir.service.PageLoadService;
 import com.ir.service.impl.PageLoadServiceImpl;
+import com.ir.util.HibernateUtil;
 import com.itextpdf.text.log.SysoCounter;
 
 /**
@@ -97,9 +98,7 @@ public class ViewAssessmentAgencyCalendar extends HttpServlet {
 					assessorName = "%";
 				}
 			
-		        Configuration conf = new Configuration();
-				conf.configure("/hibernate.cfg.xml");
-				SessionFactory sf = conf.buildSessionFactory();
+		        SessionFactory sf = new HibernateUtil().getSessionFactory();
 				Session session = sf.openSession();
 				String newList=null;
 				String sql = " select B.coursetype,C.coursename,A.assessmentdatetime,F.statename,E.firstname || ' '|| E.middlename ||' '|| E.lastname ,CASE WHEN G.status = 'A' THEN 'ACTIVE' ELSE 'IN-ACTIVE' END,C.coursecode,A.batchCode	from trainingcalendar A inner join coursetype B on(A.coursetype=B.coursetypeid)	inner join coursename C on(A.coursename=C.coursenameid)        inner join personalinformationtrainingpartner D on(A.trainingcenter=D.personalinformationtrainingpartnerid) inner join personalinformationassessor E on(A.assessor=E.personalinformationassessorid) inner join state F on(E.assessorcorrespondencestate=F.stateid)  inner join logindetails G on(E.logindetails=G.id) where to_timestamp(COALESCE(A.trainingdate, '19900101010101'),'DD-MM-YYYY') > now()"+

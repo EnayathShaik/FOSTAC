@@ -1,5 +1,7 @@
 package com.ir.service.impl;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,6 +23,7 @@ public class TrainerContactTServiceIMPL implements TrainerContactService {
 	
 	// Rishi
 	@Override
+	@Transactional
 	public String contactTrainerSave(ContactTrainee contactTrainer, String id) {
 		String contactTrainerSave = trainerContactDao.contactTrainerSave(contactTrainer , id);
 			return contactTrainerSave;
@@ -29,6 +32,7 @@ public class TrainerContactTServiceIMPL implements TrainerContactService {
 
 
 	@Override
+	@Transactional
 	public boolean changePasswordTrainerSave(ChangePasswordForm changePasswordForm, String id) {
 		boolean contactTrainerSave = trainerContactDao.changePasswordTrainerSave(changePasswordForm , id);
 		return contactTrainerSave;
@@ -37,6 +41,7 @@ public class TrainerContactTServiceIMPL implements TrainerContactService {
 
 
 	@Override
+	@Transactional
 	public String contactTrainerSave(ContactTrainee contactTrainer, int id) {
 		// TODO Auto-generated method stub
 		return null;

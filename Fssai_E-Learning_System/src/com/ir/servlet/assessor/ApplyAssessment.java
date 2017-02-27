@@ -22,6 +22,7 @@ import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.FeedbackForm;
 import com.ir.model.ManageCourseContent;
+import com.ir.util.HibernateUtil;
 /**
  * Servlet implementation class DeleteState
  */
@@ -61,9 +62,7 @@ public class ApplyAssessment extends HttpServlet {
 			}
 		System.out.println("Calendar Id :" + calendarIds + "assessorId : " + assessorId);
 		String updateQry = "update trainingcalendar set personalinformationassessorid = "+assessorId+" where trainingcalendarid in ("+calendarIds+")"; 
-		Configuration conf = new Configuration();
-		conf.configure("/hibernate.cfg.xml");
-		SessionFactory sf = conf.buildSessionFactory();
+		SessionFactory sf = new HibernateUtil().getSessionFactory();
 		Session session = sf.openSession();
 		Query query = session.createSQLQuery(updateQry);
 		System.out.println(updateQry);

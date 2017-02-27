@@ -1,9 +1,6 @@
 package com.zentech.logger;
-
-import org.apache.log4j.Logger;
-
-import com.ir.controller.RegistrationController;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 public class ZLogger {
 	String type;
 	String message;
@@ -16,21 +13,14 @@ public class ZLogger {
 		this.type = type;
 		this.message = message;
 		this.className = className;
-		
+		showDebugLog();
 	}
 	
 	public void showDebugLog(){
-		Logger log = Logger.getLogger(ZLogger.class.getName());
-		log.debug("ClassName : "+className+ " Type : "+type+ " Message : "+message);
-	}
-	public void showInfoLog(){
-		Logger log = Logger.getLogger(ZLogger.class.getName());
-		System.out.println("ClassName : "+className+ " Type : "+type+ " Message : "+message);
-		log.info("ClassName : "+className+ " Type : "+type+ " Message : "+message);
-	}
-	public void showErrorLog(){
-		Logger log = Logger.getLogger(ZLogger.class.getName());
-		log.error("ClassName : "+className+ " Type : "+type+ " Message : "+message);
+		Logger logger = LoggerFactory.getLogger(ZLogger.class);
+        logger.info("ClassName : "+className+ " Type : "+type+ " Message : "+message);
+        logger.debug("ClassName : "+className+ " Type : "+type+ " Message : "+message);
+        logger.error("ClassName : "+className+ " Type : "+type+ " Message : "+message);
 	}
 	
 	

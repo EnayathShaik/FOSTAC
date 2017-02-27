@@ -20,7 +20,7 @@ function OnStart(){
 	
 	var isOnline = "${ISONLINE}";
 	if(isOnline == 'NO'){
-		alert('Content will be available in Classroom');
+		alert('Dear User, You have registered for classroom training, So the content will be available at training center');
    	  	window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
 	}
 }

@@ -9,6 +9,6 @@ import com.ir.model.LoginDetails;
 import com.ir.model.PersonalInformationTrainer;
 
 public interface UpdateService {
-	@Transactional
+	
 	List<PersonalInformationTrainer> UpdateService(LoginDetails loginDetails);
 }

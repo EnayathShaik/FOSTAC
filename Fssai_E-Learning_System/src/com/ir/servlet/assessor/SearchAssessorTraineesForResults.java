@@ -32,6 +32,7 @@ import com.ir.model.District;
 import com.ir.model.TrainingPartner;
 import com.ir.service.PageLoadService;
 import com.ir.service.impl.PageLoadServiceImpl;
+import com.ir.util.HibernateUtil;
 import com.itextpdf.text.log.SysoCounter;
 
 /**
@@ -59,9 +60,7 @@ public class SearchAssessorTraineesForResults extends HttpServlet {
 				String id = request.getQueryString();
 		        PrintWriter out = response.getWriter();
 			
-		        Configuration conf = new Configuration();
-				conf.configure("/hibernate.cfg.xml");
-				SessionFactory sf = conf.buildSessionFactory();
+		        SessionFactory sf = new HibernateUtil().getSessionFactory();
 				Session session = sf.openSession();
 				String newList=null;
 				String sql = "select A.trainingcalendarid,B.courseenrolleduserid, C.coursename,A.trainingdate,"

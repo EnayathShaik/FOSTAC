@@ -4,6 +4,8 @@ package com.ir.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -28,12 +30,14 @@ public class PageLoadServiceImpl implements PageLoadService {
 	private PageLoadDao pageLoadDao;
 	
 	@Override
+	@Transactional
 	public List<State> loadState() {
 		List<State> listState = pageLoadDao.loadState();
 		return listState;
 	}
 
 	@Override
+	@Transactional
 	public List<City> loadCity(int stat) {
 		// TODO Auto-generated method stub
 		System.out.println("page load service");
@@ -42,6 +46,7 @@ public class PageLoadServiceImpl implements PageLoadService {
 	}
 
 	@Override
+	@Transactional
 	public List<Title> loadTitle() {
 		// TODO Auto-generated method stub
 		List<Title> titleList = pageLoadDao.loadTitle();
@@ -49,6 +54,7 @@ public class PageLoadServiceImpl implements PageLoadService {
 	}
 
 	@Override
+	@Transactional
 	public List<KindOfBusiness> loadKindOfBusiness() {
 		// TODO Auto-generated method stub
 		List<KindOfBusiness> KindOfBusinessList = pageLoadDao.loadKindOfBusiness();
@@ -56,6 +62,7 @@ public class PageLoadServiceImpl implements PageLoadService {
 	}
 
 	@Override
+	@Transactional
 	public List<CourseName> loadCourseName() {
 		// TODO Auto-generated method stub
 		List<CourseName> loadCourseName= pageLoadDao.loadCourseName();
@@ -63,6 +70,7 @@ public class PageLoadServiceImpl implements PageLoadService {
 	}
 
 	@Override
+	@Transactional
 	public List<District> loadDistrict() {
 		// TODO Auto-generated method stub
 		List<District> districtList = pageLoadDao.District();
@@ -70,6 +78,7 @@ public class PageLoadServiceImpl implements PageLoadService {
 	}
 
 	@Override
+	@Transactional
 	public List<CourseName> basicCourseName() {
 		// TODO Auto-generated method stub
 		List<CourseName> basicCourseName= pageLoadDao.basicCourseName();
@@ -77,6 +86,7 @@ public class PageLoadServiceImpl implements PageLoadService {
 	}
 
 	@Override
+	@Transactional
 	public List<CourseName> advanceCourseList() {
 		// TODO Auto-generated method stub
 		List<CourseName> advanceCourseName= pageLoadDao.advanceCourseName();
@@ -84,6 +94,7 @@ public class PageLoadServiceImpl implements PageLoadService {
 	}
 
 	@Override
+	@Transactional
 	public List<CourseName> specialCourseList() {
 		// TODO Auto-generated method stub
 		List<CourseName> specialCourseList= pageLoadDao.specialCourseList();
@@ -91,51 +102,59 @@ public class PageLoadServiceImpl implements PageLoadService {
 	}
 
 	@Override
+	@Transactional
 	public List<ManageTrainingPartner> tpList() {
 		List<ManageTrainingPartner> tpList = pageLoadDao.tpList();
 		return tpList;
 	}
 
 	@Override
+	@Transactional
 	public List<ManageAssessmentAgency> aaList() {
 		List<ManageAssessmentAgency> aaList = pageLoadDao.aaList();
 		return aaList;
 	}
 
 	@Override
+	@Transactional
 	public List basicCourseList() {
 		List basicCourseList = pageLoadDao.basicCourseList();
 		return basicCourseList;
 	}
 
 	@Override
+	@Transactional
 	public List<CourseName> getCouserNameList(int coursetypeid) {
 		return pageLoadDao.getCouserNameList(coursetypeid);
 	}
 
 	@Override
+	@Transactional
 	public List<String> getTrainingPartnerNameList() {
 		return pageLoadDao.getTrainingPartnerNameList();
 	}
 
 	@Override
+	@Transactional
 	public List<ManageCourseContent> getManageCourseContentList(int coursetypeid) {
 		return pageLoadDao.getManageCourseContentList(coursetypeid);
 	}
 
 	@Override
+	@Transactional
 	public List<IntStringBean> getTrainingPartnerList(int courseTypeId) {
 		return pageLoadDao.getTrainingPartnerList(courseTypeId);
 	}
 
 	@Override
+	@Transactional
 	public List<Object[]> loadTrainingDetails(Utility utility) {
 		return  pageLoadDao.loadTrainingDetails(utility);
 	}
 	
-	//	public  Map<String, String> casteMap()
 	
 	@Override
+	@Transactional
 	public  List<String> loadCaste() {
 		System.out.println("inside cast map");
 		return  pageLoadDao.loadCaste();

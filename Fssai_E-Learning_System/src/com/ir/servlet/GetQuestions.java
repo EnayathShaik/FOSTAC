@@ -101,47 +101,7 @@ public class GetQuestions extends HttpServlet {
 		String newList = g.toJson(assessmentQuestionsList); 
 		out.write(newList);
 		out.flush();
-		/*try {
-			Class.forName("org.postgresql.Driver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Connection conn = null;
-		try {
-			conn = DriverManager.getConnection(DBUtil.databaseUrl,DBUtil.dbUsername,DBUtil.dbPassword);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Statement stmt = null;
-		try {
-			stmt = conn.createStatement();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	    String sql="insert into managecoursecontent "
-	    		+ "		    (contentLocationInput,		courseTypeInput,		courseNameInput,		modeOfTrainingInput,	contentTypeInput,	contentNameInput 	, contentLinkInput)"
-	    		+ " values ('"+contentLocationInput+ "' , "+courseTypeInput+" , "+courseNameInput+" , '"+modeOfTrainingInput+"' , '"+contentTypeInput+"' , '"+contentNameInput+" ', '"+ contentLinkInput+"')";
-	    int i = 0;
-	    System.out.println("before try block");
-		try {
-			System.out.println("in try block");
-			 i = stmt.executeUpdate(sql);
-		} catch (SQLException e) {
-			System.out.println("in catch servlet ");
-			e.printStackTrace();
-		}
-		if(i > 0 || i != 0){
-			//String name_status= "OK";
-			System.out.println("inserted");
-			out.println("inserted");
-		}else{
-			//String name_status="";
-			//out.println(""+name+" is available to use");
-			System.out.println("not inserted");
-		}*/
+		
 	}
 
 	/**
