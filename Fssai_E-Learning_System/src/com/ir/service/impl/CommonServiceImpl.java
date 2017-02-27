@@ -1,5 +1,7 @@
 package com.ir.service.impl;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -16,11 +18,13 @@ public class CommonServiceImpl implements CommonService{
 	CommonDao commonDao; 
 	
 	@Override
+	@Transactional
 	public String getCourseTrainingType(String courseNameId){
 		String modeOfTraining = commonDao.getCourseTrainingType(courseNameId);
 		return modeOfTraining;
 	}
 	@Override
+	@Transactional
 	public boolean changePasswordSave(ChangePasswordForm changePasswordForm, String id) {
 		boolean changePasswordAssesorSave= commonDao.changePasswordSave(changePasswordForm , id);
 		return changePasswordAssesorSave;

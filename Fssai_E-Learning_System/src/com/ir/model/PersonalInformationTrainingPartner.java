@@ -58,12 +58,12 @@ public class PersonalInformationTrainingPartner {
 	private String TrainingCentreName;
 	@NotNull(message="* Enter Training Partner Name")
 	private int TrainingPartnerName;
-	@NotNull @Size(min=1, max=20 , message="* Enter First Name")
+	@NotNull @Size(min=1, max=50 , message="* Enter First Name")
 	private String FirstName;
 	private String MiddleName;
-	@NotNull @Size(min=1, max=20 , message="* Enter Last Name")
+	@NotNull @Size(min=1, max=50 , message="* Enter Last Name")
 	private String LastName;
-	@NotNull @Size(min=10, max=10 , message="* Invalid PAN Number")
+	@NotNull @Size(min=10, max=50 , message="* Invalid PAN Number")
 	private String PAN;
 	@NotNull @Size(min=1, max=100 , message="* Enter Training Center Address")
 	private String TrainingPartnerPermanentLine1;

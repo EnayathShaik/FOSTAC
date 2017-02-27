@@ -5,11 +5,8 @@ import java.util.List;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.nio.file.FileSystems;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -20,12 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.ir.constantes.Constantes;
 import com.ir.constantes.TableLink;
 import com.ir.form.ChangePasswordForm;
@@ -96,7 +89,22 @@ public class TraineeController {
 	}
 	
 
-	@ModelAttribute("kindOfBusinessList")
+	
+	
+	
+	@RequestMapping(value="/basic" , method=RequestMethod.GET)
+	public String basic(Model model,@ModelAttribute("basicTrainee") CourseEnrolledUserForm courseEnrolledUserForm ,
+		 @ModelAttribute("loginUser") PersonalInformationTrainee pit ){// , Model modal , HttpSession session ){
+
+		List<CourseType>  courseTypeList = traineeService.courseTypeList();
+		List<ManageTrainingPartner> trainingPartnerList = trainingPartnerList = traineeService.trainingPartnerList();
+		model.addAttribute("courseTypeList", courseTypeList);
+		model.addAttribute("trainingPartnerList", trainingPartnerList);
+		
+		return "basic";
+	}
+	
+	/*@ModelAttribute("kindOfBusinessList")
 	public List<KindOfBusiness> populateKindOfBusiness() {
 		List<KindOfBusiness> kindOfBusinessList = null;
 		try{
@@ -105,13 +113,6 @@ public class TraineeController {
 			e.printStackTrace();
 		}
 		return kindOfBusinessList;
-	}
-	
-	
-	@RequestMapping(value="/basic" , method=RequestMethod.GET)
-	public String basic(@ModelAttribute("basicTrainee") CourseEnrolledUserForm courseEnrolledUserForm ,
-		 @ModelAttribute("loginUser") PersonalInformationTrainee pit ){// , Model modal , HttpSession session ){
-		return "basic";
 	}
 	
 	@ModelAttribute("courseTypes")
@@ -132,6 +133,78 @@ public class TraineeController {
 		}
 		return courseTypeList;
 	}
+	
+	@ModelAttribute("courseNameListB")
+	public List<CourseName> courseNameList(){
+		List<CourseName> courseNameListB = null;
+		try{
+			courseNameListB = traineeService.courseNameList();
+			System.out.println("courseNameListB course name list   :   "+ courseNameListB);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return courseNameListB;
+	}
+	
+	@ModelAttribute("advanceCourseNameList")
+	public List<CourseName> advanceCourseNameList(){
+		List<CourseName> advanceCourseNameList = null;
+		try{
+			advanceCourseNameList = traineeService.courseNameListByType(Constantes.COURSETYPE_ADVANCE);
+			System.out.println("Advance course name list   :   "+ advanceCourseNameList);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return advanceCourseNameList;
+	}
+
+	@ModelAttribute("specialCourseNameList")
+	public List<CourseName> specialCourseNameList(){
+		List<CourseName> specialCourseNameList = null;
+		try{
+			specialCourseNameList = traineeService.courseNameListByType(Constantes.COURSETYPE_SPECIAL);
+			System.out.println("specialCourseNameList course name list   :   "+ specialCourseNameList);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return specialCourseNameList;
+	}
+	@ModelAttribute("trainingPartnerList")
+	public List<ManageTrainingPartner> trainingPartnerList(){
+		List<ManageTrainingPartner> trainingPartnerList = null;
+		try{
+			trainingPartnerList = traineeService.trainingPartnerList();
+			System.out.println("training partner name list   :   "+ trainingPartnerList);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return trainingPartnerList;
+	}
+	@ModelAttribute("trainingCenterStateList")
+	public List<State> trainingCenterStateList(){
+		List<State> trainingCenterStateList = null;
+		try{
+			trainingCenterStateList = traineeService.trainingCenterStateList();
+			System.out.println("training partner state list   :   "+ trainingCenterStateList);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return trainingCenterStateList;
+	}
+	@ModelAttribute("stateList")
+	public List<State> populateStateList() {
+		List<State> stateList = null;
+		try{
+			stateList = pageLoadService.loadState();
+			System.out.println("state list   :   "+ stateList);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return stateList;
+	}
+	*
+	*/
 
 	
 	@RequestMapping(value="/uploadImage" , method=RequestMethod.GET)
@@ -205,36 +278,8 @@ public class TraineeController {
 			     
 	    return "upload-image";  
 	    }  
-/*	@RequestMapping(value="/saveImage" , method=RequestMethod.POST)
-	public String Savemage(@RequestParam("name") String name,
-			@RequestParam("file") MultipartFile file){
-		if (!file.isEmpty()) {
-			try {
-				byte[] bytes = file.getBytes();
 
-				// Creating the directory to store file
-				String rootPath = System.getProperty("catalina.home");
-				File dir = new File(rootPath + File.separator + "tmpFiles");
-				if (!dir.exists())
-					dir.mkdirs();
-
-				// Create the file on server
-				File serverFile = new File(dir.getAbsolutePath()
-						+ File.separator + name);
-				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(serverFile));
-				stream.write(bytes);
-				stream.close();
-				System.out.println("Server File Location="
-						+ serverFile.getAbsolutePath());
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return "upload-image";
-	}*/
-	@RequestMapping(value="/courseTraining" , method=RequestMethod.GET)
+	 @RequestMapping(value="/courseTraining" , method=RequestMethod.GET)
 	public String courseTraining(@RequestParam(value = "courseTypeId", required = true)  String courseTypeId , Model model, HttpSession session){
 		Integer userId=Integer.parseInt(session.getAttribute("userId").toString());
 		try{
@@ -324,7 +369,7 @@ public class TraineeController {
 			profileId = (Integer) httpSession.getAttribute("profileId");
 			loginId = (int) httpSession.getAttribute("loginIdUnique");
 			userId = (Integer) httpSession.getAttribute("userId");
-			//int tableID = courseEnrolledUserForm.getPersonalinformationtraineeid();
+			traineeService.closeCourse(userId, profileId, "Y");
 			int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileId);
 			System.out.println("loginid   :"+ loginId);
 			System.out.println("tableID  :"+ tableID);
@@ -394,64 +439,7 @@ public class TraineeController {
 		return "contactTrainee";
 	}
 
-	@ModelAttribute("courseNameListB")
-	public List<CourseName> courseNameList(){
-		List<CourseName> courseNameListB = null;
-		try{
-			courseNameListB = traineeService.courseNameList();
-			System.out.println("courseNameListB course name list   :   "+ courseNameListB);
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return courseNameListB;
-	}
-	
-	@ModelAttribute("advanceCourseNameList")
-	public List<CourseName> advanceCourseNameList(){
-		List<CourseName> advanceCourseNameList = null;
-		try{
-			advanceCourseNameList = traineeService.courseNameListByType(Constantes.COURSETYPE_ADVANCE);
-			System.out.println("Advance course name list   :   "+ advanceCourseNameList);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return advanceCourseNameList;
-	}
 
-	@ModelAttribute("specialCourseNameList")
-	public List<CourseName> specialCourseNameList(){
-		List<CourseName> specialCourseNameList = null;
-		try{
-			specialCourseNameList = traineeService.courseNameListByType(Constantes.COURSETYPE_SPECIAL);
-			System.out.println("specialCourseNameList course name list   :   "+ specialCourseNameList);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return specialCourseNameList;
-	}
-	@ModelAttribute("trainingPartnerList")
-	public List<ManageTrainingPartner> trainingPartnerList(){
-		List<ManageTrainingPartner> trainingPartnerList = null;
-		try{
-			trainingPartnerList = traineeService.trainingPartnerList();
-			System.out.println("training partner name list   :   "+ trainingPartnerList);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return trainingPartnerList;
-	}
-	@ModelAttribute("trainingCenterStateList")
-	public List<State> trainingCenterStateList(){
-		List<State> trainingCenterStateList = null;
-		try{
-			trainingCenterStateList = traineeService.trainingCenterStateList();
-			System.out.println("training partner state list   :   "+ trainingCenterStateList);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return trainingCenterStateList;
-	}
 	@RequestMapping(value="/updateInformation" , method=RequestMethod.GET)
 	public String updateInformation(@RequestParam(value = "userId", required = true)  Integer userId ,@ModelAttribute("updateInformation") RegistrationFormTrainee registrationFormTrainee, HttpSession session, Model model ){		
 		Integer profileID = 0;
@@ -470,6 +458,8 @@ public class TraineeController {
 					title.setTitleName(personalInformationTrainee.getTitle().getTitleName());
 					List<Title> titleList = new ArrayList<Title>();
 					titleList.add(title);
+					List<KindOfBusiness> kindOfBusinessList=pageLoadService.loadKindOfBusiness();
+					model.addAttribute("kindOfBusinessList" , kindOfBusinessList);
 					session.setAttribute("loginUser", personalInformationTrainee);
 					session.setAttribute("titleList", titleList);
 				 }
@@ -501,17 +491,7 @@ public class TraineeController {
 		return "welcomeupdatetrainee";
 	}
 	
-	@ModelAttribute("stateList")
-	public List<State> populateStateList() {
-		List<State> stateList = null;
-		try{
-			stateList = pageLoadService.loadState();
-			System.out.println("state list   :   "+ stateList);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return stateList;
-	}
+	
 	@RequestMapping(value="/generateAdmitCardtrainee" , method=RequestMethod.GET)
 	public String generateAdmitCardtrainee(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm ,BindingResult bindingResult, HttpSession session , Model model ){
 		try{
@@ -580,10 +560,11 @@ public class TraineeController {
 					System.out.println("Certificate ID = "+certificateInfo.getCertificateID());
 					System.out.println("Training Date = "+certificateInfo.getTrainingDate());
 					//Close Course
-					traineeService.closeCourse(userId, profileID, "Y");
+					//traineeService.closeCourse(userId, profileID, "Y");
 					model.addAttribute("certificateID", certificateInfo.getCertificateID());
 					model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
 					model.addAttribute("traineeCertificateName", certificateInfo.getName());
+					model.addAttribute("trainingAddress", certificateInfo.getTrainingAddress());
 					session.setAttribute("traineeSteps", 0);
 				}catch(Exception e){
 					e.printStackTrace();

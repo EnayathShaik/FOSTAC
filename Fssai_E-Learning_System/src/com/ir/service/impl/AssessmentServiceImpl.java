@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -29,29 +31,34 @@ public class AssessmentServiceImpl implements AssessmentService {
 	@Qualifier(value="assessmentDao")
 	private AssessmentDao assessmentDao;
 	@Override
+	@Transactional
 	public List<AssessmentQuestion> getAssessmentQuestions(int courseType, int courseName) {
 //		AssessmentDaoImpl assessmentDao = new AssessmentDaoImpl();
 		final List<AssessmentQuestion> listAssessmetQustions = assessmentDao.getAssessmentQuestions(courseType, courseName);
 		return listAssessmetQustions;
 	}
-	
+	@Override
+	@Transactional
 	public String saveAssessment(List<AssessmentAnswerCriteria> assessmentAnswerCriterias){
 		String result = assessmentDao.saveAssessment(assessmentAnswerCriterias);
 		return result;
 	}
 	
 	@Override
+	@Transactional
 	public List<CourseType> courseTypes() {
 		List<CourseType> courseTypeList = assessmentDao.courseTypes();
 		return courseTypeList;
 	}
 	@Override
+	@Transactional
 	public List<IntStringBean> getTrainingPartners(int assessorId){
 		List<IntStringBean> trainingPartners = assessmentDao.getTrainingPartners(assessorId);
 		return trainingPartners;
 	}
 
 	@Override
+	@Transactional
 	public List<AssessmentQuestion> getAssessmentAnswers(int courseType, List<Integer> questions) {
 		// TODO Auto-generated method stub
 		List<AssessmentQuestion> answersList = assessmentDao.getAssessmentAnswers(courseType, questions);
@@ -59,6 +66,7 @@ public class AssessmentServiceImpl implements AssessmentService {
 	}
 
 	@Override
+	@Transactional
 	public TraineeAssessmentEvaluation evaluate(Map<String,String> questions ,List<AssessmentQuestion> answers, int courseNameId){
 		TraineeAssessmentEvaluation traineeEvaluation = new TraineeAssessmentEvaluation();
 		int totalQuestion = answers.size();
@@ -107,6 +115,7 @@ public class AssessmentServiceImpl implements AssessmentService {
 		return traineeEvaluation;
 	}
 	@Override
+	@Transactional
 	public int saveTraineeAssessmentEvaluation(TraineeAssessmentEvaluation traineeAssessmentEvaluation){
 		int assessmentId = assessmentDao.saveTraineeAssessmentEvaluation(traineeAssessmentEvaluation);
 		return assessmentId;
@@ -114,6 +123,7 @@ public class AssessmentServiceImpl implements AssessmentService {
 
 	
 	@Override
+	@Transactional
 	public List<CourseType> courseTypeList() {
 		List<CourseType> courseTypeList = assessmentDao.courseTypeList();
 		return courseTypeList;

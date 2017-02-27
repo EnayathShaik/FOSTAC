@@ -89,14 +89,14 @@ function updateTraineeAssessmentResult(courseEnrolledid , status){
 	var status = $("#"+courseEnrolledid).val();
 	var comment = $("#comments"+courseEnrolledid).val();
 	var total =  "courseenrolledId="+courseEnrolledid+"&status="+status+"&comment="+comment ;
-	alert(total)
- 	$.ajax({
+	$.ajax({
 		type: 'post',
 		url: 'updateTraineeAssessmentResult.jspp?'+ total,
 		data: {
 		       user_name:name,
 		      },
 		      success: function (response) {
+		    	  alert('Result Updated.')
 		       $( '#name_status' ).html(response);
 		      }
 		      });

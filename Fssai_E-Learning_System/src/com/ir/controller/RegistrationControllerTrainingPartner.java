@@ -110,7 +110,7 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 		return "contactTC";
 	}
 	@RequestMapping(value = "/registrationTrainingPartner", method = RequestMethod.POST)
-	public String registerTrainer(@Valid @ModelAttribute("registrationFormTrainingPartner") RegistrationFormTrainingPartner registrationFormTrainingPartner, BindingResult bindingResult,Model model)  {
+	public String registerTrainingCenter(@Valid @ModelAttribute("registrationFormTrainingPartner") RegistrationFormTrainingPartner registrationFormTrainingPartner, BindingResult bindingResult,Model model)  {
 		
 		System.out.println("register controller before bind trainer");
 		if(bindingResult.hasErrors()){
@@ -126,7 +126,7 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 			e.printStackTrace();
 		}
 		 
-		if(!personalInformationTrainingPartner.equalsIgnoreCase("")){
+		if(personalInformationTrainingPartner != null && !personalInformationTrainingPartner.equalsIgnoreCase("")){
 			String[] all = personalInformationTrainingPartner.split("&");
 			model.addAttribute("id" , all[1]);
 			model.addAttribute("pwd" , all[0]);

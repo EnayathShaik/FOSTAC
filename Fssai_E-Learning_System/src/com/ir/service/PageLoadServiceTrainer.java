@@ -11,16 +11,16 @@ import com.ir.model.State;
 import com.ir.model.Title;
 
 public interface PageLoadServiceTrainer {
-	@Transactional
+	
 	public List<State> loadState();
 	
-	@Transactional
+	
 	public List<Title> loadTitle();
 	
-	@Transactional
+	
 	public List<CourseName> basicCourseName();
 	
-	@Transactional
+	
 	public  List<String> loadCaste();
 	//public List<CourseName> advanceCourseList();
 	//public List<CourseName> specialCourseList();

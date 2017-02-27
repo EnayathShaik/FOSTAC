@@ -44,7 +44,7 @@ public class MainRedirect {
 	PageLoadService pageLoadService;
 	
 	
-	   @ModelAttribute("tpList")
+	   /*@ModelAttribute("tpList")
 	   public List<ManageTrainingPartner> tpList() {
 		   List<ManageTrainingPartner> tpList = null;
 		   try{
@@ -73,7 +73,7 @@ public class MainRedirect {
 			   e.printStackTrace();
 		   }
 		   return basicCourseList;
-	   }
+	   }*/
 	   @RequestMapping(value="/showTrainingCalendarDetails" , method=RequestMethod.POST)
 		@ResponseBody
 		public void getApplicationStatusDetails(@RequestBody Utility utility,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
@@ -224,39 +224,5 @@ public class MainRedirect {
 	   public String assessor() {
 		   return "assessor";
 	   }
-	 /*  public String login(
-			   @ModelAttribute("fostac_Trainee_Index_Form") RegisterFormTrainee registerFormTrainee,
-			   BindingResult result,Model model,HttpSession session) {
-			return "login";
 	
-			 String captcha=(String)session.getAttribute("CAPTCHA");
-			    if(captcha==null || (captcha!=null && !captcha.equals(login.getCaptcha()))){
-			    	login.setCaptcha("");
-			    	model.addAttribute("message", "Captcha does not match");
-			    	return "login";
-			    }
-
-				if(login.getUserId().equals("guest") && login.getPassword().equals("ddd")){
-					System.out.println("user id and password matches");
-					model.addAttribute("loginId", login.getUserId());
-					return "home";
-				
-				}
-				else{
-					login.setCaptcha("");
-					model.addAttribute("message","User ID or Password Incorrect");
-					return "login";	
-				}		
-		}
-
-	   @RequestMapping(value="/fostac_Trainee_Index_Form" ,method = RequestMethod.POST)
-	   public String fostac_Trainee_Index_Form(
-			   @ModelAttribute("RegisterFormTrainee") RegisterFormTrainee registerFormTrainee,
-				BindingResult bindingResult, Model model
-			   ) {
-		   model.addAttribute("RegisterFormTrainee",  registerFormTrainee);
-		   System.out.println("llllllllll");
-		return "trainee_registration";
-	   }*/
-
 }

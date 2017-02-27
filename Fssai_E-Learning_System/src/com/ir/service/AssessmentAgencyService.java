@@ -11,16 +11,16 @@ import com.ir.model.CourseType;
 import com.ir.model.assessmentagency.AssessmentAgencyForm;
 
 public interface AssessmentAgencyService {
-	@Transactional
+	
 	String contactAssessorSave(ContactTrainee contactTrainee , String id);
-	@Transactional
+	
 	boolean changePasswordData(ChangePasswordForm changePasswordForm, String id);
-	@Transactional
+	
 	public AssessmentAgencyForm getAssessmentAgencyForm(int agencyId);
-	@Transactional
+	
 	public List<CourseType> courseTypeList();
 	
-	@Transactional
+	
 	public Map<String , String> assessorNameMap(int AssessmentAgency);
 
 }

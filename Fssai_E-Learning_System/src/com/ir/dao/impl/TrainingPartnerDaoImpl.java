@@ -345,7 +345,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		try{
 			//String sql="select trainingdate,noofvacancy,loginid from trainingcentervacancyenrolled where postvacancyid="+postVacancyTrainingCenterBean.getPostvacancyID();
 			StringBuffer sql = new StringBuffer();
-			sql.append(" select trainingdate,noofvacancy,loginid,B.coursetypeid,B.coursetype,C.coursenameid,C.coursename from trainingcentervacancyenrolled A");
+			sql.append(" select trainingdate,noofvacancy,loginid,B.coursetypeid,B.coursetype,C.coursenameid,C.coursename,C.coursecode from trainingcentervacancyenrolled A");
 			sql.append(" inner join coursetype B on(A.coursetype=B.coursetypeid)");
 			sql.append(" inner join coursename C on(A.coursename=C.coursenameid)");
 			sql.append(" where postvacancyid="+postVacancyTrainingCenterBean.getPostvacancyID());
@@ -362,6 +362,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 				utility.setCourseTypeName(list.get(0)[4].toString());
 				utility.setCourseNameId(Integer.parseInt(list.get(0)[5].toString()));
 				utility.setCourseName(list.get(0)[6].toString());
+				utility.setCourseName(list.get(0)[7].toString());
 				List<StringStringBean> trainerList=new ArrayList<>();
 				for(int i=0;i<list.size();i++){
 					StringBuffer sqlBuffer = new StringBuffer();
@@ -589,7 +590,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		System.out.println("********  "+trainingCalendarForm.getCourseName());
 		Session session = sessionFactory.getCurrentSession();
 		
-		String sql = "select max(seqNo) + 1 from trainingcalendar";
+		String sql = "select coalesce(max(seqNo) + 1,1) from trainingcalendar";
 		int maxId = 0 ;
 		Query maxIDList = session.createSQLQuery(sql);
 		List list = maxIDList.list();
@@ -667,20 +668,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			Query query = session.createSQLQuery(sql);
 			query.executeUpdate();
 	}
-	
-/*	@Override
-	public List<ManageAssessmentAgency> loadAssessmentAgency() {
-		System.out.println("Page Load DAOImpl process start in Assessment Agency");
-		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("from ManageAssessmentAgency");
-		List loadAssessmentAgency = query.list();
-		session.close();
-		System.out.println("state list dao     :"+ loadAssessmentAgency);
-		// TODO Auto-generated method stub
-		return loadAssessmentAgency;
-	}
-	*/
-	
 	
 	
 	@Override

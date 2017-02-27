@@ -2,9 +2,12 @@ package com.ir.service.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.ir.dao.RegistrationTrainingPartnerDAO;
 import com.ir.form.ChangePasswordForm;
@@ -21,6 +24,7 @@ import com.ir.service.RegistrationServiceTrainingPartner;
 
 
 @Component("registrationServiceTrainingPartner")
+@Service
 public class RegistrationServiceTrainingPartnerImpl implements RegistrationServiceTrainingPartner{
 	
 	@Autowired
@@ -28,6 +32,7 @@ public class RegistrationServiceTrainingPartnerImpl implements RegistrationServi
 	RegistrationTrainingPartnerDAO registrationTrainingPartnerDAO; 
 
 	@Override
+	@Transactional
 	public String registerPersonalInformationTrainer(RegistrationFormTrainingPartner registrationFormTrainingPartner) {
 		// TODO Auto-generated method stub
 		String personalInformationTrainingPartner = registrationTrainingPartnerDAO.register(registrationFormTrainingPartner);
@@ -35,6 +40,7 @@ public class RegistrationServiceTrainingPartnerImpl implements RegistrationServi
 	}
 
 	@Override
+	@Transactional
 	public List<State> loadState() {
 		// TODO Auto-generated method stub
 		List<State> listState = registrationTrainingPartnerDAO.loadState();
@@ -42,12 +48,14 @@ public class RegistrationServiceTrainingPartnerImpl implements RegistrationServi
 	}
 
 	@Override
+	@Transactional
 	public List<Title> loadTitle() {
 		List<Title> titleList = registrationTrainingPartnerDAO.loadTitle();
 		return titleList;
 	}
 
 	@Override
+	@Transactional
 	public List<CourseName> basicCourseName() {
 		// TODO Auto-generated method stub
 				List<CourseName> basicCourseName= registrationTrainingPartnerDAO.basicCourseName();
@@ -55,12 +63,14 @@ public class RegistrationServiceTrainingPartnerImpl implements RegistrationServi
 	}
 
 	@Override
+	@Transactional
 	public List<ManageTrainingPartner> trainingPartnerNameList() {
 		List<ManageTrainingPartner> trainingPartnerNameList= registrationTrainingPartnerDAO.trainingPartnerNameList();
 		return trainingPartnerNameList;
 	}
 
 	@Override
+	@Transactional
 	public String registerPersonalInformationTrainingPartner(
 			RegistrationFormTrainingPartner registrationFormTrainingPartner) {
 		String registerPersonalInformationTrainingPartner = registrationTrainingPartnerDAO.registerTrainingPartner(registrationFormTrainingPartner);
@@ -68,11 +78,13 @@ public class RegistrationServiceTrainingPartnerImpl implements RegistrationServi
 	}
 
 	@Override
+	@Transactional
 	public List<ManageTrainingPartner> trainingCenterList() {
 		List<ManageTrainingPartner> trainingCenterList= registrationTrainingPartnerDAO.trainingCenterList();
 		return trainingCenterList;
 	}
 	@Override
+	@Transactional
 	public String UpdateTrainingPartner(RegistrationFormTrainingPartner registrationFormTrainingPartner, Integer id) {
 		String registrationFormTrainingPartner1 = registrationTrainingPartnerDAO.updatetrainingPartner(registrationFormTrainingPartner, id);
 		return registrationFormTrainingPartner1;
@@ -85,35 +97,41 @@ public class RegistrationServiceTrainingPartnerImpl implements RegistrationServi
 		return contactTraineeSave;
 	}*/
 	@Override
+	@Transactional
 	public String contactTraineeSave(ContactTrainee contactTrainee, String id) {
 		String contactTraineeSave = registrationTrainingPartnerDAO.contactTraineeSave(contactTrainee , id);
 		return contactTraineeSave;
 	}
 
 	@Override
+	@Transactional
 	public String postVacancyTrainingCenter(PostVacancyTrainingCenterForm postVacancyTrainingCenterForm) {
 		String postVacancyTrainingCenter = registrationTrainingPartnerDAO.postVacancyTrainingCenter(postVacancyTrainingCenterForm);
 		return postVacancyTrainingCenter;
 	}
 
 	@Override
+	@Transactional
 	public List<CourseType> courseTypeList() {
 		List<CourseType> courseTypeList = registrationTrainingPartnerDAO.courseTypeList();
 		return courseTypeList;
 	}
 
 	@Override
+	@Transactional
 	public List<CourseName> courseNameList() {
 		List<CourseName> courseNameList = registrationTrainingPartnerDAO.courseNameList();
 		return courseNameList;
 	}
 	@Override
+	@Transactional
 	public boolean changePasswordTraineeSave(ChangePasswordForm changePasswordForm, String id) {
 		boolean changePasswordTCSave = registrationTrainingPartnerDAO.changePasswordTCSave(changePasswordForm , id);
 		return changePasswordTCSave;
 	}
 	
 	@Override
+	@Transactional
 	public PersonalInformationTrainingPartner FullDetailtrainingpartner(int loginId) {
 		// TODO Auto-generated method stub
 		PersonalInformationTrainingPartner personalInformationTrainingPartner = registrationTrainingPartnerDAO.fulldetailtainingpartner(loginId);

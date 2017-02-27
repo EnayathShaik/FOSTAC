@@ -23,6 +23,7 @@ import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.RegistrationFormTrainer;
 import com.ir.model.CourseEnrolledUser;
 import com.ir.model.CourseName;
+import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
@@ -30,6 +31,7 @@ import com.ir.model.PostVacancyTrainingCenter;
 import com.ir.model.PostVacancyTrainingCenterBean;
 import com.ir.model.State;
 import com.ir.model.Title;
+import com.ir.service.PageLoadService;
 import com.ir.service.PageLoadServiceTrainer;
 import com.ir.service.RegistrationServiceTrainer;
 import com.ir.service.RegistrationServiceTrainingPartner;
@@ -43,6 +45,11 @@ import com.ir.util.Profiles;
 public class RegistrationControllerTrainer implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+	
+	@Autowired
+	@Qualifier("pageLoadService")
+	PageLoadService pageLoadService;
+	
 	@Autowired
 	@Qualifier("pageLoadServiceTrainer")
 	PageLoadServiceTrainer pageLoadServiceTrainer;
@@ -63,7 +70,7 @@ public class RegistrationControllerTrainer implements Serializable{
 	TrainingPartnerService trainingPartnerService; 
 	
 	
-	@ModelAttribute("trainingPartnerNameList" )
+	/*@ModelAttribute("trainingPartnerNameList" )
 	public List<ManageTrainingPartner> trainingPartnerNameList() {
 		List<ManageTrainingPartner> trainingPartnerNameList = registrationServiceTrainingPartner.trainingPartnerNameList();
 		return trainingPartnerNameList;
@@ -81,17 +88,7 @@ public class RegistrationControllerTrainer implements Serializable{
 		System.out.println("casteList    :   "+ casteList);
 		return casteList;
 	}
-	/*@ModelAttribute("districtList")
-	public List<District> districtList() {
-		List<District> districtList = pageLoadServiceTrainer.loadDistrict();
-		System.out.println("district list   :   "+ districtList);
-		return districtList;
-	}*/
-	/*@ModelAttribute("cityList")
-	public List<City> populateCityList() {		
-		List<City> cityList=new ArrayList<City>();
-		return cityList;
-	}*/
+	
 	@ModelAttribute("titleList")
 	public List<Title> populateTitle() {
 		List<Title> titleList = pageLoadServiceTrainer.loadTitle();
@@ -106,21 +103,38 @@ public class RegistrationControllerTrainer implements Serializable{
 		return basicCourseList;
 	}
 	
-	@RequestMapping(value = "/registrationFormTrainer", method = RequestMethod.GET)
-	public String registerForm(Model model) {
-		System.out.println("registerForm trainer begins ");
-		RegistrationFormTrainer registrationFormTrainer=new RegistrationFormTrainer();
-		model.addAttribute("registrationFormTrainer", registrationFormTrainer);
-		return "registrationFormTrainer";
-	}
-	
-	
 	@ModelAttribute("userId")
 	public String getUniqueId(){
 		String uniqueID = GenerateUniqueID.getNextCombinationId("TR", "personalinformationtrainer" , "000000");		
 		System.out.println(" Trainer ID " + uniqueID);
 		return uniqueID;
+	}*/
+	
+	@RequestMapping(value = "/registrationFormTrainer", method = RequestMethod.GET)
+	public String registerForm(Model model) {
+		System.out.println("registerForm trainer begins ");
+		RegistrationFormTrainer registrationFormTrainer=new RegistrationFormTrainer();
+		List<State> stateList = pageLoadService.loadState();
+		List<Title> titleList = pageLoadService.loadTitle();
+		List<String> casteList = pageLoadService.loadCaste();
+		List<ManageTrainingPartner> trainingPartnerNameList= registrationServiceTrainingPartner.trainingPartnerNameList();
+		String uniqueID = GenerateUniqueID.getNextCombinationId("TR", "personalinformationtrainer" , "000000");
+		List<CourseName> basicCourseList = pageLoadServiceTrainer.basicCourseName();
+		
+		
+		model.addAttribute("registrationFormTrainer", registrationFormTrainer);
+		model.addAttribute("stateList", stateList);
+		model.addAttribute("titleList", titleList);
+		model.addAttribute("casteList", casteList);
+		model.addAttribute("trainingPartnerNameList", trainingPartnerNameList);
+		model.addAttribute("userId", uniqueID);
+		model.addAttribute("basicCourseList", basicCourseList);
+		
+		return "registrationFormTrainer";
 	}
+	
+	
+	
 	
 	@RequestMapping(value = "/registrationTrainer", method = RequestMethod.POST)
 	public String registerTrainer(@Valid @ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer, BindingResult bindingResult,Model model)  {
@@ -223,73 +237,9 @@ public class RegistrationControllerTrainer implements Serializable{
 		return "trainerHomepage";
 	}
    
-    
-    @RequestMapping(value="/advanceTrainer" , method=RequestMethod.GET)
-    public String advance(@ModelAttribute("courseEnrolledUser") CourseEnrolledUserForm courseEnrolledUser )
-    {
-	return "advanceTrainer";
-	}
-    
-    @RequestMapping(value="/advanceTrainerSave" , method=RequestMethod.POST)
-	public String advanceTrainerSave(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm,
-			@ModelAttribute("rft") PersonalInformationTrainee loginUser ,BindingResult result ,HttpSession session, Model model){
-		
-    	int loginId=(int) session.getAttribute("loginIdUnique");
-		System.out.println("loginid   :"+ loginId);
-		long basicEnroll  = 0;
-		try{
-			basicEnroll = registrationServiceTrainer.advanceTrainerSave(courseEnrolledUserForm , loginId);	
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		 
-		if(basicEnroll  > 1){
-			model.addAttribute("created", "You have successfully enrolled !!!");
-			model.addAttribute("roll", basicEnroll);
-		}else{
-			model.addAttribute("created", "Oops , something went wrong !!!");
-			model.addAttribute("roll", basicEnroll);
-		}
-		return "trainerHomepage";
-	}
-    
-    @RequestMapping(value="/specialTrainer" , method=RequestMethod.GET)
-    public String special(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm )
-    {
-	return "specialTrainer";
-	}
-    
-    @RequestMapping(value="/specialTrainerSave" , method=RequestMethod.POST)
-   	public String specialTrainerSave(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm,
-   			@ModelAttribute("rft") PersonalInformationTrainee loginUser ,BindingResult result ,HttpSession session, Model model){
-   		
-       	System.out.println("wefsjdjksbjbsdjbjsdjfsdjkfbjksdbfjbsdjfbjsdbfjsdbfjsdjfjbsd");
-       	
-       	int loginId=(int) session.getAttribute("loginIdUnique");
-   		System.out.println("loginid   :"+ loginId);
-   		long basicEnroll = 0;
-   		try{
-   			basicEnroll = registrationServiceTrainer.specialTrainerSave(courseEnrolledUserForm , loginId );	
-   		}catch(Exception e){
-   			e.printStackTrace();
-   		}
-   		 
-   		if(basicEnroll  > 1){
-   			model.addAttribute("created", "You have successfully enrolled !!!");
-   			model.addAttribute("roll", basicEnroll);
-   		}else{
-   			model.addAttribute("created", "Oops , something went wrong !!!");
-   			model.addAttribute("roll", basicEnroll);
-   		}
-   		return "trainerHomepage";
-   	}
-    
      
-    
-    //by Rishi end
-    
 
-@RequestMapping(value="/update-profile" , method=RequestMethod.GET)
+    @RequestMapping(value="/update-profile" , method=RequestMethod.GET)
    	public String updateInformation(@RequestParam(value = "userId", required = true)  Integer userId ,Model model ,@ModelAttribute("updateInformation") RegistrationFormTrainer registrationFormTrainer, HttpSession session ){		
 	Integer profileID = 0;
 	try{
@@ -337,21 +287,5 @@ public class RegistrationControllerTrainer implements Serializable{
 		//model.addAttribute("update", "Updated successfully !!!");
 		return "welcomeupdatetrainee";
 	}
-    @RequestMapping(value="/generatecertificatetrainer" , method=RequestMethod.GET)
-	public String generatecertificate(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer )
-	{
-		return "generatecertificatetrainer";
-	}
-    @RequestMapping(value="/certificatetrainer" , method=RequestMethod.GET)
-    public String certificate(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer )
-    {
-	return "certificatetrainer";
-	}
-    @RequestMapping(value="/generateadmitcardtrainer" , method=RequestMethod.GET)
-	public String generateadmitcard(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer,BindingResult bindingResult, HttpSession session , Model model )
-	{
-    	CourseName courseName=traineeService.getCourseName(Profiles.TRAINER.value());
-		model.addAttribute("courseName", courseName);
-		return "generateAdmitCardTrainer";
-	}
+    
 }

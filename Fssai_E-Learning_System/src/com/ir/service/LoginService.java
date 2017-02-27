@@ -19,31 +19,31 @@ import com.ir.model.TrainingPartner;
 
 public interface LoginService {
 	
-	@Transactional
+	
 	public LoginDetails login(LoginForm loginForm);
 
-	@Transactional
+	
 	public List<CourseEnrolled> courseEnrolledList();
 
-	@Transactional
+	
 	public PersonalInformationTrainee FullDetail(int loginId);
 
-	@Transactional
+	
 	public List<TrainingPartner> trainingPartnerCountList();
 
-	@Transactional
+	
 	public ManageAssessmentAgency FullDetailAssessmentAgency(int id);
 
-	@Transactional
+	
 	public PersonalInformationAssessor fullDetailAssessor(int id );
 
-	@Transactional
+	
 	public ManageTrainingPartner FullDetailTP(int id);
 	
-	@Transactional
+	
 	public PersonalInformationTrainer FullDetailTrainer(int loginId);
 
-	@Transactional
+	
 	public PersonalInformationTrainingPartner FullDetailtrainingpartner(int loginId);
 	
 }

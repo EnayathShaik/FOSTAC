@@ -70,7 +70,7 @@ public class GetCourseDetails extends HttpServlet {
 		String sql ="select tc.trainingcalendarid , concat(pitp.trainingpartnerpermanentline1 , ' ' , pitp.trainingpartnerpermanentline2 , ' ' , s.statename , ' ' , d.districtname , ' ' , c.cityname) as address, "+
 				" concat(tc.trainingdate , ' / ' , tc.trainingtime) as schedule , "+
 				" concat(pitp.firstname , ' ' , pitp.middlename , ' ' , pitp.lastname ) ,concat( pitp.trainingpartnerpermanentmobile , ' / ' , pitp.trainingpartnerpermanentemail)  as contact, "+
-				" pitp.seatcapacitypersession ,(CAST(CAST (pitp.seatcapacitypersession AS NUMERIC(19,4)) AS INT) - ( select count(1) from courseenrolleduser where trainingcalendarid = tc.trainingcalendarid)) "+
+				" tc.seatCapacity ,(CAST(CAST (tc.seatCapacity AS NUMERIC(19,4)) AS INT) - ( select count(1) from courseenrolleduser where trainingcalendarid = tc.trainingcalendarid)) "+
 				" ,cn.courseCode , tc.trainingDate, tc.batchCode, cn.courseduration  "+
 				" from trainingcalendar as tc "+
 				" inner join coursename as cn on cn.coursenameid = tc.coursename "+
@@ -88,7 +88,7 @@ public class GetCourseDetails extends HttpServlet {
 				//" and CAST(tc.trainingdate AS varchar(10)) like '"+trainingDate+"' "+
 				" and CAST(s.stateid AS varchar(10)) like '"+trainingCenterState+"' "+
 				" and CAST(d.districtid AS varchar(10)) like '"+trainingCenterDistrict+"' "+
-				" and  to_timestamp(COALESCE(tc.trainingdate, '19900101010101'),'DD-MM-YYYY') > now() and  (CAST(CAST (pitp.seatcapacitypersession AS NUMERIC(19,4)) AS INT) - ( select count(1) from courseenrolleduser where trainingcalendarid = tc.trainingcalendarid) > 0)";
+				" and  to_timestamp(COALESCE(tc.trainingdate, '19900101010101'),'DD-MM-YYYY') > now() and  (CAST(CAST (tc.seatCapacity AS NUMERIC(19,4)) AS INT) - ( select count(1) from courseenrolleduser where trainingcalendarid = tc.trainingcalendarid) > 0)";
 	
 		List list = new AjaxRequest().returnList(sql);
 		String newList = null ;

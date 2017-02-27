@@ -10,11 +10,11 @@ import com.ir.model.RegisterTraineeInformationFull;
 
 
 public interface RegistrationServiceTrainee {
-	@Transactional
+	
 	public RegisterTraineeInformationFull registerTraineeInformationFull(RegistrationFormTrainee registrationFormTrainee); 
-	@Transactional
+	
 	public String registerTraineeInformationFullIdCheck(RegistrationFormTrainee registrationFormTrainee) ;
-	@Transactional
+	
 	public String registerPersonalInformationTrainee(RegistrationFormTrainee registrationFormTrainee);
 
 }

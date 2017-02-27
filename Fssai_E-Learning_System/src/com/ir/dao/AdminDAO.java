@@ -100,12 +100,7 @@ public interface AdminDAO {
 	public int getElegibilityForAssessment(int coursenameid);
 	public int saveTrainerAssessment(TrainerAssessmentEvaluation trainerAssessmentEvaluation);
 	
-	//State
-		public void addState(State p);
-		public void updateState(State p);
-		public List<State> listStates();
-		public State getStateById(int id);
-		public void removeState(int id);
+	
 		
 		//updateUser
 		

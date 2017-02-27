@@ -133,6 +133,7 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 
 	@Override
 	public String registerTrainingPartner(RegistrationFormTrainingPartner registrationFormTrainingPartner) {
+		
 		int personalInformationTrainingPartnerIdd = 0;
 		Session session = sessionFactory.getCurrentSession();
 		String passwordString = null;
@@ -153,57 +154,65 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 			encryprPassword = encryptionPasswordANDVerification.encryptPass(passwordString);
 			
 		}catch(NoSuchAlgorithmException e){
+			e.printStackTrace();
 			System.out.println( " no such algo exception error catch ");
 		}
-		
-		//registrationTrainingPartner
 		PersonalInformationTrainingPartner personalInformationTrainingPartner = new PersonalInformationTrainingPartner();
-		String TPName =  registrationFormTrainingPartner.getTPName();  
-		String preFix = "TCTP"+TPName;
-		System.out.println("preFix "+preFix);
-		String nextSequenceUserID  =  GenerateUniqueID.getNextCombinationId(preFix, "personalInformationTrainingPartner", "00");
-		System.out.println("nextSequenceUserID "+nextSequenceUserID);
-		LoginDetails loginDetails = new LoginDetails();
-		loginDetails.setLoginId(nextSequenceUserID);
-		/**TODO - change the status to I initially */
+		String nextSequenceUserID = "";
+		try{
+			//registrationTrainingPartner
+			
+			String TPName =  registrationFormTrainingPartner.getTPName();  
+			String preFix = "TCTP"+TPName;
+			System.out.println("preFix "+preFix);
+			nextSequenceUserID  =  GenerateUniqueID.getNextCombinationId(preFix, "personalInformationTrainingPartner", "00");
+			System.out.println("nextSequenceUserID "+nextSequenceUserID);
+			LoginDetails loginDetails = new LoginDetails();
+			loginDetails.setLoginId(nextSequenceUserID);
+			/**TODO - change the status to I initially */
+			
+			loginDetails.setStatus("A");
+			loginDetails.setPassword(passwordString);
+			loginDetails.setEncrypted_Password(encryprPassword);
+			loginDetails.setProfileId(5);
+			
+			
+			personalInformationTrainingPartner.setUserID(nextSequenceUserID);
+			personalInformationTrainingPartner.setTitle(registrationFormTrainingPartner.getTitle());
+			personalInformationTrainingPartner.setTrainingCentreName(registrationFormTrainingPartner.getTrainingCentreName());
+			personalInformationTrainingPartner.setTrainingPartnerName(registrationFormTrainingPartner.getTrainingPartnerName());
+			personalInformationTrainingPartner.setFirstName(registrationFormTrainingPartner.getFirstName());
+			personalInformationTrainingPartner.setLastName(registrationFormTrainingPartner.getLastName());
+			personalInformationTrainingPartner.setMiddleName(registrationFormTrainingPartner.getMiddleName());
+			personalInformationTrainingPartner.setPAN(registrationFormTrainingPartner.getPAN());
+			personalInformationTrainingPartner.setTrainingPartnerPermanentLine1(registrationFormTrainingPartner.getTrainingPartnerPermanentLine1());
+			personalInformationTrainingPartner.setTrainingPartnerPermanentLine2(registrationFormTrainingPartner.getTrainingPartnerPermanentLine2());
+			personalInformationTrainingPartner.setTrainingPartnerPermanentState(registrationFormTrainingPartner.getTrainingPartnerPermanentState());
+			personalInformationTrainingPartner.setTrainingPartnerPermanentDistrict(registrationFormTrainingPartner.getTrainingPartnerPermanentDistrict());
+			personalInformationTrainingPartner.setTrainingPartnerPermanentCity(registrationFormTrainingPartner.getTrainingPartnerPermanentCity());
+			personalInformationTrainingPartner.setTrainingPartnerPermanentPincode(registrationFormTrainingPartner.getTrainingPartnerPermanentPincode());
+			personalInformationTrainingPartner.setTrainingPartnerPermanentEmail(registrationFormTrainingPartner.getTrainingPartnerPermanentEmail());
+			personalInformationTrainingPartner.setTrainingPartnerPermanentMobile(registrationFormTrainingPartner.getTrainingPartnerPermanentMobile());
+			personalInformationTrainingPartner.setSeatCapacityPerSession(registrationFormTrainingPartner.getSeatCapacityPerSession());
+			personalInformationTrainingPartner.setSeatcapacityAvailable(Integer.parseInt(registrationFormTrainingPartner.getSeatCapacityPerSession()));
+			
+			//personalInformationTrainingPartner.setNoOfInHouseTrainers(registrationFormTrainingPartner.getNoOfInHouseTrainers());
+			personalInformationTrainingPartner.setAvailabiltyOfTVProjector(registrationFormTrainingPartner.getAvailabiltyOfInHouseTrainersInFoodSafety());
+			personalInformationTrainingPartner.setFacilityOfElectricityAndAirCondition(registrationFormTrainingPartner.getFacilityOfElectricityAndAirCondition());
+			System.out.println("drinking water "+registrationFormTrainingPartner.getFacilityOfDrinkingWater());
+			personalInformationTrainingPartner.setTrainingPartnerPermanentLandLine(registrationFormTrainingPartner.getTrainingPartnerPermanentLandLine());
+			personalInformationTrainingPartner.setFacilityOfDrinkingWater(registrationFormTrainingPartner.getFacilityOfDrinkingWater());
+			personalInformationTrainingPartner.setFacilityOfWashroom(registrationFormTrainingPartner.getFacilityOfWashroom());
+			//personalInformationTrainingPartner.setNoOfYearsInBusinessOfTraining(registrationFormTrainingPartner.getNoOfYearsInBusinessOfTraining());
+			personalInformationTrainingPartner.setAvailabiltyOfInHouseTrainersInFoodSafety(registrationFormTrainingPartner.getAvailabiltyOfInHouseTrainersInFoodSafety());
+			//personalInformationTrainingPartner.setNoOfTrainingSessionWishToConductInAMonth(registrationFormTrainingPartner.getNoOfTrainingSessionWishToConductInAMonth());
+			personalInformationTrainingPartner.setLoginDetails(loginDetails);
+			personalInformationTrainingPartner.setProfileCode(5);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		
-		loginDetails.setStatus("A");
-		loginDetails.setPassword(passwordString);
-		loginDetails.setEncrypted_Password(encryprPassword);
-		loginDetails.setProfileId(5);
 		
-		
-		personalInformationTrainingPartner.setUserID(nextSequenceUserID);
-		personalInformationTrainingPartner.setTitle(registrationFormTrainingPartner.getTitle());
-		personalInformationTrainingPartner.setTrainingCentreName(registrationFormTrainingPartner.getTrainingCentreName());
-		personalInformationTrainingPartner.setTrainingPartnerName(registrationFormTrainingPartner.getTrainingPartnerName());
-		personalInformationTrainingPartner.setFirstName(registrationFormTrainingPartner.getFirstName());
-		personalInformationTrainingPartner.setLastName(registrationFormTrainingPartner.getLastName());
-		personalInformationTrainingPartner.setMiddleName(registrationFormTrainingPartner.getMiddleName());
-		personalInformationTrainingPartner.setPAN(registrationFormTrainingPartner.getPAN());
-		personalInformationTrainingPartner.setTrainingPartnerPermanentLine1(registrationFormTrainingPartner.getTrainingPartnerPermanentLine1());
-		personalInformationTrainingPartner.setTrainingPartnerPermanentLine2(registrationFormTrainingPartner.getTrainingPartnerPermanentLine2());
-		personalInformationTrainingPartner.setTrainingPartnerPermanentState(registrationFormTrainingPartner.getTrainingPartnerPermanentState());
-		personalInformationTrainingPartner.setTrainingPartnerPermanentDistrict(registrationFormTrainingPartner.getTrainingPartnerPermanentDistrict());
-		personalInformationTrainingPartner.setTrainingPartnerPermanentCity(registrationFormTrainingPartner.getTrainingPartnerPermanentCity());
-		personalInformationTrainingPartner.setTrainingPartnerPermanentPincode(registrationFormTrainingPartner.getTrainingPartnerPermanentPincode());
-		personalInformationTrainingPartner.setTrainingPartnerPermanentEmail(registrationFormTrainingPartner.getTrainingPartnerPermanentEmail());
-		personalInformationTrainingPartner.setTrainingPartnerPermanentMobile(registrationFormTrainingPartner.getTrainingPartnerPermanentMobile());
-		personalInformationTrainingPartner.setSeatCapacityPerSession(registrationFormTrainingPartner.getSeatCapacityPerSession());
-		personalInformationTrainingPartner.setSeatcapacityAvailable(Integer.parseInt(registrationFormTrainingPartner.getSeatCapacityPerSession()));
-		
-		//personalInformationTrainingPartner.setNoOfInHouseTrainers(registrationFormTrainingPartner.getNoOfInHouseTrainers());
-		personalInformationTrainingPartner.setAvailabiltyOfTVProjector(registrationFormTrainingPartner.getAvailabiltyOfInHouseTrainersInFoodSafety());
-		personalInformationTrainingPartner.setFacilityOfElectricityAndAirCondition(registrationFormTrainingPartner.getFacilityOfElectricityAndAirCondition());
-		System.out.println("drinking water "+registrationFormTrainingPartner.getFacilityOfDrinkingWater());
-		personalInformationTrainingPartner.setTrainingPartnerPermanentLandLine(registrationFormTrainingPartner.getTrainingPartnerPermanentLandLine());
-		personalInformationTrainingPartner.setFacilityOfDrinkingWater(registrationFormTrainingPartner.getFacilityOfDrinkingWater());
-		personalInformationTrainingPartner.setFacilityOfWashroom(registrationFormTrainingPartner.getFacilityOfWashroom());
-		//personalInformationTrainingPartner.setNoOfYearsInBusinessOfTraining(registrationFormTrainingPartner.getNoOfYearsInBusinessOfTraining());
-		personalInformationTrainingPartner.setAvailabiltyOfInHouseTrainersInFoodSafety(registrationFormTrainingPartner.getAvailabiltyOfInHouseTrainersInFoodSafety());
-		//personalInformationTrainingPartner.setNoOfTrainingSessionWishToConductInAMonth(registrationFormTrainingPartner.getNoOfTrainingSessionWishToConductInAMonth());
-		personalInformationTrainingPartner.setLoginDetails(loginDetails);
-		personalInformationTrainingPartner.setProfileCode(5);
 		
 		try{
 			personalInformationTrainingPartnerIdd = (Integer) session.save(personalInformationTrainingPartner);
@@ -256,6 +265,7 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 				}
 			}	
 		}catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("Oops !! course basic");
 		}
 		System.out.println("all insert done");

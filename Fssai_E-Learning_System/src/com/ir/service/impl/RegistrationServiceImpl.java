@@ -1,7 +1,10 @@
 package com.ir.service.impl;
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.ir.dao.RegistrationDAO;
 import com.ir.form.RegistrationFormTrainee;
@@ -11,6 +14,7 @@ import com.ir.service.RegistrationServiceTrainee;
 
 
 @Component("registrationService")
+@Service
 public class RegistrationServiceImpl implements RegistrationServiceTrainee{
 	@Autowired
 	@Qualifier("registrationDAO")
@@ -18,6 +22,7 @@ public class RegistrationServiceImpl implements RegistrationServiceTrainee{
 
 	
 	@Override
+	@Transactional
 	public RegisterTraineeInformationFull registerTraineeInformationFull(RegistrationFormTrainee registrationFormTrainee) 
 			//throws UserAlreadRegisteredException {
 	{
@@ -38,6 +43,7 @@ public class RegistrationServiceImpl implements RegistrationServiceTrainee{
 
 
 	@Override
+	@Transactional
 	public String registerTraineeInformationFullIdCheck(
 			RegistrationFormTrainee registrationFormTrainee) {
 		System.out.println("RegistrationServiceImpl user id check begin ");
@@ -54,6 +60,7 @@ public class RegistrationServiceImpl implements RegistrationServiceTrainee{
 	}
 
 	@Override
+	@Transactional
 	public String registerPersonalInformationTrainee(
 			RegistrationFormTrainee registrationFormTrainee) {
 		String personalInformationTrainee = registrationDAO.registerPersonalInformationTrainee(registrationFormTrainee);

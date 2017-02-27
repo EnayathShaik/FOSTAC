@@ -86,18 +86,7 @@ public class AdminController {
 		return stateList;
 	}
 
-	/*@ModelAttribute("districtList")
-	public List<District> districtList() {
-		List<District> districtList = null;
-		try {
-			districtList = adminService.districtList();
-			System.out.println("districtList list   :   " + districtList);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return districtList;
-	}*/
-
+	
 	@ModelAttribute("trainingPartnerList")
 	public List<ManageTrainingPartner> trainingPartnerList() {
 		List<ManageTrainingPartner> trainingPartnerList = null;

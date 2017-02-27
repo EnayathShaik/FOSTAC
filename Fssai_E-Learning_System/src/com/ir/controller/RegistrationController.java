@@ -1,7 +1,10 @@
 package com.ir.controller;
 import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -10,15 +13,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
 import com.ir.form.AadharDetails;
 import com.ir.form.RegistrationFormTrainee;
-import com.ir.form.StateForm;
-import com.ir.model.City;
-import com.ir.model.CourseName;
-import com.ir.model.District;
 import com.ir.model.KindOfBusiness;
 import com.ir.model.State;
 import com.ir.model.Title;
@@ -43,17 +40,6 @@ public class RegistrationController {
 	
 	
 
-	/*@RequestMapping(value = "/userIdCheck", method = RequestMethod.GET)
-	public String loginForm(
-			@Valid @ModelAttribute("registrationFormTrainee") RegistrationFormTrainee registrationFormTrainee, 
-			BindingResult bindingResult,Model model)  {
-		System.out.println("Reg Controller  begin . : ");
-
-		String  registerTraineeInformationFull =  registrationServiceTrainee.registerTraineeInformationFullIdCheck(registrationFormTrainee);
-		System.out.println("return null****** " + registerTraineeInformationFull);
-		return "registrationFormTrainee";
-	}*/
-	
 	
 	@RequestMapping(value = "/aadhar-verification", method = RequestMethod.GET)
 	public String aadharVerification(Model model) {
@@ -81,18 +67,27 @@ public class RegistrationController {
 	public String registerForm(Model model) {
 		System.out.println("registerForm begins ");
 		RegistrationFormTrainee registrationFormTrainee=new RegistrationFormTrainee();
+		List<State> stateList = pageLoadService.loadState();
+		List<Title> titleList = pageLoadService.loadTitle();
+		List<String> casteList = pageLoadService.loadCaste();
+		List<KindOfBusiness> kindOfBusinessList=pageLoadService.loadKindOfBusiness();
+		String uniqueID = GenerateUniqueID.getNextCombinationId("TE", "personalinformationtrainee" , "000000");
+		
 		model.addAttribute("registrationFormTrainee", registrationFormTrainee);
-		//int  state =  stateSaveService.stateSave(statelist);
+		model.addAttribute("stateList", stateList);
+		model.addAttribute("titleList", titleList);
+		model.addAttribute("casteList", casteList);
+		model.addAttribute("kindOfBusinessList", kindOfBusinessList);
+		model.addAttribute("userId", uniqueID);
 		return "registrationFormTrainee";
 	}
 	
-	@ModelAttribute("stateList")
+	/*@ModelAttribute("stateList")
 	public List<State> populateStateList() {
 		List<State> stateList = pageLoadService.loadState();
 		System.out.println("state list   :   "+ stateList);
 		return stateList;
 	}
-	
 	
 	@ModelAttribute("titleList")
 	public List<Title> populateTitle() {
@@ -122,7 +117,7 @@ public class RegistrationController {
 		
 		List<KindOfBusiness> kindOfBusinessList=pageLoadService.loadKindOfBusiness();
 		return kindOfBusinessList;
-	}
+	}*/
 	
 	@RequestMapping(value = "/registerTrainee", method = RequestMethod.POST)
 	public String registerTrainee(@Valid @ModelAttribute("registrationFormTrainee") RegistrationFormTrainee registrationFormTrainee, BindingResult bindingResult,Model model)  {
@@ -151,16 +146,16 @@ public class RegistrationController {
 			String[] all = personalInformationTrainee.split("&");
 			model.addAttribute("id" , all[1]);
 			model.addAttribute("pwd" , all[0]);
-			JavaMail javaMail = new JavaMail();
 			
+			JavaMail javaMail = new JavaMail();
 			javaMail.mailProperty("Thanks", registrationFormTrainee.getEmail(), all[1], all[0] , registrationFormTrainee.getFirstName());
-			//return "registrationFormTrainee";
+			
 			return "welcome";
 		}else{
 			return "registrationFormTrainee";
 		}
 		
-		
+	
 		
 	}
 }

@@ -3,6 +3,7 @@ package com.ir.service.impl;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -30,18 +31,21 @@ public class LoginServiceImpl implements LoginService {
 	private LoginDAO loginDAO;
 
 	@Override
+	@Transactional
 	public LoginDetails login(LoginForm loginForm) {
 		LoginDetails loginDetails = loginDAO.login(loginForm);
 		return loginDetails;
 	}
 
 	@Override
+	@Transactional
 	public List<CourseEnrolled> courseEnrolledList() {
 		List<CourseEnrolled> courseEnrolledList= loginDAO.courseEnrolledList();
 		return courseEnrolledList;
 	}
 
 	@Override
+	@Transactional
 	public PersonalInformationTrainee FullDetail(int loginId) {
 		PersonalInformationTrainee personalInformationTrainee = loginDAO.fullDetail(loginId);
 		return personalInformationTrainee;
@@ -49,34 +53,40 @@ public class LoginServiceImpl implements LoginService {
 	
 
 	@Override
+	@Transactional
 	public List<TrainingPartner> trainingPartnerCountList() {
 		List<TrainingPartner> trainingPartnerCountList= loginDAO.trainingPartnerCountList();
 		return trainingPartnerCountList;
 	}
 
 	@Override
+	@Transactional
 	public ManageAssessmentAgency FullDetailAssessmentAgency(int id) {
 		ManageAssessmentAgency manageAssessmentAgency = loginDAO.fullDetailAssessmentAgency(id);
 		return manageAssessmentAgency;
 	}
 
 	@Override
+	@Transactional
 	public PersonalInformationAssessor fullDetailAssessor(int id) {
 		PersonalInformationAssessor personalInformationAssessor = loginDAO.fullDetailAssesser(id);
 		return personalInformationAssessor;
 	}
 
 	@Override
+	@Transactional
 	public ManageTrainingPartner FullDetailTP(int id) {
 		ManageTrainingPartner manageTrainingPartner = loginDAO.fullDetailTP(id);
 		return manageTrainingPartner;
 	}
 	@Override
+	@Transactional
 	public PersonalInformationTrainer FullDetailTrainer(int loginId) {
 		PersonalInformationTrainer personalInformationTrainer = loginDAO.fullDetailtrainer(loginId);
 		return personalInformationTrainer;
 	}
 	@Override
+	@Transactional
 	public PersonalInformationTrainingPartner FullDetailtrainingpartner(int loginId) {
 		// TODO Auto-generated method stub
 		PersonalInformationTrainingPartner personalInformationTrainingPartner = loginDAO.fulldetailtainingpartner(loginId);

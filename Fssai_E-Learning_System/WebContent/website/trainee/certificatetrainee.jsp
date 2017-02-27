@@ -65,7 +65,7 @@ try{
                                                                 <div class="di-msg">
                                                                     <p>has successfully completed the required competency to be appointed as Trainer for Food</p>
                                                                     <p>Safety Supervisor Training, the training was held on <span class="on-dat">${trainingDate}</span><span><hr class="on-hr"></span></p>
-                                                                    <p>at <span class="add-pos">Fssai Bhavan, New Delhi</span><span><hr class="at-hr"></span><span class="full-stop">.</span></p>
+                                                                    <p>at <span class="add-pos">${trainingAddress}</span><span><hr class="at-hr"></span><span class="full-stop">.</span></p>
                                                                 </div>
                                                             </div>
                                                             <div class="col-xs-12 sign-pos">

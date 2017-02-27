@@ -27,11 +27,11 @@ body {
     }
     .sign-pos {
         position: relative;
-        top: -28.1em;
+        top: -31.1em;
     }
     .cert-btm {
         position: relative;
-        top: -28em;
+        top: -31.5em;
         line-height: 12px;
     }
     .nam-hr {
@@ -118,6 +118,7 @@ body {
         top: 32px;
     }
     .add-pos {
+    	font-size: 15px;
         position: relative;
         font-weight: 600;
         left: 5%;

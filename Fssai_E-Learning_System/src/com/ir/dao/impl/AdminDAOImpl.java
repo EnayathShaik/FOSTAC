@@ -2,6 +2,8 @@ package com.ir.dao.impl;
 
 
 import java.security.NoSuchAlgorithmException;
+
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +25,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.dao.AdminDAO;
@@ -72,14 +75,13 @@ import com.ir.util.GenerateUniqueID;
 import com.ir.util.PasswordGenerator;
 import com.ir.util.SendContectMail;
 import com.ir.util.SendMail;
-import com.zentech.spring.dao.MasterDAOImpl;
+
 
 import org.apache.commons.lang.StringUtils;
 @Repository
 public class AdminDAOImpl implements AdminDAO {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(MasterDAOImpl.class);
+	
 	@Autowired
 	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
@@ -269,7 +271,7 @@ public class AdminDAOImpl implements AdminDAO {
 		Session session = sessionFactory.getCurrentSession();
 		//Get Next Seq
 		
-		String sql = "select max(seqNo) + 1 from coursename";
+		String sql = "select coalesce(max(seqNo) + 1,1) from coursename";
 		int maxId = 0 ;
 		Query maxIDList = session.createSQLQuery(sql);
 		List list = maxIDList.list();
@@ -1081,64 +1083,19 @@ public class AdminDAOImpl implements AdminDAO {
 		Integer trainerAssessmentEvaluationId = (Integer) session.save(trainerAssessmentEvaluation);
 		return trainerAssessmentEvaluationId;
 	}
+
+	
+	
 	
 	//updateUser
 	
-	@Override
-	public void updateUser( String userid , String tableName , String status){
-		Session session = sessionFactory.getCurrentSession();
-		System.out.println("update "+tableName+" set isActive='"+status+"' where id="+userid);
-		String sql="update "+tableName+" set isActive='"+status+"' where id="+userid;
-		Query query = session.createSQLQuery(sql);
-		query.executeUpdate();
-		
-	}
-	
-	@Override
-	public void addState(State p) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(p);
-		logger.info("State saved successfully, State Details=" + p);
-	}
-
-	@Override
-	public void updateState(State p) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		session.update(p);
-		logger.info("State updated successfully, State Details=" + p);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<State> listStates() {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		List<State> statesList = session.createQuery("from State").list();
-		for (State p : statesList) {
-			logger.info("State List::" + p);
+		@Override
+		public void updateUser( String userid , String tableName , String status){
+			Session session = sessionFactory.getCurrentSession();
+			System.out.println("update "+tableName+" set isActive='"+status+"' where id="+userid);
+			String sql="update "+tableName+" set isActive='"+status+"' where id="+userid;
+			Query query = session.createSQLQuery(sql);
+			query.executeUpdate();
+			
 		}
-		return statesList;
 	}
-
-	@Override
-	public State getStateById(int id) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		State p = (State) session.load(State.class, new Integer(id));
-		logger.info("State loaded successfully, State details=" + p);
-		return p;
-	}
-
-	@Override
-	public void removeState(int id) {
-		// TODO Auto-generated method stub
-		Session session = this.sessionFactory.getCurrentSession();
-		State p = (State) session.load(State.class, new Integer(id));
-		if (null != p) {
-			session.delete(p);
-		}
-		logger.info("State deleted successfully, State details=" + p);
-	}
-}

@@ -179,9 +179,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 		sql.append(" left outer join managecoursecontent G on(D.coursenameid=G.coursenameinput)");
 		sql.append(" Where A.logindetails = "+typeId+" and A.status = 'N'");
 		
-		/*String sql = "select c.coursename, c.courseduration ,c.coursenameid, mgid.contentlinkinput ,mgid.contentnameinput from  coursename as c inner join managecoursecontent as mgid on mgid.coursetypeinput = c.coursetypeid where c.coursetypeid="
-				+ typeId;
-		*/
 		Query query = session.createSQLQuery(sql.toString());
 		List<Object[]> courseTraineeList = (List<Object[]>) query.list();
 		if (courseTraineeList.size() > 0) {
@@ -196,10 +193,9 @@ public class TraineeDAOImpl implements TraineeDAO {
 			courseTrainee.setContentNameInput(o[7] == null ? "" : o[7].toString());
 			courseTrainee.setCourseTypeId(o[8] == null ? "" : o[8].toString());
 			courseTrainee.setCourseCode(o[9] == null ? "" : o[9].toString());
-			return courseTrainee;
-		} else {
-			return courseTrainee;
-		}
+			
+		} 
+		return courseTrainee;
 
 	}
 
@@ -523,7 +519,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		Session session = sessionFactory.getCurrentSession();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 		int maxId = 0 ;
-		String sql = "select max(rollseqNo) + 1 from courseenrolleduser";
+		String sql = "select coalesce(max(rollseqNo) + 1,1) from courseenrolleduser";
 		Query maxIDList = session.createSQLQuery(sql);
 		List list = maxIDList.list();
 		System.out.println(list.size());
@@ -637,49 +633,24 @@ public class TraineeDAOImpl implements TraineeDAO {
 	}
 
 	public AdmitCardForm generateAdmitCard(int loginId, int profileId) {
-		// String str_query = "select ce.courseenrolleduserid "+
-		// ", cn.coursename as courseName,"+
-		// " ctype.coursetype as category, "+
-		// " pit.fathername as fatherName, titlename as title, pit.firstname ||' '|| pit.middlename ||' '|| pit.lastname  as name ,"+
-		// " tcal.trainingcenter as trainingCenterCode,"+
-		// " pitp.trainingpartnerpermanentline1||','|| pitp.trainingpartnerpermanentline2 as address,"+
-		// " ce.rollno as rollNo "+
-		// ", district.districtname as city"+
-		//
-		// " from courseenrolleduser ce "+
-		//
-		// " inner join personalinformationtrainee pit on pit.logindetails = ce.courseenrolleduserid "+
-		// " inner join title on title.titleId = pit.title "+
-		// " inner join trainingcalendar tcal on tcal.trainingcalendarid = ce.trainingcalendarid "+
-		// " inner join personalinformationtrainingpartner pitp on pitp.personalinformationtrainingpartnerid = tcal.trainingcenter "+
-		// " inner join district district on district.districtid = pitp.trainingpartnerpermanentdistrict "+
-		// " inner join coursename cn on cn.coursenameid = tcal.coursename "+
-		// " inner join coursetype ctype on ctype.coursetypeid = cn.coursetypeid ";
-
-		String str_query = "select cn.coursename as courseName,"
+			String str_query = "select cn.coursename as courseName,"
 				+ " ctype.coursetype as category, "
 				+ " pit.fathername as fatherName, titlename as title, pit.firstname ||' '|| pit.middlename ||' '|| pit.lastname  as name ,"
-				+
-				// " pit.correspondenceaddress1 || ' '|| pit.correspondenceaddress2 as address ,"+
-				" tcal.trainingcenter as trainingCenterCode,"
+				+ " tcal.trainingcenter as trainingCenterCode,"
 				+ " pitp.trainingpartnerpermanentline1||','|| pitp.trainingpartnerpermanentline2 as address,"
 				+ " cast(ce.rollno as varchar(100)) as rollNo  , cty.cityname  "
 				+ ", district.districtname as district , coalesce(cn.coursecode, '') as coursecode , state.statename  , tcal.trainingdate as trainingstartdate , tcal.trainingtime as trainingenddate , cn.courseduration as courseduration , pitp.firstname || ' ' || pitp.middlename || ' ' || pitp.lastname as trainingcentername  , case when gender='M' then 'MALE' else 'FEMALE' end , pit.mobile"
-				+
-
-				" from courseenrolleduser ce "
-				+
-
-				" inner join personalinformationtrainee pit on pit.logindetails = ce.logindetails   "
+				+ " from courseenrolleduser ce "
+				+ " inner join personalinformationtrainee pit on pit.logindetails = ce.logindetails   "
 				+ " inner join title on title.titleId = pit.title "
 				+ " inner join trainingcalendar tcal on tcal.trainingcalendarid = ce.trainingcalendarid "
 				+ " inner join personalinformationtrainingpartner pitp on pitp.personalinformationtrainingpartnerid = tcal.trainingcenter "
-				+ " inner join district district on district.districtid = pitp.trainingpartnerpermanentdistrict "
+				+ " inner join state state on (state.stateid = pit.correspondencestate) "
+				+ " inner join district district on district.districtid = pit.correspondencedistrict "
+				+ " inner join city cty on (cty.cityid = pit.correspondencecity)  "
 				+ " inner join coursename cn on cn.coursenameid = tcal.coursename "
-				+ " inner join coursetype ctype on ctype.coursetypeid = cn.coursetypeid  inner join state state on (state.stateid = district.stateid)  inner join city cty on (cty.cityid = pit.rescity)  "
-				// +
-				// " inner join managecoursecontent mcc on mcc.coursetypeid = cn.coursetypeid "
-				+ "where ce.status = 'N' AND ce.logindetails = " + loginId;
+				+ " inner join coursetype ctype on ctype.coursetypeid = cn.coursetypeid" 
+				+ " where ce.status = 'N' AND ce.logindetails = " + loginId;
 		AdmitCardForm admitcard = new AdmitCardForm();
 		try {
 		System.out.println("&&&&&&&&&&&&&&&&&& = "+str_query);
@@ -927,8 +898,10 @@ public class TraineeDAOImpl implements TraineeDAO {
 				+ " where A.status = 'N' AND A.logindetails = " + userID;
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
-		System.out.println(list.size());
-		status = (String) list.get(0);
+		if(list.size() > 0){
+			System.out.println(list.size());
+			status = (String) list.get(0);
+		}
 		return status;
 	}
 
@@ -967,7 +940,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 						//eligible = (String) list.get(0);
 					}
 				}else{
-					String sql = "select result from courseenrolleduser where logindetails = 20 and status = 'N'";
+					String sql = "select result from courseenrolleduser where logindetails = "+ userID+" and status = 'N'";
 					Query query = session.createSQLQuery(sql);
 					List list = query.list();
 					System.out.println(list.size());
@@ -992,7 +965,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 			Session session = sessionFactory.getCurrentSession();
 			//Get Next Seq
 			
-			String sqlSeq = "select max(certificateseqno) + 1 from courseenrolleduser";
+			String sqlSeq = "select coalesce(max(certificateseqno) + 1,1) from courseenrolleduser";
 			int maxIdSeq  = 0 ;
 			Query maxIDListSeq  = session.createSQLQuery(sqlSeq);
 			List list = maxIDListSeq .list();
@@ -1005,11 +978,18 @@ public class TraineeDAOImpl implements TraineeDAO {
 			
 			//max SeqNo
 			String sql = "Select C.coursecode,B.trainingdate," +
-					"A.courseenrolleduserid ,D.firstname || ' '|| D.middlename ||' '|| D.lastname,A.issueDate,A.certificateid from courseenrolleduser A " +
-					"inner join trainingcalendar B on(A.trainingcalendarid=B.trainingcalendarid) " +
-					"inner join coursename C on(B.coursename=C.coursenameid) " +
-					"inner join personalinformationtrainee D on(A.logindetails=D.logindetails) "+
-					"Where A.status='N' AND A.logindetails = "+userID;
+					"A.courseenrolleduserid ,D.firstname || ' '|| D.middlename ||' '|| D.lastname,A.issueDate,A.certificateid " +
+					//" ,concat(E.trainingpartnerpermanentline1 , ' ' , E.trainingpartnerpermanentline2 , ' ' , s.statename , ' ' , ds.districtname , ' ' , ci.cityname) as address" +
+					" ,concat(E.trainingcentrename , ' ' , s.statename, ' ' , ds.districtname) as address" +
+					" from courseenrolleduser A " +
+					" inner join trainingcalendar B on(A.trainingcalendarid=B.trainingcalendarid) " +
+					" inner join coursename C on(B.coursename=C.coursenameid) " +
+					" inner join personalinformationtrainee D on(A.logindetails=D.logindetails) "+
+					" inner join personalinformationtrainingpartner E on(B.trainingcenter=E.personalinformationtrainingpartnerid) "+
+					" inner join state as s on s.stateid = E.trainingpartnerpermanentstate "+
+					" inner join city as ci on ci.cityid = E.trainingpartnerpermanentcity "+
+					" inner join district as ds on ds.districtid = E.trainingpartnerpermanentdistrict "+
+					" Where A.status='N' AND A.logindetails = "+userID;
 			int courseEnrolledUserID = 0;
 			String courseCode = "";
 			Query query = session.createSQLQuery(sql);
@@ -1026,6 +1006,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 					certificateInfo.setName(obj[3] == null ? "" : obj[3].toString());
 					certificateInfo.setIssueDate(obj[4] == null ? "" : obj[4].toString());
 					certificateInfo.setCertificateID(obj[5] == null ? "" : obj[5].toString());
+					certificateInfo.setTrainingAddress(obj[6] == null ? "" : obj[6].toString());
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

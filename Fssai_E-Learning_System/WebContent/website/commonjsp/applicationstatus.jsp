@@ -10,7 +10,6 @@ window.onload = OnStart;
 </script>
 <script type="text/javascript">
 function searchCurrentAppliactionStatus(){
-	alert('Start Application Status')
 	var data=JSON.stringify({
 		courseType:0,
 		courseName:0

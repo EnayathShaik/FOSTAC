@@ -126,7 +126,6 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 				<value>com.ir.model.FeedbackForm</value>
 				<value>com.ir.model.ManageAssessmentAgency</value>
 				<value>com.ir.model.State</value>
-				<value>com.zentech.spring.hb.model.NState</value>
 				<value>com.ir.model.District</value>
 				<value>com.ir.model.City</value>
 				<value>com.ir.model.Title</value>

@@ -33,6 +33,7 @@ import com.ir.model.TrainingPartner;
 import com.ir.service.LoginService;
 import com.ir.service.TrainingPartnerService;
 import com.ir.service.UpdateService;
+import com.zentech.logger.ZLogger;
 
 /**
  * Controller to handle login process
@@ -162,6 +163,8 @@ public class LoginController {
 			return "adminHomepage";
 		}else if(loginDetails !=null && loginDetails.getProfileId() == 3 && loginDetails.getStatus().equalsIgnoreCase("A"))
 		{
+			new ZLogger("Login", "Check Login", "LoginController.java").showInfoLog();
+			
 			PersonalInformationTrainee personalInformationTrainee = loginService.FullDetail(loginDetails.getId() );
 			System.out.println("in trainee login  "+ personalInformationTrainee.getFirstName());
 			session.setAttribute("logId", personalInformationTrainee.getLoginDetails().getLoginId());
@@ -169,31 +172,22 @@ public class LoginController {
 			session.setAttribute("userId", loginDetails.getId());
 			session.setAttribute("userName", loginDetails.getLoginId());
 			session.setAttribute("traineeSteps", personalInformationTrainee.getSteps());
-			
-			
-			
 			return "traineeHomepage";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 4 && loginDetails.getStatus().equalsIgnoreCase("A")){
 			PersonalInformationTrainer personalInformationTrainer = loginService.FullDetailTrainer(loginDetails.getId());
-			
 			session.setAttribute("loginId", personalInformationTrainer.getLoginDetails().getLoginId());
 			session.setAttribute("profileId", loginDetails.getProfileId());
 			session.setAttribute("userId", loginDetails.getId());
 			session.setAttribute("userName", loginDetails.getLoginId());
-			
 			session.setAttribute("loginUser2", personalInformationTrainer.getPersonalInformationTrainerId());
 			session.setAttribute("logId", personalInformationTrainer.getLoginDetails().getLoginId());
 			session.setAttribute("Id",personalInformationTrainer.getLoginDetails().getId());
-		
 			return "trainerHomepage";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 5){
 			if(loginDetails.getStatus().equalsIgnoreCase("A")){
 				PersonalInformationTrainingPartner personalInformationTrainingPartner ;
 				personalInformationTrainingPartner = loginService.FullDetailtrainingpartner(loginDetails.getId());
 				System.out.println("in trainer login aadhar is "+personalInformationTrainingPartner.getFirstName());
-				/*session.setAttribute("loginUr", personalInformationTrainingPartner);
-				session.setAttribute("loginUserS", personalInformationTrainingPartner);
-				model.addAttribute("logintrainer", personalInformationTrainingPartner);*/
 				System.out.println("**************"+personalInformationTrainingPartner.getPersonalInformationTrainingPartnerId());
 				session.setAttribute("loginUsertrainingpartner", personalInformationTrainingPartner.getPersonalInformationTrainingPartnerId());
 				session.setAttribute("logId", personalInformationTrainingPartner.getLoginDetails().getLoginId());
@@ -221,10 +215,6 @@ public class LoginController {
 				session.setAttribute("profileId", loginDetails.getProfileId());
 				session.setAttribute("userId", loginDetails.getId());
 				session.setAttribute("userName", loginDetails.getLoginId());
-				System.out.println(" agency "+personalInformationAssessor.getAssessmentAgencyName().getManageAssessmentAgencyId());
-				session.setAttribute("assessmentId", personalInformationAssessor.getAssessmentAgencyName().getManageAssessmentAgencyId());
-				session.setAttribute("agencyName", personalInformationAssessor.getAssessmentAgencyName().getAssessmentAgencyName());
-				System.out.println(" agencyName "+personalInformationAssessor.getAssessmentAgencyName().getAssessmentAgencyName());
 				return "AssessorPage";
 			}else{
 				model.addAttribute("error" , "Oops , you are not authorized !!!");
@@ -233,31 +223,18 @@ public class LoginController {
 			
 		}
 		else if(loginDetails!=null && loginDetails.getProfileId() == 7 && loginDetails.getStatus().equalsIgnoreCase("A")){
-			// TRAINING PARTNER  //// TRAINING PARTNER  //// TRAINING PARTNER  //// TRAINING PARTNER  //
-			//session.invalidate();
 			ManageTrainingPartner manageTrainingPartner = new ManageTrainingPartner();
 			manageTrainingPartner = loginService.FullDetailTP(loginDetails.getId());
-			System.out.println("in training partner login");
-			
-			//session.setAttribute("loginUser", manageTrainingPartner);
-			
-			//session.setAttribute("logerClass","PersonalInformationTrainingPartner");
-			//by rishi
 			session.setAttribute("logId", manageTrainingPartner.getLoginDetails().getLoginId());
-			//rishi
 			session.setAttribute("profileId", loginDetails.getProfileId());
 			session.setAttribute("userId", loginDetails.getId());
 			session.setAttribute("userName", loginDetails.getLoginId());
 			return "trainingPartnerDashboard";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 8 && loginDetails.getStatus().equalsIgnoreCase("A")){
-			// Assessment Agency  //// Assessment Agency  //// Assessment Agency  //// Assessment Agency  //
-			//session.invalidate();
 			System.out.println("in assessment agency");
 			ManageAssessmentAgency manageAssessmentAgency = new ManageAssessmentAgency();
 			manageAssessmentAgency = loginService.FullDetailAssessmentAgency(loginDetails.getId());
 			System.out.println("in assessment Agency Homepage");
-			//session.setAttribute("loginUser", manageAssessmentAgency);
-			//by rishi
 			session.setAttribute("logId", manageAssessmentAgency.getLoginDetails().getLoginId());
 			session.setAttribute("logerClass","ManageAssessmentAgency");
 			session.setAttribute("loginIdUnique", loginDetails.getId());

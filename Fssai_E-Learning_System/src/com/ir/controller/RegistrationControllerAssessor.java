@@ -23,10 +23,12 @@ import com.ir.form.RegistrationFormAssessor;
 import com.ir.form.RegistrationFormTrainer;
 import com.ir.model.AssessmentAgency;
 import com.ir.model.CourseName;
+import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.State;
 import com.ir.model.Title;
+import com.ir.service.PageLoadService;
 import com.ir.service.PageLoadServiceTrainer;
 import com.ir.service.RegistrationServiceAssessor;
 import com.ir.service.RegistrationServiceTrainer;
@@ -40,11 +42,15 @@ public class RegistrationControllerAssessor implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Autowired
+	@Qualifier("pageLoadService")
+	PageLoadService pageLoadService;
+	
+	@Autowired
 	@Qualifier("registrationServiceAssessor")
 	RegistrationServiceAssessor registrationServiceAssessor;
 	
 	
-	@ModelAttribute("stateList")
+	/*@ModelAttribute("stateList")
 	public List<State> populateStateList() {
 		List<State> stateList = registrationServiceAssessor.loadState();
 		System.out.println("state list   :   "+ stateList);
@@ -57,37 +63,12 @@ public class RegistrationControllerAssessor implements Serializable{
 		System.out.println("assessment Agency Name List    :   "+ assessmentAgencyNameList);
 		return assessmentAgencyNameList;
 	}
-	/*@ModelAttribute("districtList")
-	public List<District> districtList() {
-		List<District> districtList = pageLoadServiceTrainer.loadDistrict();
-		System.out.println("district list   :   "+ districtList);
-		return districtList;
-	}*/
-	/*@ModelAttribute("cityList")
-	public List<City> populateCityList() {		
-		List<City> cityList=new ArrayList<City>();
-		return cityList;
-	}*/
+	
 	@ModelAttribute("titleList")
 	public List<Title> populateTitle() {
 		List<Title> titleList = registrationServiceAssessor.loadTitle();
 		System.out.println("state list   :   "+ titleList);
 		return titleList;
-	}
-	
-	@ModelAttribute("basicCourseList" )
-	public List<CourseName> basicCourseList() {
-		List<CourseName> basicCourseList = registrationServiceAssessor.basicCourseName();
-		System.out.println("CourseName  list   :   "+ basicCourseList);
-		return basicCourseList;
-	}
-	
-	@RequestMapping(value = "/registrationFormAssessor", method = RequestMethod.GET)
-	public String registerForm(Model model) {
-		System.out.println("registerForm Assessor begins ");
-		RegistrationFormAssessor registrationFormAssessor=new RegistrationFormAssessor();
-		model.addAttribute("registrationFormAssessor", registrationFormAssessor);
-		return "registrationFormAssessor";
 	}
 	
 	@ModelAttribute("userId")
@@ -97,9 +78,37 @@ public class RegistrationControllerAssessor implements Serializable{
 		return uniqueID;
 	}
 	
+	@ModelAttribute("basicCourseList" )
+	public List<CourseName> basicCourseList() {
+		List<CourseName> basicCourseList = registrationServiceAssessor.basicCourseName();
+		System.out.println("CourseName  list   :   "+ basicCourseList);
+		return basicCourseList;
+	}*/
+	
+	@RequestMapping(value = "/registrationFormAssessor", method = RequestMethod.GET)
+	public String registerForm(Model model) {
+		System.out.println("registerForm Assessor begins ");
+		RegistrationFormAssessor registrationFormAssessor=new RegistrationFormAssessor();
+		List<State> stateList = pageLoadService.loadState();
+		List<Title> titleList = pageLoadService.loadTitle();
+		List<ManageAssessmentAgency> assessmentAgencyNameList = registrationServiceAssessor.loadAssessmentAgency();
+		String uniqueID = GenerateUniqueID.getNextCombinationId("TE", "personalinformationtrainee" , "000000");
+		List<CourseName> basicCourseList = registrationServiceAssessor.basicCourseName();
+		
+		model.addAttribute("registrationFormAssessor", registrationFormAssessor);
+		model.addAttribute("stateList", stateList);
+		model.addAttribute("titleList", titleList);
+		model.addAttribute("assessmentAgencyNameList", assessmentAgencyNameList);
+		model.addAttribute("userId", uniqueID);
+		model.addAttribute("basicCourseList", basicCourseList);
+		
+		
+		
+		return "registrationFormAssessor";
+	}
 	
 	@RequestMapping(value = "/registrationAsssessor", method = RequestMethod.POST)
-	public String registerTrainer(@Valid @ModelAttribute("registrationFormAssessor") RegistrationFormAssessor registrationFormAssessor, BindingResult bindingResult,Model model)  {
+	public String registerAssessor(@Valid @ModelAttribute("registrationFormAssessor") RegistrationFormAssessor registrationFormAssessor, BindingResult bindingResult,Model model)  {
 		
 		System.out.println("register controller before bind trainer");
 		if(bindingResult.hasErrors()){
@@ -114,8 +123,13 @@ public class RegistrationControllerAssessor implements Serializable{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		 personalInformationAssessor = registrationServiceAssessor.registerPersonalInformationAssessor(registrationFormAssessor);
-		if(! personalInformationAssessor.equalsIgnoreCase("")){
+		try{
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		personalInformationAssessor = registrationServiceAssessor.registerPersonalInformationAssessor(registrationFormAssessor);
+		if(personalInformationAssessor != null &&  !personalInformationAssessor.equalsIgnoreCase("")){
 			String[] all = personalInformationAssessor.split("&");
 			model.addAttribute("id" , all[1]);
 			model.addAttribute("pwd" , all[0]);
