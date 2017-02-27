@@ -203,4 +203,19 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 		List<IntStringBean> loadAssessmentAgency = trainingPartnerDAO.loadAssessmentAgency();
 		return loadAssessmentAgency;
 	}
+	
+	//getBatchCodeList
+	
+	@Override
+	public List<String> getBatchCodeList(int courseCode) {
+		List<String> loadBatchCode = trainingPartnerDAO.getBatchCodeList(courseCode);
+		return loadBatchCode;
+	}
+	//getCertificateIdList
+	
+	@Override
+	public List<String> getCertificateIdList(String batchcode) {
+		List<String> loadCertificate = trainingPartnerDAO.getCertificateIdList(batchcode);
+		return loadCertificate;
+	}
 }

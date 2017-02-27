@@ -97,4 +97,10 @@ public interface TrainingPartnerService {
 	
 	
 	public List<IntStringBean> loadAssessmentAgency();
+	
+	@Transactional
+	public List<String> getBatchCodeList(int CourseCode);
+	
+	@Transactional
+	public List<String> getCertificateIdList(String CourseCode);
 }

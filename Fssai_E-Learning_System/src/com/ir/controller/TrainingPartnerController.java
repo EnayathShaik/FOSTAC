@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping;
 
 import com.google.gson.Gson;
 import com.ir.bean.common.IntStringBean;
@@ -32,6 +35,7 @@ import com.ir.bean.common.JsonResponse;
 import com.ir.bean.common.StringStringBean;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
+import com.ir.form.GenerateCourseCertificateForm;
 import com.ir.form.PostVacancyTrainingCenterForm;
 import com.ir.form.TrainingCalendarForm;
 import com.ir.form.trainingPartner.TrainingPartnerSearch;
@@ -95,6 +99,59 @@ public class TrainingPartnerController {
 		return "postVacancyTrangCenter";
 		
 	}
+	
+	
+	@RequestMapping(value="/generateCourseCertificate" , method=RequestMethod.GET)
+	public String generateCourseCertificate(@ModelAttribute("generateCourseCertificateForm") GenerateCourseCertificateForm generateCourseCertificateForm,HttpSession session,BindingResult result , Model model ){
+		return "generateCourseCertificate";
+		
+	}
+	
+	@RequestMapping(value="/getBatchCode" , method=RequestMethod.POST)
+	public String getBatchCode(@ModelAttribute("generateCourseCertificateForm") GenerateCourseCertificateForm generateCourseCertificateForm,HttpSession session,HttpServletRequest request ,HttpServletResponse response , BindingResult result , Model model ) throws IOException{
+		System.out.println("inside getBatchCode");
+		String data =request.getQueryString();  
+		int courseName =  Integer.parseInt(data);
+		System.out.println("courseName "+courseName);
+		List<String> batchCodeList = trainingPartnerService.getBatchCodeList(courseName);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(batchCodeList); 
+		out.write(newList);
+		out.flush();
+		
+		return "redirect:/generateCourseCertificate.fssai";
+		
+	}
+	
+	@RequestMapping(value="/getCertificateID" , method=RequestMethod.POST)
+	public String getCertificateID(@ModelAttribute("generateCourseCertificateForm") GenerateCourseCertificateForm generateCourseCertificateForm,HttpSession session,HttpServletRequest request ,HttpServletResponse response , BindingResult result , Model model ) throws IOException{
+		System.out.println("inside getBatchCode");
+		String data =request.getQueryString().toString();  
+		String batchcode =  data;
+		System.out.println("courseName "+batchcode);
+		List<String> certificateList = trainingPartnerService.getCertificateIdList(batchcode);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(certificateList); 
+		out.write(newList);
+		out.flush();
+		
+		return "redirect:/generateCourseCertificate.fssai";
+		
+	}
+	
+	//generateCourseCertificateGO
+	
+	@RequestMapping(value="/generateCourseCertificateGO" , method=RequestMethod.POST)
+	public String generateCourseCertificateGO(@ModelAttribute("generateCourseCertificateForm") GenerateCourseCertificateForm generateCourseCertificateForm,HttpSession session,HttpServletRequest request ,HttpServletResponse response , BindingResult result , Model model ) throws IOException{
+		System.out.println("inside generateCourseCertificateGO"+generateCourseCertificateForm.getMainCertificateId());
+		
+	
+		return "redirect:/generateCourseCertificate.fssai";
+		
+	}
+	
 	@RequestMapping(value="/changePasswordTrainingPartner" , method=RequestMethod.GET)
 	public String changePasswordTP(@ModelAttribute("changePasswordTrainingPartner") ChangePasswordForm changePasswordForm ){
 		return "changePasswordTrainingPartner";		

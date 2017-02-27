@@ -443,6 +443,11 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainingCenter/post-vacancy.jsp" />
 	</definition>
+	
+	<definition name="generateCourseCertificate" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainingPartner/generateCourseCertificate.jsp" />
+	</definition>
 	<definition name="tcHomepage" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainingCenter/tcHomepage.jsp" />

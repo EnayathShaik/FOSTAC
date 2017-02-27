@@ -690,4 +690,43 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		return trinerNameList;
 	}
 
+	//getBatchCodeList
+	
+	@Override
+	public  List<String> getBatchCodeList(int courseCode){
+		Session session = sessionFactory.getCurrentSession();
+		List<String> trinerNameList=new ArrayList<>();
+		String sql="select batchcode from trainingcalendar where coursename='"+courseCode+"'";
+				
+		Query query = session.createSQLQuery(sql);
+		List<String> courseTypeList = query.list();
+		if(courseTypeList.size()>0){
+			for(int index=0;index<courseTypeList.size();index++){
+				String objecList=courseTypeList.get(index);
+				System.out.println(objecList);
+				trinerNameList.add(objecList);
+			}
+		}
+		return trinerNameList;
+	}
+	
+	//getCertificateIdList
+	@Override
+	public  List<String> getCertificateIdList(String batchCode){
+		Session session = sessionFactory.getCurrentSession();
+		List<String> trinerNameList=new ArrayList<>();
+		String sql="select ceu.certificateid from courseenrolleduser ceu  inner join trainingcalendar tc on (ceu.trainingcalendarid = tc.trainingcalendarid) where tc.batchcode='"+batchCode+"'";
+				
+		Query query = session.createSQLQuery(sql);
+		List<String> courseTypeList = query.list();
+		if(courseTypeList.size()>0){
+			for(int index=0;index<courseTypeList.size();index++){
+				String objecList=courseTypeList.get(index);
+				System.out.println(objecList);
+				trinerNameList.add(objecList);
+			}
+		}
+		return trinerNameList;
+	}
+		
 }
