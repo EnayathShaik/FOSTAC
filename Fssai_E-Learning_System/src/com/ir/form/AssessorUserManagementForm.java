@@ -7,9 +7,23 @@ public class AssessorUserManagementForm {
 	private String middleName;
 	private String lastName;
 	private String aadharNumber;
-	
+	private String profileID;
+	private String logindetails;
 	private String status;
 	
+	
+	public String getProfileID() {
+		return profileID;
+	}
+	public void setProfileID(String profileID) {
+		this.profileID = profileID;
+	}
+	public String getLogindetails() {
+		return logindetails;
+	}
+	public void setLogindetails(String logindetails) {
+		this.logindetails = logindetails;
+	}
 	public String getStatus() {
 		return status;
 	}

@@ -251,7 +251,7 @@ window.onload = OnStart;
 	}
 	
 	function setId(id){
-		alert("id "+id);
+		//alert("id "+id);
 		$("#tcid").val(id);	
 		$("#trainingPartnerCalendarForm").attr("action" , "trainingCalendarRemove.fssai");
 		

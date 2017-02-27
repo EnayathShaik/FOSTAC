@@ -104,12 +104,13 @@
                                                                                 <li class="style-li error-red"></li>
                                                                             </ul>
                                                                         </div>
-                                                                        <cf:select path="status" class="form-control">
+                                                                        <cf:select path="status" id="status" class="form-control">
                                                                             <cf:option value="0" label="Selet Status" />
                                                                             <cf:option value="A" label="Active" />
                                                                             <cf:option value="I" label="In-Active" />
                                                                         </cf:select>
-
+																		<input type="hidden" path="profileID" name="profileID" id="profileID" value="1"/>
+                                                            			<input type="hidden" path="logindetails" name="logindetails" id="logindetails" value=""/>
                                                                     </div>
                                                                 </div>
                                                                 <!-- personal information ends -->
@@ -123,6 +124,7 @@
                                                         <div class="col-md-4 hidden-xs"></div>
                                                         <div class="col-md-4 col-xs-12">
                                                             <a href="login.html">
+                                                            
                                                                 <input type="submit" class="form-control login-btn" value="Search"> </a>
                                                         </div>
                                                         <div class="col-md-4 hidden-xs"></div>
@@ -148,7 +150,8 @@
                                                                 <th>Middle Name</th>
                                                                 <th>Last Name</th>
                                                                 <th>Aadhar Number</th>
-                                                                <th>Status</th>
+                                                                <th>Current Status</th>
+                                                                <th>Update Status</th>
                                                             </thead>
                                                             <tbody>
                                                                 <ct:choose>
@@ -170,9 +173,13 @@
                                                                                 <td>
                                                                                     <label>${listValue[5]}</label>
                                                                                 </td>
+                                                                                 <td>
+                                                                                    <label>${listValue[8]}</label>
+                                                                                </td>
                                                                                 <td>
                                                                                     <label><input type="submit"  onclick=" return activateDeActivateUser('${listValue[6]}','${listValue[7]}','1');" value="${listValue[7]}"/></label>
                                                                                 </td>
+                                                                                
                                                                             </tr>
                                                                         </ct:forEach>
                                                                     </ct:when>
@@ -203,11 +210,10 @@
                 document.getElementById(id).className = "active"; */
                 function activateDeActivateUser(loginDetails,status,profileID){
                 	if(confirm("Are you Sure ?")){
+                		
                 		$("#logindetails").val(loginDetails);	
-                		$("#status").val(status);	
-                		$("#profileID").val(profileID);	
-                		alert($("#logindetails").val());
-                		$("#traineeUserManagementForm").attr("action" , "activateDeActivateUsers.fssai");
+                		$("#status").val((status=="INACTIVE"?"I":"A"));	
+                		$("#traineeUserManagementForm").attr("action" , "activateDeActivateTrainee.fssai");
                     } else{
                         return false;
                     }

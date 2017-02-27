@@ -490,7 +490,7 @@ public class AdminDAOImpl implements AdminDAO {
 		String join = " inner join loginDetails as ld on pitp.loginDetails = ld.id";
 		String like= " where upper(pitp.FirstName) like '"+FirstName.toUpperCase()+"' and pitp.MiddleName like '"+MiddleName+"' and pitp.LastName like '"+LastName+"' and "
 				+ "pitp.AadharNumber like '"+AadharNumber +"' and ld.status like '"+ status+"'";
-		String select = "pitp.personalInformationTraineeId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) ";
+		String select = "pitp.personalInformationTraineeId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails,(CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus ";
 		
 		String sql= "Select "+ select + "  from PersonalInformationTrainee as pitp "+ join + like;
 		Query query = session.createSQLQuery(sql);
@@ -537,7 +537,7 @@ public class AdminDAOImpl implements AdminDAO {
 		String join = " inner join loginDetails as ld on pitp.loginDetails = ld.id";
 		String like= " where upper(pitp.FirstName) like '"+FirstName.toUpperCase()+"' and pitp.MiddleName like '"+MiddleName+"' and pitp.LastName like '"+LastName+"' and "
 				+ "pitp.AadharNumber like '"+AadharNumber +"' and ld.status like '"+ status+"'";
-		String select = "pitp.personalInformationTrainerId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails ";
+		String select = "pitp.personalInformationTrainerId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails ,(CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus ";
 		
 		String sql= "Select "+ select + "  from PersonalInformationTrainer as pitp "+ join + like;
 		Query query = session.createSQLQuery(sql);
@@ -597,7 +597,7 @@ public class AdminDAOImpl implements AdminDAO {
 				+ "pitp.AadharNumber like '"+AadharNumber +"' and pitp.AadharNumber  like '"+ AadharNumber+"'";
 		
 		like = like + userBuffer.toString();
-		String select = "pitp.personalInformationAssessorId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails ";
+		String select = "pitp.personalInformationAssessorId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails ,(CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus ";
 		
 		String sql= "Select "+ select + "  from PersonalInformationAssessor as pitp "+ join + like;
 		Query query = session.createSQLQuery(sql);
@@ -657,7 +657,7 @@ public class AdminDAOImpl implements AdminDAO {
 		String like= " where upper(pitp.FirstName) like '"+FirstName.toUpperCase()+"' and pitp.MiddleName like '"+MiddleName+"' and pitp.LastName like '"+LastName+"' and "
 				+ "pitp.PAN like '"+PanNumber +"' and ld.status like '"+ status+"'";
 		like = like + userBuffer.toString();
-		String select = "pitp.personalInformationTrainingPartnerId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.PAN,pitp.logindetails ";
+		String select = "pitp.personalInformationTrainingPartnerId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.PAN,pitp.logindetails ,(CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus ";
 		
 		String sql= "Select "+ select + "  from PersonalInformationTrainingPartner as pitp "+ join + like;
 		Query query = session.createSQLQuery(sql);
@@ -1080,6 +1080,18 @@ public class AdminDAOImpl implements AdminDAO {
 		Session session = sessionFactory.getCurrentSession();
 		Integer trainerAssessmentEvaluationId = (Integer) session.save(trainerAssessmentEvaluation);
 		return trainerAssessmentEvaluationId;
+	}
+	
+	//updateUser
+	
+	@Override
+	public void updateUser( String userid , String tableName , String status){
+		Session session = sessionFactory.getCurrentSession();
+		System.out.println("update "+tableName+" set isActive='"+status+"' where id="+userid);
+		String sql="update "+tableName+" set isActive='"+status+"' where id="+userid;
+		Query query = session.createSQLQuery(sql);
+		query.executeUpdate();
+		
 	}
 	
 	@Override

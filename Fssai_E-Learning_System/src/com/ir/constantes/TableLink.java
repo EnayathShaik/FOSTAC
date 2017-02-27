@@ -1,7 +1,7 @@
 package com.ir.constantes;
 
 public enum TableLink {
-	ONE("",1,"SuperAdmin",""),
+	ONE("logindetails",1,"SuperAdmin",""),
     TWO("",2,"Admin",""),
     THIRD("personalinformationtrainee",3,"Trainee","email"),
     FOURTH("personalinformationtrainer",4,"Trainer","TrainingCenterPermanentEmail"),

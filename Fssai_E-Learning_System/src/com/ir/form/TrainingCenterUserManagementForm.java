@@ -7,7 +7,21 @@ public class TrainingCenterUserManagementForm {
 	private String middleName;
 	private String lastName;
 	private String panNumber;
+	private String profileID;
+	private String logindetails;
 	
+	public String getProfileID() {
+		return profileID;
+	}
+	public void setProfileID(String profileID) {
+		this.profileID = profileID;
+	}
+	public String getLogindetails() {
+		return logindetails;
+	}
+	public void setLogindetails(String logindetails) {
+		this.logindetails = logindetails;
+	}
 	private String status;
 	public String getPanNumber() {
 		return panNumber;

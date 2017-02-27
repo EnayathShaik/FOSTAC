@@ -8,7 +8,14 @@ public class TraineeUserManagementForm {
 	private String lastName;
 	private String aadharNumber;
 	private String logindetails;
-	
+	private String profileID;
+
+	public String getProfileID() {
+		return profileID;
+	}
+	public void setProfileID(String profileID) {
+		this.profileID = profileID;
+	}
 	private String status;
 	
 	public String getStatus() {

@@ -110,6 +110,8 @@
                                                     <div class="col-md-4 hidden-xs"></div>
                                                     <div class="col-md-4 col-xs-12">
                                                         <a href="#">
+                                                         	<input type="hidden" path="profileID" name="profileID" id="profileID" value="1"/>
+                                                            <input type="hidden" path="logindetails" name="logindetails" id="logindetails" value=""/>
                                                             <input type="submit" class="form-control login-btn" value="Search">
                                                         </a>
                                                     </div>
@@ -135,6 +137,8 @@
                                                         <th>Middle Name</th>
                                                         <th>Last Name</th>
                                                         <th>PAN Number</th>
+                                                        <th>Current Status</th>
+                                                        <th>Update Status</th>
                                                     </thead>
                                                     <tbody>
                                                         <ct:choose>
@@ -156,6 +160,12 @@
                                                                         <td>
                                                                             <label>${listValue[5]}</label>
                                                                         </td>
+                                                                            <td>
+                                                                                    <label>${listValue[8]}</label>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <label><input type="submit"  onclick=" return activateDeActivateUser('${listValue[6]}','${listValue[7]}','1');" value="${listValue[7]}"/></label>
+                                                                                </td>
                                                                     </tr>
                                                                 </ct:forEach>
                                                             </ct:when>
@@ -182,8 +192,15 @@
                 <!-- scripts -->
 
             </cf:form>
-            <!-- <script>
-                var id = localStorage.getItem('activeID');
-                document.getElementById(id).className = "active";
+                         <script>
+                function activateDeActivateUser(loginDetails,status,profileID){
+                	if(confirm("Are you Sure ? You want to "+status )){
+                		$("#logindetails").val(loginDetails);	
+                		$("#status").val((status=="INACTIVE"?"I":"A"));	
+                		$("#trainingCenterUserManagementForm").attr("action" , "activateDeActivateTrainingCenter.fssai");
+                    } else{
+                        return false;
+                    }
+                }
+            </script>
 
-            </script> -->

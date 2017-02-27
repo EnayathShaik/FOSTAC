@@ -28,6 +28,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.google.gson.Gson;
 import com.ir.bean.common.IntStringBean;
+import com.ir.constantes.TableLink;
 import com.ir.form.AdminUserManagementForm;
 import com.ir.form.AssessmentQuestionForm;
 import com.ir.form.AssessorUserManagementForm;
@@ -1042,10 +1043,43 @@ public class AdminController {
 		return "updateTrainerAssessment";
 	}
 	
-	@RequestMapping("/activateDeActivateUsers" )
-    public String activateDeActivateUsers(@Valid @ModelAttribute("traineeUserManagementForm") TraineeUserManagementForm traineeUserManagementForm){
-		System.out.println("Login ID Details :  "+traineeUserManagementForm.getLogindetails());
-        //trainingPartnerService.cancelTrainingCalendar(trainingPartnerCalendarForm.getTcid());
+	@RequestMapping("/activateDeActivateTrainer" )
+    public String activateDeActivateTrainer(@Valid @ModelAttribute("trainerUserManagementForm") TrainerUserManagementForm trainerUserManagementForm){
+		String status = (trainerUserManagementForm.getStatus().equalsIgnoreCase("I")? "N":"Y");
+		String tableName = TableLink.getByprofileID(Integer.parseInt(trainerUserManagementForm.getProfileID())).tableName();
+        adminService.updateUser(trainerUserManagementForm.getLogindetails() , tableName , status);
+		return "redirect:/trainerUserManagementForm.fssai";
+    }
+	
+	@RequestMapping("/activateDeActivateTrainee" )
+    public String activateDeActivateTrainee(@Valid @ModelAttribute("traineeUserManagementForm") TraineeUserManagementForm traineeUserManagementForm){
+		String status = (traineeUserManagementForm.getStatus().equalsIgnoreCase("I")? "N":"Y");
+		String tableName = TableLink.getByprofileID(Integer.parseInt(traineeUserManagementForm.getProfileID())).tableName();
+        adminService.updateUser(traineeUserManagementForm.getLogindetails() , tableName , status);
 		return "redirect:/traineeUserManagementForm.fssai";
     }
+	
+	@RequestMapping("/activateDeActivateTrainingCenter" )
+    public String activateDeActivateTrainingCenter(@Valid @ModelAttribute("trainingCenterUserManagementForm") TrainingCenterUserManagementForm trainingCenterUserManagementForm){
+		
+		String status = (trainingCenterUserManagementForm.getStatus().equalsIgnoreCase("I")? "N":"Y");
+		String tableName = TableLink.getByprofileID(Integer.parseInt(trainingCenterUserManagementForm.getProfileID())).tableName();
+        adminService.updateUser(trainingCenterUserManagementForm.getLogindetails() , tableName , status);
+		return "redirect:/trainingCenterUserManagementForm.fssai";
+    }
+	
+	@RequestMapping("/activateDeActivateAssessor" )
+    public String activateDeActivateAssessor(@Valid @ModelAttribute("assessorUserManagementForm") AssessorUserManagementForm assessorUserManagementForm){
+		System.out.println("inside activateDeActivateUsers ");
+		System.out.println("Login ID Details :  "+assessorUserManagementForm.getLogindetails());
+		System.out.println("status "+assessorUserManagementForm.getStatus() + "  profileid "+assessorUserManagementForm.getProfileID());
+		String status = (assessorUserManagementForm.getStatus().equalsIgnoreCase("I")? "N":"Y");
+		String tableName = TableLink.getByprofileID(Integer.parseInt(assessorUserManagementForm.getProfileID())).tableName();
+		System.out.println(TableLink.getByprofileID(Integer.parseInt(assessorUserManagementForm.getProfileID())).tableName());
+        adminService.updateUser(assessorUserManagementForm.getLogindetails() , tableName , status);
+		return "redirect:/assessorUserManagementForm.fssai";
+    }
+	
+	
+
 }

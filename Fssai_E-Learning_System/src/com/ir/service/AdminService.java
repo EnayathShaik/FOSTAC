@@ -132,5 +132,8 @@ public interface AdminService {
 	
 	@Transactional
 	int saveTrainerAssessment(TrainerAssessmentEvaluation trainerAssessmentEvaluation);
+	//updateUser
+	@Transactional
+	void updateUser(String userid , String tableName , String status);
 
 }

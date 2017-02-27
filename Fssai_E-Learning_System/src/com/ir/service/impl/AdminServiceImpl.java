@@ -248,4 +248,11 @@ public class AdminServiceImpl implements AdminService {
 		int assessmentId = adminDAO.saveTrainerAssessment(trainerAssessmentEvaluation);
 		return assessmentId;
 	}
+	//updateUser
+	
+	@Override
+	public void updateUser( String userid , String tableName , String status){
+		adminDAO.updateUser(userid ,tableName ,status);
+		
+	}
 }

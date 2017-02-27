@@ -106,4 +106,8 @@ public interface AdminDAO {
 		public List<State> listStates();
 		public State getStateById(int id);
 		public void removeState(int id);
+		
+		//updateUser
+		
+		public void updateUser(String userid , String tableName , String status);
 }
