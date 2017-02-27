@@ -453,7 +453,7 @@ public class AdminController {
 			JavaMail javaMail = new JavaMail();
 			javaMail.mailProperty("Thanks",
 					manageAssessmentAgencyForm.getEmail(),
-					manageAssessmentAgencyForm.getUserId(),all[0] ,manageAssessmentAgencyForm.getAssessmentAgencyName() );
+					all[1],all[0] ,manageAssessmentAgencyForm.getAssessmentAgencyName() );
 
 			return "welcomeManageTrainingPartner";
 		} else {
