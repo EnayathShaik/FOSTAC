@@ -41,10 +41,15 @@ function getBatch(val){
 	var courseType = $("#courseType").val();
 	var coursename = val;
 	var data = coursename;
-	var frm = $("#generateCourseCertificateForm");
+ 	var name=JSON.stringify({
+		courseType:0,
+		courseName:0
+  })
 	$.ajax({
-	      type: frm.attr('method'),
-	      url: 'getBatchCode.fssai?'+data,
+	      type: 'post',
+	      url: 'getBatchCode.fssai?data='+data,
+	      contentType : "application/json",
+	      data:name,
 	      success: function (response) {   
 	    	  alert(response);
 	    	 
@@ -62,10 +67,15 @@ function getBatch(val){
 
 function getCertificate(val){
 
-	var frm = $("#generateCourseCertificateForm");
+ 	var name=JSON.stringify({
+		courseType:0,
+		courseName:0
+  })
 	$.ajax({
-	      type: frm.attr('method'),
-	      url: 'getCertificateID.fssai?'+val+" ",
+	      type: 'post',
+	      url: 'getCertificateID.fssai?data='+val,
+	      contentType : "application/json",
+	      data:name,
 	      success: function (response) {   
 	    	 // alert(response);
 	    	 

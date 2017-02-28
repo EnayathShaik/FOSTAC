@@ -107,10 +107,14 @@ public class TrainingPartnerController {
 		
 	}
 	
+	
 	@RequestMapping(value="/getBatchCode" , method=RequestMethod.POST)
-	public String getBatchCode(@ModelAttribute("generateCourseCertificateForm") GenerateCourseCertificateForm generateCourseCertificateForm,HttpSession session,HttpServletRequest request ,HttpServletResponse response , BindingResult result , Model model ) throws IOException{
+	@ResponseBody
+	public void getBatchCode(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		
+		System.out.println("getBatchCode............" + data );
+		
 		System.out.println("inside getBatchCode");
-		String data =request.getQueryString();  
 		int courseName =  Integer.parseInt(data);
 		System.out.println("courseName "+courseName);
 		List<String> batchCodeList = trainingPartnerService.getBatchCodeList(courseName);
@@ -120,14 +124,13 @@ public class TrainingPartnerController {
 		out.write(newList);
 		out.flush();
 		
-		return "redirect:/generateCourseCertificate.fssai";
-		
 	}
 	
+	
 	@RequestMapping(value="/getCertificateID" , method=RequestMethod.POST)
-	public String getCertificateID(@ModelAttribute("generateCourseCertificateForm") GenerateCourseCertificateForm generateCourseCertificateForm,HttpSession session,HttpServletRequest request ,HttpServletResponse response , BindingResult result , Model model ) throws IOException{
-		System.out.println("inside getBatchCode");
-		String data =request.getQueryString().toString();  
+	@ResponseBody
+	public void getCertificateID(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		
 		String batchcode =  data;
 		System.out.println("courseName "+batchcode);
 		List<String> certificateList = trainingPartnerService.getCertificateIdList(batchcode);
@@ -137,7 +140,6 @@ public class TrainingPartnerController {
 		out.write(newList);
 		out.flush();
 		
-		return "redirect:/generateCourseCertificate.fssai";
 		
 	}
 	
