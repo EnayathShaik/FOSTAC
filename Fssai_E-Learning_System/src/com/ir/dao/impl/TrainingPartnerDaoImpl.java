@@ -28,6 +28,7 @@ import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.PostVacancyTrainingCenter;
 import com.ir.model.PostVacancyTrainingCenterBean;
 import com.ir.model.TrainingCalendar;
+import com.ir.model.TrainingCalendarHistoryLogs;
 import com.ir.model.Utility;
 import com.ir.util.ChangePasswordUtility;
 
@@ -600,6 +601,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			//eligible = (String) list.get(0);
 		}
 		TrainingCalendar tc = new TrainingCalendar();
+		TrainingCalendarHistoryLogs tch =  new TrainingCalendarHistoryLogs();
 		tc.setCourseType(trainingCalendarForm.getCourseType());
 		tc.setCourseName(trainingCalendarForm.getCourseName());
 		tc.setTrainingCenter(trainingCalendarForm.getTrainingCenter());
@@ -613,6 +615,21 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		tc.setAssessor(trainingCalendarForm.getAssessor());
 		tc.setAssessmentDateTime(trainingCalendarForm.getAssessmentDateTime());
 		
+		
+		
+		tch.setCourseType(trainingCalendarForm.getCourseType());
+		tch.setCourseName(trainingCalendarForm.getCourseName());
+		tch.setTrainingCenter(trainingCalendarForm.getTrainingCenter());
+		tch.setTrainingDate(trainingCalendarForm.getTrainingStartDate());
+		tch.setTrainingTime(trainingCalendarForm.getTrainingEndDate());
+		tch.setTrainerName(trainingCalendarForm.getTrainerName());
+		tch.setAssessmentPartnerName(trainingCalendarForm.getAssessmentAgencyName());
+		tch.setSeatCapacity(trainingCalendarForm.getSeatCapacity());
+		tch.setAssessmentDateTime(trainingCalendarForm.getAssessmentDateTime());
+		tch.setType(trainingCalendarForm.getType());
+		tch.setAssessor(trainingCalendarForm.getAssessor());
+		tch.setAssessmentDateTime(trainingCalendarForm.getAssessmentDateTime());
+		
 		System.out.println("---->"+trainingCalendarForm.getTcid());
 		CourseName courseName = (CourseName) session.load(CourseName.class, trainingCalendarForm.getCourseName());
 		PersonalInformationTrainingPartner personalInformationTrainingPartner = (PersonalInformationTrainingPartner) session.load(PersonalInformationTrainingPartner.class, trainingCalendarForm.getTrainingCenter());
@@ -624,11 +641,16 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		int i = 0;
 	if(trainingCalendarForm.getTcid()==0){
 		System.out.println("inside create");
+		System.out.println("username "+trainingCalendarForm.getUserName());
+		tch.setCreated_by(trainingCalendarForm.getUserName());
 	 i = (Integer) session.save(tc);
+	 				session.save(tch);
 	}else{
 		System.out.println(" inside update");
 		tc.setTrainingCalendarId(trainingCalendarForm.getTcid());
+		tch.setChanged_by(trainingCalendarForm.getUserName());
 		 session.update(tc);
+		 session.save(tch);
 	}
 		if(i >0){
 			return "created";
@@ -712,10 +734,17 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	
 	//getCertificateIdList
 	@Override
-	public  List<String> getCertificateIdList(String batchCode){
+	public  List<String> getCertificateIdList(String batchCode , String loginId){
 		Session session = sessionFactory.getCurrentSession();
 		List<String> trinerNameList=new ArrayList<>();
-		String sql="select ceu.certificateid from courseenrolleduser ceu  inner join trainingcalendar tc on (ceu.trainingcalendarid = tc.trainingcalendarid) where tc.batchcode='"+batchCode+"'";
+		String sql = null;
+		
+		if(loginId != null){
+			sql="select certificateid from courseenrolleduser    where logindetails='"+loginId+"'";
+		}else{
+			sql="select ceu.certificateid from courseenrolleduser ceu  inner join trainingcalendar tc on (ceu.trainingcalendarid = tc.trainingcalendarid) where tc.batchcode='"+batchCode+"'";	
+		}
+		 
 				
 		Query query = session.createSQLQuery(sql);
 		List<String> courseTypeList = query.list();

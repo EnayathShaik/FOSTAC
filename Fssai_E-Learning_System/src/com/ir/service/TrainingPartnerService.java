@@ -102,5 +102,5 @@ public interface TrainingPartnerService {
 	public List<String> getBatchCodeList(int CourseCode);
 	
 	
-	public List<String> getCertificateIdList(String CourseCode);
+	public List<String> getCertificateIdList(String CourseCode , String loginId);
 }

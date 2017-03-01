@@ -2,10 +2,29 @@
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
+function OnStart(){
+	var profileId = '${profileId}';
+	
+	if(profileId == 3){
+		
+		$("#CT").css("display" , "none");
+		$("#CN").css("display" , "none");
+		$("#BC").css("display" , "none");
+		
+		var userId = '${userId}';
+		
+		getCertificate('');
+		
+		
+	}
+	
+	
+}
 
 window.onload = OnStart;
 </script>
 <script>
+
 
 function checkVacancyType(){
 	
@@ -51,7 +70,7 @@ function getBatch(val){
 	      contentType : "application/json",
 	      data:name,
 	      success: function (response) {   
-	    	  alert(response);
+	    	
 	    	 
 	      var mainData1 = jQuery.parseJSON(response);
  	        $('#batchCode option').remove();
@@ -71,6 +90,15 @@ function getCertificate(val){
 		courseType:0,
 		courseName:0
   })
+  var profileId = '${profileId}'; 
+  if(profileId == 3){
+	  val = val+"-"+'${userId}';  
+  }else{
+	  
+	  val = val+"-NA";
+	
+  }
+  
 	$.ajax({
 	      type: 'post',
 	      url: 'getCertificateID.fssai?data='+val,
@@ -93,7 +121,7 @@ function getCertificate(val){
 function getdata(val){
 	
 	$("#mainCertificateId").val(val);
-	$("#mainCertificateId").val('I dont have data...coudnt test further');
+//	$("#mainCertificateId").val('I dont have data...coudnt test further');
 }
 </script>
 
@@ -138,7 +166,7 @@ function getdata(val){
                       
                       <!-- left side -->
                       <div class="col-md-6 col-xs-12">
-                        <div class="form-group">
+                        <div class="form-group" id="CT">
                           <div>
                             <ul class="lab-no">
                               <li class="style-li"><strong>Course Type:<span style="color:red;">*</span></strong></li>
@@ -155,23 +183,9 @@ function getdata(val){
 						<cf:options items="${courseTypeList}" itemValue="CourseTypeId" itemLabel="CourseType"/>
 						</cf:select>
                         </div>
-                        <div class="form-group">
-                          <div>
-                            <ul class="lab-no">
-                              <li class="style-li"><strong>Course Code:<span style="color:red;">*</span></strong></li>
-                              <li class="style-li error-red">
-                               <label id="courseNameError" class="error visibility">select course name</label>
-                               <cf:errors path="courseName" cssclass="error"/>
-                               </li>
-                            </ul>
-                          </div>
-					<cf:select path="courseName" class="form-control" onchange="getBatch(this.value)">
-					<cf:option value="0" label="Select Course Code" />
-					<%-- <cf:options items="${courseNameList}" itemValue="coursenameid" itemLabel="coursename"/> --%>
-					</cf:select>
-                        </div>
+                    
 
-              			<div class="form-group">
+              			<div class="form-group" id="BC">
                           <div>
                             <ul class="lab-no">
                               <li class="style-li"><strong>Batch Code:<span style="color:red;">*</span></strong></li>
@@ -187,12 +201,7 @@ function getdata(val){
 					</cf:select>
                         </div>
                         
-                       
-                        
-                      </div>
-                      <!-- right side -->
-                      <div class="col-md-6 col-xs-12">
-                       
+                      
                           <div class="form-group" id="displayStartDate" >
                           <div>
                             <ul class="lab-no">
@@ -208,8 +217,29 @@ function getdata(val){
 					<%-- <cf:options items="${courseNameList}" itemValue="coursenameid" itemLabel="coursename"/> --%>
 					</cf:select>
                         </div>
+                        
+                      </div>
+                      <!-- right side -->
+                      <div class="col-md-6 col-xs-12">
+                      
+                          <div class="form-group" id="CN">
+                          <div>
+                            <ul class="lab-no">
+                              <li class="style-li"><strong>Course Code:<span style="color:red;">*</span></strong></li>
+                              <li class="style-li error-red">
+                               <label id="courseNameError" class="error visibility">select course name</label>
+                               <cf:errors path="courseName" cssclass="error"/>
+                               </li>
+                            </ul>
+                          </div>
+					<cf:select path="courseName" class="form-control" onchange="getBatch(this.value)">
+					<cf:option value="0" label="Select Course Code" />
+					<%-- <cf:options items="${courseNameList}" itemValue="coursenameid" itemLabel="coursename"/> --%>
+					</cf:select>
+                        </div>
+                       
                      
-                          <div class="form-group" id="displayStartDate" >
+                           <div class="form-group" id="displayStartDate" >
                           <div>
                             <ul class="lab-no">
                               <li class="style-li"><strong>Certificate ID:</strong></li>

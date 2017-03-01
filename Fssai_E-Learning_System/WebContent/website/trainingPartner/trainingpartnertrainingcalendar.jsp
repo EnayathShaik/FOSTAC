@@ -282,7 +282,8 @@ window.onload = OnStart;
 								<a href="#menu-toggle" class="vertical-menu-position-btn"
 									id="menu-toggle"> <i class="fa fa-bars"></i> <span
 									class="orange-font">Welcome :
-										${loginUserS.loginDetails.loginId}</span>
+										${userName}</span>
+										
 								</a>
 							</div>
 						</div>
@@ -357,6 +358,7 @@ window.onload = OnStart;
 														<select class="form-control" name="selCourseName"
 															id="selCourseName">
 														</select>
+														
 													</div>
 													<div class="form-group">
 														<div>
@@ -487,7 +489,7 @@ window.onload = OnStart;
 															id="assessorName">
 														</select>
 													</div>
-                                                
+                                                	<input type="hidden" path="userName" name="userName" value="${userName}">
 													<input type="hidden" path="tcid" name="tcid" value="0" id="tcid">
 													<input type="submit" onclick="return saveDetails();"
 														style="margin-top: 20px;"

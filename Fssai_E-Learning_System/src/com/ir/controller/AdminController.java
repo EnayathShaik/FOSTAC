@@ -1070,5 +1070,17 @@ public class AdminController {
     }
 	
 	
+/*	@RequestMapping("/activateDeActivateTrainingPartner" )
+    public String activateDeActivateTrainingPartner(@Valid @ModelAttribute("manageTrainingPartnerForm") ManageTrainingPartnerForm manageTrainingPartnerForm){
+		System.out.println("inside activateDeActivateUsers ");
+		System.out.println("Login ID Details :  "+manageTrainingPartnerForm.getLogindetails());
+		System.out.println("status "+manageTrainingPartnerForm.getStatus() + "  profileid "+manageTrainingPartnerForm.getProfileID());
+		String status = (manageTrainingPartnerForm.getStatus().equalsIgnoreCase("I")? "N":"Y");
+		String tableName = TableLink.getByprofileID(Integer.parseInt(manageTrainingPartnerForm.getProfileID())).tableName();
+		System.out.println(TableLink.getByprofileID(Integer.parseInt(manageTrainingPartnerForm.getProfileID())).tableName());
+        adminService.updateUser(manageTrainingPartnerForm.getLogindetails() , tableName , status);
+		return "redirect:/manageTrainingPartnerForm.fssai";
+    }
+	*/
 
 }

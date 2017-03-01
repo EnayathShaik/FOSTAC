@@ -131,10 +131,16 @@ public class TrainingPartnerController {
 	@RequestMapping(value="/getCertificateID" , method=RequestMethod.POST)
 	@ResponseBody
 	public void getCertificateID(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
-		
-		String batchcode =  data;
+		System.out.println("data "+data);
+		String[] ss = data.split("-");
+		String loginId = null;
+		System.out.println("ss[1] "+ss[1]);
+		if(!ss[1].equalsIgnoreCase("NA")){
+			loginId = ss[1];
+		}
+		String batchcode =  ss[0];
 		System.out.println("courseName "+batchcode);
-		List<String> certificateList = trainingPartnerService.getCertificateIdList(batchcode);
+		List<String> certificateList = trainingPartnerService.getCertificateIdList(batchcode , loginId);
 		PrintWriter out = response.getWriter();
 		Gson g =new Gson();
 		String newList = g.toJson(certificateList); 
@@ -626,6 +632,8 @@ public class TrainingPartnerController {
 			trainingCalendarForm.setAssessor(trainingPartnerCalendarForm.getAssessorName());
 			trainingCalendarForm.setAssessmentDateTime(trainingPartnerCalendarForm.getAssessmentDateTime());
 			trainingCalendarForm.setTrainingCenter(tableID);
+			System.out.println("username "+trainingPartnerCalendarForm.getUserName());
+			trainingCalendarForm.setUserName(trainingPartnerCalendarForm.getUserName());
 			
 			String trainingCalendar = trainingPartnerService.trainingCalendarForm(trainingCalendarForm);
 			

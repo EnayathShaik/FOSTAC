@@ -17,7 +17,16 @@ public class TrainingCalendarForm {
 	private int assessor;
 	private String seatCapacity;
 	private String type;
+	private String userName;
 	
+	
+	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public String getAssessmentDateTime() {
 		return assessmentDateTime;
 	}

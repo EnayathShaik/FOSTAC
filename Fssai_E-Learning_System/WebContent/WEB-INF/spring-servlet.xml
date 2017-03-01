@@ -102,6 +102,9 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="org.postgresql.Driver" />
+<!--		<property name="url" value="jdbc:postgresql://localhost/FSSAI" />
+		<property name="username" value="postgres" />
+		<property name="password" value="test@1234" />-->
 		<property name="url" value="jdbc:postgresql://localhost/fostac" />
 		<property name="username" value="fostacadmin" />
 		<property name="password" value="Fss2iZentech" />
@@ -156,6 +159,7 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 				<value>com.ir.model.trainer.TrainerAssessmentEvaluation</value>
 				<value>com.ir.model.TrainingPartnerCalendarForm</value>
 				<value>com.ir.model.TrainingStatus</value>
+				<value>com.ir.model.TrainingCalendarHistoryLogs</value>
 <!-- 				<value>com.ir.form.AssessmentAnswerCriteria</value> -->
 				<!-- 
 				

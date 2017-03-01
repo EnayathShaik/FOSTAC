@@ -55,5 +55,5 @@ public interface TrainingPartnerDao {
 	public List<IntStringBean> loadAssessmentAgency();
 	public List<String> getBatchCodeList(int courseCode);
 	//
-	public List<String> getCertificateIdList(String batchCode);
+	public List<String> getCertificateIdList(String batchCode , String loginId);
 }

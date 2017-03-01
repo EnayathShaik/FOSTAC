@@ -10,9 +10,9 @@
 		<!-- <property name="hibernate.connection.url">jdbc:postgresql://localhost/FSSAI</property>
 		<property name="hibernate.connection.username">postgres</property>
 		<property name="hibernate.connection.password">Fss2iZentech</property> -->
-		<property name="hibernate.connection.url">jdbc:postgresql://localhost/fostac</property>
-		<property name="hibernate.connection.username">fostacadmin</property>
-		<property name="hibernate.connection.password">Fss2iZentech</property>
+		<property name="hibernate.connection.url">jdbc:postgresql://localhost/FSSAI</property>
+		<property name="hibernate.connection.username">postgres</property>
+		<property name="hibernate.connection.password">test@1234</property>
 		
 		<property name="hibernate.c3p0.min_size">50</property>
   		<property name="hibernate.c3p0.max_size">200</property>
@@ -22,8 +22,6 @@
   		
   		<property name="hibernate.c3p0.privilegeSpawnedThreads">true</property>
 		<property name="hibernate.c3p0.contextClassLoaderSource">library</property>
-		
-		
 		
 		<property name="hibernate.connection.autocommit">true</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
@@ -66,6 +64,8 @@
 		<mapping class="com.ir.model.assessor.AssessmentResult"/>
 		<mapping class="com.ir.model.trainee.TraineeAssessmentEvaluation"/>
 		<mapping class="com.ir.trainingcenter.model.AssesmentCalender"/>
+		<mapping class="com.ir.model.TrainingCalendarHistoryLogs"/>
+		
 <!-- 		<mapping class="com.ir.form.AssessmentAnswerCriteria"/> -->
 <!-- 		<mapping class="com.ir.model.CourseEnrolledUser"/> -->
 		<!-- 

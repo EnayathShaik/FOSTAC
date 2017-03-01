@@ -29,7 +29,9 @@ public class AjaxRequest {
 	        transaction.commit();
 	    }
 	    catch(Exception re){
+	    
 	        transaction.rollback();
+	    	re.printStackTrace();
 	    }
 	    finally {
 	        if(session != null){
