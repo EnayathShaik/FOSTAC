@@ -23,15 +23,15 @@ body {
 @media screen {
     .this-certify {
         position: relative;
-        top: -32em;
+        top: -32sem;
     }
     .sign-pos {
         position: relative;
-        top: -31.1em;
+        top: -32.4em;
     }
     .cert-btm {
         position: relative;
-        top: -31.5em;
+        top: -32.5em;
         line-height: 12px;
     }
     .nam-hr {
@@ -159,6 +159,16 @@ body {
         position: relative;
         top: -28.5em;
         line-height: 12px;
+    }
+    .sign-partner {
+        position: relative;
+        width: 140px;
+        left: 8em;
+    }
+    .sign-coordinator {
+        position: relative;
+        width: 140px;
+        left: 11em;
     }
 }
 
@@ -304,6 +314,16 @@ body {
         position: relative;
         top: -28.7em;
         line-height: 12px;
+    }
+    .sign-partner {
+        position: relative;
+        width: 100px;
+        left: 8em;
+    }
+    .sign-coordinator {
+        position: relative;
+        width: 100px;
+        left: 13em;
     }
 }
 

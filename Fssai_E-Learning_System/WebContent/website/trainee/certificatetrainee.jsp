@@ -70,10 +70,12 @@ try{
                                                             </div>
                                                             <div class="col-xs-12 sign-pos">
                                                                 <div class="col-md-6 col-xs-6">
+                                                                <img src="website/img/training-partner.jpg" alt="training partner signature" class="img-responsive sign-partner">
                                                                     <hr class="left-sign">
                                                                     <p class="left-p">Training Partner</p>
                                                                 </div>
                                                                 <div class="col-md-6 col-xs-6">
+                                                                <img src="website/img/training-coordinator-fssai.jpg" alt="training coordinator fssai" class="img-responsive sign-coordinator">
                                                                     <hr class="right-sign">
                                                                     <p class="right-p text-center">Training Coordinator
                                                                         <br><span>FSSAI</span></p>
