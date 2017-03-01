@@ -5,9 +5,7 @@ public class ZLogger {
 	String type;
 	String message;
 	String className;
-	public ZLogger() {
-		// TODO Auto-generated constructor stub
-	}
+	
 	public ZLogger(String type, String message, String className) {
 		super();
 		this.type = type;

@@ -34,6 +34,7 @@ import com.ir.service.RegistrationServiceAssessor;
 import com.ir.service.RegistrationServiceTrainer;
 import com.ir.util.GenerateUniqueID;
 import com.ir.util.JavaMail;
+import com.zentech.logger.ZLogger;
 
 @Controller
 @SessionAttributes
@@ -49,106 +50,63 @@ public class RegistrationControllerAssessor implements Serializable{
 	@Qualifier("registrationServiceAssessor")
 	RegistrationServiceAssessor registrationServiceAssessor;
 	
-	
-	/*@ModelAttribute("stateList")
-	public List<State> populateStateList() {
-		List<State> stateList = registrationServiceAssessor.loadState();
-		System.out.println("state list   :   "+ stateList);
-		return stateList;
-	}
-	
-	@ModelAttribute("assessmentAgencyNameList")
-	public List<ManageAssessmentAgency> assessmentAgencyNameList() {
-		List<ManageAssessmentAgency> assessmentAgencyNameList = registrationServiceAssessor.loadAssessmentAgency();
-		System.out.println("assessment Agency Name List    :   "+ assessmentAgencyNameList);
-		return assessmentAgencyNameList;
-	}
-	
-	@ModelAttribute("titleList")
-	public List<Title> populateTitle() {
-		List<Title> titleList = registrationServiceAssessor.loadTitle();
-		System.out.println("state list   :   "+ titleList);
-		return titleList;
-	}
-	
-	@ModelAttribute("userId")
-	public String getUniqueId(){
-		String uniqueID = GenerateUniqueID.getNextCombinationId("AS", "personalInformationAssessor" , "000000");		
-		System.out.println(" Assessor  " + uniqueID);
-		return uniqueID;
-	}
-	
-	@ModelAttribute("basicCourseList" )
-	public List<CourseName> basicCourseList() {
-		List<CourseName> basicCourseList = registrationServiceAssessor.basicCourseName();
-		System.out.println("CourseName  list   :   "+ basicCourseList);
-		return basicCourseList;
-	}*/
-	
 	@RequestMapping(value = "/registrationFormAssessor", method = RequestMethod.GET)
 	public String registerForm(Model model) {
-		System.out.println("registerForm Assessor begins ");
-		
-		RegistrationFormAssessor registrationFormAssessor=new RegistrationFormAssessor();
-		List<State> stateList = pageLoadService.loadState();
-		List<Title> titleList = pageLoadService.loadTitle();
-		List<ManageAssessmentAgency> assessmentAgencyNameList = registrationServiceAssessor.loadAssessmentAgency();
-		String uniqueID = GenerateUniqueID.getNextCombinationId("TE", "personalinformationtrainee" , "000000");
-		List<CourseName> basicCourseList = registrationServiceAssessor.basicCourseName();
-		
-		model.addAttribute("registrationFormAssessor", registrationFormAssessor);
-		model.addAttribute("stateList", stateList);
-		model.addAttribute("titleList", titleList);
-		model.addAttribute("assessmentAgencyNameList", assessmentAgencyNameList);
-		model.addAttribute("userId", uniqueID);
-		model.addAttribute("basicCourseList", basicCourseList);
-		
-		
+		new ZLogger("Assessor", "Assessor Registration Form Loading Starting............" , "RegistrationControllerAssessor.java");
+		try{
+			RegistrationFormAssessor registrationFormAssessor=new RegistrationFormAssessor();
+			List<State> stateList = pageLoadService.loadState();
+			List<Title> titleList = pageLoadService.loadTitle();
+			List<ManageAssessmentAgency> assessmentAgencyNameList = registrationServiceAssessor.loadAssessmentAgency();
+			String uniqueID = GenerateUniqueID.getNextCombinationId("TE", "personalinformationtrainee" , "000000");
+			List<CourseName> basicCourseList = registrationServiceAssessor.basicCourseName();
+			model.addAttribute("registrationFormAssessor", registrationFormAssessor);
+			model.addAttribute("stateList", stateList);
+			model.addAttribute("titleList", titleList);
+			model.addAttribute("assessmentAgencyNameList", assessmentAgencyNameList);
+			model.addAttribute("userId", uniqueID);
+			model.addAttribute("basicCourseList", basicCourseList);
+		}catch(Exception e){
+			e.printStackTrace();
+			new ZLogger("Assessor", "Assessor Registration Form Loading Exception" , "RegistrationControllerAssessor.java");
+		}
+		new ZLogger("Assessor", "Assessor Registration Form Loading Stopped............" , "RegistrationControllerAssessor.java");
 		
 		return "registrationFormAssessor";
 	}
 	
 	@RequestMapping(value = "/registrationAsssessor", method = RequestMethod.POST)
 	public String registerAssessor(@Valid @ModelAttribute("registrationFormAssessor") RegistrationFormAssessor registrationFormAssessor, BindingResult bindingResult,Model model)  {
-		
-		System.out.println("register controller before bind trainer");
-		if(bindingResult.hasErrors()){
-	
-			return "registrationFormAssessor";
-		}
-		System.out.println("registrationForm assessor controller");
-		System.out.println(registrationFormAssessor);
-		String personalInformationAssessor = null;
+		new ZLogger("Assessor", "Assessor Registration Form Submitting Starting............" , "RegistrationControllerAssessor.java");
 		try{
-			
+			if(bindingResult.hasErrors()){
+				return "registrationFormAssessor";
+			}
+			String personalInformationAssessor = null;
+			personalInformationAssessor = registrationServiceAssessor.registerPersonalInformationAssessor(registrationFormAssessor);
+			if(personalInformationAssessor != null &&  !personalInformationAssessor.equalsIgnoreCase("")){
+				String[] all = personalInformationAssessor.split("&");
+				model.addAttribute("id" , all[1]);
+				model.addAttribute("pwd" , all[0]);
+					JavaMail javaMail = new JavaMail();
+					javaMail.mailProperty("Thanks", registrationFormAssessor.getAssessorPermanentEmail(), all[1],all[0] , registrationFormAssessor.getFirstName());
+				return "welcome";
+			}else{
+				model.addAttribute("id" , "Oops, something went wrong !!!");
+				return "personalInformationAssessor";
+			}
 		}catch(Exception e){
 			e.printStackTrace();
+			new ZLogger("Assessor", "Assessor Registration Form Submitting Exception" , "RegistrationControllerAssessor.java");
 		}
-		try{
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		personalInformationAssessor = registrationServiceAssessor.registerPersonalInformationAssessor(registrationFormAssessor);
-		if(personalInformationAssessor != null &&  !personalInformationAssessor.equalsIgnoreCase("")){
-			String[] all = personalInformationAssessor.split("&");
-			model.addAttribute("id" , all[1]);
-			model.addAttribute("pwd" , all[0]);
-			//return "registrationFormTrainee";
-				JavaMail javaMail = new JavaMail();
-				javaMail.mailProperty("Thanks", registrationFormAssessor.getAssessorPermanentEmail(), all[1],all[0] , registrationFormAssessor.getFirstName());
-				
-			return "welcome";
-		}else{
-			model.addAttribute("id" , "Oops, something went wrong !!!");
-			//model.addAttribute("pwd" , "User id created successfully !!");
-			return "personalInformationAssessor";
-		}
+		new ZLogger("Assessor", "Assessor Registration Form Submitting Stopped............" , "RegistrationControllerAssessor.java");
+		return "personalInformationAssessor";
 	}
 
 	
 	 @RequestMapping(value="/updateAssessor" , method=RequestMethod.GET)
 		public String updateAssessor(@RequestParam(value = "userId", required = true)  Integer userId ,Model model ,@ModelAttribute("updateAssessor") RegistrationFormAssessor registrationFormAssessor, HttpSession session ){		
+		 new ZLogger("Assessor", "Assessor Update Form Load Stopped............" , "RegistrationControllerAssessor.java");
 		 Integer profileID = 0;
 			try{
 				profileID = (Integer) session.getAttribute("profileId");
@@ -157,99 +115,45 @@ public class RegistrationControllerAssessor implements Serializable{
 				}else{
 					userId = (Integer) session.getAttribute("userId");
 				}
-				
+				 if(userId > 0){
+						PersonalInformationAssessor personalInformationAssessor ;
+						personalInformationAssessor = registrationServiceAssessor.fullDetailAssessor(userId);
+						session.setAttribute("loginUr", personalInformationAssessor);
+					 
+				 }
+				 model.addAttribute("update", "");
 			}catch(Exception e){
-				System.out.println("Exception while course details save : "+ e.getMessage());
+				e.printStackTrace();
+				new ZLogger("Assessor", "Assessor Update Form Exception............" , "RegistrationControllerAssessor.java");
 			}
-		 if(userId > 0){
-				PersonalInformationAssessor personalInformationAssessor ;
-				personalInformationAssessor = registrationServiceAssessor.fullDetailAssessor(userId);
-				session.setAttribute("loginUr", personalInformationAssessor);
-			 
-		 }
-		 	model.addAttribute("update", "");
+			new ZLogger("Assessor", "Assessor Update Form Load Stopped............" , "RegistrationControllerAssessor.java");
 			return "updateAssessor";
 		}
 	
-	
-	
-	/*
-	@RequestMapping(value = "/updateAssessor", method = RequestMethod.GET)
-	public String updateAssessorData(Model model) {
-		System.out.println("registerForm trainer begins ");
-		RegistrationFormAssessor registrationFormAssessor=new RegistrationFormAssessor();
-		model.addAttribute("registrationFormAssessor", registrationFormAssessor);
-		return "updateAssessor";
-	}
-	
-	*/
-	 @RequestMapping(value="/updateAssessorDatavalue" , method=RequestMethod.POST)
-	 //@RequestMapping(value="/updateAssessorData" , method=RequestMethod.POST)
-		public String updateAssessorData(@RequestParam(value = "id", required = true)  Integer id,@Valid @ModelAttribute("updateAssessor") RegistrationFormAssessor registrationFormAssessor ,BindingResult bindingResult, HttpSession session){
-		 Integer assessorId = 0;
-			if(id <= 0){
-				assessorId = (Integer) session.getAttribute("loginUserAssessor");
-			}else{
-				assessorId = id;
-			}
-			String updateAssessor = registrationServiceAssessor.UpdateAssessor(registrationFormAssessor , assessorId);
-			if(!updateAssessor.equalsIgnoreCase(""))
-			{
-				System.out.println("Data are updated successfully");
-			}
-			//model.addAttribute("update", "Updated successfully !!!");
-			return "welcomeupdatetrainee";
-		}
-		
-		@RequestMapping(value="/contactAssessorPage" , method=RequestMethod.GET)
-		public String contactAssessor(@ModelAttribute("contactFormAssessor") ContactFormAssessor contactFormAssessor ){
-			return "contactAssessorPage";
-		}
-		
-		@RequestMapping(value="/contactAssessorSaveData" , method=RequestMethod.POST)
-		public String contactAssessorSaveData(@ModelAttribute("contactFormAssessor") ContactFormAssessor contactFormAssessor
-				,BindingResult result , Model model
-				){
-			if(result.hasErrors()){
-				System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-				System.out.println(result.getErrorCount());
-				System.out.println(result.getAllErrors());
-				return "contactAssessorSave";
-			}int id = 1;
-			//abhay   String id=	(String) session.getAttribute("logId");
-			String contactAssessorSave = registrationServiceAssessor.contactAssesorSave(contactFormAssessor , id);
-			if(contactAssessorSave.equalsIgnoreCase("created")){
-				model.addAttribute("created" , "Your request has been sent successfully !!!");
-			}else{
-				model.addAttribute("created" , "Oops, something went wrong !!!");
-			}
-			return "contactAssessorPage";
-		}
-			@RequestMapping(value="/changePasswordAssessor" , method=RequestMethod.GET)
-			public String changePass(@ModelAttribute("changePasswordForm") ChangePasswordForm changePasswordForm ){
-				return "changePasswordAssessor";
-			}
-			@RequestMapping(value="/changePasswordAssesorSave" , method=RequestMethod.POST)
-			public String changePasswordAssesorSave(@ModelAttribute("changePasswordForm") ChangePasswordForm changePasswordForm,HttpSession session
-					,BindingResult result , Model model
-					){
-				if(result.hasErrors()){
-					System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-					System.out.println(result.getErrorCount());
-					System.out.println(result.getAllErrors());
-					return "changepasswordAS";
-				}
-				String id =(String) session.getAttribute("logId");
-				//System.out.println(changePasswordForm.getLoginid());
-				//int id = 1;
-				boolean changePasswordAssesorSave = registrationServiceAssessor.changePasswordASSSave(changePasswordForm , id);
-				if(changePasswordAssesorSave){
-					model.addAttribute("created" , "Your password has changed !!!");
+	 	@RequestMapping(value="/updateAssessorDatavalue" , method=RequestMethod.POST)
+	 	public String updateAssessorData(@RequestParam(value = "id", required = true)  Integer id,@Valid @ModelAttribute("updateAssessor") RegistrationFormAssessor registrationFormAssessor ,BindingResult bindingResult, HttpSession session){
+	 		new ZLogger("Assessor", "Assessor Update Form Submit Starting............" , "RegistrationControllerAssessor.java");
+	 	try{
+			 Integer assessorId = 0;
+				if(id <= 0){
+					assessorId = (Integer) session.getAttribute("loginUserAssessor");
 				}else{
-					model.addAttribute("created" , "Oops, something went wrong !!!");
+					assessorId = id;
 				}
-				return "changepasswordAS";
-			}
-			// Rishi
+				String updateAssessor = registrationServiceAssessor.UpdateAssessor(registrationFormAssessor , assessorId);
+				if(!updateAssessor.equalsIgnoreCase(""))
+				{
+					System.out.println("Data are updated successfully");
+				}
+				//model.addAttribute("update", "Updated successfully !!!");
+		 }catch(Exception e){
+			 e.printStackTrace();
+			 new ZLogger("Assessor", "Assessor Update Form Submit Exception............" , "RegistrationControllerAssessor.java");
+		 }
+	 	new ZLogger("Assessor", "Assessor Update Form Submit Stopped............" , "RegistrationControllerAssessor.java");
+		return "welcomeupdatetrainee";
 		}
+		
+		
+}
 	
