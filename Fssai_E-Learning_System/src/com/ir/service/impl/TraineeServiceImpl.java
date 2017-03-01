@@ -214,9 +214,9 @@ public class TraineeServiceImpl implements TraineeService {
 	}
 	@Override
 	@Transactional
-	public CertificateInfo getCertificateID(int userId, int profileID) {
+	public CertificateInfo getCertificateID(int userId, int profileID, String certificateID) {
 		// TODO Auto-generated method stub
-		return traineeDAO.getCertificateID(userId, profileID);
+		return traineeDAO.getCertificateID(userId, profileID, certificateID);
 	}
 	
 	

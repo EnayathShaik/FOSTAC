@@ -369,7 +369,6 @@ public class TraineeController {
 			profileId = (Integer) httpSession.getAttribute("profileId");
 			loginId = (int) httpSession.getAttribute("loginIdUnique");
 			userId = (Integer) httpSession.getAttribute("userId");
-			traineeService.closeCourse(userId, profileId, "Y");
 			int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileId);
 			System.out.println("loginid   :"+ loginId);
 			System.out.println("tableID  :"+ tableID);
@@ -556,11 +555,11 @@ public class TraineeController {
 					userId = (Integer) session.getAttribute("userId");
 					int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
 					traineeService.updateSteps(tableID, profileID, 0);
-					CertificateInfo certificateInfo = traineeService.getCertificateID(userId, profileID);
+					CertificateInfo certificateInfo = traineeService.getCertificateID(userId, profileID,"");
 					System.out.println("Certificate ID = "+certificateInfo.getCertificateID());
 					System.out.println("Training Date = "+certificateInfo.getTrainingDate());
 					//Close Course
-					//traineeService.closeCourse(userId, profileID, "Y");
+					traineeService.closeCourse(userId, profileID, "Y");
 					model.addAttribute("certificateID", certificateInfo.getCertificateID());
 					model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
 					model.addAttribute("traineeCertificateName", certificateInfo.getName());

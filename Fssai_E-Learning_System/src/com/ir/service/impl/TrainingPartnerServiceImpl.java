@@ -207,6 +207,7 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 	//getBatchCodeList
 	
 	@Override
+	@Transactional
 	public List<String> getBatchCodeList(int courseCode) {
 		List<String> loadBatchCode = trainingPartnerDAO.getBatchCodeList(courseCode);
 		return loadBatchCode;
@@ -214,6 +215,7 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 	//getCertificateIdList
 	
 	@Override
+	@Transactional
 	public List<String> getCertificateIdList(String batchcode) {
 		List<String> loadCertificate = trainingPartnerDAO.getCertificateIdList(batchcode);
 		return loadCertificate;

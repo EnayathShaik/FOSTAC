@@ -39,6 +39,7 @@
 		</li>
 		<li><a href="feedbackForm.fssai">Feedback</a></li>
 		<li><a href="generateCertificatetrainee.fssai">Certification</a>
+		<li><a href="generateCourseCertificate.fssai">Past Certificate</a> </li>
 		</li>
 	</ul>
 </div>

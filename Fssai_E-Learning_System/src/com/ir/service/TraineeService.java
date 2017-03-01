@@ -112,7 +112,7 @@ public interface TraineeService {
 	public String isCourseOnline(int userID);
 	
 	
-	public CertificateInfo getCertificateID(int userID, int profileID);
+	public CertificateInfo getCertificateID(int userID, int profileID, String certificateID);
 
 
 }

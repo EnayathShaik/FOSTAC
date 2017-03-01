@@ -88,6 +88,7 @@ public class RegistrationControllerAssessor implements Serializable{
 	@RequestMapping(value = "/registrationFormAssessor", method = RequestMethod.GET)
 	public String registerForm(Model model) {
 		System.out.println("registerForm Assessor begins ");
+		
 		RegistrationFormAssessor registrationFormAssessor=new RegistrationFormAssessor();
 		List<State> stateList = pageLoadService.loadState();
 		List<Title> titleList = pageLoadService.loadTitle();

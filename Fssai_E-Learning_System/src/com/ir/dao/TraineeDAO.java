@@ -77,6 +77,6 @@ public interface TraineeDAO {
 	public Boolean updateSteps(int tableID, int profileID, int steps);
 	public String isCourseOnline(int userID);
 	public Boolean closeCourse(int tableID, int profileID, String status);
-	public CertificateInfo getCertificateID(int userID, int profileID);
+	public CertificateInfo getCertificateID(int userID, int profileID, String certificateID);
 	
 }

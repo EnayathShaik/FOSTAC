@@ -40,6 +40,7 @@ import com.ir.form.PostVacancyTrainingCenterForm;
 import com.ir.form.TrainingCalendarForm;
 import com.ir.form.trainingPartner.TrainingPartnerSearch;
 import com.ir.form.trainingPartner.TrainingPartnerSearchForm;
+import com.ir.model.CertificateInfo;
 import com.ir.model.CourseType;
 import com.ir.model.FeedbackForm;
 import com.ir.model.ManageAssessmentAgency;
@@ -148,9 +149,23 @@ public class TrainingPartnerController {
 	@RequestMapping(value="/generateCourseCertificateGO" , method=RequestMethod.POST)
 	public String generateCourseCertificateGO(@ModelAttribute("generateCourseCertificateForm") GenerateCourseCertificateForm generateCourseCertificateForm,HttpSession session,HttpServletRequest request ,HttpServletResponse response , BindingResult result , Model model ) throws IOException{
 		System.out.println("inside generateCourseCertificateGO"+generateCourseCertificateForm.getMainCertificateId());
-		
-	
-		return "redirect:/generateCourseCertificate.fssai";
+		Integer profileID = 0;
+		Integer userId = 0;
+		int loginId = 0;
+		String certificateID = generateCourseCertificateForm == null ? "" : generateCourseCertificateForm.getMainCertificateId() == null ? "" : generateCourseCertificateForm.getMainCertificateId().trim();
+		try{
+			profileID = (Integer) session.getAttribute("profileId");
+			loginId = (int) session.getAttribute("loginIdUnique");
+			userId = (Integer) session.getAttribute("userId");
+			CertificateInfo certificateInfo = traineeService.getCertificateID(userId, profileID,certificateID);
+			model.addAttribute("certificateID", certificateInfo.getCertificateID());
+			model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
+			model.addAttribute("traineeCertificateName", certificateInfo.getName());
+			model.addAttribute("trainingAddress", certificateInfo.getTrainingAddress());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "certificatetrainee";
 		
 	}
 	
