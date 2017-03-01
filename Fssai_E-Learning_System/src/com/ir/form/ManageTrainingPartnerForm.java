@@ -32,6 +32,22 @@ public class ManageTrainingPartnerForm {
 	private String email;
 	
 	
+	private String logindetails;
+	private String profileID;
+	
+	
+	public String getLogindetails() {
+		return logindetails;
+	}
+	public void setLogindetails(String logindetails) {
+		this.logindetails = logindetails;
+	}
+	public String getProfileID() {
+		return profileID;
+	}
+	public void setProfileID(String profileID) {
+		this.profileID = profileID;
+	}
 	public String getEmail() {
 		return email;
 	}

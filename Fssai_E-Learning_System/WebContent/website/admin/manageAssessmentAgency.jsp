@@ -376,7 +376,7 @@
                 function updateData() {
                     var i = document.getElementById("i").value;
                     var userId = $("#maaId" + i).val();
-                    alert(userId);
+                    //alert(userId);
                     var status = $("#status").val();
                     var websiteUrl = $("#websiteUrl").val();
                     var email = $("#email").val();

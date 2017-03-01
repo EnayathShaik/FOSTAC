@@ -63,7 +63,7 @@
                 function OnStart() {
                     ////alert('s');
                     //updateDiv();
-                    searchDataTP('ALL');
+                    //searchDataTP('ALL');
                 }
                 window.onload = OnStart;
 
@@ -217,15 +217,17 @@
                                 console.log(mainData1);
                                 var j = 1;
                                 $('#newTable tr').remove();
-                                $('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Training Partner Id</th><th>Training Partner Name</th><th>Weblink</th><th>Status</th><th>Option</th></tr>')
+                                $('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Training Partner Id</th><th>Training Partner Name</th><th>Weblink</th><th>Current Status</th><th>Option</th></tr>')
                                 $.each(mainData1, function(i, obj) {
-                                    var stat;
+                                	console.log(obj[6]);
+                               /*      var stat;
                                     if (obj[5] == 'A') {
                                         stat = 'Active';
                                     } else {
                                         stat = 'In-Active';
-                                    }
-                                    $('#newTable').append('<tr id="tableRow"><td>' + j++ + '</td><td>' + obj[1] + '</td><td>' + obj[2] + '</td><td>' + obj[4] + '</td><td>' + stat + '</td><td><input type="hidden" id="mtpId" value="' + obj[0] + '" /><a href="#" onClick="editManageTrainingPartner(\'' + obj[0] + '\');">edit</a> </td></tr>');
+                                    } */
+                                    /* <input type="submit"  onclick=activateDeActivateUser(\''+obj[5]+'\',\''+obj[6]+'\',\'1\'); value='+obj[6]+'> */
+                                    $('#newTable').append('<tr id="tableRow"><td>' + j++ + '</td><td>' + obj[1] + '</td><td>' + obj[2] + '</td><td>' + obj[4] + '</td><td>' +obj[6]+ '</td><td><input type="hidden" id="mtpId" value="' + obj[0] + '" /><a href="#" onClick="editManageTrainingPartner(\'' + obj[0] + '\');">edit</a> </td></tr>');
                                 });
                             }
                         });
@@ -591,6 +593,8 @@
                                                 <div class="col-md-6 col-xs-12" style="margin-top: 26px;">
 
                                                     <div id="createDiv" style="float:left;">
+                                                    	<input type="hidden" path="profileID" name="profileID" id="profileID" value="1"/>
+                                                    	<input type="hidden" path="logindetails" name="logindetails" id="logindetails" value=""/>
                                                         <input type="submit" id="register" onclick="return validate();" class="btn login-btn" value="Create" />
                                                         <input type="hidden" id="idHiddenUser" value="">
                                                     </div>
@@ -622,7 +626,8 @@ Search</a> -->
                                                                     <th>Training Partner ID</th>
                                                                     <th>Training Partner Name</th>
                                                                     <th>Website Link</th>
-                                                                    <th>Status</th>
+                                                                    <th>Current Status</th>
+                                                                    <th>Update Status</th>
                                                                     <th>Option</th>
                                                                 </tr>
                                                             </thead>
@@ -641,8 +646,18 @@ Search</a> -->
                                 </div>
                 </section>
             </cf:form>
-            <!-- <script>
-                var id = localStorage.getItem('activeID');
-                document.getElementById(id).className = "active";
-
-            </script> -->
+   <script>
+              
+           /*      function activateDeActivateUser(loginDetails,status,profileID){
+                	if(confirm("Are you Sure to  ?"+status)){
+                		
+                		$("#logindetails").val(loginDetails);	
+                		$("#status").val((status=="INACTIVE"?"I":"A"));	
+                		alert($("#logindetails").val() + " "+ $("#status").val());
+                		$("#manageTrainingPartnerForm").attr("action" , "activateDeActivateTrainingPartner.fssai");
+                		alert($("#manageTrainingPartnerForm").attr("action"));
+                    } else{
+                        return false;
+                    }
+                } */
+            </script>

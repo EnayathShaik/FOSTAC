@@ -72,7 +72,7 @@ public class SearchData extends HttpServlet {
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
-		String sql ="select maa.manageassessmentagencyid  , ld.loginid, maa.assessmentagencyname , maa.websiteurl , ld.status "+
+		String sql ="select maa.manageassessmentagencyid  , ld.loginid, maa.assessmentagencyname , maa.websiteurl , (CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus "+
 					" from manageassessmentagency as maa inner join logindetails as ld "+
 					" on ld.id = maa.logindetails "+
 					" where upper(maa.assessmentagencyname) like '"+fcn.toUpperCase() +"' and ld.loginid like '"+id+"'";

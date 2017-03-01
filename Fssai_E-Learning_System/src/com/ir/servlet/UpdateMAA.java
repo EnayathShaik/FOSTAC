@@ -58,11 +58,17 @@ public class UpdateMAA extends HttpServlet {
 		String stateId = total[7].split("=")[1];
 		String district = total[8].split("=")[1];
 		String city = total[9].split("=")[1];
+		String isActive = status.equalsIgnoreCase("A")?"Y":"N";
 
 		Configuration conf = new Configuration();
 		conf.configure("/hibernate.cfg.xml");
 		SessionFactory sf = conf.buildSessionFactory();
 		Session session = sf.openSession();
+		String selectLoginDetails = "select logindetails from manageassessmentagency where manageassessmentagencyid = '"+userId+"'";
+		Query querySel = session.createSQLQuery(selectLoginDetails);
+		String selectSel = querySel.getQueryString();
+		System.out.println("login id is   :"+ selectSel);
+		
 		String sql="UPDATE manageassessmentagency "+
 				" SET city='"+city+"',  "+
 				" district='"+district+"', email='"+email+"', "+
@@ -71,11 +77,16 @@ public class UpdateMAA extends HttpServlet {
 				" websiteurl='"+websiteUrl+"' "+
 				" WHERE manageassessmentagencyid = '"+userId+"' ";
 
+		String sqlLD = "update logindetails set status ='"+status+"' , isactive = '"+isActive+"' where id =("+selectSel+")";
+		Query query2 = session.createSQLQuery(sqlLD);
 
 		Query query = session.createSQLQuery(sql);
 		System.out.println(sql);
 		Integer i = query.executeUpdate();
 		System.out.println("i  :"+ i);
+		
+		Integer j = query2.executeUpdate();
+		System.out.println("j  :"+ j);
 		session.beginTransaction().commit();
 		session.close();
 		String newList = null ;

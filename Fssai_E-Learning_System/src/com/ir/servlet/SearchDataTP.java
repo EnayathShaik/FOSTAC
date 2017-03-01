@@ -1,3 +1,4 @@
+
 package com.ir.servlet;
 
 import java.io.IOException;
@@ -142,7 +143,7 @@ public class SearchDataTP extends HttpServlet {
 		String sql = null;
 		if(!name.equalsIgnoreCase("ALL"))
 		 sql ="select mtp.managetrainingpartnerid  , ld.loginid  , mtp.trainingpartnername , mtp.pan , "+
-					" mtp.websiteurl , ld.status from managetrainingpartner as mtp "+
+					" mtp.websiteurl , (CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus from managetrainingpartner as mtp "+
 					" inner join logindetails as ld on ld.id=mtp.logindetails "+
 					" where upper(mtp.trainingpartnername) like '"+fcn.toUpperCase() +"%' and ld.loginid like '"+id+"%' "+
 					 " and mtp.trainingpartnername like '"+tpname+"%' and mtp.pan like '"+pan+"%' and mtp.websiteurl like '"+websiteURL+"%' " +
@@ -151,7 +152,7 @@ public class SearchDataTP extends HttpServlet {
 					 "and cast(mtp.district as varchar) like '"+district+"' and cast(mtp.city as varchar) like '"+city+"' and ld.status like '"+status+"%'" ;
 		else
 			 sql ="select mtp.managetrainingpartnerid  , ld.loginid  , mtp.trainingpartnername , mtp.pan , "+
-						" mtp.websiteurl , ld.status from managetrainingpartner as mtp "+
+						" mtp.websiteurl , (CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus ,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus from managetrainingpartner as mtp "+
 						" inner join logindetails as ld on ld.id=mtp.logindetails ";
 			
 		Query query = session.createSQLQuery(sql);

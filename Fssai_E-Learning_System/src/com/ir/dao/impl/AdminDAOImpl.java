@@ -372,6 +372,7 @@ public class AdminDAOImpl implements AdminDAO {
 		loginDetails.setLoginId(nextSequenceUserID);
 		loginDetails.setPassword(passwordString);
 		loginDetails.setEncrypted_Password(encryprPassword);
+		loginDetails.setIsActive(manageTrainingPartnerForm.getStatus().equalsIgnoreCase("A")? "Y" : "N");
 		loginDetails.setStatus("A");
 		loginDetails.setProfileId(7);
 		
@@ -436,6 +437,7 @@ public class AdminDAOImpl implements AdminDAO {
 		loginDetails.setEncrypted_Password(encryprPassword);
 		loginDetails.setProfileId(8);
 		loginDetails.setStatus("A");
+		loginDetails.setIsActive(manageAssessmentAgencyForm.getStatus().equalsIgnoreCase("A")? "Y" : "N");
 		manageAssessmentAgency.setAgencyUniqueID(nextSequenceUserID);
 		manageAssessmentAgency.setPAN(manageAssessmentAgencyForm.getPAN());
 		manageAssessmentAgency.setAssessmentAgencyName(manageAssessmentAgencyForm.getAssessmentAgencyName());
