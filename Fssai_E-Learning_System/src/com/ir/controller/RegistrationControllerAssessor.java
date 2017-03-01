@@ -52,7 +52,7 @@ public class RegistrationControllerAssessor implements Serializable{
 	
 	@RequestMapping(value = "/registrationFormAssessor", method = RequestMethod.GET)
 	public String registerForm(Model model) {
-		new ZLogger("Assessor", "Assessor Registration Form Loading Starting............" , "RegistrationControllerAssessor.java");
+		new ZLogger("registerForm", "Assessor Registration Form Loading Starting............" , "RegistrationControllerAssessor.java");
 		try{
 			RegistrationFormAssessor registrationFormAssessor=new RegistrationFormAssessor();
 			List<State> stateList = pageLoadService.loadState();
@@ -68,16 +68,16 @@ public class RegistrationControllerAssessor implements Serializable{
 			model.addAttribute("basicCourseList", basicCourseList);
 		}catch(Exception e){
 			e.printStackTrace();
-			new ZLogger("Assessor", "Assessor Registration Form Loading Exception" , "RegistrationControllerAssessor.java");
+			new ZLogger("registerForm", "Assessor Registration Form Loading Exception" , "RegistrationControllerAssessor.java");
 		}
-		new ZLogger("Assessor", "Assessor Registration Form Loading Stopped............" , "RegistrationControllerAssessor.java");
+		new ZLogger("registerForm", "Assessor Registration Form Loading Stopped............" , "RegistrationControllerAssessor.java");
 		
 		return "registrationFormAssessor";
 	}
 	
 	@RequestMapping(value = "/registrationAsssessor", method = RequestMethod.POST)
 	public String registerAssessor(@Valid @ModelAttribute("registrationFormAssessor") RegistrationFormAssessor registrationFormAssessor, BindingResult bindingResult,Model model)  {
-		new ZLogger("Assessor", "Assessor Registration Form Submitting Starting............" , "RegistrationControllerAssessor.java");
+		new ZLogger("registerAssessor", "Assessor Registration Form Submitting Starting............" , "RegistrationControllerAssessor.java");
 		try{
 			if(bindingResult.hasErrors()){
 				return "registrationFormAssessor";
@@ -97,16 +97,16 @@ public class RegistrationControllerAssessor implements Serializable{
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			new ZLogger("Assessor", "Assessor Registration Form Submitting Exception" , "RegistrationControllerAssessor.java");
+			new ZLogger("registerAssessor", "Assessor Registration Form Submitting Exception" , "RegistrationControllerAssessor.java");
 		}
-		new ZLogger("Assessor", "Assessor Registration Form Submitting Stopped............" , "RegistrationControllerAssessor.java");
+		new ZLogger("registerAssessor", "Assessor Registration Form Submitting Stopped............" , "RegistrationControllerAssessor.java");
 		return "personalInformationAssessor";
 	}
 
 	
 	 @RequestMapping(value="/updateAssessor" , method=RequestMethod.GET)
 		public String updateAssessor(@RequestParam(value = "userId", required = true)  Integer userId ,Model model ,@ModelAttribute("updateAssessor") RegistrationFormAssessor registrationFormAssessor, HttpSession session ){		
-		 new ZLogger("Assessor", "Assessor Update Form Load Stopped............" , "RegistrationControllerAssessor.java");
+		 new ZLogger("updateAssessor", "Assessor Update Form Load Stopped............" , "RegistrationControllerAssessor.java");
 		 Integer profileID = 0;
 			try{
 				profileID = (Integer) session.getAttribute("profileId");
@@ -124,15 +124,15 @@ public class RegistrationControllerAssessor implements Serializable{
 				 model.addAttribute("update", "");
 			}catch(Exception e){
 				e.printStackTrace();
-				new ZLogger("Assessor", "Assessor Update Form Exception............" , "RegistrationControllerAssessor.java");
+				new ZLogger("updateAssessor", "Assessor Update Form Exception............" , "RegistrationControllerAssessor.java");
 			}
-			new ZLogger("Assessor", "Assessor Update Form Load Stopped............" , "RegistrationControllerAssessor.java");
+			new ZLogger("updateAssessor", "Assessor Update Form Load Stopped............" , "RegistrationControllerAssessor.java");
 			return "updateAssessor";
 		}
 	
 	 	@RequestMapping(value="/updateAssessorDatavalue" , method=RequestMethod.POST)
 	 	public String updateAssessorData(@RequestParam(value = "id", required = true)  Integer id,@Valid @ModelAttribute("updateAssessor") RegistrationFormAssessor registrationFormAssessor ,BindingResult bindingResult, HttpSession session){
-	 		new ZLogger("Assessor", "Assessor Update Form Submit Starting............" , "RegistrationControllerAssessor.java");
+	 		new ZLogger("updateAssessorData ", "Assessor Update Form Submit Starting............" , "RegistrationControllerAssessor.java");
 	 	try{
 			 Integer assessorId = 0;
 				if(id <= 0){
@@ -143,14 +143,13 @@ public class RegistrationControllerAssessor implements Serializable{
 				String updateAssessor = registrationServiceAssessor.UpdateAssessor(registrationFormAssessor , assessorId);
 				if(!updateAssessor.equalsIgnoreCase(""))
 				{
-					System.out.println("Data are updated successfully");
+					new ZLogger("Assessor : updateAssessorData ", "Data are updated successfully" , "RegistrationControllerAssessor.java");
 				}
-				//model.addAttribute("update", "Updated successfully !!!");
 		 }catch(Exception e){
 			 e.printStackTrace();
-			 new ZLogger("Assessor", "Assessor Update Form Submit Exception............" , "RegistrationControllerAssessor.java");
+			 new ZLogger("updateAssessorData", "Assessor Update Form Submit Exception............" , "RegistrationControllerAssessor.java");
 		 }
-	 	new ZLogger("Assessor", "Assessor Update Form Submit Stopped............" , "RegistrationControllerAssessor.java");
+	 	new ZLogger("updateAssessorData ", "Assessor Update Form Submit Stopped............" , "RegistrationControllerAssessor.java");
 		return "welcomeupdatetrainee";
 		}
 		
