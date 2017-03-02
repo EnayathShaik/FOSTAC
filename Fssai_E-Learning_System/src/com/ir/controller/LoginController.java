@@ -75,7 +75,7 @@ public class LoginController {
 		if(profileID != null && profileID > 0){
 			return "redirect:loginProcess.fssai";
 		}
-		System.out.println("LoginController loginForm begin .");
+		new ZLogger("login", "LoginController loginForm begin .", "LoginController.java");
 		return "login";
 	}
 
@@ -125,9 +125,8 @@ public class LoginController {
 	@RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
 	public String login(@Valid @ModelAttribute("login") LoginForm loginForm,BindingResult result, Model model, HttpSession session) {
 		if(result.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("loginProcess", "bindingResult.hasErrors  "+result.hasErrors() , "LoginController.java");
+			new ZLogger("loginProcess", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "LoginController.java");
 			session.invalidate();
 			return "login";
 		}
@@ -136,6 +135,7 @@ public class LoginController {
 			loginDetails = loginService.login(loginForm);
 		}catch(Exception e){
 			e.printStackTrace();
+			new ZLogger("loginProcess", "Exception while  loginProcess  "+e.getMessage() , "LoginController.java");
 		}
 		if(loginDetails == null){
 			model.addAttribute("error" , "Oops , You are not authorized !!!");
@@ -151,10 +151,10 @@ public class LoginController {
 			session.setAttribute("profileId", loginDetails.getProfileId());
 			session.setAttribute("userId", loginDetails.getId());
 			session.setAttribute("userName", loginDetails.getLoginId());
-			System.out.println("in super admin admin login");
+			new ZLogger("loginProcess","in super admin admin login" , "LoginController.java");
 			return "adminHomepage";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 2 && loginDetails.getStatus().equalsIgnoreCase("A")){
-			System.out.println("in admin login");
+			new ZLogger("loginProcess","in admin login" , "LoginController.java");
 			session.setAttribute("loginUser", loginDetails);
 			session.setAttribute("logId",loginDetails.getLoginId());
 			session.setAttribute("profileId", loginDetails.getProfileId());
@@ -164,7 +164,7 @@ public class LoginController {
 		}else if(loginDetails !=null && loginDetails.getProfileId() == 3 && loginDetails.getStatus().equalsIgnoreCase("A"))
 		{
 			PersonalInformationTrainee personalInformationTrainee = loginService.FullDetail(loginDetails.getId() );
-			System.out.println("in trainee login  "+ personalInformationTrainee.getFirstName());
+			new ZLogger("loginProcess","in trainee login  "+ personalInformationTrainee.getFirstName(), "LoginController.java");
 			session.setAttribute("logId", personalInformationTrainee.getLoginDetails().getLoginId());
 			session.setAttribute("profileId", loginDetails.getProfileId());
 			session.setAttribute("userId", loginDetails.getId());
@@ -185,15 +185,14 @@ public class LoginController {
 			if(loginDetails.getStatus().equalsIgnoreCase("A")){
 				PersonalInformationTrainingPartner personalInformationTrainingPartner ;
 				personalInformationTrainingPartner = loginService.FullDetailtrainingpartner(loginDetails.getId());
-				System.out.println("in trainer login aadhar is "+personalInformationTrainingPartner.getFirstName());
-				System.out.println("**************"+personalInformationTrainingPartner.getPersonalInformationTrainingPartnerId());
+				new ZLogger("loginProcess","in trainer login aadhar is "+personalInformationTrainingPartner.getFirstName(), "LoginController.java");
+				new ZLogger("loginProcess","**************"+personalInformationTrainingPartner.getPersonalInformationTrainingPartnerId(), "LoginController.java");
 				session.setAttribute("loginUsertrainingpartner", personalInformationTrainingPartner.getPersonalInformationTrainingPartnerId());
 				session.setAttribute("logId", personalInformationTrainingPartner.getLoginDetails().getLoginId());
 				session.setAttribute("profileId", loginDetails.getProfileId());
 				session.setAttribute("userId", loginDetails.getId());
 				session.setAttribute("userTableId", personalInformationTrainingPartner.getPersonalInformationTrainingPartnerId());
-				session.setAttribute("userName", loginDetails.getLoginId());
-				System.out.println("id of trainpartner is "+personalInformationTrainingPartner.getPersonalInformationTrainingPartnerId());	
+				session.setAttribute("userName", loginDetails.getLoginId());	
 				return "trainingPartnerHomepage";
 			}else{
 				model.addAttribute("error" , "Oops , you are not authorized !!!");
@@ -202,7 +201,7 @@ public class LoginController {
 				
 		}
 		else if(loginDetails != null && loginDetails.getProfileId() == 6 ){
-			System.out.println("in login when assessor");
+			new ZLogger("loginProcess","in login when assessor", "LoginController.java");
 			if(loginDetails.getStatus().equalsIgnoreCase("A")){
 				
 				
@@ -229,14 +228,14 @@ public class LoginController {
 			session.setAttribute("userName", loginDetails.getLoginId());
 			return "trainingPartnerDashboard";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 8 && loginDetails.getStatus().equalsIgnoreCase("A")){
-			System.out.println("in assessment agency");
+			new ZLogger("loginProcess","in assessment agency", "LoginController.java");
 			ManageAssessmentAgency manageAssessmentAgency = new ManageAssessmentAgency();
 			manageAssessmentAgency = loginService.FullDetailAssessmentAgency(loginDetails.getId());
-			System.out.println("in assessment Agency Homepage");
+			new ZLogger("loginProcess","in assessment Agency Homepage", "LoginController.java");
 			session.setAttribute("logId", manageAssessmentAgency.getLoginDetails().getLoginId());
 			session.setAttribute("logerClass","ManageAssessmentAgency");
 			session.setAttribute("loginIdUnique", loginDetails.getId());
-			System.out.println("id Is "+manageAssessmentAgency.getLoginDetails().getLoginId());
+			new ZLogger("loginProcess","id Is "+manageAssessmentAgency.getLoginDetails().getLoginId(), "LoginController.java");
 			session.setAttribute("profileId", loginDetails.getProfileId());
 			session.setAttribute("userId", loginDetails.getId());
 			session.setAttribute("userName", loginDetails.getLoginId());

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ir.form.ChangePasswordForm;
 import com.ir.service.CommonService;
+import com.zentech.logger.ZLogger;
 
 @Controller
 public class CommonController {
@@ -40,9 +41,8 @@ public class CommonController {
 			,BindingResult result , Model model
 			){
 		if(result.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("changePasswordSave", "bindingResult.hasErrors  "+result.hasErrors() , "CommonController.java");
+			new ZLogger("changePasswordSave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "CommonController.java");
 			return "changePasswordTrainee";
 		}
 		
@@ -56,6 +56,7 @@ public class CommonController {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
+			new ZLogger("changePasswordSave", " Exception while changePasswordSave  "+e.getMessage() , "CommonController.java");
 		}
 		return "changePasswordTrainee";
 	}

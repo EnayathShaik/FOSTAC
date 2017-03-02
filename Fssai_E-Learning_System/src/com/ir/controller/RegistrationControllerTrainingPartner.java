@@ -29,6 +29,7 @@ import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.service.RegistrationServiceTrainingPartner;
 import com.ir.util.JavaMail;
+import com.zentech.logger.ZLogger;
 
 @Controller
 @SessionAttributes
@@ -44,13 +45,13 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 	@ModelAttribute("stateList")
 	public List<State> populateStateList() {
 		List<State> stateList = registrationServiceTrainingPartner.loadState();
-		System.out.println("state list   :   "+ stateList);
+		 new ZLogger("stateList", "state list   :   "+ stateList, "RegistrationControllerTrainingPartner.java");
 		return stateList;
 	}
 	@ModelAttribute("trainingCenterList")
 	public List<ManageTrainingPartner> trainingCenterList() {
 		List<ManageTrainingPartner> trainingCenterList = registrationServiceTrainingPartner.trainingCenterList();
-		System.out.println("training Center List    :   "+ trainingCenterList);
+		new ZLogger("trainingCenterList", "training Center List    :   "+ trainingCenterList, "RegistrationControllerTrainingPartner.java");
 		if(trainingCenterList != null &&  trainingCenterList.size() > 0){
 			return trainingCenterList;
 		}else{
@@ -62,7 +63,7 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 	@ModelAttribute("titleList")
 	public List<Title> populateTitle() {
 		List<Title> titleList = registrationServiceTrainingPartner.loadTitle();
-		System.out.println("state list   :   "+ titleList);
+		new ZLogger("titleList", "titleList list   :   "+ titleList, "RegistrationControllerTrainingPartner.java");
 		return titleList;
 	}
 	
@@ -81,7 +82,7 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 	@ModelAttribute("basicCourseList" )
 	public List<CourseName> basicCourseList() {
 		List<CourseName> basicCourseList = registrationServiceTrainingPartner.basicCourseName();
-		System.out.println("CourseName  list   :   "+ basicCourseList);
+		new ZLogger("basicCourseList", "basicCourseList  list   :   "+ basicCourseList, "RegistrationControllerTrainingPartner.java");
 		return basicCourseList;
 	}
 	
@@ -93,17 +94,12 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 	
 	@RequestMapping(value = "/registrationFormTrainingPartner", method = RequestMethod.GET)
 	public String registerForm(Model model) {
-		System.out.println("registerForm training partner begins ");
+		new ZLogger("registrationFormTrainingPartner", "registerForm training partner begins ", "RegistrationControllerTrainingPartner.java");
 		RegistrationFormTrainingPartner registrationFormTrainingPartner=new RegistrationFormTrainingPartner();
 		model.addAttribute("registrationFormTrainingPartner", registrationFormTrainingPartner);
 		return "registerTrainingCenter";
-		//return "registrationFormTrainingPartner";
 	}
-	
-	/*@RequestMapping(value = "/contactTP", method = RequestMethod.GET)
-	public String contactTC(@ModelAttribute("contactTrainee") ContactTrainee contactTrainee) {
-		return "contactTP";
-	}*/
+
 	
 	@RequestMapping(value = "/contactTC", method = RequestMethod.GET)
 	public String contactTC(@ModelAttribute("contactTrainee") ContactTrainee contactTrainee) {
@@ -114,9 +110,8 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 		
 		System.out.println("register controller before bind trainer");
 		if(bindingResult.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+bindingResult.hasErrors());
-			System.out.println(bindingResult.getErrorCount());
-			System.out.println(bindingResult.getAllErrors());
+			new ZLogger("registrationTrainingPartner", "bindingResult.hasErrors  "+bindingResult.hasErrors() , "RegistrationControllerTrainingPartner.java");
+			new ZLogger("registrationTrainingPartner", "bindingResult.hasErrors  "+bindingResult.getErrorCount() +" All Errors "+bindingResult.getAllErrors(), "RegistrationControllerTrainingPartner.java");
 			return "registrationFormTrainingPartner";
 		}
 		String personalInformationTrainingPartner = null;
@@ -124,6 +119,7 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 			personalInformationTrainingPartner = registrationServiceTrainingPartner.registerPersonalInformationTrainingPartner(registrationFormTrainingPartner);	
 		}catch(Exception e){
 			e.printStackTrace();
+			new ZLogger("registrationTrainingPartner", "Exception while registrationTrainingPartner  "+e.getMessage(), "RegistrationControllerTrainingPartner.java");
 		}
 		 
 		if(personalInformationTrainingPartner != null && !personalInformationTrainingPartner.equalsIgnoreCase("")){
@@ -149,8 +145,6 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 			ss = id;
 		}
 		
-		
-		System.out.println("nnb is ****** " +ss);
 		String updateTrainingPartner = registrationServiceTrainingPartner.UpdateTrainingPartner(registrationFormTrainingPartner , ss);
 		//return "welcomeupdatetrainingCenter";
 		return "welcomeupdatetrainee";
@@ -168,10 +162,9 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 				}
 				
 			}catch(Exception e){
-				System.out.println("Exception while course details save : "+ e.getMessage());
+				new ZLogger("update-personal-information", "Exception while update-personal-information  "+e.getMessage(), "RegistrationControllerTrainingPartner.java");
 			}
-			 
-			System.out.println("*******************"+userId+"*******************");
+			
 		  
 		  if(userId > 0){
 				  PersonalInformationTrainingPartner personalInformationTrainingPartner = null ;
@@ -179,6 +172,7 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 					  personalInformationTrainingPartner = registrationServiceTrainingPartner.FullDetailtrainingpartner(userId);  
 				  }catch(Exception e){
 					  e.printStackTrace();
+					  new ZLogger("update-personal-information", "Exception while update-personal-information  "+e.getMessage(), "RegistrationControllerTrainingPartner.java");
 				  }
 					
 					session.setAttribute("loginUr", personalInformationTrainingPartner);
@@ -193,9 +187,8 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 				,BindingResult result , Model model
 				){
 			if(result.hasErrors()){
-				System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-				System.out.println(result.getErrorCount());
-				System.out.println(result.getAllErrors());
+				new ZLogger("contactTPSave", "bindingResult.hasErrors  "+result.hasErrors() , "RegistrationControllerTrainingPartner.java");
+				new ZLogger("contactTPSave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "RegistrationControllerTrainingPartner.java");
 				return "contactTrainee";
 			}//int id = 1;
 			String id=(String) session.getAttribute("logId");
@@ -204,6 +197,7 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 				contactTraineeSave = registrationServiceTrainingPartner.contactTraineeSave(contactTrainee , id);	
 			}catch(Exception e){
 				e.printStackTrace();
+				new ZLogger("contactTPSave", "Exception while contactTPSave  "+e.getMessage() , "RegistrationControllerTrainingPartner.java");
 			}
 			
 			if(contactTraineeSave.equalsIgnoreCase("created")){
@@ -216,7 +210,6 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 	  
 	  @RequestMapping(value="/post-vacancy" , method=RequestMethod.GET)
 	  public String postVacancy(@ModelAttribute("postVacancy") PostVacancyTrainingCenterForm postVacancyTrainingCenterForm , Model model){		
-		  System.out.println("llllllllll");
 		  model.addAttribute("created", "");
 		  return "postVacancyTC";	
 	 }
@@ -229,6 +222,7 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 			  postVacancy = registrationServiceTrainingPartner.postVacancyTrainingCenter(postVacancyTrainingCenterForm);  
 		  }catch(Exception e){
 			  e.printStackTrace();
+			  new ZLogger("postVacancyTrainingCenterSave", "Exception while  "+e.getMessage() , "RegistrationControllerTrainingPartner.java");
 		  }
 		   
 		  if(postVacancy.equalsIgnoreCase("created")){
@@ -247,14 +241,11 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 				,BindingResult result , Model model
 				){
 			if(result.hasErrors()){
-				System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-				System.out.println(result.getErrorCount());
-				System.out.println(result.getAllErrors());
+				new ZLogger("changePasswordTCentre", "bindingResult.hasErrors  "+result.hasErrors() , "RegistrationControllerTrainingPartner.java");
+				new ZLogger("changePasswordTCentre", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "RegistrationControllerTrainingPartner.java");
 				return "changePasswordTCentre";
 			}
 			String id =(String) session.getAttribute("logId");
-			//System.out.println(changePasswordForm.getLoginid());
-			//int id = 1;
 			boolean changePasswordTraineeSave = false ;
 			try{
 			 changePasswordTraineeSave = registrationServiceTrainingPartner.changePasswordTraineeSave(changePasswordForm , id);

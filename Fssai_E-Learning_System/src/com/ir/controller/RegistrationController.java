@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
 import com.ir.form.AadharDetails;
 import com.ir.form.RegistrationFormTrainee;
 import com.ir.model.KindOfBusiness;
@@ -23,6 +24,7 @@ import com.ir.service.PageLoadService;
 import com.ir.service.RegistrationServiceTrainee;
 import com.ir.util.GenerateUniqueID;
 import com.ir.util.JavaMail;
+import com.zentech.logger.ZLogger;
 
 
 @Controller
@@ -43,7 +45,7 @@ public class RegistrationController {
 	
 	@RequestMapping(value = "/aadhar-verification", method = RequestMethod.GET)
 	public String aadharVerification(Model model) {
-		System.out.println("aadhar-verification begins ");
+		new ZLogger("aadhar-verification", "aadhar-verification begins ", "RegistrationController.java");
 		AadharDetails aadharDetails=new AadharDetails();
 		model.addAttribute("aadharDetails", aadharDetails);
 		return "aadhar-verification";
@@ -52,9 +54,8 @@ public class RegistrationController {
 	public String registrationForm(@Valid @ModelAttribute("aadharDetails") AadharDetails aadharDetails,BindingResult result, Model model , HttpSession session) {
 		System.out.println("aadhar-verification submit begins ");
 		if(result.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("registrationForm", "bindingResult.hasErrors  "+result.hasErrors() , "RegistrationController.java");
+			new ZLogger("registrationForm", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "RegistrationController.java");
 			return "aadhar-verification";
 		}
 		session.setAttribute("aadhar", aadharDetails.getAadharNumber());
@@ -65,7 +66,7 @@ public class RegistrationController {
 	}
 	@RequestMapping(value = "/registrationFormTrainee", method = RequestMethod.GET)
 	public String registerForm(Model model) {
-		System.out.println("registerForm begins ");
+		new ZLogger("registrationFormTrainee", "registerForm begins ", "RegistrationController.java");
 		RegistrationFormTrainee registrationFormTrainee=new RegistrationFormTrainee();
 		List<State> stateList = pageLoadService.loadState();
 		List<Title> titleList = pageLoadService.loadTitle();
@@ -82,65 +83,24 @@ public class RegistrationController {
 		return "registrationFormTrainee";
 	}
 	
-	/*@ModelAttribute("stateList")
-	public List<State> populateStateList() {
-		List<State> stateList = pageLoadService.loadState();
-		System.out.println("state list   :   "+ stateList);
-		return stateList;
-	}
-	
-	@ModelAttribute("titleList")
-	public List<Title> populateTitle() {
-		List<Title> titleList = pageLoadService.loadTitle();
-		System.out.println("state list   :   "+ titleList);
-		return titleList;
-	}
-	
-	
-	@ModelAttribute("casteList")
-	public List<String> populateCaste() {
-		List<String> casteList = pageLoadService.loadCaste();
-		System.out.println("casteList    :   "+ casteList);
-		return casteList;
-	}
-	
-	@ModelAttribute("userId")
-	public String getUniqueId(){
-		String uniqueID = GenerateUniqueID.getNextCombinationId("TE", "personalinformationtrainee" , "000000");		
-		System.out.println(" Trainee ID " + uniqueID);
-		return uniqueID;
-	}
-	
-	
-	@ModelAttribute("kindOfBusinessList")
-	public List<KindOfBusiness> populateKindOfBusiness() {
-		
-		List<KindOfBusiness> kindOfBusinessList=pageLoadService.loadKindOfBusiness();
-		return kindOfBusinessList;
-	}*/
 	
 	@RequestMapping(value = "/registerTrainee", method = RequestMethod.POST)
 	public String registerTrainee(@Valid @ModelAttribute("registrationFormTrainee") RegistrationFormTrainee registrationFormTrainee, BindingResult bindingResult,Model model)  {
-	 	
-	
-			
-		System.out.println("Entering Registration ...............");
-		System.out.println("register controller before bind");
+
+		new ZLogger("registerTrainee", "Entering Registration ...............", "RegistrationController.java");
 		if(bindingResult.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+bindingResult.hasErrors());
-			System.out.println(bindingResult.getErrorCount());
-			System.out.println(bindingResult.getAllErrors());
+			new ZLogger("registerTrainee", "bindingResult.hasErrors  "+bindingResult.hasErrors() , "RegistrationController.java");
+			new ZLogger("registerTrainee", "bindingResult.hasErrors  "+bindingResult.getErrorCount() +" All Errors "+bindingResult.getAllErrors(), "RegistrationController.java");
 			return "registrationFormTrainee";
 		}
-		System.out.println("registrationFormTrainee controller");
-		System.out.println(registrationFormTrainee);
 		String personalInformationTrainee = null;
 		try{
 		 personalInformationTrainee = registrationServiceTrainee.registerPersonalInformationTrainee(registrationFormTrainee);
 		}catch(Exception e){
 			e.printStackTrace();
+			new ZLogger("registerTrainee", " Exception while registerTrainee   "+e.getMessage() , "RegistrationController.java");
+			
 		}
-		System.out.println("array");
 		
 		if(! personalInformationTrainee.equalsIgnoreCase("")){
 			String[] all = personalInformationTrainee.split("&");

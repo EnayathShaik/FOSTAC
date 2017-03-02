@@ -5,8 +5,10 @@ import java.util.List;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 import com.google.gson.Gson;
 import com.ir.constantes.Constantes;
 import com.ir.constantes.TableLink;
@@ -48,6 +51,7 @@ import com.ir.service.TraineeService;
 import com.ir.util.GenerateUniqueID;
 import com.ir.util.JavaMail;
 import com.ir.util.Profiles;
+import com.zentech.logger.ZLogger;
 
 @Controller
 @SessionAttributes
@@ -80,6 +84,7 @@ public class TraineeController {
 			model.addAttribute("defaultMail", defaultMail);
 		}catch(Exception e){
 			e.printStackTrace();
+			new ZLogger("contactTrainee", "Exception while  contactTrainee "+e.getMessage(), "TraineeController.java");
 		}
 		return "contactTrainee";
 	}
@@ -104,108 +109,6 @@ public class TraineeController {
 		return "basic";
 	}
 	
-	/*@ModelAttribute("kindOfBusinessList")
-	public List<KindOfBusiness> populateKindOfBusiness() {
-		List<KindOfBusiness> kindOfBusinessList = null;
-		try{
-			kindOfBusinessList=pageLoadService.loadKindOfBusiness();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return kindOfBusinessList;
-	}
-	
-	@ModelAttribute("courseTypes")
-	public List<String> populateCourseType() {
-		List<String> courseTypes  = traineeService.courseTypes();
-		System.out.println("courseTypes    :   "+ courseTypes);
-		return courseTypes;
-	}
-	
-	
-	@ModelAttribute("courseTypeList")
-	public List<CourseType> courseTypeList() {
-		List<CourseType> courseTypeList = null;
-		try {
-			courseTypeList = traineeService.courseTypeList();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return courseTypeList;
-	}
-	
-	@ModelAttribute("courseNameListB")
-	public List<CourseName> courseNameList(){
-		List<CourseName> courseNameListB = null;
-		try{
-			courseNameListB = traineeService.courseNameList();
-			System.out.println("courseNameListB course name list   :   "+ courseNameListB);
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return courseNameListB;
-	}
-	
-	@ModelAttribute("advanceCourseNameList")
-	public List<CourseName> advanceCourseNameList(){
-		List<CourseName> advanceCourseNameList = null;
-		try{
-			advanceCourseNameList = traineeService.courseNameListByType(Constantes.COURSETYPE_ADVANCE);
-			System.out.println("Advance course name list   :   "+ advanceCourseNameList);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return advanceCourseNameList;
-	}
-
-	@ModelAttribute("specialCourseNameList")
-	public List<CourseName> specialCourseNameList(){
-		List<CourseName> specialCourseNameList = null;
-		try{
-			specialCourseNameList = traineeService.courseNameListByType(Constantes.COURSETYPE_SPECIAL);
-			System.out.println("specialCourseNameList course name list   :   "+ specialCourseNameList);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return specialCourseNameList;
-	}
-	@ModelAttribute("trainingPartnerList")
-	public List<ManageTrainingPartner> trainingPartnerList(){
-		List<ManageTrainingPartner> trainingPartnerList = null;
-		try{
-			trainingPartnerList = traineeService.trainingPartnerList();
-			System.out.println("training partner name list   :   "+ trainingPartnerList);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return trainingPartnerList;
-	}
-	@ModelAttribute("trainingCenterStateList")
-	public List<State> trainingCenterStateList(){
-		List<State> trainingCenterStateList = null;
-		try{
-			trainingCenterStateList = traineeService.trainingCenterStateList();
-			System.out.println("training partner state list   :   "+ trainingCenterStateList);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return trainingCenterStateList;
-	}
-	@ModelAttribute("stateList")
-	public List<State> populateStateList() {
-		List<State> stateList = null;
-		try{
-			stateList = pageLoadService.loadState();
-			System.out.println("state list   :   "+ stateList);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return stateList;
-	}
-	*
-	*/
-
 	
 	@RequestMapping(value="/uploadImage" , method=RequestMethod.GET)
 	public String uploadImage(@ModelAttribute("uploadImage") CourseEnrolledUserForm courseEnrolledUserForm ,
@@ -227,7 +130,6 @@ public class TraineeController {
 			int loginId = 0;
 			try{
 			userName = (String) session.getAttribute("userName");
-			// String ss = session.getServletContext().getContextPath();
 			String ss = session.getServletContext().getRealPath("")
 					.replace("Fssai_E-Learning_System", "Fostac/Trainer");
 			File dir = new File(ss);
@@ -248,6 +150,7 @@ public class TraineeController {
 			stream.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("saveFile", "Exception while  saveFile "+e.getMessage(), "TraineeController.java");
 		}
 		return "upload-image";
 	    }  
@@ -274,6 +177,7 @@ public class TraineeController {
 		    stream.close();  
 			}catch(Exception e){
 				e.printStackTrace();
+				new ZLogger("saveImage", "Exception while  saveImage "+e.getMessage(), "TraineeController.java");
 			}
 			     
 	    return "upload-image";  
@@ -291,9 +195,9 @@ public class TraineeController {
 				docPath = servletContext.getContextPath().replace("Fssai_E-Learning_System", "Fostac/Course/");
 				if(userId>0){
 					CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
-					System.out.println("courseTrainee == "+courseTrainee.getCourseTypeId());
-					System.out.println("courseTrainee == "+courseTrainee.getContentNameInput());
-					System.out.println("courseTrainee == "+courseTrainee.getContentLinkInput());
+					new ZLogger("courseTraining", "courseTrainee == "+courseTrainee.getCourseTypeId(), "TraineeController.java");
+					new ZLogger("courseTraining","courseTrainee == "+courseTrainee.getContentNameInput() , "TraineeController.java");
+					new ZLogger("courseTraining", "courseTrainee == "+courseTrainee.getContentLinkInput(), "TraineeController.java");
 					
 					if(courseTrainee != null && courseTrainee.getCourseTypeId() != null && courseTrainee.getCourseTypeId().toUpperCase().contains("BASIC")){
 						if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentLinkInput().toUpperCase().contains("STUDY")){
@@ -327,6 +231,7 @@ public class TraineeController {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
+			new ZLogger("courseTraining", "Exception while  courseTraining "+e.getMessage(), "TraineeController.java");
 		}
 		return "courseTraining12";
 	}
@@ -347,15 +252,13 @@ public class TraineeController {
 					session.setAttribute("traineeSteps", 3);
 				}catch(Exception e){
 					e.printStackTrace();
+					new ZLogger("training", "Exception while training  "+e.getMessage() , "TraineeController.java");
 				}
 		return "training";
 	}
 
 	@RequestMapping(value="/playvedio" , method=RequestMethod.GET)
 	public String playvideo(Model model, HttpSession session){
-//		CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(Integer.parseInt(courseTypeId));
-//		model.addAttribute("courseTrainee", courseTrainee);
-		//session.setAttribute("uniqueId", uniqueId);
 		return "playvedio";
 	}
 	
@@ -370,8 +273,6 @@ public class TraineeController {
 			loginId = (int) httpSession.getAttribute("loginIdUnique");
 			userId = (Integer) httpSession.getAttribute("userId");
 			int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileId);
-			System.out.println("loginid   :"+ loginId);
-			System.out.println("tableID  :"+ tableID);
 			String basicEnroll = traineeService.basicSave(courseEnrolledUserForm , loginId , tableID,profileId);
 				if(basicEnroll != null && basicEnroll.length()  > 1){
 					Boolean status = traineeService.updateSteps(tableID, profileId, 1);
@@ -387,6 +288,7 @@ public class TraineeController {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
+			new ZLogger("basicSave", "Exception while basicSave  "+e.getMessage() , "TraineeController.java");
 		}
 		 return "traineeHomepage";
 	}
@@ -395,9 +297,8 @@ public class TraineeController {
 			,BindingResult result , Model model
 			){
 		if(result.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("changePasswordTraineeSave", "bindingResult.hasErrors  "+result.hasErrors() , "TraineeController.java");
+			new ZLogger("changePasswordTraineeSave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "TraineeController.java");
 			return "changePasswordTrainee";
 		}
 		try{
@@ -410,6 +311,7 @@ public class TraineeController {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
+			new ZLogger("changePasswordTraineeSave", "Exception while changePasswordTraineeSave  "+e.getMessage() , "TraineeController.java");
 		}
 		return "changePasswordTrainee";
 	}
@@ -418,14 +320,13 @@ public class TraineeController {
 			,BindingResult result , HttpSession session, Model model
 			){
 		if(result.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("contactTraineeSave", "bindingResult.hasErrors  "+result.hasErrors() , "TraineeController.java");
+			new ZLogger("contactTraineeSave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "TraineeController.java");
 			return "contactTrainee";
 		}
 		try{
 			String id=(String) session.getAttribute("logId");
-			System.out.println("userid   "+ id);
+			new ZLogger("contactTraineeSave","userid   "+ id  , "TraineeController.java");
 			String contactTraineeSave = traineeService.contactTraineeSave(contactTrainee , id);
 			if(contactTraineeSave.equalsIgnoreCase("created")){
 				model.addAttribute("created" , "Your request has been sent successfully !!!");
@@ -434,6 +335,7 @@ public class TraineeController {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
+			new ZLogger("contactTraineeSave", "Exception while contactTraineeSave  "+e.getMessage() , "TraineeController.java");
 		}
 		return "contactTrainee";
 	}
@@ -464,7 +366,7 @@ public class TraineeController {
 				 }
 		}catch(Exception e){
 			e.printStackTrace();
-			System.out.println("Exception while course details save : "+ e.getMessage());
+			new ZLogger("updateInformation","Exception while updateInformation "+e.getMessage()   , "TraineeController.java");
 		}
 		return "updateInformation";
 	}
@@ -477,15 +379,15 @@ public class TraineeController {
 			}else{
 				ss = id;
 			}
-			System.out.println("nnb   " +ss);
 			String updateTrainee = traineeService.updateTrainee(registrationFormTrainee , ss);
 			if(updateTrainee != "")
 			{
-				System.out.println("Data are updated successfully");
+				new ZLogger("updateTrainee","Data are updated successfully"  , "TraineeController.java");
 			}
 			model.addAttribute("update", "Updated successfully !!!");
 		}catch(Exception e){
 			e.printStackTrace();
+			new ZLogger("updateTrainee","Exception while updateTrainee "+e.getMessage()   , "TraineeController.java");
 		}
 		return "welcomeupdatetrainee";
 	}
@@ -494,15 +396,15 @@ public class TraineeController {
 	@RequestMapping(value="/generateAdmitCardtrainee" , method=RequestMethod.GET)
 	public String generateAdmitCardtrainee(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm ,BindingResult bindingResult, HttpSession session , Model model ){
 		try{
-			/*JavaMail javaMail = new JavaMail();
-			javaMail.mailProperty("Hello", "manindramishra.seven@gmail.com", "10002");
-			*/Integer userId=Integer.parseInt(session.getAttribute("userId").toString());
+			
+			Integer userId=Integer.parseInt(session.getAttribute("userId").toString());
 			if(userId>0){
 				CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
 				model.addAttribute("courseTrainee", courseTrainee);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
+			new ZLogger("generateAdmitCardtrainee","Exception while generateAdmitCardtrainee "+e.getMessage()   , "TraineeController.java");
 		}
 		return "generateAdmitCardtrainee";
 	}
@@ -510,9 +412,7 @@ public class TraineeController {
 	@RequestMapping(value="/admit-cardtrainee" , method=RequestMethod.GET)
 	public String admitcardtrainee(@ModelAttribute("basicTrainee") CourseEnrolledUserForm courseEnrolledUserForm ,
 			@ModelAttribute("state") State state , @ModelAttribute("tp") TrainingPartner tp,BindingResult result ,HttpSession session, Model model ){
-		//update Step
-		System.out.println("Generate Admit Card ..........................");
-		
+		new ZLogger("admit-cardtrainee","Generate Admit Card .........................."  , "TraineeController.java");
 		Integer profileID = 0;
 		Integer userId = 0;
 		int loginId = 0;
@@ -529,15 +429,13 @@ public class TraineeController {
 			if(session.getAttribute("loginIdUnique")!=null){
 				String loginid=session.getAttribute("loginIdUnique").toString();
 				AdmitCardForm admitCardForm=traineeService.generateAdmitCard(Integer.parseInt(loginid),Profiles.TRAINEE.value());
-				System.out.println("&&&&&&&&&&&&& "+admitCardForm);
-				//traineeService.updateSteps(tableID, profileID, 2);
 				session.setAttribute("traineeSteps", 2);
 				model.addAttribute("imagePath", imagePath);
 				model.addAttribute("admitCardForm", admitCardForm);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			System.out.println("Exception while course details save : "+ e.getMessage());
+			new ZLogger("admit-cardtrainee","Exception while  = "+e.getMessage()  , "TraineeController.java");
 		}
 		
 		return "admit-cardtrainee";
@@ -556,8 +454,8 @@ public class TraineeController {
 					int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
 					traineeService.updateSteps(tableID, profileID, 0);
 					CertificateInfo certificateInfo = traineeService.getCertificateID(userId, profileID,"");
-					System.out.println("Certificate ID = "+certificateInfo.getCertificateID());
-					System.out.println("Training Date = "+certificateInfo.getTrainingDate());
+					new ZLogger("certificatetrainee","Certificate ID = "+certificateInfo.getCertificateID()  , "TraineeController.java");
+					new ZLogger("certificatetrainee","Training Date = "+certificateInfo.getTrainingDate()  , "TraineeController.java");
 					//Close Course
 					traineeService.closeCourse(userId, profileID, "Y");
 					model.addAttribute("certificateID", certificateInfo.getCertificateID());
@@ -567,7 +465,7 @@ public class TraineeController {
 					session.setAttribute("traineeSteps", 0);
 				}catch(Exception e){
 					e.printStackTrace();
-					System.out.println("Exception while course details save : "+ e.getMessage());
+					new ZLogger("certificatetrainee","Exception while certificatetrainee"+e.getMessage()  , "TraineeController.java");
 				}
 		return "certificatetrainee";
 	}
@@ -604,7 +502,7 @@ public class TraineeController {
 		}
 		}catch(Exception e){
 			e.printStackTrace();
-			System.out.println("Exception while course details save : "+ e.getMessage());
+			new ZLogger("advanceTraineeSave","Exception while advanceTraineeSave"+e.getMessage()  , "TraineeController.java");
 		}
 		return "traineeHomepage";
 	}
@@ -640,7 +538,7 @@ public class TraineeController {
 		}
 		}catch(Exception e){
 			e.printStackTrace();
-			System.out.println("Exception while course details save : "+ e.getMessage());
+			new ZLogger("specialTraineeSave","Exception while specialTraineeSave"+e.getMessage()  , "TraineeController.java");
 		}
 		return "traineeHomepage";
 	}
@@ -671,7 +569,7 @@ public class TraineeController {
 		}catch(Exception e){
 			e.printStackTrace();
 			responseText = "generic_error";
-			System.out.println("Exception while fetching assessment details for trainee - "+e.getMessage());
+			new ZLogger("traineeAssessmentOnline","Exception while traineeAssessmentOnline"+e.getMessage()  , "TraineeController.java");
 		}
 		return responseText;
 	}
@@ -690,6 +588,7 @@ public class TraineeController {
 			model.addAttribute("feedbackMasters",feedbackMasters);
 		}catch(Exception e){
 			e.printStackTrace();
+			new ZLogger("feedbackForm","Exception while feedbackForm"+e.getMessage()  , "TraineeController.java");
 		}
 		return "feedbackForm";
 	}
@@ -700,7 +599,6 @@ public class TraineeController {
 			if(userId>0){
 				String isEligible = "";
 				String isOnline=traineeService.isCourseOnline(userId);
-				System.out.println("Course Type ONLINE OR CLASSROOM : "+isOnline);
 				if(isOnline != null && isOnline.toUpperCase().contains("ONLINE")){
 					model.addAttribute("ISONLINE","YES");
 					isEligible = traineeService.isTraineeEligible(userId,"ONLINE");
@@ -713,11 +611,12 @@ public class TraineeController {
 					CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
 					model.addAttribute("courseTrainee", courseTrainee);
 				}
-				System.out.println("isEligible ==== "+isEligible);
+				new ZLogger("generateCertificatetrainee","isEligible ==== "+isEligible  , "TraineeController.java");
 				model.addAttribute("Eligible", isEligible);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
+			new ZLogger("generateCertificatetrainee","Exception while generateCertificatetrainee"+e.getMessage()  , "TraineeController.java");
 		}
 		return "generateCertificatetrainee";
 	}
@@ -730,9 +629,7 @@ public class TraineeController {
 		Integer userId = 0;
 		try{
 			userId = (Integer) session.getAttribute("userId");
-			System.out.println("user id = "+userId);
 			String isOnline=traineeService.isCourseOnline(userId);
-			System.out.println("Online == "+isOnline);
 			CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
 			model.addAttribute("courseTrainee", courseTrainee);
 			if(isOnline != null && isOnline.toUpperCase().contains("ONLINE")){
@@ -743,6 +640,7 @@ public class TraineeController {
 		}catch(Exception e){
 			e.printStackTrace();
 			System.out.println("Exception while course details save : "+ e.getMessage());
+			new ZLogger("assessment-instructions-trainee","Exception while assessment-instructions-trainee "+e.getMessage()  , "TraineeController.java");
 		}
 		return "assessment-instructions-trainee";
 	}
@@ -754,7 +652,6 @@ public class TraineeController {
 	@RequestMapping(value="/course-training" , method=RequestMethod.GET)
 	public String coursetraining(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer, HttpSession session, Model model )
 	{
-		System.out.println("************************8");
 		Integer userId = 0;
 		int loginId= 0;
 		try{
@@ -769,11 +666,8 @@ public class TraineeController {
 			if(userId>0){
 				CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
 				if(courseTrainee != null && courseTrainee.getCourseTypeId() != null && courseTrainee.getCourseTypeId().toUpperCase().contains("BASIC")){
-					System.out.println("Enter Basic");
-					System.out.println(courseTrainee.getContentLinkInput().toUpperCase());
-					System.out.println(courseTrainee.getContentLinkInput().toUpperCase().contains("STUDY"));
+					new ZLogger("course-training", courseTrainee.getContentLinkInput().toUpperCase() + " "+ courseTrainee.getContentLinkInput().toUpperCase().contains("STUDY")  , "TraineeController.java");
 					if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentNameInput().toUpperCase().contains("STUDY")){
-						System.out.println("Enter Study");
 						docPath = docPath + "BASIC/PDF/"+courseTrainee.getContentLinkInput()+pdf;
 					}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentNameInput().toUpperCase().contains("PPT")){
 						docPath = docPath + "BASIC/PPT/"+courseTrainee.getContentLinkInput()+ppt;
@@ -805,11 +699,8 @@ public class TraineeController {
 			Utility utility=new Utility();
 			//Need to write service for AsssessorAgency 
 			model.addAttribute("utility",utility);
-			
-			
-			System.out.println("user id = "+userId);
 			String isOnline=traineeService.isCourseOnline(userId);
-			System.out.println("Online == "+isOnline);
+			new ZLogger("course-training", "user id = "+userId +" Online == "+isOnline  , "TraineeController.java");
 			if(isOnline != null && isOnline.toUpperCase().contains("ONLINE")){
 				model.addAttribute("ISONLINE","YES");
 			}else{
@@ -818,7 +709,7 @@ public class TraineeController {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			System.out.println("Exception while course details save : "+ e.getMessage());
+			new ZLogger("course-training", "Exception while course-training  "+e.getMessage() , "TraineeController.java");
 		}
 		
 		
@@ -833,13 +724,10 @@ public class TraineeController {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
+			new ZLogger("saveFeedbackForm", "Exception while saveFeedbackForm  "+e.getMessage() , "TraineeController.java");
 		}
 		
 		
-//		CourseName courseName=traineeService.getCourseDetails(loginId);
-//		List<FeedbackMaster> feedbackMasters=traineeService.getFeedMasterList();
-//		model.addAttribute("courseName",courseName);
-//		model.addAttribute("feedbackMasters",feedbackMasters);
 		return "feedbackForm";
 	}
 	
@@ -857,7 +745,7 @@ public class TraineeController {
 					traineeService.updateSteps(tableID, profileID, 5);
 					session.setAttribute("traineeSteps", 5);
 				}catch(Exception e){
-					System.out.println("Exception while course details save : "+ e.getMessage());
+					new ZLogger("afterFeedbackSubmit", "Exception while afterFeedbackSubmit  "+e.getMessage() , "TraineeController.java");
 				}
 		return "redirect:/loginProcess.fssai";
 	}

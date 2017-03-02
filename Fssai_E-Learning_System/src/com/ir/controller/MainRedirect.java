@@ -34,6 +34,7 @@ import com.ir.model.PostVacancyTrainingCenterBean;
 import com.ir.model.State;
 import com.ir.model.Utility;
 import com.ir.service.PageLoadService;
+import com.zentech.logger.ZLogger;
 
 @Controller
 public class MainRedirect {
@@ -43,42 +44,10 @@ public class MainRedirect {
 	@Qualifier("pageLoadService")
 	PageLoadService pageLoadService;
 	
-	
-	   /*@ModelAttribute("tpList")
-	   public List<ManageTrainingPartner> tpList() {
-		   List<ManageTrainingPartner> tpList = null;
-		   try{
-			   tpList = pageLoadService.tpList();
-		   }catch(Exception e){
-			   e.printStackTrace();
-		   }
-		   return tpList;
-	   }
-	   @ModelAttribute("aaList")
-	   public List<ManageAssessmentAgency> aaList() {
-		   List<ManageAssessmentAgency> aaList = null;
-		   try{
-			   aaList = pageLoadService.aaList();
-		   }catch(Exception e){
-			   e.printStackTrace();
-		   }
-		   return aaList;
-	   }
-	   @ModelAttribute("basicCourseList")
-	   public List basicCourseList() {
-		   List basicCourseList = null;
-		   try{
-			   basicCourseList = pageLoadService.basicCourseList();
-		   }catch(Exception e){
-			   e.printStackTrace();
-		   }
-		   return basicCourseList;
-	   }*/
 	   @RequestMapping(value="/showTrainingCalendarDetails" , method=RequestMethod.POST)
 		@ResponseBody
 		public void getApplicationStatusDetails(@RequestBody Utility utility,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
-			
-			System.out.println("Get Application Status............");
+		   new ZLogger("showTrainingCalendarDetails", "Get Application Status............", "MainRedirect.java");
 			List<Object[]> list=new ArrayList<>();
 			try{
 				 list = pageLoadService.loadTrainingDetails(utility);
@@ -88,6 +57,7 @@ public class MainRedirect {
 			        out.flush();
 			}catch(Exception e){
 				e.printStackTrace();
+				new ZLogger("showTrainingCalendarDetails", "Exception while showTrainingCalendarDetails "+e.getMessage(), "MainRedirect.java");
 			}
 			
 		}
@@ -107,6 +77,7 @@ public class MainRedirect {
 			   model.addAttribute("trainingDate", utility.getTrainingDate());
 		   }catch(Exception e){
 			   e.printStackTrace();
+			   new ZLogger("calendarSearch", "Exception while calendarSearch "+e.getMessage(), "MainRedirect.java");
 		   }
 		   return "calendarSearch";
 	   }
@@ -122,6 +93,7 @@ public class MainRedirect {
 			   model.addAttribute("manageCourseContents", new Gson().toJson(manageCourseContents));
 		   }catch(Exception e){
 			   e.printStackTrace();
+			   new ZLogger("basic-level", "Exception while basic-level "+e.getMessage(), "MainRedirect.java");
 		   }
 		    return "basic-level";
 	   }
@@ -137,6 +109,7 @@ public class MainRedirect {
 			   model.addAttribute("manageCourseContents", new Gson().toJson(manageCourseContents));
 		   }catch(Exception e){
 			   e.printStackTrace();
+			   new ZLogger("advance-level", "Exception while advance-level "+e.getMessage(), "MainRedirect.java");
 		   }
 	     return "advance-level";
 	   }
@@ -151,6 +124,7 @@ public class MainRedirect {
 			   model.addAttribute("manageCourseContents", new Gson().toJson(manageCourseContents));
 		   }catch(Exception e){
 			   e.printStackTrace();
+			   new ZLogger("special-level", "Exception while special-level "+e.getMessage(), "MainRedirect.java");
 		   }
 	     return "special-level";
 	   }

@@ -27,6 +27,7 @@ import com.ir.model.assessor.MarkAttendanceForm;
 import com.ir.service.AssessmentService;
 import com.ir.service.TraineeService;
 import com.ir.service.impl.AdminServiceImpl;
+import com.zentech.logger.ZLogger;
 
 @Controller
 public class AssessorController {
@@ -47,9 +48,8 @@ public class AssessorController {
 	@RequestMapping(value="/mark-attendance" , method=RequestMethod.GET)
 	public String markAttendance(@Valid @ModelAttribute("markAttendance") MarkAttendanceForm markAttendance, BindingResult result, HttpSession httpSession, Model model){
 		if(result.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("mark-attendance", "bindingResult.hasErrors  "+result.hasErrors() , "AssessorController.java");
+			new ZLogger("mark-attendance", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AssessorController.java");
 			return "markAttendance";
 		}
 		try{
@@ -67,6 +67,7 @@ public class AssessorController {
 			model.addAttribute("markAttendance" , gson.toJson(markAttendance));
 		}catch(Exception e){
 			e.printStackTrace();
+			new ZLogger("mark-attendance", " Exception while mark-attendance  "+e.getMessage() , "AssessorController.java");
 		}
 		return "markAttendance";
 	}
@@ -77,6 +78,8 @@ public class AssessorController {
 			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
 			System.out.println(result.getErrorCount());
 			System.out.println(result.getAllErrors());
+			new ZLogger("update-result", "bindingResult.hasErrors  "+result.hasErrors() , "AssessorController.java");
+			new ZLogger("update-result", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AssessorController.java");
 			return "updateResult";
 		}
 		try{
@@ -89,6 +92,7 @@ public class AssessorController {
 			model.addAttribute("updateResult" , gson.toJson(markAttendance));
 		}catch(Exception e){
 			e.printStackTrace();
+			new ZLogger("update-result", " Exception while update-result  "+e.getMessage() , "AssessorController.java");
 		}
 		return "updateResult";
 	}
@@ -102,14 +106,12 @@ public class AssessorController {
 			,BindingResult result , Model model
 			){
 		if(result.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("contactTASave", "bindingResult.hasErrors  "+result.hasErrors() , "AssessorController.java");
+			new ZLogger("contactTASave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AssessorController.java");
 			return "contactTrainee";
 		}
 		try{
 			String id = contactTrainee.getUserId();
-			System.out.println("userid   "+ id);
 			String contactTraineeSave = traineeService.contactTraineeSave(contactTrainee , id);
 			if(contactTraineeSave.equalsIgnoreCase("created")){
 				model.addAttribute("created" , "Your request has been sent successfully !!!");
@@ -119,6 +121,7 @@ public class AssessorController {
 			
 		}catch(Exception e){
 			e.printStackTrace();
+			new ZLogger("contactTASave", " Exception while contactTASave  "+e.getMessage() , "AssessorController.java");
 		}
 		return "contactA";
 		

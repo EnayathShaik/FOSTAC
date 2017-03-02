@@ -150,6 +150,7 @@ public class RegistrationControllerAssessor implements Serializable{
 			 new ZLogger("updateAssessorData", "Assessor Update Form Submit Exception............" , "RegistrationControllerAssessor.java");
 		 }
 	 	new ZLogger("updateAssessorData ", "Assessor Update Form Submit Stopped............" , "RegistrationControllerAssessor.java");
+	 	
 		return "welcomeupdatetrainee";
 		}
 		

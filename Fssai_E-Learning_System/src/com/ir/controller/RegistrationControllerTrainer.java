@@ -40,6 +40,7 @@ import com.ir.service.TrainingPartnerService;
 import com.ir.util.GenerateUniqueID;
 import com.ir.util.JavaMail;
 import com.ir.util.Profiles;
+import com.zentech.logger.ZLogger;
 
 @Controller
 public class RegistrationControllerTrainer implements Serializable{
@@ -70,49 +71,9 @@ public class RegistrationControllerTrainer implements Serializable{
 	TrainingPartnerService trainingPartnerService; 
 	
 	
-	/*@ModelAttribute("trainingPartnerNameList" )
-	public List<ManageTrainingPartner> trainingPartnerNameList() {
-		List<ManageTrainingPartner> trainingPartnerNameList = registrationServiceTrainingPartner.trainingPartnerNameList();
-		return trainingPartnerNameList;
-	}
-	@ModelAttribute("stateList")
-	public List<State> populateStateList() {
-		List<State> stateList = pageLoadServiceTrainer.loadState();
-		System.out.println("state list   :   "+ stateList);
-		return stateList;
-	}
-	
-	@ModelAttribute("casteList")
-	public List<String> populateCaste() {
-		List<String> casteList = pageLoadServiceTrainer.loadCaste();
-		System.out.println("casteList    :   "+ casteList);
-		return casteList;
-	}
-	
-	@ModelAttribute("titleList")
-	public List<Title> populateTitle() {
-		List<Title> titleList = pageLoadServiceTrainer.loadTitle();
-		System.out.println("state list   :   "+ titleList);
-		return titleList;
-	}
-	
-	@ModelAttribute("basicCourseList" )
-	public List<CourseName> basicCourseList() {
-		List<CourseName> basicCourseList = pageLoadServiceTrainer.basicCourseName();
-		System.out.println("CourseName  list   :   "+ basicCourseList);
-		return basicCourseList;
-	}
-	
-	@ModelAttribute("userId")
-	public String getUniqueId(){
-		String uniqueID = GenerateUniqueID.getNextCombinationId("TR", "personalinformationtrainer" , "000000");		
-		System.out.println(" Trainer ID " + uniqueID);
-		return uniqueID;
-	}*/
-	
 	@RequestMapping(value = "/registrationFormTrainer", method = RequestMethod.GET)
 	public String registerForm(Model model) {
-		System.out.println("registerForm trainer begins ");
+		new ZLogger("registrationFormTrainer","registerForm trainer begins " , "RegistrationControllerTrainer.java");
 		RegistrationFormTrainer registrationFormTrainer=new RegistrationFormTrainer();
 		List<State> stateList = pageLoadService.loadState();
 		List<Title> titleList = pageLoadService.loadTitle();
@@ -138,17 +99,12 @@ public class RegistrationControllerTrainer implements Serializable{
 	
 	@RequestMapping(value = "/registrationTrainer", method = RequestMethod.POST)
 	public String registerTrainer(@Valid @ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer, BindingResult bindingResult,Model model)  {
-		
-		System.out.println("register controller before bind trainer");
-		if(bindingResult.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+bindingResult.hasErrors());
-			System.out.println(bindingResult.getErrorCount());
-			System.out.println(bindingResult.getAllErrors());
+		new ZLogger("registrationTrainer","register controller before bind trainer" , "RegistrationControllerTrainer.java");
+		if(bindingResult.hasErrors()){			
+			new ZLogger("registrationTrainer", "bindingResult.hasErrors  "+bindingResult.hasErrors() , "RegistrationControllerTrainer.java");
+			new ZLogger("registrationTrainer", "bindingResult.hasErrors  "+bindingResult.getErrorCount() +" All Errors "+bindingResult.getAllErrors(), "RegistrationControllerTrainer.java");
 			return "registrationFormTrainer";
 		}
-		System.out.println("registrationFormTrainer controller");
-		System.out.println(registrationFormTrainer);
-		//RegisterTraineeInformationFull registerTraineeInformationFull = registrationServiceTrainee.registerTraineeInformationFull(registrationFormTrainee);
 		String personalInformationTrainer = registrationServiceTrainer.registerPersonalInformationTrainer(registrationFormTrainer);
 		if(! personalInformationTrainer.equalsIgnoreCase("")){
 			String[] all = personalInformationTrainer.split("&");
@@ -156,11 +112,9 @@ public class RegistrationControllerTrainer implements Serializable{
 			model.addAttribute("pwd" , all[0]);
 			JavaMail javaMail = new JavaMail();
 			javaMail.mailProperty("Thanks", registrationFormTrainer.getTrainingCenterPermanentEmail(), all[1],all[0] ,registrationFormTrainer.getFirstName() );
-			//return "registrationFormTrainee";
 			return "welcome";
 		}else{
 			model.addAttribute("id" , "Oops, something went wrong !!!");
-			//model.addAttribute("pwd" , "User id created successfully !!");
 			return "personalInformationTrainer";
 		}
 	}
@@ -215,11 +169,9 @@ public class RegistrationControllerTrainer implements Serializable{
     @RequestMapping(value="/basicCourseSaveTrainer" , method=RequestMethod.POST)
 	public String basicSaveTrainer(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm,
 			BindingResult result ,HttpSession session, Model model){
-		
-    	System.out.println("wefsjdjksbjbsdjbjsdjfsdjkfbjksdbfjbsdjfbjsdbfjsdbfjsdjfjbsd");
     	
 		int loginId=(int) session.getAttribute("loginIdUnique");
-		System.out.println("loginid   :"+ loginId);
+		new ZLogger("basicCourseSaveTrainer", "loginid   :"+ loginId, "RegistrationControllerTrainer.java");
 		long basicEnroll = 0;
 		try{
 			basicEnroll = registrationServiceTrainer.basicTrainerSave(courseEnrolledUserForm , loginId );	
@@ -251,7 +203,7 @@ public class RegistrationControllerTrainer implements Serializable{
 		}
 		
 	 }catch(Exception e){
-		System.out.println("Exception while course details save : "+ e.getMessage());
+		new ZLogger("update-profile", "Exception while update-profile "+e.getMessage(), "RegistrationControllerTrainer.java");
 	 }
 	 if(userId > 0){
 		 PersonalInformationTrainer personalInformationTrainer = registrationServiceTrainer.FullDetailTrainer(userId);
@@ -276,13 +228,10 @@ public class RegistrationControllerTrainer implements Serializable{
 			ss = id;
 		}
 
-	//	Integer ss=	(Integer) session.getAttribute("Id");
-		System.out.println("nnb is  " +ss);
-		System.out.println("----------"+registrationFormTrainer.getFatherName());
 		String updateTrainer = registrationServiceTrainer.UpdateTrainer(registrationFormTrainer , ss);
 		if(!updateTrainer.equalsIgnoreCase(""))
 		{
-			System.out.println("Data are updated successfully");
+			new ZLogger("update-profile", "Data are updated successfully", "RegistrationControllerTrainer.java");
 		}
 		//model.addAttribute("update", "Updated successfully !!!");
 		return "welcomeupdatetrainee";

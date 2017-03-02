@@ -30,6 +30,7 @@ import com.ir.service.PageLoadService;
 import com.ir.service.TraineeService;
 import com.ir.service.TrainerContactService;
 import com.ir.util.Profiles;
+import com.zentech.logger.ZLogger;
 
 @Controller
 @SessionAttributes
@@ -49,27 +50,7 @@ public class TrainerController {
 	@Qualifier("assessmentAgencyService")
 	AssessmentAgencyService assessmentAgencyService; 
 	
-	
-	
 
-	/*@RequestMapping(value="/contactTrainerSave" , method=RequestMethod.POST)
-	public String contactTrainee1(@ModelAttribute("contactTrainer") ContactTrainee contactTrainer
-			,BindingResult result , Model model
-			){
-		if(result.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
-			return "contactTrainer";
-		}int id = 1;
-		String contactTrainerSave = trainerContactService.contactTrainerSave(contactTrainer , id);
-		if(contactTrainerSave.equalsIgnoreCase("created")){
-			model.addAttribute("created" , "Your request has been sent successfully !!!");
-		}else{
-			model.addAttribute("created" , "Oops, something went wrong !!!");
-		}
-		return "contactTrainer";
-	}*/
 	@RequestMapping(value="/assessment-instructions-trainer" , method=RequestMethod.GET)
 	public String assessmentinstructionstrainer(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer,BindingResult bindingResult, HttpSession session , Model model )
 	{
@@ -111,7 +92,7 @@ public class TrainerController {
 		loginId = (int)httpSession.getAttribute("loginIdUnique");
 		}catch(Exception e){
 			responseText = "generic_error";
-			System.out.println("Exception while fetching assessment details for trainee - "+e.getMessage());
+			new ZLogger("contactTrainer", "Exception while   "+e.getMessage(), "TrainerController.java");
 		}
 		CourseName courseName=traineeService.getCourseName(loginId);
 		model.addAttribute("courseName", courseName);
@@ -138,10 +119,9 @@ public class TrainerController {
 	@RequestMapping(value="/contactTrainerSave" , method=RequestMethod.POST)
 	public String contactSave(@ModelAttribute("contactTrainee") ContactTrainee contactTrainee,
 			HttpSession session , Model modal){
-		System.out.println("in controller contact assessor agency save");
+		new ZLogger("contactTrainerSave", "in controller contactTrainerSave", "TrainerController.java");
 		String id = (String) session.getAttribute("logId");
-		//String id = contactTrainee.getUserId();
-		System.out.println("id    :"+ id);
+		new ZLogger("contactTrainerSave", "id "+id, "TrainerController.java");
 		String contactSave = assessmentAgencyService.contactAssessorSave(contactTrainee , id);
 		if(contactSave.equalsIgnoreCase("created")){
 			modal.addAttribute("created" , "Your mail has been sent");
@@ -161,14 +141,11 @@ public class TrainerController {
 			,BindingResult result , Model model
 			){
 		if(result.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("changePasswordTrainerSave", "bindingResult.hasErrors  "+result.hasErrors() , "TrainerController.java");
+			new ZLogger("changePasswordTrainerSave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "TrainerController.java");
 			return "changePasswordTrainee";
 		}
 		String id =(String) session.getAttribute("logId");
-		//System.out.println(changePasswordForm.getLoginid());
-		//int id = 1;
 		boolean changePasswordTrainerSave = trainerContactService.changePasswordTrainerSave(changePasswordForm , id);
 		if(changePasswordTrainerSave){
 			model.addAttribute("created" , "Your password has changed !!!");

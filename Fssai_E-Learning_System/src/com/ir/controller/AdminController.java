@@ -66,6 +66,7 @@ import com.ir.service.AdminService;
 import com.ir.util.GenerateUniqueID;
 import com.ir.util.JavaMail;
 import com.ir.util.SendContectMail;
+import com.zentech.logger.ZLogger;
 
 @Controller
 public class AdminController {
@@ -79,9 +80,10 @@ public class AdminController {
 		List<State> stateList = null;
 		try {
 			stateList = adminService.stateList();
-			System.out.println("state list   :   " + stateList);
+			new ZLogger("stateList", "state list   :   " + stateList, "AdminController.java");
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("stateList", "Exception while stateList :  "+ e.getMessage(), "AdminController.java");
 		}
 		return stateList;
 	}
@@ -94,6 +96,7 @@ public class AdminController {
 			trainingPartnerList = adminService.trainingPartnerList();
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("trainingPartnerList", "Exception while trainingPartnerList :  "+ e.getMessage(), "AdminController.java");
 		}
 		return trainingPartnerList;
 	}
@@ -105,6 +108,7 @@ public class AdminController {
 			trainingNameList = adminService.trainingNameList();
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("trainingNameList", "Exception while trainingNameList :  "+ e.getMessage(), "AdminController.java");
 		}
 		return trainingNameList;
 	}
@@ -116,6 +120,7 @@ public class AdminController {
 			courseNameList = adminService.courseNameList();
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("courseNameList", "Exception while courseNameList :  "+ e.getMessage(), "AdminController.java");
 		}
 		return courseNameList;
 	}
@@ -127,6 +132,7 @@ public class AdminController {
 			courseTypeList = adminService.courseTypeList();
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("courseTypeList", "Exception while courseTypeList :  "+ e.getMessage(), "AdminController.java");
 		}
 		return courseTypeList;
 	}
@@ -140,6 +146,7 @@ public class AdminController {
 			session.setAttribute("created", " ");
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("stateMaster", "Exception while stateMaster :  "+ e.getMessage(), "AdminController.java");
 		}
 		return "stateMaster";
 	}
@@ -150,10 +157,9 @@ public class AdminController {
 			BindingResult result, Model model, HttpSession session) {
 
 		if (result.hasErrors()) {
-			System.out
-					.println(" bindingResult.hasErrors " + result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			
+			new ZLogger("stateSave", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+			new ZLogger("stateSave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
 			return "stateMaster";
 		}
 		try {
@@ -161,7 +167,6 @@ public class AdminController {
 			if (stateMasterSave.equalsIgnoreCase("created")) {
 				model.addAttribute("created",
 						" State insertion successfull !!!");
-				// session.setAttribute("created"," State insertion successfull !!!");
 				model.addAttribute("stateMaster", new StateForm());
 			} else {
 				model.addAttribute("created",
@@ -171,6 +176,7 @@ public class AdminController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("stateMasterSave", "Exception while stateMasterSave :  "+ e.getMessage(), "AdminController.java");
 		}
 		return "stateMaster";
 	}
@@ -190,6 +196,7 @@ public class AdminController {
 			session.setAttribute("created", " ");
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("districtMaster", "Exception while districtMaster :  "+ e.getMessage(), "AdminController.java");
 		}
 		return "districtMaster";
 	}
@@ -201,14 +208,12 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/manageAssessmentQuestionsSave", method = RequestMethod.POST)
-	public String stateSave(
+	public String manageAssessmentQuestionsSave(
 			@Valid @ModelAttribute("assessmentQuestionForm") AssessmentQuestionForm assessmentQuestionForm,
 			BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			System.out
-					.println(" bindingResult.hasErrors " + result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("manageAssessmentQuestionsSave", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+			new ZLogger("manageAssessmentQuestionsSave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
 			return "manageAssessmentQuestions";
 		}
 		try {
@@ -222,20 +227,19 @@ public class AdminController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("manageAssessmentQuestionsSave", "Exception while manageAssessmentQuestionsSave :  "+ e.getMessage(), "AdminController.java");
 		}
 		return "manageAssessmentQuestions";
 	}
 
 	@RequestMapping(value = "/districtMasterSave", method = RequestMethod.POST)
-	public String stateSave(
+	public String districtMasterSave(
 			@Valid @ModelAttribute("districtMaster") DistrictForm districtForm,
 			BindingResult result, Model model, HttpSession session) {
 
 		if (result.hasErrors()) {
-			System.out
-					.println(" bindingResult.hasErrors " + result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("districtMasterSave", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+			new ZLogger("districtMasterSave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
 			return "districtMaster";
 		}
 		try {
@@ -251,6 +255,7 @@ public class AdminController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("districtMasterSave", "Exception while districtMasterSave :  "+ e.getMessage(), "AdminController.java");
 		}
 		return "districtMaster";
 	}
@@ -267,15 +272,14 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/cityMasterSave", method = RequestMethod.POST)
-	public String stateSave(
+	public String cityMasterSave(
 			@Valid @ModelAttribute("cityMaster") CityForm cityForm,
 			BindingResult result, Model model, HttpSession session) {
 
 		if (result.hasErrors()) {
-			System.out
-					.println(" bindingResult.hasErrors " + result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("cityMasterSave", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+			new ZLogger("cityMasterSave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
+			
 			return "cityMaster";
 		}
 		try {
@@ -288,6 +292,7 @@ public class AdminController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("cityMasterSave", "Exception while cityMasterSave :  "+ e.getMessage(), "AdminController.java");
 		}
 		return "cityMaster";
 	}
@@ -306,15 +311,14 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/regionMasterSave", method = RequestMethod.POST)
-	public String stateSave(
+	public String regionMasterSave(
 			@Valid @ModelAttribute("regionMappingMaster") RegionForm regionForm,
 			BindingResult result, Model model, HttpSession session) {
 
 		if (result.hasErrors()) {
-			System.out
-					.println(" bindingResult.hasErrors " + result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("regionMasterSave", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+			new ZLogger("regionMasterSave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
+			
 			return "regionMappingMaster";
 		}
 		try {
@@ -329,6 +333,7 @@ public class AdminController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("regionMasterSave", "Exception while regionMasterSave :  "+ e.getMessage(), "AdminController.java");
 		}
 		return "regionMappingMaster";
 	}
@@ -349,14 +354,13 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/manageCourse", method = RequestMethod.POST)
-	public String stateSave(
+	public String manageCourse(
 			@Valid @ModelAttribute("manageCourse") ManageCourse manageCourse,
 			BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			System.out
-					.println(" bindingResult.hasErrors " + result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("manageCourse", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+			new ZLogger("manageCourse", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
+			
 			return "manageCourse";
 		}
 		try {
@@ -372,6 +376,7 @@ public class AdminController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("manageCourse", "Exception while manageCourse :  "+ e.getMessage(), "AdminController.java");
 		}
 		return "manageCourse";
 	}
@@ -383,15 +388,14 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/manageTrainingPartnerSave", method = RequestMethod.POST)
-	public String stateSave(
+	public String manageTrainingPartnerSave(
 			@Valid @ModelAttribute("manageTrainingPartnerForm") ManageTrainingPartnerForm manageTrainingPartnerForm,
 			BindingResult result, Model model, SessionStatus status) {
 		
 		if (result.hasErrors()) {
-			System.out
-					.println(" bindingResult.hasErrors " + result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("manageTrainingPartnerSave", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+			new ZLogger("manageTrainingPartnerSave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
+			
 			return "manageTrainingPartnerForm";
 		}
 		String email = manageTrainingPartnerForm.getEmail();
@@ -430,20 +434,16 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/manageAssessmentAgencySave", method = RequestMethod.POST)
-	public String stateSave(
+	public String manageAssessmentAgencySave(
 			@Valid @ModelAttribute("manageAssessmentAgencyForm") ManageAssessmentAgencyForm manageAssessmentAgencyForm,
 			BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			System.out
-					.println(" bindingResult.hasErrors " + result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("manageAssessmentAgencySave", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+			new ZLogger("manageAssessmentAgencySave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
 			return "manageAssessmentAgencyForm";
 		}
-		System.out.println("state  " + manageAssessmentAgencyForm.getStateId());
-		System.out.println("district  " + manageAssessmentAgencyForm.getCity());
-		System.out.println("stcityate  "
-				+ manageAssessmentAgencyForm.getDistrict());
+		new ZLogger("manageAssessmentAgencySave", " state  "+manageAssessmentAgencyForm.getStateId() , "AdminController.java");
+		new ZLogger("manageAssessmentAgencySave", " stcityate  "+ manageAssessmentAgencyForm.getDistrict() , "AdminController.java");
 		String manageAssessmentAgencySave = adminService
 				.manageAssessmentAgencySave(manageAssessmentAgencyForm);
 		if (!manageAssessmentAgencySave.equalsIgnoreCase("")) {
@@ -470,21 +470,17 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/traineeUserManagementSearch", method = RequestMethod.POST)
-	public String traineeUserManagementSave(
+	public String traineeUserManagementSearch(
 			@Valid @ModelAttribute("traineeUserManagementForm") TraineeUserManagementForm traineeUserManagementForm,
 			BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			System.out
-					.println(" bindingResult.hasErrors " + result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("traineeUserManagementSearch", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+			new ZLogger("traineeUserManagementSearch", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
 			return "traineeUserManagementForm";
 		}
 		try {
 			List<PersonalInformationTrainee> traineeUserManagementSearch = adminService
 					.traineeUserManagementSearch(traineeUserManagementForm);
-			// System.out.println("traineeUserManagementSearch controller"
-			// +traineeUserManagementSearch.get(0).getLoginDetails().getLoginId());
 			if (traineeUserManagementSearch != null
 					&& traineeUserManagementSearch.size() > 0) {
 				model.addAttribute("searchTraineeUsermanagement",
@@ -492,6 +488,7 @@ public class AdminController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("traineeUserManagementSearch", "Exception while traineeUserManagementSearch :  "+ e.getMessage(), "AdminController.java");
 		}
 		return "traineeUserManagementForm";
 	}
@@ -511,7 +508,7 @@ public class AdminController {
 	@ModelAttribute("userId")
 	public String getUniqueId(){
 		String uniqueID = GenerateUniqueID.getNextCombinationId("ADM", "adminusermanagement" , "00");		
-		System.out.println(" Admin ID " + uniqueID);
+		new ZLogger("traineeUserManagementSearch", " Admin ID "+uniqueID, "AdminController.java");
 		return uniqueID;
 	}
 	
@@ -523,6 +520,7 @@ public class AdminController {
 					assessorUserManagementForm);
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("assessorUserManagementForm", "Exception while assessorUserManagementForm :  "+ e.getMessage(), "AdminController.java");
 		}
 		return "assessorUserManagementForm";
 	}
@@ -535,6 +533,7 @@ public class AdminController {
 					personalInformationTrainee);
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("traineeRegistration", "Exception while traineeRegistration :  "+ e.getMessage(), "AdminController.java");
 		}
 		return "traineeRegistration";
 	}
@@ -547,6 +546,7 @@ public class AdminController {
 					adminUserManagementForm);
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("adminUserManagementForm", "Exception while adminUserManagementForm :  "+ e.getMessage(), "AdminController.java");
 		}
 		return "adminUserManagementForm";
 	}
@@ -556,10 +556,8 @@ public class AdminController {
 			@Valid @ModelAttribute("adminUserManagementForm") AdminUserManagementForm adminUserManagementForm,
 			BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			System.out
-					.println(" bindingResult.hasErrors " + result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("adminUserManagementSave", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+			new ZLogger("adminUserManagementSave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
 			return "adminUserManagementForm";
 		}
 		try {
@@ -572,6 +570,7 @@ public class AdminController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("adminUserManagementSave", "Exception while adminUserManagementSave :  "+ e.getMessage(), "AdminController.java");
 		}
 		return "adminUserManagementForm";
 	}
@@ -581,10 +580,9 @@ public class AdminController {
 			@Valid @ModelAttribute("assessorUserManagementForm") AssessorUserManagementForm assessorUserManagementForm,
 			BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			System.out
-					.println(" bindingResult.hasErrors " + result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("assessorUserManagementSave", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+			new ZLogger("assessorUserManagementSave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
+			
 			return "registrationFormAssessor";
 		}
 		try {
@@ -597,6 +595,7 @@ public class AdminController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("assessorUserManagementSave", "Exception while assessorUserManagementSave :  "+ e.getMessage(), "AdminController.java");
 		}
 		return "registrationFormAssessor";
 	}
@@ -604,8 +603,7 @@ public class AdminController {
 	@RequestMapping(value = "/manageCourseContent", method = RequestMethod.GET)
 	public String manageCourseContent(
 			@ModelAttribute("manageCourseContent") ManageCourseContentForm manageCourseContentForm) {
-		System.out
-				.println("admin Controller manage course content form begin .");
+		new ZLogger("manageCourseContent", "admin Controller manage course content form begin .", "AdminController.java");
 		return "manageCourseContent";
 	}
 
@@ -614,10 +612,8 @@ public class AdminController {
 			@Valid @ModelAttribute("manageCourseContent") ManageCourseContentForm manageCourseContentForm,
 			BindingResult result, Model model, HttpSession session) {
 		if (result.hasErrors()) {
-			System.out
-					.println(" bindingResult.hasErrors " + result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("manageCourseContentSearch", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+			new ZLogger("manageCourseContentSearch", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
 			return "manageCourseContent";
 		}
 		try {
@@ -634,6 +630,7 @@ public class AdminController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("manageCourseContentSearch", "Exception while manageCourseContentSearch :  "+ e.getMessage(), "AdminController.java");
 		}
 		return "manageCourseContent";
 	}
@@ -645,6 +642,7 @@ public class AdminController {
 			model.addAttribute("trainingCalendarForm", trainingCalendarForm);
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("trainingCalendarForm", "Exception while trainingCalendarForm :  "+ e.getMessage(), "AdminController.java");
 		}
 		return "trainingCalendarForm";
 	}
@@ -653,17 +651,14 @@ public class AdminController {
 	public String trainingCalenderSave(
 			@Valid @ModelAttribute("trainingCalendarForm") TrainingCalendarForm trainingCalendarForm,
 			BindingResult result, Model model) {
-		System.out.println("kkkkkk");
 		if (result.hasErrors()) {
-			System.out
-					.println(" bindingResult.hasErrors " + result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("trainingCalenderSave", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+			new ZLogger("trainingCalenderSave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
+			
 			return "trainingCalendarForm";
 		}
 		try {
-			System.out.println(trainingCalendarForm.getTrainingStartDate() + "   "
-					+ trainingCalendarForm.getTrainingEndDate());
+
 			String trainingCalendar = adminService
 					.trainingCalendarForm(trainingCalendarForm);
 			if (trainingCalendar.equalsIgnoreCase("created")) {
@@ -677,6 +672,7 @@ public class AdminController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("trainingCalenderSave", "Exception while trainingCalenderSave :  "+ e.getMessage(), "AdminController.java");
 		}
 
 		return "trainingCalendarForm";
@@ -687,10 +683,8 @@ public class AdminController {
 			@Valid @ModelAttribute("trainerUserManagementForm") TrainerUserManagementForm trainerUserManagementForm,
 			BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			System.out
-					.println(" bindingResult.hasErrors " + result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("trainerUserManagementSearch", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+			new ZLogger("trainerUserManagementSearch", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
 			return "trainerUserManagementForm";
 		}
 		try {
@@ -703,6 +697,7 @@ public class AdminController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("trainerUserManagementSearch", "Exception while trainerUserManagementSearch :  "+ e.getMessage(), "AdminController.java");
 		}
 		return "trainerUserManagementForm";
 	}
@@ -712,10 +707,8 @@ public class AdminController {
 			@Valid @ModelAttribute("trainingCenterUserManagementForm") TrainingCenterUserManagementForm trainingCenterUserManagementForm,
 			BindingResult result, HttpSession httpSession, Model model) {
 		if (result.hasErrors()) {
-			System.out
-					.println(" bindingResult.hasErrors " + result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("trainingCetnterUserManagementSearch", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+			new ZLogger("trainingCetnterUserManagementSearch", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
 			return "trainingCenterUserManagementForm";
 		}
 		Integer profileId = 0;
@@ -733,8 +726,8 @@ public class AdminController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Exception while course details save : "
-					+ e.getMessage());
+			new ZLogger("trainingCetnterUserManagementSearch", "Exception while trainingCetnterUserManagementSearch :  "+ e.getMessage(), "AdminController.java");
+		
 		}
 		return "trainingCenterUserManagementForm";
 	}
@@ -744,10 +737,9 @@ public class AdminController {
 			@Valid @ModelAttribute("assessorUserManagementForm") AssessorUserManagementForm assessorUserManagementForm,
 			BindingResult result, HttpSession httpSession, Model model) {
 		if (result.hasErrors()) {
-			System.out
-					.println(" bindingResult.hasErrors " + result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+
+			new ZLogger("assessorUserManagementSearch", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+			new ZLogger("assessorUserManagementSearch", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
 			return "assessorUserManagementForm";
 		}
 		Integer profileId = 0;
@@ -764,8 +756,8 @@ public class AdminController {
 						assessorUserManagementSearch);
 			}
 		} catch (Exception e) {
-			System.out.println("Exception while course details save : "
-					+ e.getMessage());
+			e.printStackTrace();
+			new ZLogger("trainingCetnterUserManagementSearch", "Exception while assessorUserManagementSearch  :  "+ e.getMessage(), "AdminController.java");
 		}
 		return "assessorUserManagementForm";
 	}
@@ -789,7 +781,7 @@ public class AdminController {
 	public String onLoadTrainingPartnerCenterId(@RequestParam("id") int id,
 			HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
-		System.out.println("id   ::::  " + id);
+		new ZLogger("onLoadTrainingPartnerCenterId", "id   ::::  " + id, "AdminController.java");
 		req.getRequestDispatcher("onLoadTrainingPartnerCenterId?id=" + id)
 				.forward(req, res);
 		return "dashboardTrainingPartnerPending";
@@ -807,16 +799,13 @@ public class AdminController {
 			@ModelAttribute("changePasswordForm") ChangePasswordForm changePasswordForm,
 			HttpSession session, BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			System.out
-					.println(" bindingResult.hasErrors " + result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("changePasswordAdminSave", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+			new ZLogger("changePasswordAdminSave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
+			
 			return "changePasswordAdminPage";
 		}
 		try {
 			String id = (String) session.getAttribute("logId");
-			// System.out.println(changePasswordForm.getLoginid());
-			// int id = 1;
 			boolean changePasswordTraineeSave = adminService
 					.changePasswordadminSave(changePasswordForm, id);
 			if (changePasswordTraineeSave) {
@@ -826,6 +815,7 @@ public class AdminController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("changePasswordAdminSave", "changePasswordAdminSave Loading Exception "+e.getMessage() , "RegistrationControllerAssessor.java");
 		}
 		return "changePasswordAdminPage";
 	}
@@ -841,16 +831,12 @@ public class AdminController {
 			@ModelAttribute("changePasswordForm") ChangePasswordForm changePasswordForm,
 			HttpSession session, BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			System.out
-					.println(" bindingResult.hasErrors " + result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("changePasswordTPSave", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+			new ZLogger("changePasswordTPSave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
 			return "changePasswordTp";
 		}
 		try {
 			String id = (String) session.getAttribute("logId");
-			// System.out.println(changePasswordForm.getLoginid());
-			// int id = 1;
 			boolean changePasswordTraineeSave = adminService
 					.changePasswordTPSave(changePasswordForm, id);
 			if (changePasswordTraineeSave) {
@@ -860,6 +846,7 @@ public class AdminController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("changePasswordTPSave", "changePasswordTPSave exception  "+e.getMessage(), "AdminController.java");
 		}
 		return "changePasswordTp";
 	}
@@ -885,10 +872,8 @@ public class AdminController {
 			HttpSession session, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
-			System.out
-					.println(" bindingResult.hasErrors " + result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("saveFeedbackMaster", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+			new ZLogger("saveFeedbackMaster", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
 			return "feedbackMaster";
 		}
 		try {
@@ -896,6 +881,7 @@ public class AdminController {
 			model.addAttribute("created", created);
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("saveFeedbackMaster", "saveFeedbackMaster exception  "+e.getMessage(), "AdminController.java");
 		}
 		return "feedbackMaster";
 
@@ -913,16 +899,13 @@ public class AdminController {
 			@ModelAttribute("contactTraineee") ContactTrainee contactTrainee,
 			BindingResult result, HttpSession session, Model model) {
 		if (result.hasErrors()) {
-			System.out
-					.println(" bindingResult.hasErrors " + result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("contactTrainingPTSave", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+			new ZLogger("contactTrainingPTSave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
 			return "contactTPartner";
 		}// String id = contactTrainee.getUserId();
 
 		try {
 			String id = (String) session.getAttribute("logId");
-			System.out.println("userid   " + id);
 			String contactTainingPtSave = adminService.contactTraningPTSave(
 					contactTrainee, id);
 			if (contactTainingPtSave.equalsIgnoreCase("created")) {
@@ -933,6 +916,8 @@ public class AdminController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("contactTrainingPTSave", "contactTrainingPTSave exception  "+e.getMessage(), "AdminController.java");
+			
 		}
 
 		return "contactTrainee";
@@ -947,6 +932,7 @@ public class AdminController {
 					updateTrainerAssessmentForm);
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("updateTrainerAssessmentForm", "updateTrainerAssessmentForm exception  "+e.getMessage(), "AdminController.java");
 		}
 		return "updateTrainerAssessment";
 	}
@@ -965,6 +951,7 @@ public class AdminController {
 			strData = gson.toJson(listTrainingCenters);
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("trainingCenterByCoursenameId", "trainingCenterByCoursenameId exception  "+e.getMessage(), "AdminController.java");
 		}
 		return strData;
 	}
@@ -983,6 +970,7 @@ public class AdminController {
 			strData = gson.toJson(listTrainersForAssessmentEval);
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("searchTrainerForAssessmentValidation", "searchTrainerForAssessmentValidation exception  "+e.getMessage(), "AdminController.java");
 		}
 		return strData;
 	}
@@ -1017,6 +1005,7 @@ public class AdminController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			new ZLogger("saveTrainerAssessment", "saveTrainerAssessment exception  "+e.getMessage(), "AdminController.java");
 		}
 
 		if (response > 0)
@@ -1059,28 +1048,15 @@ public class AdminController {
 	
 	@RequestMapping("/activateDeActivateAssessor" )
     public String activateDeActivateAssessor(@Valid @ModelAttribute("assessorUserManagementForm") AssessorUserManagementForm assessorUserManagementForm){
-		System.out.println("inside activateDeActivateUsers ");
-		System.out.println("Login ID Details :  "+assessorUserManagementForm.getLogindetails());
-		System.out.println("status "+assessorUserManagementForm.getStatus() + "  profileid "+assessorUserManagementForm.getProfileID());
+		new ZLogger("activateDeActivateAssessor", "status "+assessorUserManagementForm.getStatus() + "  profileid "+assessorUserManagementForm.getProfileID(), "AdminController.java");
+		new ZLogger("activateDeActivateAssessor", "Login ID Details :  "+assessorUserManagementForm.getLogindetails(), "AdminController.java");
 		String status = (assessorUserManagementForm.getStatus().equalsIgnoreCase("I")? "N":"Y");
 		String tableName = TableLink.getByprofileID(Integer.parseInt(assessorUserManagementForm.getProfileID())).tableName();
-		System.out.println(TableLink.getByprofileID(Integer.parseInt(assessorUserManagementForm.getProfileID())).tableName());
+		new ZLogger("activateDeActivateAssessor", TableLink.getByprofileID(Integer.parseInt(assessorUserManagementForm.getProfileID())).tableName(), "AdminController.java");
         adminService.updateUser(assessorUserManagementForm.getLogindetails() , tableName , status);
 		return "redirect:/assessorUserManagementForm.fssai";
     }
 	
-	
-/*	@RequestMapping("/activateDeActivateTrainingPartner" )
-    public String activateDeActivateTrainingPartner(@Valid @ModelAttribute("manageTrainingPartnerForm") ManageTrainingPartnerForm manageTrainingPartnerForm){
-		System.out.println("inside activateDeActivateUsers ");
-		System.out.println("Login ID Details :  "+manageTrainingPartnerForm.getLogindetails());
-		System.out.println("status "+manageTrainingPartnerForm.getStatus() + "  profileid "+manageTrainingPartnerForm.getProfileID());
-		String status = (manageTrainingPartnerForm.getStatus().equalsIgnoreCase("I")? "N":"Y");
-		String tableName = TableLink.getByprofileID(Integer.parseInt(manageTrainingPartnerForm.getProfileID())).tableName();
-		System.out.println(TableLink.getByprofileID(Integer.parseInt(manageTrainingPartnerForm.getProfileID())).tableName());
-        adminService.updateUser(manageTrainingPartnerForm.getLogindetails() , tableName , status);
-		return "redirect:/manageTrainingPartnerForm.fssai";
-    }
-	*/
+
 
 }

@@ -53,6 +53,7 @@ import com.ir.model.Utility;
 import com.ir.service.LoginService;
 import com.ir.service.TraineeService;
 import com.ir.service.TrainingPartnerService;
+import com.zentech.logger.ZLogger;
 import com.zentect.list.constant.ListConstant;
 
 @Controller
@@ -112,12 +113,8 @@ public class TrainingPartnerController {
 	@RequestMapping(value="/getBatchCode" , method=RequestMethod.POST)
 	@ResponseBody
 	public void getBatchCode(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
-		
-		System.out.println("getBatchCode............" + data );
-		
-		System.out.println("inside getBatchCode");
+		new ZLogger("getBatchCode","getBatchCode............" + data  , "TrainingPartnerController.java");
 		int courseName =  Integer.parseInt(data);
-		System.out.println("courseName "+courseName);
 		List<String> batchCodeList = trainingPartnerService.getBatchCodeList(courseName);
 		PrintWriter out = response.getWriter();
 		Gson g =new Gson();
@@ -131,15 +128,13 @@ public class TrainingPartnerController {
 	@RequestMapping(value="/getCertificateID" , method=RequestMethod.POST)
 	@ResponseBody
 	public void getCertificateID(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
-		System.out.println("data "+data);
+		new ZLogger("getCertificateID","getCertificateID............" + data  , "TrainingPartnerController.java");
 		String[] ss = data.split("-");
 		String loginId = null;
-		System.out.println("ss[1] "+ss[1]);
 		if(!ss[1].equalsIgnoreCase("NA")){
 			loginId = ss[1];
 		}
 		String batchcode =  ss[0];
-		System.out.println("courseName "+batchcode);
 		List<String> certificateList = trainingPartnerService.getCertificateIdList(batchcode , loginId);
 		PrintWriter out = response.getWriter();
 		Gson g =new Gson();
@@ -155,6 +150,7 @@ public class TrainingPartnerController {
 	@RequestMapping(value="/generateCourseCertificateGO" , method=RequestMethod.POST)
 	public String generateCourseCertificateGO(@ModelAttribute("generateCourseCertificateForm") GenerateCourseCertificateForm generateCourseCertificateForm,HttpSession session,HttpServletRequest request ,HttpServletResponse response , BindingResult result , Model model ) throws IOException{
 		System.out.println("inside generateCourseCertificateGO"+generateCourseCertificateForm.getMainCertificateId());
+		new ZLogger("generateCourseCertificateGO","inside generateCourseCertificateGO"+generateCourseCertificateForm.getMainCertificateId()  , "TrainingPartnerController.java");
 		Integer profileID = 0;
 		Integer userId = 0;
 		int loginId = 0;
@@ -170,6 +166,7 @@ public class TrainingPartnerController {
 			model.addAttribute("trainingAddress", certificateInfo.getTrainingAddress());
 		}catch(Exception e){
 			e.printStackTrace();
+			new ZLogger("generateCourseCertificateGO","Exception while "+e.getMessage() , "TrainingPartnerController.java");
 		}
 		return "certificatetrainee";
 		
@@ -186,9 +183,8 @@ public class TrainingPartnerController {
 	@RequestMapping(value="/viewFeedbackDetails" , method=RequestMethod.GET)
 	public String viewFeedbackDetails(@ModelAttribute("trainingpartnerapplicationstatus") TrainingPartnerTrainingCalender trainingpartnerapplicationstatus,HttpSession session,BindingResult result , Model model){
 		if(result.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("viewFeedbackDetails", "bindingResult.hasErrors  "+result.hasErrors() , "TrainingPartnerController.java");
+			new ZLogger("viewFeedbackDetails", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "TrainingPartnerController.java");
 			return "trainingpartnerapplicationstatus1";
 		}
 		
@@ -210,14 +206,11 @@ public class TrainingPartnerController {
 	@RequestMapping(value="/changePasswordTrainingartnerSave" , method=RequestMethod.POST)
 	public String changePasswordTraineeSave(@ModelAttribute("changePasswordTrainingPartner") ChangePasswordForm changePasswordForm,HttpSession session,BindingResult result , Model model){
 		if(result.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("changePasswordTrainingartnerSave", "bindingResult.hasErrors  "+result.hasErrors() , "TrainingPartnerController.java");
+			new ZLogger("changePasswordTrainingartnerSave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "TrainingPartnerController.java");
 			return "changePasswordTrainingPartner";
 		}
 		String id =(String) session.getAttribute("logId");
-		//System.out.println(changePasswordForm.getLoginid());
-		//int id = 1;
 		boolean changePasswordTraineeSave = trainingPartnerService.changePasswordTrainingPartnerSave(changePasswordForm , id);
 		if(changePasswordTraineeSave){
 			model.addAttribute("created" , "Your password has been changed !!!");
@@ -229,33 +222,26 @@ public class TrainingPartnerController {
 	@RequestMapping(value="/trainingpartnertrainingcalendar" , method=RequestMethod.GET)
 	public String trainingpartnertrainingcalendar(@ModelAttribute("trainingPartnerTrainingCalender") TrainingPartnerTrainingCalender trainingPartnerTrainingCalender,HttpSession session,BindingResult result , Model model){
 		if(result.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("trainingpartnertrainingcalendar", "bindingResult.hasErrors  "+result.hasErrors() , "TrainingPartnerController.java");
+			new ZLogger("trainingpartnertrainingcalendar", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "TrainingPartnerController.java");
 			return "trainingpartnertrainingcalendar";
 		}
-		
-		
-		
+
 		List<CourseType> courseTypes = trainingPartnerService.courseTypes();
-		//List<CourseName> courseNames = trainingPartnerService.getCourseNameList();
 		trainingPartnerTrainingCalender.setCourseTypes(courseTypes);
 		List<IntStringBean> trainerList = trainingPartnerService.getTrainerList();
 		List<IntStringBean> assessmentAgencyNameList = trainingPartnerService.loadAssessmentAgency();
 		trainingPartnerTrainingCalender.setAssessmentAgencyName(assessmentAgencyNameList);
 		trainingPartnerTrainingCalender.setTrainerList(trainerList);
-//		trainingPartnerTrainingCalender.setCourseNames(courseNames);
 		Gson gson = new Gson();
 		model.addAttribute("trainingPartnerTrainingCalender" , gson.toJson(trainingPartnerTrainingCalender));
-		//model.addAttribute("created", "Oops , something went wrong !!!");
 		return "trainingpartnertrainingcalendar";
 	}
 	@RequestMapping(value="/viewtrainingpartnertrainingcalendar" , method=RequestMethod.GET)
 	public String viewtrainingpartnertrainingcalendar(@ModelAttribute("trainingPartnerTrainingCalender") TrainingPartnerTrainingCalender trainingPartnerTrainingCalender,HttpSession session,BindingResult result , Model model){
 		if(result.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("viewtrainingpartnertrainingcalendar", "bindingResult.hasErrors  "+result.hasErrors() , "TrainingPartnerController.java");
+			new ZLogger("viewtrainingpartnertrainingcalendar", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "TrainingPartnerController.java");
 			return "trainingpartnertrainingcalendar";
 		}
 		
@@ -274,21 +260,17 @@ public class TrainingPartnerController {
 	@RequestMapping(value="/trainingpartnerassessmentcalendar" , method=RequestMethod.GET)
 	public String trainingpartnerassessmentcalendar(@ModelAttribute("trainingpartnerassessmentcalendar") TrainingPartnerTrainingCalender trainingpartnerassessmentcalendar,HttpSession session,BindingResult result , Model model){
 		if(result.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("trainingpartnerassessmentcalendar", "bindingResult.hasErrors  "+result.hasErrors() , "TrainingPartnerController.java");
+			new ZLogger("trainingpartnerassessmentcalendar", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "TrainingPartnerController.java");
 			return "trainingpartnerassessmentcalendar";
 		}
 		
 		List<CourseType> courseTypes = trainingPartnerService.courseTypes();
-		
-		//List<CourseName> courseNames = trainingPartnerService.getCourseNameList();
 		trainingpartnerassessmentcalendar.setCourseTypes(courseTypes);
 		List<IntStringBean> trainerList = trainingPartnerService.getTrainerList();
 		List<IntStringBean> assessorList = trainingPartnerService.getAssessorList();
 		trainingpartnerassessmentcalendar.setTrainerList(trainerList);
 		trainingpartnerassessmentcalendar.setAssessorList(assessorList);
-//		trainingpartnerassessmentcalendar.setCourseNames(courseNames);
 		Gson gson = new Gson();
 		model.addAttribute("trainingpartnerassessmentcalendar" , gson.toJson(trainingpartnerassessmentcalendar));
 		return "trainingpartnerassessmentcalendar";
@@ -303,18 +285,15 @@ public class TrainingPartnerController {
 	@RequestMapping(value="/trainingpartnerapplicationstatus1" , method=RequestMethod.GET)
 	public String trainingpartnerapplicationstatus1(@ModelAttribute("trainingpartnerapplicationstatus") TrainingPartnerTrainingCalender trainingpartnerapplicationstatus,HttpSession session,BindingResult result , Model model){
 		if(result.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("trainingpartnerapplicationstatus1", "bindingResult.hasErrors  "+result.hasErrors() , "TrainingPartnerController.java");
+			new ZLogger("trainingpartnerapplicationstatus1", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "TrainingPartnerController.java");
 			return "trainingpartnerapplicationstatus1";
 		}
 		
 		List<CourseType> courseTypes = trainingPartnerService.courseTypes();
-		//List<CourseName> courseNames = trainingPartnerService.getCourseNameList();
 		trainingpartnerapplicationstatus.setCourseTypes(courseTypes);
 		List<PersonalInformationTrainingPartner> trainingCenterList=trainingCenterList();
 		trainingpartnerapplicationstatus.setTrainingCenterList(trainingCenterList);
-//		trainingpartnerapplicationstatus.setCourseNames(courseNames);
 		Gson gson = new Gson();
 		model.addAttribute("trainingpartnerapplicationstatus" , gson.toJson(trainingpartnerapplicationstatus));
 		return "trainingpartnerapplicationstatus1";
@@ -323,16 +302,13 @@ public class TrainingPartnerController {
 	@RequestMapping(value="/trainingpartnermanagetrainer" , method=RequestMethod.GET)
 	public String trainingpartnermanagetrainer(@ModelAttribute("trainingpartnermanagetrainer") TrainingPartnerTrainingCalender trainingpartnermanagetrainer,HttpSession session,BindingResult result , Model model){
 		if(result.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("trainingpartnermanagetrainer", "bindingResult.hasErrors  "+result.hasErrors() , "TrainingPartnerController.java");
+			new ZLogger("trainingpartnermanagetrainer", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "TrainingPartnerController.java");
 			return "trainingpartnermanagetrainer";
 		}
 		
 		List<CourseType> courseTypes = trainingPartnerService.courseTypes();
-		//List<CourseName> courseNames = trainingPartnerService.getCourseNameList();
 		trainingpartnermanagetrainer.setCourseTypes(courseTypes);
-//		trainingpartnermanagetrainer.setCourseNames(courseNames);
 		List<IntStringBean> trainerList = trainingPartnerService.getTrainerList();
 		trainingpartnermanagetrainer.setTrainerList(trainerList);
 		Gson gson = new Gson();
@@ -343,18 +319,15 @@ public class TrainingPartnerController {
 	@RequestMapping(value="/trainingpartnerviewtraineelist" , method=RequestMethod.GET)
 	public String trainingpartnerviewtraineelist(@ModelAttribute("trainingpartnerviewtraineelist") TrainingPartnerTrainingCalender trainingpartnerviewtraineelist,HttpSession session,BindingResult result , Model model){
 		if(result.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("trainingpartnerviewtraineelist", "bindingResult.hasErrors  "+result.hasErrors() , "TrainingPartnerController.java");
+			new ZLogger("trainingpartnerviewtraineelist", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "TrainingPartnerController.java");
 			return "trainingpartnerviewtraineelist";
 		}
 		
 		List<CourseType> courseTypes = trainingPartnerService.courseTypes();
-		//List<CourseName> courseNames = trainingPartnerService.getCourseNameList();
 		trainingpartnerviewtraineelist.setCourseTypes(courseTypes);
 		List<IntStringBean> trainerList = trainingPartnerService.getTrainerList();
 		trainingpartnerviewtraineelist.setTrainerList(trainerList);
-//		trainingpartnerviewtraineelist.setCourseNames(courseNames);
 		List<StringStringBean> statusList= trainingPartnerService.getStatusList();
 		trainingpartnerviewtraineelist.setStatusList(statusList);
 		List<StringStringBean> modeOfTrainingList= trainingPartnerService.getModeOfTrainingList();
@@ -367,18 +340,15 @@ public class TrainingPartnerController {
 	@RequestMapping(value="/trainingpartnerpaymentconfirmation" , method=RequestMethod.GET)
 	public String trainingpartnerpaymentconfirmation(@ModelAttribute("trainingpartnerpaymentconfirmation") TrainingPartnerTrainingCalender trainingpartnerpaymentconfirmation,HttpSession session,BindingResult result , Model model){
 		if(result.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("trainingpartnerpaymentconfirmation", "bindingResult.hasErrors  "+result.hasErrors() , "TrainingPartnerController.java");
+			new ZLogger("trainingpartnerpaymentconfirmation", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "TrainingPartnerController.java");
 			return "trainingpartnerpaymentconfirmation";
 		}
 		
 		List<CourseType> courseTypes = trainingPartnerService.courseTypes();
-		//List<CourseName> courseNames = trainingPartnerService.getCourseNameList();
 		trainingpartnerpaymentconfirmation.setCourseTypes(courseTypes);
 		List<IntStringBean> trainerList = trainingPartnerService.getTrainerList();
 		trainingpartnerpaymentconfirmation.setTrainerList(trainerList);
-//		trainingpartnerpaymentconfirmation.setCourseNames(courseNames);
 		List<StringStringBean> statusList= trainingPartnerService.getStatusList();
 		trainingpartnerpaymentconfirmation.setStatusList(statusList);
 		Gson gson = new Gson();
@@ -397,18 +367,16 @@ public class TrainingPartnerController {
 	@RequestMapping(value="/trainingpartnermarkAttendence" , method=RequestMethod.GET)
 	public String trainingpartnermarkAttendence(@ModelAttribute("trainingpartnermarkAttendence") TrainingPartnerTrainingCalender trainingpartnerpaymentconfirmation,HttpSession session,BindingResult result , Model model){
 		if(result.hasErrors()){
-			System.out.println(" bindingResult.hasErrors "+result.hasErrors());
-			System.out.println(result.getErrorCount());
-			System.out.println(result.getAllErrors());
+			new ZLogger("trainingpartnermarkAttendence", "bindingResult.hasErrors  "+result.hasErrors() , "TrainingPartnerController.java");
+			new ZLogger("trainingpartnermarkAttendence", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "TrainingPartnerController.java");
+			
 			return "trainingpartnermarkAttendence";
 		}
 		
 		List<CourseType> courseTypes = trainingPartnerService.courseTypes();
-		//List<CourseName> courseNames = trainingPartnerService.getCourseNameList();
 		trainingpartnerpaymentconfirmation.setCourseTypes(courseTypes);
 		List<IntStringBean> trainerList = trainingPartnerService.getTrainerList();
 		trainingpartnerpaymentconfirmation.setTrainerList(trainerList);
-//		trainingpartnerpaymentconfirmation.setCourseNames(courseNames);
 		List<StringStringBean> statusList= trainingPartnerService.getStatusList();
 		trainingpartnerpaymentconfirmation.setStatusList(statusList);
 		Gson gson = new Gson();
@@ -424,6 +392,7 @@ public class TrainingPartnerController {
 			responseObj.setMessage("Vacancy status Updated sucessfully");
 		}catch(Exception e){
 			responseObj.setMessage("unable to update Vacancy");
+			new ZLogger("updateApplicationStatusForEnrolledVacancy", "Exception while updateApplicationStatusForEnrolledVacancy  "+e.getMessage() , "TrainingPartnerController.java");
 		}
 		response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
@@ -443,6 +412,7 @@ public class TrainingPartnerController {
 		trainingCalendarList=trainingPartnerService.getTrainingCalenderList(postVacancyTrainingCenterBean);
 	
 		}catch(Exception e){
+			new ZLogger("getTrainingCalenderList", "Exception while getTrainingCalenderList  "+e.getMessage() , "TrainingPartnerController.java");
 		}
 		response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
@@ -493,14 +463,14 @@ public class TrainingPartnerController {
 	@ResponseBody
 	public void getApplicationStatusDetails(@RequestParam("name") String name ,@RequestBody PostVacancyTrainingCenterBean postVacancyTrainingCenterBean,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
 		
-		System.out.println("Get Application Status............" + name);
 		
 		List<PostVacancyTrainingCenter> list=new ArrayList<>();
 		try{
 			 list = trainingPartnerService.getAppliedCount(postVacancyTrainingCenterBean);
-			 System.out.println("List Size == "+list.size());
+	
 		}catch(Exception e){
 			e.printStackTrace();
+			new ZLogger("getApplicationStatusDetails", "Exception while getApplicationStatusDetails  "+e.getMessage() , "TrainingPartnerController.java");
 		}
 		response.setContentType("text/html;charset=UTF-8");
 		List<Utility> utilityList=new ArrayList<>();
@@ -535,6 +505,7 @@ public class TrainingPartnerController {
 			responseObj.setMessage("OK");
 		}catch(Exception e){
 			responseObj.setMessage("KO");
+			new ZLogger("updateUpcomingTrainingsStatus", "Exception while updateUpcomingTrainingsStatus  "+e.getMessage() , "TrainingPartnerController.java");
 		}
 		response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
@@ -565,6 +536,7 @@ public class TrainingPartnerController {
 			}
 		}catch(Exception e){
 			responseObj.setMessage("unable to apply Vacancy");
+			new ZLogger("applyForVacancy", "Exception while applyForVacancy  "+e.getMessage() , "TrainingPartnerController.java");
 		}
 		response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
@@ -580,7 +552,7 @@ public class TrainingPartnerController {
 		try{
 			feedbackFormList=traineeService.getFeedbackDetails(utility);
 		}catch(Exception e){
-
+			new ZLogger("getFeedbackDetails", "Exception while getFeedbackDetails  "+e.getMessage() , "TrainingPartnerController.java");	
 		}
 		response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
@@ -645,6 +617,7 @@ public class TrainingPartnerController {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
+			new ZLogger("trainingCenterCalenderSave", "Exception while trainingCenterCalenderSave  "+e.getMessage() , "TrainingPartnerController.java");
 		}
 		
 		return "redirect:/trainingpartnertrainingcalendar.fssai";
@@ -653,44 +626,12 @@ public class TrainingPartnerController {
 	
 	@RequestMapping("/trainingCalendarRemove" )
     public String removeManageCourseCarricullum(@Valid @ModelAttribute("trainingPartnerCalendarForm") TrainingPartnerCalendarForm trainingPartnerCalendarForm){
-		System.out.println("id "+trainingPartnerCalendarForm.getTcid());
         trainingPartnerService.cancelTrainingCalendar(trainingPartnerCalendarForm.getTcid());
 		return "redirect:/trainingpartnertrainingcalendar.fssai";
     }
 	
 	
-	//
-	
-	
-	/*@RequestMapping(value="/trainingpartnerpaymentconfirmationSave" , method=RequestMethod.POST)
-	  public String trainingpartnerpaymentconfirmationSave(@ModelAttribute("trainingpartnerpaymentconfirmationForm") PostVacancyTrainingCenterForm trainingpartnerpaymentconfirmationForm ,HttpSession session,BindingResult result ,  Model model){		
-		boolean isPostVacancyTrainingPartner=true;
-		if(postVacancyTrainingCenterForm.getTrainingCenter()==0){
-			isPostVacancyTrainingPartner=false;
-			int loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
-			postVacancyTrainingCenterForm.setTrainingCenter(loginService.FullDetailtrainingpartner(loginId).getPersonalInformationTrainingPartnerId());
-		}
-		String postVacancy = trainingPartnerService.postVacancyTrainingPartner(postVacancyTrainingCenterForm);
-		  if(postVacancy.equalsIgnoreCase("created")){
-			  model.addAttribute("created", "Vacancy created successfull !!!");
-		  }else{
-			  model.addAttribute("created", "vacancy already created !!!");
-		  }
-		  if(isPostVacancyTrainingPartner){
-			  return "postVacancyTrangCenter";
-		  }else{
-			  return "postVacancyTrainingPartner";	
-		  }
-	 }
-	*/
-	
-	/*
-	@ModelAttribute("assessmentAgencyNameList")
-	public List<ManageAssessmentAgency> assessmentAgencyNameList() {
-		List<ManageAssessmentAgency> assessmentAgencyNameList = trainingPartnerService.loadAssessmentAgency();
-		System.out.println("assessment Agency Name List    :   "+ assessmentAgencyNameList);
-		return assessmentAgencyNameList;
-	}*/
+
 	
 	
 }

@@ -28,6 +28,7 @@ import com.ir.model.LoginDetails;
 import com.ir.model.trainee.TraineeAssessmentEvaluation;
 import com.ir.service.AssessmentService;
 import com.ir.service.TraineeService;
+import com.zentech.logger.ZLogger;
 
 @Controller
 @SessionAttributes
@@ -47,7 +48,7 @@ public class AssessmentController {
 			Model model, HttpServletRequest request,HttpSession session) {
 		
 		try{
-			System.out.println(request.getAttribute("questionNo1"));
+			new ZLogger("submitAssessment",(String) request.getAttribute("questionNo1"), "AssessmentController.java");
 			Map<String, String> questionMap = new HashMap<>();
 			List<AssessmentAnswerCriteria> listAnswerCriteria = new ArrayList<AssessmentAnswerCriteria>();
 			AssessmentAnswerCriteria assessmentAnswerCriteria = new AssessmentAnswerCriteria();
@@ -79,8 +80,7 @@ public class AssessmentController {
 				assessmentAnswerCriteria.setLoginId(loginIdUniuqe);
 				listAnswerCriteria.add(assessmentAnswerCriteria);
 			}
-			System.out.println("Assessment save begin..");
-			System.out.println(questionMap);
+			new ZLogger("submitAssessment","Assessment save begin.."+questionMap, "AssessmentController.java");
 			assessmentService.saveAssessment(listAnswerCriteria);
 
 			TraineeAssessmentEvaluation traineeAssessmentEvaluation = assessmentService
@@ -104,8 +104,7 @@ public class AssessmentController {
 				loginId = (int) session.getAttribute("loginIdUnique");
 				userId = (Integer) session.getAttribute("userId");
 			} catch (Exception e) {
-				System.out.println("Exception while course details save : "
-						+ e.getMessage());
+				new ZLogger("submitAssessment"," Exception while submitAssessment "+e.getMessage(), "AssessmentController.java");
 			}
 			int tableID = traineeService.getTableIdForEnrolmentID(loginId,
 					profileID);
@@ -113,6 +112,7 @@ public class AssessmentController {
 			session.setAttribute("traineeSteps", 4);
 		}catch(Exception e){
 			e.printStackTrace();
+			new ZLogger("submitAssessment"," Exception while submitAssessment "+e.getMessage(), "AssessmentController.java");
 		}
 		
 		return "traineeAssessmentEvaluation";
