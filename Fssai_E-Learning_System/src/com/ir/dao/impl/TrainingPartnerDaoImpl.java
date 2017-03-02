@@ -31,6 +31,7 @@ import com.ir.model.TrainingCalendar;
 import com.ir.model.TrainingCalendarHistoryLogs;
 import com.ir.model.Utility;
 import com.ir.util.ChangePasswordUtility;
+import com.zentech.logger.ZLogger;
 
 @Repository
 public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
@@ -95,7 +96,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		Session session = sessionFactory.getCurrentSession();
 		PersonalInformationTrainingPartner p = getPersonalInformationTrainingPartner(postVacancyTrainingCenterForm.getTrainingCenter());
 		
-		System.out.println("hkhkhk");
+		new ZLogger("postVacancyTrainingPartner","postVacancyTrainingPartner", "TrainingPartnerDaoImpl.java");
 		String sql = "select * from PostVacancyTrainingCenter where CourseType = '"+postVacancyTrainingCenterForm.getCourseType()+"' and CourseName = '" + postVacancyTrainingCenterForm.getCourseName()+"' and TrainingDate = '"+ postVacancyTrainingCenterForm.getTrainingDate()+"'";
 		Query query = session.createSQLQuery(sql);
 		List l = query.list();
@@ -104,10 +105,8 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		}else{
 			CourseType ct = getCourseType(postVacancyTrainingCenterForm.getCourseType());
 			CourseName cn = getCourseName(postVacancyTrainingCenterForm.getCourseName());
-			//LoginDetails loginDetails = loginDetails.setLoginId(postVacancyTrainingCenterForm.getLoginId());
 			postVacancyTrainingCenter.setNoOfVacancy(postVacancyTrainingCenterForm.getNoOfVacancy());
 			postVacancyTrainingCenter.setRequiredExp(postVacancyTrainingCenterForm.getRequiredExp());
-			//postVacancyTrainingCenter.setTrainingDate(postVacancyTrainingCenterForm.getTrainingDate());
 			postVacancyTrainingCenter.setCourseName(cn);
 			postVacancyTrainingCenter.setCourseType(ct);
 			postVacancyTrainingCenter.setVacancyType(postVacancyTrainingCenterForm.getVacancyType());
@@ -116,7 +115,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			postVacancyTrainingCenter.setLoginId(postVacancyTrainingCenterForm.getLoginId());
 			postVacancyTrainingCenter.setTrainingCenter(p);
 			postVacancyTrainingCenterIdd = (Integer) session.save(postVacancyTrainingCenter);
-			System.out.println("post Vacancy TrainingCenter after save");
 			if(postVacancyTrainingCenterIdd >0 && postVacancyTrainingCenterIdd != null){
 				return "created";
 			}else{
@@ -143,9 +141,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	public boolean changePasswordTrainingPartnerSave(ChangePasswordForm changePasswordForm, String id) {
 		String oldPassword=	changePasswordForm.getOldPassword();
 		String newPassword=changePasswordForm.getNewPassword();
-		//String idd=changePasswordForm.getLoginid();
-		System.out.println("new pass   "+oldPassword);
-		
+		new ZLogger("changePasswordTrainingPartnerSave","changePasswordTrainingPartnerSave "+oldPassword, "TrainingPartnerDaoImpl.java");
 		boolean confirm = changePasswordUtility.changePasswordUtil(oldPassword, newPassword, id);
 		return confirm;
 	}
@@ -160,8 +156,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		Session session = sessionFactory.getCurrentSession();
 		List<IntStringBean> trinerNameList=new ArrayList<>();
 		String sql="select distinct pitp.personalinformationtrainerid,pitp.firstname,pitp.middlename,pitp.lastname from personalinformationtrainer pitp , logindetails pit";
-				
-		//"select pit.logindetails,pit.firstname,pit.middlename,pit.lastname from personalinformationtrainer pit,personalinformationtrainingpartner pitp";// where pit.logindetails=pitp.logindetails";
 		Query query = session.createSQLQuery(sql);
 		List<Object[]> courseTypeList = query.list();
 		if(courseTypeList.size()>0){
@@ -180,8 +174,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		Session session = sessionFactory.getCurrentSession();
 		List<IntStringBean> trinerNameList=new ArrayList<>();
 		String sql="select distinct pitp.personalinformationtraineeid,pitp.firstname,pitp.middlename,pitp.lastname from personalinformationtrainee pitp , logindetails pit";
-				
-		//"select pit.logindetails,pit.firstname,pit.middlename,pit.lastname from personalinformationtrainer pit,personalinformationtrainingpartner pitp";// where pit.logindetails=pitp.logindetails";
 		Query query = session.createSQLQuery(sql);
 		List<Object[]> courseTypeList = query.list();
 		if(courseTypeList.size()>0){
@@ -209,7 +201,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		String sql="select distinct A.personalinformationtrainingpartnerid,A.firstname,A.middlename,A.lastname  from personalinformationtrainingpartner A " +
 				" inner join logindetails B on(A.logindetails=B.id) ";
 		sql	= sql + userCondition.toString();
-		//"select pit.logindetails,pit.firstname,pit.middlename,pit.lastname from personalinformationtrainer pit,personalinformationtrainingpartner pitp";// where pit.logindetails=pitp.logindetails";
 		Query query = session.createSQLQuery(sql);
 		List<Object[]> courseTypeList = query.list();
 		if(courseTypeList.size()>0){
@@ -234,14 +225,13 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	
 		String sql="select distinct A.personalinformationtrainingpartnerid  from personalinformationtrainingpartner A " +
 				" inner join logindetails B on(A.logindetails=B.id) where logindetails='"+userId+"'";
-		
-	System.out.println(" sql "+sql);
+		new ZLogger("getTrainingCenter","sql "+sql, "TrainingPartnerDaoImpl.java");
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
 		
 			if(list.size() > 0){
 				trainingCenter = (int) list.get(0);
-				System.out.println("trainingCenter "+trainingCenter);
+				new ZLogger("getTrainingCenter"," ", "TrainingPartnerDaoImpl.java");
 			}
 		
 		return trainingCenter;
@@ -287,17 +277,17 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		Session session = sessionFactory.getCurrentSession();
 		double trainerExp = 0;
 		String sql = "select (CAST(AA.expinfoodsafefytimeyear AS VARCHAR(10) ) ||'.'|| CAST(AA.expinfoodsafefytimemonth AS VARCHAR(10) )) from personalinformationtrainer AA where AA.logindetails ='"+userID+"'";
-		System.out.println("sql "+sql);
+		new ZLogger("getPostVacancyTrainingList","sql "+sql, "TrainingPartnerDaoImpl.java");
 		Query query1 = session.createSQLQuery(sql);
 		List<String> status = query1.list();
 		try{
 			if(status.size()>0){
-				System.out.println("status.get(0).toString() == "+status.get(0).toString());
+				new ZLogger("getPostVacancyTrainingList","status.size() "+status.size(), "TrainingPartnerDaoImpl.java");
 				trainerExp = Float.parseFloat(status.get(0).toString());
 			}	
 		}catch(Exception e){
 			e.printStackTrace();
-			System.out.println("e "+e.getMessage());
+			new ZLogger("getPostVacancyTrainingList","Exception while getPostVacancyTrainingList "+e.getMessage(), "TrainingPartnerDaoImpl.java");
 		}
 		
 		Query query = session.createQuery("from PostVacancyTrainingCenter A where  to_timestamp(COALESCE(A.trainingDate, '19900101010101'),'DD-MM-YYYY HH24:MI')  > now() AND A.requiredExp <= "+trainerExp);
@@ -382,15 +372,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 					e.setLink(loginSQLSQuerylist.get(i)[3] == null ? "" : loginSQLSQuerylist.get(i)[3].toString());
 					trainerList.add(e);
 				}
-				/*for(Object[] obj:list){
-					String loginSQL=" select ve.vacancyenrolledid , concat(pit.firstname,' ',pit.middlename,' ',pit.lastname) as name from personalinformationtrainer pit , trainingcentervacancyenrolled ve where logindetails="+Integer.parseInt(list.get(0)[2].toString());
-					Query loginSQLSQuery = session.createSQLQuery(loginSQL);
-					List<Object[]> loginSQLSQuerylist = loginSQLSQuery.list();
-					StringStringBean e=new StringStringBean();
-					e.setId(loginSQLSQuerylist.get(0)[0].toString());
-					e.setValue(loginSQLSQuerylist.get(0)[1].toString());
-					trainerList.add(e);
-				}*/
 				
 				utility.setTrainerList(trainerList);
 			}
@@ -413,8 +394,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		sqlBuffer.append(" inner join coursetype B on(A.coursetype=B.coursetypeid)");
 		sqlBuffer.append(" inner join coursename C on(A.coursename=C.coursenameid) ");
 		
-		System.out.println("Application Status == "+sqlBuffer.toString());
-		
+		new ZLogger("getAppliedCount","getAppliedCount  "+sqlBuffer.toString(), "TrainingPartnerDaoImpl.java");
 		String queryParam="";
 		List<PostVacancyTrainingCenter> beans=new ArrayList<>();
 		if(postVacancyTrainingCenterBean.getCourseType()>0){
@@ -534,7 +514,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		String[] statusList=PostVacancyTrainingCenterBean.getStatus().split(",");
 		for(int index=0;index<trainerList.length;index++){
 			PostVacancyTrainingCenterBean pvtcb = (PostVacancyTrainingCenterBean)session.load(PostVacancyTrainingCenterBean.class, Integer.parseInt(trainerList[index]));
-			System.out.println("****************************"+statusList[index]);
 			pvtcb.setStatus(statusList[index]);
 			session.update(pvtcb);
 		}
@@ -588,17 +567,15 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	
 	@Override
 	public String trainingCalendarForm(TrainingCalendarForm trainingCalendarForm) {
-		System.out.println("********  "+trainingCalendarForm.getCourseName());
+		new ZLogger("trainingCalendarForm","trainingCalendarForm  "+trainingCalendarForm.getCourseName(), "TrainingPartnerDaoImpl.java");
 		Session session = sessionFactory.getCurrentSession();
 		
 		String sql = "select coalesce(max(seqNo) + 1,1) from trainingcalendar";
 		int maxId = 0 ;
 		Query maxIDList = session.createSQLQuery(sql);
 		List list = maxIDList.list();
-		System.out.println(list.size());
 		if(list.size() > 0){
 			maxId = (int) list.get(0);
-			//eligible = (String) list.get(0);
 		}
 		TrainingCalendar tc = new TrainingCalendar();
 		TrainingCalendarHistoryLogs tch =  new TrainingCalendarHistoryLogs();
@@ -630,7 +607,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		tch.setAssessor(trainingCalendarForm.getAssessor());
 		tch.setAssessmentDateTime(trainingCalendarForm.getAssessmentDateTime());
 		
-		System.out.println("---->"+trainingCalendarForm.getTcid());
 		CourseName courseName = (CourseName) session.load(CourseName.class, trainingCalendarForm.getCourseName());
 		PersonalInformationTrainingPartner personalInformationTrainingPartner = (PersonalInformationTrainingPartner) session.load(PersonalInformationTrainingPartner.class, trainingCalendarForm.getTrainingCenter());
 		tc.setTrainingPartner(personalInformationTrainingPartner.getTrainingPartnerName());
@@ -640,13 +616,11 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		}
 		int i = 0;
 	if(trainingCalendarForm.getTcid()==0){
-		System.out.println("inside create");
-		System.out.println("username "+trainingCalendarForm.getUserName());
 		tch.setCreated_by(trainingCalendarForm.getUserName());
 	 i = (Integer) session.save(tc);
 	 				session.save(tch);
 	}else{
-		System.out.println(" inside update");
+		new ZLogger("trainingCalendarForm","inside update ", "TrainingPartnerDaoImpl.java");
 		tc.setTrainingCalendarId(trainingCalendarForm.getTcid());
 		tch.setChanged_by(trainingCalendarForm.getUserName());
 		 session.update(tc);
@@ -664,7 +638,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		
 		Session session = sessionFactory.getCurrentSession();
 		String sql = "select personalinformationtrainingpartnerid , trainingpartnername   from personalinformationtrainingpartner ptp inner join  logindetails ld on ptp.logindetails = ld.id where ld.loginid ='"+loginName+"'";
-		System.out.println("sql "+sql);
+		new ZLogger("setTrainingCalanderDeatils","sql "+sql, "TrainingPartnerDaoImpl.java");
 		Query query = session.createSQLQuery(sql);
 		List<Object[]> status = query.list();
 		try{
@@ -675,7 +649,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 				}
 			}	
 		}catch(Exception e){
-			System.out.println("e "+e.getMessage());
+			new ZLogger("setTrainingCalanderDeatils","exception while  setTrainingCalanderDeatils  "+e.getMessage(), "TrainingPartnerDaoImpl.java");
 		}
 		
 	}
@@ -725,7 +699,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		if(courseTypeList.size()>0){
 			for(int index=0;index<courseTypeList.size();index++){
 				String objecList=courseTypeList.get(index);
-				System.out.println(objecList);
 				trinerNameList.add(objecList);
 			}
 		}
@@ -751,7 +724,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		if(courseTypeList.size()>0){
 			for(int index=0;index<courseTypeList.size();index++){
 				String objecList=courseTypeList.get(index);
-				System.out.println(objecList);
 				trinerNameList.add(objecList);
 			}
 		}

@@ -5,12 +5,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+
 import com.ir.constantes.Constantes;
 import com.ir.constantes.TableLink;
 import com.ir.dao.AdminDAO;
@@ -40,6 +42,7 @@ import com.ir.model.TrainingCalendar;
 import com.ir.model.Utility;
 import com.ir.util.ChangePasswordUtility;
 import com.ir.util.SendContectMail;
+import com.zentech.logger.ZLogger;
 
 
 public class TraineeDAOImpl implements TraineeDAO {
@@ -118,9 +121,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		ContactTraineee contactTraineeModel = new ContactTraineee();
 		String email = contactTrainee.getEmailAddress();
 		String msg = contactTrainee.getMessageDetails();
-		// String ss=contactTrainee.getUserId();
-		System.out.println("user id in dao impl  :::::" + id);
-
+		new ZLogger("contactTraineeSave", "user id in dao impl  :::::" + id, "TraineeDAOImpl.java");
 		traineeMaail.mailProperty(msg, email, id);
 		contactTraineeModel.setEmailAddress(email);
 		contactTraineeModel.setMessageDetails(msg);
@@ -203,11 +204,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public CourseName getCourseName(int loginId) {
 		CourseName courseName = new CourseName();
 		Session session = sessionFactory.getCurrentSession();
-		// String
-		// sql="select cn.coursename, ce.coursenameid, cn.courseduration "
-		// + "from courseenrolled ce "
-		// + "inner join coursename cn on cn.coursenameid = ce.coursenameid "
-		// + "where ce.logindetails = "+loginId;
 		String sql = "select cn.coursename, cn.coursenameid, cn.courseduration "
 				+ "from courseenrolleduser  ceu "
 				+ "inner join trainingcalendar tc on tc.trainingcalendarid =   ceu.trainingcalendarid "
@@ -293,6 +289,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 
 		}
 		System.out.println(st);
+		new ZLogger("trainingCenterStateList", "  " + st, "TraineeDAOImpl.java");
 		return st;
 	}
 
@@ -302,7 +299,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 
 		Session session = sessionFactory.getCurrentSession();
 
-		System.out.println("iddddd  " + ss);
+		new ZLogger("updateTrainee", "  " + ss, "TraineeDAOImpl.java");
 		State ps = getState(registrationFormTrainee.getResState());
 		State cs = getState(registrationFormTrainee.getResState());
 		State bs = getState(registrationFormTrainee.getBussState());
@@ -314,47 +311,19 @@ public class TraineeDAOImpl implements TraineeDAO {
 		City pc = getCity(registrationFormTrainee.getResCity());
 		City cc = getCity(registrationFormTrainee.getCorrespondenceCity());
 		City bc = getCity(registrationFormTrainee.getBussCity());
-		// Title tt = getTitle(registrationFormTrainee.getTitle());
 		KindOfBusiness kob = getKid(registrationFormTrainee.getKindOfBusiness());
 		PersonalInformationTrainee personalInformationTrainee = (PersonalInformationTrainee) session
 				.load(PersonalInformationTrainee.class, ss);
 
-		// PersonalInformationTrainee personalInformationTrainee = new
-		// PersonalInformationTrainee();
-		// personalInformationTrainee.setTitle(tt);
-		System.out.println("this is pin code    "
-				+ registrationFormTrainee.getResPincode());
-		System.out.println("this is state     "
-				+ registrationFormTrainee.getResState());
+		new ZLogger("updateTrainee","this is pin code    "+ registrationFormTrainee.getResPincode(), "TraineeDAOImpl.java");
+		new ZLogger("updateTrainee","this is state     "+ registrationFormTrainee.getResState(), "TraineeDAOImpl.java");
 		System.out.println(registrationFormTrainee.getBusinessAddressLine1());
 		boolean correspondADD = registrationFormTrainee.isCheckCorrespondence();
 		boolean checkCompany = registrationFormTrainee.isCheckCompany();
 
-		// Business
-		/*
-		 * personalInformationTrainee.setKindOfBusiness(kob);
-		 * personalInformationTrainee
-		 * .setBusinessAddressLine1(registrationFormTrainee
-		 * .getBusinessAddressLine1());
-		 * personalInformationTrainee.setBusinessAddressLine2
-		 * (registrationFormTrainee.getBusinessAddressLine2());
-		 * personalInformationTrainee.setBussState(bs);
-		 * personalInformationTrainee.setBussCity(bc);
-		 * personalInformationTrainee.setBussDistrict(bd);
-		 * personalInformationTrainee
-		 * .setBussPincode(registrationFormTrainee.getBussPincode());
-		 * personalInformationTrainee
-		 * .setCompanyName(registrationFormTrainee.getCompanyName());
-		 * personalInformationTrainee
-		 * .setDesignation(registrationFormTrainee.getDesignation());
-		 * personalInformationTrainee
-		 * .setRegistrationNo(registrationFormTrainee.getRegistrationNo());
-		 */
-
 		personalInformationTrainee.setGender(registrationFormTrainee
 				.getGender());
 
-		System.out.println("==== " + registrationFormTrainee.getGender());
 
 		if (registrationFormTrainee.getKindOfBusiness() == 6) {
 			personalInformationTrainee.setKindOfBusiness(kob);
@@ -369,7 +338,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 			personalInformationTrainee.setBussPincode(null);
 
 		} else {
-			System.out.println("Else Kind of business");
+			new ZLogger("updateTrainee","Else Kind of business", "TraineeDAOImpl.java");
 			personalInformationTrainee.setCompanyName(registrationFormTrainee
 					.getCompanyName());
 			personalInformationTrainee.setDesignation(registrationFormTrainee
@@ -430,20 +399,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 		personalInformationTrainee
 				.setCorrespondencePincode(registrationFormTrainee
 						.getCorrespondencePincode());
-		// personalInformationTrainee.setCorrespondenceState(adminDAO.getState(registrationFormTrainee.getCorrespondenceState()));
-
-		// Permanent Block
-		/*
-		 * personalInformationTrainee.setResidentialLine1(registrationFormTrainee
-		 * .getResidentialAddressLine1());
-		 * personalInformationTrainee.setResidentialLine2
-		 * (registrationFormTrainee.getResidentialAddressLine2());
-		 * personalInformationTrainee.setResState(ps);
-		 * personalInformationTrainee.setResidentialDistrict(pd);
-		 * personalInformationTrainee.setResCity(pc);
-		 * personalInformationTrainee.
-		 * setResPincode(registrationFormTrainee.getResPincode());
-		 */
 		if (correspondADD) {
 			personalInformationTrainee
 					.setResidentialLine1(registrationFormTrainee
@@ -471,8 +426,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 					.getResPincode());
 			personalInformationTrainee.setCheckPermanent("false");
 		}
-
-		// session.createQuery("update com. ir.model.PersonalInformationTrainee set title='"+personalInformationTrainee.getTitle()+"', Email='"+personalInformationTrainee.getEmail()+"' ");
 
 		session.update(personalInformationTrainee);
 		return null;
@@ -502,9 +455,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 
 		String oldPassword = changePasswordForm.getOldPassword();
 		String newPassword = changePasswordForm.getNewPassword();
-		// String idd=changePasswordForm.getLoginid();
-		System.out.println("new pass   " + oldPassword);
-
+		new ZLogger("updateTrainee","new pass   " + oldPassword, "TraineeDAOImpl.java");
 		boolean confirm = changePasswordUtility.changePasswordUtil(oldPassword,
 				newPassword, id);
 
@@ -515,17 +466,16 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public String basicSave(CourseEnrolledUserForm courseEnrolledUserForm,
 			int loginid, int tableID, Integer profileID) {
 
-		System.out.println("course enrolled");
+		new ZLogger("basicSave","basicSave", "TraineeDAOImpl.java");
 		Session session = sessionFactory.getCurrentSession();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 		int maxId = 0 ;
 		String sql = "select coalesce(max(rollseqNo) + 1,1) from courseenrolleduser";
 		Query maxIDList = session.createSQLQuery(sql);
 		List list = maxIDList.list();
-		System.out.println(list.size());
+		new ZLogger("basicSave","list.size() "+list.size(), "TraineeDAOImpl.java");
 		if(list.size() > 0){
 			maxId = (int) (list.get(0) == null ? "1" : list.get(0));
-			//eligible = (String) list.get(0);
 		}
 		TrainingCalendar tc = (TrainingCalendar) session.load(TrainingCalendar.class, courseEnrolledUserForm.getTrainingCalendarId());
 		CourseName ct = (CourseName) session.load(CourseName.class, tc.getCourseName());
@@ -556,21 +506,17 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public long advanceTraineeSave(
 			CourseEnrolledUserForm courseEnrolledUserForm, int loginid,
 			int tableID, Integer profileID) {
-		System.out.println("course enrolled");
+		new ZLogger("advanceTraineeSave","advanceTraineeSave", "TraineeDAOImpl.java");
 		Session session = sessionFactory.getCurrentSession();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 		long date = System.currentTimeMillis();
-		System.out.println("roll nu  :" + date);
-		System.out.println("loginid  :" + loginid);
-		System.out.println("tableID   :" + tableID);
-		System.out.println("TrainingCalendarId()   :"
-				+ courseEnrolledUserForm.getTrainingCalendarId());
-
+		new ZLogger("advanceTraineeSave","TrainingCalendarId()   :"+ courseEnrolledUserForm.getTrainingCalendarId(), "TraineeDAOImpl.java");
+		new ZLogger("basicSave","tableID "+tableID, "TraineeDAOImpl.java");
+		
 		courseEnrolledUser.setLoginDetails(loginid);
 		courseEnrolledUser.setProfileId(3);
 		courseEnrolledUser.setTrainingCalendarId(courseEnrolledUserForm
 				.getTrainingCalendarId());
-		//courseEnrolledUser.setRollno(date);
 		courseEnrolledUser.setStatus("N");
 		courseEnrolledUser.setPaymentstatus("Pending");
 		if (profileID != null && profileID == 3) {
@@ -592,12 +538,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 		Session session = sessionFactory.getCurrentSession();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 		long date = System.currentTimeMillis();
-		System.out.println("roll nu  :" + date);
-		System.out.println("loginid  :" + loginid);
-		System.out.println("tableID   :" + tableID);
-		System.out.println("TrainingCalendarId()   :"
-				+ courseEnrolledUserForm.getTrainingCalendarId());
-
 		courseEnrolledUser.setLoginDetails(loginid);
 		courseEnrolledUser.setProfileId(3);
 		courseEnrolledUser.setTrainingCalendarId(courseEnrolledUserForm
@@ -653,14 +593,11 @@ public class TraineeDAOImpl implements TraineeDAO {
 				+ " where ce.status = 'N' AND ce.logindetails = " + loginId;
 		AdmitCardForm admitcard = new AdmitCardForm();
 		try {
-		System.out.println("&&&&&&&&&&&&&&&&&& = "+str_query);
 		Session session = sessionFactory.getCurrentSession();
 		
 		Query query = session.createSQLQuery(str_query);
 		// List records = query.list();
 		List<Object[]> records = (List<Object[]>) query.list();
-		System.out.println("records == : "+records);
-		
 			if (records.size() > 0) {
 
 				Object[] obj = records.get(0);
@@ -687,11 +624,10 @@ public class TraineeDAOImpl implements TraineeDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out
-					.println("Exception while retrieving admit card details : "
-							+ e.getMessage());
+			new ZLogger("generateAdmitCard","Exception while  :"+e.getMessage(), "TraineeDAOImpl.java");
 		}
-		System.out.println("Admin Card Form : "+admitcard);
+
+		new ZLogger("generateAdmitCard","Exception while  :"+admitcard, "TraineeDAOImpl.java");
 		return admitcard;
 	}
 
@@ -787,6 +723,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 			System.out
 					.println("Exception while retrieving admit card details : "
 							+ e.getMessage());
+			new ZLogger("generateTrainerAdmitCard","Exception while generateTrainerAdmitCard :"+e.getMessage(), "TraineeDAOImpl.java");
 		}
 		return admitcard;
 	}
@@ -795,26 +732,23 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public String getDefaultMailID(int loginId, int profileId) {
 		// TODO Auto-generated method stub
 		String email = "";
-		System.out.println("Login ID -- " + loginId);
-		System.out.println("profileId ID -- " + profileId);
 		TableLink data = TableLink.getByprofileID(profileId);
+		new ZLogger("getDefaultMailID","getDefaultMailID :"+data, "TraineeDAOImpl.java");
 		System.out.println("Table Name == " + data.tableName());
 		Session session = sessionFactory.getCurrentSession();
 		String sql = "select " + data.email() + " from " + data.tableName()
 				+ " where logindetails = " + loginId;
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
-		System.out.println(list.size());
-		
+		new ZLogger("getDefaultMailID","list.size():"+list.size(), "TraineeDAOImpl.java");
 		return (String) list.get(0);
 	}
 
 	@Override
 	public PersonalInformationTrainee fullDetail(int loginId) {
-		System.out.println("LoginDAOImpl full detail process start ");
+		new ZLogger("PersonalInformationTrainee","PersonalInformationTrainee :"+loginId, "TraineeDAOImpl.java");
 		Session session = sessionFactory.getCurrentSession();
 		Integer i = loginId;
-		System.out.println("search " + loginId);
 		Query query = session
 				.createQuery("from PersonalInformationTrainee where loginDetails = '"
 						+ i + "'");
@@ -830,10 +764,8 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public int getTableIdForEnrolmentID(int loginId, int profileId) {
 		// TODO Auto-generated method stub
 		int tableID = 0;
-		System.out.println("Login ID -- " + loginId);
-		System.out.println("profileId ID -- " + profileId);
+		new ZLogger("getTableIdForEnrolmentID","loginId :"+loginId + " profileId "+profileId , "TraineeDAOImpl.java");
 		TableLink data = TableLink.getByprofileID(profileId);
-		System.out.println("Table Name == " + data.tableName());
 		Session session = sessionFactory.getCurrentSession();
 		String sql = "";
 		if (profileId == 3) {
@@ -848,37 +780,30 @@ public class TraineeDAOImpl implements TraineeDAO {
 		}
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();
-		System.out.println(list.size());
 		return (Integer) list.get(0);
 	}
 
 	@Override
 	public Boolean updateSteps(int tableID, int profileID, int steps) {
 		// TODO Auto-generated method stub
-		System.out.println("**************Steps == " + steps);
 		Session session = sessionFactory.getCurrentSession();
 		if (profileID == 3) {
 			PersonalInformationTrainee personalInformationTrainee = (PersonalInformationTrainee) session
 					.load(PersonalInformationTrainee.class, tableID);
-			System.out.println("personalInformationTrainer.getSteps() "
-					+ personalInformationTrainee.getSteps());
-			System.out
-					.println("personalInformationTrainer.getSteps() " + steps);
+			new ZLogger("getTableIdForEnrolmentID","tableID :"+tableID + " profileID "+profileID , "TraineeDAOImpl.java");
 			if (personalInformationTrainee.getSteps() < steps) {
-				System.out.println("IF");
+				new ZLogger("getTableIdForEnrolmentID","IF", "TraineeDAOImpl.java");
 				personalInformationTrainee.setSteps(steps);
 			} else {
-				System.out.println("ELSE");
+				new ZLogger("getTableIdForEnrolmentID","ELSE", "TraineeDAOImpl.java");
 			}
 			session.update(personalInformationTrainee);
 		} else if (profileID == 4) {
 			PersonalInformationTrainer personalInformationTrainer = (PersonalInformationTrainer) session
 					.load(PersonalInformationTrainer.class, tableID);
 
-			System.out.println("personalInformationTrainer.getSteps() "
-					+ personalInformationTrainer.getSteps());
-			System.out
-					.println("personalInformationTrainer.getSteps() " + steps);
+			System.out.println("personalInformationTrainer.getSteps() "+ personalInformationTrainer.getSteps());
+			new ZLogger("getTableIdForEnrolmentID","personalInformationTrainer.getSteps() "+ personalInformationTrainer.getSteps(), "TraineeDAOImpl.java");
 			if (personalInformationTrainer.getSteps() < steps) {
 				personalInformationTrainer.setSteps(steps);
 			}
@@ -900,6 +825,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		List list = query.list();
 		if(list.size() > 0){
 			System.out.println(list.size());
+			new ZLogger("isCourseOnline","list.size() "+ list.size(), "TraineeDAOImpl.java");
 			status = (String) list.get(0);
 		}
 		return status;
@@ -939,7 +865,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 							+ " where A.totalscore >= (select AA.eligibility from assessmenteligibility AA where AA.coursenameid=A.coursenameid) and A.logindetails = " + userID;
 					Query query = session.createSQLQuery(sql);
 					List list = query.list();
-					System.out.println(list.size());
+					new ZLogger("isTraineeEligible","list.size() "+ list.size(), "TraineeDAOImpl.java");
 					if(list.size() > 0){
 						eligible = "Y";
 						//eligible = (String) list.get(0);
@@ -948,7 +874,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 					String sql = "select result from courseenrolleduser where logindetails = "+ userID+" and status = 'N'";
 					Query query = session.createSQLQuery(sql);
 					List list = query.list();
-					System.out.println(list.size());
+					new ZLogger("isTraineeEligible","list.size() "+ list.size(), "TraineeDAOImpl.java");
 					if(list.size() > 0){
 						String result  = (String) list.get(0);
 						if(result != null && result.toUpperCase().equals("P")){
@@ -979,7 +905,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 				String sqlSeq = "select coalesce(max(certificateseqno) + 1,1) from courseenrolleduser";
 				Query maxIDListSeq = session.createSQLQuery(sqlSeq);
 				List list = maxIDListSeq.list();
-				System.out.println(list.size());
+				new ZLogger("getCertificateID","list.size() "+ list.size(), "TraineeDAOImpl.java");
 				if (list.size() > 0) {
 					maxIdSeq = (int) list.get(0);
 					// eligible = (String) list.get(0);

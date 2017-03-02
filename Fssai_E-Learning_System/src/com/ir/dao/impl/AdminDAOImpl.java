@@ -77,6 +77,8 @@ import com.ir.util.SendContectMail;
 import com.ir.util.SendMail;
 
 
+import com.zentech.logger.ZLogger;
+
 import org.apache.commons.lang.StringUtils;
 @Repository
 public class AdminDAOImpl implements AdminDAO {
@@ -139,7 +141,6 @@ public class AdminDAOImpl implements AdminDAO {
 		State state = new State();
 		state.setStateName(stateForm.getStateName().replaceAll("%20", " "));
 		state.setStatus(stateForm.getStatus());
-		System.out.println("**********SS");
 		Integer stateIdd = null ;
 		String sql = "select * from state where upper(stateName) like '"+stateForm.getStateName().replaceAll("%20", " ").toUpperCase()+"'";
 		Query query = session.createSQLQuery(sql);
@@ -276,6 +277,7 @@ public class AdminDAOImpl implements AdminDAO {
 		Query maxIDList = session.createSQLQuery(sql);
 		List list = maxIDList.list();
 		System.out.println(list.size());
+		new ZLogger("manageCourse", "list.size() "+list.size(), "AdminDAOImpl.java");
 		if(list.size() > 0){
 			maxId = (int) list.get(0);
 			//eligible = (String) list.get(0);
@@ -358,16 +360,13 @@ public class AdminDAOImpl implements AdminDAO {
 			encryprPassword = encryptionPasswordANDVerification.encryptPass(passwordString);
 			
 		}catch(NoSuchAlgorithmException e){
-			System.out.println( " no such algo exception error catch ");
+			new ZLogger("manageTrainingPartnerSave", "Exception while  "+e.getMessage(), "AdminDAOImpl.java");
 		}
 		
 		
 		String TPPrefix = "TP"+   manageTrainingPartnerForm.getTrainingPartnerName().toUpperCase().substring(0, 3);
-		System.out.println(" TPPrefix "+TPPrefix);
 		String nextSequenceUserID  =  GenerateUniqueID.getNextCombinationId(TPPrefix, "manageTrainingPartner", "00");
-		System.out.println(" nextSequenceUserID "+nextSequenceUserID);
-		
-		
+
 		LoginDetails loginDetails = new LoginDetails();
 		loginDetails.setLoginId(nextSequenceUserID);
 		loginDetails.setPassword(passwordString);
@@ -395,8 +394,8 @@ public class AdminDAOImpl implements AdminDAO {
 		manageTrainingPartner.setLoginDetails(loginDetails);
 		Integer manageTrainingPartnerIdd = (Integer)session.save(manageTrainingPartner);
 		
-		System.out.println("all insert done");
-		System.out.println("saved login "+ manageTrainingPartnerIdd);
+		new ZLogger("manageTrainingPartnerSave", "all insert done", "AdminDAOImpl.java");
+		new ZLogger("manageTrainingPartnerSave", "saved login "+ manageTrainingPartnerIdd, "AdminDAOImpl.java");
 		if(manageTrainingPartnerIdd  != 0){
 			SendMail sendMail = new SendMail();
 			sendMail.mailProperty(passwordString, manageTrainingPartnerForm.getEmail(), manageTrainingPartnerForm.getTrainingPartnerName()+ " " + manageTrainingPartnerForm.getUserId());
@@ -419,7 +418,7 @@ public class AdminDAOImpl implements AdminDAO {
 			encryprPassword = encryptionPasswordANDVerification.encryptPass(passwordString);
 			
 		}catch(NoSuchAlgorithmException e){
-			System.out.println( " no such algo exception error catch ");
+			new ZLogger("manageAssessmentAgencySave", "Exception while manageAssessmentAgencySave "+e.getMessage(), "AdminDAOImpl.java");
 		}
 		
 		State s = getState(manageAssessmentAgencyForm.getStateId());
@@ -428,9 +427,7 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		ManageAssessmentAgency manageAssessmentAgency = new ManageAssessmentAgency();
 		String APPrefix = "AP"+   manageAssessmentAgencyForm.getAssessmentAgencyName().toUpperCase().substring(0, 3);
-		System.out.println(" APPrefix "+APPrefix);
 		String nextSequenceUserID  =  GenerateUniqueID.getNextCombinationId(APPrefix, "manageAssessmentAgency", "00");
-		System.out.println(" nextSequenceUserID "+nextSequenceUserID);
 		LoginDetails loginDetails = new LoginDetails();
 		loginDetails.setLoginId(nextSequenceUserID);
 		loginDetails.setPassword(passwordString);
@@ -499,8 +496,7 @@ public class AdminDAOImpl implements AdminDAO {
 		String sql= "Select "+ select + "  from PersonalInformationTrainee as pitp "+ join + like;
 		Query query = session.createSQLQuery(sql);
 		List<PersonalInformationTrainee> list = query.list();
-		System.out.println("all select done");
-		System.out.println("list  "+ list);
+		new ZLogger("traineeUserManagementSearch", "list  "+ list, "AdminDAOImpl.java");
 		if( list.size() > 0){
 			return list;
 		}else{
@@ -546,13 +542,11 @@ public class AdminDAOImpl implements AdminDAO {
 		String sql= "Select "+ select + "  from PersonalInformationTrainer as pitp "+ join + like;
 		Query query = session.createSQLQuery(sql);
 		List<PersonalInformationTrainer> list = query.list();
-		System.out.println("all select done");
-		System.out.println("list  "+ list);
+		new ZLogger("trainerUserManagementSearch", "list  "+ list, "AdminDAOImpl.java");
 		if( list.size() > 0){
-			System.out.println("list size gt thaan 0");
 			return list;
 		}else{
-			System.out.println("list size null");
+			new ZLogger("trainerUserManagementSearch", "list size null", "AdminDAOImpl.java");
 			list = null;
 			return list;
 		}
@@ -606,13 +600,12 @@ public class AdminDAOImpl implements AdminDAO {
 		String sql= "Select "+ select + "  from PersonalInformationAssessor as pitp "+ join + like;
 		Query query = session.createSQLQuery(sql);
 		List<PersonalInformationAssessor> list = query.list();
-		System.out.println("all select done");
-		System.out.println("list  "+ list);
+		new ZLogger("assessorUserManagementSearch", "list size "+list.size(), "AdminDAOImpl.java");
 		if( list.size() > 0){
-			System.out.println("list size gt thaan 0");
+			new ZLogger("assessorUserManagementSearch", "list size gt thaan 0", "AdminDAOImpl.java");
 			return list;
 		}else{
-			System.out.println("list size null");
+			new ZLogger("assessorUserManagementSearch", "list size null", "AdminDAOImpl.java");
 			list = null;
 			return list;
 		}
@@ -666,13 +659,11 @@ public class AdminDAOImpl implements AdminDAO {
 		String sql= "Select "+ select + "  from PersonalInformationTrainingPartner as pitp "+ join + like;
 		Query query = session.createSQLQuery(sql);
 		List<PersonalInformationTrainingPartner> list = query.list();
-		System.out.println("all select done");
-		System.out.println("list  "+ list);
 		if( list.size() > 0){
-			System.out.println("list size gt thaan 0");
+			new ZLogger("trainingCenterUserManagementSearch", "list size gt thaan 0", "AdminDAOImpl.java");
 			return list;
 		}else{
-			System.out.println("list size null");
+			new ZLogger("trainingCenterUserManagementSearch", "list size null", "AdminDAOImpl.java");
 			list = null;
 			return list;
 		}
@@ -681,12 +672,10 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public List<AdminUserManagement> adminUserManagementSearch() {
-		System.out.println("RegistrationDAOImpl [register] begin for registration trainee");
+		new ZLogger("adminUserManagementSearch", "inside adminUserManagementSearch", "AdminDAOImpl.java");
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(AdminUserManagement.class);
 		List<AdminUserManagement> list = criteria.list();
-		System.out.println("all select done");
-		System.out.println("list  "+ list);
 		if( list.size() > 0){
 			return list;
 		}else{
@@ -697,7 +686,7 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public String adminUserManagementSave(AdminUserManagementForm adminUserManagementForm) {
-		System.out.println("admin DAO Impl atate input process start");
+		new ZLogger("adminUserManagementSave", "inside adminUserManagementSave", "AdminDAOImpl.java");
 		Session session = sessionFactory.getCurrentSession();
 		String sql = "select * from adminusermanagement as aum inner join logindetails as ld on ld.id = aum.logindetails where loginid = '"+adminUserManagementForm.getUserId()+"'";
 		Query query = session.createSQLQuery(sql);
@@ -833,13 +822,11 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public String trainingCalendarForm(TrainingCalendarForm trainingCalendarForm) {
-		System.out.println("********  "+trainingCalendarForm.getCourseName());
 		Session session = sessionFactory.getCurrentSession();
 		String sql = "select max(seqNo) + 1 from trainingcalendar";
 		int maxId = 0 ;
 		Query maxIDList = session.createSQLQuery(sql);
 		List list = maxIDList.list();
-		System.out.println(list.size());
 		if(list.size() > 0){
 			maxId = (int) list.get(0);
 			//eligible = (String) list.get(0);
@@ -872,7 +859,6 @@ public class AdminDAOImpl implements AdminDAO {
 	public String manageAssessmentQuestionsSave(AssessmentQuestionForm assessmentQuestionForm) {
 		Session session = sessionFactory.getCurrentSession();
 		AssessmentQuestion assessmentQuestion = null;
-		System.out.println("Assessment Question == "+assessmentQuestionForm.getId());
 		if(assessmentQuestionForm.getId() <= 0){
 			assessmentQuestion = new AssessmentQuestion();
 		}else{
@@ -928,10 +914,6 @@ public class AdminDAOImpl implements AdminDAO {
 	public boolean trainingadminForm(ChangePasswordForm changePasswordForm, String id) {
 		String oldPassword=	changePasswordForm.getOldPassword();
 		String newPassword=changePasswordForm.getNewPassword();
-		//String idd=changePasswordForm.getLoginid();
-		System.out.println("new pass   "+oldPassword);
-		
-		
 		boolean confirm = changePasswordUtility.changePasswordUtil(oldPassword, newPassword, id);
 		
 		
@@ -942,13 +924,8 @@ public class AdminDAOImpl implements AdminDAO {
 	public boolean trainingPartnerPass(ChangePasswordForm changePasswordForm, String id) {
 		String oldPassword=	changePasswordForm.getOldPassword();
 		String newPassword=changePasswordForm.getNewPassword();
-		//String idd=changePasswordForm.getLoginid();
-		System.out.println("new pass   "+oldPassword);
-		
-		
-		boolean confirm = changePasswordUtility.changePasswordUtil(oldPassword, newPassword, id);
-		
-		
+
+		boolean confirm = changePasswordUtility.changePasswordUtil(oldPassword, newPassword, id);		
 		return confirm;
 	}
 
@@ -962,14 +939,12 @@ public class AdminDAOImpl implements AdminDAO {
 		String email=contactTrainee.getEmailAddress();
 		String msg=contactTrainee.getMessageDetails();
 		traineeMaail.mailProperty(msg, email,id);
-		
-		System.out.println("sent mail to........................");
-		
+		new ZLogger("contactTrainigPartnerSave", "sent mail to........................", "AdminDAOImpl.java");
 		contactTrainerModel.setEmailAddress(email); 
 		contactTrainerModel.setMessageDetails(msg);
 		contactTrainerModel.setUserId(id);
 		Integer contactTrainerModelId = (Integer) session.save(contactTrainerModel);
-		System.out.println("contactTraineeSave after save");
+		new ZLogger("contactTrainigPartnerSave", "contactTraineeSave after save", "AdminDAOImpl.java");
 		if(contactTrainerModelId >0 && contactTrainerModelId != null){
 			return "created";
 		}else{
@@ -987,8 +962,7 @@ public class AdminDAOImpl implements AdminDAO {
 		}else{
 			session.update(feedbackMaster);
 		}
-		
-		System.out.println("saveFeedbackMaster after save");
+		new ZLogger("saveFeedbackMaster", "saveFeedbackMaster after save", "AdminDAOImpl.java");
 		if(saveFeedbackMasterId != null && saveFeedbackMasterId.intValue() >0){
 			return "Successfully created";
 		}else{
@@ -1094,7 +1068,7 @@ public class AdminDAOImpl implements AdminDAO {
 		@Override
 		public void updateUser( String userid , String tableName , String status){
 			Session session = sessionFactory.getCurrentSession();
-			System.out.println("update "+tableName+" set isActive='"+status+"' where id="+userid);
+			new ZLogger("contactTrainigPartnerSave", "update "+tableName+" set isActive='"+status+"' where id="+userid, "AdminDAOImpl.java");
 			String sql="update "+tableName+" set isActive='"+status+"' where id="+userid;
 			Query query = session.createSQLQuery(sql);
 			query.executeUpdate();
