@@ -2,6 +2,16 @@
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
+
+function OnStart(){
+
+	flatpickr('[id="trainingDate"]' , {
+		enableTime: true
+	});
+}
+
+window.onload = OnStart;
+
 function showDetails(){
 	$('#tblUpdateResult tr').remove();
 	$('#tblUpdateResult').append('<thead>'+
@@ -20,9 +30,14 @@ function showDetails(){
 	var result="";
 	//var id = document.getElementById("assessmentAgencyId").value;
 	var assessorId =710;
+	//
+	var courseName =  ($("#selCourseType").val() == 0 || $("#selCourseType").val() == null ? "" : $("#selCourseType").val());
+	var selTrainingCenters =  ($("#selTrainingCenters").val() == 0 || $("#selTrainingCenters").val() == null ? "" : $("#selTrainingCenters").val());
+	var trainingDate = (($("#trainingDate").val() == 'undefined' || $("#trainingDate").val() == null ) ? "" : $("#trainingDate").val() );
+	var total =  "courseName=" + courseName+ "&selTrainingCenters=" + selTrainingCenters+"&trainingDate="+trainingDate;
 	$.ajax({
 	type: 'post',
-	url: 'searchAssessorTraineesForResults.jspp',
+	url: 'searchAssessorTraineesForResults.jspp?'+total,
 	async: false, 
 	success: function (data){
 		console.log("Data received..");
@@ -178,7 +193,7 @@ function updateTraineeAssessmentResult(courseEnrolledid , status){
                             <li class="style-li error-red"> </li>
                           </ul>
                             </div>
-                        <input type="date" class="form-control">
+                        <input type="text" id="trainingDate" class="form-control">
                       </div>
                         </div>
                     

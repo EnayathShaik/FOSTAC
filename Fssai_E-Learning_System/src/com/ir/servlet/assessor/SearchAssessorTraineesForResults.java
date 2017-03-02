@@ -57,9 +57,33 @@ public class SearchAssessorTraineesForResults extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 				System.out.println("Retrieve upcoming calendar");
 				response.setContentType("text/html;charset=UTF-8");
-				String id = request.getQueryString();
+				String name = (request.getQueryString());
+				String [] n1 = name.split("&");
 		        PrintWriter out = response.getWriter();
 			
+		        String courseName , trainingDate , trainingCenter;
+		        try{
+					courseName = n1[0].split("=")[1];	
+				}catch(Exception e){
+					courseName = "%";	
+				}
+				
+		        try{
+		        	trainingCenter = n1[1].split("=")[1];	
+				}catch(Exception e){
+					trainingCenter = "%";	
+				}
+				
+			
+				try{
+					trainingDate = n1[2].split("=")[1];
+					trainingDate = "%"+trainingDate.replaceAll("%20", " ");
+					System.out.println("trainingDate "+trainingDate);
+				}
+				catch(Exception e){
+					trainingDate = "%";
+				}
+		        
 		        SessionFactory sf = new HibernateUtil().getSessionFactory();
 				Session session = sf.openSession();
 				String newList=null;
@@ -72,7 +96,9 @@ public class SearchAssessorTraineesForResults extends HttpServlet {
 						+ " inner join coursename C on(A.coursename=C.coursenameid) "
 						+ " inner join personalinformationtrainingpartner D on(A.trainingcenter=D.personalinformationtrainingpartnerid) "
 						+ " inner join logindetails E on(D.logindetails=E.id)"
-						+ " inner join personalinformationtrainee F on(F.logindetails=B.logindetails) ";
+						+ " inner join personalinformationtrainee F on(F.logindetails=B.logindetails) "
+						+" where cast(A.coursename as varchar(100)) like '"+courseName+"%'   and  cast(A.trainingdate as varchar(100)) like '"+trainingDate+"%'  and cast(A.trainingcenter as varchar(100)) like '"+trainingCenter+"%'";
+						
 						
 
 				Query query = session.createSQLQuery(sql);
