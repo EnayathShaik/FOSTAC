@@ -69,9 +69,9 @@ import com.ir.model.State;
 import com.ir.model.TrainingCalendar;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
+import com.ir.service.PageLoadService;
 import com.ir.util.ChangePasswordUtility;
 import com.ir.util.EncryptionPasswordANDVerification;
-import com.ir.util.GenerateUniqueID;
 import com.ir.util.PasswordGenerator;
 import com.ir.util.SendContectMail;
 import com.ir.util.SendMail;
@@ -105,6 +105,9 @@ public class AdminDAOImpl implements AdminDAO {
 	@Autowired
 	@Qualifier("courseNameS")
 	private CourseName courseNameS;
+	@Autowired
+	@Qualifier("pageLoadService")
+	PageLoadService pageLoadService;
 
 
 	@Override
@@ -365,8 +368,8 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		
 		String TPPrefix = "TP"+   manageTrainingPartnerForm.getTrainingPartnerName().toUpperCase().substring(0, 3);
-		String nextSequenceUserID  =  GenerateUniqueID.getNextCombinationId(TPPrefix, "manageTrainingPartner", "00");
-
+		//String nextSequenceUserID  =  GenerateUniqueID.getNextCombinationId(TPPrefix, "manageTrainingPartner", "00");
+		String nextSequenceUserID = pageLoadService.getNextCombinationId(TPPrefix, "manageTrainingPartner", "00");
 		LoginDetails loginDetails = new LoginDetails();
 		loginDetails.setLoginId(nextSequenceUserID);
 		loginDetails.setPassword(passwordString);
@@ -427,7 +430,8 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		ManageAssessmentAgency manageAssessmentAgency = new ManageAssessmentAgency();
 		String APPrefix = "AP"+   manageAssessmentAgencyForm.getAssessmentAgencyName().toUpperCase().substring(0, 3);
-		String nextSequenceUserID  =  GenerateUniqueID.getNextCombinationId(APPrefix, "manageAssessmentAgency", "00");
+		String nextSequenceUserID  =  pageLoadService.getNextCombinationId(APPrefix, "manageAssessmentAgency", "00");
+		
 		LoginDetails loginDetails = new LoginDetails();
 		loginDetails.setLoginId(nextSequenceUserID);
 		loginDetails.setPassword(passwordString);

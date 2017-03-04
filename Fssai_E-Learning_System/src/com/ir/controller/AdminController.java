@@ -63,7 +63,7 @@ import com.ir.model.TrainingPartnerCalendarForm;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
 import com.ir.service.AdminService;
-import com.ir.util.GenerateUniqueID;
+import com.ir.service.PageLoadService;
 import com.ir.util.JavaMail;
 import com.ir.util.SendContectMail;
 import com.zentech.logger.ZLogger;
@@ -74,6 +74,11 @@ public class AdminController {
 	@Autowired
 	@Qualifier("adminService")
 	AdminService adminService;
+	
+	@Autowired
+	@Qualifier("pageLoadService")
+	PageLoadService pageLoadService;
+	
 
 	@ModelAttribute("stateList")
 	public List<State> stateList() {
@@ -507,7 +512,9 @@ public class AdminController {
 
 	@ModelAttribute("userId")
 	public String getUniqueId(){
-		String uniqueID = GenerateUniqueID.getNextCombinationId("ADM", "adminusermanagement" , "00");		
+		//String uniqueID = GenerateUniqueID.getNextCombinationId("ADM", "adminusermanagement" , "00");		
+		//String uniqueID = GenerateUniqueID.getNextCombinationId("ADM", "adminusermanagement" , "00");
+		String uniqueID = pageLoadService.getNextCombinationId("ADM", "adminusermanagement" , "00");
 		new ZLogger("traineeUserManagementSearch", " Admin ID "+uniqueID, "AdminController.java");
 		return uniqueID;
 	}

@@ -35,5 +35,6 @@ public interface PageLoadDao {
 	public List<IntStringBean> getTrainingPartnerList(int courseTypeId);
 	public List<Object[]> loadTrainingDetails(Utility utility);
 	public  List<String> loadCaste(); 
+	public String getNextCombinationId(String prefix , String tableName , String pattern);
 	
 }

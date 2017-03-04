@@ -22,7 +22,6 @@ import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.service.PageLoadService;
 import com.ir.service.RegistrationServiceTrainee;
-import com.ir.util.GenerateUniqueID;
 import com.ir.util.JavaMail;
 import com.zentech.logger.ZLogger;
 
@@ -35,33 +34,35 @@ public class RegistrationController {
 	@Qualifier("registrationServiceTrainee")
 	RegistrationServiceTrainee registrationServiceTrainee;
 	
-	
 	@Autowired
 	@Qualifier("pageLoadService")
 	PageLoadService pageLoadService;
 	
-	
-
-	
 	@RequestMapping(value = "/aadhar-verification", method = RequestMethod.GET)
 	public String aadharVerification(Model model) {
-		new ZLogger("aadhar-verification", "aadhar-verification begins ", "RegistrationController.java");
-		AadharDetails aadharDetails=new AadharDetails();
-		model.addAttribute("aadharDetails", aadharDetails);
+		try{
+			new ZLogger("aadhar-verification", "aadhar-verification begins ", "RegistrationController.java");
+			AadharDetails aadharDetails=new AadharDetails();
+			model.addAttribute("aadharDetails", aadharDetails);
+		}catch(Exception e){
+			e.printStackTrace();
+			new ZLogger("aadhar-verification", e.getMessage(), "RegistrationController.java");
+		}
+		new ZLogger("aadhar-verification", "aadhar-verification Ends ", "RegistrationController.java");
 		return "aadhar-verification";
 	}
 	@RequestMapping(value = "/registrationForm", method = RequestMethod.GET)
 	public String registrationForm(@Valid @ModelAttribute("aadharDetails") AadharDetails aadharDetails,BindingResult result, Model model , HttpSession session) {
 		System.out.println("aadhar-verification submit begins ");
-		if(result.hasErrors()){
+		if(result != null && result.hasErrors()){
 			new ZLogger("registrationForm", "bindingResult.hasErrors  "+result.hasErrors() , "RegistrationController.java");
 			new ZLogger("registrationForm", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "RegistrationController.java");
 			return "aadhar-verification";
 		}
-		session.setAttribute("aadhar", aadharDetails.getAadharNumber());
-		session.setAttribute("name", aadharDetails.getName());
-		session.setAttribute("dob" , aadharDetails.getDob());
-		session.setAttribute("gender" , aadharDetails.getGender());
+		session.setAttribute("aadhar", aadharDetails == null ? "" : aadharDetails.getAadharNumber());
+		session.setAttribute("name",  aadharDetails == null ? "" : aadharDetails.getName());
+		session.setAttribute("dob" ,  aadharDetails == null ? "" : aadharDetails.getDob());
+		session.setAttribute("gender" ,  aadharDetails == null ? "" : aadharDetails.getGender());
 		return "aadhar-verification";
 	}
 	@RequestMapping(value = "/registrationFormTrainee", method = RequestMethod.GET)
@@ -72,8 +73,8 @@ public class RegistrationController {
 		List<Title> titleList = pageLoadService.loadTitle();
 		List<String> casteList = pageLoadService.loadCaste();
 		List<KindOfBusiness> kindOfBusinessList=pageLoadService.loadKindOfBusiness();
-		String uniqueID = GenerateUniqueID.getNextCombinationId("TE", "personalinformationtrainee" , "000000");
-		
+		//String uniqueID = GenerateUniqueID.getNextCombinationId("TE", "personalinformationtrainee" , "000000");
+		String uniqueID = pageLoadService.getNextCombinationId("TE", "personalinformationtrainee" , "000000");
 		model.addAttribute("registrationFormTrainee", registrationFormTrainee);
 		model.addAttribute("stateList", stateList);
 		model.addAttribute("titleList", titleList);
@@ -99,17 +100,14 @@ public class RegistrationController {
 		}catch(Exception e){
 			e.printStackTrace();
 			new ZLogger("registerTrainee", " Exception while registerTrainee   "+e.getMessage() , "RegistrationController.java");
-			
 		}
 		
-		if(! personalInformationTrainee.equalsIgnoreCase("")){
+		if(personalInformationTrainee != null && ! personalInformationTrainee.equalsIgnoreCase("")){
 			String[] all = personalInformationTrainee.split("&");
 			model.addAttribute("id" , all[1]);
 			model.addAttribute("pwd" , all[0]);
-			
 			JavaMail javaMail = new JavaMail();
 			javaMail.mailProperty("Thanks", registrationFormTrainee.getEmail(), all[1], all[0] , registrationFormTrainee.getFirstName());
-			
 			return "welcome";
 		}else{
 			return "registrationFormTrainee";

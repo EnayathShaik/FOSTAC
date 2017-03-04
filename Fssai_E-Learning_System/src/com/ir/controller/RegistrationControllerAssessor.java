@@ -32,7 +32,6 @@ import com.ir.service.PageLoadService;
 import com.ir.service.PageLoadServiceTrainer;
 import com.ir.service.RegistrationServiceAssessor;
 import com.ir.service.RegistrationServiceTrainer;
-import com.ir.util.GenerateUniqueID;
 import com.ir.util.JavaMail;
 import com.zentech.logger.ZLogger;
 
@@ -58,7 +57,9 @@ public class RegistrationControllerAssessor implements Serializable{
 			List<State> stateList = pageLoadService.loadState();
 			List<Title> titleList = pageLoadService.loadTitle();
 			List<ManageAssessmentAgency> assessmentAgencyNameList = registrationServiceAssessor.loadAssessmentAgency();
-			String uniqueID = GenerateUniqueID.getNextCombinationId("TE", "personalinformationtrainee" , "000000");
+			//String uniqueID = GenerateUniqueID.getNextCombinationId("TE", "personalinformationtrainee" , "000000");
+			String uniqueID = pageLoadService.getNextCombinationId("TE", "personalinformationtrainee" , "000000");
+			
 			List<CourseName> basicCourseList = registrationServiceAssessor.basicCourseName();
 			model.addAttribute("registrationFormAssessor", registrationFormAssessor);
 			model.addAttribute("stateList", stateList);

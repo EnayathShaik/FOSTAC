@@ -6,6 +6,8 @@ import java.util.List;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -21,9 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
 import com.google.gson.Gson;
-import com.ir.constantes.Constantes;
 import com.ir.constantes.TableLink;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
@@ -33,7 +33,6 @@ import com.ir.form.RegistrationFormTrainer;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.AssessmentQuestion;
 import com.ir.model.CertificateInfo;
-import com.ir.model.CourseName;
 import com.ir.model.CourseTrainee;
 import com.ir.model.CourseType;
 import com.ir.model.FeedbackForm;
@@ -49,8 +48,6 @@ import com.ir.model.Utility;
 import com.ir.service.AssessmentService;
 import com.ir.service.PageLoadService;
 import com.ir.service.TraineeService;
-import com.ir.util.GenerateUniqueID;
-import com.ir.util.JavaMail;
 import com.ir.util.Profiles;
 import com.zentech.logger.ZLogger;
 
@@ -184,7 +181,7 @@ public class TraineeController {
 	    return "upload-image";  
 	    }  
 
-	 @RequestMapping(value="/courseTraining" , method=RequestMethod.GET)
+	@RequestMapping(value="/courseTraining" , method=RequestMethod.GET)
 	public String courseTraining(@RequestParam(value = "courseTypeId", required = true)  String courseTypeId , Model model, HttpSession session){
 		Integer userId=Integer.parseInt(session.getAttribute("userId").toString());
 		try{
@@ -258,11 +255,6 @@ public class TraineeController {
 		return "training";
 	}
 
-	@RequestMapping(value="/playvedio" , method=RequestMethod.GET)
-	public String playvideo(Model model, HttpSession session){
-		return "playvedio";
-	}
-	
 	@RequestMapping(value="/basicSave" , method=RequestMethod.POST)
 	public String basicSave(@ModelAttribute("basicTrainee") CourseEnrolledUserForm courseEnrolledUserForm,
 			@ModelAttribute("rft") PersonalInformationTrainee loginUser ,BindingResult result , HttpSession httpSession,Model model){
@@ -471,79 +463,6 @@ public class TraineeController {
 		return "certificatetrainee";
 	}
 
-	@RequestMapping(value="/advanceTrainee" , method=RequestMethod.GET)
-	public String advance(@ModelAttribute("advanceTrainee") CourseEnrolledUserForm courseEnrolledUserForm ,
-			@ModelAttribute("state") State state , @ModelAttribute("loginUser") PersonalInformationTrainee pit ){
-		return "advanceTrainee";
-	}
-	@RequestMapping(value="/advanceTraineeSave" , method=RequestMethod.POST)
-	public String advanceTraineeSave(@ModelAttribute("advanceTrainee") CourseEnrolledUserForm courseEnrolledUserForm,
-			@ModelAttribute("rft") PersonalInformationTrainee loginUser ,BindingResult result ,HttpSession httpSession, Model model){
-		
-		int loginId = 0;
-		Integer profileId = 0;
-		Integer userId = 0;
-		try{
-			loginId = (int) httpSession.getAttribute("loginIdUnique");
-			profileId = (Integer) httpSession.getAttribute("profileId");
-			userId = (Integer) httpSession.getAttribute("userId");
-			int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileId);
-			long basicEnroll = traineeService.advanceTraineeSave(courseEnrolledUserForm , loginId , tableID,profileId);
-			if(basicEnroll  > 1){
-				Boolean status = traineeService.updateSteps(tableID, profileId, 1);
-				httpSession.setAttribute("traineeSteps", 1);
-				if(status){
-					model.addAttribute("created", "You have successfully enrolled !!!");
-					model.addAttribute("roll", basicEnroll);
-				}else{
-					model.addAttribute("created", "Oops , something went wrong !!!");
-					model.addAttribute("roll", basicEnroll);
-				}
-			}else{
-		}
-		}catch(Exception e){
-			e.printStackTrace();
-			new ZLogger("advanceTraineeSave","Exception while advanceTraineeSave"+e.getMessage()  , "TraineeController.java");
-		}
-		return "traineeHomepage";
-	}
-	@RequestMapping(value="/specialTrainee" , method=RequestMethod.GET)
-	public String specialTrainee(@ModelAttribute("specialTrainee") CourseEnrolledUserForm courseEnrolledUserForm ,
-			@ModelAttribute("state") State state , @ModelAttribute("loginUser") PersonalInformationTrainee pit ){
-		return "specialTrainee";
-	}
-	
-	@RequestMapping(value="/specialTraineeSave" , method=RequestMethod.POST)
-	public String specialTraineeSave(@ModelAttribute("specialTrainee") CourseEnrolledUserForm courseEnrolledUserForm,
-			@ModelAttribute("rft") PersonalInformationTrainee loginUser ,BindingResult result ,HttpSession httpSession, Model model){
-		int loginId = 0;
-		Integer profileId = 0;
-		Integer userId = 0;
-		try{
-			profileId = (Integer) httpSession.getAttribute("profileId");
-			loginId = (int) httpSession.getAttribute("loginIdUnique");
-			userId = (Integer) httpSession.getAttribute("userId");
-			int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileId);
-			String basicEnroll = traineeService.basicSave(courseEnrolledUserForm , loginId , tableID,profileId);
-			if(basicEnroll != null && basicEnroll.length()  > 1){
-				Boolean status = traineeService.updateSteps(tableID, profileId, 1);
-				httpSession.setAttribute("traineeSteps", 1);
-				if(status){
-					model.addAttribute("created", "You have successfully enrolled !!!");
-					model.addAttribute("roll", basicEnroll);
-				}else{
-					model.addAttribute("created", "Oops , something went wrong !!!");
-					model.addAttribute("roll", basicEnroll);
-				}
-			}else{
-		}
-		}catch(Exception e){
-			e.printStackTrace();
-			new ZLogger("specialTraineeSave","Exception while specialTraineeSave"+e.getMessage()  , "TraineeController.java");
-		}
-		return "traineeHomepage";
-	}
-	
 	@RequestMapping(value="/viewTraineeList" , method=RequestMethod.GET)
 	public String viewTraineeList(@ModelAttribute("courseEnrolledUserForm") CourseEnrolledUserForm courseEnrolledUserForm ,
 			@ModelAttribute("state") State state , @ModelAttribute("loginUser") PersonalInformationTrainee pit ){

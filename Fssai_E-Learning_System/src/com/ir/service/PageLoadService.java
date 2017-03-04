@@ -22,56 +22,26 @@ import com.ir.model.Utility;
 public interface PageLoadService {
 	
 	public List<State> loadState();
-	
-	
 	public  List<String> loadCaste();
-	
-	
 	public List<City> loadCity(int stat);
-	
-	
 	public List<Title> loadTitle();
-	
-	
 	public List<KindOfBusiness> loadKindOfBusiness();
-	
-	
 	public List<CourseName> loadCourseName();
-	
-	
 	public List<District> loadDistrict();
-	
-	
 	public List<CourseName> basicCourseName();
-	
-	
 	public List<CourseName> advanceCourseList();
-	
-	
 	public List<CourseName> specialCourseList();
-	
-	
 	public List<ManageTrainingPartner> tpList();
-	
-	
 	public List<ManageAssessmentAgency> aaList();
-	
-	
 	public List basicCourseList();
-	
-	
 	public List<CourseName> getCouserNameList(int coursetypeid);
-	
-	
 	public List<String> getTrainingPartnerNameList();
-	
-	
 	public List<ManageCourseContent> getManageCourseContentList(int i);
-	
-	
 	public List<IntStringBean> getTrainingPartnerList(int courseTypeId);
-	
-	
 	public List<Object[]> loadTrainingDetails(Utility utility);
+	public String getNextCombinationId(String prefix , String tableName , String pattern);
+	
+	
+	
 	 
 }

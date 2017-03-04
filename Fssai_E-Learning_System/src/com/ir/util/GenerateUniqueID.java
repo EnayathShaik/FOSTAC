@@ -1,4 +1,4 @@
-package com.ir.util;
+/*package com.ir.util;
 
 import java.math.BigInteger;
 import java.text.DecimalFormat;
@@ -64,3 +64,4 @@ public class GenerateUniqueID {
 		//System.out.println(getNextCombinationId("TE"));
 	}
 }
+*/

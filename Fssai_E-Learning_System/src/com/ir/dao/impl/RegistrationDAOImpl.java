@@ -42,61 +42,56 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 	@Autowired
 	@Qualifier("kindOfBusiness")
 	private KindOfBusiness kindOfBusiness;
+	
 	@Autowired
 	@Qualifier("state")
 	private State state;
+	
 	@Autowired
 	@Qualifier("district")
 	private District district;
+	
 	@Autowired
 	@Qualifier("city")
 	private City city;
+	
 	@Autowired
 	@Qualifier("title")
 	private Title title;
+	
 	@Autowired
 	@Qualifier("loginDetails")
 	private LoginDetails loginDetails;
 	
 	@Autowired
 	@Qualifier("sessionFactory")
+	
 	private SessionFactory sessionFactory;
 	@Autowired
 	@Qualifier("personalInformationTrainee")
 	private PersonalInformationTrainee personalInformationTrainee;
 	
-	@Override
-	public KindOfBusiness getKid(int id){
-		Session ss = sessionFactory.getCurrentSession();
-		KindOfBusiness kid=(KindOfBusiness) ss.load(KindOfBusiness.class, id);
+	public KindOfBusiness getKid(int id,Session session){
+		KindOfBusiness kid=(KindOfBusiness) session.load(KindOfBusiness.class, id);
 		return kid;
 	}
-	@Override
-	public State getState(int id){
-		Session s = sessionFactory.getCurrentSession();
-		State ss = (State)s.load(State.class, id);
+	public State getState(int id,Session session){
+		State ss = (State)session.load(State.class, id);
 		return ss;
 	}
-	@Override
-	public City getCity(int id){
-		Session s = sessionFactory.getCurrentSession();
-		City cc = (City)s.load(City.class, id);
+	public City getCity(int id,Session session){
+		City cc = (City)session.load(City.class, id);
 		return cc;
 	}
-	@Override
-	public District getDistrict(int id){
-		Session s = sessionFactory.getCurrentSession();
-		District dd = (District)s.load(District.class, id);
+	public District getDistrict(int id,Session session){
+		District dd = (District)session.load(District.class, id);
 		return dd;
 	}
-	@Override
-	public Title getTitle(int id){
-		Session s = sessionFactory.getCurrentSession();
-		Title tt = (Title)s.load(Title.class, id);
+	public Title getTitle(int id,Session session){
+		Title tt = (Title)session.load(Title.class, id);
 		return tt;
 	}
-	@Autowired
-	AdminDAO admindao;
+	
 	
 	@Override
 	public RegisterTraineeInformationFull register(RegistrationFormTrainee registrationFormTrainee)  {
@@ -115,9 +110,7 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 			if(null==userId || localizedMessage.contains("duplicate key")){
 				System.out.println("UserAlreadRegisteredException occured..");
 				Exception e=he;
-				
 			}
-			
 		}
 		return null;
 	}
@@ -159,17 +152,17 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 		System.out.println("RegistrationDAOImpl [register] begin for registration trainee");
 		Session session = sessionFactory.getCurrentSession();
 		
-		State ps = getState(registrationFormTrainee.getResState()); 
-		State cs = getState(registrationFormTrainee.getCorrespondenceState());
-		State bs = getState(registrationFormTrainee.getBussState());
-		District pd = getDistrict(registrationFormTrainee.getResidentialDistrict());
-		District cd = getDistrict(registrationFormTrainee.getCorrespondenceDistrict());
-		District bd = getDistrict(registrationFormTrainee.getBussDistrict());
-		City pc = getCity(registrationFormTrainee.getResCity());
-		City cc = getCity(registrationFormTrainee.getCorrespondenceCity());
-		City bc = getCity(registrationFormTrainee.getBussCity());
-		Title tt = getTitle(registrationFormTrainee.getTitle());
-		KindOfBusiness kob = getKid(registrationFormTrainee.getKindOfBusiness());
+		State ps = getState(registrationFormTrainee.getResState(),session); 
+		State cs = getState(registrationFormTrainee.getCorrespondenceState(),session);
+		State bs = getState(registrationFormTrainee.getBussState(),session);
+		District pd = getDistrict(registrationFormTrainee.getResidentialDistrict(),session);
+		District cd = getDistrict(registrationFormTrainee.getCorrespondenceDistrict(),session);
+		District bd = getDistrict(registrationFormTrainee.getBussDistrict(),session);
+		City pc = getCity(registrationFormTrainee.getResCity(),session);
+		City cc = getCity(registrationFormTrainee.getCorrespondenceCity(),session);
+		City bc = getCity(registrationFormTrainee.getBussCity(),session);
+		Title tt = getTitle(registrationFormTrainee.getTitle(),session);
+		KindOfBusiness kob = getKid(registrationFormTrainee.getKindOfBusiness(),session);
 		
 	boolean correspondADD=registrationFormTrainee.isCheckCorrespondence();
 	boolean checkCompany=registrationFormTrainee.isCheckCompany();

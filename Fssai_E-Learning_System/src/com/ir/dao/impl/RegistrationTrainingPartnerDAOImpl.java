@@ -26,9 +26,9 @@ import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.PostVacancyTrainingCenter;
 import com.ir.model.State;
 import com.ir.model.Title;
+import com.ir.service.PageLoadService;
 import com.ir.util.ChangePasswordUtility;
 import com.ir.util.EncryptionPasswordANDVerification;
-import com.ir.util.GenerateUniqueID;
 import com.ir.util.PasswordGenerator;
 import com.ir.util.SendContectMail;
 import com.ir.util.SendMail;
@@ -53,6 +53,10 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 	@Autowired
 	@Qualifier("courseTypeS")
 	private CourseType courseTypeS;
+	
+	@Autowired
+	@Qualifier("pageLoadService")
+	PageLoadService pageLoadService;
 
 	
 	@Override
@@ -165,7 +169,8 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 			String TPName =  registrationFormTrainingPartner.getTPName();  
 			String preFix = "TCTP"+TPName;
 			System.out.println("preFix "+preFix);
-			nextSequenceUserID  =  GenerateUniqueID.getNextCombinationId(preFix, "personalInformationTrainingPartner", "00");
+			//nextSequenceUserID  =  GenerateUniqueID.getNextCombinationId(preFix, "personalInformationTrainingPartner", "00");
+			nextSequenceUserID = pageLoadService.getNextCombinationId(preFix, "personalInformationTrainingPartner", "00");
 			System.out.println("nextSequenceUserID "+nextSequenceUserID);
 			LoginDetails loginDetails = new LoginDetails();
 			loginDetails.setLoginId(nextSequenceUserID);

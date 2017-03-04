@@ -160,5 +160,12 @@ public class PageLoadServiceImpl implements PageLoadService {
 		return  pageLoadDao.loadCaste();
 	}
 	
+	@Override
+	@Transactional
+	public String getNextCombinationId(String prefix , String tableName , String pattern) {
+		System.out.println("inside cast map");
+		return  pageLoadDao.getNextCombinationId(prefix, tableName, pattern);
+	}
+	
 
 }

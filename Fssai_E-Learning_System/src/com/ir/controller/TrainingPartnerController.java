@@ -141,8 +141,6 @@ public class TrainingPartnerController {
 		String newList = g.toJson(certificateList); 
 		out.write(newList);
 		out.flush();
-		
-		
 	}
 	
 	//generateCourseCertificateGO

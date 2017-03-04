@@ -1,5 +1,7 @@
 package com.ir.dao.impl;
 
+import java.math.BigInteger;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -236,6 +238,35 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		Query query = session.createSQLQuery(sql);
 		List<Object[]> trainingCalendarList = query.list();
 		return trainingCalendarList;
+	}
+	
+	@Override
+	public String getNextCombinationId(String prefix , String tableName , String pattern) {
+		Session session = sessionFactory.getCurrentSession();
+		String combinationId =  null;
+		BigInteger getNextId =  getNextId(tableName,session);
+		combinationId =prefix+ getFourDigitFormat(getNextId , pattern) ;
+		return combinationId;
+	}
+	
+	public static BigInteger getNextId(String tableName,Session session){
+		BigInteger count = new BigInteger("0");
+		String sql = "select count(1)+1 from  "+tableName ;
+		System.out.println(" query "+sql);
+		Query query = session.createSQLQuery(sql);
+		List listCount = query.list();
+		if(listCount.size()>0){
+			count = (BigInteger) listCount.get(0);
+		}
+		return count;
+	}
+	
+	
+	private static String getFourDigitFormat(BigInteger getNextId , String pattern)
+	{
+		 DecimalFormat myFormatter = new DecimalFormat(pattern);
+		 String output = myFormatter.format(getNextId);
+		 return output;
 	}
 	
 

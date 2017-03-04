@@ -13,6 +13,7 @@ import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.bean.common.StringStringBean;
@@ -34,6 +35,7 @@ import com.ir.util.ChangePasswordUtility;
 import com.zentech.logger.ZLogger;
 
 @Repository
+@Service
 public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 
 	@Autowired

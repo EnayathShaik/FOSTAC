@@ -2,8 +2,6 @@ package com.ir.form.common;
 
 import java.io.File;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +27,7 @@ public class EventsCreater {
 		   return time/24/60 + ":" + time/60%24 + ':' + time%60;
 		 }
 	
-	public void createEvents(HttpServletRequest httpServletRequest) throws ParseException {
+	public void createEvents(HttpServletRequest httpServletRequest) throws ParseException {/*
 
 	  try {
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -49,7 +47,7 @@ public class EventsCreater {
 		Query query = session.createSQLQuery("select cn.coursename,tc.trainingdate,tc.trainingtime,SUM(CAST(cn.courseduration AS DECIMAL(10, 2))) as courseduration ,tc.coursetype from trainingcalendar tc inner join coursename cn on tc.coursetype=cn.coursetypeid  GROUP BY tc.trainingdate,tc.trainingtime,tc.coursetype,cn.coursename");
 		List<Object[]> eventList = query.list();
 		session.close();
-		/*for(int index=0;index<eventList.size();index++){
+		for(int index=0;index<eventList.size();index++){
 			Object[] objArr=eventList.get(index);
 			// staff elements
 			Element event = doc.createElement("event");
@@ -113,7 +111,7 @@ public class EventsCreater {
 			event.appendChild(url);
 
 
-		}*/
+		}
 				// write the content into xml file
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
@@ -133,5 +131,5 @@ public class EventsCreater {
 	  } catch (TransformerException tfe) {
 		tfe.printStackTrace();
 	  }
-	}
+	*/}
 }

@@ -26,6 +26,8 @@ public class AjaxRequest {
 	        System.out.println("sqlQuery "+sqlQuery);
 			Query query = session.createSQLQuery(sqlQuery);
 			list = query.list();
+			 session.flush();
+		     session.clear();
 	        transaction.commit();
 	    }
 	    catch(Exception re){

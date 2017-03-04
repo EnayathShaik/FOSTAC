@@ -37,7 +37,6 @@ import com.ir.service.RegistrationServiceTrainer;
 import com.ir.service.RegistrationServiceTrainingPartner;
 import com.ir.service.TraineeService;
 import com.ir.service.TrainingPartnerService;
-import com.ir.util.GenerateUniqueID;
 import com.ir.util.JavaMail;
 import com.ir.util.Profiles;
 import com.zentech.logger.ZLogger;
@@ -79,7 +78,8 @@ public class RegistrationControllerTrainer implements Serializable{
 		List<Title> titleList = pageLoadService.loadTitle();
 		List<String> casteList = pageLoadService.loadCaste();
 		List<ManageTrainingPartner> trainingPartnerNameList= registrationServiceTrainingPartner.trainingPartnerNameList();
-		String uniqueID = GenerateUniqueID.getNextCombinationId("TR", "personalinformationtrainer" , "000000");
+		//String uniqueID = GenerateUniqueID.getNextCombinationId("TR", "personalinformationtrainer" , "000000");
+		String uniqueID = pageLoadService.getNextCombinationId("TR", "personalinformationtrainer" , "000000");
 		List<CourseName> basicCourseList = pageLoadServiceTrainer.basicCourseName();
 		
 		

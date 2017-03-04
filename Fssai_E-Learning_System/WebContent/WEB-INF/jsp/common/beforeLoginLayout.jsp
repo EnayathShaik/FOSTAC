@@ -56,7 +56,7 @@
 <script src="website/js/jquery.js"></script> 
 <script src="website/js/bootstrap.min.js"></script> 
 <script src="website/js/jquery.isotope.min.js"></script> 
-<script src="website/js/main.js"></script> 
+<!-- <script src="website/js/main.js"></script>  -->
 <script src="website/js/wow.min.js"></script>
 <script src="website/js/validation.js"></script>
 

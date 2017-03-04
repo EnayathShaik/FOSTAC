@@ -102,9 +102,6 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-<!--		<property name="url" value="jdbc:postgresql://localhost/FSSAI" />
-		<property name="username" value="postgres" />
-		<property name="password" value="test@1234" />-->
 		<property name="url" value="jdbc:postgresql://localhost/fostac" />
 		<property name="username" value="fostacadmin" />
 		<property name="password" value="Fss2iZentech" />
@@ -260,9 +257,9 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 	<bean id="assessmentEvaluationTrainee" class="com.ir.model.trainee.TraineeAssessmentEvaluation"  scope="prototype"/>
 	<bean id="assessmentEvaluationTrainer" class="com.ir.model.trainer.TrainerAssessmentEvaluation"  scope="prototype"/>
 	
-	<bean id="generateID" class="com.ir.util.GenerateUniqueID">
+	<!-- <bean id="generateID" class="com.ir.util.GenerateUniqueID">
     <property name="sessionFactory" ref="sessionFactory"></property>
-</bean>
+</bean> -->
 	
 	
 	<bean id="transactionManager"
