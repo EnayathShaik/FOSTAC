@@ -67,10 +67,17 @@ window.onload = OnStart;
 					</video> -->
 					<fieldset>
                     <legend><h3>Course Content</h3></legend>
+                    
+ 						<ct:forEach items="${contentLink}" var="contentLink">
+ 							<h4>${contentLink.value}</h4>
+							<h4><a href="${contentLink.key}" target="_blank" >${contentLink.key}</a></h4>
+							</ct:forEach>
 					<ct:choose>
 						<ct:when
 							test="${contentPath.contains('pdf')}">
+							<ct:forEach items="${contentName}" var="contentName">
 							<h4><a href="${contentPath}" target="_blank" >${contentName}</a></h4>
+							</ct:forEach>
 						</ct:when>
 					</ct:choose>
 					<ct:choose>
@@ -85,11 +92,11 @@ window.onload = OnStart;
 							<h4><a href="${contentPath}" target="_blank" >${contentName}</a></h4>
 						</ct:when>
 					</ct:choose>
-					<fieldset>
+				<!-- 	<fieldset>
 					<h4><a href="pdf/temp1.m4v?autoPlay=true" target="_blank" data-webm="images/Big_Buck_Bunny_2.webm" class="html5lightbox" >Temp Mv4</a></h4>
 					<h4><a href="pdf/temp.pdf" target="_blank" >Temp PDF</a></h4>
-					<h4><a href="pdf/catering.pptx" target="_blank" >Catering</a></h4>
-			      </fieldset>
+					<h4><a href="pdf/catering.pptx" target="_blank" >Catering</a></h4> 
+			      </fieldset>-->
                   <br>
                 </div>
               </div>

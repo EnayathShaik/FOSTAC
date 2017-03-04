@@ -42,6 +42,8 @@ public interface TraineeService {
 	
 	public CourseTrainee getCourseTrainingByCourseTypeID(int typeId);
 	
+	public List<CourseTrainee> getCourseTrainingByCourseTypeIDList(int typeId);
+	
 	
 	public String isTraineeEligible(int userID,String isOnline);
 	

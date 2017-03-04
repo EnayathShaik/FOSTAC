@@ -1,6 +1,7 @@
 package com.ir.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -657,45 +658,68 @@ public class TraineeController {
 		try{
 			userId = (Integer) session.getAttribute("userId");
 			loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
-			String docPath = "";
+			
 			String contentName = "";
 			String pdf = ".pdf";
 			String mp4 = ".mp4";
 			String ppt = ".ppt";
-			docPath = servletContext.getContextPath().replace("Fssai_E-Learning_System", "Fostac/Course/");
+			
 			if(userId>0){
-				CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
-				if(courseTrainee != null && courseTrainee.getCourseTypeId() != null && courseTrainee.getCourseTypeId().toUpperCase().contains("BASIC")){
+				List<CourseTrainee>  ListcourseTrainee= traineeService.getCourseTrainingByCourseTypeIDList(userId);
+				System.out.println(" inside list "+ListcourseTrainee.size());
+				List<String> listcontentName =  new ArrayList<String>();
+				HashMap<String ,String> map = new HashMap<String , String>();
+				List<String> listcontentPath =  new ArrayList<String>();
+				List<String> courseTrainees =  new ArrayList<String>();
+				List<String> listcontentLink =  new ArrayList<String>();
+				for(CourseTrainee courseTrainee : ListcourseTrainee ){
+					String docPath = "";
+					docPath = servletContext.getContextPath().replace("Fssai_E-Learning_System", "Fostac/Course/");
+				System.out.println(courseTrainee.getCourseTypeId().toUpperCase());
+				
+				if( courseTrainee.getCourseTypeId() != null && courseTrainee.getCourseTypeId().toUpperCase().contains("BASIC")){
 					new ZLogger("course-training", courseTrainee.getContentLinkInput().toUpperCase() + " "+ courseTrainee.getContentLinkInput().toUpperCase().contains("STUDY")  , "TraineeController.java");
-					if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentNameInput().toUpperCase().contains("STUDY")){
+					
+					if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentType().toUpperCase().contains("STUDYMATERIAL")){
 						docPath = docPath + "BASIC/PDF/"+courseTrainee.getContentLinkInput()+pdf;
-					}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentNameInput().toUpperCase().contains("PPT")){
+					}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentType().toUpperCase().contains("PPT")){
 						docPath = docPath + "BASIC/PPT/"+courseTrainee.getContentLinkInput()+ppt;
-					}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentNameInput().toUpperCase().contains("VIDEO")){
+					}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentType().toUpperCase().contains("VIDEOS")){
 						docPath = docPath + "BASIC/VIDEO/"+courseTrainee.getContentLinkInput()+mp4;
 					}
-				}else if(courseTrainee != null && courseTrainee.getCourseTypeId() != null && courseTrainee.getCourseTypeId().toUpperCase().contains("ADVANCE")){
+				}else if( courseTrainee.getCourseTypeId() != null && courseTrainee.getCourseTypeId().toUpperCase().contains("ADVANCE")){
 					
-					if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentNameInput().toUpperCase().contains("STUDY")){
+					if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentType().toUpperCase().contains("STUDY")){
 						docPath = docPath + "ADVANCE/PDF/"+courseTrainee.getContentLinkInput()+pdf;
-					}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentNameInput().toUpperCase().contains("PPT")){
+					}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentType().toUpperCase().contains("PPT")){
 						docPath = docPath + "ADVANCE/PPT/"+courseTrainee.getContentLinkInput()+ppt;
-					}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentNameInput().toUpperCase().contains("VIDEO")){
+					}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentType().toUpperCase().contains("VIDEO")){
 						docPath = docPath + "ADVANCE/VIDEO/"+courseTrainee.getContentLinkInput()+mp4;
 					}
-				}else if(courseTrainee != null && courseTrainee.getCourseTypeId() != null && courseTrainee.getCourseTypeId().toUpperCase().contains("SPECIAL")){
-					if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentNameInput().toUpperCase().contains("STUDY")){
+				}else if( courseTrainee.getCourseTypeId() != null && courseTrainee.getCourseTypeId().toUpperCase().contains("SPECIAL")){
+					if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentType().toUpperCase().contains("STUDY")){
 						docPath = docPath + "SPECIAL/PDF/"+courseTrainee.getContentLinkInput()+pdf;
-					}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentNameInput().toUpperCase().contains("PPT")){
+					}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentType().toUpperCase().contains("PPT")){
 						docPath = docPath + "SPECIAL/PPT/"+courseTrainee.getContentLinkInput()+mp4;
-					}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentNameInput().toUpperCase().contains("VIDEO")){
+					}else if(courseTrainee.getContentLinkInput() != null && courseTrainee.getContentType().toUpperCase().contains("VIDEO")){
 						docPath = docPath + "SPECIAL/VIDEO/"+courseTrainee.getContentLinkInput();
 					}
 				}
-				model.addAttribute("contentName", courseTrainee.getContentNameInput());
-				model.addAttribute("contentPath", docPath);
-				model.addAttribute("courseTrainee", courseTrainee);
+				System.out.println("courseTrainee.getContentNameInput() "+courseTrainee.getContentNameInput());
+				System.out.println("docPath "+docPath);
+				listcontentName.add(courseTrainee.getContentNameInput());
+				
+				map.put(docPath, courseTrainee.getContentNameInput());
+				
+				listcontentPath.add(docPath);
+				listcontentLink.add(courseTrainee.getContentLinkInput());
 			
+			
+				}
+	
+				model.addAttribute("contentName", listcontentName);
+				model.addAttribute("contentPath", listcontentPath);
+				model.addAttribute("contentLink", map);
 			Utility utility=new Utility();
 			//Need to write service for AsssessorAgency 
 			model.addAttribute("utility",utility);

@@ -163,11 +163,13 @@ public class TraineeDAOImpl implements TraineeDAO {
 		List<CourseName> courseNameList = query.list();
 		return courseNameList;
 	}
-
+	
+	
 	@Override
 	public CourseTrainee getCourseTrainingByCourseTypeID(int typeId) {
 		Session session = sessionFactory.getCurrentSession();
 		CourseTrainee courseTrainee = new CourseTrainee();
+		List<CourseTrainee>  listCourseTrainee =  new ArrayList<CourseTrainee>();
 		StringBuffer sql = new StringBuffer();
 		sql.append("Select D.coursenameid,D.coursename,D.courseduration ");
 		sql.append(" ,concat(E.firstname , ' ' , E.middlename , ' ' , E.lastname ) ,F.assessmentagencyname,G.contentnameinput, G.contentlinkinput, G.contenttypeinput, C.coursetype");
@@ -194,9 +196,53 @@ public class TraineeDAOImpl implements TraineeDAO {
 			courseTrainee.setContentNameInput(o[7] == null ? "" : o[7].toString());
 			courseTrainee.setCourseTypeId(o[8] == null ? "" : o[8].toString());
 			courseTrainee.setCourseCode(o[9] == null ? "" : o[9].toString());
+		
 			
 		} 
 		return courseTrainee;
+
+	}
+
+
+	@Override
+	public List<CourseTrainee> getCourseTrainingByCourseTypeIDList(int typeId) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		List<CourseTrainee>  listCourseTrainee =  new ArrayList<CourseTrainee>();
+		StringBuffer sql = new StringBuffer();
+		sql.append("Select distinct D.coursenameid,D.coursename,D.courseduration ");
+		sql.append(" ,concat(E.firstname , ' ' , E.middlename , ' ' , E.lastname ) ,F.assessmentagencyname,G.contentnameinput, G.contentlinkinput, G.contenttypeinput, C.coursetype");
+		sql.append(" ,D.courseCode from courseenrolleduser A");
+		sql.append(" inner join trainingcalendar B on(A.trainingcalendarid=B.trainingcalendarid)");
+		sql.append(" inner join coursetype C on(B.coursetype=C.coursetypeid)");
+		sql.append(" inner join coursename D on(B.coursename=D.coursenameid)");
+		sql.append(" left outer join personalinformationassessor E on(B.assessor=E.personalinformationassessorid)");
+		sql.append(" left outer join manageassessmentagency F on(E.assessmentagencyname=F.manageassessmentagencyid)");
+		sql.append(" left outer join managecoursecontent G on(D.coursenameid=G.coursenameinput)");
+		sql.append(" Where A.logindetails = "+typeId+" and A.status = 'N'");
+		
+		Query query = session.createSQLQuery(sql.toString());
+		List<Object[]> courseTraineeList = (List<Object[]>) query.list();
+		for( int i = 0 ; i < courseTraineeList.size() ; i++) {
+			Object[] o = courseTraineeList.get(i);
+			CourseTrainee courseTrainee = new CourseTrainee();
+			courseTrainee.setCourseNameID(o[0] == null ? "" : o[0].toString());
+			courseTrainee.setCourseName(o[1] == null ? "" : o[1].toString());
+			courseTrainee.setCourseDuration(o[2] == null ? "" : o[2].toString());
+			courseTrainee.setAssessor(o[3] == null ? "" : o[3].toString());
+			courseTrainee.setAssessorAgency(o[4] == null ? "" : o[4].toString());
+			courseTrainee.setContentNameInput(o[5] == null ? "" : o[5].toString());
+			courseTrainee.setContentLinkInput(o[6] == null ? "" : o[6].toString());
+			System.out.println("o[5] "+o[5] + " o[6] "+o[6]);
+			courseTrainee.setContentType(o[7] == null ? "" : o[7].toString());
+			courseTrainee.setCourseTypeId(o[8] == null ? "" : o[8].toString());
+			courseTrainee.setCourseCode(o[9] == null ? "" : o[9].toString());
+			System.out.println("before adding "+courseTrainee.getContentNameInput());
+			listCourseTrainee.add(courseTrainee);
+			
+		} 
+		System.out.println("size "+listCourseTrainee.size());
+		return listCourseTrainee;
 
 	}
 
