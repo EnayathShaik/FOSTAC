@@ -737,6 +737,8 @@ public class AdminDAOImpl implements AdminDAO {
 		criteria.add(Restrictions.eq("contentLocationInput", contentLocation));
 		criteria.add(Restrictions.eq("courseTypeInput", courseType));
 		criteria.add(Restrictions.eq("courseNameInput", courseName));
+		criteria.add(Restrictions.eq("contentNameInput", contentName));
+		
 		List l = criteria.list();
 		if(l != null && l.size() > 0){
 			session.close();
