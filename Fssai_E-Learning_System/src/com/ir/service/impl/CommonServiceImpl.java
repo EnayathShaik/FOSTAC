@@ -29,4 +29,11 @@ public class CommonServiceImpl implements CommonService{
 		boolean changePasswordAssesorSave= commonDao.changePasswordSave(changePasswordForm , id);
 		return changePasswordAssesorSave;
 	}
+	
+	@Override
+	@Transactional
+	public String checkAadhar(String aadhar , String tableName){
+		String modeOfTraining = commonDao.checkAadhar(aadhar , tableName);
+		return modeOfTraining;
+	}
 }

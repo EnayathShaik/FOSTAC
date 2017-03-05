@@ -31,31 +31,32 @@
     function ck_aadhar() {
     	var name=document.getElementById( "AadharNumber" ).value;
         if(name)
-        {
-         $.ajax({
-         type: 'post',
-         url: 'checkaadhartrainee.jspp?'+ name,
-         data: {
-          user_name:name,
-         },
-         success: function (response) {
-          $( '#aadhar_status' ).html(response);
-          if(response.trim() == 'Already')	
-          {
-       	   document.getElementById('AadharNumber').value="";
-       	   document.getElementById("register").style.display = 'none';
-              return false;
-       	   
-          }
-          else
-          {
-       	   var aa = $('#aadhar_status').html(response);
-       	   document.getElementById("register").style.display = 'block';
-              return true;	
-          }
-       	  
-          }  
-         })
+        {    
+    	 	var name1=JSON.stringify({
+    			courseType:0,
+    			courseName:0
+    	  })
+        	 var  input = name+"-"+"personalinformationtrainee";
+       		$.ajax({
+       		      type: 'post',
+       		      url: 'checkAadhar.fssai?data='+input,
+       		      contentType : "application/json",
+       		      data:name1,
+       		      success: function (response) {   
+       		    	$('#aadhar_status').html(response);
+       		    	if (response.trim() == 'Already') {
+       					document.getElementById('AadharNumber').value = "";
+       					document.getElementById("register").style.display = 'none';
+       					return false;
+
+       				} else {
+       					var aa = $('#aadhar_status').html("");
+       					document.getElementById("register").style.display = 'block';
+       					return true;
+       				}
+       		    	
+       		      } 
+       		      });
          }else{
        	  $( '#aadhar_status' ).html("");
              document.getElementById("register").style.display = 'none';

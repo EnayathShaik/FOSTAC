@@ -9,4 +9,6 @@ public interface CommonService {
 	public String getCourseTrainingType(String courseNameId);
 	
 	public boolean changePasswordSave(ChangePasswordForm changePasswordForm, String id);
+	
+	public String checkAadhar(String aadhar , String tableName);
 }
