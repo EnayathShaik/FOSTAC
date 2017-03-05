@@ -61,9 +61,15 @@ window.onload = OnStart;
 
 	function getCourseName(val) {
 		$('#selCourseName option').remove();
+	 	var name=JSON.stringify({
+			courseType:0,
+			courseName:0
+	  })
 		$.ajax({
 			type : 'post',
-			url : 'getCourseName.jspp?' + val,
+			url : 'getCourseName.fssai?data='+ val,
+			contentType : "application/json",
+		    data:name,
 			success : function(response) {
 				var mainData1 = jQuery.parseJSON(response);
 				$('#selCourseName option').remove();

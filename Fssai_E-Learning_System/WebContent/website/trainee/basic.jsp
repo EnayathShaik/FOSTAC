@@ -37,17 +37,26 @@ window.onload = OnStart;
 	 
  }
  
- 
+
+
+	
+	
 	function getCourseName(val) {
 		$('#courseName option').remove();
+	 	var name=JSON.stringify({
+			courseType:0,
+			courseName:0
+	  })
 		$.ajax({
 			type : 'post',
-			url : 'getCourseName.jspp?' + val,
+			url : 'getCourseName.fssai?data='+ val,
+			contentType : "application/json",
+		    data:name,
 			success : function(response) {
 				var mainData1 = jQuery.parseJSON(response);
 				$('#courseName option').remove();
 				$('#courseName').append(
-						'<option value="0" label="--Select Course Code--" />');
+						'<option value="0" label="--Select Course Name--" />');
 				$.each(mainData1, function(i, obj) {
 					$('#courseName')
 							.append(
@@ -57,7 +66,6 @@ window.onload = OnStart;
 			}
 		});
 	}
-
  
 function confirmTrainee(){
 	if(confirm("(Trainee can enroll to one course at one time,another course enrollment will be done after the completion of last step i.e. Generate Certificate).?")){

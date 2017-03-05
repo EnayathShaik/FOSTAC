@@ -167,5 +167,23 @@ public class PageLoadServiceImpl implements PageLoadService {
 		return  pageLoadDao.getNextCombinationId(prefix, tableName, pattern);
 	}
 	
+	@Override
+	@Transactional
+	public List<District> loadDistrict(String stateId) {
+		// TODO Auto-generated method stub
+		List<District> districtList = pageLoadDao.District(stateId);
+		return districtList;
+	}
+	
+	
+	@Override
+	@Transactional
+	public List<City> loadCity(String distId) {
+		// TODO Auto-generated method stub
+		System.out.println("page load service");
+		List<City> cityList = pageLoadDao.loadCity(distId);
+		return cityList;
+	}
+
 
 }

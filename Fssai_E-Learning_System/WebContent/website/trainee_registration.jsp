@@ -489,24 +489,28 @@ function AvoidSpace(event) {
     if (k == 32) return false;
 }
 
-function getDistrict(val)
+function getDistrict(val , idName)
 {
-	//////alert('jjh');
+ 	var name1=JSON.stringify({
+		courseType:0,
+		courseName:0
+  })
 	$.ajax({
 	      type: 'post',
-	      
-	      url: 'loadDistrict.jspp?'+ val,
+	      url: 'loadDistrict.fssai?data='+ val,
+	      contentType : "application/json",
+		  data:name1,
 	      success: function (response) {      
 	      var mainData1 = jQuery.parseJSON(response);
 	    
-	      $('#correspondenceDistrict option').remove();
-	      $('#correspondenceDistrict').append('<option value="0" label="Select District" />');
-	      $('#correspondenceCity option').remove();
-	      $('#correspondenceCity').append('<option value="0" label="Select City" />');
+	      $('#'+idName+' option').remove();
+	      $('#'+idName).append('<option value="0" label="Select District" />');
+	      $('#'+idName+' option').remove();
+	      $('#'+idName).append('<option value="0" label="Select City" />');
 	  	 
 	      $.each(mainData1 , function(i , obj)
 	  		{
-  				$('#correspondenceDistrict').append('<option value='+obj.districtId+' >'+obj.districtName+'</option>');	
+  				$('#'+idName).append('<option value='+obj.districtId+' >'+obj.districtName+'</option>');	
 	  		});
 	      }
 	      });     
@@ -530,28 +534,7 @@ function getCity(val)
 	      });     
 }
 
-function getDistrict1(val)
-{
-	//////alert('jjh');
-	$.ajax({
-	      type: 'post',
-	      
-	      url: 'loadDistrict.jspp?'+ val,
-	      success: function (response) {      
-	      var mainData1 = jQuery.parseJSON(response);
-	    
-	      $('#residentialDistrict option').remove();
-	      $('#residentialDistrict').append('<option value="0" label="Select District" />');
-	      $('#resCity option').remove();
-	      $('#resCity').append('<option value="0" label="Select City" />');
-	  	 
-	      $.each(mainData1 , function(i , obj)
-	  		{
-	    	 	 $('#residentialDistrict').append('<option value='+obj.districtId+' >'+obj.districtName+'</option>');
-	  		});
-	      }
-	      });     
-}
+
 
 
 function getCity1(val)
@@ -571,28 +554,6 @@ function getCity1(val)
 	      });     
 }
 
-function getDistrict2(val)
-{
-	//////alert('jjh');
-	$.ajax({
-	      type: 'post',
-	      
-	      url: 'loadDistrict.jspp?'+ val,
-	      success: function (response) {      
-	      var mainData1 = jQuery.parseJSON(response);
-	    
-	      $('#bussDistrict option').remove();
-	      $('#bussDistrict').append('<option value="0" label="Select District" />');
-	      $('#bussCity option').remove();
-	      $('#bussCity').append('<option value="0" label="Select City" />');
-	  	 
-	      $.each(mainData1 , function(i , obj)
-	  		{
-	    		  $('#bussDistrict').append('<option value='+obj.districtId+' >'+obj.districtName+'</option>');
-	  		});
-	      }
-	      });     
-}
 
 
 function getCity2(val)
@@ -1038,7 +999,7 @@ function ck_aadhar() {
 									</ul>
 								</div>
 								<cf:select path="correspondenceState" class="form-control"
-									onchange="getDistrict(this.value);">
+									onchange="getDistrict(this.value, 'correspondenceDistrict');">
 									<cf:option value="0" label="Select State" />
 									<cf:options items="${stateList}" itemValue="stateId"
 										itemLabel="stateName" />
@@ -1199,7 +1160,7 @@ function ck_aadhar() {
 									</ul>
 								</div>
 								<cf:select path="resState" class="form-control state"
-									onchange="getDistrict1(this.value);">
+									onchange="getDistrict(this.value , 'residentialDistrict');">
 									<cf:option value="0" label="Select State" />
 									<cf:options items="${stateList}" itemValue="stateId"
 										itemLabel="stateName" />
@@ -1475,7 +1436,7 @@ function ck_aadhar() {
 									</ul>
 								</div>
 								<cf:select path="bussState" class="form-control"
-									onchange="getDistrict2(this.value);">
+									onchange="getDistrict(this.value , 'bussDistrict');">
 									<cf:option value="0" label="Select State" />
 									<cf:options items="${stateList}" itemValue="stateId"
 										itemLabel="StateName" />

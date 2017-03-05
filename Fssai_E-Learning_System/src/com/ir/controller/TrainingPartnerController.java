@@ -124,6 +124,8 @@ public class TrainingPartnerController {
 		
 	}
 	
+
+	
 	
 	@RequestMapping(value="/getCertificateID" , method=RequestMethod.POST)
 	@ResponseBody

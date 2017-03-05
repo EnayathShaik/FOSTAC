@@ -2,6 +2,7 @@ package com.ir.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -87,4 +88,21 @@ public class CommonController {
 		out.flush();
 		
 	}
+	
+	
+	@RequestMapping(value="/getCourseName" , method=RequestMethod.POST)
+	@ResponseBody
+	public void getCourseName(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("getCourseName","getCourseName............" + data  , "TrainingPartnerController.java");
+		String courseName =  data;
+		List batchCodeList = commonService.getCourseName(courseName);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(batchCodeList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
 }

@@ -41,6 +41,11 @@ public interface PageLoadService {
 	public List<Object[]> loadTrainingDetails(Utility utility);
 	public String getNextCombinationId(String prefix , String tableName , String pattern);
 	
+	//onchange 
+	
+	public List<District> loadDistrict(String stateId);
+	public List<City> loadCity(String districtId);
+	
 	
 	
 	 

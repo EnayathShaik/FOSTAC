@@ -1,5 +1,7 @@
 package com.ir.service.impl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +37,13 @@ public class CommonServiceImpl implements CommonService{
 	public String checkAadhar(String aadhar , String tableName){
 		String modeOfTraining = commonDao.checkAadhar(aadhar , tableName);
 		return modeOfTraining;
+	}
+	//getCourseName
+	
+	@Override
+	@Transactional
+	public List getCourseName(String courseeName){
+		List  courseName = commonDao.getCourseName( courseeName);
+		return courseName;
 	}
 }

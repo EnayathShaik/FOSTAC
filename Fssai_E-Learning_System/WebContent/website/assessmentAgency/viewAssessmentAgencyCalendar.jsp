@@ -23,7 +23,7 @@ function OnStart(){
 }
 window.onload = OnStart;
 
-function getCourseName(val){
+/* function getCourseName(val){
 	
 	$.ajax({
 	      type: 'post',
@@ -39,8 +39,34 @@ function getCourseName(val){
 	  		});
 	      }
 	      });
-}
+} */
 
+
+function getCourseName(val) {
+	$('#selCourseName option').remove();
+ 	var name=JSON.stringify({
+		courseType:0,
+		courseName:0
+  })
+	$.ajax({
+		type : 'post',
+		url : 'getCourseName.fssai?data='+ val,
+		contentType : "application/json",
+	    data:name,
+		success : function(response) {
+			var mainData1 = jQuery.parseJSON(response);
+			$('#courseName option').remove();
+			$('#courseName').append(
+					'<option value="0" label="--Select Course Name--" />');
+			$.each(mainData1, function(i, obj) {
+				$('#courseName')
+						.append(
+								'<option value='+obj[0]+' >' + obj[1]
+										+ '</option>');
+			});
+		}
+	});
+}
 
 </script> 
 

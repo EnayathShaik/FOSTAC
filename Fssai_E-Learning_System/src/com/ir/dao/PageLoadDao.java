@@ -37,4 +37,6 @@ public interface PageLoadDao {
 	public  List<String> loadCaste(); 
 	public String getNextCombinationId(String prefix , String tableName , String pattern);
 	
+	public List<District> District(String stateId);
+	public List<City> loadCity(String distId);
 }

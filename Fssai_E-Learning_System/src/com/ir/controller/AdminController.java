@@ -1,6 +1,7 @@
 package com.ir.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +38,7 @@ import com.ir.form.ChangePasswordForm;
 import com.ir.form.CityForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.DistrictForm;
+import com.ir.form.GenerateCourseCertificateForm;
 import com.ir.form.ManageAssessmentAgencyForm;
 import com.ir.form.ManageCourse;
 import com.ir.form.ManageCourseContentForm;
@@ -49,6 +52,7 @@ import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.UpdateTrainerAssessmentForm;
 import com.ir.model.ActivateDeActivateUsersForm;
 import com.ir.model.AdminUserManagement;
+import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.District;
@@ -1064,6 +1068,38 @@ public class AdminController {
 		return "redirect:/assessorUserManagementForm.fssai";
     }
 	
-
+	
+	@RequestMapping(value="/loadDistrict" , method=RequestMethod.POST)
+	@ResponseBody
+	public void getCourseName(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("loadDistrict","loadDistrict............" + data  , "AdminController.java");
+		String stateId =  data;
+		List districtList = pageLoadService.loadDistrict(stateId);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(districtList); 
+		new ZLogger("loadDistrict","newList "+newList , "AdminController.java");
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+//loadCity
+	
+	@RequestMapping(value="/loadCity" , method=RequestMethod.POST)
+	@ResponseBody
+	public void loadCity(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("loadCity","loadCity............" + data  , "AdminController.java");
+		String districtid =  data;
+		List<City> cityList = pageLoadService.loadCity(districtid);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(cityList); 
+		new ZLogger("loadDistrict","newList "+newList , "AdminController.java");
+		out.write(newList);
+		out.flush();
+		
+	}
+	
 
 }
