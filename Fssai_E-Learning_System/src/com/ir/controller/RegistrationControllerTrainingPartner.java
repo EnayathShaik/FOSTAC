@@ -22,7 +22,6 @@ import com.ir.form.PostVacancyTrainingCenterForm;
 import com.ir.form.RegistrationFormTrainingPartner;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.service.RegistrationServiceTrainingPartner;
-import com.ir.util.JavaMail;
 import com.zentech.backgroundservices.Mail;
 import com.zentech.logger.ZLogger;
 

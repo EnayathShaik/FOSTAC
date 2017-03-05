@@ -2,7 +2,6 @@ package com.ir.dao.impl;
 
 
 import java.security.NoSuchAlgorithmException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.hibernate.Query;

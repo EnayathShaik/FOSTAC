@@ -49,10 +49,7 @@ import com.ir.form.TrainerUserManagementForm;
 import com.ir.form.TrainingCalendarForm;
 import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.UpdateTrainerAssessmentForm;
-import com.ir.model.ActivateDeActivateUsersForm;
-import com.ir.model.AdminUserManagement;
 import com.ir.model.City;
-import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.PersonalInformationAssessor;
@@ -64,7 +61,6 @@ import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
 import com.ir.service.AdminService;
 import com.ir.service.PageLoadService;
-import com.ir.util.JavaMail;
 import com.zentech.backgroundservices.Mail;
 import com.zentech.logger.ZLogger;
 

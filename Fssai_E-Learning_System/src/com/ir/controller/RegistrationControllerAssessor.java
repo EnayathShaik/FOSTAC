@@ -25,7 +25,6 @@ import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.service.PageLoadService;
 import com.ir.service.RegistrationServiceAssessor;
-import com.ir.util.JavaMail;
 import com.zentech.backgroundservices.Mail;
 import com.zentech.logger.ZLogger;
 

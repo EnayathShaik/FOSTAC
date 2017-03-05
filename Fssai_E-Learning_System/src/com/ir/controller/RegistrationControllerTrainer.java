@@ -33,7 +33,6 @@ import com.ir.service.RegistrationServiceTrainer;
 import com.ir.service.RegistrationServiceTrainingPartner;
 import com.ir.service.TraineeService;
 import com.ir.service.TrainingPartnerService;
-import com.ir.util.JavaMail;
 import com.zentech.backgroundservices.Mail;
 import com.zentech.logger.ZLogger;
 

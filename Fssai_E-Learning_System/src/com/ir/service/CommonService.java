@@ -2,7 +2,6 @@ package com.ir.service;
 
 import java.util.List;
 
-
 import com.ir.form.ChangePasswordForm;
 
 public interface CommonService {
