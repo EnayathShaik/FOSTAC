@@ -1,7 +1,6 @@
 package com.ir.general;
 
 import java.io.FileNotFoundException;
-
 import java.io.InputStream;
 import java.util.Properties;
 

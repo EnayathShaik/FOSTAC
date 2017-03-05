@@ -1,25 +1,15 @@
 package com.ir.dao.impl;
-import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
-import org.apache.tomcat.util.buf.UEncoder;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.ir.constantes.DBUtil;
-import com.ir.dao.AdminDAO;
 import com.ir.dao.RegistrationDAO;
 import com.ir.form.RegistrationFormTrainee;
 import com.ir.model.City;
@@ -32,8 +22,6 @@ import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.util.EncryptionPasswordANDVerification;
 import com.ir.util.PasswordGenerator;
-import com.ir.util.SendMail;
-import com.zentect.ajax.AjaxRequest;
 
 
 @Component("registrationDAO")
@@ -109,7 +97,7 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 			String localizedMessage = he.getLocalizedMessage();
 			if(null==userId || localizedMessage.contains("duplicate key")){
 				System.out.println("UserAlreadRegisteredException occured..");
-				Exception e=he;
+				
 			}
 		}
 		return null;
@@ -123,7 +111,7 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 		try{
 			Session session = sessionFactory.getCurrentSession();
 			String sqlQuery = "select password from personalinformationtrainee where userid = " + registrationFormTrainee.getUserId() + " ";
-			String newList=null;
+			//String newList=null;
 			try {       
 		        System.out.println("sqlQuery "+sqlQuery);
 				Query query = session.createSQLQuery(sqlQuery);
@@ -164,10 +152,10 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 		Title tt = getTitle(registrationFormTrainee.getTitle(),session);
 		KindOfBusiness kob = getKid(registrationFormTrainee.getKindOfBusiness(),session);
 		
-	boolean correspondADD=registrationFormTrainee.isCheckCorrespondence();
-	boolean checkCompany=registrationFormTrainee.isCheckCompany();
+		boolean correspondADD=registrationFormTrainee.isCheckCorrespondence();
+		boolean checkCompany=registrationFormTrainee.isCheckCompany();
 		
-	System.out.println("this is boolean value   "+correspondADD);
+		System.out.println("this is boolean value   "+correspondADD);
 		PasswordGenerator passwordGenerator = new PasswordGenerator(6);
 		char[] pass = passwordGenerator.get();
 		String passwordString = String.valueOf(pass);
@@ -193,41 +181,40 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 		PersonalInformationTrainee personalInformationTrainee = new PersonalInformationTrainee();
 		personalInformationTrainee.setSteps(0);
 		personalInformationTrainee.setTitle(tt);
-		personalInformationTrainee.setCaste(registrationFormTrainee.getCaste());
-		personalInformationTrainee.setAadharNumber(registrationFormTrainee.getAadharNumber().trim());
-		personalInformationTrainee.setFirstName(registrationFormTrainee.getFirstName().trim());
-		personalInformationTrainee.setLastName(registrationFormTrainee.getLastName().trim());
-		personalInformationTrainee.setMiddleName(registrationFormTrainee.getMiddleName().trim());
-		personalInformationTrainee.setDob(registrationFormTrainee.getDob().trim());
-		System.out.println("Gender == "+registrationFormTrainee.getGender());
-		personalInformationTrainee.setGender(registrationFormTrainee.getGender().trim());
-		personalInformationTrainee.setEmail(registrationFormTrainee.getEmail().trim());
-		personalInformationTrainee.setMobile(registrationFormTrainee.getMobile().trim());		
-		personalInformationTrainee.setCorrespondenceAddress1(registrationFormTrainee.getCorrespondenceAddress1().trim());
-		personalInformationTrainee.setCorrespondenceAddress2(registrationFormTrainee.getCorrespondenceAddress2().trim());
+		personalInformationTrainee.setCaste(registrationFormTrainee.getCaste() == null ? "" : registrationFormTrainee.getCaste().trim());
+		personalInformationTrainee.setAadharNumber(registrationFormTrainee.getAadharNumber() == null ? "" : registrationFormTrainee.getAadharNumber().trim());
+		personalInformationTrainee.setFirstName(registrationFormTrainee.getFirstName() == null ? "" : registrationFormTrainee.getFirstName().trim());
+		personalInformationTrainee.setLastName(registrationFormTrainee.getLastName() == null ? "" : registrationFormTrainee.getLastName().trim());
+		personalInformationTrainee.setMiddleName(registrationFormTrainee.getMiddleName() == null ? "" : registrationFormTrainee.getMiddleName().trim());
+		personalInformationTrainee.setDob(registrationFormTrainee.getDob() == null ? "" : registrationFormTrainee.getDob().trim());
+		personalInformationTrainee.setGender(registrationFormTrainee.getGender() == null ? "" : registrationFormTrainee.getGender().trim());
+		personalInformationTrainee.setEmail(registrationFormTrainee.getEmail() == null ? "" : registrationFormTrainee.getEmail().trim());
+		personalInformationTrainee.setMobile(registrationFormTrainee.getMobile() == null ? "" : registrationFormTrainee.getMobile().trim());		
+		personalInformationTrainee.setCorrespondenceAddress1(registrationFormTrainee.getCorrespondenceAddress1() == null ? "" : registrationFormTrainee.getCorrespondenceAddress1().trim());
+		personalInformationTrainee.setCorrespondenceAddress2(registrationFormTrainee.getCorrespondenceAddress2() == null ? "" : registrationFormTrainee.getCorrespondenceAddress2().trim());
 		personalInformationTrainee.setCorrespondenceState(cs);
 		personalInformationTrainee.setCorrespondenceDistrict(cd);
 		personalInformationTrainee.setCorrespondenceCity(cc);
-		personalInformationTrainee.setCorrespondencePincode(registrationFormTrainee.getCorrespondencePincode().trim());
-		personalInformationTrainee.setFatherName(registrationFormTrainee.getFatherName());
+		personalInformationTrainee.setCorrespondencePincode(registrationFormTrainee.getCorrespondencePincode() == null ? "" : registrationFormTrainee.getCorrespondencePincode().trim());
+		personalInformationTrainee.setFatherName(registrationFormTrainee.getFatherName() == null ? "" : registrationFormTrainee.getFatherName().trim());
 		
 		
 		
 		if(correspondADD){
-			personalInformationTrainee.setResidentialLine1(registrationFormTrainee.getCorrespondenceAddress1());
-			personalInformationTrainee.setResidentialLine2(registrationFormTrainee.getCorrespondenceAddress2());
+			personalInformationTrainee.setResidentialLine1(registrationFormTrainee.getCorrespondenceAddress1() == null ? "" : registrationFormTrainee.getCorrespondenceAddress1().trim());
+			personalInformationTrainee.setResidentialLine2(registrationFormTrainee.getCorrespondenceAddress2() == null ? "" : registrationFormTrainee.getCorrespondenceAddress2().trim());
 			personalInformationTrainee.setResState(cs);
 			personalInformationTrainee.setResCity(cc);
 			personalInformationTrainee.setResidentialDistrict(cd);
-			personalInformationTrainee.setResPincode(registrationFormTrainee.getCorrespondencePincode());
+			personalInformationTrainee.setResPincode(registrationFormTrainee.getCorrespondencePincode() == null ? "" : registrationFormTrainee.getCorrespondencePincode().trim());
 			personalInformationTrainee.setCheckPermanent("true");
 		}else{
-			personalInformationTrainee.setResidentialLine1(registrationFormTrainee.getResidentialAddressLine1());
-			personalInformationTrainee.setResidentialLine2(registrationFormTrainee.getResidentialAddressLine2());
+			personalInformationTrainee.setResidentialLine1(registrationFormTrainee.getResidentialAddressLine1() == null ? "" : registrationFormTrainee.getResidentialAddressLine1().trim());
+			personalInformationTrainee.setResidentialLine2(registrationFormTrainee.getResidentialAddressLine2() == null ? "" : registrationFormTrainee.getResidentialAddressLine2().trim());
 			personalInformationTrainee.setResState(ps);
 			personalInformationTrainee.setResCity(pc);
 			personalInformationTrainee.setResidentialDistrict(pd);
-			personalInformationTrainee.setResPincode(registrationFormTrainee.getResPincode());
+			personalInformationTrainee.setResPincode(registrationFormTrainee.getResPincode() == null ? "" : registrationFormTrainee.getResPincode().trim());
 			personalInformationTrainee.setCheckPermanent("false");
 			}
 		
@@ -249,44 +236,35 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 		}
 		else{
 			System.out.println("Else Kind of business");
-			personalInformationTrainee.setDesignation(registrationFormTrainee.getDesignation().trim());
+			personalInformationTrainee.setDesignation(registrationFormTrainee.getDesignation() == null ? "" : registrationFormTrainee.getDesignation().trim());
 			personalInformationTrainee.setKindOfBusiness(kob);
-			personalInformationTrainee.setCompanyName(registrationFormTrainee.getCompanyName());
-			personalInformationTrainee.setRegistrationNo(registrationFormTrainee.getRegistrationNo());
+			personalInformationTrainee.setCompanyName(registrationFormTrainee.getCompanyName() == null ? "" : registrationFormTrainee.getCompanyName().trim());
+			personalInformationTrainee.setRegistrationNo(registrationFormTrainee.getRegistrationNo() == null ? "" : registrationFormTrainee.getRegistrationNo().trim());
 			
 
 			if(checkCompany){
-				personalInformationTrainee.setBusinessAddressLine1(registrationFormTrainee.getCorrespondenceAddress1());
-				personalInformationTrainee.setBusinessAddressLine2(registrationFormTrainee.getCorrespondenceAddress2());
+				personalInformationTrainee.setBusinessAddressLine1(registrationFormTrainee.getCorrespondenceAddress1() == null ? "" : registrationFormTrainee.getCorrespondenceAddress1().trim());
+				personalInformationTrainee.setBusinessAddressLine2(registrationFormTrainee.getCorrespondenceAddress2() == null ? "" : registrationFormTrainee.getCorrespondenceAddress2().trim());
 				personalInformationTrainee.setBussCity(cc);
 				personalInformationTrainee.setBussDistrict(cd);
 				personalInformationTrainee.setBussState(cs);
-				personalInformationTrainee.setBussPincode(registrationFormTrainee.getCorrespondencePincode());
+				personalInformationTrainee.setBussPincode(registrationFormTrainee.getCorrespondencePincode() == null ? "" : registrationFormTrainee.getCorrespondencePincode().trim());
 				personalInformationTrainee.setCheckCompany("true");
-				
 			}else{
-				personalInformationTrainee.setBusinessAddressLine1(registrationFormTrainee.getBusinessAddressLine1());
-				personalInformationTrainee.setBusinessAddressLine2(registrationFormTrainee.getBusinessAddressLine2());
-				personalInformationTrainee.setDesignation(registrationFormTrainee.getDesignation());
+				personalInformationTrainee.setBusinessAddressLine1(registrationFormTrainee.getBusinessAddressLine1() == null ? "" : registrationFormTrainee.getBusinessAddressLine1().trim());
+				personalInformationTrainee.setBusinessAddressLine2(registrationFormTrainee.getBusinessAddressLine2() == null ? "" : registrationFormTrainee.getBusinessAddressLine2().trim());
+				personalInformationTrainee.setDesignation(registrationFormTrainee.getDesignation() == null ? "" : registrationFormTrainee.getDesignation().trim());
 			
 				personalInformationTrainee.setBussState(bs);
 				personalInformationTrainee.setBussCity(bc);
 				personalInformationTrainee.setBussDistrict(bd);
-				personalInformationTrainee.setBussPincode(registrationFormTrainee.getBussPincode());
+				personalInformationTrainee.setBussPincode(registrationFormTrainee.getBussPincode() == null ? "" : registrationFormTrainee.getBussPincode().trim());
 				personalInformationTrainee.setCheckCompany("false");
 	}
 		}
-	//		personalInformationTrainee.setFirstName(registrationFormTrainee.getFirstName());
-		
 		personalInformationTrainee.setLoginDetails(loginDetails);
 		Integer personalInformationTraineeId = (Integer)session.save(personalInformationTrainee);
-		
-		System.out.println("all insert done");
-		System.out.println("saved login "+ personalInformationTraineeId);
 		if(personalInformationTraineeId  != 0){
-			/*SendMail sendMail = new SendMail();
-			sendMail.mailProperty(passwordString, registrationFormTrainee.getEmail(), registrationFormTrainee.getFirstName()+ " " + registrationFormTrainee.getLastName());
-*/
 			return passwordString+"&"+registrationFormTrainee.getUserId();
 		}else{
 			return passwordString+"&"+registrationFormTrainee.getUserId();

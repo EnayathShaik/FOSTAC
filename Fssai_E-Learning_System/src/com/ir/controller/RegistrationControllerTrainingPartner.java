@@ -1,7 +1,6 @@
 package com.ir.controller;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -21,14 +20,10 @@ import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.PostVacancyTrainingCenterForm;
 import com.ir.form.RegistrationFormTrainingPartner;
-import com.ir.model.CourseName;
-import com.ir.model.CourseType;
-import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationTrainingPartner;
-import com.ir.model.State;
-import com.ir.model.Title;
 import com.ir.service.RegistrationServiceTrainingPartner;
 import com.ir.util.JavaMail;
+import com.zentech.backgroundservices.Mail;
 import com.zentech.logger.ZLogger;
 
 @Controller
@@ -42,7 +37,7 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 	RegistrationServiceTrainingPartner registrationServiceTrainingPartner;
 	
 	
-	@ModelAttribute("stateList")
+	/*@ModelAttribute("stateList")
 	public List<State> populateStateList() {
 		List<State> stateList = registrationServiceTrainingPartner.loadState();
 		 new ZLogger("stateList", "state list   :   "+ stateList, "RegistrationControllerTrainingPartner.java");
@@ -90,7 +85,7 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 	public List<ManageTrainingPartner> trainingPartnerNameList() {
 		List<ManageTrainingPartner> trainingPartnerNameList = registrationServiceTrainingPartner.trainingPartnerNameList();
 		return trainingPartnerNameList;
-	}
+	}*/
 	
 	@RequestMapping(value = "/registrationFormTrainingPartner", method = RequestMethod.GET)
 	public String registerForm(Model model) {
@@ -126,9 +121,7 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 			String[] all = personalInformationTrainingPartner.split("&");
 			model.addAttribute("id" , all[1]);
 			model.addAttribute("pwd" , all[0]);
-				JavaMail javaMail = new JavaMail();
-				javaMail.mailProperty("Thanks", registrationFormTrainingPartner.getTrainingPartnerPermanentEmail(),all[1] ,all[0] , registrationFormTrainingPartner.getFirstName());
-				
+			new Thread(new Mail("Thanks", registrationFormTrainingPartner.getTrainingPartnerPermanentEmail(), all[1], all[0], registrationFormTrainingPartner.getFirstName())).start();
 			return "welcomeTrainingCenter";
 		}else{
 			model.addAttribute("created" , "Oops , Something went wrong !!!");
@@ -138,14 +131,7 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 	
 	@RequestMapping(value="/updateTrainingpartner" , method=RequestMethod.POST)
 	public String updateTrainer(@RequestParam(value = "id", required = true)  Integer id,@Valid @ModelAttribute("updateInformation") RegistrationFormTrainingPartner registrationFormTrainingPartner ,BindingResult bindingResult, HttpSession session){
-		Integer ss = 0;
-		if(id <= 0){
-			 ss = (Integer)session.getAttribute("loginUsertrainingpartner");
-		}else{
-			ss = id;
-		}
 		
-		String updateTrainingPartner = registrationServiceTrainingPartner.UpdateTrainingPartner(registrationFormTrainingPartner , ss);
 		//return "welcomeupdatetrainingCenter";
 		return "welcomeupdatetrainee";
 	}
@@ -232,7 +218,7 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 		  }
 		  return "postVacancyTC";	
 	 }
-@RequestMapping(value="/changePasswordTCentre" , method=RequestMethod.GET)
+	  @RequestMapping(value="/changePasswordTCentre" , method=RequestMethod.GET)
 		public String contactTrainee(@ModelAttribute("changePasswordForm") ChangePasswordForm changePasswordForm ){
 			return "changePasswordTCentre";
 		}

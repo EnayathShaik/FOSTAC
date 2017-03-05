@@ -2,20 +2,17 @@ package com.ir.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.hibernate.Query;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import com.google.gson.Gson;
-import com.ir.model.CourseEnrolledUser;
-import com.ir.model.PersonalInformationTrainee;
+
 import com.ir.model.TrainingCalendar;
 import com.ir.trainingcenter.model.AssesmentCalender;
 

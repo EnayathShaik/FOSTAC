@@ -2,19 +2,19 @@ package com.zentect.list.constant;
 
 public class ListMasters {
 	//State
-	public static String STATE_ID = "id";
-	public static String STATE_NAME = "id";
+	public static String TABLE_STATE = "STATE";
+	public static String COLUMN_STATE = "ID,";
 	
 	//District
-	public static String DISTRICT_ID = "id";
-	public static String DISTRICT_NAME = "id";
+	public static String TABLE_DISTRICT = "id";
+	public static String COLUMN_DISTRICT = "id";
 	
 	//City
-	public static String CITY_ID = "id";
-	public static String CITY_NAME = "id";
+	public static String TABLE_CITY = "id";
+	public static String COLUMN_CITY = "id";
 	
 	//Region
-	public static String REGION_ID = "id";
-	public static String REGION_NAME = "id";
+	public static String TABLE_REGION = "id";
+	public static String COLUMN_REGION = "id";
 
 }

@@ -1,7 +1,6 @@
 package com.ir.model.assessor;
 
 import java.io.Serializable;
-import javax.persistence.Embeddable;
 
 public class EnrolledAssessmentId implements Serializable{
 	/** Serial version ID */

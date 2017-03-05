@@ -1,7 +1,5 @@
 package com.ir.form;
 
-import java.sql.Date;
-import java.sql.Time;
 
 public class TrainingCalendarForm {
 	

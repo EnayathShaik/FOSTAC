@@ -3,8 +3,6 @@ package com.ir.service;
 import java.util.List;
 import java.util.Map;
 
-import javax.transaction.Transactional;
-
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.model.CourseType;

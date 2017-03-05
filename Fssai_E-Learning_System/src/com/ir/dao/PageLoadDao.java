@@ -1,11 +1,11 @@
 package com.ir.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.model.City;
 import com.ir.model.CourseName;
+import com.ir.model.CourseType;
 import com.ir.model.District;
 import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageAssessmentAgency;
@@ -13,7 +13,6 @@ import com.ir.model.ManageCourseContent;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.State;
 import com.ir.model.Title;
-import com.ir.model.TrainingPartner;
 import com.ir.model.Utility;
 
 public interface PageLoadDao {
@@ -36,7 +35,7 @@ public interface PageLoadDao {
 	public List<Object[]> loadTrainingDetails(Utility utility);
 	public  List<String> loadCaste(); 
 	public String getNextCombinationId(String prefix , String tableName , String pattern);
-	
+	List<CourseType> courseTypeList();
 	public List<District> District(String stateId);
 	public List<City> loadCity(String distId);
 }

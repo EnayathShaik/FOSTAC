@@ -1,9 +1,6 @@
 package com.ir.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -17,9 +14,6 @@ import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactFormAssessor;
 import com.ir.form.ContactTrainee;
 import com.ir.form.RegistrationFormAssessor;
-import com.ir.form.RegistrationFormTrainer;
-import com.ir.model.AssessmentAgency;
-import com.ir.model.CourseEnrolled;
 import com.ir.model.CourseName;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.PersonalInformationAssessor;

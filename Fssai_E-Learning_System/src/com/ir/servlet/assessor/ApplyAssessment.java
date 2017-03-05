@@ -2,9 +2,6 @@ package com.ir.servlet.assessor;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,14 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.Transaction;
 
-import com.google.gson.Gson;
-import com.ir.model.CourseName;
-import com.ir.model.CourseType;
-import com.ir.model.FeedbackForm;
-import com.ir.model.ManageCourseContent;
 import com.ir.util.HibernateUtil;
 /**
  * Servlet implementation class DeleteState

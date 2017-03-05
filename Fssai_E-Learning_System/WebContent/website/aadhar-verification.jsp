@@ -46,12 +46,12 @@
        		    	$('#aadhar_status').html(response);
        		    	if (response.trim() == 'Already') {
        					document.getElementById('AadharNumber').value = "";
-       					document.getElementById("register").style.display = 'none';
+       					//document.getElementById("register").style.display = 'none';
        					return false;
 
        				} else {
        					var aa = $('#aadhar_status').html("");
-       					document.getElementById("register").style.display = 'block';
+       					//document.getElementById("register").style.display = 'block';
        					return true;
        				}
        		    	

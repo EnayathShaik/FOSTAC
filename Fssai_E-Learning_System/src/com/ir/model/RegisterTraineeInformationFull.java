@@ -4,13 +4,12 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.*;
-import org.hibernate.validator.constraints.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
-import com.ir.model.City;
-import com.ir.model.KindOfBusiness;
-import com.ir.model.State;
-import com.ir.model.Title;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 

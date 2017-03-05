@@ -7,12 +7,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import com.ir.dao.AdminDAO;
 import com.ir.dao.impl.AdminDAOImpl;
 import com.ir.form.TraineeUserManagementForm;
-import com.ir.form.TrainerUserManagementForm;
 import com.ir.model.PersonalInformationTrainee;
-import com.ir.model.PersonalInformationTrainer;
 import com.ir.service.AdminService;
 
 public class UserManagement {

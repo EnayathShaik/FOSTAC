@@ -2,7 +2,6 @@ package com.ir.service.impl;
 
 
 import java.util.List;
-import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -13,6 +12,7 @@ import com.ir.bean.common.IntStringBean;
 import com.ir.dao.PageLoadDao;
 import com.ir.model.City;
 import com.ir.model.CourseName;
+import com.ir.model.CourseType;
 import com.ir.model.District;
 import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageAssessmentAgency;
@@ -165,6 +165,12 @@ public class PageLoadServiceImpl implements PageLoadService {
 	public String getNextCombinationId(String prefix , String tableName , String pattern) {
 		System.out.println("inside cast map");
 		return  pageLoadDao.getNextCombinationId(prefix, tableName, pattern);
+	}
+	@Override
+	@Transactional
+	public List<CourseType> courseTypeList() {
+		List<CourseType> courseTypeList = pageLoadDao.courseTypeList();
+		return courseTypeList;
 	}
 	
 	@Override

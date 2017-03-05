@@ -1,6 +1,5 @@
 package com.ir.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -40,7 +39,6 @@ import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.State;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
-import com.ir.model.trainee.TraineeAssessmentEvaluation;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
 import com.ir.service.AdminService;
 

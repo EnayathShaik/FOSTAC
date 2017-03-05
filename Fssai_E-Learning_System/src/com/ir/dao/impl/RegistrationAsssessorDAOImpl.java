@@ -5,13 +5,10 @@ import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.hql.internal.ast.tree.IsNotNullLogicOperatorNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -21,7 +18,6 @@ import com.ir.dao.RegistrationAssessorDAO;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.RegistrationFormAssessor;
-import com.ir.model.AssessmentAgency;
 import com.ir.model.City;
 import com.ir.model.ContactTraineee;
 import com.ir.model.CourseEnrolled;
@@ -31,7 +27,6 @@ import com.ir.model.KindOfBusiness;
 import com.ir.model.LoginDetails;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.PersonalInformationAssessor;
-import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.util.ChangePasswordUtility;
@@ -39,7 +34,6 @@ import com.ir.util.EncryptionPasswordANDVerification;
 import com.ir.util.PasswordGenerator;
 import com.ir.util.SendContectMail;
 import com.ir.util.SendMail;
-import com.ir.util.Util;
 
 
 @Repository
@@ -113,7 +107,6 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 	@Override
 	public String register(RegistrationFormAssessor registrationFormAssessor ) {
 		try{
-			Integer personalInformationTrainerId=null;
 			Integer personalInformationTrainerIdd = null  ;
 			State cs = getState(registrationFormAssessor.getAssessorCorrespondenceState());
 			State ps = getState(registrationFormAssessor.getAssessorrPermanentState());
@@ -131,8 +124,6 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 			if(registrationFormAssessor.getSpecialCourses() != null)
 				registeredCourses.addAll(registrationFormAssessor.getSpecialCourses());
 			
-			SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-			long date = System.currentTimeMillis();
 			
 			PasswordGenerator passwordGenerator = new PasswordGenerator(6);
 			char[] pass = passwordGenerator.get();
@@ -225,7 +216,7 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 								courseEnrolledBasic.setLoginDetails(loginDetails);
 								courseEnrolledBasic.setCoursenameid(Integer.parseInt(strBasicCourse));
 								System.out.println("BasicCoursesplited  "+ strBasicCourse);
-								long courseenrolledbasic = (Integer)session1.save(courseEnrolledBasic);
+								session1.save(courseEnrolledBasic);
 				}
 		}catch (Exception e) {
 				System.out.println("Oops !! course basic" + e.getMessage());
@@ -294,8 +285,6 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 
 	@Override
 	public String updateAssessor(RegistrationFormAssessor registrationFormAssessor, int loginId) {
-		Integer id=null;
-		//Integer idd=id;
 		Session session =sessionFactory.getCurrentSession();
 		State cs = getState(registrationFormAssessor.getAssessorCorrespondenceState());
 		State ps = getState(registrationFormAssessor.getAssessorrPermanentState());

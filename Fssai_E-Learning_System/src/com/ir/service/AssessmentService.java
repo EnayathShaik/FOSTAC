@@ -3,8 +3,6 @@ package com.ir.service;
 import java.util.List;
 import java.util.Map;
 
-import javax.transaction.Transactional;
-
 import com.ir.bean.common.IntStringBean;
 import com.ir.form.AssessmentAnswerCriteria;
 import com.ir.model.AssessmentQuestion;

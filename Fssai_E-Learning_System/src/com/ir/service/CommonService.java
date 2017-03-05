@@ -2,7 +2,6 @@ package com.ir.service;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
 
 import com.ir.form.ChangePasswordForm;
 

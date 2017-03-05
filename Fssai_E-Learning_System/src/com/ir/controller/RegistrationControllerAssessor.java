@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -16,23 +17,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.ir.form.ChangePasswordForm;
-import com.ir.form.ContactFormAssessor;
-import com.ir.form.ContactTrainee;
 import com.ir.form.RegistrationFormAssessor;
-import com.ir.form.RegistrationFormTrainer;
-import com.ir.model.AssessmentAgency;
 import com.ir.model.CourseName;
-import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.service.PageLoadService;
-import com.ir.service.PageLoadServiceTrainer;
 import com.ir.service.RegistrationServiceAssessor;
-import com.ir.service.RegistrationServiceTrainer;
 import com.ir.util.JavaMail;
+import com.zentech.backgroundservices.Mail;
 import com.zentech.logger.ZLogger;
 
 @Controller
@@ -89,8 +83,7 @@ public class RegistrationControllerAssessor implements Serializable{
 				String[] all = personalInformationAssessor.split("&");
 				model.addAttribute("id" , all[1]);
 				model.addAttribute("pwd" , all[0]);
-					JavaMail javaMail = new JavaMail();
-					javaMail.mailProperty("Thanks", registrationFormAssessor.getAssessorPermanentEmail(), all[1],all[0] , registrationFormAssessor.getFirstName());
+				new Thread(new Mail("Thanks", registrationFormAssessor.getAssessorPermanentEmail(), all[1], all[0], registrationFormAssessor.getFirstName())).start();
 				return "welcome";
 			}else{
 				model.addAttribute("id" , "Oops, something went wrong !!!");

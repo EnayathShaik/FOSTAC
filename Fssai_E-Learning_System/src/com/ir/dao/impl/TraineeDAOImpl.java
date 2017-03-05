@@ -23,6 +23,7 @@ import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.RegistrationFormTrainee;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.CertificateInfo;
+import com.ir.model.CheckAadhar;
 import com.ir.model.City;
 import com.ir.model.ContactTraineee;
 import com.ir.model.CourseEnrolledUser;
@@ -169,7 +170,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public CourseTrainee getCourseTrainingByCourseTypeID(int typeId) {
 		Session session = sessionFactory.getCurrentSession();
 		CourseTrainee courseTrainee = new CourseTrainee();
-		List<CourseTrainee>  listCourseTrainee =  new ArrayList<CourseTrainee>();
 		StringBuffer sql = new StringBuffer();
 		sql.append("Select D.coursenameid,D.coursename,D.courseduration ");
 		sql.append(" ,concat(E.firstname , ' ' , E.middlename , ' ' , E.lastname ) ,F.assessmentagencyname,G.contentnameinput, G.contentlinkinput, G.contenttypeinput, C.coursetype");
@@ -514,7 +514,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 
 		new ZLogger("basicSave","basicSave", "TraineeDAOImpl.java");
 		Session session = sessionFactory.getCurrentSession();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 		int maxId = 0 ;
 		String sql = "select coalesce(max(rollseqNo) + 1,1) from courseenrolleduser";
 		Query maxIDList = session.createSQLQuery(sql);
@@ -554,7 +553,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 			int tableID, Integer profileID) {
 		new ZLogger("advanceTraineeSave","advanceTraineeSave", "TraineeDAOImpl.java");
 		Session session = sessionFactory.getCurrentSession();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 		long date = System.currentTimeMillis();
 		new ZLogger("advanceTraineeSave","TrainingCalendarId()   :"+ courseEnrolledUserForm.getTrainingCalendarId(), "TraineeDAOImpl.java");
 		new ZLogger("basicSave","tableID "+tableID, "TraineeDAOImpl.java");
@@ -573,7 +571,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 			courseEnrolledUser.setProfileId(profileID);
 		}
 		// Integer ce =0;
-		Integer ce = (Integer) session.save(courseEnrolledUser);
+		session.save(courseEnrolledUser);
 		return date;
 	}
 
@@ -582,7 +580,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 			CourseEnrolledUserForm courseEnrolledUserForm, int loginid,
 			int tableID, Integer profileID) {
 		Session session = sessionFactory.getCurrentSession();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 		long date = System.currentTimeMillis();
 		courseEnrolledUser.setLoginDetails(loginid);
 		courseEnrolledUser.setProfileId(3);
@@ -600,7 +597,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		courseEnrolledUser.setPaymentstatus("Pending");
 
 		// Integer ce =0;
-		Integer ce = (Integer) session.save(courseEnrolledUser);
+		session.save(courseEnrolledUser);
 		return date;
 	}
 
@@ -777,7 +774,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 	@Override
 	public String getDefaultMailID(int loginId, int profileId) {
 		// TODO Auto-generated method stub
-		String email = "";
 		TableLink data = TableLink.getByprofileID(profileId);
 		new ZLogger("getDefaultMailID","getDefaultMailID :"+data, "TraineeDAOImpl.java");
 		System.out.println("Table Name == " + data.tableName());
@@ -809,7 +805,6 @@ public class TraineeDAOImpl implements TraineeDAO {
 	@Override
 	public int getTableIdForEnrolmentID(int loginId, int profileId) {
 		// TODO Auto-generated method stub
-		int tableID = 0;
 		new ZLogger("getTableIdForEnrolmentID","loginId :"+loginId + " profileId "+profileId , "TraineeDAOImpl.java");
 		TableLink data = TableLink.getByprofileID(profileId);
 		Session session = sessionFactory.getCurrentSession();
@@ -1051,5 +1046,21 @@ public class TraineeDAOImpl implements TraineeDAO {
 		Query query = session.createQuery("from CourseType");
 		List<CourseType> courseTypeList = query.list();
 		return courseTypeList;
+	}
+	
+	@Override
+	public String isAadharExist(CheckAadhar checkAadhar) {
+		// TODO Auto-generated method stub
+		String status = "";
+		Session session = sessionFactory.getCurrentSession();
+		String sql = "select aadharnumber from personalinformationtrainee where aadharnumber = '" + (checkAadhar.getAadharNo() == null ? "" : checkAadhar.getAadharNo().trim()) + "'";
+		Query query = session.createSQLQuery(sql);
+		List list = query.list();
+		if(list.size() > 0){
+			System.out.println(list.size());
+			new ZLogger("isAadharExist","list.size() "+ list.size(), "TraineeDAOImpl.java");
+			status = (String) list.get(0);
+		}
+		return status;
 	}
 }

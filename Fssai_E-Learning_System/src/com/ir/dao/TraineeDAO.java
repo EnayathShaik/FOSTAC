@@ -2,13 +2,13 @@ package com.ir.dao;
 
 import java.util.List;
 
-import com.ir.bean.common.IntStringBean;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.RegistrationFormTrainee;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.CertificateInfo;
+import com.ir.model.CheckAadhar;
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.CourseTrainee;
@@ -19,10 +19,8 @@ import com.ir.model.FeedbackMaster;
 import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationTrainee;
-import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.State;
 import com.ir.model.Title;
-import com.ir.model.TrainingPartner;
 import com.ir.model.Utility;
 
 public interface TraineeDAO {
@@ -79,5 +77,5 @@ public interface TraineeDAO {
 	public String isCourseOnline(int userID);
 	public Boolean closeCourse(int tableID, int profileID, String status);
 	public CertificateInfo getCertificateID(int userID, int profileID, String certificateID);
-	
+	public String isAadharExist(CheckAadhar checkAadhar);
 }

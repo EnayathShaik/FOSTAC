@@ -13,9 +13,9 @@
                         <li>
                             <a href="trainer.fssai"><img src="website/images/trainer.png"></a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="trainingPartner.fssai"><img src="website/images/training-partner.png"></a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="assessor.fssai"><img src="website/images/assessor.png"></a>
                         </li>

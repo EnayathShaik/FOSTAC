@@ -2,11 +2,7 @@ package com.ir.service;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
-import com.ir.model.City;
 import com.ir.model.CourseName;
-import com.ir.model.District;
 import com.ir.model.State;
 import com.ir.model.Title;
 

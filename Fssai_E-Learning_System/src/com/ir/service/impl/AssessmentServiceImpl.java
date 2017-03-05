@@ -1,7 +1,6 @@
 package com.ir.service.impl;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -16,8 +15,6 @@ import org.springframework.stereotype.Service;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.dao.AssessmentDao;
-import com.ir.dao.LoginDAO;
-import com.ir.dao.impl.AssessmentDaoImpl;
 import com.ir.form.AssessmentAnswerCriteria;
 import com.ir.model.AssessmentQuestion;
 import com.ir.model.CourseType;
@@ -69,7 +66,7 @@ public class AssessmentServiceImpl implements AssessmentService {
 	@Transactional
 	public TraineeAssessmentEvaluation evaluate(Map<String,String> questions ,List<AssessmentQuestion> answers, int courseNameId){
 		TraineeAssessmentEvaluation traineeEvaluation = new TraineeAssessmentEvaluation();
-		int totalQuestion = answers.size();
+		//int totalQuestion = answers.size();
 		Map<String, Integer> answersMap = new HashMap<String, Integer>();
 		for (int i = 0; i < answers.size(); i++) {
 			answersMap.put(String.valueOf(answers.get(i).getAssessmentQuestionId()), answers.get(i).getCorrectAnswer());

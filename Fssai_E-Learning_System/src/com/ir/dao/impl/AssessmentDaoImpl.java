@@ -3,16 +3,9 @@ package com.ir.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.internal.SessionFactoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -22,7 +15,6 @@ import com.ir.dao.AssessmentDao;
 import com.ir.form.AssessmentAnswerCriteria;
 import com.ir.model.AssessmentQuestion;
 import com.ir.model.CourseType;
-import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.trainee.TraineeAssessmentEvaluation;
 @Repository("AssessmentDao")
 public class AssessmentDaoImpl implements AssessmentDao{

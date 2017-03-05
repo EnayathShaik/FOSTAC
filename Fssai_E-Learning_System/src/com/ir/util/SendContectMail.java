@@ -34,7 +34,6 @@ public class SendContectMail {
 		String toEmail = "fics@fssai.gov.in";
 
 		this.to = toEmail;
-		String ret = "success";
 		try {
 			Session session = Session.getDefaultInstance(properties,
 					new javax.mail.Authenticator() {

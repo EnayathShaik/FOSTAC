@@ -7,8 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+
 import com.ir.dao.UpdateDAO;
-import com.ir.form.RegistrationFormTrainer;
 import com.ir.model.LoginDetails;
 import com.ir.model.PersonalInformationTrainer;
 

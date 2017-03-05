@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -24,7 +21,6 @@ import com.ir.form.TrainingCalendarForm;
 import com.ir.form.trainingPartner.TrainingPartnerSearch;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
-import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.PostVacancyTrainingCenter;
 import com.ir.model.PostVacancyTrainingCenterBean;
@@ -223,8 +219,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	public int getTrainingCenter(Integer userId,Integer profileId){
 		Session session = sessionFactory.getCurrentSession();
 		int trainingCenter=0;
-		StringBuffer userCondition = new StringBuffer();
-	
+		
 		String sql="select distinct A.personalinformationtrainingpartnerid  from personalinformationtrainingpartner A " +
 				" inner join logindetails B on(A.logindetails=B.id) where logindetails='"+userId+"'";
 		new ZLogger("getTrainingCenter","sql "+sql, "TrainingPartnerDaoImpl.java");
@@ -336,7 +331,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		}
 		Session session = sessionFactory.getCurrentSession();
 		try{
-			//String sql="select trainingdate,noofvacancy,loginid from trainingcentervacancyenrolled where postvacancyid="+postVacancyTrainingCenterBean.getPostvacancyID();
 			StringBuffer sql = new StringBuffer();
 			sql.append(" select trainingdate,noofvacancy,loginid,B.coursetypeid,B.coursetype,C.coursenameid,C.coursename,C.coursecode from trainingcentervacancyenrolled A");
 			sql.append(" inner join coursetype B on(A.coursetype=B.coursetypeid)");
@@ -346,8 +340,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			Query query = session.createSQLQuery(sql.toString());
 			
 			List<Object[]> list = query.list();
-			List<CourseType> courseTypeList=courseTypes();
-			List<CourseName> courseNames=getCourseNameList();
 			if(list.size() > 0){
 				utility.setTrainingDate(list.get(0)[0] == null ? "" : list.get(0)[0].toString());
 				utility.setNoOfVacancy(Integer.parseInt(list.get(0)[1].toString()));

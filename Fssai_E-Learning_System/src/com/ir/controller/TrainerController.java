@@ -19,7 +19,6 @@ import com.ir.form.ContactTrainee;
 import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.RegistrationFormTrainer;
 import com.ir.model.AdmitCardForm;
-import com.ir.model.CourseEnrolledUser;
 import com.ir.model.CourseName;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.State;

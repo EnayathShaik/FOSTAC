@@ -2,7 +2,6 @@ package com.ir.captcha;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-//import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+//import java.sql.Timestamp;
 
 
 public class Otptime extends HttpServlet {

@@ -1,9 +1,5 @@
 package com.ir.listener;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
 import javax.servlet.ServletContextAttributeEvent;
 import javax.servlet.ServletContextAttributeListener;
 import javax.servlet.ServletContextEvent;
@@ -19,10 +15,6 @@ import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
-
-import org.hibernate.SessionFactory;
-
-import com.ir.constantes.DBUtil;
 
 /**
  * Application Lifecycle Listener implementation class DeployListener

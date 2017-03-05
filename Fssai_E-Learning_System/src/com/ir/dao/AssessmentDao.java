@@ -2,8 +2,6 @@ package com.ir.dao;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import com.ir.bean.common.IntStringBean;
 import com.ir.form.AssessmentAnswerCriteria;
 import com.ir.model.AssessmentQuestion;

@@ -9,8 +9,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import com.ir.model.LoginDetails;
-
 public class ChangePasswordUtility {
 	
 	@Autowired
@@ -22,7 +20,6 @@ public class ChangePasswordUtility {
 		boolean passwordCheck=false;
 		String oldEcriptedPwd=null;
 		String newEncryptPwd=null;
-		String dataPassword=null;
 		String Password=null;
 		try {
 			 oldEcriptedPwd=EncryptionPasswordANDVerification.encryptPass(oldPassword);

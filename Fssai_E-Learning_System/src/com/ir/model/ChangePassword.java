@@ -1,7 +1,5 @@
 package com.ir.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;

@@ -8,10 +8,10 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
 import com.ir.dao.RegistrationTrainerDAO;
 import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.RegistrationFormTrainer;
@@ -19,10 +19,8 @@ import com.ir.model.City;
 import com.ir.model.CourseEnrolled;
 import com.ir.model.CourseEnrolledUser;
 import com.ir.model.District;
-import com.ir.model.KindOfBusiness;
 import com.ir.model.LoginDetails;
 import com.ir.model.ManageTrainingPartner;
-import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.State;
 import com.ir.model.Title;
@@ -94,7 +92,7 @@ private Title title;
 				PasswordGenerator passwordGenerator = new PasswordGenerator(6);
 				char[] pass = passwordGenerator.get();
 				String passwordString = String.valueOf(pass);
-				boolean checkCom=registrationFormTrainer.isCheckPermanent();
+				registrationFormTrainer.isCheckPermanent();
 				
 				String encryprPassword = null;
 				try{
@@ -190,7 +188,7 @@ private Title title;
 							courseEnrolledBasic.setLoginDetails(loginDetails);
 							courseEnrolledBasic.setCoursenameid(Integer.parseInt(BasicCoursesplited[i]));
 							System.out.println("BasicCoursesplited  "+ BasicCoursesplited[i]);
-							Integer courseenrolledbasic = (Integer)session.save(courseEnrolledBasic);
+							session.save(courseEnrolledBasic);
 						}
 					}
 				}
@@ -204,7 +202,7 @@ private Title title;
 							courseEnrolledAdvance.setLoginDetails(loginDetails);
 							courseEnrolledAdvance.setCoursenameid(Integer.parseInt(AdvanceCoursesplited[i]));
 							System.out.println("AdvanceCoursesplited  "+ AdvanceCoursesplited[i]);
-							Integer courseenrolledAdvancee = (Integer)session.save(courseEnrolledAdvance);
+							session.save(courseEnrolledAdvance);
 						}
 					}
 				}
@@ -219,7 +217,7 @@ private Title title;
 							courseEnrolledSpecial.setLoginDetails(loginDetails);
 							courseEnrolledSpecial.setCoursenameid(Integer.parseInt(SpecialCoursesplited[i]));
 							System.out.println("SpecialCoursesplited  "+ SpecialCoursesplited[i]);
-							Integer courseenrolledSpeciall = (Integer)session.save(courseEnrolledSpecial);
+							session.save(courseEnrolledSpecial);
 						}
 					}
 				}
@@ -310,7 +308,6 @@ private Title title;
 	public long basicCourseTrainer(CourseEnrolledUserForm courseEnrolledUserForm, int loginid) {
 		
 		Session session =sessionFactory.getCurrentSession();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 		long date = System.currentTimeMillis();
 		System.out.println("roll nu  :"+date);
 		System.out.println("loginid  :"+loginid);
@@ -321,16 +318,12 @@ private Title title;
 		ceu.setLoginDetails(loginid);
 		ceu.setProfileId(4);
 		ceu.setTrainingCalendarId(courseEnrolledUserForm.getTrainingCalendarId());
-		//ceu.setRollno(date);
-//		ceu.setStatus("Pending");
-		
-		Integer ce = (Integer) session.save(ceu);
+		session.save(ceu);
 		return date;
 	}
 	@Override
 	public long advanceTrainerSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid) {
 		Session session =sessionFactory.getCurrentSession();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 		long date = System.currentTimeMillis();
 		System.out.println("roll nu  :"+date);
 		System.out.println("loginid  :"+loginid);
@@ -341,16 +334,12 @@ private Title title;
 		//ceu.setLoginDetails(loginid);
 		ceu.setProfileId(4);
 		ceu.setTrainingCalendarId(courseEnrolledUserForm.getTrainingCalendarId());
-		//ceu.setRollno(date);
-		//abhay ceu.setStatus("Pending");
-		
-		Integer ce = (Integer) session.save(ceu);
+		session.save(ceu);
 		return date;
 	}
 	@Override
 	public long specialTrainerSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid) {
 		Session session =sessionFactory.getCurrentSession();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 		long date = System.currentTimeMillis();
 		System.out.println("roll nu  :"+date);
 		System.out.println("loginid  :"+loginid);
@@ -364,7 +353,7 @@ private Title title;
 		//ceu.setRollno(date);
 		//abhay ceu.setStatus("Pending");
 		
-		Integer ce = (Integer) session.save(ceu);
+		session.save(ceu);
 		return date;
 	}
 	@Override

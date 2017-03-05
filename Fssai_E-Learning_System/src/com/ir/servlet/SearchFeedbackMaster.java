@@ -2,20 +2,9 @@ package com.ir.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,13 +15,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import com.google.gson.Gson;
-import com.ir.model.City;
-import com.ir.model.District;
 import com.ir.model.FeedbackMaster;
-import com.ir.model.TrainingPartner;
-import com.ir.service.PageLoadService;
-import com.ir.service.impl.PageLoadServiceImpl;
-import com.itextpdf.text.log.SysoCounter;
 
 /**
  * Servlet implementation class MyServlt

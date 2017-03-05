@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -55,21 +54,18 @@ import com.ir.model.AdminUserManagement;
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
-import com.ir.model.District;
 import com.ir.model.FeedbackMaster;
-import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.State;
-import com.ir.model.TrainingPartnerCalendarForm;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
 import com.ir.service.AdminService;
 import com.ir.service.PageLoadService;
 import com.ir.util.JavaMail;
-import com.ir.util.SendContectMail;
+import com.zentech.backgroundservices.Mail;
 import com.zentech.logger.ZLogger;
 
 @Controller
@@ -83,8 +79,7 @@ public class AdminController {
 	@Qualifier("pageLoadService")
 	PageLoadService pageLoadService;
 	
-
-	@ModelAttribute("stateList")
+	/*@ModelAttribute("stateList")
 	public List<State> stateList() {
 		List<State> stateList = null;
 		try {
@@ -146,6 +141,14 @@ public class AdminController {
 		return courseTypeList;
 	}
 
+	@ModelAttribute("userId")
+	public String getUniqueId(){
+		String uniqueID = pageLoadService.getNextCombinationId("ADM", "adminusermanagement" , "00");
+		new ZLogger("traineeUserManagementSearch", " Admin ID "+uniqueID, "AdminController.java");
+		return uniqueID;
+	}*/
+	
+
 	@RequestMapping(value = "/stateMaster", method = RequestMethod.GET)
 	public String stateMaster(
 			@ModelAttribute("stateMaster") StateForm stateForm, Model model,
@@ -200,7 +203,10 @@ public class AdminController {
 	public String districtMaster(
 			@ModelAttribute("districtMaster") DistrictForm districtForm,
 			Model model, HttpSession session) {
+		List<State> stateList = null;
 		try {
+			stateList = adminService.stateList();
+			model.addAttribute("stateList", stateList);
 			model.addAttribute("created", " ");
 			session.setAttribute("created", " ");
 		} catch (Exception e) {
@@ -212,7 +218,9 @@ public class AdminController {
 
 	@RequestMapping(value = "/manageAssessmentQuestions", method = RequestMethod.GET)
 	public String manageAssessmentQuestions(
-			@ModelAttribute("assessmentQuestionForm") AssessmentQuestionForm assessmentQuestionForm) {
+			@ModelAttribute("assessmentQuestionForm") AssessmentQuestionForm assessmentQuestionForm, Model model) {
+		List<CourseType> courseTypeList = pageLoadService.courseTypeList();
+		model.addAttribute("courseTypeList", courseTypeList);
 		return "manageAssessmentQuestions";
 	}
 
@@ -276,14 +284,16 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/cityMaster", method = RequestMethod.GET)
-	public String districtMaster(@ModelAttribute("cityMaster") CityForm cityForm) {
+	public String districtMaster(@ModelAttribute("cityMaster") CityForm cityForm, Model model) {
+		List<State> stateList = adminService.stateList();
+		model.addAttribute("stateList", stateList);
 		return "cityMaster";
 	}
 
 	@RequestMapping(value = "/cityMasterSave", method = RequestMethod.POST)
 	public String cityMasterSave(
 			@Valid @ModelAttribute("cityMaster") CityForm cityForm,
-			BindingResult result, Model model, HttpSession session) {
+			BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
 			new ZLogger("cityMasterSave", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
@@ -315,7 +325,9 @@ public class AdminController {
 
 	@RequestMapping(value = "/regionMappingMaster", method = RequestMethod.GET)
 	public String districtMaster(
-			@ModelAttribute("regionMappingMaster") RegionForm regionForm) {
+			@ModelAttribute("regionMappingMaster") RegionForm regionForm, Model model) {
+		List<State> stateList = adminService.stateList();
+		model.addAttribute("stateList", stateList);
 		return "regionMappingMaster";
 	}
 
@@ -359,6 +371,8 @@ public class AdminController {
 			@ModelAttribute("manageCourse") ManageCourse manageCourse,
 			Model model) throws JsonGenerationException, JsonMappingException,
 			IOException {
+		List<CourseType> courseTypeList = pageLoadService.courseTypeList();
+		model.addAttribute("courseTypeList", courseTypeList);
 		return "manageCourse";
 	}
 
@@ -392,7 +406,9 @@ public class AdminController {
 
 	@RequestMapping(value = "/manageTrainingPartnerForm", method = RequestMethod.GET)
 	public String manageTrainingPartnerForm(
-			@ModelAttribute("manageTrainingPartnerForm") ManageTrainingPartnerForm manageTrainingPartnerForm) {
+			@ModelAttribute("manageTrainingPartnerForm") ManageTrainingPartnerForm manageTrainingPartnerForm,Model model) {
+		List<State> stateList = adminService.stateList();
+		model.addAttribute("stateList", stateList);
 		return "manageTrainingPartnerForm";
 	}
 
@@ -414,20 +430,7 @@ public class AdminController {
 			String[] all = manageTrainingPartnerSave.split("&");
 			model.addAttribute("id", all[1]);
 			model.addAttribute("pwd", all[0]);
-			JavaMail javaMail = new JavaMail();
-			javaMail.mailProperty("Thanks",
-					email,all[1] , all[0],manageTrainingPartnerForm.getTrainingPartnerName());
-			/*Thread t1 = new Thread(new Runnable() {
-				public void run() {
-					// code goes here.
-					
-				}
-			});
-			t1.start();*/
-			// javaMail.mailProperty("Thanks",
-			// manageTrainingPartnerForm.getEmail(),
-			// manageTrainingPartnerForm.getUserId());
-
+			new Thread(new Mail("Thanks", email, all[1], all[0], manageTrainingPartnerForm.getTrainingPartnerName())).start();
 			return "welcomeManageTrainingPartner";
 		} else {
 			model.addAttribute("id", "User id created successfully !!");
@@ -438,7 +441,9 @@ public class AdminController {
 
 	@RequestMapping(value = "/manageAssessmentAgencyForm", method = RequestMethod.GET)
 	public String manageAssessmentAgencyForm(
-			@ModelAttribute("manageAssessmentAgencyForm") ManageAssessmentAgencyForm manageAssessmentAgencyForm) {
+			@ModelAttribute("manageAssessmentAgencyForm") ManageAssessmentAgencyForm manageAssessmentAgencyForm,Model model) {
+		List<State> stateList = adminService.stateList();
+		model.addAttribute("stateList", stateList);
 		return "manageAssessmentAgencyForm";
 	}
 
@@ -459,11 +464,7 @@ public class AdminController {
 			String[] all = manageAssessmentAgencySave.split("&");
 			model.addAttribute("id", all[1]);
 			model.addAttribute("pwd", all[0]);
-			JavaMail javaMail = new JavaMail();
-			javaMail.mailProperty("Thanks",
-					manageAssessmentAgencyForm.getEmail(),
-					all[1],all[0] ,manageAssessmentAgencyForm.getAssessmentAgencyName() );
-
+			new Thread(new Mail("Thanks", manageAssessmentAgencyForm.getEmail(), all[1], all[0], manageAssessmentAgencyForm.getAssessmentAgencyName())).start();
 			return "welcomeManageTrainingPartner";
 		} else {
 			model.addAttribute("id", "User id created successfully !!");
@@ -514,14 +515,7 @@ public class AdminController {
 		return "trainingCenterUserManagementForm";
 	}
 
-	@ModelAttribute("userId")
-	public String getUniqueId(){
-		//String uniqueID = GenerateUniqueID.getNextCombinationId("ADM", "adminusermanagement" , "00");		
-		//String uniqueID = GenerateUniqueID.getNextCombinationId("ADM", "adminusermanagement" , "00");
-		String uniqueID = pageLoadService.getNextCombinationId("ADM", "adminusermanagement" , "00");
-		new ZLogger("traineeUserManagementSearch", " Admin ID "+uniqueID, "AdminController.java");
-		return uniqueID;
-	}
+	
 	
 	@RequestMapping(value = "/assessorUserManagementForm", method = RequestMethod.GET)
 	public String assessorUserManagementForm(Model model) {
@@ -613,8 +607,10 @@ public class AdminController {
 
 	@RequestMapping(value = "/manageCourseContent", method = RequestMethod.GET)
 	public String manageCourseContent(
-			@ModelAttribute("manageCourseContent") ManageCourseContentForm manageCourseContentForm) {
+			@ModelAttribute("manageCourseContent") ManageCourseContentForm manageCourseContentForm, Model model) {
 		new ZLogger("manageCourseContent", "admin Controller manage course content form begin .", "AdminController.java");
+		List<CourseType> courseTypeList = pageLoadService.courseTypeList();
+		model.addAttribute("courseTypeList", courseTypeList);
 		return "manageCourseContent";
 	}
 
@@ -773,13 +769,13 @@ public class AdminController {
 		return "assessorUserManagementForm";
 	}
 
-	@ModelAttribute("searchAdminUserManagement")
+	/*@ModelAttribute("searchAdminUserManagement")
 	public List<AdminUserManagement> searchAdminUserManagement() {
 		List<AdminUserManagement> searchAdminUserManagement = adminService
 				.adminUserManagementSearch();
 		return searchAdminUserManagement;
 
-	}
+	}*/
 
 	/*
 	 * @RequestMapping(value="/searchManageCourse") public void getList( Model

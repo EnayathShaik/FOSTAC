@@ -1,12 +1,10 @@
 package com.ir.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-//import org.apache.tomcat.util.net.jsse.openssl.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.google.gson.Gson;
 import com.ir.form.LoginForm;
 import com.ir.model.LoginDetails;
 import com.ir.model.ManageAssessmentAgency;
@@ -27,13 +24,12 @@ import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
-import com.ir.model.PostVacancyTrainingCenter;
-import com.ir.model.PostVacancyTrainingCenterBean;
 import com.ir.model.TrainingPartner;
 import com.ir.service.LoginService;
 import com.ir.service.TrainingPartnerService;
 import com.ir.service.UpdateService;
 import com.zentech.logger.ZLogger;
+//import org.apache.tomcat.util.net.jsse.openssl.Authentication;
 
 /**
  * Controller to handle login process

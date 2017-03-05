@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.ir.bean.common.IntStringBean;
 import com.ir.dao.TraineeDAO;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
@@ -16,6 +15,7 @@ import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.RegistrationFormTrainee;
 import com.ir.model.AdmitCardForm;
 import com.ir.model.CertificateInfo;
+import com.ir.model.CheckAadhar;
 import com.ir.model.CourseName;
 import com.ir.model.CourseTrainee;
 import com.ir.model.CourseType;
@@ -226,6 +226,13 @@ public class TraineeServiceImpl implements TraineeService {
 	public CertificateInfo getCertificateID(int userId, int profileID, String certificateID) {
 		// TODO Auto-generated method stub
 		return traineeDAO.getCertificateID(userId, profileID, certificateID);
+	}
+	
+	@Override
+	@Transactional
+	public String isAadharExist(CheckAadhar checkAadhar) {
+		// TODO Auto-generated method stub
+		return traineeDAO.isAadharExist(checkAadhar);
 	}
 	
 	

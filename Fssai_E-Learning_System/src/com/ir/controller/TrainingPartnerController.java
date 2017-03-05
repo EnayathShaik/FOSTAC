@@ -1,6 +1,5 @@
 package com.ir.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -13,21 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping;
 
 import com.google.gson.Gson;
 import com.ir.bean.common.IntStringBean;
@@ -43,14 +38,12 @@ import com.ir.form.trainingPartner.TrainingPartnerSearchForm;
 import com.ir.model.CertificateInfo;
 import com.ir.model.CourseType;
 import com.ir.model.FeedbackForm;
-import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.PostVacancyTrainingCenter;
 import com.ir.model.PostVacancyTrainingCenterBean;
 import com.ir.model.TrainingPartnerCalendarForm;
 import com.ir.model.TrainingPartnerTrainingCalender;
 import com.ir.model.Utility;
-import com.ir.service.LoginService;
 import com.ir.service.TraineeService;
 import com.ir.service.TrainingPartnerService;
 import com.zentech.logger.ZLogger;
@@ -70,12 +63,19 @@ public class TrainingPartnerController {
 	@Autowired
 	@Qualifier("traineeService")
 	public TraineeService traineeService;
+
 	
+	public List<PersonalInformationTrainingPartner> trainingCenterList(){
+		List<PersonalInformationTrainingPartner> trainingCenterList = trainingPartnerService.trainingCenterList();
+		return trainingCenterList;
+	}
 	
-	@Autowired
-	@Qualifier("loginService")
-	LoginService loginService; 
-	
+	/*@ModelAttribute("courseTypeList")
+	public List<CourseType> courseTypeList(){
+		List<CourseType> courseTypeList = trainingPartnerService.courseTypeList();
+		return courseTypeList;
+	}
+	*/
 	ListConstant lst = new ListConstant();
 	
 	@RequestMapping(value="/postVacancyTrainingPartner" , method=RequestMethod.GET)
@@ -83,13 +83,14 @@ public class TrainingPartnerController {
 		Integer userId = (Integer) session.getAttribute("userId");
 		Integer profileId = (Integer) session.getAttribute("profileId");
 		
-		
+		List<CourseType> courseTypeList = trainingPartnerService.courseTypeList();
 		List<IntStringBean> trainingCenterList = trainingPartnerService.getTrainingCenterList(userId,profileId);
 		int trainingCenter = trainingPartnerService.getTrainingCenter(userId, profileId);
 		model.addAttribute("triningCenter", trainingCenter);
 		Map<String , String> vacancyMap = lst.vacancyMap;
 		model.addAttribute("trainingCenterList" , trainingCenterList);
 		model.addAttribute("vacancyMap",vacancyMap);
+		model.addAttribute("courseTypeList",courseTypeList);
 		
 		return "postVacancyTrainingPartner";
 		
@@ -105,6 +106,9 @@ public class TrainingPartnerController {
 	
 	@RequestMapping(value="/generateCourseCertificate" , method=RequestMethod.GET)
 	public String generateCourseCertificate(@ModelAttribute("generateCourseCertificateForm") GenerateCourseCertificateForm generateCourseCertificateForm,HttpSession session,BindingResult result , Model model ){
+		
+		List<CourseType> courseTypeList = trainingPartnerService.courseTypeList();
+		model.addAttribute("courseTypeList",courseTypeList);
 		return "generateCourseCertificate";
 		
 	}
@@ -153,11 +157,9 @@ public class TrainingPartnerController {
 		new ZLogger("generateCourseCertificateGO","inside generateCourseCertificateGO"+generateCourseCertificateForm.getMainCertificateId()  , "TrainingPartnerController.java");
 		Integer profileID = 0;
 		Integer userId = 0;
-		int loginId = 0;
 		String certificateID = generateCourseCertificateForm == null ? "" : generateCourseCertificateForm.getMainCertificateId() == null ? "" : generateCourseCertificateForm.getMainCertificateId().trim();
 		try{
 			profileID = (Integer) session.getAttribute("profileId");
-			loginId = (int) session.getAttribute("loginIdUnique");
 			userId = (Integer) session.getAttribute("userId");
 			CertificateInfo certificateInfo = traineeService.getCertificateID(userId, profileID,certificateID);
 			model.addAttribute("certificateID", certificateInfo.getCertificateID());
@@ -326,8 +328,8 @@ public class TrainingPartnerController {
 		
 		List<CourseType> courseTypes = trainingPartnerService.courseTypes();
 		trainingpartnerviewtraineelist.setCourseTypes(courseTypes);
-		List<IntStringBean> trainerList = trainingPartnerService.getTrainerList();
-		trainingpartnerviewtraineelist.setTrainerList(trainerList);
+		/*List<IntStringBean> trainerList = trainingPartnerService.getTrainerList();
+		trainingpartnerviewtraineelist.setTrainerList(trainerList);*/
 		List<StringStringBean> statusList= trainingPartnerService.getStatusList();
 		trainingpartnerviewtraineelist.setStatusList(statusList);
 		List<StringStringBean> modeOfTrainingList= trainingPartnerService.getModeOfTrainingList();
@@ -375,10 +377,10 @@ public class TrainingPartnerController {
 		
 		List<CourseType> courseTypes = trainingPartnerService.courseTypes();
 		trainingpartnerpaymentconfirmation.setCourseTypes(courseTypes);
-		List<IntStringBean> trainerList = trainingPartnerService.getTrainerList();
+		/*List<IntStringBean> trainerList = trainingPartnerService.getTrainerList();
 		trainingpartnerpaymentconfirmation.setTrainerList(trainerList);
 		List<StringStringBean> statusList= trainingPartnerService.getStatusList();
-		trainingpartnerpaymentconfirmation.setStatusList(statusList);
+		trainingpartnerpaymentconfirmation.setStatusList(statusList);*/
 		Gson gson = new Gson();
 		model.addAttribute("trainingpartnermarkAttendence" , gson.toJson(trainingpartnerpaymentconfirmation));
 		return "trainingpartnermarkAttendence";
@@ -438,7 +440,6 @@ public class TrainingPartnerController {
 	 }
 	@RequestMapping(value="/postVacancyTrainingPartnerSave" , method=RequestMethod.POST)
 	  public String postVacancySave(@ModelAttribute("postVacancyTrainingCenterForm") PostVacancyTrainingCenterForm postVacancyTrainingCenterForm ,HttpSession session,BindingResult result ,  Model model){		
-			int loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
 		String postVacancy = trainingPartnerService.postVacancyTrainingPartner(postVacancyTrainingCenterForm);
 		  if(postVacancy.equalsIgnoreCase("created")){
 			  model.addAttribute("created", "Vacancy created successfull !!!");
@@ -449,16 +450,7 @@ public class TrainingPartnerController {
 		  return "redirect:/postVacancyTrainingPartner.fssai";
 		  
 	 }
-	@ModelAttribute("trainingCenterList")
-	public List<PersonalInformationTrainingPartner> trainingCenterList(){
-		List<PersonalInformationTrainingPartner> trainingCenterList = trainingPartnerService.trainingCenterList();
-		return trainingCenterList;
-	}
-	@ModelAttribute("courseTypeList")
-	public List<CourseType> courseTypeList(){
-		List<CourseType> courseTypeList = trainingPartnerService.courseTypeList();
-		return courseTypeList;
-	}
+	
 	@RequestMapping(value="/getApplicationStatusDetails" , method=RequestMethod.POST)
 	@ResponseBody
 	public void getApplicationStatusDetails(@RequestParam("name") String name ,@RequestBody PostVacancyTrainingCenterBean postVacancyTrainingCenterBean,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
@@ -583,11 +575,9 @@ public class TrainingPartnerController {
 				return "trainingpartnertrainingcalendar";
 			}
 			Integer profileID = 0;
-			Integer userId = 0;
 			int loginId = 0;
 				profileID = (Integer) session.getAttribute("profileId");
 				loginId = (int) session.getAttribute("loginIdUnique");
-				userId = (Integer) session.getAttribute("userId");
 				int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
 		     
 			TrainingCalendarForm trainingCalendarForm = new TrainingCalendarForm();

@@ -2,11 +2,6 @@ package com.ir.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,15 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-
-import com.ir.constantes.DBUtil;
-import com.ir.model.City;
-import com.ir.service.PageLoadService;
-import com.ir.service.impl.PageLoadServiceImpl;
 import com.zentect.ajax.AjaxRequest;
 
 /**

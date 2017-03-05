@@ -2,23 +2,16 @@ package com.ir.dao.impl;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import com.ir.bean.common.IntStringBean;
 import com.ir.dao.LoginDAO;
 import com.ir.form.LoginForm;
 import com.ir.model.CourseEnrolled;
@@ -29,7 +22,6 @@ import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
-import com.ir.model.State;
 import com.ir.model.TrainingPartner;
 import com.ir.util.EncryptionPasswordANDVerification;
 

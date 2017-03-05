@@ -16,16 +16,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
 import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.RegistrationFormTrainer;
-import com.ir.model.CourseEnrolledUser;
 import com.ir.model.CourseName;
-import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageTrainingPartner;
-import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PostVacancyTrainingCenter;
 import com.ir.model.PostVacancyTrainingCenterBean;
@@ -38,7 +34,7 @@ import com.ir.service.RegistrationServiceTrainingPartner;
 import com.ir.service.TraineeService;
 import com.ir.service.TrainingPartnerService;
 import com.ir.util.JavaMail;
-import com.ir.util.Profiles;
+import com.zentech.backgroundservices.Mail;
 import com.zentech.logger.ZLogger;
 
 @Controller
@@ -110,8 +106,7 @@ public class RegistrationControllerTrainer implements Serializable{
 			String[] all = personalInformationTrainer.split("&");
 			model.addAttribute("id" , all[1]);
 			model.addAttribute("pwd" , all[0]);
-			JavaMail javaMail = new JavaMail();
-			javaMail.mailProperty("Thanks", registrationFormTrainer.getTrainingCenterPermanentEmail(), all[1],all[0] ,registrationFormTrainer.getFirstName() );
+			new Thread(new Mail("Thanks", registrationFormTrainer.getTrainingCenterPermanentEmail(), all[1], all[0], registrationFormTrainer.getFirstName())).start();
 			return "welcome";
 		}else{
 			model.addAttribute("id" , "Oops, something went wrong !!!");
@@ -124,7 +119,6 @@ public class RegistrationControllerTrainer implements Serializable{
 	{
 		
 		Integer userId = (Integer) session.getAttribute("userId");
-		Integer profileId = (Integer) session.getAttribute("profileId");
 		List<PostVacancyTrainingCenter> postVacancyTrainingCenter=trainingPartnerService.getPostVacancyTrainingList(userId);
 		List<PostVacancyTrainingCenterBean> vacancyTrainingCenterBeans=new ArrayList<>();
 		PostVacancyTrainingCenterBean applicationStatusBean = null ;

@@ -7,7 +7,6 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -237,7 +236,7 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 						courseEnrolledBasic.setLoginDetails(loginDetails);
 						courseEnrolledBasic.setCoursenameid(Integer.parseInt(BasicCoursesplited[i]));
 						System.out.println("BasicCoursesplited  "+ BasicCoursesplited[i]);
-						Integer courseenrolledBasicc = (Integer)session1.save(courseEnrolledBasic);
+						session1.save(courseEnrolledBasic);
 					}
 				}
 			}
@@ -251,7 +250,7 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 						courseEnrolledAdvance.setLoginDetails(loginDetails);
 						courseEnrolledAdvance.setCoursenameid(Integer.parseInt(AdvanceCoursesplited[i]));
 						System.out.println("AdvanceCoursesplited  "+ AdvanceCoursesplited[i]);
-						Integer courseenrolledAdvancee = (Integer)session1.save(courseEnrolledAdvance);
+						session1.save(courseEnrolledAdvance);
 					}
 				}
 			}
@@ -265,7 +264,7 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 						courseEnrolledSpecial.setLoginDetails(loginDetails);
 						courseEnrolledSpecial.setCoursenameid(Integer.parseInt(SpecialCoursesplited[i]));
 						System.out.println("SpecialCoursesplited  "+ SpecialCoursesplited[i]);
-						Integer courseenrolledSpeciall = (Integer)session1.save(courseEnrolledSpecial);
+						session1.save(courseEnrolledSpecial);
 					}
 				}
 			}	

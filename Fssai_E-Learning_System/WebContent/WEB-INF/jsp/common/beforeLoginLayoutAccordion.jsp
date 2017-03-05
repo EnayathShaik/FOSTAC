@@ -32,7 +32,7 @@
 
 <!--/#footer--> 
 
-<script src="website/js/jquery.js"></script> 
+<!-- <script src="website/js/jquery.js"></script>  -->
 <script src="website/js/bootstrap.min.js"></script> 
 <script src="website/js/jquery.isotope.min.js"></script> 
 

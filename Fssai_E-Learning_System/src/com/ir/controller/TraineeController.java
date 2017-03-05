@@ -1,12 +1,10 @@
 package com.ir.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -23,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 import com.google.gson.Gson;
 import com.ir.constantes.TableLink;
 import com.ir.form.ChangePasswordForm;
@@ -125,7 +124,6 @@ public class TraineeController {
 	    public String saveFile( @RequestParam CommonsMultipartFile file,  
 	           HttpSession session) throws Exception{  
 		 	String userName = "";
-			int loginId = 0;
 			try{
 			userName = (String) session.getAttribute("userName");
 			String ss = session.getServletContext().getRealPath("")
@@ -239,12 +237,10 @@ public class TraineeController {
 		
 		//update Step
 				Integer profileID = 0;
-				Integer userId = 0;
 				int loginId = 0;
 				try{
 					profileID = (Integer) session.getAttribute("profileId");
 					loginId = (int) session.getAttribute("loginIdUnique");
-					userId = (Integer) session.getAttribute("userId");
 					int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
 					traineeService.updateSteps(tableID, profileID, 3);
 					session.setAttribute("traineeSteps", 3);
@@ -260,11 +256,9 @@ public class TraineeController {
 			@ModelAttribute("rft") PersonalInformationTrainee loginUser ,BindingResult result , HttpSession httpSession,Model model){
 		int loginId = 0;
 		Integer profileId = 0;
-		Integer userId = 0;
 		try{
 			profileId = (Integer) httpSession.getAttribute("profileId");
 			loginId = (int) httpSession.getAttribute("loginIdUnique");
-			userId = (Integer) httpSession.getAttribute("userId");
 			int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileId);
 			String basicEnroll = traineeService.basicSave(courseEnrolledUserForm , loginId , tableID,profileId);
 				if(basicEnroll != null && basicEnroll.length()  > 1){
@@ -406,19 +400,12 @@ public class TraineeController {
 	public String admitcardtrainee(@ModelAttribute("basicTrainee") CourseEnrolledUserForm courseEnrolledUserForm ,
 			@ModelAttribute("state") State state , @ModelAttribute("tp") TrainingPartner tp,BindingResult result ,HttpSession session, Model model ){
 		new ZLogger("admit-cardtrainee","Generate Admit Card .........................."  , "TraineeController.java");
-		Integer profileID = 0;
-		Integer userId = 0;
-		int loginId = 0;
 		String imagePath = "";
 		String userName = "";
 		try{
-			profileID = (Integer) session.getAttribute("profileId");
-			loginId = (int) session.getAttribute("loginIdUnique");
-			userId = (Integer) session.getAttribute("userId");
 			userName = (String) session.getAttribute("userName");
 			String ss = servletContext.getContextPath().replace("Fssai_E-Learning_System", "Fostac/Trainee");
 			imagePath = ss + File.separator + userName+".png";
-			int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
 			if(session.getAttribute("loginIdUnique")!=null){
 				String loginid=session.getAttribute("loginIdUnique").toString();
 				AdmitCardForm admitCardForm=traineeService.generateAdmitCard(Integer.parseInt(loginid),Profiles.TRAINEE.value());
@@ -503,7 +490,6 @@ public class TraineeController {
 				model.addAttribute("courseTrainee", courseTrainee);
 			}
 			
-			TableLink data = TableLink.getByprofileID(profileId);
 			List<FeedbackMaster> feedbackMasters=traineeService.getFeedMasterList(profileId);
 			model.addAttribute("feedbackMasters",feedbackMasters);
 		}catch(Exception e){
@@ -573,12 +559,9 @@ public class TraineeController {
 	public String coursetraining(@ModelAttribute("registrationFormTrainer") RegistrationFormTrainer registrationFormTrainer, HttpSession session, Model model )
 	{
 		Integer userId = 0;
-		int loginId= 0;
 		try{
 			userId = (Integer) session.getAttribute("userId");
-			loginId=Integer.parseInt(session.getAttribute("loginIdUnique").toString());
 			
-			String contentName = "";
 			String pdf = ".pdf";
 			String mp4 = ".mp4";
 			String ppt = ".ppt";
@@ -589,7 +572,6 @@ public class TraineeController {
 				List<String> listcontentName =  new ArrayList<String>();
 				HashMap<String ,String> map = new HashMap<String , String>();
 				List<String> listcontentPath =  new ArrayList<String>();
-				List<String> courseTrainees =  new ArrayList<String>();
 				List<String> listcontentLink =  new ArrayList<String>();
 				for(CourseTrainee courseTrainee : ListcourseTrainee ){
 					String docPath = "";
@@ -678,12 +660,10 @@ public class TraineeController {
 	public String saveFeedbackForm(HttpSession session){
 		//update Step
 				Integer profileID = 0;
-				Integer userId = 0;
 				int loginId = 0;
 				try{
 					profileID = (Integer) session.getAttribute("profileId");
 					loginId = (int) session.getAttribute("loginIdUnique");
-					userId = (Integer) session.getAttribute("userId");
 					int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
 					traineeService.updateSteps(tableID, profileID, 5);
 					session.setAttribute("traineeSteps", 5);
@@ -692,4 +672,5 @@ public class TraineeController {
 				}
 		return "redirect:/loginProcess.fssai";
 	}
+	
 }

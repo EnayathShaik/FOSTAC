@@ -14,13 +14,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.google.gson.Gson;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.LoginForm;
 import com.ir.form.viewAssessmentAgencyCalendarForm;
 import com.ir.model.CourseType;
-import com.ir.model.assessmentagency.AssessmentAgencyForm;
 import com.ir.service.AssessmentAgencyService;
 import com.zentech.logger.ZLogger;
 
@@ -93,10 +91,8 @@ public class AssessmentAgencyController {
 	public String changePassword(@ModelAttribute("changePasswordForm") ChangePasswordForm changePasswordForm,HttpSession session,
 				 Model model){
 		try{
-			String getConfirmation=null;
 			boolean getConfirm=false;
 				String id = (String) session.getAttribute("logId");
-				String loginClass= (String) session.getAttribute("logerClass");
 				new ZLogger("passwordChangeAssesAgency", "in controller change password assessor agency save  id "+id, "AssessmentAgencyController.java");
 				 getConfirm = assessmentAgencyService.changePasswordData(changePasswordForm, id);
 				if(getConfirm){

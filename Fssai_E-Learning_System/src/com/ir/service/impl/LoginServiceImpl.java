@@ -2,14 +2,12 @@ package com.ir.service.impl;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.ir.bean.common.IntStringBean;
 import com.ir.dao.LoginDAO;
 import com.ir.form.LoginForm;
 import com.ir.model.CourseEnrolled;

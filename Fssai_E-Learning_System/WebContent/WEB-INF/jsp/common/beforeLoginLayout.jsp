@@ -54,6 +54,7 @@
 <!--/#footer--> 
 
 <script src="website/js/jquery.js"></script> 
+<!--  <script src="website/afterLogin/js/jquery-2.1.0.min.js"></script> -->
 <script src="website/js/bootstrap.min.js"></script> 
 <script src="website/js/jquery.isotope.min.js"></script> 
 <!-- <script src="website/js/main.js"></script>  -->

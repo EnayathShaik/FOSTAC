@@ -2,8 +2,6 @@ package com.ir.service;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import com.ir.bean.common.IntStringBean;
 import com.ir.bean.common.StringStringBean;
 import com.ir.form.ChangePasswordForm;
@@ -12,7 +10,6 @@ import com.ir.form.TrainingCalendarForm;
 import com.ir.form.trainingPartner.TrainingPartnerSearch;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
-import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.PostVacancyTrainingCenter;
 import com.ir.model.PostVacancyTrainingCenterBean;

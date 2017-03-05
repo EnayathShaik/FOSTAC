@@ -18,6 +18,7 @@ import com.ir.bean.common.IntStringBean;
 import com.ir.dao.PageLoadDao;
 import com.ir.model.City;
 import com.ir.model.CourseName;
+import com.ir.model.CourseType;
 import com.ir.model.KindOfBusiness;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageCourseContent;
@@ -292,6 +293,13 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			return listCaste;
 		}
 	
+		@Override
+		public List<CourseType> courseTypeList() {
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createQuery("from CourseType");
+			List<CourseType> courseTypeList = query.list();
+			return courseTypeList;
+		}
 		@Override
 		public List<com.ir.model.District> District(String stateId) {
 			// TODO Auto-generated method stub

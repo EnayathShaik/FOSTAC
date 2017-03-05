@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.springframework.stereotype.Service;
-
 import com.ir.bean.common.IntStringBean;
 import com.ir.form.AdminUserManagementForm;
 import com.ir.form.AssessmentQuestionForm;
@@ -35,9 +33,7 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.State;
-import com.ir.model.TrainingPartner;
 import com.ir.model.admin.TrainerAssessmentSearchForm;
-import com.ir.model.trainee.TraineeAssessmentEvaluation;
 import com.ir.model.trainer.TrainerAssessmentEvaluation;
 
 public interface AdminService {

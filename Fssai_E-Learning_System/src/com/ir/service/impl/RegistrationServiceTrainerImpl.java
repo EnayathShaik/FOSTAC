@@ -11,7 +11,6 @@ import com.ir.dao.RegistrationTrainerDAO;
 import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.RegistrationFormTrainer;
 import com.ir.model.PersonalInformationTrainer;
-import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.service.RegistrationServiceTrainer;
 
 

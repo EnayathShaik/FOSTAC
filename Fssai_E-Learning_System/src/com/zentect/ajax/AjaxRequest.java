@@ -6,9 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
-import com.google.gson.Gson;
 import com.ir.util.HibernateUtil;
 
 public class AjaxRequest {
@@ -19,7 +17,6 @@ public class AjaxRequest {
 		SessionFactory sf = conf.buildSessionFactory();*/
 		SessionFactory sf = new HibernateUtil().getSessionFactory();
 		Session session = sf.openSession();
-		String newList=null;
 		Transaction transaction = null;
 		try {       
 	        transaction = session.beginTransaction();

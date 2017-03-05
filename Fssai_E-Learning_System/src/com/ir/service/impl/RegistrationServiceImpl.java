@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.ir.dao.RegistrationDAO;
 import com.ir.form.RegistrationFormTrainee;
-import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.RegisterTraineeInformationFull;
 import com.ir.service.RegistrationServiceTrainee;
 
@@ -30,7 +29,7 @@ public class RegistrationServiceImpl implements RegistrationServiceTrainee{
 		System.out.println(registrationFormTrainee.getAadharNumber());
 		System.out.println(registrationFormTrainee.getBusinessAddressLine1());
 		
-		RegisterTraineeInformationFull registerTraineeInformationFull = registrationDAO.register(registrationFormTrainee);
+		registrationDAO.register(registrationFormTrainee);
 		return null;
 		
 		/*PersonalInformationTrainee registrationFormTrainee1=new PersonalInformationTrainee();

@@ -1,6 +1,7 @@
 package com.ir.dao;
 
 import java.util.List;
+
 import com.ir.model.LoginDetails;
 import com.ir.model.PersonalInformationTrainer;
 

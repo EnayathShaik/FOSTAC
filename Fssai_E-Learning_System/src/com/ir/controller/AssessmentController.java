@@ -20,11 +20,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
-import com.ir.form.AadharDetails;
 import com.ir.form.AssessmentAnswerCriteria;
 import com.ir.form.common.AssessmentEvaluationForm;
 import com.ir.model.AssessmentQuestion;
-import com.ir.model.LoginDetails;
 import com.ir.model.trainee.TraineeAssessmentEvaluation;
 import com.ir.service.AssessmentService;
 import com.ir.service.TraineeService;
@@ -97,12 +95,10 @@ public class AssessmentController {
 
 			// update Step
 			Integer profileID = 0;
-			Integer userId = 0;
 			int loginId = 0;
 			try {
 				profileID = (Integer) session.getAttribute("profileId");
 				loginId = (int) session.getAttribute("loginIdUnique");
-				userId = (Integer) session.getAttribute("userId");
 			} catch (Exception e) {
 				new ZLogger("submitAssessment"," Exception while submitAssessment "+e.getMessage(), "AssessmentController.java");
 			}

@@ -4,7 +4,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -22,7 +21,7 @@ import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.service.PageLoadService;
 import com.ir.service.RegistrationServiceTrainee;
-import com.ir.util.JavaMail;
+import com.zentech.backgroundservices.Mail;
 import com.zentech.logger.ZLogger;
 
 
@@ -106,14 +105,10 @@ public class RegistrationController {
 			String[] all = personalInformationTrainee.split("&");
 			model.addAttribute("id" , all[1]);
 			model.addAttribute("pwd" , all[0]);
-			JavaMail javaMail = new JavaMail();
-			javaMail.mailProperty("Thanks", registrationFormTrainee.getEmail(), all[1], all[0] , registrationFormTrainee.getFirstName());
+			new Thread(new Mail("Thanks", registrationFormTrainee.getEmail(), all[1], all[0], registrationFormTrainee.getFirstName())).start();
 			return "welcome";
 		}else{
 			return "registrationFormTrainee";
 		}
-		
-	
-		
 	}
 }

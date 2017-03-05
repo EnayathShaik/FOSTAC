@@ -2,8 +2,6 @@ package com.ir.dao;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import com.ir.form.LoginForm;
 import com.ir.model.CourseEnrolled;
 import com.ir.model.LoginDetails;

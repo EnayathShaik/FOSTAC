@@ -2,10 +2,7 @@ package com.ir.dao.impl;
 
 
 import java.security.NoSuchAlgorithmException;
-
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -15,17 +12,10 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.dao.AdminDAO;
@@ -55,7 +45,6 @@ import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.District;
 import com.ir.model.FeedbackMaster;
-import com.ir.model.KindOfBusiness;
 import com.ir.model.LoginDetails;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageCourseContent;
@@ -75,11 +64,7 @@ import com.ir.util.EncryptionPasswordANDVerification;
 import com.ir.util.PasswordGenerator;
 import com.ir.util.SendContectMail;
 import com.ir.util.SendMail;
-
-
 import com.zentech.logger.ZLogger;
-
-import org.apache.commons.lang.StringUtils;
 @Repository
 public class AdminDAOImpl implements AdminDAO {
 
@@ -788,7 +773,6 @@ public class AdminDAOImpl implements AdminDAO {
 		Session session = sessionFactory.getCurrentSession();
 		String sqlInsert ="select ld.loginid  , aum.aadharnumber from assessorusermanagement as aum "+
 				  " inner join logindetails as ld on ld.id = aum.logindetails ";
-		Integer assessorId = null ;
 		Query query = session.createSQLQuery(sqlInsert);
 		List l = query.list();
 		if(l != null && l.size() >0){

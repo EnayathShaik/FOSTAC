@@ -7,31 +7,17 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-
 import com.google.gson.Gson;
 import com.ir.constantes.DBUtil;
-import com.ir.model.City;
-import com.ir.model.District;
 import com.ir.model.State;
-import com.ir.service.PageLoadService;
-import com.ir.service.impl.PageLoadServiceImpl;
 
 /**
  * Servlet implementation class MyServlt
