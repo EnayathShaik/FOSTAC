@@ -1087,7 +1087,7 @@ public class AdminController {
 		PrintWriter out = response.getWriter();
 		Gson g =new Gson();
 		String newList = g.toJson(cityList); 
-		new ZLogger("loadDistrict","newList "+newList , "AdminController.java");
+		new ZLogger("loadCity","newList "+newList , "AdminController.java");
 		out.write(newList);
 		out.flush();
 		

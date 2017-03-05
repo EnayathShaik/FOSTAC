@@ -235,7 +235,6 @@
                         });
                     }
 
-
                     function getDistrictList(val) {
                         $.ajax({
                             type: 'post',

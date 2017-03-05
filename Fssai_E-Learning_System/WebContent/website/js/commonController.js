@@ -1,0 +1,94 @@
+function getDistrict(val , idName)
+{
+ 	var name1=JSON.stringify({
+		courseType:0,
+		courseName:0
+  })
+	$.ajax({
+	      type: 'post',
+	      url: 'loadDistrict.fssai?data='+ val,
+	      contentType : "application/json",
+		  data:name1,
+	      success: function (response) {      
+	      var mainData1 = jQuery.parseJSON(response);
+	    
+	      $('#'+idName+' option').remove();
+	      $('#'+idName).append('<option value="0" label="Select District" />');
+	      $('#'+idName+' option').remove();
+	      $('#'+idName).append('<option value="0" label="Select City" />');
+	  	 
+	      $.each(mainData1 , function(i , obj)
+	  		{
+  				$('#'+idName).append('<option value='+obj.districtId+' >'+obj.districtName+'</option>');	
+	  		});
+	      }
+	      });     
+}
+
+
+function getCity(val , idName)
+{
+	 var name1=JSON.stringify({
+			courseType:0,
+			courseName:0
+	  })
+	$.ajax({
+	      type: 'post',
+	      url: 'loadCity.fssai?data='+ val,
+	      contentType : "application/json",
+		  data:name1,
+	      success: function (response) {      
+	      var mainData1 = jQuery.parseJSON(response);
+	      $('#'+idName+' option').remove();
+	      $('#'+idName).append('<option value="0" label="Select City" />');
+	  	  $.each(mainData1 , function(i , obj)
+	  		{
+	  		$('#'+idName).append('<option value='+obj.cityId+' >'+obj.cityName+'</option>');	
+	  		});
+	      }
+	      });     
+}
+
+
+function ck_aadhar(tableName ) {
+	var name=document.getElementById( "AadharNumber" ).value;
+    if(name)
+        {
+    	
+    	var name1=JSON.stringify({
+			courseType:0,
+			courseName:0
+	  })
+    	 //var  input = name+"-"+"personalinformationtrainer";
+	  
+	  var  input = name+"-"+tableName;
+    		$.ajax({
+    		      type: 'post',
+    		      url: 'checkAadhar.fssai?data='+input,
+    		      contentType : "application/json",
+    		      data:name1,
+    		      success: function (response) {   
+    		    	$('#aadhar_status').html(response);
+    		    	if (response.trim() == 'Already') {
+    					document.getElementById('AadharNumber').value = "";
+    					document.getElementById("register").style.display = 'none';
+    					return false;
+
+    				} else {
+    					var aa = $('#aadhar_status').html("");
+    					document.getElementById("register").style.display = 'block';
+    					return true;
+    				}
+    		    	
+    		      } 
+    		      });
+     }else{
+   	  $( '#aadhar_status' ).html("");
+         document.getElementById("register").style.display = 'none';
+         return false;
+     }
+}
+
+
+
+

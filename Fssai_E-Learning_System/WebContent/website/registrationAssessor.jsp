@@ -1,7 +1,7 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<script src="website/js/commonController.js"></script>
 
 <script type="text/javascript">
 	function OnStart() {
@@ -66,63 +66,15 @@
 			return false;
 	}
 
-	/* function myCheckPermanent() {
-		var x = document.getElementById('checkPermanent').checked;
-		//permanent1.style.display = checkPermanent.checked ? "none" : "block";
-		//permanent2.style.display = checkPermanent.checked ? "none" : "block";
-		if (x == true) {
-			document.getElementById('AssessorPermanentLine1').value = document
-					.getElementById('AssessorCorrespondenceLine1').value;
-			$("#AssessorPermanentLine1").attr('readonly',true);
-			document.getElementById('AssessorPermanentLine2').value = document
-					.getElementById('AssessorCorrespondenceLine2').value;
-			$("#AssessorPermanentLine2").attr('readonly',true);
-			document.getElementById('AssessorPermanentPincode').value = document
-					.getElementById('AssessorCorrespondencePincode').value;
-			$("#AssessorPermanentPincode").attr('readonly',true);
-			document.getElementById('AssessorrPermanentState').value = document.getElementById('AssessorCorrespondenceState').value;
-			$("#AssessorrPermanentState").trigger("change");
-			$("#AssessorrPermanentState").attr("disabled" , true);
-			window.setTimeout(function(){
-				//console.log("district "+ document.getElementById('AssessorCorrespondenceDistrict').value);
-				$("#AssessorPermanentDistrict").val($("#AssessorCorrespondenceDistrict").val());
-				$("#AssessorPermanentDistrict").trigger("change");
-				$("#AssessorPermanentDistrict").attr('disabled',true);
-			 }, 3000);
-			
-				window.setTimeout(function(){
-					//console.log(" city "+ document.getElementById('AssessorCorrespondenceCity').value);
-					$("#AssessorPermanentCity").val($("#AssessorCorrespondenceCity").val())
-					//document.getElementById('AssessorPermanentCity').value = document.getElementById('AssessorCorrespondenceCity').value;
-					
-					$("#AssessorPermanentCity").attr('disabled',true);
-			}, 4000);
-			
-			
-		}
-		if (x == false) {
-			document.getElementById('AssessorPermanentLine1').value = "";
-			document.getElementById('AssessorPermanentLine2').value = "";
-			document.getElementById('AssessorPermanentPincode').value = "";
-			document.getElementById('AssessorrPermanentState').value = "";
-			document.getElementById('AssessorPermanentDistrict').value = "";
-			document.getElementById('AssessorPermanentCity').value = "";
-		}
-	} */
 	
 	function myCheckPermanent() {
 		var x = document.getElementById('checkPermanent').checked;
-		//permanent1.style.display = checkPermanent.checked ? "none" : "block";
-		//permanent2.style.display = checkPermanent.checked ? "none" : "block";
+		
 		if (x == true) {
-			//document.getElementById('permanent1').style.display = 'none';
-			//document.getElementById('permanent2').style.display = 'none';
 			document.getElementById('AssessorPermanentLine1').value = document
 					.getElementById('AssessorCorrespondenceLine1').value;
-			//$("#AssessorPermanentLine1").attr('readonly',true);
 			document.getElementById('AssessorPermanentLine2').value = document
 					.getElementById('AssessorCorrespondenceLine2').value;
-			//$("#AssessorPermanentLine2").attr('readonly',true);
 			document.getElementById('AssessorPermanentPincode').value = document
 					.getElementById('AssessorCorrespondencePincode').value;
 			//$("#AssessorPermanentPincode").attr('readonly',true);
@@ -139,9 +91,6 @@
 				window.setTimeout(function(){
 					//console.log(" city "+ document.getElementById('AssessorCorrespondenceCity').value);
 					$("#AssessorPermanentCity").val($("#AssessorCorrespondenceCity").val())
-					//document.getElementById('AssessorPermanentCity').value = document.getElementById('AssessorCorrespondenceCity').value;
-					
-					//$("#AssessorPermanentCity").attr('disabled',true);
 			}, 4000);
 			
 			
@@ -183,68 +132,6 @@
 		return y;
 	}
 
-	function ck_aadhar() {
-		var name = document.getElementById("AadharNumber").value;
-		if (name) {
-		/* 	$
-					.ajax({
-						type : 'post',
-						url : 'checkaadharassessor.jspp?' + name,
-						data : {
-							user_name : name,
-						},
-						success : function(response) {
-							$('#aadhar_status').html(response);
-							if (response.trim() == 'Already') {
-								document.getElementById('AadharNumber').value = "";
-								document.getElementById("register").style.display = 'none';
-								return false;
-
-							} else {
-								var aa = $('#aadhar_status').html(response);
-								document.getElementById("register").style.display = 'block';
-								return true;
-							}
-
-						}
-					}) */
-					
-					
-					
-					
-					
-			
-		 	var name1=JSON.stringify({
-			courseType:0,
-			courseName:0
-	  })
-	  var  input = name+"-"+"personalinformationassessor";
-		$.ajax({
-		      type: 'post',
-		      url: 'checkAadhar.fssai?data='+input,
-		      contentType : "application/json",
-		      data:name1,
-		      success: function (response) {   
-		    	$('#aadhar_status').html(response);
-		    	if (response.trim() == 'Already') {
-					document.getElementById('AadharNumber').value = "";
-					document.getElementById("register").style.display = 'none';
-					return false;
-
-				} else {
-					var aa = $('#aadhar_status').html("");
-					document.getElementById("register").style.display = 'block';
-					return true;
-				}
-		    	
-		      } 
-		      });
-		} else {
-			$('#aadhar_status').html("");
-			document.getElementById("register").style.display = 'none';
-			return false;
-		}
-	}
 
 	function checkname() {
 		var name = document.getElementById("UserId").value;
@@ -278,89 +165,9 @@
 		}
 	}
 
-	function getDistrict(val) {
-		$.ajax({
-			type : 'post',
-			url : 'loadDistrict.jspp?' + val,
-			success : function(response) {
-				var mainData1 = jQuery.parseJSON(response);
-				$('#AssessorCorrespondenceDistrict option').remove();
-				$('#AssessorCorrespondenceDistrict').append(
-						'<option value="0" label="Select District" />');
-				$('#AssessorCorrespondenceCity option').remove();
-				$('#AssessorCorrespondenceCity').append(
-						'<option value="0" label="Select City" />');
+	
 
-				$.each(mainData1, function(i, obj) {
-
-					$('#AssessorCorrespondenceDistrict').append(
-							'<option value='+obj.districtId+'>'
-									+ obj.districtName + '</option>');
-				});
-			}
-		});
-	}
-
-	function getCity(val) {
-		$.ajax({
-			type : 'post',
-			url : 'loadCity.jspp?' + val,
-			success : function(response) {
-				var mainData1 = jQuery.parseJSON(response);
-				$('#AssessorCorrespondenceCity option').remove();
-				$('#AssessorCorrespondenceCity').append(
-						'<option value="0" label="Select City" />');
-				$.each(mainData1, function(i, obj) {
-
-					$('#AssessorCorrespondenceCity').append(
-							'<option value='+obj.cityId+'>' + obj.cityName
-									+ '</option>');
-				});
-			}
-		});
-	}
-
-	function getDistrict1(val) {
-		$.ajax({
-			type : 'post',
-			url : 'loadDistrict.jspp?' + val,
-			success : function(response) {
-				var mainData1 = jQuery.parseJSON(response);
-				$('#AssessorPermanentDistrict option').remove();
-				$('#AssessorPermanentDistrict').append(
-						'<option value="0" label="Select District" />');
-				$('#AssessorPermanentCity option').remove();
-				$('#AssessorPermanentCity').append(
-						'<option value="0" label="Select City" />');
-
-				$.each(mainData1, function(i, obj) {
-
-					$('#AssessorPermanentDistrict').append(
-							'<option value='+obj.districtId+'>'
-									+ obj.districtName + '</option>');
-				});
-			}
-		});
-	}
-
-	function getCity1(val) {
-		$.ajax({
-			type : 'post',
-			url : 'loadCity.jspp?' + val,
-			success : function(response) {
-				var mainData1 = jQuery.parseJSON(response);
-				$('#AssessorPermanentCity option').remove();
-				$('#AssessorPermanentCity').append(
-						'<option value="0" label="Select City" />');
-				$.each(mainData1, function(i, obj) {
-
-					$('#AssessorPermanentCity').append(
-							'<option value='+obj.cityId+'>' + obj.cityName
-									+ '</option>');
-				});
-			}
-		});
-	}
+	
 </script>
 <script type='text/javascript'>
 	function validate() {
@@ -637,7 +444,7 @@
 								</ul>
 							</div>
 							<cf:input path="AadharNumber" class="form-control" maxlength="12"
-								placeholder="Aadhar Number" onblur="ck_aadhar();"
+								placeholder="Aadhar Number" onblur="ck_aadhar('personalinformationassessor');"
 								onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" />
 						</div>
 						<div class="form-group" style="display:none">
@@ -837,7 +644,7 @@
 								</ul>
 							</div>
 							<cf:select path="AssessorCorrespondenceState"
-								class="form-control" onchange="getDistrict(this.value);">
+								class="form-control" onchange="getDistrict(this.value , 'AssessorCorrespondenceDistrict');">
 								<cf:option value="0" label="Select State" />
 								<cf:options items="${stateList}" itemValue="stateId"
 									itemLabel="stateName" />
@@ -856,7 +663,7 @@
 								</ul>
 							</div>
 							<cf:select path="AssessorCorrespondenceDistrict"
-								class="form-control" onchange="getCity(this.value);">
+								class="form-control" onchange="getCity(this.value , 'AssessorCorrespondenceCity');">
 								<cf:option value="0" label="Select District" />
 							</cf:select>
 						</div>
@@ -943,17 +750,6 @@
 				<br>
 				<br>
 
-
-
-
-
-
-
-
-
-
-
-
 				<fieldset>
 					<legend>Permanent Address</legend>
 
@@ -1010,7 +806,7 @@
 								</ul>
 							</div>
 							<cf:select path="AssessorrPermanentState" class="form-control"
-								onchange="getDistrict1(this.value);">
+								onchange="getDistrict(this.value , 'AssessorPermanentDistrict');">
 								<cf:option value="0" label="Select State" />
 								<cf:options items="${stateList}" itemValue="stateId"
 									itemLabel="stateName" />
@@ -1034,7 +830,7 @@
 								</ul>
 							</div>
 							<cf:select path="AssessorPermanentDistrict" class="form-control"
-								onchange="getCity1(this.value);">
+								onchange="getCity(this.value , 'AssessorPermanentCity');">
 								<cf:option value="0" label="Select District" />
 								<cf:options items="${districtList}" itemValue="districtId"
 									itemLabel="districtName" />

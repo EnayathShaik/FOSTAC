@@ -105,4 +105,23 @@ public class CommonController {
 		
 	}
 	
+	
+	
+	@RequestMapping(value="/checkdata" , method=RequestMethod.POST)
+	@ResponseBody
+	public void checkdata(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("testAjax","testAjax............" + data  , "TrainingPartnerController.java");
+		String[] inputs = data.split("-");
+		String aadhar = inputs[0];
+		String tableName = inputs[1];
+		System.out.println("aadhar "+aadhar + " tableName "+tableName);
+		String result = null;
+		result = commonService.checkAadhar(aadhar, tableName);
+		//checkAadhar
+		PrintWriter out = response.getWriter(); 
+		out.write(result.equalsIgnoreCase("Already") ? "Already" : "" );
+		out.flush();
+		
+	}
+	
 }

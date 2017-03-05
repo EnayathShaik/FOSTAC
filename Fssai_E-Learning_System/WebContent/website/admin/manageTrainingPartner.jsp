@@ -7,6 +7,7 @@
                 }
 
             </style>
+            <script src="website/js/commonController.js"></script>
             <script type="text/javascript">
                 function validate() {
                     var status = true;
@@ -125,41 +126,7 @@
                     }
                 }
 
-                function getDistrict(val) {
-                    $.ajax({
-                        type: 'post',
-                        url: 'loadDistrict.jspp?' + val,
-                        success: function(response) {
-                            var mainData1 = jQuery.parseJSON(response);
-                            $('#district option').remove();
-                            $('#district').append('<option value="0">Select State</option>');
-                            $('#city option').remove();
-                            $('#city').append('<option value="0">Select City</option>');
-                            $.each(mainData1, function(i, obj) {
-
-                                $('#district').append('<option value=' + obj.districtId + '>' + obj.districtName + '</option>');
-                            });
-                        }
-                    });
-                }
-
-                function getCity(val) {
-                    ////alert("hiiiiiiiii"+val);
-                    $.ajax({
-                        type: 'post',
-                        url: 'loadCity.jspp?' + val,
-                        success: function(response) {
-                            ////alert(response);	      
-                            var mainData1 = jQuery.parseJSON(response);
-                            $('#city option').remove();
-                            $('#city').append('<option value="0" label="Select City" />');
-                            $.each(mainData1, function(i, obj) {
-
-                                $('#city').append('<option value=' + obj.cityId + ' >' + obj.cityName + '</option>');
-                            });
-                        }
-                    });
-                }
+  
 
             </script>
             <script type="text/javascript" language="javascript">
@@ -556,7 +523,7 @@
                                                                         <li class="style-li error-red"></li>
                                                                     </ul>
                                                                 </div>
-                                                                <cf:select path="state" class="form-control" onchange="getDistrict(this.value)">
+                                                                <cf:select path="state" class="form-control" onchange="getDistrict(this.value , 'district')">
                                                                     <cf:option value="0" label="Select State" />
                                                                     <cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName" />
                                                                 </cf:select>
@@ -568,7 +535,7 @@
                                                                         <li class="style-li error-red"></li>
                                                                     </ul>
                                                                 </div>
-                                                                <cf:select path="district" class="form-control" onchange="getCity(this.value)">
+                                                                <cf:select path="district" class="form-control" onchange="getCity(this.value , 'city')">
                                                                     <cf:option value="0" label="Select District" />
                                                                 </cf:select>
                                                             </div>

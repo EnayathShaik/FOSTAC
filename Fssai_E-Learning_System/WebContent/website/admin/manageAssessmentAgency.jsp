@@ -1,6 +1,7 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
     <%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
         <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
+        <script src="website/js/commonController.js"></script>
             <style>
                 .error {
                     color: red;
@@ -114,40 +115,6 @@
                     }
                 }
 
-                function getDistrict(val) {
-                    $.ajax({
-                        type: 'post',
-                        url: 'loadDistrict.jspp?' + val,
-                        success: function(response) {
-                            var mainData1 = jQuery.parseJSON(response);
-                            $('#district option').remove();
-                            $('#district').append(
-                                '<option value="0" label="Select District" />');
-                            $('#city option').remove();
-                            $('#city').append('<option value="0" label="Select City" />');
-                            $.each(mainData1, function(i, obj) {
-                                $('#district').append(
-                                    '<option value=' + obj.districtId + '  >' + obj.districtName + '</option>');
-                            });
-                        }
-                    });
-                }
-
-                function getCity(val) {
-                    $.ajax({
-                        type: 'post',
-                        url: 'loadCity.jspp?' + val,
-                        success: function(response) {
-                            var mainData1 = jQuery.parseJSON(response);
-                            $('#city option').remove();
-                            $('#city').append('<option value="0" label="Select City" />');
-                            $.each(mainData1, function(i, obj) {
-                                $('#city').append(
-                                    '<option value=' + obj.cityId + ' >' + obj.cityName + '</optipon>');
-                            });
-                        }
-                    });
-                }
 
             </script>
             <script type="text/javascript" language="javascript">
@@ -584,7 +551,7 @@
                                                                     <li class="style-li error-red"></li>
                                                                 </ul>
                                                             </div>
-                                                            <cf:select path="stateId" class="form-control" onchange="getDistrict(this.value);">
+                                                            <cf:select path="stateId" class="form-control" onchange="getDistrict(this.value , 'district');">
                                                                 <cf:option value="0" label="Select State" />
                                                                 <cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName" />
                                                             </cf:select>
@@ -596,7 +563,7 @@
                                                                     <li class="style-li error-red"></li>
                                                                 </ul>
                                                             </div>
-                                                            <cf:select path="district" class="form-control" onchange="getCity(this.value);">
+                                                            <cf:select path="district" class="form-control" onchange="getCity(this.value , 'city');">
                                                                 <cf:option value="0" label="Select District" />
                                                                 <%-- <cf:options items="${districtList}" itemValue="districtId" itemLabel="districtName"/> --%>
                                                             </cf:select>

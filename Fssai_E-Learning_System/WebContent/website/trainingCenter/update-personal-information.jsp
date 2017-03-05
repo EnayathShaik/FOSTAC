@@ -2,7 +2,7 @@
     <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %>
         <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
+<script src="website/js/commonController.js"></script>
             <script>
                 function getstateid() {
                     getState()
@@ -91,40 +91,8 @@
 
             </script>
             <script>
-                function getDistrict(val) {
-                    $.ajax({
-                        type: 'post',
-                        url: 'loadDistrict.jspp?' + val,
-                        success: function(response) {
-                            var mainData1 = jQuery.parseJSON(response);
-                            $('#TrainingPartnerPermanentDistrict option').remove();
-                            $('#TrainingPartnerPermanentDistrict').append('<option value="0" label="Select District" />');
-                            $('#TrainingPartnerPermanentCity option').remove();
-                            $('#TrainingPartnerPermanentCity').append('<option value="0" label="Select City" />');
 
-                            $.each(mainData1, function(i, obj) {
-
-                                $('#TrainingPartnerPermanentDistrict').append('<option value=' + obj.districtId + '>' + obj.districtName + ' </option>');
-                            });
-                        }
-                    });
-                }
-
-                function getCity(val) {
-                    $.ajax({
-                        type: 'post',
-                        url: 'loadCity.jspp?' + val,
-                        success: function(response) {
-                            var mainData1 = jQuery.parseJSON(response);
-                            $('#TrainingPartnerPermanentCity option').remove();
-                            $('#TrainingPartnerPermanentCity').append('<option value="0" label="Select City" />');
-                            $.each(mainData1, function(i, obj) {
-
-                                $('#TrainingPartnerPermanentCity').append('<option value=' + obj.cityId + '>' + obj.cityName + ' </option>');
-                            });
-                        }
-                    });
-                }
+        
 
             </script>
 
@@ -231,7 +199,7 @@
 											</ul>
 										</div>
 										<cf:select path="TrainingPartnerPermanentState"
-											class="form-control" onchange="getDistrict(this.value);">
+											class="form-control" onchange="getDistrict(this.value  , 'TrainingPartnerPermanentDistrict');">
 											<cf:option value="0" label="Select State" />
 											<cf:options items="${stateList}" itemValue="stateId"
 												itemLabel="stateName" />
@@ -251,7 +219,7 @@
 											</ul>
 										</div>
 										<cf:select path="TrainingPartnerPermanentDistrict"
-											class="form-control" onchange="getCity(this.value);">
+											class="form-control" onchange="getCity(this.value , 'TrainingPartnerPermanentCity');">
 											<cf:option value="0" label="Select District" />
 										</cf:select>
 									</div>

@@ -8,7 +8,7 @@
 <?
  $myForm = $_POST['correspondenceDistrict'];
  ?>
- 
+ <script src="website/js/commonController.js"></script>
  <script type="text/javascript">
  	
  
@@ -489,89 +489,6 @@ function AvoidSpace(event) {
     if (k == 32) return false;
 }
 
-function getDistrict(val , idName)
-{
- 	var name1=JSON.stringify({
-		courseType:0,
-		courseName:0
-  })
-	$.ajax({
-	      type: 'post',
-	      url: 'loadDistrict.fssai?data='+ val,
-	      contentType : "application/json",
-		  data:name1,
-	      success: function (response) {      
-	      var mainData1 = jQuery.parseJSON(response);
-	    
-	      $('#'+idName+' option').remove();
-	      $('#'+idName).append('<option value="0" label="Select District" />');
-	      $('#'+idName+' option').remove();
-	      $('#'+idName).append('<option value="0" label="Select City" />');
-	  	 
-	      $.each(mainData1 , function(i , obj)
-	  		{
-  				$('#'+idName).append('<option value='+obj.districtId+' >'+obj.districtName+'</option>');	
-	  		});
-	      }
-	      });     
-}
-
-
-function getCity(val)
-{
-	$.ajax({
-	      type: 'post',
-	      url: 'loadCity.jspp?'+ val,
-	      success: function (response) {      
-	      var mainData1 = jQuery.parseJSON(response);
-	      $('#correspondenceCity option').remove();
-	      $('#correspondenceCity').append('<option value="0" label="Select City" />');
-	  	  $.each(mainData1 , function(i , obj)
-	  		{
-	  		$('#correspondenceCity').append('<option value='+obj.cityId+' >'+obj.cityName+'</option>');	
-	  		});
-	      }
-	      });     
-}
-
-
-
-
-function getCity1(val)
-{
-	$.ajax({
-	      type: 'post',
-	      url: 'loadCity.jspp?'+ val,
-	      success: function (response) {      
-	      var mainData1 = jQuery.parseJSON(response);
-	      $('#resCity option').remove();
-	      $('#resCity').append('<option value="0" label="Select City" />');
-	  	  $.each(mainData1 , function(i , obj)
-	  		{
-	  		$('#resCity').append('<option value='+obj.cityId+' >'+obj.cityName+'</option>');
-	  		});
-	      }
-	      });     
-}
-
-
-
-function getCity2(val)
-{
-	$.ajax({
-	      type: 'post',
-	      url: 'loadCity.jspp?'+ val,
-	      success: function (response) {      
-	      var mainData1 = jQuery.parseJSON(response);
-	      $('#bussCity option').remove();
-	      $('#bussCity').append('<option value="0" label="Select City" />');
-	  	  $.each(mainData1 , function(i , obj)
-	  		{
-	  		$('#bussCity').append('<option value='+obj.cityId+' >'+obj.cityName+'</option>');
-	  		});
-	      }
-	      });     
-}
 function my11(str) {
   var xhttp;
   if (str == "") {
@@ -593,11 +510,7 @@ function my11(str) {
 <script language="javascript" type="text/javascript">
 function myBusiness() {
     var x = document.getElementById("KindOfBusiness").value;
-	/* if($('[id*=KindOfBusiness] option:selected').text()=='Other') {
-		document.getElementById("CompanyName").value='nil';
-		document.getElementById("Designation").value='nil';
-    	document.getElementById("desiNCm").style.display= 'block';
-    }else  */if($('[id*=KindOfBusiness] option:selected').text()=='Not in business'){
+	if($('[id*=KindOfBusiness] option:selected').text()=='Not in business'){
     	document.getElementById("desiNCm").style.display= 'none';
     	document.getElementById("businessID1").style.display= 'none';
     	document.getElementById("businessID2").style.display= 'none';
@@ -618,24 +531,18 @@ function myCorrespondence() {
 	var x = document.getElementById('checkCorrespondence').checked;
     residential1.style.display = checkCorrespondence.checked ? "none" : "block";
     residential2.style.display = checkCorrespondence.checked ? "none" : "block";
-    //var s = $("#correspondenceState").val();
-    //var d = $("#correspondenceDistrict").val();
-    //var c = $("#correspondenceCity").val();
+    
     if(x == true){
     	document.getElementById('ResidentialAddressLine1').value= document.getElementById('correspondenceAddress1').value;
     	document.getElementById('ResidentialAddressLine2').value= document.getElementById('correspondenceAddress2').value;
     	document.getElementById('resPincode').value= document.getElementById('correspondencePincode').value;
-    	//document.getElementById('resState').value=document.getElementById('correspondenceState').value;
-    	//document.getElementById('residentialDistrict').value=document.getElementById('correspondenceDistrict').value;
-    	//document.getElementById('resCity').value=document.getElementById('resCity').value;    	
+    	  	
     }
     if(x == false){
     	document.getElementById('ResidentialAddressLine1').value="";
     	document.getElementById('ResidentialAddressLine2').value= "";
     	document.getElementById('resPincode').value= "";
-    	//$("#resState").prop('selectedIndex',0);
-    	//$("#residentialDistrict").prop('selectedIndex',0);
-    	//$("#resCity").prop('selectedIndex',0);
+    	
     }
     
     
@@ -659,37 +566,6 @@ function checkagree()
 
 </script>
 <script>
-function ck_aadhar() {
-	var name=document.getElementById( "AadharNumber" ).value;
-    if(name)
-    {     
-    	  var  input = name+"-"+"personalinformationtrainee";
-  		$.ajax({
-  		      type: 'post',
-  		      url: 'checkAadhar.fssai?data='+input,
-  		      contentType : "application/json",
-  		      data:name1,
-  		      success: function (response) {   
-  		    	$('#aadhar_status').html(response);
-  		    	if (response.trim() == 'Already') {
-  					document.getElementById('AadharNumber').value = "";
-  					document.getElementById("register").style.display = 'none';
-  					return false;
-
-  				} else {
-  					var aa = $('#aadhar_status').html("");
-  					document.getElementById("register").style.display = 'block';
-  					return true;
-  				}
-  		    	
-  		      } 
-  		      });
-     }else{
-   	  $( '#aadhar_status' ).html("");
-         document.getElementById("register").style.display = 'none';
-         return false;
-     }
-}
     function myCompany(val) {
     	businessID3.style.display = checkCompany.checked ? "none" : "block";
     	businessID2.style.display = checkCompany.checked ? "none" : "block";
@@ -804,7 +680,7 @@ function ck_aadhar() {
 								</div>
 								<%-- <cf:input path="AadharNumber" class="form-control"
 									maxlength="12" placeholder="Aadhar Number"
-									onblur="ck_aadhar();" value="0"
+									onblur="ck_aadhar('personalinformationtrainee');" value="0"
 									onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" /> --%>
 							<input type="text" id="AadharNumberShow" class="form-control" placeholder="Aadhar Number" value="" disabled="true"  />
 							<cf:input type="hidden" path="AadharNumber" class="form-control" placeholder="Aadhar Number" value="" />
@@ -1035,7 +911,7 @@ function ck_aadhar() {
 									</ul>
 								</div>
 								<cf:select path="correspondenceDistrict" class="form-control"
-									onchange="getCity(this.value);">
+									onchange="getCity(this.value , 'correspondenceCity');">
 									<cf:option value="0" label="Select District" />
 									<%-- <cf:options items="${districtList}" itemValue="districtId" itemLabel="districtName" /> --%>
 								</cf:select>
@@ -1190,7 +1066,7 @@ function ck_aadhar() {
 									</ul>
 								</div>
 								<cf:select path="residentialDistrict" class="form-control"
-									onchange="getCity1(this.value);">
+									onchange="getCity(this.value , 'resCity');">
 									<cf:option value="0" label="Select District" />
 									<cf:options items="${districtList}" itemValue="districtId"
 										itemLabel="districtName" />
@@ -1463,7 +1339,7 @@ function ck_aadhar() {
 									</ul>
 								</div>
 								<cf:select path="bussDistrict" class="form-control"
-									onchange="getCity2(this.value);">
+									onchange="getCity(this.value , 'bussCity');">
 									<cf:option value="0" label="Select District" />
 									<cf:options items="${districtList}" itemValue="districtId"
 										itemLabel="districtName" />

@@ -1,6 +1,7 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="website/js/commonController.js"></script>
 <script> 
     function AvoidSpace(event) {
         var k = event ? event.which : window.event.keyCode;
@@ -28,41 +29,7 @@
     	}
     	
     }
-    function ck_aadhar() {
-    	var name=document.getElementById( "AadharNumber" ).value;
-        if(name)
-        {    
-    	 	var name1=JSON.stringify({
-    			courseType:0,
-    			courseName:0
-    	  })
-        	 var  input = name+"-"+"personalinformationtrainee";
-       		$.ajax({
-       		      type: 'post',
-       		      url: 'checkAadhar.fssai?data='+input,
-       		      contentType : "application/json",
-       		      data:name1,
-       		      success: function (response) {   
-       		    	$('#aadhar_status').html(response);
-       		    	if (response.trim() == 'Already') {
-       					document.getElementById('AadharNumber').value = "";
-       					//document.getElementById("register").style.display = 'none';
-       					return false;
 
-       				} else {
-       					var aa = $('#aadhar_status').html("");
-       					//document.getElementById("register").style.display = 'block';
-       					return true;
-       				}
-       		    	
-       		      } 
-       		      });
-         }else{
-       	  $( '#aadhar_status' ).html("");
-             document.getElementById("register").style.display = 'none';
-             return false;
-         }
-    }
 </script>
 <cf:form action="registrationForm.fssai"  name="myForm" method="POST" commandName="aadharDetails" > 
 
@@ -95,7 +62,7 @@
 								</div>
 								<cf:input path="AadharNumber" class="form-control"
 									maxlength="12" placeholder="Aadhar Number"
-									onblur="ck_aadhar();" value=""
+									onblur="ck_aadhar('personalinformationtrainee');" value=""
 									onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" />
 							</div>
               <div class="form-group">

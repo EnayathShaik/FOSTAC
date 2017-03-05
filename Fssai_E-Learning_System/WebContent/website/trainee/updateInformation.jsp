@@ -1,10 +1,9 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="website/js/commonController.js"></script>
 <script>
-
-
-	function getDistrict(val) {
+function getDistrict(val) {
 		////alert('jjh');
 		$.ajax({
 			type : 'post',
@@ -866,7 +865,7 @@
                         </select>-->
 													</div>
 													<cf:select path="correspondenceState" class="form-control"
-														onchange="getDistrict(this.value);">
+														onchange="getDistrict(this.value , 'correspondenceDistrict');">
 														<cf:option value="0" label="Select State" />
 														<cf:options items="${stateList}" itemValue="stateId"
 															itemLabel="stateName" />
@@ -913,7 +912,7 @@
                           <option value="3">Lorem</option>
                         </select>   -->
 													<cf:select path="correspondenceDistrict"
-														class="form-control" onchange="getCity(this.value);">
+														class="form-control" onchange="getCity(this.value , 'correspondenceCity');">
 														<cf:option value="0" label="Select District" />
 														<%-- <cf:options items="${districtList}" itemValue="districtId" itemLabel="districtName" /> --%>
 													</cf:select>
@@ -993,12 +992,6 @@
 
 									<div class="row" style="height: 20px;"></div>
 
-
-
-
-
-
-
 									<!-- Contact details Start -->
 									<div class="personel-info">
 										<fieldset>
@@ -1071,7 +1064,7 @@
 <cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName" />
 </cf:select> --%>
 													<cf:select path="resState" class="form-control state"
-														onchange="getDistrict1(this.value);">
+														onchange="getDistrict(this.value , 'residentialDistrict');">
 														<cf:option value="0" label="Select State" />
 														<cf:options items="${stateList}" itemValue="stateId"
 															itemLabel="stateName" />
@@ -1093,14 +1086,8 @@
 															<li class="style-li error-red"></li>
 														</ul>
 													</div>
-													<!-- <select class="form-control">
-                          <option value="0">Lorem</option>
-                          <option value="1">Lorem</option>
-                          <option value="2">Lorem</option>
-                          <option value="3">Lorem</option>
-                        </select> -->
 													<cf:select path="residentialDistrict" class="form-control"
-														onchange="getCity1(this.value);">
+														onchange="getCity(this.value , 'resCity');">
 														<cf:option value="0" label="Select District" />
 														<cf:options items="${districtList}" itemValue="districtId"
 															itemLabel="districtName" />
@@ -1117,9 +1104,7 @@
 															<li class="style-li error-red"></li>
 														</ul>
 													</div>
-													<%-- <cf:select path="correspondenceCity" class="form-control" onchange="return myBusiness()">
-<cf:options items="${cityList}" itemValue="cityId" itemLabel="cityName" />
-</cf:select>  --%>
+		
 													<cf:select path="resCity" class="form-control">
 														<cf:option value="0" label="Select City" />
 														<cf:options items="${cityList}" itemValue="cityId"
@@ -1340,22 +1325,12 @@
                           <option value="3">Lorem</option>
                         </select> -->
 													<cf:select path="bussState" class="form-control"
-														onchange="getDistrict2(this.value);">
+														onchange="getDistrict(this.value , 'bussDistrict');">
 														<cf:option value="0" label="Select State" />
 														<cf:options items="${stateList}" itemValue="stateId"
 															itemLabel="StateName" />
 													</cf:select>
 												</div>
-
-
-
-
-
-
-
-
-
-
 
 											</div>
 											<!--Left side-->
@@ -1373,14 +1348,9 @@
 															<li class="style-li error-red"></li>
 														</ul>
 													</div>
-													<!-- <select class="form-control">
-                          <option value="0">Lorem</option>
-                          <option value="1">Lorem</option>
-                          <option value="2">Lorem</option>
-                          <option value="3">Lorem</option>
-                        </select> -->
+				
 													<select id="bussDistrict" name="bussDistrict"
-														class="form-control" onchange="getCity2(this.value);">
+														class="form-control" onchange="getCity(this.value , 'bussCity');">
 														<option value="0" selected="selected">Select
 															District</option>
 
@@ -1397,13 +1367,6 @@
 															<li class="style-li error-red"></li>
 														</ul>
 													</div>
-													<!--  <select class="form-control" >
-                          <option>value="">Select City</option>
-                          <option value="0">Lorem</option>
-                          <option value="1">Lorem</option>
-                          <option value="2">Lorem</option>
-                          <option value="3">Lorem</option>
-                        </select> -->
 													<cf:select path="bussCity" id="bussCity"
 														class="form-control">
 														<cf:option value="0" label="Select City" />
