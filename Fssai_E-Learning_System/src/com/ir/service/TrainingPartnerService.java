@@ -84,6 +84,7 @@ public interface TrainingPartnerService {
 	public List<TrainingPartnerSearch> getTrainingPartnerDetails(int trainingPartnerId);
 	
 	
+	
 	String trainingCalendarForm(TrainingCalendarForm trainingCalendarForm);
 	
 	
@@ -100,4 +101,8 @@ public interface TrainingPartnerService {
 	
 	
 	public List<String> getCertificateIdList(String CourseCode , String loginId);
+	
+	//getTrainingPartnerList
+	
+	public List getTrainingPartnerList(String searchData);
 }

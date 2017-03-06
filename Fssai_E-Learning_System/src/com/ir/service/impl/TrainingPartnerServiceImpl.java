@@ -219,4 +219,14 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 		List<String> loadCertificate = trainingPartnerDAO.getCertificateIdList(batchcode , loginId);
 		return loadCertificate;
 	}
+	
+	//getTrainingPartnerList
+	
+	
+	@Override
+	@Transactional
+	public List getTrainingPartnerList(String searchData) {
+		List loadTrainingList = trainingPartnerDAO.getTrainingPartnerList(searchData);
+		return loadTrainingList;
+	}
 }

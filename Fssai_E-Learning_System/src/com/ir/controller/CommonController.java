@@ -75,7 +75,7 @@ public class CommonController {
 	@RequestMapping(value="/checkAadhar" , method=RequestMethod.POST)
 	@ResponseBody
 	public void checkAadhar(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
-		new ZLogger("testAjax","testAjax............" + data  , "TrainingPartnerController.java");
+		new ZLogger("testAjax","testAjax............" + data  , "CommonController.java");
 		String[] inputs = data.split("-");
 		String aadhar = inputs[0];
 		String tableName = inputs[1];
@@ -93,7 +93,7 @@ public class CommonController {
 	@RequestMapping(value="/getCourseName" , method=RequestMethod.POST)
 	@ResponseBody
 	public void getCourseName(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
-		new ZLogger("getCourseName","getCourseName............" + data  , "TrainingPartnerController.java");
+		new ZLogger("getCourseName","getCourseName............" + data  , "CommonController.java");
 		String courseName =  data;
 		List batchCodeList = commonService.getCourseName(courseName);
 		PrintWriter out = response.getWriter();
@@ -110,7 +110,7 @@ public class CommonController {
 	@RequestMapping(value="/checkdata" , method=RequestMethod.POST)
 	@ResponseBody
 	public void checkdata(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
-		new ZLogger("testAjax","testAjax............" + data  , "TrainingPartnerController.java");
+		new ZLogger("testAjax","testAjax............" + data  , "CommonController.java");
 		String[] inputs = data.split("-");
 		String aadhar = inputs[0];
 		String tableName = inputs[1];
@@ -120,6 +120,22 @@ public class CommonController {
 		//checkAadhar
 		PrintWriter out = response.getWriter(); 
 		out.write(result.equalsIgnoreCase("Already") ? "Already" : "" );
+		out.flush();
+		
+	}
+	
+	
+	@RequestMapping(value="/getAssessorName" , method=RequestMethod.POST)
+	@ResponseBody
+	public void getAssessorName(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("getAssessorName","getAssessorName............" + data  , "CommonController.java");
+		String assessorAgencyName =  data;
+		List batchCodeList = commonService.getAssessorName(assessorAgencyName);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(batchCodeList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
 		out.flush();
 		
 	}

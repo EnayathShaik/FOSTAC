@@ -1,6 +1,7 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="website/js/commonController.js"></script>
 <script>
 function OnStart(){
 
@@ -20,10 +21,7 @@ function OnStart(){
 
 
 function editTrainingCalendar( srNo , id, courseType){
-	
-	console.log("i "+i + "   courseType "+courseType);
-	
-	
+
 	var tcid = i;
 	
 	$("#selCourseType").val($("#selCourseType"+srNo).val());
@@ -58,156 +56,10 @@ function editTrainingCalendar( srNo , id, courseType){
 	$("#tcid").val(id);	
 }
 window.onload = OnStart;
-
-	function getCourseName(val) {
-		$('#selCourseName option').remove();
-	 	var name=JSON.stringify({
-			courseType:0,
-			courseName:0
-	  })
-		$.ajax({
-			type : 'post',
-			url : 'getCourseName.fssai?data='+ val,
-			contentType : "application/json",
-		    data:name,
-			success : function(response) {
-				var mainData1 = jQuery.parseJSON(response);
-				$('#selCourseName option').remove();
-				$('#selCourseName').append(
-						'<option value="0" label="--Select Course Name--" />');
-				$.each(mainData1, function(i, obj) {
-					$('#selCourseName')
-							.append(
-									'<option value='+obj[0]+' >' + obj[1]
-											+ '</option>');
-				});
-			}
-		});
-	}
-
-	function getTrainingCenter(val) {
-		$.ajax({
-			type : 'post',
-			url : 'loadTrainingCenter.jspp?' + val,
-			success : function(response) {
-				var mainData1 = jQuery.parseJSON(response);
-				//alert(mainData1);
-				$('#trainingCenter option').remove();
-				$('#trainingCenter').append(
-						'<option value="0" label="Select Training Center" />');
-				$.each(mainData1, function(i, obj) {
-					$('#trainingCenter').append(
-							'<option value='+obj[0]+' label='+obj[1]+' />');
-				});
-			}
-		});
-	}
-	
-	//getAssessorName.jspp
-		function getAssessorName(val) {
-		$.ajax({
-			type : 'post',
-			url : 'getAssessorName.jspp?' + val,
-			success : function(response) {
-				var mainData1 = jQuery.parseJSON(response);
-				
-				$('#assessorName option').remove();
-			/* 	$('#assessorName').append(
-						'<option value="0" label="Select Assessor Name" />'); */
-				$.each(mainData1, function(i, obj) {
-					$('#assessorName')
-					.append(
-							'<option value='+obj[0]+' >' + obj[1]
-									+ '</option>');
-				});
-			}
-		});
-	}
 </script>
 <script>
 	function saveDetails() {
 
-	}
-
-	function showDetail() {
-		//
-		var courseType = $("#selCourseType").val();
-		var courseName = $("#selCourseName").val();
-		var trainingDate = $("#trainingStartDate").val();
-		var trainingTime = $("#trainingEndDate").val();
-		var trainerName = $('#selTrainerNames').val();
-		
-		$('#tblAssessorCourses tr').remove();
-		$('#tblAssessorCourses').append(
-				'<thead>' + '<tr class="background-open-vacancies">'
-						+ '<th>S.No.</th>' + '<th>Course Type</th>'
-						+ '<th>Course Name</th>' + '<th>Training Date</th>'
-						+ '<th>Training Time</th>' + '<th>Trainer Name</th>'
-						+ '<th>&nbsp;&nbsp;</th>' + '</tr>' + '</thead>');
-		var result = "";
-		//var id = document.getElementById("assessmentAgencyId").value;
-		var assessorId = 710;
-		$
-				.ajax({
-					type : 'post',
-					url : 'searchTrainingPartnerGenaricServlet.jspp?'
-							+ assessorId,
-					async : false,
-					data : {
-						cousertypeid : $('#selCourseType').val(),
-						coursenameid : $('#selCourseName').val(),
-						trainerid : $('#selTrainerNames').val(),
-						trainingdate : $('#trainingdate').val(),
-						trainingtime : $('#trainingtime').val(),
-						screentype : "TRAINING_PARTNER_CALENDAR"
-					},
-					success : function(data) {
-						console.log("Data received..");
-						console.log(data);
-						var jsonData = jQuery.parseJSON(data);
-						console.log(jsonData);
-						var j = 1;
-						var accessorId;
-						$
-								.each(
-										jsonData,
-										function(i, obj) {
-											$('#tblAssessorCourses')
-													.append(
-															'<tr id="tableRow"><td>'
-																	+ j++
-																	+ '</td>'
-																	+ '<td>'
-																	+ obj[3]
-																	+ '</td>'
-																	+ '<td>'
-																	+ obj[4]
-																	+ '</td>'
-																	+ '<td>'
-																	+ obj[5]
-																	+ '</td>'
-																	+ '<td><select name =attendanceRow'+obj[1]+'><option name="present" value ="A">Present</option>'
-																	+ '<option name="absent" value="I">Absent</option></td>'
-																	+ '<td> <button onclick="updateAttendance('
-																	+ obj[0]
-																	+ ','
-																	+ obj[1]
-																	+ ');return false;">Update</button></td>'
-																	+ '</tr>');
-											console.log("0-" + obj[0] + " #1-"
-													+ obj[1] + " #2-" + obj[2]
-													+ " #3-" + obj[3] + " #4-"
-													+ obj[4] + " #5-" + obj[5]);
-											currentAssessorId = obj[0];
-										});
-
-					},
-					failure : function(data) {
-						alert("Error occured while retrieving upcoming calendars.");
-						msgbox('Error occured while retrieving upcoming calendars.');
-					}
-				});
-		return result;
 	}
 
 	function showDetails() {
@@ -221,12 +73,18 @@ window.onload = OnStart;
 		var assessmentAgencyName = ($("#assessmentAgencyName").val()== 0 ||  $("#assessmentAgencyName").val() == null ? "" : $("#assessmentAgencyName").val());
 		var assessorName = ($("#assessorName").val()== 0 ||  $("#assessorName").val() == null ? "" : $("#assessorName").val());
 		var seatCapacity = ($("#seatCapacity").val()== 0 ||  $("#seatCapacity").val() == null ? "" : $("#seatCapacity").val());
-		var total = "courseType="+courseType + "&courseName=" + courseName+ "&trainingStartDate=" + trainingStartDate + "&trainingEndDate="+ trainingEndDate+"&trainerName="+trainerName+"&assessmentDateTime="+assessmentDateTime+"&assessmentAgencyName="+assessmentAgencyName+"&assessorName="+assessorName+"&seatCapacity="+seatCapacity;
+		//var total = "courseType="+courseType + "&courseName=" + courseName+ "&trainingStartDate=" + trainingStartDate + "&trainingEndDate="+ trainingEndDate+"&trainerName="+trainerName+"&assessmentDateTime="+assessmentDateTime+"&assessmentAgencyName="+assessmentAgencyName+"&assessorName="+assessorName+"&seatCapacity="+seatCapacity;
+		var total = courseType + "#" + courseName+ "#" + trainingStartDate + "#"+ trainingEndDate+"#"+trainerName+"#"+assessmentDateTime+"#"+assessmentAgencyName+"#"+assessorName+"#"+seatCapacity+"#";
 		var result = "";
+		var name1=JSON.stringify({
+			courseType:0,
+			courseName:0
+	  })
 		$.ajax({
 			type : 'post',
-			url : 'traineeCenterViewTrainee.jspp?' + total,
-			
+			url : 'traineeCenterViewTrainee.fssai?data=' + total,
+			 contentType : "application/json",
+			  data:name1,
 			async : false,
 			success : function(data) {
 				$('#newTable').show();
@@ -235,7 +93,6 @@ window.onload = OnStart;
 				var j = 1;
 				$('#newTable tr').remove();
 				$.each(mainData1, function(i, obj) {
-					console.log(" --> "+obj[9] + ' 10  '+obj[10] + '  11 '+obj[11] + '  12 '+obj[12]);
 					$('#newTable').append(
 							'<tr id="tableRow"><td><input id='+obj[0]+' type="hidden"/>' + j++ 
 										
@@ -329,7 +186,7 @@ window.onload = OnStart;
 															</ul>
 														</div>
 														<select path="selCourseType" class="form-control"
-															onchange="getCourseName(this.value);"
+															onchange="getCourseName(this.value , 'selCourseName');"
 															name="selCourseType" id="selCourseType">
 														</select>
 														<script>

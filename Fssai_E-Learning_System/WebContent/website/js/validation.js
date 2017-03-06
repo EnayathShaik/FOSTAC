@@ -110,3 +110,36 @@ function displayPreview(files) {
 }
 
 
+function getDistrict(val , idName)
+{
+ 	var name1=JSON.stringify({
+		courseType:0,
+		courseName:0
+  })
+	$.ajax({
+	      type: 'post',
+	      url: 'loadDistrict.fssai?data='+ val,
+	      contentType : "application/json",
+		  data:name1,
+	      success: function (response) {      
+	      var mainData1 = jQuery.parseJSON(response);
+	    
+	      $('#'+idName+' option').remove();
+	      $('#'+idName).append('<option value="0" label="Select District" />');
+	      $('#'+idName+' option').remove();
+	      $('#'+idName).append('<option value="0" label="Select City" />');
+	  	 
+	      $.each(mainData1 , function(i , obj)
+	  		{
+  				$('#'+idName).append('<option value='+obj.districtId+' >'+obj.districtName+'</option>');	
+	  		});
+	      }
+	      });     
+}
+
+
+
+
+
+
+

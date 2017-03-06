@@ -594,7 +594,6 @@ public class TrainingPartnerController {
 			trainingCalendarForm.setAssessor(trainingPartnerCalendarForm.getAssessorName());
 			trainingCalendarForm.setAssessmentDateTime(trainingPartnerCalendarForm.getAssessmentDateTime());
 			trainingCalendarForm.setTrainingCenter(tableID);
-			System.out.println("username "+trainingPartnerCalendarForm.getUserName());
 			trainingCalendarForm.setUserName(trainingPartnerCalendarForm.getUserName());
 			
 			String trainingCalendar = trainingPartnerService.trainingCalendarForm(trainingCalendarForm);
@@ -621,7 +620,19 @@ public class TrainingPartnerController {
     }
 	
 	
-
-	
+//traineeCenterViewTrainee
+	@RequestMapping(value="/traineeCenterViewTrainee" , method=RequestMethod.POST)
+	@ResponseBody
+	public void traineeCenterViewTrainee(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("traineeCenterViewTrainee","traineeCenterViewTrainee............" + data  , "TrainingPartnerController.java");
+		List batchCodeList = trainingPartnerService.getTrainingPartnerList(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(batchCodeList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
 	
 }

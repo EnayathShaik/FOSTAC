@@ -13,4 +13,5 @@ public interface CommonService {
 	public String checkAadhar(String aadhar , String tableName);
 	
 	public List getCourseName( String courseName);
+	public List getAssessorName( String assessorAgencyName);
 }

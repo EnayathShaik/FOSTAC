@@ -55,4 +55,7 @@ public interface TrainingPartnerDao {
 	public List<String> getBatchCodeList(int courseCode);
 	//
 	public List<String> getCertificateIdList(String batchCode , String loginId);
+	//getTrainingPartnerList
+	
+	public List getTrainingPartnerList(String searchData);
 }

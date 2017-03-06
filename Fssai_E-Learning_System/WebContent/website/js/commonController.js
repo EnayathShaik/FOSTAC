@@ -90,5 +90,58 @@ function ck_aadhar(tableName ) {
 }
 
 
+function getAssessorName(val) {
+ 	var name=JSON.stringify({
+		courseType:0,
+		courseName:0
+  })
+	$.ajax({
+		type : 'post',
+		url : 'getAssessorName.fssai?data=' + val,
+		contentType : "application/json",
+	    data:name,
+		success : function(response) {
+			var mainData1 = jQuery.parseJSON(response);
+			
+			$('#assessorName option').remove();
+		 	$('#assessorName').append(
+					'<option selected value="0" label="Select Assessor Name" />'); 
+			$.each(mainData1, function(i, obj) {
+				$('#assessorName')
+				.append(
+						'<option value='+obj[0]+' >' + obj[1]
+								+ '</option>');	
+			});
+		}
+	});
+}
+
+function getCourseName(val , idName) {
+	$('#'+idName+' option').remove();
+ 	var name=JSON.stringify({
+		courseType:0,
+		courseName:0
+  })
+	$.ajax({
+		type : 'post',
+		url : 'getCourseName.fssai?data='+ val,
+		contentType : "application/json",
+	    data:name,
+		success : function(response) {
+			var mainData1 = jQuery.parseJSON(response);
+			$('#'+idName+' option').remove();
+			$('#'+idName).append(
+					'<option value="0" label="--Select Course Name--" />');
+			$.each(mainData1, function(i, obj) {
+				$('#'+idName)
+						.append(
+								'<option value='+obj[0]+' >' + obj[1]
+										+ '</option>');
+			});
+		}
+	});
+}
+
+
 
 

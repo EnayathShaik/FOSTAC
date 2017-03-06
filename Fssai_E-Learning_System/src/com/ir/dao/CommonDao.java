@@ -9,4 +9,6 @@ public interface CommonDao {
 	public boolean changePasswordSave(ChangePasswordForm changePasswordForm, String id);
 	public String checkAadhar(String aadhar , String tableName);
 	public List getCourseName(String courseName);
+	//getAssessorName
+	public List getAssessorName(String assessorAgencyName);
 }

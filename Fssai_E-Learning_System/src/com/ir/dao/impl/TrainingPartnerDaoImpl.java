@@ -2,6 +2,7 @@ package com.ir.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Query;
@@ -723,5 +724,107 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		}
 		return trinerNameList;
 	}
+	
+	//getTrainingPartnerList
 		
+	
+	
+	@Override
+	public  List getTrainingPartnerList(String data){
+		System.out.println("data "+data);
+		String[] datas = data.toString().split("#");
+		System.out.println("datas "+datas);
+		String courseType,courseName , trainingStartDate , trainingEndDate,trainer , assessmentDateTime , assessmentAgencyName , assessorName , seatCapacity , type ;
+		try{
+			courseType = datas[0];
+		}
+		catch(Exception e){
+			courseType = "%";	
+		}
+		
+		try{
+			courseName = datas[1];	
+		}catch(Exception e){
+			courseName = "%";	
+		}
+		
+	
+		try{
+			trainingStartDate = datas[2];
+			trainingStartDate = "%"+trainingStartDate.replaceAll("%20", " ");
+			System.out.println("trainingStartDate "+trainingStartDate);
+		}
+		catch(Exception e){
+			trainingStartDate = "%";
+		}
+		
+		try{
+			trainingEndDate =datas[3];
+			trainingEndDate = "%"+trainingEndDate.replaceAll("%20", " ");
+		}
+		catch(Exception e){
+			trainingEndDate = "%";
+		}
+        
+		try{
+			trainer = datas[4];
+		}
+		catch(Exception e){
+			trainer = "%";
+		}
+		
+		try{
+			assessmentDateTime = datas[5];
+			assessmentDateTime = "%"+assessmentDateTime.replaceAll("%20", " ");
+		}
+		catch(Exception e){
+			assessmentDateTime = "%";
+		}
+		
+		try{
+			assessmentAgencyName = datas[6];
+		}
+		catch(Exception e){
+			assessmentAgencyName = "%";
+		}
+		
+		try{
+			assessorName = datas[7];
+		}
+		catch(Exception e){
+			assessorName = "%";
+		}
+		
+		try{
+			seatCapacity = datas[8];
+		}
+		catch(Exception e){
+			seatCapacity = "%";
+		}
+		
+		try{
+			type = datas[9];
+		}
+		catch(Exception e){
+			type = "%";
+		}
+		Session session = sessionFactory.getCurrentSession();
+		String	sql = "select A.trainingcalendarid , A.batchcode,C.coursecode,A.trainingdate,A.trainingtime,pitr.firstname || ' '|| pitr.middlename ||' '|| pitr.lastname as participantName   " +
+				" , A.coursetype as coursetypeid  , A.coursename as coursenameid , A.trainername as trainernameid , A.assessmentDatetime , A.assessmentpartnername , D.assessmentagencyname ,  A.assessor , cast(E.firstname || ' ' ||  E.middlename || ' ' ||  E.lastname as varchar(100)) , A.seatcapacity , case when  A.type ='P' then 'Paid' else 'Un-Paid'  end as type ,A.type as typecode  from trainingcalendar A " +
+				" inner join coursetype B on(A.coursetype=B.coursetypeid)" +
+				" inner join coursename C on(A.coursename=C.coursenameid)"+
+				" left join ManageAssessmentAgency D on(cast(A.assessmentpartnername as numeric)=D.manageassessmentagencyid)"+
+				" left join personalInformationAssessor E on(A.assessor=E.personalinformationassessorid)"+
+				" inner join personalinformationtrainer as pitr on CAST(CAST (A.trainername AS NUMERIC(19,4)) AS INT) = pitr.personalinformationtrainerid "
+				+" where A.tcStatus is null  and  cast( B.coursetypeid  as varchar(10)) like '"+courseType+"%' " +
+						"and  cast(C.coursenameid as varchar(10)) like '"+courseName+"%' and  " +
+								"cast(A.trainingdate as varchar(100)) like '"+trainingStartDate+"%' " +
+										"and cast(A.trainingtime as varchar(100)) like '"+trainingEndDate+"%' and cast(A.trainername as varchar(100)) like '"+trainer+"%'  and cast(coalesce(A.assessmentdatetime , '') as varchar(100)) like '"+assessmentDateTime+"%' and  cast(A.assessmentpartnername as varchar(100)) like '"+assessmentAgencyName+"%' and  cast(A.assessor as varchar(100)) like '"+assessorName+"%' and  cast(A.seatcapacity as varchar(100)) like '"+seatCapacity+"%'   AND to_timestamp(COALESCE(trainingdate, '19900101010101'),'DD-MM-YYYY') >= CURRENT_TIMESTAMP - INTERVAL '1 days' Order By A.trainingcalendarid desc";
+		
+		
+		
+		Query query = session.createSQLQuery(sql);
+		List courseTypeList = query.list();
+		return courseTypeList;
+	}
 }
