@@ -635,4 +635,104 @@ public class TrainingPartnerController {
 		
 	}
 	
+	
+	@RequestMapping(value="/tcvt" , method=RequestMethod.POST)
+	@ResponseBody
+	public void traineeCenterViewTraineeList(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("traineeCenterViewTraineeList","traineeCenterViewTraineeList............" + data  , "TrainingPartnerController.java");
+		List batchCodeList = trainingPartnerService.traineeCenterViewTraineeList(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(batchCodeList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	
+	
+	@RequestMapping(value="/traineeCenterPaymentConfirmation" , method=RequestMethod.POST)
+	@ResponseBody
+	public void traineeCenterPaymentConfirmation(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("traineeCenterPaymentConfirmation","traineeCenterPaymentConfirmation............" + data  , "TrainingPartnerController.java");
+		List batchCodeList = trainingPartnerService.traineeCenterPaymentConfirmation(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(batchCodeList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	//trainingpartnermanagetrainer
+	
+	
+	
+
+	@RequestMapping(value="/trainingpartnermanagetrainer" , method=RequestMethod.POST)
+	@ResponseBody
+	public void trainingpartnermanagetrainer(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("trainingpartnermanagetrainer","trainingpartnermanagetrainer............" + data  , "TrainingPartnerController.java");
+		List batchCodeList = trainingPartnerService.trainingpartnermanagetrainer(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(batchCodeList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	//searchVacancy
+	
+	
+	@RequestMapping(value="/searchVacancy" , method=RequestMethod.POST)
+	@ResponseBody
+	public void searchVacancy(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("searchVacancy","searchVacancy............" + data  , "TrainingPartnerController.java");
+		List batchCodeList = trainingPartnerService.searchVacancy(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(batchCodeList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	
+	
+	
+	@RequestMapping(value="/searchMarkAttendance" , method=RequestMethod.POST)
+	@ResponseBody
+	public void searchMarkAttendance(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("searchMark","searchVacancy............" + data  , "TrainingPartnerController.java");
+		List batchCodeList = trainingPartnerService.searchMarkAttendance(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(batchCodeList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	//updateAttendanceStatus
+	
+	
+	@RequestMapping(value="/updateAttendanceStatus" , method=RequestMethod.POST)
+	@ResponseBody
+	public void updateAttendanceStatus(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("searchMark","searchVacancy............" + data  , "TrainingPartnerController.java");
+		String result = trainingPartnerService.updateAttendanceStatus(data);
+		PrintWriter out = response.getWriter();
+
+		out.write(result);
+		out.flush();
+		
+	}
+	
+	
 }

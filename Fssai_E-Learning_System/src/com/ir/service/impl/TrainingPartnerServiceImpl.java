@@ -229,4 +229,66 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 		List loadTrainingList = trainingPartnerDAO.getTrainingPartnerList(searchData);
 		return loadTrainingList;
 	}
+	
+	//traineeCenterViewTraineeList
+	
+	@Override
+	@Transactional
+	public List traineeCenterViewTraineeList(String searchData) {
+		List loadTrainingList = trainingPartnerDAO.traineeCenterViewTraineeList(searchData);
+		return loadTrainingList;
+	}
+	
+	//searchMarkAttendance
+	
+	
+	@Override
+	@Transactional
+	public List searchMarkAttendance(String searchData) {
+		List loadTrainingList = trainingPartnerDAO.searchMarkAttendance(searchData);
+		return loadTrainingList;
+	}
+	
+	
+	//traineeCenterPaymentConfirmation
+	
+	
+	@Override
+	@Transactional
+	public List traineeCenterPaymentConfirmation(String searchData) {
+		List loadTrainingList = trainingPartnerDAO.traineeCenterPaymentConfirmation(searchData);
+		return loadTrainingList;
+	}
+	
+	//trainingpartnermanagetrainer
+	
+	
+	@Override
+	@Transactional
+	public List trainingpartnermanagetrainer(String searchData) {
+		List loadTrainingList = trainingPartnerDAO.trainingpartnermanagetrainer(searchData);
+		return loadTrainingList;
+	}
+	
+	//searchVacancy
+	
+
+	@Override
+	@Transactional
+	public List searchVacancy(String searchData) {
+		List loadTrainingList = trainingPartnerDAO.searchVacancy(searchData);
+		return loadTrainingList;
+	}
+	
+	//updateAttendanceStatus
+	
+
+	@Override
+	@Transactional
+	public String updateAttendanceStatus(String searchData) {
+		String loadTrainingList = trainingPartnerDAO.updateAttendanceStatus(searchData);
+		return loadTrainingList;
+	}
+	
+	
 }

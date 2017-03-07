@@ -1,6 +1,7 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="website/js/commonController.js"></script>
 <script>
 function OnStart(){
 	showDetails('ALL');
@@ -16,7 +17,7 @@ function OnStart(){
 }
 window.onload = OnStart;
 
-
+/* 
 function getCourseName(val){
 	 $('#selCourseName option').remove();
 	$.ajax({
@@ -33,7 +34,7 @@ function getCourseName(val){
 	      }
 	      });
 }
-
+ */
 </script>
 <script>
 
@@ -50,32 +51,40 @@ function ck_aadhar(thisValue){
 	}
 
 }
-function showDetails(indicator){
+
+
+
+
+	function showDetails(indicator){
 	 	var courseType = ( $("#selCourseType").val() == null ) ? "" : $("#selCourseType").val() ;
 		var courseName =  ($("#selCourseName").val() == null) ? "" :$("#selCourseName").val() ;
 		var trainingDate = ($("#trainingDate").val() == null) ? "" :$("#trainingDate").val() ;
 		var trainingTime =  ($("#trainingTime").val() == null) ? "" :$("#trainingTime").val() ;
 		var status = $('#selTraineeStatus').val(); 
 		 var total = "";
-		
+		var profileId = '${profileId}';
 		$(".displayNone").css("display","block");
 		
 		if(indicator == "ALL")
 			{
-			total = "courseType=&courseName=&trainingDate=&trainingTime=";
+			total = "courseType=-courseName=-trainingDate=-trainingTime=-profileId="+profileId;
 			}else{
-			total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&trainingTime"+trainingTime;		
+			total = "courseType="+courseType+"-courseName="+courseName+"-trainingDate="+trainingDate+"-trainingTime="+trainingTime+"-profileId="+profileId;		
 			}
 		 
-		
+		var name1=JSON.stringify({
+			courseType:0,
+			courseName:0
+	  })
 		var result="";
 			$.ajax({
 			type: 'post',
-			url: 'searchMarkAttendance.jspp?'+ total,
+			url: 'searchMarkAttendance.fssai?data='+ total,
+		      contentType : "application/json",
+			  data:name1,
 			async: false, 
 			success: function (data){
 			$('#newTable').show();
-			//var mainData = JSON.stringify(data);
 			var mainData1 = jQuery.parseJSON(data);
 			var j=1;
 			$('#newTable tr').remove();
@@ -107,15 +116,20 @@ function showDetails(indicator){
 	
 	function updateAttendance(courseEnrolledid , id){
 		
-		alert("id "+ id + " courseEnrolledid  "+courseEnrolledid);
+		
+		var profileId = '${profileId}';
+		alert("id "+ id + " courseEnrolledid  "+courseEnrolledid+" profileId "+profileId);
 		var status = $("#attendanceRow"+id).val();
-		var total =  "courseenrolledId="+courseEnrolledid+"&status="+status ;
+		var total =  "courseenrolledId="+courseEnrolledid+"-status="+status+"-profileId="+profileId ;
+		var name1=JSON.stringify({
+			courseType:0,
+			courseName:0
+	  })
 	 	$.ajax({
 			type: 'post',
-			url: 'updateAttendanceStatus.jspp?'+ total,
-			data: {
-			       user_name:name,
-			      },
+			url: 'updateAttendanceStatus.fssai?data='+ total,
+			      contentType : "application/json",
+				  data:name1,
 			      success: function (response) {
 			       $( '#name_status' ).html(response);
 			      }
@@ -232,7 +246,7 @@ return result;
                                                                 
                                                             </ul>
                                                         </div>
-                                                        <select class="form-control" onchange="getCourseName(this.value);" name="selCourseType" id = "selCourseType"> </select>
+                                                        <select class="form-control" onchange="getCourseName(this.value , 'selCourseName');" name="selCourseType" id = "selCourseType"> </select>
 														<script>
 															var selectctpeOptions =  "<option disabled selected value> -- select courseType -- </option>";
 															for(var i=0 ; i < courseTypes.length; i++)
@@ -281,7 +295,7 @@ return result;
                                                         <input type="text" class="form-control" id="trainingDate" name="trainingDate">
                                                     </div>                              
                                                     
-                                                     <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails('');return false">Show Details</button>
+                                                     <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails('');return false;">Show Details</button>
                                                      <!-- <input type="button" id="btnExport" style="margin-right: 20px;"  class="btn login-btn pull-right" value="Download" /> -->
                                                 </div>
                                                

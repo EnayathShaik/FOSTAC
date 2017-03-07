@@ -11,4 +11,6 @@ public interface CommonDao {
 	public List getCourseName(String courseName);
 	//getAssessorName
 	public List getAssessorName(String assessorAgencyName);
+	//getCourseTrainingMode
+	public String getCourseTrainingMode(String courseName);
 }

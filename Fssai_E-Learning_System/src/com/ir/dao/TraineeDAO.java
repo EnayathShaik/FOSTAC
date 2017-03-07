@@ -78,4 +78,7 @@ public interface TraineeDAO {
 	public Boolean closeCourse(int tableID, int profileID, String status);
 	public CertificateInfo getCertificateID(int userID, int profileID, String certificateID);
 	public String isAadharExist(CheckAadhar checkAadhar);
+	public List<State> stateList();
+	
+	public List getCourseDetails(String data);
 }

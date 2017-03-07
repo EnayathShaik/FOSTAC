@@ -1,6 +1,7 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="website/js/commonController.js"></script>
 <script type="text/javascript">
 function OnStart(){
 	var steps = 1;
@@ -16,7 +17,7 @@ function OnStart(){
 		window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
 	}
 }
-window.onload = OnStart;
+//window.onload = OnStart;
 
  
  function getcourseType(){
@@ -36,37 +37,7 @@ window.onload = OnStart;
 	
 	 
  }
- 
 
-
-	
-	
-	function getCourseName(val) {
-		$('#courseName option').remove();
-	 	var name=JSON.stringify({
-			courseType:0,
-			courseName:0
-	  })
-		$.ajax({
-			type : 'post',
-			url : 'getCourseName.fssai?data='+ val,
-			contentType : "application/json",
-		    data:name,
-			success : function(response) {
-				var mainData1 = jQuery.parseJSON(response);
-				$('#courseName option').remove();
-				$('#courseName').append(
-						'<option value="0" label="--Select Course Name--" />');
-				$.each(mainData1, function(i, obj) {
-					$('#courseName')
-							.append(
-									'<option value='+obj[0]+' >' + obj[1]
-											+ '</option>');
-				});
-			}
-		});
-	}
- 
 function confirmTrainee(){
 	if(confirm("(Trainee can enroll to one course at one time,another course enrollment will be done after the completion of last step i.e. Generate Certificate).?")){
     }
@@ -74,44 +45,46 @@ function confirmTrainee(){
         return false;
     }
 }
-function getDistrict(val)
-{
+
+
+
+/* function getCourseDetails(){
+	var courseType=($("#courseType").val()== null ? "" :$("#courseType").val() );
+	var courseName =  ($("#courseName").val() == null ? "" : $("#courseName").val());
+	var modeOfTraining =  ($("#modeOfTraining").val() == null ? "" : $("#modeOfTraining").val() );
+	var trainingPatrtner =  ($("#trainingPartner").val() == null ? "" : $("#trainingPartner").val() );
+	var trainingCenterState = ( $("#trainingCenterState").val() == null ? "" : $("#trainingCenterState").val());
+	var trainingCenterDistrict = ( $("#trainingCenterCity").val() == null ? "" : $("#trainingCenterCity").val());
+	var total= ""+courseName+"-"+modeOfTraining+"-"+trainingPatrtner+"-"+trainingCenterState+"-"+trainingCenterDistrict+"-"+courseType+"-";
+	var courseNameEl = document.getElementById('courseName');
+	var courseTitle = courseNameEl.options[courseNameEl.selectedIndex].innerHTML;
+	$('#certificationCourse').text(courseTitle);
+	var name1=JSON.stringify({
+		aaa:0,
+		bbb:0
+  })
+	
 	$.ajax({
 	      type: 'post',
-	      url: 'loadDistrict.jspp?'+ val,
+	      url: 'getCourseDetailss.fssai?data='+ total.toString(),
+	      contentType : "application/json",
+		  data:name1,
 	      success: function (response) {      
 	      var mainData1 = jQuery.parseJSON(response);
-	      $('#trainingCenterCity option').remove();
-	      $('#trainingCenterCity').append('<option value="0">Select District</option>');
-	  	  $.each(mainData1 , function(i , obj)
-	  		{
-	  		
-	  				$('#trainingCenterCity').append('<option value='+obj.districtId+'>'+obj.districtName+' </option>');		
-	  		});
-	      }
-	      });     
-}
-
-function getCourseTrainingType(){
-	
-	var data =  $("#courseName").val();
-	$.ajax({
-		type: 'post',
-	    url: 'getCourseTrainingMode.jspp?'+data,
-	    success: function (response) {      
-	    	console.log("Success respose" + response);
-	    if(response == "Online"){
-	    	$("#modeOfTraining").val("Online");
-	    }else{
-	    	$("#modeOfTraining").val("Classroom");
-	    }
-	   
-		},
-		failure: function (response){
-			console.log("Failure response:" + response);
-		}
-	});
-}
+	      $('#newTable').show();
+	      $(".displayNone").css("display","block");
+	      var j=1;
+			$('#newTable tr').remove();
+			$('#newTable').append('<tr  class="background-open-vacancies"><th>Select</th><th>Batch Code Code</th><th>Course Code</th><th>Course Duration</th><th>Training Center Name & Address</th><th>Training Schedule</th><th>Training Center</th><th>Seating Capacity</th><th>Seats available</th></tr>')
+			$.each(mainData1 , function(i , obj)
+			{
+			$('#newTable').append('<tr id="tableRow"><td><input type="hidden" name="getCalander" id="h" value="'+obj[0]+'" /><input type="radio" name="getCalander" onclick="gettid(this.value);" id="trainingCalendarIdd'+i+'"  value="'+obj[0]+'"/></td><td>'+obj[9]+'</td><td>'+obj[7]+'</td><td>'+obj[10]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td></tr>');	
+			document.getElementById("trainingCalendarId").value = i;
+			});
+			}
+			});
+	//return result; 
+} */
 
 function getCourseDetails(){
 	var courseType=$("#courseType").val();
@@ -145,7 +118,6 @@ function getCourseDetails(){
 			});
 	//return result; 
 }
-
 
 
 
@@ -206,7 +178,7 @@ function gettid(value){
                       <div class="col-md-6 col-xs-12">
                          <div class="form-group">
                           <label>Course Type</label> &nbsp;&nbsp;<label> ${created}</label>
-					<cf:select path="courseType" class="form-control" onchange="getCourseName(this.value);">
+					<cf:select path="courseType" class="form-control" onchange="getCourseName(this.value , 'courseName');">
 					<cf:option value="0" label="Select Course" />
 					<cf:options items="${courseTypeList}" itemValue="CourseTypeId" itemLabel="CourseType"/>
 					</cf:select>
@@ -231,7 +203,7 @@ function gettid(value){
                         </div>
                         <div class="form-group">
                           <label>Training Centre: State</label>
-<cf:select path="trainingCenterState" class="form-control" onchange="getDistrict(this.value);">
+<cf:select path="trainingCenterState" class="form-control" onchange="getDistrict(this.value , 'trainingCenterCity');">
 <cf:option value="0" label="Select State" />
 <cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName" />
 </cf:select>
@@ -240,7 +212,7 @@ function gettid(value){
                         <!-- residential address --> 
 
                       </div>
-
+	
                       <!-- right side -->
                       <div class="col-md-6 col-xs-12">
                         <div class="form-group">
@@ -266,7 +238,7 @@ function gettid(value){
                         <div class="form-group">
                         
             
-<a href="#" onclick="getCourseDetails();" class="form-control login-btn btn pull-right" style="width: 50%;">Show Details</a>
+<a href="#" onclick="getCourseDetails();return false;" class="form-control login-btn btn pull-right" style="width: 50%;">Show Details</a>
                         </div>
 
                         <!-- residential address --> 

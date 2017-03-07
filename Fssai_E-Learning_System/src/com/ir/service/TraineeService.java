@@ -112,4 +112,9 @@ public interface TraineeService {
 
 
 	public String isAadharExist(CheckAadhar checkAadhar);
+	
+	List<State> stateList();
+	//getCourseDetails
+	
+	public List getCourseDetails(String data);
 }

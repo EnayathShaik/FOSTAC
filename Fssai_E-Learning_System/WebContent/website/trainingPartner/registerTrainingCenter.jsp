@@ -7,6 +7,7 @@ function OnStart(){
 }
 window.onload = OnStart;
 </script>
+<script src="website/js/commonController.js"></script>
 <script>
 function checkname()
 {
@@ -164,7 +165,7 @@ function AvoidSpace(event) {
     	return y;
     }
     
-    function getDistrict(val)
+/*     function getDistrict(val , idName)
     {
     	$.ajax({
     	      type: 'post',
@@ -183,7 +184,7 @@ function AvoidSpace(event) {
     	  		});
     	      }
     	      });     
-    }
+    } */
     function getCity(val)
     {
     	$.ajax({
@@ -597,7 +598,7 @@ function AvoidSpace(event) {
 														</ul>
 													</div>
 													<cf:select path="TrainingPartnerPermanentState"
-														class="form-control" onchange="getDistrict(this.value);">
+														class="form-control" onchange="getDistrict(this.value , 'TrainingPartnerPermanentDistrict');">
 														<cf:option value="0" label="Select State" />
 														<cf:options items="${stateList}" itemValue="stateId"
 															itemLabel="stateName" />

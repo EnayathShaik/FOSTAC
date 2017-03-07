@@ -143,5 +143,30 @@ function getCourseName(val , idName) {
 }
 
 
-
+function getCourseTrainingType(){
+	
+	var data =  $("#courseName").val();
+	var name1=JSON.stringify({
+		courseType:0,
+		courseName:0
+  })
+	$.ajax({
+		type: 'post',
+	    url: 'getCourseTrainingMode.fssai?data='+data,
+	    contentType : "application/json",
+		  data:name1,
+	    success: function (response) {      
+	    	console.log("Success respose" + response);
+	    if(response == "Online"){
+	    	$("#modeOfTraining").val("Online");
+	    }else{
+	    	$("#modeOfTraining").val("Classroom");
+	    }
+	   
+		},
+		failure: function (response){
+			console.log("Failure response:" + response);
+		}
+	});
+}
 

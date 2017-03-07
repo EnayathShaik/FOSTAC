@@ -100,5 +100,27 @@ public class CommonDaoImpl implements CommonDao{
 		List courseTypeList = query.list();
 		return courseTypeList;
 	}
+	
+	//getCourseTrainingMode
+	
+	@Override
+	public String getCourseTrainingMode(String courseName ){
+		Session session = sessionFactory.getCurrentSession();
+		String response = null;
+		String sql = "select online from coursename where coursenameid ="+courseName;
+		
+		try{
+			Query query = session.createSQLQuery(sql);
+			List list = (List)query.list();
+			if(list.size()>0){
+				response = (String)list.get(0);	
+			}
+		}catch(Exception e){
+			
+		}finally{
+		}
+		return response;
+	}
+	
 
 }

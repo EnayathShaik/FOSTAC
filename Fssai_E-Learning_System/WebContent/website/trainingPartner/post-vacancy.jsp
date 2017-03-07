@@ -1,6 +1,7 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="website/js/commonController.js"></script>
 <script type="text/javascript">
 
 function OnStart(){
@@ -34,21 +35,6 @@ function checkVacancyType(){
 	
 }
 
-function getCourseName(val){
-	$.ajax({
-	      type: 'post',
-	      url: 'getCourseName.jspp?'+ val,
-	      success: function (response) {      
-	      var mainData1 = jQuery.parseJSON(response);
-	       $('#courseName option').remove();
-	      $('#courseName').append('<option value="0" label="Select Course Code" />');
-	        $.each(mainData1 , function(i , obj)
-	  		{
-	  				$('#courseName').append('<option value='+obj[0]+' >'+obj[1]+'</option>');		
-	  		});
-	      }
-	      });
-}
 
 </script>
 <script>
@@ -99,7 +85,7 @@ function validateFields(){
 </script>
 
 <script type="text/javascript">
-function searchVacancy(indicator){
+/* function searchVacancy(indicator){
 	var loginID = '${triningCenter}';
 	
 	
@@ -137,6 +123,54 @@ function searchVacancy(indicator){
 		});  
 	return result;
 }
+ */
+
+
+
+function searchVacancy(indicator){
+	var loginID = '${triningCenter}';
+	
+	
+	var courseType =  ($("#courseType").val() == 0 ? "" : $("#courseType").val());
+	var courseName =  ($("#courseName").val() == 0 ? "" : $("#courseName").val());
+	var trainingDate = (typeof $("#trainingStartTime").val() === "undefined"  ? "" : $("#trainingStartTime").val() ); 
+	var trainingTime = (typeof $("#trainingEndTime").val() === "undefined" ? "" : $("#trainingEndTime").val() ); 
+	var requiredExp =  ($("#requiredExp").val() == 0 ? "" : $("#requiredExp").val());
+	var noOfVacancy =  ($("#noOfVacancy").val() == 0 ? "" : $("#noOfVacancy").val());
+	var name1=JSON.stringify({
+		courseType:0,
+		courseName:0
+  })
+	var total = null;
+	$(".displayNone").css("display","block");
+	
+	if(indicator == "ALL")
+		 total = "courseType=-courseName=-trainingDate=-requiredExp=-noOfVacancy=-loginid="+loginID;
+	else
+		 total = "courseType="+courseType+"-courseName="+courseName+"-trainingDate="+trainingDate+"-requiredExp="+requiredExp+"-noOfVacancy="+noOfVacancy+"-loginid="+loginID+"-trainingTime="+trainingTime;
+ 	var result="";
+	 	$.ajax({
+		type: 'post',
+		url: 'searchVacancy.fssai?data='+ total,
+		contentType : "application/json",
+		data:name1,
+		async: false, 
+		success: function (data){
+		$('#newTable').show();
+		//var mainData = JSON.stringify(data);
+		var mainData1 = jQuery.parseJSON(data);
+		var j=1;
+		$('#newTable tr').remove();
+		$.each(mainData1 , function(i , obj)
+		{
+			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td style="display:none;">'+obj[0]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td></tr>');
+			
+		});
+		}
+		});  
+	return result;
+}
+
 
 </script>
 
@@ -197,7 +231,7 @@ function searchVacancy(indicator){
                                                             </li>
                             </ul>
                           </div>
-						<cf:select path="courseType" class="form-control" onchange="getCourseName(this.value);">
+						<cf:select path="courseType" class="form-control" onchange="getCourseName(this.value , 'courseName');">
 						<cf:option value="0" label="Select Course Type" />
 						<cf:options items="${courseTypeList}" itemValue="CourseTypeId" itemLabel="CourseType"/>
 						</cf:select>
@@ -315,7 +349,7 @@ function searchVacancy(indicator){
                         
                       </div>
                       <input type="submit" style="margin-top:20px;"  class="btn login-btn pull-right show-details-vacancy collapsed"  data-target="#show-result" aria-expanded="false" value="Create">
-                      <a href="#testt"  onclick="searchVacancy('');" style="margin-top:20px; margin-right: 20px;"  class="btn login-btn pull-right"   >Search</a>
+                      <a href="#testt"  onclick="searchVacancy('');return false;" style="margin-top:20px; margin-right: 20px;"  class="btn login-btn pull-right"   >Search</a>
                  	  <!-- <input type="button" id="btnExport" style="margin-top:20px; margin-right: 20px;"  class="btn login-btn pull-right" value="Download" /> -->
                     
                     </div>

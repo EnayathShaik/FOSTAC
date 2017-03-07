@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -20,6 +23,7 @@ import com.ir.form.ChangePasswordForm;
 import com.ir.form.PostVacancyTrainingCenterForm;
 import com.ir.form.TrainingCalendarForm;
 import com.ir.form.trainingPartner.TrainingPartnerSearch;
+import com.ir.model.CourseEnrolledUser;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.PersonalInformationTrainingPartner;
@@ -827,4 +831,341 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		List courseTypeList = query.list();
 		return courseTypeList;
 	}
+	
+	
+	//traineeCenterViewTraineeList
+	
+	@Override
+	public  List traineeCenterViewTraineeList(String name){
+		StringBuffer stringBuffer = new StringBuffer();
+		System.out.println("name "+name);
+		 if(name != null && name.length() > 0 ){
+	        	String[] whereList = name.toString().split("-");
+	        	for(int i=0;i<whereList.length;i++){
+	        		if(i==0){
+	        			stringBuffer.append(whereList[0] != null & !whereList[0].equals("null") & whereList[0].length() > 0 ? " AND E.coursetypeid="+whereList[0] : "");
+	        		}else if(i==1){
+	        			stringBuffer.append(whereList[1] != null & !whereList[1].equals("null") & whereList[1].length() > 0  ? " AND D.COURSENAMEID="+whereList[1] : "");
+	        		}else if(i==2){
+	        			
+	        			stringBuffer.append(whereList[2] != null & !whereList[2].equals("null") & whereList[2].length() > 0 ? " AND B.TRAININGDATE='%"+whereList[2].replaceAll("%20", " ")+"'" : "");
+	        		}else if(i==3){
+	        			
+	        			stringBuffer.append(whereList[3] != null & !whereList[3].equals("null") & whereList[3].length() > 0 ? " AND B.TRAININGTIME='%"+whereList[3].replaceAll("%20", " ")+"'" : "");
+	        		}else if(i==4){
+	        			
+	        			stringBuffer.append(whereList[4] != null & !whereList[4].equals("null") & whereList[4].length() > 0 ? " AND A.PAYMENTSTATUS='"+whereList[4]+"'" : "");
+	        			
+	        		}else if(i==5){
+	        			
+	        			stringBuffer.append(whereList[5] != null & whereList[5].length() > 0 ? " AND  replace(D.classroom ||''|| D.online,'Nil','')= '"+whereList[5]+"'" : "");
+	        		
+	        		}
+	        	}
+	        }
+	        
+		Session session = sessionFactory.getCurrentSession();
+		 String sql ="";
+	        sql = "select  B.batchCode,D.courseCode,B.trainingdate,B.trainingtime,C.firstname || ' '|| C.middlename ||' '|| C.lastname as participantName,replace(D.classroom ||' '|| D.online,'Nil',''),D.status from courseenrolleduser  A"
+					+ " inner join trainingcalendar B on(A.trainingcalendarid= B.trainingcalendarid)"
+					+ " inner join coursename D on (D.coursenameid = B.coursename)"
+					+ " inner join coursetype E on (E.coursetypeid = B.coursetype)"
+					+ "  inner join personalinformationtrainee C on (C.logindetails = A.logindetails)  "
+					+ " inner join logindetails F on(F.id=C.logindetails)";
+	        sql = sql + stringBuffer.toString();
+		
+		Query query = session.createSQLQuery(sql);
+		List courseTypeList = query.list();
+		return courseTypeList;
+	}
+	
+	//searchMarkAttendance
+	
+
+	@Override
+	public  List searchMarkAttendance(String name){
+		String [] n1 = name.split("-");
+		System.out.println("name "+name);
+		String courseType,courseName , trainingDate , trainingTime ,profileCode;
+		
+		try{
+			courseType = n1[0].split("=")[1];
+		}
+		catch(Exception e){
+			courseType = "%";	
+		}
+		
+		try{
+			courseName = n1[1].split("=")[1];	
+		}catch(Exception e){
+			courseName = "%";	
+		}
+		
+	
+		try{
+			trainingDate = "%"+n1[2].split("=")[1].replaceAll("%20", " ");
+		}
+		catch(Exception e){
+			trainingDate = "%";
+		}
+		
+		try{
+			trainingTime ="%"+ n1[3].split("=")[1].replaceAll("%20", " ");
+		}
+		catch(Exception e){
+			trainingTime = "%";
+		}
+		String userstatus = "";
+		
+
+		try{
+			profileCode = n1[4].split("=")[1];	
+		}catch(Exception e){
+			profileCode = "%";	
+		}
+		if(profileCode.equalsIgnoreCase("5")){
+			userstatus = "F.userstaus";
+		}else if(profileCode.equalsIgnoreCase("6")){
+			userstatus = "F.userstausassessor";
+		}
+		
+		Configuration conf = new Configuration();
+		conf.configure("/hibernate.cfg.xml");
+		SessionFactory sf = conf.buildSessionFactory();
+		Session session = sf.openSession();
+		String newList=null;
+		System.out.println("district 0");
+		String sql ="";
+		
+		sql = "select A.batchCode,C.courseCode,A.trainingdate,A.trainingtime,G.firstname||' ' ||G.middlename|| ' ' ||G.lastname as participantName ,G.aadharnumber , courseenrolleduserid , " +userstatus+ " "+
+				"from trainingcalendar A inner join coursetype B on(A.coursetype=B.coursetypeid)  inner join coursename C on(A.coursename=C.coursenameid)   inner join personalinformationtrainingpartner D on(A.trainingcenter=D.personalinformationtrainingpartnerid) "+
+				"inner join logindetails E on(D.logindetails=E.ID) inner join courseenrolleduser F on(A.trainingcalendarid=F.trainingcalendarid) inner join personalinformationtrainee G on(CAST(CAST (F.logindetails AS NUMERIC(19,4)) AS INT)=G.logindetails)  " +
+				"where 1=1 " +
+				"and cast(B.coursetypeid as varchar(10)) like '"+courseType+"%'  and cast( C.coursenameid as varchar(10)) like  '"+courseName+"%' and cast(trainingdate as varchar(10)) like '"+trainingDate+"%' and trainingtime  like '"+trainingTime+"%'   ";
+		
+	
+		
+		Query query = session.createSQLQuery(sql);
+		List courseTypeList = query.list();
+		return courseTypeList;
+	}
+	
+	
+	//traineeCenterPaymentConfirmation
+	
+	@Override
+	public  List traineeCenterPaymentConfirmation(String name){
+		String[] n1 = name.split("-");
+		System.out.println("name "+name);
+		String courseType,courseName , trainingDate , trainingtime,status ;
+		try{
+			courseType = n1[0].split("=")[1];
+		}
+		catch(Exception e){
+			courseType = "%";	
+		}
+		
+		try{
+			courseName = n1[1].split("=")[1];	
+		}catch(Exception e){
+			courseName = "%";	
+		}
+		
+	
+		try{
+			trainingDate = "%"+n1[2].split("=")[1].replaceAll("%20", " ");
+		}
+		catch(Exception e){
+			trainingDate = "%";
+		}
+		
+		try{
+			trainingtime = "%"+n1[3].split("=")[1].replaceAll("%20", " ");
+		}
+		catch(Exception e){
+			trainingtime = "%";
+		}
+        
+		try{
+			status = n1[4].split("=")[1];
+		}
+		catch(Exception e){
+			status = "%";
+		}
+		Session session = sessionFactory.getCurrentSession();
+		String sql = "";
+		sql = "select  B.batchcode,D.coursecode,B.trainingdate,B.trainingtime,C.firstname || ' '|| C.middlename ||' '|| C.lastname as participantName,D.modeoftraining,A.paymentstatus,A.courseenrolleduserid from courseenrolleduser  A"
+				+ " inner join trainingcalendar B on(A.trainingcalendarid= B.trainingcalendarid)"
+				+ " inner join personalinformationtrainingpartner C on (C.personalinformationtrainingpartnerid = B.trainingcenter)"
+				+ " inner join coursename D on (D.coursenameid = B.coursename)"
+				+ " inner join coursetype E on (E.coursetypeid = B.coursetype)"
+				+ " inner join logindetails F on (F.ID = C.logindetails)"
+				+" WHERE A.status = 'N' and  cast(E.coursetypeid  as varchar(10)) like '"+courseType+"%' and cast(D.COURSENAMEID as varchar(10))  like '"+courseName+"%'  and  cast(B.TRAININGDATE as varchar(10)) like '"+trainingDate+"%' and  cast(B.TRAININGTIME as varchar(10)) like '"+trainingtime+"%'  and cast(A.paymentstatus as varchar(10)) like '"+status+"%' "; 
+					//	"  AND F.loginid ='"+loginId+"' ";
+		
+		
+		Query query = session.createSQLQuery(sql);
+		List courseTypeList = query.list();
+		return courseTypeList;
+	}
+	
+	
+	//trainingpartnermanagetrainer
+	
+	@Override
+	public  List trainingpartnermanagetrainer(String name){
+		String[] n1 = name.split("-");
+		System.out.println("name "+name);
+		String courseType,courseName , trainingDate , trainingtime,status ;
+		try{
+			courseType = n1[0].split("=")[1];
+		}
+		catch(Exception e){
+			courseType = "%";	
+		}
+		
+		try{
+			courseName = n1[1].split("=")[1];	
+		}catch(Exception e){
+			courseName = "%";	
+		}
+		
+	
+		try{
+			trainingDate = "%"+n1[2].split("=")[1].replaceAll("%20", " ");
+		}
+		catch(Exception e){
+			trainingDate = "%";
+		}
+		
+		try{
+			trainingtime = "%"+n1[3].split("=")[1].replaceAll("%20", " ");
+		}
+		catch(Exception e){
+			trainingtime = "%";
+		}
+        
+		try{
+			status = n1[4].split("=")[1];
+		}
+		catch(Exception e){
+			status = "%";
+		}
+		Session session = sessionFactory.getCurrentSession();
+		String sql = "";
+		sql = "select  B.batchcode,D.coursecode,B.trainingdate,B.trainingtime,C.firstname || ' '|| C.middlename ||' '|| C.lastname as participantName,D.modeoftraining,A.paymentstatus,A.courseenrolleduserid from courseenrolleduser  A"
+				+ " inner join trainingcalendar B on(A.trainingcalendarid= B.trainingcalendarid)"
+				+ " inner join personalinformationtrainingpartner C on (C.personalinformationtrainingpartnerid = B.trainingcenter)"
+				+ " inner join coursename D on (D.coursenameid = B.coursename)"
+				+ " inner join coursetype E on (E.coursetypeid = B.coursetype)"
+				+ " inner join logindetails F on (F.ID = C.logindetails)"
+				+" WHERE A.status = 'N' and  cast(E.coursetypeid  as varchar(10)) like '"+courseType+"%' and cast(D.COURSENAMEID as varchar(10))  like '"+courseName+"%'  and  cast(B.TRAININGDATE as varchar(10)) like '"+trainingDate+"%' and  cast(B.TRAININGTIME as varchar(10)) like '"+trainingtime+"%'  and cast(A.paymentstatus as varchar(10)) like '"+status+"%' "; 
+					//	"  AND F.loginid ='"+loginId+"' ";
+		
+		
+		Query query = session.createSQLQuery(sql);
+		List courseTypeList = query.list();
+		return courseTypeList;
+	}
+	
+	//searchVacancy
+	
+	
+	@Override
+	public  List searchVacancy(String name){
+		String [] n1 = name.split("-");
+		
+		String courseType,courseName , trainingDate , requiredExp ,noOfVacancy,selectAll, trainingendtime, trainingcenter;
+		try{
+			courseType = n1[0].split("=")[1];
+		}
+		catch(Exception e){
+			courseType = "%";	
+		}
+		
+		try{
+			courseName = n1[1].split("=")[1];	
+		}catch(Exception e){
+			courseName = "%";	
+		}
+		
+	
+		try{
+			trainingDate = "%"+n1[2].split("=")[1].replaceAll("%20", " ");
+		}
+		catch(Exception e){
+			trainingDate = "%";
+		}
+		
+		try{
+			requiredExp = n1[3].split("=")[1];
+		}
+		catch(Exception e){
+			requiredExp = "%";
+		}
+		
+		try{
+			noOfVacancy = n1[4].split("=")[1];
+		}
+		catch(Exception e){
+			noOfVacancy = "%";
+		}
+		
+		try{
+			trainingcenter = n1[5].split("=")[1];
+		}
+		catch(Exception e){
+			trainingcenter = "%";
+		}
+		
+		try{
+			trainingendtime = "%"+n1[6].split("=")[1].replaceAll("%20", " ");
+		}
+		catch(Exception e){
+			trainingendtime = "%";
+		}
+		Session session = sessionFactory.getCurrentSession();
+		System.out.println("district 0");
+		String loginCK = "";
+		loginCK = "1=1";
+		String sql ="";
+		sql = "select pvtc.postvacancytrainingcenterid , ct.coursetype , cn.coursecode , pvtc.trainingdate , pvtc.trainingendtime ,pvtc.requiredexp , pvtc.noofvacancy,pvtc.loginid   from postvacancytrainingcenter pvtc left join coursetype as ct on ct.coursetypeid = pvtc.coursetype left join coursename as cn on cn.coursenameid = pvtc.coursename left join personalinformationtrainingpartner D on(pvtc.trainingcenter=D.personalinformationtrainingpartnerid)  left join  logindetails E on(D.logindetails=E.ID) " +
+				" where "+loginCK+"  and pvtc.trainingcenter='"+trainingcenter+"'  and  cast(ct.coursetypeid as varchar(10))  like '"+courseType+"%' and CAST(cn.coursenameid AS VARCHAR(10)) like '"+courseName+"%' and  CAST(pvtc.trainingdate AS VARCHAR(100)) like '"+trainingDate+"%'   and cast(pvtc.requiredexp as varchar(10))  like '"+requiredExp+"%' and cast(pvtc.noofvacancy as varchar(10)) like '"+noOfVacancy+"%'  and cast(pvtc.trainingendtime as varchar(100)) like   '"+trainingendtime+"%'  ";
+		
+		Query query = session.createSQLQuery(sql);
+		List courseTypeList = query.list();
+		return courseTypeList;
+	}
+	
+	//updateAttendanceStatus
+	
+	
+	@Override
+	public  String updateAttendanceStatus(String name){
+		String[] updateDetails = name.split("-");
+
+		String id , status ;	
+		id= (updateDetails[0].split("="))[1];
+		
+		status = (updateDetails[1].split("="))[1];
+		String profileID =  (updateDetails[2].split("="))[1];
+		Session session = sessionFactory.getCurrentSession();
+		CourseEnrolledUser courseEnrolledUser = (CourseEnrolledUser) session.load(CourseEnrolledUser.class, Integer.parseInt(id));
+		if(profileID.equalsIgnoreCase("5")){
+			courseEnrolledUser.setUserStaus(status);
+		}else if(profileID.equalsIgnoreCase("6")){
+			courseEnrolledUser.setUserStausAssessor(status);
+		}
+		
+		String result ="Recors successfully updated !!!" ;
+		
+		
+		session.update(courseEnrolledUser);
+		
+		return result;
+		
+	
+	}
+	
+	
 }

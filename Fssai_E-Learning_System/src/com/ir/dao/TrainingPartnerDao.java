@@ -58,4 +58,26 @@ public interface TrainingPartnerDao {
 	//getTrainingPartnerList
 	
 	public List getTrainingPartnerList(String searchData);
+	
+	//traineeCenterViewTraineeList
+	
+	public List traineeCenterViewTraineeList(String searchData);
+	//searchMarkAttendance
+	
+	public List searchMarkAttendance(String searchData);
+	
+	//traineeCenterPaymentConfirmation
+	
+	public List traineeCenterPaymentConfirmation(String searchData);
+	//trainingpartnermanagetrainer
+	public List trainingpartnermanagetrainer(String searchData);
+	
+	//searchVacancy
+	
+	public List searchVacancy(String searchData);
+	
+	//updateAttendanceStatus
+	
+	public String updateAttendanceStatus(String searchData);
+	
 }

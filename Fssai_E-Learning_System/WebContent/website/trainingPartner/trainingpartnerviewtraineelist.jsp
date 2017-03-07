@@ -1,6 +1,7 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="website/js/commonController.js"></script>
 <script>
 function OnStart(){
 flatpickr('[id="traineeTime"]' , {
@@ -16,42 +17,32 @@ flatpickr('[id="traineeDate"]' , {
 }
 window.onload = OnStart;
 
-function getCourseName(val){
-	 $('#selCourseName option').remove();
-	$.ajax({
-	      type: 'post',
-	      url: 'getCourseName.jspp?'+ val,
-	      success: function (response) {      
-	      var mainData1 = jQuery.parseJSON(response);
-	       $('#selCourseName option').remove();
-	      $('#selCourseName').append('<option value="0" label="--Select Course Code--" />');
-	        $.each(mainData1 , function(i , obj)
-	  		{
-	  				$('#selCourseName').append('<option value='+obj[0]+' >'+obj[1]+'</option>');		
-	  		});
-	      }
-	      });
-}
 
 </script>
 <script>
 
 function showDetails(){
-	/* alert('Hoiee');
-	alert('Data......'); */
-	var courseType =  $("#selCourseType").val();
-	var courseName =  $("#selCourseName").val();
-	var trainingDate = $("#traineeDate").val();/* .replace("-","/").replace("-","/"); */
-	var trainingTime =  $("#traineeTime").val();
-	var selTraineeStatus = $("#selTraineeStatus").val();
-	var selTraineeModeOfTraining = $("#selTraineeModeOfTraining").val();
+	
+	var courseType =  ($("#selCourseType").val()== null ? "" : $("#selCourseType").val());
+	 var courseName = ( $("#selCourseName").val() == null ? "" : $("#selCourseName").val());
+	var trainingDate =( $("#traineeDate").val() == null ? "" : $("#traineeDate").val());
+	var trainingTime = ( $("#traineeTime").val() == null ? "" : $("#traineeTime").val()  );
+	var selTraineeStatus =( $("#selTraineeStatus").val() == null ? "" :  $("#selTraineeStatus").val());
+	var selTraineeModeOfTraining =( $("#selTraineeModeOfTraining").val() == null ? "" : $("#selTraineeModeOfTraining").val());
 	 
- 	var total = courseType+"&"+courseName+"&"+trainingDate+"&"+trainingTime+"&"+selTraineeStatus+"&"+selTraineeModeOfTraining+"&";
+ 	var total = courseType+"-"+courseName+"-"+trainingDate+"-"+trainingTime+"-"+selTraineeStatus+"-"+selTraineeModeOfTraining+"-";
 	$(".displayNone").css("display","block");
 	var result="";
+ 	var name1=JSON.stringify({
+		courseType:0,
+		courseName:0
+  })
+  alert("total "+total);
 	$.ajax({
 		type: 'POST',
-		url: 'traineeCenterViewTraineeList.jspp?'+ total,
+		url: 'tcvt.fssai?data='+ total.toString(),
+		 contentType : "application/json",
+		 data:name1,
 		async: false, 
 		success: function (data){
 		$('#newTable').show();
@@ -69,7 +60,7 @@ function showDetails(){
 	return result; 
 }
 
-function showDetail(){
+/* function showDetail(){
 	alert("Fetching details to mark attendance..");
 	
 	$('#tblAssessorCourses tr').remove();
@@ -121,7 +112,7 @@ function showDetail(){
 	});
 return result;	
 }
-
+ */
 
 </script>
 <section>
@@ -181,7 +172,7 @@ return result;
                                                                 
                                                             </ul>
                                                         </div>
-                                                        <select class="form-control" onchange="getCourseName(this.value);"  name="selCourseType" id = "selCourseType"> </select>
+                                                        <select class="form-control" onchange="getCourseName(this.value , 'selCourseName');"  name="selCourseType" id = "selCourseType"> </select>
 														<script>
 															var selectctpeOptions =  "<option disabled selected value> -- select courseType -- </option>";
 															for(var i=0 ; i < courseTypes.length; i++)

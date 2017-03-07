@@ -1063,4 +1063,60 @@ public class TraineeDAOImpl implements TraineeDAO {
 		}
 		return status;
 	}
+	
+	@Override
+	public List<State> stateList() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from State where status = 'A'");
+		List<State> stateList = query.list();
+		return stateList;
+	}
+	
+	//getCourseDetails
+	
+	@Override
+	public  List getCourseDetails(String data){
+		System.out.println("data "+data);
+		String[] totalConnected = data.toString().split("-");
+		String courseName,modeOfTraining,trainingPatrtner,trainingDate = null,trainingCenterState,trainingCenterDistrict , courseType;
+		
+		courseName = totalConnected[0];
+		if(courseName.equals("0")){		courseName = "%";	}
+		modeOfTraining = totalConnected[1];
+		if(modeOfTraining.equals("0")){		modeOfTraining = "%";	}
+		trainingPatrtner = totalConnected[2];
+		if(trainingPatrtner.equals("0")){		trainingPatrtner = "%";	}
+		//String[] trainingDate1 = totalConnected[3];
+		trainingCenterState = totalConnected[3];
+		if(trainingCenterState.equals("0")){		trainingCenterState = "%";	}
+		trainingCenterDistrict = totalConnected[4];
+		if(trainingCenterDistrict.equals("0")){		trainingCenterDistrict = "%";	}
+		courseType = totalConnected[5];
+		if(courseType.equals("0")){		courseType = "%";	}
+		Session session = sessionFactory.getCurrentSession();
+		String sql ="select tc.trainingcalendarid , concat(pitp.trainingpartnerpermanentline1 , ' ' , pitp.trainingpartnerpermanentline2 , ' ' , s.statename , ' ' , d.districtname , ' ' , c.cityname) as address, "+
+				" concat(tc.trainingdate , ' / ' , tc.trainingtime) as schedule , "+
+				" concat(pitp.firstname , ' ' , pitp.middlename , ' ' , pitp.lastname ) ,concat( pitp.trainingpartnerpermanentmobile , ' / ' , pitp.trainingpartnerpermanentemail)  as contact, "+
+				" tc.seatCapacity ,(CAST(CAST (tc.seatCapacity AS NUMERIC(19,4)) AS INT) - ( select count(1) from courseenrolleduser where trainingcalendarid = tc.trainingcalendarid)) "+
+				" ,cn.courseCode , tc.trainingDate, tc.batchCode, cn.courseduration  "+
+				" from trainingcalendar as tc "+
+				" inner join coursename as cn on cn.coursenameid = tc.coursename "+
+				" inner join coursetype as ct on ct.coursetypeid = tc.coursetype "+
+				" inner join managetrainingpartner as mtp on mtp.managetrainingpartnerid = tc.trainingpartner "+
+				" inner join personalinformationtrainingpartner as pitp on mtp.managetrainingpartnerid = pitp.trainingpartnername "+
+				" inner join state as s on s.stateid = pitp.trainingpartnerpermanentstate "+
+				" inner join city as c on c.cityid = pitp.trainingpartnerpermanentcity "+
+				" inner join district as d on d.districtid = pitp.trainingpartnerpermanentdistrict "+
+				" and tc.trainingcenter = pitp.personalinformationtrainingpartnerid "+
+				" where CAST(tc.coursename AS varchar(10)) like '"+courseName+"' "+
+				" and CAST(tc.courseType AS varchar(10)) like  '"+courseType+"' "+
+				" and CAST(tc.trainingpartner AS varchar(10)) like '"+trainingPatrtner+"'  "+
+				" and CAST(s.stateid AS varchar(10)) like '"+trainingCenterState+"' "+
+				" and CAST(d.districtid AS varchar(10)) like '"+trainingCenterDistrict+"' "+
+				" and  to_timestamp(COALESCE(tc.trainingdate, '19900101010101'),'DD-MM-YYYY') > CURRENT_TIMESTAMP - INTERVAL '1 days' and  (CAST(CAST (tc.seatCapacity AS NUMERIC(19,4)) AS INT) - ( select count(1) from courseenrolleduser where trainingcalendarid = tc.trainingcalendarid) > 0)";
+	
+		Query query = session.createSQLQuery(sql);
+		List courseTypeList = query.list();
+		return courseTypeList;
+	}
 }

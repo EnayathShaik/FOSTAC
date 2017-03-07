@@ -140,4 +140,20 @@ public class CommonController {
 		
 	}
 	
+	//getCourseTrainingMode
+	
+	@RequestMapping(value="/getCourseTrainingMode" , method=RequestMethod.POST)
+	@ResponseBody
+	public void getCourseTrainingMode(@RequestParam("data") String data ,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("getCourseTrainingMode","getCourseTrainingMode............" + data  , "CommonController.java");
+		
+		String result = null;
+		result = commonService.getCourseTrainingMode(data);
+		//checkAadhar
+		PrintWriter out = response.getWriter(); 
+		out.write(result);
+		out.flush();
+		
+	}
+	
 }

@@ -1,6 +1,7 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="website/js/commonController.js"></script>
 <script>
 function OnStart(){
 	flatpickr("#traningDate" , {
@@ -77,12 +78,18 @@ function showDetails(){
 
 		
 	$(".displayNone").css("display","block");
-	var total = "courseType="+courseType+"&courseName="+courseName+"&trainingdate="+trainingDate+"&trainingTime="+traningTime+"&status="+status;
+	var total = "courseType="+courseType+"-courseName="+courseName+"-trainingdate="+trainingDate+"-trainingTime="+traningTime+"-status="+status;
 	console.log("total "+total);
 	var result="";
+	var name1=JSON.stringify({
+		courseType:0,
+		courseName:0
+  })
 	$.ajax({
 		type: 'post',
-		url: 'traineeCenterPaymentConfirmation.jspp?'+ total,
+		url: 'traineeCenterPaymentConfirmation.fssai?data='+ total,
+		 contentType : "application/json",
+		  data:name1,
 		async: false, 
 		success: function (data){              
 		$('#newTable').show();
@@ -208,7 +215,7 @@ return result;
                                                                 
                                                             </ul>
                                                         </div>
-                                                        <select class="form-control" onchange="getCourseName(this.value);" name="selCourseType" id = "selCourseType"> </select>
+                                                        <select class="form-control" onchange="getCourseName(this.value , 'selCourseName');" name="selCourseType" id = "selCourseType"> </select>
 														<script>
 															var selectctpeOptions =  "<option disabled selected value> -- select courseType -- </option>";
 															for(var i=0 ; i < courseTypes.length; i++)
@@ -277,7 +284,7 @@ return result;
 														</script>
 														
                                                     </div>
-                                                     <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails();return false">Show Details</button>
+                                                     <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails();return false;">Show Details</button>
                                                        <input type="button" id="btnExport" style="margin-right: 20px;"  class="btn login-btn pull-right" value="Download" />
                                                 </div>
                                                

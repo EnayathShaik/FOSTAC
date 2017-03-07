@@ -1,95 +1,11 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
-<script>
-	function getCourseName(val) {
-		$('#selCourseName option').remove();
-		$.ajax({
-			type : 'post',
-			url : 'getCourseName.jspp?' + val,
-			success : function(response) {
-				var mainData1 = jQuery.parseJSON(response);
-				$('#selCourseName option').remove();
-				$('#selCourseName').append(
-						'<option value="0" label="--Select Course Code--" />');
-				$.each(mainData1, function(i, obj) {
-					$('#selCourseName')
-							.append(
-									'<option value='+obj[0]+' >' + obj[1]
-											+ '</option>');
-				});
-			}
-		});
-	}
-</script>
-<script>
-/* 	function showDetails() {
-		alert("Fetching details to mark attendance..");
+<script src="website/js/commonController.js"></script>
 
-		$('#tblAssessorCourses tr').remove();
-		$('#tblAssessorCourses').append(
-				'<thead>' + '<tr class="background-open-vacancies">'
-						+ '<th>S.No.</th>' + '<th>Course Type</th>'
-						+ '<th>Course Name</th>' + '<th>Training Date</th>'
-						+ '<th>Training Time</th>' + '<th>Trainer Name</th>'
-						+ '<th>&nbsp;&nbsp;</th>' + '</tr>' + '</thead>');
-		var result = "";
-		//var id = document.getElementById("assessmentAgencyId").value;
-		var assessorId = 710;
-		$
-				.ajax({
-					type : 'post',
-					url : 'trainingpartnermanagetrainer.jspp?' + assessorId,
-					async : false,
-					success : function(data) {
-						console.log("Data received..");
-						console.log(data);
-						var jsonData = jQuery.parseJSON(data);
-						console.log(jsonData);
-						var j = 1;
-						var accessorId;
-						$
-								.each(
-										jsonData,
-										function(i, obj) {
-											$('#tblAssessorCourses')
-													.append(
-															'<tr id="tableRow"><td>'
-																	+ j++
-																	+ '</td>'
-																	+ '<td>'
-																	+ obj[3]
-																	+ '</td>'
-																	+ '<td>'
-																	+ obj[4]
-																	+ '</td>'
-																	+ '<td>'
-																	+ obj[5]
-																	+ '</td>'
-																	+ '<td><select name =attendanceRow'+obj[1]+'><option name="present" value ="A">Present</option>'
-																	+ '<option name="absent" value="I">Absent</option></td>'
-																	+ '<td> <button onclick="updateAttendance('
-																	+ obj[0]
-																	+ ','
-																	+ obj[1]
-																	+ ');return false;">Update</button></td>'
-																	+ '</tr>');
-											console.log("0-" + obj[0] + " #1-"
-													+ obj[1] + " #2-" + obj[2]
-													+ " #3-" + obj[3] + " #4-"
-													+ obj[4] + " #5-" + obj[5]);
-											currentAssessorId = obj[0];
-										});
+<script>
 
-					},
-					failure : function(data) {
-						alert("Error occured while retrieving upcoming calendars.");
-						msgbox('Error occured while retrieving upcoming calendars.');
-					}
-				});
-		return result;
-	} */
-	function showDetails() {
+ 	function showDetails() {
 		
 		
 		 	var courseType =  ($("#selCourseType").val() == 0 || $("#selCourseType").val() == null ? "" : $("#selCourseType").val());
@@ -116,7 +32,8 @@
 		});
 		return result;
 	}
-	
+
+
 	function removeTrainer(id){
 			if(confirm("Are You Sure!!")){
 				$.ajax({
@@ -195,7 +112,7 @@
 															</ul>
 														</div>
 														<select class="form-control"
-															onchange="getCourseName(this.value);"
+															onchange="getCourseName(this.value , 'selCourseName');"
 															name="selCourseType" id="selCourseType">
 														</select>
 														<script>
@@ -256,7 +173,7 @@
 															id="selCourseName">
 														</select>
 													</div>
-													 <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails();return false">Show Details</button>
+													 <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails();return false;">Show Details</button>
 												</div>
 												<input type="button" id="btnExport"  style="margin-top:-34px; margin-right: 15px;"  class="btn login-btn pull-right" value="Download" />
 

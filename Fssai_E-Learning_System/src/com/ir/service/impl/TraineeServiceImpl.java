@@ -237,4 +237,22 @@ public class TraineeServiceImpl implements TraineeService {
 	
 	
 
+	@Override
+	@Transactional
+	public List<State> stateList() {
+		// TODO Auto-generated method stub
+		List<State> stateList = traineeDAO.stateList();
+		return stateList;
+	}
+	
+	//getCourseDetails
+	
+	
+	@Override
+	@Transactional
+	public List getCourseDetails(String  data) {
+		// TODO Auto-generated method stub
+		return traineeDAO.getCourseDetails(data);
+	}
+
 }
