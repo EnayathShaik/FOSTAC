@@ -56,4 +56,13 @@ public class CommonServiceImpl implements CommonService{
 		List  assessorName = commonDao.getAssessorName( assessoragencyName);
 		return assessorName;
 	}
+	
+	//getCourseTrainingMode
+	
+	@Override
+	@Transactional
+	public String getCourseTrainingMode(String courseName){
+		String modeOfTraining = commonDao.getCourseTrainingMode(courseName);
+		return modeOfTraining;
+	}
 }
