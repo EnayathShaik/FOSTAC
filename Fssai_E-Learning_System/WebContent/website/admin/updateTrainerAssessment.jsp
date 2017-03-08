@@ -1,6 +1,7 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="website/js/commonController.js"></script>
 <style>
 .error {
 	color: red;
@@ -247,13 +248,8 @@ function saveAssessment(trainerId, trainingPartnerId, courseNameId){
                                                             <li class="style-li error-red"> </li>
                                                         </ul>
                                                     </div>
-<%--                                                     <select class="form-control" onchange="getCourseName(this.value);> --%>
-<!--                                                      	<option value =0> Select course type</option> -->
-<!--                                                         <option value = 1>Basic</option> -->
-<!--                                                         <option value = 2>Advanced</option> -->
-<!--                                                         <option value = 3>Special</option> -->
-<!--                                                     </select> -->
-                                                    <cf:select path="courseType" class="form-control" onchange="getCourseName(this.value);">
+
+                                                    <cf:select path="courseType" class="form-control" onchange="getCourseName(this.value , 'courseName');">
 														<cf:option value="0" label="Select Course Type"></cf:option>
  														<cf:options items="${courseTypeList}" itemValue="CourseTypeId" itemLabel="CourseType"/> 
 													</cf:select>

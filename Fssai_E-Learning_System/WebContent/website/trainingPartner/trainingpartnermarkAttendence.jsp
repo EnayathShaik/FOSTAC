@@ -17,24 +17,6 @@ function OnStart(){
 }
 window.onload = OnStart;
 
-/* 
-function getCourseName(val){
-	 $('#selCourseName option').remove();
-	$.ajax({
-	      type: 'post',
-	      url: 'getCourseName.jspp?'+ val,
-	      success: function (response) {      
-	      var mainData1 = jQuery.parseJSON(response);
-	       $('#selCourseName option').remove();
-	      $('#selCourseName').append('<option value="0" label="--Select Course Code--" />');
-	        $.each(mainData1 , function(i , obj)
-	  		{
-	  				$('#selCourseName').append('<option value='+obj[0]+' >'+obj[1]+'</option>');		
-	  		});
-	      }
-	      });
-}
- */
 </script>
 <script>
 

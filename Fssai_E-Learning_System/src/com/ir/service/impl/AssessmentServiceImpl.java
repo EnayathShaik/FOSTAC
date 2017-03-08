@@ -125,4 +125,42 @@ public class AssessmentServiceImpl implements AssessmentService {
 		List<CourseType> courseTypeList = assessmentDao.courseTypeList();
 		return courseTypeList;
 	}
+	
+	//searchAssessorCalendar
+	
+	@Override
+	@Transactional
+	public List searchAssessorCalendar(String data) {
+		List courseTypeList = assessmentDao.searchAssessorCalendar(data);
+		return courseTypeList;
+	}
+	
+	//viewAssessmentAgencyCalendar
+	
+	
+	@Override
+	@Transactional
+	public List viewAssessmentAgencyCalendar(String data) {
+		List courseTypeList = assessmentDao.viewAssessmentAgencyCalendar(data);
+		return courseTypeList;
+	}
+	
+	//searchAssessorTraineesForResults
+	
+	@Override
+	@Transactional
+	public List searchAssessorTraineesForResults(String data) {
+		List courseTypeList = assessmentDao.searchAssessorTraineesForResults(data);
+		return courseTypeList;
+	}
+	
+	//updateTraineeAssessmentResult
+	
+	@Override
+	@Transactional
+	public String updateTraineeAssessmentResult(String data) {
+		String courseTypeList = assessmentDao.updateTraineeAssessmentResult(data);
+		return courseTypeList;
+	}
+	
 }

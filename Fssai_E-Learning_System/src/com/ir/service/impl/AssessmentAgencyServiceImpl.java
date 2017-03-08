@@ -55,8 +55,8 @@ public class AssessmentAgencyServiceImpl implements AssessmentAgencyService {
 	
 	@Override
 	@Transactional
-	public Map<String , String> assessorNameMap(int agencyId) {
-		Map<String , String>assessorName = assessmentAgencyDao.assessorNameMap(agencyId);
+	public Map<String , String> assessorNameMap(int agencyId , int profileId) {
+		Map<String , String>assessorName = assessmentAgencyDao.assessorNameMap(agencyId , profileId);
 		return assessorName;
 	}
 

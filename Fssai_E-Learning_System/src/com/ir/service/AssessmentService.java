@@ -33,4 +33,12 @@ public interface AssessmentService {
 	
 	
 	public List<CourseType> courseTypeList();
+	
+	public List searchAssessorCalendar(String data);
+	
+	public List viewAssessmentAgencyCalendar(String data);
+	
+	public List searchAssessorTraineesForResults(String data);
+	
+	public String updateTraineeAssessmentResult(String data);
 }

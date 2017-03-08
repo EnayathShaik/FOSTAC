@@ -968,6 +968,7 @@ public class AdminController {
 			@RequestParam Integer courseNameId, @RequestParam Integer tpId,
 			HttpServletRequest request, HttpServletResponse response) {
 		List<TrainerAssessmentSearchForm> listTrainersForAssessmentEval = null;
+		System.out.println("courseNameId "+courseNameId + " tpId "+tpId );
 		String strData = "";
 		try {
 			listTrainersForAssessmentEval = adminService
@@ -1280,6 +1281,69 @@ public class AdminController {
 		String newList = g.toJson(courseList); 
 		System.out.println("newList "+newList);
 		
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	
+	@RequestMapping(value="/traineeAssessmentCalender" , method=RequestMethod.POST)
+	@ResponseBody
+	public void traineeAssessmentCalender(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("traineeAssessmentCalender","traineeAssessmentCalender............" + data  , "AdminController.java");
+		List courseList = adminService.traineeAssessmentCalender(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(courseList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	//getQuestions
+
+	@RequestMapping(value="/getQuestions" , method=RequestMethod.POST)
+	@ResponseBody
+	public void getQuestions(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("traineeAssessmentCalender","traineeAssessmentCalender............" + data  , "AdminController.java");
+		List courseList = adminService.getQuestions(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(courseList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	//searchFeedbackMaster
+	
+	@RequestMapping(value="/searchFeedbackMaster" , method=RequestMethod.POST)
+	@ResponseBody
+	public void searchFeedbackMaster(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("searchFeedbackMaster","searchFeedbackMaster............" + data  , "AdminController.java");
+		List courseList = adminService.searchFeedbackMaster(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(courseList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	//searchAssessmentAgencyList
+	
+	@RequestMapping(value="/searchAssessmentAgencyList" , method=RequestMethod.POST)
+	@ResponseBody
+	public void searchAssessmentAgencyList(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("searchAssessmentAgencyList","searchAssessmentAgencyList............" + data  , "AdminController.java");
+		List courseList = adminService.searchAssessmentAgencyList(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(courseList); 
+		System.out.println("newList "+newList);
 		out.write(newList);
 		out.flush();
 		

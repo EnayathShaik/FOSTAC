@@ -127,11 +127,12 @@ public class AssessmentAgencyController {
 	
 	@RequestMapping(value="/viewAssessmentAgencyCalendar", method=RequestMethod.GET)
 	public String viewAssessmentAgencyCalendar(@Validated @ModelAttribute("viewAssessmentAgencyCalendarForm") viewAssessmentAgencyCalendarForm viewAssessmentAgencyCalendarForm,HttpSession httpSession,Model model){
-		int agencyId = (Integer)httpSession.getAttribute("assessmentId");
+		int agencyId = (Integer)httpSession.getAttribute("loginUserAssessor");
+		int profileId = (Integer)httpSession.getAttribute("profileId");
 		new ZLogger("viewAssessmentAgencyCalendar", "agencyId "+agencyId, "AssessmentAgencyController.java");
 		try{
 
-				Map<String , String> assessorMap = assessmentAgencyService.assessorNameMap(agencyId);
+				Map<String , String> assessorMap = assessmentAgencyService.assessorNameMap(agencyId , profileId);
 				model.addAttribute("assessorName" , assessorMap);
 				return "viewAssessmentAgencyCalendar";
 		
@@ -148,5 +149,7 @@ public class AssessmentAgencyController {
 		List<CourseType> courseTypeList = assessmentAgencyService.courseTypeList();
 		return courseTypeList;
 	}
+	
+	//
 	
 }

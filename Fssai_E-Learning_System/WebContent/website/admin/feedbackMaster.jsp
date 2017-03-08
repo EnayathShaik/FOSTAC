@@ -3,8 +3,6 @@
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
 function OnStart(){
-	//searchTrainingPartnameList();
-	//searchAssessmentAgencyList();
 	onFeedbackMasterSearchClick("ALL");
 }
 window.onload = OnStart;
@@ -80,12 +78,18 @@ function onFeedbackMasterSearchClick(indicator){
 	if(indicator == "ALL"){
 		searchStr = "ALL";
 	}else{
-		searchStr = "courseType="+courseType+"&catogery="+catogery+"&feedback="+feedback+"&status="+status;
+		searchStr = "courseType="+courseType+"-catogery="+catogery+"-feedback="+feedback+"-status="+status;
 	}
 	console.log(" searchStr "+searchStr);
+	var name1=JSON.stringify({
+		courseType:0,
+		courseName:0
+  })
 	$.ajax({
 		type: 'post',
-		url: 'searchFeedbackMaster.jspp?'+searchStr,
+		url: 'searchFeedbackMaster.fssai?data='+searchStr,
+		 contentType : "application/json",
+		 data:name1,
 		async: false, 
 		success: function (data){
 			var feedbackList=jQuery.parseJSON(data);

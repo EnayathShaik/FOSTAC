@@ -2,7 +2,7 @@
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
+<script src="website/js/commonController.js"></script>
 
 <script src="website/js/jquery-1.9.1.js"></script>
  <script type="text/javascript">
@@ -10,7 +10,6 @@ function OnStart(){
 	//searchAssessmentAgencyCalendar();
 	
 	flatpickr("#assessmentDateTime" , {
-		//defaultDate: today, // Date objects and date strings are also accepted
 		enableTime: true
 	});	
 	
@@ -23,51 +22,6 @@ function OnStart(){
 }
 window.onload = OnStart;
 
-/* function getCourseName(val){
-	
-	$.ajax({
-	      type: 'post',
-	      url: 'getCourseName.jspp?'+ val,
-	      success: function (response) {  
-	          
-	      var mainData1 = jQuery.parseJSON(response);
-	       $('#courseName option').remove();
-	      $('#courseName').append('<option value="0" label="Select Course Code" />');
-	        $.each(mainData1 , function(i , obj)
-	  		{
-	  				$('#courseName').append('<option value='+obj[0]+' >'+obj[1]+'</option>');		
-	  		});
-	      }
-	      });
-} */
-
-
-function getCourseName(val) {
-	$('#selCourseName option').remove();
- 	var name=JSON.stringify({
-		courseType:0,
-		courseName:0
-  })
-	$.ajax({
-		type : 'post',
-		url : 'getCourseName.fssai?data='+ val,
-		contentType : "application/json",
-	    data:name,
-		success : function(response) {
-			var mainData1 = jQuery.parseJSON(response);
-			$('#courseName option').remove();
-			$('#courseName').append(
-					'<option value="0" label="--Select Course Name--" />');
-			$.each(mainData1, function(i, obj) {
-				$('#courseName')
-						.append(
-								'<option value='+obj[0]+' >' + obj[1]
-										+ '</option>');
-			});
-		}
-	});
-}
-
 </script> 
 
 <script type="text/javascript">
@@ -79,13 +33,16 @@ function getCourseName(val) {
 		var assessmentDateTime = (($("#assessmentDateTime").val() == 'undefined' || $("#assessmentDateTime").val() == null ) ? "" : $("#assessmentDateTime").val() );
 		var assessmentAgencyName = ($("#assessmentAgency").val()== 0 ||  $("#assessmentAgency").val() == null ? "" : $("#assessmentAgency").val());
 		var assessorName = ($("#assessor").val()== 0 ||  $("#assessor").val() == null ? "" : $("#assessor").val());
-		var total = "courseType="+courseType + "&courseName=" + courseName+"&assessmentDateTime="+assessmentDateTime+"&assessmentAgencyName="+assessmentAgencyName+"&assessorName="+assessorName;
+		var total = "courseType="+courseType + "-courseName=" + courseName+"-assessmentDateTime="+assessmentDateTime+"-assessmentAgencyName="+assessmentAgencyName+"-assessorName="+assessorName;
+		var name1=JSON.stringify({
+			courseType:0,
+			courseName:0
+	  })
 		$.ajax({
 			type : 'post',
-			data : {
-				agencyId : agencyId
-			},
-			url : 'viewAssessmentAgencyCalendar.jspp?'+total,
+			url : 'viewAssessmentAgencyCalendar.fssai?data='+total,
+			 contentType : "application/json",
+			  data:name1,
 			async : false,
 			success : function(data) {
 				$('#tblAACalendar').show();
@@ -165,7 +122,7 @@ function getCourseName(val) {
 														</ul>
 													</div>
 													<cf:select path="courseType" class="form-control"
-														onchange="getCourseName(this.value);">
+														onchange="getCourseName(this.value, 'courseName');">
 														<cf:option value="0" label="Select Course Type" />
 														<cf:options items="${courseTypeList}"
 															itemValue="CourseTypeId" itemLabel="CourseType" />

@@ -14,5 +14,5 @@ public interface AssessmentAgencyDao {
 	public boolean changePasswordData(ChangePasswordForm changePasswordForm, String id);
 	public AssessmentAgencyForm getAssessmentAgencyForm(int agencyId);
 	public List<CourseType> courseTypeList();
-	public Map<String , String> assessorNameMap(int agencyId);
+	public Map<String , String> assessorNameMap(int agencyId , int profileId);
 }

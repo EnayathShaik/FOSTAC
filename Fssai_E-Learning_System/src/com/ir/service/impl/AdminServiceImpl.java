@@ -398,4 +398,40 @@ public class AdminServiceImpl implements AdminService {
 		return courseData;
 	}
 	
+	//traineeAssessmentCalender
+	
+	@Override
+	@Transactional
+	public List traineeAssessmentCalender(String data){
+		List courseData = adminDAO.traineeAssessmentCalender(data);
+		return courseData;
+	}
+	
+	//getQuestions
+	@Override
+	@Transactional
+	public List getQuestions(String data){
+		List courseData = adminDAO.getQuestions(data);
+		return courseData;
+	}
+	
+	//searchFeedbackMaster
+
+	@Override
+	@Transactional
+	public List searchFeedbackMaster(String data){
+		List courseData = adminDAO.searchFeedbackMaster(data);
+		return courseData;
+	}
+	
+	//searchAssessmentAgencyList
+	
+	
+	@Override
+	@Transactional
+	public List searchAssessmentAgencyList(String data){
+		List courseData = adminDAO.searchAssessmentAgencyList(data);
+		return courseData;
+	}
+	
 }

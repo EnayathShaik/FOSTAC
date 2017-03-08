@@ -124,4 +124,8 @@ public interface AdminDAO {
 		public List searchCity(String data);
 		public List onLoadRegion(String data);
 		public String editRegionData(String data);
+		public List traineeAssessmentCalender(String data);
+		public List getQuestions(String data);
+		public List searchFeedbackMaster(String data);
+		public List searchAssessmentAgencyList(String data);
 }

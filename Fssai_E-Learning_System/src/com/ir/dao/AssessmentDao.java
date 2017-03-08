@@ -18,5 +18,8 @@ public interface AssessmentDao {
 	public int saveTraineeAssessmentEvaluation(TraineeAssessmentEvaluation traineeAssessmentEvaluation);
 	public int getElegibilityForAssessment(int coursetypeid);
 	public List<CourseType> courseTypeList();
-
+	public List searchAssessorCalendar(String data);
+	public List viewAssessmentAgencyCalendar(String data);
+	public List searchAssessorTraineesForResults(String data);
+	public String updateTraineeAssessmentResult(String data);
 }

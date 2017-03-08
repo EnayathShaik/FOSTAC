@@ -1,6 +1,7 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="website/js/commonController.js"></script>
 <script>
 function saveAssesmentCalender(i,courseType,courseName,trainer,traininingCalandar){
 	var assessor =  $('#assRow'+traininingCalandar).val();
@@ -35,28 +36,12 @@ function saveAssesmentCalender(i,courseType,courseName,trainer,traininingCalanda
 	
 }
 
-function getCourseName(val){
-	 $('#selCourseName option').remove();
-	$.ajax({
-	      type: 'post',
-	      url: 'getCourseName.jspp?'+ val,
-	      success: function (response) {      
-	      var mainData1 = jQuery.parseJSON(response);
-	       $('#selCourseName option').remove();
-	      $('#selCourseName').append('<option value="0" label="--Select Course Code--" />');
-	        $.each(mainData1 , function(i , obj)
-	  		{
-	  				$('#selCourseName').append('<option value='+obj[0]+' >'+obj[1]+'</option>');		
-	  		});
-	      }
-	      });
-}
 
 </script>
 <script>
-function showDetails(){
+/* function showDetails(){
 	alert("Fetching details to mark attendance..");
-	
+	alert('hiee');
 	$('#tblAssessorCourses tr').remove();
 	$('#tblAssessorCourses').append('<thead>'+
     '<tr class="background-open-vacancies">'+
@@ -105,32 +90,30 @@ function showDetails(){
 	});
 return result;	
 }
-
+ */
+ 
 function showDetails(){
-	 
-	 	var courseType =  $("#selCourseType").val();
-		var courseName =  $("#selCourseName").val();
-		var TrainerNames =  $("#selTrainerNames").val(); 
-		var assesmentDate = $('#assessmentDate').val();
-		var assesmentTime = $('#assessmentTime').val();
-		
-		/* alert("courseType" + courseType);
-		alert("courseName" + courseName);
-		alert("TrainerNames" + TrainerNames);
-		alert("assesmentDate" + assesmentDate);
-		alert("assesmentTime" + assesmentTime); */
-		
+	 	var courseType =  ($("#selCourseType").val()==null ? "" : $("#selCourseType").val());
+		var courseName =  ($("#selCourseName").val() == null ? "" : $("#selCourseName").val());
+		var TrainerNames = ( $("#selTrainerNames").val() == null ? "" :$("#selTrainerNames").val() ); 
+		var assesmentDate = ($('#assessmentDate').val() == null ? "" :$('#assessmentDate').val() );
+		var assesmentTime = ($('#assessmentTime').val() == null ? "" : $('#assessmentTime').val());
+	
 		$(".displayNone").css("display","block");
-		//var total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy;
+		var total = "courseType="+courseType+"&-courseName="+courseName+"-trainingDate="+trainingDate+"-requiredExp="+requiredExp+"-noOfVacancy="+noOfVacancy;
 		var total = "";
 		var result="";
+		var name1=JSON.stringify({
+			courseType:0
+	  })
 			$.ajax({
 			type: 'post',
-			url: 'traineeAssessmentCalender.jspp?'+ total,
+			url: 'traineeAssessmentCalender.fssai?data='+ total,
+			 contentType : "application/json",
+			 data:name1,
 			async: false, 
 			success: function (data){
 			$('#newTable').show();
-			//var mainData = JSON.stringify(data);
 			var mainData1 = jQuery.parseJSON(data);
 			var j=1;
 			$('#newTable tr').remove();
@@ -176,7 +159,7 @@ function showDetails(){
                             <div class="row">
                                 <div class="col-lg-12">
                                     <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle">
-                                        <i class="fa fa-bars"></i> <span class="orange-font">Welcome</span>
+                                        <i class="fa fa-bars"></i> <span class="orange-font">Welcome ${userName }</span>
                                     </a>
                                 </div>
                             </div>
@@ -210,7 +193,7 @@ function showDetails(){
                                                                 
                                                             </ul>
                                                         </div>
-                                                        <select class="form-control"  onchange="getCourseName(this.value);"  name="selCourseType" id = "selCourseType"> </select>
+                                                        <select class="form-control"  onchange="getCourseName(this.value , 'selCourseName');"  name="selCourseType" id = "selCourseType"> </select>
 														<script>
 															var selectctpeOptions = "<option disabled selected value> -- select courseType -- </option>";
 															for(var i=0 ; i < courseTypes.length; i++)

@@ -1,5 +1,6 @@
 <script src="website/js/jquery-1.9.1.js"></script>
 <script type="text/javascript">
+
     function OnStart() {
         currentAssessorId = -1;
         searchUpcomingTrainings();
@@ -11,21 +12,24 @@
         $('#tblUpcomingAssessments tr').remove();
         $('#tblUpcomingAssessments').append('<thead> <tr class="background-open-vacancies"> <th>S.No</th> <th>Batch Code</th><th>Assessment Date</th><th>Course Code</th> <th>Training Start Date</th> <th>Training Course Address</th> <th>No. Of Participants</th></tr> </thead>');
         var result = "";
-        //var id = document.getElementById("assessmentAgencyId").value;
         var assessorId = ${loginUserAssessor};
+    	var name1=JSON.stringify({
+    		courseType:0,
+    		courseName:0
+      })
         $.ajax({
             type: 'post',
-            url: 'searchAssessorCalendar.jspp?' + assessorId,
+            url: 'searchAssessorCalendar.fssai?data=' + assessorId,
+            contentType : "application/json",
+   		 	data:name1,
             async: false,
             success: function(data) {
                 console.log("Data received..");
                 console.log(data);
-                //var mainData = JSON.stringify(data);
                 var jsonData = jQuery.parseJSON(data);
                 console.log(jsonData);
                 var j = 1;
                 var accessorId;
-                // 	$('#tblUpcomingAssessments').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Assessment Agency Name</th><th>Assessor Name</th><th>Assessor Id</th><th>Active / In-Active</th><th>Detail</th></tr>')
                 $.each(jsonData, function(i, obj) {
                     $('#tblUpcomingAssessments').append('<tr id="tableRow"><td>' + j++ + '</td>' +
                     		'<td>' + obj[4] + '</td>' +

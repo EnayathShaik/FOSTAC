@@ -11,11 +11,15 @@
             <script type="text/javascript">
                 function searchAssessmentAgencyList() {
                     document.getElementById("detailListOfAssessor").style.display = 'none';
-                    //document.getElementById("conclusionListOfAssessment").style.display ='block';
+                	var name1=JSON.stringify({
+                		courseName:0
+                  })
                     var result = "";
                     $.ajax({
                         type: 'post',
-                        url: 'searchAssessmentAgencyList.jspp?',
+                        url: 'searchAssessmentAgencyList.fssai?data=',
+                        contentType : "application/json",
+              		  	data:name1,
                         async: false,
                         success: function(data) {
                             $('#newTable').show();

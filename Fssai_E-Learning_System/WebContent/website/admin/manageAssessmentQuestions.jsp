@@ -1,7 +1,7 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<script src="website/js/commonController.js"></script>
 
 <script>
 function OnStart(){
@@ -21,15 +21,19 @@ window.onload = OnStart;
 function getQuestions(){
 	var courseTypeSearch =  $("#courseTypeSearch").val();
 	var courseNameSearch =  $("#courseNameSearch").val();
-	var total = "courseNameSearch="+courseNameSearch+"&courseTypeSearch="+courseTypeSearch;
+	var total = "courseNameSearch="+courseNameSearch+"-courseTypeSearch="+courseTypeSearch;
 	var result="";
+	var name1=JSON.stringify({
+		courseType:0
+  })
 	$.ajax({
 	type: 'post',
-	url: 'getQuestions.jspp?'+ total,
+	url: 'getQuestions.fssai?data='+ total,
+	 contentType : "application/json",
+	 data:name1,
 	async: false, 
 	success: function (data){
 	$('#newTable').show();
-	//var mainData = JSON.stringify(data);
 	var mainData1 = jQuery.parseJSON(data);
 	var j=1;
 	$('#newTable tr').remove();
@@ -52,7 +56,6 @@ function editAssessmentQuestion(id){
 	url: 'getSingleAssessmentQuestions.jspp?'+ id,
 	async: false, 
 	success: function (data){
-	//var mainData = JSON.stringify(data);
 	var mainData1 = jQuery.parseJSON(data);
 	$.each(mainData1 , function(i , obj)
 	{
@@ -92,38 +95,7 @@ function editAssessmentQuestion(id){
 }
 
 
-function searchCourse(val)
-{
-	$.ajax({
-	      type: 'post',
-	      url: 'searchCourse.jspp?'+ val,
-	      success: function (response) {      
-	      var mainData1 = jQuery.parseJSON(response);
-	      $('#courseName option').remove();
-	      $('#courseName').append('<option value="0" label="Select Course Code" />');
-	      $.each(mainData1 , function(i , obj)
-	  		{
-	  				$('#courseName').append('<option value='+obj[0]+' >'+obj[1]+'</option>');		
-	  		});
-	      }
-	      });     
-}
-function searchCourse1(val)
-{
-	$.ajax({
-	      type: 'post',
-	      url: 'searchCourse.jspp?'+ val,
-	      success: function (response) {      
-	      var mainData1 = jQuery.parseJSON(response);
-	      $('#courseNameSearch option').remove();
-	      $('#courseNameSearch').append('<option value="0" label="Select Course Code" />');
-	      $.each(mainData1 , function(i , obj)
-	  		{
-	  				$('#courseNameSearch').append('<option value='+obj[0]+'  >'+obj[1]+'</option>');		
-	  		});
-	      }
-	      });     
-}
+
 </script>
 <cf:form   action="manageAssessmentQuestionsSave.fssai" name="myForm" method="POST" commandName="assessmentQuestionForm" onsubmit="return validateFields();"> 
 <script>
@@ -173,7 +145,7 @@ function searchCourse1(val)
                         <!-- vertical button -->
                         <div class="row">
                             <div class="col-lg-12">
-                                <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome Trainee Mr. Lorem </span> </a>
+                                <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome ${userName} </span> </a>
                             </div>
                         </div>
                         <!-- add the content here for main body -->
@@ -195,7 +167,7 @@ function searchCourse1(val)
                                                             <li class="style-li error-red"> </li>
                                                         </ul>
                                                     </div>
-                                                   <cf:select path="courseTypeSearch" class="form-control" onchange="searchCourse1(this.value);">
+                                                   <cf:select path="courseTypeSearch" class="form-control" onchange="getCourseName(this.value , 'courseNameSearch');">
 														<cf:option value="0" label="Select Course Type" />
 														<cf:options items="${courseTypeList}" itemValue="CourseTypeId" itemLabel="CourseType" />
                                                       </cf:select>
@@ -293,7 +265,7 @@ function searchCourse1(val)
                                                                  </li>
                                                             </ul>
                                                         </div>
-                                                      <cf:select path="courseTypeId" class="form-control" onchange="searchCourse(this.value);">
+                                                      <cf:select path="courseTypeId" class="form-control" onchange="getCourseName(this.value , 'courseName');">
 														<cf:option value="0" label="Select Course Type" />
 														<cf:options items="${courseTypeList}" itemValue="CourseTypeId" itemLabel="CourseType" />
                                                       </cf:select>

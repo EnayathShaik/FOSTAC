@@ -1438,5 +1438,168 @@ public class AdminDAOImpl implements AdminDAO {
 
 		}
 
+		//traineeAssessmentCalender
+		
+		@Override
+		public List traineeAssessmentCalender(String data){
+			String [] n1 = data.split("&");
+			System.out.println("n1 "+n1);
+			String courseType,courseName , trainerName, assDate , assTime ;
+			try{
+				courseType = n1[0].split("=")[1];
+			}
+			catch(Exception e){
+				courseType = "%";	
+			}
+			
+			try{
+				courseName = n1[1].split("=")[1];	
+			}catch(Exception e){
+				courseName = "%";	
+			}
+			
+			try{
+				trainerName = n1[2].split("=")[1];	
+			}catch(Exception e){
+				trainerName = "%";	
+			}
+			
+			
+			try{
+				assDate = n1[3].split("=")[1];	
+			}catch(Exception e){
+				assDate = "%";	
+			}
+			
+			try{
+				assTime = n1[4].split("=")[1];	
+			}catch(Exception e){
+				assTime = "%";	
+			}
+			
+			Session session =  sessionFactory.getCurrentSession();
+			String sql = "select B.coursetype,C.coursename,A.trainername,A.assessmentdate,A.assessmenttime,D.firstname || D.middlename || D.lastname,A.trainingcalendarid,A.assessor  from trainingcalendar A  " +
+					" inner join coursetype B on(A.coursetype=B.coursetypeid)  " +
+					"inner join coursename C on(A.coursename=C.coursenameid)"+
+					"inner join personalinformationtrainer D on(CAST(CAST (A.trainername AS NUMERIC(19,4)) AS INT)=D.personalinformationtrainerid)" +
+					" where  cast(B.coursetypeid as varchar(10)) like '"+courseType+"%'  and cast(C.coursenameid as varchar(10)) like  '"+courseName+"%' and (D.firstname || ' '|| D.middlename ||' '|| D.lastname)  like  '"+trainerName+"%'  and  cast(A.assessmentdate as varchar(10)) like  '"+assDate+"%'  and cast(assessmenttime as varchar(10)) like '"+assTime+"%'  " ;
+			
+
+			Query query = session.createSQLQuery(sql);
+			List list = query.list();
+			System.out.println(list.size());
+				return list;
+		}
+		
+		//getQuestions
+
+		@Override
+		public List getQuestions(String data){
+			String[] totalConnected = data.split("-");
+			
+			int  courseNameSearch = Integer.parseInt((totalConnected[0].split("="))[1]);
+			int  courseTypeSearch = Integer.parseInt((totalConnected[1].split("="))[1]);
+			
+			String courseNameSearch1 , courseTypeSearch1;
+			if(courseNameSearch == 0){
+				courseNameSearch1 ="%";
+			}else{
+				courseNameSearch1 = (totalConnected[0].split("="))[1];
+			}
+			
+			if(courseTypeSearch == 0){
+				courseTypeSearch1 ="%";
+			}else{
+				courseTypeSearch1 = (totalConnected[0].split("="))[1];
+			}
+			
+			
+			System.out.println("contentLocationInput  "+courseNameSearch + "  "+ courseNameSearch1);
+			System.out.println("courseTypeInput   "+courseTypeSearch + "  "+ courseTypeSearch1);
+			StringBuffer wherebuffer = new StringBuffer();
+			wherebuffer.append(" WHERE 1=1 ");
+			if(courseTypeSearch > 0){
+				wherebuffer.append(" AND ct.coursetypeid="+courseTypeSearch);
+			}
+			if(courseNameSearch > 0){
+				wherebuffer.append(" AND cn.coursenameid="+courseNameSearch);
+			}
+			
+			Session session =  sessionFactory.getCurrentSession();
+			String sql = "select ct.coursetype , cn.coursename , aq.questionnumber, aq.assessmentquestionid, cn.coursecode   from assessmentquestion as aq "+
+					" inner join coursetype as ct on ct.coursetypeid = aq.coursetype"+
+					" inner join coursename as cn on cn.coursenameid = aq.coursename";
+		sql = sql + wherebuffer.toString();
+			Query query = session.createSQLQuery(sql);
+			List list = query.list();
+			System.out.println(list.size());
+				return list;
+		}
+		
+		//searchFeedbackMaster
+		
+		@Override
+		public List searchFeedbackMaster(String data){
+			String courseType ="" , catagory ="", feedback = "" , status = "";
+			if(!data.equalsIgnoreCase("ALL")){
+				
+				 String [] n1 = data.split("-");
+					
+					
+					try{
+						courseType = (n1[0].split("="))[1];
+					}catch(Exception e){
+						courseType = "%";
+					}
+					
+					try{
+						catagory = n1[1].split("=")[1];
+						
+					}catch(Exception e){
+						catagory ="%";
+					}
+					
+					try{
+						feedback = (n1[2].split("="))[1];
+					}catch(Exception e){
+						feedback = "%";
+					}
+					
+					 status = (n1[3].split("="))[1] ;
+			}
+		
+			String sql= null;
+			Session session =  sessionFactory.getCurrentSession();
+			if(data.equalsIgnoreCase("ALL"))
+				sql = "select feedbacktypeid,coursetype,catogery,feedback,status from feedbackmaster";
+				else
+				sql = "select feedbacktypeid,coursetype,catogery,feedback,status from feedbackmaster"+
+				" where cast (coursetype as varchar(20)) like '"+courseType+"%' and cast(catogery as varchar(20)) like  '"+catagory+"%' and cast(feedback as varchar(20)) like '"+feedback+"%' and cast(status as varchar(10)) like '"+status+"%'";
+			Query query = session.createSQLQuery(sql);
+			List list = query.list();
+			System.out.println(list.size());
+				return list;
+		}
+		
+
+		//searchAssessmentAgencyList
+		@Override
+		public List searchAssessmentAgencyList(String data){
+			Session session =  sessionFactory.getCurrentSession();
+			
+				String sql = "select maa.manageassessmentagencyid ,  maa.assessmentagencyname , "+
+						" count(pia.assessmentagencyname) from personalinformationassessor as pia "+
+" inner join manageassessmentagency as maa on pia.assessmentagencyname = maa.manageassessmentagencyid  "+
+" inner join logindetails as ld on pia.logindetails = ld.id where ld.status='I' "+
+" group by maa.assessmentagencyname , maa.manageassessmentagencyid ";
+			Query query = session.createSQLQuery(sql);
+			List list = query.list();
+			System.out.println(list.size());
+				return list;
+		}
+		
+		
 		
 }
+
+

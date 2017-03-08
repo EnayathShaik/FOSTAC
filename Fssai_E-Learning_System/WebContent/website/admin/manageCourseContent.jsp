@@ -1,6 +1,7 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="website/js/commonController.js"></script>
 <script type='text/javascript'>
 function OnStart(){
 	searchManageCourseContent('ALL');
@@ -298,7 +299,7 @@ function deleteCourseContent(i){
                                                         </ul>
                                                     </div>
 
-<cf:select path="courseType" class="form-control" onchange="getContentName(this.value);">
+<cf:select path="courseType" class="form-control" onchange="getCourseName(this.value , 'courseName');">
 <cf:option value="0" label="Select Content Type" />
 <cf:options items="${courseTypeList}" itemValue="CourseTypeId" itemLabel="CourseType"/>
 </cf:select>

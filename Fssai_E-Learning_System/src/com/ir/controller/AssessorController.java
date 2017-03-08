@@ -1,8 +1,12 @@
 package com.ir.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -12,12 +16,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.ir.bean.common.IntStringBean;
 import com.ir.form.ContactTrainee;
+import com.ir.form.GenerateCourseCertificateForm;
 import com.ir.model.CourseType;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.assessor.MarkAttendanceForm;
@@ -129,4 +137,69 @@ public class AssessorController {
 		List<CourseType> courseTypeList = assessmentService.courseTypeList();
 		return courseTypeList;
 	}
+	
+	//searchAssessorCalendar
+	
+
+	@RequestMapping(value="/searchAssessorCalendar" , method=RequestMethod.POST)
+	@ResponseBody
+	public void searchAssessorCalendar(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("searchAssessmentAgencyList","searchAssessmentAgencyList............" + data  , "AdminController.java");
+		List courseList = assessmentService.searchAssessorCalendar(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(courseList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	//viewAssessmentAgencyCalendar
+	
+	
+	@RequestMapping(value="/viewAssessmentAgencyCalendar" , method=RequestMethod.POST)
+	@ResponseBody
+	public void viewAssessmentAgencyCalendar(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("viewAssessmentAgencyCalendar","viewAssessmentAgencyCalendar............" + data  , "AdminController.java");
+		List courseList = assessmentService.viewAssessmentAgencyCalendar(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(courseList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	
+	@RequestMapping(value="/searchAssessorTraineesForResults" , method=RequestMethod.POST)
+	@ResponseBody
+	public void searchAssessorTraineesForResults(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("searchAssessorTraineesForResults","searchAssessorTraineesForResults............" + data  , "AdminController.java");
+		List courseList = assessmentService.searchAssessorTraineesForResults(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(courseList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	@RequestMapping(value="/updateTraineeAssessmentResult" , method=RequestMethod.POST)
+	@ResponseBody
+	public void updateTraineeAssessmentResult(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("updateTraineeAssessmentResult","updateTraineeAssessmentResult............" + data  , "AdminController.java");
+		String courseList = assessmentService.updateTraineeAssessmentResult(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(courseList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	
 }

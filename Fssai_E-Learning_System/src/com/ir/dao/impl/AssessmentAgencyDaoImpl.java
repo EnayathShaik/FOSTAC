@@ -95,10 +95,16 @@ public class AssessmentAgencyDaoImpl implements AssessmentAgencyDao {
 	
 	
 	@Override
-	public Map<String , String> assessorNameMap(int agencyId) {
+	public Map<String , String> assessorNameMap(int agencyId , int profileId) {
 		HashMap<String , String> assessor = new HashMap<String , String>();
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createSQLQuery("select personalinformationassessorid , (firstname || ' '|| middlename || ' ' || lastname) from personalinformationassessor where assessmentagencyname= '"+agencyId+"'");
+		Query query = null ;
+		if(profileId == 6){
+			 query = session.createSQLQuery("select personalinformationassessorid , (firstname || ' '|| middlename || ' ' || lastname) from personalinformationassessor where personalinformationassessorid= '"+agencyId+"'");
+		}else{
+			 query = session.createSQLQuery("select manageassessmentagencyid , assessmentagencyname from manageAssessmentAgency where manageassessmentagencyid= '"+agencyId+"'");	
+		}
+		
 		
 		List<Object[]> assessorList = query.list();
 		

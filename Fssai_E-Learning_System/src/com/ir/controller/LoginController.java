@@ -208,6 +208,10 @@ public class LoginController {
 				session.setAttribute("profileId", loginDetails.getProfileId());
 				session.setAttribute("userId", loginDetails.getId());
 				session.setAttribute("userName", loginDetails.getLoginId());
+				session.setAttribute("assessmentId", personalInformationAssessor.getAssessmentAgencyName().getManageAssessmentAgencyId());
+				
+				session.setAttribute("agencyName", personalInformationAssessor.getAssessmentAgencyName().getAssessmentAgencyName());
+				System.out.println( personalInformationAssessor.getAssessmentAgencyName().getManageAssessmentAgencyId() + " "+personalInformationAssessor.getAssessmentAgencyName().getAssessmentAgencyName());
 				return "AssessorPage";
 			}else{
 				model.addAttribute("error" , "Oops , you are not authorized !!!");
@@ -227,7 +231,8 @@ public class LoginController {
 			new ZLogger("loginProcess","in assessment agency", "LoginController.java");
 			ManageAssessmentAgency manageAssessmentAgency = new ManageAssessmentAgency();
 			manageAssessmentAgency = loginService.FullDetailAssessmentAgency(loginDetails.getId());
-			new ZLogger("loginProcess","in assessment Agency Homepage", "LoginController.java");
+			session.setAttribute("loginUserAssessor", manageAssessmentAgency.getManageAssessmentAgencyId());
+			new ZLogger("loginProcess","in assessment Agency Homepage "+manageAssessmentAgency.getManageAssessmentAgencyId(), "LoginController.java");
 			session.setAttribute("logId", manageAssessmentAgency.getLoginDetails().getLoginId());
 			session.setAttribute("logerClass","ManageAssessmentAgency");
 			session.setAttribute("loginIdUnique", loginDetails.getId());

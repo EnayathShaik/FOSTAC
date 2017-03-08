@@ -153,6 +153,14 @@ public interface AdminService {
 	List onLoadRegion(String data);
 	
 	String editRegionData(String data);
+	
+	List traineeAssessmentCalender(String data);
+	
+	List getQuestions(String data);
+	
+	List searchFeedbackMaster(String data);
+	
+	List searchAssessmentAgencyList(String data);
 
 	
 }

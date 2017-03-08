@@ -19,6 +19,6 @@ public interface AssessmentAgencyService {
 	public List<CourseType> courseTypeList();
 	
 	
-	public Map<String , String> assessorNameMap(int AssessmentAgency);
+	public Map<String , String> assessorNameMap(int AssessmentAgency , int profileId);
 
 }

@@ -34,10 +34,16 @@ function showDetails(){
 	var courseName =  ($("#selCourseType").val() == 0 || $("#selCourseType").val() == null ? "" : $("#selCourseType").val());
 	var selTrainingCenters =  ($("#selTrainingCenters").val() == 0 || $("#selTrainingCenters").val() == null ? "" : $("#selTrainingCenters").val());
 	var trainingDate = (($("#trainingDate").val() == 'undefined' || $("#trainingDate").val() == null ) ? "" : $("#trainingDate").val() );
-	var total =  "courseName=" + courseName+ "&selTrainingCenters=" + selTrainingCenters+"&trainingDate="+trainingDate;
+	var total =  "courseName=" + courseName+ "-selTrainingCenters=" + selTrainingCenters+"-trainingDate="+trainingDate;
+ 	var name1=JSON.stringify({
+		courseType:0,
+		courseName:0
+  })
 	$.ajax({
 	type: 'post',
-	url: 'searchAssessorTraineesForResults.jspp?'+total,
+	url: 'searchAssessorTraineesForResults.fssai?data='+total,
+	 contentType : "application/json",
+	  data:name1,
 	async: false, 
 	success: function (data){
 		console.log("Data received..");
@@ -103,13 +109,16 @@ function updateTraineeAssessmentResult(courseEnrolledid , status){
 	
 	var status = $("#"+courseEnrolledid).val();
 	var comment = $("#comments"+courseEnrolledid).val();
-	var total =  "courseenrolledId="+courseEnrolledid+"&status="+status+"&comment="+comment ;
+	var total =  "courseenrolledId="+courseEnrolledid+"-status="+status+"-comment="+comment ;
+	var name1=JSON.stringify({
+		courseType:0,
+		courseName:0
+  })
 	$.ajax({
 		type: 'post',
-		url: 'updateTraineeAssessmentResult.jspp?'+ total,
-		data: {
-		       user_name:name,
-		      },
+		url: 'updateTraineeAssessmentResult.fssai?data='+ total,
+	    contentType : "application/json",
+		  data:name1,
 		      success: function (response) {
 		    	  alert('Result Updated.')
 		       $( '#name_status' ).html(response);
