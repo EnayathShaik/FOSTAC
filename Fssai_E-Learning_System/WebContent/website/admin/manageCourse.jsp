@@ -69,11 +69,18 @@ function searchManageCourse(indicator){
 		if(indicator.match('ALL')){
 			total = "ALL";//"contentLocation=0&courseType=0&courseName=&modeOfTraining=&contentType=0";
 		}else{
-		total = "courseType="+courseType+"&courseName="+courseName+"&freePaid="+freePaid+"&status="+status+"&duration="+duration;
+		total = "courseType="+courseType+"-courseName="+courseName+"-freePaid="+freePaid+"-status="+status+"-duration="+duration;
 		}
+		
+		var name1=JSON.stringify({
+			courseType:0,
+			courseName:0
+	  })
 		$.ajax({
 		type: 'post',
-		url: 'searchManageCourse.jspp?'+ total,
+		url: 'searchManageCourse.fssai?data='+ total,
+		contentType : "application/json",
+		 data:name1,
 		async: false, 
 		success: function (data){
 		$('#newTable').show();
@@ -147,31 +154,33 @@ function editManageCourse(i,courseType){
 <script>
 function editManageCourseData(){
 	$('.error-red').html('');
-	var courseType = $("#hiddenCourseType").val(); 
-	var courseName = $("#courseName").val();
-	var duration = $("#duration").val();
-	var classroom =  $("#classroom").prop("checked");
-	var online =  $("#online").prop("checked");
+	var courseType = ($("#hiddenCourseType").val() == null ? "" : $("#hiddenCourseType").val()); 
+	var courseName = ($("#courseName").val() == null ? "" : $("#courseName").val());
+	var duration = ($("#duration").val() == null ? "" : $("#duration").val());
+	var classroom =  ($("#classroom").prop("checked") == null ? "" : $("#classroom").prop("checked") );
+	var online = ( $("#online").prop("checked") == null ? "" : $("#online").prop("checked"));
 	console.log("online "+online);
-	var status = $("#status").val();
-	var freePaid = $("#freePaid").val();
-	var idHidden =  $("#idHidden").val();
+	var status = ($("#status").val()== null ? "" : $("#status").val() );
+	var freePaid = ($("#freePaid").val() == null ? "" : $("#freePaid").val());
+	var idHidden =  ($("#idHidden").val() == null ? "" : $("#idHidden").val());
 	document.getElementById('btnUpdate').style.display = 'none';
 	document.getElementById('btnCreate').style.display = 'block';
 	$(".displayNone").css("display","block");
 	 
 		var result="";
-		var total = "freePaid="+freePaid+"&courseName="+courseName+"&online="+online+"&status="+status+"&duration="+duration+"&id="+idHidden+"&classroom="+classroom;
+		var total = "freePaid="+freePaid+"-courseName="+courseName+"-online="+online+"-status="+status+"-duration="+duration+"-id="+idHidden+"-classroom="+classroom;
 		console.log("total "+total);
-		alert(idHidden);
+	//	alert(idHidden);
 		$('#newTable').hide();
-		
+		var name1=JSON.stringify({
+			courseType:0,
+			courseName:0
+	  })
 	 	$.ajax({
 		type: 'post',
-		url: 'editManageCourseData.jspp?'+ total,
-		data: {
-		       user_name:name,
-		      },
+		url: 'editManageCourseData.fssai?data='+ total,
+		 contentType : "application/json",
+		  data:name1,
 		      success: function (response) {
 		       $( '#name_status' ).html(response);
 		      }
@@ -338,7 +347,7 @@ function deleteManageCourse(){
                                                     <button id="btnCreate" class="btn login-btn">Create</button>
                                               
                                                 
-<a href="#" onclick="editManageCourseData();" id="btnUpdate" style="display: none; padding: 6px 7px; width: 20%; margin-bottom: 0; font-size: 14px; 
+<a href="#" onclick="editManageCourseData();return false;" id="btnUpdate" style="display: none; padding: 6px 7px; width: 20%; margin-bottom: 0; font-size: 14px; 
 font-weight: normal; line-height: 1.42857143; text-align: center; white-space: nowrap; vertical-align: middle;
  -ms-touch-action: manipulation; touch-action: manipulation; cursor: pointer; -webkit-user-select: none; 
  -moz-user-select: none; -ms-user-select: none; user-select: none; background-image: none; border: 1px solid transparent;

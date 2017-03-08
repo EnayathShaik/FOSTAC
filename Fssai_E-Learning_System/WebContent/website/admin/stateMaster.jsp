@@ -22,16 +22,17 @@
 
                     document.getElementById('btnUpdate').style.display = 'block';
                     document.getElementById('btnCreate').style.display = 'none';
-                    var total = "id=" + idHidden + "&status=" + status + "&state=" + state;
-                    // alert(total);
-                    //$('#newTable').hide();
-                    //alert(total);
+                    var total = "id=" + idHidden + "-status=" + status + "-state=" + state;
+                 	var name1=JSON.stringify({
+                		courseType:0,
+                		courseName:0
+                  })
                     $.ajax({
                         type: 'post',
-                        url: 'deleteState.jspp?' + total,
-                        data: {
-                            user_name: name,
-                        },
+                        url: 'editState.fssai?data=' + total,
+                        contentType : "application/json",
+              		 	 data:name1,
+                       
                         success: function(response) {
                             $('#name_status').html(response);
                         }
@@ -44,13 +45,15 @@
                 function checkState() {
                     var name = document.getElementById("stateName").value;
                     if (name) {
-                        $
-                            .ajax({
+                    	var name1=JSON.stringify({
+                    		courseType:0,
+                    		courseName:0
+                      })
+                        $.ajax({
                                 type: 'post',
-                                url: 'CheckState.jspp?' + name,
-                                data: {
-                                    user_name: name,
-                                },
+                                url: 'CheckState.fssai?data=' + name,
+                                contentType : "application/json",
+                     		 	 data:name1,
                                 success: function(response) {
                                     $('#name_status').html(response);
                                     if (response == "Already") {
@@ -93,34 +96,6 @@
 
             </script>
             <script>
-                function deleteState1(i) {
-                    var idHidden = $("#idLabel'" + i + "'").val();
-                    var status = $("#statusLabel").val();
-                    var state = $("#stateLabel").val();
-                    //alert(idHidden + "  "+ status + "   "+ state);
-                    document.getElementById('btnUpdate').style.display = 'none';
-                    document.getElementById('btnCreate').style.display = 'block';
-                    $(".displayNone").css("display", "block");
-                    var total = "id=" + idHidden + "&status=" + status + "";
-                    $('#newTable').show();
-                    //alert(total);
-                    $.ajax({
-                        type: 'post',
-                        url: 'deleteState1.jspp?' + total,
-                        data: {
-                            user_name: name,
-                        },
-                        success: function(response) {
-                            $('#name_status').html(response);
-                        }
-                    });
-                    //alert (result);
-
-                    return true;
-                }
-
-            </script>
-            <script>
                 function searchState(indicator) {
 
                     $('.displayNone').css('display', 'block');
@@ -130,18 +105,23 @@
                         var result = "";
                         var total = "";
                         if (indicator.match('ALL')) {
-                            total = "stateName=&status=" + status;
+                            total = "stateName=-status=" + status;
                         } else {
-                            total = "stateName=" + stateName + "&status=" + status;
+                            total = "stateName=" + stateName + "-status=" + status;
                         }
+                        var name1=JSON.stringify({
+                    		courseType:0,
+                    		courseName:0
+                      })
                         $.ajax({
                             type: 'post',
-                            url: 'searchState.jspp?' + total,
+                            url: 'searchState.fssai?data=' + total,
+                            contentType : "application/json",
+                		 	 data:name1,
                             async: false,
                             success: function(data) {
                                 $('#newTable').show();
                                 var mainData1 = jQuery.parseJSON(data);
-                                //alert(mainData1);
                                 var j = 1;
                                 $('#newTable tr').remove();
                                 $('#newTable').append('<tr  class="background-open-vacancies" style="background-color:#000077;"><th>S.No.</th><th>State Name</th><th>Status</th><th>Change</th><th style="display:none"></th></tr>')

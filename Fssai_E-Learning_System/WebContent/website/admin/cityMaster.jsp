@@ -1,6 +1,7 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
     <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %>
         <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+        <script src="website/js/commonController.js"></script>
             <script type="text/javascript">
                 function OnStart() {
                     searchCity('ALL');
@@ -10,22 +11,28 @@
             </script>
             <script type='text/javascript'>
                 function searchCity(indicator) {
-                    var stateId = $("#stateId").val();
-                    var districtName = $("#districtId").val();
-                    var cityName = $("#cityName").val();
+                    var stateId = ($("#stateId").val() == null ? "" : $("#stateId").val());
+                    var districtName =( $("#districtId").val() == null ? "" : $("#districtId").val());
+                    var cityName = ($("#cityName").val() == null ? "" : $("#cityName").val());
                     var status = $("#status").val();
                     $(".displayNone").css("display", "block"); {
                         var result = "";
                         var total = "";
                         if (indicator.match('ALL')) {
-                            total = "stateId=0&districtName=0&cityName=&status=" + status;
+                            total = "stateId=0-districtName=0-cityName=-status=" + status;
                         } else {
-                            total = "stateId=" + stateId + "&districtName=" + districtName + "&cityName=" + cityName + "&status=" + status;
+                            total = "stateId=" + stateId + "-districtName=" + districtName + "-cityName=" + cityName + "-status=" + status;
                             console.log("total>" + total)
                         }
+                    	var name1=JSON.stringify({
+                    		courseType:0,
+                    		courseName:0
+                      })
                         $.ajax({
                             type: 'post',
-                            url: 'searchCity.jspp?' + total,
+                            url: 'searchCity.fssai?data=' + total,
+                            contentType : "application/json",
+                  		  	data:name1,
                             async: false,
                             success: function(data) {
                                 $('#newTable').show();
@@ -40,7 +47,7 @@
                                     } else {
                                         status = 'In-Active';
                                     }
-                                    $('#newTable').append('<tr id="tableRow"><td>' + j++ + '</td><td><input type="hidden" id="stateH" value="' + obj[0] + '">' + obj[0] + '</td><td><input type="hidden" id="districtH" value="' + obj[1] + '">' + obj[1] + '</td><td><input type="hidden" id="cityNameH" value="' + obj[2] + '">' + obj[2] + '</td><td><input type="hidden" id="statusH" value="' + obj[3] + '">' + status + '</td><td><input type="hidden" id="id" value="' + obj[4] + '"><a href="#" onclick="editCity(\'' + obj[0] + '\',\'' + obj[1] + '\',\'' + obj[2] + '\',\'' + obj[5] + '\',\'' + status + '\',\'' + obj[4] + '\');">edit</a></td><td><input type="hidden" id="districtHID" value="' + obj[5] + '"></tr>');
+                                    $('#newTable').append('<tr id="tableRow"><td>' + j++ + '</td><td><input type="hidden" id="stateH" value="' + obj[6] + '">' + obj[0] + '</td><td><input type="hidden" id="districtH" value="' + obj[1] + '">' + obj[1] + '</td><td><input type="hidden" id="cityNameH" value="' + obj[2] + '">' + obj[2] + '</td><td><input type="hidden" id="statusH" value="' + obj[3] + '">' + status + '</td><td><input type="hidden" id="id" value="' + obj[4] + '"><a href="#" onclick="editCity(\'' + obj[6] + '\',\'' + obj[1] + '\',\'' + obj[2] + '\',\'' + obj[5] + '\',\'' + status + '\',\'' + obj[4] + '\');">edit</a></td><td><input type="hidden" id="districtHID" value="' + obj[5] + '"></tr>');
                                 });
                             }
                         });
@@ -54,42 +61,18 @@
                     document.getElementById('btnCreate').style.display = 'none';
 
                     document.getElementById('idHidden').value = cityID;
-                    //$('#cityName').attr('readonly', 'true');
+                    
                     console.log("state " + state);
-
-                    $("#stateId option").filter(function() {
-                        return this.text == state;
-                    }).attr('selected', true);
-                    //stateId.options[0].text = state;	
-                    //$("#stateId").trigger("change");
+                    $("#stateId").val(state);
+                    $("#stateId").trigger("change");
+                    window.setTimeout(function() {
+                        $('#districtId').val(districtHid);
+                    }, 3000);
+                    
                     $("#cityName").val(city);
-
-                    document.getElementById('districtId').value = districtHid;
-                    $("#status option").filter(function() {
-                        return this.text == status;
-                    }).attr('selected', true);
-
-
                     $(".displayNone").css("display", "block");
                     $("#btnUpdate").css("display", "block");
-                    /*var a = document.getElementById('stateH').value;
-                    var b = document.getElementById('districtH').value;
-                    var c = document.getElementById('statusH').value;
-                    console.log("c "+c); */
-                    //stateId.options[0].text = a;
-                    //$("#stateId").prop('selectedIndex',0);
-                    //$('#districtId option').remove();
-                    /* 	$('#districtId').append('<option value="0" label="'+b+'" />');
-                    	document.getElementById('cityName').value = document.getElementById('cityNameH').value;
-                    	//var status = document.getElementById('statusLabel').value;
-                    	if(c=="A"){
-                    		$('#status option').remove();
-                    		$('#status').append('<option value="A" selected="true">Active</option><option value="I">In-active</option>');
-                    	}else{
-                    		$('#status option').remove();
-                    		$('#status').append('<option value="A">Active</option><option value="I"  selected="true">In-active</option>');
-                    	} */
-                }
+                                    }
 
                 function editCityData() {
 
@@ -103,14 +86,17 @@
                     document.getElementById('btnCreate').style.display = 'block';
                     $(".displayNone").css("display", "block"); {
                         var result = "";
-                        var total = "status=" + status + "&cityId=" + cityId + "&cityName=" + cityName + "&districtId=" + districtId;
+                        var total = "status=" + status + "-cityId=" + cityId + "-cityName=" + cityName + "-districtId=" + districtId;
+                        var name1=JSON.stringify({
+                    		courseType:0,
+                    		courseName:0
+                      })
                         $.ajax({
                             type: 'post',
                             async: false,
-                            url: 'editCityData.jspp?' + total,
-                            data: {
-                                user_name: name,
-                            },
+                            url: 'editCityData.fssai?data=' + total,
+                            contentType : "application/json",
+               		 	 	data:name1,
                             success: function(response) {
                                 //  showResponse = response;
 
@@ -123,52 +109,7 @@
 
                 }
 
-                function deleteCity() {
-                    var cityId = $("#idLabel").val();
-                    document.getElementById('btnUpdate').style.display = 'none';
-                    document.getElementById('btnCreate').style.display = 'block';
-                    $(".displayNone").css("display", "block"); {
-                        var result = "";
-                        var total = cityId;
-                        alert(total);
-                        $('#newTable').hide();
-                        $.ajax({
-                            type: 'post',
-                            url: 'deleteCity.jspp?' + total,
-                            data: {
-                                user_name: name,
-                            },
-                            success: function(response) {
-                                $('#name_status').html(response);
-                            }
-                        });
-                        //alert (result);
-                        return true;
-                    }
-                }
-
-            </script>
-            <script>
-                function getDistrict(val) {
-                    console.log("val " + val);
-                    $.ajax({
-                        type: 'post',
-
-                        url: 'loadDistrict.jspp?' + val,
-                        success: function(response) {
-                            var mainData1 = jQuery.parseJSON(response);
-
-                            $('#districtId option').remove();
-                            $('#districtId').append('<option value="0" label="Select District" />');
-                            $.each(mainData1, function(i, obj) {
-
-                                $('#districtId').append('<option value=' + obj.districtId + '>' + obj.districtName + '</option>');
-                            });
-                        }
-                    });
-                }
-
-            </script>
+                 </script>
             <script>
                 function validateFields() {
                     if (document.getElementById("stateId").value == "0") {
@@ -245,7 +186,7 @@
                                                                         </li>
                                                                     </ul>
                                                                 </div>
-                                                                <cf:select path="stateId" class="form-control" onchange="getDistrict(this.value);">
+                                                                <cf:select path="stateId" class="form-control" onchange="getDistrict(this.value , 'districtId');">
                                                                     <cf:option value="0" label="Select State" />
                                                                     <cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName" />
                                                                 </cf:select>

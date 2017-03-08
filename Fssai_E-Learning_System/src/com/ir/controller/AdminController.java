@@ -51,6 +51,7 @@ import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.UpdateTrainerAssessmentForm;
 import com.ir.model.City;
 import com.ir.model.CourseType;
+import com.ir.model.District;
 import com.ir.model.FeedbackMaster;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
@@ -282,6 +283,8 @@ public class AdminController {
 	@RequestMapping(value = "/cityMaster", method = RequestMethod.GET)
 	public String districtMaster(@ModelAttribute("cityMaster") CityForm cityForm, Model model) {
 		List<State> stateList = adminService.stateList();
+		List<District> districtList = adminService.districtList();
+		model.addAttribute("districtList", districtList);
 		model.addAttribute("stateList", stateList);
 		return "cityMaster";
 	}
@@ -1093,5 +1096,192 @@ public class AdminController {
 		
 	}
 	
+	
+	@RequestMapping(value="/searchManageCourse" , method=RequestMethod.POST)
+	@ResponseBody
+	public void searchManageCourse(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("searchManageCourse","searchManageCourse............" + data  , "AdminController.java");
+		List courseList = adminService.searchManageCourse(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(courseList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	
+	
+	@RequestMapping(value="/editManageCourseData" , method=RequestMethod.POST)
+	@ResponseBody
+	public void editManageCourseData(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("editManageCourseData","editManageCourseData............" + data  , "AdminController.java");
+		String courseList = adminService.editManageCourseData(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(courseList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	
+	@RequestMapping(value="/editState" , method=RequestMethod.POST)
+	@ResponseBody
+	public void editState(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("editState","editState............" + data  , "AdminController.java");
+		String courseList = adminService.editState(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(courseList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	//CheckState
+	@RequestMapping(value="/CheckState" , method=RequestMethod.POST)
+	@ResponseBody
+	public void CheckState(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("CheckState","CheckState............" + data  , "AdminController.java");
+		String courseList = adminService.CheckState(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(courseList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	@RequestMapping(value="/searchState" , method=RequestMethod.POST)
+	@ResponseBody
+	public void searchState(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("searchState","searchState............" + data  , "AdminController.java");
+		List<State> courseList = adminService.searchState(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(courseList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	//onLoadDistrict
 
+	
+	@RequestMapping(value="/onLoadDistrict" , method=RequestMethod.POST)
+	@ResponseBody
+	public void onLoadDistrict(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("onLoadDistrict","onLoadDistrict............" + data  , "AdminController.java");
+		List courseList = adminService.onLoadDistrict(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(courseList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	//changeStatusDistrict
+	
+	@RequestMapping(value="/changeStatusDistrict" , method=RequestMethod.POST)
+	@ResponseBody
+	public void changeStatusDistrict(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("changeStatusDistrict","changeStatusDistrict............" + data  , "AdminController.java");
+		String courseList = adminService.changeStatusDistrict(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(courseList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	//searchDistrict
+	
+	@RequestMapping(value="/searchDistrict" , method=RequestMethod.POST)
+	@ResponseBody
+	public void searchDistrict(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("searchDistrict","searchDistrict............" + data  , "AdminController.java");
+		List courseList = adminService.searchDistrict(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(courseList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+//editCityData
+	
+	@RequestMapping(value="/editCityData" , method=RequestMethod.POST)
+	@ResponseBody
+	public void editCityData(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("editCityData","editCityData............" + data  , "AdminController.java");
+		String courseList = adminService.editCityData(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(courseList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	//searchCity
+	
+	@RequestMapping(value="/searchCity" , method=RequestMethod.POST)
+	@ResponseBody
+	public void searchCity(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("searchCity","searchCity............" + data  , "AdminController.java");
+		List courseList = adminService.searchCity(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(courseList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	//onLoadRegion
+	
+	
+	@RequestMapping(value="/onLoadRegion" , method=RequestMethod.POST)
+	@ResponseBody
+	public void onLoadRegion(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("onLoadRegion","onLoadRegion............" + data  , "AdminController.java");
+		List courseList = adminService.onLoadRegion(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(courseList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	//editRegionData
+	
+
+	@RequestMapping(value="/editRegionData" , method=RequestMethod.POST)
+	@ResponseBody
+	public void editRegionData(@RequestParam("data") String data ,  Model model,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("editRegionData","editRegionData............" + data  , "AdminController.java");
+		String courseList = adminService.editRegionData(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(courseList); 
+		System.out.println("newList "+newList);
+		
+		out.write(newList);
+		out.flush();
+		
+	}
 }

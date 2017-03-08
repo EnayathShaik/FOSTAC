@@ -104,4 +104,24 @@ public interface AdminDAO {
 		//updateUser
 		
 		public void updateUser(String userid , String tableName , String status);
+		
+		//searchManageCourse
+		public List searchManageCourse(String data);
+		
+		//editManageCourseData
+		public String editManageCourseData(String data);
+		
+		public String editState(String data);
+		
+		public String CheckState(String data);
+		
+		public List<State> searchState(String data);
+		public List onLoadDistrict(String data);
+		public String changeStatusDistrict(String data);
+		
+		public List searchDistrict(String data);
+		public String editCityData(String data);
+		public List searchCity(String data);
+		public List onLoadRegion(String data);
+		public String editRegionData(String data);
 }

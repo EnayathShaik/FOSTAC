@@ -12,9 +12,15 @@
             <script>
                 function onLoadDistrict() {
                     var result = "";
+                    var name1=JSON.stringify({
+                		courseType:0,
+                		courseName:0
+                  })
                     $.ajax({
                         type: 'post',
-                        url: 'onLoadDistrict.jspp?',
+                        url: 'onLoadDistrict.fssai?data=',
+                        contentType : "application/json",
+           		 	 	data:name1,
                         async: false,
                         success: function(data) {
                             $('#newTable').show();
@@ -85,20 +91,21 @@
                     var stateName = $("#stateName").val();
                     var disName = $("#DistrictName").val();
                     var statusLabel = $("#status").val();
-                    console.log("statusLabel>>" + statusLabel);
-                    //var districtIdHidden = $("#DistrictIdH").val();
                     document.getElementById('btnUpdate').style.display = 'none';
                     document.getElementById('btnCreate').style.display = 'block';
                     $(".displayNone").css("display", "block");
-                    var total = "id=" + districtLabel + "&status=" + statusLabel + "&disName=" + disName + "&stateName=" + stateName;
+                    var total = "id=" + districtLabel + "-status=" + statusLabel + "-disName=" + disName + "-stateName=" + stateName;
+                    var name1=JSON.stringify({
+                		courseType:0,
+                		courseName:0
+                  })
                     $('#newTable').hide();
                     $.ajax({
                         type: 'post',
                         async: false,
-                        url: 'changeStatusDistrict.jspp?' + total,
-                        data: {
-                            user_name: name,
-                        },
+                        url: 'changeStatusDistrict.fssai?data=' + total,
+                        contentType : "application/json",
+           		 	 	data:name1,
                         success: function(response) {
                             console.log("response " + response);
                             $('#name_status').html(response);
@@ -118,10 +125,16 @@
                     console.log("stateId" + stateId);
                     var disName = $("#DistrictName").val();
                     var result = "";
-                    var total = "stateId=" + stateId + "&disName=" + disName;
+                    var total = "stateId=" + stateId + "-disName=" + disName;
+                    var name1=JSON.stringify({
+                		courseType:0,
+                		courseName:0
+                  })
                     $.ajax({
                         type: 'post',
-                        url: 'searchDistrict.jspp?' + total,
+                        url: 'searchDistrict.fssai?data=' + total,
+                        contentType : "application/json",
+           		 	 	data:name1,
                         async: false,
                         success: function(data) {
                             $('#newTable').show();
@@ -148,14 +161,10 @@
 
                     document.getElementById('btnUpdate').style.display = 'block';
                     document.getElementById('btnCreate').style.display = 'none';
-                    //document.getElementById('stateId').value = state;
-                    //document.getElementById('stateLabel').value = statuslabel;
-
+                
                     document.getElementById('DistrictName').value = districtName;
                     document.getElementById('DistrictIdH').value = distID;
-                    /* var a =document.getElementById('stateName').value;
-                    console.log("stateId.options[0].text"+stateId.options[0].text);
-                     */ //
+                
                     stateId.options[0].text = state;
 
                     console.log("status>" + statuslabel);

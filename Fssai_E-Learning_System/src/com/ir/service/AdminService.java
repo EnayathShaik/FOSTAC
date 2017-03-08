@@ -133,5 +133,27 @@ public interface AdminService {
 	//updateUser
 	@Transactional
 	void updateUser(String userid , String tableName , String status);
+	
+	List searchManageCourse(String data);
+	
+	String editManageCourseData(String data);
+	
+	String editState(String data);
 
+	String CheckState(String data);
+	List searchState(String data);
+	List onLoadDistrict(String data);
+	String changeStatusDistrict(String data);
+	List searchDistrict(String data);
+	
+	String editCityData(String data);
+	
+	List searchCity(String data);
+	
+	List onLoadRegion(String data);
+	
+	String editRegionData(String data);
+
+	
 }
+

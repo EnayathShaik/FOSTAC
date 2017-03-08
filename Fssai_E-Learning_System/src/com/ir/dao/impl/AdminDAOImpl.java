@@ -12,11 +12,13 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.Gson;
 import com.ir.bean.common.IntStringBean;
 import com.ir.dao.AdminDAO;
 import com.ir.form.AdminUserManagementForm;
@@ -61,6 +63,7 @@ import com.ir.model.trainer.TrainerAssessmentEvaluation;
 import com.ir.service.PageLoadService;
 import com.ir.util.ChangePasswordUtility;
 import com.ir.util.EncryptionPasswordANDVerification;
+import com.ir.util.HibernateUtil;
 import com.ir.util.PasswordGenerator;
 import com.ir.util.SendContectMail;
 import com.ir.util.SendMail;
@@ -1064,4 +1067,376 @@ public class AdminDAOImpl implements AdminDAO {
 			query.executeUpdate();
 			
 		}
-	}
+		
+		//searchManageCourse
+		@Override
+		public List searchManageCourse( String data){
+			String name = data;
+			System.out.println("passing name   :" + name);
+			String[] totalConnected = name.split("-");
+			String courseType="",courseName="" , freePaid ="" , status="",duration = "" ;
+			if(!name.equalsIgnoreCase("ALL")){
+				
+				try{
+					courseType = (totalConnected[0].split("="))[1];
+				}
+				catch(Exception e)
+				{
+					courseType ="%" ;
+				}
+				
+				try{
+					courseName = (totalConnected[1].split("="))[1].replaceAll("%20", " ").trim();
+				}
+				catch(Exception e)
+				{
+					courseName = "%";
+				}
+				
+				try{
+					freePaid = (totalConnected[2].split("="))[1];
+				}
+				catch(Exception e)
+				{
+					freePaid = "%";
+				}
+				
+					status = (totalConnected[3].split("="))[1];
+					try{
+						duration =totalConnected[4].split("=")[1];
+					}catch(Exception e){
+						duration = "%";	
+					}
+				
+			}
+			CourseName courseName1 = new CourseName();
+			String sql = null;
+			if(!name.equalsIgnoreCase("ALL"))
+				sql ="select cn.coursetypeid,ct.coursetype , cn.coursename , cn.courseduration , cn.paidunpaid ,  cn.status ,cn.coursenameid , cn.online , cn.classroom"+
+							" ,cn.courseCode from coursename as cn inner join coursetype as ct on ct.coursetypeid= cn.coursetypeid "+
+							" where cast(cn.coursetypeid as varchar(10)) like '"+courseType+"%' and upper(cn.coursename) like '"+ courseName.toUpperCase()+"%'"+
+							"  and paidunpaid like'"+freePaid+"%' and cn.courseduration like '"+duration+"%' and cn.status like '"+status+"%' Order By cn.coursenameid desc ";
+				else
+				sql ="select cn.coursetypeid,ct.coursetype , cn.coursename , cn.courseduration , cn.paidunpaid ,  cn.status ,cn.coursenameid , cn.online , cn.classroom"+
+								" ,cn.courseCode from coursename as cn inner join coursetype as ct on ct.coursetypeid= cn.coursetypeid Order By cn.coursenameid desc " ;
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createSQLQuery(sql);
+			List courseTypeList = query.list();
+			return courseTypeList;	
+			
+			
+		}	
+		
+		//editManageCourseData
+		
+		@Override
+		public String editManageCourseData( String data){
+			String name = data;
+			System.out.println("passing name   : " + name);
+			
+			String[] totalConnected = name.split("-");
+			String courseName , courseDuration , online, status , paidunpaid , id  , classroom;
+			
+			courseName = (totalConnected[1].split("="))[1].replaceAll("%20", " ").trim();
+			courseDuration = (totalConnected[4].split("="))[1].replaceAll("%20", " ").trim();
+			if( (totalConnected[2].split("="))[1].equals("true")){
+				online =  "Online";
+			}else{
+				online = "Nil";
+			}
+			paidunpaid = (totalConnected[0].split("="))[1];
+			status = (totalConnected[3].split("="))[1];
+			id = (totalConnected[5].split("="))[1];
+			System.out.println(" classroom "+(totalConnected[6].split("="))[1]);
+			if( (totalConnected[6].split("="))[1].equals("true")){
+				classroom =  "Classroom";
+			}else{
+				classroom = "Nil";
+			}
+			
+			System.out.println(courseName + " "+courseDuration + " "+ online + "  "+ classroom + " "+ status + "  "+id);
+			
+			Session session = sessionFactory.getCurrentSession();
+			CourseName   courseNameee=(CourseName) session.load(CourseName.class, Integer.parseInt(id));
+			courseNameee.setCoursename(courseName);
+			courseNameee.setCourseduration(courseDuration);
+			courseNameee.setOnline(online);
+			courseNameee.setClassroom(classroom);
+			courseNameee.setStatus(status);	
+			courseNameee.setPaidunpaid(paidunpaid);
+			session.update(courseNameee);
+			String newList = "Recors successfully updated !!!" ;
+			
+			return newList;
+
+		}	
+		
+		//editState
+		
+		@Override
+		public String editState( String data){
+			String name = data;
+			System.out.println("passing name state update  :" + name);
+			String[] totalConnected = name.split("-");
+			String id , status , state ;
+			id = (totalConnected[0].split("="))[1];
+			status = (totalConnected[1].split("="))[1];
+			state = (totalConnected[2].split("="))[1].replaceAll("%20", " ");
+			System.out.println(Integer.parseInt(id) + "  "+ status + "   "+ state);
+			String newList = null;
+			Session session =  sessionFactory.getCurrentSession();
+				State   stateNameee=(State) session.load(State.class, Integer.parseInt(id));
+				stateNameee.setStatus(status);
+				stateNameee.setStateName(state);
+				session.update(stateNameee);
+			 newList = "Recors successfully updated !!!" ;
+			
+			return newList;
+
+		}
+		
+	
+		//CheckState
+		
+		@Override
+		public String CheckState( String data){
+			String name = data;
+			String newList = null;
+			System.out.println("passing name state update  :" + name);
+			String sql="select * from State where upper(stateName) like '" + name.replaceAll("%20", " ").toUpperCase() + "%'"; 
+			Session session =  sessionFactory.getCurrentSession();
+			Query query = session.createSQLQuery(sql);
+			System.out.println("query>"+query);
+			List l = query.list();
+			if(l != null && l.size() > 0){
+				System.out.println("available in data base cannot use");
+				newList = "Already";
+					
+			}else{
+				System.out.println("available to use not in database");
+				newList = "";
+			}
+
+			
+			return newList;
+
+		}
+		
+		//searchState
+		
+		@Override
+		public List<State> searchState( String data){
+			String n = data;
+			String sss , ssss;
+			  String [] n1 = n.split("-");
+		        String stateName = null;
+		        try{
+		        	 stateName = (n1[0].split("="))[1] ;
+		        	 String s [] = stateName.split("%20");
+		        	 String ss = " ";
+		        	 for(int i = 0 ; i < s.length ; i++){
+		        		 ss =ss + s[i] + " "; 
+		        	 }
+		        	 sss = ss.substring(1, ss.length());
+		        	 ssss = sss.substring(0 , sss.length() - 1);
+		        }catch(Exception e){
+		        	stateName = "%";
+		        }
+		        
+		        String status = (n1[1].split("="))[1];
+		        System.out.println(stateName + "   "+ status);
+		        
+		        Session session =  sessionFactory.getCurrentSession();
+				String newList = null ;
+				
+					System.out.println("state 1");
+					Query query = session.createQuery("from State where statename like '"+ stateName+"%'");
+					List<State> list = query.list();
+					return list;
+
+		}
+		
+		
+		//onLoadDistrict
+
+		
+		@Override
+		public List onLoadDistrict( String data){
+				Session session =  sessionFactory.getCurrentSession();
+				String newList = null ;
+				
+					System.out.println("state 1");
+					Query query = session.createSQLQuery("select s.statename , d.districtName , d.status , d.districtId from district as d inner join state as s on s.stateid = d.stateid");
+					List list = query.list();
+					return list;
+
+		}
+		
+		
+		@Override
+		public String changeStatusDistrict(String data){
+			
+			String[] totalConnected = data.split("-");
+			String id,status,distName;
+			
+			
+			id = (totalConnected[0].split("="))[1];
+			status = (totalConnected[1].split("="))[1];
+			distName = (totalConnected[2].split("="))[1];
+			//districtIdH = (totalConnected[4].split("="))[1];
+			System.out.println("check status:"+status);
+			System.out.println("district name==>"+distName);
+			Session session =  sessionFactory.getCurrentSession();
+			
+			String newList = null;
+		
+				District d = (District) session.load(District.class,Integer.parseInt( id));			
+				System.out.println("else");
+				d.setStatus(status);
+				d.setDistrictName(distName);
+				session.update(d);
+				newList = "Status changed" ;
+				return newList;
+		}
+		
+//searchDistrict
+		
+		@Override
+		public List searchDistrict(String data){
+			
+			String[] totalConnected = data.split("-");
+	        String stateId = (totalConnected[0].split("="))[1];
+	        String	districtName =null ;
+	        System.out.println("length  "+totalConnected[1].split("=").length);
+	        
+	        try{
+	        	districtName = (totalConnected[1].split("="))[1];
+	        }catch(Exception e){
+	        	districtName = "%";
+	        }
+	     
+	        System.out.println("stateId "+stateId  + " districtName "+districtName );
+			Session session =  sessionFactory.getCurrentSession();
+			String sql = "select  s.stateName , d.districtName  , d.districtId  from district as d inner join state as s on s.stateid = d.stateid where "+
+					 " d.status = 'A' and upper(districtname) like '"+districtName.replaceAll("%20", " ").toUpperCase()+"%' and cast(s.stateid as varchar(100)) like '"+stateId+"%' ";
+			Query query = session.createSQLQuery(sql);
+			List list = query.list();
+			System.out.println(list.size());
+				return list;
+		}
+		
+		
+		//editCityData
+		
+		@Override
+		public String editCityData( String data){
+			String name = data;
+			System.out.println("passing name state update  :" + name);
+			String[] totalConnected = name.split("-");
+			String status,cityName;
+			int  cityId;
+			status = (totalConnected[0].split("="))[1];
+			
+			cityId = Integer.parseInt((totalConnected[1].split("="))[1]);
+			cityName = (totalConnected[2].split("="))[1];
+			String districtId = (totalConnected[3].split("="))[1];
+			String newList = null;
+			Session session =  sessionFactory.getCurrentSession();
+			City   cityNameee=(City) session.load(City.class, cityId);
+			cityNameee.setStatus(status);
+			cityNameee.setCityName(cityName);
+			session.update(cityNameee);
+			 newList = "Recors successfully updated !!!" ;
+			
+			return newList;
+
+		}
+		
+		//searchCity
+		
+		
+		@Override
+		public List searchCity(String data){
+			String [] n1 = data.split("-");
+			
+			String stateId ;
+			if((n1[0].split("="))[1].equals("0")){
+				stateId = "%";
+			}else{
+				stateId = (n1[0].split("="))[1];
+			}
+			
+			String districtId;
+			if((n1[1].split("="))[1].equals("0")){
+				districtId ="%";
+			}else{
+				districtId = (n1[1].split("="))[1];
+			}
+			
+			String cityName = null;
+			if( (n1[2].split("=")).length == 1){
+				cityName = "%";
+			}else{
+				cityName =  (n1[2].split("="))[1].replaceAll("%20", " ");
+			}
+			String status = (n1[3].split("="))[1] ;
+			Session session =  sessionFactory.getCurrentSession();
+			String sql = "select s.statename , d.districtname , c.cityname , c.status , c.cityId,d.districtid  ,s.stateid from city as c  "+
+					" inner join district d on d.districtid = c.districtid "+
+					" inner join state as s on s.stateid = d.stateid"+
+					" where CAST(s.stateid AS varchar(10)) like'"+ stateId +"'"+
+					" and c.cityName like '"+cityName+"%' and  CAST(d.districtid AS varchar(10)) like '"+districtId+"'";
+
+
+			Query query = session.createSQLQuery(sql);
+			List list = query.list();
+			System.out.println(list.size());
+				return list;
+		}
+	
+		
+		@Override
+		public List onLoadRegion( String data){
+				Session session =  sessionFactory.getCurrentSession();
+				String newList = null ;
+				
+					System.out.println("onLoadRegion");
+					Query query = session.createSQLQuery("select d.districtName , r.regionname ,r.id , s.statename , c.cityname ,r.cityid , r.districtid , r.stateid , r.status  from region r left join city c on c.cityid = r.cityid left join district d on d.districtid = r.districtid left join state s on s.stateid = r.stateid ");
+					List list = query.list();
+					return list;
+
+		}
+		//editRegionData
+		
+		@Override
+		public String editRegionData( String data){
+			String name = data;
+			String[] totalConnected = name.split("-");
+			String regionName,status;
+			int  regionId,stateId,districtId,cityId;
+			regionId = Integer.parseInt((totalConnected[0].split("="))[1]);
+			regionName = (totalConnected[1].split("="))[1];
+			status = (totalConnected[2].split("="))[1];
+			stateId =  Integer.parseInt((totalConnected[3].split("="))[1]);
+			districtId =  Integer.parseInt((totalConnected[4].split("="))[1]);
+			cityId =  Integer.parseInt((totalConnected[5].split("="))[1]);
+			System.out.println("checkkk data==>"+regionId+regionName+stateId+districtId+cityId);
+			Session session =  sessionFactory.getCurrentSession();
+			
+				
+				Region   region=(Region) session.load(Region.class, regionId);
+				region.setCityId(cityId);
+				region.setDistrictId(districtId);
+				region.setStateId(stateId);
+				region.setStatus(status);
+				region.setRegionName(regionName);
+				session.update(region);
+			
+			String newList = "Recors successfully updated !!!" ;
+			
+			return newList;
+
+		}
+
+		
+}

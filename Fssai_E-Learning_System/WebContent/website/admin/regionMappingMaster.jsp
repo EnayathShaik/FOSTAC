@@ -1,6 +1,7 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
     <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %>
         <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+        <script src="website/js/commonController.js"></script>
             <script type="text/javascript">
                 function OnStart() {
                     onLoadRegion();
@@ -10,29 +11,30 @@
             </script>
             <script type='text/javascript'>
                 function editRegion(distid, stateid, regionid, cityid, regionName, status) {
-                    //$('#cityName').attr('readonly', 'true');
+                   
                     document.getElementById('btnUpdate').style.display = 'block';
                     document.getElementById('btnCreate').style.display = 'none';
                     document.getElementById('stateId').value = stateid;
-                    document.getElementById('districtId').value = distid;
-                    $("#districtId").trigger("change");
-                    console.log("cityId " + cityid);
+                    $("#stateId").trigger("change");
                     window.setTimeout(function() {
-                        $('#cityId').val(cityid);
-                    }, 3000);
+                        $('#districtId').val(distid);
+                        
+                        $("#districtId").trigger("change");
+                        
+                        window.setTimeout(function() {
+                            $('#cityId').val(cityid);
+                        }, 1000);
 
-                    document.getElementById('cityId').value = cityid;
+                    }, 1000);
+                   
+                   
+                  //  document.getElementById('cityId').value = cityid;
                     document.getElementById('RegionidH').value = regionid;
 
 
                     document.getElementById('regionName').value = regionName;
                     document.getElementById('status').value = status;
-                    /* $("#stateId").prop("disabled", true);
-                    stateId.options[0].text = stateName;
-                    $("#stateId").prop('selectedIndex',0); */
-                    //$("#stateId").prop("disabled", true);
-                    /* $("#districtId").prop("disabled", true);
-                    $("#cityId").prop("disabled", true); */
+                    
 
                     if (status == "Active") {
                         $('#status option').remove();
@@ -48,14 +50,20 @@
                 function onLoadRegion() {
                     $('#newTable').show();
                     $('#newTable tr').remove();
+                    var name1=JSON.stringify({
+                		courseType:0,
+                		courseName:0
+                  })
                     $.ajax({
                         type: 'post',
-                        url: 'onLoadRegion.jspp',
+                        url: 'onLoadRegion.fssai?data=',
+                        contentType : "application/json",
+           		 	 	data:name1,
                         async: false,
                         success: function(data) {
                             $('#newTable').show();
                             var mainData1 = jQuery.parseJSON(data);
-                            ////alert(mainData1);
+                           
                             var j = 1;
                             $('#newTable tr').remove();
                             $('#newTable').append('<tr  class="background-open-vacancies" style="background-color:#000077;"><th>S.No.</th><th>State Name</th><th>District Name</th><th>City Name</th><th>Region Name</th><th>Status</th><th>Edit</th></tr>')
@@ -91,17 +99,22 @@
                     document.getElementById('btnCreate').style.display = 'block';
                     $(".displayNone").css("display", "block"); {
                         var result = "";
-                        var total = "regionId=" + regionId + "&regionName=" + regionName + "&status=" + status + "&stateName=" + stateName + "&districtName=" + districtName + "&cityName=" + cityName + "";
+                        var total = "regionId=" + regionId + "-regionName=" + regionName + "-status=" + status + "-stateName=" + stateName + "-districtName=" + districtName + "-cityName=" + cityName + "";
                         //alert(total);
                         $('#newTable').hide();
+                        var name1=JSON.stringify({
+                    		courseType:0,
+                    		courseName:0
+                      })
                         $.ajax({
                             type: 'post',
+
+                            url: 'editRegionData.fssai?data=' + total,
+                            contentType : "application/json",
+               		 	 	data:name1,
                             async: false,
-                            url: 'editRegionData.jspp?' + total,
-                            data: {
-                                user_name: name,
-                            },
                             success: function(response) {
+                            	$('#regionMappingMaster')[0].reset();
                                 $('#name_status').html(response);
                             }
                         });
@@ -114,53 +127,7 @@
                 }
 
 
-                function getDistrict(val) {
-                    //alert('jjh');
-                    $.ajax({
-                        type: 'post',
-
-                        url: 'loadDistrict.jspp?' + val,
-                        success: function(response) {
-                            var mainData1 = jQuery.parseJSON(response);
-
-                            $('#districtId option').remove();
-                            $('#districtId').append('<option value="0" label="Select District" />');
-
-                            $.each(mainData1, function(i, obj) {
-
-                                $('#districtId').append('<option value=' + obj.districtId + '>' + obj.districtName + '</option>');
-                            });
-
-                            /*    $('#cityId option').remove();
-	      $('#cityId').append('<option value="0" label="Select City" />');
-	      
-	  	 
-	      $.each(mainData1 , function(i , obj)
-	  		{
-	  		
-	  				$('#districtId').append('<option value='+obj.cityId+'>'+obj.cityId+'</option>');		
-	  		});
-	     */
-                        }
-                    });
-                }
-
-
-                function getCity(val) {
-                    $.ajax({
-                        type: 'post',
-                        url: 'loadCity.jspp?' + val,
-                        success: function(response) {
-                            var mainData1 = jQuery.parseJSON(response);
-                            $('#cityId option').remove();
-                            $('#cityId').append('<option value="0" label="Select City" />');
-                            $.each(mainData1, function(i, obj) {
-
-                                $('#cityId').append('<option value=' + obj.cityId + '>' + obj.cityName + '</option>');
-                            });
-                        }
-                    });
-                }
+              
 
 
                 function validateFields() {
@@ -218,7 +185,7 @@
                 }
 
             </script>
-            <cf:form action="regionMasterSave.fssai" name="myForm" method="POST" commandName="regionMappingMaster" onsubmit="return validateFields();">
+            <cf:form action="regionMasterSave.fssai" name="myForm" method="POST" id="regionMappingMaster" commandName="regionMappingMaster" onsubmit="return validateFields();">
 
                 <section>
 
@@ -264,7 +231,7 @@
                                                                         </li>
                                                                     </ul>
                                                                 </div>
-                                                                <cf:select path="stateId" class="form-control" onchange="getDistrict(this.value);">
+                                                                <cf:select path="stateId" class="form-control" onchange="getDistrict(this.value , 'districtId');">
                                                                     <cf:option value="0" label="Select State" />
                                                                     <cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName" />
                                                                 </cf:select>
@@ -321,7 +288,7 @@
                                                                         <li class="style-li error-red"></li>
                                                                     </ul>
                                                                 </div>
-                                                                <cf:select path="districtId" id="districtId" class="form-control" onchange="getCity(this.value);">
+                                                                <cf:select path="districtId" id="districtId" class="form-control" onchange="getCity(this.value , 'cityId');">
                                                                     <cf:option value="0" label="Select District" />
                                                                     <cf:options items="${districtList}" itemValue="districtId" itemLabel="districtName" />
                                                                 </cf:select>
