@@ -928,11 +928,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		}else if(profileCode.equalsIgnoreCase("6")){
 			userstatus = "F.userstausassessor";
 		}
-		
-		Configuration conf = new Configuration();
-		conf.configure("/hibernate.cfg.xml");
-		SessionFactory sf = conf.buildSessionFactory();
-		Session session = sf.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String newList=null;
 		System.out.println("district 0");
 		String sql ="";
