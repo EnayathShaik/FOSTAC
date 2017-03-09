@@ -330,6 +330,189 @@ body {
 /* new certificate style ends*/
 
 
+
+/* new fssai certificate */
+
+@media screen {
+    .th-certificate {
+        position: relative;
+        top: -45em;
+        right: -8em;
+    }
+    .th-certificate>h3 {
+        font-size: 2.5em;
+    }
+    .im-zoo {
+        zoom: 0.3;
+    }
+    .na-per {
+        border-top: 1px dotted #000;
+        width: 56%;
+        position: relative;
+        top: 11px;
+        margin-left: 8px;
+    }
+    .has-p {
+        font-size: 19px;
+        letter-spacing: 0.4px;
+        position: relative;
+        right: -6px;
+        top: 5px;
+    }
+    .has-p-at {
+        font-size: 19px;
+        letter-spacing: 0.4px;
+        position: relative;
+        right: -7px;
+        top: -27px;
+    }
+    .on-hr-dashed {
+        border-top: 1px dotted #000;
+        width: 32.5%;
+        position: relative;
+        top: -21px;
+        margin-left: 228px;
+    }
+    .at-hr-dashed {
+        border-top: 1px dotted #000;
+        width: 53.5%;
+        position: relative;
+        top: -52px;
+        margin-left: 31px;
+    }
+    .train-ng-dashed {
+        border-top: 1px dotted #000;
+        width: 32.5%;
+        position: relative;
+        top: 9px;
+        margin-left: 145px;
+    }
+    .train-sign-pos {
+        position: relative;
+        top: -11em;
+        left: -9em;
+    }
+    .cert-btm-general-ce {
+        position: relative;
+        top: -37.7em;
+        line-height: 12px;
+        right: -23px;
+    }
+    .btm-p-sign {
+        position: relative;
+        left: 95px;
+        letter-spacing: 0.1px;
+    }
+    .sign-train-p {
+        position: relative;
+        top: 8px;
+        right: -136px;
+    }
+    .nam-print {
+        font-weight: 600;
+        font-size: 1.2em;
+        margin-bottom: -30px;
+        position: relative;
+        left: 10em;
+        margin-top: 22px;
+    }
+}
+@media print {
+    .th-certificate {
+        position: relative;
+        top: -40em;
+        right: -6em;
+    }
+    .th-certificate>h3 {
+        font-size: 2.1em;
+    }
+    .im-zoo {
+        zoom: 0.3;
+    }
+    .na-per {
+        border-top: 1px dotted #000;
+        width: 77%;
+        position: relative;
+        top: 11px;
+        margin-left: 8px;
+    }
+    .has-p {
+        font-size: 19px;
+        letter-spacing: 0.4px;
+        position: relative;
+        right: -6px;
+        top: 8px;
+    }
+    .has-p-at {
+        font-size: 19px;
+        letter-spacing: 0.4px;
+        position: relative;
+        right: -7px;
+        top: -27px;
+    }
+    .on-hr-dashed {
+        border-top: 1px dotted #000;
+        width: 32.5%;
+        position: relative;
+        top: -20px;
+        margin-left: 228px;
+    }
+    .at-hr-dashed {
+        border-top: 1px dotted #000;
+        width: 53.5%;
+        position: relative;
+        top: -43px;
+        margin-left: 18px;
+    }
+    .train-ng-dashed {
+        border-top: 1px dotted #000;
+        width: 34.5%;
+        position: relative;
+        top: 9px;
+        margin-left: 250px;
+    }
+    .train-sign-pos {
+        position: relative;
+        top: -11em;
+        left: -8em;
+    }
+    .cert-btm-general-ce {
+        position: relative;
+        top: -35.7em;
+        line-height: 12px;
+        right: -23px;
+    }
+    .btm-p-sign {
+        position: relative;
+        left: 95px;
+        letter-spacing: 0.1px;
+    }
+    .adju {
+        position: relative;
+        left: 155px;
+    }
+    .sign-train-p {
+        position: relative;
+        top: 8px;
+        right: -206px;
+    }
+    .nam-print {
+        font-weight: 600;
+        font-size: 1.2em;
+        position: relative;
+        top: 25px;
+        left: 25px;
+    }
+}
+
+/* new fssai certificate ends */
+
+
+
+
+
+
+
 /* Toggle Styles */
 
 .sub-heading {

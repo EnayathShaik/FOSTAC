@@ -57,46 +57,47 @@ try{
                                                     <div class="row">
                                                         <!-- html code to add from here -->
                                                         <div class="col-xs-12">
-                                                            <div class="col-xs-12"><img src="website/img/hra-wi1.jpg" class="img-responsive"></div>
-                                                            <div class="col-xs-12 this-certify">
-                                                                <h3 class="text-center th-pos">This is to certify that</h3>
-                                                                <p class="text-center for-p"><span><strong>${traineeCertificateName}</strong></span></p>
-                                                                <hr class="nam-hr">
-                                                                <div class="di-msg">
-                                                                    <p>has successfully completed the required competency to be appointed as Trainer for Food</p>
-                                                                    <p>Safety Supervisor Training, the training was held on <span class="on-dat">${trainingDate}</span><span><hr class="on-hr"></span></p>
-                                                                    <p>at <span class="add-pos">${trainingAddress}</span><span><hr class="at-hr"></span><span class="full-stop">.</span></p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xs-12 sign-pos">
-                                                                <div class="col-md-6 col-xs-6">
-                                                                <img src="website/img/training-partner.jpg" alt="training partner signature" class="img-responsive sign-partner">
-                                                                    <hr class="left-sign">
-                                                                    <p class="left-p">Training Partner</p>
-                                                                </div>
-                                                                <div class="col-md-6 col-xs-6">
-                                                                <img src="website/img/training-coordinator-fssai.jpg" alt="training coordinator fssai" class="img-responsive sign-coordinator">
-                                                                    <hr class="right-sign">
-                                                                    <p class="right-p text-center">Training Coordinator
-                                                                        <br><span>FSSAI</span></p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xs-12 cert-btm">
-                                                                <p class="btm-p">Certificate Number : ${certificateID}</p>
-                                                                <p class="btm-p">Date Issued :
-                                                                    <%=strNewDate%>
-                                                                </p>
-                                                                <p class="btm-p">Refresher Due : 2 years from date of issue.</p>
-                                                            </div>
-                                                            <div class="col-xs-12" style="position: relative; top: -23em;">
-                                                                <div class="col-md-4 col-xs-12"></div>
-                                                                <div class="col-md-4 col-xs-12" align="center">
-                                                                    <button class="btn login-btn" onclick="window.print()">Print Certificate</button>
-                                                                    <!-- <input type="button" class="btn login-btn" value="Download AdmitCard" id="btnPrint" /> -->
-                                                                </div>
-                                                                <div class="col-md-4 col-xs-12"> </div>
-                                                            </div>
-                                                        </div>
+						                                    <div class="col-xs-12"><img src="website/img/competence.jpg" class="img-responsive im-zoo"></div>
+						                                    <div class="col-xs-12 th-certificate">
+						                                        <h3>This is to certify that</h3>
+						                                        <p class="nam-print">Mr. Natwar Shah</p>
+						                                        <hr class="na-per">
+						                                        <p class="has-p">has received necessary training required to be a <strong>Master</strong></p>
+						                                        <p class="has-p"><strong>Trainer</strong> for <strong>Project Clean Street Food .</strong></p>
+						                                        <p class="has-p">The training was held on <span><strong>12/02/2015</strong></span></p>
+						                                        <hr class="on-hr-dashed">
+						                                        <p class="has-p-at">at <span><strong> FDA Bhawan, New Delhi</strong></span></p>
+						                                        <hr class="at-hr-dashed">
+						
+						                                    </div>
+						
+						                                    <div class="col-xs-12 sign-pos-general">
+						                                        <div class="col-md-6 col-xs-6">
+						
+						                                        </div>
+						                                        <div class="col-md-6 col-xs-6 train-sign-pos">
+						                                            <img src="website/img/training-coordinator-fssai.png" width="150px" class="img-responsive sign-train-p">
+						                                            <hr class="train-ng-dashed">
+						                                            <p class="text-center adju">Training Coordinator
+						                                                <br><span>FSSAI</span></p>
+						                                        </div>
+						                                    </div>
+						
+						                                    <div class="col-xs-12 cert-btm-general-ce">
+						                                        <p class="btm-p-sign">Certificate Number : BCA001</p>
+						                                        <p class="btm-p-sign">Date Issued : 10/2/2017</p>
+						                                        <p class="btm-p-sign">Refresher Due : 2 years from date of issue.</p>
+						                                    </div>
+						
+						                                    <div class="row">
+						                                        <div class="col-md-4 col-xs-12"></div>
+						                                        <div class="col-md-4 col-xs-12" style="position: relative; top: -30em;">
+						                                            <a href="#" onclick="window.print()" class="btn login-btn" style="width: 100%;">Print</a>
+						                                        </div>
+						                                        <div class="col-md-4 col-xs-12"></div>
+						                                    </div>
+						
+						                                </div>
                                                         <!-- html code ends here -->
                                                     </div>
                                                 </div>
