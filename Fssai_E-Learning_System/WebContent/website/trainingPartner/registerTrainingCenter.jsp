@@ -546,7 +546,7 @@ function AvoidSpace(event) {
 													<cf:input type="hidden" path="TPName" id="TPName" />
 													<cf:select path="TrainingPartnerName" class="form-control"
 														onchange="getTPName()">
-														<cf:option value="${userId }" label="${userName }" />
+														<cf:option value="${partnerId }" label="${userName }" />
 														<%-- <cf:options items="${trainingPartnerNameList}"
 															itemValue="manageTrainingPartnerId"
 															itemLabel="trainingPartnerName" /> --%>
