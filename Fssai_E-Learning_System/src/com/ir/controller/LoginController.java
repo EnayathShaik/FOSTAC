@@ -220,11 +220,13 @@ public class LoginController {
 			
 		}
 		else if(loginDetails!=null && loginDetails.getProfileId() == 7 && loginDetails.getStatus().equalsIgnoreCase("A")){
+			System.out.println("loginDetails.getId() "+loginDetails.getId());
+			
 			ManageTrainingPartner manageTrainingPartner = new ManageTrainingPartner();
 			manageTrainingPartner = loginService.FullDetailTP(loginDetails.getId());
 			session.setAttribute("logId", manageTrainingPartner.getLoginDetails().getLoginId());
 			session.setAttribute("profileId", loginDetails.getProfileId());
-			session.setAttribute("userId", loginDetails.getId());
+			session.setAttribute("userId", manageTrainingPartner.getManageTrainingPartnerId());
 			session.setAttribute("userName", loginDetails.getLoginId());
 			return "trainingPartnerDashboard";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 8 && loginDetails.getStatus().equalsIgnoreCase("A")){
