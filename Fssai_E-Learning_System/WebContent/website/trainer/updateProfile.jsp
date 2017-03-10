@@ -6,6 +6,7 @@
                     <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
                         <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %>
                             <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+                            <script src="website/js/commonController.js"></script>
 
                                 <script type="text/javascript">
                                     function validateFields() {
@@ -244,15 +245,7 @@
                                 </script>
                                 <script>
                                     function getstateid1() {
-                                        /* var checkk = ${loginUr.checkAddress};
-	if(checkk == true){
 
-		document.getElementById("permanent1").style.display = 'none';
-		document.getElementById("permanent2").style.display = 'none';
-	}else{
-		document.getElementById("permanent1").style.display = 'block';
-		document.getElementById("permanent2").style.display = 'block';
-	}  */
 
                                         //var psid = ${stateid};
                                         var psid = '${loginUr.permanentstate.stateId}';
@@ -264,25 +257,19 @@
                                         var title = '${loginUr.title.titleId}';
                                         //var tp = '${tp}';
                                         var tp = '${trainingPartnerID}';
-
+										alert("tp "+tp)
                                         var safety = '${loginUr.foodSafetyExpBackground}';
                                         var month=${loginUr.expInFoodSafefyTimeMonth};
-                                        /* var month = $ {
-                                            loginUr.expInFoodSafefyTimeMonth;
-                                        }; */
+                                   
                                         $("#FoodSafetyExpBackground").prop('selectedIndex', safety);
                                         $("#ExpInFoodSafefyTimeMonth").prop('selectedIndex', month);
-                                        //$("#TrainingCenterPermanentState").prop('selectedIndex', psid);  
-                                        //TrainingCenterPermanentState.options[0].text = psname;    
+                              
                                         getStateUpdate(psid, pdid, pcid);
 
-                                        // TrainingCenterPermanentState.options[0].text = psname;
-
-                                        // TrainingCenterPermanentDistrict.options[0].text = pdname;
-                                        //TrainingCenterPermanentCity.options[0].text = pcname;
-
+                                       
                                         $("#Title").prop('value', title);
-                                        $("#associatedTrainingpartnerName").prop('value', tp);
+                                        $("#associatedTrainingpartnerName").val(tp);
+                                        alert("input val "+ $("#associatedTrainingpartnerName").val());
                                         //associatedTrainingpartnerName.options[0].text = tp;
                                     }
 
@@ -437,84 +424,6 @@
 
 
                                 <script>
-                                    function getDistrict(val) {
-                                        //alert('jjh');
-                                        $.ajax({
-                                            type: 'post',
-
-                                            url: 'loadDistrict.jspp?' + val,
-                                            success: function(response) {
-                                                var mainData1 = jQuery.parseJSON(response);
-
-                                                $('#TrainingCenterCorrespondenceDistrict option').remove();
-                                                $('#TrainingCenterCorrespondenceDistrict').append('<option value="0" label="Select District" />');
-                                                $('#TrainingCenterCorrespondenceCity option').remove();
-                                                $('#TrainingCenterCorrespondenceCity').append('<option value="0" label="Select City" />');
-
-                                                $.each(mainData1, function(i, obj) {
-
-                                                    $('#TrainingCenterCorrespondenceDistrict').append('<option value=' + obj.districtId + '>' + obj.districtName + '</option>');
-                                                });
-                                            }
-                                        });
-                                    }
-
-                                    function getDistrictList(val) {
-                                        //alert('city');
-                                        $.ajax({
-                                            type: 'post',
-
-                                            url: 'loadDistrict.jspp?' + val,
-                                            success: function(response) {
-                                                var mainData1 = jQuery.parseJSON(response);
-
-                                                $('#TrainingCenterPermanentDistrict option').remove();
-                                                $('#TrainingCenterPermanentDistrict').append('<option value="0" label="Select District" />');
-                                                $('#TrainingCenterPermanentCity option').remove();
-                                                $('#TrainingCenterPermanentCity').append('<option value="0" label="Select City" />');
-
-                                                $.each(mainData1, function(i, obj) {
-
-                                                    $('#TrainingCenterPermanentDistrict').append('<option value=' + obj.districtId + '>' + obj.districtName + '</option>');
-                                                });
-                                            }
-                                        });
-                                    }
-
-
-
-
-                                    function getCity(val) {
-                                        $.ajax({
-                                            type: 'post',
-                                            url: 'loadCity.jspp?' + val,
-                                            success: function(response) {
-                                                var mainData1 = jQuery.parseJSON(response);
-                                                $('#TrainingCenterCorrespondenceCity option').remove();
-                                                $('#TrainingCenterCorrespondenceCity').append('<option value="0" label="Select City" />');
-                                                $.each(mainData1, function(i, obj) {
-
-                                                    $('#TrainingCenterCorrespondenceCity').append('<option value=' + obj.cityId + '>' + obj.cityName + '</option>');
-                                                });
-                                            }
-                                        });
-                                    }
-
-                                    function getCityList(val) {
-                                        $.ajax({
-                                            type: 'post',
-                                            url: 'loadCity.jspp?' + val,
-                                            success: function(response) {
-                                                var mainData1 = jQuery.parseJSON(response);
-                                                $('#TrainingCenterPermanentCity option').remove();
-                                                $('#TrainingCenterPermanentCity').append('<option value="0" label="Select City" />');
-                                                $.each(mainData1, function(i, obj) {
-
-                                                    $('#TrainingCenterPermanentCity').append('<option value=' + obj.cityId + '>' + obj.cityName + '</option>');
-                                                });
-                                            }
-                                        });
-                                    }
 
                                     function myCheckPermanent() {
                                         var x = document.getElementById('checkPermanent').checked;
@@ -722,7 +631,7 @@
                                                                                                     </li>
                                                                                                 </ul>
                                                                                             </div>
-                                                                                            <cf:select path="TrainingCenterCorrespondenceState" class="form-control" onchange="getDistrict(this.value);">
+                                                                                            <cf:select path="TrainingCenterCorrespondenceState" class="form-control" onchange="getDistrict(this.value , 'TrainingCenterCorrespondenceDistrict');">
                                                                                                 <cf:option value="0" label="Select State" />
                                                                                                 <cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName" />
                                                                                             </cf:select>
@@ -737,7 +646,7 @@
                                                                                                     </li>
                                                                                                 </ul>
                                                                                             </div>
-                                                                                            <cf:select path="TrainingCenterCorrespondenceDistrict" class="form-control" onchange="getCity(this.value);">
+                                                                                            <cf:select path="TrainingCenterCorrespondenceDistrict" class="form-control" onchange="getCity(this.value , 'TrainingCenterCorrespondenceCity');">
                                                                                                 <cf:option value="0" label="Select District" />
                                                                                                 <%-- <cf:options items="${districtList}" itemValue="districtId" --%>itemLabel="districtName" />
                                                                                             </cf:select>
@@ -944,7 +853,7 @@
                                                                                                 </li>
                                                                                             </ul>
                                                                                         </div>
-                                                                                        <cf:select path="TrainingCenterPermanentState" class="form-control" onchange="getDistrictList(this.value);">
+                                                                                        <cf:select path="TrainingCenterPermanentState" class="form-control" onchange="getDistrictList(this.value, 'TrainingCenterPermanentDistrict');">
                                                                                             <cf:option value="0" label="Select State" />
                                                                                             <cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName" />
                                                                                         </cf:select>
@@ -965,7 +874,7 @@
                                                                                                 </li>
                                                                                             </ul>
                                                                                         </div>
-                                                                                        <cf:select path="TrainingCenterPermanentDistrict" class="form-control" onchange="getCityList(this.value);">
+                                                                                        <cf:select path="TrainingCenterPermanentDistrict" class="form-control" onchange="getCityList(this.value , 'TrainingCenterPermanentCity');">
                                                                                             <cf:option value="0" label="Select District" />
                                                                                             <%-- <cf:options items="${districtList}" itemValue="districtId" --%> itemLabel="districtName" />
                                                                                         </cf:select>
@@ -1126,11 +1035,11 @@
                                                                                                     </li>
                                                                                                 </ul>
                                                                                             </div>
-                                                                                            <%-- <cf:input type="text" class="form-control" path="associatedTrainingpartnerName" placeholder="Partner Name"  value="${loginUr.associatedTrainingpartnerName}"/> --%>
+                                                                                        <%--     <cf:input type="text" class="form-control" path="associatedTrainingpartnerName" placeholder="Partner Name"  value="${loginUr.associatedTrainingpartnerName}"/> --%> 
 
-                                                                                                <cf:select path="associatedTrainingpartnerName" class="form-control">
-                                                                                                    <cf:options items="${trainingPartnerNameList}" itemValue="manageTrainingPartnerId" itemLabel="trainingPartnerName" />
-                                                                                                </cf:select>
+                                                                                                <cf:select path="associatedTrainingpartnerName" id="associatedTrainingpartnerName" name ="associatedTrainingpartnerName" class="form-control">
+                                                                                                    <cf:options items="${trainingPartnerList}" itemValue="manageTrainingPartnerId" itemLabel="trainingPartnerName" />
+                                                                                                </cf:select> 
 
                                                                                         </div>
                                                                                     </div>
