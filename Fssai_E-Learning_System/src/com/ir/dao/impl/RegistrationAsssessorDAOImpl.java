@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.ir.dao.RegistrationAssessorDAO;
 import com.ir.form.ChangePasswordForm;
@@ -37,6 +38,7 @@ import com.ir.util.SendMail;
 
 @Repository
 @Component("RegistrationAssessorDAO")
+@Service
 public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 
 	@Autowired

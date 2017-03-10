@@ -12,6 +12,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.dao.AssessmentDao;
@@ -22,6 +23,7 @@ import com.ir.model.CourseType;
 import com.ir.model.trainee.TraineeAssessmentEvaluation;
 import com.ir.util.HibernateUtil;
 @Repository("AssessmentDao")
+@Service
 public class AssessmentDaoImpl implements AssessmentDao{
 
 	@Autowired

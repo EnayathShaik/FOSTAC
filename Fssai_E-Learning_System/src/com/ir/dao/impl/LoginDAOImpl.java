@@ -11,6 +11,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.ir.dao.LoginDAO;
 import com.ir.form.LoginForm;
@@ -26,6 +27,7 @@ import com.ir.model.TrainingPartner;
 import com.ir.util.EncryptionPasswordANDVerification;
 
 @Repository("LoginDAO")
+@Service
 public class LoginDAOImpl implements LoginDAO{
 
 

@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.dao.PageLoadDao;
@@ -22,7 +23,7 @@ import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.model.Utility;
 import com.ir.service.PageLoadService;
-
+@Service
 public class PageLoadServiceImpl implements PageLoadService {
 
 	@Autowired

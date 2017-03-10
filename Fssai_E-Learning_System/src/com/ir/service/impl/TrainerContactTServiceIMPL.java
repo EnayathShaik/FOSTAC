@@ -5,12 +5,13 @@ import javax.transaction.Transactional;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.ir.dao.TrainerContactDao;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.service.TrainerContactService;
-
+@Service
 public class TrainerContactTServiceIMPL implements TrainerContactService {
 
 	@Autowired

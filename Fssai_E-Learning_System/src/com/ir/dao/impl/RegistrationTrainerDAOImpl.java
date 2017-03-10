@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.ir.dao.RegistrationTrainerDAO;
 import com.ir.form.CourseEnrolledUserForm;
@@ -28,7 +29,7 @@ import com.ir.util.PasswordGenerator;
 import com.ir.util.SendMail;
 
 
-
+@Service
 @Component("registrationDAO")
 public class RegistrationTrainerDAOImpl implements RegistrationTrainerDAO {
 
@@ -214,7 +215,6 @@ private Title title;
 						for(int i=0 ; i < SpecialCoursesplited.length ; i++){
 							CourseEnrolled courseEnrolledSpecial = new CourseEnrolled();
 							courseEnrolledSpecial.setLoginDetails(loginDetails);
-							System.out.println("special course "+SpecialCoursesplited[i]);
 							courseEnrolledSpecial.setCoursenameid(Integer.parseInt(SpecialCoursesplited[i]));
 							System.out.println("SpecialCoursesplited  "+ SpecialCoursesplited[i]);
 							session.save(courseEnrolledSpecial);
@@ -242,7 +242,6 @@ private Title title;
 		City pc = getCity(registrationFormTrainer.getTrainingCenterPermanentCity());
 		City cc = getCity(registrationFormTrainer.getTrainingCenterCorrespondenceCity());
 		//Title tt = getTitle(registrationFormTrainer.getTitle());
-		System.out.println(registrationFormTrainer.getAssociatedTrainingpartnerName());
 		ManageTrainingPartner mtp = getTP(registrationFormTrainer.getAssociatedTrainingpartnerName());
 		
 		

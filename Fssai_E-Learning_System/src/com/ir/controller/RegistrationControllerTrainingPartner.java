@@ -38,7 +38,7 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 	RegistrationServiceTrainingPartner registrationServiceTrainingPartner;
 	
 	
-	/*	@ModelAttribute("stateList")
+	/*@ModelAttribute("stateList")
 	public List<State> populateStateList() {
 		List<State> stateList = registrationServiceTrainingPartner.loadState();
 		 new ZLogger("stateList", "state list   :   "+ stateList, "RegistrationControllerTrainingPartner.java");
@@ -86,8 +86,8 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 	public List<ManageTrainingPartner> trainingPartnerNameList() {
 		List<ManageTrainingPartner> trainingPartnerNameList = registrationServiceTrainingPartner.trainingPartnerNameList();
 		return trainingPartnerNameList;
-	}
-	*/
+	}*/
+	
 	@RequestMapping(value = "/registrationFormTrainingPartner", method = RequestMethod.GET)
 	public String registerForm(Model model) {
 		new ZLogger("registrationFormTrainingPartner", "registerForm training partner begins ", "RegistrationControllerTrainingPartner.java");

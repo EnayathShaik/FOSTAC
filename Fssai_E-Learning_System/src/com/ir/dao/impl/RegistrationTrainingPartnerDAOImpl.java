@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.ir.dao.RegistrationTrainingPartnerDAO;
 import com.ir.form.ChangePasswordForm;
@@ -31,7 +32,7 @@ import com.ir.util.EncryptionPasswordANDVerification;
 import com.ir.util.PasswordGenerator;
 import com.ir.util.SendContectMail;
 import com.ir.util.SendMail;
-
+@Service
 public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingPartnerDAO {
 	
 	@Autowired

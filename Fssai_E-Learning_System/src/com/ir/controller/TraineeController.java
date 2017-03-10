@@ -445,7 +445,9 @@ public class TraineeController {
 					new ZLogger("certificatetrainee","Certificate ID = "+certificateInfo.getCertificateID()  , "TraineeController.java");
 					new ZLogger("certificatetrainee","Training Date = "+certificateInfo.getTrainingDate()  , "TraineeController.java");
 					//Close Course
-					traineeService.closeCourse(userId, profileID, "Y");
+					if(certificateInfo != null && certificateInfo.getCertificateID() != null && certificateInfo.getCertificateID().length() > 5){
+						traineeService.closeCourse(userId, profileID, "Y");
+					}
 					model.addAttribute("certificateID", certificateInfo.getCertificateID());
 					model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
 					model.addAttribute("traineeCertificateName", certificateInfo.getName());

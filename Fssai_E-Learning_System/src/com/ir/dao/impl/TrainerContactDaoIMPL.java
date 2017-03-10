@@ -1,9 +1,12 @@
 package com.ir.dao.impl;
 
+import org.springframework.stereotype.Service;
+
 import com.ir.dao.TrainerContactDao;
 import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 
+@Service
 public class TrainerContactDaoIMPL implements TrainerContactDao{
 
 	@Override

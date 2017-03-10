@@ -17,6 +17,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 import com.ir.bean.common.IntStringBean;
@@ -69,6 +70,7 @@ import com.ir.util.SendContectMail;
 import com.ir.util.SendMail;
 import com.zentech.logger.ZLogger;
 @Repository
+@Service
 public class AdminDAOImpl implements AdminDAO {
 
 	

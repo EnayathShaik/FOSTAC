@@ -13,6 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.dao.PageLoadDao;
@@ -26,7 +27,7 @@ import com.ir.model.ManageTrainingPartner;
 import com.ir.model.State;
 import com.ir.model.Title;
 import com.ir.model.Utility;
-
+@Service
 public class PageLoadDaoImpl implements PageLoadDao {
 
 	@Autowired
@@ -306,7 +307,6 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			System.out.println("Page Load DAOImpl process start in district name ");
 			Session session = sessionFactory.getCurrentSession();
 			Query query = session.createQuery("from District where status = 'A'  and stateId =  '"+stateId+"'");
-			//Query query = session.createQuery("select districtId , districtName from District");
 			List districtList = query.list();
 			System.out.println("district  ************* list dao     :"+ districtList);
 			return districtList;

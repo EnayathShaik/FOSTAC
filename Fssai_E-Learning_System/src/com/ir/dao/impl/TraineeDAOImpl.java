@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.ir.constantes.Constantes;
 import com.ir.constantes.TableLink;
@@ -45,7 +46,7 @@ import com.ir.util.ChangePasswordUtility;
 import com.ir.util.SendContectMail;
 import com.zentech.logger.ZLogger;
 
-
+@Service
 public class TraineeDAOImpl implements TraineeDAO {
 
 	@Autowired
@@ -877,7 +878,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		// TODO Auto-generated method stub
 		int courseenrolleduserid = 0;
 		Session session = sessionFactory.getCurrentSession();
-		String sql = "select courseenrolleduserid from courseenrolleduser where logindetails  = "
+		String sql = "select courseenrolleduserid from courseenrolleduser where status = 'N' AND logindetails  = "
 				+ userId;
 		Query query = session.createSQLQuery(sql);
 		List list = query.list();

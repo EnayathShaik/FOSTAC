@@ -144,9 +144,9 @@ response.setDateHeader("Expires",   0);
                                         </div>
 
                                         <!-- forgot password -->
-                                        <div class="text-center forgot-margin-top">
+                                        <!-- <div class="text-center forgot-margin-top">
                                             <a style="color: #fff;" href="#" target="_blank">Forgot Password ?</a>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="col-md-4 col-xs-12"></div>
 

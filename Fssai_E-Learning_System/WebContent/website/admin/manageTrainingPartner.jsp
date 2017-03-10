@@ -440,7 +440,7 @@
                                                                             </li>
                                                                         </ul>
                                                                     </div>
-                                                                    <cf:input path="PAN" maxlength="10" placeholder="PAN" class="form-control" onKeyUP="this.value = this.value.toUpperCase();" onblur="pan_validate(this.value);" />
+                                                                    <cf:input path="PAN" maxlength="10" placeholder="PAN" class="form-control" onKeyUP="this.value = this.value.toUpperCase();" onblur="pan_validate(this.id,this.value);" />
                                                                 </div>
 
                                                                 <div class="form-group">

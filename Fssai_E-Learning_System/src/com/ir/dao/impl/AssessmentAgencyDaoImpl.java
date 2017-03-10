@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.ir.dao.AssessmentAgencyDao;
 import com.ir.form.ChangePasswordForm;
@@ -18,7 +19,7 @@ import com.ir.model.CourseType;
 import com.ir.model.assessmentagency.AssessmentAgencyForm;
 import com.ir.util.ChangePasswordUtility;
 import com.ir.util.SendContectMail;
-
+@Service
 public class AssessmentAgencyDaoImpl implements AssessmentAgencyDao {
 
 	@Autowired
