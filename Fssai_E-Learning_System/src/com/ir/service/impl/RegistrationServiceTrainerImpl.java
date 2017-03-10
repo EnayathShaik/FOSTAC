@@ -1,5 +1,7 @@
 package com.ir.service.impl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.ir.dao.RegistrationTrainerDAO;
 import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.RegistrationFormTrainer;
+import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.service.RegistrationServiceTrainer;
 
@@ -62,5 +65,15 @@ public class RegistrationServiceTrainerImpl implements RegistrationServiceTraine
 		PersonalInformationTrainer personalInformationTrainer = registrationTrainerDAO.fullDetailtrainer(loginId);
 		return personalInformationTrainer;
 	}
-	//by Rishi
+	
+	
+	@Override
+	@Transactional
+	public List<ManageTrainingPartner> trainingPartnerList() {
+		List<ManageTrainingPartner> trainingPartnerList = registrationTrainerDAO.trainingPartnerList();
+		return trainingPartnerList;
+	}
+	
+	
+	
 }

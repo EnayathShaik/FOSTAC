@@ -1,7 +1,10 @@
 package com.ir.service;
 
+import java.util.List;
+
 import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.RegistrationFormTrainer;
+import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationTrainer;
 
 public interface RegistrationServiceTrainer {
@@ -22,4 +25,8 @@ public interface RegistrationServiceTrainer {
 	
 	
 	public PersonalInformationTrainer FullDetailTrainer(int loginId);
+	
+	
+	List<ManageTrainingPartner> trainingPartnerList();
 }
+

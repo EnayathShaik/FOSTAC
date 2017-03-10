@@ -198,9 +198,15 @@ public class RegistrationControllerTrainer implements Serializable{
 	 }catch(Exception e){
 		new ZLogger("update-profile", "Exception while update-profile "+e.getMessage(), "RegistrationControllerTrainer.java");
 	 };
+	
+	 List<ManageTrainingPartner> trainingPartnerList = null;
 	 if(userId > 0){
+		 trainingPartnerList = registrationServiceTrainer.trainingPartnerList();
 		 PersonalInformationTrainer personalInformationTrainer = registrationServiceTrainer.FullDetailTrainer(userId);
 		model.addAttribute("trainingPartnerID", personalInformationTrainer.getAssociatedTrainingpartnerName().getManageTrainingPartnerId());
+		System.out.println("trainingPartnerList "+trainingPartnerList);
+		model.addAttribute("trainingPartnerList" , trainingPartnerList);
+		System.out.println(" partner ID "+personalInformationTrainer.getAssociatedTrainingpartnerName().getManageTrainingPartnerId());
 		 session.setAttribute("loginUr", personalInformationTrainer);
 		 
 	 }

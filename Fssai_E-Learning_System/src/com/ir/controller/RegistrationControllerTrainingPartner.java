@@ -1,6 +1,7 @@
 package com.ir.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -21,6 +22,7 @@ import com.ir.form.ContactTrainee;
 import com.ir.form.PostVacancyTrainingCenterForm;
 import com.ir.form.RegistrationFormTrainingPartner;
 import com.ir.model.PersonalInformationTrainingPartner;
+import com.ir.model.State;
 import com.ir.service.RegistrationServiceTrainingPartner;
 import com.zentech.backgroundservices.Mail;
 import com.zentech.logger.ZLogger;
@@ -36,7 +38,7 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 	RegistrationServiceTrainingPartner registrationServiceTrainingPartner;
 	
 	
-	/*@ModelAttribute("stateList")
+	/*	@ModelAttribute("stateList")
 	public List<State> populateStateList() {
 		List<State> stateList = registrationServiceTrainingPartner.loadState();
 		 new ZLogger("stateList", "state list   :   "+ stateList, "RegistrationControllerTrainingPartner.java");
@@ -84,12 +86,14 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 	public List<ManageTrainingPartner> trainingPartnerNameList() {
 		List<ManageTrainingPartner> trainingPartnerNameList = registrationServiceTrainingPartner.trainingPartnerNameList();
 		return trainingPartnerNameList;
-	}*/
-	
+	}
+	*/
 	@RequestMapping(value = "/registrationFormTrainingPartner", method = RequestMethod.GET)
 	public String registerForm(Model model) {
 		new ZLogger("registrationFormTrainingPartner", "registerForm training partner begins ", "RegistrationControllerTrainingPartner.java");
 		RegistrationFormTrainingPartner registrationFormTrainingPartner=new RegistrationFormTrainingPartner();
+		List<State> stateList = registrationServiceTrainingPartner.loadState();
+		model.addAttribute("stateList", stateList);
 		model.addAttribute("registrationFormTrainingPartner", registrationFormTrainingPartner);
 		return "registerTrainingCenter";
 	}

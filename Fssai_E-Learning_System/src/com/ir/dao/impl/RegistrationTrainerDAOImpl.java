@@ -214,6 +214,7 @@ private Title title;
 						for(int i=0 ; i < SpecialCoursesplited.length ; i++){
 							CourseEnrolled courseEnrolledSpecial = new CourseEnrolled();
 							courseEnrolledSpecial.setLoginDetails(loginDetails);
+							System.out.println("special course "+SpecialCoursesplited[i]);
 							courseEnrolledSpecial.setCoursenameid(Integer.parseInt(SpecialCoursesplited[i]));
 							System.out.println("SpecialCoursesplited  "+ SpecialCoursesplited[i]);
 							session.save(courseEnrolledSpecial);
@@ -241,6 +242,7 @@ private Title title;
 		City pc = getCity(registrationFormTrainer.getTrainingCenterPermanentCity());
 		City cc = getCity(registrationFormTrainer.getTrainingCenterCorrespondenceCity());
 		//Title tt = getTitle(registrationFormTrainer.getTitle());
+		System.out.println(registrationFormTrainer.getAssociatedTrainingpartnerName());
 		ManageTrainingPartner mtp = getTP(registrationFormTrainer.getAssociatedTrainingpartnerName());
 		
 		
@@ -371,7 +373,16 @@ private Title title;
 		return personalInformationTrainer;
 
 	}
-	// Rishi end
+	
+	
+	
+	@Override
+	public List<ManageTrainingPartner> trainingPartnerList() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from ManageTrainingPartner");
+		List<ManageTrainingPartner> trainingPartnerList = query.list();
+		return trainingPartnerList;
+	}
 	}
 	
 	

@@ -133,6 +133,8 @@
                                                             <th>Middle Name</th>
                                                             <th>Last Name</th>
                                                             <th>Aadhar Number</th>
+                                                            <th>Current Status</th>
+                                                            <th>Update Status</th>
                                                         </thead>
                                                         <tbody>
                                                             <ct:choose>

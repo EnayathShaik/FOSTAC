@@ -1,5 +1,7 @@
 package com.ir.dao;
 
+import java.util.List;
+
 import com.ir.form.CourseEnrolledUserForm;
 import com.ir.form.RegistrationFormTrainer;
 import com.ir.model.City;
@@ -21,5 +23,6 @@ public interface RegistrationTrainerDAO {
 	long advanceTrainerSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid);
 	long specialTrainerSave(CourseEnrolledUserForm courseEnrolledUserForm, int loginid);
 	public PersonalInformationTrainer fullDetailtrainer(int loginId);
+	public List<ManageTrainingPartner> trainingPartnerList();
 
 }
