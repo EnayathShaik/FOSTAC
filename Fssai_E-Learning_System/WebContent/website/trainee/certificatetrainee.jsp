@@ -60,13 +60,13 @@ try{
 						                                    <div class="col-xs-12"><img src="website/img/competence.jpg" class="img-responsive im-zoo"></div>
 						                                    <div class="col-xs-12 th-certificate">
 						                                        <h3>This is to certify that</h3>
-						                                        <p class="nam-print">Mr. Natwar Shah</p>
+						                                        <p class="nam-print">${traineeCertificateName}</p>
 						                                        <hr class="na-per">
 						                                        <p class="has-p">has received necessary training required to be a <strong>Master</strong></p>
 						                                        <p class="has-p"><strong>Trainer</strong> for <strong>Project Clean Street Food .</strong></p>
-						                                        <p class="has-p">The training was held on <span><strong>12/02/2015</strong></span></p>
+						                                        <p class="has-p">The training was held on <span><strong>${trainingDate}</strong></span></p>
 						                                        <hr class="on-hr-dashed">
-						                                        <p class="has-p-at">at <span><strong> FDA Bhawan, New Delhi</strong></span></p>
+						                                        <p class="has-p-at">at <span><strong> ${trainingAddress}</strong></span></p>
 						                                        <hr class="at-hr-dashed">
 						
 						                                    </div>
@@ -84,8 +84,8 @@ try{
 						                                    </div>
 						
 						                                    <div class="col-xs-12 cert-btm-general-ce">
-						                                        <p class="btm-p-sign">Certificate Number : BCA001</p>
-						                                        <p class="btm-p-sign">Date Issued : 10/2/2017</p>
+						                                        <p class="btm-p-sign">Certificate Number : ${certificateID}</p>
+						                                        <p class="btm-p-sign">Date Issued : <%=strNewDate%></p>
 						                                        <p class="btm-p-sign">Refresher Due : 2 years from date of issue.</p>
 						                                    </div>
 						
