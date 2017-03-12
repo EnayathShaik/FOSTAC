@@ -32,6 +32,7 @@ import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.GenerateCourseCertificateForm;
 import com.ir.form.PostVacancyTrainingCenterForm;
+import com.ir.form.TraineeAttendanceForm;
 import com.ir.form.TrainingCalendarForm;
 import com.ir.form.trainingPartner.TrainingPartnerSearch;
 import com.ir.form.trainingPartner.TrainingPartnerSearchForm;
@@ -106,7 +107,6 @@ public class TrainingPartnerController {
 	
 	@RequestMapping(value="/generateCourseCertificate" , method=RequestMethod.GET)
 	public String generateCourseCertificate(@ModelAttribute("generateCourseCertificateForm") GenerateCourseCertificateForm generateCourseCertificateForm,HttpSession session,BindingResult result , Model model ){
-		
 		List<CourseType> courseTypeList = trainingPartnerService.courseTypeList();
 		model.addAttribute("courseTypeList",courseTypeList);
 		return "generateCourseCertificate";
@@ -750,4 +750,58 @@ public class TrainingPartnerController {
 		
 	}
 	
+	//searchTrainingCenterList
+	
+	@RequestMapping(value="/searchTrainingCenterList" , method=RequestMethod.POST)
+	@ResponseBody
+	public void searchTrainingCenterList(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("searchTrainingCenterList","searchTrainingCenterList............" + data  , "TrainingPartnerController.java");
+		List batchCodeList = trainingPartnerService.searchTrainingCenterList(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(batchCodeList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	
+	//onLoadTrainingPartnerCenterId
+	@RequestMapping(value="/onLoadTrainingPartnerCenterId" , method=RequestMethod.POST)
+	@ResponseBody
+	public void onLoadTrainingPartnerCenterId(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("onLoadTrainingPartnerCenterId","onLoadTrainingPartnerCenterId............" + data  , "TrainingPartnerController.java");
+		List batchCodeList = trainingPartnerService.onLoadTrainingPartnerCenterId(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(batchCodeList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	@RequestMapping(value="/traineeAttendance" , method={RequestMethod.GET , RequestMethod.POST} )
+	public String traineeAttendance(@ModelAttribute("traineeAttendanceForm") TraineeAttendanceForm traineeAttendanceForm,HttpSession session,BindingResult result , Model model ){
+		return "traineeAttendance";
+		
+	}
+	
+	//markTraineeAttendance
+
+	@RequestMapping(value="/markTraineeAttendance" , method=RequestMethod.POST)
+	@ResponseBody
+	public void markTraineeAttendance(@RequestParam("data") String data  , @RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		
+		String rollNo =data;
+		System.out.println("roll number "+rollNo);
+		String res = trainingPartnerService.markTraineeAttendance(rollNo);
+		System.out.println("res "+res);
+		//checkAadhar
+		PrintWriter out = response.getWriter(); 
+		out.write(res );
+		out.flush();
+		
+	}
 }

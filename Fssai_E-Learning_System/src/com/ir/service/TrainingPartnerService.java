@@ -132,5 +132,11 @@ public interface TrainingPartnerService {
 	
 	public List SearchUpcomingTraining(String data);
 	
+	public List searchTrainingCenterList(String data);
+	
+	public List onLoadTrainingPartnerCenterId(String data);
+	
+	public String markTraineeAttendance(String rollNo);
+	
 	
 }

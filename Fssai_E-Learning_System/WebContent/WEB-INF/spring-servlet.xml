@@ -157,6 +157,8 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 				<value>com.ir.model.TrainingPartnerCalendarForm</value>
 				<value>com.ir.model.TrainingStatus</value>
 				<value>com.ir.model.TrainingCalendarHistoryLogs</value>
+				<value>com.ir.model.TraineeDailyAttendance</value>
+				
 <!-- 				<value>com.ir.form.AssessmentAnswerCriteria</value> -->
 				<!-- 
 				

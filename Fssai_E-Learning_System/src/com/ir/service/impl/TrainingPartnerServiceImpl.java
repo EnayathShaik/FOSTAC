@@ -300,4 +300,32 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 		return loadTrainingList;
 	}
 	
+	//searchTrainingCenterList
+	
+	
+	@Override
+	@Transactional
+	public List searchTrainingCenterList(String data) {
+		List loadTrainingList = trainingPartnerDAO.searchTrainingCenterList(data);
+		return loadTrainingList;
+	}
+	
+	
+	//onLoadTrainingPartnerCenterId
+	
+	@Override
+	@Transactional
+	public List onLoadTrainingPartnerCenterId(String data) {
+		List loadTrainingList = trainingPartnerDAO.onLoadTrainingPartnerCenterId(data);
+		return loadTrainingList;
+	}
+	
+//	/markTraineeAttendance
+	@Override
+	@Transactional
+	public String markTraineeAttendance(String searchData) {
+		String loadTrainingList = trainingPartnerDAO.markTraineeAttendance(searchData);
+		return loadTrainingList;
+	}
+	
 }

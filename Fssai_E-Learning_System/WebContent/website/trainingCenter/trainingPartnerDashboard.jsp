@@ -13,9 +13,14 @@ window.onload = OnStart;
 <script type="text/javascript">
 function searchTrainingCenterList1(){
 	var result="";
+	var name1=JSON.stringify({
+		courseName:0
+  })
 	$.ajax({
 	type: 'post',
-	url: 'searchTrainingCenterList.jspp',
+	url: 'searchTrainingCenterList.fssai',
+	contentType : "application/json",
+	data:name1,
 	async: false, 
 	success: function (data){
 		$('#newTable').show();
@@ -39,15 +44,18 @@ function onLoadTrainingPartnerCenterId(){
 	var id = document.getElementById("idd").value;
 	var result="";
 	var id = document.getElementById("idd").value;
+	var name1=JSON.stringify({
+		courseName:0
+  })
 	$.ajax({
 	type: 'post',
-	url: 'onLoadTrainingPartnerCenterId.jspp?'+id,
+	url: 'onLoadTrainingPartnerCenterId.fssai?data='+id,
+	contentType : "application/json",
+	data:name1,
 	async: false, 
 	success: function (data){
 	$('#newTable1').show();
-	//var mainData = JSON.stringify(data);
 	var mainData1 = jQuery.parseJSON(data);
-	//alert(mainData1);
 	var j=1;
 	$('#newTable1 tr').remove();
 	$('#newTable1').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Training Center Name</th><th>Training Center Id</th><th>Active / In-Active</th></tr>')

@@ -1,16 +1,20 @@
 package com.ir.dao.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -26,9 +30,11 @@ import com.ir.form.trainingPartner.TrainingPartnerSearch;
 import com.ir.model.CourseEnrolledUser;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
+import com.ir.model.ManageCourseContent;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.PostVacancyTrainingCenter;
 import com.ir.model.PostVacancyTrainingCenterBean;
+import com.ir.model.TraineeDailyAttendance;
 import com.ir.model.TrainingCalendar;
 import com.ir.model.TrainingCalendarHistoryLogs;
 import com.ir.model.Utility;
@@ -1171,7 +1177,6 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	public  List SearchUpcomingTraining(String id){
 		
 		Session session = sessionFactory.getCurrentSession();
-System.out.println("id "+id);
 	
 		String sql ="select tc.trainingcalendarid , concat(pitp.trainingpartnerpermanentline1 , ' ' , pitp.trainingpartnerpermanentline2 , ' ' , s.statename , ' ' , d.districtname , ' ' , c.cityname) as address, "+
 				" concat(tc.trainingdate , ' / ' , tc.trainingtime) as schedule , "+
@@ -1193,4 +1198,107 @@ System.out.println("id "+id);
 		return courseTypeList;
 	}
 	
+	
+	//searchTrainingCenterList
+	
+	@Override
+	public  List searchTrainingCenterList(String id){
+		
+		Session session = sessionFactory.getCurrentSession();
+System.out.println("id "+id);
+	
+String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername , count(pitp.trainingpartnername) from personalinformationtrainingpartner as pitp "+ 
+		" inner join managetrainingpartner as mtp on pitp.trainingpartnername = mtp.managetrainingpartnerid "+
+		"  inner join logindetails as ld on pitp.logindetails = ld.id where ld.status='I' "+
+		//"   and mtp.managetrainingpartnerid = 133 "+
+		" group by mtp.trainingpartnername , mtp.managetrainingpartnerid ";	
+		Query query = session.createSQLQuery(sql);
+		List courseTypeList = query.list();
+		return courseTypeList;
+	}
+	
+	//onLoadTrainingPartnerCenterId
+	
+	@Override
+	public  List onLoadTrainingPartnerCenterId(String id){
+		
+		Session session = sessionFactory.getCurrentSession();
+		System.out.println("id "+id);
+	
+		String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername , count(pitp.trainingpartnername) from personalinformationtrainingpartner as pitp "+ 
+		" inner join managetrainingpartner as mtp on pitp.trainingpartnername = mtp.managetrainingpartnerid "+
+		"  inner join logindetails as ld on pitp.logindetails = ld.id where ld.status='I' "+
+		//"   and mtp.managetrainingpartnerid = 133 "+
+		" group by mtp.trainingpartnername , mtp.managetrainingpartnerid ";	
+		Query query = session.createSQLQuery(sql);
+		List courseTypeList = query.list();
+		return courseTypeList;
+	}
+	
+	//markTraineeAttendance
+	
+	@Override
+	public String markTraineeAttendance(String rollNo){
+	
+		Session session = sessionFactory.getCurrentSession();
+		String result = null;
+		String sql="select  cast(trainingdate as date),  cast(trainingtime  as date),cast(now() as date)  from trainingcalendar as tc inner join courseenrolleduser ceu on ceu.trainingcalendarid = tc.trainingcalendarid where rollno ='"+rollNo+"' ";
+		try{
+			Query query = session.createSQLQuery(sql);
+			List<Object[]> list = query.list();
+			System.out.println("size "+list.size());
+			if(list.size() > 0){
+				
+				String trainingStartDate = list.get(0)[0].toString();
+				String trainingEndDate = list.get(0)[1].toString();
+				Date date = new Date();
+				String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(date);
+				 Date trainingStartDateNew = new SimpleDateFormat("yyyy-MM-dd").parse(trainingStartDate.toString());
+				 Date trainingEndDateNew = new SimpleDateFormat("yyyy-MM-dd").parse(trainingEndDate.toString());
+				 Date testDate = new SimpleDateFormat("yyyy-MM-dd").parse(modifiedDate.toString());
+				 
+				 boolean  iswithinRange = isWithinRange(testDate, trainingStartDateNew , trainingEndDateNew);
+				 if(iswithinRange){
+					 Session session2 = sessionFactory.getCurrentSession();
+					 Criteria criteria = session2.createCriteria(TraineeDailyAttendance.class);
+						criteria.add(Restrictions.eq("rollNumber", rollNo));
+						criteria.add(Restrictions.eq("attendanceDate", modifiedDate));
+						
+						List l = criteria.list();
+						System.out.println("l.size() "+l.size());
+						if(l != null && l.size() > 0){
+							result ="Attendance is already marked for date "+modifiedDate;
+						
+						}else{
+							Session session1 = sessionFactory.getCurrentSession();
+							TraineeDailyAttendance traineeAtt = new TraineeDailyAttendance();
+							traineeAtt.setRollNumber(rollNo);
+							traineeAtt.setAttendanceDate(modifiedDate);
+							int attId = (int) session1.save(traineeAtt);
+							if(attId>0){
+							result ="Attendance successfully marked for Roll Number "+rollNo;
+							}
+						}
+				 }else{
+					 result = "Training is already Completed."; 
+				 }
+				 System.out.println("iswithinRange "+iswithinRange);
+				new ZLogger("markTraineeAttendance", "markTraineeAttendance", "CommonDaoImpl.java");
+				
+			}else{
+				result ="No Course Enrolled ";	
+				
+			}
+		}catch(Exception e){
+			
+		}finally{
+		}
+
+		return result;
+	}
+	
+	boolean isWithinRange(Date testDate ,Date startDate , Date endDate ) {
+		System.out.println(" input "+ " testDate "+testDate + " startDate "+startDate + " endDate "+endDate );
+		   return !(testDate.before(startDate) || testDate.after(endDate));
+		}	
 }

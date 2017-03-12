@@ -67,6 +67,7 @@
 		<mapping class="com.ir.model.trainee.TraineeAssessmentEvaluation"/>
 		<mapping class="com.ir.trainingcenter.model.AssesmentCalender"/>
 		<mapping class="com.ir.model.TrainingCalendarHistoryLogs"/>
+		<mapping class="com.ir.model.TraineeDailyAttendance"/>
 		
 <!-- 		<mapping class="com.ir.form.AssessmentAnswerCriteria"/> -->
 <!-- 		<mapping class="com.ir.model.CourseEnrolledUser"/> -->
