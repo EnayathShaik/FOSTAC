@@ -290,5 +290,14 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 		return loadTrainingList;
 	}
 	
+	//SearchUpcomingTraining
+	
+	
+	@Override
+	@Transactional
+	public List SearchUpcomingTraining(String data) {
+		List loadTrainingList = trainingPartnerDAO.SearchUpcomingTraining(data);
+		return loadTrainingList;
+	}
 	
 }

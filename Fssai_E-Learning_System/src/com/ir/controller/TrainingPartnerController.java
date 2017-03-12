@@ -734,5 +734,20 @@ public class TrainingPartnerController {
 		
 	}
 	
+	//SearchUpcomingTraining
+	
+	@RequestMapping(value="/searchUpcomingTraining" , method=RequestMethod.POST)
+	@ResponseBody
+	public void searchUpcomingTraining(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("searchUpcomingTraining","SearchUpcomingTraining............" + data  , "TrainingPartnerController.java");
+		List batchCodeList = trainingPartnerService.SearchUpcomingTraining(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(batchCodeList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
 	
 }

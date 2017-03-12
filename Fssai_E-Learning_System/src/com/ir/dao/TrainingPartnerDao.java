@@ -80,4 +80,6 @@ public interface TrainingPartnerDao {
 	
 	public String updateAttendanceStatus(String searchData);
 	
+	public List SearchUpcomingTraining(String data);
+	
 }

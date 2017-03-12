@@ -165,26 +165,7 @@ function AvoidSpace(event) {
     	return y;
     }
     
-/*     function getDistrict(val , idName)
-    {
-    	$.ajax({
-    	      type: 'post',
-    	      url: 'loadDistrict.jspp?'+ val,
-    	      success: function (response) {      
-    	      var mainData1 = jQuery.parseJSON(response);
-    	      $('#TrainingPartnerPermanentDistrict option').remove();
-    	      $('#TrainingPartnerPermanentDistrict').append('<option value="0" label="Select District" />');
-    	      $('#TrainingPartnerPermanentCity option').remove();
-    	      $('#TrainingPartnerPermanentCity').append('<option value="0" label="Select City" />');
-    	  	 
-    	      $.each(mainData1 , function(i , obj)
-    	  		{
-    	  		
-    	  				$('#TrainingPartnerPermanentDistrict').append('<option value='+obj.districtId+' >'+obj.districtName+'</option>');		
-    	  		});
-    	      }
-    	      });     
-    } */
+
     function getCity(val)
     {
     	$.ajax({

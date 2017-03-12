@@ -1,6 +1,7 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="website/js/commonController.js"></script>
 <script>
 
 function OnStart(){
@@ -31,10 +32,11 @@ function showDetails(){
 	//var id = document.getElementById("assessmentAgencyId").value;
 	var assessorId =710;
 	//
-	var courseName =  ($("#selCourseType").val() == 0 || $("#selCourseType").val() == null ? "" : $("#selCourseType").val());
+	var courseType =  ($("#selCourseType").val() == 0 || $("#selCourseType").val() == null ? "" : $("#selCourseType").val());
+	var courseName =  ($("#courseName").val() == 0 || $("#courseName").val() == null ? "" : $("#courseName").val());
 	var selTrainingCenters =  ($("#selTrainingCenters").val() == 0 || $("#selTrainingCenters").val() == null ? "" : $("#selTrainingCenters").val());
 	var trainingDate = (($("#trainingDate").val() == 'undefined' || $("#trainingDate").val() == null ) ? "" : $("#trainingDate").val() );
-	var total =  "courseName=" + courseName+ "-selTrainingCenters=" + selTrainingCenters+"-trainingDate="+trainingDate;
+	var total =  "courseType=" + courseType+ "-selTrainingCenters=" + selTrainingCenters+"-trainingDate="+trainingDate+"-courseName="+courseName;
  	var name1=JSON.stringify({
 		courseType:0,
 		courseName:0
@@ -179,23 +181,51 @@ function updateTraineeAssessmentResult(courseEnrolledid , status){
                           <div class="form-group">
                         <div>
                               <ul class="lab-no">
-                            <li class="style-li"><strong>Course Name:</strong></li>
+                            <li class="style-li"><strong>Course Type:</strong></li>
                             
                           </ul>
                             </div>
-                            <select class="form-control" name="selCourseType" id = "selCourseType"> </select>
+                            <select class="form-control" name="selCourseType" id = "selCourseType" onchange="getCourseName(this.value, 'courseName');"> <option value="0" >Select Course Type</option></select>
+                            
 								<script>
 									var selectOptions = "";
 									for(var i=0 ; i < courseTypes.length; i++)
 										{
 											console.log(courseTypes[i].CourseTypeId + " -- "+ courseTypes[i].CourseType);
+											
 											selectOptions += "<option value="+courseTypes[i].CourseTypeId+">"+courseTypes[i].CourseType+"</option>"
 											
 										}
 									document.getElementById('selCourseType').innerHTML += selectOptions; 
 							</script>
                       </div>
-                          <div class="form-group">
+
+													<div class="form-group">
+														<div>
+															<ul class="lab-no">
+																<li class="style-li"><strong>Course Name:</strong></li>
+																<li class="style-li error-red"></li>
+															</ul>
+														</div>
+														   <select class="form-control" name="courseName" id = "courseName" > </select>
+								<script>
+									var selectOptions = "";
+									for(var i=0 ; i < courseNames.length; i++)
+										{
+											console.log(courseTypes[i].CourseNameId + " -- "+ courseNames[i].CourseName);
+											selectOptions += "<option value="+courseNames[i].CourseNameId+">"+courseNames[i].CourseName+"</option>"
+											
+										}
+									document.getElementById('courseName').innerHTML += selectOptions; 
+							</script>
+													</div>
+						
+                        </div>
+                    
+                    <!-- right side -->
+                    
+                    <div class="col-md-6 col-xs-12">
+                    	<div class="form-group">
                         <div>
                               <ul class="lab-no">
                             <li class="style-li"><strong>Training Date</strong></li>
@@ -204,11 +234,6 @@ function updateTraineeAssessmentResult(courseEnrolledid , status){
                             </div>
                         <input type="text" id="trainingDate" class="form-control">
                       </div>
-                        </div>
-                    
-                    <!-- right side -->
-                    
-                    <div class="col-md-6 col-xs-12">
                           <div class="form-group">
                         <div>
                               <ul class="lab-no">

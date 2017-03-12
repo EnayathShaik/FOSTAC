@@ -1164,4 +1164,33 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	}
 	
 	
+	//SearchUpcomingTraining
+	
+	
+	@Override
+	public  List SearchUpcomingTraining(String id){
+		
+		Session session = sessionFactory.getCurrentSession();
+System.out.println("id "+id);
+	
+		String sql ="select tc.trainingcalendarid , concat(pitp.trainingpartnerpermanentline1 , ' ' , pitp.trainingpartnerpermanentline2 , ' ' , s.statename , ' ' , d.districtname , ' ' , c.cityname) as address, "+
+				" concat(tc.trainingdate , ' / ' , tc.trainingtime) as schedule , "+
+				" concat(pitp.firstname , ' ' , pitp.middlename , ' ' , pitp.lastname ) ,concat( pitp.trainingpartnerpermanentmobile , ' / ' , pitp.trainingpartnerpermanentemail)  as contact, "+
+				" (select count(1) from courseenrolleduser A where A.trainingcalendarid = tc.trainingcalendarid) , tc.seatcapacity , ct.coursetype "+
+				"  , cn.coursename  , tc.status,cn.coursecode,tc.batchcode from trainingcalendar as tc "+
+				" inner join coursename as cn on cn.coursenameid = tc.coursename "+
+				" inner join coursetype as ct on ct.coursetypeid = tc.coursetype "+
+				" inner join managetrainingpartner as mtp on mtp.managetrainingpartnerid = tc.trainingpartner "+
+				" inner join personalinformationtrainingpartner as pitp on mtp.managetrainingpartnerid = pitp.trainingpartnername "+
+				" inner join logindetails as log on log.id = pitp.logindetails "+
+				" inner join state as s on s.stateid = pitp.trainingpartnerpermanentstate "+
+				" inner join city as c on c.cityid = pitp.trainingpartnerpermanentcity "+
+				" inner join district as d on d.districtid = pitp.trainingpartnerpermanentdistrict "+
+				" and tc.trainingcenter = pitp.personalinformationtrainingpartnerid where to_timestamp(COALESCE(tc.trainingdate, '19900101010101'),'DD-MM-YYYY HH24:MI') > now()";// and tc.trainingcenter='"+id+"'";
+				//" WHERE log.id = "+userId;
+		Query query = session.createSQLQuery(sql);
+		List courseTypeList = query.list();
+		return courseTypeList;
+	}
+	
 }

@@ -4,7 +4,9 @@
 
 <script type="text/javascript">
 function OnStart(){
+	
 	DrawCaptcha();
+
 }
 window.onload = OnStart;
 </script>
@@ -532,8 +534,7 @@ function AvoidSpace(event) {
                   </div>
                   <cf:input  type="hidden" path="TPName" id="TPName"/>
                     <cf:select path="TrainingPartnerName" class="form-control" onchange="getTPName()">
-                    <cf:option value="0" label="Select Training Partner Name" />
-					<cf:options items="${trainingPartnerNameList}" itemValue="manageTrainingPartnerId" itemLabel="trainingPartnerName" />
+                    <cf:option value="${userId}" label="${userName}" />
 					</cf:select>
                 </div>
                 <div class="form-group">

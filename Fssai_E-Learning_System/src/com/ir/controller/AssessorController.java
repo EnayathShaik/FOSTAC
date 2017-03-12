@@ -26,6 +26,7 @@ import com.google.gson.Gson;
 import com.ir.bean.common.IntStringBean;
 import com.ir.form.ContactTrainee;
 import com.ir.form.GenerateCourseCertificateForm;
+import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.assessor.MarkAttendanceForm;
@@ -89,8 +90,10 @@ public class AssessorController {
 		try{
 			int assessorId= (int)httpSession.getAttribute("loginIdUnique");
 			List<CourseType> courseTypes = assessmentService.courseTypes();
+			List<CourseName> courseNames = assessmentService.courseNames();
 			List<IntStringBean> listTc = assessmentService.getTrainingPartners(assessorId);
 			markAttendance.setCourseType(courseTypes);
+			markAttendance.setCoursetName(courseNames);
 			markAttendance.setTrainingCenters(listTc);
 			Gson gson = new Gson();
 			model.addAttribute("updateResult" , gson.toJson(markAttendance));

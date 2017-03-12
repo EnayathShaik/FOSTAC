@@ -67,11 +67,16 @@
 
                 function searchUpcomingTraining() {
 
-
+                	var name1=JSON.stringify({
+                		courseType:0,
+                		courseName:0
+                  })
                     var result = "";
                     $.ajax({
                         type: 'post',
-                        url: 'searchUpcomingTraining.jspp?'+window.trainingcenterId,
+                        url: 'searchUpcomingTraining.fssai?data='+window.trainingcenterId,
+                        contentType : "application/json",
+              		  	data:name1,
                         async: false,
                         success: function(data) {
                             $('#newTable').show();

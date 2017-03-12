@@ -17,6 +17,7 @@ import com.ir.bean.common.IntStringBean;
 import com.ir.dao.AssessmentDao;
 import com.ir.form.AssessmentAnswerCriteria;
 import com.ir.model.AssessmentQuestion;
+import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.trainee.TraineeAssessmentEvaluation;
 import com.ir.service.AssessmentService;
@@ -46,6 +47,14 @@ public class AssessmentServiceImpl implements AssessmentService {
 	public List<CourseType> courseTypes() {
 		List<CourseType> courseTypeList = assessmentDao.courseTypes();
 		return courseTypeList;
+	}
+	
+	
+	@Override
+	@Transactional
+	public List<CourseName> courseNames() {
+		List<CourseName> courseNameList = assessmentDao.courseNames();
+		return courseNameList;
 	}
 	@Override
 	@Transactional

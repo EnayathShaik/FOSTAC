@@ -3,6 +3,7 @@ package com.ir.model.assessor;
 import java.util.List;
 
 import com.ir.bean.common.IntStringBean;
+import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 
 public class MarkAttendanceForm {
@@ -10,6 +11,9 @@ public class MarkAttendanceForm {
 	int assessorId;
 	List<IntStringBean> trainingCenters;
 	List<CourseType> courseType;
+	List<CourseName> courseName;
+	
+
 
 	/**
 	 * @return the trainingCenters
@@ -51,6 +55,21 @@ public class MarkAttendanceForm {
 	 */
 	public void setAssessorId(int assessorId) {
 		this.assessorId = assessorId;
+	}
+	
+	
+	/**
+	 * @return the courseType
+	 */
+	public List<CourseName> getCourseName() {
+		return courseName;
+	}
+
+	/**
+	 * @param courseType the courseType to set
+	 */
+	public void setCoursetName(List<CourseName> courseName) {
+		this.courseName = courseName;
 	}
 	
 	

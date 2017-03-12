@@ -19,6 +19,7 @@ import com.ir.dao.AssessmentDao;
 import com.ir.form.AssessmentAnswerCriteria;
 import com.ir.model.AssessmentQuestion;
 import com.ir.model.CourseEnrolledUser;
+import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.trainee.TraineeAssessmentEvaluation;
 import com.ir.util.HibernateUtil;
@@ -64,6 +65,15 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		Query query = session.createQuery("from CourseType");
 		List<CourseType> courseTypeList = query.list();
 		return courseTypeList;
+	}
+	
+	
+	@Override
+	public List<CourseName> courseNames() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from CourseName");
+		List<CourseName> courseNameList = query.list();
+		return courseNameList;
 	}
 	@Override
 	public List<IntStringBean> getTrainingPartners(int assessorId){
@@ -217,11 +227,11 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		
 		String [] n1 = data.split("-");
         
-        String courseName , trainingDate , trainingCenter;
+        String courseType , trainingDate , trainingCenter , courseName;
         try{
-			courseName = n1[0].split("=")[1];	
+			courseType = n1[0].split("=")[1];	
 		}catch(Exception e){
-			courseName = "%";	
+			courseType = "%";	
 		}
 		
         try{
@@ -239,6 +249,13 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		catch(Exception e){
 			trainingDate = "%";
 		}
+		
+		  try{
+				courseName = n1[3].split("=")[1];	
+			}catch(Exception e){
+				courseName = "%";	
+			}
+		
 		String sql = "select A.trainingcalendarid,B.courseenrolleduserid, C.coursename,A.trainingdate,"
 				+ " concat(D.firstname , ' ' , D.middlename , ' ' , D.lastname ) TraineeCenter, "
 				+ " concat(F.firstname , ' ' , F.middlename , ' ' , F.lastname ) Trainee "
@@ -249,7 +266,7 @@ public class AssessmentDaoImpl implements AssessmentDao{
 				+ " inner join personalinformationtrainingpartner D on(A.trainingcenter=D.personalinformationtrainingpartnerid) "
 				+ " inner join logindetails E on(D.logindetails=E.id)"
 				+ " inner join personalinformationtrainee F on(F.logindetails=B.logindetails) "
-				+" where cast(A.coursename as varchar(100)) like '"+courseName+"%'   and  cast(A.trainingdate as varchar(100)) like '"+trainingDate+"%'  and cast(A.trainingcenter as varchar(100)) like '"+trainingCenter+"%'";
+				+" where cast(A.courseType as varchar(100)) like '"+courseType+"%'  and  cast(A.coursename as varchar(100)) like '"+courseName+"%'   and  cast(A.trainingdate as varchar(100)) like '"+trainingDate+"%'  and cast(A.trainingcenter as varchar(100)) like '"+trainingCenter+"%'";
 				
 				
 		Session session = sessionFactory.getCurrentSession();

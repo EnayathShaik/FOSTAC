@@ -130,5 +130,7 @@ public interface TrainingPartnerService {
 	
 	public String updateAttendanceStatus(String searchData);
 	
+	public List SearchUpcomingTraining(String data);
+	
 	
 }
