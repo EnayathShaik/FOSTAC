@@ -117,4 +117,7 @@ public interface TraineeService {
 	//getCourseDetails
 	
 	public List getCourseDetails(String data);
+	
+	public List getAttendanceDeatilsByID(String id);
+	
 }

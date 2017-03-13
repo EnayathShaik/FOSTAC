@@ -254,5 +254,14 @@ public class TraineeServiceImpl implements TraineeService {
 		// TODO Auto-generated method stub
 		return traineeDAO.getCourseDetails(data);
 	}
+	
+	//getAttendanceDeatilsByID
+	@Override
+	@Transactional
+	public List getAttendanceDeatilsByID(String  data) {
+		// TODO Auto-generated method stub
+		return traineeDAO.getAttendanceDeatilsByID(data);
+	}	
+	
 
 }

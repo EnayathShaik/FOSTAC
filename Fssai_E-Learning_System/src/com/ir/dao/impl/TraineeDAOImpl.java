@@ -1120,4 +1120,22 @@ public class TraineeDAOImpl implements TraineeDAO {
 		List courseTypeList = query.list();
 		return courseTypeList;
 	}
+	
+	
+	//getAttendanceDeatilsByID
+	@Override
+	public  List getAttendanceDeatilsByID(String data){
+		System.out.println("data "+data);
+		Session session = sessionFactory.getCurrentSession();
+		String sql ="select  loginid as traineeName , batchcode, trainingdate  trainingStartDate , trainingtime trainingEndDate ,D.coursecode, D.coursename , att.attendancedate  from courseenrolleduser ceu inner join trainingcalendar tc on (ceu.trainingcalendarid = tc.trainingcalendarid) "+
+		"inner join logindetails login on  (ceu.logindetails =  login.id)"+
+		"inner join coursename D on(tc.coursename=D.coursenameid)"+
+		"inner join traineedailyattendance att on (att.rollnumber = ceu.rollno)"+
+		"where rollno ='"+data+"'";
+		Query query = session.createSQLQuery(sql);
+		List courseTypeList = query.list();
+		return courseTypeList;
+	}
+	
+	
 }

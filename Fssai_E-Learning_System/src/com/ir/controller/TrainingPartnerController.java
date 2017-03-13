@@ -37,6 +37,7 @@ import com.ir.form.TrainingCalendarForm;
 import com.ir.form.trainingPartner.TrainingPartnerSearch;
 import com.ir.form.trainingPartner.TrainingPartnerSearchForm;
 import com.ir.model.CertificateInfo;
+import com.ir.model.CourseTrainee;
 import com.ir.model.CourseType;
 import com.ir.model.FeedbackForm;
 import com.ir.model.PersonalInformationTrainingPartner;
@@ -804,4 +805,24 @@ public class TrainingPartnerController {
 		out.flush();
 		
 	}
+	
+	
+	@RequestMapping(value="/getAttendanceDeatils" , method=RequestMethod.POST)
+	@ResponseBody
+	public void getAttendanceDeatils(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response ,  Model model ) throws IOException{
+		new ZLogger("getAttendanceDeatils","getAttendanceDeatils............" + data  , "TrainingPartnerController.java");
+
+			List  courseEnrolledDetails= traineeService.getAttendanceDeatilsByID(data);
+			PrintWriter out = response.getWriter();
+			Gson g =new Gson();
+			String newList = g.toJson(courseEnrolledDetails); 
+			System.out.println("newList "+newList);
+			out.write(newList);
+			out.flush();
+		
+		
+		
+	}
+	
+	
 }
