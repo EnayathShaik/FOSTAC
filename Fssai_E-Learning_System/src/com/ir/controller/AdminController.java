@@ -50,6 +50,7 @@ import com.ir.form.TrainingCalendarForm;
 import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.UpdateTrainerAssessmentForm;
 import com.ir.model.City;
+import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.District;
 import com.ir.model.FeedbackMaster;
@@ -609,6 +610,8 @@ public class AdminController {
 			@ModelAttribute("manageCourseContent") ManageCourseContentForm manageCourseContentForm, Model model) {
 		new ZLogger("manageCourseContent", "admin Controller manage course content form begin .", "AdminController.java");
 		List<CourseType> courseTypeList = pageLoadService.courseTypeList();
+		List<CourseName> courseNameList = adminService.courseNameList();
+		model.addAttribute("courseNameList", courseNameList);
 		model.addAttribute("courseTypeList", courseTypeList);
 		return "manageCourseContent";
 	}
