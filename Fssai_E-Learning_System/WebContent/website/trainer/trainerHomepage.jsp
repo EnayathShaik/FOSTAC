@@ -17,13 +17,17 @@ function OnStart(){
 window.onload = OnStart;
 
 function searchUpcomingTraining(){
+	var name1=JSON.stringify({
+		courseName:0
+  })
 	$.ajax({
 	type: 'post',
-	url: 'searchUpcomingTraining.jspp',
+	url: 'searchUpcomingTraining.fssai?data=',
+	  contentType : "application/json",
+	  data:name1,
 	async: false, 
 	success: function (data){
 	$('#newTable').show();
-	//var mainData = JSON.stringify(data);
 	var mainData1 = jQuery.parseJSON(data);
 	console.log(mainData1);
 //		alert(mainData1);
