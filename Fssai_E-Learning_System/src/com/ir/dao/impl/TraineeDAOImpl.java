@@ -1156,4 +1156,24 @@ public class TraineeDAOImpl implements TraineeDAO {
 	}
 	
 	
+	//savePaymentStatus
+	
+	@Override
+	public  String savePaymentStatus(String data){
+		System.out.println("data "+data);
+		String[] totalConnected = data.split("-");
+		String paymentstatus , courseenrolleduserid ;
+		paymentstatus= (totalConnected[0].split("="))[1];
+		
+		courseenrolleduserid = (totalConnected[1].split("="))[1];
+		new ZLogger("trainingCenterStateList", " paymentstatus " + paymentstatus + " courseenrolleduserid  "+courseenrolleduserid,  "TraineeDAOImpl.java");
+		Session session = sessionFactory.getCurrentSession();
+		CourseEnrolledUser courseEnrolledUser = (CourseEnrolledUser) session.load(CourseEnrolledUser.class, Integer.parseInt(courseenrolleduserid));
+		courseEnrolledUser.setPaymentstatus(paymentstatus);
+		
+		session.update(courseEnrolledUser);
+		
+		return "updated Sucessfully";
+	}
+	
 }

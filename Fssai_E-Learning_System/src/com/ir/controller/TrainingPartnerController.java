@@ -825,5 +825,19 @@ public class TrainingPartnerController {
 		
 	}
 	
+	//savePaymentStatus
+	
+	@RequestMapping(value="/savePaymentStatus" , method=RequestMethod.POST)
+	@ResponseBody
+	public void savePaymentStatus(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("savePaymentStatus","savePaymentStatus............" + data  , "TrainingPartnerController.java");
+		String result = traineeService.savePaymentStatus(data);
+		System.out.println("result "+result);
+		PrintWriter out = response.getWriter();
+		out.write(result);
+		out.flush();
+		
+	}
+	
 	
 }

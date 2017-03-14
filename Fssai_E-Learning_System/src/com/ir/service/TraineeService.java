@@ -120,4 +120,7 @@ public interface TraineeService {
 	
 	public List getAttendanceDeatilsByID(String id);
 	
+	public String savePaymentStatus(String data);
+	
+	
 }

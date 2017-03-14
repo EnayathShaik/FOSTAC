@@ -83,4 +83,6 @@ public interface TraineeDAO {
 	public List getCourseDetails(String data);
 	
 	public List getAttendanceDeatilsByID(String id);
+	
+	public String savePaymentStatus(String data);
 }

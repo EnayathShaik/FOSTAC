@@ -47,23 +47,24 @@ function confirmStatus(trainingid,courseid){
 		paymentstatus = 'Pending' ;
 	 
 		var result="";
-		var total = "paymentstatus="+paymentstatus+"&courseid="+courseid ;
+		var total = "paymentstatus="+paymentstatus+"-courseid="+courseid ;
 		console.log("total "+total);
 		//alert(idHidden);
 		$('#newTable').hide();
-		
+		var name1=JSON.stringify({
+			courseName:0
+	  })
 	 	$.ajax({
 		type: 'post',
-		url: 'savePaymentStatus.jspp?'+ total,
-		data: {
-		       user_name:name,
-		      },
+		url: 'savePaymentStatus.fssai?data='+ total,
+		contentType : "application/json",
+		data:name1,
 		      success: function (response) {
-		       $( '#name_status' ).html(response);
+		    	  alert(response);
+		       location.reload();
 		      }
 		      });
-	 	location.reload();
-	 	return true;
+	
 }
 
 </script>
@@ -99,7 +100,7 @@ function showDetails(){
 		//$('#newTable tr').remove();
 			$.each(mainData1 , function(i , obj)
 			{
-				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td><input type="radio" id="paymentstatus" name="paymentstatus" value="true">YES</td><td>'+obj[6]+'</td><td><a href="#" onClick="confirmStatus(\''+j+'\',\''+obj[7]+'\');">Save</a> </td></tr>');
+				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td><input type="radio" id="paymentstatus" name="paymentstatus" value="true">YES</td><td>'+obj[6]+'</td><td><a href="#" onClick="confirmStatus(\''+j+'\',\''+obj[7]+'\');return false;">Save</a> </td></tr>');
 				
 			});
 			}
@@ -211,7 +212,7 @@ return result;
                                                      <div class="form-group">
                                                         <div>
                                                             <ul class="lab-no">
-                                                                <li class="style-li"><strong>Course Type:</strong></li>
+                                                                <li class="style-li"><strong>Course Type:</strong></li><span id="name_status"></span>
                                                                 
                                                             </ul>
                                                         </div>

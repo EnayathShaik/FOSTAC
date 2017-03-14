@@ -263,5 +263,13 @@ public class TraineeServiceImpl implements TraineeService {
 		return traineeDAO.getAttendanceDeatilsByID(data);
 	}	
 	
+	
+	//savePaymentStatus
 
+	@Override
+	@Transactional
+	public String savePaymentStatus(String  data) {
+		// TODO Auto-generated method stub
+		return traineeDAO.savePaymentStatus(data);
+	}	
 }
