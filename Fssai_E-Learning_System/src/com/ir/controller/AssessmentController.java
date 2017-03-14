@@ -58,6 +58,7 @@ public class AssessmentController {
 			Enumeration<String> enumeration = request.getParameterNames();
 			HttpSession httpSession = request.getSession(false);
 			int loginIdUniuqe = (Integer) httpSession.getAttribute("loginIdUnique");
+			int userId = (Integer) httpSession.getAttribute("userId");
 			while (enumeration.hasMoreElements()) {
 				String parameterName = (String) enumeration.nextElement();
 				if (!parameterName.equalsIgnoreCase("courseNameId")
@@ -87,6 +88,14 @@ public class AssessmentController {
 			traineeAssessmentEvaluation.setLogindetails(loginIdUniuqe);
 			assessmentService
 					.saveTraineeAssessmentEvaluation(traineeAssessmentEvaluation);
+			
+			//Update Result in Course Enrolled User
+			if(traineeAssessmentEvaluation != null && traineeAssessmentEvaluation.getResult() != null){
+				//Update Result
+				assessmentService.updateTraineeAssessmentResultOnline(userId, traineeAssessmentEvaluation.getResult(), String.valueOf(traineeAssessmentEvaluation.getTotalScore()));
+			}
+			
+			
 			Gson gson = new Gson();
 			String strTraineeAssessmentEvaluation = gson
 					.toJson(traineeAssessmentEvaluation);

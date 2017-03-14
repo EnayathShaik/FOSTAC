@@ -24,4 +24,5 @@ public interface AssessmentDao {
 	public List viewAssessmentAgencyCalendar(String data);
 	public List searchAssessorTraineesForResults(String data);
 	public String updateTraineeAssessmentResult(String data);
+	public String updateTraineeAssessmentResultOnline(Integer userID,String result,String comment);
 }

@@ -127,47 +127,47 @@ private Title title;
 				PersonalInformationTrainer personalInformationTrainer = new PersonalInformationTrainer();
 				personalInformationTrainer.setTitle(tt);
 				personalInformationTrainer.setSteps(0);
-				personalInformationTrainer.setAadharNumber(registrationFormTrainer.getAadharNumber());
-				personalInformationTrainer.setFirstName(registrationFormTrainer.getFirstName());
-				personalInformationTrainer.setLastName(registrationFormTrainer.getLastName());
-				personalInformationTrainer.setMiddleName(registrationFormTrainer.getMiddleName());
-				personalInformationTrainer.setDOB(registrationFormTrainer.getDOB());
-				personalInformationTrainer.setCaste(registrationFormTrainer.getCaste());
-				personalInformationTrainer.setGender(registrationFormTrainer.getGender());
-				personalInformationTrainer.setTrainingCenterCorrespondenceLine1(registrationFormTrainer.getTrainingCenterCorrespondenceLine1());
-				personalInformationTrainer.setTrainingCenterCorrespondenceLine2(registrationFormTrainer.getTrainingCenterCorrespondenceLine2());
+				personalInformationTrainer.setAadharNumber(registrationFormTrainer.getAadharNumber() == null ? "" : registrationFormTrainer.getAadharNumber());
+				personalInformationTrainer.setFirstName(registrationFormTrainer.getFirstName() == null ? "" : registrationFormTrainer.getFirstName());
+				personalInformationTrainer.setLastName(registrationFormTrainer.getLastName() == null ? "" : registrationFormTrainer.getLastName());
+				personalInformationTrainer.setMiddleName(registrationFormTrainer.getMiddleName() == null ? "" :registrationFormTrainer.getMiddleName());
+				personalInformationTrainer.setDOB(registrationFormTrainer.getDOB() == null ? "" : registrationFormTrainer.getDOB());
+				personalInformationTrainer.setCaste(registrationFormTrainer.getCaste() == null ? "" : registrationFormTrainer.getCaste());
+				personalInformationTrainer.setGender(registrationFormTrainer.getGender() == null ? "" : registrationFormTrainer.getGender());
+				personalInformationTrainer.setTrainingCenterCorrespondenceLine1(registrationFormTrainer.getTrainingCenterCorrespondenceLine1() == null ? "" : registrationFormTrainer.getTrainingCenterCorrespondenceLine1());
+				personalInformationTrainer.setTrainingCenterCorrespondenceLine2(registrationFormTrainer.getTrainingCenterCorrespondenceLine2() == null ? "" : registrationFormTrainer.getTrainingCenterCorrespondenceLine2());
 				personalInformationTrainer.setCorrespondencestate(cs);
 				personalInformationTrainer.setCorrespondencedistrict(cd);
 				personalInformationTrainer.setCorrespondencecity(cc);
-				personalInformationTrainer.setFathername(registrationFormTrainer.getFatherName());
-				personalInformationTrainer.setTrainingCenterCorrespondencePincode(registrationFormTrainer.getTrainingCenterCorrespondencePincode());
-				personalInformationTrainer.setTrainingCenterPermanentEmail(registrationFormTrainer.getTrainingCenterPermanentEmail());
-				personalInformationTrainer.setTrainingCenterPermanentMobile(registrationFormTrainer.getTrainingCenterPermanentMobile());
-				personalInformationTrainer.setFoodSafetyExpBackground(registrationFormTrainer.getFoodSafetyExpBackground());
+				personalInformationTrainer.setFathername(registrationFormTrainer.getFatherName() == null ? "" : registrationFormTrainer.getFatherName());
+				personalInformationTrainer.setTrainingCenterCorrespondencePincode(registrationFormTrainer.getTrainingCenterCorrespondencePincode() == null ? "" : registrationFormTrainer.getTrainingCenterCorrespondencePincode());
+				personalInformationTrainer.setTrainingCenterPermanentEmail(registrationFormTrainer.getTrainingCenterPermanentEmail() == null ? "" : registrationFormTrainer.getTrainingCenterPermanentEmail());
+				personalInformationTrainer.setTrainingCenterPermanentMobile(registrationFormTrainer.getTrainingCenterPermanentMobile() == null ? "" : registrationFormTrainer.getTrainingCenterPermanentMobile());
+				personalInformationTrainer.setFoodSafetyExpBackground(registrationFormTrainer.getFoodSafetyExpBackground() == null ? "" : registrationFormTrainer.getFoodSafetyExpBackground());
 				personalInformationTrainer.setTrainingSessionWishToConduct(registrationFormTrainer.getTrainingSessionWishToConduct());
 				personalInformationTrainer.setExpInFoodSafefyTimeYear(registrationFormTrainer.getExpInFoodSafefyTimeYear());
 				personalInformationTrainer.setExpInFoodSafefyTimeMonth(registrationFormTrainer.getExpInFoodSafefyTimeMonth());
-				personalInformationTrainer.setAssociatedWithAnyTrainingPartner(registrationFormTrainer.getAssociatedWithAnyTrainingPartner());
+				personalInformationTrainer.setAssociatedWithAnyTrainingPartner(registrationFormTrainer.getAssociatedWithAnyTrainingPartner() == null ? "" :  registrationFormTrainer.getAssociatedWithAnyTrainingPartner());
 				personalInformationTrainer.setNoOfTrainingSessionConducted(registrationFormTrainer.getNoOfTrainingSessionConducted());
 				personalInformationTrainer.setAssociatedTrainingpartnerName(mtp);
 				if(checkPeramanent){
-					personalInformationTrainer.setTrainingCenterPermanentLine1(registrationFormTrainer.getTrainingCenterCorrespondenceLine1());
-					personalInformationTrainer.setTrainingCenterPermanentLine2(registrationFormTrainer.getTrainingCenterCorrespondenceLine2());
+					personalInformationTrainer.setTrainingCenterPermanentLine1(registrationFormTrainer.getTrainingCenterCorrespondenceLine1() == null ? "" : registrationFormTrainer.getTrainingCenterCorrespondenceLine1());
+					personalInformationTrainer.setTrainingCenterPermanentLine2(registrationFormTrainer.getTrainingCenterCorrespondenceLine2() == null ? "" : registrationFormTrainer.getTrainingCenterCorrespondenceLine2());
 					personalInformationTrainer.setPermanentcity(cc);
 					personalInformationTrainer.setPermanentdistrict(cd);
 					personalInformationTrainer.setPermanentstate(cs);
 					personalInformationTrainer.setCheckAddress("true");
-					personalInformationTrainer.setTrainingCenterPermanentPincode(registrationFormTrainer.getTrainingCenterCorrespondencePincode());
+					personalInformationTrainer.setTrainingCenterPermanentPincode(registrationFormTrainer.getTrainingCenterCorrespondencePincode() == null ? "" : registrationFormTrainer.getTrainingCenterCorrespondencePincode());
 				}
 				else{
-				personalInformationTrainer.setTrainingCenterPermanentLine1(registrationFormTrainer.getTrainingCenterPermanentLine1());
-				personalInformationTrainer.setTrainingCenterPermanentLine2(registrationFormTrainer.getTrainingCenterPermanentLine2());
+				personalInformationTrainer.setTrainingCenterPermanentLine1(registrationFormTrainer.getTrainingCenterPermanentLine1() == null ? "" : registrationFormTrainer.getTrainingCenterPermanentLine1());
+				personalInformationTrainer.setTrainingCenterPermanentLine2(registrationFormTrainer.getTrainingCenterPermanentLine2() == null ? "" : registrationFormTrainer.getTrainingCenterPermanentLine2());
 				personalInformationTrainer.setPermanentstate(ps);
 				personalInformationTrainer.setPermanentdistrict(pd);
 				//System.out.println(pd.getDistrictId() + "dist id");
 				personalInformationTrainer.setPermanentcity(pc);
 				personalInformationTrainer.setCheckAddress("false");
-				personalInformationTrainer.setTrainingCenterPermanentPincode(registrationFormTrainer.getTrainingCenterPermanentPincode());
+				personalInformationTrainer.setTrainingCenterPermanentPincode(registrationFormTrainer.getTrainingCenterPermanentPincode() == null ? "" : registrationFormTrainer.getTrainingCenterPermanentPincode());
 				}
 				personalInformationTrainer.setLoginDetails(loginDetails);
 				
@@ -221,16 +221,7 @@ private Title title;
 						}
 					}
 				}
-				
-				System.out.println("all insert done");
-				if(personalInformationTrainerIdd != 0){
-					SendMail sendMail = new SendMail();
-					sendMail.mailProperty(passwordString, registrationFormTrainer.getTrainingCenterPermanentEmail(), registrationFormTrainer.getFirstName()+ " " + registrationFormTrainer.getLastName());
-
-					return passwordString+"&"+registrationFormTrainer.getUserId();
-				}else{
-					return passwordString+"&"+registrationFormTrainer.getUserId();
-				}
+				return passwordString+"&"+registrationFormTrainer.getUserId();
 	}
 	
 	@Override

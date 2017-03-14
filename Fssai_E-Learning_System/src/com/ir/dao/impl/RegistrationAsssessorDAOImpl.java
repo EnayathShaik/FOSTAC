@@ -145,44 +145,33 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 			loginDetails.setProfileId(6);
 			loginDetails.setStatus("I");
 			loginDetails.setLoginId(registrationFormAssessor.getUserId());
-			
-//			List <CourseEnrolled> coursesEnrolled = new ArrayList<CourseEnrolled>();
-//			for(int i=0;i<registeredCourses.size(); i++){
-//				if(Util.isNotNull(registeredCourses.get(i)) ){
-//					
-//					int course = Integer.valueOf(registeredCourses.get(i));
-//					CourseEnrolled courseEnrolled = new CourseEnrolled();
-//					courseEnrolled.setLoginDetails(loginDetails);
-//					courseEnrolled.setCoursenameid(course);
-//				}
-//			}	
 
 			PersonalInformationAssessor personalInformationAssessor = new PersonalInformationAssessor();
 			personalInformationAssessor.setTitle(tt);
-			personalInformationAssessor.setUserId(registrationFormAssessor.getUserId());
-			personalInformationAssessor.setAadharNumber(registrationFormAssessor.getAadharNumber());
-			personalInformationAssessor.setFirstName(registrationFormAssessor.getFirstName());
-			personalInformationAssessor.setLastName(registrationFormAssessor.getLastName());
-			personalInformationAssessor.setMiddleName(registrationFormAssessor.getMiddleName());
-			personalInformationAssessor.setDOB(registrationFormAssessor.getDOB());
-			personalInformationAssessor.setGender(registrationFormAssessor.getGender());
-			personalInformationAssessor.setAssessorPermanentLine1(registrationFormAssessor.getAssessorPermanentLine1());
-			personalInformationAssessor.setAssessorPermanentLine2(registrationFormAssessor.getAssessorPermanentLine2());
+			personalInformationAssessor.setUserId(registrationFormAssessor.getUserId() == null ? "" : registrationFormAssessor.getUserId());
+			personalInformationAssessor.setAadharNumber(registrationFormAssessor.getAadharNumber() == null ? "" : registrationFormAssessor.getAadharNumber());
+			personalInformationAssessor.setFirstName(registrationFormAssessor.getFirstName() == null ? "" : registrationFormAssessor.getFirstName());
+			personalInformationAssessor.setLastName(registrationFormAssessor.getLastName() == null ? "" : registrationFormAssessor.getLastName());
+			personalInformationAssessor.setMiddleName(registrationFormAssessor.getMiddleName() == null ? "" : registrationFormAssessor.getMiddleName());
+			personalInformationAssessor.setDOB(registrationFormAssessor.getDOB() == null ? "" : registrationFormAssessor.getDOB());
+			personalInformationAssessor.setGender(registrationFormAssessor.getGender() == null ? "" : registrationFormAssessor.getGender());
+			personalInformationAssessor.setAssessorPermanentLine1(registrationFormAssessor.getAssessorPermanentLine1() == null ? "" : registrationFormAssessor.getAssessorPermanentLine1());
+			personalInformationAssessor.setAssessorPermanentLine2(registrationFormAssessor.getAssessorPermanentLine2() == null ? "" : registrationFormAssessor.getAssessorPermanentLine2());
 			personalInformationAssessor.setAssessorrPermanentState(ps);
 			personalInformationAssessor.setAssessorPermanentDistrict(pd);
 			personalInformationAssessor.setAssessorPermanentCity(pc);
-			personalInformationAssessor.setAssessorPermanentPincode(registrationFormAssessor.getAssessorPermanentPincode());
-			personalInformationAssessor.setAssessorPermanentEmail(registrationFormAssessor.getAssessorPermanentEmail());
-			personalInformationAssessor.setAssessorPermanentMobile(registrationFormAssessor.getAssessorPermanentMobile());
-			personalInformationAssessor.setAssessorCorrespondenceLine1(registrationFormAssessor.getAssessorCorrespondenceLine1());
-			personalInformationAssessor.setAssessorCorrespondenceLine2(registrationFormAssessor.getAssessorCorrespondenceLine2());
+			personalInformationAssessor.setAssessorPermanentPincode(registrationFormAssessor.getAssessorPermanentPincode() == null ? "" : registrationFormAssessor.getAssessorPermanentPincode());
+			personalInformationAssessor.setAssessorPermanentEmail(registrationFormAssessor.getAssessorPermanentEmail() == null ? "" : registrationFormAssessor.getAssessorPermanentEmail());
+			personalInformationAssessor.setAssessorPermanentMobile(registrationFormAssessor.getAssessorPermanentMobile() == null ? "" : registrationFormAssessor.getAssessorPermanentMobile());
+			personalInformationAssessor.setAssessorCorrespondenceLine1(registrationFormAssessor.getAssessorCorrespondenceLine1() == null ? "" : registrationFormAssessor.getAssessorCorrespondenceLine1());
+			personalInformationAssessor.setAssessorCorrespondenceLine2(registrationFormAssessor.getAssessorCorrespondenceLine2() == null ? "" : registrationFormAssessor.getAssessorCorrespondenceLine2());
 			personalInformationAssessor.setAssessorCorrespondenceState(cs);
 			personalInformationAssessor.setAssessorCorrespondenceDistrict(cd);
 			personalInformationAssessor.setAssessorCorrespondenceCity(cc);
-			personalInformationAssessor.setAssessorCorrespondencePincode(registrationFormAssessor.getAssessorCorrespondencePincode());
+			personalInformationAssessor.setAssessorCorrespondencePincode(registrationFormAssessor.getAssessorCorrespondencePincode() == null ? "" : registrationFormAssessor.getAssessorCorrespondencePincode());
 			personalInformationAssessor.setReleventExpOfAuditInYear(registrationFormAssessor.getReleventExpOfAuditInYear());
-			personalInformationAssessor.setReleventExpOfAuditInMonth(registrationFormAssessor.getReleventExpOfAuditInMonth());
-			personalInformationAssessor.setHowManyAssessmentConductInAMonth(registrationFormAssessor.getHowManyAssessmentConductInAMonth());
+			personalInformationAssessor.setReleventExpOfAuditInMonth(registrationFormAssessor.getReleventExpOfAuditInMonth() == null ? "" : registrationFormAssessor.getReleventExpOfAuditInMonth());
+			personalInformationAssessor.setHowManyAssessmentConductInAMonth(registrationFormAssessor.getHowManyAssessmentConductInAMonth() == null ? "" : registrationFormAssessor.getHowManyAssessmentConductInAMonth());
 			personalInformationAssessor.setAssessmentAgencyName(maan);
 			personalInformationAssessor.setLoginDetails(loginDetails);
 			//personalInformationAssessor.setCoursesEnrolled(coursesEnrolled);

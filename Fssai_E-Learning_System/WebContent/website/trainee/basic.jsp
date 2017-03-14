@@ -7,6 +7,7 @@ function OnStart(){
 	var steps = 1;
 	var traineeSteps =
 		<%=(Integer) session.getAttribute("traineeSteps")%>
+	
 	if(steps > traineeSteps){
 	}else{
 		if(steps-1 == traineeSteps){
@@ -17,7 +18,7 @@ function OnStart(){
 		window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
 	}
 }
-//window.onload = OnStart;
+window.onload = OnStart;
 
  
  function getcourseType(){

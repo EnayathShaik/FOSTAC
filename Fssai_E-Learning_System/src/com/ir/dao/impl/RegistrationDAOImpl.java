@@ -139,9 +139,8 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 	@Override
 	public String registerPersonalInformationTrainee(
 			RegistrationFormTrainee registrationFormTrainee) {
-		System.out.println("RegistrationDAOImpl [register] begin for registration trainee");
-		Session session = sessionFactory.getCurrentSession();
 		
+		Session session = sessionFactory.getCurrentSession();
 		State ps = getState(registrationFormTrainee.getResState(),session); 
 		State cs = getState(registrationFormTrainee.getCorrespondenceState(),session);
 		State bs = getState(registrationFormTrainee.getBussState(),session);
@@ -157,7 +156,6 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 		boolean correspondADD=registrationFormTrainee.isCheckCorrespondence();
 		boolean checkCompany=registrationFormTrainee.isCheckCompany();
 		
-		System.out.println("this is boolean value   "+correspondADD);
 		PasswordGenerator passwordGenerator = new PasswordGenerator(6);
 		char[] pass = passwordGenerator.get();
 		String passwordString = String.valueOf(pass);
@@ -175,7 +173,7 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 		
 		
 		LoginDetails loginDetails = new LoginDetails();
-		loginDetails.setLoginId(registrationFormTrainee.getUserId());
+		loginDetails.setLoginId(registrationFormTrainee.getUserId() == null ? "" : registrationFormTrainee.getUserId());
 		loginDetails.setPassword(passwordString);
 		loginDetails.setEncrypted_Password(encryprPassword);
 		loginDetails.setStatus("A");
@@ -265,12 +263,8 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 	}
 		}
 		personalInformationTrainee.setLoginDetails(loginDetails);
-		Integer personalInformationTraineeId = (Integer)session.save(personalInformationTrainee);
-		if(personalInformationTraineeId  != 0){
-			return passwordString+"&"+registrationFormTrainee.getUserId();
-		}else{
-			return passwordString+"&"+registrationFormTrainee.getUserId();
-		}
+		session.save(personalInformationTrainee);
+		return passwordString+"&"+registrationFormTrainee.getUserId();
 	}
 	
 }

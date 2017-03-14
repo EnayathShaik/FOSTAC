@@ -108,7 +108,7 @@ return result;
 }
 
 function updateTraineeAssessmentResult(courseEnrolledid , status){
-	
+	alert('courseEnrolledid '+courseEnrolledid)
 	var status = $("#"+courseEnrolledid).val();
 	var comment = $("#comments"+courseEnrolledid).val();
 	var total =  "courseenrolledId="+courseEnrolledid+"-status="+status+"-comment="+comment ;

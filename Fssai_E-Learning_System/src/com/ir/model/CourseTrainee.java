@@ -138,5 +138,18 @@ public class CourseTrainee {
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
 	}
+	@Override
+	public String toString() {
+		return "CourseTrainee [courseName=" + courseName + ", courseCode="
+				+ courseCode + ", courseTypeId=" + courseTypeId
+				+ ", courseDuration=" + courseDuration + ", courseNameID="
+				+ courseNameID + ", contentLinkInput=" + contentLinkInput
+				+ ", contentNameInput=" + contentNameInput + ", assessor="
+				+ assessor + ", assessorAgency=" + assessorAgency
+				+ ", contentType=" + contentType + ", createDate=" + createDate
+				+ ", modifyDate=" + modifyDate + "]";
+	}
+	
+	
 	
 }

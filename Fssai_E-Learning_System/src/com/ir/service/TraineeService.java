@@ -39,7 +39,7 @@ public interface TraineeService {
 	public List<CourseTrainee> getCourseTrainingByCourseTypeIDList(int typeId);
 	
 	
-	public String isTraineeEligible(int userID,String isOnline);
+	public String isTraineeEligible(int userID);
 	
 	
 	public List<ManageTrainingPartner> trainingPartnerList();

@@ -110,7 +110,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		Query query = session.createSQLQuery(sql);
 		List l = query.list();
 		if(l != null && l.size() > 0){
-			return "error";
+			
 		}else{
 			CourseType ct = getCourseType(postVacancyTrainingCenterForm.getCourseType());
 			CourseName cn = getCourseName(postVacancyTrainingCenterForm.getCourseName());
@@ -118,18 +118,17 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			postVacancyTrainingCenter.setRequiredExp(postVacancyTrainingCenterForm.getRequiredExp());
 			postVacancyTrainingCenter.setCourseName(cn);
 			postVacancyTrainingCenter.setCourseType(ct);
-			postVacancyTrainingCenter.setVacancyType(postVacancyTrainingCenterForm.getVacancyType());
-			postVacancyTrainingCenter.setTrainingDate(postVacancyTrainingCenterForm.getTrainingDate());
-			postVacancyTrainingCenter.setTrainingEndTime(postVacancyTrainingCenterForm.getTrainingEndTime());
-			postVacancyTrainingCenter.setLoginId(postVacancyTrainingCenterForm.getLoginId());
+			postVacancyTrainingCenter.setVacancyType(postVacancyTrainingCenterForm.getVacancyType() == null ? "" : postVacancyTrainingCenterForm.getVacancyType());
+			postVacancyTrainingCenter.setTrainingDate(postVacancyTrainingCenterForm.getTrainingDate() == null ? "" : postVacancyTrainingCenterForm.getTrainingDate());
+			postVacancyTrainingCenter.setTrainingEndTime(postVacancyTrainingCenterForm.getTrainingEndTime() == null ? "" : postVacancyTrainingCenterForm.getTrainingEndTime());
+			postVacancyTrainingCenter.setLoginId(postVacancyTrainingCenterForm.getLoginId() == null ? "" : postVacancyTrainingCenterForm.getLoginId());
 			postVacancyTrainingCenter.setTrainingCenter(p);
 			postVacancyTrainingCenterIdd = (Integer) session.save(postVacancyTrainingCenter);
 			if(postVacancyTrainingCenterIdd >0 && postVacancyTrainingCenterIdd != null){
 				return "created";
-			}else{
-				return "error";
 			}
 		}
+		return "error";
 	}
 	@Override
 	public int saveVacancy(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean,Integer profileID, Integer userId){
@@ -584,33 +583,35 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		}
 		TrainingCalendar tc = new TrainingCalendar();
 		TrainingCalendarHistoryLogs tch =  new TrainingCalendarHistoryLogs();
+		
 		tc.setCourseType(trainingCalendarForm.getCourseType());
 		tc.setCourseName(trainingCalendarForm.getCourseName());
 		tc.setTrainingCenter(trainingCalendarForm.getTrainingCenter());
-		tc.setTrainingDate(trainingCalendarForm.getTrainingStartDate());
-		tc.setTrainingTime(trainingCalendarForm.getTrainingEndDate());
-		tc.setTrainerName(trainingCalendarForm.getTrainerName());
-		tc.setAssessmentPartnerName(trainingCalendarForm.getAssessmentAgencyName());
-		tc.setSeatCapacity(trainingCalendarForm.getSeatCapacity());
-		tc.setAssessmentDateTime(trainingCalendarForm.getAssessmentDateTime());
-		tc.setType(trainingCalendarForm.getType());
+		tc.setTrainingDate(trainingCalendarForm.getTrainingStartDate() == null ? "" : trainingCalendarForm.getTrainingStartDate());
+		tc.setTrainingTime(trainingCalendarForm.getTrainingEndDate() == null ? "" : trainingCalendarForm.getTrainingEndDate());
+		tc.setTrainerName(trainingCalendarForm.getTrainerName() == null ? "" : trainingCalendarForm.getTrainerName());
+		tc.setAssessmentPartnerName(trainingCalendarForm.getAssessmentAgencyName() == null ? "" : trainingCalendarForm.getAssessmentAgencyName());
+		tc.setSeatCapacity(trainingCalendarForm.getSeatCapacity() == null ? "" : trainingCalendarForm.getSeatCapacity());
+		tc.setAssessmentDateTime(trainingCalendarForm.getAssessmentDateTime() == null ? "" : trainingCalendarForm.getAssessmentDateTime());
+		tc.setType(trainingCalendarForm.getType() == null ? "" : trainingCalendarForm.getType());
 		tc.setAssessor(trainingCalendarForm.getAssessor());
-		tc.setAssessmentDateTime(trainingCalendarForm.getAssessmentDateTime());
+		tc.setAssessmentDateTime(trainingCalendarForm.getAssessmentDateTime() == null ? "" : trainingCalendarForm.getAssessmentDateTime());
 		
 		
 		
 		tch.setCourseType(trainingCalendarForm.getCourseType());
 		tch.setCourseName(trainingCalendarForm.getCourseName());
 		tch.setTrainingCenter(trainingCalendarForm.getTrainingCenter());
-		tch.setTrainingDate(trainingCalendarForm.getTrainingStartDate());
-		tch.setTrainingTime(trainingCalendarForm.getTrainingEndDate());
-		tch.setTrainerName(trainingCalendarForm.getTrainerName());
-		tch.setAssessmentPartnerName(trainingCalendarForm.getAssessmentAgencyName());
-		tch.setSeatCapacity(trainingCalendarForm.getSeatCapacity());
-		tch.setAssessmentDateTime(trainingCalendarForm.getAssessmentDateTime());
-		tch.setType(trainingCalendarForm.getType());
+		tch.setTrainingDate(trainingCalendarForm.getTrainingStartDate() == null ? "" : trainingCalendarForm.getTrainingStartDate());
+		tch.setTrainingTime(trainingCalendarForm.getTrainingEndDate() == null ? "" : trainingCalendarForm.getTrainingEndDate());
+		tch.setTrainerName(trainingCalendarForm.getTrainerName() == null ? "" : trainingCalendarForm.getTrainerName());
+		tch.setAssessmentPartnerName(trainingCalendarForm.getAssessmentAgencyName() == null ? "" : trainingCalendarForm.getAssessmentAgencyName());
+		tch.setSeatCapacity(trainingCalendarForm.getSeatCapacity() == null ? "" : trainingCalendarForm.getSeatCapacity());
+		tch.setAssessmentDateTime(trainingCalendarForm.getAssessmentDateTime() == null ? "" : trainingCalendarForm.getAssessmentDateTime());
+		tch.setType(trainingCalendarForm.getType() == null ? "" : trainingCalendarForm.getType());
 		tch.setAssessor(trainingCalendarForm.getAssessor());
-		tch.setAssessmentDateTime(trainingCalendarForm.getAssessmentDateTime());
+		tch.setAssessmentDateTime(trainingCalendarForm.getAssessmentDateTime() == null ? "" : trainingCalendarForm.getAssessmentDateTime());
+	
 		
 		CourseName courseName = (CourseName) session.load(CourseName.class, trainingCalendarForm.getCourseName());
 		PersonalInformationTrainingPartner personalInformationTrainingPartner = (PersonalInformationTrainingPartner) session.load(PersonalInformationTrainingPartner.class, trainingCalendarForm.getTrainingCenter());
@@ -1249,8 +1250,8 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 			System.out.println("size "+list.size());
 			if(list.size() > 0){
 				
-				String trainingStartDate = list.get(0)[0].toString();
-				String trainingEndDate = list.get(0)[1].toString();
+				String trainingStartDate = list.get(0)[0] == null ? "" : list.get(0)[0].toString();
+				String trainingEndDate = list.get(0)[1] == null ? "" : list.get(0)[1].toString();
 				Date date = new Date();
 				String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(date);
 				 Date trainingStartDateNew = new SimpleDateFormat("yyyy-MM-dd").parse(trainingStartDate.toString());
@@ -1274,7 +1275,7 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 							TraineeDailyAttendance traineeAtt = new TraineeDailyAttendance();
 							traineeAtt.setRollNumber(rollNo);
 							traineeAtt.setAttendanceDate(modifiedDate);
-							int attId = (int) session1.save(traineeAtt);
+							int attId = (Integer) session1.save(traineeAtt);
 							if(attId>0){
 							result ="Attendance successfully marked for Roll Number "+rollNo;
 							}
@@ -1290,7 +1291,7 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 				
 			}
 		}catch(Exception e){
-			
+			e.printStackTrace();
 		}finally{
 		}
 

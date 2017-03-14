@@ -426,7 +426,7 @@ public class AdminController {
 		String email = manageTrainingPartnerForm.getEmail();
 		String manageTrainingPartnerSave = adminService
 				.manageTrainingPartnerSave(manageTrainingPartnerForm);
-		if (!manageTrainingPartnerSave.equalsIgnoreCase("")) {
+		if (manageTrainingPartnerSave != null && !manageTrainingPartnerSave.equalsIgnoreCase("")) {
 			String[] all = manageTrainingPartnerSave.split("&");
 			model.addAttribute("id", all[1]);
 			model.addAttribute("pwd", all[0]);
@@ -460,7 +460,7 @@ public class AdminController {
 		new ZLogger("manageAssessmentAgencySave", " stcityate  "+ manageAssessmentAgencyForm.getDistrict() , "AdminController.java");
 		String manageAssessmentAgencySave = adminService
 				.manageAssessmentAgencySave(manageAssessmentAgencyForm);
-		if (!manageAssessmentAgencySave.equalsIgnoreCase("")) {
+		if (manageAssessmentAgencySave != null && !manageAssessmentAgencySave.equalsIgnoreCase("")) {
 			String[] all = manageAssessmentAgencySave.split("&");
 			model.addAttribute("id", all[1]);
 			model.addAttribute("pwd", all[0]);

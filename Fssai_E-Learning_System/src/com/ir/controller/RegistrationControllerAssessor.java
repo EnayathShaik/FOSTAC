@@ -51,7 +51,7 @@ public class RegistrationControllerAssessor implements Serializable{
 			List<Title> titleList = pageLoadService.loadTitle();
 			List<ManageAssessmentAgency> assessmentAgencyNameList = registrationServiceAssessor.loadAssessmentAgency();
 			//String uniqueID = GenerateUniqueID.getNextCombinationId("TE", "personalinformationtrainee" , "000000");
-			String uniqueID = pageLoadService.getNextCombinationId("TE", "personalinformationtrainee" , "000000");
+			String uniqueID = pageLoadService.getNextCombinationId("AS", "personalinformationassessor" , "000000");
 			
 			List<CourseName> basicCourseList = registrationServiceAssessor.basicCourseName();
 			model.addAttribute("registrationFormAssessor", registrationFormAssessor);

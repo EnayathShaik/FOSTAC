@@ -279,23 +279,17 @@ public class AdminDAOImpl implements AdminDAO {
 		CourseType ct = (CourseType) session.load(CourseType.class, manageCourse.getCourseType());
 		String coursetype = ct.getCourseType();
 		CourseName courseName= new CourseName();
-		courseName.setCourseduration(manageCourse.getDuration());
-		courseName.setCoursename(manageCourse.getCourseName());
+		courseName.setCourseduration(manageCourse.getDuration() == null ? "" : manageCourse.getDuration());
+		courseName.setCoursename(manageCourse.getCourseName() == null ? "" : manageCourse.getCourseName());
 		courseName.setCourseTypeS(ct);
-		courseName.setStatus(manageCourse.getStatus());
-		courseName.setPaidunpaid(manageCourse.getFreePaid());
-		courseName.setModeOfTraining(manageCourse.getModeOfTraining());
+		courseName.setStatus(manageCourse.getStatus() == null ? "" : manageCourse.getStatus());
+		courseName.setPaidunpaid(manageCourse.getFreePaid() == null ? "" : manageCourse.getFreePaid());
+		courseName.setModeOfTraining(manageCourse.getModeOfTraining() == null ? "" : manageCourse.getModeOfTraining());
 		if(manageCourse != null && manageCourse.getCourseName() != null && manageCourse.getCourseName().length() > 1
 				&& coursetype != null && coursetype.length() > 1){
 			courseName.setCourseCode(ct.getCourseType().substring(0, 1).toUpperCase()+ manageCourse.getCourseName().substring(0, 2).toUpperCase()+StringUtils.leftPad(String.valueOf(maxId), 3, "0"));
-			
 			courseName.setSeqNo(maxId);
 		}
-		
-		
-		
-		
-		
 		if(manageCourse.getOnline()==null||manageCourse.getOnline().equals("false")){
 			courseName.setOnline("Nil");
 		}else{
@@ -373,29 +367,22 @@ public class AdminDAOImpl implements AdminDAO {
 		City c = getCity(manageTrainingPartnerForm.getCity());
 		
 		ManageTrainingPartner manageTrainingPartner = new ManageTrainingPartner();
-		manageTrainingPartner.setPAN(manageTrainingPartnerForm.getPAN());
-		manageTrainingPartner.setTrainingPartnerName(manageTrainingPartnerForm.getTrainingPartnerName());
-		manageTrainingPartner.setUserId(nextSequenceUserID);
-		manageTrainingPartner.setWebsiteUrl(manageTrainingPartnerForm.getWebsiteUrl());
-		manageTrainingPartner.setHeadOfficeDataAddress1(manageTrainingPartnerForm.getHeadOfficeDataAddress1());
-		manageTrainingPartner.setHeadOfficeDataAddress2(manageTrainingPartnerForm.getHeadOfficeDataAddress2());
-		manageTrainingPartner.setPin(manageTrainingPartnerForm.getPin());
+		manageTrainingPartner.setPAN(manageTrainingPartnerForm.getPAN() == null ? "" : manageTrainingPartnerForm.getPAN());
+		manageTrainingPartner.setTrainingPartnerName(manageTrainingPartnerForm.getTrainingPartnerName() == null ? "" : manageTrainingPartnerForm.getTrainingPartnerName());
+		manageTrainingPartner.setUserId(nextSequenceUserID == null ? "" : nextSequenceUserID);
+		manageTrainingPartner.setWebsiteUrl(manageTrainingPartnerForm.getWebsiteUrl() == null ? "" : manageTrainingPartnerForm.getWebsiteUrl());
+		manageTrainingPartner.setHeadOfficeDataAddress1(manageTrainingPartnerForm.getHeadOfficeDataAddress1() == null ? "" : manageTrainingPartnerForm.getHeadOfficeDataAddress1());
+		manageTrainingPartner.setHeadOfficeDataAddress2(manageTrainingPartnerForm.getHeadOfficeDataAddress2() == null ? "" : manageTrainingPartnerForm.getHeadOfficeDataAddress2());
+		manageTrainingPartner.setPin(manageTrainingPartnerForm.getPin() == null ? "" : manageTrainingPartnerForm.getPin());
 		manageTrainingPartner.setDistrict(d);
 		manageTrainingPartner.setCity(c);
 		manageTrainingPartner.setState(s);
-		manageTrainingPartner.setEmail(manageTrainingPartnerForm.getEmail());
+		manageTrainingPartner.setEmail(manageTrainingPartnerForm.getEmail() == null ?  "" : manageTrainingPartnerForm.getEmail());
 		manageTrainingPartner.setLoginDetails(loginDetails);
-		Integer manageTrainingPartnerIdd = (Integer)session.save(manageTrainingPartner);
+		session.save(manageTrainingPartner);
 		
 		new ZLogger("manageTrainingPartnerSave", "all insert done", "AdminDAOImpl.java");
-		new ZLogger("manageTrainingPartnerSave", "saved login "+ manageTrainingPartnerIdd, "AdminDAOImpl.java");
-		if(manageTrainingPartnerIdd  != 0){
-			SendMail sendMail = new SendMail();
-			sendMail.mailProperty(passwordString, manageTrainingPartnerForm.getEmail(), manageTrainingPartnerForm.getTrainingPartnerName()+ " " + manageTrainingPartnerForm.getUserId());
-			return passwordString+"&"+nextSequenceUserID;
-		}else{
-			return passwordString+"&"+nextSequenceUserID;
-		}
+		return passwordString+"&"+nextSequenceUserID;
 	}
 
 
@@ -429,27 +416,20 @@ public class AdminDAOImpl implements AdminDAO {
 		loginDetails.setProfileId(8);
 		loginDetails.setStatus("A");
 		loginDetails.setIsActive(manageAssessmentAgencyForm.getStatus().equalsIgnoreCase("A")? "Y" : "N");
-		manageAssessmentAgency.setAgencyUniqueID(nextSequenceUserID);
-		manageAssessmentAgency.setPAN(manageAssessmentAgencyForm.getPAN());
-		manageAssessmentAgency.setAssessmentAgencyName(manageAssessmentAgencyForm.getAssessmentAgencyName());
-		manageAssessmentAgency.setWebsiteUrl(manageAssessmentAgencyForm.getWebsiteUrl());
-		manageAssessmentAgency.setHeadOfficeDataAddress1(manageAssessmentAgencyForm.getHeadOfficeDataAddress1());
-		manageAssessmentAgency.setHeadOfficeDataAddress2(manageAssessmentAgencyForm.getHeadOfficeDataAddress2());
-		manageAssessmentAgency.setPin(manageAssessmentAgencyForm.getPin());
+		manageAssessmentAgency.setAgencyUniqueID(nextSequenceUserID == null ? "" : nextSequenceUserID);
+		manageAssessmentAgency.setPAN(manageAssessmentAgencyForm.getPAN() == null ? "" : manageAssessmentAgencyForm.getPAN());
+		manageAssessmentAgency.setAssessmentAgencyName(manageAssessmentAgencyForm.getAssessmentAgencyName() == null ? "" : manageAssessmentAgencyForm.getAssessmentAgencyName());
+		manageAssessmentAgency.setWebsiteUrl(manageAssessmentAgencyForm.getWebsiteUrl() == null ? "" : manageAssessmentAgencyForm.getWebsiteUrl());
+		manageAssessmentAgency.setHeadOfficeDataAddress1(manageAssessmentAgencyForm.getHeadOfficeDataAddress1() == null ? "" : manageAssessmentAgencyForm.getHeadOfficeDataAddress1());
+		manageAssessmentAgency.setHeadOfficeDataAddress2(manageAssessmentAgencyForm.getHeadOfficeDataAddress2() == null ? "" : manageAssessmentAgencyForm.getHeadOfficeDataAddress2());
+		manageAssessmentAgency.setPin(manageAssessmentAgencyForm.getPin() == null ? "" : manageAssessmentAgencyForm.getPin());
 		manageAssessmentAgency.setDistrict(d);
 		manageAssessmentAgency.setCity(c);
-		manageAssessmentAgency.setEmail(manageAssessmentAgencyForm.getEmail());
+		manageAssessmentAgency.setEmail(manageAssessmentAgencyForm.getEmail() == null ? "" : manageAssessmentAgencyForm.getEmail());
 		manageAssessmentAgency.setLoginDetails(loginDetails);
 		manageAssessmentAgency.setState(s);
-		Integer manageTrainingPartnerIdd = (Integer)session.save(manageAssessmentAgency);
-		if(manageTrainingPartnerIdd  != 0){
-			SendMail sendMail = new SendMail();
-			sendMail.mailProperty(passwordString, manageAssessmentAgencyForm.getEmail(), manageAssessmentAgencyForm.getAssessmentAgencyName()+ " " + manageAssessmentAgencyForm.getUserId());
-
-			return passwordString+"&"+nextSequenceUserID;
-		}else{
-			return passwordString+"&"+nextSequenceUserID;
-		}
+		session.save(manageAssessmentAgency);
+		return passwordString+"&"+nextSequenceUserID;
 	}
 
 

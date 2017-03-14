@@ -231,6 +231,7 @@ public class TraineeController {
 					contentName = (courseTrainee != null ? "" :  courseTrainee.getContentNameInput());
 					model.addAttribute("contentName", contentName);
 					model.addAttribute("contentPath", docPath);
+					System.out.println("********************** == "+courseTrainee);
 					model.addAttribute("courseTrainee", courseTrainee);
 			}
 		}catch(Exception e){
@@ -517,12 +518,11 @@ public class TraineeController {
 				String isOnline=traineeService.isCourseOnline(userId);
 				if(isOnline != null && isOnline.toUpperCase().contains("ONLINE")){
 					model.addAttribute("ISONLINE","YES");
-					isEligible = traineeService.isTraineeEligible(userId,"ONLINE");
 				}else{
 					model.addAttribute("ISONLINE","NO");
-					isEligible = traineeService.isTraineeEligible(userId,"CLASSROOM");
 				}
-				
+				isEligible = traineeService.isTraineeEligible(userId);
+				System.out.println("*****isEligible****"+isEligible);
 				if(isEligible != null && isEligible.equals("Y")){
 					CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
 					model.addAttribute("courseTrainee", courseTrainee);
@@ -577,6 +577,7 @@ public class TraineeController {
 			String ppt = ".ppt";
 			
 			if(userId>0){
+				CourseTrainee  courseTraineeDisplay= traineeService.getCourseTrainingByCourseTypeID(userId);
 				List<CourseTrainee>  ListcourseTrainee= traineeService.getCourseTrainingByCourseTypeIDList(userId);
 				System.out.println(" inside list "+ListcourseTrainee.size());
 				List<String> listcontentName =  new ArrayList<String>();
@@ -631,6 +632,8 @@ public class TraineeController {
 				model.addAttribute("contentName", listcontentName);
 				model.addAttribute("contentPath", listcontentPath);
 				model.addAttribute("contentLink", map);
+				model.addAttribute("courseTrainee", courseTraineeDisplay);
+				
 			Utility utility=new Utility();
 			//Need to write service for AsssessorAgency 
 			model.addAttribute("utility",utility);

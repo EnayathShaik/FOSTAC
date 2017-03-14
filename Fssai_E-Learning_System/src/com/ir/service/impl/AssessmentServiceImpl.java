@@ -172,4 +172,13 @@ public class AssessmentServiceImpl implements AssessmentService {
 		return courseTypeList;
 	}
 	
+	@Override
+	@Transactional
+	public String updateTraineeAssessmentResultOnline(Integer userID,String result,String comment) {
+		String courseTypeList = assessmentDao.updateTraineeAssessmentResultOnline(userID,result,comment);
+		return courseTypeList;
+	}
+	
+	
+	
 }

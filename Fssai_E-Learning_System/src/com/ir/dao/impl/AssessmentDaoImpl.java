@@ -23,6 +23,7 @@ import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.trainee.TraineeAssessmentEvaluation;
 import com.ir.util.HibernateUtil;
+import com.zentech.logger.ZLogger;
 @Repository("AssessmentDao")
 @Service
 public class AssessmentDaoImpl implements AssessmentDao{
@@ -302,6 +303,30 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		String newList = "Records successfully updated !!!" ; 
 				
 	
+		return newList;
+	}
+	
+	@Override
+	public String updateTraineeAssessmentResultOnline(Integer userID,String result,String comment) {
+		int courseenrolledUserID = 0;
+		Session session = sessionFactory.getCurrentSession();
+		String sql = "select courseenrolleduserid from courseenrolleduser where  status = 'N' and logindetails = "+userID;
+		Query query = session.createSQLQuery(sql);
+		List list = query.list();
+		if(list.size() > 0){
+			courseenrolledUserID = (Integer) list.get(0);
+		}
+		if(courseenrolledUserID > 0){
+			CourseEnrolledUser courseEnrolledUser = (CourseEnrolledUser) session.load(CourseEnrolledUser.class, courseenrolledUserID);
+			if(result != null && result.toUpperCase().equals("PASS")){
+				courseEnrolledUser.setResult("P");
+			}else{
+				courseEnrolledUser.setResult("F");
+			}
+			courseEnrolledUser.setAssessorComment(comment);
+			session.update(courseEnrolledUser);
+		}
+		String newList = "Records successfully updated !!!" ; 
 		return newList;
 	}
 	

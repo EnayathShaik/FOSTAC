@@ -499,13 +499,19 @@ public class TraineeDAOImpl implements TraineeDAO {
 	@Override
 	public boolean changePasswordTraineeSave(
 			ChangePasswordForm changePasswordForm, String id) {
+		boolean confirm = Boolean.FALSE;
+		Session session = sessionFactory.getCurrentSession();
+		try{
+			String oldPassword = changePasswordForm.getOldPassword();
+			String newPassword = changePasswordForm.getNewPassword();
+			new ZLogger("updateTrainee","new pass   " + oldPassword, "TraineeDAOImpl.java");
+			confirm = changePasswordUtility.changePasswordUtil(oldPassword,
+					newPassword, id, session);
 
-		String oldPassword = changePasswordForm.getOldPassword();
-		String newPassword = changePasswordForm.getNewPassword();
-		new ZLogger("updateTrainee","new pass   " + oldPassword, "TraineeDAOImpl.java");
-		boolean confirm = changePasswordUtility.changePasswordUtil(oldPassword,
-				newPassword, id);
-
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
 		return confirm;
 	}
 
@@ -709,7 +715,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		String sql = "select cn.coursenameid "
 				+ "from courseenrolleduser  ceu "
 				+ "inner join trainingcalendar tc on tc.trainingcalendarid =   ceu.trainingcalendarid "
-				+ "inner join coursename cn on cn.coursenameid = tc.coursename where ceu.logindetails = "
+				+ "inner join coursename cn on cn.coursenameid = tc.coursename where ceu.status = 'N' and ceu.logindetails = "
 				+ loginId;
 		Query query = session.createSQLQuery(sql);
 		List listCourseNameId = query.list();
@@ -896,13 +902,25 @@ public class TraineeDAOImpl implements TraineeDAO {
 	}
 
 	@Override
-	public String isTraineeEligible(int userID,String isOnline) {
+	public String isTraineeEligible(int userID) {
 		// TODO Auto-generated method stub
 				String eligible = "";
 				Session session = sessionFactory.getCurrentSession();
 				
 				
-				if(isOnline != null && isOnline.equals("ONLINE")){
+				String sql = "select result from courseenrolleduser where logindetails = "+ userID+" and status = 'N'";
+				Query query = session.createSQLQuery(sql);
+				List list = query.list();
+				new ZLogger("isTraineeEligible","list.size() "+ list.size(), "TraineeDAOImpl.java");
+				if(list.size() > 0){
+					String result  = (String) list.get(0);
+					if(result != null && result.toUpperCase().equals("P")){
+						eligible = "Y";
+					}
+					//eligible = (String) list.get(0);
+				}
+				
+				/*if(isOnline != null && isOnline.equals("ONLINE")){
 					String sql = "select A.logindetails  from assessmentevaluationtrainee A"
 							+ " where A.totalscore >= (select AA.eligibility from assessmenteligibility AA where AA.coursenameid=A.coursenameid) and A.logindetails = " + userID;
 					Query query = session.createSQLQuery(sql);
@@ -924,7 +942,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 						}
 						//eligible = (String) list.get(0);
 					}
-				}
+				}*/
 				
 				return eligible;
 	}

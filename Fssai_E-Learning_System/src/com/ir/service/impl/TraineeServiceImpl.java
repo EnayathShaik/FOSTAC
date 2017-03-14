@@ -80,8 +80,8 @@ public class TraineeServiceImpl implements TraineeService {
 	
 	@Override
 	@Transactional
-	public String isTraineeEligible(int userID,String isOnline) {
-		String eligible = traineeDAO.isTraineeEligible(userID,isOnline);
+	public String isTraineeEligible(int userID) {
+		String eligible = traineeDAO.isTraineeEligible(userID);
 		return eligible;
 	}
 	@Override

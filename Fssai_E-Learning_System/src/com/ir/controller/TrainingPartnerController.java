@@ -798,6 +798,7 @@ public class TrainingPartnerController {
 		String rollNo =data;
 		System.out.println("roll number "+rollNo);
 		String res = trainingPartnerService.markTraineeAttendance(rollNo);
+		
 		System.out.println("res "+res);
 		//checkAadhar
 		PrintWriter out = response.getWriter(); 

@@ -101,7 +101,7 @@ public class RegistrationControllerTrainer implements Serializable{
 			return "registrationFormTrainer";
 		}
 		String personalInformationTrainer = registrationServiceTrainer.registerPersonalInformationTrainer(registrationFormTrainer);
-		if(! personalInformationTrainer.equalsIgnoreCase("")){
+		if(personalInformationTrainer != null && ! personalInformationTrainer.equalsIgnoreCase("")){
 			String[] all = personalInformationTrainer.split("&");
 			model.addAttribute("id" , all[1]);
 			model.addAttribute("pwd" , all[0]);

@@ -33,7 +33,7 @@ public interface TraineeDAO {
 	public CourseName getCourseDetails(int loginId);
 	public CourseTrainee getCourseTrainingByCourseTypeID(int typeId);
 	public List<CourseTrainee> getCourseTrainingByCourseTypeIDList(int typeId);
-	public String isTraineeEligible(int userID,String isOnline);
+	public String isTraineeEligible(int userID);
 	public List<ManageTrainingPartner> trainingPartnerList();
 	public List<FeedbackMaster> getFeedMasterList(int profileId);
 
