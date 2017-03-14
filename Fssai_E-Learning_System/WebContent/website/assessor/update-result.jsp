@@ -21,6 +21,7 @@ function showDetails(){
         '<th>Batch Code</th>'+
         '<th>Course Code</th>'+
         '<th>Training Date</th>'+
+        '<th>Assessment DateTime</th>'+
         '<th>Training Center</th>'+
         '<th>Trainee Name</th>'+
         '<th>Status</th>'+
@@ -63,6 +64,7 @@ function showDetails(){
 					'<td>'+obj[9]+'</td>'+
 					'<td>'+obj[8]+'</td>'+
 					'<td>'+obj[3]+'</td>'+
+					'<td>'+obj[10]+'</td>'+
 					'<td>'+obj[4]+'</td>'+
 					'<td>'+obj[5]+'</td>'+
 					'<td><select id='+obj[1]+'><option  value ="0">Please Select</option><option selected="true"  value ="P">Pass</option>'+
@@ -75,6 +77,7 @@ function showDetails(){
 					'<td>'+obj[9]+'</td>'+
 					'<td>'+obj[8]+'</td>'+
 					'<td>'+obj[3]+'</td>'+
+					'<td>'+obj[10]+'</td>'+
 					'<td>'+obj[4]+'</td>'+
 					'<td>'+obj[5]+'</td>'+
 					'<td><select id='+obj[1]+'><option  value ="0">Please Select</option><option  value ="P">Pass</option>'+
@@ -87,6 +90,7 @@ function showDetails(){
 					'<td>'+obj[9]+'</td>'+
 					'<td>'+obj[8]+'</td>'+
 					'<td>'+obj[3]+'</td>'+
+					'<td>'+obj[10]+'</td>'+
 					'<td>'+obj[4]+'</td>'+
 					'<td>'+obj[5]+'</td>'+
 					'<td><select id='+obj[1]+'><option  value ="0">Please Select</option><option  value ="P">Pass</option>'+
@@ -108,7 +112,7 @@ return result;
 }
 
 function updateTraineeAssessmentResult(courseEnrolledid , status){
-	alert('courseEnrolledid '+courseEnrolledid)
+	//alert('courseEnrolledid '+courseEnrolledid)
 	var status = $("#"+courseEnrolledid).val();
 	var comment = $("#comments"+courseEnrolledid).val();
 	var total =  "courseenrolledId="+courseEnrolledid+"-status="+status+"-comment="+comment ;

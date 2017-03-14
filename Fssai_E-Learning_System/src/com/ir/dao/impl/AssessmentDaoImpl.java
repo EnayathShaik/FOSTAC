@@ -260,14 +260,14 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		String sql = "select A.trainingcalendarid,B.courseenrolleduserid, C.coursename,A.trainingdate,"
 				+ " concat(D.firstname , ' ' , D.middlename , ' ' , D.lastname ) TraineeCenter, "
 				+ " concat(F.firstname , ' ' , F.middlename , ' ' , F.lastname ) Trainee "
-				+ " ,B.result,B.assessorcomment,C.courseCode,A.batchCode "
+				+ " ,B.result,B.assessorcomment,C.courseCode,A.batchCode , A.assessmentdatetime "
 				+ " from trainingcalendar A "
 				+ " inner join courseenrolleduser B on(A.trainingcalendarid=B.trainingcalendarid) "
 				+ " inner join coursename C on(A.coursename=C.coursenameid) "
 				+ " inner join personalinformationtrainingpartner D on(A.trainingcenter=D.personalinformationtrainingpartnerid) "
 				+ " inner join logindetails E on(D.logindetails=E.id)"
 				+ " inner join personalinformationtrainee F on(F.logindetails=B.logindetails) "
-				+" where cast(A.courseType as varchar(100)) like '"+courseType+"%'  and  cast(A.coursename as varchar(100)) like '"+courseName+"%'   and  cast(A.trainingdate as varchar(100)) like '"+trainingDate+"%'  and cast(A.trainingcenter as varchar(100)) like '"+trainingCenter+"%'";
+				+" where to_timestamp(COALESCE(A.assessmentdatetime, '19900101010101'),'DD-MM-YYYY HH24:MI')  > now() and cast(A.courseType as varchar(100)) like '"+courseType+"%'  and  cast(A.coursename as varchar(100)) like '"+courseName+"%'   and  cast(A.trainingdate as varchar(100)) like '"+trainingDate+"%'  and cast(A.trainingcenter as varchar(100)) like '"+trainingCenter+"%'";
 				
 				
 		Session session = sessionFactory.getCurrentSession();
