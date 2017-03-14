@@ -401,7 +401,7 @@ public class AdminController {
 			e.printStackTrace();
 			new ZLogger("manageCourse", "Exception while manageCourse :  "+ e.getMessage(), "AdminController.java");
 		}
-		return "manageCourse";
+		return "redirect:manageCourse.fssai";
 	}
 
 	@RequestMapping(value = "/manageTrainingPartnerForm", method = RequestMethod.GET)
@@ -610,8 +610,6 @@ public class AdminController {
 			@ModelAttribute("manageCourseContent") ManageCourseContentForm manageCourseContentForm, Model model) {
 		new ZLogger("manageCourseContent", "admin Controller manage course content form begin .", "AdminController.java");
 		List<CourseType> courseTypeList = pageLoadService.courseTypeList();
-		List<CourseName> courseNameList = adminService.courseNameList();
-		model.addAttribute("courseNameList", courseNameList);
 		model.addAttribute("courseTypeList", courseTypeList);
 		return "manageCourseContent";
 	}
@@ -641,7 +639,7 @@ public class AdminController {
 			e.printStackTrace();
 			new ZLogger("manageCourseContentSearch", "Exception while manageCourseContentSearch :  "+ e.getMessage(), "AdminController.java");
 		}
-		return "manageCourseContent";
+		return "redirect:manageCourseContent.fssai";
 	}
 
 	@RequestMapping(value = "/trainingCalendarForm", method = RequestMethod.GET)

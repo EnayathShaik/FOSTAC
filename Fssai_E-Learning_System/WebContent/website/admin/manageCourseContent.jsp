@@ -266,7 +266,7 @@ function deleteCourseContent(i){
                                                     </div>
 
 <cf:select path="contentType" class="form-control">
-<cf:option value="0" label="Select Content Type" />
+<cf:option value="0" label="Select Course Type" />
 <cf:option value="PPTs" label="PPTs" />
 <cf:option value="Videos" label="Videos" />
 <cf:option value="StudyMaterial" label="Study Material" />
@@ -300,7 +300,7 @@ function deleteCourseContent(i){
                                                     </div>
 
 <cf:select path="courseType" class="form-control" onchange="getCourseName(this.value , 'courseName');">
-<cf:option value="0" label="Select Content Type" />
+<cf:option value="0" label="Select Course Type" />
 <cf:options items="${courseTypeList}" itemValue="CourseTypeId" itemLabel="CourseType"/>
 </cf:select>
                                                 </div>
