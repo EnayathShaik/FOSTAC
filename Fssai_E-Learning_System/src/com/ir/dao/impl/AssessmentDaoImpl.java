@@ -291,7 +291,7 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		
 		
 		
-		String[] updateDetails = data.split("-");
+		String[] updateDetails = data.split("@");
 		String id , status , comment ;	
 		id= (updateDetails[0].split("="))[1];
 		

@@ -74,10 +74,9 @@ window.onload = OnStart;
 		var assessorName = ($("#assessorName").val()== 0 ||  $("#assessorName").val() == null ? "" : $("#assessorName").val());
 		var seatCapacity = ($("#seatCapacity").val()== 0 ||  $("#seatCapacity").val() == null ? "" : $("#seatCapacity").val());
 		//var total = "courseType="+courseType + "&courseName=" + courseName+ "&trainingStartDate=" + trainingStartDate + "&trainingEndDate="+ trainingEndDate+"&trainerName="+trainerName+"&assessmentDateTime="+assessmentDateTime+"&assessmentAgencyName="+assessmentAgencyName+"&assessorName="+assessorName+"&seatCapacity="+seatCapacity;
-		var total = courseType + "#" + courseName+ "#" + trainingStartDate + "#"+ trainingEndDate+"#"+trainerName+"#"+assessmentDateTime+"#"+assessmentAgencyName+"#"+assessorName+"#"+seatCapacity+"#";
+		var total = courseType + "@" + courseName+ "@" + trainingStartDate + "@"+ trainingEndDate+"@"+trainerName+"@"+assessmentDateTime+"@"+assessmentAgencyName+"@"+assessorName+"@"+seatCapacity+"@";
 		var result = "";
 		var name1=JSON.stringify({
-			courseType:0,
 			courseName:0
 	  })
 		$.ajax({

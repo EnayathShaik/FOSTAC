@@ -74,11 +74,11 @@ function ck_aadhar(thisValue){
 			{
 				i= i+1;
 				if(obj[7] == 'A'){
-					$('#newTable').append('<tr id="tableRow"><td>'+i +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td><input type="hidden" value='+obj[5]+' name="validAadhar" id="validAadhar" /><input path="AadharNumber" id="AadharNumber" name="AadharNumber" class="form-control" maxlength="12" disabled="disabled" placeholder="Aadhar Number" onblur=ck_aadhar(this); /></td><td><select style="width:100px;height:34px;font-size:12px;" disabled="disabled" name =attendanceRow'+i+'  id=attendanceRow'+i+'><option selected="true" name="present" value ="A">Present</option><option name="absent" value="I">Absent</option></td><td><button onclick="updateAttendance('+obj[6]+' , '+i+');return false;">Update</button></td></tr>');
+					$('#newTable').append('<tr id="tableRow"><td>'+i +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td><input type="hidden" value='+obj[5]+' name="validAadhar" id="validAadhar" /><input path="AadharNumber" id="AadharNumber" name="AadharNumber" class="form-control" maxlength="12" disabled="disabled" placeholder="Aadhar Number" onblur=ck_aadhar(this); /></td><td><select style="width:100px;height:34px;font-size:12px;" disabled="disabled" name =attendanceRow'+i+'  id=attendanceRow'+i+'><option selected="true" name="present" value ="A">Present</option><option name="absent" value="I">Absent</option></td><td><button onclick="updateAttendance('+obj[6]+' , '+i+' , \''+obj[2]+'\' );return false;">Update</button></td></tr>');
 				}else if(obj[7] == 'I'){
-					$('#newTable').append('<tr id="tableRow"><td>'+ i +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td><input type="hidden" value='+obj[5]+' name="validAadhar" id="validAadhar" /><input path="AadharNumber" id="AadharNumber" name="AadharNumber" class="form-control" maxlength="12" placeholder="Aadhar Number" onblur=ck_aadhar(this); /></td><td><select style="width:100px;height:34px;font-size:12px;" disabled="disabled" name =attendanceRow'+i+'  id=attendanceRow'+i+'><option name="present" value ="A">Present</option><option selected="true" name="absent" value="I">Absent</option></td><td><button onclick="updateAttendance('+obj[6]+' , '+i+');return false;">Update</button></td></tr>');
+					$('#newTable').append('<tr id="tableRow"><td>'+ i +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td><input type="hidden" value='+obj[5]+' name="validAadhar" id="validAadhar" /><input path="AadharNumber" id="AadharNumber" name="AadharNumber" class="form-control" maxlength="12" placeholder="Aadhar Number" onblur=ck_aadhar(this); /></td><td><select style="width:100px;height:34px;font-size:12px;" disabled="disabled" name =attendanceRow'+i+'  id=attendanceRow'+i+'><option name="present" value ="A">Present</option><option selected="true" name="absent" value="I">Absent</option></td><td><button onclick="updateAttendance('+obj[6]+' , '+i+' , \''+obj[2]+'\');return false;">Update</button></td></tr>');
 				}else{
-					$('#newTable').append('<tr id="tableRow"><td>'+ i +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td><input type="hidden" value='+obj[5]+' name="validAadhar" id="validAadhar" /><input path="AadharNumber" id="AadharNumber" name="AadharNumber" class="form-control" maxlength="12" placeholder="Aadhar Number" onblur=ck_aadhar(this); /></td><td><select style="width:100px;height:34px;font-size:12px;" disabled="disabled" name =attendanceRow'+i+'  id=attendanceRow'+i+'><option name="present" value ="A">Present</option><option name="absent" value="I">Absent</option></td><td><button onclick="updateAttendance('+obj[6]+' , '+i+');return false;">Update</button></td></tr>');
+					$('#newTable').append('<tr id="tableRow"><td>'+ i +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td><input type="hidden" value='+obj[5]+' name="validAadhar" id="validAadhar" /><input path="AadharNumber" id="AadharNumber" name="AadharNumber" class="form-control" maxlength="12" placeholder="Aadhar Number" onblur=ck_aadhar(this); /></td><td><select style="width:100px;height:34px;font-size:12px;" disabled="disabled" name =attendanceRow'+i+'  id=attendanceRow'+i+'><option name="present" value ="A">Present</option><option name="absent" value="I">Absent</option></td><td><button onclick="updateAttendance('+obj[6]+' , '+i+'  , \''+obj[2]+'\');return false;">Update</button></td></tr>');
 				}
 				
 			});
@@ -96,10 +96,23 @@ function ck_aadhar(thisValue){
 	}
 	
 	
-	function updateAttendance(courseEnrolledid , id){
+	function updateAttendance(courseEnrolledid , id , trainingdate){
+		var dateString = trainingdate,
+	    dateTimeParts = dateString.split(' '),
+	    timeParts = dateTimeParts[1].split(':'),
+	    dateParts = dateTimeParts[0].split('-'),
+	    date;
+	    date = new Date(dateParts[2], parseInt(dateParts[1], 10) - 1, dateParts[0], timeParts[0], timeParts[1]);
+		var today = new Date();
+		alert("today "+today + " date "+date);
+		if(date < today){
+			
+			alert("Past training attendance can not be marked.");
+			return false;
+		}
 		
 		
-		var profileId = '${profileId}';
+		 var profileId = '${profileId}';
 		alert("id "+ id + " courseEnrolledid  "+courseEnrolledid+" profileId "+profileId);
 		var status = $("#attendanceRow"+id).val();
 		var total =  "courseenrolledId="+courseEnrolledid+"-status="+status+"-profileId="+profileId ;
@@ -117,7 +130,7 @@ function ck_aadhar(thisValue){
 			      }
 			      });
 		 	location.reload();
-		 	return true;
+		 	return true; 
 	}
 
 function showDetail(){

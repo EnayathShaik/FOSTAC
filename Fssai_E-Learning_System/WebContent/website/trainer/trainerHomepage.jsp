@@ -39,7 +39,7 @@ function searchUpcomingTraining(){
 		var statuss = obj[9];
 		if(statuss == "A"){
 			a = "Confirmed";
-		$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[7]+'</td><td>'+obj[8]+'</td><td>'+obj[2]+'</td><td>'+obj[1]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td></tr>');
+		$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[7]+'</td><td>'+obj[10]+'</td><td>'+obj[2]+'</td><td>'+obj[1]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td></tr>');
 		}
 		
 	});
@@ -88,7 +88,7 @@ function searchUpcomingTraining(){
                           <tr class="background-open-vacancies">
                             <th>S.No.</th>
                             <th>Course Type</th>
-                            <th>Course Name</th>
+                            <th>Course Code</th>
                             <th>Training Date &amp; Time</th>
                             <th>Training Center Name &amp; Address</th>
                             <th>Contact Person Name</th>
