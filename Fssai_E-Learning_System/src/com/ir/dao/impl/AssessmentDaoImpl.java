@@ -158,7 +158,7 @@ public class AssessmentDaoImpl implements AssessmentDao{
 				+ "from trainingcalendar A "
 				+ "inner join coursename B on(A.coursename=B.coursenameid) "
 				+ "inner join personalinformationtrainingpartner C on(A.trainingcenter=C.personalinformationtrainingpartnerid) "
-				+ "inner join district dt on dt.districtid = C.trainingpartnerpermanentdistrict where to_timestamp(COALESCE(A.assessmentdatetime, '19900101010101'),'DD-MM-YYYY') > now() AND A.assessor= '"+data+"'";
+				+ "inner join district dt on dt.districtid = C.trainingpartnerpermanentdistrict where to_timestamp(COALESCE(A.assessmentdatetime, '19900101010101'),'DD-MM-YYYY') >= CURRENT_TIMESTAMP - INTERVAL '1 days' AND A.assessor= '"+data+"'";
 	
 			Query query = session.createSQLQuery(sql);
 			List list = query.list();
@@ -267,7 +267,7 @@ public class AssessmentDaoImpl implements AssessmentDao{
 				+ " inner join personalinformationtrainingpartner D on(A.trainingcenter=D.personalinformationtrainingpartnerid) "
 				+ " inner join logindetails E on(D.logindetails=E.id)"
 				+ " inner join personalinformationtrainee F on(F.logindetails=B.logindetails) "
-				+" where to_timestamp(COALESCE(A.assessmentdatetime, '19900101010101'),'DD-MM-YYYY HH24:MI')  > now() and cast(A.courseType as varchar(100)) like '"+courseType+"%'  and  cast(A.coursename as varchar(100)) like '"+courseName+"%'   and  cast(A.trainingdate as varchar(100)) like '"+trainingDate+"%'  and cast(A.trainingcenter as varchar(100)) like '"+trainingCenter+"%'";
+				+" where to_timestamp(COALESCE(A.assessmentdatetime, '19900101010101'),'DD-MM-YYYY') >= CURRENT_TIMESTAMP - INTERVAL '1 days' and cast(A.courseType as varchar(100)) like '"+courseType+"%'  and  cast(A.coursename as varchar(100)) like '"+courseName+"%'   and  cast(A.trainingdate as varchar(100)) like '"+trainingDate+"%'  and cast(A.trainingcenter as varchar(100)) like '"+trainingCenter+"%'";
 				
 				
 		Session session = sessionFactory.getCurrentSession();
