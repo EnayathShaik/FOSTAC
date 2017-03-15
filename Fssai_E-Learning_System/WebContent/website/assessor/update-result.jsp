@@ -37,7 +37,14 @@ function showDetails(){
 	var courseName =  ($("#courseName").val() == 0 || $("#courseName").val() == null ? "" : $("#courseName").val());
 	var selTrainingCenters =  ($("#selTrainingCenters").val() == 0 || $("#selTrainingCenters").val() == null ? "" : $("#selTrainingCenters").val());
 	var trainingDate = (($("#trainingDate").val() == 'undefined' || $("#trainingDate").val() == null ) ? "" : $("#trainingDate").val() );
-	var total =  "courseType=" + courseType+ "-selTrainingCenters=" + selTrainingCenters+"-trainingDate="+trainingDate+"-courseName="+courseName;
+	var total =  "courseType=" + courseType+ "@selTrainingCenters=" + selTrainingCenters+"@trainingDate="+trainingDate+"@courseName="+courseName;
+	alert(total);
+	if(trainingDate == ""){
+		$("#trainingDate").focus();
+		alert("Training date can not be blank.");
+		
+		return false;
+	}
  	var name1=JSON.stringify({
 		courseType:0,
 		courseName:0
