@@ -24,7 +24,7 @@ public class RegistrationFormTrainer {
 	public void setCheckPermanent(boolean checkPermanent) {
 		this.checkPermanent = checkPermanent;
 	}
-	@NotNull
+	//@NotNull
 	private String UserId;
 	@NotNull
 	private int Title;

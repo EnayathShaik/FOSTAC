@@ -74,7 +74,6 @@ public class RegistrationControllerTrainer implements Serializable{
 		List<String> casteList = pageLoadService.loadCaste();
 		List<ManageTrainingPartner> trainingPartnerNameList= registrationServiceTrainingPartner.trainingPartnerNameList();
 		//String uniqueID = GenerateUniqueID.getNextCombinationId("TR", "personalinformationtrainer" , "000000");
-		String uniqueID = pageLoadService.getNextCombinationId("TR", "personalinformationtrainer" , "000000");
 		List<CourseName> basicCourseList = pageLoadServiceTrainer.basicCourseName();
 		
 		
@@ -83,7 +82,6 @@ public class RegistrationControllerTrainer implements Serializable{
 		model.addAttribute("titleList", titleList);
 		model.addAttribute("casteList", casteList);
 		model.addAttribute("trainingPartnerNameList", trainingPartnerNameList);
-		model.addAttribute("userId", uniqueID);
 		model.addAttribute("basicCourseList", basicCourseList);
 		
 		return "registrationFormTrainer";

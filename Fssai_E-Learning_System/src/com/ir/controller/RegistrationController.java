@@ -72,14 +72,11 @@ public class RegistrationController {
 		List<Title> titleList = pageLoadService.loadTitle();
 		List<String> casteList = pageLoadService.loadCaste();
 		List<KindOfBusiness> kindOfBusinessList=pageLoadService.loadKindOfBusiness();
-		//String uniqueID = GenerateUniqueID.getNextCombinationId("TE", "personalinformationtrainee" , "000000");
-		String uniqueID = pageLoadService.getNextCombinationId("TE", "personalinformationtrainee" , "000000");
 		model.addAttribute("registrationFormTrainee", registrationFormTrainee);
 		model.addAttribute("stateList", stateList);
 		model.addAttribute("titleList", titleList);
 		model.addAttribute("casteList", casteList);
 		model.addAttribute("kindOfBusinessList", kindOfBusinessList);
-		model.addAttribute("userId", uniqueID);
 		return "registrationFormTrainee";
 	}
 	

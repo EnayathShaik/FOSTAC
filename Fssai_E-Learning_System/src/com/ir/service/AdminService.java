@@ -161,6 +161,10 @@ public interface AdminService {
 	List searchFeedbackMaster(String data);
 	
 	List searchAssessmentAgencyList(String data);
+	
+	List searchAssessorDetail(String data);
+	
+	String changeAssessor(String data);
 
 	
 }

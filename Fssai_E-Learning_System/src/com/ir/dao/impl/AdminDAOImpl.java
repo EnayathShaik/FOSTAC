@@ -1582,6 +1582,68 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		
 		
+		//searchAssessorDetail
+		
+		
+		@Override
+		public List searchAssessorDetail(String data){
+			String id = data;
+			Session session =  sessionFactory.getCurrentSession();
+			
+			String sql = "select  maa.assessmentagencyname , concat( pia.firstname ,'' ,pia.middlename ,' '  , pia.lastname) , ld.loginid , "+
+					"  ld.status ,  pia.personalinformationassessorid , case when ld.status='A' then 'Active' else 'In Active' end from personalinformationassessor as pia "+
+					" inner join manageassessmentagency as maa on pia.assessmentagencyname = maa.manageassessmentagencyid "+
+					" inner join logindetails as ld on ld.id = pia.logindetails "+
+					" where maa.manageassessmentagencyid = '"+Integer.parseInt(id)+"' AND ld.status='I'";
+			Query query = session.createSQLQuery(sql);
+			List list = query.list();
+			System.out.println(list.size());
+				return list;
+		}
+		
+		//changeAssessor
+		
+		
+		@Override
+		public String changeAssessor(String data){
+			
+			String[] totalConnected = data.split("@");
+			String id,status;
+			
+			id = (totalConnected[0].split("="))[1];
+			status = (totalConnected[1].split("="))[1];
+			Session session =  sessionFactory.getCurrentSession();
+			
+			String newList = null;
+			PersonalInformationAssessor   personalInformationAssessor=(PersonalInformationAssessor) session.load(PersonalInformationAssessor.class,Integer.parseInt(id));
+			LoginDetails ld = personalInformationAssessor.getLoginDetails();
+			String newStatus = "I";
+			if(status.equalsIgnoreCase("I")){
+				newStatus = "A";
+				newList = "Status changet to ACTIVE" ;
+			}else{
+				newList = "Status changet to IN-ACTIVE" ;
+				newStatus = "I";
+			}
+	
+					if(personalInformationAssessor.getLoginDetails() != null){
+						String updateQry = "update logindetails set status ='"+newStatus+"' where id ="+personalInformationAssessor.getLoginDetails().getId(); 
+						Query query = session.createSQLQuery(updateQry);
+						System.out.println(updateQry);
+						Integer i = query.executeUpdate();
+						System.out.println("i  :"+ i);
+						String responseStr = null ;
+						
+						if(i > 0 ){
+							System.out.println("data selected finally  " );
+							responseStr = "Data updated successfully"; 
+						}else{
+							responseStr = "Oops , something went wrong try ageain !!!";
+						}
+					}
+		
+		return newList;
+		}
 }
 
 

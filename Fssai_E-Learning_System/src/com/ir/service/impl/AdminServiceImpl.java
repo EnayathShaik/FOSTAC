@@ -434,4 +434,20 @@ public class AdminServiceImpl implements AdminService {
 		return courseData;
 	}
 	
+//	/searchAssessorDetail
+	
+	@Override
+	@Transactional
+	public List searchAssessorDetail(String data){
+		List courseData = adminDAO.searchAssessorDetail(data);
+		return courseData;
+	}
+	
+	//changeAssessor
+	@Override
+	@Transactional
+	public String changeAssessor(String data){
+		String courseData = adminDAO.changeAssessor(data);
+		return courseData;
+	}	
 }

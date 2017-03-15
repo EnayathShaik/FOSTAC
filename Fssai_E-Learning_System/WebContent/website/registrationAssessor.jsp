@@ -133,38 +133,7 @@
 	}
 
 
-	function checkname() {
-		var name = document.getElementById("UserId").value;
-		if (name) {
-			$
-					.ajax({
-						type : 'post',
-						url : 'checkdata.jspp?' + name,
-						data : {
-							user_name : name,
-						},
-						success : function(response) {
-							$('#name_status').html(response);
-							if (response.trim() == 'Already') {
-								document.getElementById('UserId').value = "";
-								document.getElementById("register").style.display = 'none';
-								return false;
-
-							} else {
-								var aa = $('#name_status').html(response);
-								document.getElementById("register").style.display = 'block';
-								return true;
-							}
-
-						}
-					})
-		} else {
-			$('#name_status').html("");
-			document.getElementById("register").style.display = 'none';
-			return false;
-		}
-	}
-
+	
 	
 
 	
@@ -182,7 +151,7 @@
 			document.getElementById('errorAadharNumber').style.display = 'none';
 		}
 
-		if (document.getElementById('UserId').value == null) {
+/* 		if (document.getElementById('UserId').value == null) {
 			document.getElementById('UserId').focus();
 			document.getElementById('UserId').style.borderColor = "red";
 			document.getElementById('errorUserId').style.display = 'block';
@@ -190,7 +159,7 @@
 		} else {
 			document.getElementById('UserId').style.borderColor = "#ccc";
 			document.getElementById('errorUserId').style.display = 'none';
-		}
+		} */
 
 		if (document.getElementById('Title').value == null) {
 			document.getElementById('Title').focus();

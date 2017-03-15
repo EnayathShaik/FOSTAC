@@ -29,6 +29,7 @@ import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.State;
 import com.ir.model.Title;
+import com.ir.service.PageLoadService;
 import com.ir.util.ChangePasswordUtility;
 import com.ir.util.EncryptionPasswordANDVerification;
 import com.ir.util.PasswordGenerator;
@@ -44,6 +45,10 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 	@Autowired
 	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
+	
+	@Autowired
+	@Qualifier("pageLoadService")
+	PageLoadService pageLoadService;
 
 	@Autowired
 	@Qualifier("state")
@@ -138,17 +143,17 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 				System.out.println( " no such algo exception error catch ");
 			}
 			
-			
+			String uniqueID = pageLoadService.getNextCombinationId("AS", "personalinformationassessor" , "000000");
 			LoginDetails loginDetails = new LoginDetails();
 			loginDetails.setPassword(passwordString);
 			loginDetails.setEncrypted_Password(encryprPassword.trim());
 			loginDetails.setProfileId(6);
 			loginDetails.setStatus("I");
-			loginDetails.setLoginId(registrationFormAssessor.getUserId());
+			loginDetails.setLoginId(uniqueID);
 
 			PersonalInformationAssessor personalInformationAssessor = new PersonalInformationAssessor();
 			personalInformationAssessor.setTitle(tt);
-			personalInformationAssessor.setUserId(registrationFormAssessor.getUserId() == null ? "" : registrationFormAssessor.getUserId());
+			personalInformationAssessor.setUserId(uniqueID);
 			personalInformationAssessor.setAadharNumber(registrationFormAssessor.getAadharNumber() == null ? "" : registrationFormAssessor.getAadharNumber());
 			personalInformationAssessor.setFirstName(registrationFormAssessor.getFirstName() == null ? "" : registrationFormAssessor.getFirstName());
 			personalInformationAssessor.setLastName(registrationFormAssessor.getLastName() == null ? "" : registrationFormAssessor.getLastName());
@@ -211,15 +216,15 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 		}catch (Exception e) {
 				System.out.println("Oops !! course basic" + e.getMessage());
 			}
-			System.out.println("lllll     "+ registrationFormAssessor.getUserId() + "      "+ personalInformationTrainerIdd);
+			System.out.println("lllll     "+ uniqueID + "      "+ personalInformationTrainerIdd);
 			System.out.println("all insert done");
 		
 			if(personalInformationTrainerIdd >0 ){
 				SendMail sendMail = new SendMail();
 				sendMail.mailProperty(passwordString, registrationFormAssessor.getAssessorPermanentEmail(), registrationFormAssessor.getFirstName()+ " " + registrationFormAssessor.getLastName());
-				return passwordString+"&"+registrationFormAssessor.getUserId();
+				return passwordString+"&"+uniqueID;
 			}else{
-				return passwordString+"&"+registrationFormAssessor.getUserId();
+				return passwordString+"&"+uniqueID;
 			}
 		}catch(Exception e){
 			e.printStackTrace();

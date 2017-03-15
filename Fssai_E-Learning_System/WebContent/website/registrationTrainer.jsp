@@ -113,7 +113,7 @@ function removeSpaces(string)
     
     function validateFields() {
     	////alert("hhhhhhhhhhhhhhhhhhhhhh");
-    	if(document.getElementById("UserId").value=="") {
+    /* 	if(document.getElementById("UserId").value=="") {
     		////alert("IN Fname");
     		document.getElementById('UserId').style.borderColor = "red";
 	    	document.getElementById("UserIdError").style.display = 'block';
@@ -122,8 +122,7 @@ function removeSpaces(string)
     	}else{
     	    document.getElementById('UserId').style.borderColor = "#ccc";
     	    document.getElementById("UserIdError").style.display = 'none';
-    	    }
-    	
+    	    } */
     	
     	
     	

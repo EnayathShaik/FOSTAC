@@ -139,12 +139,7 @@ public class AdminController {
 		return courseTypeList;
 	}
 
-	@ModelAttribute("userId")
-	public String getUniqueId(){
-		String uniqueID = pageLoadService.getNextCombinationId("ADM", "adminusermanagement" , "00");
-		new ZLogger("traineeUserManagementSearch", " Admin ID "+uniqueID, "AdminController.java");
-		return uniqueID;
-	}*/
+*/
 	
 
 	@RequestMapping(value = "/stateMaster", method = RequestMethod.GET)
@@ -1346,6 +1341,39 @@ public class AdminController {
 		String newList = g.toJson(courseList); 
 		System.out.println("newList "+newList);
 		out.write(newList);
+		out.flush();
+		
+	}
+	
+	//searchAssessorDetail
+	
+	
+	@RequestMapping(value="/searchAssessorDetail" , method=RequestMethod.POST)
+	@ResponseBody
+	public void searchAssessorDetail(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("searchAssessorDetail","searchAssessorDetail............" + data  , "AdminController.java");
+		List courseList = adminService.searchAssessorDetail(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(courseList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	//changeAssessor
+	
+	
+	@RequestMapping(value="/changeAssessor" , method=RequestMethod.POST)
+	@ResponseBody
+	public void changeAssessor(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("changeAssessor","changeAssessor............" + data  , "AdminController.java");
+		String result = adminService.changeAssessor(data);
+		PrintWriter out = response.getWriter();
+		
+		System.out.println("newList "+result);
+		out.write(result);
 		out.flush();
 		
 	}

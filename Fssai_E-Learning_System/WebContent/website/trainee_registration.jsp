@@ -34,7 +34,7 @@ window.onload = OnStart;
     function validateFields() {
         //alert("validate");
 
-        if (document.getElementById("userId").value == "") {
+    /*     if (document.getElementById("userId").value == "") {
             document.getElementById('userId').style.borderColor = "red";
             document.getElementById("userIdError").style.display = 'block';
             document.getElementById("userId").focus();
@@ -42,7 +42,7 @@ window.onload = OnStart;
         } else {
             document.getElementById('userId').style.borderColor = "#ccc";
             document.getElementById("userIdError").style.display = 'none';
-        }
+        } */
         if (document.getElementById("Title").value == 0) {
             document.getElementById('Title').style.borderColor = "red";
             document.getElementById("TitleError").style.display = 'block';
@@ -592,45 +592,7 @@ function checkagree()
         }
  }
  
-    function checkname()
-    {
-   
-    	var name=document.getElementById( "userId" ).value;
-    	
-     if(name)
-     {
-      $.ajax({
-      type: 'post',
-      url: 'checkdata.jspp?'+ name,
-      data: {
-       user_name:name,
-      },
-      success: function (response) {
-       $( '#name_status' ).html(response);
-       if(response.trim() == 'Already')	
-       {
-    	   document.getElementById('userId').value="";
-    	   document.getElementById("register").style.display = 'none';
-           return false;
-    	   
-       }
-       else
-       {
-    	   var aa = $('#name_status').html(response);
-    	   document.getElementById("register").style.display = 'block';
-           return true;	
-       }
-    	  
-       }  
-      })
-      }else{
-    	  $( '#name_status' ).html("");
-          document.getElementById("register").style.display = 'none';
-          return false;
-      }
-     }
-    
-    
+     
 </script>
 <!-- <head> -->
 <body>

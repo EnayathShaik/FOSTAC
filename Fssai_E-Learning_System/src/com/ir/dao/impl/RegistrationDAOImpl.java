@@ -21,6 +21,7 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.RegisterTraineeInformationFull;
 import com.ir.model.State;
 import com.ir.model.Title;
+import com.ir.service.PageLoadService;
 import com.ir.util.EncryptionPasswordANDVerification;
 import com.ir.util.PasswordGenerator;
 
@@ -32,6 +33,12 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 	@Autowired
 	@Qualifier("kindOfBusiness")
 	private KindOfBusiness kindOfBusiness;
+	
+	@Autowired
+	@Qualifier("pageLoadService")
+	PageLoadService pageLoadService;
+
+
 	
 	@Autowired
 	@Qualifier("state")
@@ -170,10 +177,9 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 			System.out.println( " no such algo exception error catch ");
 		}
 		
-		
-		
+		String nextSequenceUserID = pageLoadService.getNextCombinationId("TE", "personalinformationtrainee" , "000000");
 		LoginDetails loginDetails = new LoginDetails();
-		loginDetails.setLoginId(registrationFormTrainee.getUserId() == null ? "" : registrationFormTrainee.getUserId());
+		loginDetails.setLoginId(nextSequenceUserID);
 		loginDetails.setPassword(passwordString);
 		loginDetails.setEncrypted_Password(encryprPassword);
 		loginDetails.setStatus("A");
@@ -264,7 +270,7 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 		}
 		personalInformationTrainee.setLoginDetails(loginDetails);
 		session.save(personalInformationTrainee);
-		return passwordString+"&"+registrationFormTrainee.getUserId();
+		return passwordString+"&"+nextSequenceUserID;
 	}
 	
 }

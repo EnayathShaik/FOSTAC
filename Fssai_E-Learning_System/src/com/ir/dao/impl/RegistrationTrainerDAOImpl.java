@@ -24,6 +24,7 @@ import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.State;
 import com.ir.model.Title;
+import com.ir.service.PageLoadService;
 import com.ir.util.EncryptionPasswordANDVerification;
 import com.ir.util.PasswordGenerator;
 import com.ir.util.SendMail;
@@ -58,6 +59,9 @@ private Title title;
 		State ss = (State)s.load(State.class, id);
 		return ss;
 	}
+	@Autowired
+	@Qualifier("pageLoadService")
+	PageLoadService pageLoadService;
 	@Override
 	public ManageTrainingPartner getTP(int id){
 		Session s = sessionFactory.getCurrentSession();
@@ -102,6 +106,8 @@ private Title title;
 				}catch(NoSuchAlgorithmException e){
 					System.out.println( " no such algo exception error catch ");
 				}
+				String uniqueID = pageLoadService.getNextCombinationId("TR", "personalinformationtrainer" , "000000");
+				
 				State ps = getState(registrationFormTrainer.getTrainingCenterPermanentState()); 
 				State cs = getState(registrationFormTrainer.getTrainingCenterCorrespondenceState());
 				District pd = getDistrict(registrationFormTrainer.getTrainingCenterPermanentDistrict());
@@ -118,7 +124,7 @@ private Title title;
 				}
 				boolean checkPeramanent=registrationFormTrainer.isCheckPermanent();
 				LoginDetails loginDetails = new LoginDetails();
-				loginDetails.setLoginId(registrationFormTrainer.getUserId());
+				loginDetails.setLoginId(uniqueID);
 				loginDetails.setPassword(passwordString);
 				loginDetails.setEncrypted_Password(encryprPassword);
 				loginDetails.setProfileId(4);
@@ -221,7 +227,7 @@ private Title title;
 						}
 					}
 				}
-				return passwordString+"&"+registrationFormTrainer.getUserId();
+				return passwordString+"&"+uniqueID;
 	}
 	
 	@Override

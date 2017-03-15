@@ -50,15 +50,13 @@ public class RegistrationControllerAssessor implements Serializable{
 			List<State> stateList = pageLoadService.loadState();
 			List<Title> titleList = pageLoadService.loadTitle();
 			List<ManageAssessmentAgency> assessmentAgencyNameList = registrationServiceAssessor.loadAssessmentAgency();
-			//String uniqueID = GenerateUniqueID.getNextCombinationId("TE", "personalinformationtrainee" , "000000");
-			String uniqueID = pageLoadService.getNextCombinationId("AS", "personalinformationassessor" , "000000");
+			
 			
 			List<CourseName> basicCourseList = registrationServiceAssessor.basicCourseName();
 			model.addAttribute("registrationFormAssessor", registrationFormAssessor);
 			model.addAttribute("stateList", stateList);
 			model.addAttribute("titleList", titleList);
 			model.addAttribute("assessmentAgencyNameList", assessmentAgencyNameList);
-			model.addAttribute("userId", uniqueID);
 			model.addAttribute("basicCourseList", basicCourseList);
 		}catch(Exception e){
 			e.printStackTrace();

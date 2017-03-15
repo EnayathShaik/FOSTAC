@@ -39,14 +39,18 @@
 
 
                 function showDetail() {
-                    //alert('detail');
+
                     document.getElementById("detailListOfAssessor").style.display = 'block';
-                    //document.getElementById("conclusionListOfAssessment").style.display ='none';
                     var result = "";
                     var id = document.getElementById("assessmentAgencyId").value;
+                 	var name1=JSON.stringify({
+                		courseName:0
+                  })
                     $.ajax({
                         type: 'post',
-                        url: 'searchAssessorDetail.jspp?' + id,
+                        url: 'searchAssessorDetail.fssai?data=' + id,
+                        contentType : "application/json",
+              		  	data:name1,
                         async: false,
                         success: function(data) {
                             $('#newTable1').show();
@@ -55,9 +59,9 @@
                             //alert(mainData1);
                             var j = 1;
                             $('#newTable1 tr').remove();
-                            $('#newTable1').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Assessment Agency Name</th><th>Assessor Name</th><th>Assessor Id</th><th>Active / In-Active</th><th>Detail</th></tr>')
+                            $('#newTable1').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Assessment Agency Name</th><th>Assessor Name</th><th>Assessor Id</th><th>Activate</th></tr>')
                             $.each(mainData1, function(i, obj) {
-                                $('#newTable1').append('<tr id="tableRow"><td>' + j++ + '</td><td>' + obj[0] + '</td><td>' + obj[1] + '</td><td>' + obj[2] + '</td><td><input type="hidden" id="statusHidden' + obj[4] + '" value="' + obj[5] + '"/><a href="#" onclick="statusChange(' + obj[4] + ');">' + obj[3] + '</a></td><td><input type="hidden" id="assessorId' + obj[4] + '" value="' + obj[4] + '" /><a href="#" onclick="showDetail();">' + obj[4] + '</a></td></tr>');
+                                $('#newTable1').append('<tr id="tableRow"><td>' + j++ + '</td><td>' + obj[0] + '</td><td>' + obj[1] + '</td><td>' + obj[2] + '</td><td><input type="hidden" id="statusHidden' + obj[4] + '" value="' + obj[3] + '"/><input type="hidden" id="assessorId' + obj[4] + '" value="' + obj[4] + '" /><button onclick="statusChange(' + obj[4] + ');return false;"> Activate</button></td></tr>');
                                 console.log(obj[0] + " -" + obj[1] + " -" + obj[2] + " -" + obj[3] + " -" + obj[4]);
 
                             });
@@ -66,14 +70,23 @@
                     return result;
                 }
 
+                </script>
 
+<script >
                 function statusChange(elementId) {
+                
+                	var result = "";
                     var id = document.getElementById("assessorId" + elementId).value;
                     var status = document.getElementById("statusHidden" + elementId).value;
-                    var total = "id=" + id + "&status=" + status;
+                    var total = "id=" + id + "@status=" + status;
+                	var name1=JSON.stringify({
+                		courseName:0
+                  })
                     $.ajax({
                         type: 'post',
-                        url: 'changeAssessor.jspp?' + total,
+                        url: 'changeAssessor.fssai?data=' + total,
+                        contentType : "application/json",
+              		  	data:name1,
                         async: false,
                         success: function(data) {
                             $('#name_status').html(response);
@@ -84,7 +97,8 @@
                     return result;
                 }
 
-            </script>
+                </script>
+            
 
             <!-- <script>
                 var id = localStorage.getItem('activeID');
