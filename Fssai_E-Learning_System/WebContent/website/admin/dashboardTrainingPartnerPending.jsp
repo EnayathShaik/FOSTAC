@@ -56,17 +56,7 @@
         <div class="container-fluid">
             <div id="wrapper">
                 <!-- Sidebar -->
-                <div id="sidebar-wrapper">
-                    <ul class="sidebar-nav">
-                        <!-- <li class="sidebar-brand"></li> -->
-                        <li><a href="manage-course.html">Manage Course</a></li>
-                        <li><a href="manage-course-content.html">Manage Course Content</a></li>
-                        <li> <a href="training-calendar.html">Training Calendar</a> </li>
-                        <li> <a href="assessment-schedule.html">Update Assessor</a> </li>
-                        <li> <a href="manage-assessment-questions.html">Assessment Questions</a> </li>
-                        <li> <a href="update-trainer-assessment.html">TOT Assessment</a> </li><li> <a href="feedback-master.html">Feedback Master</a> </li><li> <a href="feedback-master.html">Feedback Master</a> </li>
-                    </ul>
-                </div>
+                  <%@include file="../roles/slider.jsp" %>
                 <!-- /#sidebar-wrapper -->
                 <!-- Page Content -->
                 <div id="page-content-wrapper">

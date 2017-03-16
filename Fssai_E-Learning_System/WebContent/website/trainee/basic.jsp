@@ -152,7 +152,7 @@ function gettid(value){
               <!-- vertical button -->
               <div class="row">
             <div class="col-lg-12"> <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> 
-            <span class="orange-font">Welcome Trainer</span>
+            <span class="orange-font">Welcome ${userName}</span>
             <cf:input type="hidden" path="personalinformationtraineeid" value="${personalinformationtraineeid }" />
             <cf:input type="hidden" path="loginId" value="${loginId }" />
             <cf:input type="hidden" path="trainingCalendarId" value="" />

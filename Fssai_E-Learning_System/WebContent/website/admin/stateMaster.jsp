@@ -162,7 +162,7 @@
                                         <!-- vertical button -->
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome Admin</span>
+                                                <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome ${userName }</span>
                                                 </a>
                                             </div>
                                         </div>

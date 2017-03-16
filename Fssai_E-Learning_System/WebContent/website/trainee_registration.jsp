@@ -208,6 +208,7 @@ window.onload = OnStart;
 
             if (document.getElementById('checkCorrespondence').checked == false) {
 
+            
                 if (document.getElementById("ResidentialAddressLine1").value == "") {
                     document.getElementById('ResidentialAddressLine1').style.borderColor = "red";
                     document.getElementById("ResidentialAddressLine1Error").style.display = 'block';
@@ -267,17 +268,23 @@ window.onload = OnStart;
                     document.getElementById('resPincode').style.borderColor = "#ccc";
                     document.getElementById("resPincode").style.display = 'none';
                 }
+                
+            }
 
+        	
+  
                 if (document.getElementById("KindOfBusiness").selectedIndex == 0) {
+           
                     document.getElementById('KindOfBusiness').style.borderColor = "red";
                     document.getElementById("KindOfBusinessError").style.display = 'block';
                     document.getElementById("KindOfBusiness").focus();
                     return false;
-                } else if (document.getElementById("KindOfBusiness").selectedIndex == 6) {
+            	    }  else if (document.getElementById("KindOfBusiness").value == 6) {
                     document.getElementById('KindOfBusiness').style.borderColor = "#ccc";
                     document.getElementById("KindOfBusinessError").style.display = 'none';
-                    return false;
-                } else {
+                   
+                }  else {
+                	
                     document.getElementById('KindOfBusiness').style.borderColor = "#ccc";
                     document.getElementById("KindOfBusinessError").style.display = 'none';
                     if (document.getElementById("CompanyName").value == "") {
@@ -290,6 +297,7 @@ window.onload = OnStart;
                         document.getElementById("CompanyNameError").style.display = 'none';
                     }
 
+                    
                     if (document.getElementById("Designation").selectedIndex == 0) {
                         document.getElementById('Designation').style.borderColor = "red";
                         document.getElementById("DesignationError").style.display = 'block';
@@ -300,15 +308,17 @@ window.onload = OnStart;
                         document.getElementById("DesignationError").style.display = 'none';
                     }
 
+                    alert(document.getElementById("registrationNo").value )
                     if (document.getElementById("registrationNo").value == "") {
                         document.getElementById('registrationNo').style.borderColor = "red";
                         document.getElementById("registrationNoError").style.display = 'block';
                         document.getElementById("registrationNo").focus();
                         return false;
                     } else {
+                    	
+                    
                         document.getElementById('registrationNo').style.borderColor = "#ccc";
                         document.getElementById("registrationNoError").style.display = 'none';
-
                         if (document.getElementById('checkCompany').checked == false) {
 
                             if (document.getElementById("BusinessAddressLine1").value == "") {
@@ -376,7 +386,7 @@ window.onload = OnStart;
                         }
                     }
                 }
-            }
+          
         }
 
     }
