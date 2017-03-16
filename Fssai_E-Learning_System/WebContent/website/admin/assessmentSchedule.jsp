@@ -53,70 +53,14 @@
     </section>
     <!-- horizontal navigation -->
     <section>
-        <div class="container-fluid">
-            <nav class="navbar navbar-default navbar-fixed-top horizontal-nav-top horizontal-top-nav-border">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                            </div>
-                            <div id="navbar" class="navbar-collapse collapse">
-                                <ul class="nav navbar-nav">
-                                    <li></li>
-                                    <li class="active hori"><a href="index.html">Home</a></li>
-                                    <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Management<span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="trainee-user-management.html" class="clr">Trainee</a></li>
-                                            <li><a href="trainer-user-management.html" class="clr">Trainer</a></li>
-                                            <li><a href="training-center--user-management.html" class="clr">Training Center</a></li>
-                                            <li><a href="assessor-user-management.html" class="clr">Assessor</a></li>
-                                            <li><a href="admin--user-management.html" class="clr">Admin</a></li>
-                                        </ul>
-                                    </li>
-                                    <li> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Master Data<span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="state-master.html" class="clr">State</a></li>
-                                            <li><a href="district-master.html" class="clr">District</a></li>
-                                            <li><a href="city-master.html" class="clr">City</a></li>                                            
-                                            <li><a href="region-mapping-master.html" class="clr">Region Mapping</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="manage-training-partner.html">Manage Training Partner</a></li>
-                                    <li><a href="manage-assessment-agency.html">Manage Assessment Agency</a></li>
-                                </ul>
-                                <ul class="nav navbar-nav navbar-right">
-                                    <li class="dropdown active"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog fa-spin"></i> <span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="changePasswordAssesAgency.fssai">Change Password</a></li>
-                                            <li><a href="fostac.fssai">Logout</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!--/.nav-collapse -->
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </div>
+        <%@include file="../roles/top-menu.jsp"%>
     </section>
     <!-- main body -->
     <section class="main-section-margin-top">
         <div class="container-fluid">
             <div id="wrapper">
                 <!-- Sidebar -->
-                <div id="sidebar-wrapper">
-                    <ul class="sidebar-nav">
-                        <!-- <li class="sidebar-brand"></li> -->
-                        <li><a href="manage-course.html">Manage Course</a></li>
-                        <li><a href="manage-course-content.html">Manage Course Content</a></li>
-                        <li> <a href="training-calendar.html">Training Calendar</a> </li>
-                        <li> <a href="assessmentSchedule.fssai">Update Assessor</a> </li>
-                        <li> <a href="manage-assessment-questions.html">Assessment Questions</a> </li>
-                        <li> <a href="update-trainer-assessment.html">TOT Assessment</a> </li><li> <a href="feedback-master.html">Feedback Master</a> </li>
-                    </ul>
-                </div>
+                <%@include file="../roles/slider.jsp" %>
                 <!-- /#sidebar-wrapper -->
                 <!-- Page Content -->
                 <div id="page-content-wrapper">

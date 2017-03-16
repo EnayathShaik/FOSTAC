@@ -102,6 +102,7 @@
           <li> <a href="viewAssessmentAgencyCalendar.fssai">Assessment Calendar</a> </li>
           <li> <a href="trainingpartnermarkAttendence.fssai">Mark Attendance</a> </li>
           <li> <a href="update-result.fssai">Update Result</a> </li>
+          <li> <a href="trainingpartnertrainingcalendar.fssai">Training Calendar</a> </li>
       </ul>
 </div>
 

@@ -19,6 +19,7 @@
     <link href="website/css/visibility.css" rel="stylesheet" />
     <link href="website/css/flatpickr.css" rel="stylesheet" />
     <script src="website/js/flatpickr.js"></script>
+    <script src="website/js/JsBarcode.code128.min.js"></script>
     <style>
         #news .item img {
             display: block;

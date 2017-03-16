@@ -18,6 +18,9 @@
                         printWindow.print();
                     });
 
+                    
+                    
+              
                 </script>
             </head>
 
@@ -81,7 +84,7 @@
                                                                     <td align="center" class="sub-heading" style="padding-top:20px; font-size: 16px; font-weight: 100;"></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td align="center"><img src="/Fssai_E-Learning_System/website/img/admit-card-barcode.png" width="182" height="41" alt="" /></td>
+                                                                    <td align="center"><img id = "rollNumberBarcode" ></td>
                                                                 </tr>
                                                             </table>
                                                         </td>
@@ -191,3 +194,17 @@
             </body>
 
             </html>
+            
+            <script>
+            
+          
+            	var rollnumber =' ${admitCardForm.rollNo }';
+        			
+        			JsBarcode("#rollNumberBarcode", rollnumber, {
+        				width:1,
+            			height:30,
+            			quite: 10,
+        				  displayValue: false
+        				});
+        			
+              </script>

@@ -4,6 +4,7 @@
 <script type="text/javascript">
 function OnStart(){
 	DrawCaptcha();
+	getTPName();
 }
 window.onload = OnStart;
 </script>
@@ -48,10 +49,9 @@ function checkname()
 } 
 
 function getTPName(){
-	
-	var TPName = $("#TrainingPartnerName option:selected").text();
-	TPName = TPName.substring(0,3).toUpperCase();
-	console.log(" TPName  "+TPName);
+	var TPName = '${userName }'; // $("#TrainingPartnerName option:selected").text();
+	TPName = TPName.substring(2,5).toUpperCase();
+	alert(" TPName  "+TPName);
 	$("#TPName").val(TPName);
 	
 }

@@ -1243,7 +1243,7 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 	
 		Session session = sessionFactory.getCurrentSession();
 		String result = null;
-		String sql="select  cast(trainingdate as date),  cast(trainingtime  as date),cast(now() as date)  from trainingcalendar as tc inner join courseenrolleduser ceu on ceu.trainingcalendarid = tc.trainingcalendarid where rollno ='"+rollNo+"' ";
+		String sql="select  to_date(trainingdate , 'DD-MM-YYYY') trainingdate ,  to_date(trainingtime , 'DD-MM-YYYY') trainingtime,cast(now() as date)  today from trainingcalendar as tc inner join courseenrolleduser ceu on ceu.trainingcalendarid = tc.trainingcalendarid where rollno ='"+rollNo+"' ";
 		try{
 			Query query = session.createSQLQuery(sql);
 			List<Object[]> list = query.list();

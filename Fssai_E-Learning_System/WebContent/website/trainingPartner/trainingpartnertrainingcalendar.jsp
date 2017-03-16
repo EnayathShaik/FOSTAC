@@ -5,16 +5,24 @@
 <script>
 function OnStart(){
 
-	flatpickr('[name="trainingEndDate"]' , {
+	
+	 window.profileId = ${profileId};
+	
+	if(window.profileId == 6 ){
+		
+		document.getElementById('btnCreate').style.display = 'none';
+	}
+	
+	 window.trainingEndDate =   flatpickr('[name="trainingEndDate"]' , {
 		enableTime: true
 	});
 	
-	flatpickr('[name="trainingStartDate"]' , {
+	 window.trainingStartDate =   flatpickr('[name="trainingStartDate"]' , {
 		enableTime: true
 	});
 
 	
-	flatpickr('[name="assessmentDateTime"]' , {
+	 window.assessmentDateTime =   flatpickr('[name="assessmentDateTime"]' , {
 		enableTime: true
 	});
 }
@@ -54,6 +62,30 @@ function editTrainingCalendar( srNo , id, courseType){
 	document.getElementById('btnUpdate').style.display = 'block';
 	document.getElementById('btnCreate').style.display = 'none';
 	$("#tcid").val(id);	
+	
+	
+	
+	if(window.profileId == 6){
+		
+	//	alert(window.profileId);
+		window.trainingStartDate.destroy();
+		window.trainingEndDate.destroy();
+		
+		
+		$("#selCourseType").attr('readonly',true);
+		$("#selCourseName").attr('readonly',true);
+		$("#selTrainerNames").attr('readonly',true);
+		$("#trainingStartDate").attr('readonly',true);
+		$("#trainingEndDate").attr('readonly',true);
+		$("#assessmentAgencyName").attr('readonly',true);
+		$("#assessorName").attr('readonly',true);
+		$("#seatCapacity").attr('readonly',true);
+		$("#type").attr('readonly' , true);
+		
+			   
+		$("#trainingStartDate").val($("#trainingStartDate"+srNo).text());
+		$("#trainingEndDate").val($("#trainingEndDate"+srNo).text());
+	}
 }
 window.onload = OnStart;
 </script>

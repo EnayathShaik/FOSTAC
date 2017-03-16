@@ -813,6 +813,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public int getTableIdForEnrolmentID(int loginId, int profileId) {
 		// TODO Auto-generated method stub
 		new ZLogger("getTableIdForEnrolmentID","loginId :"+loginId + " profileId "+profileId , "TraineeDAOImpl.java");
+		
 		TableLink data = TableLink.getByprofileID(profileId);
 		Session session = sessionFactory.getCurrentSession();
 		String sql = "";
@@ -822,7 +823,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		} else if (profileId == 4) {
 			sql = "select personalinformationtrainerid from "
 					+ data.tableName() + " where logindetails = " + loginId;
-		} else if (profileId == 5) {
+		} else if (profileId == 5 ) {
 			sql = "select personalinformationtrainingpartnerid from "
 					+ data.tableName() + " where logindetails = " + loginId;
 		}
