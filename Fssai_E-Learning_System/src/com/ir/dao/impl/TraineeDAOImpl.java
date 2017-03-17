@@ -836,30 +836,11 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public Boolean updateSteps(int tableID, int profileID, int steps) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		if (profileID == 3) {
-			PersonalInformationTrainee personalInformationTrainee = (PersonalInformationTrainee) session
-					.load(PersonalInformationTrainee.class, tableID);
-			new ZLogger("getTableIdForEnrolmentID","tableID :"+tableID + " profileID "+profileID , "TraineeDAOImpl.java");
-			if (personalInformationTrainee.getSteps() < steps) {
-				new ZLogger("getTableIdForEnrolmentID","IF", "TraineeDAOImpl.java");
-				personalInformationTrainee.setSteps(steps);
-			} else {
-				new ZLogger("getTableIdForEnrolmentID","ELSE", "TraineeDAOImpl.java");
-			}
-			session.update(personalInformationTrainee);
-		} else if (profileID == 4) {
-			PersonalInformationTrainer personalInformationTrainer = (PersonalInformationTrainer) session
-					.load(PersonalInformationTrainer.class, tableID);
-
-			System.out.println("personalInformationTrainer.getSteps() "+ personalInformationTrainer.getSteps());
-			new ZLogger("getTableIdForEnrolmentID","personalInformationTrainer.getSteps() "+ personalInformationTrainer.getSteps(), "TraineeDAOImpl.java");
-			if (personalInformationTrainer.getSteps() < steps) {
-				personalInformationTrainer.setSteps(steps);
-			}
-
-			session.update(personalInformationTrainer);
-
-		}
+		PersonalInformationTrainee personalInformationTrainee = (PersonalInformationTrainee) session
+				.load(PersonalInformationTrainee.class, tableID);
+		new ZLogger("getTableIdForEnrolmentID","tableID :"+tableID + " profileID "+profileID , "TraineeDAOImpl.java");
+		personalInformationTrainee.setSteps(steps);
+		session.update(personalInformationTrainee);
 		return true;
 	}
 
