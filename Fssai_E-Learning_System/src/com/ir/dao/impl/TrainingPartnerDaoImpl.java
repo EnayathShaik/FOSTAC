@@ -297,7 +297,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			new ZLogger("getPostVacancyTrainingList","Exception while getPostVacancyTrainingList "+e.getMessage(), "TrainingPartnerDaoImpl.java");
 		}
 		
-		Query query = session.createQuery("from PostVacancyTrainingCenter A where  to_timestamp(COALESCE(A.trainingDate, '19900101010101'),'DD-MM-YYYY HH24:MI')  > now() AND A.requiredExp <= "+trainerExp);
+		Query query = session.createQuery("from PostVacancyTrainingCenter A where   to_timestamp(COALESCE(A.trainingDate, '19900101010101'),'DD-MM-YYYY HH24:MI')  > now() - INTERVAL '1 days' AND A.requiredExp <= "+trainerExp);
 		List<PostVacancyTrainingCenter> postVacancyTrainingCenter = query.list();
 		return postVacancyTrainingCenter;
 	}
@@ -1003,7 +1003,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 				+ " inner join coursename D on (D.coursenameid = B.coursename)"
 				+ " inner join coursetype E on (E.coursetypeid = B.coursetype)"
 				+ " inner join logindetails F on (F.ID = C.logindetails)"
-				+" WHERE A.status = 'N' and  cast(E.coursetypeid  as varchar(10)) like '"+courseType+"%' and cast(D.COURSENAMEID as varchar(10))  like '"+courseName+"%'  and  cast(B.TRAININGDATE as varchar(10)) like '"+trainingDate+"%' and  cast(B.TRAININGTIME as varchar(10)) like '"+trainingtime+"%'  and cast(A.paymentstatus as varchar(10)) like '"+status+"%' "; 
+				+" WHERE A.status = 'N' and B.type not in ('U')  and  cast(E.coursetypeid  as varchar(10)) like '"+courseType+"%' and cast(D.COURSENAMEID as varchar(10))  like '"+courseName+"%'  and  cast(B.TRAININGDATE as varchar(10)) like '"+trainingDate+"%' and  cast(B.TRAININGTIME as varchar(10)) like '"+trainingtime+"%'  and cast(A.paymentstatus as varchar(10)) like '"+status+"%' "; 
 					//	"  AND F.loginid ='"+loginId+"' ";
 		
 		
@@ -1301,5 +1301,39 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 	boolean isWithinRange(Date testDate ,Date startDate , Date endDate ) {
 		System.out.println(" input "+ " testDate "+testDate + " startDate "+startDate + " endDate "+endDate );
 		   return !(testDate.before(startDate) || testDate.after(endDate));
-		}	
+		}
+
+	//updateTrainingCalendar
+	
+	public String updateTrainingCalendar(String data){
+		String[] updateDetails = data.split("@");
+
+		String id , assessmentDateTime ;	
+		assessmentDateTime= (updateDetails[0].split("="))[1];
+		
+		id = (updateDetails[1].split("="))[1];
+		
+		Session session = sessionFactory.getCurrentSession();
+		System.out.println("id "+id + " assessmentDateTime "+assessmentDateTime);
+		TrainingCalendar c = new TrainingCalendar();
+		/*String sql = "update trainingcalendar set assessmentdatetime='"+assessmentDateTime+"' where trainingcalendarid="+id;
+		TrainingCalendar objectToUpdate = (TrainingCalendar) session.get(TrainingCalendar.class, Integer.parseInt(id));
+		objectToUpdate.setAssessmentDateTime(assessmentDateTime);*/
+		
+		/*String hqlUpdate = "update trainingcalendar c set c.assessmentdatetime = :newAssessmentdatetime where c.trainingcalendarid = :newTrainingcalendarid";
+		// or String hqlUpdate = "update Customer set name = :newName where name = :oldName";
+		int updatedEntities = session.createQuery( hqlUpdate ).setString( "newAssessmentdatetime", assessmentDateTime )
+		        .setInteger( "newTrainingcalendarid", Integer.parseInt(id) )
+		        .executeUpdate();	*/	
+		
+		
+		String sql="update trainingcalendar  set assessmentdatetime='"+assessmentDateTime+"' where trainingcalendarid="+Integer.parseInt(id);
+		Query query = session.createSQLQuery(sql);
+		query.executeUpdate();
+		
+		
+		
+		String result ="Recors successfully updated !!!" ;
+		return result;
+	}
 }

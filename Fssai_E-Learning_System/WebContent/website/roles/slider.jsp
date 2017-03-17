@@ -81,7 +81,7 @@
                         </li> -->
           <li> <a href="trainingpartnertrainingcalendar.fssai">Training Calendar</a> </li>
           <li> <a href="trainingpartnerviewtraineelist.fssai">View Trainee List</a> </li>
-          <li> <a href="trainingpartnermarkAttendence.fssai">Mark Attendance</a> </li>
+          <!-- <li> <a href="trainingpartnermarkAttendence.fssai">Mark Attendance</a> </li> -->
           <li> <a href="postVacancyTrainingPartner.fssai">Post Vacancy for Trainer</a> </li>
           <li> <a href="trainingpartnerapplicationstatus.fssai">Application Status</a> </li>
           <li> <a href="trainingpartnermanagetrainer.fssai">Manage Trainer</a> </li>
@@ -100,9 +100,10 @@
           <!-- <li class="sidebar-brand">
                     </li> -->
           <li> <a href="viewAssessmentAgencyCalendar.fssai">Assessment Calendar</a> </li>
-          <li> <a href="trainingpartnermarkAttendence.fssai">Mark Attendance</a> </li>
+          <!-- <li> <a href="trainingpartnermarkAttendence.fssai">Mark Attendance</a> </li> -->
+          <li> <a href="traineeAttendance.fssai">Trainee Attendance</a> </li>
           <li> <a href="update-result.fssai">Update Result</a> </li>
-          <li> <a href="trainingpartnertrainingcalendar.fssai">Training Calendar</a> </li>
+          <li> <a href="trainingpartnertrainingcalendar.fssai">Reschedule Assessment</a> </li>
       </ul>
 </div>
 

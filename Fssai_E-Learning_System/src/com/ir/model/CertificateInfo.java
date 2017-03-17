@@ -6,6 +6,16 @@ public class CertificateInfo {
 	private String trainingDate;
 	private String trainingAddress;
 	private String issueDate;
+	private String trainingPartnerName;
+	
+	
+	
+	public String getTrainingPartnerName() {
+		return trainingPartnerName;
+	}
+	public void setTrainingPartnerName(String trainingPartnerName) {
+		this.trainingPartnerName = trainingPartnerName;
+	}
 	public String getCertificateID() {
 		return certificateID;
 	}

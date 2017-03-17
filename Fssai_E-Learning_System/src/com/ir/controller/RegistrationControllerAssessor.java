@@ -112,6 +112,10 @@ public class RegistrationControllerAssessor implements Serializable{
 						session.setAttribute("loginUr", personalInformationAssessor);
 					 
 				 }
+					List<State> stateList = pageLoadService.loadState();
+					List<Title> titleList = pageLoadService.loadTitle();
+					model.addAttribute("stateList", stateList);
+					model.addAttribute("titleList", titleList);
 				 model.addAttribute("update", "");
 			}catch(Exception e){
 				e.printStackTrace();

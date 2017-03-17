@@ -257,7 +257,7 @@
                                         var title = '${loginUr.title.titleId}';
                                         //var tp = '${tp}';
                                         var tp = '${trainingPartnerID}';
-										alert("tp "+tp)
+										
                                         var safety = '${loginUr.foodSafetyExpBackground}';
                                         var month=${loginUr.expInFoodSafefyTimeMonth};
                                    
@@ -269,7 +269,7 @@
                                        
                                         $("#Title").prop('value', title);
                                         $("#associatedTrainingpartnerName").val(tp);
-                                        alert("input val "+ $("#associatedTrainingpartnerName").val());
+                                     
                                         //associatedTrainingpartnerName.options[0].text = tp;
                                     }
 
@@ -853,7 +853,7 @@
                                                                                                 </li>
                                                                                             </ul>
                                                                                         </div>
-                                                                                        <cf:select path="TrainingCenterPermanentState" class="form-control" onchange="getDistrictList(this.value, 'TrainingCenterPermanentDistrict');">
+                                                                                        <cf:select path="TrainingCenterPermanentState" class="form-control" onchange="getDistrict(this.value, 'TrainingCenterPermanentDistrict');">
                                                                                             <cf:option value="0" label="Select State" />
                                                                                             <cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName" />
                                                                                         </cf:select>
@@ -874,7 +874,7 @@
                                                                                                 </li>
                                                                                             </ul>
                                                                                         </div>
-                                                                                        <cf:select path="TrainingCenterPermanentDistrict" class="form-control" onchange="getCityList(this.value , 'TrainingCenterPermanentCity');">
+                                                                                        <cf:select path="TrainingCenterPermanentDistrict" class="form-control" onchange="getCity(this.value , 'TrainingCenterPermanentCity');">
                                                                                             <cf:option value="0" label="Select District" />
                                                                                             <%-- <cf:options items="${districtList}" itemValue="districtId" --%> itemLabel="districtName" />
                                                                                         </cf:select>

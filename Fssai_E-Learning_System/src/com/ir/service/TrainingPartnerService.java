@@ -138,5 +138,7 @@ public interface TrainingPartnerService {
 	
 	public String markTraineeAttendance(String rollNo);
 	
+	public String updateTrainingCalendar(String data);
+	
 	
 }

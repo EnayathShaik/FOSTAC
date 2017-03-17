@@ -328,4 +328,13 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 		return loadTrainingList;
 	}
 	
+	//updateTrainingCalendar
+	
+	@Override
+	@Transactional
+	public String updateTrainingCalendar(String searchData) {
+		String loadTrainingList = trainingPartnerDAO.updateTrainingCalendar(searchData);
+		return loadTrainingList;
+	}
+	
 }

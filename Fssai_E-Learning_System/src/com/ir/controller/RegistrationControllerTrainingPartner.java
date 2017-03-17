@@ -135,6 +135,23 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 	@RequestMapping(value="/updateTrainingpartner" , method=RequestMethod.POST)
 	public String updateTrainer(@RequestParam(value = "id", required = true)  Integer id,@Valid @ModelAttribute("updateInformation") RegistrationFormTrainingPartner registrationFormTrainingPartner ,BindingResult bindingResult, HttpSession session){
 		
+		if(session == null){
+			return "login";
+		}
+		Integer ss = 0;
+		if(id <= 0){
+			 ss = (Integer)session.getAttribute("loginUser2");
+		}else{
+			ss = id;
+		}
+
+		String updateTrainer = registrationServiceTrainingPartner.UpdateTrainingPartner(registrationFormTrainingPartner , ss);
+		if(!updateTrainer.equalsIgnoreCase(""))
+		{
+			new ZLogger("update-profile", "Data are updated successfully", "RegistrationControllerTrainingPartner.java");
+		}
+		
+		
 		//return "welcomeupdatetrainingCenter";
 		return "welcomeupdatetrainee";
 	}
@@ -149,6 +166,9 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 				}else{
 					userId = (Integer) session.getAttribute("userId");
 				}
+				
+				List<State> stateList = registrationServiceTrainingPartner.loadState();
+				model.addAttribute("stateList", stateList);
 				
 			}catch(Exception e){
 				new ZLogger("update-personal-information", "Exception while update-personal-information  "+e.getMessage(), "RegistrationControllerTrainingPartner.java");

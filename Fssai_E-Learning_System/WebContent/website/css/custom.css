@@ -23,7 +23,7 @@ body {
 @media screen {
     .this-certify {
         position: relative;
-        top: -32sem;
+        top: -32em;
     }
     .sign-pos {
         position: relative;
@@ -118,7 +118,6 @@ body {
         top: 32px;
     }
     .add-pos {
-    	font-size: 15px;
         position: relative;
         font-weight: 600;
         left: 5%;
@@ -160,7 +159,7 @@ body {
         top: -28.5em;
         line-height: 12px;
     }
-    .sign-partner {
+     .sign-partner {
         position: relative;
         width: 140px;
         left: 8em;
@@ -170,6 +169,10 @@ body {
         width: 140px;
         left: 11em;
     }
+    .certi-width{
+	     max-width: 70em;
+	     min-width: 70em;
+     }
 }
 
 
@@ -182,13 +185,17 @@ body {
     }
     .sign-pos {
         position: relative;
-        top: -28em;
+        top: -31.4em;
     }
     .cert-btm {
         position: relative;
-        top: -28.5em;
+        top: -32.6em;
         line-height: 12px;
     }
+    .certi-width{
+	     max-width: 70em;
+	     min-width: 70em;
+     }
     .nam-hr {
         width: 80%;
         margin-top: 32px;
@@ -331,6 +338,7 @@ body {
 /* new certificate style ends*/
 
 
+
 /* new fssai certificate */
 
 @media screen {
@@ -343,7 +351,11 @@ body {
         font-size: 2.5em;
     }
     .im-zoo {
-        zoom: 0.3;
+        width: 53em;
+    }
+    .certi-a-width{
+    	max-width: 70em;
+    	min-width: 70em;
     }
     .na-per {
         border-top: 1px dotted #000;
@@ -427,8 +439,9 @@ body {
         font-size: 2.1em;
     }
     .im-zoo {
-        zoom: 0.3;
+        width: 53em;
     }
+   
     .na-per {
         border-top: 1px dotted #000;
         width: 77%;
@@ -441,7 +454,7 @@ body {
         letter-spacing: 0.4px;
         position: relative;
         right: -6px;
-        top: 8px;
+        top: -16px;
     }
     .has-p-at {
         font-size: 19px;
@@ -465,9 +478,9 @@ body {
         margin-left: 18px;
     }
     .train-ng-dashed {
-        border-top: 1px dotted #000;
-        width: 34.5%;
-        position: relative;
+        border-top: 1px dotted #000;zoom: 0.3;
+        -moz-transform: scale(1.1);
+        -moz-transform-origin: 0px 85em;
         top: 9px;
         margin-left: 250px;
     }
@@ -478,7 +491,7 @@ body {
     }
     .cert-btm-general-ce {
         position: relative;
-        top: -40.7em;
+        top: -38.7em;
         line-height: 12px;
         right: -23px;
     }

@@ -91,4 +91,6 @@ public interface TrainingPartnerDao {
 	public List onLoadTrainingPartnerCenterId(String data);
 	
 	public String markTraineeAttendance(String rollno);
+	
+	public String updateTrainingCalendar(String data);
 }

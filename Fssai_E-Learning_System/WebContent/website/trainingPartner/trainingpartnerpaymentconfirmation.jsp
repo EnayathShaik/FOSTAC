@@ -196,7 +196,7 @@ return result;
                                     <!-- search and apply vacancies -->
                                     <div class="col-xs-12">
                                         <fieldset>
-                                        <legend><h3>Payment Confirmation</h3></legend>
+                                        <legend><h3>Fees Confirmation</h3></legend>
                                         <script type="text/javascript">
                                         var formObj = '${trainingpartnerpaymentconfirmation}';
                                         var formData = JSON.parse(formObj);

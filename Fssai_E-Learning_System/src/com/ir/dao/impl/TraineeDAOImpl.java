@@ -962,9 +962,10 @@ public class TraineeDAOImpl implements TraineeDAO {
 					+
 					// " ,concat(E.trainingpartnerpermanentline1 , ' ' , E.trainingpartnerpermanentline2 , ' ' , s.statename , ' ' , ds.districtname , ' ' , ci.cityname) as address"
 					// +
-					" ,concat(E.trainingcentrename , ' ' , s.statename, ' ' , ds.districtname) as address"
+					" ,concat(E.trainingcentrename , ' ' , s.statename, ' ' , ds.districtname) as address ,  mtp.trainingpartnername  "
 					+ " from courseenrolleduser A "
 					+ " inner join trainingcalendar B on(A.trainingcalendarid=B.trainingcalendarid) "
+					+"	inner join managetrainingpartner mtp on (B.trainingpartner = mtp.managetrainingpartnerid) "
 					+ " inner join coursename C on(B.coursename=C.coursenameid) "
 					+ " inner join personalinformationtrainee D on(A.logindetails=D.logindetails) "
 					+ " inner join personalinformationtrainingpartner E on(B.trainingcenter=E.personalinformationtrainingpartnerid) "
@@ -991,6 +992,8 @@ public class TraineeDAOImpl implements TraineeDAO {
 					certificateInfo.setCertificateID(obj[5] == null ? ""
 							: obj[5].toString());
 					certificateInfo.setTrainingAddress(obj[6] == null ? ""
+							: obj[6].toString());
+					certificateInfo.setTrainingPartnerName(obj[7] == null ? ""
 							: obj[6].toString());
 				}
 			} catch (Exception e) {

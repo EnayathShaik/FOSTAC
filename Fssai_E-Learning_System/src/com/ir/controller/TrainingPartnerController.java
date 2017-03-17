@@ -159,6 +159,8 @@ public class TrainingPartnerController {
 		Integer profileID = 0;
 		Integer userId = 0;
 		String certificateID = generateCourseCertificateForm == null ? "" : generateCourseCertificateForm.getMainCertificateId() == null ? "" : generateCourseCertificateForm.getMainCertificateId().trim();
+		
+		String returnResult = null;
 		try{
 			profileID = (Integer) session.getAttribute("profileId");
 			userId = (Integer) session.getAttribute("userId");
@@ -167,11 +169,23 @@ public class TrainingPartnerController {
 			model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
 			model.addAttribute("traineeCertificateName", certificateInfo.getName());
 			model.addAttribute("trainingAddress", certificateInfo.getTrainingAddress());
+			if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Western India)")){
+			returnResult = "certificatetraineeHRAWI";	
+			}
+			else if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Northern India)")){
+				returnResult = "certificatetraineeHRANI";
+			}else if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("FSSAI")){
+				returnResult ="certificatetraineeFSSAI";
+			}else{
+				returnResult = "certificatetraineeGEN";
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 			new ZLogger("generateCourseCertificateGO","Exception while "+e.getMessage() , "TrainingPartnerController.java");
 		}
-		return "certificatetrainee";
+		
+		System.out.println("returnResult "+returnResult);
+		return returnResult;
 		
 	}
 	
@@ -834,6 +848,20 @@ public class TrainingPartnerController {
 		String result = traineeService.savePaymentStatus(data);
 		System.out.println("result "+result);
 		PrintWriter out = response.getWriter();
+		out.write(result);
+		out.flush();
+		
+	}
+	
+	
+	
+	@RequestMapping(value="/updateTrainingCalendar" , method=RequestMethod.POST)
+	@ResponseBody
+	public void updateTrainingCalendar(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("updateTrainingCalendar","updateTrainingCalendar............" + data  , "TrainingPartnerController.java");
+		String result = trainingPartnerService.updateTrainingCalendar(data);
+		PrintWriter out = response.getWriter();
+
 		out.write(result);
 		out.flush();
 		

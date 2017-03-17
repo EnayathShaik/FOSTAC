@@ -233,10 +233,32 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainer/generate-certificate-trainer.jsp" />
 	</definition>
-	<definition name="certificatetrainee" extends="base.user.afterLogin">
+	<definition name="certificatetraineeFSSAI" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainee/certificatetraineeFSSAI.jsp" />
+	</definition>
+	
+		<definition name="certificatetraineeHRANI" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainee/certificatetraineeHRANI.jsp" />
+	</definition>
+	
+		<definition name="certificatetraineeHRAWI" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainee/certificatetraineeHRAWI.jsp" />
+	</definition>
+	
+		<definition name="certificatetraineeGEN" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainee/certificatetrainee.jsp" />
 	</definition>
+	
+		<definition name="certificatetrainee" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainee/certificatetrainee.jsp" />
+	</definition>
+	
+	
 	<definition name="contactTrainee" extends="base.user.afterLogin">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/commonjsp/contactUsTrainee.jsp" />

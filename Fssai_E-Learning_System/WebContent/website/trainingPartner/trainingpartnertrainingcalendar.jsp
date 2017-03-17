@@ -67,7 +67,6 @@ function editTrainingCalendar( srNo , id, courseType){
 	
 	if(window.profileId == 6){
 		
-	//	alert(window.profileId);
 		window.trainingStartDate.destroy();
 		window.trainingEndDate.destroy();
 		
@@ -82,17 +81,41 @@ function editTrainingCalendar( srNo , id, courseType){
 		$("#seatCapacity").attr('readonly',true);
 		$("#type").attr('readonly' , true);
 		
-			   
+			 
 		$("#trainingStartDate").val($("#trainingStartDate"+srNo).text());
 		$("#trainingEndDate").val($("#trainingEndDate"+srNo).text());
+		
+		$("#btnUpdate1").css("display" , "block");
+		$("#btnUpdate").css("display" , "none");
 	}
 }
 window.onload = OnStart;
 </script>
 <script>
-	function saveDetails() {
-
+	function updateTrainingCalendar() {
+		
+		var assessmentDateTime = (($("#assessmentDateTime").val() == 'undefined' || $("#assessmentDateTime").val() == null ) ? "" : $("#assessmentDateTime").val() );
+		var tcid = $("#tcid").val();
+		alert(" assessmentDateTime "+assessmentDateTime + " tcid "+tcid);
+		
+		var total =  "assessmentDateTime="+assessmentDateTime+"@tcid="+tcid;
+		var name1=JSON.stringify({
+			courseType:0
+	  })
+	 	$.ajax({
+			type: 'post',
+			url: 'updateTrainingCalendar.fssai?data='+ total,
+			      contentType : "application/json",
+				  data:name1,
+			      success: function (response) {
+			    	  alert(response);
+			       $( '#name_status' ).html(response);
+			      }
+			      });
 	}
+	
+	
+
 
 	function showDetails() {
 		$(".displayNone").css("display", "block");
@@ -119,7 +142,6 @@ window.onload = OnStart;
 			async : false,
 			success : function(data) {
 				$('#newTable').show();
-				//var mainData = JSON.stringify(data);
 				var mainData1 = jQuery.parseJSON(data);
 				var j = 1;
 				$('#newTable tr').remove();
@@ -136,12 +158,16 @@ window.onload = OnStart;
 									+'</td><td><input type="hidden" value='+obj[8]+'  id=selTrainerNames'+i+' />' + obj[5]	
 									+'</td><td id=seatCapacity'+i+'>' + obj[14]
 									+'</td><td><input type="hidden" value='+obj[16]+'  id=type'+i+' />' + obj[15]
-									+ '</td><td><input type="button"  onClick="editTrainingCalendar(\''+i+'\',\''+obj[0]+'\',\''+obj[1]+'\');" value="Reschedule"/></td><td> <input type="submit"  onclick=" return setId('+obj[0]+')" value="Cancel Training"/> </td></tr>');
+									+ '</td><td><input type="button" id="TP"   onClick="editTrainingCalendar(\''+i+'\',\''+obj[0]+'\',\''+obj[1]+'\');" value="Reschedule"/></td><td> <input type="submit"  onclick=" return setId('+obj[0]+')" value="Cancel Training"/> </td></tr>');
 
 				});
 			}
 		}); 
 		return result;
+		
+		
+		
+		
 	}
 	
 	function setId(id){
@@ -320,7 +346,7 @@ window.onload = OnStart;
 																<li class="style-li error-red"></li>
 															</ul>
 														</div>
-														<input type="date" value="" name="trainingStartDate" 
+														<input type="text" value="" name="trainingStartDate" 
 															id="trainingStartDate" class="form-control">
 													</div>
 													<div class="form-group">
@@ -330,7 +356,7 @@ window.onload = OnStart;
 																<li class="style-li error-red"></li>
 															</ul>
 														</div>
-														<input type="time" name="trainingEndDate" 
+														<input type="text" name="trainingEndDate" 
 															id="trainingEndDate" class="form-control">
 															
 															<input type="hidden" name="loginId"
@@ -396,6 +422,12 @@ window.onload = OnStart;
 														class="btn login-btn pull-right show-details-vacancy collapsed" id="btnUpdate"
 														data-target="#show-result" aria-expanded="false"
 														value="Update">
+														
+														<button
+														style="display:none; margin-top: 20px;" onclick="updateTrainingCalendar()"
+														class="btn login-btn pull-right show-details-vacancy collapsed" style="display:none" id="btnUpdate1"
+														data-target="#show-result" aria-expanded="false"
+														>Update</button>
 														
 														
   
