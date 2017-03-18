@@ -27,11 +27,11 @@ function checkVacancyType(){
 	var vacancyType = $("#vacancyType").val();
 	console.log("vacancyType "+vacancyType);
 	
-	if(vacancyType=="P"){
+	/*if(vacancyType=="P"){
 		
 		$("#displayStartDate").css("display","block");
 		$("#displayEndDate").css("display","block");
-	}
+	} */
 	
 }
 
@@ -44,6 +44,17 @@ function validateFields(){
 	var trainingDate =  $("#trainingDate").val();
 	var requiredExp =  $("#requiredExp").val();
 	var noOfVacancy =  $("#noOfVacancy").val();
+	
+	var trainingStartDate = $("#trainingDate").val();
+	var trainingEndTime = $("#trainingEndTime").val();
+	
+	if(trainingStartDate == "" ||  trainingEndTime == ""){
+		
+		alert("Training Date can not be blank.");
+		return false;
+	}
+	
+	
 	if(courseType == 0){
 		document.getElementById('courseType').style.borderColor = "red";
     	document.getElementById("courseTypeError").style.display = 'block';
@@ -85,46 +96,6 @@ function validateFields(){
 </script>
 
 <script type="text/javascript">
-/* function searchVacancy(indicator){
-	var loginID = '${triningCenter}';
-	
-	
-	var courseType =  ($("#courseType").val() == 0 ? "" : $("#courseType").val());
-	var courseName =  ($("#courseName").val() == 0 ? "" : $("#courseName").val());
-	var trainingDate = (typeof $("#trainingStartTime").val() === "undefined"  ? "" : $("#trainingStartTime").val() ); 
-	var trainingTime = (typeof $("#trainingEndTime").val() === "undefined" ? "" : $("#trainingEndTime").val() ); 
-	var requiredExp =  ($("#requiredExp").val() == 0 ? "" : $("#requiredExp").val());
-	var noOfVacancy =  ($("#noOfVacancy").val() == 0 ? "" : $("#noOfVacancy").val());
-	
-	var total = null;
-	$(".displayNone").css("display","block");
-	
-	if(indicator == "ALL")
-		 total = "courseType=&courseName=&trainingDate=&requiredExp=&noOfVacancy=&loginid="+loginID;
-	else
-		 total = "courseType="+courseType+"&courseName="+courseName+"&trainingDate="+trainingDate+"&requiredExp="+requiredExp+"&noOfVacancy="+noOfVacancy+"&loginid="+loginID+"&trainingTime="+trainingTime;
- 	var result="";
-	 	$.ajax({
-		type: 'post',
-		url: 'searchVacancy.jspp?'+ total,
-		async: false, 
-		success: function (data){
-		$('#newTable').show();
-		//var mainData = JSON.stringify(data);
-		var mainData1 = jQuery.parseJSON(data);
-		var j=1;
-		$('#newTable tr').remove();
-		$.each(mainData1 , function(i , obj)
-		{
-			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td style="display:none;">'+obj[0]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td></tr>');
-			
-		});
-		}
-		});  
-	return result;
-}
- */
-
 
 
 function searchVacancy(indicator){
@@ -272,7 +243,7 @@ function searchVacancy(indicator){
                         
                         
                         
-                               <div class="form-group" id="displayStartDate" style="display:none">
+                               <div class="form-group" id="displayStartDate" >
                           <div>
                             <ul class="lab-no">
                               <li class="style-li"><strong>Training Start Date:</strong></li>
@@ -333,7 +304,7 @@ function searchVacancy(indicator){
 						</cf:select>
                         </div>
 
-                      <div class="form-group" id="displayEndDate" style="display:none">
+                      <div class="form-group" id="displayEndDate" >
                           <div>
                             <ul class="lab-no">
                               <li class="style-li"><strong>Training End Date:</strong></li>
