@@ -30,14 +30,14 @@ function showDetails(){
 	var selTraineeStatus =( $("#selTraineeStatus").val() == null ? "" :  $("#selTraineeStatus").val());
 	var selTraineeModeOfTraining =( $("#selTraineeModeOfTraining").val() == null ? "" : $("#selTraineeModeOfTraining").val());
 	 
- 	var total = courseType+"-"+courseName+"-"+trainingDate+"-"+trainingTime+"-"+selTraineeStatus+"-"+selTraineeModeOfTraining+"-";
+ 	var total = courseType+"@"+courseName+"@"+trainingDate+"@"+trainingTime+"@"+selTraineeStatus+"@"+selTraineeModeOfTraining+"@";
 	$(".displayNone").css("display","block");
 	var result="";
  	var name1=JSON.stringify({
 		courseType:0,
 		courseName:0
   })
-  alert("total "+total);
+  
 	$.ajax({
 		type: 'POST',
 		url: 'tcvt.fssai?data='+ total.toString(),
@@ -60,59 +60,6 @@ function showDetails(){
 	return result; 
 }
 
-/* function showDetail(){
-	alert("Fetching details to mark attendance..");
-	
-	$('#tblAssessorCourses tr').remove();
-	$('#tblAssessorCourses').append('<thead>'+
-    '<tr class="background-open-vacancies">'+
-        '<th>S.No.</th>'+
-        '<th>Course Type</th>'+
-        '<th>Course Code</th>'+
-        '<th>Training Date</th>'+
-        '<th>Training Time</th>'+
-        '<th>Trainer Name</th>'+
-        '<th>&nbsp;&nbsp;</th>'+
-    '</tr>'+
-	'</thead>');
-	var result="";
-	//var id = document.getElementById("assessmentAgencyId").value;
-	var assessorId =710;
-	$.ajax({
-	type: 'post',
-	url: 'trainingpartnerviewtraineelist.jspp?'+assessorId,
-	async: false, 
-	success: function (data){
-		console.log("Data received..");
-		console.log(data);
-	var jsonData = jQuery.parseJSON(data);
-	alert(jsonData)
-	console.log(jsonData);
-	var j=1;
-	var accessorId;
-	$.each(jsonData , function(i , obj)
-	{
-		$('#tblAssessorCourses').append('<tr id="tableRow"><td>'+j++ +'</td>'+
-				'<td>'+obj[3]+'</td>'+
-				'<td>'+obj[4]+'</td>'+
-				'<td>'+obj[5]+'</td>'+
-				'<td><select name =attendanceRow'+obj[1]+'><option name="present" value ="A">Present</option>'+
-				'<option name="absent" value="I">Absent</option></td>'+
-				'<td> <button onclick="updateAttendance('+obj[0]+','+obj[1]+');return false;">Update</button></td>'+
-				'</tr>');
-		console.log("0-"+obj[0] +" #1-" +obj[1] +" #2-" +obj[2] +" #3-"+obj[3] +" #4-"+obj[4]+" #5-"+obj[5]);
-		currentAssessorId = obj[0];
-	});
-	
-	},
-	failure:function(data){
-		alert("Error occured while retrieving upcoming calendars.");
-	 msgbox('Error occured while retrieving upcoming calendars.');
-	}
-	});
-return result;	
-}
- */
 
 </script>
 <section>
@@ -228,7 +175,7 @@ return result;
                                                                 
                                                             </ul>
                                                         </div>
-                                                        <select class="form-control" name="selTraineeStatus" id = "selTraineeStatus"><option value="0">Please Select</option> </select>
+                                                        <select class="form-control" name="selTraineeStatus" id = "selTraineeStatus"><option value="">Please Select</option> </select>
 														
 														<script>
 															var selTraineeStatusOptions = "";
