@@ -7,9 +7,25 @@ public class GenerateCourseCertificateForm {
 	private String batchCode;
 	private String certificateId;
 	private String mainCertificateId;
-	
+	private String trainingStartDate;
+	private String trainingEndDate;
 
 	
+	
+	
+	
+	public String getTrainingStartDate() {
+		return trainingStartDate;
+	}
+	public void setTrainingStartDate(String trainingStartDate) {
+		this.trainingStartDate = trainingStartDate;
+	}
+	public String getTrainingEndDate() {
+		return trainingEndDate;
+	}
+	public void setTrainingEndDate(String trainingEndDate) {
+		this.trainingEndDate = trainingEndDate;
+	}
 	public int getCourseType() {
 		return courseType;
 	}
