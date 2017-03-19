@@ -5,7 +5,7 @@
                 function OnStart() {
                 	window.trainingcenterId = ${loginUsertrainingpartner};
                     searchUpcomingTraining();
-                    searchCurrentAppliactionStatus();
+                    //searchCurrentAppliactionStatus();
                 }
                 window.onload = OnStart;
                 
@@ -177,9 +177,9 @@
 
                                             <!-- current upcoming trainings -->
                                             <!-- upcoming trainings -->
-                                            <div class="col-xs-12 collapse in table-overflow-responsive" id="show-result" aria-expanded="true" style="">
+                                            <!-- <div class="col-xs-12 collapse in table-overflow-responsive" id="show-result" aria-expanded="true" style="">
 
-                                                <!-- table -->
+                                                table
                                                 <div class="personel-info">
                                                     <div class="row">
                                                         <div class="col-xs-12">
@@ -204,7 +204,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
