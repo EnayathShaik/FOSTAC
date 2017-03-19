@@ -178,12 +178,12 @@ public class TrainingPartnerController {
 			model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
 			model.addAttribute("traineeCertificateName", certificateInfo.getName());
 			model.addAttribute("trainingAddress", certificateInfo.getTrainingAddress());
-			if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Western India)")){
-			returnResult = "certificatetraineeHRAWI";	
-			}
-			else if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Northern India)")){
+			
+			if(certificateInfo != null && certificateInfo.getTrainingPartnerName() != null && certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Western India)")){
+				returnResult = "certificatetraineeHRAWI";	
+			}else if(certificateInfo != null && certificateInfo.getTrainingPartnerName() != null && certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Northern India)")){
 				returnResult = "certificatetraineeHRANI";
-			}else if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("FSSAI")){
+			}else if(certificateInfo != null && certificateInfo.getTrainingPartnerName() != null && certificateInfo.getTrainingPartnerName().equalsIgnoreCase("FSSAI")){
 				returnResult ="certificatetraineeFSSAI";
 			}else{
 				returnResult = "certificatetraineeGEN";
