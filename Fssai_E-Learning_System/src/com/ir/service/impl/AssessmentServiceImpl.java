@@ -179,6 +179,29 @@ public class AssessmentServiceImpl implements AssessmentService {
 		return courseTypeList;
 	}
 	
+	//searchDataAssessmentAgency
+	@Override
+	@Transactional
+	public List searchDataAssessmentAgency(String data) {
+		List courseTypeList = assessmentDao.searchDataAssessmentAgency(data);
+		return courseTypeList;
+	}
 	
+	//editMAA
 	
+	@Override
+	@Transactional
+	public List editMAA(String data) {
+		List courseTypeList = assessmentDao.editMAA(data);
+		return courseTypeList;
+	}
+	
+	//updateMAA
+	
+	@Override
+	@Transactional
+	public String updateMAA(String data) {
+		String courseTypeList = assessmentDao.updateMAA(data);
+		return courseTypeList;
+	}
 }

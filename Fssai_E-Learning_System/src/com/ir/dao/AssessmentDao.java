@@ -25,4 +25,10 @@ public interface AssessmentDao {
 	public List searchAssessorTraineesForResults(String data);
 	public String updateTraineeAssessmentResult(String data);
 	public String updateTraineeAssessmentResultOnline(Integer userID,String result,String comment);
+	
+	public List searchDataAssessmentAgency(String data);
+	
+	public List editMAA(String data);
+	
+	public String updateMAA(String data);
 }

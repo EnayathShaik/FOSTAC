@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -24,6 +25,7 @@ import com.ir.model.CourseType;
 import com.ir.model.trainee.TraineeAssessmentEvaluation;
 import com.ir.util.HibernateUtil;
 import com.zentech.logger.ZLogger;
+import com.zentect.ajax.AjaxRequest;
 @Repository("AssessmentDao")
 @Service
 public class AssessmentDaoImpl implements AssessmentDao{
@@ -332,4 +334,112 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		return newList;
 	}
 	
+	
+	//searchDataAssessmentAgency
+	@Override
+	public List searchDataAssessmentAgency(String name) {
+		String[] totalConnected = name.split("-");
+		String id,status;
+		
+		if(totalConnected[0].split("=").length == 1){
+			id = "%";
+		}else{
+			id = (totalConnected[0].split("="))[1];
+		}
+		if(totalConnected[1].split("=").length == 1){
+			status = "%";
+		}else{
+			status = (totalConnected[1].split("="))[1];
+		}
+		
+		
+		String[] statusA  = status.split("%20");
+		String cn = "";
+		for(int i = 0 ; i < statusA.length ; i++){
+			cn = cn + statusA[i] + " ";
+		}
+		String fcn = cn.substring(0, cn.length()-1);
+		System.out.println(fcn.length());
+		
+		Session session = sessionFactory.getCurrentSession();
+		String sql ="select maa.manageassessmentagencyid  , ld.loginid, maa.assessmentagencyname , maa.websiteurl , (CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus "+
+					" from manageassessmentagency as maa inner join logindetails as ld "+
+					" on ld.id = maa.logindetails "+
+					" where upper(maa.assessmentagencyname) like '"+fcn.toUpperCase() +"' and ld.loginid like '"+id+"'";
+		Query query = session.createSQLQuery(sql);
+		List<CourseName> list = query.list();
+		return list;
+	}
+	
+	//editMAA
+	
+	@Override
+	public List editMAA(String name) {
+
+		String sql="select maa.manageassessmentagencyid  , ld.loginid ,maa.assessmentagencyname , maa.websiteurl , ld.status , "+
+    			" maa.pan , maa.email , maa.headofficedataaddress1 , maa.headofficedataaddress2 , maa.pin ,s.statename , "+
+    			" d.districtname  , c.cityname ,"+
+    			" s.stateid ,d.districtid  , c.cityid "+
+				" from manageassessmentagency as maa "+
+				" inner join logindetails as ld on ld.id = maa.logindetails "+
+				" inner join district as d on d.districtid = maa.district "+
+				" inner join city as c on c.cityId = maa.city "+
+				" inner join state as s on s.stateid = maa.stateid "+
+				" where maa.manageassessmentagencyid = '"+ name+"' ";
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createSQLQuery(sql);
+		List<CourseName> list =  query.list();
+		return list;
+	}
+	
+	//updateMAA
+	
+	@Override
+	public String updateMAA(String name) {
+
+		String [] total = name.split("-");
+		String userId = total[0].split("=")[1];
+		String status = total[1].split("=")[1];
+		String websiteUrl = total[2].split("=")[1];
+		String email = total[3].split("=")[1];
+		String headOfficeDataAddress1 = total[4].split("=")[1].replaceAll("%20", " ");
+		String headOfficeDataAddress2 = total[5].split("=")[1].replaceAll("%20", " ");
+		System.out.println("address 1  :"+ headOfficeDataAddress1 +"     "+ headOfficeDataAddress2);
+		String pin = total[6].split("=")[1];
+		String stateId = total[7].split("=")[1];
+		String district = total[8].split("=")[1];
+		String city = total[9].split("=")[1];
+		String isActive = status.equalsIgnoreCase("A")?"Y":"N";
+		Session session = sessionFactory.getCurrentSession();
+		
+		String selectLoginDetails = "select logindetails from manageassessmentagency where manageassessmentagencyid = '"+userId+"'";
+		Query querySel = session.createSQLQuery(selectLoginDetails);
+		String selectSel = querySel.getQueryString();
+		System.out.println("login id is   :"+ selectSel);
+		
+		String sql="UPDATE manageassessmentagency "+
+				" SET city='"+city+"',  "+
+				" district='"+district+"', email='"+email+"', "+
+				" headofficedataaddress1='"+headOfficeDataAddress1+"', headofficedataaddress2='"+headOfficeDataAddress2+"', "+
+				" pin='"+pin+"', stateid='"+stateId+"', "+
+				" websiteurl='"+websiteUrl+"' "+
+				" WHERE manageassessmentagencyid = '"+userId+"' ";
+
+		String sqlLD = "update logindetails set status ='"+status+"' , isactive = '"+isActive+"' where id =("+selectSel+")";
+		Query query2 = session.createSQLQuery(sqlLD);
+		String result = null;
+		Query query = session.createSQLQuery(sql);
+		System.out.println(sql);
+		Integer i = query.executeUpdate();
+		System.out.println("i  :"+ i);
+		
+		Integer j = query2.executeUpdate();
+		if(i > 0 ){
+			System.out.println("data selected finally  " );
+			result = "Data updated successfully"; 
+		}else{
+			result = "Oops , something went wrong try ageain !!!";
+		}
+		return result;
+	}
 }

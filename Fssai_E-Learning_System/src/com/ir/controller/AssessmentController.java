@@ -1,5 +1,7 @@
 package com.ir.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -7,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -15,12 +18,16 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
 import com.ir.form.AssessmentAnswerCriteria;
+import com.ir.form.GenerateCourseCertificateForm;
 import com.ir.form.common.AssessmentEvaluationForm;
 import com.ir.model.AssessmentQuestion;
 import com.ir.model.trainee.TraineeAssessmentEvaluation;
@@ -121,8 +128,57 @@ public class AssessmentController {
 		}
 		
 		return "traineeAssessmentEvaluation";
-		// return "redirect:afterSaveAssessment.fssai";
+		
 
 	}
 
+	
+	//searchDataAssessmentAgency
+	@RequestMapping(value="/searchDataAssessmentAgency" , method=RequestMethod.POST)
+	@ResponseBody
+	public void searchDataAssessmentAgency(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("searchDataAssessmentAgency","searchDataAssessmentAgency............" + data  , "TrainingPartnerController.java");
+		List batchCodeList = assessmentService.searchDataAssessmentAgency(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(batchCodeList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	//editMAA
+	
+	@RequestMapping(value="/editMAA" , method=RequestMethod.POST)
+	@ResponseBody
+	public void editMAA(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("editMAA","editMAA............" + data  , "TrainingPartnerController.java");
+		List batchCodeList = assessmentService.editMAA(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(batchCodeList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
+	//updateMAA
+	
+	
+	@RequestMapping(value="/updateMAA" , method=RequestMethod.POST)
+	@ResponseBody
+	public void updateMAA(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("updateMAA","updateMAA............" + data  , "TrainingPartnerController.java");
+		String batchCodeList = assessmentService.updateMAA(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(batchCodeList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
 }

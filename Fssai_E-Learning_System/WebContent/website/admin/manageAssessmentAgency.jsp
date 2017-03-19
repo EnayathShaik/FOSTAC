@@ -11,7 +11,7 @@
             <script type="text/javascript">
                 function validate() {
                     var status = true;
-                   // var userID = $("#userId").val();
+                   
                     var assAgencyName = $("#assessmentAgencyName").val();
                     var websiteURL = $("#websiteUrl").val();
                     var pan = $("#PAN").val();
@@ -22,10 +22,7 @@
                     var stateId = $("#stateId").val();
                     var district = $("#district").val();
                     var city = $("#city").val();
-                   /*  if (userID == "" || userID.length <= 0) {
-                        alert('Please Enter User ID')
-                        status = false;
-                    } else  */if (assAgencyName == "" || assAgencyName.length <= 0) {
+                  if (assAgencyName == "" || assAgencyName.length <= 0) {
                         alert('Please Enter Assessment Agency Name.')
                         status = false;
                     } else if (websiteURL == "" || websiteURL.length <= 0) {
@@ -62,7 +59,6 @@
                 }
 
                 function OnStart() {
-                    //alert('s');
                     updateDiv();
                 }
                 window.onload = OnStart;
@@ -81,41 +77,7 @@
                         return false;
                 }
 
-                function checkname() {
-                    var name = document.getElementById("userId").value;
-
-                    if (name) {
-                        $
-                            .ajax({
-                                type: 'post',
-                                url: 'checkdata.jspp?' + name,
-                                data: {
-                                    user_name: name,
-                                },
-
-                                success: function(response) {
-                                    $('#name_status').html(response);
-
-                                    if (response.trim() == 'Already') {
-                                        document.getElementById('userId').value = "";
-                                        document.getElementById("register").style.display = 'none';
-                                        return false;
-
-                                    } else {
-                                        var aa = $('#name_status').html(response);
-                                        document.getElementById("register").style.display = 'block';
-                                        return true;
-                                    }
-                                }
-                            });
-                    } else {
-                        $('#name_status').html("");
-                        document.getElementById("register").style.display = 'none';
-                        return false;
-                    }
-                }
-
-
+             
             </script>
             <script type="text/javascript" language="javascript">
                 function pan_validate(pan) {
@@ -131,12 +93,16 @@
                     var userId = $("#userId").val();
                     var aan = $("#assessmentAgencyName").val(); - $(".displayNone").css("display", "block"); {
                         var result = "";
-                        var total = "userId=" + userId + "&assessmentAgencyName=" + aan;
-                        $
-                            .ajax({
+                        var total = "userId=" + userId + "-assessmentAgencyName=" + aan;
+                    	var name1=JSON.stringify({
+                    		courseName:0
+                      })
+                        $.ajax({
                                 type: 'post',
-                                url: 'searchData.jspp?' + total,
+                                url: 'searchDataAssessmentAgency.fssai?data=' + total,
                                 async: false,
+                                contentType : "application/json",
+                      		  	data:name1,
                                 success: function(data) {
                                     var mainData1 = jQuery.parseJSON(data);
                                     var j = 1;
@@ -162,109 +128,26 @@
 
             </script>
             <script>
-                function getStateUpdate(ss, dd, cc) {
-                    $
-                        .ajax({
-                            type: 'post',
-                            url: 'getStateUpdate.jspp',
-                            success: function(response) {
-                                var mainData2 = jQuery.parseJSON(response);
-                                $('#stateId option').remove();
-                                $('#stateId')
-                                    .append(
-                                        '<option value="0" label="Select Stateeeeee" />');
-                                $
-                                    .each(
-                                        mainData2,
-                                        function(i, obj) {
-                                            if (ss == obj.stateId) {
-                                                $('#stateId')
-                                                    .append(
-                                                        '<option selected="true" value=' + obj.stateId + '>' + obj.stateName + '  </option>');
-                                            } else {
-                                                $('#stateId')
-                                                    .append(
-                                                        '<option value=' + obj.stateId + '>' + obj.stateName + ' </option>');
-                                            }
-                                        });
-                            }
-                        });
-                    getDistrictUpdate(ss, dd, cc);
-                }
-
-                function getDistrictUpdate(ss, dd, cc) {
-                    $
-                        .ajax({
-                            type: 'post',
-                            url: 'getDistrictUpdate.jspp?' + ss,
-                            success: function(response) {
-                                var mainData1 = jQuery.parseJSON(response);
-                                $('#district option').remove();
-                                $('#district').append(
-                                    '<option value="0" label="Select District" />');
-
-                                $
-                                    .each(
-                                        mainData1,
-                                        function(i, obj) {
-                                            if (dd == obj.districtId) {
-                                                $('#district')
-                                                    .append(
-                                                        '<option selected="true" value=' + obj.districtId + '>' + obj.districtName + ' </option>');
-                                            } else {
-                                                $('#district')
-                                                    .append(
-                                                        '<option value=' + obj.districtId + '>' + obj.districtName + ' </option>');
-                                            }
-                                        });
-                            }
-                        });
-                    getCityUpdate(dd, cc);
-                }
-
-                function getCityUpdate(dd, cc) {
-                    $
-                        .ajax({
-                            type: 'post',
-                            url: 'getCityUpdate.jspp?' + dd,
-                            success: function(response) {
-                                var mainData1 = jQuery.parseJSON(response);
-                                $('#city option').remove();
-                                $('#city').append(
-                                    '<option value="0" label="Select District" />');
-
-                                $
-                                    .each(
-                                        mainData1,
-                                        function(i, obj) {
-                                            if (cc == obj.cityId) {
-                                                $('#city')
-                                                    .append(
-                                                        '<option selected="true" value=' + obj.cityId + '>' + obj.cityName + ' </option>');
-                                            } else {
-                                                $('#city')
-                                                    .append(
-                                                        '<option value=' + obj.cityId + '>' + obj.cityName + ' </option>');
-                                            }
-                                        });
-                            }
-                        });
-                }
+             
 
                 function editManageAssessmentAgency(i) {
                     var userId = $("#maaId" + i).val();
                     document.getElementById("i").value = i;
-                    alert(userId);
+                    
                     $(".displayNone").css("display", "block");
                     $("#updateDiv").show();
                     $("#createDiv").hide(); {
                         var result = "";
                         var total = userId;
-                        $
-                            .ajax({
+                    	var name1=JSON.stringify({
+                    		courseName:0
+                      })
+                        $.ajax({
                                 type: 'post',
-                                url: 'editMAA.jspp?' + total,
+                                url: 'editMAA.fssai?data=' + total,
                                 async: false,
+                                contentType : "application/json",
+                      		  	data:name1,
                                 success: function(data) {
                                     $('#newTable').show();
                                     var mainData1 = jQuery.parseJSON(data);
@@ -300,50 +183,40 @@
                                                 var d = obj[11];
                                                 var dd = obj[14];
                                                 var c = obj[12];
-                                                var cc = obj[15];
-                                                getStateUpdate(ss, dd, cc);
+                                                var cc = obj[15];    
+                                 
+                                                $("#stateId").val(ss);
+                                                
+                                                $("#stateId").trigger("change");
+                                                window.setTimeout(function() {
+                                                    $('#district').val(dd);
+                                                    
+                                                    $("#district").trigger("change");
+                                                    
+                                                    window.setTimeout(function() {
+                                                    	
+                                                        $('#city').val(cc);
+                                                    }, 1000);
 
-                                                /* $('#stateId option').remove();
-                                                $('#stateId').append('<option value="'+s+'">ss</option>');
-												
-                                                $('#district option').remove();
-                                                $('#district').append('<option value="'+14+'">dd</option>');
-												
-                                                $('#city option').remove();
-                                                $('#city').append('<option value="'+15+'">cc</option>'); */
+                                                }, 1000);
 
-                                                //stateId.options[0].text = s;
-                                                //district.options[0].text = d;
-                                                //city.options[0].text = c;
-                                                if (obj[4] == "A") {
-                                                    //alert('a');
-                                                    $('#status option')
-                                                        .remove();
-                                                    $('#status')
-                                                        .append(
-                                                            '<option value="0">Select Status</option><option value="A" selected="true">Active</option><option value="I">In-active</option>');
-                                                } else {
-                                                    //alert('i');
-                                                    $('#status option')
-                                                        .remove();
-                                                    $('#status')
-                                                        .append(
-                                                            '<option value="0" >In-Active</option><option value="A">Active</option><option value="I"  selected="true">In-active</option>');
-                                                }
-                                            });
-                                }
-                            });
+													if (obj[4] == "A") {
+													$('#status option').remove();
+													$('#status').append('<option value="0">Select Status</option><option value="A" selected="true">Active</option><option value="I">In-active</option>');} else {
+													$('#status option').remove();
+													$('#status').append('<option value="0" >In-Active</option><option value="A">Active</option><option value="I"  selected="true">In-active</option>');}
+																	});
+																	}
+																	});
 
-                        return result;
-                    }
-                }
-
-            </script>
+															return result;
+														}
+													}
+												</script>
             <script>
                 function updateData() {
                     var i = document.getElementById("i").value;
                     var userId = $("#maaId" + i).val();
-                    //alert(userId);
                     var status = $("#status").val();
                     var websiteUrl = $("#websiteUrl").val();
                     var email = $("#email").val();
@@ -354,16 +227,18 @@
                     var district = $("#district").val();
                     var city = $("#city").val();
 
-                    var total = "userId=" + userId + "&status=" + status + "&websiteUrl=" + websiteUrl + "&email=" + email + "&headOfficeDataAddress1=" + headOfficeDataAddress1 + "&headOfficeDataAddress2=" + headOfficeDataAddress1 + "&pin=" + pin + "&stateId=" + stateId + "&district=" + district + "&city=" + city;
+                    var total = "userId=" + userId + "-status=" + status + "-websiteUrl=" + websiteUrl + "-email=" + email + "-headOfficeDataAddress1=" + headOfficeDataAddress1 + "-headOfficeDataAddress2=" + headOfficeDataAddress1 + "-pin=" + pin + "-stateId=" + stateId + "-district=" + district + "-city=" + city;
                     $(".displayNone").css("display", "block");
                     $("#updateDiv").hide();
                     $("#createDiv").show();
+                	var name1=JSON.stringify({
+                		courseName:0
+                  })
                     $.ajax({
                         type: 'post',
-                        url: 'updateMAA.jspp?' + total,
-                        data: {
-                            user_name: name,
-                        },
+                        url: 'updateMAA.fssai?data=' + total,
+                        contentType : "application/json",
+              		  	data:name1,
                         success: function(response) {
                             $('#name_status').html(response);
 
@@ -375,14 +250,6 @@
                         .append(
                             '<option value="0" >Select Status</option><option value="A">Active</option><option value="I" >In-active</option>');
 
-                    $("#websiteUrl").val() = '';
-                    $("#email").val() = '';
-                    $("#headOfficeDataAddress1").val() = '';
-                    $("#headOfficeDataAddress2").val() = '';
-                    $("#pin").val() = '';
-                    $("#stateId").val() = '';
-                    $("#district").val() = '';
-                    $("#city").val() = '';
                 }
 
             </script>
@@ -577,22 +444,10 @@
                                                             </div>
                                                             <cf:select path="city" class="form-control">
                                                                 <cf:option value="0" label="Select City" />
-                                                                <%-- <cf:options items="${districtList}" itemValue="districtId" itemLabel="districtName"/> --%>
+                                                              
                                                             </cf:select>
                                                         </div>
-                                                        <%--  <div class="form-group">
-                                            <div>
-                                                <ul class="lab-no">
-                                                    <li class="style-li"><strong>Status:</strong></li>
-                                                    <li class="style-li error-red"></li>
-                                                </ul>
-                                            </div>
-<cf:select path="status" class="form-control">
-<cf:option value="A" label="Active" />
-<cf:option value="i" label="In-Active" />
-</cf:select>
-                                        </div> --%>
-                                                    </div>
+                                                        </div>
                                                 </fieldset>
                                             </div>
                                             <!-- button -->
