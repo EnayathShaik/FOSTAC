@@ -172,11 +172,16 @@
 
                             total = "ALL"; //"contentLocation=0&courseType=0&courseName=&modeOfTraining=&contentType=0";
                         } else {
-                            total = "userId=" + userId + "&assessmentAgencyName=" + tpn + "&websiteURL=" + websiteURL + "&pan=" + pan + "&email=" + email + "&headOfficeDataAddress1=" + headOfficeDataAddress1 + "&headOfficeDataAddress2=" + headOfficeDataAddress2 + "&pin=" + pin + "&stateId=" + stateId + "&district=" + district + "&city=" + city + "&status=" + status;
+                            total = "userId=" + userId + "-assessmentAgencyName=" + tpn + "-websiteURL=" + websiteURL + "-pan=" + pan + "-email=" + email + "-headOfficeDataAddress1=" + headOfficeDataAddress1 + "-headOfficeDataAddress2=" + headOfficeDataAddress2 + "-pin=" + pin + "-stateId=" + stateId + "-district=" + district + "-city=" + city + "-status=" + status;
                         }
+                    	var name1=JSON.stringify({
+                    		courseName:0
+                      })
                         $.ajax({
                             type: 'post',
-                            url: 'searchDataTP.jspp?' + total,
+                            url: 'searchDataTP.fssai?data=' + total,
+                            contentType : "application/json",
+                  		  	data:name1,
                             async: false,
                             success: function(data) {
                                 $('#newTable').show();
@@ -186,14 +191,6 @@
                                 $('#newTable tr').remove();
                                 $('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Training Partner Id</th><th>Training Partner Name</th><th>Weblink</th><th>Current Status</th><th>Option</th></tr>')
                                 $.each(mainData1, function(i, obj) {
-                                	console.log(obj[6]);
-                               /*      var stat;
-                                    if (obj[5] == 'A') {
-                                        stat = 'Active';
-                                    } else {
-                                        stat = 'In-Active';
-                                    } */
-                                    /* <input type="submit"  onclick=activateDeActivateUser(\''+obj[5]+'\',\''+obj[6]+'\',\'1\'); value='+obj[6]+'> */
                                     $('#newTable').append('<tr id="tableRow"><td>' + j++ + '</td><td>' + obj[1] + '</td><td>' + obj[2] + '</td><td>' + obj[4] + '</td><td>' +obj[6]+ '</td><td><input type="hidden" id="mtpId" value="' + obj[0] + '" /><a href="#" onClick="editManageTrainingPartner(\'' + obj[0] + '\');">edit</a> </td></tr>');
                                 });
                             }
@@ -203,17 +200,19 @@
                 }
 
                 function editManageTrainingPartner(id) {
-                    var userId = $("#mtpId").val();
-                    //alert(userId);
-
-
+          
+                	var name1=JSON.stringify({
+                		courseName:0
+                  })
                     $(".displayNone").css("display", "block"); {
                         var result = "";
                         var total = id;
                         $.ajax({
                             type: 'post',
-                            url: 'editMTP.jspp?' + total,
+                            url: 'editMTP.fssai?data=' + total,
                             async: false,
+                            contentType : "application/json",
+                  		  	data:name1,
                             success: function(data) {
                                 $('#newTable').show();
                                 var mainData1 = jQuery.parseJSON(data);
@@ -235,18 +234,35 @@
                                     var s = obj[9];
                                     var d = obj[10];
                                     var c = obj[11];
-                                    //alert(s+' '+d+' '+c);
+                                   
                                     if (obj[4] == "A") {
-                                        //alert('a');class="form-control"
+                                   
                                         $('#status option ').remove();
-                                        //$('#status').addClass("form-control");
+                              
                                         $('#status').append('<option value="A" selected="true">Active</option><option value="I">In-active</option>');
                                     } else {
-                                        //alert('i');
+                                        
                                         $('#status option').remove();
                                         $('#status').append('<option value="A">Active</option><option value="I"  selected="true">In-active</option>');
                                     }
-                                    getStateUpdate(s, d, c);
+                                
+                                  $("#state").val(s);
+                                  
+                                  $("#state").trigger("change");
+                                  window.setTimeout(function() {
+                                      $('#district').val(d);
+                                      
+                                      $("#district").trigger("change");
+                                      
+                                      window.setTimeout(function() {
+                                          $('#city').val(c);
+                                      }, 1000);
+
+                                  }, 1000);
+                                 
+
+                                  
+                                  
                                 });
                             }
                         });
@@ -254,68 +270,6 @@
                         $("#createDiv").css("display", "none");
                         return result;
                     }
-                }
-
-                function getStateUpdate(s, d, c) {
-                    $.ajax({
-                        type: 'post',
-                        url: 'getStateUpdate.jspp',
-                        success: function(response) {
-                            var mainData2 = jQuery.parseJSON(response);
-                            $('#state option').remove();
-                            $('#state').append('<option value="0" label="Select Stateeeeee" />');
-
-                            $.each(mainData2, function(i, obj) {
-                                if (s == obj.stateId) {
-                                    $('#state').append('<option selected="true" value=' + obj.stateId + '>' + obj.stateName + '  </option>');
-                                } else {
-                                    $('#state').append('<option value=' + obj.stateId + '>' + obj.stateName + ' </option>');
-                                }
-                            });
-                        }
-                    });
-                    getDistrictUpdate(s, d, c);
-                }
-
-                function getDistrictUpdate(s, d, c) {
-                    $.ajax({
-                        type: 'post',
-                        url: 'getDistrictUpdate.jspp?' + s,
-                        success: function(response) {
-                            var mainData1 = jQuery.parseJSON(response);
-                            $('#district option').remove();
-                            $('#district').append('<option value="0" label="Select District" />');
-
-                            $.each(mainData1, function(i, obj) {
-                                if (d == obj.districtId) {
-                                    $('#district').append('<option selected="true" value=' + obj.districtId + '>' + obj.districtName + '</option>');
-                                } else {
-                                    $('#district').append('<option value=' + obj.districtId + '>' + obj.districtName + ' </option>');
-                                }
-                            });
-                        }
-                    });
-                    getCityUpdate(d, c);
-                }
-
-                function getCityUpdate(d, c) {
-                    $.ajax({
-                        type: 'post',
-                        url: 'getCityUpdate.jspp?' + d,
-                        success: function(response) {
-                            var mainData1 = jQuery.parseJSON(response);
-                            $('#city option').remove();
-                            $('#city').append('<option value="0">Select District</option>');
-
-                            $.each(mainData1, function(i, obj) {
-                                if (c == obj.cityId) {
-                                    $('#city').append('<option selected="true" value=' + obj.cityId + '>' + obj.cityName + ' </option>');
-                                } else {
-                                    $('#city').append('<option value=' + obj.cityId + '>' + obj.cityName + ' </option>');
-                                }
-                            });
-                        }
-                    });
                 }
 
             </script>
@@ -333,13 +287,15 @@
                     var mtpId = $('#mtpId').val();
                     var idHiddenUser = $('#idHiddenUser').val();
                     var result = "";
-                    var total = status + ',' + url + ',' + email + ',' + address1 + ',' + address2 + ',' + pin + ',' + state + ',' + district + ',' + city + ',' + idHiddenUser;
+                    var total = status + '-' + url + '-' + email + '-' + address1 + '-' + address2 + '-' + pin + '-' + state + '-' + district + '-' + city + '-' + idHiddenUser;
+                	var name1=JSON.stringify({
+                		courseName:0
+                  })
                     $.ajax({
                         type: 'post',
-                        url: 'updateMTP.jspp?' + total,
-                        data: {
-                            user_name: name,
-                        },
+                        url: 'updateMTP.fssai?data=' + total,
+                        contentType : "application/json",
+              		  	data:name1,
                         success: function(response) {
                             $('#name_status').html(response);
                         }
@@ -571,10 +527,6 @@ Update</a>
                                                     </div>
 
                                                     <a href="#testt" onclick="searchDataTP('SELECTED');" class="pull-right">Search</a>
-                                                    <!-- <div id="searchDiv" style=" float:left; margin-left: 20px;">
-<a href="#" onclick="searchDataTP('SELECTED');" class="btn btn-default pull-right show-details-vacancy collapsed" 
-data-toggle="collapse" data-target="#show-result" aria-expanded="false" style="margin-right: 15px; ">
-Search</a> -->
                                                 </div>
                                             </div>
                                         </div>

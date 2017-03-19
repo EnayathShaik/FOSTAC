@@ -27,19 +27,23 @@ import com.ir.form.ChangePasswordForm;
 import com.ir.form.PostVacancyTrainingCenterForm;
 import com.ir.form.TrainingCalendarForm;
 import com.ir.form.trainingPartner.TrainingPartnerSearch;
+import com.ir.model.City;
 import com.ir.model.CourseEnrolledUser;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
+import com.ir.model.District;
 import com.ir.model.ManageCourseContent;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.PostVacancyTrainingCenter;
 import com.ir.model.PostVacancyTrainingCenterBean;
+import com.ir.model.State;
 import com.ir.model.TraineeDailyAttendance;
 import com.ir.model.TrainingCalendar;
 import com.ir.model.TrainingCalendarHistoryLogs;
 import com.ir.model.Utility;
 import com.ir.util.ChangePasswordUtility;
 import com.zentech.logger.ZLogger;
+import com.zentect.ajax.AjaxRequest;
 
 @Repository
 @Service
@@ -1397,4 +1401,209 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 	
 	
 	//certificateForTraineeList
+	
+	
+	//searchDataTP
+	
+	
+	@Override
+	public  List searchDataTP(String name){
+
+		System.out.println("passing name   :" + name);
+		String[] totalConnected = name.split("-");
+		String id="",tpname="", fcn = "",websiteURL= "",pan= "",email="",headOfficeDataAddress1="",headOfficeDataAddress2="",pin="",stateId="",district="",city="",status="";
+		
+		
+		if(!name.equalsIgnoreCase("ALL")){
+			try{
+				id = (totalConnected[0].split("="))[1];	
+			}
+			catch(Exception e){
+				id ="%";	
+			}
+			try{
+				tpname = (totalConnected[1].split("="))[1];
+			}
+			catch(Exception e)
+			{
+				tpname = "%";	
+			}
+			try{
+				websiteURL = (totalConnected[2].split("="))[1];	
+			}catch(Exception e)
+			{
+				websiteURL = "%";
+			}
+		try{
+			pan = (totalConnected[3].split("="))[1];
+		}
+		catch(Exception e)
+		{
+			pan = "%";
+		}
+		try{
+			email = (totalConnected[4].split("="))[1];
+		}
+		catch(Exception e){
+			email = "%";
+		}
+		try{
+			headOfficeDataAddress1 = (totalConnected[5].split("="))[1];
+		}catch(Exception e)
+		{
+			headOfficeDataAddress1 = "%";
+		}
+		try{
+			headOfficeDataAddress2 = (totalConnected[6].split("="))[1];
+		}
+		catch(Exception e){
+			headOfficeDataAddress2 = "%";
+		}
+		try{
+			pin = (totalConnected[1].split("="))[7];	
+		}
+		catch(Exception e){
+			pin = "%";
+		}
+		try{
+			stateId = (totalConnected[8].split("="))[1];
+		}
+		catch(Exception e){
+			stateId = "%";
+		}
+		try{
+			district = (totalConnected[9].split("="))[1];
+		}
+		catch(Exception e){
+			district = "%";
+		}
+		try{
+			city = (totalConnected[10].split("="))[1];
+		}
+		catch(Exception e){
+			city = "%";
+		}
+		try{
+			status = (totalConnected[11].split("="))[1];
+		}
+		catch(Exception e){
+			status = "%";
+		}
+		
+		String[] tpnameA  = tpname.split("%20");
+		String cn = "";
+		for(int i = 0 ; i < tpnameA.length ; i++){
+			cn = cn + tpnameA[i] + " ";
+		}
+		
+		fcn = cn.substring(0, cn.length()-1);
+		System.out.println(fcn.length()  + "   "+ fcn);
+		}
+		Session session = sessionFactory.getCurrentSession();
+		
+		String sql = null;
+		if(!name.equalsIgnoreCase("ALL"))
+		 sql ="select mtp.managetrainingpartnerid  , ld.loginid  , mtp.trainingpartnername , mtp.pan , "+
+					" mtp.websiteurl , (CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus from managetrainingpartner as mtp "+
+					" inner join logindetails as ld on ld.id=mtp.logindetails "+
+					" where upper(mtp.trainingpartnername) like '"+fcn.toUpperCase() +"%' and ld.loginid like '"+id+"%' "+
+					 " and mtp.trainingpartnername like '"+tpname+"%' and mtp.pan like '"+pan+"%' and mtp.websiteurl like '"+websiteURL+"%' " +
+					 " and mtp.email like '"+email+"%' and mtp.headOfficeDataAddress1 like '"+headOfficeDataAddress1+"%' " +
+					 " and mtp.headOfficeDataAddress2 like '"+headOfficeDataAddress2+"%' and mtp.pin like '"+pin+"%' and cast(mtp.state as varchar) like '"+stateId+"'" +
+					 "and cast(mtp.district as varchar) like '"+district+"' and cast(mtp.city as varchar) like '"+city+"' and ld.status like '"+status+"%'" ;
+		else
+			 sql ="select mtp.managetrainingpartnerid  , ld.loginid  , mtp.trainingpartnername , mtp.pan , "+
+						" mtp.websiteurl , (CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus ,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus from managetrainingpartner as mtp "+
+						" inner join logindetails as ld on ld.id=mtp.logindetails ";
+			
+		Query query = session.createSQLQuery(sql);
+		System.out.println("sql===>"+sql);
+		List<CourseName> list = query.list();
+		return list;
+	}
+	
+	
+	//editMTP
+	
+
+	@Override
+	public  List editMTP(String name){
+		
+		Session session = sessionFactory.getCurrentSession();
+		String sql=" select mtp.managetrainingpartnerid  , ld.loginid  ,  mtp.pan , mtp.trainingpartnername , ld.status , "+
+				" mtp.websiteurl , mtp.headofficedataaddress1 , mtp.headofficedataaddress2 ,mtp.pin ,  "+
+			  " s.stateid , d.districtid , c.cityid , mtp.email "+
+				" from managetrainingpartner as mtp "+
+				" inner join logindetails as ld on ld.id = mtp.logindetails "+
+				" inner join district as d on d.districtid = mtp.district "+
+				" inner join city as c on c.cityId = mtp.city "+
+				" inner join state as s on s.stateid = mtp.state "+
+				" where mtp.managetrainingpartnerid = '"+ name+"' ";
+		
+		Query query = session.createSQLQuery(sql);
+		List<CourseName> list = query.list();
+		
+		return list;
+	}
+	
+	//updateMTP
+	@Override
+	public  String updateMTP(String name){
+		String [] total = name.toString().split("-");
+		System.out.println(total);
+		String status = total[0];
+		System.out.println("status "+status);
+		String url = total[1];
+		String email = total[2];
+		String address1 = total[3];
+		String address2 = total[4];
+		String pin = total[5];
+		String state = total[6];
+		String district = total[7];
+		String city = total[8];
+		String mtpId = total[9];
+		String isActive = (status.equalsIgnoreCase("A") ? "Y" : "N");
+		System.out.println("status>"+status+url+email+address1+address2+pin+state+district+city+mtpId);
+
+		State s = new State();
+		s.setStateId(Integer.parseInt(state));
+		District d = new District();
+		d.setDistrictId(Integer.parseInt(district));
+		City c = new City();
+		c.setCityId(Integer.parseInt(city));
+		Session session = sessionFactory.getCurrentSession();
+		String selectLoginDetails = "select logindetails from managetrainingpartner where managetrainingpartnerid = '"+mtpId+"'";
+		Query querySel = session.createSQLQuery(selectLoginDetails);
+		String selectSel = querySel.getQueryString();
+		System.out.println("login id is   :"+ selectSel);
+		String sql="UPDATE managetrainingpartner "+
+				" SET city='"+c.getCityId()+"',  "+
+				" district='"+d.getDistrictId()+"', email='"+email+"', "+
+				" headofficedataaddress1='"+address1+"', headofficedataaddress2='"+address2+"', "+
+				" pin='"+pin+"', state='"+s.getStateId()+"' , "+
+				" websiteurl='"+url+"' "+
+				" WHERE managetrainingpartnerid = '"+mtpId+"' ";
+
+		String sqlLD = "update logindetails set status ='"+status+"' , isactive = '"+isActive+"' where id =("+selectSel+")"; 
+		Query query = session.createSQLQuery(sql);
+		Query query2 = session.createSQLQuery(sqlLD);
+		System.out.println(sql);
+		
+		Integer i = query.executeUpdate();
+		System.out.println("i  :"+ i);
+		Integer j = query2.executeUpdate();
+		System.out.println("j  :"+ j);
+		System.out.println("sql==>"+sqlLD);
+		String newList = null ;
+		if(i > 0 ){
+			System.out.println("data selected finally  " );
+			newList = "Data updated successfully"; 
+		}else{
+			newList = "Oops , something went wrong try ageain !!!";
+		}
+		
+		
+		return newList;
+	}
+	
 }

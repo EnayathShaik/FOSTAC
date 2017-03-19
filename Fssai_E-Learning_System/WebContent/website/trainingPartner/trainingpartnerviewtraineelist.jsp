@@ -151,7 +151,7 @@ function showDetails(){
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
-                                                        <input type="date" class="form-control" id="traineeDate">
+                                                        <input type="text" class="form-control" id="traineeDate">
                                                     </div>
 
                                                 </div>
@@ -165,7 +165,7 @@ function showDetails(){
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
-                                                        <input type="time" class="form-control" id="traineeTime">
+                                                        <input type="text" class="form-control" id="traineeTime">
                                                     </div>
                                                                                 
                                                     <div class="form-group">
@@ -253,7 +253,6 @@ function showDetails(){
                         </tbody>
                       </table>
                       </div>
-                      <!-- <a href="#" class="btn login-btn pull-right">Save</a> -->
                     </fieldset>
                     <div style="width: 95px;">
                       <ul class="pager">

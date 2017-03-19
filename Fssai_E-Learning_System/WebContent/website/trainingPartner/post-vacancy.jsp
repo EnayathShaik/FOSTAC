@@ -116,9 +116,9 @@ function searchVacancy(indicator){
 	$(".displayNone").css("display","block");
 	
 	if(indicator == "ALL")
-		 total = "courseType=-courseName=-trainingDate=-requiredExp=-noOfVacancy=-loginid="+loginID;
+		 total = "courseType=@courseName=@trainingDate=@requiredExp=@noOfVacancy=@loginid="+loginID;
 	else
-		 total = "courseType="+courseType+"-courseName="+courseName+"-trainingDate="+trainingDate+"-requiredExp="+requiredExp+"-noOfVacancy="+noOfVacancy+"-loginid="+loginID+"-trainingTime="+trainingTime;
+		 total = "courseType="+courseType+"@courseName="+courseName+"@trainingDate="+trainingDate+"@requiredExp="+requiredExp+"@noOfVacancy="+noOfVacancy+"@loginid="+loginID+"@trainingTime="+trainingTime;
  	var result="";
 	 	$.ajax({
 		type: 'post',

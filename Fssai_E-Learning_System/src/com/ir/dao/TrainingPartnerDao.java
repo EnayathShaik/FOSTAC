@@ -93,4 +93,14 @@ public interface TrainingPartnerDao {
 	public String markTraineeAttendance(String rollno);
 	
 	public String updateTrainingCalendar(String data);
+	
+	public List certificateForTraineeList(String data);
+	
+	public List searchDataTP(String data);
+	
+	public List editMTP(String data);
+	
+	public String updateMTP(String data);
+	
+	
 }

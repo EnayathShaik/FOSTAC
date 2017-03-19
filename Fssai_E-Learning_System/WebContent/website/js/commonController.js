@@ -170,3 +170,28 @@ function getCourseTrainingType(){
 	});
 }
 
+
+
+function getBatch(val , idName){
+
+ 	var name=JSON.stringify({
+		courseType:0
+  })
+	$.ajax({
+	      type: 'post',
+	      url: 'getBatchCode.fssai?data='+val,
+	      contentType : "application/json",
+		  data:name,
+	      success: function (response) {   
+
+	      var mainData1 = jQuery.parseJSON(response);
+ 	        $('#'+idName+' option').remove();
+	      $('#'+idName).append('<option value="" label="Select Batch Code" />');
+	        $.each(mainData1 , function(i , obj)
+	  		{
+	  				$('#'+idName).append('<option value='+obj+' >'+obj+'</option>');		
+	  		});  
+	      }
+	      });
+}
+

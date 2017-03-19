@@ -337,4 +337,39 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 		return loadTrainingList;
 	}
 	
+	//certificateForTraineeList
+	
+	@Override
+	@Transactional
+	public List certificateForTraineeList(String searchData) {
+		List loadTrainingList = trainingPartnerDAO.certificateForTraineeList(searchData);
+		return loadTrainingList;
+	}
+	
+	
+//	/searchDataTP
+	
+	@Override
+	@Transactional
+	public List searchDataTP(String searchData) {
+		List loadTrainingList = trainingPartnerDAO.searchDataTP(searchData);
+		return loadTrainingList;
+	}
+	
+	//editMTP
+	
+	@Override
+	@Transactional
+	public List editMTP(String searchData) {
+		List loadTrainingList = trainingPartnerDAO.editMTP(searchData);
+		return loadTrainingList;
+	}
+	//updateMTP
+	
+	@Override
+	@Transactional
+	public String updateMTP(String searchData) {
+		String loadTrainingList = trainingPartnerDAO.updateMTP(searchData);
+		return loadTrainingList;
+	}
 }

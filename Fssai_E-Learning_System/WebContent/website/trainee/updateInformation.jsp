@@ -134,36 +134,7 @@ function getDistrict(val) {
 			}
 		});
 	}
-	/* function myBusiness() {
-	 var x = document.getElementById("KindOfBusiness").value;
-	 if($('[id*=KindOfBusiness] option:selected').text()=='Others') {
-	 document.getElementById("businessID1").style.display= 'none';
-	 document.getElementById("businessID2").style.display= 'none';
-	 document.getElementById("businessID3").style.display= 'none';
-	 }else{
-	 document.getElementById("businessID1").style.display= 'block';
-	 document.getElementById("businessID2").style.display= 'block';
-	 document.getElementById("businessID3").style.display= 'block';
-	 }
-	
-
-	 } */
-// 	function my11(str) {
-// 		var xhttp;
-// 		if (str == "") {
-// 			document.getElementById("resState").innerHTML = "";
-// 			return;
-// 		}
-// 		xhttp = new XMLHttpRequest();
-// 		xhttp.onreadystatechange = function() {
-// 			if (this.readyState == 4 && this.status == 200) {
-// 				document.getElementById("resCity").innerHTML = this.responseText;
-// 			}
-// 		};
-// 		xhttp.open("GET", "loadCity.fssaii?q=" + str, true);
-// 		xhttp.send();
-// 	}
-</script>
+	</script>
 
 
 <script language="javascript" type="text/javascript">
@@ -207,20 +178,14 @@ function getDistrict(val) {
 			document.getElementById('resCity').selectedIndex = z;
 
 		} else {
-			/* document.getElementById('Email').value=${loginUser.email} ; */
+			
 			document.getElementById('ResidentialAddressLine1').value = '${loginUser.residentialLine1 }';
 			document.getElementById('ResidentialAddressLine2').value = '${loginUser.residentialLine2 }';
-			/* document.getElementById('Mobile').value= ""; */
-			/* document.getElementById('resPincode').value= ""; */
-			/* document.getElementById('resState').selectedIndex=
-			document.getElementById('resCity').selectedIndex= z; */
+			
 		}
 	}
 
-	/* function myCompany() {
-		businessID3.style.display = checkCompany.checked ? "none" : "block";
-		businessID2.style.display = checkCompany.checked ? "none" : "block";
-	} */
+	
 
 	function checkname() {
 		var name = document.getElementById("userId").value;
@@ -609,48 +574,10 @@ function getDistrict(val) {
 			document.getElementById('bussCity').value = c;
 
 		} else {
-			/* document.getElementById('BusinessAddressLine1').value="";
-			document.getElementById('BusinessAddressLine2').value= "";
-			document.getElementById('bussPincode').value= "";
-			$("#bussState").prop('selectedIndex',0);
-			$("#bussDistrict").prop('selectedIndex',0);
-			$("#bussCity").prop('selectedIndex',0); */
+			
 		}
 	}
 
-	function checkname() {
-		var name = document.getElementById("userId").value;
-
-		if (name) {
-			$
-					.ajax({
-						type : 'post',
-						url : 'checkdata.jspp?' + name,
-						data : {
-							user_name : name,
-						},
-						success : function(response) {
-							$('#name_status').html(response);
-							if (response == 'Already') {
-								//alert('a');
-								document.getElementById("register").style.display = 'none';
-								return false;
-
-							} else {
-								//alert('b');
-								var aa = $('#name_status').html(response);
-								document.getElementById("register").style.display = 'block';
-								return true;
-							}
-
-						}
-					})
-		} else {
-			$('#name_status').html("");
-			document.getElementById("register").style.display = 'none';
-			return false;
-		}
-	}
 </script>
 
 
