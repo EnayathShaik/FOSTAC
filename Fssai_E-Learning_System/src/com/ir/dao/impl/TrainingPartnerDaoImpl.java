@@ -297,7 +297,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			new ZLogger("getPostVacancyTrainingList","Exception while getPostVacancyTrainingList "+e.getMessage(), "TrainingPartnerDaoImpl.java");
 		}
 		
-		Query query = session.createQuery("from PostVacancyTrainingCenter A where   to_timestamp(COALESCE(A.trainingDate, '19900101010101'),'DD-MM-YYYY HH24:MI')  > now() - INTERVAL '1 days' AND A.requiredExp <= "+trainerExp);
+		Query query = session.createQuery("from PostVacancyTrainingCenter A where   to_timestamp(COALESCE(A.trainingDate, '19900101010101'),'DD-MM-YYYY HH24:MI')  > now()   AND A.requiredExp <= "+trainerExp);
 		List<PostVacancyTrainingCenter> postVacancyTrainingCenter = query.list();
 		return postVacancyTrainingCenter;
 	}
@@ -1076,7 +1076,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	
 	@Override
 	public  List searchVacancy(String name){
-		String [] n1 = name.split("-");
+		String [] n1 = name.split("@");
 		
 		String courseType,courseName , trainingDate , requiredExp ,noOfVacancy,selectAll, trainingendtime, trainingcenter;
 		try{
@@ -1316,17 +1316,7 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 		Session session = sessionFactory.getCurrentSession();
 		System.out.println("id "+id + " assessmentDateTime "+assessmentDateTime);
 		TrainingCalendar c = new TrainingCalendar();
-		/*String sql = "update trainingcalendar set assessmentdatetime='"+assessmentDateTime+"' where trainingcalendarid="+id;
-		TrainingCalendar objectToUpdate = (TrainingCalendar) session.get(TrainingCalendar.class, Integer.parseInt(id));
-		objectToUpdate.setAssessmentDateTime(assessmentDateTime);*/
-		
-		/*String hqlUpdate = "update trainingcalendar c set c.assessmentdatetime = :newAssessmentdatetime where c.trainingcalendarid = :newTrainingcalendarid";
-		// or String hqlUpdate = "update Customer set name = :newName where name = :oldName";
-		int updatedEntities = session.createQuery( hqlUpdate ).setString( "newAssessmentdatetime", assessmentDateTime )
-		        .setInteger( "newTrainingcalendarid", Integer.parseInt(id) )
-		        .executeUpdate();	*/	
-		
-		
+
 		String sql="update trainingcalendar  set assessmentdatetime='"+assessmentDateTime+"' where trainingcalendarid="+Integer.parseInt(id);
 		Query query = session.createSQLQuery(sql);
 		query.executeUpdate();
@@ -1336,4 +1326,75 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 		String result ="Recors successfully updated !!!" ;
 		return result;
 	}
+	
+	//certificateForTraineeList
+	
+	
+	
+	
+	@Override
+	public  List certificateForTraineeList(String name){
+		String[] n1 = name.split("@");
+
+		String courseType,courseName ,batchCode ,trainingDate , trainingtime,id ;
+		try{
+			courseType = n1[0];
+		}
+		catch(Exception e){
+			courseType = "%";	
+		}
+		
+		try{
+			courseName = n1[1];	
+		}catch(Exception e){
+			courseName = "%";	
+		}
+		
+		try{
+			batchCode = n1[2];	
+		}catch(Exception e){
+			batchCode = "%";	
+		}
+		
+	
+		try{
+			trainingDate = "%"+n1[3].replaceAll("%20", " ");
+		}
+		catch(Exception e){
+			trainingDate = "%";
+		}
+		
+		try{
+			trainingtime = "%"+n1[4].replaceAll("%20", " ");
+		}
+		catch(Exception e){
+			trainingtime = "%";
+		}
+        
+		try{
+			id = n1[5];
+		}
+		catch(Exception e){
+			id = "%";
+		}
+		Session session = sessionFactory.getCurrentSession();
+		String sql = "";
+		sql = "select  B.batchCode,D.courseCode,B.trainingdate,B.trainingtime,C.firstname || ' '|| C.middlename ||' '|| C.lastname as participantName , A.certificateid , pitp.firstname   ,"
+				+ " concat(pitp.trainingcentrename , ' ' , s.statename, ' ' , ds.districtname) as address "
+				+ " from courseenrolleduser  A inner join trainingcalendar B on(A.trainingcalendarid= B.trainingcalendarid) "
+				+ " inner join personalinformationtrainingpartner pitp on (pitp.personalinformationtrainingpartnerid = B.trainingcenter)"
+				+ " inner join state as s on s.stateid = pitp.trainingpartnerpermanentstate "
+				+ " inner join district as ds on ds.districtid = pitp.trainingpartnerpermanentdistrict "
+				+ " inner join coursename D on (D.coursenameid = B.coursename) inner join coursetype E on (E.coursetypeid = B.coursetype)  inner join personalinformationtrainee C on (C.logindetails = A.logindetails)   inner join logindetails F on(F.id=C.logindetails)"
+				+" and pitp.logindetails = '"+id+"' and cast(B.batchCode as varchar(100)) like '"+batchCode+"%' and cast(E.coursetypeid as varchar(20))  like '%"+courseType+"' and  cast(D.coursenameid as varchar(20)) like '%"+courseName+"'  and cast(B.trainingdate as varchar(100)) like '%"+trainingDate+"'   and cast(B.trainingtime as varchar(100)) like '%"+trainingtime+"' "; 
+				
+		
+		
+		Query query = session.createSQLQuery(sql);
+		List courseTypeList = query.list();
+		return courseTypeList;
+	}
+	
+	
+	//certificateForTraineeList
 }
