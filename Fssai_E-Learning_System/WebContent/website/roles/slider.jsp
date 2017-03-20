@@ -87,7 +87,7 @@
           <li> <a href="trainingpartnermanagetrainer.fssai">Manage Trainer</a> </li>
           <!-- <li> <a href="trainingpartnerassessmentcalendar.fssai">Assessment Calendar</a></li> -->
           <li> <a href="trainingpartnerpaymentconfirmation.fssai">Fees</a> </li>
-          <li> <a href="generateCourseCertificate.fssai">Trainee Certificate</a> </li>
+          <li> <a href="generateCourseCertificateForTrainee.fssai">Trainee Certificate</a> </li>
           <li> <a href="traineeAttendance.fssai">Trainee Attendance</a> </li>
         </ul>
       </div>
