@@ -9,11 +9,24 @@ public class GenerateCourseCertificateForm {
 	private String mainCertificateId;
 	private String trainingStartDate;
 	private String trainingEndDate;
-
+	private int loginId;
+	private int traineeId;
 	
 	
 	
 	
+	public int getTraineeId() {
+		return traineeId;
+	}
+	public void setTraineeId(int traineeId) {
+		this.traineeId = traineeId;
+	}
+	public int getLoginId() {
+		return loginId;
+	}
+	public void setLoginId(int loginId) {
+		this.loginId = loginId;
+	}
 	public String getTrainingStartDate() {
 		return trainingStartDate;
 	}

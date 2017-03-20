@@ -1384,13 +1384,14 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 		Session session = sessionFactory.getCurrentSession();
 		String sql = "";
 		sql = "select  B.batchCode,D.courseCode,B.trainingdate,B.trainingtime,C.firstname || ' '|| C.middlename ||' '|| C.lastname as participantName , A.certificateid , pitp.firstname   ,"
-				+ " concat(pitp.trainingcentrename , ' ' , s.statename, ' ' , ds.districtname) as address "
+				+ " concat(pitp.trainingcentrename , ' ' , s.statename, ' ' , ds.districtname) as address , A.result , A.logindetails ,  pit.personalinformationtraineeid  "
 				+ " from courseenrolleduser  A inner join trainingcalendar B on(A.trainingcalendarid= B.trainingcalendarid) "
 				+ " inner join personalinformationtrainingpartner pitp on (pitp.personalinformationtrainingpartnerid = B.trainingcenter)"
 				+ " inner join state as s on s.stateid = pitp.trainingpartnerpermanentstate "
 				+ " inner join district as ds on ds.districtid = pitp.trainingpartnerpermanentdistrict "
+				+ " inner join personalinformationtrainee pit on (A.logindetails = pit.logindetails)"
 				+ " inner join coursename D on (D.coursenameid = B.coursename) inner join coursetype E on (E.coursetypeid = B.coursetype)  inner join personalinformationtrainee C on (C.logindetails = A.logindetails)   inner join logindetails F on(F.id=C.logindetails)"
-				+" and pitp.logindetails = '"+id+"' and cast(B.batchCode as varchar(100)) like '"+batchCode+"%' and cast(E.coursetypeid as varchar(20))  like '%"+courseType+"' and  cast(D.coursenameid as varchar(20)) like '%"+courseName+"'  and cast(B.trainingdate as varchar(100)) like '%"+trainingDate+"'   and cast(B.trainingtime as varchar(100)) like '%"+trainingtime+"' "; 
+				+" and pitp.logindetails = '"+id+"'  and A.status='N'   and cast(B.batchCode as varchar(100)) like '"+batchCode+"%' and cast(E.coursetypeid as varchar(20))  like '%"+courseType+"' and  cast(D.coursenameid as varchar(20)) like '%"+courseName+"'  and cast(B.trainingdate as varchar(100)) like '%"+trainingDate+"'   and cast(B.trainingtime as varchar(100)) like '%"+trainingtime+"' "; 
 				
 		
 		

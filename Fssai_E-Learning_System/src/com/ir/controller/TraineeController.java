@@ -436,6 +436,7 @@ public class TraineeController {
 				Integer profileID = 0;
 				Integer userId = 0;
 				int loginId = 0;
+				String returnResult =null;
 				try{
 					profileID = (Integer) session.getAttribute("profileId");
 					loginId = (int) session.getAttribute("loginIdUnique");
@@ -454,11 +455,25 @@ public class TraineeController {
 					model.addAttribute("traineeCertificateName", certificateInfo.getName());
 					model.addAttribute("trainingAddress", certificateInfo.getTrainingAddress());
 					session.setAttribute("traineeSteps", 0);
+					
+					if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Western India)")){
+						returnResult = "certificatetraineeHRAWI";	
+						}
+						else if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Northern India)")){
+							returnResult = "certificatetraineeHRANI";
+						}else if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("FSSAI")){
+							returnResult ="certificatetraineeFSSAI";
+						}else{
+							returnResult = "certificatetraineeGEN";
+						}
+					
+					
+					
 				}catch(Exception e){
 					e.printStackTrace();
 					new ZLogger("certificatetrainee","Exception while certificatetrainee"+e.getMessage()  , "TraineeController.java");
 				}
-		return "certificatetrainee";
+		return returnResult;
 	}
 
 	@RequestMapping(value="/viewTraineeList" , method=RequestMethod.GET)

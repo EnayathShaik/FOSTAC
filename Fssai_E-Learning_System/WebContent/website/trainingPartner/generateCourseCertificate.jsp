@@ -121,7 +121,6 @@ function getCertificate(val){
 function getdata(val){
 	
 	$("#mainCertificateId").val(val);
-//	$("#mainCertificateId").val('I dont have data...coudnt test further');
 }
 </script>
 

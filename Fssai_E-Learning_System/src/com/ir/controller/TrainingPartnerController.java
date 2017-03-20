@@ -166,27 +166,58 @@ public class TrainingPartnerController {
 		System.out.println("inside generateCourseCertificateGO"+generateCourseCertificateForm.getMainCertificateId());
 		new ZLogger("generateCourseCertificateGO","inside generateCourseCertificateGO"+generateCourseCertificateForm.getMainCertificateId()  , "TrainingPartnerController.java");
 		Integer profileID = 0;
-		Integer userId = 0;
+	
 		String certificateID = generateCourseCertificateForm == null ? "" : generateCourseCertificateForm.getMainCertificateId() == null ? "" : generateCourseCertificateForm.getMainCertificateId().trim();
 		
 		String returnResult = null;
 		try{
+			
+			
 			profileID = (Integer) session.getAttribute("profileId");
-			userId = (Integer) session.getAttribute("userId");
+			
+			System.out.println("profileID "+profileID);
+			if(profileID== 3){
+			int userId = (Integer) session.getAttribute("userId");
 			CertificateInfo certificateInfo = traineeService.getCertificateID(userId, profileID,certificateID);
 			model.addAttribute("certificateID", certificateInfo.getCertificateID());
 			model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
 			model.addAttribute("traineeCertificateName", certificateInfo.getName());
 			model.addAttribute("trainingAddress", certificateInfo.getTrainingAddress());
-			
-			if(certificateInfo != null && certificateInfo.getTrainingPartnerName() != null && certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Western India)")){
-				returnResult = "certificatetraineeHRAWI";	
-			}else if(certificateInfo != null && certificateInfo.getTrainingPartnerName() != null && certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Northern India)")){
+			if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Western India)")){
+			returnResult = "certificatetraineeHRAWI";	
+			}
+			else if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Northern India)")){
 				returnResult = "certificatetraineeHRANI";
-			}else if(certificateInfo != null && certificateInfo.getTrainingPartnerName() != null && certificateInfo.getTrainingPartnerName().equalsIgnoreCase("FSSAI")){
+			}else if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("FSSAI")){
 				returnResult ="certificatetraineeFSSAI";
 			}else{
 				returnResult = "certificatetraineeGEN";
+			}
+			
+			}else{
+				
+				int loginId =generateCourseCertificateForm.getLoginId();
+				int traineeId = generateCourseCertificateForm.getTraineeId();
+				System.out.println(" traineeId "+traineeId);
+				traineeService.updateSteps(traineeId, profileID, 0);
+				CertificateInfo certificateInfo = traineeService.getCertificateID(loginId, profileID,"");
+				model.addAttribute("certificateID", certificateInfo.getCertificateID());
+				model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
+				model.addAttribute("traineeCertificateName", certificateInfo.getName());
+				model.addAttribute("trainingAddress", certificateInfo.getTrainingAddress());
+				if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Western India)")){
+				returnResult = "certificatetraineeHRAWI";	
+				}
+				else if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Northern India)")){
+					returnResult = "certificatetraineeHRANI";
+				}else if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("FSSAI")){
+					returnResult ="certificatetraineeFSSAI";
+				}else{
+					returnResult = "certificatetraineeGEN";
+				}
+				
+				
+				new ZLogger("certificatetrainee","Certificate ID = "+certificateInfo.getCertificateID()  , "TrainingPartnerController.java");
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -221,9 +252,7 @@ public class TrainingPartnerController {
 		trainingpartnerapplicationstatus.setTrainingCenterList(trainingCenterList);
 		List<IntStringBean> traineeList = trainingPartnerService.getTraineeList();
 		trainingpartnerapplicationstatus.setTraineeList(traineeList);
-		
-		
-//		trainingpartnerapplicationstatus.setCourseNames(courseNames);
+	
 		Gson gson = new Gson();
 		model.addAttribute("trainingpartnerapplicationstatus" , gson.toJson(trainingpartnerapplicationstatus));
 	
