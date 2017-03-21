@@ -21,6 +21,7 @@ import com.ir.form.ChangePasswordForm;
 import com.ir.form.ContactTrainee;
 import com.ir.form.PostVacancyTrainingCenterForm;
 import com.ir.form.RegistrationFormTrainingPartner;
+import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.State;
 import com.ir.service.RegistrationServiceTrainingPartner;
@@ -168,7 +169,10 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 				}
 				
 				List<State> stateList = registrationServiceTrainingPartner.loadState();
+				List<ManageTrainingPartner> trainingPartnerNameList = registrationServiceTrainingPartner.trainingPartnerNameList();
 				model.addAttribute("stateList", stateList);
+				model.addAttribute("trainingPartnerNameList", trainingPartnerNameList);
+				
 				
 			}catch(Exception e){
 				new ZLogger("update-personal-information", "Exception while update-personal-information  "+e.getMessage(), "RegistrationControllerTrainingPartner.java");

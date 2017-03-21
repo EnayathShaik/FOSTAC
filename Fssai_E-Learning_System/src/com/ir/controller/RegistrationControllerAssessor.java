@@ -114,8 +114,10 @@ public class RegistrationControllerAssessor implements Serializable{
 				 }
 					List<State> stateList = pageLoadService.loadState();
 					List<Title> titleList = pageLoadService.loadTitle();
+					List<ManageAssessmentAgency> assessmentAgencyNameList = registrationServiceAssessor.loadAssessmentAgency();
 					model.addAttribute("stateList", stateList);
 					model.addAttribute("titleList", titleList);
+					model.addAttribute("assessmentAgencyNameList", assessmentAgencyNameList);
 				 model.addAttribute("update", "");
 			}catch(Exception e){
 				e.printStackTrace();
