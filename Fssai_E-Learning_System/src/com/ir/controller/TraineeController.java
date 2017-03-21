@@ -356,7 +356,9 @@ public class TraineeController {
 					List<Title> titleList = new ArrayList<Title>();
 					titleList.add(title);
 					List<KindOfBusiness> kindOfBusinessList=pageLoadService.loadKindOfBusiness();
+					List<State> stateList = pageLoadService.loadState();
 					model.addAttribute("kindOfBusinessList" , kindOfBusinessList);
+					model.addAttribute("stateList" , stateList);
 					session.setAttribute("loginUser", personalInformationTrainee);
 					session.setAttribute("titleList", titleList);
 				 }
@@ -702,10 +704,10 @@ public class TraineeController {
 	}
 	
 	
-	@RequestMapping(value="/getCourseDetailss" , method=RequestMethod.POST)
+	@RequestMapping(value="/getCourseDetailInfo" , method=RequestMethod.POST)
 	@ResponseBody
-	public void getCourseDetailss(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
-		new ZLogger("getCourseDetailss","getCourseDetailss............" + data  , "TrainingPartnerController.java");
+	public void getCourseDetailInfo(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("getCourseDetailInfo","getCourseDetailInfo............" + data  , "TrainingPartnerController.java");
 		List batchCodeList = traineeService.getCourseDetails(data);
 		PrintWriter out = response.getWriter();
 		Gson g =new Gson();

@@ -202,9 +202,12 @@ public class RegistrationControllerTrainer implements Serializable{
 		 trainingPartnerList = registrationServiceTrainer.trainingPartnerList();
 		 PersonalInformationTrainer personalInformationTrainer = registrationServiceTrainer.FullDetailTrainer(userId);
 		model.addAttribute("trainingPartnerID", personalInformationTrainer.getAssociatedTrainingpartnerName().getManageTrainingPartnerId());
-		System.out.println("trainingPartnerList "+trainingPartnerList);
+		List<State> stateList = pageLoadService.loadState();
+		List<Title> titleList = pageLoadService.loadTitle();
+		model.addAttribute("stateList", stateList);
+		model.addAttribute("titleList", titleList);
 		model.addAttribute("trainingPartnerList" , trainingPartnerList);
-		System.out.println(" partner ID "+personalInformationTrainer.getAssociatedTrainingpartnerName().getManageTrainingPartnerId());
+		
 		 session.setAttribute("loginUr", personalInformationTrainer);
 		 
 	 }

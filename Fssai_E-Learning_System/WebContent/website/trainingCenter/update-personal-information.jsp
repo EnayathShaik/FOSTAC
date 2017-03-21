@@ -11,83 +11,28 @@
 
             </script>
 
-
-
-
-
             <script>
                 function getState() {
                     var ss = ${loginUr.trainingPartnerPermanentState};
                     var dd = ${loginUr.trainingPartnerPermanentDistrict};
                     var cc = ${loginUr.trainingPartnerPermanentCity};
 
-                    getStateUpdate(ss, dd, cc);
+                    $("#TrainingPartnerPermanentState").val(ss);
+                            
+                            $("#TrainingPartnerPermanentState").trigger("change");
+                            window.setTimeout(function() {
+                                $('#TrainingPartnerPermanentDistrict').val(dd);
+                                
+                                $("#TrainingPartnerPermanentDistrict").trigger("change");
+                                
+                                window.setTimeout(function() {
+                                    $('#TrainingPartnerPermanentCity').val(cc);
+                                }, 1000);
+
+                            }, 1000);
 
                 }
 
-                function getStateUpdate(ss, dd, cc) {
-                    $.ajax({
-                        type: 'post',
-                        url: 'getStateUpdate.jspp',
-                        success: function(response) {
-                            var mainData2 = jQuery.parseJSON(response);
-                            $('#TrainingPartnerPermanentState option').remove();
-                            $('#TrainingPartnerPermanentState').append('<option value="0" label="Select Stateeeeee" />');
-
-                            $.each(mainData2, function(i, obj) {
-                                if (ss == obj.stateId) {
-                                    $('#TrainingPartnerPermanentState').append('<option  selected="true" value=' + obj.stateId + '>' + obj.stateName + ' </option>');
-                                } else {
-                                    $('#TrainingPartnerPermanentState').append('<option value=' + obj.stateId + '>' + obj.stateName + ' </option>');
-                                }
-                            });
-                        }
-                    });
-                    getDistrictUpdate(ss, dd, cc)
-
-                }
-
-                function getDistrictUpdate(ss, dd, cc) {
-                    $.ajax({
-                        type: 'post',
-                        url: 'getDistrictUpdate.jspp?' + ss,
-                        success: function(response) {
-                            var mainData1 = jQuery.parseJSON(response);
-                            $('#TrainingPartnerPermanentDistrict option').remove();
-                            $('#TrainingPartnerPermanentDistrict').append('<option value="0" label="Select District" />');
-
-                            $.each(mainData1, function(i, obj) {
-                                if (dd == obj.districtId) {
-                                    $('#TrainingPartnerPermanentDistrict').append('<option selected="true" value=' + obj.districtId + '>' + obj.districtName + '  </option>');
-                                } else {
-                                    $('#TrainingPartnerPermanentDistrict').append('<option value=' + obj.districtId + '>' + obj.districtName + ' </option>');
-                                }
-                            });
-                        }
-                    });
-                    getCityUpdate(dd, cc);
-                }
-
-                function getCityUpdate(dd, cc) {
-                    $.ajax({
-                        type: 'post',
-                        url: 'getCityUpdate.jspp?' + dd,
-                        success: function(response) {
-                            var mainData1 = jQuery.parseJSON(response);
-                            $('#TrainingPartnerPermanentCity option').remove();
-                            $('#TrainingPartnerPermanentCity').append('<option value="0" label="Select City" />');
-
-                            $.each(mainData1, function(i, obj) {
-                                if (cc == obj.cityId) {
-                                    $('#TrainingPartnerPermanentCity').append('<option selected="true" value=' + obj.cityId + '>' + obj.cityName + '  </option>');
-                                } else {
-                                    $('#TrainingPartnerPermanentCity').append('<option value=' + obj.cityId + '>' + obj.cityName + ' </option>');
-                                }
-                            });
-                        }
-                    });
-
-                }
 
             </script>
             <script>

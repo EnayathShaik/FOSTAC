@@ -2,140 +2,6 @@
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="website/js/commonController.js"></script>
-<script>
-function getDistrict(val) {
-		////alert('jjh');
-		$.ajax({
-			type : 'post',
-
-			url : 'loadDistrict.jspp?' + val,
-			success : function(response) {
-				var mainData1 = jQuery.parseJSON(response);
-
-				$('#correspondenceDistrict option').remove();
-				$('#correspondenceDistrict').append(
-						'<option value="0" label="Select District" />');
-				$('#correspondenceCity option').remove();
-				$('#correspondenceCity').append(
-						'<option value="0" label="Select City" />');
-
-				$.each(mainData1, function(i, obj) {
-					$('#correspondenceDistrict').append(
-							'<option value='+obj.districtId+' >'
-									+ obj.districtName + '</option>');
-				});
-			}
-		});
-	}
-
-	function getCity(val) {
-		$.ajax({
-			type : 'post',
-			url : 'loadCity.jspp?' + val,
-			success : function(response) {
-				var mainData1 = jQuery.parseJSON(response);
-				$('#correspondenceCity option').remove();
-				$('#correspondenceCity').append(
-						'<option value="0" label="Select City" />');
-				$.each(mainData1, function(i, obj) {
-					$('#correspondenceCity').append(
-							'<option value='+obj.cityId+' >' + obj.cityName
-									+ '</option>');
-				});
-			}
-		});
-	}
-
-	function getDistrict1(val) {
-		////alert('jjh');
-		$.ajax({
-			type : 'post',
-
-			url : 'loadDistrict.jspp?' + val,
-			success : function(response) {
-				var mainData1 = jQuery.parseJSON(response);
-
-				$('#residentialDistrict option').remove();
-				$('#residentialDistrict').append(
-						'<option value="0" label="Select District" />');
-				$('#resCity option').remove();
-				$('#resCity')
-						.append('<option value="0" label="Select City" />');
-
-				$.each(mainData1, function(i, obj) {
-					$('#residentialDistrict').append(
-							'<option value='+obj.districtId+' >'
-									+ obj.districtName + '</option>');
-				});
-			}
-		});
-	}
-
-	function getCity1(val) {
-		$.ajax({
-			type : 'post',
-			url : 'loadCity.jspp?' + val,
-			success : function(response) {
-				var mainData1 = jQuery.parseJSON(response);
-				$('#resCity option').remove();
-				$('#resCity')
-						.append('<option value="0" label="Select City" />');
-				$.each(mainData1, function(i, obj) {
-					$('#resCity').append(
-							'<option value='+obj.cityId+' >' + obj.cityName
-									+ '</option>');
-
-				});
-			}
-		});
-	}
-
-	function getDistrict2(val) {
-		////alert('jjh');
-		$.ajax({
-			type : 'post',
-
-			url : 'loadDistrict.jspp?' + val,
-			success : function(response) {
-				var mainData1 = jQuery.parseJSON(response);
-
-				$('#bussDistrict option').remove();
-				$('#bussDistrict').append(
-						'<option value="0" label="Select District" />');
-				$('#bussCity option').remove();
-				$('#bussCity').append(
-						'<option value="0" label="Select City" />');
-
-				$.each(mainData1, function(i, obj) {
-
-					$('#bussDistrict').append(
-							'<option value='+obj.districtId+'>'
-									+ obj.districtName + '</option>');
-				});
-			}
-		});
-	}
-
-	function getCity2(val) {
-		$.ajax({
-			type : 'post',
-			url : 'loadCity.jspp?' + val,
-			success : function(response) {
-				var mainData1 = jQuery.parseJSON(response);
-				$('#bussCity option').remove();
-				$('#bussCity').append(
-						'<option value="0" label="Select City" />');
-				$.each(mainData1, function(i, obj) {
-
-					$('#bussCity').append(
-							'<option value='+obj.cityId+' >' + obj.cityName
-									+ '</option>');
-				});
-			}
-		});
-	}
-	</script>
-
 
 <script language="javascript" type="text/javascript">
 	function myBusiness() {
@@ -185,36 +51,7 @@ function getDistrict(val) {
 		}
 	}
 
-	
 
-	function checkname() {
-		var name = document.getElementById("userId").value;
-
-		if (name) {
-			$
-					.ajax({
-						type : 'post',
-						url : 'checkdata.jspp?' + name,
-						data : {
-							user_name : name,
-						},
-						success : function(response) {
-							$('#name_status').html(response);
-							if (response == "OK") {
-								document.getElementById("register").style.display = 'none';
-								return true;
-							} else {
-								document.getElementById("register").style.display = 'block';
-								return false;
-							}
-						}
-					});
-		} else {
-			$('#name_status').html("");
-			document.getElementById("register").style.display = 'none';
-			return false;
-		}
-	}
 </script>
 <script type="text/javascript">
 	function OnStart() {
@@ -229,7 +66,6 @@ function getDistrict(val) {
 		var cs = '${loginUser.correspondenceState.stateId }';
 
 		var cd = '${loginUser.correspondenceDistrict.districtId}';
-		//alert('cd is'+cd);
 		var cc = '${loginUser.correspondenceCity.cityId}';
 		var ps = '${loginUser.resState.stateId}';
 		var pd = '${loginUser.residentialDistrict.districtId}';
@@ -240,11 +76,9 @@ function getDistrict(val) {
 		var kob = '${loginUser.kindOfBusiness.kindOfBusinessId}';
 		var checkpermanent = '${loginUser.checkPermanent}';
 		var designation = '${loginUser.designation}';
-		/* $("#Designation").prop('selectedIndex',designation); */
 		Designation.options[0].text = designation;
-		//alert(checkpermanent);
 		if (checkpermanent) {
-			//alert("Inside If");
+
 			//document.getElementById('checkCorrespondence').checked = true;
 			residential1.style.display = checkCorrespondence.checked ? "none"
 					: "block";
@@ -262,295 +96,55 @@ function getDistrict(val) {
 		if ($('[id*=KindOfBusiness] option:selected').text() == 'Not in business') {
 			myBusiness();
 		}
+	
+		 $("#correspondenceState").val(cs);
+         
+         $("#correspondenceState").trigger("change");
+         window.setTimeout(function() {
+             $('#correspondenceDistrict').val(cd);
+             
+             $("#correspondenceDistrict").trigger("change");
+             
+             window.setTimeout(function() {
+                 $('#correspondenceCity').val(cc);
+             }, 1000);
+
+         }, 1000);
+        
 		
-		//alert("cs");
-		//alert(cs + ' '+cd+' '+cc+' '+ps+' '+pd+' '+pc+' '+bd+' '+bs+' '+bc+' '+checkpermanent+' '+checkbusiness+' '+designation);
+ $("#resState").val(ps);
+         
+         $("#resState").trigger("change");
+         window.setTimeout(function() {
+             $('#residentialDistrict').val(pd);
+             
+             $("#residentialDistrict").trigger("change");
+             
+             window.setTimeout(function() {
+                 $('#resCity').val(pc);
+             }, 1000);
 
-		getStateUpdate(cs, cd, cc);
-		getStateUpdateP(ps, pd, pc);
-		getStateUpdateB(bs, bd, bc);
+         }, 1000);
+
+         $("#bussState").val(bs);
+                 
+                 $("#bussState").trigger("change");
+                 window.setTimeout(function() {
+                     $('#bussDistrict').val(bd);
+                     
+                     $("#bussDistrict").trigger("change");
+                     
+                     window.setTimeout(function() {
+                         $('#bussCity').val(bc);
+                     }, 1000);
+
+                 }, 1000);
+
 
 	}
 </script>
-<script>
-	function getStateUpdate(cs, cd, cc) {
-		$
-				.ajax({
-					type : 'post',
-					url : 'getStateUpdate.jspp',
-					success : function(response) {
-						var mainData2 = jQuery.parseJSON(response);
-						$('#correspondenceState option').remove();
-						$('#correspondenceState')
-								.append(
-										'<option value="0" label="Select Stateeeeee" />');
 
-						$
-								.each(
-										mainData2,
-										function(i, obj) {
-											if (cs == obj.stateId) {
-												$('#correspondenceState')
-														.append(
-																'<option selected="true" value='+obj.stateId+' >'+obj.stateName+'</option>');
-											} else {
-												$('#correspondenceState')
-														.append(
-																'<option value='+obj.stateId+'>'+obj.stateName+'</option>');
-											}
-										});
-						
-					}
-				});
-		getDistrictUpdate(cs, cd, cc);
-	}
-	function getDistrictUpdate(cs, cd, cc) {
-		$
-				.ajax({
-					type : 'post',
-					url : 'getDistrictUpdate.jspp?' + cs,
-					success : function(response) {
-						var mainData1 = jQuery.parseJSON(response);
-						$('#correspondenceDistrict option').remove();
-						$('#correspondenceDistrict').append(
-								'<option value="0" label="Select District" />');
 
-						$
-								.each(
-										mainData1,
-										function(i, obj) {
-											if (cd == obj.districtId) {
-												$('#correspondenceDistrict')
-														.append(
-																'<option selected="true" value='+obj.districtId+'>'+obj.districtName+' </option>');
-											} else {
-												$('#correspondenceDistrict')
-														.append(
-																'<option value='+obj.districtId+'>'+obj.districtName+' </option>');
-											}
-										});
-					}
-				});
-		getCityUpdate(cd, cc);
-	}
-	function getCityUpdate(cd, cc) {
-		$
-				.ajax({
-					type : 'post',
-					url : 'getCityUpdate.jspp?' + cd,
-					success : function(response) {
-						var mainData1 = jQuery.parseJSON(response);
-						$('#correspondenceCity option').remove();
-						$('#correspondenceCity').append(
-								'<option value="0" label="Select City" />');
-
-						$
-								.each(
-										mainData1,
-										function(i, obj) {
-											if (cc == obj.cityId) {
-												$('#correspondenceCity')
-														.append(
-																'<option selected="true" value='+obj.cityId+'>'+obj.cityName+' </option>');
-											} else {
-												$('#correspondenceCity')
-														.append(
-																'<option value='+obj.cityId+'>'+obj.cityName+' </option>');
-											}
-										});
-					}
-				});
-
-		//alert("hhhhhh");
-	}
-</script>
-<script>
-	function getStateUpdateP(ps, pd, pc) {
-		$
-				.ajax({
-					type : 'post',
-					url : 'getStateUpdate.jspp',
-					success : function(response) {
-						var mainData2 = jQuery.parseJSON(response);
-						$('#resState option').remove();
-						$('#resState').append(
-								'<option value="0" label="Select State" />');
-
-						$
-								.each(
-										mainData2,
-										function(i, obj) {
-											if (ps == obj.stateId) {
-												$('#resState')
-														.append(
-																'<option selected="true" value='+obj.stateId+'>'+obj.stateName+'</option>');
-											} else {
-												$('#resState')
-														.append(
-																'<option value='+obj.stateId+'>'+obj.stateName+'</option>');
-											}
-										});
-					}
-				});
-		getDistrictUpdateP(ps, pd, pc);
-	}
-</script>
-<script>
-	function getDistrictUpdateP(ps, pd, pc) {
-		$
-				.ajax({
-					type : 'post',
-					url : 'getDistrictUpdate.jspp?' + ps,
-					success : function(response) {
-						var mainData1 = jQuery.parseJSON(response);
-						$('#residentialDistrict option').remove();
-						$('#residentialDistrict').append(
-								'<option value="0" label="Select District" />');
-
-						$
-								.each(
-										mainData1,
-										function(i, obj) {
-											if (pd == obj.districtId) {
-												$('#residentialDistrict')
-														.append(
-																'<option selected="true" value='+obj.districtId+'>'+obj.districtName+' </option>');
-											} else {
-												$('#residentialDistrict')
-														.append(
-																'<option value='+obj.districtId+'>'+obj.districtName+' </option>');
-											}
-										});
-					}
-				});
-		getCityUpdateP(pd, pc);
-	}
-</script>
-<script>
-	function getCityUpdateP(pd, pc) {
-		//alert('in city');
-		$
-				.ajax({
-					type : 'post',
-					url : 'getCityUpdate.jspp?' + pd,
-					success : function(response) {
-						var mainData1 = jQuery.parseJSON(response);
-						$('#resCity option').remove();
-						$('#resCity').append(
-								'<option value="0" label="Select District" />');
-
-						$
-								.each(
-										mainData1,
-										function(i, obj) {
-											if (pc == obj.cityId) {
-												$('#resCity')
-														.append(
-																'<option selected="true" value='+obj.cityId+'>'+obj.cityName+' </option>');
-											} else {
-												$('#resCity')
-														.append(
-																'<option value='+obj.cityId+'>'+obj.cityName+' </option>');
-											}
-										});
-					}
-				});
-	}
-</script>
-<script>
-	function getStateUpdateB(bs, bd, bc) {
-		$
-				.ajax({
-					type : 'post',
-					url : 'getStateUpdate.jspp',
-					success : function(response) {
-						var mainData2 = jQuery.parseJSON(response);
-						$('#bussState option').remove();
-						$('#bussState').append(
-								'<option value="0" label="Select State" />');
-
-						$
-								.each(
-										mainData2,
-										function(i, obj) {
-											if (bs == obj.stateId) {
-												$('#bussState')
-														.append(
-																'<option selected="true" value='+obj.stateId+'>'+obj.stateName+'</option>');
-															
-											} else {
-												$('#bussState')
-														.append(
-																'<option value='+obj.stateId+'>'+obj.stateName+'</option>');
-											}
-										});
-					}
-				});
-		getDistrictUpdateB(bs, bd, bc);
-	}
-</script>
-<script>
-	function getDistrictUpdateB(bs, bd, bc) {
-		$
-				.ajax({
-					type : 'post',
-					url : 'getDistrictUpdate.jspp?' + bs,
-					success : function(response) {
-						var mainData1 = jQuery.parseJSON(response);
-						$('#bussDistrict option').remove();
-						$('#bussDistrict').append(
-								'<option value="0" label="Select District" />');
-
-						$
-								.each(
-										mainData1,
-										function(i, obj) {
-											if (bd == obj.districtId) {
-												$('#bussDistrict')
-														.append(
-																'<option selected="true" value='+obj.districtId+'>'+obj.districtName+' </option>');
-											} else {
-												$('#bussDistrict')
-														.append(
-																'<option value='+obj.districtId+'>'+obj.districtName+' </option>');
-											}
-										});
-					}
-				});
-		getCityUpdateB(bd, bc);
-	}
-</script>
-<script>
-	function getCityUpdateB(bd, bc) {
-		$
-				.ajax({
-					type : 'post',
-					url : 'getCityUpdate.jspp?' + bd,
-					success : function(response) {
-						var mainData1 = jQuery.parseJSON(response);
-						$('#bussCity option').remove();
-						$('#bussCity').append(
-								'<option value="0" label="Select District" />');
-
-						$
-								.each(
-										mainData1,
-										function(i, obj) {
-											if (bc == obj.cityId) {
-												$('#bussCity')
-														.append(
-																'<option selected="true" value='+obj.cityId+'>'+obj.cityName+' </option>');
-											} else {
-												$('#bussCity')
-														.append(
-																'<option value='+obj.cityId+'>'+obj.cityName+' </option>');
-											}
-										});
-					}
-				});
-		//alert('bc end');
-	}
-</script>
 
 <script>
    
@@ -784,12 +378,7 @@ function getDistrict(val) {
 															<li class="style-li"><strong>State:</strong></li>
 															<li class="style-li error-red"></li>
 														</ul>
-														<!--  <select class="form-control">
-                          <option value="0">Lorem</option>
-                          <option value="1">Lorem</option>
-                          <option value="2">Lorem</option>
-                          <option value="3">Lorem</option>
-                        </select>-->
+								
 													</div>
 													<cf:select path="correspondenceState" class="form-control"
 														onchange="getDistrict(this.value , 'correspondenceDistrict');">
@@ -832,12 +421,7 @@ function getDistrict(val) {
 															<li class="style-li error-red"></li>
 														</ul>
 													</div>
-													<!--  <select class="form-control">
-                          <option value="0">Lorem</option>
-                          <option value="1">Lorem</option>
-                          <option value="2">Lorem</option>
-                          <option value="3">Lorem</option>
-                        </select>   -->
+								
 													<cf:select path="correspondenceDistrict"
 														class="form-control" onchange="getCity(this.value , 'correspondenceCity');">
 														<cf:option value="0" label="Select District" />
@@ -853,12 +437,7 @@ function getDistrict(val) {
 															<li class="style-li error-red"></li>
 														</ul>
 													</div>
-													<!--  <select class="form-control">
-                          <option value="0">Lorem</option>
-                          <option value="1">Lorem</option>
-                          <option value="2">Lorem</option>
-                          <option value="3">Lorem</option>
-                        </select> -->
+							
 													<cf:select path="correspondenceCity" class="form-control"
 														onchange="return myBusiness()">
 														<cf:option value="0" label="Select City" />
@@ -900,15 +479,7 @@ function getDistrict(val) {
 
 												</div>
 
-												<!-- <div class="form-group">
-                        <div>
-                          <ul class="lab-no">
-                            <li class="style-li"><strong>Location:</strong></li>
-                            <li class="style-li error-red"></li>
-                          </ul>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Location" >
-                      </div> -->
+		
 											</div>
 											<!--Right side-->
 
@@ -980,16 +551,9 @@ function getDistrict(val) {
 															<li class="style-li error-red"><cf:errors
 																	path="resState" cssClass="error" /></li>
 														</ul>
-														<!--  <select class="form-control">
-                          <option value="0">Lorem</option>
-                          <option value="1">Lorem</option>
-                          <option value="2">Lorem</option>
-                          <option value="3">Lorem</option>
-                        </select> -->
+								
 													</div>
-													<%-- <cf:select path="resState" class="form-control state">
-<cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName" />
-</cf:select> --%>
+		
 													<cf:select path="resState" class="form-control state"
 														onchange="getDistrict(this.value , 'residentialDistrict');">
 														<cf:option value="0" label="Select State" />
@@ -1245,12 +809,7 @@ function getDistrict(val) {
 															<li class="style-li error-red"></li>
 														</ul>
 													</div>
-													<!--   <select class="form-control">
-                          <option value="0">Lorem</option>
-                          <option value="1">Lorem</option>
-                          <option value="2">Lorem</option>
-                          <option value="3">Lorem</option>
-                        </select> -->
+							
 													<cf:select path="bussState" class="form-control"
 														onchange="getDistrict(this.value , 'bussDistrict');">
 														<cf:option value="0" label="Select State" />

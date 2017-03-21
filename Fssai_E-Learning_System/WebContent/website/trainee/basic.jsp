@@ -49,27 +49,28 @@ function confirmTrainee(){
 
 
 
-/* function getCourseDetails(){
+ function getCourseDetails(){
 	var courseType=($("#courseType").val()== null ? "" :$("#courseType").val() );
 	var courseName =  ($("#courseName").val() == null ? "" : $("#courseName").val());
 	var modeOfTraining =  ($("#modeOfTraining").val() == null ? "" : $("#modeOfTraining").val() );
 	var trainingPatrtner =  ($("#trainingPartner").val() == null ? "" : $("#trainingPartner").val() );
 	var trainingCenterState = ( $("#trainingCenterState").val() == null ? "" : $("#trainingCenterState").val());
 	var trainingCenterDistrict = ( $("#trainingCenterCity").val() == null ? "" : $("#trainingCenterCity").val());
-	var total= ""+courseName+"-"+modeOfTraining+"-"+trainingPatrtner+"-"+trainingCenterState+"-"+trainingCenterDistrict+"-"+courseType+"-";
+	var total= courseName+"-"+modeOfTraining+"-"+trainingPatrtner+"-"+trainingCenterState+"-"+trainingCenterDistrict+"-"+courseType;
 	var courseNameEl = document.getElementById('courseName');
 	var courseTitle = courseNameEl.options[courseNameEl.selectedIndex].innerHTML;
 	$('#certificationCourse').text(courseTitle);
 	var name1=JSON.stringify({
-		aaa:0,
-		bbb:0
+		courseType:0,
+		courseName:0
   })
 	
 	$.ajax({
 	      type: 'post',
-	      url: 'getCourseDetailss.fssai?data='+ total.toString(),
+	      url: "getCourseDetailInfo.fssai?data="+ total,
 	      contentType : "application/json",
 		  data:name1,
+		  async :false,
 	      success: function (response) {      
 	      var mainData1 = jQuery.parseJSON(response);
 	      $('#newTable').show();
@@ -85,41 +86,7 @@ function confirmTrainee(){
 			}
 			});
 	//return result; 
-} */
-
-function getCourseDetails(){
-	var courseType=$("#courseType").val();
-	console.log("courseType "+courseType);
-	var courseName =  $("#courseName").val();
-	var modeOfTraining =  $("#modeOfTraining").val();
-	var trainingPatrtner =  $("#trainingPartner").val();
-	//var trainingDate =  $("#trainingDate").val();
-	var trainingCenterState =  $("#trainingCenterState").val();
-	var trainingCenterDistrict =  $("#trainingCenterCity").val();
-	var total="courseName="+courseName+"&modeOfTraining="+modeOfTraining+"&trainingPatrtner="+trainingPatrtner+"&trainingCenterState="+trainingCenterState+"&trainingCenterDistrict="+trainingCenterDistrict+"&courseType="+courseType;
-	var courseNameEl = document.getElementById('courseName');
-	var courseTitle = courseNameEl.options[courseNameEl.selectedIndex].innerHTML;
-	$('#certificationCourse').text(courseTitle);
-	$.ajax({
-	      type: 'post',
-	      url: 'getCourseDetails.jspp?'+ total,
-	      success: function (response) {      
-	      var mainData1 = jQuery.parseJSON(response);
-	      $('#newTable').show();
-	      $(".displayNone").css("display","block");
-	      var j=1;
-			$('#newTable tr').remove();
-			$('#newTable').append('<tr  class="background-open-vacancies"><th>Select</th><th>Batch Code Code</th><th>Course Code</th><th>Course Duration</th><th>Training Center Name & Address</th><th>Training Schedule</th><th>Training Center</th><th>Seating Capacity</th><th>Seats available</th></tr>')
-			$.each(mainData1 , function(i , obj)
-			{
-			$('#newTable').append('<tr id="tableRow"><td><input type="hidden" name="getCalander" id="h" value="'+obj[0]+'" /><input type="radio" name="getCalander" onclick="gettid(this.value);" id="trainingCalendarIdd'+i+'"  value="'+obj[0]+'"/></td><td>'+obj[9]+'</td><td>'+obj[7]+'</td><td>'+obj[10]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td></tr>');	
-			document.getElementById("trainingCalendarId").value = i;
-			});
-			}
-			});
-	//return result; 
-}
-
+} 
 
 
 function gettid(value){
@@ -239,7 +206,7 @@ function gettid(value){
                         <div class="form-group">
                         
             
-<a href="#" onclick="getCourseDetails();return false;" class="form-control login-btn btn pull-right" style="width: 50%;">Show Details</a>
+<button onclick="getCourseDetails();return false;" class="form-control login-btn btn pull-right" style="width: 50%;">Show Details</button>
                         </div>
 
                         <!-- residential address --> 

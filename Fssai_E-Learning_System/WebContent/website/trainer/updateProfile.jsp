@@ -76,7 +76,7 @@
                                         // if(x!=''){
                                         var atpos = x.indexOf("@");
                                         var dotpos = x.lastIndexOf(".");
-                                        if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= x.length) {
+                                        if (atpos < 1 || dotpos < (atpos + 2) || dotpos + 2 >= x.length) {
                                             document.getElementById('TrainingCenterPermanentEmail').style.borderColor = "red";
                                             document.getElementById("TrainingCenterPermanentEmailError").style.display = 'block';
                                             document.getElementById("TrainingCenterPermanentEmail").focus();
@@ -87,7 +87,6 @@
                                             document.getElementById("TrainingCenterPermanentEmailError").style.display = 'none';
                                         }
                                         var x = document.getElementById("TrainingCenterPermanentMobile").value;
-                                        //if(x!=''){
 
                                         if (x.length < 10 || x.length > 10) {
 
@@ -102,9 +101,6 @@
                                         }
 
                                         if (document.getElementById('checkPermanent').checked == false) {
-
-
-
                                             if (document.getElementById("TrainingCenterPermanentLine1").value == "") {
                                                 document.getElementById('TrainingCenterPermanentLine1').style.borderColor = "red";
                                                 document.getElementById("TrainingCenterPermanentLine1Error").style.display = 'block';
@@ -155,8 +151,6 @@
                                                 document.getElementById('TrainingCenterPermanentCity').style.borderColor = "#ccc";
                                                 document.getElementById("TrainingCenterPermanentCityError").style.display = 'none';
                                             }
-
-
 
                                             var x = document.getElementById("TrainingCenterPermanentPincode").value;
                                             if (x == "" || x.length < 6) {
@@ -213,13 +207,6 @@
 
                                         return true;
 
-
-
-
-
-
-
-
                                     }
 
                                 </script>
@@ -236,8 +223,6 @@
 
                                 <script>
                                     function getstateid() {
-
-                                        getstat2();
                                         getstateid1();
                                     }
                                     window.onload = getstateid;
@@ -246,8 +231,6 @@
                                 <script>
                                     function getstateid1() {
 
-
-                                        //var psid = ${stateid};
                                         var psid = '${loginUr.permanentstate.stateId}';
                                         var psname = '${loginUr.permanentstate.stateName}';
                                         var pdid = '${loginUr.permanentdistrict.districtId}';
@@ -255,7 +238,6 @@
                                         var pcid = '${loginUr.permanentcity.cityId}';
                                         var pcname = '${loginUr.permanentcity.cityName}';
                                         var title = '${loginUr.title.titleId}';
-                                        //var tp = '${tp}';
                                         var tp = '${trainingPartnerID}';
 										
                                         var safety = '${loginUr.foodSafetyExpBackground}';
@@ -264,81 +246,21 @@
                                         $("#FoodSafetyExpBackground").prop('selectedIndex', safety);
                                         $("#ExpInFoodSafefyTimeMonth").prop('selectedIndex', month);
                               
-                                        getStateUpdate(psid, pdid, pcid);
+                                        $("#TrainingCenterPermanentState").val(psid);
+                                        
+                                        $("#TrainingCenterPermanentState").trigger("change");
+                                        window.setTimeout(function() {
+                                            $('#TrainingCenterPermanentDistrict').val(pdid);
+                                            
+                                            $("#TrainingCenterPermanentDistrict").trigger("change");
+                                            
+                                            window.setTimeout(function() {
+                                                $('#TrainingCenterPermanentCity').val(pcid);
+                                            }, 1000);
 
-                                       
-                                        $("#Title").prop('value', title);
-                                        $("#associatedTrainingpartnerName").val(tp);
-                                     
-                                        //associatedTrainingpartnerName.options[0].text = tp;
-                                    }
-
-                                    function getStateUpdate(psid, pdid, pcid) {
-                                        $.ajax({
-                                            type: 'post',
-                                            url: 'getStateUpdate.jspp',
-                                            success: function(response) {
-                                                var mainData2 = jQuery.parseJSON(response);
-                                                $('#TrainingCenterPermanentState option').remove();
-                                                $('#TrainingCenterPermanentState').append('<option value="0" label="Select Stateeeeee" />');
-
-                                                $.each(mainData2, function(i, obj) {
-                                                    if (psid == obj.stateId) {
-                                                        $('#TrainingCenterPermanentState').append('<option selected="true" value=' + obj.stateId + '>' + obj.stateName + '</option>');
-                                                    } else {
-                                                        $('#TrainingCenterPermanentState').append('<option value=' + obj.stateId + '>' + obj.stateName + '</option>');
-                                                    }
-                                                });
-                                            }
-                                        });
-                                        getDistrictUpdate(psid, pdid, pcid)
-
-                                    }
-
-                                    function getDistrictUpdate(ss, dd, cc) {
-                                        $.ajax({
-                                            type: 'post',
-                                            url: 'getDistrictUpdate.jspp?' + ss,
-                                            success: function(response) {
-                                                var mainData1 = jQuery.parseJSON(response);
-                                                $('#TrainingCenterPermanentDistrict option').remove();
-                                                $('#TrainingCenterPermanentDistrict').append('<option value="0" label="Select District" />');
-
-                                                $.each(mainData1, function(i, obj) {
-                                                    if (dd == obj.districtId) {
-                                                        $('#TrainingCenterPermanentDistrict').append('<option  selected="true" value=' + obj.districtId + '>' + obj.districtName + '</option>');
-                                                    } else {
-                                                        $('#TrainingCenterPermanentDistrict').append('<option value=' + obj.districtId + '>' + obj.districtName + '</option>');
-                                                    }
-                                                });
-                                            }
-                                        });
-                                        getCityUpdate(dd, cc);
-                                    }
-
-                                    function getCityUpdate(dd, cc) {
-                                        $.ajax({
-                                            type: 'post',
-                                            url: 'getCityUpdate.jspp?' + dd,
-                                            success: function(response) {
-                                                var mainData1 = jQuery.parseJSON(response);
-                                                $('#TrainingCenterPermanentCity option').remove();
-                                                $('#TrainingCenterPermanentCity').append('<option value="0" label="Select City" />');
-
-                                                $.each(mainData1, function(i, obj) {
-                                                    if (cc == obj.cityId) {
-                                                        $('#TrainingCenterPermanentCity').append('<option selected="true" value=' + obj.cityId + '>' + obj.cityName + '</option>');
-                                                    } else {
-                                                        $('#TrainingCenterPermanentCity').append('<option value=' + obj.cityId + '>' + obj.cityName + '</option>');
-                                                    }
-                                                });
-                                            }
-                                        });
-
-                                    }
-
-
-                                    function getstat2() {
+                                        }, 1000);
+                                        
+                                        
                                         var csid = '${loginUr.correspondencestate.stateId}';
                                         var csname = '${loginUr.correspondencestate.stateName}';
                                         var cdid = '${loginUr.correspondencedistrict.districtId}';
@@ -346,78 +268,25 @@
                                         var cdname = '${loginUr.correspondencedistrict.districtName}';
                                         var ccid = '${loginUr.correspondencecity.cityId}';
                                         var ccname = '${loginUr.correspondencecity.cityName}';
-                                        //var trainingPartnerName='${loginUr.associatedTrainingpartnerName.trainingPartnerName}';
-                                        //TrainingCenterCorrespondenceState.options[0].text = csname;
-                                        // TrainingCenterCorrespondenceDistrict.options[0].text = cdname;
-                                        //TrainingCenterCorrespondenceCity.options[0].text = ccname;
-                                        getCorrespondanceStateUpdate(csid, cdid, ccid, cdname);
-                                        /* associatedTrainingpartnerName.options[0].text = trainingPartnerName; */
-                                    }
+                                        
+ 										$("#TrainingCenterCorrespondenceState").val(csid);
+                                        
+                                        $("#TrainingCenterCorrespondenceState").trigger("change");
+                                        window.setTimeout(function() {
+                                            $('#TrainingCenterCorrespondenceDistrict').val(cdid);
+                                            
+                                            $("#TrainingCenterCorrespondenceDistrict").trigger("change");
+                                            
+                                            window.setTimeout(function() {
+                                                $('#TrainingCenterCorrespondenceCity').val(ccid);
+                                            }, 1000);
 
-                                    function getCorrespondanceStateUpdate(csid, cdid, ccid, cdname) {
-                                        $.ajax({
-                                            type: 'post',
-                                            url: 'getStateUpdate.jspp',
-                                            success: function(response) {
-                                                var mainData2 = jQuery.parseJSON(response);
-                                                $('#TrainingCenterCorrespondenceState option').remove();
-                                                $('#TrainingCenterCorrespondenceState').append('<option value="0" label="Select Stateeeeee" />');
-
-                                                $.each(mainData2, function(i, obj) {
-                                                    if (csid == obj.stateId) {
-                                                        $('#TrainingCenterCorrespondenceState').append('<option selected="true" value=' + obj.stateId + '>' + obj.stateName + '</option>');
-                                                    } else {
-                                                        $('#TrainingCenterCorrespondenceState').append('<option value=' + obj.stateId + '>' + obj.stateName + '</option>');
-                                                    }
-                                                });
-                                            }
-                                        });
-                                        CorrDistrictUpdate(csid, cdid, ccid, cdname);
-                                    }
-
-                                    function CorrDistrictUpdate(csid, cdid, ccid, cdname) {
-                                        $.ajax({
-                                            type: 'post',
-                                            url: 'getDistrictUpdate.jspp?' + csid,
-                                            success: function(response) {
-                                                var mainData1 = jQuery.parseJSON(response);
-                                                $('#TrainingCenterCorrespondenceDistrict option').remove();
-                                                $('#TrainingCenterCorrespondenceDistrict').append('<option value="0" label="Select District" />');
-
-                                                $.each(mainData1, function(i, obj) {
-
-                                                    // $("#TrainingCenterCorrespondenceDistrict").prop('selectedIndex', cdid);
-                                                    if (cdid == obj.districtId) {
-                                                        //TrainingCenterCorrespondenceDistrict.options[0].text = cdname;
-                                                        $('#TrainingCenterCorrespondenceDistrict').append('<option selected="true" value=' + obj.districtId + '>' + obj.districtName + '</option>');
-
-                                                    } else {
-                                                        $('#TrainingCenterCorrespondenceDistrict').append('<option value=' + obj.districtId + '>' + obj.districtName + '</option>');
-                                                    }
-                                                });
-                                            }
-                                        });
-                                        getCorrCityUpdate(cdid, ccid);
-                                    }
-
-                                    function getCorrCityUpdate(cdid, ccid) {
-                                        $.ajax({
-                                            type: 'post',
-                                            url: 'getCityUpdate.jspp?' + cdid,
-                                            success: function(response) {
-                                                var mainData1 = jQuery.parseJSON(response);
-                                                $('#TrainingCenterCorrespondenceCity option').remove();
-                                                $('#TrainingCenterCorrespondenceCity').append('<option value="0" label="Select City" />');
-
-                                                $.each(mainData1, function(i, obj) {
-                                                    if (ccid == obj.cityId) {
-                                                        $('#TrainingCenterCorrespondenceCity').append('<option selected="true" value=' + obj.cityId + '>' + obj.cityName + '</option>');
-                                                    } else {
-                                                        $('#TrainingCenterCorrespondenceCity').append('<option value=' + obj.cityId + '>' + obj.cityName + '</option>');
-                                                    }
-                                                });
-                                            }
-                                        });
+                                        }, 1000);
+                                       
+                                        $("#Title").prop('value', title);
+                                        $("#associatedTrainingpartnerName").val(tp);
+                                     
+                                       
                                     }
 
                                 </script>
@@ -438,9 +307,7 @@
                                             document.getElementById('').value = document.getElementById('').value;
                                         }
                                         if (x == false) {
-                                            /* document.getElementById('TrainingCenterCorrespondenceLine1').value= "";
-                                            document.getElementById('TrainingCenterCorrespondenceLine2').value= "";
-                                            document.getElementById('TrainingCenterCorrespondencePincode').value= ""; */
+                                            
                                             document.getElementById('TrainingCenterPermanentLine1').value = "";
                                             document.getElementById('TrainingCenterPermanentLine2').value = "";
                                             document.getElementById('TrainingCenterPermanentPincode').value = "";
@@ -516,26 +383,8 @@
                                                                                             <input type="text" class="form-control" placeholder="Date" disabled="disabled" value="${loginUr.DOB}">
                                                                                         </div>
 
-
-
-                                                                                        <!-- <div class="form-group">
-                                                        <div>
-                                                            <ul class="lab-no">
-                                                                <li class="style-li"><strong>Upload Your Profile:</strong></li>
-                                                            </ul>
-                                                        </div>
-                                                        <input type="file" id="myFile">
-                                                    </div> -->
-
-
-
                                                                                         <div class="form-group">
-                                                                                            <!--  <label>Gender</label>
-                                                        <br />
-                                                        <label class="radio-inline">
-                                                            <input type="radio" name="optradio"> Yes </label>
-                                                        <label class="radio-inline">
-                                                            <input type="radio" name="optradio"> No </label> -->
+                                                                                          
                                                                                             <label class="radio-inline">
                                                                                                 <cf:radiobutton path="gender" id="male" value="M" />Male&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                                                                 <cf:radiobutton path="gender" id="female" value="F" />Female
@@ -709,90 +558,7 @@
                                                                                     <!-- right side ends -->
                                                                                     <!-- permanent address ends -->
                                                                                     <!-- selection -->
-                                                                                    <%-- <div class="col-xs-12">
-                                                    <div class="form-group">
-                                                        <!-- <label>Is your correspondence address same as permanent address</label>
-                                                        <br>
-                                                        <label class="radio-inline">
-                                                            <input type="radio" name="optradio"> Yes </label>
-                                                        <label class="radio-inline">
-  
-                                                            <input type="radio" name="optradio"> No </label> -->
-  <input type="checkbox" id="checkPermanent" onclick="myCheckPermanent(this)"> <label class = "error">Is your permanent address same as correspondence address.</label>                                                           
-                                                    </div>
-                                                </div>
-                                                <!-- selection ends -->
-                                                <!-- correspondance address -->
-                                                <!--Left side-->
-                                                <div class="col-md-6 col-xs-12">
-                                                    <h4>Permanent Address</h4>
-                                                    <div class="form-group">
-                                                        <div>
-                                                            <ul class="lab-no">
-                                                                <li class="style-li"><strong>Permanent Adddress Line 1:</strong></li>
-                                                            </ul>
-                                                        </div>
-                                                        <cf:input type="text" class="form-control" path="TrainingCenterPermanentLine1" placeholder="Training Center Line 1" value="${loginUr.trainingCenterPermanentLine1}"/> </div>
-                                                    <div class="form-group">
-                                                        <div>
-                                                            <ul class="lab-no">
-                                                                <li class="style-li"><strong>Permanent Adddress Line 2:</strong></li>
-                                                            </ul>
-                                                        </div>
-                                                        <cf:input type="text" class="form-control" path="trainingCenterPermanentLine2" placeholder="Training Center Line 2" value="${loginUr.trainingCenterPermanentLine2}"/> </div>
-                                                    <div class="form-group">
-                                                        <div>
-                                                            <ul class="lab-no">
-                                                                <li class="style-li"><strong>State:</strong></li>
-                                                            </ul>
-                                                        </div>
-                                                       <cf:select path="TrainingCenterPermanentState" class="form-control" onchange="getDistrictList(this.value);">
-<cf:option value="0" label="Select State" />
-<cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName" />
-</cf:select>
-                                                    </div>
-                                                </div>
-                                                <!-- left side ends -->
-                                                <!-- right side -->
-                                                <div class="col-md-6 col-xs-12">
-                                                    <h5><br>
-                          </h5>
-                                                    <div class="form-group">
-                                                        <div>
-                                                            <ul class="lab-no">
-                                                                <li class="style-li"><strong>District:</strong></li>
-                                                            </ul>
-                                                        </div>
-                                                        <cf:select path="TrainingCenterPermanentDistrict" class="form-control"  onchange="getCityList(this.value);">
-<cf:option value="0" label="Select District" />
-<cf:options items="${districtList}" itemValue="districtId" itemLabel="districtName" />
-</cf:select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div>
-                                                            <ul class="lab-no">
-                                                                <li class="style-li"><strong>Closest City:</strong></li>
-                                                            </ul>
-                                                        </div>
-                                                       <cf:select path="TrainingCenterPermanentCity" class="form-control">
-<cf:option value="0" label="Select City" />
-<cf:options items="${cityList}" itemValue="cityId" itemLabel="cityName" />
-</cf:select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div>
-                                                            <ul class="lab-no">
-                                                                <li class="style-li"><strong>PIN Code:</strong></li>
-                                                            </ul>
-                                                        </div>
-                                                        <cf:input type="text" class="form-control" path="TrainingCenterPermanentPincode" placeholder="Pincode" value="${loginUr.trainingCenterPermanentPincode}"/> </div>
-                                                </div>
-                                                <!-- right side ends -->
-                                            </fieldset>
-                       --%>
-
-
-
+                                           
                                                                             </div>
 
                                                                             <fieldset>

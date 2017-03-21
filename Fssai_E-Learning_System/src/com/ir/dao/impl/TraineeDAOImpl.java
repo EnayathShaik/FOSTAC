@@ -1114,7 +1114,9 @@ public class TraineeDAOImpl implements TraineeDAO {
 				" and tc.trainingcenter = pitp.personalinformationtrainingpartnerid "+
 				" where CAST(tc.coursename AS varchar(10)) like '"+courseName+"' "+
 				" and CAST(tc.courseType AS varchar(10)) like  '"+courseType+"' "+
+				//" and cn.modeoftraining like '"+modeOfTraining+"' "+
 				" and CAST(tc.trainingpartner AS varchar(10)) like '"+trainingPatrtner+"'  "+
+				//" and CAST(tc.trainingdate AS varchar(10)) like '"+trainingDate+"' "+
 				" and CAST(s.stateid AS varchar(10)) like '"+trainingCenterState+"' "+
 				" and CAST(d.districtid AS varchar(10)) like '"+trainingCenterDistrict+"' "+
 				" and  to_timestamp(COALESCE(tc.trainingdate, '19900101010101'),'DD-MM-YYYY') > CURRENT_TIMESTAMP - INTERVAL '1 days' and  (CAST(CAST (tc.seatCapacity AS NUMERIC(19,4)) AS INT) - ( select count(1) from courseenrolleduser where trainingcalendarid = tc.trainingcalendarid) > 0)";

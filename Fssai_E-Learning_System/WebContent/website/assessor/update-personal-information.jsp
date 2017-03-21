@@ -4,11 +4,9 @@
         <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %>
             <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
+<script src="website/js/commonController.js"></script>
                 <script>
                     function getstateid() {
-                        //alert('ll');
-                        getstat2();
                         getstateid1();
 
                     }
@@ -27,244 +25,55 @@
                         var pdid = ${loginUr.assessorPermanentDistrict.districtId};
                         var pcid = ${loginUr.assessorPermanentCity.cityId};
                         var title = '${loginUr.title.titleName}';
-                        getStateUpdate(psid, pdid, pcid);
+                        
+                        $("#AssessorrPermanentState").val(psid);
+                        
+                        $("#AssessorrPermanentState").trigger("change");
+                        window.setTimeout(function() {
+                            $('#AssessorPermanentDistrict').val(pdid);
+                            
+                            $("#AssessorPermanentDistrict").trigger("change");
+                            
+                            window.setTimeout(function() {
+                                $('#AssessorPermanentCity').val(pcid);
+                            }, 1000);
+
+                        }, 1000);
+                        
+                        var csid = ${loginUr.assessorCorrespondenceState.stateId};
+
+                        var cdid = ${loginUr.assessorCorrespondenceDistrict.districtId};
+
+                        var ccid = ${loginUr.assessorCorrespondenceCity.cityId};
+                        
+          				$("#AssessorCorrespondenceState").val(csid);
+                        
+                        $("#AssessorCorrespondenceState").trigger("change");
+                        window.setTimeout(function() {
+                            $('#AssessorCorrespondenceDistrict').val(cdid);
+                            
+                            $("#AssessorCorrespondenceDistrict").trigger("change");
+                            
+                            window.setTimeout(function() {
+                                $('#AssessorCorrespondenceCity').val(ccid);
+                            }, 1000);
+
+                        }, 1000);
+
                         Title.options[0].text = title;
                         var agency = '${loginUr.assessmentAgencyName.assessmentAgencyName}';
-                        alert(agency)
                         AssessmentAgencyName.options[0].text = agency;
                         var month = '${loginUr.releventExpOfAuditInMonth}';
                         ReleventExpOfAuditInMonth.options[0].text = month;
 
                     }
 
-                    function getStateUpdate(psid, pdid, pcid) {
-                        $.ajax({
-                            type: 'post',
-                            url: 'getStateUpdate.jspp',
-                            success: function(response) {
-                                var mainData2 = jQuery.parseJSON(response);
-                                $('#AssessorrPermanentState option').remove();
-                                $('#AssessorrPermanentState').append('<option value="0" >Select Stateeeeee </option>');
-
-                                $.each(mainData2, function(i, obj) {
-                                    if (psid == obj.stateId) {
-                                        $('#AssessorrPermanentState').append('<option selected="true" value=' + obj.stateId + '>' + obj.stateName + '  </option>');
-                                    } else {
-                                        $('#AssessorrPermanentState').append('<option value=' + obj.stateId + '>' + obj.stateName + ' </option>');
-                                    }
-                                });
-                            }
-                        });
-                        getDistrictUpdate(psid, pdid, pcid)
-
-                    }
-
-                    function getDistrictUpdate(ss, dd, cc) {
-                        $.ajax({
-                            type: 'post',
-                            url: 'getDistrictUpdate.jspp?' + ss,
-                            success: function(response) {
-                                var mainData1 = jQuery.parseJSON(response);
-                                $('#AssessorPermanentDistrict option').remove();
-                                $('#AssessorPermanentDistrict').append('<option value="0" label="Select District" />');
-
-                                $.each(mainData1, function(i, obj) {
-                                    if (dd == obj.districtId) {
-                                        $('#AssessorPermanentDistrict').append('<option selected="true" value=' + obj.districtId + '>' + obj.districtName + ' </option>');
-                                    } else {
-                                        $('#AssessorPermanentDistrict').append('<option value=' + obj.districtId + '>' + obj.districtName + ' </option>');
-                                    }
-                                });
-                            }
-                        });
-                        getCityUpdate(dd, cc);
-                    }
-
-                    function getCityUpdate(dd, cc) {
-                        $.ajax({
-                            type: 'post',
-                            url: 'getCityUpdate.jspp?' + dd,
-                            success: function(response) {
-                                var mainData1 = jQuery.parseJSON(response);
-                                $('#AssessorPermanentCity option').remove();
-                                $('#AssessorPermanentCity').append('<option value="0" label="Select City" />');
-
-                                $.each(mainData1, function(i, obj) {
-                                    if (cc == obj.cityId) {
-                                        $('#AssessorPermanentCity').append('<option selected="true" value=' + obj.cityId + '>' + obj.cityName + ' </option>');
-                                    } else {
-                                        $('#AssessorPermanentCity').append('<option value=' + obj.cityId + '>' + obj.cityName + '</option>');
-                                    }
-                                });
-                            }
-                        });
-
-                    }
-
-
-                    function getstat2() {
-                        var csid = ${loginUr.assessorCorrespondenceState.stateId};
-
-                        var cdid = ${loginUr.assessorCorrespondenceDistrict.districtId};
-
-                        var ccid = ${loginUr.assessorCorrespondenceCity.cityId};
-
-                        getCorrespondanceStateUpdate(csid, cdid, ccid);
-
-                    }
-
-                    function getCorrespondanceStateUpdate(csid, cdid, ccid) {
-                        $.ajax({
-                            type: 'post',
-                            url: 'getStateUpdate.jspp',
-                            success: function(response) {
-                                var mainData2 = jQuery.parseJSON(response);
-                                $('#AssessorCorrespondenceState option').remove();
-                                $('#AssessorCorrespondenceState').append('<option value="0" label="Select Stateeeeee" />');
-
-                                $.each(mainData2, function(i, obj) {
-                                    if (csid == obj.stateId) {
-                                        $('#AssessorCorrespondenceState').append('<option selected="true" value=' + obj.stateId + '>' + obj.stateName + '  </option>');
-                                    } else {
-                                        $('#AssessorCorrespondenceState').append('<option value=' + obj.stateId + '>' + obj.stateName + ' </option>');
-                                    }
-                                });
-                            }
-                        });
-
-                        CorrDistrictUpdate(csid, cdid, ccid);
-                    }
-
-                    function CorrDistrictUpdate(csid, cdid, ccid) {
-                        $.ajax({
-                            type: 'post',
-                            url: 'getDistrictUpdate.jspp?' + csid,
-                            success: function(response) {
-                                var mainData1 = jQuery.parseJSON(response);
-                                $('#AssessorCorrespondenceDistrict option').remove();
-                                $('#AssessorCorrespondenceDistrict').append('<option value="0" label="Select District" />');
-
-                                $.each(mainData1, function(i, obj) {
-
-                                    //alert("cdname is "+cdname);
-                                    // $("#TrainingCenterCorrespondenceDistrict").prop('selectedIndex', cdid);
-                                    if (cdid == obj.districtId) {
-                                        //TrainingCenterCorrespondenceDistrict.options[0].text = cdname;
-                                        $('#AssessorCorrespondenceDistrict').append('<option selected="true" value=' + obj.districtId + '>' + obj.districtName + ' </option>');
-                                        //alert("cd is "+cdid);
-
-                                    } else {
-                                        $('#AssessorCorrespondenceDistrict').append('<option value=' + obj.districtId + '>' + obj.districtName + ' </option>');
-                                    }
-                                });
-                            }
-                        });
-                        getCorrCityUpdate(cdid, ccid);
-                    }
-
-                    function getCorrCityUpdate(cdid, ccid) {
-                        $.ajax({
-                            type: 'post',
-                            url: 'getCityUpdate.jspp?' + cdid,
-                            success: function(response) {
-                                var mainData1 = jQuery.parseJSON(response);
-                                $('#AssessorCorrespondenceCity option').remove();
-                                $('#AssessorCorrespondenceCity').append('<option value="0" label="Select City" />');
-
-                                $.each(mainData1, function(i, obj) {
-                                    if (ccid == obj.cityId) {
-                                        $('#AssessorCorrespondenceCity').append('<option selected="true" value=' + obj.cityId + '>' + obj.cityName + ' </option>');
-                                    } else {
-                                        $('#AssessorCorrespondenceCity').append('<option value=' + obj.cityId + '>' + obj.cityName + ' </option>');
-                                    }
-                                });
-                            }
-                        });
-
-                    }
 
                 </script>
 
-
-
-                <script>
-                    function getDistrict(val) {
-
-                        $.ajax({
-                            type: 'post',
-                            url: 'loadDistrict.jspp?' + val,
-                            success: function(response) {
-                                var mainData1 = jQuery.parseJSON(response);
-                                $('#AssessorCorrespondenceDistrict option').remove();
-                                $('#AssessorCorrespondenceDistrict').append('<option value="0" label="Select District" />');
-                                $('#AssessorCorrespondenceCity option').remove();
-                                $('#AssessorCorrespondenceCity').append('<option value="0" label="Select City" />');
-
-                                $.each(mainData1, function(i, obj) {
-
-                                    $('#AssessorCorrespondenceDistrict').append('<option value=' + obj.districtId + '>' + obj.districtName + ' </option>');
-                                });
-                            }
-                        });
-                    }
-
-                    function getCity(val) {
-                        $.ajax({
-                            type: 'post',
-                            url: 'loadCity.jspp?' + val,
-                            success: function(response) {
-                                var mainData1 = jQuery.parseJSON(response);
-                                $('#AssessorCorrespondenceCity option').remove();
-                                $('#AssessorCorrespondenceCity').append('<option value="0" label="Select City" />');
-                                $.each(mainData1, function(i, obj) {
-
-                                    $("#AssessorCorrespondenceCity").append('<option value=' + obj.cityId + '>' + obj.cityName + ' </option>');
-                                });
-                            }
-                        });
-                    }
-
-                    function getDistrictList(val) {
-                        $.ajax({
-                            type: 'post',
-                            url: 'loadDistrict.jspp?' + val,
-                            success: function(response) {
-                                var mainData1 = jQuery.parseJSON(response);
-                                $('#AssessorPermanentDistrict option').remove();
-                                $('#AssessorPermanentDistrict').append('<option value="0" label="Select District" />');
-                                $('#AssessorPermanentCity option').remove();
-                                $('#AssessorPermanentCity').append('<option value="0" label="Select City" />');
-
-                                $.each(mainData1, function(i, obj) {
-
-                                    $('#AssessorPermanentDistrict').append('<option value=' + obj.districtId + '>' + obj.districtName + ' </option>');
-                                });
-                            }
-                        });
-                    }
-
-                    function getCityList(val) {
-                        $.ajax({
-                            type: 'post',
-                            url: 'loadCity.jspp?' + val,
-                            success: function(response) {
-                                var mainData1 = jQuery.parseJSON(response);
-                                $('#AssessorPermanentCity option').remove();
-                                $('#AssessorPermanentCity').append('<option value="0" label="Select City" />');
-                                $.each(mainData1, function(i, obj) {
-
-                                    $('#AssessorPermanentCity').append('<option value=' + obj.cityId + '>' + obj.cityName + ' </option>');
-                                });
-                            }
-                        });
-                    }
-
-                </script>
 
                 <script type='text/javascript'>
                     function validate() {
-                        //alert("The form was submitted");
-
 
                         if (document.getElementById('AssessorCorrespondenceLine1').value == null) {
                             document.getElementById('AssessorCorrespondenceLine1').focus();
@@ -471,35 +280,6 @@
                         });
                         document.getElementById('SpecialCourse1').value = y;
                         return y;
-                    }
-
-
-                    function checkname() {
-                        var name = document.getElementById("UserId").value;
-
-                        if (name) {
-                            $.ajax({
-                                type: 'post',
-                                url: 'checkdata.jspp?' + name,
-                                data: {
-                                    user_name: name,
-                                },
-                                success: function(response) {
-                                    $('#name_status').html(response);
-                                    if (response == "OK") {
-                                        document.getElementById("register").style.display = 'none';
-                                        return true;
-                                    } else {
-                                        document.getElementById("register").style.display = 'block';
-                                        return false;
-                                    }
-                                }
-                            });
-                        } else {
-                            $('#name_status').html("");
-                            document.getElementById("register").style.display = 'none';
-                            return false;
-                        }
                     }
 
                 </script>
@@ -713,7 +493,7 @@
                                                                                     <!-- <li class="style-li error-red">*Error</li> -->
                                                                                 </ul>
                                                                             </div>
-                                                                            <cf:select class="form-control" path="AssessorCorrespondenceState" onchange="getDistrict(this.value);">
+                                                                            <cf:select class="form-control" path="AssessorCorrespondenceState" onchange="getDistrict(this.value , 'AssessorCorrespondenceDistrict');">
                                                                                 <option value="">select state</option>
                                                                                 <cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName" />
 
@@ -726,7 +506,7 @@
                                                                                     <!--  <li class="style-li error-red">*Error</li> -->
                                                                                 </ul>
                                                                             </div>
-                                                                            <cf:select path="AssessorCorrespondenceDistrict" class="form-control" onchange="getCity(this.value);">
+                                                                            <cf:select path="AssessorCorrespondenceDistrict" class="form-control" onchange="getCity(this.value, 'AssessorCorrespondenceCity');">
                                                                                 <cf:option value="0" label="Select District" />
                                                                             </cf:select>
                                                                         </div>
@@ -826,7 +606,7 @@
                                                                                     <!--  <li class="style-li error-red">*Error</li> -->
                                                                                 </ul>
                                                                             </div>
-                                                                            <cf:select path="AssessorrPermanentState" class="form-control" onchange="getDistrictList(this.value);">
+                                                                            <cf:select path="AssessorrPermanentState" class="form-control" onchange="getDistrict(this.value , 'AssessorPermanentDistrict');">
                                                                                 <cf:option value="0" label="Select State" />
                                                                                 <cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName" />
                                                                             </cf:select>
@@ -845,7 +625,7 @@
                                                                                     <!-- <li class="style-li error-red">*Error</li> -->
                                                                                 </ul>
                                                                             </div>
-                                                                            <cf:select path="AssessorPermanentDistrict" class="form-control" onchange="getCityList(this.value);">
+                                                                            <cf:select path="AssessorPermanentDistrict" class="form-control" onchange="getCity(this.value , 'AssessorPermanentCity');">
                                                                                 <cf:option value="0" label="Select District" />
                                                                                 <cf:options items="${districtList}" itemValue="districtId" itemLabel="districtName" />
                                                                             </cf:select>
