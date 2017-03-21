@@ -245,7 +245,7 @@ function getDistrict(val) {
 		//alert(checkpermanent);
 		if (checkpermanent) {
 			//alert("Inside If");
-			document.getElementById('checkCorrespondence').checked = true;
+			//document.getElementById('checkCorrespondence').checked = true;
 			residential1.style.display = checkCorrespondence.checked ? "none"
 					: "block";
 			residential2.style.display = checkCorrespondence.checked ? "none"
@@ -254,7 +254,7 @@ function getDistrict(val) {
 
 		var checkbusiness = '${loginUser.checkCompany}';
 		if (checkbusiness) {
-			document.getElementById('checkCompany').checked = true;
+			//document.getElementById('checkCompany').checked = true;
 			businessID3.style.display = checkCompany.checked ? "none" : "block";
 			businessID2.style.display = checkCompany.checked ? "none" : "block";
 		}
