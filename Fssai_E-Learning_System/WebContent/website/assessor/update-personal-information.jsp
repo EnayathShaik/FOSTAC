@@ -23,19 +23,14 @@
                     function getstateid1() {
 
 
-                        var psid = $ {
-                            loginUr.assessorrPermanentState.stateId
-                        };
-                        var pdid = $ {
-                            loginUr.assessorPermanentDistrict.districtId
-                        };
-                        var pcid = $ {
-                            loginUr.assessorPermanentCity.cityId
-                        };
+                        var psid = ${loginUr.assessorrPermanentState.stateId};
+                        var pdid = ${loginUr.assessorPermanentDistrict.districtId};
+                        var pcid = ${loginUr.assessorPermanentCity.cityId};
                         var title = '${loginUr.title.titleName}';
                         getStateUpdate(psid, pdid, pcid);
                         Title.options[0].text = title;
                         var agency = '${loginUr.assessmentAgencyName.assessmentAgencyName}';
+                        alert(agency)
                         AssessmentAgencyName.options[0].text = agency;
                         var month = '${loginUr.releventExpOfAuditInMonth}';
                         ReleventExpOfAuditInMonth.options[0].text = month;
@@ -108,17 +103,11 @@
 
 
                     function getstat2() {
-                        var csid = $ {
-                            loginUr.assessorCorrespondenceState.stateId
-                        };
+                        var csid = ${loginUr.assessorCorrespondenceState.stateId};
 
-                        var cdid = $ {
-                            loginUr.assessorCorrespondenceDistrict.districtId
-                        };
+                        var cdid = ${loginUr.assessorCorrespondenceDistrict.districtId};
 
-                        var ccid = $ {
-                            loginUr.assessorCorrespondenceCity.cityId
-                        };
+                        var ccid = ${loginUr.assessorCorrespondenceCity.cityId};
 
                         getCorrespondanceStateUpdate(csid, cdid, ccid);
 

@@ -230,7 +230,7 @@ function updateTraineeAssessmentResult(courseEnrolledid , trainingDate, comment)
 													<div class="form-group">
 														<div>
 															<ul class="lab-no">
-																<li class="style-li"><strong>Course Name:</strong></li>
+																<li class="style-li"><strong>Course Code:</strong></li>
 																<li class="style-li error-red"></li>
 															</ul>
 														</div>

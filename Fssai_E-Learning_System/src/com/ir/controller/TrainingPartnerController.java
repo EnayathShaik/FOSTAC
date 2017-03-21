@@ -573,13 +573,20 @@ public class TrainingPartnerController {
 			profileID = (Integer) session.getAttribute("profileId");
 			userId = (Integer) session.getAttribute("userId");
 			postVacancyTrainingCenterBean.setLoginId(session.getAttribute("loginIdUnique").toString());
-			int appliedId = trainingPartnerService.saveVacancy(postVacancyTrainingCenterBean,profileID,userId);
-			if(appliedId>0){
-				responseObj.setMessage("Vacancy applyed successfully");
+			int vacancyLeft = trainingPartnerService.isVacancyOpen(postVacancyTrainingCenterBean);
+			if(vacancyLeft > 0){
+				int appliedId = trainingPartnerService.saveVacancy(postVacancyTrainingCenterBean,profileID,userId);
+				if(appliedId>0){
+					responseObj.setMessage("Vacancy applyed successfully");
+				}else{
+					responseObj.setMessage("Vacancy already applyed");
+				}
 			}else{
-				responseObj.setMessage("Vacancy already applyed");
+				responseObj.setMessage("Vacancy Closed.");
 			}
+			
 		}catch(Exception e){
+			e.printStackTrace();
 			responseObj.setMessage("unable to apply Vacancy");
 			new ZLogger("applyForVacancy", "Exception while applyForVacancy  "+e.getMessage() , "TrainingPartnerController.java");
 		}

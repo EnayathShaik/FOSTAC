@@ -1606,5 +1606,21 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 		
 		return newList;
 	}
+	@Override
+	public int isVacancyOpen(
+			PostVacancyTrainingCenterBean postVacancyTrainingCenterBean) {
+		// TODO Auto-generated method stub
+		int vacanctLeft = 0;
+		Session session = sessionFactory.getCurrentSession();
+		String sql = "select (noofvacancy - (select count(1) from trainingcentervacancyenrolled where postvacancyid = "+postVacancyTrainingCenterBean.getPostvacancyID()+")) from postvacancytrainingcenter where (noofvacancy - (select count(1) from trainingcentervacancyenrolled where postvacancyid = "+postVacancyTrainingCenterBean.getPostvacancyID()+")) > 0 and postvacancytrainingcenterid = "+postVacancyTrainingCenterBean.getPostvacancyID();
+		Query query = session.createSQLQuery(sql);
+		List list = query.list();
+		if(list.size() > 0){
+			System.out.println(list.size());
+			new ZLogger("isVacancyOpen","list.size() "+ list.size(), "TraineeDAOImpl.java");
+			vacanctLeft = 1;
+		}
+		return vacanctLeft;
+	}
 	
 }

@@ -87,7 +87,7 @@ public class AssessmentController {
 				listAnswerCriteria.add(assessmentAnswerCriteria);
 			}
 			new ZLogger("submitAssessment","Assessment save begin.."+questionMap, "AssessmentController.java");
-			assessmentService.saveAssessment(listAnswerCriteria);
+			//assessmentService.saveAssessment(listAnswerCriteria);
 
 			TraineeAssessmentEvaluation traineeAssessmentEvaluation = assessmentService
 					.evaluate(questionMap, answers,
@@ -99,6 +99,8 @@ public class AssessmentController {
 			//Update Result in Course Enrolled User
 			if(traineeAssessmentEvaluation != null && traineeAssessmentEvaluation.getResult() != null){
 				//Update Result
+				
+				System.out.println("Update Result -- " +traineeAssessmentEvaluation.getResult());
 				assessmentService.updateTraineeAssessmentResultOnline(userId, traineeAssessmentEvaluation.getResult(), String.valueOf(traineeAssessmentEvaluation.getTotalScore()));
 			}
 			

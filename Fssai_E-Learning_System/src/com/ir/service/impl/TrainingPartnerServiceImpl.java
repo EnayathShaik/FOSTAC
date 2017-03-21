@@ -372,4 +372,16 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 		String loadTrainingList = trainingPartnerDAO.updateMTP(searchData);
 		return loadTrainingList;
 	}
+
+	@Override
+	@Transactional
+	public int isVacancyOpen(
+			PostVacancyTrainingCenterBean c) {
+		// TODO Auto-generated method stub
+		int isVacancy = trainingPartnerDAO.isVacancyOpen(c);
+		return isVacancy;
+	}
+	
+	
+	
 }

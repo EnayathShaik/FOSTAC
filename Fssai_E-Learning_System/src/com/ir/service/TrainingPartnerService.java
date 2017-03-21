@@ -149,5 +149,5 @@ public interface TrainingPartnerService {
 	public String updateMTP(String data);
 	
 	
-	
+	public int isVacancyOpen(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
 }

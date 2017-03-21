@@ -102,5 +102,7 @@ public interface TrainingPartnerDao {
 	
 	public String updateMTP(String data);
 	
+	public int isVacancyOpen(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
+	
 	
 }
