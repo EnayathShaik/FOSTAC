@@ -77,7 +77,7 @@ function showDetails(){
 					'<td><select id='+obj[1]+'><option  value ="0">Please Select</option><option selected="true"  value ="P">Pass</option>'+
 					'<option  value="F">Fail</option></td>'+
 					'<td><input type="text" class="form-control" value="'+(obj[7] == null || obj[7] == "null" ? "" : obj[7])+'"   id = "comments'+obj[1]+'"/>'+
-					'<td> <button onclick="updateTraineeAssessmentResult(\''+obj[1]+'\', \''+obj[3]+'\', \''+comment+'\' );return false;">Update</button></td>'+
+					'<td> <button onclick="updateTraineeAssessmentResult(\''+obj[1]+'\', \''+obj[10]+'\', \''+comment+'\' );return false;">Update</button></td>'+
 					'</tr>');
 		}else if(obj[6] == 'F'){
 			$('#tblUpdateResult').append('<tr id="tableRow"><td>'+j++ +'</td>'+
@@ -90,7 +90,7 @@ function showDetails(){
 					'<td><select id='+obj[1]+'><option  value ="0">Please Select</option><option  value ="P">Pass</option>'+
 					'<option selected="true"  value="F">Fail</option></td>'+
 					'<td><input type="text" class="form-control" value="'+(obj[7] == null || obj[7] == "null" ? "" : obj[7])+'" id = "comments'+obj[1]+'"/>'+
-					'<td> <button onclick="updateTraineeAssessmentResult(\''+obj[1]+'\', \''+obj[3]+'\', \''+comment+'\' );return false;">Update</button></td>'+
+					'<td> <button onclick="updateTraineeAssessmentResult(\''+obj[1]+'\', \''+obj[10]+'\', \''+comment+'\' );return false;">Update</button></td>'+
 					'</tr>');
 		}else{
 			$('#tblUpdateResult').append('<tr id="tableRow"><td>'+j++ +'</td>'+
@@ -103,7 +103,7 @@ function showDetails(){
 					'<td><select id='+obj[1]+'><option  value ="0">Please Select</option><option  value ="P">Pass</option>'+
 					'<option  value="F">Fail</option></td>'+
 					'<td><input type="text" class="form-control" value="'+(obj[7] == null || obj[7] == "null" ? "" : obj[7])+'"  id = "comments'+obj[1]+'"/>'+
-					'<td> <button onclick="updateTraineeAssessmentResult(\''+obj[1]+'\', \''+obj[3]+'\', \''+comment+'\' );return false;">Update</button></td>'+
+					'<td> <button onclick="updateTraineeAssessmentResult(\''+obj[1]+'\', \''+obj[10]+'\', \''+comment+'\' );return false;">Update</button></td>'+
 					'</tr>');
 		}
 		
@@ -124,8 +124,8 @@ function updateTraineeAssessmentResult(courseEnrolledid , trainingDate, comment)
     timeParts = dateTimeParts[1].split(':'),
     dateParts = dateTimeParts[0].split('-'),
     date;
-    date = new Date(dateParts[2], parseInt(dateParts[1], 10) - 1, dateParts[0], timeParts[0], timeParts[1]);
-	var today = new Date();
+    date = new Date(dateParts[2], parseInt(dateParts[1], 10) - 1, dateParts[0], 0, 0);
+	var today = new Date().setHours(0, 0, 0, 0);
 	console.log("today "+today + " date "+date);
 	if(date < today){
 		
@@ -139,7 +139,7 @@ function updateTraineeAssessmentResult(courseEnrolledid , trainingDate, comment)
 	var status = $("#"+courseEnrolledid).val();
 	var comment = ($("#comments"+courseEnrolledid).val() == "" ? "-":$("#comments"+courseEnrolledid).val() );
 	var total =  "courseenrolledId="+courseEnrolledid+"@status="+status+"@comment="+comment+"@" ;
-	alert(total);
+	//alert(total);
 	var name1=JSON.stringify({
 		courseType:0
   })
