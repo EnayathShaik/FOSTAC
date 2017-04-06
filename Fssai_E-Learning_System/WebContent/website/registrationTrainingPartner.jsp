@@ -231,21 +231,7 @@ function AvoidSpace(event) {
     	    document.getElementById("TrainingCentreNameError").style.display = 'none';
     	    } 
     	
-    	//TrainingPartnerName
-    	/* alert("Training Partner Name");
-    	if(document.getElementById('TrainingPartnerName').value == '0') {
-    	document.getElementById("TrainingPartnerName").style.borderColor = "red";
-    	document.getElementById("TrainingPartnerNameError").style.display = 'block';
-    	document.getElementById("TrainingPartnerName").focus();
-    	return false;
-    	}else{
-    		alert("Training partner Name*********");
-    	    document.getElementById('TrainingPartnerName').style.borderColor = "#ccc";
-    	    document.getElementById("TrainingPartnerNameError").style.display = 'none';
-    	    }  */
-    	//PAN
-    	//alert("PAN Name");
-    	if(document.getElementById('PAN').value == '') {
+    /* 	if(document.getElementById('PAN').value == '') {
     	document.getElementById("PAN").style.borderColor = "red";
     	document.getElementById("PANError").style.display = 'block';
     	document.getElementById("PAN").focus();
@@ -254,7 +240,7 @@ function AvoidSpace(event) {
     		//alert("PAN Name*********");
     	    document.getElementById('PAN').style.borderColor = "#ccc";
     	    document.getElementById("PANError").style.display = 'none';
-    	    } 
+    	    }  */
     	
     	//Title
     	//alert("Title Name");
@@ -598,7 +584,7 @@ function AvoidSpace(event) {
                     </ul>
                   </div>
                  <cf:input path="LastName" maxlength="50" onkeyup="allLetter(this.id,this.value);" class="form-control"  placeholder="Last Name"/>
-                </div>
+                </div> 
               </div>
               <!-- personal information ends -->
             </fieldset>

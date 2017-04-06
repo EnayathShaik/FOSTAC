@@ -54,6 +54,7 @@ import com.ir.service.AssessmentService;
 import com.ir.service.PageLoadService;
 import com.ir.service.TraineeService;
 import com.ir.util.Profiles;
+import com.zentech.backgroundservices.Mail;
 import com.zentech.logger.ZLogger;
 
 @Controller
@@ -451,6 +452,13 @@ public class TraineeController {
 					//Close Course
 					if(certificateInfo != null && certificateInfo.getCertificateID() != null && certificateInfo.getCertificateID().length() > 5){
 						traineeService.closeCourse(userId, profileID, "Y");
+						
+						int courseId = certificateInfo.getCourseTypeId();
+						if(courseId==4){
+						
+							new Thread(new Mail("TOT", certificateInfo.getEmail(), "", "", certificateInfo.getName())).start();
+						}
+						
 					}
 					model.addAttribute("certificateID", certificateInfo.getCertificateID());
 					model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
@@ -458,8 +466,8 @@ public class TraineeController {
 					model.addAttribute("trainingAddress", certificateInfo.getTrainingAddress());
 					session.setAttribute("traineeSteps", 0);
 					
-					if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Western India)")){
-						returnResult = "certificatetraineeHRAWI";	
+					if(!certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Western India)")){
+						returnResult = "certificatetraineeFSSAI";	
 						}
 						else if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Northern India)")){
 							returnResult = "certificatetraineeHRANI";

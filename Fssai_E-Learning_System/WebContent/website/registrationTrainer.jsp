@@ -498,7 +498,7 @@ return true;
     } 
     
   
-    s
+    
 </script>
 <cf:form action="registrationTrainer.fssai" name="myForm" method="POST"
 	commandName="registrationFormTrainer"

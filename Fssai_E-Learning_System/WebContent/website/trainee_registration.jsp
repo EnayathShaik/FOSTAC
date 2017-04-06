@@ -781,7 +781,7 @@ function checkagree()
 													code="lbl.Trainee.fatherName" /></strong></li>
 										<li class="style-li error-red"><label
 											id="FatherNameError" class="error visibility">* enter
-												your father name </label> <cf:errors path="FatherName"
+												your Father/Mother name </label> <cf:errors path="FatherName"
 												cssClass="error" /></li>
 									</ul>
 								</div>

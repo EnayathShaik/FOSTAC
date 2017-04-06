@@ -962,7 +962,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 					+
 					// " ,concat(E.trainingpartnerpermanentline1 , ' ' , E.trainingpartnerpermanentline2 , ' ' , s.statename , ' ' , ds.districtname , ' ' , ci.cityname) as address"
 					// +
-					" ,concat(E.trainingcentrename , ' ' , s.statename, ' ' , ds.districtname) as address ,  mtp.trainingpartnername  "
+					" ,concat(E.trainingcentrename , ' ' , s.statename, ' ' , ds.districtname) as address ,  mtp.trainingpartnername , C.coursetypeid , D.email  "
 					+ " from courseenrolleduser A "
 					+ " inner join trainingcalendar B on(A.trainingcalendarid=B.trainingcalendarid) "
 					+"	inner join managetrainingpartner mtp on (B.trainingpartner = mtp.managetrainingpartnerid) "
@@ -994,7 +994,9 @@ public class TraineeDAOImpl implements TraineeDAO {
 					certificateInfo.setTrainingAddress(obj[6] == null ? ""
 							: obj[6].toString());
 					certificateInfo.setTrainingPartnerName(obj[7] == null ? ""
-							: obj[6].toString());
+							: obj[7].toString());
+					certificateInfo.setCourseTypeId((int)obj[8]);
+					certificateInfo.setEmail(obj[9].toString() == null ? "" :obj[9].toString() );
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -1082,27 +1084,27 @@ public class TraineeDAOImpl implements TraineeDAO {
 	public  List getCourseDetails(String data){
 		System.out.println("data "+data);
 		String[] totalConnected = data.toString().split("-");
-		String courseName,modeOfTraining,trainingPatrtner,trainingDate = null,trainingCenterState,trainingCenterDistrict , courseType;
+		String courseName,modeOfTraining,trainingDate = null , courseType;
 		
 		courseName = totalConnected[0];
 		if(courseName.equals("0")){		courseName = "%";	}
 		modeOfTraining = totalConnected[1];
 		if(modeOfTraining.equals("0")){		modeOfTraining = "%";	}
-		trainingPatrtner = totalConnected[2];
-		if(trainingPatrtner.equals("0")){		trainingPatrtner = "%";	}
+	//	trainingPatrtner = totalConnected[2];
+	//	if(trainingPatrtner.equals("0")){		trainingPatrtner = "%";	}
 		//String[] trainingDate1 = totalConnected[3];
-		trainingCenterState = totalConnected[3];
-		if(trainingCenterState.equals("0")){		trainingCenterState = "%";	}
-		trainingCenterDistrict = totalConnected[4];
-		if(trainingCenterDistrict.equals("0")){		trainingCenterDistrict = "%";	}
-		courseType = totalConnected[5];
+		//trainingCenterState = totalConnected[3];
+		//if(trainingCenterState.equals("0")){		trainingCenterState = "%";	}
+		//trainingCenterDistrict = totalConnected[4];
+	//	if(trainingCenterDistrict.equals("0")){		trainingCenterDistrict = "%";	}
+		courseType = totalConnected[2];
 		if(courseType.equals("0")){		courseType = "%";	}
 		Session session = sessionFactory.getCurrentSession();
 		String sql ="select tc.trainingcalendarid , concat(pitp.trainingpartnerpermanentline1 , ' ' , pitp.trainingpartnerpermanentline2 , ' ' , s.statename , ' ' , d.districtname , ' ' , c.cityname) as address, "+
 				" concat(tc.trainingdate , ' / ' , tc.trainingtime) as schedule , "+
 				" concat(pitp.firstname , ' ' , pitp.middlename , ' ' , pitp.lastname ) ,concat( pitp.trainingpartnerpermanentmobile , ' / ' , pitp.trainingpartnerpermanentemail)  as contact, "+
 				" tc.seatCapacity ,(CAST(CAST (tc.seatCapacity AS NUMERIC(19,4)) AS INT) - ( select count(1) from courseenrolleduser where trainingcalendarid = tc.trainingcalendarid)) "+
-				" ,cn.courseCode , tc.trainingDate, tc.batchCode, cn.courseduration  "+
+				" ,cn.courseCode , tc.trainingDate, tc.batchCode, cn.courseduration ,  pitp.trainingcentrename   "+
 				" from trainingcalendar as tc "+
 				" inner join coursename as cn on cn.coursenameid = tc.coursename "+
 				" inner join coursetype as ct on ct.coursetypeid = tc.coursetype "+
@@ -1115,10 +1117,10 @@ public class TraineeDAOImpl implements TraineeDAO {
 				" where CAST(tc.coursename AS varchar(10)) like '"+courseName+"' "+
 				" and CAST(tc.courseType AS varchar(10)) like  '"+courseType+"' "+
 				//" and cn.modeoftraining like '"+modeOfTraining+"' "+
-				" and CAST(tc.trainingpartner AS varchar(10)) like '"+trainingPatrtner+"'  "+
+			//	" and CAST(tc.trainingpartner AS varchar(10)) like '"+trainingPatrtner+"'  "+
 				//" and CAST(tc.trainingdate AS varchar(10)) like '"+trainingDate+"' "+
-				" and CAST(s.stateid AS varchar(10)) like '"+trainingCenterState+"' "+
-				" and CAST(d.districtid AS varchar(10)) like '"+trainingCenterDistrict+"' "+
+			//	" and CAST(s.stateid AS varchar(10)) like '"+trainingCenterState+"' "+
+			//	" and CAST(d.districtid AS varchar(10)) like '"+trainingCenterDistrict+"' "+
 				" and  to_timestamp(COALESCE(tc.trainingdate, '19900101010101'),'DD-MM-YYYY') > CURRENT_TIMESTAMP - INTERVAL '1 days' and  (CAST(CAST (tc.seatCapacity AS NUMERIC(19,4)) AS INT) - ( select count(1) from courseenrolleduser where trainingcalendarid = tc.trainingcalendarid) > 0)";
 	
 		Query query = session.createSQLQuery(sql);

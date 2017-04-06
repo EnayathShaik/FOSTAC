@@ -51,7 +51,6 @@ function checkname()
 function getTPName(){
 	var TPName = '${userName }'; // $("#TrainingPartnerName option:selected").text();
 	TPName = TPName.substring(2,5).toUpperCase();
-	alert(" TPName  "+TPName);
 	$("#TPName").val(TPName);
 	
 }
@@ -199,7 +198,7 @@ function AvoidSpace(event) {
     	    document.getElementById("TrainingCentreNameError").style.display = 'none';
     	    } 
     	
-    
+    /* 
     	if(document.getElementById('PAN').value == '') {
     	document.getElementById("PAN").style.borderColor = "red";
     	document.getElementById("PANError").style.display = 'block';
@@ -209,7 +208,7 @@ function AvoidSpace(event) {
     		//alert("PAN Name*********");
     	    document.getElementById('PAN').style.borderColor = "#ccc";
     	    document.getElementById("PANError").style.display = 'none';
-    	    } 
+    	    }  */
     	
     	//Title
     	//alert("Title Name");
@@ -370,16 +369,7 @@ function AvoidSpace(event) {
        	    document.getElementById("SeatCapacityPerSessionError").style.display = 'none';
        	    } 
 
-          	if(document.getElementById('NoOfInHouseTrainers').value == '') {
-          	document.getElementById("NoOfInHouseTrainers").style.borderColor = "red";
-          	document.getElementById("NoOfInHouseTrainersError").style.display = 'block';
-          	document.getElementById("NoOfInHouseTrainers").focus();
-          	return false;
-          	}else{
-          		//alert("NoOfInHouseTrainers *********");
-          	    document.getElementById('NoOfInHouseTrainers').style.borderColor = "#ccc";
-          	    document.getElementById("NoOfInHouseTrainersError").style.display = 'none';
-          	    } 
+      
           	
           	 // NoOfYearsInBusinessOfTraining
           	//alert("NoOfYearsInBusinessOfTraining");
@@ -686,7 +676,7 @@ function AvoidSpace(event) {
                     <div class="row" style="height: 20px;"></div>
                     <!-- Training center head etails -->
                     <div class="personel-info">
-                        <fieldset>
+                     <%--    <fieldset>
                             <legend>
                                 Training Center Head Details</legend>
                             <!-- left side -->
@@ -776,7 +766,7 @@ function AvoidSpace(event) {
 
                             <!-- right side ends -->
 
-                        </fieldset>
+                        </fieldset> --%>
                     </div>
                     <!-- training center head ends -->
                     <div class="row" style="height: 20px;"></div>

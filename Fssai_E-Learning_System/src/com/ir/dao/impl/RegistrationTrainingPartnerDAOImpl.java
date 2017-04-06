@@ -32,6 +32,7 @@ import com.ir.util.EncryptionPasswordANDVerification;
 import com.ir.util.PasswordGenerator;
 import com.ir.util.SendContectMail;
 import com.ir.util.SendMail;
+import com.zentech.backgroundservices.Mail;
 @Service
 public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingPartnerDAO {
 	
@@ -185,11 +186,12 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 			personalInformationTrainingPartner.setUserID(nextSequenceUserID == null ? "" : nextSequenceUserID);
 			personalInformationTrainingPartner.setTitle(registrationFormTrainingPartner.getTitle());
 			personalInformationTrainingPartner.setTrainingCentreName(registrationFormTrainingPartner.getTrainingCentreName() == null ? "" : registrationFormTrainingPartner.getTrainingCentreName());
+			
 			personalInformationTrainingPartner.setTrainingPartnerName(registrationFormTrainingPartner.getTrainingPartnerName());
-			personalInformationTrainingPartner.setFirstName(registrationFormTrainingPartner.getFirstName() == null ? "" : registrationFormTrainingPartner.getFirstName());
+			/*personalInformationTrainingPartner.setFirstName(registrationFormTrainingPartner.getFirstName() == null ? "" : registrationFormTrainingPartner.getFirstName());
 			personalInformationTrainingPartner.setLastName(registrationFormTrainingPartner.getLastName() == null ? "" : registrationFormTrainingPartner.getLastName());
 			personalInformationTrainingPartner.setMiddleName(registrationFormTrainingPartner.getMiddleName() == null ? "" : registrationFormTrainingPartner.getMiddleName());
-			personalInformationTrainingPartner.setPAN(registrationFormTrainingPartner.getPAN() == null ? "" : registrationFormTrainingPartner.getPAN());
+			personalInformationTrainingPartner.setPAN(registrationFormTrainingPartner.getPAN() == null ? "" : registrationFormTrainingPartner.getPAN());*/
 			personalInformationTrainingPartner.setTrainingPartnerPermanentLine1(registrationFormTrainingPartner.getTrainingPartnerPermanentLine1() == null ? "" : registrationFormTrainingPartner.getTrainingPartnerPermanentLine1());
 			personalInformationTrainingPartner.setTrainingPartnerPermanentLine2(registrationFormTrainingPartner.getTrainingPartnerPermanentLine2() == null ? "" : registrationFormTrainingPartner.getTrainingPartnerPermanentLine2());
 			personalInformationTrainingPartner.setTrainingPartnerPermanentState(registrationFormTrainingPartner.getTrainingPartnerPermanentState());
@@ -197,7 +199,7 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 			personalInformationTrainingPartner.setTrainingPartnerPermanentCity(registrationFormTrainingPartner.getTrainingPartnerPermanentCity());
 			personalInformationTrainingPartner.setTrainingPartnerPermanentPincode(registrationFormTrainingPartner.getTrainingPartnerPermanentPincode() == null ? "" : registrationFormTrainingPartner.getTrainingPartnerPermanentPincode());
 			personalInformationTrainingPartner.setTrainingPartnerPermanentEmail(registrationFormTrainingPartner.getTrainingPartnerPermanentEmail() == null ? "" : registrationFormTrainingPartner.getTrainingPartnerPermanentEmail());
-			personalInformationTrainingPartner.setTrainingPartnerPermanentMobile(registrationFormTrainingPartner.getTrainingPartnerPermanentMobile() == null ? "" : registrationFormTrainingPartner.getTrainingPartnerPermanentMobile());
+			/*personalInformationTrainingPartner.setTrainingPartnerPermanentMobile(registrationFormTrainingPartner.getTrainingPartnerPermanentMobile() == null ? "" : registrationFormTrainingPartner.getTrainingPartnerPermanentMobile());*/
 			personalInformationTrainingPartner.setSeatCapacityPerSession(registrationFormTrainingPartner.getSeatCapacityPerSession() == null ? "": registrationFormTrainingPartner.getSeatCapacityPerSession());
 			personalInformationTrainingPartner.setSeatcapacityAvailable(Integer.parseInt(registrationFormTrainingPartner.getSeatCapacityPerSession() == null ? "0" : registrationFormTrainingPartner.getSeatCapacityPerSession()));
 			
@@ -218,7 +220,8 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 		}
 		
 		
-		
+		String trainingCenterName =registrationFormTrainingPartner.getTrainingCentreName() == null ? "" : registrationFormTrainingPartner.getTrainingCentreName();
+		System.out.println(" trainingCenterName "+trainingCenterName);
 		try{
 			personalInformationTrainingPartnerIdd = (Integer) session.save(personalInformationTrainingPartner);
 		}catch (Exception e) {
@@ -275,9 +278,9 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 		}
 		System.out.println("all insert done");
 		if(personalInformationTrainingPartnerIdd > 0){
-			SendMail sendMail = new SendMail();
-			sendMail.mailProperty(passwordString, registrationFormTrainingPartner.getTrainingPartnerPermanentEmail(), registrationFormTrainingPartner.getFirstName()+ " " + registrationFormTrainingPartner.getLastName());
-
+		//	SendMail sendMail = new SendMail();
+			//sendMail.mailProperty(passwordString, registrationFormTrainingPartner.getTrainingPartnerPermanentEmail(), trainingCenterName);
+			//new Thread(new Mail("Thanks", registrationFormTrainingPartner.getTrainingPartnerPermanentEmail(), nextSequenceUserID, passwordString, trainingCenterName)).start();
 			return passwordString+"&"+nextSequenceUserID;
 			//return "created";
 		}else{

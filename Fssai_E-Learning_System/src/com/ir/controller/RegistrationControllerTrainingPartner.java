@@ -125,7 +125,7 @@ public class RegistrationControllerTrainingPartner implements Serializable{
 			String[] all = personalInformationTrainingPartner.split("&");
 			model.addAttribute("id" , all[1]);
 			model.addAttribute("pwd" , all[0]);
-			new Thread(new Mail("Thanks", registrationFormTrainingPartner.getTrainingPartnerPermanentEmail(), all[1], all[0], registrationFormTrainingPartner.getFirstName())).start();
+			new Thread(new Mail("Thanks", registrationFormTrainingPartner.getTrainingPartnerPermanentEmail(), all[1], all[0], registrationFormTrainingPartner.getTrainingCentreName())).start();
 			return "welcomeTrainingCenter";
 		}else{
 			model.addAttribute("created" , "Oops , Something went wrong !!!");

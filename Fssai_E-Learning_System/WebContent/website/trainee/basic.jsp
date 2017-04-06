@@ -53,10 +53,10 @@ function confirmTrainee(){
 	var courseType=($("#courseType").val()== null ? "" :$("#courseType").val() );
 	var courseName =  ($("#courseName").val() == null ? "" : $("#courseName").val());
 	var modeOfTraining =  ($("#modeOfTraining").val() == null ? "" : $("#modeOfTraining").val() );
-	var trainingPatrtner =  ($("#trainingPartner").val() == null ? "" : $("#trainingPartner").val() );
-	var trainingCenterState = ( $("#trainingCenterState").val() == null ? "" : $("#trainingCenterState").val());
-	var trainingCenterDistrict = ( $("#trainingCenterCity").val() == null ? "" : $("#trainingCenterCity").val());
-	var total= courseName+"-"+modeOfTraining+"-"+trainingPatrtner+"-"+trainingCenterState+"-"+trainingCenterDistrict+"-"+courseType;
+	//var trainingPatrtner =  ($("#trainingPartner").val() == null ? "" : $("#trainingPartner").val() );
+	//var trainingCenterState = ( $("#trainingCenterState").val() == null ? "" : $("#trainingCenterState").val());
+	//var trainingCenterDistrict = ( $("#trainingCenterCity").val() == null ? "" : $("#trainingCenterCity").val());
+	var total= courseName+"-"+modeOfTraining+"-"+courseType;
 	var courseNameEl = document.getElementById('courseName');
 	var courseTitle = courseNameEl.options[courseNameEl.selectedIndex].innerHTML;
 	$('#certificationCourse').text(courseTitle);
@@ -77,10 +77,10 @@ function confirmTrainee(){
 	      $(".displayNone").css("display","block");
 	      var j=1;
 			$('#newTable tr').remove();
-			$('#newTable').append('<tr  class="background-open-vacancies"><th>Select</th><th>Batch Code Code</th><th>Course Code</th><th>Course Duration</th><th>Training Center Name & Address</th><th>Training Schedule</th><th>Training Center</th><th>Seating Capacity</th><th>Seats available</th></tr>')
+			$('#newTable').append('<tr  class="background-open-vacancies"><th>Select</th><th>Batch Code Code</th><th>Course Code</th><th>Course Duration</th><th>Training Center/Venue</th><th>Training Schedule</th><th>Training Center Name</th><th>Seating Capacity</th><th>Seats available</th></tr>')
 			$.each(mainData1 , function(i , obj)
 			{
-			$('#newTable').append('<tr id="tableRow"><td><input type="hidden" name="getCalander" id="h" value="'+obj[0]+'" /><input type="radio" name="getCalander" onclick="gettid(this.value);" id="trainingCalendarIdd'+i+'"  value="'+obj[0]+'"/></td><td>'+obj[9]+'</td><td>'+obj[7]+'</td><td>'+obj[10]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td></tr>');	
+			$('#newTable').append('<tr id="tableRow"><td><input type="hidden" name="getCalander" id="h" value="'+obj[0]+'" /><input type="radio" name="getCalander" onclick="gettid(this.value);" id="trainingCalendarIdd'+i+'"  value="'+obj[0]+'"/></td><td>'+obj[9]+'</td><td>'+obj[7]+'</td><td>'+obj[10]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[11]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td></tr>');	
 			document.getElementById("trainingCalendarId").value = i;
 			});
 			}
@@ -162,7 +162,7 @@ function gettid(value){
 							</cf:select> 
 							
                         </div>
-                        <div class="form-group">
+                      <%--   <div class="form-group">
                           <label>Training Partner</label>
 <cf:select path="trainingPartner" class="form-control">
 <cf:option value="0" label="Select Training Partner" />
@@ -175,7 +175,7 @@ function gettid(value){
 <cf:option value="0" label="Select State" />
 <cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName" />
 </cf:select>
-                        </div>
+                        </div> --%>
 
                         <!-- residential address --> 
 
@@ -192,12 +192,12 @@ function gettid(value){
 </cf:select>
                         </div>
                    
-                        <div class="form-group">
+            <%--             <div class="form-group">
                           <label>Training Centre: District</label>
 <cf:select path="trainingCenterCity" class="form-control">
 <cf:option value="0" label="Select District" />
 </cf:select>
-                        </div>
+                        </div> --%>
                         
                         
                         <!-- business address --> 
@@ -229,7 +229,7 @@ function gettid(value){
                         <thead>
                           <tr id="newTable" class="background-open-vacancies">
                             <!-- <td>Select</td>
-                            <td>Training Center Name & Address</td>
+                            <td>Training Center Name /Venue</td>
                             <td>Training Schedule</td>
                             <td>Center Contact Person Name, Mobile & Email Id</td>
                             <td>Seating Capacity</td>

@@ -7,9 +7,18 @@ public class CertificateInfo {
 	private String trainingAddress;
 	private String issueDate;
 	private String trainingPartnerName;
+	private int courseTypeId;
+	private String email;
 	
 	
 	
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getTrainingPartnerName() {
 		return trainingPartnerName;
 	}
@@ -46,5 +55,13 @@ public class CertificateInfo {
 	public void setIssueDate(String issueDate) {
 		this.issueDate = issueDate;
 	}
+	public int getCourseTypeId() {
+		return courseTypeId;
+	}
+	public void setCourseTypeId(int courseTypeId) {
+		this.courseTypeId = courseTypeId;
+	}
 
+	
+	
 }

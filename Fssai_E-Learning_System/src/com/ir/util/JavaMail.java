@@ -69,13 +69,25 @@ public class JavaMail {
 	                emailSubjectTxt = "FSSAI Support";
 	                
 	                StringBuffer emailMessage = new StringBuffer("Dear "+username);
+	                if(emailMsgTxt.equalsIgnoreCase("Thanks")){
 	                emailMessage.append("<br/>");
 	                emailMessage.append("<br/>");
 	                emailMessage.append("Your User ID "+id+" has been created successfully with password : "+pass);
 	                emailMessage.append("<br/>");
 	                emailMessage.append("<br/>");
+	               emailMessage.append("You can login using this Link :");
+	               emailMessage.append("<a href=\"google.com\">Click Here</a>");  
 	                emailMessage.append("<br/>");
 	                emailMessage.append(" Regards");
+	                }else{
+	                    emailMessage.append("<br/>");
+		                emailMessage.append("<br/>");
+		                emailMessage.append("Your course training course completed successfully ,");
+		                emailMessage.append("<br/>");
+		                emailMessage.append("<br/>");
+		                emailMessage.append("Now u can registered as trainer.");
+	                }
+	                System.out.println("emailMessage "+emailMessage);
 	                emailMsgTxt = "Dear  "+username +", "+" \r\n "+"\n"+System.getProperty("line.separator")+
 	                		" Your User ID "+id+" has been created successfully with password : "+pass+"\r\n "+"\n"+System.getProperty("line.separator")+
 	                		" Regards";

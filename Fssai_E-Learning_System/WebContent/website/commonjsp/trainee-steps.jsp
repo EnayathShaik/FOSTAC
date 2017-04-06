@@ -8,7 +8,7 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="page-header">
-				<h1 id="timeline">Certification Process</h1>
+				<h1 id="timeline"> Welcome trainee</h1>
 			</div>
 			<ul class="timeline">
 				<li><ct:choose>
