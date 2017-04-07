@@ -370,6 +370,10 @@ public class AdminDAOImpl implements AdminDAO {
 		manageTrainingPartner.setPAN(manageTrainingPartnerForm.getPAN() == null ? "" : manageTrainingPartnerForm.getPAN());
 		manageTrainingPartner.setTrainingPartnerName(manageTrainingPartnerForm.getTrainingPartnerName() == null ? "" : manageTrainingPartnerForm.getTrainingPartnerName());
 		manageTrainingPartner.setUserId(nextSequenceUserID == null ? "" : nextSequenceUserID);
+		
+		manageTrainingPartner.setContactPersonName(manageTrainingPartnerForm.getContactPersonName() == null ? "" :manageTrainingPartnerForm.getContactPersonName() );
+		manageTrainingPartner.setContactEmail(manageTrainingPartnerForm.getContactEmail() == null ? "" :manageTrainingPartnerForm.getContactEmail() );
+		manageTrainingPartner.setEmail(manageTrainingPartnerForm.getEmail() == null ? "" :manageTrainingPartnerForm.getEmail() );
 		manageTrainingPartner.setWebsiteUrl(manageTrainingPartnerForm.getWebsiteUrl() == null ? "" : manageTrainingPartnerForm.getWebsiteUrl());
 		manageTrainingPartner.setHeadOfficeDataAddress1(manageTrainingPartnerForm.getHeadOfficeDataAddress1() == null ? "" : manageTrainingPartnerForm.getHeadOfficeDataAddress1());
 		manageTrainingPartner.setHeadOfficeDataAddress2(manageTrainingPartnerForm.getHeadOfficeDataAddress2() == null ? "" : manageTrainingPartnerForm.getHeadOfficeDataAddress2());

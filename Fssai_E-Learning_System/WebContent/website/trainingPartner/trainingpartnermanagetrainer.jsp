@@ -13,10 +13,16 @@
 			var courseName =  ($("#selCourseName").val() == 0 || $("#selCourseName").val() == null ? "" : $("#selCourseName").val()) ;
 			var result = "";
 		$(".displayNone").css("display", "block");
-		var total = "courseType="+courseType+"&courseName="+courseName+"&trainerName="+trainername;
+		var name1=JSON.stringify({
+			courseType:0,
+			courseName:0
+	  })
+		var total = "courseType="+courseType+"-courseName="+courseName+"-trainerName="+trainername;
 		$.ajax({
 			type : 'post',
-			url : 'trainingpartnermanagetrainer.jspp?' + total,
+			url : 'trainingpartnermanagetrainer.fssai?data=' + total,
+			contentType : "application/json",
+			data:name1,
 			async : false,
 			success : function(data) {
 				$('#newTable').show();
@@ -24,8 +30,9 @@
 				var j = 1;
 				$('#newTable tr').remove();
 				$.each(mainData1, function(i, obj) {
+					alert("obj "+obj);
 					$('#newTable').append(
-							'<tr id="tableRow"><td>' + j++ + '</td><td>' + obj[1]+ '</td><td>' + obj[2] + '</td><td><a href="#" onClick="removeTrainer(\''+obj[3]+'\');">Remove Trainer</a> </td></tr>');
+							'<tr id="tableRow"><td>' + j++ + '</td><td>' + obj[1]+ '</td><td>' + obj[8] + '</td><td><a href="#" onClick="removeTrainer(\''+obj[3]+'\');">Remove Trainer</a> </td></tr>');
 
 				});
 			}

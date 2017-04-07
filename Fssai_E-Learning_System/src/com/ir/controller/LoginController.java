@@ -209,7 +209,6 @@ public class LoginController {
 				session.setAttribute("userId", loginDetails.getId());
 				session.setAttribute("userName", loginDetails.getLoginId());
 				session.setAttribute("assessmentId", personalInformationAssessor.getAssessmentAgencyName().getManageAssessmentAgencyId());
-				
 				session.setAttribute("agencyName", personalInformationAssessor.getAssessmentAgencyName().getAssessmentAgencyName());
 				System.out.println( personalInformationAssessor.getAssessmentAgencyName().getManageAssessmentAgencyId() + " "+personalInformationAssessor.getAssessmentAgencyName().getAssessmentAgencyName());
 				return "AssessorPage";

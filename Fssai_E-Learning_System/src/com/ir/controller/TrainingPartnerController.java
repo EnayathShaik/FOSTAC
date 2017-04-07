@@ -683,8 +683,15 @@ public class TrainingPartnerController {
 //traineeCenterViewTrainee
 	@RequestMapping(value="/traineeCenterViewTrainee" , method=RequestMethod.POST)
 	@ResponseBody
-	public void traineeCenterViewTrainee(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+	public void traineeCenterViewTrainee(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response , HttpSession session) throws IOException{
 		new ZLogger("traineeCenterViewTrainee","traineeCenterViewTrainee............" + data  , "TrainingPartnerController.java");
+		
+		String[] datas = data.toString().split("@");
+		System.out.println( " datas[9] "+datas[9]);
+		if(Integer.parseInt(datas[9]) == 6){
+			data = data+"@"+session.getAttribute("userId");
+		}
+		System.out.println("userId id  " +session.getAttribute("userId"));
 		List batchCodeList = trainingPartnerService.getTrainingPartnerList(data);
 		PrintWriter out = response.getWriter();
 		Gson g =new Gson();

@@ -38,7 +38,13 @@ function getCourseName(val){
 </script>
 <script>
 function confirmStatus(trainingid,courseid){
-	
+	console.log($("input[type='radio'][name='paymentstatus']").is(':disabled'));
+	if($("input[type='radio'][name='paymentstatus']").is(':disabled')){
+		alert("Payment status is already confirmed");
+		return false;
+	}else{
+		
+
 	var paymentstatus = $("input[type='radio'][name='paymentstatus']:checked").val();
 	console.log("stsists=>"+paymentstatus);
 	if(paymentstatus=="true")
@@ -64,7 +70,7 @@ function confirmStatus(trainingid,courseid){
 		       location.reload();
 		      }
 		      });
-	
+	}	
 }
 
 </script>
@@ -79,7 +85,7 @@ function showDetails(){
 
 		
 	$(".displayNone").css("display","block");
-	var total = "courseType="+courseType+"-courseName="+courseName+"-trainingdate="+trainingDate+"-trainingTime="+traningTime+"-status="+status;
+	var total = "courseType="+courseType+"@courseName="+courseName+"@trainingdate="+trainingDate+"@trainingTime="+traningTime+"@status="+status;
 	console.log("total "+total);
 	var result="";
 	var name1=JSON.stringify({
@@ -97,10 +103,16 @@ function showDetails(){
 		//var mainData = JSON.stringify(data);
 		var mainData1 = jQuery.parseJSON(data);
 		var j=1;
-		//$('#newTable tr').remove();
+		$('#newTable tr').remove();
 			$.each(mainData1 , function(i , obj)
 			{
-				$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td><input type="radio" id="paymentstatus" name="paymentstatus" value="true">YES</td><td>'+obj[6]+'</td><td><a href="#" onClick="confirmStatus(\''+j+'\',\''+obj[7]+'\');return false;">Save</a> </td></tr>');
+				
+				if(obj[6] == "Confirm"){
+					$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td><input type="radio" id="paymentstatus" name="paymentstatus" disabled value="true">YES</td><td>'+obj[6]+'</td><td><a href="#" onClick="confirmStatus(\''+j+'\',\''+obj[7]+'\');return false;">Save</a> </td></tr>');	
+				}
+				else{
+					$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td><input type="radio" id="paymentstatus" name="paymentstatus" value="true">YES</td><td>'+obj[6]+'</td><td><a href="#" onClick="confirmStatus(\''+j+'\',\''+obj[7]+'\');return false;">Save</a> </td></tr>');
+				}
 				
 			});
 			}

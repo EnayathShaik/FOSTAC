@@ -35,7 +35,30 @@ public class ManageTrainingPartnerForm {
 	private String logindetails;
 	private String profileID;
 	
+	private String contactPersonName;
+	private String contactEmail;
+	private String mobile;
 	
+	
+	
+	public String getContactPersonName() {
+		return contactPersonName;
+	}
+	public void setContactPersonName(String contactPersonName) {
+		this.contactPersonName = contactPersonName;
+	}
+	public String getContactEmail() {
+		return contactEmail;
+	}
+	public void setContactEmail(String contactEmail) {
+		this.contactEmail = contactEmail;
+	}
+	public String getMobile() {
+		return mobile;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
 	public String getLogindetails() {
 		return logindetails;
 	}

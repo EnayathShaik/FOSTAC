@@ -749,7 +749,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		System.out.println("data "+data);
 		String[] datas = data.toString().split("@");
 		System.out.println("datas "+datas);
-		String courseType,courseName , trainingStartDate , trainingEndDate,trainer , assessmentDateTime , assessmentAgencyName , assessorName , seatCapacity , type ;
+		String courseType,courseName , trainingStartDate , trainingEndDate,trainer , assessmentDateTime , assessmentAgencyName , assessorName , seatCapacity , profileId ,userId ;
 		try{
 			courseType = datas[0];
 		}
@@ -818,25 +818,49 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		}
 		
 		try{
-			type = datas[9];
+			profileId = datas[9];
 		}
 		catch(Exception e){
-			type = "%";
+			profileId = "%";
 		}
+		
+		if(Integer.parseInt(profileId) == 6){
+			userId = datas[10];
+		}else{
+			userId = null;
+		}
+		
+	
 		Session session = sessionFactory.getCurrentSession();
-		String	sql = "select A.trainingcalendarid , A.batchcode,C.coursecode,A.trainingdate,A.trainingtime,pitr.firstname || ' '|| pitr.middlename ||' '|| pitr.lastname as participantName   " +
-				" , A.coursetype as coursetypeid  , A.coursename as coursenameid , A.trainername as trainernameid , A.assessmentDatetime , A.assessmentpartnername , D.assessmentagencyname ,  A.assessor , cast(E.firstname || ' ' ||  E.middlename || ' ' ||  E.lastname as varchar(100)) , A.seatcapacity , case when  A.type ='P' then 'Paid' else 'Un-Paid'  end as type ,A.type as typecode  from trainingcalendar A " +
-				" inner join coursetype B on(A.coursetype=B.coursetypeid)" +
-				" inner join coursename C on(A.coursename=C.coursenameid)"+
-				" left join ManageAssessmentAgency D on(cast(A.assessmentpartnername as numeric)=D.manageassessmentagencyid)"+
-				" left join personalInformationAssessor E on(A.assessor=E.personalinformationassessorid)"+
-				" inner join personalinformationtrainer as pitr on CAST(CAST (A.trainername AS NUMERIC(19,4)) AS INT) = pitr.personalinformationtrainerid "
-				+" where A.tcStatus is null  and  cast( B.coursetypeid  as varchar(10)) like '"+courseType+"%' " +
-						"and  cast(C.coursenameid as varchar(10)) like '"+courseName+"%' and  " +
-								"cast(A.trainingdate as varchar(100)) like '"+trainingStartDate+"%' " +
-										"and cast(A.trainingtime as varchar(100)) like '"+trainingEndDate+"%' and cast(A.trainername as varchar(100)) like '"+trainer+"%'  and cast(coalesce(A.assessmentdatetime , '') as varchar(100)) like '"+assessmentDateTime+"%' and  cast(A.assessmentpartnername as varchar(100)) like '"+assessmentAgencyName+"%' and  cast(A.assessor as varchar(100)) like '"+assessorName+"%' and  cast(A.seatcapacity as varchar(100)) like '"+seatCapacity+"%'   AND to_timestamp(COALESCE(trainingdate, '19900101010101'),'DD-MM-YYYY') >= CURRENT_TIMESTAMP - INTERVAL '1 days' Order By A.trainingcalendarid desc";
-		
-		
+		String	sql = null;
+	System.out.println(profileId + " profileId");
+		if(Integer.parseInt(profileId) == 6){
+			sql = "select A.trainingcalendarid , A.batchcode,C.coursecode,A.trainingdate,A.trainingtime,pitr.firstname || ' '|| pitr.middlename ||' '|| pitr.lastname as participantName   " +
+					" , A.coursetype as coursetypeid  , A.coursename as coursenameid , A.trainername as trainernameid , A.assessmentDatetime , A.assessmentpartnername , D.assessmentagencyname ,  A.assessor , cast(E.firstname || ' ' ||  E.middlename || ' ' ||  E.lastname as varchar(100)) , A.seatcapacity , case when  A.type ='P' then 'Paid' else 'Un-Paid'  end as type ,A.type as typecode  from trainingcalendar A " +
+					" inner join coursetype B on(A.coursetype=B.coursetypeid)" +
+					" inner join coursename C on(A.coursename=C.coursenameid)"+
+					" left join ManageAssessmentAgency D on(cast(A.assessmentpartnername as numeric)=D.manageassessmentagencyid)"+
+					" left join personalInformationAssessor E on(A.assessor=E.personalinformationassessorid)"+
+					" inner join personalinformationtrainer as pitr on CAST(CAST (A.trainername AS NUMERIC(19,4)) AS INT) = pitr.personalinformationtrainerid "
+					+" where A.tcStatus is null and  cast( E.logindetails as varchar(50))='"+userId+"'  and  cast( B.coursetypeid  as varchar(10)) like '"+courseType+"%' " +
+							"and  cast(C.coursenameid as varchar(10)) like '"+courseName+"%' and  " +
+									"cast(A.trainingdate as varchar(100)) like '"+trainingStartDate+"%' " +
+											"and cast(A.trainingtime as varchar(100)) like '"+trainingEndDate+"%' and cast(A.trainername as varchar(100)) like '"+trainer+"%'  and cast(coalesce(A.assessmentdatetime , '') as varchar(100)) like '"+assessmentDateTime+"%' and  cast(A.assessmentpartnername as varchar(100)) like '"+assessmentAgencyName+"%' and  cast(A.assessor as varchar(100)) like '"+assessorName+"%' and  cast(A.seatcapacity as varchar(100)) like '"+seatCapacity+"%'   AND to_timestamp(COALESCE(trainingdate, '19900101010101'),'DD-MM-YYYY') >= CURRENT_TIMESTAMP - INTERVAL '1 days' Order By A.trainingcalendarid desc ";
+			
+		}else{
+			sql = "select A.trainingcalendarid , A.batchcode,C.coursecode,A.trainingdate,A.trainingtime,pitr.firstname || ' '|| pitr.middlename ||' '|| pitr.lastname as participantName   " +
+					" , A.coursetype as coursetypeid  , A.coursename as coursenameid , A.trainername as trainernameid , A.assessmentDatetime , A.assessmentpartnername , D.assessmentagencyname ,  A.assessor , cast(E.firstname || ' ' ||  E.middlename || ' ' ||  E.lastname as varchar(100)) , A.seatcapacity , case when  A.type ='P' then 'Paid' else 'Un-Paid'  end as type ,A.type as typecode  from trainingcalendar A " +
+					" inner join coursetype B on(A.coursetype=B.coursetypeid)" +
+					" inner join coursename C on(A.coursename=C.coursenameid)"+
+					" left join ManageAssessmentAgency D on(cast(A.assessmentpartnername as numeric)=D.manageassessmentagencyid)"+
+					" left join personalInformationAssessor E on(A.assessor=E.personalinformationassessorid)"+
+					" inner join personalinformationtrainer as pitr on CAST(CAST (A.trainername AS NUMERIC(19,4)) AS INT) = pitr.personalinformationtrainerid "
+					+" where A.tcStatus is null  and  cast( B.coursetypeid  as varchar(10)) like '"+courseType+"%' " +
+							"and  cast(C.coursenameid as varchar(10)) like '"+courseName+"%' and  " +
+									"cast(A.trainingdate as varchar(100)) like '"+trainingStartDate+"%' " +
+											"and cast(A.trainingtime as varchar(100)) like '"+trainingEndDate+"%' and cast(A.trainername as varchar(100)) like '"+trainer+"%'  and cast(coalesce(A.assessmentdatetime , '') as varchar(100)) like '"+assessmentDateTime+"%' and  cast(A.assessmentpartnername as varchar(100)) like '"+assessmentAgencyName+"%' and  cast(A.assessor as varchar(100)) like '"+assessorName+"%' and  cast(A.seatcapacity as varchar(100)) like '"+seatCapacity+"%'   AND to_timestamp(COALESCE(trainingdate, '19900101010101'),'DD-MM-YYYY') >= CURRENT_TIMESTAMP - INTERVAL '1 days' Order By A.trainingcalendarid desc ";
+			
+		}
 		
 		Query query = session.createSQLQuery(sql);
 		List courseTypeList = query.list();
@@ -962,7 +986,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	
 	@Override
 	public  List traineeCenterPaymentConfirmation(String name){
-		String[] n1 = name.split("-");
+		String[] n1 = name.split("@");
 		System.out.println("name "+name);
 		String courseType,courseName , trainingDate , trainingtime,status ;
 		try{
@@ -1007,7 +1031,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 				+ " inner join coursename D on (D.coursenameid = B.coursename)"
 				+ " inner join coursetype E on (E.coursetypeid = B.coursetype)"
 				+ " inner join logindetails F on (F.ID = C.logindetails)"
-				+" WHERE A.status = 'N' and B.type not in ('U')  and  cast(E.coursetypeid  as varchar(10)) like '"+courseType+"%' and cast(D.COURSENAMEID as varchar(10))  like '"+courseName+"%'  and  cast(B.TRAININGDATE as varchar(10)) like '"+trainingDate+"%' and  cast(B.TRAININGTIME as varchar(10)) like '"+trainingtime+"%'  and cast(A.paymentstatus as varchar(10)) like '"+status+"%' "; 
+				+" WHERE A.status = 'N' and B.type not in ('U')  and  cast(E.coursetypeid  as varchar(10)) like '"+courseType+"%' and cast(D.COURSENAMEID as varchar(10))  like '"+courseName+"%'  and  cast(B.TRAININGDATE as varchar(100)) like '"+trainingDate+"%' and  cast(B.TRAININGTIME as varchar(100)) like '"+trainingtime+"%'  and cast(A.paymentstatus as varchar(10)) like '"+status+"%' "; 
 					//	"  AND F.loginid ='"+loginId+"' ";
 		
 		
@@ -1060,12 +1084,13 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		}
 		Session session = sessionFactory.getCurrentSession();
 		String sql = "";
-		sql = "select  B.batchcode,D.coursecode,B.trainingdate,B.trainingtime,C.firstname || ' '|| C.middlename ||' '|| C.lastname as participantName,D.modeoftraining,A.paymentstatus,A.courseenrolleduserid from courseenrolleduser  A"
+		sql = "select  B.batchcode,D.coursecode,B.trainingdate,B.trainingtime,C.firstname || ' '|| C.middlename ||' '|| C.lastname as participantName,D.modeoftraining,A.paymentstatus,A.courseenrolleduserid , pit.firstname || ' '|| pit.middlename ||' '|| pit.lastname as trainerName  from courseenrolleduser  A"
 				+ " inner join trainingcalendar B on(A.trainingcalendarid= B.trainingcalendarid)"
 				+ " inner join personalinformationtrainingpartner C on (C.personalinformationtrainingpartnerid = B.trainingcenter)"
 				+ " inner join coursename D on (D.coursenameid = B.coursename)"
 				+ " inner join coursetype E on (E.coursetypeid = B.coursetype)"
 				+ " inner join logindetails F on (F.ID = C.logindetails)"
+				+	"left join personalinformationtrainer pit on (cast(B.trainername as int) = pit.personalinformationtrainerid) "
 				+" WHERE A.status = 'N' and  cast(E.coursetypeid  as varchar(10)) like '"+courseType+"%' and cast(D.COURSENAMEID as varchar(10))  like '"+courseName+"%'  and  cast(B.TRAININGDATE as varchar(10)) like '"+trainingDate+"%' and  cast(B.TRAININGTIME as varchar(10)) like '"+trainingtime+"%'  and cast(A.paymentstatus as varchar(10)) like '"+status+"%' "; 
 					//	"  AND F.loginid ='"+loginId+"' ";
 		

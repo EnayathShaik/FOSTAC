@@ -259,10 +259,6 @@
                                       }, 1000);
 
                                   }, 1000);
-                                 
-
-                                  
-                                  
                                 });
                             }
                         });
@@ -381,10 +377,8 @@
                                                             </div>
                                                             <!-- left side ends -->
                                                             <!-- right side -->
+                                                             
                                                             <div class="col-md-6 col-xs-12">
-
-
-
                                                                 <div class="form-group">
                                                                     <div>
                                                                         <ul class="lab-no">
@@ -428,7 +422,68 @@
                                                     </div>
                                                 </fieldset>
                                             </div>
-                                            <div style="height:50px;"></div>
+                                              <div class="row">
+                                                <!-- Contact -->
+                                               <div class="col-xs-12">
+                                                    <fieldset>
+                                                    <legend>Contact Details</legend>
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <!-- left side -->
+                                                            <div class="col-md-6 col-xs-12">
+																 <div class="form-group">
+                                                                    <div>
+                                                                        <ul class="lab-no">
+                                                                            <li class="style-li"><strong>Contact Person Name:</strong></li>
+                                                                            <li class="style-li error-red">
+                                                                                <cf:errors path="contactPersonName" cssClass="error" />
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <cf:input path="contactPersonName" maxlength="100" placeholder="Contact Person Name" class="form-control" />
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        <ul class="lab-no">
+                                                                            <li class="style-li"><strong>Contact Email:</strong></li>
+                                                                            <li class="style-li error-red">
+                                                                                <cf:errors path="contactEmail" cssClass="error" />
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <cf:input path="contactEmail" maxlength="100" placeholder="Contact Email" class="form-control" />
+                                                                </div>
+
+
+
+                                                            </div>
+                                                            <!-- left side ends -->
+                                                            <!-- right side -->
+                                                          <div class="col-md-6 col-xs-12">
+
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        <ul class="lab-no">
+                                                                            <li class="style-li"><strong>Mobile:</strong></li>
+                                                                            <li class="style-li error-red">
+                                                                                <span id="mobile"> </span>
+                                                                                <span id="mobile"></span>
+                                                                                <cf:errors path="mobile" cssClass="error" />
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <cf:input path="mobile" maxlength="10" placeholder="Mobile" max="10" class="form-control"  />
+                                                                </div>
+
+
+                                                            </div>
+                                                            <!-- rigth side ends -->
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                      </div>
+                                      </div>
                                             <div class="row">
                                                 <!-- head office data -->
                                                 <div class="col-xs-12">

@@ -54,6 +54,33 @@ public class ManageTrainingPartner {
 	private State state;
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="loginDetails")
 	private LoginDetails loginDetails;
+	
+	
+	private String contactPersonName;
+	private String contactEmail;
+	private String mobile;
+	
+	
+	
+	
+	public String getContactPersonName() {
+		return contactPersonName;
+	}
+	public void setContactPersonName(String contactPersonName) {
+		this.contactPersonName = contactPersonName;
+	}
+	public String getContactEmail() {
+		return contactEmail;
+	}
+	public void setContactEmail(String contactEmail) {
+		this.contactEmail = contactEmail;
+	}
+	public String getMobile() {
+		return mobile;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
 	public int getManageTrainingPartnerId() {
 		return manageTrainingPartnerId;
 	}
