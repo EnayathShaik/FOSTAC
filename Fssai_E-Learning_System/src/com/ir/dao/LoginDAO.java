@@ -32,4 +32,12 @@ public interface LoginDAO {
 	public PersonalInformationTrainer fullDetailtrainer(int loginId);
 
 	public PersonalInformationTrainingPartner fulldetailtainingpartner(int id);
+	
+	
+	public long getTraineeCount();
+	public long getTrainerCount();
+	public long getTrainingCenterCount();
+	public long getAssessorCount();
+	public long getTrainingPartnerCount();
+	public long getAssessorAgencyCount();
 }

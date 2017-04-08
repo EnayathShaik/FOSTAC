@@ -146,7 +146,7 @@ private Title title;
 				personalInformationTrainer.setCorrespondencedistrict(cd);
 				personalInformationTrainer.setCorrespondencecity(cc);
 				personalInformationTrainer.setFathername(registrationFormTrainer.getFatherName() == null ? "" : registrationFormTrainer.getFatherName());
-				personalInformationTrainer.setTrainingCenterCorrespondencePincode(registrationFormTrainer.getTrainingCenterCorrespondencePincode() == null ? "" : registrationFormTrainer.getTrainingCenterCorrespondencePincode());
+				personalInformationTrainer.setTrainingCenterCorrespondencePincode(registrationFormTrainer.getTrainingCenterCorrespondencePincode() == null ? "000000" : registrationFormTrainer.getTrainingCenterCorrespondencePincode());
 				personalInformationTrainer.setTrainingCenterPermanentEmail(registrationFormTrainer.getTrainingCenterPermanentEmail() == null ? "" : registrationFormTrainer.getTrainingCenterPermanentEmail());
 				personalInformationTrainer.setTrainingCenterPermanentMobile(registrationFormTrainer.getTrainingCenterPermanentMobile() == null ? "" : registrationFormTrainer.getTrainingCenterPermanentMobile());
 				personalInformationTrainer.setFoodSafetyExpBackground(registrationFormTrainer.getFoodSafetyExpBackground() == null ? "" : registrationFormTrainer.getFoodSafetyExpBackground());

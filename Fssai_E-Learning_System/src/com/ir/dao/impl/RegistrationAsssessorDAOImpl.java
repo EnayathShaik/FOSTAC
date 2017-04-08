@@ -165,7 +165,7 @@ public class RegistrationAsssessorDAOImpl implements RegistrationAssessorDAO {
 			personalInformationAssessor.setAssessorrPermanentState(ps);
 			personalInformationAssessor.setAssessorPermanentDistrict(pd);
 			personalInformationAssessor.setAssessorPermanentCity(pc);
-			personalInformationAssessor.setAssessorPermanentPincode(registrationFormAssessor.getAssessorPermanentPincode() == null ? "" : registrationFormAssessor.getAssessorPermanentPincode());
+			personalInformationAssessor.setAssessorPermanentPincode(registrationFormAssessor.getAssessorPermanentPincode() == null ? "000000" : registrationFormAssessor.getAssessorPermanentPincode());
 			personalInformationAssessor.setAssessorPermanentEmail(registrationFormAssessor.getAssessorPermanentEmail() == null ? "" : registrationFormAssessor.getAssessorPermanentEmail());
 			personalInformationAssessor.setAssessorPermanentMobile(registrationFormAssessor.getAssessorPermanentMobile() == null ? "" : registrationFormAssessor.getAssessorPermanentMobile());
 			personalInformationAssessor.setAssessorCorrespondenceLine1(registrationFormAssessor.getAssessorCorrespondenceLine1() == null ? "" : registrationFormAssessor.getAssessorCorrespondenceLine1());

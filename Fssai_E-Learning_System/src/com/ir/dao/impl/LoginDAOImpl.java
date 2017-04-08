@@ -206,6 +206,100 @@ public class LoginDAOImpl implements LoginDAO{
 		}
 		return personalInformationTrainingPartner11;
 	}
-
-
+	
+	
+	
+	
+	@Override
+	public long getTraineeCount() {
+		
+		Session session = sessionFactory.getCurrentSession();
+		
+		long count = 0;
+		Query query = session.createQuery("select count(1) from PersonalInformationTrainee");
+		List list = query.list();
+		if(list.size() > 0){
+			count = (long) list.get(0);
+		}
+		return count;
+	}
+	
+	
+	
+	@Override
+	public long getTrainerCount() {
+		
+		Session session = sessionFactory.getCurrentSession();
+		
+		long count = 0;
+		Query query = session.createQuery("select count(1) from PersonalInformationTrainer");
+		List list = query.list();
+		if(list.size() > 0){
+			count = (long) list.get(0);
+		}
+		return count;
+	}
+	
+	
+	
+	@Override
+	public long getTrainingCenterCount() {
+		
+		Session session = sessionFactory.getCurrentSession();
+		
+		long count = 0;
+		Query query = session.createQuery("select count(1) from PersonalInformationTrainingPartner");
+		List list = query.list();
+		if(list.size() > 0){
+			count = (long) list.get(0);
+		}
+		return count;
+	}
+	
+	
+	@Override
+	public long getTrainingPartnerCount() {
+		
+		Session session = sessionFactory.getCurrentSession();
+		
+		long count = 0;
+		Query query = session.createQuery("select count(1) from ManageTrainingPartner");
+		List list = query.list();
+		if(list.size() > 0){
+			count = (long) list.get(0);
+		}
+		return count;
+	}
+	
+	
+	
+	@Override
+	public long getAssessorCount() {
+		
+		Session session = sessionFactory.getCurrentSession();
+		
+		long count = 0;
+		Query query = session.createQuery("select count(1) from PersonalInformationAssessor");
+		List list = query.list();
+		if(list.size() > 0){
+			count = (long) list.get(0);
+		}
+		return count;
+	}
+	
+	
+	@Override
+	public long getAssessorAgencyCount() {
+		
+		Session session = sessionFactory.getCurrentSession();
+		
+		long count = 0;
+		Query query = session.createQuery("select count(1) from ManageAssessmentAgency");
+		List list = query.list();
+		if(list.size() > 0){
+			count = (long) list.get(0);
+		}
+		return count;
+	}
+	
 }

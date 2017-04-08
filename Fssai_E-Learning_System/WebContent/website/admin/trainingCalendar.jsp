@@ -1,6 +1,7 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="website/js/commonController.js"></script>
 <script type="text/javascript">
 function OnStart(){
 	var profileId =
@@ -15,27 +16,20 @@ function OnStart(){
 	if(PROFILEID=="1"){
 		$("#CreateTraineeCalender").css("display" , "none");
 	}
+	
+	 window.trainingEndDate =   flatpickr('[name="trainingEndDate"]' , {
+			enableTime: true
+		});
+		
+		 window.trainingStartDate =   flatpickr('[name="trainingStartDate"]' , {
+			enableTime: true
+		});
+
 }
 window.onload = OnStart;
 </script>
 <script>
-function getCourseName(val)
-{
-	$.ajax({
-	      type: 'post',
-	      url: 'loadCourseName.jspp?'+ val,
-	      success: function (response) {      
-	      var mainData1 = jQuery.parseJSON(response);
-	     // alert(mainData1);
-	      $('#courseName option').remove();
-	      $('#courseName').append('<option value="0" label="Select Course Code" />')
-	  	  $.each(mainData1 , function(i , obj)
-	  		{
-	  				$('#courseName').append('<option value='+obj[0]+'>'+obj[1]+'</option>');		
-	  		});
-	      }
-	      });     
-}
+
 </script>
 <script>
 function getTrainingCenter(val)
@@ -140,7 +134,7 @@ function getTrainingCalender(indicator){
                                                         <li class="style-li error-red">${created}</li>
                                                     </ul>
                                                 </div>
-												<cf:select path="courseType" class="form-control" onchange="getCourseName(this.value);">
+												<cf:select path="courseType" class="form-control" onchange="getCourseName(this.value , 'courseName');">
 													<cf:option value="0" label="Select Course Type"></cf:option>
 													<cf:options items="${courseTypeList}" itemValue="CourseTypeId" itemLabel="CourseType"/>
 												</cf:select>
@@ -196,17 +190,17 @@ function getTrainingCalender(indicator){
                                                         <li class="style-li error-red"></li>
                                                     </ul>
                                                 </div>
-                                                <cf:input path="trainingStartDate" type="date" class="form-control" required="required" />
+                                                <cf:input path="trainingStartDate" type="text" class="form-control" required="required" />
                                             </div>
                                             
                                             <div class="form-group">
                                                 <div>
                                                     <ul class="lab-no">
-                                                        <li class="style-li"><strong>Training Start Time</strong></li>
+                                                        <li class="style-li"><strong>Training End Date:</strong></li>
                                                         <li class="style-li error-red"></li>
                                                     </ul>
                                                 </div>
-                                                <cf:input path="trainingEndDate" type="time" class="form-control" required="required" />
+                                                <cf:input path="trainingEndDate" type="text" class="form-control" required="required" />
                                             </div>
                                             
                                             <div class="form-group">

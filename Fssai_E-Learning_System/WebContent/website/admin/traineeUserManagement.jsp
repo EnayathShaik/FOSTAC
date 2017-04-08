@@ -2,7 +2,7 @@
     <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %>
         <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 
-            <cf:form action="traineeUserManagementSearch.fssai" name="myForm" method="POST" commandName="traineeUserManagementForm">
+            <cf:form action="traineeUserManagementSearch.fssai" name="myForm" id="myForm" method="POST" commandName="traineeUserManagementForm">
 
                 <section>
                     <%@include file="../roles/top-menu.jsp"%>
@@ -125,7 +125,7 @@
                                                         <div class="col-md-4 col-xs-12">
                                                             <a href="login.html">
                                                             
-                                                                <input type="submit" class="form-control login-btn" value="Search"> </a>
+                                                                <input type="submit" class="form-control login-btn" id="search" value="Search"> </a>
                                                         </div>
                                                         <div class="col-md-4 hidden-xs"></div>
                                                         <!-- training center details ends -->
@@ -218,4 +218,20 @@
                         return false;
                     }
                 }
+
+                    var name = GetParameterValues('Name');  
+                      if(name == "callSubmit"){
+                    	  $("#search").trigger("click");
+                      }  
+                    function GetParameterValues(param) {  
+                        var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');  
+                        for (var i = 0; i < url.length; i++) {  
+                            var urlparam = url[i].split('=');  
+                            if (urlparam[0] == param) {  
+                                return urlparam[1];  
+                            }  
+                        }  
+                    }  
+             
+
             </script>

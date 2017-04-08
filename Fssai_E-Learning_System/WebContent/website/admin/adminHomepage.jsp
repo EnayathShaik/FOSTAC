@@ -1,6 +1,53 @@
 <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
     <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %>
         <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+        
+        <<style>
+<!--
+
+#myDIV {
+  width: 146px;
+  height: 110px;
+  margin: 5px;
+  float: left;
+  overflow: hidden;
+  position: relative;
+  background: #888;
+  color: #222;
+  -webkit-border-top-right-radius: 1.2em;
+      -moz-border-radius-topright: 1.2em;
+          border-top-right-radius: 1.2em;
+  display:inline-block;
+}
+
+.element .symbol {
+ left: 0.2em;
+    top: 0.4em;
+    font-size: 3.8em;
+    line-height: 1.0em;
+    color: #FFF;
+}
+
+.number {
+       font-size: 1.25em;
+    font-weight: bold;
+    color: hsla(0,0%,0%,.5);
+    right: 0.5em;
+    top: 0.5em;
+}
+.clickable .element:hover {
+  cursor: pointer;
+}
+
+.clickable .element:hover h3 {
+  text-shadow:
+    0 0 10px white,
+    0 0 10px white
+  ;
+}
+
+-->
+</style>
             <script type="text/javascript">
                 function OnStart() {
                     searchAssessmentAgencyList();
@@ -130,6 +177,45 @@
                                     <!-- add the content here for main body -->
                                     <!-- timeline  -->
                                     <div class="row" id="conclusionListOfAssessment">
+                                    
+                                    
+                                    
+                                    <fieldset>
+                                    
+                                    <div id="myDIV" style="background-color: #F80;">
+                                      <p class="number">${traineeCount}</p>
+                                      <h3 class="symbol"><a href="traineeUserManagementForm.fssai?Name=callSubmit"> Trainee</a></h3>
+                                      </div>&nbsp;&nbsp;
+                                     <div id="myDIV" style="background-color: #cc0;">
+                                      <p class="number">${trainerCount}</p>
+                                      <h3 class="symbol"><a href="trainerUserManagementForm.fssai?Name=callSubmit">Trainer</a></h3> 
+									</div>&nbsp;&nbsp;
+                                      <div id="myDIV" style="background-color: #0FF;">
+                                         <p class="number">${trainingCenterCount}</p>
+                                      <h3 class="symbol"><a href="trainingCenterUserManagementForm.fssai?Name=callSubmit">Training Center</a></h3>
+                                       </div>&nbsp;&nbsp;
+                                       <div id="myDIV" style="background-color: #cc0;"> 
+                                        <p class="number">${trainingPartnerCount}</p>
+                                      <h3 class="symbol"><a href="manageTrainingPartnerForm.fssai?Name=callSubmit">Training Partner</a></h3>
+                                       </div>&nbsp;&nbsp;
+                                        <div id="myDIV" style="background-color: #F80;"> 
+                                         <p class="number">${assessorCount}</p>
+                                      	<h3 class="symbol"><a href="assessorUserManagementForm.fssai?Name=callSubmit">Assessor</a></h3>
+                                        </div>&nbsp;&nbsp;
+                                       <div id="myDIV" style="background-color: #cc0;"> 
+                                        <p class="number">${assessmentagencyCount}</p>
+                                      	<h3 class="symbol"><a href="manageAssessmentAgencyForm.fssai?Name=callSubmit">Assessment Agency</a></h3>
+                                       </div>&nbsp;&nbsp;
+                                    
+                                    </fieldset>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
                                         <div class="col-xs-12">
                                             <fieldset>
                                                 <legend>Pending Assessor ID Activation</legend>

@@ -147,6 +147,15 @@ public class LoginController {
 			session.setAttribute("profileId", loginDetails.getProfileId());
 			session.setAttribute("userId", loginDetails.getId());
 			session.setAttribute("userName", loginDetails.getLoginId());
+			session.setAttribute("traineeCount", loginService.getTraineeCount());
+			System.out.println(" traineecount "+loginService.getTraineeCount());
+			session.setAttribute("trainerCount", loginService.getTrainerCount());
+			session.setAttribute("trainingPartnerCount", loginService.getTrainingPartnerCount());
+			session.setAttribute("trainingCenterCount", loginService.getTrainingCenterCount());
+			session.setAttribute("assessorCount", loginService.getAssessorCount());
+			session.setAttribute("assessmentagencyCount", loginService.getAssessorAgencyCount());
+			
+			
 			new ZLogger("loginProcess","in super admin admin login" , "LoginController.java");
 			return "adminHomepage";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 2 && loginDetails.getStatus().equalsIgnoreCase("A")){
@@ -156,6 +165,15 @@ public class LoginController {
 			session.setAttribute("profileId", loginDetails.getProfileId());
 			session.setAttribute("userId", loginDetails.getId());
 			session.setAttribute("userName", loginDetails.getLoginId());
+			
+			
+			session.setAttribute("traineeCount", loginService.getTraineeCount());
+			System.out.println(" traineecount "+loginService.getTraineeCount());
+			session.setAttribute("trainerCount", loginService.getTrainerCount());
+			session.setAttribute("trainingPartnerCount", loginService.getTrainingPartnerCount());
+			session.setAttribute("trainingCenterCount", loginService.getTrainingCenterCount());
+			session.setAttribute("assessorCount", loginService.getAssessorCount());
+			session.setAttribute("assessmentagencyCount", loginService.getAssessorAgencyCount());
 			return "adminHomepage";
 		}else if(loginDetails !=null && loginDetails.getProfileId() == 3 && loginDetails.getStatus().equalsIgnoreCase("A"))
 		{

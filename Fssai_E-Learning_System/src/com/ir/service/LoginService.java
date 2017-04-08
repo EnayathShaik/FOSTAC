@@ -42,4 +42,11 @@ public interface LoginService {
 	
 	public PersonalInformationTrainingPartner FullDetailtrainingpartner(int loginId);
 	
+	public long getTraineeCount();
+	public long getTrainerCount();
+	public long getTrainingCenterCount();
+	public long getAssessorCount();
+	public long getTrainingPartnerCount();
+	public long getAssessorAgencyCount();
+	
 }

@@ -91,4 +91,59 @@ public class LoginServiceImpl implements LoginService {
 		return personalInformationTrainingPartner;
 	}
 	
+	
+	
+	
+	@Override
+	@Transactional
+	public long getTraineeCount() {
+		// TODO Auto-generated method stub
+		long count = loginDAO.getTraineeCount();
+		return count;
+	}
+	
+	@Override
+	@Transactional
+	public long getTrainerCount() {
+		// TODO Auto-generated method stub
+		long count = loginDAO.getTrainerCount();
+		return count;
+	}
+	
+	@Override
+	@Transactional
+	public long getTrainingCenterCount() {
+		// TODO Auto-generated method stub
+		long count = loginDAO.getTrainingCenterCount();
+		return count;
+	}
+	
+	@Override
+	@Transactional
+	public long getAssessorCount() {
+		// TODO Auto-generated method stub
+		long count = loginDAO.getAssessorCount();
+		return count;
+	}
+	
+	@Override
+	@Transactional
+	public long getTrainingPartnerCount() {
+		// TODO Auto-generated method stub
+		long count = loginDAO.getTrainingPartnerCount();
+		return count;
+	}
+	
+	
+	@Override
+	@Transactional
+	public long getAssessorAgencyCount() {
+		// TODO Auto-generated method stub
+		long count = loginDAO.getAssessorAgencyCount();
+		return count;
+	}
+	
+
+	
+	
 }

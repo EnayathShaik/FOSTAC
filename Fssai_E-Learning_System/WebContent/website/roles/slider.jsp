@@ -116,8 +116,8 @@
                         </li> -->
           <!-- <li> <a href="postVacancyTrainingPartner.fssai">Post Vacancy for Trainer</a> </li>
           <li> <a href="trainingpartnerapplicationstatus.fssai">Application Status</a> </li> -->
-           <!-- <li><a href="trainingCalendarForm.fssai">View Training Calendar</a></li> -->
-           <li> <a href="trainingpartnertrainingcalendar.fssai">Training Calendar</a> </li>
+            <li><a href="trainingCalendarForm.fssai">View Training Calendar</a></li>
+           <!-- <li> <a href="trainingpartnertrainingcalendar.fssai">Training Calendar</a> </li> -->
            <li><a href="viewFeedbackDetails.fssai">View Feedback</a></li>
            <li><a href="registrationFormTrainingPartner.fssai">Register Training Center</a></li>
         </ul>

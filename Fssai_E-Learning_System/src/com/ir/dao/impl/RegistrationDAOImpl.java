@@ -201,7 +201,7 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 		personalInformationTrainee.setCorrespondenceState(cs);
 		personalInformationTrainee.setCorrespondenceDistrict(cd);
 		personalInformationTrainee.setCorrespondenceCity(cc);
-		personalInformationTrainee.setCorrespondencePincode(registrationFormTrainee.getCorrespondencePincode() == null ? "" : registrationFormTrainee.getCorrespondencePincode().trim());
+		personalInformationTrainee.setCorrespondencePincode(registrationFormTrainee.getCorrespondencePincode() == null ? "000000" : registrationFormTrainee.getCorrespondencePincode().trim());
 		personalInformationTrainee.setFatherName(registrationFormTrainee.getFatherName() == null ? "" : registrationFormTrainee.getFatherName().trim());
 		
 		

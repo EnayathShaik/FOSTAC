@@ -54,6 +54,7 @@ import com.ir.model.CourseName;
 import com.ir.model.CourseType;
 import com.ir.model.District;
 import com.ir.model.FeedbackMaster;
+import com.ir.model.ManageTrainingPartner;
 import com.ir.model.PersonalInformationAssessor;
 import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
@@ -641,7 +642,11 @@ public class AdminController {
 	public String trainingCalendarForm(Model model) {
 		try {
 			TrainingCalendarForm trainingCalendarForm = new TrainingCalendarForm();
+			List<ManageTrainingPartner> trainingPartnerList = adminService.trainingPartnerList();
+			List<CourseType> courseTypeList = pageLoadService.courseTypeList();
+			model.addAttribute("courseTypeList", courseTypeList);
 			model.addAttribute("trainingCalendarForm", trainingCalendarForm);
+			model.addAttribute("trainingPartnerList", trainingPartnerList);
 		} catch (Exception e) {
 			e.printStackTrace();
 			new ZLogger("trainingCalendarForm", "Exception while trainingCalendarForm :  "+ e.getMessage(), "AdminController.java");
