@@ -17,6 +17,7 @@
                     var dd = ${loginUr.trainingPartnerPermanentDistrict};
                     var cc = ${loginUr.trainingPartnerPermanentCity};
 
+                    
                     $("#TrainingPartnerPermanentState").val(ss);
                             
                             $("#TrainingPartnerPermanentState").trigger("change");
@@ -121,7 +122,6 @@
 											placeholder="Training Center Line 1"
 											value=" ${loginUr.trainingPartnerPermanentLine1}" />
 									</div>
-
 									<div class="form-group">
 										<div>
 											<ul class="lab-no">
@@ -225,63 +225,7 @@
                     <div class="row" style="height: 20px;"></div>
                     <!-- Training center head etails -->
                     <div class="personel-info">
-                        <fieldset>
-                            <legend>
-                                Training Center Head Details</legend>
-                            <!-- left side -->
-                            <div class="col-md-6 col-xs-12">
-									<div class="form-group">
-										<div>
-											<ul class="lab-no">
-												<li class="style-li"><strong>First
-														Name:(Training Center Head) </strong></li>
-
-											</ul>
-										</div>
-										<input type="text" class="form-control"
-											placeholder="First Name" disabled="disabled"
-											value=" ${loginUr.firstName}">
-									</div>
-							
-
-									<div class="form-group">
-										<div>
-											<ul class="lab-no">
-												<li class="style-li"><strong>Last
-														Name:(Training Center Head)</strong></li>
-
-											</ul>
-										</div>
-										<input type="text" class="form-control"
-											placeholder="Last Name" disabled="disabled"
-											value=" ${loginUr.lastName}">
-									</div>
-
-								</div>
-                            <!-- left side ends -->
-
-                            <!-- right side -->
-                            <div class="col-md-6 col-xs-12">
-                         		<div class="form-group">
-										<div>
-											<ul class="lab-no">
-												<li class="style-li"><strong>Middle
-														Name:(Training Center Head)</strong></li>
-
-											</ul>
-										</div>
-										<input type="text" class="form-control"
-											placeholder="Middle Name" disabled="disabled"
-											value=" ${loginUr.middleName}">
-									</div>
-                       
-
-                            </div>
-
-                            <!-- right side ends -->
-
-                        </fieldset>
-                    </div>
+                                            </div>
                     <!-- training center head ends -->
                     <div class="row" style="height: 20px;"></div>
                     <!-- facilities Details  -->

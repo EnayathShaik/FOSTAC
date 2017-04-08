@@ -86,16 +86,12 @@ public class PersonalInformationTrainingPartner {
 	private String TrainingPartnerPermanentMobile;
 	@NotNull @Size(min=1, max=4 , message="* Enter Seating Capacity Per Session")
 	private String SeatCapacityPerSession;
-/*	@NotNull @Size(min=1, max=4 , message="* Enter Number Of In-House Trainer")
-	private String NoOfInHouseTrainers;*/
-	@NotNull @Size(min=1, max=4 , message="* Enter Availabilty Of TV Projectors")
+
+	
 	private String AvailabiltyOfTVProjector;
-	/*@NotNull @Size(min=1, max=2 , message="* Enter Number Of Years In Business Of Training")
-	private String NoOfYearsInBusinessOfTraining;*/
+	
 	@NotNull @Size(min=1, max=3 , message="* Enter Availabilty Of In-House Trainers In Food Safety")
 	private String AvailabiltyOfInHouseTrainersInFoodSafety;
-	/*@NotNull @Size(min=1, max=2 , message="* Enter Number Of Training Session Wish To Conduct In A Month")
-	private String NoOfTrainingSessionWishToConductInAMonth;*/
 
 	
 	@NotNull @Size(min=1, max=1 , message="* Enter Facility of Electricity + Air-Conditioner ")
@@ -266,12 +262,8 @@ public class PersonalInformationTrainingPartner {
 	public void setNoOfInHouseTrainers(String noOfInHouseTrainers) {
 		NoOfInHouseTrainers = noOfInHouseTrainers;
 	}*/
-	public String getAvailabiltyOfTVProjector() {
-		return AvailabiltyOfTVProjector;
-	}
-	public void setAvailabiltyOfTVProjector(String availabiltyOfTVProjector) {
-		AvailabiltyOfTVProjector = availabiltyOfTVProjector;
-	}
+
+	
 /*	public String getNoOfYearsInBusinessOfTraining() {
 		return NoOfYearsInBusinessOfTraining;
 	}
@@ -280,6 +272,12 @@ public class PersonalInformationTrainingPartner {
 	}*/
 	public String getAvailabiltyOfInHouseTrainersInFoodSafety() {
 		return AvailabiltyOfInHouseTrainersInFoodSafety;
+	}
+	public String getAvailabiltyOfTVProjector() {
+		return AvailabiltyOfTVProjector;
+	}
+	public void setAvailabiltyOfTVProjector(String availabiltyOfTVProjector) {
+		AvailabiltyOfTVProjector = availabiltyOfTVProjector;
 	}
 	public void setAvailabiltyOfInHouseTrainersInFoodSafety(String availabiltyOfInHouseTrainersInFoodSafety) {
 		AvailabiltyOfInHouseTrainersInFoodSafety = availabiltyOfInHouseTrainersInFoodSafety;

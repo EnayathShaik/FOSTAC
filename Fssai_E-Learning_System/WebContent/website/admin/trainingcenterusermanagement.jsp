@@ -44,47 +44,12 @@
                                                                 <div class="form-group">
                                                                     <div>
                                                                         <ul class="lab-no">
-                                                                            <li class="style-li"><strong>First Name:</strong></li>
+                                                                            <li class="style-li"><strong>Training Center Name:</strong></li>
                                                                             <li class="style-li error-red"> </li>
                                                                         </ul>
                                                                     </div>
-                                                                    <cf:input type="text" class="form-control" path="firstName" placeholder="First Name" /> </div>
-                                                                <div class="form-group">
-                                                                    <div>
-                                                                        <ul class="lab-no">
-                                                                            <li class="style-li"><strong>Middle Name:</strong></li>
-                                                                            <li class="style-li error-red"> </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <cf:input type="text" class="form-control" path="middleName" placeholder="Middle Name" /> </div>
-                                                                <div class="form-group">
-                                                                    <div>
-                                                                        <ul class="lab-no">
-                                                                            <li class="style-li"><strong>Last Name:</strong></li>
-                                                                            <li class="style-li error-red"> </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <cf:input type="text" class="form-control" path="lastName" placeholder="Last Name" /> </div>
-                                                            </div>
-                                                            <!-- right side -->
-                                                            <div class="col-md-6 col-xs-12">
-                                                                <div class="form-group">
-                                                                    <div>
-                                                                        <ul class="lab-no">
-                                                                            <li class="style-li"><strong>User ID:</strong></li>
-                                                                            <li class="style-li error-red"> </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <cf:input type="text" class="form-control" path="userId" placeholder="User ID" /> </div>
-                                                                <div class="form-group">
-                                                                    <div>
-                                                                        <ul class="lab-no">
-                                                                            <li class="style-li"><strong>PAN Number:</strong></li>
-                                                                            <li class="style-li error-red"> </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <input type="text" class="form-control" placeholder="PAN Number" /> </div>
-                                                                <div class="form-group">
+                                                                    <cf:input type="text" class="form-control" path="trainingCenterName" placeholder="Training Center Name" /> </div>
+                                                                    <div class="form-group">
                                                                     <div>
                                                                         <ul class="lab-no">
                                                                             <li class="style-li"><strong>Status:</strong></li>
@@ -98,6 +63,19 @@
                                                                         </cf:select>
                                                                     </div>
                                                                 </div>
+                                                            </div>
+                                                            <!-- right side -->
+                                                            <div class="col-md-6 col-xs-12">
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        <ul class="lab-no">
+                                                                            <li class="style-li"><strong>User ID:</strong></li>
+                                                                            <li class="style-li error-red"> </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <cf:input type="text" class="form-control" path="userId" placeholder="User ID" /> </div>
+                                                      
+                                                            
                                                             </div>
                                                             <!-- personal information ends -->
                                                         </fieldset>
@@ -133,10 +111,7 @@
                                                 <table class="table-hover table table-bordered table-responsive">
                                                     <thead>
                                                         <th>User ID</th>
-                                                        <th>First Name</th>
-                                                        <th>Middle Name</th>
-                                                        <th>Last Name</th>
-                                                        <th>PAN Number</th>
+                                                        <th>Training center Name</th>
                                                         <th>Current Status</th>
                                                         <th>Update Status</th>
                                                     </thead>
@@ -146,25 +121,17 @@
                                                                 <ct:forEach var="listValue" items="${searchTrainingCenterUsermanagement}" varStatus="loop">
                                                                     <tr>
                                                                         <td>
-                                                                            <label><a href="update-personal-information.fssai?userId=${listValue[6]}" value="${listValue[0]}">${listValue[1]}</a></label>
+                                                                            <label><a href="update-personal-information.fssai?userId=${listValue[3]}" value="${listValue[0]}">${listValue[1]}</a></label>
                                                                         </td>
                                                                         <td>
                                                                             <label>${listValue[2] }</label>
                                                                         </td>
-                                                                        <td>
-                                                                            <label>${listValue[3]}</label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label>${listValue[4]}</label>
-                                                                        </td>
-                                                                        <td>
-                                                                            <label>${listValue[5]}</label>
-                                                                        </td>
+                                                                       
                                                                             <td>
                                                                                     <label>${listValue[8]}</label>
                                                                                 </td>
                                                                                 <td>
-                                                                                    <label><input type="submit"  onclick=" return activateDeActivateUser('${listValue[6]}','${listValue[7]}','1');" value="${listValue[7]}"/></label>
+                                                                                    <label><input type="submit"  onclick=" return activateDeActivateUser('${listValue[3]}','${listValue[4]}','1');" value="${listValue[3]}"/></label>
                                                                                 </td>
                                                                     </tr>
                                                                 </ct:forEach>

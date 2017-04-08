@@ -1041,7 +1041,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	}
 	
 	
-	//trainingpartnermanagetrainer
+
 	
 	@Override
 	public  List trainingpartnermanagetrainer(String name){

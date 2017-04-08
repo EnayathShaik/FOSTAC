@@ -242,8 +242,8 @@
 										
                                         var safety = '${loginUr.foodSafetyExpBackground}';
                                         var month=${loginUr.expInFoodSafefyTimeMonth};
-                                   
-                                        $("#FoodSafetyExpBackground").prop('selectedIndex', safety);
+                                        $('#FoodSafetyExpBackground option').filter(function() { return $.trim( $(this).text() ) == safety; }).attr('selected',true);
+                                        //$("#FoodSafetyExpBackground").prop('selectedIndex', safety);
                                         $("#ExpInFoodSafefyTimeMonth").prop('selectedIndex', month);
                               
                                         $("#TrainingCenterPermanentState").val(psid);

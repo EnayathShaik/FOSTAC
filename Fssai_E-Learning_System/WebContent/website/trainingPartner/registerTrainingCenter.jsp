@@ -198,20 +198,6 @@ function AvoidSpace(event) {
     	    document.getElementById("TrainingCentreNameError").style.display = 'none';
     	    } 
     	
-    /* 
-    	if(document.getElementById('PAN').value == '') {
-    	document.getElementById("PAN").style.borderColor = "red";
-    	document.getElementById("PANError").style.display = 'block';
-    	document.getElementById("PAN").focus();
-    	return false;
-    	}else{
-    		//alert("PAN Name*********");
-    	    document.getElementById('PAN').style.borderColor = "#ccc";
-    	    document.getElementById("PANError").style.display = 'none';
-    	    }  */
-    	
-    	//Title
-    	//alert("Title Name");
     	if(document.getElementById('Title').value == '0') {
     	document.getElementById("Title").style.borderColor = "red";
     	document.getElementById("TitleError").style.display = 'block';

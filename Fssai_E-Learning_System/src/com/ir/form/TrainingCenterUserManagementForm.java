@@ -2,7 +2,7 @@ package com.ir.form;
 
 public class TrainingCenterUserManagementForm {
 	
-	private String firstName;
+	private String trainingCenterName;
 	private String userId;
 	private String middleName;
 	private String lastName;
@@ -36,11 +36,12 @@ public class TrainingCenterUserManagementForm {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public String getFirstName() {
-		return firstName;
+
+	public String getTrainingCenterName() {
+		return trainingCenterName;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setTrainingCenterName(String trainingCenterName) {
+		this.trainingCenterName = trainingCenterName;
 	}
 	public String getUserId() {
 		return userId;

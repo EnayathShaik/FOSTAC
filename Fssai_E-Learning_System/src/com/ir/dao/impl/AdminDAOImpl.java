@@ -592,28 +592,21 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List<PersonalInformationTrainingPartner> trainingCenterUserManagementSearch(TrainingCenterUserManagementForm trainingCenterUserManagementForm,Integer profileid,Integer userID) {
 		Session session = sessionFactory.getCurrentSession();
-		String FirstName = trainingCenterUserManagementForm.getFirstName();
-		String MiddleName = trainingCenterUserManagementForm.getMiddleName();
+		String FirstName = trainingCenterUserManagementForm.getTrainingCenterName();
+		/*String MiddleName = trainingCenterUserManagementForm.getMiddleName();
 		String LastName = trainingCenterUserManagementForm.getLastName() ;
-		String PanNumber = trainingCenterUserManagementForm.getPanNumber();
+		String PanNumber = trainingCenterUserManagementForm.getPanNumber();*/
 		String status = trainingCenterUserManagementForm.getStatus();
+		String userId = trainingCenterUserManagementForm.getUserId();
 		
 		if(FirstName.length() == 0){
 			FirstName = "%";
 		}
-		if(MiddleName.length()==0)
-		{
-			MiddleName="%";
-		}
-		if(LastName.length()==0)
-		{
-			LastName="%";
+		
+		if(userId.length() == 0){
+			userId = "%";
 		}
 		
-		if(PanNumber == null)
-		{
-			PanNumber="%";
-		}
 		if(status.equals("0"))
 		{
 			status="%";
@@ -629,10 +622,10 @@ public class AdminDAOImpl implements AdminDAO {
 			userBuffer.append(" AND pitp.trainingpartnername="+perTrainingPartnerID);
 		}
 		String join = " inner join loginDetails as ld on pitp.loginDetails = ld.id";
-		String like= " where upper(pitp.FirstName) like '"+FirstName.toUpperCase()+"' and pitp.MiddleName like '"+MiddleName+"' and pitp.LastName like '"+LastName+"' and "
-				+ "pitp.PAN like '"+PanNumber +"' and ld.status like '"+ status+"'";
+		String like= " where upper(pitp.trainingcentrename) like '"+FirstName.toUpperCase()+"'  and "
+				+ " ld.loginid like '"+userId+"%' and ld.status like '"+ status+"'";
 		like = like + userBuffer.toString();
-		String select = "pitp.personalInformationTrainingPartnerId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.PAN,pitp.logindetails ,(CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus ";
+		String select = "pitp.personalInformationTrainingPartnerId,ld.loginid,pitp.trainingcentrename,pitp.logindetails ,(CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus ";
 		
 		String sql= "Select "+ select + "  from PersonalInformationTrainingPartner as pitp "+ join + like;
 		Query query = session.createSQLQuery(sql);

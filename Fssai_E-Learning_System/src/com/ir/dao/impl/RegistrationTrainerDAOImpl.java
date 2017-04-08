@@ -254,15 +254,7 @@ private Title title;
 		personalinformationtrainer.setTrainingCenterPermanentEmail(registrationFormTrainer.getTrainingCenterPermanentEmail());
 		personalinformationtrainer.setTrainingCenterPermanentMobile(registrationFormTrainer.getTrainingCenterPermanentMobile());
 		personalinformationtrainer.setTrainingCenterCorrespondencePincode(registrationFormTrainer.getTrainingCenterCorrespondencePincode());
-		/*
-		
-		personalinformationtrainer.setTrainingCenterPermanentLine1(registrationFormTrainer.getTrainingCenterPermanentLine1());
-		personalinformationtrainer.setTrainingCenterPermanentLine2(registrationFormTrainer.getTrainingCenterPermanentLine2());
-		personalinformationtrainer.setPermanentstate(ps);
-		personalinformationtrainer.setPermanentdistrict(pd);
-		personalinformationtrainer.setPermanentcity(pc);
-		personalinformationtrainer.setTrainingCenterPermanentPincode(registrationFormTrainer.getTrainingCenterPermanentPincode());
-		*/
+	
 		boolean checkPeramanent=registrationFormTrainer.isCheckPermanent();
 		if(checkPeramanent){
 			personalinformationtrainer.setTrainingCenterPermanentLine1(registrationFormTrainer.getTrainingCenterCorrespondenceLine1());

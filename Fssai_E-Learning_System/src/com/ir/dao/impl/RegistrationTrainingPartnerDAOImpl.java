@@ -188,10 +188,7 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 			personalInformationTrainingPartner.setTrainingCentreName(registrationFormTrainingPartner.getTrainingCentreName() == null ? "" : registrationFormTrainingPartner.getTrainingCentreName());
 			
 			personalInformationTrainingPartner.setTrainingPartnerName(registrationFormTrainingPartner.getTrainingPartnerName());
-			/*personalInformationTrainingPartner.setFirstName(registrationFormTrainingPartner.getFirstName() == null ? "" : registrationFormTrainingPartner.getFirstName());
-			personalInformationTrainingPartner.setLastName(registrationFormTrainingPartner.getLastName() == null ? "" : registrationFormTrainingPartner.getLastName());
-			personalInformationTrainingPartner.setMiddleName(registrationFormTrainingPartner.getMiddleName() == null ? "" : registrationFormTrainingPartner.getMiddleName());
-			personalInformationTrainingPartner.setPAN(registrationFormTrainingPartner.getPAN() == null ? "" : registrationFormTrainingPartner.getPAN());*/
+		
 			personalInformationTrainingPartner.setTrainingPartnerPermanentLine1(registrationFormTrainingPartner.getTrainingPartnerPermanentLine1() == null ? "" : registrationFormTrainingPartner.getTrainingPartnerPermanentLine1());
 			personalInformationTrainingPartner.setTrainingPartnerPermanentLine2(registrationFormTrainingPartner.getTrainingPartnerPermanentLine2() == null ? "" : registrationFormTrainingPartner.getTrainingPartnerPermanentLine2());
 			personalInformationTrainingPartner.setTrainingPartnerPermanentState(registrationFormTrainingPartner.getTrainingPartnerPermanentState());
@@ -203,7 +200,8 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 			personalInformationTrainingPartner.setSeatCapacityPerSession(registrationFormTrainingPartner.getSeatCapacityPerSession() == null ? "": registrationFormTrainingPartner.getSeatCapacityPerSession());
 			personalInformationTrainingPartner.setSeatcapacityAvailable(Integer.parseInt(registrationFormTrainingPartner.getSeatCapacityPerSession() == null ? "0" : registrationFormTrainingPartner.getSeatCapacityPerSession()));
 			
-			//personalInformationTrainingPartner.setNoOfInHouseTrainers(registrationFormTrainingPartner.getNoOfInHouseTrainers());
+	System.out.println(registrationFormTrainingPartner.getAvailabiltyOfInHouseTrainersInFoodSafety());
+	System.out.println(registrationFormTrainingPartner.getFacilityOfElectricityAndAirCondition());
 			personalInformationTrainingPartner.setAvailabiltyOfTVProjector(registrationFormTrainingPartner.getAvailabiltyOfInHouseTrainersInFoodSafety() == null ? "" : registrationFormTrainingPartner.getAvailabiltyOfInHouseTrainersInFoodSafety());
 			personalInformationTrainingPartner.setFacilityOfElectricityAndAirCondition(registrationFormTrainingPartner.getFacilityOfElectricityAndAirCondition() == null ? "" : registrationFormTrainingPartner.getFacilityOfElectricityAndAirCondition());
 			System.out.println("drinking water "+registrationFormTrainingPartner.getFacilityOfDrinkingWater());
