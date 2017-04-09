@@ -16,4 +16,6 @@ public interface CommonService {
 	public List getAssessorName( String assessorAgencyName);
 	
 	public String getCourseTrainingMode(String courseNmae);
+	
+	public List loadTrainingCenter(String data);
 }

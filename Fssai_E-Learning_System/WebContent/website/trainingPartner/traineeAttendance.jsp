@@ -6,7 +6,6 @@
 function markTraineeAttendance(){
 	
 	var rollNo = $("#traineeUniqueCode").val();
-	//alert(rollNo);
 	if(rollNo == ""){
 		alert("Enter Trainee Roll Number");
 		$("#traineeUniqueCode").focus();

@@ -13,4 +13,7 @@ public interface CommonDao {
 	public List getAssessorName(String assessorAgencyName);
 	//getCourseTrainingMode
 	public String getCourseTrainingMode(String courseName);
+	//loadTrainingCenter
+	public List loadTrainingCenter(String courseName);
+
 }

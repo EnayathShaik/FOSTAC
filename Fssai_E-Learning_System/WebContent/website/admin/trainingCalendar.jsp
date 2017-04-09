@@ -34,12 +34,16 @@ window.onload = OnStart;
 <script>
 function getTrainingCenter(val)
 {
+	var name1=JSON.stringify({
+		courseName:0
+  })
 	$.ajax({
 	      type: 'post',
-	      url: 'loadTrainingCenter.jspp?'+ val,
+	      url: 'loadTrainingCenter.fssai?data='+ val,
+	      contentType : "application/json",
+		  data:name1,
 	      success: function (response) {      
 	      var mainData1 = jQuery.parseJSON(response);
-	        //alert(mainData1);
 	      $('#trainingCenter option').remove();
 	      $('#trainingCenter').append('<option value="0">Select Training Center </option>');
 	  	  $.each(mainData1 , function(i , obj)
@@ -67,17 +71,20 @@ function getTrainingCalender(indicator){
 		total = "ALL";//"contentLocation=0&courseType=0&courseName=&modeOfTraining=&contentType=0";
 	}else{
 	
-	total="courseType="+courseType+"&courseName="+courseName+"&trainingPartner="+trainingPartner+ 
-	"&trainingCenter="+trainingCenter+"&trainingDate="+trainingDate+"&trainingTime="+trainingTime+
-	"&trainerName="+trainerName;
+	total="courseType="+courseType+"@courseName="+courseName+"@trainingPartner="+trainingPartner+ 
+	"@trainingCenter="+trainingCenter+"@trainingDate="+trainingDate+"@trainingTime="+trainingTime+
+	"@trainerName="+trainerName;
 	}
-	//alert("total>"+total);
+	var name1=JSON.stringify({
+		courseName:0
+  })
 	$.ajax({
 	      type: 'post',
-	      url: 'getTrainingCalender.jspp?'+ total,
+	      url: 'getTrainingCalender.fssai?data='+ total,
+	      contentType : "application/json",
+		  data:name1,
 	      success: function (response) {      
 	      var mainData1 = jQuery.parseJSON(response);
-	      //alert(mainData1);
 	      var j = 1;
 	      $('#newTable tr').remove();
 	      $('#newTable').append('<tr class="background-open-vacancies"><td>S.No.</td><td>Batch Code</td><td>Course Code</td><td>Training Partner Name</td><td>Training Center name</td><td>Training Date</td><td>Training Time</td><td>Trainer Name</td><tr>')
@@ -113,8 +120,8 @@ function getTrainingCalender(indicator){
                         <!-- vertical button -->
                         <div class="row">
                             <div class="col-lg-12">
-                                <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome ${userName }</span> </a>
-                            </div>
+                                <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome ${userName}</span> </a>
+                            </div>]
                         </div>
                         <!-- add the content here for main body -->
                         <!-- timeline  -->

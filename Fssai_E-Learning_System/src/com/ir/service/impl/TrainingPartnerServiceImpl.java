@@ -265,8 +265,8 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 	
 	@Override
 	@Transactional
-	public List trainingpartnermanagetrainer(String searchData) {
-		List loadTrainingList = trainingPartnerDAO.trainingpartnermanagetrainer(searchData);
+	public String trainingpartnermanagetrainer(String searchData) {
+		String loadTrainingList = trainingPartnerDAO.trainingpartnermanagetrainer(searchData);
 		return loadTrainingList;
 	}
 	
@@ -364,6 +364,7 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 		List loadTrainingList = trainingPartnerDAO.editMTP(searchData);
 		return loadTrainingList;
 	}
+
 	//updateMTP
 	
 	@Override
@@ -382,6 +383,13 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 		return isVacancy;
 	}
 	
+	
+	@Override
+	@Transactional
+	public List getTrainingCalender(String searchData) {
+		List loadTrainingList = trainingPartnerDAO.getTrainingCalender(searchData);
+		return loadTrainingList;
+	}
 	
 	
 }

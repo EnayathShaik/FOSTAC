@@ -70,7 +70,7 @@ public interface TrainingPartnerDao {
 	
 	public List traineeCenterPaymentConfirmation(String searchData);
 	//trainingpartnermanagetrainer
-	public List trainingpartnermanagetrainer(String searchData);
+	public String trainingpartnermanagetrainer(String searchData);
 	
 	//searchVacancy
 	
@@ -100,9 +100,10 @@ public interface TrainingPartnerDao {
 	
 	public List editMTP(String data);
 	
+	
 	public String updateMTP(String data);
 	
 	public int isVacancyOpen(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
 	
-	
+	public List getTrainingCalender(String data);
 }

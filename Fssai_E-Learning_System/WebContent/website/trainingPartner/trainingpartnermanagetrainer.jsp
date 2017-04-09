@@ -5,42 +5,15 @@
 
 <script>
 
-function showDetails() {
-	
-	
- 	var courseType =  ($("#selCourseType").val() == 0 || $("#selCourseType").val() == null ? "" : $("#selCourseType").val());
- 	var trainername =  ($('#selTrainerName').val() == 0 || $('#selTrainerName').val() == null ? "" : $('#selTrainerName').val() );
-	var courseName =  ($("#selCourseName").val() == 0 || $("#selCourseName").val() == null ? "" : $("#selCourseName").val()) ;
-	var result = "";
-$(".displayNone").css("display", "block");
-var total = "courseType="+courseType+"&courseName="+courseName+"&trainerName="+trainername;
-$.ajax({
-	type : 'post',
-	url : 'trainingpartnermanagetrainer.jspp?' + total,
-	async : false,
-	success : function(data) {
-		$('#newTable').show();
-		var mainData1 = jQuery.parseJSON(data);
-		var j = 1;
-		$('#newTable tr').remove();
-		$.each(mainData1, function(i, obj) {
-			$('#newTable').append(
-					'<tr id="tableRow"><td>' + j++ + '</td><td>' + obj[1]+ '</td><td>' + obj[2] + '</td><td><a href="#" onClick="removeTrainer(\''+obj[3]+'\');">Remove Trainer</a> </td></tr>');
-
-		});
-	}
-});
-return result;
-}
-
- 	function showDetailsNew() {
+ 	function showDetails() {
+		
+		
 		 	var courseType =  ($("#selCourseType").val() == 0 || $("#selCourseType").val() == null ? "" : $("#selCourseType").val());
 		 	var trainername =  ($('#selTrainerName').val() == 0 || $('#selTrainerName').val() == null ? "" : $('#selTrainerName').val() );
 			var courseName =  ($("#selCourseName").val() == 0 || $("#selCourseName").val() == null ? "" : $("#selCourseName").val()) ;
 			var result = "";
 		$(".displayNone").css("display", "block");
 		var name1=JSON.stringify({
-			courseType:0,
 			courseName:0
 	  })
 		var total = "courseType="+courseType+"-courseName="+courseName+"-trainerName="+trainername;
@@ -56,7 +29,7 @@ return result;
 				var j = 1;
 				$('#newTable tr').remove();
 				$.each(mainData1, function(i, obj) {
-					alert("obj "+obj);
+				
 					$('#newTable').append(
 							'<tr id="tableRow"><td>' + j++ + '</td><td>' + obj[1]+ '</td><td>' + obj[8] + '</td><td><a href="#" onClick="removeTrainer(\''+obj[3]+'\');">Remove Trainer</a> </td></tr>');
 
@@ -69,9 +42,16 @@ return result;
 
 	function removeTrainer(id){
 			if(confirm("Are You Sure!!")){
+				
+				var name1=JSON.stringify({
+					courseName:0
+			  })
+			  id = "id="+id;
 				$.ajax({
 					type : 'post',
-					url : 'trainingpartnermanagetrainer.jspp?'+id,
+					url : 'trainingpartnermanagetrainer.fssai?data='+id,
+					contentType : "application/json",
+					data:name1,
 					async : false,
 					success : function(data) {
 					alert(data);

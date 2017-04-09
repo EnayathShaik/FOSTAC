@@ -251,7 +251,7 @@ function deleteCourseContent(i){
                                                     </div>
 <cf:select path="courseName" class="form-control">
 <cf:option value="0" label="Select Course Code" />
-<cf:options items="${courseNameList}" itemValue="coursenameid" itemLabel="coursename"/>
+<cf:options items="${courseNameList}" itemValue="coursenameid" itemLabel="courseCode"/>
 </cf:select> 
                                                 </div>
                                                 

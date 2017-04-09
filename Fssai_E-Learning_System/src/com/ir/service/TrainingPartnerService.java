@@ -120,7 +120,7 @@ public interface TrainingPartnerService {
 	//trainingpartnermanagetrainer
 	
 	
-	public List trainingpartnermanagetrainer(String searchData);
+	public String trainingpartnermanagetrainer(String searchData);
 	
 	//searchVacancy
 	
@@ -146,8 +146,11 @@ public interface TrainingPartnerService {
 	
 	public List editMTP(String data);
 	
+	
 	public String updateMTP(String data);
 	
 	
 	public int isVacancyOpen(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
+	
+	public List getTrainingCalender(String data);
 }

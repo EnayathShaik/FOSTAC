@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
 import com.ir.bean.common.IntStringBean;
 import com.ir.bean.common.StringStringBean;
 import com.ir.dao.TrainingPartnerDao;
@@ -42,6 +43,7 @@ import com.ir.model.TrainingCalendar;
 import com.ir.model.TrainingCalendarHistoryLogs;
 import com.ir.model.Utility;
 import com.ir.util.ChangePasswordUtility;
+import com.ir.util.HibernateUtil;
 import com.zentech.logger.ZLogger;
 import com.zentect.ajax.AjaxRequest;
 
@@ -210,17 +212,17 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		}else{
 			userCondition.append("");
 		}
-		String sql="select distinct A.personalinformationtrainingpartnerid,A.firstname,A.middlename,A.lastname  from personalinformationtrainingpartner A " +
+		String sql="select distinct A.personalinformationtrainingpartnerid,A.trainingcentrename  from personalinformationtrainingpartner A " +
 				" inner join logindetails B on(A.logindetails=B.id) ";
 		sql	= sql + userCondition.toString();
 		Query query = session.createSQLQuery(sql);
 		List<Object[]> courseTypeList = query.list();
 		if(courseTypeList.size()>0){
-			for(int index=0;index<courseTypeList.size();index++){
+			for(int index=0;index<courseTypeList.size();index++){	
 				IntStringBean bean=new IntStringBean();
 				Object[] objecList=courseTypeList.get(index);
 				bean.setId(Integer.parseInt(objecList[0].toString()));
-				bean.setValue(objecList[1].toString().concat(" ").concat(objecList[2].toString()).concat(" ").concat(objecList[3].toString()));
+				bean.setValue(objecList[1].toString());
 				trainingCenterList.add(bean);
 			}
 		}
@@ -1044,10 +1046,20 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 
 	
 	@Override
-	public  List trainingpartnermanagetrainer(String name){
+	public  String trainingpartnermanagetrainer(String name){
 		String[] n1 = name.split("-");
 		System.out.println("name "+name);
-		String courseType,courseName , trainingDate , trainingtime,status ;
+		String courseType = null,courseName = null , trainername = null ;
+	String id = null;
+	if(name.contains("id")){
+		try{
+			id = n1[0].split("=")[1];
+		}
+		catch(Exception e){
+			id = "%";	
+		}
+			
+	}else{
 		try{
 			courseType = n1[0].split("=")[1];
 		}
@@ -1060,44 +1072,42 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		}catch(Exception e){
 			courseName = "%";	
 		}
+		try{
+			trainername = n1[2].split("=")[1];	
+		}catch(Exception e){
+			trainername = "%";	
+		}
 		
 	
-		try{
-			trainingDate = "%"+n1[2].split("=")[1].replaceAll("%20", " ");
-		}
-		catch(Exception e){
-			trainingDate = "%";
-		}
+	}
 		
-		try{
-			trainingtime = "%"+n1[3].split("=")[1].replaceAll("%20", " ");
-		}
-		catch(Exception e){
-			trainingtime = "%";
-		}
-        
-		try{
-			status = n1[4].split("=")[1];
-		}
-		catch(Exception e){
-			status = "%";
-		}
+			
+		String result = null ;
+	
 		Session session = sessionFactory.getCurrentSession();
-		String sql = "";
-		sql = "select  B.batchcode,D.coursecode,B.trainingdate,B.trainingtime,C.firstname || ' '|| C.middlename ||' '|| C.lastname as participantName,D.modeoftraining,A.paymentstatus,A.courseenrolleduserid , pit.firstname || ' '|| pit.middlename ||' '|| pit.lastname as trainerName  from courseenrolleduser  A"
-				+ " inner join trainingcalendar B on(A.trainingcalendarid= B.trainingcalendarid)"
-				+ " inner join personalinformationtrainingpartner C on (C.personalinformationtrainingpartnerid = B.trainingcenter)"
-				+ " inner join coursename D on (D.coursenameid = B.coursename)"
-				+ " inner join coursetype E on (E.coursetypeid = B.coursetype)"
-				+ " inner join logindetails F on (F.ID = C.logindetails)"
-				+	"left join personalinformationtrainer pit on (cast(B.trainername as int) = pit.personalinformationtrainerid) "
-				+" WHERE A.status = 'N' and  cast(E.coursetypeid  as varchar(10)) like '"+courseType+"%' and cast(D.COURSENAMEID as varchar(10))  like '"+courseName+"%'  and  cast(B.TRAININGDATE as varchar(10)) like '"+trainingDate+"%' and  cast(B.TRAININGTIME as varchar(10)) like '"+trainingtime+"%'  and cast(A.paymentstatus as varchar(10)) like '"+status+"%' "; 
-					//	"  AND F.loginid ='"+loginId+"' ";
+		String sql ="";
+		if(id !=null && Integer.parseInt(id) > 0){
 		
 		
-		Query query = session.createSQLQuery(sql);
-		List courseTypeList = query.list();
-		return courseTypeList;
+			System.out.println("ID == "+id);
+			PostVacancyTrainingCenterBean centerBean = (PostVacancyTrainingCenterBean) session.load(PostVacancyTrainingCenterBean.class, Integer.parseInt(id));
+			session.delete(centerBean);
+			result ="Successfully Removed";
+			
+		}else{
+		
+			sql = "select C.coursetype,D.coursecode,E.firstname || ' '|| E.middlename ||' '|| E.lastname,B.vacancyenrolledid from postvacancytrainingcenter A" +
+					" inner join trainingcentervacancyenrolled B on(A.postvacancytrainingcenterid=B.postvacancyid)" +
+					" inner join coursetype C on(A.coursetype=C.coursetypeid) "+
+					" inner join coursename D on(A.coursename=D.coursenameid) "+
+					" inner join personalinformationtrainer E on (E.logindetails = CAST(CAST (B.loginid AS NUMERIC(19,4)) AS INT))" +
+					" where  cast(C.coursetypeid as varchar(10)) like '"+courseType+"%'  and cast(D.coursenameid as varchar(10)) like  '"+courseName+"%' and cast(E.personalinformationtrainerid as varchar(10)) like  '"+trainername+"%'   " ;
+			Query query = session.createSQLQuery(sql);
+			List courseTypeList = query.list();
+			Gson g =new Gson();
+			 result = g.toJson(courseTypeList); 
+		}
+		return result;
 	}
 	
 	//searchVacancy
@@ -1210,7 +1220,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	
 		String sql ="select tc.trainingcalendarid , concat(pitp.trainingpartnerpermanentline1 , ' ' , pitp.trainingpartnerpermanentline2 , ' ' , s.statename , ' ' , d.districtname , ' ' , c.cityname) as address, "+
 				" concat(tc.trainingdate , ' / ' , tc.trainingtime) as schedule , "+
-				" concat(pitp.firstname , ' ' , pitp.middlename , ' ' , pitp.lastname ) ,concat( pitp.trainingpartnerpermanentmobile , ' / ' , pitp.trainingpartnerpermanentemail)  as contact, "+
+				" concat(pitp.trainingcentrename) ,concat( pitp.trainingpartnerpermanentmobile , ' / ' , pitp.trainingpartnerpermanentemail)  as contact, "+
 				" (select count(1) from courseenrolleduser A where A.trainingcalendarid = tc.trainingcalendarid) , tc.seatcapacity , ct.coursetype "+
 				"  , cn.coursename  , tc.status,cn.coursecode,tc.batchcode from trainingcalendar as tc "+
 				" inner join coursename as cn on cn.coursenameid = tc.coursename "+
@@ -1224,10 +1234,10 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 				" and tc.trainingcenter = pitp.personalinformationtrainingpartnerid where to_timestamp(COALESCE(tc.trainingdate, '19900101010101'),'DD-MM-YYYY') >= CURRENT_TIMESTAMP - INTERVAL '1 days'";// and tc.trainingcenter='"+id+"'";
 				//" WHERE log.id = "+userId;
 		Query query = session.createSQLQuery(sql);
+		System.out.println(" query "+query);
 		List courseTypeList = query.list();
 		return courseTypeList;
 	}
-	
 	
 	//searchTrainingCenterList
 	
@@ -1572,6 +1582,8 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 		return list;
 	}
 	
+
+	
 	//updateMTP
 	@Override
 	public  String updateMTP(String name){
@@ -1646,6 +1658,89 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 			vacanctLeft = 1;
 		}
 		return vacanctLeft;
+	}
+	
+	
+	@Override
+	public  List getTrainingCalender(String name){
+		
+		String[] totalConnected = name.split("@");
+		String courseType="",courseName="",trainingPartner="",trainingCenter="",trainingDate = null,trainingTime = null,trainerName = null,trainingType="";
+		
+		if(!name.equalsIgnoreCase("ALL")){
+		courseType = (totalConnected[0].split("="))[1];
+		if(courseType.equals("0")){		courseType = "%";	}
+		courseName = (totalConnected[1].split("="))[1];
+		if(courseName.equals("0")){		courseName = "%";	}
+		trainingPartner = (totalConnected[2].split("="))[1];
+		if(trainingPartner.equals("0")){		trainingPartner = "%";	}
+		trainingCenter = (totalConnected[3].split("="))[1];
+		if(trainingCenter.equals("0")){		trainingCenter = "%";	}
+		
+		String[] trainingDate1 = totalConnected[4].split("=");
+		if(trainingDate1.length == 1){
+			trainingDate = "%";
+		}else{
+			trainingDate = totalConnected[4].split("=")[1];
+		}
+		String[] trainingTime1 = totalConnected[5].split("=");
+		if(trainingTime1.length == 1){
+			trainingTime = "%";
+		}else{
+			trainingTime = totalConnected[5].split("=")[1];
+		}
+		
+		String[] trainerName1 = totalConnected[6].split("=");
+		System.out.println((totalConnected[6].split("="))[1] + "  **************");
+		if((totalConnected[6].split("="))[1].equals("0")){
+			trainerName = "%";
+		}else{
+			trainerName = totalConnected[6].split("=")[1];
+		}
+
+		System.out.println(trainerName);
+		
+		}
+		
+		String sql = null;
+		Session session = sessionFactory.getCurrentSession();
+		if(name.equalsIgnoreCase("ALL"))
+
+			sql="select tc.trainingcalendarid ,mtp.trainingpartnername ,  "+
+						" concat(pitp.firstname ,  '  ' , pitp.middlename , ' ' , PITP.lastname) as name, "+
+						" cn.coursename , ct.coursetype , tc.trainingdate ,tc.trainingtime , pitp.seatcapacitypersession , pitp.seatcapacityavailable , "+
+						"   tc.trainingtype  , pitp.trainingcentrename,  concat(pitr.firstname ,  '  ' , pitr.middlename , ' ' , pitr.lastname), tc.batchcode "+
+						" ,cn.courseCode from trainingcalendar as tc "+
+						" inner join coursename as cn on cn.coursenameid = tc.coursename "+
+						" inner join coursetype as ct on ct.coursetypeid = tc.coursetype "+
+						" inner join managetrainingpartner as mtp on mtp.managetrainingpartnerid = tc.trainingpartner "+
+						" inner join personalinformationtrainingpartner as pitp on mtp.managetrainingpartnerid = pitp.trainingpartnername and tc.trainingcenter = pitp.personalinformationtrainingpartnerid"+
+						" inner join personalinformationtrainer as pitr on CAST(CAST (tc.trainername AS NUMERIC(19,4)) AS INT) = pitr.personalinformationtrainerid "+
+						" Where to_timestamp(COALESCE(tc.trainingdate, '19900101010101'),'DD-MM-YYYY') > now()" ;
+						else
+							
+		sql="select tc.trainingcalendarid ,mtp.trainingpartnername ,  "+
+					" concat(pitp.firstname ,  '  ' , pitp.middlename , ' ' , PITP.lastname) as name, "+
+					" cn.coursename , ct.coursetype , tc.trainingdate ,tc.trainingtime , pitp.seatcapacitypersession , pitp.seatcapacityavailable , "+
+					"   tc.trainingtype  , pitp.trainingcentrename , concat(pitr.firstname ,  '  ' , pitr.middlename , ' ' , pitr.lastname), tc.batchcode"+
+					"  ,cn.courseCode  from trainingcalendar as tc "+
+					" inner join coursename as cn on cn.coursenameid = tc.coursename "+
+					" inner join coursetype as ct on ct.coursetypeid = tc.coursetype "+
+					" inner join managetrainingpartner as mtp on mtp.managetrainingpartnerid = tc.trainingpartner "+
+					" inner join personalinformationtrainingpartner as pitp on mtp.managetrainingpartnerid = pitp.trainingpartnername and tc.trainingcenter = pitp.personalinformationtrainingpartnerid"+
+					" inner join personalinformationtrainer as pitr on CAST(CAST (tc.trainername AS NUMERIC(19,4)) AS INT) = pitr.personalinformationtrainerid "+
+					"  "+
+					" where to_timestamp(COALESCE(tc.trainingdate, '19900101010101'),'DD-MM-YYYY') > now() AND CAST(tc.coursename AS varchar(10)) like '"+courseName+"' "+
+					//--and cn.modeoftraining like 'Online'
+					" and CAST(tc.courseType AS varchar(10)) like '"+courseType+"' "+ 
+					" and CAST(tc.trainingpartner AS varchar(10)) like '"+trainingPartner+"' "+ 
+					" and CAST(tc.trainingcenter AS varchar(10)) like '"+trainingCenter+"' "+ 
+					" and CAST(tc.trainingdate AS varchar(10)) like '"+trainingDate+"' "+ 
+					" and CAST(tc.trainingTime AS varchar(10)) like '"+trainingTime+"' "+ 
+					" and CAST(tc.trainerName AS varchar(10)) like '"+trainerName+"' "; 
+		Query query = session.createSQLQuery(sql);
+		List<CourseName> list = query.list();
+		return list;
 	}
 	
 }

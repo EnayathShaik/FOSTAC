@@ -124,5 +124,20 @@ public class CommonDaoImpl implements CommonDao{
 		return response;
 	}
 	
+	//	//loadTrainingCenter
+	@Override
+	public  List loadTrainingCenter(String data){
+		Session session = sessionFactory.getCurrentSession();
+
+		String sql="select pitp.personalinformationtrainingpartnerid , pitp.trainingcentrename "+
+				" from personalinformationtrainingpartner as pitp "+
+				" inner join managetrainingpartner as mtp on pitp.trainingpartnername = mtp.managetrainingpartnerid "+
+				" inner join logindetails as ld on ld.id = pitp.logindetails "+
+				"  inner join state as s on s.stateid = pitp.trainingpartnerpermanentstate"+
+				" where pitp.trainingpartnername = '"+data+"'" ;		
+		Query query = session.createSQLQuery(sql);
+		List trainingCenterList = query.list();
+		return trainingCenterList;
+	}	
 
 }

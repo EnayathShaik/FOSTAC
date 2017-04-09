@@ -158,4 +158,18 @@ public class CommonController {
 	
 	//loadTrainingCenter
 	
+	@RequestMapping(value="/loadTrainingCenter" , method=RequestMethod.POST)
+	@ResponseBody
+	public void loadTrainingCenter(@RequestParam("data") String data ,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("loadTrainingCenter","loadTrainingCenter............" + data  , "CommonController.java");
+		
+		List result = commonService.loadTrainingCenter(data);
+		Gson g =new Gson();
+		String newList = g.toJson(result); 
+		PrintWriter out = response.getWriter(); 
+		out.write(newList);
+		out.flush();
+		
+	}
+	
 }

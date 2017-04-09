@@ -84,7 +84,7 @@ public class TrainingPartnerController {
 	public String postVacancy(@ModelAttribute("postVacancyTrainingCenterForm") PostVacancyTrainingCenterForm postVacancyTrainingCenterForm,HttpSession session,BindingResult result , Model model ){
 		Integer userId = (Integer) session.getAttribute("userId");
 		Integer profileId = (Integer) session.getAttribute("profileId");
-		
+		System.out.println("userId "+userId + " profileId "+profileId);
 		List<CourseType> courseTypeList = trainingPartnerService.courseTypeList();
 		List<IntStringBean> trainingCenterList = trainingPartnerService.getTrainingCenterList(userId,profileId);
 		int trainingCenter = trainingPartnerService.getTrainingCenter(userId, profileId);
@@ -742,11 +742,10 @@ public class TrainingPartnerController {
 	@ResponseBody
 	public void trainingpartnermanagetrainer(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
 		new ZLogger("trainingpartnermanagetrainer","trainingpartnermanagetrainer............" + data  , "TrainingPartnerController.java");
-		List batchCodeList = trainingPartnerService.trainingpartnermanagetrainer(data);
+		String newList = trainingPartnerService.trainingpartnermanagetrainer(data);
 		PrintWriter out = response.getWriter();
 		Gson g =new Gson();
-		String newList = g.toJson(batchCodeList); 
-		System.out.println("newList "+newList);
+		
 		out.write(newList);
 		out.flush();
 		
@@ -1019,5 +1018,21 @@ public class TrainingPartnerController {
 		out.flush();
 		
 	}
+	
+	
+	@RequestMapping(value="/getTrainingCalender" , method=RequestMethod.POST)
+	@ResponseBody
+	public void getTrainingCalender(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("getTrainingCalender","getTrainingCalender............" + data  , "TrainingPartnerController.java");
+		List batchCodeList = trainingPartnerService.getTrainingCalender(data);
+		PrintWriter out = response.getWriter();
+		Gson g =new Gson();
+		String newList = g.toJson(batchCodeList); 
+		System.out.println("newList "+newList);
+		out.write(newList);
+		out.flush();
+		
+	}
+	
 	
 }

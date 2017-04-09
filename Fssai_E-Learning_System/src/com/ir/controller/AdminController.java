@@ -605,8 +605,10 @@ public class AdminController {
 	public String manageCourseContent(
 			@ModelAttribute("manageCourseContent") ManageCourseContentForm manageCourseContentForm, Model model) {
 		new ZLogger("manageCourseContent", "admin Controller manage course content form begin .", "AdminController.java");
+		 List<CourseName> courseNameList = adminService.courseNameList();
 		List<CourseType> courseTypeList = pageLoadService.courseTypeList();
 		model.addAttribute("courseTypeList", courseTypeList);
+		model.addAttribute("courseNameList", courseNameList);
 		return "manageCourseContent";
 	}
 

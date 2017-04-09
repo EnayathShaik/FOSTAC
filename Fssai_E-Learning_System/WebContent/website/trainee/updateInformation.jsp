@@ -31,12 +31,12 @@
 		var v = document.getElementById("correspondenceDistrict").selectedIndex;
 		////alert(z + "    " + y);
 		if (x) {
-			/* document.getElementById('Email').value= document.getElementById('correspondenceEmail').value; */
+			
 			document.getElementById('ResidentialAddressLine1').value = document
 					.getElementById('correspondenceAddress1').value;
 			document.getElementById('ResidentialAddressLine2').value = document
 					.getElementById('correspondenceAddress2').value;
-			/* document.getElementById('Mobile').value= document.getElementById('correspondenceMobile').value; */
+		
 			document.getElementById('resPincode').value = document
 					.getElementById('correspondencePincode').value;
 			document.getElementById('resState').selectedIndex = y;
