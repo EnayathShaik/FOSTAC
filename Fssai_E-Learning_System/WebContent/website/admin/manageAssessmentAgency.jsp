@@ -40,10 +40,10 @@
                     } else if (headOfficeDataAddress2 == "" || headOfficeDataAddress2.length <= 0) {
                         alert('Please Enter Address 2.')
                         status = false;
-                    } else if (pin == "" || pin.length <= 0) {
+                    } /* else if (pin == "" || pin.length <= 0) {
                         alert('Please Enter Pincode.')
                         status = false;
-                    } else if (stateId == 0 || stateId == "" || stateId.length <= 0) {
+                    } */ else if (stateId == 0 || stateId == "" || stateId.length <= 0) {
                         alert('Please Select State.')
                         status = false;
                     } else if (district == 0 || district == "" || district.length <= 0) {
@@ -84,6 +84,7 @@
                     var regpan = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
                     if (regpan.test(pan) == false) {
                         document.getElementById("statusPan").innerHTML = "Invalid PAN !!!";
+                        return false;
                     } else {
                         document.getElementById("statusPan").innerHTML = "";
                     }

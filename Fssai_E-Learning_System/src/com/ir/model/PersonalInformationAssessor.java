@@ -83,7 +83,7 @@ public class PersonalInformationAssessor {
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="AssessorPermanentCity")
 	private City AssessorPermanentCity;
 
-	@NotNull @Size(min=1, max=20 , message="* error")
+	/*@NotNull @Size(min=1, max=20 , message="* error")*/
 	private String AssessorPermanentPincode;
 	@NotNull @Email(message="& error")
 	private String AssessorPermanentEmail;
@@ -104,7 +104,7 @@ public class PersonalInformationAssessor {
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="AssessorCorrespondenceCity")
 	private City AssessorCorrespondenceCity;
 
-	@NotNull @Size(min=6, max=6 , message="* error")
+	/*@NotNull @Size(min=6, max=6 , message="* error")*/
 	private String AssessorCorrespondencePincode;
 	@NotNull
 	private int ReleventExpOfAuditInYear;

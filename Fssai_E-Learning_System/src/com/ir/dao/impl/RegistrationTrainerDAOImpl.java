@@ -146,7 +146,7 @@ private Title title;
 				personalInformationTrainer.setCorrespondencedistrict(cd);
 				personalInformationTrainer.setCorrespondencecity(cc);
 				personalInformationTrainer.setFathername(registrationFormTrainer.getFatherName() == null ? "" : registrationFormTrainer.getFatherName());
-				personalInformationTrainer.setTrainingCenterCorrespondencePincode(registrationFormTrainer.getTrainingCenterCorrespondencePincode() == null ? "000000" : registrationFormTrainer.getTrainingCenterCorrespondencePincode());
+				personalInformationTrainer.setTrainingCenterCorrespondencePincode(registrationFormTrainer.getTrainingCenterCorrespondencePincode() == null ? "" : registrationFormTrainer.getTrainingCenterCorrespondencePincode());
 				personalInformationTrainer.setTrainingCenterPermanentEmail(registrationFormTrainer.getTrainingCenterPermanentEmail() == null ? "" : registrationFormTrainer.getTrainingCenterPermanentEmail());
 				personalInformationTrainer.setTrainingCenterPermanentMobile(registrationFormTrainer.getTrainingCenterPermanentMobile() == null ? "" : registrationFormTrainer.getTrainingCenterPermanentMobile());
 				personalInformationTrainer.setFoodSafetyExpBackground(registrationFormTrainer.getFoodSafetyExpBackground() == null ? "" : registrationFormTrainer.getFoodSafetyExpBackground());
@@ -216,7 +216,7 @@ private Title title;
 				String SpecialCourse = registrationFormTrainer.getSpecialCourse1();
 				if(AdvanceCourse.length() > 0){
 					String[] SpecialCoursesplited = SpecialCourse.split(",");
-					System.out.println("SpecialCourse course length   "+ SpecialCoursesplited.length);
+					System.out.println("SpecialCourse course length   "+ SpecialCoursesplited.length + "  array "+SpecialCoursesplited.toString());
 					if(SpecialCoursesplited.length > 0){
 						for(int i=0 ; i < SpecialCoursesplited.length ; i++){
 							CourseEnrolled courseEnrolledSpecial = new CourseEnrolled();
@@ -253,7 +253,7 @@ private Title title;
 		personalinformationtrainer.setCorrespondencecity(cc);
 		personalinformationtrainer.setTrainingCenterPermanentEmail(registrationFormTrainer.getTrainingCenterPermanentEmail());
 		personalinformationtrainer.setTrainingCenterPermanentMobile(registrationFormTrainer.getTrainingCenterPermanentMobile());
-		personalinformationtrainer.setTrainingCenterCorrespondencePincode(registrationFormTrainer.getTrainingCenterCorrespondencePincode());
+		personalinformationtrainer.setTrainingCenterCorrespondencePincode((registrationFormTrainer.getTrainingCenterCorrespondencePincode() == null ? "" :registrationFormTrainer.getTrainingCenterCorrespondencePincode() ));
 	
 		boolean checkPeramanent=registrationFormTrainer.isCheckPermanent();
 		if(checkPeramanent){
@@ -272,7 +272,7 @@ private Title title;
 			personalinformationtrainer.setPermanentdistrict(pd);
 			personalinformationtrainer.setPermanentcity(pc);
 			personalinformationtrainer.setCheckAddress("false");
-			personalinformationtrainer.setTrainingCenterPermanentPincode(registrationFormTrainer.getTrainingCenterPermanentPincode());
+			personalinformationtrainer.setTrainingCenterPermanentPincode((registrationFormTrainer.getTrainingCenterPermanentPincode() == null ? "" : registrationFormTrainer.getTrainingCenterPermanentPincode()));
 		}
 		
 		

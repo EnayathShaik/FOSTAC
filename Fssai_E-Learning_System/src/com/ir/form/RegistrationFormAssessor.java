@@ -48,8 +48,8 @@ public class RegistrationFormAssessor {
 	private int AssessorPermanentDistrict;
 	@NotNull
 	private int AssessorPermanentCity;
-	@NotNull
-	@Size(min=1, max=20 , message="* error")
+	/*@NotNull
+	@Size(min=1, max=20 , message="* error")*/
 	private String AssessorPermanentPincode;
 	@NotNull @Email(message="& error")
 	private String AssessorPermanentEmail;
@@ -68,8 +68,8 @@ public class RegistrationFormAssessor {
 	private int AssessorCorrespondenceDistrict;
 	@NotNull
 	private int AssessorCorrespondenceCity;
-	@NotNull
-	@Size(min=6, max=6 , message="* error")
+	/*@NotNull
+	@Size(min=6, max=6 , message="* error")*/
 	private String AssessorCorrespondencePincode;
 
 	@NotNull 

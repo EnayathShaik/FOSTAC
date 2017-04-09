@@ -182,7 +182,7 @@ window.onload = OnStart;
             document.getElementById('correspondenceCity').style.borderColor = "#ccc";
             document.getElementById("correspondenceCityError").style.display = 'none';
         }
-
+/* 
         var x = document.getElementById("correspondencePincode").value;
         if (x.length < 6) {
             document.getElementById('correspondencePincode').style.borderColor = "red";
@@ -192,7 +192,7 @@ window.onload = OnStart;
         } else {
             document.getElementById('correspondencePincode').style.borderColor = "#ccc";
             document.getElementById("correspondencePincodeError").style.display = 'none';
-        }
+        } */
 
         var x = document.getElementById("Mobile").value;
         if (x != '') {
@@ -257,7 +257,7 @@ window.onload = OnStart;
                     document.getElementById('resCity').style.borderColor = "#ccc";
                     document.getElementById("resCityError").style.display = 'none';
                 }
-                var x = document.getElementById("resPincode").value;
+            /*     var x = document.getElementById("resPincode").value;
 
                 if (x.length < 6) {
                     document.getElementById('resPincode').style.borderColor = "red";
@@ -267,7 +267,7 @@ window.onload = OnStart;
                 } else {
                     document.getElementById('resPincode').style.borderColor = "#ccc";
                     document.getElementById("resPincode").style.display = 'none';
-                }
+                } */
                 
             }
 
@@ -372,7 +372,7 @@ window.onload = OnStart;
                                 document.getElementById('bussCity').style.borderColor = "#ccc";
                                 document.getElementById("bussCityError").style.display = 'none';
                             }
-                            var x = document.getElementById("bussPincode").value;
+                     /*        var x = document.getElementById("bussPincode").value;
                             if (x.length < 6) {
                                 document.getElementById('bussPincode').style.borderColor = "red";
                                 document.getElementById("bussPincodeError").style.display = 'block';
@@ -381,7 +381,7 @@ window.onload = OnStart;
                             } else {
                                 document.getElementById('bussPincode').style.borderColor = "#ccc";
                                 document.getElementById("bussPincodeError").style.display = 'none';
-                            }
+                            } */
 
                         }
                     }
@@ -425,7 +425,7 @@ function ValidCaptcha(){
 		var bussAdd2 = removeSpaces(document.getElementById('BusinessAddressLine2').value);
 		var city = removeSpaces(document.getElementById('bussCity').value);
 		var state = removeSpaces(document.getElementById('bussState').value);
-		var pincode = removeSpaces(document.getElementById('bussPincode').value);
+	//	var pincode = removeSpaces(document.getElementById('bussPincode').value);
 		
 		if(kindOfBuss != 7){
 			if(companyName == "" || companyName.length <= 0){
@@ -460,11 +460,11 @@ function ValidCaptcha(){
 				 	status = false;
 				}
 			
-			else if(pincode == "" || pincode.length <= 0){
+		/* 	else if(pincode == "" || pincode.length <= 0){
 					message = 'Please Enter Pincode';
 				  	status = false;
 				}
-			
+			 */
 		}
 		
 		if(!status){

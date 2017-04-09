@@ -95,8 +95,8 @@ public class PersonalInformationTrainee {
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="resCity")
 	private City resCity;
 	
-	@NotNull
-	@Size(min=1, max=6 , message="enter your Pincode")
+	/*@NotNull
+	@Size(min=1, max=6 , message="enter your Pincode")*/
 	private String resPincode;
 	@NotNull
 	@Size(min=1, max=100 , message="enter your correspondenceAddress1")
@@ -109,7 +109,7 @@ public class PersonalInformationTrainee {
 	private State correspondenceState;
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="correspondenceCity")
 	private City correspondenceCity;
-	@NotNull @Size(min=6, max=6 , message="* enter your correspondencePincode ")
+	/*@NotNull @Size(min=6, max=6 , message="* enter your correspondencePincode ")*/
 	private String correspondencePincode;
 
 

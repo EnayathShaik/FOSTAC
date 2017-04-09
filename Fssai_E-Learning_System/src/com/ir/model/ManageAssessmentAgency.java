@@ -42,7 +42,7 @@ public class ManageAssessmentAgency {
 	private String headOfficeDataAddress1;
 	@NotNull
 	private String headOfficeDataAddress2;
-	@NotNull
+	/*@NotNull*/
 	private String pin;
 	@OneToOne (cascade=CascadeType.ALL)  @JoinColumn(name="district")
 	private District district;

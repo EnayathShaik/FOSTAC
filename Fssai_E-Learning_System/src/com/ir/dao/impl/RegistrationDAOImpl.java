@@ -212,7 +212,7 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 			personalInformationTrainee.setResState(cs);
 			personalInformationTrainee.setResCity(cc);
 			personalInformationTrainee.setResidentialDistrict(cd);
-			personalInformationTrainee.setResPincode(registrationFormTrainee.getCorrespondencePincode() == null ? "" : registrationFormTrainee.getCorrespondencePincode().trim());
+			personalInformationTrainee.setResPincode(registrationFormTrainee.getCorrespondencePincode() == null ? "000000" : registrationFormTrainee.getCorrespondencePincode().trim());
 			personalInformationTrainee.setCheckPermanent("true");
 		}else{
 			personalInformationTrainee.setResidentialLine1(registrationFormTrainee.getResidentialAddressLine1() == null ? "" : registrationFormTrainee.getResidentialAddressLine1().trim());
@@ -220,7 +220,7 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 			personalInformationTrainee.setResState(ps);
 			personalInformationTrainee.setResCity(pc);
 			personalInformationTrainee.setResidentialDistrict(pd);
-			personalInformationTrainee.setResPincode(registrationFormTrainee.getResPincode() == null ? "" : registrationFormTrainee.getResPincode().trim());
+			personalInformationTrainee.setResPincode(registrationFormTrainee.getResPincode() == null ? "000000" : registrationFormTrainee.getResPincode().trim());
 			personalInformationTrainee.setCheckPermanent("false");
 			}
 		
@@ -254,7 +254,7 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 				personalInformationTrainee.setBussCity(cc);
 				personalInformationTrainee.setBussDistrict(cd);
 				personalInformationTrainee.setBussState(cs);
-				personalInformationTrainee.setBussPincode(registrationFormTrainee.getCorrespondencePincode() == null ? "" : registrationFormTrainee.getCorrespondencePincode().trim());
+				personalInformationTrainee.setBussPincode(registrationFormTrainee.getCorrespondencePincode() == null ? "000000" : registrationFormTrainee.getCorrespondencePincode().trim());
 				personalInformationTrainee.setCheckCompany("true");
 			}else{
 				personalInformationTrainee.setBusinessAddressLine1(registrationFormTrainee.getBusinessAddressLine1() == null ? "" : registrationFormTrainee.getBusinessAddressLine1().trim());
@@ -264,7 +264,7 @@ public class RegistrationDAOImpl implements RegistrationDAO {
 				personalInformationTrainee.setBussState(bs);
 				personalInformationTrainee.setBussCity(bc);
 				personalInformationTrainee.setBussDistrict(bd);
-				personalInformationTrainee.setBussPincode(registrationFormTrainee.getBussPincode() == null ? "" : registrationFormTrainee.getBussPincode().trim());
+				personalInformationTrainee.setBussPincode(registrationFormTrainee.getBussPincode() == null ? "000000" : registrationFormTrainee.getBussPincode().trim());
 				personalInformationTrainee.setCheckCompany("false");
 	}
 		}

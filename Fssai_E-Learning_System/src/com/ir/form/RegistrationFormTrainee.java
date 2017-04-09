@@ -56,7 +56,7 @@ public class RegistrationFormTrainee {
 	private int resCity;
 	@NotNull
 	private int residentialDistrict;
-	@NotNull @Size(min=6, max=6 , message="enter your Pincode")
+	/*@NotNull @Size(min=6, max=6 , message="enter your Pincode")*/
 	private String resPincode;
 	//@NotNull
 	private int KindOfBusiness;
@@ -84,7 +84,7 @@ public class RegistrationFormTrainee {
 	private int correspondenceState;
 	@NotNull
 	private int correspondenceCity;
-	@NotNull @Size(min=6, max=6 , message="* enter your Pincode")
+	/*@NotNull @Size(min=6, max=6 , message="* enter your Pincode")*/
 	private String correspondencePincode;
 
 	@NotNull

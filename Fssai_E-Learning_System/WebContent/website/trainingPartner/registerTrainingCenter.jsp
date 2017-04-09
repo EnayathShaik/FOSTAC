@@ -248,15 +248,14 @@ function AvoidSpace(event) {
     	    document.getElementById("TrainingPartnerPermanentLine1Error").style.display = 'none';
     	    } 
     	
-    	//TrainingPartnerPermanentLine2
-    	//alert("TrainingPartnerPermanentLine2 Name");
+
     	if(document.getElementById('TrainingPartnerPermanentLine2').value == '') {
     	document.getElementById("TrainingPartnerPermanentLine2").style.borderColor = "red";
     	document.getElementById("TrainingPartnerPermanentLine2Error").style.display = 'block';
     	document.getElementById("TrainingPartnerPermanentLine2").focus();
     	return false;
     	}else{
-    		//alert("TrainingPartnerPermanentLine2 Name*********");
+    		
     	    document.getElementById('TrainingPartnerPermanentLine2').style.borderColor = "#ccc";
     	    document.getElementById("TrainingPartnerPermanentLine2Error").style.display = 'none';
     	    } 
@@ -295,28 +294,11 @@ function AvoidSpace(event) {
         	    document.getElementById("TrainingPartnerPermanentCityError").style.display = 'none';
         	    }
     	   
-    	   
-    	 //TrainingPartnerPermanentPincode
-       	//alert("TrainingPartnerPermanentPincode Name");
-    	var x= document.getElementById('TrainingPartnerPermanentPincode').value;
-       	if(x=='' ||x.length<6) {
-       	document.getElementById("TrainingPartnerPermanentPincode").style.borderColor = "red";
-       	document.getElementById("TrainingPartnerPermanentPincodeError").style.display = 'block';
-       	document.getElementById("TrainingPartnerPermanentPincode").focus();
-       	return false;
-       	}else{
-       		//alert("TrainingPartnerPermanentPincode Name*********");
-       	    document.getElementById('TrainingPartnerPermanentPincode').style.borderColor = "#ccc";
-       	    document.getElementById("TrainingPartnerPermanentPincodeError").style.display = 'none';
-       	    } 
-       	
-      //TrainingPartnerPermanentEmail
-       //	alert("TrainingPartnerPermanentEmail Name");
+
        	 var x =document.getElementById('TrainingPartnerPermanentEmail').value;
          var atpos = x.indexOf("@");
          var dotpos = x.lastIndexOf(".");
          if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
-         //  ////alert("Not a valid e-mail address");
 		document.getElementById('TrainingPartnerPermanentEmail').style.borderColor = "red";
         document.getElementById("TrainingPartnerPermanentEmailError").style.display = 'block';
         document.getElementById("TrainingPartnerPermanentEmail").focus();
@@ -325,9 +307,7 @@ function AvoidSpace(event) {
         	document.getElementById('TrainingPartnerPermanentEmail').style.borderColor = "#ccc";
             document.getElementById("TrainingPartnerPermanentEmailError").style.display = 'none';
         } 
-    	
-       	//TrainingPartnerPermanentMobile
-	  	//alert("TrainingPartnerPermanentMobile Name");
+  
        var x=document.getElementById('TrainingPartnerPermanentMobile').value;
        if(x!=''){
        	if(x.length<10) {
@@ -342,8 +322,7 @@ function AvoidSpace(event) {
        	    document.getElementById("TrainingPartnerPermanentMobileError").style.display = 'none';
        	    } 
        	
-       //	SeatCapacityPerSession
-     // alert("SeatCapacityPerSession Name");
+
        	if(document.getElementById('SeatCapacityPerSession').value == '') {
        	document.getElementById("SeatCapacityPerSession").style.borderColor = "red";
        	document.getElementById("SeatCapacityPerSessionError").style.display = 'block';
@@ -356,9 +335,6 @@ function AvoidSpace(event) {
        	    } 
 
       
-          	
-          	 // NoOfYearsInBusinessOfTraining
-          	//alert("NoOfYearsInBusinessOfTraining");
           	if(document.getElementById('NoOfYearsInBusinessOfTraining').value == '') {
           	document.getElementById("NoOfYearsInBusinessOfTraining").style.borderColor = "red";
           	document.getElementById("NoOfYearsInBusinessOfTrainingError").style.display = 'block';
@@ -371,8 +347,6 @@ function AvoidSpace(event) {
           	    } 
           	
 
-         	 // NoOfYearsInBusinessOfTraining
-         	//alert("NoOfYearsInBusinessOfTraining");
          	if(document.getElementById('NoOfYearsInBusinessOfTraining').value == '') {
          	document.getElementById("NoOfYearsInBusinessOfTraining").style.borderColor = "red";
          	document.getElementById("NoOfYearsInBusinessOfTrainingError").style.display = 'block';
@@ -383,9 +357,7 @@ function AvoidSpace(event) {
          	    document.getElementById('NoOfYearsInBusinessOfTraining').style.borderColor = "#ccc";
          	    document.getElementById("NoOfYearsInBusinessOfTrainingError").style.display = 'none';
          	    } 
-         	
-         //	NoOfTrainingSessionWishToConductInAMonth
-         	//alert("NoOfTrainingSessionWishToConductInAMonth");
+         
          	if(document.getElementById('NoOfTrainingSessionWishToConductInAMonth').value == '') {
          	document.getElementById("NoOfTrainingSessionWishToConductInAMonth").style.borderColor = "red";
          	document.getElementById("NoOfTrainingSessionWishToConductInAMonthError").style.display = 'block';

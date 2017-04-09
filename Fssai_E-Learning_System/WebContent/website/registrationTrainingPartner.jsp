@@ -344,7 +344,7 @@ function AvoidSpace(event) {
     	   
     	 //TrainingPartnerPermanentPincode
        	//alert("TrainingPartnerPermanentPincode Name");
-    	var x= document.getElementById('TrainingPartnerPermanentPincode').value;
+  /*   	var x= document.getElementById('TrainingPartnerPermanentPincode').value;
        	if(x=='' ||x.length<6) {
        	document.getElementById("TrainingPartnerPermanentPincode").style.borderColor = "red";
        	document.getElementById("TrainingPartnerPermanentPincodeError").style.display = 'block';
@@ -354,7 +354,7 @@ function AvoidSpace(event) {
        		//alert("TrainingPartnerPermanentPincode Name*********");
        	    document.getElementById('TrainingPartnerPermanentPincode').style.borderColor = "#ccc";
        	    document.getElementById("TrainingPartnerPermanentPincodeError").style.display = 'none';
-       	    } 
+       	    }  */
        	
       //TrainingPartnerPermanentEmail
        //	alert("TrainingPartnerPermanentEmail Name");

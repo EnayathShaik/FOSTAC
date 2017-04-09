@@ -240,7 +240,7 @@ function removeSpaces(string)
                 	    document.getElementById("TrainingCenterCorrespondenceCityError").style.display = 'none';
                 	    }
                 	    
-        	    var x=document.getElementById("TrainingCenterCorrespondencePincode").value;
+        /* 	    var x=document.getElementById("TrainingCenterCorrespondencePincode").value;
             	if(x =="" || x.length<6 ) 
                 	    {
                     		////alert("IN Fname");
@@ -252,7 +252,7 @@ function removeSpaces(string)
                     	else{
                     	    document.getElementById('TrainingCenterCorrespondencePincode').style.borderColor = "#ccc";
                     	    document.getElementById("TrainingCenterCorrespondencePincodeError").style.display = 'none';
-                    	    }
+                    	    } */
                     	
                     /* 	    var x =document.getElementById('TrainingCenterPermanentEmail').value;
                     	    var atpos = x.indexOf("@");
@@ -366,7 +366,7 @@ function removeSpaces(string)
                                             	    }
                     	    
                                     	    
-                                       	    
+                                       	    /* 
                                     	    var x=document.getElementById("TrainingCenterPermanentPincode").value;
                                         	if(x =="" || x.length<6 ) 
                                             	    {
@@ -379,7 +379,7 @@ function removeSpaces(string)
                                                 	else{
                                                 	    document.getElementById('TrainingCenterPermanentPincode').style.borderColor = "#ccc";
                                                 	    document.getElementById("TrainingCenterPermanentPincodeError").style.display = 'none';
-                                                	    }
+                                                	    } */
                                                 	    
                                                 	    
                                         	 if(document.getElementById("FoodSafetyExpBackground").selectedIndex == 0) {

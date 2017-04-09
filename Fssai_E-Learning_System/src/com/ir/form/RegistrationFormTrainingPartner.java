@@ -41,7 +41,7 @@ public class RegistrationFormTrainingPartner {
 	private int TrainingPartnerPermanentDistrict;
 	@NotNull(message="* Select City")
 	private int TrainingPartnerPermanentCity;
-	@NotNull @Size(min=6, max=6 , message="* Enter Valid PIN Code")
+	/*@NotNull @Size(min=6, max=6 , message="* Enter Valid PIN Code")*/
 	private String TrainingPartnerPermanentPincode;
 	
 	private String TrainingPartnerPermanentEmail;
@@ -204,36 +204,21 @@ public class RegistrationFormTrainingPartner {
 	public void setSeatCapacityPerSession(String seatCapacityPerSession) {
 		SeatCapacityPerSession = seatCapacityPerSession;
 	}
-/*	public String getNoOfInHouseTrainers() {
-		return NoOfInHouseTrainers;
-	}
-	public void setNoOfInHouseTrainers(String noOfInHouseTrainers) {
-		NoOfInHouseTrainers = noOfInHouseTrainers;
-	}*/
+
 	public String getAvailabiltyOfTVProjector() {
 		return AvailabiltyOfTVProjector;
 	}
 	public void setAvailabiltyOfTVProjector(String availabiltyOfTVProjector) {
 		AvailabiltyOfTVProjector = availabiltyOfTVProjector;
 	}
-/*	public String getNoOfYearsInBusinessOfTraining() {
-		return NoOfYearsInBusinessOfTraining;
-	}
-	public void setNoOfYearsInBusinessOfTraining(String noOfYearsInBusinessOfTraining) {
-		NoOfYearsInBusinessOfTraining = noOfYearsInBusinessOfTraining;
-	}*/
+
 	public String getAvailabiltyOfInHouseTrainersInFoodSafety() {
 		return AvailabiltyOfInHouseTrainersInFoodSafety;
 	}
 	public void setAvailabiltyOfInHouseTrainersInFoodSafety(String availabiltyOfInHouseTrainersInFoodSafety) {
 		AvailabiltyOfInHouseTrainersInFoodSafety = availabiltyOfInHouseTrainersInFoodSafety;
 	}
-/*	public String getNoOfTrainingSessionWishToConductInAMonth() {
-		return NoOfTrainingSessionWishToConductInAMonth;
-	}
-	public void setNoOfTrainingSessionWishToConductInAMonth(String noOfTrainingSessionWishToConductInAMonth) {
-		NoOfTrainingSessionWishToConductInAMonth = noOfTrainingSessionWishToConductInAMonth;
-	}*/
+
 	public String getBasicCourse() {
 		return BasicCourse;
 	}

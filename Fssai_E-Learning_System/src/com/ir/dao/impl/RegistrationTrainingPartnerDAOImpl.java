@@ -308,7 +308,7 @@ public class RegistrationTrainingPartnerDAOImpl implements RegistrationTrainingP
 		personalInformationTrainingPartner.setTrainingPartnerPermanentState(registrationFormTrainingPartner.getTrainingPartnerPermanentState());
 		personalInformationTrainingPartner.setTrainingPartnerPermanentDistrict(registrationFormTrainingPartner.getTrainingPartnerPermanentDistrict());
 		personalInformationTrainingPartner.setTrainingPartnerPermanentCity(registrationFormTrainingPartner.getTrainingPartnerPermanentCity());
-		personalInformationTrainingPartner.setTrainingPartnerPermanentPincode(registrationFormTrainingPartner.getTrainingPartnerPermanentPincode().trim());
+		personalInformationTrainingPartner.setTrainingPartnerPermanentPincode((registrationFormTrainingPartner.getTrainingPartnerPermanentPincode().trim() == null ? "" : registrationFormTrainingPartner.getTrainingPartnerPermanentPincode().trim()));
 		System.out.println(registrationFormTrainingPartner.getTrainingPartnerPermanentEmail()  + "email is "+registrationFormTrainingPartner.getTrainingPartnerPermanentPincode().length());
 		String email= registrationFormTrainingPartner.getTrainingPartnerPermanentEmail();
 		System.out.println("email is"+email);

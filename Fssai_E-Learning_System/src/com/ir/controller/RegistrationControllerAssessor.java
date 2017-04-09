@@ -72,6 +72,8 @@ public class RegistrationControllerAssessor implements Serializable{
 		new ZLogger("registerAssessor", "Assessor Registration Form Submitting Starting............" , "RegistrationControllerAssessor.java");
 		try{
 			if(bindingResult.hasErrors()){
+				new ZLogger("registrationForm", "bindingResult.hasErrors  "+bindingResult.hasErrors() , "RegistrationControllerAssessor.java");
+				new ZLogger("registrationForm", "bindingResult.hasErrors  "+bindingResult.getErrorCount() +" All Errors "+bindingResult.getAllErrors(), "RegistrationControllerAssessor.java");
 				return "registrationFormAssessor";
 			}
 			String personalInformationAssessor = null;

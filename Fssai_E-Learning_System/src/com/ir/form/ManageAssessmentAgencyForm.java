@@ -17,7 +17,7 @@ public class ManageAssessmentAgencyForm {
 	private String headOfficeDataAddress1;
 	@NotNull
 	private String headOfficeDataAddress2;
-	@NotNull
+/*	@NotNull*/
 	private String pin;
 	@NotNull
 	private int district;

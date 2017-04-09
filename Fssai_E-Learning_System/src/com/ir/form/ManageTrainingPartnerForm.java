@@ -20,7 +20,7 @@ public class ManageTrainingPartnerForm {
 	private String headOfficeDataAddress1;
 	@NotNull(message="* error")
 	private String headOfficeDataAddress2;
-	@NotNull(message="* error")
+	/*@NotNull(message="* error")*/
 	private String pin;
 	@NotNull
 	private int district;

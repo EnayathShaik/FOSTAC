@@ -80,16 +80,12 @@
 			//$("#AssessorPermanentPincode").attr('readonly',true);
 			document.getElementById('AssessorrPermanentState').value = document.getElementById('AssessorCorrespondenceState').value;
 			$("#AssessorrPermanentState").trigger("change");
-			//$("#AssessorrPermanentState").attr("disabled" , true);
 			window.setTimeout(function(){
-				//console.log("district "+ document.getElementById('AssessorCorrespondenceDistrict').value);
 				$("#AssessorPermanentDistrict").val($("#AssessorCorrespondenceDistrict").val());
 				$("#AssessorPermanentDistrict").trigger("change");
-				//$("#AssessorPermanentDistrict").attr('disabled',true);
 			 }, 3000);
 			
 				window.setTimeout(function(){
-					//console.log(" city "+ document.getElementById('AssessorCorrespondenceCity').value);
 					$("#AssessorPermanentCity").val($("#AssessorCorrespondenceCity").val())
 			}, 4000);
 			
@@ -150,17 +146,6 @@
 			document.getElementById('AadharNumber').style.color = "#ccc";
 			document.getElementById('errorAadharNumber').style.display = 'none';
 		}
-
-/* 		if (document.getElementById('UserId').value == null) {
-			document.getElementById('UserId').focus();
-			document.getElementById('UserId').style.borderColor = "red";
-			document.getElementById('errorUserId').style.display = 'block';
-			return false;
-		} else {
-			document.getElementById('UserId').style.borderColor = "#ccc";
-			document.getElementById('errorUserId').style.display = 'none';
-		} */
-
 		if (document.getElementById('Title').value == null) {
 			document.getElementById('Title').focus();
 			document.getElementById('Title').style.borderColor = "red";
@@ -281,16 +266,6 @@
 			document.getElementById('AssessorCorrespondenceCityError').style.display = 'none';
 		}
 
-		if (document.getElementById('AssessorCorrespondencePincode').value == null) {
-			document.getElementById('AssessorCorrespondencePincode').focus();
-			document.getElementById('AssessorCorrespondencePincode').style.borderColor = "red";
-			document.getElementById('errorAssessorCorrespondencePincode').style.display = 'block';
-			return false;
-		} else {
-			document.getElementById('AssessorCorrespondencePincode').style.borderColor = "#ccc";
-			document.getElementById('errorAssessorCorrespondencePincode').style.display = 'none';
-		}
-
 		if (document.getElementById('AssessorPermanentEmail').value == null) {
 			document.getElementById('AssessorPermanentEmail').focus();
 			document.getElementById('AssessorPermanentEmail').style.borderColor = "red";
@@ -361,15 +336,6 @@
 			document.getElementById('AssessorPermanentCityError').style.display = 'none';
 		}
 
-		if (document.getElementById('AssessorPermanentPincode').value == null) {
-			document.getElementById('AssessorPermanentPincode').focus();
-			document.getElementById('AssessorPermanentPincode').style.borderColor = "red";
-			document.getElementById('AssessorPermanentPincodeError').style.display = 'block';
-			return false;
-		} else {
-			document.getElementById('AssessorPermanentPincode').style.borderColor = "#ccc";
-			document.getElementById('AssessorPermanentPincodeError').style.display = 'none';
-		}
 
 		if (document.getElementById('ReleventExpOfAuditInMonth').value == null) {
 			document.getElementById('ReleventExpOfAuditInMonth').focus();

@@ -67,8 +67,8 @@ public class RegistrationFormTrainer {
 	private int TrainingCenterPermanentDistrict;
 	@NotNull
 	private int TrainingCenterPermanentCity;
-	@NotNull
-	@Size(min=1, max=6 , message="* error")
+	/*@NotNull
+	@Size(min=1, max=6 , message="* error")*/
 	private String TrainingCenterPermanentPincode;
 	//@NotNull @Email(message="& error")
 	private String TrainingCenterPermanentEmail;
@@ -87,8 +87,8 @@ public class RegistrationFormTrainer {
 	private int TrainingCenterCorrespondenceDistrict;
 	@NotNull
 	private int TrainingCenterCorrespondenceCity;
-	@NotNull
-	@Size(min=6, max=6 , message="* error")
+	/*@NotNull
+	@Size(min=6, max=6 , message="* error")*/
 	private String TrainingCenterCorrespondencePincode;
 
 	// *****************************//

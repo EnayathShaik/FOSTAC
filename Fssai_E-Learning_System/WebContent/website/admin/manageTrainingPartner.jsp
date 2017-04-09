@@ -22,10 +22,7 @@
                     var stateId = $("#state").val();
                     var district = $("#district").val();
                     var city = $("#city").val();
-                  /*   if (userID == "" || userID.length <= 0) {
-                        alert('Please Enter User ID')
-                        status = false;
-                    } else */ if (trainingPartnerName == "" || trainingPartnerName.length <= 0) {
+                	 if (trainingPartnerName == "" || trainingPartnerName.length <= 0) {
                         alert('Please Enter Training Partner Name.')
                         status = false;
                     } else if (websiteURL == "" || websiteURL.length <= 0) {
@@ -43,10 +40,7 @@
                     } else if (headOfficeDataAddress2 == "" || headOfficeDataAddress2.length <= 0) {
                         alert('Please Enter Address 2.')
                         status = false;
-                    } else if (pin == "" || pin.length <= 0) {
-                        alert('Please Enter Pincode.')
-                        status = false;
-                    } else if (stateId == 0 || stateId == "" || stateId.length <= 0) {
+                    }else if (stateId == 0 || stateId == "" || stateId.length <= 0) {
                         alert('Please Select State.')
                         status = false;
                     } else if (district == 0 || district == "" || district.length <= 0) {
@@ -62,9 +56,7 @@
                 }
 
                 function OnStart() {
-                    ////alert('s');
-                    //updateDiv();
-                    //searchDataTP('ALL');
+               
                 }
                 window.onload = OnStart;
 
@@ -93,38 +85,6 @@
                 }
 
 
-                function checkname() {
-                    var name = document.getElementById("userId").value;
-
-                    if (name) {
-                        $.ajax({
-                            type: 'post',
-                            url: 'checkdata.jspp?' + name,
-                            data: {
-                                user_name: name,
-                            },
-
-                            success: function(response) {
-                                $('#name_status').html(response);
-
-                                if (response.trim() == 'Already') {
-                                    document.getElementById('userId').value = "";
-                                    document.getElementById("register").style.display = 'none';
-                                    return false;
-
-                                } else {
-                                    var aa = $('#name_status').html(response);
-                                    document.getElementById("register").style.display = 'block';
-                                    return true;
-                                }
-                            }
-                        });
-                    } else {
-                        $('#name_status').html("");
-                        document.getElementById("register").style.display = 'none';
-                        return false;
-                    }
-                }
 
   
 

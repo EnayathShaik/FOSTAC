@@ -78,7 +78,7 @@ public class PersonalInformationTrainingPartner {
 	private int TrainingPartnerPermanentDistrict;
 	@NotNull(message="* Select City")
 	private int TrainingPartnerPermanentCity;
-	@NotNull @Size(min=6, max=6 , message="* Enter Valid PIN Code")
+	/*@NotNull @Size(min=6, max=6 , message="* Enter Valid PIN Code")*/
 	private String TrainingPartnerPermanentPincode;
 	@Email(message="* Enter Valid Email Id")
 	private String TrainingPartnerPermanentEmail;
