@@ -52,40 +52,35 @@
                     $("#viewfeedback > tbody").html("");
                     var courseType = $("#selCourseType").val();
                     var courseName = $("#selCourseName").val();
-                    var trainee = $("#selTrainee").val();
-                    /* var trainingDate = $("#traningDate").val();
-                    var traningTime =  $("#traningTime").val();
-                    var status = $('#selTraineeStatus').val(); */
+                    if(courseType == null || courseType == '' || courseType == 0 || courseName == '' || courseName == 0 || courseName == null){
+                    	alert('Please select course type & course name')
+                    }else{
+                    	var trainee = $("#selTrainee").val();
+                        $(".displayNone").css("display", "block");
+                        //var	total = courseType+"&"+courseName+"&"+trainingDate+"&"+traningTime+"&"+status;
+                        var total = courseType + "&" + courseName + "&" + trainee;
+                        console.log("total " + total);
+                        //var total = "";
+                        var result = "";
+                        $.ajax({
+                            type: 'post',
+                            url: 'traineeCenterViewFeedBack.jspp?' + total,
+                            async: false,
+                            success: function(data) {
+                                $('#newTable').show();
+                                //var mainData = JSON.stringify(data);
+                                var mainData1 = jQuery.parseJSON(data);
+                                var j = 1;
+                                //$('#newTable tr').remove();
+                                $.each(mainData1, function(i, obj) {
+                                    $('#newTable').append('<tr id="tableRow"><td>' + j++ + '</td><td>' + obj[0] + '</td><td>' + obj[1] + '</td><td>' + obj[2] + '</td><td>' + obj[3] + '</td><td>' + obj[4] + '</td></tr>');
 
-                    //alert("courseType "+courseType);
-                    /* alert("courseName "+courseName);
-                    alert("trainingDate "+trainingDate);
-                    alert("traningTime "+traningTime);
-                    alert("status "+status);  */
-
-                    $(".displayNone").css("display", "block");
-                    //var	total = courseType+"&"+courseName+"&"+trainingDate+"&"+traningTime+"&"+status;
-                    var total = courseType + "&" + courseName + "&" + trainee;
-                    console.log("total " + total);
-                    //var total = "";
-                    var result = "";
-                    $.ajax({
-                        type: 'post',
-                        url: 'traineeCenterViewFeedBack.jspp?' + total,
-                        async: false,
-                        success: function(data) {
-                            $('#newTable').show();
-                            //var mainData = JSON.stringify(data);
-                            var mainData1 = jQuery.parseJSON(data);
-                            var j = 1;
-                            //$('#newTable tr').remove();
-                            $.each(mainData1, function(i, obj) {
-                                $('#newTable').append('<tr id="tableRow"><td>' + j++ + '</td><td>' + obj[0] + '</td><td>' + obj[1] + '</td><td>' + obj[2] + '</td><td>' + obj[3] + '</td><td>' + obj[4] + '</td></tr>');
-
-                            });
-                        }
-                    });
-                    return false;
+                                });
+                            }
+                        });
+                     }
+                    
+                    
                 }
 
             </script>

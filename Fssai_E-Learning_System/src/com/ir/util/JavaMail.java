@@ -24,6 +24,11 @@ public class JavaMail {
 	private String to;
 	private String subject = "FSSAI Support";
 	private String body;
+	
+	public static void main(String[] args) {
+		System.out.println("34543");
+		new JavaMail().mailProperty("sdfd", "jyotimekal3@gmail.com", "sdfd", "sdfds", "sdfsdf");
+	}
 
 	static Properties properties = new Properties();
 	static {
@@ -75,13 +80,14 @@ public class JavaMail {
 	                emailMessage.append("Your User ID "+id+" has been created successfully with password : "+pass);
 	                emailMessage.append("<br/>");
 	                emailMessage.append("<br/>");
-	               emailMessage.append("You can login using this Link :");
+	               emailMessage.append("You can login using this Link : http://localhost:8081/Fssai_E-Learning_System");
 	               emailMessage.append("<a href=\"google.com\">Click Here</a>");  
 	                emailMessage.append("<br/>");
 	                emailMessage.append(" Regards");
 	                }else{
 	                    emailMessage.append("<br/>");
 		                emailMessage.append("<br/>");
+		                emailMessage.append("You can login using this Link : http://localhost:8081/Fssai_E-Learning_System");
 		                emailMessage.append("Your course training course completed successfully ,");
 		                emailMessage.append("<br/>");
 		                emailMessage.append("<br/>");

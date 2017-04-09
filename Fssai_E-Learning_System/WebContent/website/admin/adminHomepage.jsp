@@ -6,8 +6,9 @@
 <!--
 
 #myDIV {
+text-align: center;
   width: 146px;
-  height: 110px;
+  height: 171px;
   margin: 5px;
   float: left;
   overflow: hidden;
@@ -20,6 +21,10 @@
   display:inline-block;
 }
 
+.font-dashboard {
+	    font-size: 20px;
+}
+
 .element .symbol {
  left: 0.2em;
     top: 0.4em;
@@ -29,11 +34,13 @@
 }
 
 .number {
-       font-size: 1.25em;
+		text-align: center;
+       font-size: 4.25em;
     font-weight: bold;
     color: hsla(0,0%,0%,.5);
     right: 0.5em;
     top: 0.5em;
+        margin-top: 10px;
 }
 .clickable .element:hover {
   cursor: pointer;
@@ -182,29 +189,29 @@
                                     
                                     <fieldset>
                                     
-                                    <div id="myDIV" style="background-color: #F80;">
+                                    <div id="myDIV" style="background-color: #f2dede;;">
                                       <p class="number">${traineeCount}</p>
-                                      <h3 class="symbol"><a href="traineeUserManagementForm.fssai?Name=callSubmit"> Trainee</a></h3>
+                                      <h3 class="symbol font-dashboard"><a href="traineeUserManagementForm.fssai?Name=callSubmit"> Trainee</a></h3>
                                       </div>&nbsp;&nbsp;
-                                     <div id="myDIV" style="background-color: #cc0;">
+                                     <div id="myDIV" style="background-color: #dff0d8;">
                                       <p class="number">${trainerCount}</p>
-                                      <h3 class="symbol"><a href="trainerUserManagementForm.fssai?Name=callSubmit">Trainer</a></h3> 
+                                      <h3 class="symbol font-dashboard"><a href="trainerUserManagementForm.fssai?Name=callSubmit">Trainer</a></h3> 
 									</div>&nbsp;&nbsp;
-                                      <div id="myDIV" style="background-color: #0FF;">
+                                      <div id="myDIV" style="background-color: e6e6e6;">
                                          <p class="number">${trainingCenterCount}</p>
-                                      <h3 class="symbol"><a href="trainingCenterUserManagementForm.fssai?Name=callSubmit">Training Center</a></h3>
+                                      <h3 class="symbol font-dashboard"><a href="trainingCenterUserManagementForm.fssai?Name=callSubmit">Training Center</a></h3>
                                        </div>&nbsp;&nbsp;
-                                       <div id="myDIV" style="background-color: #cc0;"> 
-                                        <p class="number">${trainingPartnerCount}</p>
-                                      <h3 class="symbol"><a href="manageTrainingPartnerForm.fssai?Name=callSubmit">Training Partner</a></h3>
+                                       <div id="myDIV" style="background-color: #fcf8e3;"> 
+                                        <p class="number ">${trainingPartnerCount}</p>
+                                      <h3 class="symbol font-dashboard"><a href="manageTrainingPartnerForm.fssai?Name=callSubmit">Training Partner</a></h3>
                                        </div>&nbsp;&nbsp;
-                                        <div id="myDIV" style="background-color: #F80;"> 
+                                        <div id="myDIV" style="background-color: #f5f5f5;"> 
                                          <p class="number">${assessorCount}</p>
-                                      	<h3 class="symbol"><a href="assessorUserManagementForm.fssai?Name=callSubmit">Assessor</a></h3>
+                                      	<h3 class="symbol font-dashboard"><a href="assessorUserManagementForm.fssai?Name=callSubmit">Assessor</a></h3>
                                         </div>&nbsp;&nbsp;
-                                       <div id="myDIV" style="background-color: #cc0;"> 
+                                       <div id="myDIV" style="background-color: #c0c0c0;"> 
                                         <p class="number">${assessmentagencyCount}</p>
-                                      	<h3 class="symbol"><a href="manageAssessmentAgencyForm.fssai?Name=callSubmit">Assessment Agency</a></h3>
+                                      	<h3 class="symbol font-dashboard"><a href="manageAssessmentAgencyForm.fssai?Name=callSubmit">Assessment Agency</a></h3>
                                        </div>&nbsp;&nbsp;
                                     
                                     </fieldset>
