@@ -170,7 +170,7 @@ function showDetails(){
                             </ul>
                           </div>
 						<cf:select path="courseType" id="courseType" name="courseType" class="form-control" onchange="getCourseName(this.value ,'courseName' );">
-						<cf:option value="" label="Select Course Type" />
+						<cf:option value="0" label="Select Course Type" />
 						<cf:options items="${courseTypeList}" itemValue="CourseTypeId" itemLabel="CourseType"/>
 						</cf:select>
                         </div>
@@ -221,7 +221,7 @@ function showDetails(){
 														<cf:select path="courseName" id="courseName"
 															name="courseName" class="form-control"
 															onchange="getBatch(this.value , 'batchCode')">
-															<cf:option value="" label="Select Course Code" />
+															<cf:option value="0" label="Select Course Code" />
 														</cf:select>
 													</div>
 
