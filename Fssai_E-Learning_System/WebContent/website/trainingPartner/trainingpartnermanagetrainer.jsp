@@ -5,9 +5,35 @@
 
 <script>
 
- 	function showDetails() {
-		
-		
+function showDetails() {
+	
+	
+ 	var courseType =  ($("#selCourseType").val() == 0 || $("#selCourseType").val() == null ? "" : $("#selCourseType").val());
+ 	var trainername =  ($('#selTrainerName').val() == 0 || $('#selTrainerName').val() == null ? "" : $('#selTrainerName').val() );
+	var courseName =  ($("#selCourseName").val() == 0 || $("#selCourseName").val() == null ? "" : $("#selCourseName").val()) ;
+	var result = "";
+$(".displayNone").css("display", "block");
+var total = "courseType="+courseType+"&courseName="+courseName+"&trainerName="+trainername;
+$.ajax({
+	type : 'post',
+	url : 'trainingpartnermanagetrainer.jspp?' + total,
+	async : false,
+	success : function(data) {
+		$('#newTable').show();
+		var mainData1 = jQuery.parseJSON(data);
+		var j = 1;
+		$('#newTable tr').remove();
+		$.each(mainData1, function(i, obj) {
+			$('#newTable').append(
+					'<tr id="tableRow"><td>' + j++ + '</td><td>' + obj[1]+ '</td><td>' + obj[2] + '</td><td><a href="#" onClick="removeTrainer(\''+obj[3]+'\');">Remove Trainer</a> </td></tr>');
+
+		});
+	}
+});
+return result;
+}
+
+ 	function showDetailsNew() {
 		 	var courseType =  ($("#selCourseType").val() == 0 || $("#selCourseType").val() == null ? "" : $("#selCourseType").val());
 		 	var trainername =  ($('#selTrainerName').val() == 0 || $('#selTrainerName').val() == null ? "" : $('#selTrainerName').val() );
 			var courseName =  ($("#selCourseName").val() == 0 || $("#selCourseName").val() == null ? "" : $("#selCourseName").val()) ;
