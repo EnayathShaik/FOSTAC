@@ -282,13 +282,23 @@ public class TrainingPartnerController {
 			new ZLogger("trainingpartnertrainingcalendar", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "TrainingPartnerController.java");
 			return "trainingpartnertrainingcalendar";
 		}
+		int prifileId = (int) session.getAttribute("profileId");
+		System.out.println("prifileId "+prifileId);
+		if(prifileId == 7){
+			int partnerId = (int) session.getAttribute("partnerId");
+			List<IntStringBean> trainingPartnerList = trainingPartnerService.loadTrainingPartnerList(partnerId);
+			trainingPartnerTrainingCalender.setTrainingPartnerList(trainingPartnerList);
+		}
+		
 
 		List<CourseType> courseTypes = trainingPartnerService.courseTypes();
 		trainingPartnerTrainingCalender.setCourseTypes(courseTypes);
 		List<IntStringBean> trainerList = trainingPartnerService.getTrainerList();
 		List<IntStringBean> assessmentAgencyNameList = trainingPartnerService.loadAssessmentAgency();
+		
 		trainingPartnerTrainingCalender.setAssessmentAgencyName(assessmentAgencyNameList);
 		trainingPartnerTrainingCalender.setTrainerList(trainerList);
+		
 		Gson gson = new Gson();
 		model.addAttribute("trainingPartnerTrainingCalender" , gson.toJson(trainingPartnerTrainingCalender));
 		return "trainingpartnertrainingcalendar";
@@ -637,10 +647,18 @@ public class TrainingPartnerController {
 			}
 			Integer profileID = 0;
 			int loginId = 0;
+			int tableID = 0;
 				profileID = (Integer) session.getAttribute("profileId");
-				loginId = (int) session.getAttribute("loginIdUnique");
-				int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
-		     
+				System.out.println("profileID "+profileID);
+				if(profileID !=7){
+					loginId = (int) session.getAttribute("loginIdUnique");
+					tableID = traineeService.getTableIdForEnrolmentID(loginId, profileID);
+					System.out.println(" tableID "+tableID);
+				}else {
+					tableID =  trainingPartnerCalendarForm.getTrainingCenter();
+				}
+				
+		     System.out.println(" tableID "+tableID);
 			TrainingCalendarForm trainingCalendarForm = new TrainingCalendarForm();
 			trainingPartnerService.setTrainingCalanderDeatils(trainingCalendarForm, trainingPartnerCalendarForm.getLoginId());
 			trainingCalendarForm.setCourseName(trainingPartnerCalendarForm.getSelCourseName());

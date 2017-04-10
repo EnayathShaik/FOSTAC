@@ -202,6 +202,12 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 		List<IntStringBean> loadAssessmentAgency = trainingPartnerDAO.loadAssessmentAgency();
 		return loadAssessmentAgency;
 	}
+	@Override
+	@Transactional
+	public List<IntStringBean> loadTrainingPartnerList(int id) {
+		List<IntStringBean> loadTrainingPartnerList = trainingPartnerDAO.loadTrainingPartnerList(id);
+		return loadTrainingPartnerList;
+	}
 	
 	//getBatchCodeList
 	

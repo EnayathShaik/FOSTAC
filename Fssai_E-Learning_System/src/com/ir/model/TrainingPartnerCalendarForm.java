@@ -14,6 +14,8 @@ public class TrainingPartnerCalendarForm {
 	private String seatCapacity;
 	private String type;
 	private String userName;
+	private int trainingPartner;
+	private int trainingCenter;
 
 	
 	public String getUserName() {
@@ -97,7 +99,21 @@ public class TrainingPartnerCalendarForm {
 	public void setSelTrainerNames(String selTrainerNames) {
 		this.selTrainerNames = selTrainerNames;
 	}
+	
+	
 
+	public int getTrainingPartner() {
+		return trainingPartner;
+	}
+	public void setTrainingPartner(int trainingPartner) {
+		this.trainingPartner = trainingPartner;
+	}
+	public int getTrainingCenter() {
+		return trainingCenter;
+	}
+	public void setTrainingCenter(int trainingCenter) {
+		this.trainingCenter = trainingCenter;
+	}
 	@Override
 	public String toString() {
 		return "TrainingPartnerCalendarForm [selCourseType=" + selCourseType

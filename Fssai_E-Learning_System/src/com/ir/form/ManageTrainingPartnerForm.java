@@ -8,7 +8,7 @@ public class ManageTrainingPartnerForm {
 	
 	//@NotNull(message="* error")
 	private String userId;
-	@NotNull(message="* error")
+	/*@NotNull(message="* error")*/
 	private String PAN;
 	@NotNull(message="* error")
 	private String trainingPartnerName;

@@ -5,13 +5,27 @@
 <script>
 function OnStart(){
 
-	
 	 window.profileId = ${profileId};
+	$("#trainingPartner").val('${profileId}');
+	
+
 	
 	if(window.profileId == 6 ){
 		
 		document.getElementById('btnCreate').style.display = 'none';
+	
 	}
+	
+	
+	
+	if(window.profileId == 5 ){
+		
+		document.getElementById('trainingPart').style.display = 'none';
+		document.getElementById('trainingCent').style.display = 'none';
+	
+	}
+	
+	
 	
 	 window.trainingEndDate =   flatpickr('[name="trainingEndDate"]' , {
 		enableTime: true
@@ -217,6 +231,7 @@ window.onload = OnStart;
 								<div class="col-xs-12">
 									<fieldset>
 										<legend>
+										
 											<h3>Training Calendar</h3>
 										</legend>
 										<script type="text/javascript">
@@ -225,6 +240,7 @@ window.onload = OnStart;
 											var courseTypes = formData.courseTypes;
 											var trainerList = formData.trainerList;
 											var assessmentAgencyNameList = formData.assessmentAgencyName;
+											var trainingPartnerList = formData.trainingPartnerList;
 											
 										</script>
 
@@ -333,6 +349,32 @@ window.onload = OnStart;
 														</select>
 													</div>
 					
+											<div class="form-group" id="trainingPart" >
+                          						<label>Training Partner</label> &nbsp;&nbsp;
+											 	<select class="form-control" name="trainingPartner" onchange="getTrainingCenter(this.value , 'trainingCenter');"
+															id="trainingPartner">
+														</select>
+														<script>
+														console.log("length "+trainingPartnerList.length);
+															var trainingPartnerListOptions = "";//"<option disabled selected value='0'> -- select training partner -- </option>";
+															for ( var i = 0; i < trainingPartnerList.length; i++) {
+																trainingPartnerListOptions += "<option value="+trainingPartnerList[i].id+">"
+																		+ trainingPartnerList[i].value
+																		+ "</option>"
+
+															}
+															document
+																	.getElementById('trainingPartner').innerHTML += trainingPartnerListOptions;
+															document.getElementById('trainingPartner').value = '${partnerId}';
+														
+															
+														</script>
+ 
+                       							 </div>
+													
+													
+
+
 												</div>
 
 												<!-- right side -->
@@ -409,7 +451,23 @@ window.onload = OnStart;
 															id="assessorName">
 														</select>
 													</div>
-                                                	<input type="hidden" path="userName" name="userName" value="${userName}">
+
+													<div class="form-group" id="trainingCent" >
+														<div>
+															<ul class="lab-no">
+																<li class="style-li"><strong>Training
+																		Center:</strong></li>
+																<li class="style-li error-red"></li>
+															</ul>
+														</div>
+										
+															<select class="form-control" name="trainingCenter"
+															id="trainingCenter">
+														</select>
+													</div>
+
+
+													<input type="hidden" path="userName" name="userName" value="${userName}">
 													<input type="hidden" path="tcid" name="tcid" value="0" id="tcid">
 													<input type="submit" onclick="return saveDetails();"
 														style="margin-top: 20px;"

@@ -33,7 +33,7 @@ public class ManageTrainingPartner {
 	}
 	private String userId;
 	
-	@NotNull
+/*	@NotNull*/
 	private String PAN;
 	@NotNull
 	private String trainingPartnerName;

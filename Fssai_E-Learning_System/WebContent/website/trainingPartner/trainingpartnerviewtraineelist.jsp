@@ -161,7 +161,7 @@ function showDetails(){
                                                     <div class="form-group">
                                                         <div>
                                                             <ul class="lab-no">
-                                                                <li class="style-li"><strong>Training Start Time</strong></li>
+                                                                <li class="style-li"><strong>Training End Date</strong></li>
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>

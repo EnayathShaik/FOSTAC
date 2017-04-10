@@ -520,6 +520,17 @@ function my11(str) {
 <script language="javascript" type="text/javascript">
 function myBusiness() {
     var x = document.getElementById("KindOfBusiness").value;
+    if(x=="7"){
+    	$("#KindOfBusiness").html('');
+    	$("#KindOfBusiness").append(new Option("HouseWife", "8"));
+    	$("#KindOfBusiness").append(new Option("Student", "9"));
+    	$("#KindOfBusiness").append(new Option("Teacher", "10"));
+    	$("#KindOfBusiness").append(new Option("Doctor", "11"));
+    	$("#KindOfBusiness").append(new Option("Entrepreneur", "12"));
+    	$("#KindOfBusiness").append(new Option("Not in business", "6"));
+    }
+    
+    
 	if($('[id*=KindOfBusiness] option:selected').text()=='Not in business'){
     	document.getElementById("desiNCm").style.display= 'none';
     	document.getElementById("businessID1").style.display= 'none';
@@ -1102,6 +1113,15 @@ function checkagree()
 												path="KindOfBusiness" cssClass="error" /></li>
 									</ul>
 								</div>
+								<%-- <cf:select path="KindOfBusiness" class="form-control"
+									onchange="return myBusiness()">
+									<cf:option value="8" label="Select Business" />
+									<cf:option value="9" label="Select Business" />
+									<cf:option value="10" label="Select Business" />
+									<cf:option value="11" label="Select Business" />
+									
+								</cf:select> --%>
+								
 								<cf:select path="KindOfBusiness" class="form-control"
 									onchange="return myBusiness()">
 									<cf:option value="0" label="Select Business" />

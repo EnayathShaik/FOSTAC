@@ -195,3 +195,27 @@ function getBatch(val , idName){
 	      });
 }
 
+
+function getTrainingCenter(val , id)
+{
+	var name1=JSON.stringify({
+		courseName:0
+  })
+	$.ajax({
+	      type: 'post',
+	      url: 'loadTrainingCenter.fssai?data='+ val,
+	      contentType : "application/json",
+		  data:name1,
+	      success: function (response) {      
+	      var mainData1 = jQuery.parseJSON(response);
+	      $('#'+id+' option').remove();
+	      $('#'+id).append('<option value="0">Select Training Center </option>');
+	  	  $.each(mainData1 , function(i , obj)
+	  		{
+	  		
+	  				$('#'+id).append('<option value='+obj[0]+'>'+obj[1]+'</option>');		
+	  		});
+	      }
+	      });     
+}
+

@@ -195,7 +195,7 @@ function showDetails(){
 														<div>
 															<ul class="lab-no">
 																<li class="style-li"><strong>Training
-																		Start Time</strong></li>
+																		End Date</strong></li>
 																<li class="style-li error-red"></li>
 															</ul>
 														</div>

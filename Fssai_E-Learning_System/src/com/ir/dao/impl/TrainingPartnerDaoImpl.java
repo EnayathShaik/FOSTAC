@@ -618,19 +618,22 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		tch.setAssessor(trainingCalendarForm.getAssessor());
 		tch.setAssessmentDateTime(trainingCalendarForm.getAssessmentDateTime() == null ? "" : trainingCalendarForm.getAssessmentDateTime());
 	
-		
+		System.out.println(" center "+trainingCalendarForm.getTrainingCenter());
 		CourseName courseName = (CourseName) session.load(CourseName.class, trainingCalendarForm.getCourseName());
 		PersonalInformationTrainingPartner personalInformationTrainingPartner = (PersonalInformationTrainingPartner) session.load(PersonalInformationTrainingPartner.class, trainingCalendarForm.getTrainingCenter());
+		System.out.println(" partner "+personalInformationTrainingPartner.getTrainingPartnerName());
 		tc.setTrainingPartner(personalInformationTrainingPartner.getTrainingPartnerName());
 		if(courseName != null && courseName.getCourseCode() != null && courseName.getCourseCode().length() > 1){
 			tc.setBatchCode(courseName.getCourseCode()+"/"+StringUtils.leftPad(String.valueOf(maxId), 5, "0"));
 			tc.setSeqNo(maxId);
 		}
 		int i = 0;
+		System.out.println(" trainingCalendarForm.getTcid() "+trainingCalendarForm.getTcid());
 	if(trainingCalendarForm.getTcid()==0){
 		tch.setCreated_by(trainingCalendarForm.getUserName());
 	 i = (Integer) session.save(tc);
 	 				session.save(tch);
+	 				System.out.println(" created ");
 	}else{
 		new ZLogger("trainingCalendarForm","inside update ", "TrainingPartnerDaoImpl.java");
 		tc.setTrainingCalendarId(trainingCalendarForm.getTcid());
@@ -638,6 +641,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		 session.update(tc);
 		 session.save(tch);
 	}
+	System.out.println(" i "+i);
 		if(i >0){
 			return "created";
 		}else{
@@ -684,6 +688,25 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		List<IntStringBean> trinerNameList=new ArrayList<>();
 		String sql="select manageassessmentagencyid , assessmentagencyname from ManageAssessmentAgency";
 				
+		Query query = session.createSQLQuery(sql);
+		List<Object[]> courseTypeList = query.list();
+		if(courseTypeList.size()>0){
+			for(int index=0;index<courseTypeList.size();index++){
+				IntStringBean bean=new IntStringBean();
+				Object[] objecList=courseTypeList.get(index);
+				bean.setId(Integer.parseInt(objecList[0].toString()));
+				bean.setValue(objecList[1].toString());
+				trinerNameList.add(bean);
+			}
+		}
+		return trinerNameList;
+	}
+	@Override
+	public List<IntStringBean> loadTrainingPartnerList(int id){
+		Session session = sessionFactory.getCurrentSession();
+		List<IntStringBean> trinerNameList=new ArrayList<>();
+		String sql="select managetrainingpartnerid , trainingpartnername from managetrainingpartner where managetrainingpartnerid="+id;
+		
 		Query query = session.createSQLQuery(sql);
 		List<Object[]> courseTypeList = query.list();
 		if(courseTypeList.size()>0){
@@ -1029,10 +1052,11 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		String sql = "";
 		sql = "select  B.batchcode,D.coursecode,B.trainingdate,B.trainingtime,C.firstname || ' '|| C.middlename ||' '|| C.lastname as participantName,D.modeoftraining,A.paymentstatus,A.courseenrolleduserid from courseenrolleduser  A"
 				+ " inner join trainingcalendar B on(A.trainingcalendarid= B.trainingcalendarid)"
-				+ " inner join personalinformationtrainingpartner C on (C.personalinformationtrainingpartnerid = B.trainingcenter)"
+				//+ " inner join personalinformationtrainingpartner C on (C.personalinformationtrainingpartnerid = B.trainingcenter)"
+				+ " inner join personalinformationtrainee C on (C.logindetails = A.logindetails)"
 				+ " inner join coursename D on (D.coursenameid = B.coursename)"
 				+ " inner join coursetype E on (E.coursetypeid = B.coursetype)"
-				+ " inner join logindetails F on (F.ID = C.logindetails)"
+				//+ " inner join logindetails F on (F.ID = C.logindetails)"
 				+" WHERE A.status = 'N' and B.type not in ('U')  and  cast(E.coursetypeid  as varchar(10)) like '"+courseType+"%' and cast(D.COURSENAMEID as varchar(10))  like '"+courseName+"%'  and  cast(B.TRAININGDATE as varchar(100)) like '"+trainingDate+"%' and  cast(B.TRAININGTIME as varchar(100)) like '"+trainingtime+"%'  and cast(A.paymentstatus as varchar(10)) like '"+status+"%' "; 
 					//	"  AND F.loginid ='"+loginId+"' ";
 		

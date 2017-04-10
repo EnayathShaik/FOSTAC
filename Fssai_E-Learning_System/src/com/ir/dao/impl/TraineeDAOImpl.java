@@ -815,6 +815,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		new ZLogger("getTableIdForEnrolmentID","loginId :"+loginId + " profileId "+profileId , "TraineeDAOImpl.java");
 		
 		TableLink data = TableLink.getByprofileID(profileId);
+		System.out.println(" data "+data + " tablename "+data.tableName());
 		Session session = sessionFactory.getCurrentSession();
 		String sql = "";
 		if (profileId == 3) {

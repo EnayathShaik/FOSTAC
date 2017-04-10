@@ -28,10 +28,10 @@
                     } else if (websiteURL == "" || websiteURL.length <= 0) {
                         alert('Please Enter Website URL.')
                         status = false;
-                    } else if (pan == "" || pan.length <= 0) {
+                    } /* else if (pan == "" || pan.length <= 0) {
                         alert('Please Enter PAN.')
                         status = false;
-                    } else if (email == "" || email.length <= 0) {
+                    } */ else if (email == "" || email.length <= 0) {
                         alert('Please Enter Email.')
                         status = false;
                     } else if (headOfficeDataAddress1 == "" || headOfficeDataAddress1.length <= 0) {
@@ -91,12 +91,16 @@
             </script>
             <script type="text/javascript" language="javascript">
                 function pan_validate(pan) {
-                    var regpan = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
-                    if (regpan.test(pan) == false) {
-                        document.getElementById("panstatus").innerHTML = "Invalid PAN !!!";
-                    } else {
-                        document.getElementById("panstatus").innerHTML = "";
-                    }
+                	alert(pan);
+                	if(pan != ''){
+                		var regpan = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
+                        if (regpan.test(pan) == false) {
+                            document.getElementById("panstatus").innerHTML = "Invalid PAN !!!";
+                        } else {
+                            document.getElementById("panstatus").innerHTML = "";
+                        }	
+                	}
+                    
                 }
 
                 function searchDataTP(indicator) {

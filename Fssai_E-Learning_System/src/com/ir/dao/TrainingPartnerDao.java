@@ -52,6 +52,7 @@ public interface TrainingPartnerDao {
 	public void setTrainingCalanderDeatils(TrainingCalendarForm trainingCalendarForm , String loginId);
 	public void cancelTrainingCalndar(int id);
 	public List<IntStringBean> loadAssessmentAgency();
+	public List<IntStringBean> loadTrainingPartnerList(int id);
 	public List<String> getBatchCodeList(int courseCode);
 	//
 	public List<String> getCertificateIdList(String batchCode , String loginId);

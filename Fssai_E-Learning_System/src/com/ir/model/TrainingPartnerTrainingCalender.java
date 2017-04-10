@@ -15,6 +15,7 @@ public class TrainingPartnerTrainingCalender {
 	private List<IntStringBean> assessorList;
 	private List<IntStringBean> traineeList;
 	private List<IntStringBean>assessmentAgencyName;
+	private List<IntStringBean>trainingPartnerList;
 	public List<IntStringBean> getAssessmentAgencyName() {
 		return assessmentAgencyName;
 	}
@@ -106,6 +107,12 @@ public class TrainingPartnerTrainingCalender {
 	}
 	public void setTraineeList(List<IntStringBean> traineeList) {
 		this.traineeList = traineeList;
+	}
+	public List<IntStringBean> getTrainingPartnerList() {
+		return trainingPartnerList;
+	}
+	public void setTrainingPartnerList(List<IntStringBean> trainingPartnerList) {
+		this.trainingPartnerList = trainingPartnerList;
 	}
 	
 	

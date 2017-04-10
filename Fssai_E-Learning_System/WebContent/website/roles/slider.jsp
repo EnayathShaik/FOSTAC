@@ -116,7 +116,8 @@
                         </li> -->
           <!-- <li> <a href="postVacancyTrainingPartner.fssai">Post Vacancy for Trainer</a> </li>
           <li> <a href="trainingpartnerapplicationstatus.fssai">Application Status</a> </li> -->
-            <li><a href="trainingCalendarForm.fssai">View Training Calendar</a></li>
+          <li> <a href="trainingpartnertrainingcalendar.fssai">Training Calendar</a> </li>
+           <!--  <li><a href="trainingCalendarForm.fssai">View Training Calendar</a></li> -->
            <!-- <li> <a href="trainingpartnertrainingcalendar.fssai">Training Calendar</a> </li> -->
            <li><a href="viewFeedbackDetails.fssai">View Feedback</a></li>
            <li><a href="registrationFormTrainingPartner.fssai">Register Training Center</a></li>
@@ -145,7 +146,7 @@
                         <!-- <li class="sidebar-brand"></li> -->
                         <li><a href="manageCourse.fssai">Manage Course</a></li>
                         <li><a href="manageCourseContent.fssai">Manage Course Content</a></li>
-                      <!--   <li> <a href="trainingCalendarForm.fssai">Training Calendar</a> </li> -->
+                         <li> <a href="trainingCalendarForm.fssai">Training Calendar</a> </li> 
                        <!--  <li> <a href="trainingpartnerassessmentcalendar.fssai">Update Assessor</a> </li> -->
                         <li> <a href="manageAssessmentQuestions.fssai">Assessment Questions</a> </li>
                         <!-- <li> <a href="updateTrainerAssessmentForm.fssai">TOT Assessment</a> </li> -->
