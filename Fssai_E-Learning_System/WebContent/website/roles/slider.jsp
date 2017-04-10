@@ -150,6 +150,7 @@
                         <li> <a href="manageAssessmentQuestions.fssai">Assessment Questions</a> </li>
                         <!-- <li> <a href="updateTrainerAssessmentForm.fssai">TOT Assessment</a> </li> -->
                         <li> <a href="feedbackMaster.fssai">Feedback Master</a> </li>
+                        <li> <a href="trainingCenterList.fssai">Training Center List</a> </li>
                     </ul>
                 </div>
 
@@ -165,6 +166,7 @@
                         <li> <a href="manageAssessmentQuestions.fssai">Assessment Questions</a> </li>
                         <!-- <li> <a href="updateTrainerAssessmentForm.fssai">TOT Assessment</a> </li> -->
                         <li> <a href="feedbackMaster.fssai">Feedback Master</a> </li>
+              		  <!-- <li> <a href="trainingCenterReport.fssai">Training Center Report</a> </li>-->
                     </ul>
                 </div>
 

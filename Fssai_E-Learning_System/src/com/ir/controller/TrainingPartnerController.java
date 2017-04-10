@@ -118,6 +118,7 @@ public class TrainingPartnerController {
 	@RequestMapping(value="/generateCourseCertificateForTrainee" , method=RequestMethod.GET)
 	public String generateCourseCertificateForTrainee(@ModelAttribute("generateCourseCertificateForm") GenerateCourseCertificateForm generateCourseCertificateForm,HttpSession session,BindingResult result , Model model ){
 		List<CourseType> courseTypeList = trainingPartnerService.courseTypeList();
+		System.out.println(" courseTypeList "+courseTypeList);
 		model.addAttribute("courseTypeList",courseTypeList);
 		return "generateCourseCertificateForTrainee";
 		
@@ -482,7 +483,7 @@ public class TrainingPartnerController {
 		utilityList=trainingPartnerService.editApplicationStatus(postVacancyTrainingCenterBean);
 		model.addAttribute("utilityList", new Gson().toJson(utilityList));
 		
-		resumePath = servletContext.getContextPath().replace("Fssai_E-Learning_System", "Fostac/Trainer");
+		resumePath = ((HttpServletRequest) servletContext).getContextPath().replace("Fssai_E-Learning_System", "Fostac/Trainer");
 		model.addAttribute("resumePath", resumePath);
 		if(postVacancyTrainingCenterBean.getTrainingCenter()>0){
 			return "editApplicationStatusDetails1";

@@ -38,6 +38,7 @@ import com.ir.form.StateForm;
 import com.ir.form.TraineeUserManagementForm;
 import com.ir.form.TrainerUserManagementForm;
 import com.ir.form.TrainingCalendarForm;
+import com.ir.form.TrainingCenterReport;
 import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.model.AdminUserManagement;
 import com.ir.model.AssessmentQuestion;
@@ -843,7 +844,8 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		assessmentQuestion.setCourseType(ct);
 		assessmentQuestion.setCourseName(cn);
-		assessmentQuestion.setQuestionNumber(assessmentQuestionForm.getQuestionNumber());
+		assessmentQuestion.setQuestionNumber(1);
+		System.out.println(assessmentQuestion.getQuestionNumber());
 		assessmentQuestion.setQuestionHint(assessmentQuestionForm.getQuestionHint());
 		assessmentQuestion.setQuestionTitle(assessmentQuestionForm.getQuestionTitle());
 		assessmentQuestion.setNoOfOption(assessmentQuestionForm.getNoOfOption());
@@ -1577,6 +1579,8 @@ public class AdminDAOImpl implements AdminDAO {
 				return list;
 		}
 		
+
+		
 		
 		
 		//searchAssessorDetail
@@ -1640,6 +1644,34 @@ public class AdminDAOImpl implements AdminDAO {
 					}
 		
 		return newList;
+		}
+		
+		@Override
+		 public List trainingCenterDetails(int data){
+			String input = null;
+			if(data == 0){
+				input = "%";
+			}else{
+				input = data+"";
+						
+			}
+			Session session =  sessionFactory.getCurrentSession();
+			List<TrainingCenterReport> mailList = new ArrayList<TrainingCenterReport>();
+			String sql = "select cast('jyoti' as varchar(50)) as trainingcenter , cast('29' as varchar(10)) as noOfTrainingDone  ,  cast('39' as varchar(10))   as NoOfTraineesInvolved,  cast('20' as varchar(10))   as Pass , cast('10' as varchar(10))  CountFail from personalinformationtrainingpartner where cast(trainingpartnername as varchar(20))  like '"+input+"%'";
+			Query query = session.createSQLQuery(sql);
+			List list = query.list();
+			System.out.println(list.size());
+			for(int i = 0 ; i < list.size() ; i++){
+				Object[] obj = (Object[]) list.get(i);
+				TrainingCenterReport tc = new TrainingCenterReport();
+				tc.setTrainingCenter((String)obj[0]);
+				tc.setNoOfTrainingDone((String)obj[1]);
+				tc.setNoOfTraineesInvolved((String) obj[2]);
+				tc.setPass((String)obj[3]);
+				tc.setCountFail((String)obj[4]);
+				mailList.add(tc);
+			}
+			return mailList;
 		}
 }
 

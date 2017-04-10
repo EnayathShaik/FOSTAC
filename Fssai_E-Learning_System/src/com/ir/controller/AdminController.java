@@ -3,6 +3,7 @@ package com.ir.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -47,6 +48,7 @@ import com.ir.form.StateForm;
 import com.ir.form.TraineeUserManagementForm;
 import com.ir.form.TrainerUserManagementForm;
 import com.ir.form.TrainingCalendarForm;
+import com.ir.form.TrainingCenterReport;
 import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.form.UpdateTrainerAssessmentForm;
 import com.ir.model.City;
@@ -1383,5 +1385,45 @@ public class AdminController {
 		out.write(result);
 		out.flush();
 		
+	}
+	
+	
+	
+	@RequestMapping(value = "/trainingCenterReport", method = RequestMethod.GET)
+	public String trainingCenterReport(Model model,
+			HttpServletRequest request) {
+		try {
+			TrainingCenterReport trainingCenterReport = new TrainingCenterReport();
+			List<ManageTrainingPartner> trainingPartnerList = adminService.trainingPartnerList();
+			model.addAttribute("trainingCenterDetails",adminService.trainingCenterDetails(0));
+			model.addAttribute("trainingCenterReport",trainingCenterReport);
+			model.addAttribute("trainingPartnerList",trainingPartnerList);
+	
+		} catch (Exception e) {
+			e.printStackTrace();
+			new ZLogger("trainingCenterReport", "trainingCenterReport exception  "+e.getMessage(), "AdminController.java");
+		}
+		return "trainingCenterReport";
+	}
+	
+//	/trainingCenterDetails
+	
+	@RequestMapping(value = "/trainingCenterDetails", method = RequestMethod.POST)
+	public String trainingCenterDetails(Model model, @RequestBody TrainingCenterReport trainingCenterReport,
+			HttpServletRequest request) {
+		try {
+			 trainingCenterReport = new TrainingCenterReport();
+			 String trainingPartner = trainingCenterReport.getTrainingPartner();
+			 System.out.println("trainingPartner "+trainingPartner);
+			List<ManageTrainingPartner> trainingPartnerList = adminService.trainingPartnerList();
+			model.addAttribute("trainingCenterReport",trainingCenterReport);
+			model.addAttribute("trainingPartnerList",trainingPartnerList);
+			model.addAttribute("trainingCenterDetails",adminService.trainingCenterDetails(Integer.parseInt(trainingPartner)));
+	
+		} catch (Exception e) {
+			e.printStackTrace();
+			new ZLogger("trainingCenterReport", "trainingCenterReport exception  "+e.getMessage(), "AdminController.java");
+		}
+		return "trainingCenterReport";
 	}
 }

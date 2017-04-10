@@ -26,6 +26,7 @@ import com.ir.form.StateForm;
 import com.ir.form.TraineeUserManagementForm;
 import com.ir.form.TrainerUserManagementForm;
 import com.ir.form.TrainingCalendarForm;
+import com.ir.form.TrainingCenterReport;
 import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.model.AdminUserManagement;
 import com.ir.model.CourseName;
@@ -448,6 +449,12 @@ public class AdminServiceImpl implements AdminService {
 	@Transactional
 	public String changeAssessor(String data){
 		String courseData = adminDAO.changeAssessor(data);
+		return courseData;
+	}	
+	@Override
+	@Transactional
+	public List<TrainingCenterReport> trainingCenterDetails(int trainingPartner){
+		List<TrainingCenterReport> courseData = adminDAO.trainingCenterDetails(trainingPartner);
 		return courseData;
 	}	
 }

@@ -8,7 +8,7 @@ function OnStart(){
 	document.getElementById('id').value = 0;
 document.getElementById('courseTypeId').value = 0;
 document.getElementById('courseName').value = 0;
-document.getElementById('questionNumber').value = '';
+//document.getElementById('questionNumber').value = '';
 document.getElementById('questionHint').value = '';
 document.getElementById('questionTitle').value = '';
 document.getElementById('noOfAssesmentQues').value = 0;
@@ -271,14 +271,14 @@ function editAssessmentQuestion(id){
                                                       </cf:select>
                                                     </div>
                                                     
-                                                    <div class="form-group">
+                                                    <div style="display:none" class="form-group">
                                                         <div>
                                                             <ul class="lab-no">
                                                                 <li class="style-li"><strong>Question Number:</strong></li>
                                                                 <li class="style-li error-red"> </li>
                                                             </ul>
                                                         </div>
-                                                      <cf:input path="questionNumber" class="form-control" placeholder="Question Number" />
+                                                      <cf:input path="questionNumber" class="form-control"  placeholder="Question Number" />
                                                     </div>
                                                     
                                                     <div class="form-group">

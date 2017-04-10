@@ -129,5 +129,7 @@ public interface AdminDAO {
 		public List searchFeedbackMaster(String data);
 		public List searchAssessmentAgencyList(String data);
 		public List searchAssessorDetail(String data);
+		
 		public String changeAssessor(String data);
+		public List trainingCenterDetails(int data);
 }

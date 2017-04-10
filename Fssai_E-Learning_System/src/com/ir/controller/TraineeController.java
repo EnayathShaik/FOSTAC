@@ -197,7 +197,7 @@ public class TraineeController {
 				String pdf = ".pdf";
 				String mp4 = ".mp4";
 				String ppt = ".ppt";
-				docPath = servletContext.getContextPath().replace("Fssai_E-Learning_System", "Fostac/Course/");
+				docPath = ((HttpServletRequest) servletContext).getContextPath().replace("Fssai_E-Learning_System", "Fostac/Course/");
 				if(userId>0){
 					CourseTrainee  courseTrainee= traineeService.getCourseTrainingByCourseTypeID(userId);
 					new ZLogger("courseTraining", "courseTrainee == "+courseTrainee.getCourseTypeId(), "TraineeController.java");
@@ -416,7 +416,7 @@ public class TraineeController {
 		String userName = "";
 		try{
 			userName = (String) session.getAttribute("userName");
-			String ss = servletContext.getContextPath().replace("Fssai_E-Learning_System", "Fostac/Trainee");
+			String ss = ((HttpServletRequest) servletContext).getContextPath().replace("Fssai_E-Learning_System", "Fostac/Trainee");
 			imagePath = ss + File.separator + userName+".png";
 			if(session.getAttribute("loginIdUnique")!=null){
 				String loginid=session.getAttribute("loginIdUnique").toString();
@@ -611,7 +611,7 @@ public class TraineeController {
 				List<String> listcontentLink =  new ArrayList<String>();
 				for(CourseTrainee courseTrainee : ListcourseTrainee ){
 					String docPath = "";
-					docPath = servletContext.getContextPath().replace("Fssai_E-Learning_System", "Fostac/Course/");
+					docPath = ((HttpServletRequest) servletContext).getContextPath().replace("Fssai_E-Learning_System", "Fostac/Course/");
 				System.out.println(courseTrainee.getCourseTypeId().toUpperCase());
 				
 				if( courseTrainee.getCourseTypeId() != null && courseTrainee.getCourseTypeId().toUpperCase().contains("BASIC")){

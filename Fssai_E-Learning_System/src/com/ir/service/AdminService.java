@@ -21,6 +21,7 @@ import com.ir.form.StateForm;
 import com.ir.form.TraineeUserManagementForm;
 import com.ir.form.TrainerUserManagementForm;
 import com.ir.form.TrainingCalendarForm;
+import com.ir.form.TrainingCenterReport;
 import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.model.AdminUserManagement;
 import com.ir.model.CourseName;
@@ -165,7 +166,7 @@ public interface AdminService {
 	List searchAssessorDetail(String data);
 	
 	String changeAssessor(String data);
-
+	List<TrainingCenterReport> trainingCenterDetails(int trainingPartner );
 	
 }
 

@@ -10,7 +10,7 @@ public class AssessmentQuestionForm {
 	private int courseTypeId;
 	@NotNull
 	private int courseName;
-	@NotNull
+/*	@NotNull*/
 	private int questionNumber;
 	@NotNull @Size(min=0 , max = 500 , message="Please enter question")
 	private String questionTitle;
