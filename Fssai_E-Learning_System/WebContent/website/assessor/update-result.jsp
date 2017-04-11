@@ -14,8 +14,8 @@ function OnStart(){
 window.onload = OnStart;
 
 function showDetails(){
-	$('#tblUpdateResult tr').remove();
-	$('#tblUpdateResult').append('<thead>'+
+	//$('#tblUpdateResult tr').remove();
+/* 	$('#tblUpdateResult').append('<thead>'+
     '<tr class="background-open-vacancies">'+
         '<th>S.No.</th>'+
         '<th>Batch Code</th>'+
@@ -28,7 +28,7 @@ function showDetails(){
         '<th>Comments</th>'+
         '<th>&nbsp;</th>'+
     '</tr>'+
-	'</thead>');
+	'</thead>'); */
 	var result="";
 	//var id = document.getElementById("assessmentAgencyId").value;
 	var assessorId =710;
@@ -62,8 +62,10 @@ function showDetails(){
 	console.log(jsonData);
 	var j=1;
 // 	var accessorId;
+
 	$.each(jsonData , function(i , obj)
 	{
+		
 		var recId = obj[1];
 		var comment = obj[7] == null || obj[7] == "null" ? "" : obj[7];
 		if(obj[6] == 'P'){
@@ -303,7 +305,20 @@ function updateTraineeAssessmentResult(courseEnrolledid , trainingDate, comment)
 												<span id="resultResponse" class = "style-li error-red">
 												</span>
                                                 <table id = "tblUpdateResult" class="table table-bordered table-responsive table-striped table-hover">
-                                                    
+                                                    <thead>
+                                                    <tr class="background-open-vacancies">
+                                                        <th>S.No.</th>
+                                                        <th>Batch Code</th>
+                                                        <th>Course Code</th>
+                                                        <th>Training Date</th>
+                                                        <th>Assessment Date Time</th>
+                                                        <th>Training Center</th>
+                                                        <th>Trainee Name</th>
+                                                        <th>Status</th>
+                                                        <th>Comments</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>  
                                                 </table>
                                             </div>
                                         </div>
