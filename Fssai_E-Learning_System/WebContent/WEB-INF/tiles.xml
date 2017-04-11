@@ -776,5 +776,10 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainingPartner/traineeAttendance.jsp" />
 	</definition>
+	
+<definition name="trainingCenterReport" extends="base.user.afterLogin">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/admin/trainingCenterReport.jsp" />
+	</definition>
 
 </tiles-definitions>
