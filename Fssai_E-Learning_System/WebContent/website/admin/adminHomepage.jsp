@@ -205,7 +205,7 @@ text-align: center;
                                         <p class="number ">${trainingPartnerCount}</p>
                                       <h3 class="symbol font-dashboard"><a href="manageTrainingPartnerForm.fssai?Name=callSubmit">Training Partner</a></h3>
                                        </div>&nbsp;&nbsp;
-                                        <div id="myDIV" style="background-color: #f5f5f5;"> 
+                                        <div id="myDIV" style="background-color: rgba(77, 144, 254, 0.39);"> 
                                          <p class="number">${assessorCount}</p>
                                       	<h3 class="symbol font-dashboard"><a href="assessorUserManagementForm.fssai?Name=callSubmit">Assessor</a></h3>
                                         </div>&nbsp;&nbsp;

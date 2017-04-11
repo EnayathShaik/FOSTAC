@@ -493,7 +493,7 @@ public class TrainingPartnerController {
 		utilityList=trainingPartnerService.editApplicationStatus(postVacancyTrainingCenterBean);
 		model.addAttribute("utilityList", new Gson().toJson(utilityList));
 		
-		resumePath = ((HttpServletRequest) servletContext).getContextPath().replace("Fssai_E-Learning_System", "Fostac/Trainer");
+		resumePath = servletContext.getContextPath().replace("Fssai_E-Learning_System", "Fostac/Trainer");
 		model.addAttribute("resumePath", resumePath);
 		if(postVacancyTrainingCenterBean.getTrainingCenter()>0){
 			return "editApplicationStatusDetails1";

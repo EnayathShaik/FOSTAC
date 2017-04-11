@@ -7,15 +7,21 @@ function OnStart(){
 	var steps = 5;
 	var traineeSteps =
 		<%=(Integer) session.getAttribute("traineeSteps")%>
-	if(steps > traineeSteps){
-	}else{
-		if(steps-1 == traineeSteps){
-			alert('Please Complete Your Previous Training First')
-		}else{
-			alert('Please Flow Step By Step..');
-		}
+	if(traineeSteps == 0){
+		alert('Please Enroll First.')
 		window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
+	}else{
+		if(steps > traineeSteps){
+		}else{
+			if(steps-1 == traineeSteps){
+				alert('Please Complete Your Previous Training First')
+			}else{
+				alert('Please Flow Step By Step..');
+			}
+			window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
+		}
 	}
+	
 }
 window.onload = OnStart;
 function onFeedbackSave(feedbackMasterList){

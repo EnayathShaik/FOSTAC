@@ -1,4 +1,16 @@
+<script type="text/javascript">
 
+function OnStart(){
+	var traineeSteps =
+		<%=(Integer) session.getAttribute("traineeSteps")%>
+	
+	if(traineeSteps == 0){
+		alert('Please Enroll First.')
+		window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
+	}
+}
+window.onload = OnStart;
+</script>
 <!-- horizontal navigation -->
 <section>
  <%@include file="../roles/top-menu.jsp"%>    

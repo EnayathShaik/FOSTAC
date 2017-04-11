@@ -1,22 +1,30 @@
 <script type="text/javascript">
 function OnStart(){
-	var isEligible = "${Eligible}";
-	if(isEligible == ''){
-		alert('Need to Clear Exam First.');
-   	  	window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
-	}
 	var steps = 6;
 	var traineeSteps =
 		<%=(Integer) session.getAttribute("traineeSteps")%>
-	if(steps > traineeSteps){
+	if(traineeSteps == 0){
+		alert('Please Enroll First.')
+		window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
 	}else{
-		if(steps-1 == traineeSteps){
-			alert('Please Complete Your Previous Training First')
-		}else{
-			alert('Please Flow Step By Step..');
+		var isEligible = "${Eligible}";
+		if(isEligible == ''){
+			alert('Need to Clear Exam First.');
+	   	  	window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
 		}
-		//window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
+		
+		if(steps > traineeSteps){
+		}else{
+			if(steps-1 == traineeSteps){
+				alert('Please Complete Your Previous Training First')
+			}else{
+				alert('Please Flow Step By Step..');
+			}
+			//window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
+		}
 	}
+	
+	
 }
 window.onload = OnStart;
 </script>
