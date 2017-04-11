@@ -410,12 +410,13 @@ public class TraineeController {
 	
 	@RequestMapping(value="/admit-cardtrainee" , method=RequestMethod.GET)
 	public String admitcardtrainee(@ModelAttribute("basicTrainee") CourseEnrolledUserForm courseEnrolledUserForm ,
-			@ModelAttribute("state") State state , @ModelAttribute("tp") TrainingPartner tp,BindingResult result ,HttpSession session, Model model ){
+			@ModelAttribute("state") State state , @ModelAttribute("tp") TrainingPartner tp,BindingResult result ,HttpSession session, Model model ,HttpServletRequest request ){
 		new ZLogger("admit-cardtrainee","Generate Admit Card .........................."  , "TraineeController.java");
 		String imagePath = "";
 		String userName = "";
 		try{
 			userName = (String) session.getAttribute("userName");
+			System.out.println("path "+request.getContextPath());
 			String ss = ((HttpServletRequest) servletContext).getContextPath().replace("Fssai_E-Learning_System", "Fostac/Trainee");
 			imagePath = ss + File.separator + userName+".png";
 			if(session.getAttribute("loginIdUnique")!=null){
@@ -467,7 +468,7 @@ public class TraineeController {
 					session.setAttribute("traineeSteps", 0);
 					
 					if(!certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Western India)")){
-						returnResult = "certificatetraineeFSSAI";	
+						returnResult = "certificatetraineeHRAWI";	
 						}
 						else if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Northern India)")){
 							returnResult = "certificatetraineeHRANI";

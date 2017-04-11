@@ -128,10 +128,10 @@
                                                                         </td>
                                                                        
                                                                             <td>
-                                                                                    <label>${listValue[8]}</label>
+                                                                                    <label>${listValue[5]}</label>
                                                                                 </td>
                                                                                 <td>
-                                                                                    <label><input type="submit"  onclick=" return activateDeActivateUser('${listValue[3]}','${listValue[4]}','1');" value="${listValue[3]}"/></label>
+                                                                                    <label><input type="submit"  onclick=" return activateDeActivateUser('${listValue[3]}','${listValue[4]}','1');" value="${listValue[4]}"/></label>
                                                                                 </td>
                                                                     </tr>
                                                                 </ct:forEach>

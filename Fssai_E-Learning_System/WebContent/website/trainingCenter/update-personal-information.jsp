@@ -63,7 +63,7 @@
 
                     <!-- Training Center information -->
                     <div class="personel-info">
-                        <fieldset>
+                        <fieldset style="width:700px">
                             <legend>Personal Information</legend>
                             <!-- left side -->
                             <div class="col-md-6 col-xs-12">
@@ -168,7 +168,7 @@
 											<cf:option value="0" label="Select District" />
 										</cf:select>
 									</div>
-									<div class="col-md-6 col-xs-12">
+									
 										<div class="form-group">
 											<div>
 												<ul class="lab-no">
@@ -200,9 +200,10 @@
 
 												</ul>
 											</div>
-											<cf:input type="text" class="form-control"
-												path="TrainingPartnerPermanentEmail" placeholder="Email"
-												value=" ${loginUr.trainingPartnerPermanentEmail}" />
+											
+													<cf:input path="TrainingPartnerPermanentEmail"
+														onkeypress="return AvoidSpace(event)" maxlength="50"
+														class="form-control" value=" ${loginUr.trainingPartnerPermanentEmail}" placeholder="Email" />
 										</div>
 
 										<div class="form-group">
