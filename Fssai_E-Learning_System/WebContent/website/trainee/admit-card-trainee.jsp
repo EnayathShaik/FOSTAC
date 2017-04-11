@@ -60,9 +60,9 @@
                                                     <tr>
                                                         <td width="35%">
                                                             <table border="0">
-                                                                <tr>
+                                                               <!--  <tr>
                                                                     <td width="50%" align="center" class="logo-admit"><img src="/Fssai_E-Learning_System/website/img/admit-card-fssai-logo.png" alt="" /></td>
-                                                                </tr>
+                                                                </tr> -->
                                                                 <tr>
                                                                     <td width="50%" align="center" style="position: relative; top: 1.5em;" class="logo-admit" style="border-bottom:0px;"><img src="/Fssai_E-Learning_System/website/img/admit-card-fostac-logo.png" alt="" /></td>
                                                                 </tr>

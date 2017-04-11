@@ -84,7 +84,7 @@ public class CommonDaoImpl implements CommonDao{
 	@Override
 	public  List getCourseName(String courseName){
 		Session session = sessionFactory.getCurrentSession();
-		String sql = "select cn.coursenameid , cn.coursecode from coursename as cn inner join coursetype as ct on ct.coursetypeid = cn.coursetypeid where cn.coursetypeid  = '"+courseName+"'";		
+		String sql = "select cn.coursenameid , cn.coursecode , cn.coursename from coursename as cn inner join coursetype as ct on ct.coursetypeid = cn.coursetypeid where cn.coursetypeid  = '"+courseName+"'";		
 		Query query = session.createSQLQuery(sql);
 		List courseTypeList = query.list();
 		return courseTypeList;

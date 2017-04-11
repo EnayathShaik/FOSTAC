@@ -135,7 +135,7 @@ function getCourseName(val , idName) {
 			$.each(mainData1, function(i, obj) {
 				$('#'+idName)
 						.append(
-								'<option value='+obj[0]+' >' + obj[1]
+								'<option value='+obj[0]+' >' + obj[1]+'-'+obj[2]
 										+ '</option>');
 			});
 		}

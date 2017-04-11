@@ -487,13 +487,13 @@ public class TrainingPartnerController {
 	 }
 	
 	@RequestMapping(value="/editApplicationStatusDetails" , method=RequestMethod.GET)
-	  public String editApplicationStatusDetails(@ModelAttribute("PostVacancyTrainingCenterBean") PostVacancyTrainingCenterBean postVacancyTrainingCenterBean ,HttpSession session,BindingResult result ,  Model model) {	
+	  public String editApplicationStatusDetails(@ModelAttribute("PostVacancyTrainingCenterBean") PostVacancyTrainingCenterBean postVacancyTrainingCenterBean ,HttpSession session,BindingResult result ,  Model model , HttpServletRequest request) {	
 		String resumePath = "";
 		Utility utilityList=new Utility();
 		utilityList=trainingPartnerService.editApplicationStatus(postVacancyTrainingCenterBean);
 		model.addAttribute("utilityList", new Gson().toJson(utilityList));
 		
-		resumePath = servletContext.getContextPath().replace("Fssai_E-Learning_System", "Fostac/Trainer");
+		resumePath = request.getContextPath().replace("Fssai_E-Learning_System", "Fostac/Trainer");
 		model.addAttribute("resumePath", resumePath);
 		if(postVacancyTrainingCenterBean.getTrainingCenter()>0){
 			return "editApplicationStatusDetails1";

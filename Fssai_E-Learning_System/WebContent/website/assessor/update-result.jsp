@@ -62,9 +62,11 @@ function showDetails(){
 	console.log(jsonData);
 	var j=1;
 // 	var accessorId;
-
+	$('#tblUpdateResult tr').remove();
+	$('#tblUpdateResult').append('<tr class="background-open-vacancies"><th>S.No.</th><th>Batch Code</th><th>Course Code</th><th>Training Date</th><th>Assessment DateTime</th><th>Training Center</th><th>Trainee Name</th><th>Status</th><th>Comments</th><th>Action</th></tr>');
 	$.each(jsonData , function(i , obj)
 	{
+	
 		
 		var recId = obj[1];
 		var comment = obj[7] == null || obj[7] == "null" ? "" : obj[7];

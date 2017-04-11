@@ -654,7 +654,7 @@ function checkagree()
 								<div>
 									<ul class="lab-no">
 										<li class="style-li"><strong><cs:message
-													code="lbl.Trainee.AadharNumber" /></strong></li>
+													code="lbl.Trainee.AadharNumber" /><span style="color:red;">*</span></strong></li>
 										<li class="style-li error-red"><span id="aadhar_status"><label
 												id=AadharNumberError class="error visibility">*
 													Enter your aadharNumber </label> <cf:errors path="AadharNumber"
@@ -673,7 +673,7 @@ function checkagree()
 								<div>
 									<ul class="lab-no">
 										<li class="style-li"><strong><cs:message
-													code="lbl.Trainee.DOB" /></strong></li>
+													code="lbl.Trainee.DOB" /><span style="color:red;">*</span></strong></li>
 										<li class="style-li error-red"><label id="dobError"
 											class="error visibility">* select your date </label> <cf:errors
 												path="dob" cssClass="error" /></li>
@@ -704,7 +704,7 @@ function checkagree()
 								<div>
 									<ul class="lab-no">
 										<li class="style-li"><strong><cs:message
-													code="lbl.Trainee.Gender" /></strong></li>
+													code="lbl.Trainee.Gender" /><span style="color:red;">*</span></strong></li>
 										<li class="style-li error-red"><cf:errors path="gender"
 												cssClass="error" /></li>
 									</ul>
@@ -725,7 +725,7 @@ function checkagree()
 								<div>
 									<ul class="lab-no">
 										<li class="style-li"><strong><cs:message
-													code="lbl.Trainee.Title" /></strong></li>
+													code="lbl.Trainee.Title" /><span style="color:red;">*</span></strong></li>
 										<li class="style-li error-red"><label id="TitleError"
 											class="error visibility">* enter your Title</label> <cf:errors
 												path="Title" cssClass="error" /></li>
@@ -743,7 +743,7 @@ function checkagree()
 								<div>
 									<ul class="lab-no">
 										<li class="style-li"><strong><cs:message
-													code="lbl.Trainee.FirstName" /></strong></li>
+													code="lbl.Trainee.FirstName" /><span style="color:red;">*</span></strong></li>
 										<li class="style-li error-red"><label id="firstNameError"
 											class="error visibility">* enter your firstname </label> <cf:errors
 												path="firstName" cssClass="error" /></li>
@@ -789,7 +789,7 @@ function checkagree()
 								<div>
 									<ul class="lab-no">
 										<li class="style-li"><strong><cs:message
-													code="lbl.Trainee.fatherName" /></strong></li>
+													code="lbl.Trainee.fatherName" /><span style="color:red;">*</span></strong></li>
 										<li class="style-li error-red"><label
 											id="FatherNameError" class="error visibility">* enter
 												your Father/Mother name </label> <cf:errors path="FatherName"
@@ -820,7 +820,7 @@ function checkagree()
 								<div>
 									<ul class="lab-no">
 										<li class="style-li"><strong><cs:message
-													code="lbl.Trainee.correspondenceAddress1" /></strong></li>
+													code="lbl.Trainee.correspondenceAddress1" /><span style="color:red;">*</span></strong></li>
 										<li class="style-li error-red"><label
 											id="correspondenceAddress1Error" class="error visibility">*
 												enter your correspondence address </label> <cf:errors
@@ -835,7 +835,7 @@ function checkagree()
 								<div>
 									<ul class="lab-no">
 										<li class="style-li"><strong><cs:message
-													code="lbl.Trainee.correspondenceAddress2" /></strong></li>
+													code="lbl.Trainee.correspondenceAddress2" /><span style="color:red;">*</span></strong></li>
 										<li class="style-li error-red"><label
 											id="correspondenceAddress2Error" class="error visibility">*
 												enter your correspondence address </label> <cf:errors
@@ -850,7 +850,7 @@ function checkagree()
 								<div>
 									<ul class="lab-no">
 										<li class="style-li"><strong><cs:message
-													code="lbl.Trainee.correspondenceState" /></strong></li>
+													code="lbl.Trainee.correspondenceState" /><span style="color:red;">*</span></strong></li>
 										<li class="style-li error-red"><label
 											id="correspondenceStateError" class="error visibility">*
 												select your state </label> <cf:errors path="correspondenceState"
@@ -886,7 +886,7 @@ function checkagree()
 								<div>
 									<ul class="lab-no">
 										<li class="style-li"><strong><cs:message
-													code="lbl.Trainee.District" /></strong></li>
+													code="lbl.Trainee.District" /><span style="color:red;">*</span></strong></li>
 										<li class="style-li error-red"><label
 											id="correspondenceDistrictError" class="error visibility">*
 												select your correspondence district </label> <cf:errors
@@ -903,7 +903,7 @@ function checkagree()
 								<div>
 									<ul class="lab-no">
 										<li class="style-li"><strong><cs:message
-													code="lbl.Trainee.correspondenceCity" /></strong></li>
+													code="lbl.Trainee.correspondenceCity" /><span style="color:red;">*</span></strong></li>
 										<li class="style-li error-red"><label
 											id="correspondenceCityError" class="error visibility">*
 												select your correspondence city</label> <cf:errors
@@ -1106,7 +1106,7 @@ function checkagree()
 								<div>
 									<ul class="lab-no">
 										<li class="style-li"><strong><cs:message
-													code="lbl.Trainee.KindOfBusiness" /></strong></li>
+													code="lbl.Trainee.KindOfBusiness" /></strong><span style="color:red;">*</span></li>
 										<li class="style-li error-red"><label
 											id="KindOfBusinessError" class="error visibility">*
 												select your kindofbussiness </label> <cf:errors

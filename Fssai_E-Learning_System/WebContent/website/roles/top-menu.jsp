@@ -210,7 +210,7 @@
 							<li></li>
 							<li class="active hori"><a href="loginProcess.fssai">Home</a></li>
 							<li><a href="trainingCenterUserManagementForm.fssai">Training
-									Center Management</a></li>
+									Center/Venue Management</a></li>
 							<li class="hori"><a href="contactTrainee.fssai">Contact
 									Us</a></li>
 						</ul>

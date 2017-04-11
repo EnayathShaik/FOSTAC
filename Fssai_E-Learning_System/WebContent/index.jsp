@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="col-sm-6 col-xs-8">
                                     <div class="social">
                                         <div class="social-share">
-                                            <a href="http://www.fssai.gov.in/" target="_blank"><img class="img-responsive" src="website/images/fssai-logo.jpg"></a>
+                                         <!--    <a href="http://www.fssai.gov.in/" target="_blank"><img class="img-responsive" src="website/images/fssai-logo.jpg"></a> -->
                                         </div>
                                     </div>
                                 </div>
@@ -135,15 +135,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 <div class="col-md-4 col-xs-12" align="center">
                                                     <a href="assessor.fssai"><img src="website/images/assessor.png"></a>
                                                 </div>
+                                                
+                                               <!--     <div class="col-md-4 col-xs-12" align="center">
+                                                    <a href="trainingPartner.fssai"><img src="website/images/training-partner_img.png"></a>
+                                                </div> -->
 
                                             </div>
                                             <div class="col-md-3 xs-hidden">
-
+											 <a href="trainingPartner.fssai"><img src="website/images/training-partner_bk.png"></a>
                                             </div>
 
-                                            <!--  <li>
-                                                        <a href="trainingPartner.fssai"><img src="website/images/training-partner.png"></a>
-                                                    </li> -->
+                                              <li>
+                                                        
+                                                    </li> 
 
                                         </div>
                                     </div>
