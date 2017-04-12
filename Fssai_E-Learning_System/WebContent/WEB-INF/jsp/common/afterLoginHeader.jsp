@@ -20,10 +20,10 @@ function googleTranslateElementInit() {
                         <div class="col-xs-6 fostac-logo-left">
                             <a href="#"><img src="website/afterLogin/img/fostac-logo.png" class="img-responsive fostac-logo-top-padding" alt="logo" /></a>
                         </div>
-                        <%-- <div class="col-xs-6 fssai-logo-right">
+                        <div class="col-xs-6 fssai-logo-right">
 							<label id="uniqueId" style="margin-top:20px; font-size: 20px; font-weight: bold;">${loginUserS.loginDetails.loginId}</label>
-                            <a href="#"><img src="website/afterLogin/img/fssai-logo.png" class="img-responsive pull-right" alt="logo" /></a>
-                        </div> --%>
+                            <a href="#"><img src="website/afterLogin/img/fssai-logo.png"  class="img-responsive pull-right" alt="logo" style="margin-right: 59px;" /></a>
+                        </div>
                     </div>
 
                     <!--<div>

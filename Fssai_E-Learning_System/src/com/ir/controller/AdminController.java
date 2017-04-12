@@ -409,6 +409,13 @@ public class AdminController {
 		model.addAttribute("stateList", stateList);
 		return "manageTrainingPartnerForm";
 	}
+	@RequestMapping(value = "/trainingpartner", method = RequestMethod.GET)
+	public String trainingpartner(
+			@ModelAttribute("manageTrainingPartnerForm") ManageTrainingPartnerForm manageTrainingPartnerForm,Model model) {
+		List<State> stateList = adminService.stateList();
+		model.addAttribute("stateList", stateList);
+		return "trainingpartner";
+	}
 
 	@RequestMapping(value = "/manageTrainingPartnerSave", method = RequestMethod.POST)
 	public String manageTrainingPartnerSave(
@@ -429,7 +436,7 @@ public class AdminController {
 			model.addAttribute("id", all[1]);
 			model.addAttribute("pwd", all[0]);
 			new Thread(new Mail("Thanks", email, all[1], all[0], manageTrainingPartnerForm.getTrainingPartnerName())).start();
-			return "welcomeManageTrainingPartner";
+			return "welcome";
 		} else {
 			model.addAttribute("id", "User id created successfully !!");
 			model.addAttribute("pwd", "User id created successfully !!");

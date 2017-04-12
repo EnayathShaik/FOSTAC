@@ -1,14 +1,48 @@
-<%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
     <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %>
         <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
-        <style>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+     <script src="website/js/commonController.js"></script>   
+
+   <style>
                 .error {
                     color: red;
                 }
 
             </style>
-            <script src="website/js/commonController.js"></script>
-            <script type="text/javascript">
+         
+            <script >
+            
+        	function DrawCaptcha() {
+        		
+        		var a = Math.ceil(Math.random() * 10) + '';
+        		var b = Math.ceil(Math.random() * 10) + '';
+        		var c = Math.ceil(Math.random() * 10) + '';
+        		var d = Math.ceil(Math.random() * 10) + '';
+        		var e = Math.ceil(Math.random() * 10) + '';
+        		var f = Math.ceil(Math.random() * 10) + '';
+        		var g = Math.ceil(Math.random() * 10) + '';
+        		var code = a + ' ' + b + ' ' + ' ' + c + ' ' + d + ' ' + e + ' ' + f
+        				+ ' ' + g;
+        		document.getElementById("txtCaptcha").value = code
+        	}
+        	
+        	function ValidCaptcha() {
+        		var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
+        		var str2 = removeSpaces(document.getElementById('txtInput').value);
+        		if (str1 == str2) {
+        			return checkagree();
+        			return true;
+        		} else {
+        			alert("Please Enter correct captcha");
+        			document.getElementById('txtInput').value = "";
+        			return false;
+        		}
+
+        	}
                 function validate() {
                     var status = true;
                    // var userID = $("#userId").val();
@@ -56,10 +90,7 @@
                 }
 
                 function OnStart() {
-           var profileId = '${profileId}';
-               if(profileId == 1){
-            	  $("#show-results").css("display" , "block");
-               }
+               
                 }
                 window.onload = OnStart;
 
@@ -94,7 +125,7 @@
             </script>
             <script type="text/javascript" language="javascript">
                 function pan_validate(pan) {
-                	
+                	alert(pan);
                 	if(pan != ''){
                 		var regpan = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
                         if (regpan.test(pan) == false) {
@@ -197,11 +228,6 @@
                                     document.getElementById("headOfficeDataAddress1").value = obj[6];
                                     document.getElementById("headOfficeDataAddress2").value = obj[7];
                                     document.getElementById("pin").value = obj[8];
-                                    document.getElementById("contactPersonName").value = obj[13];
-                                    document.getElementById("contactEmail").value = obj[14];
-                                
-                                    document.getElementById("mobile").value =obj[15].toString();
-                                  //  document.getElementById("mobile").value = obj[15];
                                     document.getElementById("idHiddenUser").value = id;
                                     var s = obj[9];
                                     var d = obj[10];
@@ -253,12 +279,9 @@
                     var district = $("#district").val();;
                     var city = $("#city").val();
                     var mtpId = $('#mtpId').val();
-                    var contactPerson = $('#contactPersonName').val();
-                    var contactEmail = $('#contactEmail').val();
-                    var mobile = $('#mobile').val();
                     var idHiddenUser = $('#idHiddenUser').val();
                     var result = "";
-                    var total = status + '-' + url + '-' + email + '-' + address1 + '-' + address2 + '-' + pin + '-' + state + '-' + district + '-' + city + '-' + idHiddenUser+'-'+contactPerson+'-'+contactEmail+'-'+mobile;
+                    var total = status + '-' + url + '-' + email + '-' + address1 + '-' + address2 + '-' + pin + '-' + state + '-' + district + '-' + city + '-' + idHiddenUser;
                 	var name1=JSON.stringify({
                 		courseName:0
                   })
@@ -277,54 +300,25 @@
                 }
 
             </script>
-            <cf:form action="manageTrainingPartnerSave.fssai" name="myForm" method="POST" commandName="manageTrainingPartnerForm" onsubmit="return validateFields();">
 
-                <section>
-                    <%@include file="../roles/top-menu.jsp"%>
-                </section>
-                <!-- main body -->
-                <section class="main-section-margin-top">
-                    <div class="container-fluid">
-                        <div id="wrapper">
-                            <!-- Sidebar -->
-                            <%@include file="../roles/slider.jsp" %>
-                             <%-- <%@include file="../register_trainingpartner.jsp" %> --%>
-                                <!-- /#sidebar-wrapper -->
-                                <!-- Page Content -->
-                            <div id="page-content-wrapper">
-                                    <div class="container-fluid">
-                                        <!-- vertical button -->
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle"> <i class="fa fa-bars"></i> <span class="orange-font">Welcome ${userName}</span> </a>
-                                            </div>
-                                        </div>
-                                        <!-- add the content here for main body -->
-                                        <!-- timeline  -->
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <h1>Manage Training Partner</h1>
+  <cf:form action="manageTrainingPartnerSave.fssai" name="myForm" method="POST" commandName="manageTrainingPartnerForm" onsubmit="return validateFields();">
 
-                                                <fieldset>
-                                                    <legend>Head Office Details</legend>
-                                                    <div class="row">
-                                                        <div class="col-xs-12">
-                                                            <!-- left side -->
-                                                            <div class="col-md-6 col-xs-12">
+	<!-- login form -->
+	<div class="row">
+		<div class="col-md-2 hidden-xs"></div>
+		<div class="col-md-8  col-xs-12">
+			<h3 class="text-capitalize heading-3-padding">Training Partner
+				Registration Form</h3>
 
-                                                                <div class="form-group" style="display:none">
-                                                                    <div>
-                                                                        <ul class="lab-no">
-                                                                            <li class="style-li"><strong><cs:message code="lbl.Trainee.UserId" /></strong></li>
-                                                                            <li class="style-li error-red">${created }<span id="name_status"> </span>
-                                                                                <cf:errors path="userId" cssClass="error" />
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <cf:input path="userId"  placeholder="UserId" class="form-control" />
-                                                                </div>
+			<!-- personal info -->
+			<div class="personel-info">
+				<fieldset>
+					<legend>Personal Information</legend>
+					<!-- left side -->
+					<div class="col-md-6 col-xs-12">
 
-                                                                <div class="form-group">
+
+					       <div class="form-group">
                                                                     <div>
                                                                         <ul class="lab-no">
                                                                             <li class="style-li"><strong>Training Partner Name:</strong></li>
@@ -335,8 +329,8 @@
                                                                     </div>
                                                                     <cf:input path="trainingPartnerName" maxlength="100" placeholder="Training Partner Name" class="form-control" />
                                                                 </div>
-
-                                                                <div class="form-group">
+					
+					    <div class="form-group">
                                                                     <div>
                                                                         <ul class="lab-no">
                                                                             <li class="style-li"><strong>Website URL:</strong></li>
@@ -347,15 +341,14 @@
                                                                     </div>
                                                                     <cf:input path="websiteUrl" maxlength="100" placeholder="Website URL" class="form-control" />
                                                                 </div>
+					
 
+					
+					</div>
+					<!-- right side -->
+					<div class="col-md-6 col-xs-12">
 
-
-                                                            </div>
-                                                            <!-- left side ends -->
-                                                            <!-- right side -->
-                                                             
-                                                            <div class="col-md-6 col-xs-12">
-                                                                <div class="form-group">
+				     <div class="form-group">
                                                                     <div>
                                                                         <ul class="lab-no">
                                                                             <li class="style-li"><strong>PAN:</strong></li>
@@ -369,20 +362,8 @@
                                                                     <cf:input path="PAN" maxlength="10" placeholder="PAN" class="form-control" onKeyUP="this.value = this.value.toUpperCase();" onblur="pan_validate(this.id,this.value);" />
                                                                 </div>
 
-                                                                <div class="form-group">
-                                                                    <div>
-                                                                        <ul class="lab-no">
-                                                                            <li class="style-li"><strong>Approved Partner:</strong></li>
-                                                                            <li class="style-li error-red"></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <cf:select path="status" class="form-control">
-                                                                        <cf:option value="A" label="Active" />
-                                                                        <cf:option value="I" label="In-Active" />
-                                                                    </cf:select>
-                                                                </div>
 
-                                                                <div class="form-group">
+					                          <div class="form-group">
                                                                     <div>
                                                                         <ul class="lab-no">
                                                                             <li class="style-li"><strong>Email:</strong></li>
@@ -392,22 +373,20 @@
                                                                     <cf:input path="email" class="form-control" maxlength="100" />
 
                                                                 </div>
-                                                            </div>
-                                                            <!-- rigth side ends -->
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                            </div>
-                                              <div class="row">
-                                                <!-- Contact -->
-                                               <div class="col-xs-12">
-                                                    <fieldset>
-                                                    <legend>Contact Details</legend>
-                                                    <div class="row">
-                                                        <div class="col-xs-12">
-                                                            <!-- left side -->
-                                                            <div class="col-md-6 col-xs-12">
-																 <div class="form-group">
+					</div>
+				</fieldset>
+			</div>
+
+			<div class="row" style="height: 20px;"></div>
+			<!-- contact details -->
+			<div class="personel-info">
+				<fieldset>
+					<legend>Contact Details</legend>
+					<!-- permanent address -->
+					<!--Left side-->
+					<div class="col-md-6 col-xs-12">
+
+						 <div class="form-group">
                                                                     <div>
                                                                         <ul class="lab-no">
                                                                             <li class="style-li"><strong>Contact Person Name:</strong></li>
@@ -419,7 +398,7 @@
                                                                     <cf:input path="contactPersonName" maxlength="100" placeholder="Contact Person Name" class="form-control" />
                                                                 </div>
 
-                                                                <div class="form-group">
+					       <div class="form-group">
                                                                     <div>
                                                                         <ul class="lab-no">
                                                                             <li class="style-li"><strong>Contact Email:</strong></li>
@@ -430,43 +409,40 @@
                                                                     </div>
                                                                     <cf:input path="contactEmail" maxlength="100" placeholder="Contact Email" class="form-control" />
                                                                 </div>
-
-
-
-                                                            </div>
-                                                            <!-- left side ends -->
-                                                            <!-- right side -->
-                                                          <div class="col-md-6 col-xs-12">
+					</div>
+					<!-- left side ends -->
+					<!-- right side -->
+					<div class="col-md-6 col-xs-12">
+                               <div class="col-md-6 col-xs-12">
 
                                                                 <div class="form-group">
                                                                     <div>
                                                                         <ul class="lab-no">
                                                                             <li class="style-li"><strong>Mobile:</strong></li>
                                                                             <li class="style-li error-red">
-                                                                              
+                                                                                <span id="mobile"> </span>
+                                                                                <span id="mobile"></span>
                                                                                 <cf:errors path="mobile" cssClass="error" />
                                                                             </li>
                                                                         </ul>
                                                                     </div>
-                                                                    <cf:input path="mobile"  maxlength="10" placeholder="Mobile"  class="form-control"  />
+                                                                    <cf:input path="mobile" maxlength="10" placeholder="Mobile" max="10" class="form-control"  />
                                                                 </div>
 
 
                                                             </div>
-                                                            <!-- rigth side ends -->
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                      </div>
-                                      </div>
-                                            <div class="row">
-                                                <!-- head office data -->
-                                                <div class="col-xs-12">
-                                                    <fieldset>
-                                                        <legend>Head Office Data</legend>
-                                                        <!-- left side -->
-                                                        <div class="col-md-6 col-xs-12">
-                                                            <div class="form-group">
+					</div>
+				</fieldset>
+
+				<br>
+				<br>
+
+				<fieldset>
+					<legend>Head Office Data</legend>
+					<!--Left side-->
+					<div class="col-md-6 col-xs-12" id="permanent1">
+
+				      <div class="form-group">
                                                                 <div>
                                                                     <ul class="lab-no">
                                                                         <li class="style-li"><strong>Address 1:</strong></li>
@@ -477,7 +453,7 @@
                                                                 </div>
                                                                 <cf:input path="headOfficeDataAddress1" maxlength="100" placeholder="Address" class="form-control" />
                                                             </div>
-                                                            <div class="form-group">
+												<div class="form-group">
                                                                 <div>
                                                                     <ul class="lab-no">
                                                                         <li class="style-li"><strong>Address 2:</strong></li>
@@ -488,7 +464,8 @@
                                                                 </div>
                                                                 <cf:input path="headOfficeDataAddress2" maxlength="100" placeholder="Address" class="form-control" />
                                                             </div>
-                                                            <div class="form-group">
+
+					     <div class="form-group">
                                                                 <div>
                                                                     <ul class="lab-no">
                                                                         <li class="style-li"><strong>PIN:</strong></li>
@@ -499,10 +476,13 @@
                                                                 </div>
                                                                 <cf:input path="pin" maxlength="6" placeholder="PIN" class="form-control" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" />
                                                             </div>
-                                                        </div>
-                                                        <!-- right side -->
-                                                        <div class="col-md-6 col-xs-12">
-                                                            <div class="form-group">
+
+
+					</div>
+					<!-- left side ends -->
+					<!-- right side -->
+					<div class="col-md-6 col-xs-12" id="permanent2">
+													<div class="form-group">
                                                                 <div>
                                                                     <ul class="lab-no">
                                                                         <li class="style-li"><strong>State:</strong></li>
@@ -514,7 +494,7 @@
                                                                     <cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName" />
                                                                 </cf:select>
                                                             </div>
-                                                            <div class="form-group">
+														<div class="form-group">
                                                                 <div>
                                                                     <ul class="lab-no">
                                                                         <li class="style-li"><strong>District:</strong></li>
@@ -525,7 +505,7 @@
                                                                     <cf:option value="0" label="Select District" />
                                                                 </cf:select>
                                                             </div>
-                                                            <div class="form-group">
+															<div class="form-group">
                                                                 <div>
                                                                     <ul class="lab-no">
                                                                         <li class="style-li"><strong>City:</strong></li>
@@ -536,68 +516,67 @@
                                                                     <cf:option value="0" label="Select City" />
                                                                 </cf:select>
                                                             </div>
-                                                        </div>
-                                                    </fieldset>
-                                                </div>
-                                            </div>
-                                            <!-- button -->
-                                            <div class="row" id="register1">
-                                                <div class="col-md-6 col-xs-12"></div>
-                                                <div class="col-md-6 col-xs-12" style="margin-top: 26px;">
 
-                                                    <div id="createDiv" style="float:left;">
-                                                    	<input type="hidden" path="profileID" name="profileID" id="profileID" value="1"/>
-                                                    	<input type="hidden" path="logindetails" name="logindetails" id="logindetails" value=""/>
-                                                        <input type="submit" id="register" onclick="return validate();" style="display:none;" class="btn login-btn" value="Create" />
-                                                        <input type="hidden" id="idHiddenUser" value="">
-                                                    </div>
-                                                    <div id="updateDiv"  style=" float:left;display:none; margin-left: 20px;">
-                                                        <a href="#" onclick="updateMTP();"   class="btn btn-default pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" style="margin-right: 0px;  ">
-Update</a>
-                                                    </div>
 
-                                                    <a href="#testt" onclick="searchDataTP('SELECTED');" class="pull-right">Search</a>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        
-           
+					</div>
+					<!-- right side ends -->
+				</fieldset>
 
-                                        <!-- search Results -->
-                                        <div class="col-xs-12 " id="show-results" style="display:none;" aria-expanded="false"  style="height: 0px;">
-                                            <!-- table -->
-                                            <div class="row">
-                                                <div class="col-xs-12">
-                                                    <fieldset>
-                                                        <legend>Search Result</legend>
-                                                        <table id="newTable" class="table table-bordered table-responsive">
-                                                            <thead>
-                                                                <tr class="background-open-vacancies">
-                                                                    <th>S.No.</th>
-                                                                    <th>Training Partner ID</th>
-                                                                    <th>Training Partner Name</th>
-                                                                    <th>Website Link</th>
-                                                                    <th>Current Status</th>
-                                                                    <th>Update Status</th>
-                                                                    <th>Option</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            </tbody>
-                                                        </table>
-                                                    </fieldset>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- search div ends -->
 
-                                        <!-- row ends -->
-                                                   </div>
 
-                                </div>
-                </section>
-        </cf:form>               
-   <script>
-              
-          
-            </script>
+			</div>
+
+
+			<div
+				style="width: 95%; margin-left: 32px; float: left; height: 100px; border: 1px solid #cecece;"
+				class="form-group">
+				<div style="float: left">
+					<div style="float: left; width: 98%;">
+						<label id="captchaError"
+							style="float: left; width: 99%; font-family: Calibri; margin-left: 0px;">Please
+							enter captcha in below textbox !!!</label>
+					</div>
+
+					<div style="float: left; width: 99%;">
+
+						<input type="text" id="txtCaptcha"
+							style="background-image: url(1.jpg); text-align: center; border: none; width: 140px; margin-left: 8px; font-weight: bold; font-family: Modern"
+							disabled="disabled" /> <input type="button" id="btnrefresh"
+							value="Refresh" onclick="DrawCaptcha();" /> <input type="text"
+							id="txtInput" placeholder="Captcha" style="width: 140px;"/ >
+
+					</div>
+				</div>
+				<div style="float: left; width: 99%;">
+					<input type="checkbox" id="check" style="margin-left: 1%;">
+					<!-- <a href="#" target="_blank" class="terms-font-size"> -->
+					I have read and understood the Terms & Conditions and the Privacy
+					Policy of FSSAI.
+					<!-- </a> -->
+				</div>
+			</div>
+
+
+
+			<div class="col-xs-12"></div>
+			<div class="col-md-4 hidden-xs"></div>
+			<div class="col-md-4 col-xs-12" id="register">
+				<div class="pull-right">
+					<div class="form-group">
+						<input type="submit" class="form-control login-btn"
+							value="Register" onclick="return ValidCaptcha();">
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 hidden-xs"></div>
+
+		</div>
+		<div class="col-md-2 hidden-xs"></div>
+	</div>
+</cf:form>
+<script >
+	function OnStart() {
+		DrawCaptcha();
+	}
+	window.onload = OnStart;
+</script>

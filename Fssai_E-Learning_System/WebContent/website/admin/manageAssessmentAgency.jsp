@@ -28,10 +28,7 @@
                     } else if (websiteURL == "" || websiteURL.length <= 0) {
                         alert('Please Enter Website URL.')
                         status = false;
-                    } else if (pan == "" || pan.length <= 0) {
-                        alert('Please Enter PAN.')
-                        status = false;
-                    } else if (email == "" || email.length <= 0) {
+                    } xelse if (email == "" || email.length <= 0) {
                         alert('Please Enter Email.')
                         status = false;
                     } else if (headOfficeDataAddress1 == "" || headOfficeDataAddress1.length <= 0) {
@@ -40,10 +37,7 @@
                     } else if (headOfficeDataAddress2 == "" || headOfficeDataAddress2.length <= 0) {
                         alert('Please Enter Address 2.')
                         status = false;
-                    } /* else if (pin == "" || pin.length <= 0) {
-                        alert('Please Enter Pincode.')
-                        status = false;
-                    } */ else if (stateId == 0 || stateId == "" || stateId.length <= 0) {
+                    }  else if (stateId == 0 || stateId == "" || stateId.length <= 0) {
                         alert('Please Select State.')
                         status = false;
                     } else if (district == 0 || district == "" || district.length <= 0) {
@@ -80,16 +74,7 @@
              
             </script>
             <script type="text/javascript" language="javascript">
-                function pan_validate(pan) {
-                    var regpan = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
-                    if (regpan.test(pan) == false) {
-                        document.getElementById("statusPan").innerHTML = "Invalid PAN !!!";
-                        return false;
-                    } else {
-                        document.getElementById("statusPan").innerHTML = "";
-                    }
-                }
-
+           
                 function searchData() {
                     var userId = $("#userId").val();
                     var aan = $("#assessmentAgencyName").val(); - $(".displayNone").css("display", "block"); {
@@ -369,6 +354,65 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                                            <div class="col-xs-12">
+                                                    <fieldset>
+                                                    <legend>Contact Details</legend>
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <!-- left side -->
+                                                            <div class="col-md-6 col-xs-12">
+																 <div class="form-group">
+                                                                    <div>
+                                                                        <ul class="lab-no">
+                                                                            <li class="style-li"><strong>Contact Person Name:</strong></li>
+                                                                            <li class="style-li error-red">
+                                                                                <cf:errors path="contactPersonName" cssClass="error" />
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <cf:input path="contactPersonName" maxlength="100" placeholder="Contact Person Name" class="form-control" />
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        <ul class="lab-no">
+                                                                            <li class="style-li"><strong>Contact Email:</strong></li>
+                                                                            <li class="style-li error-red">
+                                                                                <cf:errors path="contactEmail" cssClass="error" />
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <cf:input path="contactEmail" maxlength="100" placeholder="Contact Email" class="form-control" />
+                                                                </div>
+
+
+
+                                                            </div>
+                                                            <!-- left side ends -->
+                                                            <!-- right side -->
+                                                          <div class="col-md-6 col-xs-12">
+
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        <ul class="lab-no">
+                                                                            <li class="style-li"><strong>Mobile:</strong></li>
+                                                                            <li class="style-li error-red">
+                                                                                <span id="mobile"> </span>
+                                                                                <span id="mobile"></span>
+                                                                                <cf:errors path="mobile" cssClass="error" />
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <cf:input path="mobile" maxlength="10" placeholder="Mobile" max="10" class="form-control"  />
+                                                                </div>
+
+
+                                                            </div>
+                                                            <!-- rigth side ends -->
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                      </div>
                                             <!-- head data -->
                                             <div class="col-xs-12">
                                                 <fieldset>

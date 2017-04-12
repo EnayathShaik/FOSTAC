@@ -12,7 +12,7 @@ public class ManageTrainingPartnerForm {
 	private String PAN;
 	@NotNull(message="* error")
 	private String trainingPartnerName;
-	@NotNull(message="* error")
+//	@NotNull(message="* error")
 	private String status;
 	@NotNull(message="* error")
 	private String websiteUrl;

@@ -359,14 +359,15 @@ public class AdminDAOImpl implements AdminDAO {
 		loginDetails.setLoginId(nextSequenceUserID);
 		loginDetails.setPassword(passwordString);
 		loginDetails.setEncrypted_Password(encryprPassword);
-		loginDetails.setIsActive(manageTrainingPartnerForm.getStatus().equalsIgnoreCase("A")? "Y" : "N");
-		loginDetails.setStatus("A");
+		System.out.println("status "+manageTrainingPartnerForm.getStatus());
+		loginDetails.setIsActive( manageTrainingPartnerForm.getStatus() != null && manageTrainingPartnerForm.getStatus().equalsIgnoreCase("A")? "Y" : "N");
+		loginDetails.setStatus( manageTrainingPartnerForm.getStatus() != null && manageTrainingPartnerForm.getStatus().equalsIgnoreCase("A")? "Y" : "N");
 		loginDetails.setProfileId(7);
 		
 		State s = getState(manageTrainingPartnerForm.getState());
 		District d = getDistrict(manageTrainingPartnerForm.getDistrict());
 		City c = getCity(manageTrainingPartnerForm.getCity());
-		
+		try{
 		ManageTrainingPartner manageTrainingPartner = new ManageTrainingPartner();
 		manageTrainingPartner.setPAN(manageTrainingPartnerForm.getPAN() == null ? "" : manageTrainingPartnerForm.getPAN());
 		manageTrainingPartner.setTrainingPartnerName(manageTrainingPartnerForm.getTrainingPartnerName() == null ? "" : manageTrainingPartnerForm.getTrainingPartnerName());
@@ -374,6 +375,7 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		manageTrainingPartner.setContactPersonName(manageTrainingPartnerForm.getContactPersonName() == null ? "" :manageTrainingPartnerForm.getContactPersonName() );
 		manageTrainingPartner.setContactEmail(manageTrainingPartnerForm.getContactEmail() == null ? "" :manageTrainingPartnerForm.getContactEmail() );
+		manageTrainingPartner.setMobile(manageTrainingPartnerForm.getMobile() == null ? "" :manageTrainingPartnerForm.getMobile() );
 		manageTrainingPartner.setEmail(manageTrainingPartnerForm.getEmail() == null ? "" :manageTrainingPartnerForm.getEmail() );
 		manageTrainingPartner.setWebsiteUrl(manageTrainingPartnerForm.getWebsiteUrl() == null ? "" : manageTrainingPartnerForm.getWebsiteUrl());
 		manageTrainingPartner.setHeadOfficeDataAddress1(manageTrainingPartnerForm.getHeadOfficeDataAddress1() == null ? "" : manageTrainingPartnerForm.getHeadOfficeDataAddress1());
@@ -382,10 +384,11 @@ public class AdminDAOImpl implements AdminDAO {
 		manageTrainingPartner.setDistrict(d);
 		manageTrainingPartner.setCity(c);
 		manageTrainingPartner.setState(s);
-		manageTrainingPartner.setEmail(manageTrainingPartnerForm.getEmail() == null ?  "" : manageTrainingPartnerForm.getEmail());
 		manageTrainingPartner.setLoginDetails(loginDetails);
 		session.save(manageTrainingPartner);
-		
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		new ZLogger("manageTrainingPartnerSave", "all insert done", "AdminDAOImpl.java");
 		return passwordString+"&"+nextSequenceUserID;
 	}
@@ -423,6 +426,9 @@ public class AdminDAOImpl implements AdminDAO {
 		loginDetails.setIsActive(manageAssessmentAgencyForm.getStatus().equalsIgnoreCase("A")? "Y" : "N");
 		manageAssessmentAgency.setAgencyUniqueID(nextSequenceUserID == null ? "" : nextSequenceUserID);
 		manageAssessmentAgency.setPAN(manageAssessmentAgencyForm.getPAN() == null ? "" : manageAssessmentAgencyForm.getPAN());
+		manageAssessmentAgency.setContactPersonName(manageAssessmentAgencyForm.getContactPersonName() == null ? "" : manageAssessmentAgencyForm.getContactPersonName());
+		manageAssessmentAgency.setContactEmail(manageAssessmentAgencyForm.getContactEmail() == null ? "" : manageAssessmentAgencyForm.getContactEmail());
+		manageAssessmentAgency.setMobile(manageAssessmentAgencyForm.getMobile() == null? "" :manageAssessmentAgencyForm.getMobile() );
 		manageAssessmentAgency.setAssessmentAgencyName(manageAssessmentAgencyForm.getAssessmentAgencyName() == null ? "" : manageAssessmentAgencyForm.getAssessmentAgencyName());
 		manageAssessmentAgency.setWebsiteUrl(manageAssessmentAgencyForm.getWebsiteUrl() == null ? "" : manageAssessmentAgencyForm.getWebsiteUrl());
 		manageAssessmentAgency.setHeadOfficeDataAddress1(manageAssessmentAgencyForm.getHeadOfficeDataAddress1() == null ? "" : manageAssessmentAgencyForm.getHeadOfficeDataAddress1());

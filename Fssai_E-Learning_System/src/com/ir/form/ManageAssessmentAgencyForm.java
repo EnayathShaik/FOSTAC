@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 public class ManageAssessmentAgencyForm {
 	//@NotNull
 	private String userId;
-	@NotNull
+/*	@NotNull*/
 	private String PAN;
 	@NotNull
 	private String assessmentAgencyName;
@@ -26,6 +26,11 @@ public class ManageAssessmentAgencyForm {
 	private String email;
 	private int stateId;
 	
+	
+	
+	private String contactPersonName;
+	private String contactEmail;
+	private String mobile;
 	
 	public int getStateId() {
 		return stateId;
@@ -99,6 +104,24 @@ public class ManageAssessmentAgencyForm {
 	}
 	public void setCity(int city) {
 		this.city = city;
+	}
+	public String getContactPersonName() {
+		return contactPersonName;
+	}
+	public void setContactPersonName(String contactPersonName) {
+		this.contactPersonName = contactPersonName;
+	}
+	public String getContactEmail() {
+		return contactEmail;
+	}
+	public void setContactEmail(String contactEmail) {
+		this.contactEmail = contactEmail;
+	}
+	public String getMobile() {
+		return mobile;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 	
 	

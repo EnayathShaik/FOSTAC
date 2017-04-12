@@ -1570,7 +1570,7 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 					 " and mtp.trainingpartnername like '"+tpname+"%' and mtp.pan like '"+pan+"%' and mtp.websiteurl like '"+websiteURL+"%' " +
 					 " and mtp.email like '"+email+"%' and mtp.headOfficeDataAddress1 like '"+headOfficeDataAddress1+"%' " +
 					 " and mtp.headOfficeDataAddress2 like '"+headOfficeDataAddress2+"%' and mtp.pin like '"+pin+"%' and cast(mtp.state as varchar) like '"+stateId+"'" +
-					 "and cast(mtp.district as varchar) like '"+district+"' and cast(mtp.city as varchar) like '"+city+"' and ld.status like '"+status+"%'" ;
+					 "and cast(mtp.district as varchar) like '"+district+"' and cast(mtp.city as varchar) like '"+city+"'";
 		else
 			 sql ="select mtp.managetrainingpartnerid  , ld.loginid  , mtp.trainingpartnername , mtp.pan , "+
 						" mtp.websiteurl , (CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus ,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus from managetrainingpartner as mtp "+
@@ -1592,7 +1592,7 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 		Session session = sessionFactory.getCurrentSession();
 		String sql=" select mtp.managetrainingpartnerid  , ld.loginid  ,  mtp.pan , mtp.trainingpartnername , ld.status , "+
 				" mtp.websiteurl , mtp.headofficedataaddress1 , mtp.headofficedataaddress2 ,mtp.pin ,  "+
-			  " s.stateid , d.districtid , c.cityid , mtp.email "+
+			  " s.stateid , d.districtid , c.cityid , mtp.email , mtp.contactpersonname , mtp.contactemail , mtp.mobile  "+
 				" from managetrainingpartner as mtp "+
 				" inner join logindetails as ld on ld.id = mtp.logindetails "+
 				" inner join district as d on d.districtid = mtp.district "+
@@ -1624,6 +1624,9 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 		String district = total[7];
 		String city = total[8];
 		String mtpId = total[9];
+		String contactPerson = total[10];
+		String contactEmail = total[11];
+		String mobile = total[12];
 		String isActive = (status.equalsIgnoreCase("A") ? "Y" : "N");
 		System.out.println("status>"+status+url+email+address1+address2+pin+state+district+city+mtpId);
 
@@ -1643,7 +1646,7 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 				" district='"+d.getDistrictId()+"', email='"+email+"', "+
 				" headofficedataaddress1='"+address1+"', headofficedataaddress2='"+address2+"', "+
 				" pin='"+pin+"', state='"+s.getStateId()+"' , "+
-				" websiteurl='"+url+"' "+
+				" websiteurl='"+url+"' , contactPersonName= '"+contactPerson+"' ,  contactemail='"+contactEmail+"' ,  mobile='"+mobile+"' "+
 				" WHERE managetrainingpartnerid = '"+mtpId+"' ";
 
 		String sqlLD = "update logindetails set status ='"+status+"' , isactive = '"+isActive+"' where id =("+selectSel+")"; 
