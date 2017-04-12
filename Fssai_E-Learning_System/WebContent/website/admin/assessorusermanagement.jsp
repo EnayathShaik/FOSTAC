@@ -125,7 +125,7 @@
                                                     <div class="row" style="height:20px;"></div>
                                                     <div class="row">
                                                         <div class="col-xs-12 table-overflow-responsive">
-                                                            <table class="table table-bordered table-hover table-responsive">
+                                                            <table id="datatablesfostac" class="table table-bordered table-hover table-responsive">
                                                                 <thead>
                                                                     <th>User ID</th>
                                                                     <th>First Name</th>

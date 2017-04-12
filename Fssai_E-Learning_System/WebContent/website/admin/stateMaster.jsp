@@ -120,11 +120,11 @@
                 		 	 data:name1,
                             async: false,
                             success: function(data) {
-                                $('#newTable').show();
+                                //$('#newTable').show();
                                 var mainData1 = jQuery.parseJSON(data);
                                 var j = 1;
-                                $('#newTable tr').remove();
-                                $('#newTable').append('<tr  class="background-open-vacancies" style="background-color:#000077;"><th>S.No.</th><th>State Name</th><th>Status</th><th>Change</th><th style="display:none"></th></tr>')
+                               // $('#newTable tr').remove();
+                               // $('#newTable').append('<tr  class="background-open-vacancies" style="background-color:#000077;"><th>S.No.</th><th>State Name</th><th>Status</th><th>Change</th><th style="display:none"></th></tr>')
                                 $.each(mainData1, function(i, obj) {
                                     var stat;
                                     if (obj.status == 'A') {
@@ -134,7 +134,12 @@
                                     }
                                     var state = obj.stateName;
                                     var status = obj.status;
-                                    $('#newTable').append('<tr id="tableRow"><td>' + j++ + '</td><td><input type="hidden" id="stateLabel" value="' + obj.stateName + '">' + obj.stateName + '</td><td><input type="hidden" id="statusLabel" value="' + obj.status + '">' + stat + '</td><td> &nbsp;&nbsp;&nbsp;&nbsp; <a href="#" onClick="deleteState(\'' + obj.stateName + '\',\'' + obj.status + '\',\'' + obj.stateId + '\');">Edit</a> </td><td style="display:none;"><input type="hidden" id="idLabel' + i + '" value="' + obj.stateId + '"></td></tr>');
+                                    $('#newTable').dataTable().fnAddData( [
+                                                                         j++,
+                                                                         state,
+                                                                         status,
+                                                                         '<a href="#" class="btn login-btn" onClick="deleteState(\'' + obj.stateName + '\',\'' + obj.status + '\',\'' + obj.stateId + '\');">Edit</a>' ] );
+                                  //  $('#newTable').append('<tr id="tableRow"><td>' + j++ + '</td><td><input type="hidden" id="stateLabel" value="' + obj.stateName + '">' + obj.stateName + '</td><td><input type="hidden" id="statusLabel" value="' + obj.status + '">' + stat + '</td><td> &nbsp;&nbsp;&nbsp;&nbsp; <a href="#" onClick="deleteState(\'' + obj.stateName + '\',\'' + obj.status + '\',\'' + obj.stateId + '\');">Edit</a> </td><td style="display:none;"><input type="hidden" id="idLabel' + i + '" value="' + obj.stateId + '"></td></tr>');
                                 });
                             }
                         });
@@ -270,7 +275,7 @@ Update</a>
                                                                         <th>S. No.</th>
                                                                         <th>State Name</th>
                                                                         <th>Status</th>
-                                                                        <th>Change Status</th>
+                                                                        <th>Edit</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>

@@ -138,7 +138,7 @@ function onFeedbackSave(feedbackMasterList){
                               <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="2"></td>
                               <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="3"></td>
                               <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="4"></td>
-                              <td class="text-center"><input type="radio" name="feedbackRating${feedbackMaster[0]}" value="5"></td>
+                              <td class="text-center"><input checked="checked" type="radio" name="feedbackRating${feedbackMaster[0]}" value="5"></td>
 						    </tr>
 						</ct:forEach>
                       </tbody>

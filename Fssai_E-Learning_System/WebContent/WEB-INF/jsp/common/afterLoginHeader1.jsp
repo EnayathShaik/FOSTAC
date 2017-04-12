@@ -34,9 +34,9 @@
                             <a href="#"><img src="website/afterLogin/img/fostac-logo.png" class="img-responsive fostac-logo-top-padding" alt="logo" /></a>
                         </div>
 
-                        <div class="col-xs-6 fssai-logo-right">
+                        <!-- <div class="col-xs-6 fssai-logo-right">
                             <a href="#"><img src="website/afterLogin/img/fssai-logo.png" class="img-responsive pull-right" alt="logo" /></a>
-                        </div>
+                        </div> -->
                     </div>
                     <!--<div>
                         <ul class="nav navbar-nav">

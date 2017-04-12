@@ -143,7 +143,7 @@
                                                 <div class="row" style="height:20px;"></div>
                                                 <div class="row">
                                                     <div class="col-xs-12">
-                                                        <table class="table table-hover table-bordered table-responsive">
+                                                        <table id="datatablesfostac" class="table table-hover table-bordered table-responsive">
                                                             <thead>
                                                                 <th>User ID</th>
                                                                 <th>First Name</th>
@@ -183,13 +183,13 @@
                                                                             </tr>
                                                                         </ct:forEach>
                                                                     </ct:when>
-                                                                    <ct:otherwise>
+                                                                  <%--   <ct:otherwise>
                                                                         <tr>
                                                                             <td colspan="6">
                                                                                 <label>No records available</label>
                                                                             </td>
                                                                         </tr>
-                                                                    </ct:otherwise>
+                                                                    </ct:otherwise> --%>
                                                                 </ct:choose>
                                                             </tbody>
                                                         </table>

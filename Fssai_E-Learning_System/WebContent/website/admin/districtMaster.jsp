@@ -26,8 +26,8 @@
                             $('#newTable').show();
                             var mainData1 = jQuery.parseJSON(data);
                             var j = 1;
-                            $('#newTable tr').remove();
-                            $('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>State Name</th><th>District Name</th><th>Status</th><th>Edit</th></tr>')
+                            //$('#newTable tr').remove();
+                            //$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>State Name</th><th>District Name</th><th>Status</th><th>Edit</th></tr>')
                             $.each(mainData1, function(i, obj) {
                                 var status;
                                 if (obj[2] == 'A') {
@@ -35,7 +35,13 @@
                                 } else {
                                     status = 'In-Active';
                                 }
-                                $('#newTable').append('<tr id="tableRow"><td>' + j++ + '</td><td><input type="hidden" id="stateName" value="' + obj[0] + '">' + obj[0] + '</td><td><input type="hidden" id="districtName" value="' + obj[1] + '">' + obj[1] + '</td><td><input type="hidden" id="statusLabel" value="' + status + '">' + status + '</td><td><input type="hidden" id="idCity" value="' + obj[3] + '" /><a href="#" onClick="editDistrict(\'' + obj[0] + '\',\'' + obj[1] + '\',\'' + status + '\',\'' + obj[3] + '\');">Edit</a></td></tr>');
+                                $('#newTable').dataTable().fnAddData( [
+                                                                       j++,
+                                                                       obj[0],
+                                                                       obj[1],
+                                                                       status,
+                                                                       '<a href="#" class="btn login-btn" onClick="editDistrict(\'' + obj[0] + '\',\'' + obj[1] + '\',\'' + status + '\',\'' + obj[3] + '\');">Edit</a>' ] );
+                                //$('#newTable').append('<tr id="tableRow"><td>' + j++ + '</td><td><input type="hidden" id="stateName" value="' + obj[0] + '">' + obj[0] + '</td><td><input type="hidden" id="districtName" value="' + obj[1] + '">' + obj[1] + '</td><td><input type="hidden" id="statusLabel" value="' + status + '">' + status + '</td><td><input type="hidden" id="idCity" value="' + obj[3] + '" /><a href="#" onClick="editDistrict(\'' + obj[0] + '\',\'' + obj[1] + '\',\'' + status + '\',\'' + obj[3] + '\');">Edit</a></td></tr>');
 
                             });
                         }
@@ -321,7 +327,8 @@ Update</a>
                                                                         <th>S.No.</th>
                                                                         <th>State Name</th>
                                                                         <th>District Name</th>
-                                                                        <th>Option</th>
+                                                                        <th>Status</th>
+                                                                        <th>Edit</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
