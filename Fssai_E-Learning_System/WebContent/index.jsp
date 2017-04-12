@@ -142,7 +142,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                                             </div>
                                             <div class="col-md-3 xs-hidden">
-											 <a href="trainingPartner.fssai"><img src="website/images/training-partner_bk.png"></a>
+											 <a href="trainingpartner.fssai"><img src="website/images/training-partner_bk.png"></a>
                                             </div>
 
                                               <li>
