@@ -80,8 +80,8 @@ public class JavaMail {
 	                emailMessage.append("Your User ID "+id+" has been created successfully with password : "+pass);
 	                emailMessage.append("<br/>");
 	                emailMessage.append("<br/>");
-	               emailMessage.append("You can login using this Link : http://114.79.137.170:8086/Fssai_E-Learning_System");
-	              // emailMessage.append("<a href=\"google.com\">Click Here</a>");  
+	            //   emailMessage.append("You can login using this Link : ");
+	               emailMessage.append("<a href=\"google.com\">Click Here</a>");  
 	                emailMessage.append("<br/>");
 	                emailMessage.append(" Regards");
 	                }else{
