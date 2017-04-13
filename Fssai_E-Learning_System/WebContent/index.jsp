@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="col-sm-6 col-xs-8">
                                     <div class="social">
                                         <div class="social-share">
-                                         <!--    <a href="http://www.fssai.gov.in/" target="_blank"><img class="img-responsive" src="website/images/fssai-logo.jpg"></a> -->
+                                           <a href="http://www.fssai.gov.in/" target="_blank"><img class="img-responsive" src="website/images/fssai-logo.jpg"></a> 
                                         </div>
                                     </div>
                                 </div>
