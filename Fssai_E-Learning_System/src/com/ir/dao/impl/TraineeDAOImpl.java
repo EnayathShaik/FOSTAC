@@ -629,7 +629,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 				+ " tcal.trainingcenter as trainingCenterCode,"
 				+ " pitp.trainingpartnerpermanentline1||','|| pitp.trainingpartnerpermanentline2 as address,"
 				+ " cast(ce.rollno as varchar(100)) as rollNo  , cty.cityname  "
-				+ ", district.districtname as district , coalesce(cn.coursecode, '') as coursecode , state.statename  , tcal.trainingdate as trainingstartdate , tcal.trainingtime as trainingenddate , cn.courseduration as courseduration , pitp.firstname || ' ' || pitp.middlename || ' ' || pitp.lastname as trainingcentername  , case when gender='M' then 'MALE' else 'FEMALE' end , pit.mobile"
+				+ ", district.districtname as district , coalesce(cn.coursecode, '') as coursecode , state.statename  , tcal.trainingdate as trainingstartdate , tcal.trainingtime as trainingenddate , cn.courseduration as courseduration , pitp.trainingcentrename as trainingcentername  , case when gender='M' then 'MALE' else 'FEMALE' end , pit.mobile"
 				+ " from courseenrolleduser ce "
 				+ " inner join personalinformationtrainee pit on pit.logindetails = ce.logindetails   "
 				+ " inner join title on title.titleId = pit.title "

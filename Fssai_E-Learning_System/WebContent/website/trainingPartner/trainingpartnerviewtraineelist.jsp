@@ -49,10 +49,22 @@ function showDetails(){
 		//var mainData = JSON.stringify(data);
 		var mainData1 = jQuery.parseJSON(data);
 		var j=1;
-		$('#newTable tr').remove();
+	//	$('#newTable tr').remove();
 		$.each(mainData1 , function(i , obj)
 		{
-			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td>'+obj[5]+'</td><td>Pending</td></tr>');
+		//	$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td>'+obj[5]+'</td><td>Pending</td></tr>');
+		
+		
+			  $('#newTable').dataTable().fnAddData( [ j++,
+			                                          obj[0] ,
+			                                          obj[1],
+			                                          obj[2],
+			                                          obj[3],
+			                                          obj[4],
+			                                          obj[5],
+			                                          'Pending'
+			                                          
+													 ] );
 			
 		});
 		}
@@ -236,7 +248,7 @@ function showDetails(){
                       <h4>Search results</h4>
                       </legend>
                       <div id="dvData">
-                      <table  class="table table-bordered table-responsive table-striped table-hover">
+                      <table  id="newTable"   class="table table-bordered table-responsive table-striped table-hover">
                         <thead>
                           <tr class="background-open-vacancies">
                             <th>S.No.</th>
@@ -249,8 +261,8 @@ function showDetails(){
                             <th>Status</th>
                           </tr>
                         </thead>
-                        <tbody id="newTable">
-                        </tbody>
+                     <!--    <tbody id="newTable">
+                        </tbody> -->
                       </table>
                       </div>
                     </fieldset>

@@ -84,8 +84,8 @@
                             var mainData1 = jQuery.parseJSON(data);
                             // 		alert(mainData1);
                             var j = 1;
-                            $('#newTable tr').remove();
-                            $('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Course Code</th><th>Batch Code</th><th>Training Date</th><th>No. Of Seats</th><th>No. Of Enrollments</th></tr>')
+                        //   $('#newTable tr').remove();
+                          //  $('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Course Code</th><th>Batch Code</th><th>Training Date</th><th>No. Of Seats</th><th>No. Of Enrollments</th></tr>')
                             $.each(mainData1, function(i, obj) {
                                /*  var a = null;
                                 var statuss = obj[9];
@@ -94,8 +94,18 @@
                                 } else {
                                     a = '<a href="#"  onClick=confirmStatus(' + obj[0] + '); id=confirm_' + obj[0] + ' >Confirm</a>';
                                 } */
-                                $('#newTable').append('<tr id="tableRow"><td>' + j++ + '</td><td>' + obj[10] + '</td><td>' + obj[11] + '</td><td>' + obj[2] + '</td><td>' + obj[6] + '</td><td>' + obj[5] + '</td></tr>');
-
+                                
+                                
+                              //  $('#newTable').append('<tr id="tableRow"><td>' + j++ + '</td><td>' + obj[10] + '</td><td>' + obj[11] + '</td><td>' + obj[2] + '</td><td>' + obj[6] + '</td><td>' + obj[5] + '</td></tr>');
+                            	 $('#newTable').dataTable().fnAddData( [
+                                                                        j++,
+                                                                        obj[10],
+                                                                        obj[11],
+                                                                        obj[2],
+                                                                        obj[6],
+                                                                        obj[5]
+                                                                        ] );
+                              
                             });
                         }
                     });
@@ -161,8 +171,8 @@
                                                                             <th>Training Date</th>
                                                                             <th>No. of Seats</th>
                                                                             <th>No. Of Enrollments</th>
-                                                                            <th>Required Seats</th>
-                                                                            <th>Confirm Status</th>
+                                                                           <!--  <th>Required Seats</th>
+                                                                            <th>Confirm Status</th> -->
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>

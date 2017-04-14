@@ -564,7 +564,7 @@ Update</a>
            
 
                                         <!-- search Results -->
-                                        <div class="col-xs-12 " id="show-results" style="display:none;" aria-expanded="false"  style="height: 0px;">
+                                        <div class="col-xs-12 " id="show-results"  aria-expanded="false"  style="height: 0px;">
                                             <!-- table -->
                                             <div class="row">
                                                 <div class="col-xs-12">

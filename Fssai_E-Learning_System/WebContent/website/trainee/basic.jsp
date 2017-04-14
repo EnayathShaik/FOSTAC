@@ -18,7 +18,7 @@ function OnStart(){
 		window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
 	}
 }
-window.onload = OnStart;
+//window.onload = OnStart;
 
  
  function getcourseType(){
@@ -76,11 +76,24 @@ function confirmTrainee(){
 	      $('#newTable').show();
 	      $(".displayNone").css("display","block");
 	      var j=1;
-			$('#newTable tr').remove();
-			$('#newTable').append('<tr  class="background-open-vacancies"><th>Select</th><th>Batch Code Code</th><th>Course Code</th><th>Course Duration</th><th>Training Center/Venue</th><th>Training Schedule</th><th>Training Center Name</th><th>Seating Capacity</th><th>Seats available</th></tr>')
+			//$('#newTable tr').remove();
+		//	$('#newTable').append('<tr  class="background-open-vacancies"><th>Select</th><th>Batch Code Code</th><th>Course Code</th><th>Course Duration</th><th>Training Center/Venue</th><th>Training Schedule</th><th>Training Center Name</th><th>Seating Capacity</th><th>Seats available</th></tr>')
 			$.each(mainData1 , function(i , obj)
 			{
-			$('#newTable').append('<tr id="tableRow"><td><input type="hidden" name="getCalander" id="h" value="'+obj[0]+'" /><input type="radio" name="getCalander" onclick="gettid(this.value);" id="trainingCalendarIdd'+i+'"  value="'+obj[0]+'"/></td><td>'+obj[9]+'</td><td>'+obj[7]+'</td><td>'+obj[10]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[11]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td></tr>');	
+				
+			//$('#newTable').append('<tr id="tableRow"><td><input type="hidden" name="getCalander" id="h" value="'+obj[0]+'" /><input type="radio" name="getCalander" onclick="gettid(this.value);" id="trainingCalendarIdd'+i+'"  value="'+obj[0]+'"/></td><td>'+obj[9]+'</td><td>'+obj[7]+'</td><td>'+obj[10]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[11]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td></tr>');
+			
+			  $('#newTable').dataTable().fnAddData( [ j++,
+			                                          '<input type="hidden" name="getCalander" id="h" value="'+obj[0]+'" /><input type="radio" name="getCalander" onclick="gettid(this.value);" id="trainingCalendarIdd'+i+'"  value="'+obj[0]+'"/>' ,
+			                                          obj[9],
+			                                          obj[7],
+			                                          obj[10],
+			                                          obj[1],
+			                                          obj[2],
+			                                          obj[11],
+			                                          obj[5],
+			                                          obj[6],
+													 ] );
 			document.getElementById("trainingCalendarId").value = i;
 			});
 			}
@@ -227,13 +240,16 @@ function gettid(value){
                     <legend><h3 class="text-capitalize heading-3-padding"><span id ="certificationCourse">Certification Course</span></h3></legend>
                     <table  id="newTable"  class="table-bordered table table-responsive table-striped table-hover">
                         <thead>
-                          <tr id="newTable" class="background-open-vacancies">
-                            <!-- <td>Select</td>
-                            <td>Training Center Name /Venue</td>
-                            <td>Training Schedule</td>
-                            <td>Center Contact Person Name, Mobile & Email Id</td>
-                            <td>Seating Capacity</td>
-                            <td>Seats available</td> -->
+                        <tr  class="background-open-vacancies">
+                          <th>Select</th>
+							<th>Batch Code Code</th>
+							<th>Course Code</th>
+							<th>Course Duration</th>
+							<th>Training Center/Venue</th>
+							<th>Training Schedule</th>
+							<th>Training Center Name</th>
+							<th>Seating Capacity</th>
+							<th>Seats available</th>
                           </tr>
                         </thead><tbody></tbody>
                       </table>
