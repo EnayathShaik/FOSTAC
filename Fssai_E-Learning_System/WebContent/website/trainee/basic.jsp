@@ -3,22 +3,37 @@
 <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="website/js/commonController.js"></script>
 <script type="text/javascript">
+
+function convertStringToDate(dateString){
+	    dateTimeParts = dateString.split(' '),
+	    timeParts = dateTimeParts[1].split(':'),
+	    dateParts = dateTimeParts[0].split('-'),
+	    date = '';
+	date = new Date(dateParts[2], parseInt(dateParts[1], 10) - 1, dateParts[0], timeParts[0], timeParts[1]);
+	console.log(date.getTime()); //1379426880000
+	console.log(date);
+	return date;
+	}
 function OnStart(){
 	var steps = 1;
 	var traineeSteps =
 		<%=(Integer) session.getAttribute("traineeSteps")%>
 	
-	if(steps > traineeSteps){
+	var trainingEndDate = '${trainingEndDate}';
+	
+	var trainingDate = convertStringToDate(trainingEndDate);
+	var today = new Date();
+	 if(steps > traineeSteps){
 	}else{
-		if(steps-1 == traineeSteps){
+		if(steps-1 == traineeSteps || (today <trainingDate )){
 			alert('Please Complete Your Previous Training First')
-		}else{
+		}else if((today <trainingDate )){
 			alert('Please Flow Step By Step..');
 		}
 		window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
-	}
+	} 
 }
-//window.onload = OnStart;
+window.onload = OnStart;
 
  
  function getcourseType(){

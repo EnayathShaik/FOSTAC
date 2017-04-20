@@ -49,4 +49,6 @@ public interface LoginService {
 	public long getTrainingPartnerCount();
 	public long getAssessorAgencyCount();
 	
+	public String getTrainingEndDateOfTrainee(int loginId);
+	
 }

@@ -40,4 +40,5 @@ public interface LoginDAO {
 	public long getAssessorCount();
 	public long getTrainingPartnerCount();
 	public long getAssessorAgencyCount();
+	public String getTrainingEndDateOfTrainee(int loginID);
 }

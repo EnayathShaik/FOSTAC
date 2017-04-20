@@ -143,6 +143,14 @@ public class LoginServiceImpl implements LoginService {
 		return count;
 	}
 	
+	@Override
+	@Transactional
+	public String getTrainingEndDateOfTrainee(int loginId) {
+		// TODO Auto-generated method stub
+		String trainingEndDate = loginDAO.getTrainingEndDateOfTrainee(loginId);
+		return trainingEndDate;
+	}
+	
 
 	
 	

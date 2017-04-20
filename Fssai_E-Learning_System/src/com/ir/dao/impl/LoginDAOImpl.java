@@ -302,4 +302,19 @@ public class LoginDAOImpl implements LoginDAO{
 		return count;
 	}
 	
+	@Override
+	public String getTrainingEndDateOfTrainee(int loginID) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		
+		String trainingTime = null;
+		Query query = session.createSQLQuery("select trainingtime  from courseenrolleduser ceu left join  trainingcalendar tc on (ceu.trainingcalendarid = tc.trainingcalendarid) where ceu.logindetails="+loginID+" order by ceu.create_date desc limit 1");
+		List list = query.list();
+		if(list.size() > 0){
+			trainingTime = (String) list.get(0);
+		}
+		System.out.println("trainingTime "+trainingTime);
+		return trainingTime;
+	}
+	
 }

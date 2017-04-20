@@ -216,6 +216,22 @@ function getTrainingCenter(val , id)
 	  				$('#'+id).append('<option value='+obj[0]+'>'+obj[1]+'</option>');		
 	  		});
 	      }
-	      });     
+	      });
+	
+	
+	function convertStringToDate(dateString){
+		
+	//	var dateString = '17-09-2013 10:08',
+	    dateTimeParts = dateString.split(' '),
+	    timeParts = dateTimeParts[1].split(':'),
+	    dateParts = dateTimeParts[0].split('-'),
+	    date;
+
+	date = new Date(dateParts[2], parseInt(dateParts[1], 10) - 1, dateParts[0], timeParts[0], timeParts[1]);
+
+	console.log(date.getTime()); //1379426880000
+	console.log(date);
+	return date;
+	}
 }
 

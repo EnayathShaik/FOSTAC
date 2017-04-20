@@ -184,10 +184,13 @@ public class LoginController {
 		}else if(loginDetails !=null && loginDetails.getProfileId() == 3 && loginDetails.getStatus().equalsIgnoreCase("A"))
 		{
 			PersonalInformationTrainee personalInformationTrainee = loginService.FullDetail(loginDetails.getId() );
+			String trainingEndDate = loginService.getTrainingEndDateOfTrainee(loginDetails.getId());
+			session.setAttribute("trainingEndDate",trainingEndDate);
 			new ZLogger("loginProcess","in trainee login  "+ personalInformationTrainee.getFirstName(), "LoginController.java");
 			session.setAttribute("logId", personalInformationTrainee.getLoginDetails().getLoginId());
 			session.setAttribute("profileId", loginDetails.getProfileId());
 			session.setAttribute("userId", loginDetails.getId());
+			
 			session.setAttribute("userName", loginDetails.getLoginId());
 			session.setAttribute("traineeSteps", personalInformationTrainee.getSteps());
 			return "traineeHomepage";
