@@ -112,41 +112,52 @@ return result;
                         <div class="row">
                              <div class="col-xs-12" id="fullListOfTP">
                             <fieldset>
-                                <legend>Pending Training Center ID Activation</legend>
-                                <table id="newTable" class="table-bordered table table-hover table-responsive">
-                                    <thead>
-                                        <tr  class="background-open-vacancies">
-                                            <td>S. No.</td>
-                                            <td>Training Partner Name</td>
-                                            <td>Number of Training Center IDs</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>                                   
-                                </table>                               
-                            </fieldset>
-                                 <br><br>
-                            </div> <!-- col xs ends -->
+                                <legend>List Of Training Center</legend>
+                          
+                        
                             
                          
-                            <div class="col-md-2 hidden-xs"></div>
-                            <div class="row" id="detailListOfTP">
-                            <div class="col-xs-12">
-                            <span id="name_status"></span>
-                                <div class="page-header">
-                                    <h1 id="timeline">List of Pending Training Partner ID Activation</h1> </div>
-                                <table id="newTable1"  class="table-bordered table-hover table table-responsive">
-                                    <thead>
-                                        <tr class="background-open-vacancies">
-                                            <td>S. No.</td>
-                                            <td>Training Center Name</td>
-                                            <td>Training Center ID</td>
-                                            <td>Status</td>
-                                        </tr>
-                                    </thead>
-                                   <tbody></tbody>
-                                </table>
-                                         </div>
-                            <div class="col-md-2 hidden-xs"></div>
+                             <div class="col-xs-12 table-overflow-responsive">
+                                                <table id="datatablesfostac" class="table-hover table table-bordered table-responsive">
+                                                    <thead>
+                                                        <th>User ID</th>
+                                                        <th>Training center Name</th>
+                                                        <th>Current Status</th>
+                                                        <th>Update Status</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <ct:choose>
+                                                            <ct:when test="${not empty searchTrainingCenterUsermanagement }">
+                                                                <ct:forEach var="listValue" items="${searchTrainingCenterUsermanagement}" varStatus="loop">
+                                                                    <tr>
+                                                                        <td>
+                                                                            <label><a href="update-personal-information.fssai?userId=${listValue[3]}" value="${listValue[0]}">${listValue[1]}</a></label>
+                                                                        </td>
+                                                                        <td>
+                                                                            <label>${listValue[2] }</label>
+                                                                        </td>
+                                                                       
+                                                                            <td>
+                                                                                    <label>${listValue[5]}</label>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <label><input type="submit"  onclick=" return activateDeActivateUser('${listValue[3]}','${listValue[4]}','1');" value="${listValue[4]}"/></label>
+                                                                                </td>
+                                                                    </tr>
+                                                                </ct:forEach>
+                                                            </ct:when>
+                                                            <ct:otherwise>
+                                                                <td colspan="5">
+                                                                    <label>No records available</label>
+                                                                </td>
+
+                                                            </ct:otherwise>
+                                                        </ct:choose>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            </fieldset>
+                           </div> <!-- col xs ends -->
                         </div>
                         </div>
                     </div>

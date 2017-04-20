@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.ir.form.LoginForm;
+import com.ir.form.TrainingCenterUserManagementForm;
 import com.ir.model.LoginDetails;
 import com.ir.model.ManageAssessmentAgency;
 import com.ir.model.ManageTrainingPartner;
@@ -25,6 +26,7 @@ import com.ir.model.PersonalInformationTrainee;
 import com.ir.model.PersonalInformationTrainer;
 import com.ir.model.PersonalInformationTrainingPartner;
 import com.ir.model.TrainingPartner;
+import com.ir.service.AdminService;
 import com.ir.service.LoginService;
 import com.ir.service.TrainingPartnerService;
 import com.ir.service.UpdateService;
@@ -39,6 +41,10 @@ import com.zentech.logger.ZLogger;
 @SessionAttributes
 public class LoginController {
 	
+	
+	@Autowired
+	@Qualifier("adminService")
+	AdminService adminService;
 	
 	@Autowired
 	@Qualifier("loginService")
@@ -243,6 +249,12 @@ public class LoginController {
 			session.setAttribute("profileId", loginDetails.getProfileId());
 			session.setAttribute("userId", loginDetails.getId());
 			session.setAttribute("partnerId", manageTrainingPartner.getManageTrainingPartnerId());
+			TrainingCenterUserManagementForm trainingCenterUserManagementForm =  new TrainingCenterUserManagementForm();
+			trainingCenterUserManagementForm.setStatus("0");
+			List<PersonalInformationTrainingPartner> trainingCetnterUserManagementSearch = adminService.trainingCenterUserManagementSearch(trainingCenterUserManagementForm, loginDetails.getProfileId(), loginDetails.getId());
+			if (trainingCetnterUserManagementSearch != null && trainingCetnterUserManagementSearch.size() > 0) {
+				model.addAttribute("searchTrainingCenterUsermanagement",trainingCetnterUserManagementSearch);
+			}
 			session.setAttribute("userName", loginDetails.getLoginId());
 			return "trainingPartnerDashboard";
 		}else if(loginDetails!=null && loginDetails.getProfileId() == 8 && loginDetails.getStatus().equalsIgnoreCase("A")){

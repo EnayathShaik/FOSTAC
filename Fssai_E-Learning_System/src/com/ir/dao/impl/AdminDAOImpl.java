@@ -599,12 +599,12 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List<PersonalInformationTrainingPartner> trainingCenterUserManagementSearch(TrainingCenterUserManagementForm trainingCenterUserManagementForm,Integer profileid,Integer userID) {
 		Session session = sessionFactory.getCurrentSession();
-		String FirstName = trainingCenterUserManagementForm.getTrainingCenterName();
+		String FirstName = (trainingCenterUserManagementForm.getTrainingCenterName()==null ? "" : trainingCenterUserManagementForm.getTrainingCenterName());
 		/*String MiddleName = trainingCenterUserManagementForm.getMiddleName();
 		String LastName = trainingCenterUserManagementForm.getLastName() ;
 		String PanNumber = trainingCenterUserManagementForm.getPanNumber();*/
-		String status = trainingCenterUserManagementForm.getStatus();
-		String userId = trainingCenterUserManagementForm.getUserId();
+		String status = (trainingCenterUserManagementForm.getStatus() == null ? "" : trainingCenterUserManagementForm.getStatus());
+		String userId = (trainingCenterUserManagementForm.getUserId() == null ? "" : trainingCenterUserManagementForm.getUserId() );
 		
 		if(FirstName.length() == 0){
 			FirstName = "%";
