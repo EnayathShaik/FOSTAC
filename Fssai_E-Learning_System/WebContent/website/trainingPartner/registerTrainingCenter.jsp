@@ -425,13 +425,13 @@ function AvoidSpace(event) {
 							<div class="row">
 								<div class="col-md-2 hidden-xs"></div>
 								<div class="col-md-8  col-xs-12">
-                    <h3 class="text-capitalize heading-3-padding">Training Center Registration Form</h3>
+                    <h3 class="text-capitalize heading-3-padding">Training Center/Venue Registration Form</h3>
 
                     <!-- Training Center information -->
                     <div class="personel-info">
                         <fieldset>
                             <legend>
-                                Training Center Information</legend>
+                                Training Center/Venue Information</legend>
                             <!-- left side -->
                             <div class="col-md-6 col-xs-12">
                             	<div class="form-group" style="display: none">
@@ -452,10 +452,10 @@ function AvoidSpace(event) {
 													<div>
 														<ul class="lab-no">
 															<li class="style-li"><strong>Training
-																	Center Name</strong></li>
+																	Venue Name</strong></li>
 															<li class="style-li error-red"><label
 																id="TrainingCentreNameError" class="error visibility">Enter
-																	Training Centre Name</label> <cf:errors
+																	Training Venue Name</label> <cf:errors
 																	path="TrainingCentreName" cssClass="error" /></li>
 														</ul>
 													</div>
@@ -485,10 +485,10 @@ function AvoidSpace(event) {
                              					<div class="form-group">
 													<div>
 														<ul class="lab-no">
-															<li class="style-li"><strong>Training Center Address</strong> (<em>Line 1</em>)<strong>:</strong></li>
+															<li class="style-li"><strong>Training Venue Address</strong> (<em>Line 1</em>)<strong>:</strong></li>
 															<li class="style-li error-red"><label
 																id="TrainingPartnerPermanentLine1Error"
-																class="error visibility">Enter Training Center
+																class="error visibility">Enter Training Venue
 																	Address Line 1</label> <cf:errors
 																	path="TrainingPartnerPermanentLine1" cssClass="error" /></li>
 														</ul>
@@ -502,10 +502,10 @@ function AvoidSpace(event) {
                                						<div class="form-group">
 													<div>
 														<ul class="lab-no">
-															<li class="style-li"><strong>Training Center Address</strong> (<em>Line 2</em>)<strong>:</strong></li>
+															<li class="style-li"><strong>Training Venue Address</strong> (<em>Line 2</em>)<strong>:</strong></li>
 															<li class="style-li error-red"><label
 																id="TrainingPartnerPermanentLine2Error"
-																class="error visibility">Enter Training Center
+																class="error visibility">Enter Training Venue
 																	Address Line 2</label> <cf:errors
 																	path="TrainingPartnerPermanentLine2" cssClass="error" /></li>
 														</ul>
@@ -634,97 +634,7 @@ function AvoidSpace(event) {
                     <div class="row" style="height: 20px;"></div>
                     <!-- Training center head etails -->
                     <div class="personel-info">
-                     <%--    <fieldset>
-                            <legend>
-                                Training Center Head Details</legend>
-                            <!-- left side -->
-                            <div class="col-md-6 col-xs-12">
-                              
-												<div class="form-group">
-													<div>
-														<ul class="lab-no">
-															<li class="style-li"><strong>First
-																	Name:(Training Center Head) </strong></li>
-															<li class="style-li error-red"><label
-																id="FirstNameError" class="error visibility">Enter
-																	First Name</label> <cf:errors path="FirstName" cssClass="error" /></li>
-														</ul>
-													</div>
-													<cf:input path="FirstName" maxlength="50"
-														onkeyup="allLetter(this.id,this.value);"
-														class="form-control" placeholder="First Name" />
-												</div>
-                            					<div class="form-group">
-													<div>
-														<ul class="lab-no">
-															<li class="style-li"><strong>Middle
-																	Name:(Training Center Head)</strong></li>
-															<li class="style-li error-red"><cf:errors
-																	path="MiddleName" cssClass="error" /></li>
-														</ul>
-													</div>
-													<cf:input path="MiddleName" maxlength="50"
-														onkeyup="allLetter(this.id,this.value);"
-														class="form-control" placeholder="Middle Name" />
-												</div>
 
-                             					 <div class="form-group">
-													<div>
-														<ul class="lab-no">
-															<li class="style-li"><strong>Last
-																	Name:(Training Center Head)</strong></li>
-															<li class="style-li error-red"><label
-																id="LastNameError" class="error visibility">Enter
-																	Last Name</label> <cf:errors path="LastName" cssClass="error" /></li>
-														</ul>
-													</div>
-													<cf:input path="LastName" maxlength="50"
-														onkeyup="allLetter(this.id,this.value);"
-														class="form-control" placeholder="Last Name" />
-												</div>
-
-                            </div>
-                            <!-- left side ends -->
-
-                            <!-- right side -->
-                            <div class="col-md-6 col-xs-12">
-                               				
-                             					 <div class="form-group">
-													<div>
-														<ul class="lab-no">
-															<li class="style-li"><strong>Mobile:</strong></li>
-															<li class="style-li error-red"><label
-																class="error visibility"
-																id="TrainingPartnerPermanentMobileError">Enter
-																	Valid Mobile Number</label> <cf:errors
-																	path="TrainingPartnerPermanentMobile" cssClass="error" /></li>
-														</ul>
-													</div>
-													<cf:input path="TrainingPartnerPermanentMobile"
-														onkeypress="return AvoidSpace(event)" class="form-control"
-														onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"
-														maxlength="10" placeholder="Mobile" />
-												</div>
-                              					<div class="form-group">
-													<div>
-														<ul class="lab-no">
-															<li class="style-li"><strong>PAN:</strong></li>
-															<li class="style-li error-red"><label id="PANError"
-																class="error visibility">Enter Valid PAN Number</label>
-																<cf:errors path="PAN" cssClass="error" /></li>
-														</ul>
-													</div>
-													<cf:input path="PAN" maxlength="10" class="form-control"
-														onkeypress="return AvoidSpace(event)" placeholder="PAN"
-														onKeyUP="this.value = this.value.toUpperCase();"
-														onblur="pan_validate(this.id,this.value);" />
-												</div>
-
-                            </div>
-
-                            <!-- right side ends -->
-
-                        </fieldset> --%>
                     </div>
                     <!-- training center head ends -->
                     <div class="row" style="height: 20px;"></div>
@@ -804,8 +714,8 @@ function AvoidSpace(event) {
                     <!-- facilities ends -->
                     <!-- Basic courses -->
                     <div class="personel-info">
-                        <h4>Courses wish to conduct ?</h4>
-                    					<fieldset>
+                     <!--    <h4>Courses wish to conduct ?</h4> -->
+                    		<%-- 			<fieldset>
 											<legend>Basic Courses</legend>
 											<!-- left -->
 											<div class="col-md-6 col-xs-12" style="width: 100%;">
@@ -826,11 +736,11 @@ function AvoidSpace(event) {
 											</div>
 											<!-- right -->
 											<div class="col-md-6 col-xs-12">
-										</fieldset>
-                    </div>
+										</fieldset> --%>
+                    <!-- </div> -->
                     <!-- basic course -->
                     <!-- Advanced courses -->
-                    <div class="personel-info">
+                    <%-- <div class="personel-info">
                         <fieldset>
                             <legend>
                                 <h3>Advanced Courses</h3></legend>
@@ -855,10 +765,10 @@ function AvoidSpace(event) {
                             <!-- right -->
                             <div class="col-md-6 col-xs-12"></div>
                         </fieldset>
-                    </div>
+                    </div> --%>
                     <!-- advanced course -->
                     <!-- special courses -->
-                    <div class="personel-info">
+                  <%--   <div class="personel-info">
                         <fieldset>
                             <legend>
                                 <h3>Special Courses</h3></legend>
@@ -883,7 +793,7 @@ function AvoidSpace(event) {
                             <div class="col-md-6 col-xs-12"> </div>
                         </fieldset>
                     </div>
-                    <!-- special course -->
+ --%>                    <!-- special course -->
                     <!-- captcha -->
                     <div class="col-xs-12">
                         	<div style="float: left; width: 99%;">

@@ -120,7 +120,7 @@
            <!--  <li><a href="trainingCalendarForm.fssai">View Training Calendar</a></li> -->
            <!-- <li> <a href="trainingpartnertrainingcalendar.fssai">Training Calendar</a> </li> -->
            <li><a href="viewFeedbackDetails.fssai">View Feedback</a></li>
-           <li><a href="registrationFormTrainingPartner.fssai">Register Training Center/Venue</a></li>
+           <li><a href="registrationFormTrainingPartner.fssai">Register Training Venue</a></li>
         </ul>
       </div>
 
