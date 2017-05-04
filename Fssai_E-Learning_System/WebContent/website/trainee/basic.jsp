@@ -33,7 +33,7 @@ function OnStart(){
 		window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
 	} 
 }
-window.onload = OnStart;
+//window.onload = OnStart;
 
  
  function getcourseType(){
@@ -98,7 +98,7 @@ function confirmTrainee(){
 				
 			//$('#newTable').append('<tr id="tableRow"><td><input type="hidden" name="getCalander" id="h" value="'+obj[0]+'" /><input type="radio" name="getCalander" onclick="gettid(this.value);" id="trainingCalendarIdd'+i+'"  value="'+obj[0]+'"/></td><td>'+obj[9]+'</td><td>'+obj[7]+'</td><td>'+obj[10]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[11]+'</td><td>'+obj[5]+'</td><td>'+obj[6]+'</td></tr>');
 			
-			  $('#newTable').dataTable().fnAddData( [ j++,
+			  $('#newTable').dataTable().fnAddData( [ 
 			                                          '<input type="hidden" name="getCalander" id="h" value="'+obj[0]+'" /><input type="radio" name="getCalander" onclick="gettid(this.value);" id="trainingCalendarIdd'+i+'"  value="'+obj[0]+'"/>' ,
 			                                          obj[9],
 			                                          obj[7],
