@@ -465,10 +465,12 @@ public class TraineeController {
 					model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
 					model.addAttribute("traineeCertificateName", certificateInfo.getName());
 					model.addAttribute("trainingAddress", certificateInfo.getTrainingAddress());
+					model.addAttribute("courseName", certificateInfo.getCourseName());
 					session.setAttribute("traineeSteps", 0);
 				
 					if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Western India)")){
 						returnResult = "certificatetraineeHRAWI";	
+							
 						}
 						else if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Northern India)")){
 							returnResult = "certificatetraineeHRANI";

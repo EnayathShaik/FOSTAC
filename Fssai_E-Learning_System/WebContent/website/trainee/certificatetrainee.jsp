@@ -64,19 +64,11 @@ try{
                                         <p class="text-center for-p"><span><strong>${traineeCertificateName}</strong></span></p>
                                         <hr class="nam-hr">
                                         <div class="di-msg">
-                                            <p>has received necessary training required to be a trainer for Project Clean Streat Food . The Training</p>
-                                            <p> was help on
-                                                <span class="on-dat-general">${trainingDate}</span>
-                                                <span class="at-general">at</span>
-                                                <span><hr class="on-hr-general" /></span>
-
-                                                <span>
-                                                    
-                                                <span class="add-pos-general">${trainingAddress}</span><span><hr class="at-hr-general"></span><span class="full-stop-general">.</span>
-                                                </span>
-
-                                            </p>
-
+                                            <p>has received necessary training required to be a trainer for ${courseName} . The training </p>
+                                             <p class="has-p"> was held on <span><strong>${trainingDate}</strong></span></p>
+						                                        <hr class="on-hr-dashed">
+						                                        <p class="has-p-at">at <span><strong> ${trainingAddress}</strong></span></p>
+						                                        <hr class="at-hr-dashed">
                                         </div>
                                     </div>
 

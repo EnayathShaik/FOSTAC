@@ -64,7 +64,7 @@ try{
                                         <p class="text-center for-p"><span><strong>${traineeCertificateName}</strong></span></p>
                                         <hr class="nam-hr">
                                         <div class="di-msg">
-                                            <p>has successfully completed the required competency to be appointed as Trainer for Food Safety</p>
+                                            <p>has successfully completed the required competency to be appointed as Trainer for ${courseName} </p>
                                             <p>Supervisor Training, the training was held on
                                                 <span class="on-dat">${trainingDate}</span><span><hr class="on-hr"></span></p>
                                             <p>at

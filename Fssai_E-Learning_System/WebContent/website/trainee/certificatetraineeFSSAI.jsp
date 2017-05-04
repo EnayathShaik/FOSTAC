@@ -63,7 +63,7 @@ try{
 						                                        <p class="nam-print">${traineeCertificateName}</p>
 						                                        <hr class="na-per">
 						                                        <p class="has-p">has received necessary training required to be a <strong>Master</strong></p>
-						                                        <p class="has-p"><strong>Trainer</strong> for <strong>Project Clean Street Food .</strong></p>
+						                                        <p class="has-p"><strong>Trainer</strong> for <strong>${courseName}  .</strong></p>
 						                                        <p class="has-p">The training was held on <span><strong>${trainingDate}</strong></span></p>
 						                                        <hr class="on-hr-dashed">
 						                                        <p class="has-p-at">at <span><strong> ${trainingAddress}</strong></span></p>

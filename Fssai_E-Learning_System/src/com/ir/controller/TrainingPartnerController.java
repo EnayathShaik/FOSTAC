@@ -184,9 +184,12 @@ public class TrainingPartnerController {
 			model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
 			model.addAttribute("traineeCertificateName", certificateInfo.getName());
 			model.addAttribute("trainingAddress", certificateInfo.getTrainingAddress());
+			model.addAttribute("courseName", certificateInfo.getCourseName());
+			
 			System.out.println( " partner name "+certificateInfo.getTrainingPartnerName());
 			if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Western India)")){
-			returnResult = "certificatetraineeHRAWI";	
+			returnResult = "certificatetraineeHRAWI";
+				
 			}
 			else if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Northern India)")){
 				returnResult = "certificatetraineeHRANI";

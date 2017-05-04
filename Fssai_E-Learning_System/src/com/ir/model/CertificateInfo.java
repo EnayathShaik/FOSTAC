@@ -9,6 +9,7 @@ public class CertificateInfo {
 	private String trainingPartnerName;
 	private int courseTypeId;
 	private String email;
+	private String courseName;
 	
 	
 	
@@ -60,6 +61,12 @@ public class CertificateInfo {
 	}
 	public void setCourseTypeId(int courseTypeId) {
 		this.courseTypeId = courseTypeId;
+	}
+	public String getCourseName() {
+		return courseName;
+	}
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
 	}
 
 	
