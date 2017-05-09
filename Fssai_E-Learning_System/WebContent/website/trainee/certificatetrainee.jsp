@@ -64,8 +64,8 @@ try{
                                         <p class="text-center for-p"><span><strong>${traineeCertificateName}</strong></span></p>
                                         <hr class="nam-hr">
                                         <div class="di-msg">
-                                            <p>has received necessary training required to be a trainer for ${courseName} . The training </p>
-                                             <p class="has-p"> was held on <span><strong>${trainingDate}</strong></span></p>
+                                            <p>has received necessary training required to be a trainer for ${courseName} . </p>
+                                             <p class="has-p">The training  was held on <span><strong>${trainingDate}</strong></span></p>
 						                                        <hr class="on-hr-dashed">
 						                                        <p class="has-p-at">at <span><strong> ${trainingAddress}</strong></span></p>
 						                                        <hr class="at-hr-dashed">
@@ -74,10 +74,12 @@ try{
 
                                     <div class="col-xs-12 sign-pos-general">
                                         <div class="col-md-6 col-xs-6">
+                                          <img src="website/img/training-partner.jpg" alt="training partner signature" class="img-responsive sign-partner">
                                             <hr class="left-sign">
                                             <p class="left-p">Training Partner</p>
                                         </div>
                                         <div class="col-md-6 col-xs-6">
+                                         <img src="website/img/training-coordinator-fssai.png" width="150px" class="img-responsive sign-train-p">
                                             <hr class="right-sign">
                                             <p class="right-p text-center">Training Coordinator
                                                 <br><span>FSSAI</span></p>
