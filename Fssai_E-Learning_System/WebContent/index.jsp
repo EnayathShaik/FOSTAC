@@ -121,7 +121,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <div class="slider-img"> </div>
                                         </div>
                                         <!-- re update the index design -->
-                                        <div class="col-xs-12">
+                                        <div class="col-xs-12" style="right: 93px;">
                                             <div class="col-md-3 xs-hidden">
 
                                             </div>
