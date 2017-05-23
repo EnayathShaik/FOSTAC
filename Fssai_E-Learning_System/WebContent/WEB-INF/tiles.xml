@@ -785,5 +785,7 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/admin/trainingCenterReport.jsp" />
 	</definition>
-
+<definition name="commonCourses" extends="base.before.login.accordion">
+		<put-attribute name="body" value="/website/website/commonCourses.jsp" />
+	</definition>
 </tiles-definitions>

@@ -192,5 +192,31 @@ public class PageLoadServiceImpl implements PageLoadService {
 		return cityList;
 	}
 
+	@Override
+	@Transactional
+	public List<CourseName> cateringList() {
+		List<CourseName> cateringList = pageLoadDao.cateringList();
+		return cateringList;
+	}
 
+	@Override
+	@Transactional
+	public List<CourseName> manufacturingList() {
+		List<CourseName> manufacturingList = pageLoadDao.manufacturingList();
+		return manufacturingList;
+	}
+
+	@Override
+	@Transactional
+	public List<CourseName> transportList() {
+		List<CourseName> transportList = pageLoadDao.transportList();
+		return transportList;
+	}
+
+	@Override
+	@Transactional
+	public List<CourseName> retailList() {
+		List<CourseName> retailList = pageLoadDao.retailList();
+		return retailList;
+	}
 }

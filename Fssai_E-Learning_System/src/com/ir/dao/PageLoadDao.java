@@ -38,4 +38,8 @@ public interface PageLoadDao {
 	List<CourseType> courseTypeList();
 	public List<District> District(String stateId);
 	public List<City> loadCity(String distId);
+	public List<CourseName> cateringList();
+	public List<CourseName> manufacturingList();
+	public List<CourseName> transportList();
+	public List<CourseName> retailList();
 }

@@ -24,8 +24,10 @@ import com.google.gson.Gson;
 import com.ir.bean.common.IntStringBean;
 import com.ir.bean.common.PropertyUtils;
 import com.ir.form.LoginForm;
+import com.ir.form.ManageCourse;
 import com.ir.model.City;
 import com.ir.model.CourseName;
+import com.ir.model.CourseType;
 import com.ir.model.ManageCourseContent;
 import com.ir.model.State;
 import com.ir.model.Utility;
@@ -84,7 +86,7 @@ public class MainRedirect {
 			   List<CourseName> courseNameList=pageLoadService.getCouserNameList(Integer.parseInt(PropertyUtils.basicLevel));
 			   List<String> trainingPartnerNameList=pageLoadService.getTrainingPartnerNameList();
 			   List<ManageCourseContent> manageCourseContents=pageLoadService.getManageCourseContentList(Integer.parseInt(PropertyUtils.basicLevel));
-			   model.addAttribute("courseNameList", new Gson().toJson(courseNameList));
+			 model.addAttribute("courseNameList", new Gson().toJson(courseNameList));
 			   model.addAttribute("trainingPartnerNameList", new Gson().toJson(trainingPartnerNameList));
 			   model.addAttribute("manageCourseContents", new Gson().toJson(manageCourseContents));
 		   }catch(Exception e){
@@ -194,5 +196,31 @@ public class MainRedirect {
 	   public String assessor() {
 		   return "assessor";
 	   }
-	
+	 @RequestMapping(value="/commonCourses" ,method = RequestMethod.GET)
+	   public String cateringList(@ModelAttribute("CourseName")CourseName mcc,HttpSession session,BindingResult result ,  Model model,HttpServletRequest request) {
+		   int id=Integer.parseInt(request.getParameter("id"));
+		 try{
+			 if(id==1){
+				 List<CourseName> cateringList = pageLoadService.cateringList();
+					model.addAttribute("cateringList", this.pageLoadService.cateringList());
+		 }
+		 else if(id==2){
+			 List<CourseName> manufacturingList = pageLoadService.manufacturingList();
+				model.addAttribute("manufacturingList", this.pageLoadService.manufacturingList());
+		 }
+		 else if(id==3){
+				List<CourseName> transportList = pageLoadService.transportList();
+				model.addAttribute("transportList", this.pageLoadService.transportList());
+		 }
+		 else if(id==4){
+				List<CourseName> retailList = pageLoadService.retailList();
+				model.addAttribute("retailList", this.pageLoadService.retailList());
+		 }
+			
+		   }catch(Exception e){
+			   e.printStackTrace();
+			   new ZLogger("basic-level", "Exception while basic-level "+e.getMessage(), "MainRedirect.java");
+		   }
+		    return "commonCourses";
+	   }
 }

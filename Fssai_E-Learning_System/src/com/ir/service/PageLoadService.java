@@ -43,6 +43,10 @@ public interface PageLoadService {
 	
 	public List<District> loadDistrict(String stateId);
 	public List<City> loadCity(String districtId);
+	public List<CourseName> cateringList();
+	public List<CourseName> manufacturingList();
+	public List<CourseName> transportList();
+	public List<CourseName> retailList();
 	
 	
 	

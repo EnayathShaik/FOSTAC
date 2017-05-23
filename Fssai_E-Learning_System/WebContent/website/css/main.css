@@ -167,7 +167,7 @@ body > section {
     margin-left: 0;
 }
 .top-bar {
-    padding: 10px 0;
+  /*   padding: 10px 0; */
     background: #fff;
     line-height: 28px;
 }
@@ -217,7 +217,7 @@ input.search-form {
     padding: 7px 0px 7px 5px;
 }
 .searchbar {
-    border: 1px solid #ebecec;
+    border: 1px solid #607d8b;
     margin-top: 8px;
     margin-left: 20px;
 }
@@ -238,7 +238,7 @@ input.search-form:hover {
     border-radius: 0;
     margin-bottom: 0;
     background: #fff;
-    padding: 15px 0;
+    /* padding: 15px 0; */
     padding-bottom: 0;
 }
 .navbar-nav {
@@ -461,7 +461,7 @@ input.search-form:hover {
     animation: fadeInUp 300ms linear 1200ms both;
 }
 #feature {
-    padding-bottom: 40px;
+    padding-bottom: 20px;
 }
 .features {
     padding: 0;
@@ -479,8 +479,9 @@ input.search-form:hover {
     color: #fff !important;
     border: none;
     padding-bottom: 30px;
-    min-height: 265px;
-    padding-top: 10px;
+    min-height: 200px;
+    padding-top: 23px;
+    margin-left:17px;
 }
 .course-bg .industry-heading {
     color: #ffffff !important;
@@ -2232,7 +2233,7 @@ shortcodes page css
     background: #e7e7e7;
     border-bottom: 1px solid #efefef;
     font-size: 14px;
-    margin-top: 56px;
+   /*  margin-top: 56px; */
     padding-top: 30px;
 }
 #bottom h3 {
@@ -2254,7 +2255,7 @@ shortcodes page css
 }
 #bottom ul li a {
     color: #808080;
-    padding: 8px;
+   /*  padding: 8px; */
     line-height: 16px;
 }
 #bottom ul li a:hover {
@@ -2268,8 +2269,8 @@ shortcodes page css
     border-right: 1px solid #efefef;
 }
 #footer {
-    padding-top: 30px;
-    padding-bottom: 30px;
+   /*  padding-top: 30px;
+    padding-bottom: 30px; */
     color: #1c1b1b;
     background: #eae8e8;
 }

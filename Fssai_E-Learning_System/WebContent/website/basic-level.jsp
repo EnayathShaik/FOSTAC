@@ -1,5 +1,5 @@
 <section id="main-slider" class="no-margin">
-    <div class="carousel-inner innerpage">
+    <div class="carousel-inner innerpage"  style="background-image: url(website/images/slider/bg1.jpg)">
         <div class="container">
             <div class="row slide-margin">
                 <div class="col-sm-12">
@@ -52,11 +52,11 @@
 </section>
 
 <section>
-    <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+  <!--   <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
         <div class="row">
             <div class="col-md-2 col-xs-12"></div>
             <div class="col-md-10 col-xs-14">
-                <!-- collapsible accordion -->
+                collapsible accordion
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#course">Course Name</a></li>
                     <li><a data-toggle="tab" href="#training">Training Partner</a></li>
@@ -64,7 +64,7 @@
                     <li><a data-toggle="tab" href="#who">Target Participant</a></li>
                     <li><a data-toggle="tab" href="#curriculum">Study Material</a></li>
                 </ul>
-                <!-- content for above tabs -->
+                content for above tabs
                 <div class="tab-content">
                     <div id="course" class="tab-pane fade in active">
                         <ul id="courseul"></ul>
@@ -91,12 +91,15 @@
                     </div>
                 </div>
 
-                <!-- tabs navigation -->
+                tabs navigation
 
             </div>
             <div class="col-md-2 col-xs-12"></div>
         </div>
-    </div>
+    </div> -->
+    
+    
+  
     <script src="website/js/jquery.js"></script>
     <script src="website/js/bootstrap.min.js"></script>
     <script src="website/js/jquery.isotope.min.js"></script>

@@ -1,6 +1,6 @@
 
     <section id="main-slider" class="no-margin">
-        <div class="carousel-inner innerpage">
+        <div class="carousel-inner innerpage"  style="background-image: url(website/images/slider/bg1.jpg)">
             <div class="container">
                 <div class="row slide-margin">
                     <div class="col-sm-12">

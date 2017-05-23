@@ -145,10 +145,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											 <a href="trainingpartner.fssai"><img src="website/images/training-partner_bk.png"></a>
                                             </div>
 
-                                              <li>
-                                                        
-                                                    </li> 
-
                                         </div>
                                     </div>
                                 </div>
@@ -221,44 +217,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <div class="features">
                                 <div class="col-md-3 col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
                                     <div class="feature-wrap course-bg"> <img class="img-responsive center-block" src="website/images/catering-sector.png" width="94" height="94">
-                                        <h3 class="industry-heading">Catering</h3>
-                                        <ul>
+                                        <h3 class="industry-heading"><a href="commonCourses.fssai?id=1">Catering</a></h3>
+                                        <!-- <ul>
                                             <li><a href="basic-level.fssai">Basic Level</a></li>
                                             <li><a href="advance-level.fssai">Advance Level</a></li>
-                                        </ul>
+                                        </ul> -->
                                     </div>
                                 </div>
                                 <!--/.col-md-4-->
 
                                 <div class="col-md-3 col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
                                     <div class="feature-wrap course-bg"> <img class="img-responsive center-block" src="website/images/manufacturing-sector.png" width="94" height="94">
-                                        <h3 class="industry-heading">Manufacturing</h3>
-                                        <ul>
+                                        <h3 class="industry-heading"><a href="commonCourses.fssai?id=2">Manufacturing</a></h3>
+                                        <!-- <ul>
                                             <li><a href="basic-level.fssai">Basic Level</a></li>
                                             <li><a href="advance-level.fssai">Advance Level</a></li>
                                             <li><a href="special-level.fssai">Special Level</a></li>
-                                        </ul>
+                                        </ul> -->
                                     </div>
                                 </div>
                                 <!--/.col-md-4-->
                                 <div class="col-md-3 col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
                                     <div class="feature-wrap course-bg"> <img class="img-responsive center-block" src="website/images/transport-sector.png" width="94" height="94">
-                                        <h3 class="industry-heading">Transport & Storage</h3>
-                                        <ul>
+                                        <h3 class="industry-heading"><a href="commonCourses.fssai?id=3">Transport & Storage</a></h3>
+                                       <!--  <ul>
                                             <li><a href="basic-level.fssai">Basic Level</a></li>
                                             <li><a href="advance-level.fssai">Advance Level</a></li>
-                                        </ul>
+                                        </ul> -->
                                     </div>
                                 </div>
                                 <!--/.col-md-4-->
 
                                 <div class="col-md-3 col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
                                     <div class="feature-wrap course-bg"> <img class="img-responsive center-block" src="website/images/retail-sector.png" width="94" height="94">
-                                        <h3 class="industry-heading">Retail</h3>
-                                        <ul>
+                                        <h3 class="industry-heading"><a href="commonCourses.fssai?id=4">Retail</a></h3>
+                                        <!-- <ul>
                                             <li><a href="basic-level.fssai">Basic Level</a></li>
                                             <li><a href="advance-level.fssai">Advance Level</a></li>
-                                        </ul>
+                                        </ul> -->
                                     </div>
                                 </div>
                                 <!--/.col-md-4-->

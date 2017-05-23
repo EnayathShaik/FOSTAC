@@ -322,4 +322,48 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			return listCity;
 		}
 
+
+		@Override
+		public List<CourseName> cateringList() {
+			System.out.println("Page Load DAOImpl process start in specialCourseList  ");
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createQuery("from CourseName where courseName like '%catering%' ");
+			List cateringList = query.list();
+			System.out.println("CourseName  ************* list dao     :"+ cateringList);
+			return cateringList;
+		}
+
+
+		@Override
+		public List<CourseName> manufacturingList() {
+			System.out.println("Page Load DAOImpl process start in specialCourseList  ");
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createQuery("from CourseName where courseName like '%manufacturing%' ");
+			List manufacturingList = query.list();
+			System.out.println("CourseName  ************* list dao     :"+ manufacturingList);
+			return manufacturingList;
+		}
+
+
+		@Override
+		public List<CourseName> transportList() {
+			System.out.println("Page Load DAOImpl process start in specialCourseList  ");
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createQuery("from CourseName where courseName like '%transport%' ");
+			List transportList = query.list();
+			System.out.println("CourseName  ************* list dao     :"+ transportList);
+			return transportList;
+		}
+
+
+		@Override
+		public List<CourseName> retailList() {
+			System.out.println("Page Load DAOImpl process start in specialCourseList  ");
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createQuery("from CourseName where courseName like '%retail%' ");
+			List retailList = query.list();
+			System.out.println("CourseName  ************* list dao     :"+ retailList);
+			return retailList;
+		}
+		
 }
