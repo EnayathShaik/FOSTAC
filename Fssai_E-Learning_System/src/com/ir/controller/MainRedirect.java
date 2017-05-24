@@ -201,20 +201,28 @@ public class MainRedirect {
 		   int id=Integer.parseInt(request.getParameter("id"));
 		 try{
 			 if(id==1){
-				 List<CourseName> cateringList = pageLoadService.cateringList();
-					model.addAttribute("cateringList", this.pageLoadService.cateringList());
+					model.addAttribute("commonList", this.pageLoadService.cateringList());
 		 }
 		 else if(id==2){
-			 List<CourseName> manufacturingList = pageLoadService.manufacturingList();
-				model.addAttribute("manufacturingList", this.pageLoadService.manufacturingList());
+				model.addAttribute("commonList", this.pageLoadService.manufacturingList());
 		 }
 		 else if(id==3){
-				List<CourseName> transportList = pageLoadService.transportList();
-				model.addAttribute("transportList", this.pageLoadService.transportList());
+				model.addAttribute("commonList", this.pageLoadService.transportList());
 		 }
 		 else if(id==4){
-				List<CourseName> retailList = pageLoadService.retailList();
-				model.addAttribute("retailList", this.pageLoadService.retailList());
+				model.addAttribute("commonList", this.pageLoadService.retailList());
+		 }
+		 else if(id==5){
+				model.addAttribute("commonList", this.pageLoadService.basicList());
+		 }
+		 else if(id==6){
+				model.addAttribute("commonList", this.pageLoadService.advancedList());
+		 }
+		 else if(id==7){
+				model.addAttribute("commonList", this.pageLoadService.specialList());
+		 }
+		 else if(id==8){
+				model.addAttribute("commonList", this.pageLoadService.awarenessList());
 		 }
 			
 		   }catch(Exception e){

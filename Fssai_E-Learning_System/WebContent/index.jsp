@@ -167,16 +167,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <div class="features">
                                 <div class="col-md-3 col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
                                     <div class="feature-wrap">
-                                        <a href="basicFoodSafetyCertification.fssai"><img class="img-responsive center-block" src="website/images/fssai-certification-logo.jpg" width="132" height="87"></a>
-                                        <h3><a href="basicFoodSafetyCertification.fssai">Awareness on <br> Food Safety</a></h3>
+                                        <a href="commonCourses.fssai?id=8"><img class="img-responsive center-block" src="website/images/fssai-certification-logo.jpg" width="132" height="87"></a>
+                                        <h3><a href="commonCourses.fssai?id=8">Awareness on <br> Food Safety</a></h3>
                                     </div>
                                 </div>
                                 <!--/.col-md-4-->
 
                                 <div class="col-md-3 col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
                                     <div class="feature-wrap feature-wrapbasic">
-                                        <a href="basic-level.fssai"><img class="img-responsive center-block" src="website/images/fssai-certification-logo.jpg" width="132" height="87"></a>
-                                        <h3><a href="basic-level.fssai">Basic Food Safety <br>
+                                        <a href="commonCourses.fssai?id=5"><img class="img-responsive center-block" src="website/images/fssai-certification-logo.jpg" width="132" height="87"></a>
+                                        <h3><a href="commonCourses.fssai?id=5">Basic Food Safety <br>
               Certification</a></h3>
                                     </div>
                                 </div>
@@ -184,8 +184,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                                 <div class="col-md-3 col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
                                     <div class="feature-wrap feature-wrapadvance">
-                                        <a href="advance-level.fssai"><img class="img-responsive center-block" src="website/images/fssai-certification-logo.jpg" width="132" height="87"></a>
-                                        <h3><a href="advance-level.fssai">Advance Food Safety <br>
+                                        <a href="commonCourses.fssai?id=6"><img class="img-responsive center-block" src="website/images/fssai-certification-logo.jpg" width="132" height="87"></a>
+                                        <h3><a href="commonCourses.fssai?id=6">Advance Food Safety <br>
               Certification</a></h3>
                                     </div>
                                 </div>
@@ -193,8 +193,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                                 <div class="col-md-3 col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
                                     <div class="feature-wrap">
-                                        <a href="special-level.fssai"><img class="img-responsive center-block" src="website/images/fssai-certification-logo.jpg" width="132" height="87"></a>
-                                        <h3><a href="special-level.fssai">Special Food Safety <br>
+                                        <a href="commonCourses.fssai?id=7"><img class="img-responsive center-block" src="website/images/fssai-certification-logo.jpg" width="132" height="87"></a>
+                                        <h3><a href="commonCourses.fssai?id=7">Special Food Safety <br>
               Certification</a></h3>
                                     </div>
                                 </div>

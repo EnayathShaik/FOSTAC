@@ -106,7 +106,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 	}
 
 
-	@Override
+	/*@Override
 	public List<CourseName> basicCourseName() {
 		// TODO Auto-generated method stub
 		System.out.println("Page Load DAOImpl process start in basicCourseName  ");
@@ -127,10 +127,10 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		List advanceCourseName = query.list();
 		System.out.println("CourseName  ************* list dao     :"+ advanceCourseName);
 		return advanceCourseName;
-	}
+	}*/
 
 
-	@Override
+/*	@Override
 	public List<CourseName> specialCourseList() {
 		// TODO Auto-generated method stub
 		System.out.println("Page Load DAOImpl process start in specialCourseList  ");
@@ -141,7 +141,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		return specialCourseList;
 
 	}
-
+*/
 
 	@Override
 	public List<ManageTrainingPartner> tpList() {
@@ -364,6 +364,50 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			List retailList = query.list();
 			System.out.println("CourseName  ************* list dao     :"+ retailList);
 			return retailList;
+		}
+
+
+		@Override
+		public List<CourseName> basicList() {
+			System.out.println("Page Load DAOImpl process start in specialCourseList  ");
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createQuery("from CourseName where coursetypeid=1");
+			List basicList = query.list();
+			System.out.println("CourseName  ************* list dao     :"+ basicList);
+			return basicList;
+		}
+
+
+		@Override
+		public List<CourseName> advancedList() {
+			System.out.println("Page Load DAOImpl process start in specialCourseList  ");
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createQuery("from CourseName where coursetypeid=2 ");
+			List advancedList = query.list();
+			System.out.println("CourseName  ************* list dao     :"+ advancedList);
+			return advancedList;
+		}
+
+
+		@Override
+		public List<CourseName> specialList() {
+			System.out.println("Page Load DAOImpl process start in specialCourseList  ");
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createQuery("from CourseName where coursetypeid=3");
+			List specialList = query.list();
+			System.out.println("CourseName  ************* list dao     :"+ specialList);
+			return specialList;
+		}
+
+
+		@Override
+		public List<CourseName> awarenessList() {
+			System.out.println("Page Load DAOImpl process start in specialCourseList  ");
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createQuery("from CourseName where coursetypeid=4");
+			List specialList = query.list();
+			System.out.println("CourseName  ************* list dao     :"+ specialList);
+			return specialList;
 		}
 		
 }

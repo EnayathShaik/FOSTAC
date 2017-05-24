@@ -24,9 +24,6 @@ public interface PageLoadService {
 	public List<KindOfBusiness> loadKindOfBusiness();
 	public List<CourseName> loadCourseName();
 	public List<District> loadDistrict();
-	public List<CourseName> basicCourseName();
-	public List<CourseName> advanceCourseList();
-	public List<CourseName> specialCourseList();
 	public List<ManageTrainingPartner> tpList();
 	public List<ManageAssessmentAgency> aaList();
 	public List basicCourseList();
@@ -47,7 +44,10 @@ public interface PageLoadService {
 	public List<CourseName> manufacturingList();
 	public List<CourseName> transportList();
 	public List<CourseName> retailList();
-	
+	public List<CourseName> basicList();
+	public List<CourseName> advancedList();
+	public List<CourseName> specialList();
+	public List<CourseName> awarenessList();
 	
 	
 	 

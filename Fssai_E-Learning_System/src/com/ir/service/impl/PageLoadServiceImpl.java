@@ -78,7 +78,7 @@ public class PageLoadServiceImpl implements PageLoadService {
 		return districtList;
 	}
 
-	@Override
+/*	@Override
 	@Transactional
 	public List<CourseName> basicCourseName() {
 		// TODO Auto-generated method stub
@@ -92,15 +92,15 @@ public class PageLoadServiceImpl implements PageLoadService {
 		// TODO Auto-generated method stub
 		List<CourseName> advanceCourseName= pageLoadDao.advanceCourseName();
 		return advanceCourseName;
-	}
+	}*/
 
-	@Override
+/*	@Override
 	@Transactional
 	public List<CourseName> specialCourseList() {
 		// TODO Auto-generated method stub
 		List<CourseName> specialCourseList= pageLoadDao.specialCourseList();
 		return specialCourseList;
-	}
+	}*/
 
 	@Override
 	@Transactional
@@ -219,4 +219,33 @@ public class PageLoadServiceImpl implements PageLoadService {
 		List<CourseName> retailList = pageLoadDao.retailList();
 		return retailList;
 	}
+	@Override
+	@Transactional
+	public List<CourseName> basicList() {
+		List<CourseName> basicList = pageLoadDao.basicList();
+		return basicList;
+	}
+
+	@Override
+	@Transactional
+	public List<CourseName> advancedList() {
+		List<CourseName> advancedList = pageLoadDao.advancedList();
+		return advancedList;
+	}
+
+	@Override
+	@Transactional
+	public List<CourseName> specialList() {
+		List<CourseName> specialList = pageLoadDao.specialList();
+		return specialList;
+	}
+
+	@Override
+	@Transactional
+	public List<CourseName> awarenessList() {
+		List<CourseName> awarenessList = pageLoadDao.awarenessList();
+		return awarenessList;
+	}
+
+
 }
