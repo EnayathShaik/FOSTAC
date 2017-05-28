@@ -15,5 +15,8 @@ public interface CommonDao {
 	public String getCourseTrainingMode(String courseName);
 	//loadTrainingCenter
 	public List loadTrainingCenter(String courseName);
+	public String getTrainingCalendarInfo(String data);
+	
+	public String getTrainingCenterAddress(String data);
 
 }

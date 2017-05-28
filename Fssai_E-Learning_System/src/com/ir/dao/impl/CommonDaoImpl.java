@@ -139,5 +139,32 @@ public class CommonDaoImpl implements CommonDao{
 		List trainingCenterList = query.list();
 		return trainingCenterList;
 	}	
+	@Override
+	public  String getTrainingCalendarInfo(String data){
+		Session session = sessionFactory.getCurrentSession();
+		String result= null;
+		String sql=" select  batchcode from trainingcalendar where to_date(trainingdate , 'DD-MM-YYYY')  = '"+data+"' limit 1";		
+		Query query = session.createSQLQuery(sql);
+		List lst = query.list();
+		if(lst.size() > 0 ){
+			
+		result =  (String) lst.get(0);	
+		}
+		return result;
+	}
+	
+	@Override
+	public  String getTrainingCenterAddress(String data){
+		Session session = sessionFactory.getCurrentSession();
+		String result= null;
+		String sql="select trainingcentrename || '|' ||  trainingpartnerpermanentline1 || '|' || trainingpartnerpermanentline2 || '|' || districtname || ' , ' || cityname || '|' || statename  || ' - ' || trainingpartnerpermanentpincode  from personalinformationtrainingpartner tp left join state st on (tp.trainingpartnerpermanentstate = st.stateid ) left join district dt on (tp.trainingpartnerpermanentdistrict = dt.districtid ) left join city ct on (tp.trainingpartnerpermanentcity = ct.cityid ) where trainingpartnerpermanentpincode ='"+data+"' limit 1";		
+		Query query = session.createSQLQuery(sql);
+		List lst = query.list();
+		if(lst.size() > 0 ){
+			
+			result =  (String) lst.get(0);	
+		}
+		return result;
+	}	
 
 }

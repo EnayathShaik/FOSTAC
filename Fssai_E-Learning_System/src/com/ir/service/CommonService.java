@@ -18,4 +18,6 @@ public interface CommonService {
 	public String getCourseTrainingMode(String courseNmae);
 	
 	public List loadTrainingCenter(String data);
+	public String getTrainingCalendarInfo(String data);
+	public String getTrainingCenterAddress(String data);
 }

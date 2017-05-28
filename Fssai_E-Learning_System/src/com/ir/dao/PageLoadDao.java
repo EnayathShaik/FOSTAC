@@ -43,4 +43,5 @@ public interface PageLoadDao {
 	public List<CourseName> advancedList();
 	public List<CourseName> specialList();
 	public List<CourseName> awarenessList();
+
 }

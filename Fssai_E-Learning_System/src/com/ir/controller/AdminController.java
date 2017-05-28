@@ -1433,4 +1433,16 @@ public class AdminController {
 		}
 		return "trainingCenterReport";
 	}
+	
+	@ModelAttribute("trainingNameList")
+	public List<PersonalInformationTrainer> trainingNameList() {
+		List<PersonalInformationTrainer> trainingNameList = null;
+		try {
+			trainingNameList = adminService.trainingNameList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			new ZLogger("trainingNameList", "Exception while trainingNameList :  "+ e.getMessage(), "AdminController.java");
+		}
+		return trainingNameList;
+	}
 }

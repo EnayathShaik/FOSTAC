@@ -6,6 +6,34 @@ function setID(id) {
 }
 
 (function ($) {
+	   function getdummy(selectedDate){
+		   
+	    //	alert('Hiee '+selectedDate);
+	    	
+	    	var name1=JSON.stringify({
+	    		courseType:0,
+	    		courseName:0
+	      })
+	    	$.ajax({
+	  	      type: 'post',
+	  	      url: 'getTrainingCalendarInfo.fssai?data='+ selectedDate,
+	  	      contentType : "application/json",
+	  		  data:name1,
+	  	      success: function (response) {      
+	  	      var mainData1 = jQuery.parseJSON(response);
+	  	      if(mainData1 !=null){
+	  	    	$("#batchInfo").html("Training is schedule for batchcode "+mainData1);  
+	  	      }else{
+	  	    	$("#batchInfo").html("No Training is schedule");
+	  	      }
+	  	      
+	  	      $("#ex1").modal('show');
+	  	      
+	  	      }
+	  	      }); 
+	    	
+	    }
+	
     $.fn.extend({
         monthly: function (options) {
             // These are overridden by options declared in footer
@@ -382,8 +410,11 @@ function setID(id) {
 
             // Click A Day
             $(document.body).on('click', '#' + uniqueId + ' a.monthly-day', function (e) {
+            	//alert( $('#' + uniqueId).data('setMonth') + '/' + $(this).data('number') + '/' + $('#' + uniqueId).data('setYear'));
+            	var selectedDate  =  $('#' + uniqueId).data('setYear') + '-' +  $('#' + uniqueId).data('setMonth') + '-' + $(this).data('number') ;
+            	getdummy(selectedDate);
                 // If events, show events list
-                if (options.mode == 'event' && options.eventList == true) {
+               /* if (options.mode == 'event' && options.eventList == true) {
                     var whichDay = $(this).data('number');
                     $('#' + uniqueId + ' .monthly-event-list').show();
                     $('#' + uniqueId + ' .monthly-event-list').css('transform');
@@ -412,9 +443,10 @@ function setID(id) {
                             $('#' + uniqueId).hide();
                         }
                     }
+                    
                 }
                 e.preventDefault();
-            });
+*/            });
 
             // Clicking an event within the list
             $(document.body).on('click', '#' + uniqueId + ' .listed-event', function (e) {
@@ -427,4 +459,5 @@ function setID(id) {
 
         }
     });
+    
 })(jQuery);

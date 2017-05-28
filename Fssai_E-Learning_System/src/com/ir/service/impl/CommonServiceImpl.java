@@ -76,4 +76,17 @@ public class CommonServiceImpl implements CommonService{
 		List trainingCenter = commonDao.loadTrainingCenter(data);
 		return trainingCenter;
 	}
+	
+	@Override
+	@Transactional
+	public String getTrainingCalendarInfo(String data){
+		String info = commonDao.getTrainingCalendarInfo(data);
+		return info;
+	}
+	@Override
+	@Transactional
+	public String getTrainingCenterAddress(String data){
+		String info = commonDao.getTrainingCenterAddress(data);
+		return info;
+	}
 }

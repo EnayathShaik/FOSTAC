@@ -35,12 +35,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <link href="website/css/animate.min.css" rel="stylesheet">
                 <link href="website/css/main.css" rel="stylesheet">
                 <link href="website/css/responsive.css" rel="stylesheet">
+                <link href="website/css/jquery.modal.css" rel="stylesheet">
                 <link href="website/css/monthly.css" rel="stylesheet" />
                 <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
 
+<style type="text/css">
+#loc-list {
+    float: left;
+    width: 270px;
+    /* height: 530px; */
+    overflow: auto;
+}
+</style>
             </head>
             <!--/head-->
 
@@ -311,7 +320,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <div class="feature-wrap training-box center-block">
                                         <h3 class="box-heading">Find your Nearest Training Centre</h3>
                                         <div style="margin:10px 0px 0px 0px;">
-                                            <jsp:include page="website/website/index.html" />
+                                        <script src="website/website/js/jquery-1.10.1.min.js"></script>
+                                            <%-- <jsp:include page="website/website/index.html" /> --%>
+                                            <input type="text" value="" id="zip" style="width:150px;" placeholder="Enter Zipcode"/> <button onclick="getCenterAddress();return false;">Submit</button>
+                                            <span id="centerAdd">
+                                            <span id="centerName"></span>
+                                            <br>
+                                            <span id="lane1"></span>
+                                            <span id="lane2"></span>
+                                            <span id="city"></span>
+                                            <span id="state"></span>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -324,8 +343,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                     <!--/.container-->
                 </section>
+                
+                 <div id="loc-list">
+                 <ul id="list"></ul>
+                 </div>
 
-                <section>
+        <!--         <section>
                     <div class="container">
                         <div class="row">
                             <div class="col-xs-12">
@@ -349,7 +372,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                         </div>
                     </div>
-                </section>
+                </section> -->
 
 
                 <section id="bottom">
@@ -432,13 +455,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </footer>
                 <!--/#footer-->
                 <!-- <script src="website/js/jquery.js"></script>  -->
+                
                 <script src="website/js/bootstrap.min.js"></script>
                 <script src="website/js/jquery.isotope.min.js"></script>
                 <script src="website/js/wow.min.js"></script>
+                <script src="website/js/jquery.modal.js" type="text/javascript" charset="utf-8"></script>
                 <script src="website/js/monthly.js"></script>
+                
+                
                 <%
-	EventsCreater creater=new EventsCreater();
-	creater.createEvents(request);
+	/* EventsCreater creater=new EventsCreater();
+	creater.createEvents(request); */
 %>
                     <script type="text/javascript">
                         $(window).load(function() {
@@ -470,6 +497,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             }
 
                         });
+                        
+                        function getCenterAddress(){
+                        	
+                      	var zipcode =   $("#zip").val();
+                      	var name1=JSON.stringify({
+            	    		courseType:0,
+            	    		courseName:0
+            	      })
+                      	$.ajax({
+              	  	      type: 'post',
+              	  	      url: 'getTrainingCenterAddress.fssai?data='+ zipcode,
+              	  	      contentType : "application/json",
+              	  		  data:name1,
+              	  	      success: function (response) {      
+              	  	      var mainData1 = jQuery.parseJSON(response);
+              	  	      if(mainData1 !=null){
+              	  	    	var addraay = mainData1.toString().split('|');
+                	  	      $("#centerName").html(addraay[0]);
+                	  	      $("#lane1").html(addraay[1]);
+                	  	      $("#lane2").html(addraay[2]);
+                	  	      $("#city").html(addraay[3]);
+                	  	      $("#state").html(addraay[4]);  
+              	  	      }else{
+              	  	    	  
+              	  	    	  alert('No Training center available.');
+              	  	      }
+              	  	      
+              	  	      
+              	  	      }
+              	  	      }); 
+                        	
+                        }
 
                     </script>
                     <div id="google_translate_element"></div><script type="text/javascript">
@@ -486,6 +545,12 @@ function googleTranslateElementInit() {
                 document.getElementById(id).className = "active";
 
             </script> -->
+            
+            
+            
+	<div id="ex1" style="display:none;">
+    <p id="batchInfo">Thanks for clicking.  That felt good.  <a href="#" rel="modal:close">Close</a> or press ESC</p>
+  </div>
             
 
             </html>

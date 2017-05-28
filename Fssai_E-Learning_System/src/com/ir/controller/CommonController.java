@@ -168,8 +168,36 @@ public class CommonController {
 		String newList = g.toJson(result); 
 		PrintWriter out = response.getWriter(); 
 		out.write(newList);
-		out.flush();
+		out.flush();	
+	}
+	
+	
+	@RequestMapping(value="/getTrainingCalendarInfo" , method=RequestMethod.POST)
+	@ResponseBody
+	public void getTrainingCalendarInfo(@RequestParam("data") String data ,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("getTrainingCalendarInfo","loadTrainingCenter............" + data  , "CommonController.java");
 		
+		String result = commonService.getTrainingCalendarInfo(data);
+		System.out.println(" result "+result);
+		Gson g =new Gson();
+		String newList = g.toJson(result); 
+		PrintWriter out = response.getWriter(); 
+		out.write(newList);
+		out.flush();	
+	}
+	
+	@RequestMapping(value="/getTrainingCenterAddress" , method=RequestMethod.POST)
+	@ResponseBody
+	public void getTrainingCenterAddress(@RequestParam("data") String data ,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+		new ZLogger("getTrainingCenterAddress","getTrainingCenterAddress............" + data  , "CommonController.java");
+		
+		String result = commonService.getTrainingCenterAddress(data);
+		System.out.println(" result "+result);
+		Gson g =new Gson();
+		String newList = g.toJson(result); 
+		PrintWriter out = response.getWriter(); 
+		out.write(newList);
+		out.flush();	
 	}
 	
 }

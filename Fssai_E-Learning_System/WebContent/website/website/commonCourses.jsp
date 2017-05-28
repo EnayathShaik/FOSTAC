@@ -84,7 +84,7 @@ window.onload = OnStart;
 											<legend>Course Name List</legend>
 									<table id="datatablesfosrest" 
 													class="table table-bordered table-responsive">
-													<thead>
+													<thead style="background: #e6511a;">
 														<tr class="background-open-vacancies">
 															<th>S.No.</th>
 															<th>Course Code</th>
