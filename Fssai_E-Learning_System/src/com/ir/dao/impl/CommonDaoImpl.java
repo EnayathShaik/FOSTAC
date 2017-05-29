@@ -143,7 +143,7 @@ public class CommonDaoImpl implements CommonDao{
 	public  String getTrainingCalendarInfo(String data){
 		Session session = sessionFactory.getCurrentSession();
 		String result= null;
-		String sql=" select  batchcode from trainingcalendar where to_date(trainingdate , 'DD-MM-YYYY')  = '"+data+"' limit 1";		
+		String sql=" select cn.coursename || '|' || tp.trainingcentrename  from trainingcalendar tc left join coursename cn on (tc.coursename = cn.coursenameid) left join personalinformationtrainingpartner tp on  (tc.trainingcenter = tp.personalinformationtrainingpartnerid) where to_date(tc.trainingdate , 'DD-MM-YYYY')  = '"+data+"' limit 1";		
 		Query query = session.createSQLQuery(sql);
 		List lst = query.list();
 		if(lst.size() > 0 ){

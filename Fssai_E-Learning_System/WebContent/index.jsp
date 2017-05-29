@@ -121,7 +121,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <div class="col-sm-12">
                                             <div class="carousel-content">
                                                 <h1 class="animation animated-item-1">Food Safety Training and Certification</h1>
-                                                <h3 class="animation animated-item-3">WE ARE LOOKING FOR YOU!</h3>
+                                                <!-- <h3 class="animation animated-item-3">WE ARE LOOKING FOR YOU!</h3> -->
                                                 <h3 class="animation animated-item-3">TO START</h3>
                                                 <h2 class="animation animated-item-2">REGISTER HERE</h2>
                                             </div>

@@ -206,20 +206,7 @@ function AvoidSpace(event) {
     }
    
     function validateFields() {
-    	//alert("userid")
-  /*   	if(document.getElementById('UserId').value == '') {
-    	document.getElementById("UserId").style.borderColor = "red";
-    	document.getElementById("UserIdError").style.display = 'block';
-    	document.getElementById("UserId").focus();
-    	return false;
-    	}else{
-    		//alert("userid**************")
-    	    document.getElementById('UserId').style.borderColor = "#ccc";
-    	    document.getElementById("UserIdError").style.display = 'none';
-    	    } */
-    	
-    	
-    	//alert("Training Centre Name");
+
     	if(document.getElementById('TrainingCentreName').value == '') {
     	document.getElementById("TrainingCentreName").style.borderColor = "red";
     	document.getElementById("TrainingCentreNameError").style.display = 'block';
@@ -231,19 +218,7 @@ function AvoidSpace(event) {
     	    document.getElementById("TrainingCentreNameError").style.display = 'none';
     	    } 
     	
-    /* 	if(document.getElementById('PAN').value == '') {
-    	document.getElementById("PAN").style.borderColor = "red";
-    	document.getElementById("PANError").style.display = 'block';
-    	document.getElementById("PAN").focus();
-    	return false;
-    	}else{
-    		//alert("PAN Name*********");
-    	    document.getElementById('PAN').style.borderColor = "#ccc";
-    	    document.getElementById("PANError").style.display = 'none';
-    	    }  */
-    	
-    	//Title
-    	//alert("Title Name");
+
     	if(document.getElementById('Title').value == '0') {
     	document.getElementById("Title").style.borderColor = "red";
     	document.getElementById("TitleError").style.display = 'block';
@@ -255,8 +230,6 @@ function AvoidSpace(event) {
     	    document.getElementById("TitleError").style.display = 'none';
     	    } 
     	
-    	//FirstName
-    	//alert("First Name");
     	if(document.getElementById('FirstName').value == '') {
     	document.getElementById("FirstName").style.borderColor = "red";
     	document.getElementById("FirstNameError").style.display = 'block';
@@ -268,8 +241,6 @@ function AvoidSpace(event) {
     	    document.getElementById("FirstNameError").style.display = 'none';
     	    } 
     	
-    	//LastName
-    	//alert("LastName Name");
     	if(document.getElementById('LastName').value == '') {
     	document.getElementById("LastName").style.borderColor = "red";
     	document.getElementById("LastNameError").style.display = 'block';
@@ -281,8 +252,6 @@ function AvoidSpace(event) {
     	    document.getElementById("LastNameError").style.display = 'none';
     	    } 
     	
-    	//TrainingPartnerPermanentLine1
-    	//alert("TrainingPartnerPermanentLine1 Name");
     	if(document.getElementById('TrainingPartnerPermanentLine1').value == '') {
     	document.getElementById("TrainingPartnerPermanentLine1").style.borderColor = "red";
     	document.getElementById("TrainingPartnerPermanentLine1Error").style.display = 'block';
@@ -342,27 +311,11 @@ function AvoidSpace(event) {
         	    }
     	   
     	   
-    	 //TrainingPartnerPermanentPincode
-       	//alert("TrainingPartnerPermanentPincode Name");
-  /*   	var x= document.getElementById('TrainingPartnerPermanentPincode').value;
-       	if(x=='' ||x.length<6) {
-       	document.getElementById("TrainingPartnerPermanentPincode").style.borderColor = "red";
-       	document.getElementById("TrainingPartnerPermanentPincodeError").style.display = 'block';
-       	document.getElementById("TrainingPartnerPermanentPincode").focus();
-       	return false;
-       	}else{
-       		//alert("TrainingPartnerPermanentPincode Name*********");
-       	    document.getElementById('TrainingPartnerPermanentPincode').style.borderColor = "#ccc";
-       	    document.getElementById("TrainingPartnerPermanentPincodeError").style.display = 'none';
-       	    }  */
-       	
-      //TrainingPartnerPermanentEmail
-       //	alert("TrainingPartnerPermanentEmail Name");
        	 var x =document.getElementById('TrainingPartnerPermanentEmail').value;
          var atpos = x.indexOf("@");
          var dotpos = x.lastIndexOf(".");
          if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
-         //  ////alert("Not a valid e-mail address");
+         
 		document.getElementById('TrainingPartnerPermanentEmail').style.borderColor = "red";
         document.getElementById("TrainingPartnerPermanentEmailError").style.display = 'block';
         document.getElementById("TrainingPartnerPermanentEmail").focus();
@@ -439,8 +392,7 @@ function AvoidSpace(event) {
          	    document.getElementById("NoOfYearsInBusinessOfTrainingError").style.display = 'none';
          	    } 
          	
-         //	NoOfTrainingSessionWishToConductInAMonth
-         	//alert("NoOfTrainingSessionWishToConductInAMonth");
+         
          	if(document.getElementById('NoOfTrainingSessionWishToConductInAMonth').value == '') {
          	document.getElementById("NoOfTrainingSessionWishToConductInAMonth").style.borderColor = "red";
          	document.getElementById("NoOfTrainingSessionWishToConductInAMonthError").style.display = 'block';
@@ -476,7 +428,7 @@ function AvoidSpace(event) {
     <div class="row">
       <div class="col-md-2 hidden-xs"></div>
       <div class="col-md-8  col-xs-12">
-        <h3 class="text-capitalize heading-3-padding">A Training Center Registration Form......</h3>
+        <h3 class="text-capitalize heading-3-padding">A Training Center/Venue Registration Form</h3>
 
           <!-- personal information -->
           <div class="personel-info">

@@ -16,9 +16,9 @@
     <!--/.carousel-->
 </section>
 <!--/#main-slider-->
-<section id="feature" class="tp-mrg">
+<!--<section id="feature" class="tp-mrg">
     <div class="container">
-        <div class="row">
+         <div class="row">
             <div class="features">
                 <div class="col-md-3 col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
                     <div class="feature-wrap">
@@ -26,7 +26,7 @@
                         <h3><a href="free-food-safety-certification.fssai">Awareness on <br> Food Safety</a></h3>
                     </div>
                 </div>
-                <!--/.col-md-4-->
+                /.col-md-4
                 <div class="col-md-3 col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
                     <div class="feature-wrap feature-wrapbasic">
                         <a href="basic-level.fssai"><img class="img-responsive center-block" src="website/images/fssai-certification-logo.jpg" width="132" height="87"></a>
@@ -34,7 +34,7 @@
               Certification</a></h3>
                     </div>
                 </div>
-                <!--/.col-md-4-->
+                /.col-md-4
                 <div class="col-md-3 col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
                     <div class="feature-wrap feature-wrapadvance">
                         <a href="advance-level.fssai"><img class="img-responsive center-block" src="website/images/fssai-certification-logo.jpg" width="132" height="87"></a>
@@ -42,7 +42,7 @@
               Certification</a></h3>
                     </div>
                 </div>
-                <!--/.col-md-4-->
+                /.col-md-4
                 <div class="col-md-3 col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
                     <div class="feature-wrap">
                         <a href="special-level.fssai"><img class="img-responsive center-block" src="website/images/fssai-certification-logo.jpg" width="132" height="87"></a>
@@ -50,14 +50,14 @@
               Certification</a></h3>
                     </div>
                 </div>
-                <!--/.col-md-4-->
+                /.col-md-4
             </div>
-            <!--/.services-->
+            /.services
         </div>
         <!--/.row-->
-    </div>
-    <!--/.container-->
-</section>
+   <!--  </div>
+    /.container
+</section>  -->
 <!--/#feature-->
 <section id="study">
     <div class="row">

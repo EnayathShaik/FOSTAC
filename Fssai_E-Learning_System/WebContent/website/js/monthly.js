@@ -22,7 +22,9 @@ function setID(id) {
 	  	      success: function (response) {      
 	  	      var mainData1 = jQuery.parseJSON(response);
 	  	      if(mainData1 !=null){
-	  	    	$("#batchInfo").html("Training is schedule for batchcode "+mainData1);  
+	  	    	  var course =mainData1.toString().split('|')[0];
+	  	    	  var centername = mainData1.toString().split('|')[1];
+	  	    	$("#batchInfo").html("Training is schedule for course "+course + " at "+centername );  
 	  	      }else{
 	  	    	$("#batchInfo").html("No Training is schedule");
 	  	      }
