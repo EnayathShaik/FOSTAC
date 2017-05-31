@@ -327,7 +327,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		public List<CourseName> cateringList() {
 			System.out.println("Page Load DAOImpl process start in specialCourseList  ");
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("from CourseName where courseName like '%catering%' ");
+			Query query = session.createQuery("from CourseName where courseName like '%Catering%' ");
 			List cateringList = query.list();
 			System.out.println("CourseName  ************* list dao     :"+ cateringList);
 			return cateringList;
@@ -338,7 +338,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		public List<CourseName> manufacturingList() {
 			System.out.println("Page Load DAOImpl process start in specialCourseList  ");
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("from CourseName where courseName like '%manufacturing%' ");
+			Query query = session.createQuery("from CourseName where courseName like '%Manufacturing%' ");
 			List manufacturingList = query.list();
 			System.out.println("CourseName  ************* list dao     :"+ manufacturingList);
 			return manufacturingList;
@@ -349,7 +349,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		public List<CourseName> transportList() {
 			System.out.println("Page Load DAOImpl process start in specialCourseList  ");
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("from CourseName where courseName like '%transport%' ");
+			Query query = session.createQuery("from CourseName where courseName like '%Transport%' or courseName like '%Storage%'  ");
 			List transportList = query.list();
 			System.out.println("CourseName  ************* list dao     :"+ transportList);
 			return transportList;
@@ -360,7 +360,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		public List<CourseName> retailList() {
 			System.out.println("Page Load DAOImpl process start in specialCourseList  ");
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("from CourseName where courseName like '%retail%' ");
+			Query query = session.createQuery("from CourseName where courseName like '%Retail%' ");
 			List retailList = query.list();
 			System.out.println("CourseName  ************* list dao     :"+ retailList);
 			return retailList;
@@ -404,7 +404,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		public List<CourseName> awarenessList() {
 			System.out.println("Page Load DAOImpl process start in specialCourseList  ");
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("from CourseName where coursetypeid=4");
+			Query query = session.createQuery("from CourseName where coursetypeid=5");
 			List specialList = query.list();
 			System.out.println("CourseName  ************* list dao     :"+ specialList);
 			return specialList;
