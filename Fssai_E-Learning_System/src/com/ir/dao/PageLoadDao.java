@@ -3,6 +3,8 @@ package com.ir.dao;
 import java.util.List;
 
 import com.ir.bean.common.IntStringBean;
+import com.ir.form.ManageAssessmentAgencyForm;
+import com.ir.form.ManageTrainingPartnerForm;
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
@@ -43,5 +45,7 @@ public interface PageLoadDao {
 	public List<CourseName> advancedList();
 	public List<CourseName> specialList();
 	public List<CourseName> awarenessList();
+	public List<ManageTrainingPartnerForm> manageTrainingPartnerList();
+	public List<ManageAssessmentAgencyForm> manageAssessmentAgencyList();
 
 }

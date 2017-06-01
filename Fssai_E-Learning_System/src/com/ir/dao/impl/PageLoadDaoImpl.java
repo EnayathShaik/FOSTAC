@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.dao.PageLoadDao;
+import com.ir.form.ManageAssessmentAgencyForm;
+import com.ir.form.ManageTrainingPartnerForm;
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
@@ -409,5 +411,28 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			System.out.println("CourseName  ************* list dao     :"+ specialList);
 			return specialList;
 		}
+		
+		@Override
+		public List<ManageTrainingPartnerForm> manageTrainingPartnerList() {
+			System.out.println("Page Load DAOImpl process start in specialCourseList  ");
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createSQLQuery("select l.loginid,tp.trainingPartnerName,tp.websiteUrl,(CASE WHEN l.status = 'N' THEN 'INACTIVE' ELSE 'ACTIVE' END) as currentStatus from ManageTrainingPartner tp inner join logindetails l on tp.logindetails=l.id");
+			List manageTrainingPartnerList = query.list();
+			System.out.println("CourseName  ************* list dao     :"+ manageTrainingPartnerList);
+			return manageTrainingPartnerList;
+		}
+		
+		@Override
+		public List<ManageAssessmentAgencyForm> manageAssessmentAgencyList() {
+			System.out.println("Page Load DAOImpl process start in specialCourseList  ");
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createSQLQuery("select l.loginid,ma.assessmentAgencyName,ma.websiteUrl,(CASE WHEN l.status = 'N' THEN 'INACTIVE' ELSE 'ACTIVE' END) as status from ManageAssessmentAgency ma inner join logindetails l on ma.logindetails=l.id");
+			List manageAssessmentAgencyList = query.list();
+			System.out.println("CourseName  ************* list dao     :"+ manageAssessmentAgencyList);
+			return manageAssessmentAgencyList;
+		}
+
+
+		
 		
 }

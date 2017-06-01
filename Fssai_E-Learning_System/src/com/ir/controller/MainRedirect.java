@@ -152,7 +152,9 @@ public class MainRedirect {
 		   return "faq";
 	   }
 	   @RequestMapping(value="/knowYourTrainingPartner" ,method = RequestMethod.GET)
-	   public String knowYourTrainingPartner() {
+	   public String knowYourTrainingPartner(Model model) {
+		   model.addAttribute("manageTrainingPartnerList", this.pageLoadService.manageTrainingPartnerList());
+		   model.addAttribute("manageAssessmentAgencyList", this.pageLoadService.manageAssessmentAgencyList());
 		   return "knowYourTrainingPartner";
 	   }
 	   @RequestMapping(value="/basicFoodSafetyCertification" ,method = RequestMethod.GET)

@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.ir.bean.common.IntStringBean;
 import com.ir.dao.PageLoadDao;
+import com.ir.form.ManageAssessmentAgencyForm;
+import com.ir.form.ManageTrainingPartnerForm;
 import com.ir.model.City;
 import com.ir.model.CourseName;
 import com.ir.model.CourseType;
@@ -246,6 +248,21 @@ public class PageLoadServiceImpl implements PageLoadService {
 		List<CourseName> awarenessList = pageLoadDao.awarenessList();
 		return awarenessList;
 	}
+	@Override
+	@Transactional
+	public List<ManageTrainingPartnerForm> manageTrainingPartnerList() {
+		// TODO Auto-generated method stub
+		List<ManageTrainingPartnerForm> manageTrainingPartnerList = pageLoadDao.manageTrainingPartnerList();
+		return manageTrainingPartnerList;
+	}	
+	
+	@Override
+	@Transactional
+	public List<ManageAssessmentAgencyForm> manageAssessmentAgencyList() {
+		// TODO Auto-generated method stub
+		List<ManageAssessmentAgencyForm> manageAssessmentAgencyList = pageLoadDao.manageAssessmentAgencyList();
+		return manageAssessmentAgencyList;
+	}
 
-
+	
 }

@@ -304,7 +304,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                                 <div class="col-md-3 col-sm-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
                                     <!--  <img src="website/images/calendar.png" width="224" height="124"> -->
-                                    <h4 class="text-capitalize">Training Calendar</h4>
+                                   <!--  <h4 class="text-capitalize">Training Calendar</h4> -->
 
                                     <div class="page">
                                         <div style="width:100%; max-width:600px; display:inline-block;">
