@@ -185,9 +185,10 @@ public class TrainingPartnerController {
 			model.addAttribute("traineeCertificateName", certificateInfo.getName());
 			model.addAttribute("trainingAddress", certificateInfo.getTrainingAddress());
 			model.addAttribute("courseName", certificateInfo.getCourseName());
-			
+			model.addAttribute("trainingPartner", certificateInfo.getTrainingPartnerName());
+			model.addAttribute("trainingPartnerId", certificateInfo.getTpId());
 			System.out.println( " partner name "+certificateInfo.getTrainingPartnerName());
-			if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Western India)")){
+			/*if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Western India)")){
 			returnResult = "certificatetraineeHRAWI";
 				
 			}
@@ -197,6 +198,16 @@ public class TrainingPartnerController {
 				returnResult ="certificatetraineeFSSAI";
 			}else{
 				returnResult = "certificatetraineeGEN";
+			}*/
+			
+			
+			if(certificateInfo.getCourseTypeId()==4){
+				returnResult = "certificatetraineeHRAWI";	
+			}else if(certificateInfo.getCourseTypeId()==5){
+				returnResult ="certificatetraineeHRANI";
+			}else{
+				returnResult = "certificatetraineeGEN";
+				
 			}
 			
 			}else{
@@ -210,7 +221,9 @@ public class TrainingPartnerController {
 				model.addAttribute("trainingDate", certificateInfo.getTrainingDate());
 				model.addAttribute("traineeCertificateName", certificateInfo.getName());
 				model.addAttribute("trainingAddress", certificateInfo.getTrainingAddress());
-				if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Western India)")){
+				model.addAttribute("trainingPartner", certificateInfo.getTrainingPartnerName());
+				model.addAttribute("trainingPartnerId", certificateInfo.getTpId());
+			/*	if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Western India)")){
 				returnResult = "certificatetraineeHRAWI";	
 				}
 				else if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Northern India)")){
@@ -219,8 +232,17 @@ public class TrainingPartnerController {
 					returnResult ="certificatetraineeFSSAI";
 				}else{
 					returnResult = "certificatetraineeGEN";
-				}
+				}*/
 				
+				
+				if(certificateInfo.getCourseTypeId()==4){
+					returnResult = "certificatetraineeHRAWI";	
+				}else if(certificateInfo.getCourseTypeId()==5){
+					returnResult ="certificatetraineeHRANI";
+				}else{
+					returnResult = "certificatetraineeGEN";
+					
+				}
 				
 				new ZLogger("certificatetrainee","Certificate ID = "+certificateInfo.getCertificateID()  , "TrainingPartnerController.java");
 			}

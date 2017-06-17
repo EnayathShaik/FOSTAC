@@ -467,8 +467,10 @@ public class TraineeController {
 					model.addAttribute("trainingAddress", certificateInfo.getTrainingAddress());
 					model.addAttribute("courseName", certificateInfo.getCourseName());
 					session.setAttribute("traineeSteps", 0);
+					model.addAttribute("trainingPartner", certificateInfo.getTrainingPartnerName());
+					model.addAttribute("trainingPartnerId", certificateInfo.getTpId());
 				
-					if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Western India)")){
+					/*if(certificateInfo.getTrainingPartnerName().equalsIgnoreCase("Hotel and Restaurant Association (Western India)")){
 						returnResult = "certificatetraineeHRAWI";	
 							
 						}
@@ -478,8 +480,16 @@ public class TraineeController {
 							returnResult ="certificatetraineeFSSAI";
 						}else{
 							returnResult = "certificatetraineeGEN";
-						}
+						}*/
 					
+					if(certificateInfo.getCourseTypeId()==4){
+						returnResult = "certificatetraineeHRAWI";	
+					}else if(certificateInfo.getCourseTypeId()==5){
+						returnResult ="certificatetraineeHRANI";
+					}else{
+						returnResult = "certificatetraineeGEN";
+						
+					}
 					
 					
 				}catch(Exception e){

@@ -1,8 +1,16 @@
-<%@page import="java.text.SimpleDateFormat"%>
+        <%@page import="java.text.SimpleDateFormat"%>
     <%@page import="java.util.Date"%>
         <html xmlns="http://www.w3.org/1999/xhtml">
-     
+        <%
+String strNewDate = null;
+String strNewDateExpiry= null; 
+try{
 
+	strNewDate=new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+	strNewDateExpiry = strNewDate.split("/")[0]+"/"+strNewDate.split("/")[1]+"/"+(Integer.parseInt(strNewDate.split("/")[2])+2);
+}catch(Exception e){
+}
+%>
             <head>
                 <title></title>
             </head>
@@ -52,7 +60,7 @@
                                             
                                         </div>
                                          <div class=" text-center">
-                                            <p><span><strong>________________</strong></span></p>
+                                            <p><span><strong>${courseName}</strong></span></p>
                                             
                                         </div>
                                           <div class=" text-center">
@@ -60,7 +68,7 @@
                                             
                                         </div>
                                          <div class=" text-center">
-                                            <p>____</p>
+                                            <p>${trainingAddress}</p>
                                             
                                         </div>
                                         <div class=" text-center">
@@ -74,18 +82,19 @@
                                     <div class="col-xs-12 cert-btm-general" style="margin-top:35px;">
                                     <p class="btm-p">_______________</p>
                                         <p class="btm-p">Training Coordinator</p>
-                                        <p class="btm-p">Training Conducted by: ____</p>
-                                        <p class="btm-p">ID of Training Partner : ___</p>
+                                        
+                                        <p class="btm-p">Training Conducted by: ${trainingPartner}</p>
+                                        <p class="btm-p">ID of Training Partner :  ${trainingPartnerId}</p>
                                         <br><br>
-                                         <p class="btm-p">Certificate number: ___</p>
-                                          <p class="btm-p">Date of Issue : ___</p>
+                                         <p class="btm-p">Certificate number:  ${certificateID}</p>
+                                          <p class="btm-p">Date of Issue : <%=strNewDate%></p>
                                           <br><br>
                                            
                                     </div>                     
 						                      <div class="col-xs-12 sign-pos-general" style="margin-top:-30px;">
                                         <div class="col-md-6 col-xs-6">
                                      
-                                            <p class="left-p" style="margin-left:-57px;">Refresher Due on:</p>
+                                            <p class="left-p" style="margin-left:-57px;">Refresher Due on: <%=strNewDateExpiry%></p>
                                         </div>
                                         <div class="col-md-6 col-xs-6" style="margin-top:-25px;">
                                          <img src="website/images/fostac-logo.png" width="150px" class="img-responsive sign-train-p">
