@@ -177,38 +177,46 @@ try{
                                                     <div class="row">
                                                         <!-- html code to add from here -->
                                                         <div class="col-xs-12 certi-width">
-						                                    <div class="col-xs-12"><img src="website/images/competencenew.jpg" class="img-responsive"></div>
+						                                    <div class="col-xs-12"><img src="website/images/1.jpg" class="img-responsive"></div>
 						            							
 <div class="col-xs-12 this-certify">
-<h2 class="text-center th-pos" style="margin-top: -152px;
-    font-size: 37px;font-weight:bold;
-    color: #8803cf;"> Health & Wellness Coordinator</h2>
+<h2 class="text-center th-pos" style="margin-top: -254px;
+   font-size: 34px;font-family:calibri;font-weight:bold;color:#365f91;">  Health & Wellness Coordinator</h2>
+    <h2 class="text-center th-pos" style="margin-top: 2px;
+    font-size: 34px;font-family:calibri;font-weight:bold;color:#365f91;"> Certificate of Competence</h2>
 
-                                        <h3 class="text-center th-pos" style="margin-top:42px;font-size:18px;">This is to certify that</h3>
+                                        <h3 class="text-center th-pos" style="margin-top:30px;font-size:19px;font-weight:bold; font-family: times new roman; font-weight: bold;
+    font-size: 22px;">This is to certify that</h3>
                                         <p class="text-center for-p"><span><strong>${traineeCertificateName}</strong></span></p>
                                         <hr class="nam-hr">
                                         <div class=" text-center">
-                                            <p style="font-size:18px;">has successfully completed training  </p>
+                                            <p style="font-weight:bold; font-family: times new roman; font-weight: bold;
+    font-size: 22px;">has successfully completed training  </p>
                                             
                                         </div>
                                           <div class=" text-center">
-                                            <p style="font-size:18px;">in</p>
+                                            <p style="font-weight:bold; font-family: times new roman; font-weight: bold;
+    font-size: 22px;">in</p>
                                             
                                         </div>
                                          <div class=" text-center">
-                                            <p style="font-size:18px;"><span><strong>${courseName}</strong></span></p>
+                                            <p style="font-weight:bold; font-family: times new roman; font-weight: bold;
+    font-size: 22px;"><span><strong>${courseName}</strong></span></p>
                                             
                                         </div>
                                           <div class=" text-center">
-                                            <p style="font-size:18px;">held at</p>
+                                            <p style="font-weight:bold; font-family: times new roman; font-weight: bold;
+    font-size: 22px;">held at</p>
                                             
                                         </div>
                                          <div class=" text-center">
-                                            <p style="font-size:18px;">${trainingAddress}</p>
+                                            <p style="font-weight:bold; font-family: times new roman; font-weight: bold;
+    font-size: 22px;">${trainingAddress}</p>
                                             
                                         </div>
                                         <div class=" text-center">
-                                            <p style="font-size:18px;">& is awarded this certificate.    </p>
+                                            <p style="font-family: times new roman; font-weight: bold;
+    font-size: 22px;">& is awarded this certificate.    </p>
                                             
                                         </div>
                                     </div>

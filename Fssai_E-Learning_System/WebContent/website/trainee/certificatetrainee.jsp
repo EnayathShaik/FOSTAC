@@ -45,18 +45,32 @@ try{
                                                     <div class="row">
                                                         <!-- html code to add from here -->
                                                         <div class="col-xs-12 certi-width">
-						                                    <div class="col-xs-12"><img src="website/images/competencenew.jpg" class="img-responsive"></div>
+						                                    <div class="col-xs-12"><img src="website/images/1.jpg" class="img-responsive"></div>
 						            							
 <div class="col-xs-12 this-certify">
-                                        <h3 class="text-center th-pos" style="margin-top:-130px;font-size:18px;">This is to certify that</h3>
+<h2 class="text-center th-pos" style="margin-top: -254px;
+    font-size: 34px;font-family:calibri;font-weight:bold;color:#365f91;">  Food Safety Supervisor</h2>
+    <h2 class="text-center th-pos" style="margin-top: 2px;
+    font-size: 34px;font-family:calibri;font-weight:bold;color:#365f91;"> Certificate of Competence</h2>
+   
+                                        <h3 class="text-center th-pos" style="margin-top: 20px;
+    font-family: times new roman;
+    font-size: 22px;
+    font-weight: bold;">This is to certify that</h3>
                                         <p class="text-center for-p"><span><strong></strong></span></p>
                                         <hr class="nam-hr">
                                         <div class=" text-center">
-                                            <p class="th-pos" style="font-size:18px;">has successfully completed training  </p>
+                                            <p class="th-pos" style="
+    font-family: times new roman;
+    font-size: 22px;
+    font-weight: bold;">has successfully completed training  </p>
                                             
                                         </div>
                                           <div class=" text-center">
-                                            <p class="th-pos" style="font-size:18px;">in</p>
+                                            <p class="th-pos" style="
+    font-family: times new roman;
+    font-size: 22px;
+    font-weight: bold;">in</p>
                                             
                                         </div>
                                          <div class=" text-center">
@@ -64,7 +78,10 @@ try{
                                             
                                         </div>
                                           <div class=" text-center">
-                                            <p class="th-pos" style="font-size:18px;">held at</p>
+                                            <p class="th-pos" style="
+    font-family: times new roman;
+    font-size: 22px;
+    font-weight: bold;">held at</p>
                                             
                                         </div>
                                          <div class=" text-center">
@@ -72,7 +89,10 @@ try{
                                             
                                         </div>
                                         <div class=" text-center">
-                                            <p class="th-pos" style="font-size:18px;">& is awarded this certificate.    </p>
+                                            <p class="th-pos" style="
+    font-family: times new roman;
+    font-size: 22px;
+    font-weight: bold;">& is awarded this certificate.    </p>
                                             
                                         </div>
                                     </div>
