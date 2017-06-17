@@ -180,68 +180,56 @@ try{
 						                                    <div class="col-xs-12"><img src="website/images/competencenew.jpg" class="img-responsive"></div>
 						            							
 <div class="col-xs-12 this-certify">
-<h2 class="text-center th-pos" style="margin-top: -80px;
-    font-size: 32px;font-weight:bold;
+<h2 class="text-center th-pos" style="margin-top: -152px;
+    font-size: 37px;font-weight:bold;
     color: #8803cf;"> Health & Wellness Coordinator</h2>
 
-                                        <h3 class="text-center th-pos" style="margin-top:-3px;">This is to certify that</h3>
+                                        <h3 class="text-center th-pos" style="margin-top:42px;font-size:18px;">This is to certify that</h3>
                                         <p class="text-center for-p"><span><strong>${traineeCertificateName}</strong></span></p>
                                         <hr class="nam-hr">
                                         <div class=" text-center">
-                                            <p>has successfully completed training  </p>
+                                            <p style="font-size:18px;">has successfully completed training  </p>
                                             
                                         </div>
                                           <div class=" text-center">
-                                            <p>in</p>
+                                            <p style="font-size:18px;">in</p>
                                             
                                         </div>
                                          <div class=" text-center">
-                                            <p><span><strong>${courseName}</strong></span></p>
+                                            <p style="font-size:18px;"><span><strong>${courseName}</strong></span></p>
                                             
                                         </div>
                                           <div class=" text-center">
-                                            <p>held at</p>
+                                            <p style="font-size:18px;">held at</p>
                                             
                                         </div>
                                          <div class=" text-center">
-                                            <p>${trainingAddress}</p>
+                                            <p style="font-size:18px;">${trainingAddress}</p>
                                             
                                         </div>
                                         <div class=" text-center">
-                                            <p>& is awarded this certificate.    </p>
+                                            <p style="font-size:18px;">& is awarded this certificate.    </p>
                                             
                                         </div>
                                     </div>
 
-                                 <!--    <div class="col-xs-12 sign-pos-general">
-                                        <div class="col-md-6 col-xs-6">
-                                          <img src="website/img/training-partner.jpg" alt="training partner signature" class="img-responsive sign-partner">
-                                            <hr class="left-sign">
-                                            <p class="left-p">Training Partner</p>
-                                        </div>
-                                        <div class="col-md-6 col-xs-6">
-                                         <img src="website/img/training-coordinator-fssai.png" width="150px" class="img-responsive sign-train-p">
-                                            <hr class="right-sign">
-                                            <p class="right-p text-center">Training Coordinator
-                                                <br><span>FSSAI</span></p>
-                                        </div>
-                                    </div> -->
+                                
 <br><br><br><br>
                                     <div class="col-xs-12 cert-btm-general" style="margin-top:35px;">
                                     <p class="btm-p">_______________</p>
-                                        <p class="btm-p">Training Coordinator</p>
-                                        <p class="btm-p">Training Conducted by: ${trainingPartner}</p>
-                                        <p class="btm-p">ID of Training Partner :  ${trainingPartnerId}</p>
+                                        <p class="btm-p" style="font-weight:bold;">Training Coordinator</p>
+                                        <p class="btm-p" style="font-weight:bold;">Training Conducted by: ${trainingPartner}</p>
+                                        <p class="btm-p" style="font-weight:bold;">ID of Training Partner :  ${trainingPartnerId}</p>
                                         <br><br>
-                                         <p class="btm-p">Certificate number: ${certificateID}</p>
-                                          <p class="btm-p">Date of Issue :  <%=strNewDate%></p>
+                                         <p class="btm-p" style="font-weight:bold;">Certificate number: ${certificateID}</p>
+                                          <p class="btm-p" style="font-weight:bold;">Date of Issue :  <%=strNewDate%></p>
                                           <br><br>
                                            
                                     </div>                     
 						                      <div class="col-xs-12 sign-pos-general" style="margin-top:-30px;">
                                         <div class="col-md-6 col-xs-6">
                                      
-                                            <p class="left-p" style="margin-left:-57px;">Refresher Due on: <%=strNewDateExpiry%></p>
+                                            <p class="left-p" style="margin-left:-57px;font-weight:bold;">Refresher Due on: <%=strNewDateExpiry%></p>
                                         </div>
                                         <div class="col-md-6 col-xs-6" style="margin-top:-25px;">
                                          <img src="website/images/fostac-logo.png" width="150px" class="img-responsive sign-train-p">

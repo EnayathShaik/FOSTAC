@@ -48,53 +48,53 @@ try{
 						                                    <div class="col-xs-12"><img src="website/images/competencenew.jpg" class="img-responsive"></div>
 						            							
 <div class="col-xs-12 this-certify">
-                                        <h3 class="text-center th-pos" style="margin-top:-40px;">This is to certify that</h3>
+                                        <h3 class="text-center th-pos" style="margin-top:-130px;font-size:18px;">This is to certify that</h3>
                                         <p class="text-center for-p"><span><strong></strong></span></p>
                                         <hr class="nam-hr">
                                         <div class=" text-center">
-                                            <p>has successfully completed training  </p>
+                                            <p class="th-pos" style="font-size:18px;">has successfully completed training  </p>
                                             
                                         </div>
                                           <div class=" text-center">
-                                            <p>in</p>
+                                            <p class="th-pos" style="font-size:18px;">in</p>
                                             
                                         </div>
                                          <div class=" text-center">
-                                            <p><span><strong>${courseName}</strong></span></p>
+                                            <p class="th-pos" ><span><strong>&nbsp;</strong></span></p>
                                             
                                         </div>
                                           <div class=" text-center">
-                                            <p>held at</p>
+                                            <p class="th-pos" style="font-size:18px;">held at</p>
                                             
                                         </div>
                                          <div class=" text-center">
-                                            <p>${trainingAddress}</p>
+                                            <p class="th-pos"><span><strong>${trainingAddress}&nbsp;</strong></span></p>
                                             
                                         </div>
                                         <div class=" text-center">
-                                            <p>& is awarded this certificate.    </p>
+                                            <p class="th-pos" style="font-size:18px;">& is awarded this certificate.    </p>
                                             
                                         </div>
                                     </div>
 
                               
-<br><br><br><br>
-                                    <div class="col-xs-12 cert-btm-general" style="margin-top:35px;">
+<br><br>
+                                    <div class="col-xs-12 cert-btm-general" style="margin-top:45px;">
                                     <p class="btm-p">_______________</p>
-                                        <p class="btm-p">Training Coordinator</p>
+                                        <p class="btm-p" style="font-weight:bold;">Training Coordinator</p>
                                         
-                                        <p class="btm-p">Training Conducted by: ${trainingPartner}</p>
-                                        <p class="btm-p">ID of Training Partner :  ${trainingPartnerId}</p>
+                                        <p class="btm-p" style="font-weight:bold;">Training Conducted by: ${trainingPartner}</p>
+                                        <p class="btm-p" style="font-weight:bold;">ID of Training Partner :  ${trainingPartnerId}</p>
                                         <br><br>
-                                         <p class="btm-p">Certificate number:  ${certificateID}</p>
-                                          <p class="btm-p">Date of Issue : <%=strNewDate%></p>
+                                         <p class="btm-p" style="font-weight:bold;">Certificate number:  ${certificateID}</p>
+                                          <p class="btm-p" style="font-weight:bold;">Date of Issue : <%=strNewDate%></p>
                                           <br><br>
                                            
                                     </div>                     
 						                      <div class="col-xs-12 sign-pos-general" style="margin-top:-30px;">
                                         <div class="col-md-6 col-xs-6">
                                      
-                                            <p class="left-p" style="margin-left:-57px;">Refresher Due on: <%=strNewDateExpiry%></p>
+                                            <p class="left-p" style="margin-left:-57px;font-weight:bold;">Refresher Due on: <%=strNewDateExpiry%></p>
                                         </div>
                                         <div class="col-md-6 col-xs-6" style="margin-top:-25px;">
                                          <img src="website/images/fostac-logo.png" width="150px" class="img-responsive sign-train-p">
