@@ -10,6 +10,7 @@ public class CertificateInfo {
 	private int courseTypeId;
 	private String email;
 	private String courseName;
+	private String tpId;
 	
 	
 	
@@ -67,6 +68,12 @@ public class CertificateInfo {
 	}
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
+	}
+	public String getTpId() {
+		return tpId;
+	}
+	public void setTpId(String tpId) {
+		this.tpId = tpId;
 	}
 
 	
