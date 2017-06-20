@@ -361,7 +361,7 @@ public class AdminDAOImpl implements AdminDAO {
 		loginDetails.setEncrypted_Password(encryprPassword);
 		System.out.println("status "+manageTrainingPartnerForm.getStatus());
 		loginDetails.setIsActive( manageTrainingPartnerForm.getStatus() != null && manageTrainingPartnerForm.getStatus().equalsIgnoreCase("A")? "Y" : "N");
-		loginDetails.setStatus( manageTrainingPartnerForm.getStatus() != null && manageTrainingPartnerForm.getStatus().equalsIgnoreCase("A")? "Y" : "N");
+		loginDetails.setStatus("I");
 		loginDetails.setProfileId(7);
 		
 		State s = getState(manageTrainingPartnerForm.getState());

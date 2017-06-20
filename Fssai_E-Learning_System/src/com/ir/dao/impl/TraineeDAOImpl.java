@@ -623,7 +623,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 	}
 
 	public AdmitCardForm generateAdmitCard(int loginId, int profileId) {
-			String str_query = "select cn.coursename as courseName,"
+			String str_query = "select top 1  cn.coursename as courseName,"
 				+ " ctype.coursetype as category, "
 				+ " pit.fathername as fatherName, titlename as title, pit.firstname ||' '|| pit.middlename ||' '|| pit.lastname  as name ,"
 				+ " tcal.trainingcenter as trainingCenterCode,"
@@ -640,7 +640,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 				+ " inner join city cty on (cty.cityid = pit.correspondencecity)  "
 				+ " inner join coursename cn on cn.coursenameid = tcal.coursename "
 				+ " inner join coursetype ctype on ctype.coursetypeid = cn.coursetypeid" 
-				+ " where ce.status = 'N' AND ce.logindetails = " + loginId;
+				+ " where ce.status = 'N' AND ce.logindetails = " + loginId + "  order by ce.courseenrolleduserid desc";
 		AdmitCardForm admitcard = new AdmitCardForm();
 		try {
 		Session session = sessionFactory.getCurrentSession();
@@ -963,7 +963,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 					+
 					// " ,concat(E.trainingpartnerpermanentline1 , ' ' , E.trainingpartnerpermanentline2 , ' ' , s.statename , ' ' , ds.districtname , ' ' , ci.cityname) as address"
 					// +
-					" ,concat(E.trainingcentrename , ' ' , s.statename, ' ' , ds.districtname) as address ,  mtp.trainingpartnername , C.coursetypeid , D.email , C.coursename   "
+					" ,concat(E.trainingcentrename , ' ' , s.statename, ' ' , ds.districtname) as address ,  mtp.trainingpartnername , C.coursetypeid , D.email , C.coursename , mtp.userid  "
 					+ " from courseenrolleduser A "
 					+ " inner join trainingcalendar B on(A.trainingcalendarid=B.trainingcalendarid) "
 					+"	inner join managetrainingpartner mtp on (B.trainingpartner = mtp.managetrainingpartnerid) "
@@ -999,6 +999,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 					certificateInfo.setCourseTypeId((int)obj[8]);
 					certificateInfo.setEmail(obj[9].toString() == null ? "" :obj[9].toString() );
 					certificateInfo.setCourseName(obj[10].toString() == null ? "" :obj[10].toString() );
+					certificateInfo.setTpId(obj[11].toString() == null ? "" :obj[11].toString());
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

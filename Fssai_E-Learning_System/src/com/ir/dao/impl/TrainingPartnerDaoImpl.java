@@ -748,9 +748,9 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 		String sql = null;
 		
 		if(loginId != null){
-			sql="select certificateid from courseenrolleduser    where logindetails='"+loginId+"'";
+			sql="select certificateid from courseenrolleduser    where certificateid is not null and   logindetails='"+loginId+"' ";
 		}else{
-			sql="select ceu.certificateid from courseenrolleduser ceu  inner join trainingcalendar tc on (ceu.trainingcalendarid = tc.trainingcalendarid) where tc.batchcode='"+batchCode+"'";	
+			sql="select ceu.certificateid from courseenrolleduser ceu  inner join trainingcalendar tc on (ceu.trainingcalendarid = tc.trainingcalendarid) where ceu.certificateid is not null and   tc.batchcode='"+batchCode+"'";	
 		}
 		 
 				
@@ -1564,7 +1564,7 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 		String sql = null;
 		if(!name.equalsIgnoreCase("ALL"))
 		 sql ="select mtp.managetrainingpartnerid  , ld.loginid  , mtp.trainingpartnername , mtp.pan , "+
-					" mtp.websiteurl , (CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus from managetrainingpartner as mtp "+
+					" mtp.websiteurl , (CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,ld.status as currentstatus from managetrainingpartner as mtp "+
 					" inner join logindetails as ld on ld.id=mtp.logindetails "+
 					" where upper(mtp.trainingpartnername) like '"+fcn.toUpperCase() +"%' and ld.loginid like '"+id+"%' "+
 					 " and mtp.trainingpartnername like '"+tpname+"%' and mtp.pan like '"+pan+"%' and mtp.websiteurl like '"+websiteURL+"%' " +
@@ -1599,7 +1599,7 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 				" inner join city as c on c.cityId = mtp.city "+
 				" inner join state as s on s.stateid = mtp.state "+
 				" where mtp.managetrainingpartnerid = '"+ name+"' ";
-		
+		System.out.println(" sql-----> "+sql);
 		Query query = session.createSQLQuery(sql);
 		List<CourseName> list = query.list();
 		
@@ -1611,6 +1611,7 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 	//updateMTP
 	@Override
 	public  String updateMTP(String name){
+		System.out.println(" name "+name);
 		String [] total = name.toString().split("-");
 		System.out.println(total);
 		String status = total[0];

@@ -124,7 +124,7 @@ function getdata(val){
 }
 </script>
 
-<cf:form action="generateCourseCertificateGO.fssai" name="myForm" method="POST" commandName="generateCourseCertificateForm" id="generateCourseCertificateForm"  >
+<cf:form action="generateCourseCertificateGO.fssai" name="myForm" method="POST" onsubmit="return validateId();" commandName="generateCourseCertificateForm" id="generateCourseCertificateForm"  >
 
 <section>
    <%@include file="../roles/top-menu.jsp"%>
@@ -252,7 +252,7 @@ function getdata(val){
                         </div>
   
                       </div>
-                      <input type="submit" style="margin-top:20px;"  class="btn login-btn pull-right show-details-vacancy collapsed"  data-target="#show-result" aria-expanded="false" value="GO">
+                      <input type="submit" style="margin-top:20px;"  class="btn login-btn pull-right show-details-vacancy collapsed"   data-target="#show-result" aria-expanded="false" value="GO">
                    
                     
                     </div>
@@ -270,3 +270,16 @@ function getdata(val){
   </div>
 </section>
 </cf:form>
+
+<script>
+
+function validateId(){
+
+var value = $("#certificateId").val();
+if(value==0){
+	alert("certificate Id can not be blank");
+	$("#certificateId").focus();
+	return false;
+}	
+}
+</script>
