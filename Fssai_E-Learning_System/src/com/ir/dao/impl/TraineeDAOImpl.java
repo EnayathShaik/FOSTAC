@@ -623,7 +623,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 	}
 
 	public AdmitCardForm generateAdmitCard(int loginId, int profileId) {
-			String str_query = "select top 1  cn.coursename as courseName,"
+			String str_query = "select   cn.coursename as courseName,"
 				+ " ctype.coursetype as category, "
 				+ " pit.fathername as fatherName, titlename as title, pit.firstname ||' '|| pit.middlename ||' '|| pit.lastname  as name ,"
 				+ " tcal.trainingcenter as trainingCenterCode,"
