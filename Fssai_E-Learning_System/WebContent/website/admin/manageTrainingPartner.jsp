@@ -158,7 +158,7 @@
                                 $('#newTable tr').remove();
                                 $('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Training Partner Id</th><th>Training Partner Name</th><th>Weblink</th><th>Current Status</th><th>Option</th></tr>')
                                 $.each(mainData1, function(i, obj) {
-                                    $('#newTable').append('<tr id="tableRow"><td>' + j++ + '</td><td>' + obj[1] + '</td><td>' + obj[2] + '</td><td>' + obj[4] + '</td><td>' +obj[6]+ '</td><td><input type="hidden" id="mtpId" value="' + obj[0] + '" /><a href="#" onClick="editManageTrainingPartner(\'' + obj[0] + '\');">edit</a> </td></tr>');
+                                    $('#newTable').append('<tr id="tableRow"><td>' + j++ + '</td><td>' + obj[1] + '</td><td>' + obj[2] + '</td><td>' + obj[4] + '</td><td>' + (obj[6]=='A'?'Active' : 'In-Active')+ ' </td><td><input type="hidden" id="mtpId" value="' + obj[0] + '" /><a href="#" onClick="editManageTrainingPartner(\'' + obj[0] + '\');">edit</a> </td></tr>');
                                 });
                             }
                         });
@@ -167,7 +167,7 @@
                 }
 
                 function editManageTrainingPartner(id) {
-          
+     
                 	var name1=JSON.stringify({
                 		courseName:0
                   })
@@ -189,7 +189,7 @@
                                     document.getElementById("userId").value = obj[1];
                                     $("#trainingPartnerName").attr("disabled", "disabled");
                                     $("#userId").attr("disabled", "disabled");
-
+								
                                     $("#PAN").attr("disabled", "disabled");
                                     document.getElementById("PAN").value = obj[2];
                                     document.getElementById("websiteUrl").value = obj[5];
@@ -199,24 +199,16 @@
                                     document.getElementById("pin").value = obj[8];
                                     document.getElementById("contactPersonName").value = obj[13];
                                     document.getElementById("contactEmail").value = obj[14];
+                                    document.getElementById("status").value = obj[4];
                                 
-                                    document.getElementById("mobile").value =obj[15].toString();
+                                    document.getElementById("mobile").value =obj[15];
                                   //  document.getElementById("mobile").value = obj[15];
                                     document.getElementById("idHiddenUser").value = id;
+                                    
                                     var s = obj[9];
                                     var d = obj[10];
                                     var c = obj[11];
-                                   
-                                    if (obj[4] == "A") {
-                                   
-                                        $('#status option ').remove();
-                              
-                                        $('#status').append('<option value="A" selected="true">Active</option><option value="I">In-active</option>');
-                                    } else {
-                                        
-                                        $('#status option').remove();
-                                        $('#status').append('<option value="A">Active</option><option value="I"  selected="true">In-active</option>');
-                                    }
+                          
                                 
                                   $("#state").val(s);
                                   
@@ -243,22 +235,22 @@
             </script>
             <script>
                 function updateMTP() {
-                    var status = $("#status").val();;
-                    var url = $("#websiteUrl").val();;
-                    var email = $("#email").val();;
-                    var address1 = $("#headOfficeDataAddress1").val();;
-                    var address2 = $("#headOfficeDataAddress2").val();;
-                    var pin = $("#pin").val();;
-                    var state = $("#state").val();;
-                    var district = $("#district").val();;
-                    var city = $("#city").val();
-                    var mtpId = $('#mtpId').val();
-                    var contactPerson = $('#contactPersonName').val();
-                    var contactEmail = $('#contactEmail').val();
-                    var mobile = $('#mobile').val();
-                    var idHiddenUser = $('#idHiddenUser').val();
+                    var status =( $("#status").val()==null ? '' :$("#status").val() );
+                    var url = ($("#websiteUrl").val() == null ? '' : $("#websiteUrl").val());
+                    var email = ($("#email").val() == null ? '' : $("#email").val());
+                    var address1 = ($("#headOfficeDataAddress1").val() == null ? '' : $("#headOfficeDataAddress1").val());
+                    var address2 = ($("#headOfficeDataAddress2").val() == null ? '' : $("#headOfficeDataAddress2").val());
+                    var pin = ($("#pin").val()==null ? '' : $("#pin").val());
+                    var state =( $("#state").val() == null ? '' : $("#state").val() );
+                    var district =( $("#district").val() == null ? '' : $("#district").val());
+                    var city = ($("#city").val() == null ? '' : $("#city").val() );
+                    var mtpId = ($('#mtpId').val() == null ? '' : $('#mtpId').val());
+                    var contactPerson = ($('#contactPersonName').val()==null ? '' : $('#contactPersonName').val());
+                    var contactEmail = ($('#contactEmail').val()==null ? '' : $('#contactEmail').val());
+                    var mobile = ($('#mobile').val() == null ? '' : $('#mobile').val());
+                    var idHiddenUser =( $('#idHiddenUser').val()== null ? '' :  $('#idHiddenUser').val());
                     var result = "";
-                    var total = status + '-' + url + '-' + email + '-' + address1 + '-' + address2 + '-' + pin + '-' + state + '-' + district + '-' + city + '-' + idHiddenUser+'-'+contactPerson+'-'+contactEmail+'-'+mobile;
+                    var total = status + '-' + url + '-' + email + '-' + address1 + '-' + address2 + '-' + pin + '-' + state + '-' + district + '-' + city + '-' + idHiddenUser+'-'+contactPerson+'-'+contactEmail+'-'+mobile+'-';
                 	var name1=JSON.stringify({
                 		courseName:0
                   })
