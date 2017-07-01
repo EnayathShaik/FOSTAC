@@ -9,7 +9,7 @@
 		  p = url.charAt(69);
 		   //alert(p);
 		if (p==5) {
-			$("#a").css("display", "block");
+			$("#d").css("display", "block");
 		}
 		if (p==6) {
 			$("#b").css("display", "block");
@@ -18,7 +18,7 @@
 			$("#c").css("display", "block");
 		}
 		if (p==8) {
-			$("#d").css("display", "block");
+			$("#a").css("display", "block");
 		}
 	} 
 window.onload = OnStart;
@@ -61,7 +61,7 @@ window.onload = OnStart;
             <div class="features">
                 <div class="col-md-12 col-xs-12 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
                     <div class="feature-wrap feature-wrapbasic"> <img class="img-responsive center-block" src="website/images/fssai-certification-logo.jpg" width="132" height="87">
-                      <h3  id="a" style="display:none;">Basic Food Safety Certification</h3>
+                      <h3  id="a" style="display:none;">Awarness Food Safety Certification</h3>
                        <h3 id="b" style="display:none;">Advanced Food Safety Certification</h3>
                        <h3 id="c" style="display:none;">Special Food Safety Certification</h3> 
                          <h3 id="d" style="display:none;">Basic Training on Food Safety</h3>

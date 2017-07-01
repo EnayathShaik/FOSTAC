@@ -40,9 +40,10 @@ function googleTranslateElementInit() {
           <li id="aboutpagefssai"><a onclick="setID('aboutpagefssai')" href="about.fssai">ABOUT</a></li>
           <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">COURSES <i class="fa fa-angle-down"></i></a>
             <ul class="dropdown-menu">
-              <li><a href="basic-level.fssai">BASIC LEVEL</a></li>
-              <li><a href="advance-level.fssai">ADVANCE LEVEL</a></li>
-              <li><a href="special-level.fssai">SPECIAL LEVEL</a></li>
+                                            <li><a href="commonCourses.fssai?id=8">AWARENESS LEVEL</a></li>
+                                            <li><a href="commonCourses.fssai?id=5">BASIC LEVEL</a></li>
+                                            <li><a href="commonCourses.fssai?id=6">ADVANCE LEVEL</a></li>
+                                            <li><a href="commonCourses.fssai?id=7">SPECIAL LEVEL</a></li>
             </ul>
           </li>
           <li><a href="faq.fssai">FAQ</a></li>
