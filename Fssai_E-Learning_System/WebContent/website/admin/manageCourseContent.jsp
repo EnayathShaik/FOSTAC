@@ -192,7 +192,8 @@ function deleteCourseContent(i){
 	}
 
 </script>
-<cf:form action="manageCourseContentSearch.fssai" name="myForm" method="POST" commandName="manageCourseContent" onsubmit="return validateFields();"> 
+
+<cf:form action="manageCourseContentSearch.fssai" name="myForm" method="POST" commandName="manageCourseContent" onsubmit="return validateFields();" enctype="multipart/form-data"> 
 
     <section>
         
@@ -328,8 +329,15 @@ function deleteCourseContent(i){
                                                             <cf:errors path="contentLink" cssClass="error" />  </li>
                                                         </ul>
                                                     </div>
-<cf:input path="contentLink" class="form-control" />
-                                                </div>  
+                                       <cf:input path="contentLink" class="form-control" />
+                                                </div> 
+                                              <!--   upload file -->
+                                                
+                                                   <div class="col-md-4 col-xs-12">
+                                                                    <span id="preview"></span>
+                                                                    <input class="btn login-btn" type="file" id="file" name="file" />
+                                                                </div>
+                                               <!-- end -->
                                             </div> <!-- rigth side ends -->
                                             <br><br>
                                             <!-- button -->
@@ -341,7 +349,7 @@ function deleteCourseContent(i){
                                               
                                                 
   
-                                                    <button id="btnCreate"  class="btn login-btn">Create</button>
+                                                    <button  type="submit" id="btnCreate" class="btn login-btn">Create</button>
                                               		<a href="#testt" class="btn login-btn" onclick="searchManageCourseContent('SELECTED');">Search</a>
                                                 
 <a href="#" onclick="editCourseContentData();" id="btnUpdate" style="display: none; padding: 6px 7px; width: 20%; margin-bottom: 0; font-size: 14px; 

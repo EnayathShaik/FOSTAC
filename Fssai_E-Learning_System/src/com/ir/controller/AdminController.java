@@ -1,5 +1,8 @@
 package com.ir.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -21,12 +24,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.google.gson.Gson;
 import com.ir.bean.common.IntStringBean;
@@ -612,24 +617,29 @@ public class AdminController {
 
 	@RequestMapping(value = "/manageCourseContent", method = RequestMethod.GET)
 	public String manageCourseContent(
-			@ModelAttribute("manageCourseContent") ManageCourseContentForm manageCourseContentForm, Model model) {
+			@ModelAttribute("manageCourseContent") ManageCourseContentForm manageCourseContentForm, Model model,HttpSession session) {
 		new ZLogger("manageCourseContent", "admin Controller manage course content form begin .", "AdminController.java");
 		 List<CourseName> courseNameList = adminService.courseNameList();
 		List<CourseType> courseTypeList = pageLoadService.courseTypeList();
 		model.addAttribute("courseTypeList", courseTypeList);
 		model.addAttribute("courseNameList", courseNameList);
+		
+		
 		return "manageCourseContent";
 	}
+	
+	
 
 	@RequestMapping(value = "/manageCourseContentSearch", method = RequestMethod.POST)
 	public String manageCourseContentSearch(
-			@Valid @ModelAttribute("manageCourseContent") ManageCourseContentForm manageCourseContentForm,
+			@RequestParam CommonsMultipartFile file,@Valid @ModelAttribute("manageCourseContent") ManageCourseContentForm manageCourseContentForm,
 			BindingResult result, Model model, HttpSession session) {
-		if (result.hasErrors()) {
+	if (result.hasErrors()) {
 			new ZLogger("manageCourseContentSearch", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
 			new ZLogger("manageCourseContentSearch", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
 			return "manageCourseContent";
 		}
+	
 		try {
 			String manageCourseContentSearch = adminService
 					.manageCourseContentSearch(manageCourseContentForm);
@@ -646,8 +656,37 @@ public class AdminController {
 			e.printStackTrace();
 			new ZLogger("manageCourseContentSearch", "Exception while manageCourseContentSearch :  "+ e.getMessage(), "AdminController.java");
 		}
+		//upload file
+		try
+		{
+			String name = manageCourseContentForm.getContentName();
+			System.out.println(name);
+			//String ss = session.getServletContext().getRealPath("").replace("Fssai_E-Learning_System", "Fostac/Trainee");
+			String ss = session.getServletContext().getRealPath("Content");
+			File dir = new File(ss);
+			if (!dir.exists())
+				dir.mkdirs();
+			String extension = "";
+			
+			String fileName = file.getOriginalFilename();
+			int i = fileName.lastIndexOf('.');
+			if (i > 0) {
+				extension = fileName.substring(i + 1);
+			}
+	    byte[] bytes = file.getBytes();  
+	    BufferedOutputStream stream =new BufferedOutputStream(new FileOutputStream(  
+	         new File(ss + File.separator + name+"." +extension)));  
+	    stream.write(bytes);  
+	    stream.flush();  
+	    stream.close();  
+		}catch(Exception e){
+			e.printStackTrace();
+			new ZLogger("saveImage", "Exception while  saveFile "+e.getMessage(), "AdminController.java");
+		}
 		return "redirect:manageCourseContent.fssai";
 	}
+	
+	
 
 	@RequestMapping(value = "/trainingCalendarForm", method = RequestMethod.GET)
 	public String trainingCalendarForm(Model model) {
@@ -1445,4 +1484,5 @@ public class AdminController {
 		}
 		return trainingNameList;
 	}
+	
 }
