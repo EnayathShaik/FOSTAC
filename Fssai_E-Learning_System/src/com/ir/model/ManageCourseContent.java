@@ -27,7 +27,10 @@ public class ManageCourseContent {
 	private String modeOfTrainingInput;
 	private String contentTypeInput;
 	private String contentNameInput;
+	
 	private String contentLinkInput;
+	private String uploadedContent;
+	
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "create_date")
@@ -38,6 +41,14 @@ public class ManageCourseContent {
 	@Column(name = "modify_date")
 	private Date modifyDate;
 
+	public String getUploadedContent() {
+		return uploadedContent;
+	}
+
+	public void setUploadedContent(String uploadedContent) {
+		this.uploadedContent = uploadedContent;
+	}
+	
 	public Date getCreateDate() {
 		return createDate;
 	}

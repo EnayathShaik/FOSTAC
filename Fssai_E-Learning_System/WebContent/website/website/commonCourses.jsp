@@ -24,6 +24,48 @@
 window.onload = OnStart;
 </script>
 
+<head>
+<style>
+button.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+button.accordion.active, button.accordion:hover {
+    background-color: #ddd;
+}
+
+button.accordion:after {
+    content: '\002B';
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+button.accordion.active:after {
+    content: "\2212";
+}
+
+div.panel {
+    padding: 0 18px;
+    background-color: white;
+    color:black; 
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+</style>
+</head>
+
 <section id="main-slider" class="no-margin">
     <div class="carousel-inner innerpage" style="background-image: url(website/images/slider/bg1.jpg)">
         <div class="container">
@@ -72,7 +114,7 @@ window.onload = OnStart;
         </div>
         <!--/.row-->
     </div>
-    <!--/.container-->
+    <!--/.container-->  
 </section>
 
 <section>
@@ -111,8 +153,91 @@ window.onload = OnStart;
 											<ct:if test="${empty commonList}">
 											No Records Available.
 											</ct:if>
-										</fieldset>
+										</fieldset>	
 										</div>
 								</div>
 						</div>
+			<!-- .//////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+			
+ 
+	<ct:if test="${!empty commonList}">  
+	<ct:if test="${!empty commonList2}">  
+	<body> 
+		
+			<h2>Course Content</h2> 
+													<ct:forEach items="${commonList}"
+														var="commonList" varStatus="loop">
+								  <div class="col-md-6 col-xs-12 " style="  float: left; margin-left: 356px;">  
+														<button class="accordion">${commonList.coursename}</button> 
+														<div class="panel">  	
+														<br />
+														<ul>
+														<li><h4>Course Code: ${commonList.courseCode}</h4></li>
+														<%-- <li>${commonList.coursename}</li> --%>  
+															<li><h4>Duration: ${commonList.courseduration}</h4></li> 
+															<li><h4>free/Paid: ${commonList.paidunpaid}</h4></li>
+														</ul> 
+														<br />
+															 <table 
+													class="table table-bordered table-responsive">
+													<thead style="background: #e6511a;">
+    												  <tr><th>Content Name</th><th>Mode of Training Input</th><th>Content Type</th><th>Uploaded Content</th><th>Content Link</th></tr> 
+    												  </thead> 
+													<ct:forEach items="${commonList2}" 
+														var="commonList2" varStatus="loop"> 
+													
+															<ct:if test="${commonList.courseCode==commonList2[0]}">   
+													<%-- 		   
+														 
+														<ul>
+  														
+ 																<li>Content Name: ${commonList2[6]}</li>
+  																<li>Content Location: ${commonList2[3]}</li>
+  																<li>Content Link: ${commonList2[2]}</li>
+  																
+  																<li>Mode of Training Input: ${commonList2[4]}</li>
+  																<li>Mode of Training Input: ${commonList2[5]}</li>
+  																 
+   														  
+    												  </ul>   --%> 
+    												   
+    												 <tr><td> ${commonList2[6]}</td><td>${commonList2[4]}</td><td>${commonList2[5]}</td><td><a href="${commonList2[7]}" target="_blank"> ${commonList2[7]}</a></td><td><a href="${commonList2[2]}" target="_blank">${commonList2[2]}</a></td></tr>
+    												  
+															</ct:if> 
+															
+													</ct:forEach> 
+																												    												  </table> 
+													
+													 
+																
+</div>
+																</div> 
+													</ct:forEach>
+													</ct:if>
+													</ct:if>
+													
+
+
+		
+						
+			</body> 			
+						
 </section> 
+
+
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].onclick = function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  }
+}
+</script>

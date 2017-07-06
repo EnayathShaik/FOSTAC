@@ -264,5 +264,12 @@ public class PageLoadServiceImpl implements PageLoadService {
 		return manageAssessmentAgencyList;
 	}
 
+	@Override
+	@Transactional
+	public List commonList2(int i) {
+		// TODO Auto-generated method stub
+		return  pageLoadDao.commonList2(i);
+	}
+
 	
 }

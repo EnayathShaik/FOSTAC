@@ -640,7 +640,42 @@ public class AdminController {
 			return "manageCourseContent";
 		}
 	
+	//upload file
+	String uploadLink="";
+			try
+			{
+				String name = manageCourseContentForm.getContentName();
+				System.out.println(name);
+				//String ss = session.getServletContext().getRealPath("").replace("Fssai_E-Learning_System", "Fostac/Trainee");
+				String ss = session.getServletContext().getRealPath("Content");
+				File dir = new File(ss);
+				if (!dir.exists())
+					dir.mkdirs();
+				String extension = "";
+				
+				String fileName = file.getOriginalFilename();
+				int i = fileName.lastIndexOf('.');
+				if (i > 0) {
+					extension = fileName.substring(i + 1);
+					uploadLink="Content/"+name+"."+extension; 	
+					
+					
+				}
+		    byte[] bytes = file.getBytes();  
+		    BufferedOutputStream stream =new BufferedOutputStream(new FileOutputStream(  
+		         new File(ss + File.separator + name+"." +extension)));  
+		    stream.write(bytes);  
+		    stream.flush();  
+		    stream.close();  
+			}catch(Exception e){
+				e.printStackTrace();
+				new ZLogger("saveImage", "Exception while  saveFile "+e.getMessage(), "AdminController.java");
+			}
+	
+	
+	
 		try {
+			manageCourseContentForm.setUploadedContent(uploadLink);
 			String manageCourseContentSearch = adminService
 					.manageCourseContentSearch(manageCourseContentForm);
 			if (manageCourseContentSearch.equalsIgnoreCase("created")) {
@@ -656,33 +691,7 @@ public class AdminController {
 			e.printStackTrace();
 			new ZLogger("manageCourseContentSearch", "Exception while manageCourseContentSearch :  "+ e.getMessage(), "AdminController.java");
 		}
-		//upload file
-		try
-		{
-			String name = manageCourseContentForm.getContentName();
-			System.out.println(name);
-			//String ss = session.getServletContext().getRealPath("").replace("Fssai_E-Learning_System", "Fostac/Trainee");
-			String ss = session.getServletContext().getRealPath("Content");
-			File dir = new File(ss);
-			if (!dir.exists())
-				dir.mkdirs();
-			String extension = "";
-			
-			String fileName = file.getOriginalFilename();
-			int i = fileName.lastIndexOf('.');
-			if (i > 0) {
-				extension = fileName.substring(i + 1);
-			}
-	    byte[] bytes = file.getBytes();  
-	    BufferedOutputStream stream =new BufferedOutputStream(new FileOutputStream(  
-	         new File(ss + File.separator + name+"." +extension)));  
-	    stream.write(bytes);  
-	    stream.flush();  
-	    stream.close();  
-		}catch(Exception e){
-			e.printStackTrace();
-			new ZLogger("saveImage", "Exception while  saveFile "+e.getMessage(), "AdminController.java");
-		}
+		
 		return "redirect:manageCourseContent.fssai";
 	}
 	

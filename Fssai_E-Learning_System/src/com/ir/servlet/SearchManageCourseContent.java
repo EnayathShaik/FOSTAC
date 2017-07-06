@@ -234,13 +234,13 @@ public class SearchManageCourseContent extends HttpServlet {
 		
 		if(!name.equalsIgnoreCase("ALL"))
 		 sql= "select cn.coursecode , ct.coursetype , mcm.contentlinkinput , mcm.contentlocationinput, "+
-				"mcm.modeoftraininginput , mcm.contenttypeinput , mcm.contentnameinput , mcm.managecoursecontentid from ManageCoursecontent as mcm "+
+				"mcm.modeoftraininginput , mcm.contenttypeinput , mcm.contentnameinput , mcm.managecoursecontentid, mcm.uploadedContent from ManageCoursecontent as mcm "+
 				"inner join coursetype as ct on ct.coursetypeid = mcm.coursetypeinput "+
 				"inner join coursename as cn on cn.coursenameid = mcm.coursenameinput "+
 				"where cast(mcm.contentlocationinput as varchar) like '"+ contentLocation+"' and cast(mcm.coursetypeinput as varchar) like '"+courseType+"' and cast(mcm.coursenameinput as varchar) like '"+courseName  +"' and cast(mcm.modeoftraininginput as varchar) like '"+modeOfTraining+"' and cast(mcm.contenttypeinput as varchar) like '"+contentType+ "' and mcm.contentnameinput like '"+contentName+"%' and cast(mcm.contentlinkinput as varchar) like '"+contentLink+"%'  order by mcm.managecoursecontentid desc";
 		else
 			 sql= "select cn.coursecode , ct.coursetype , mcm.contentlinkinput , mcm.contentlocationinput, "+
-						"mcm.modeoftraininginput , mcm.contenttypeinput , mcm.contentnameinput , mcm.managecoursecontentid from ManageCoursecontent as mcm "+
+						"mcm.modeoftraininginput , mcm.contenttypeinput , mcm.contentnameinput , mcm.managecoursecontentid, mcm.uploadedContent from ManageCoursecontent as mcm "+
 						"inner join coursetype as ct on ct.coursetypeid = mcm.coursetypeinput "+
 						"inner join coursename as cn on cn.coursenameid = mcm.coursenameinput order by mcm.managecoursecontentid desc";	
 		

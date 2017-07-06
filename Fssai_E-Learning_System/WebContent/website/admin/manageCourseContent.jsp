@@ -123,18 +123,18 @@ function searchManageCourseContent(indicator){
 		var mainData1 = jQuery.parseJSON(data);
 		var j=1;
 		$('#newTable tr').remove();
-		$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Content Location</th><th>Course Type</th><th>Course Code</th><th>Mode of Training</th><th>Content Type</th><th>Content Name</th><th>Content Link</th><th>Option	</th></tr>')
-		$.each(mainData1 , function(i , obj)
+		$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Content Location</th><th>Course Type</th><th>Course Code</th><th>Mode of Training</th><th>Content Type</th><th>Content Name</th><th>Uploaded Content</th><th>Content Link</th><th>Option	</th></tr>')
+		$.each(mainData1 , function(i , obj) 
 		{
 
-			$('#newTable').append('<tr id="tableRow"><td>'+ j++ +'</td><td>'+ obj[3]+'</td><td>'+ obj[1] +'</td><td>'+ obj[0] +'</td><td>'+ obj[4] +'</td><td>'+ obj[5] +'</td><td><input type="hidden" id="contentNameLabel" value="'+ obj[6] +'" />'+  obj[6] +'</td><td><input type="hidden" id="contentLinkLabel" value="'+ obj[2] +'" />'+ obj[2] +'</td><td><input type="hidden" id="idLabel'+i+'" value="'+ obj[7] +'" /> <a href="#" class="edit" onClick="editCourseContent(\''+obj[3]+'\',\''+obj[1]+'\',\''+obj[0]+'\',\''+obj[4]+'\',\''+obj[5]+'\',\''+obj[2]+'\',\''+obj[6]+'\',\''+i+'\');">edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="delete" onClick="deleteCourseContent('+i+');">delete</a></td></tr>');
+			$('#newTable').append('<tr id="tableRow"><td>'+ j++ +'</td><td>'+ obj[3]+'</td><td>'+ obj[1] +'</td><td>'+ obj[0] +'</td><td>'+ obj[4] +'</td><td>'+ obj[5] +'</td><td><input type="hidden" id="contentNameLabel" value="'+ obj[6] +'" />'+  obj[6] +'</td><td><input type="hidden" id="uploadedContent" value="'+ obj[8] +'" /><a href="'+ obj[8] +'" target="_blank">'+ obj[8] +'</a></td><td><input type="hidden" id="contentLinkLabel" value="'+ obj[2] +'" /><a href="'+ obj[2] +'" target="_blank">'+ obj[2] +'</a></td><td><input type="hidden" id="idLabel'+i+'" value="'+ obj[7] +'" /> <a href="#" class="edit" onClick="editCourseContent(\''+obj[3]+'\',\''+obj[1]+'\',\''+obj[0]+'\',\''+obj[4]+'\',\''+obj[5]+'\',\''+obj[2]+'\',\''+obj[6]+'\',\''+i+'\');">edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="delete" onClick="deleteCourseContent('+i+');">delete</a></td></tr>');
 		});
 		}
 		});
 	return result;
 	}
 }
-
+ 
 function editCourseContent(location , courseType , courseName ,modeOfTraining , contentType ,link ,contentName,i){
 	$('.error-red').html('');
 	console.log("-----> "+location + " "+courseType + " " +courseName + " "+modeOfTraining + " "+contentType + " "+contentName + " "+link);
@@ -243,6 +243,21 @@ function deleteCourseContent(i){
 </cf:select>
                                                 </div>
                                                 
+                                                   
+                                                 <div class="form-group">
+                                                    <div>
+                                                        <ul class="lab-no">
+                                                            <li class="style-li"><strong>Course Type:</strong></li>
+                                                            <li class="style-li error-red"></li>
+                                                        </ul>
+                                                    </div>
+
+<cf:select path="courseType" class="form-control" onchange="getCourseName(this.value , 'courseName');">
+<cf:option value="0" label="Select Course Type" />
+<cf:options items="${courseTypeList}" itemValue="CourseTypeId" itemLabel="CourseType"/>
+</cf:select>
+                                                </div>
+                                                
                                                  <div class="form-group">
                                                     <div>
                                                         <ul class="lab-no">
@@ -273,7 +288,15 @@ function deleteCourseContent(i){
 <cf:option value="StudyMaterial" label="Study Material" />
 </cf:select>
                                                 </div>
- <div class="form-group">
+
+                                            </div> <!-- left side ends -->
+
+                                            <!-- right side -->
+                                            <div class="col-xs-6">
+                                                
+                                             
+                                                
+                                                 <div class="form-group">
                                                     <div>
                                                         <ul class="lab-no">
                                                             <li class="style-li"><strong>Content Name:</strong></li>
@@ -286,25 +309,6 @@ function deleteCourseContent(i){
 
                                                 </div>                                                
                                                 
-                                            </div> <!-- left side ends -->
-
-                                            <!-- right side -->
-                                            <div class="col-xs-6">
-                                                
-                                                
-                                                 <div class="form-group">
-                                                    <div>
-                                                        <ul class="lab-no">
-                                                            <li class="style-li"><strong>Course Type:</strong></li>
-                                                            <li class="style-li error-red"></li>
-                                                        </ul>
-                                                    </div>
-
-<cf:select path="courseType" class="form-control" onchange="getCourseName(this.value , 'courseName');">
-<cf:option value="0" label="Select Course Type" />
-<cf:options items="${courseTypeList}" itemValue="CourseTypeId" itemLabel="CourseType"/>
-</cf:select>
-                                                </div>
                                                 
                                                 <div class="form-group">
                                                     <div>
@@ -329,7 +333,7 @@ function deleteCourseContent(i){
                                                             <cf:errors path="contentLink" cssClass="error" />  </li>
                                                         </ul>
                                                     </div>
-                                       <cf:input path="contentLink" class="form-control" />
+                                       <cf:input path="contentLink" class="form-control" placeholder="https://google.com" />
                                                 </div> 
                                               <!--   upload file -->
                                                 

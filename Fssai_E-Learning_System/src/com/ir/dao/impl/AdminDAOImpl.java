@@ -727,6 +727,7 @@ public class AdminDAOImpl implements AdminDAO {
 			mcc.setContentTypeInput(contentType);
 			mcc.setContentLinkInput(contentLink);
 			mcc.setContentNameInput(contentName);
+			mcc.setUploadedContent(manageCourseContentForm.getUploadedContent());
 			int mccId = (Integer)session1.save(mcc);
 			if(mccId > 0){
 				return "created";

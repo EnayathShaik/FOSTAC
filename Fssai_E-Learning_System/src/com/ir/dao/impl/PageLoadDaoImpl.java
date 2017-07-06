@@ -433,6 +433,18 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		}
 
 
+		@Override
+		public List commonList2(int i) {
+			// TODO Auto-generated method stub
+			System.out.println("Page Load DAOImpl process start in basicList2  ");
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createSQLQuery("select cn.coursecode , ct.coursetype , mcm.contentlinkinput , mcm.contentlocationinput, mcm.modeoftraininginput , mcm.contenttypeinput, mcm.contentnameinput ,mcm.uploadedContent, mcm.managecoursecontentid from ManageCoursecontent as mcm inner join coursetype as ct on ct.coursetypeid = mcm.coursetypeinput  inner join coursename as cn on cn.coursenameid = mcm.coursenameinput where ct.coursetypeid ="+i+" order by mcm.managecoursecontentid desc ");
+			List basicList = query.list();
+			System.out.println("basicList2  ************* list dao     :"+ basicList);
+			return basicList;
+		}
+
+
 		
 		
 }

@@ -47,5 +47,6 @@ public interface PageLoadDao {
 	public List<CourseName> awarenessList();
 	public List<ManageTrainingPartnerForm> manageTrainingPartnerList();
 	public List<ManageAssessmentAgencyForm> manageAssessmentAgencyList();
+	public List commonList2(int i);
 
 }

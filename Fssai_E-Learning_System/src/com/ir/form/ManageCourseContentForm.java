@@ -23,6 +23,15 @@ public class ManageCourseContentForm {
 	private String contentNameInput;
 	private String contentLinkInput;
 	
+	public String getUploadedContent() {
+		return uploadedContent;
+	}
+	public void setUploadedContent(String uploadedContent) {
+		this.uploadedContent = uploadedContent;
+	}
+	private String uploadedContent;
+
+	
 	
 	
 	

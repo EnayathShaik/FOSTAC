@@ -216,15 +216,19 @@ public class MainRedirect {
 		 }
 		 else if(id==5){
 				model.addAttribute("commonList", this.pageLoadService.basicList());
+				model.addAttribute("commonList2", this.pageLoadService.commonList2(1));
 		 }
 		 else if(id==6){
 				model.addAttribute("commonList", this.pageLoadService.advancedList());
+				model.addAttribute("commonList2", this.pageLoadService.commonList2(2));
 		 }
 		 else if(id==7){
 				model.addAttribute("commonList", this.pageLoadService.specialList());
+				model.addAttribute("commonList2", this.pageLoadService.commonList2(3));
 		 }
 		 else if(id==8){
 				model.addAttribute("commonList", this.pageLoadService.awarenessList());
+				model.addAttribute("commonList2", this.pageLoadService.commonList2(4));
 		 }
 			
 		   }catch(Exception e){
