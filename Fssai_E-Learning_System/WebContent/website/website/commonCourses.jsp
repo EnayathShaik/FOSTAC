@@ -149,8 +149,9 @@ div.panel {
 														<td>${commonList.coursename}</td>
 															<td>${commonList.courseduration}</td>
 															<td>${commonList.paidunpaid}</td> 
-															<td> <div >    
-														<button class="accordion" style="width: 200px;" >${commonList.coursename}</button> 
+															<td style="width: 200px;"> 
+															 <div  >    
+														<button class="accordion"  >${commonList.coursename}</button> 
 														<div class="panel">  	
 														<br />
 													
@@ -162,7 +163,7 @@ div.panel {
 													<ct:forEach items="${commonList2}" 
 														var="commonList2" varStatus="loop">  
 													
-															<ct:if test="${commonList.courseCode==commonList2[0] && commonList2[5]=='StudyMaterial' }">   
+															<ct:if test="${commonList.courseCode==commonList2[0] && commonList2[5]=='StudyMaterial' && commonList2[7]!='Not Uploaded' }">   
 													<%-- 		   
 														 
 														<ul>
@@ -188,9 +189,9 @@ div.panel {
 													<h3>Videos</h3>  
 													
 														<ct:forEach items="${commonList2}" 
-														var="commonList2" varStatus="loop"> 
+														var="commonList2" varStatus="loop">  
 													
-															<ct:if test="${commonList.courseCode==commonList2[0] && commonList2[5]=='Videos' && commonList2[7]!=''}">   
+															<ct:if test="${commonList.courseCode==commonList2[0] && commonList2[5]=='Videos' && commonList2[7]!='Not Uploaded'}">   
 												
     												    
     													<ul>
@@ -204,7 +205,7 @@ div.panel {
 														<ct:forEach items="${commonList2}" 
 														var="commonList2" varStatus="loop"> 
 													
-															<ct:if test="${commonList.courseCode==commonList2[0] && commonList2[5]=='PPTs'}">   
+															<ct:if test="${commonList.courseCode==commonList2[0] && commonList2[5]=='PPTs' && commonList2[7]!='Not Uploaded'}">   
     												<ul> 
     												<li> <a href="${commonList2[7]}" target="_blank"> ${commonList2[7]}</a></li>
     												 <li><a href="${commonList2[2]}" target="_blank">${commonList2[2]}</a></li>
@@ -255,17 +256,14 @@ div.panel {
 														<button class="accordion">${commonList.coursename}</button> 
 														<div class="panel">  	
 														<br />
-														<ul>
-														<li><h4>Course Code: ${commonList.courseCode}</h4></li>
+														<h3>Course Code: ${commonList.courseCode}</h3> 
 														<%-- <li>${commonList.coursename}</li> --%>  
-															<li><h4>Duration: ${commonList.courseduration}</h4></li> 
-															<li><h4>free/Paid: ${commonList.paidunpaid}</h4></li>
-														</ul> 
-														
+															<h3>Duration: ${commonList.courseduration}</h3> 
+															<h3>free/Paid: ${commonList.paidunpaid}</h3>
 														
 														
 														<br />
-															 <table 
+															<%--  <table 
 													class="table table-bordered table-responsive">
 													<thead style="background: #e6511a;">
     												  <tr><th>Content Name</th><th>Mode of Training Input</th><th>Content Type</th><th>Uploaded Content</th><th>Content Link</th></tr> 
@@ -274,6 +272,37 @@ div.panel {
 														var="commonList2" varStatus="loop"> 
 													
 															<ct:if test="${commonList.courseCode==commonList2[0]}">   
+															   
+														 
+														<ul>
+  														
+ 																<li>Content Name: ${commonList2[6]}</li>
+  																<li>Content Location: ${commonList2[3]}</li>
+  																<li>Content Link: ${commonList2[2]}</li>
+  																
+  																<li>Mode of Training Input: ${commonList2[4]}</li>
+  																<li>Mode of Training Input: ${commonList2[5]}</li>
+  																 
+   														  
+    												  </ul>   
+    												   
+    												 <tr><td> ${commonList2[6]}</td><td>${commonList2[4]}</td><td>${commonList2[5]}</td><td><a href="${commonList2[7]}" target="_blank"> ${commonList2[7]}</a></td><td><a href="${commonList2[2]}" target="_blank">${commonList2[2]}</a></td></tr>
+    												  
+															</ct:if> 
+															
+													</ct:forEach> 
+													 </table>  --%>
+													 
+													  <div  >    
+														 
+															 
+													  
+    												  
+    												  <h4 align="left" >Study Material</h4>    
+													<ct:forEach items="${commonList2}" 
+														var="commonList2" varStatus="loop">  
+													
+															<ct:if test="${commonList.courseCode==commonList2[0] && commonList2[5]=='StudyMaterial' && commonList2[7]!='Not Uploaded'}">   
 													<%-- 		   
 														 
 														<ul>
@@ -288,12 +317,64 @@ div.panel {
    														  
     												  </ul>   --%> 
     												   
-    												 <tr><td> ${commonList2[6]}</td><td>${commonList2[4]}</td><td>${commonList2[5]}</td><td><a href="${commonList2[7]}" target="_blank"> ${commonList2[7]}</a></td><td><a href="${commonList2[2]}" target="_blank">${commonList2[2]}</a></td></tr>
-    												  
+    												    
+    												<ul>
+    												<li> <a href="${commonList2[7]}" target="_blank"> ${commonList2[7]}</a></li>
+    												 </ul>  
+    												 
 															</ct:if> 
 															
 													</ct:forEach> 
-																												    												  </table> 
+													
+													<br />
+													<h4>Videos</h4>  
+													
+														<ct:forEach items="${commonList2}" 
+														var="commonList2" varStatus="loop"> 
+													
+															<ct:if test="${commonList.courseCode==commonList2[0] && commonList2[5]=='Videos' && commonList2[7]!='Not Uploaded'}">   
+												
+    												    
+    													<ul>
+    												<li> <a href="${commonList2[7]}" target="_blank"> ${commonList2[7]}</a></li>
+    												 </ul>  
+    												   
+															</ct:if> 
+															
+													</ct:forEach> 
+													<br />
+															<h4>PPTs</h4>  
+														<ct:forEach items="${commonList2}"  
+														var="commonList2" varStatus="loop"> 
+													
+															<ct:if test="${commonList.courseCode==commonList2[0] && commonList2[5]=='PPTs' && commonList2[7]!='Not Uploaded'}">   
+    												<ul> 
+    												<li> <a href="${commonList2[7]}" target="_blank"> ${commonList2[7]}</a></li>
+    												 <li><a href="${commonList2[2]}" target="_blank">${commonList2[2]}</a></li>
+    												 </ul>    
+															</ct:if> 
+															 
+													</ct:forEach> 
+													<br />
+													<br />
+													<h4>Content Link</h4>  
+												<ct:forEach items="${commonList2}" 
+														var="commonList2" varStatus="loop"> 
+													
+															<ct:if test="${commonList.courseCode==commonList2[0]}">   
+											
+    												<ul>  
+    												 <li><a href="${commonList2[2]}" target="_blank">${commonList2[2]}</a></li>
+    												 </ul>     
+    												
+															</ct:if> 
+															
+													</ct:forEach> 
+													
+													 
+																
+</div>
+																</div>
 													
 													 
 																

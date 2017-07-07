@@ -125,9 +125,10 @@ function searchManageCourseContent(indicator){
 		$('#newTable tr').remove();
 		$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Content Location</th><th>Course Type</th><th>Course Code</th><th>Mode of Training</th><th>Content Type</th><th>Content Name</th><th>Uploaded Content</th><th>Content Link</th><th>Option	</th></tr>')
 		$.each(mainData1 , function(i , obj) 
-		{
-
-			$('#newTable').append('<tr id="tableRow"><td>'+ j++ +'</td><td>'+ obj[3]+'</td><td>'+ obj[1] +'</td><td>'+ obj[0] +'</td><td>'+ obj[4] +'</td><td>'+ obj[5] +'</td><td><input type="hidden" id="contentNameLabel" value="'+ obj[6] +'" />'+  obj[6] +'</td><td><input type="hidden" id="uploadedContent" value="'+ obj[8] +'" /><a href="'+ obj[8] +'" target="_blank">'+ obj[8] +'</a></td><td><input type="hidden" id="contentLinkLabel" value="'+ obj[2] +'" /><a href="'+ obj[2] +'" target="_blank">'+ obj[2] +'</a></td><td><input type="hidden" id="idLabel'+i+'" value="'+ obj[7] +'" /> <a href="#" class="edit" onClick="editCourseContent(\''+obj[3]+'\',\''+obj[1]+'\',\''+obj[0]+'\',\''+obj[4]+'\',\''+obj[5]+'\',\''+obj[2]+'\',\''+obj[6]+'\',\''+i+'\');">edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="delete" onClick="deleteCourseContent('+i+');">delete</a></td></tr>');
+		{	var uContent="Not Uploaded";
+			if(obj[8]!="Not Uploaded")
+			uContent='<a href="'+ obj[8] +'" target="_blank">'+ obj[8] +'</a>';
+			$('#newTable').append('<tr id="tableRow"><td>'+ j++ +'</td><td>'+ obj[3]+'</td><td>'+ obj[1] +'</td><td>'+ obj[0] +'</td><td>'+ obj[4] +'</td><td>'+ obj[5] +'</td><td><input type="hidden" id="contentNameLabel" value="'+ obj[6] +'" />'+  obj[6] +'</td><td><input type="hidden" id="uploadedContent" value="'+ obj[8] +'" />'+uContent+'</td><td><input type="hidden" id="contentLinkLabel" value="'+ obj[2] +'" /><a href="'+ obj[2] +'" target="_blank">'+ obj[2] +'</a></td><td><input type="hidden" id="idLabel'+i+'" value="'+ obj[7] +'" /> <a href="#" class="edit" onClick="editCourseContent(\''+obj[3]+'\',\''+obj[1]+'\',\''+obj[0]+'\',\''+obj[4]+'\',\''+obj[5]+'\',\''+obj[2]+'\',\''+obj[6]+'\',\''+i+'\');">edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="delete" onClick="deleteCourseContent('+i+');">delete</a></td></tr>');
 		});
 		}
 		});

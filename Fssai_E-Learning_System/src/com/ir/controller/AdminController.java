@@ -641,7 +641,7 @@ public class AdminController {
 		}
 	
 	//upload file
-	String uploadLink="";
+	String uploadLink="Not Uploaded";
 			try
 			{
 				String name = manageCourseContentForm.getContentName();
