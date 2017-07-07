@@ -132,7 +132,8 @@ div.panel {
 															<th>Course Code</th>
 															 <th>Course Name</th>
 															<th>Duration</th>
-															<th>Free/Paid</th>
+															<th>Free/Paid</th> 
+															<th>Uploaded Content</th>
 														<!-- 	<th></th>
 															<th>Activate Training</th> --> 
 														</tr>
@@ -142,10 +143,93 @@ div.panel {
 														var="commonList" varStatus="loop">
 														<tr>
 															<td>${loop.count}</td>
+																														
+															
 															<td>${commonList.courseCode}</td>
 														<td>${commonList.coursename}</td>
 															<td>${commonList.courseduration}</td>
 															<td>${commonList.paidunpaid}</td> 
+															<td> <div >    
+														<button class="accordion" style="width: 200px;" >${commonList.coursename}</button> 
+														<div class="panel">  	
+														<br />
+													
+														<br />
+															 
+													 
+    												  
+    												  <h3>Study Material</h3>  
+													<ct:forEach items="${commonList2}" 
+														var="commonList2" varStatus="loop">  
+													
+															<ct:if test="${commonList.courseCode==commonList2[0] && commonList2[5]=='StudyMaterial' }">   
+													<%-- 		   
+														 
+														<ul>
+  														
+ 																<li>Content Name: ${commonList2[6]}</li>
+  																<li>Content Location: ${commonList2[3]}</li>
+  																<li>Content Link: ${commonList2[2]}</li>
+  																
+  																<li>Mode of Training Input: ${commonList2[4]}</li>
+  																<li>Mode of Training Input: ${commonList2[5]}</li>
+  																 
+   														  
+    												  </ul>   --%> 
+    												   
+    												    
+    												<ul>
+    												<li> <a href="${commonList2[7]}" target="_blank"> ${commonList2[7]}</a></li>
+    												 </ul>  
+    												 
+															</ct:if> 
+															
+													</ct:forEach> 
+													<h3>Videos</h3>  
+													
+														<ct:forEach items="${commonList2}" 
+														var="commonList2" varStatus="loop"> 
+													
+															<ct:if test="${commonList.courseCode==commonList2[0] && commonList2[5]=='Videos' && commonList2[7]!=''}">   
+												
+    												    
+    													<ul>
+    												<li> <a href="${commonList2[7]}" target="_blank"> ${commonList2[7]}</a></li>
+    												 </ul>  
+    												   
+															</ct:if> 
+															
+													</ct:forEach> 
+															<h3>PPTs</h3> 
+														<ct:forEach items="${commonList2}" 
+														var="commonList2" varStatus="loop"> 
+													
+															<ct:if test="${commonList.courseCode==commonList2[0] && commonList2[5]=='PPTs'}">   
+    												<ul> 
+    												<li> <a href="${commonList2[7]}" target="_blank"> ${commonList2[7]}</a></li>
+    												 <li><a href="${commonList2[2]}" target="_blank">${commonList2[2]}</a></li>
+    												 </ul>    
+															</ct:if> 
+															 
+													</ct:forEach> 
+													<h3>Content Link</h3>  
+												<ct:forEach items="${commonList2}" 
+														var="commonList2" varStatus="loop"> 
+													
+															<ct:if test="${commonList.courseCode==commonList2[0]}">   
+											
+    												<ul>  
+    												 <li><a href="${commonList2[2]}" target="_blank">${commonList2[2]}</a></li>
+    												 </ul>     
+    												
+															</ct:if> 
+															
+													</ct:forEach> 
+													
+													 
+																
+</div>
+																</div> </td> 
 														</tr>
 													</ct:forEach>
 													</ct:if>
@@ -177,6 +261,9 @@ div.panel {
 															<li><h4>Duration: ${commonList.courseduration}</h4></li> 
 															<li><h4>free/Paid: ${commonList.paidunpaid}</h4></li>
 														</ul> 
+														
+														
+														
 														<br />
 															 <table 
 													class="table table-bordered table-responsive">
