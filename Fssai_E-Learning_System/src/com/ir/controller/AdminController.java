@@ -646,8 +646,9 @@ public class AdminController {
 			{
 				String name = manageCourseContentForm.getContentName();
 				System.out.println(name);
-				//String ss = session.getServletContext().getRealPath("").replace("Fssai_E-Learning_System", "Fostac/Trainee");
+				String ss1 = session.getServletContext().getRealPath("").replace("Fssai_E-Learning_System", "uploads");
 				String ss = session.getServletContext().getRealPath("Content");
+				System.out.println(" ss "+ss  + " ss1 "+ss1);
 				File dir = new File(ss);
 				if (!dir.exists())
 					dir.mkdirs();
@@ -657,9 +658,7 @@ public class AdminController {
 				int i = fileName.lastIndexOf('.');
 				if (i > 0) {
 					extension = fileName.substring(i + 1);
-					uploadLink="Content/"+name+"."+extension; 	
-					
-					
+					uploadLink="Content/"+name+"."+extension; 		
 				}
 		    byte[] bytes = file.getBytes();  
 		    BufferedOutputStream stream =new BufferedOutputStream(new FileOutputStream(  

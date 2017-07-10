@@ -97,6 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <li id="faqpagefssai"><a onclick="setID('faqpagefssai')" href="faq.fssai">FAQ</a></li>
                                     <li id="contactpagefssai"><a onclick="setID('contactpagefssai')" href="contact.fssai">CONTACT</a></li>
                                     <li id="loginpagefssai"><a onclick="setID('loginpagefssai')" href="login.fssai">LOGIN</a></li>
+                                    <li id="loginpagefssai"><a onclick="setID('loginpagefssai')" target="_blank" href="./website/trainingPartner/EOI.pdf">EOI FOR TRAINING PARTNER</a></li>
                                 </ul>
                                 <div class="search">
                                     <form role="form" class="searchbar">

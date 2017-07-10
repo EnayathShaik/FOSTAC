@@ -244,6 +244,13 @@ try{
                                         </div>
                                     </div>             
 						     
+						     									<div class="row">
+						                                        <div class="col-md-4 col-xs-12"></div>
+						                                        <div class="col-md-4 col-xs-12" style="position: absolute;top: 54em;left: 12px;">
+						                                            <a href="#" onclick="window.print()" class="btn login-btn" style="width: 100%;">Print</a>
+						                                        </div>
+						                                        <div class="col-md-4 col-xs-12"></div>
+						                                    </div>
 						                                </div>
                                                         <!-- html code ends here -->
                                                     </div>
