@@ -7,7 +7,8 @@
 		  url = window.location.href;
 		  //alert(url);
 		  p = url.charAt(69);
-		   //alert(p);
+		  
+		  // alert(p);
 		if (p==5) {
 			$("#d").css("display", "block");
 		}
@@ -19,6 +20,18 @@
 		}
 		if (p==8) {
 			$("#a").css("display", "block");
+		}
+		if (p==1) {
+			$("#e").css("display", "block");
+		}
+		if (p==2) {
+			$("#f").css("display", "block");
+		}
+		if (p==3) {
+			$("#g").css("display", "block");
+		}
+		if (p==4) {
+			$("#h").css("display", "block");
 		}
 	} 
 window.onload = OnStart;
@@ -107,6 +120,10 @@ div.panel {
                        <h3 id="b" style="display:none;">Advanced Food Safety Certification</h3>
                        <h3 id="c" style="display:none;">Special Food Safety Certification</h3> 
                          <h3 id="d" style="display:none;">Basic Training on Food Safety</h3>
+                         <h3  id="e" style="display:none;">Catering</h3>
+                       <h3 id="f" style="display:none;">Manufacturing</h3>
+                       <h3 id="g" style="display:none;">Transport & Storage</h3> 
+                         <h3 id="h" style="display:none;">Retail</h3>
                     </div>
                 </div> 
             </div>
