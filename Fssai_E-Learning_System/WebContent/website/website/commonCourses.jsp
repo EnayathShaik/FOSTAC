@@ -125,14 +125,14 @@ div.panel {
 										<fieldset>
 											<legend>Course Name List</legend>
 									<table id="datatablesfosrest" 
-													class="table table-bordered table-responsive">
+													class="table table-bordered table-responsive" style="    margin-left: 156px; width: 74%;">
 													<thead style="background: #e6511a;">
 														<tr class="background-open-vacancies">
 															<th>S.No.</th>
 															<th>Course Code</th>
 															 <th>Course Name</th>
-															<th>Duration</th>
-															<th>Free/Paid</th> 
+															<th>Duration (hrs)</th>
+															<!-- <th>Free/Paid</th>  -->
 															<th>Uploaded Content</th>
 														<!-- 	<th></th>
 															<th>Activate Training</th> --> 
@@ -148,10 +148,10 @@ div.panel {
 															<td>${commonList.courseCode}</td>
 														<td>${commonList.coursename}</td>
 															<td>${commonList.courseduration}</td>
-															<td>${commonList.paidunpaid}</td> 
+															<%-- <td>${commonList.paidunpaid}</td>  --%>
 															<td style="width: 200px;"> 
 															 <div  >    
-														<button class="accordion"  >${commonList.coursename}</button> 
+														<button class="accordion"  >View</button> 
 														<div class="panel">  	
 														<br />
 													

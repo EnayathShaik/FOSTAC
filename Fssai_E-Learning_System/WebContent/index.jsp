@@ -285,7 +285,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <a href="certificationProcess.fssai">
                                         <div class="feature-wrap assessor-box center-block">
                                             <h3 class="box-heading">Certification Process</h3>
-                                            <p>Fostac has FSSAI recognized assessor's to access & provide FSSAI validated certificate.</p>
+                                            <p>Fostac is a 4 step Training & Certification system.</p>
                                         </div>
                                     </a>
                                 </div>
@@ -297,7 +297,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <a href="knowYourTrainingPartner.fssai">
                                         <div class="feature-wrap partner-box center-block">
                                             <h3 class="box-heading">TRAINING PARTNER & ASSESSMENT AGENCY</h3>
-                                            <p>On the basis of your training need you can choose your training provider.</p>
+                                            <p>View the list of Training Partner to select as per requirement.</p>
                                         </div>
                                     </a>
                                 </div>
@@ -324,7 +324,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <div style="margin:10px 0px 0px 0px;">
                                         <script src="website/website/js/jquery-1.10.1.min.js"></script>
                                             <%-- <jsp:include page="website/website/index.html" /> --%>
-                                            <input type="text" value="" id="zip" style="width:150px;" placeholder="Enter Zipcode"/> <button onclick="getCenterAddress();return false;">Submit</button>
+                                            <input type="text" value="" id="zip" style="width:150px;" placeholder="Enter Pincode"/> <button onclick="getCenterAddress();return false;">Submit</button>
                                             <span id="centerAdd">
                                             <span id="centerName"></span>
                                             <br>
