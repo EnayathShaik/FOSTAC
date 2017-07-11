@@ -141,7 +141,16 @@ try{
 
             <head>
                 <title></title>
-             
+              <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+                <script type="text/javascript">
+                    function printDiv() {    
+                        var printContents = document.getElementById('dvContainer').innerHTML;
+                        var originalContents = document.body.innerHTML;
+                         document.body.innerHTML = printContents;
+                         window.print();
+                         document.body.innerHTML = originalContents;
+                        }
+                </script>
             </head>
 
             <body>
@@ -176,7 +185,7 @@ try{
                                                     <div class="row">
                                                         <!-- html code to add from here -->
                                                         <div class="col-xs-12 certi-width">
-						                                    <div class="col-xs-12"><img src="website/images/1.jpg" class="img-responsive"></div>
+						                                    <div class="col-xs-12" ><img src="website/images/1.jpg" class="img-responsive" ></div>
 						            							
 <div class="col-xs-12 this-certify">
 <h2 class="text-center th-pos" style="margin-top: -254px;
@@ -185,44 +194,44 @@ try{
     font-size: 34px;font-family:calibri;font-weight:bold;color:#365f91;"> Certificate of Competence</h2>
 
                                         <h3 class="text-center th-pos" style="margin-top:30px;font-size:18px; font-family: times new roman; font-weight: bold;
-    font-size: 22px;">This is to certify that</h3>
+    font-size: 20px;">This is to certify that</h3>
                                         <p class="text-center for-p"><span><strong>${traineeCertificateName}</strong></span></p>
                                         <hr class="nam-hr">
                                         <div class=" text-center">
                                             <p style=" font-family: times new roman; font-weight: bold;
-    font-size: 22px;">has successfully completed training  </p>
+    font-size: 20px;margin-top:-10px;">has successfully completed training  </p>
                                             
                                         </div>
                                           <div class=" text-center">
                                             <p style=" font-family: times new roman; font-weight: bold;
-    font-size: 22px;">in</p>
+    font-size: 20px;margin-top:-10px;">in</p>
                                             
                                         </div>
                                          <div class=" text-center">
                                             <p style="font-family: times new roman; font-weight: bold;
-    font-size: 22px;"><span><strong>${courseName} </strong></span></p>
+    font-size: 20px;"><span><strong>${courseName} </strong></span></p>
                                             
                                         </div>
                                           <div class=" text-center">
                                             <p style=" font-family: times new roman; font-weight: bold;
-    font-size: 22px;">held at</p>
+    font-size: 20px;">held at</p>
                                             
                                         </div>
                                          <div class=" text-center">
                                             <p style=" font-family: times new roman; font-weight: bold;
-    font-size: 22px;">${trainingAddress}</p>
+    font-size: 20px;">${trainingAddress}</p>
                                             
                                         </div>
                                         <div class=" text-center">
                                             <p style=" font-family: times new roman;
-    font-size: 22px; font-weight: bold;">& is awarded this certificate.    </p>
+    font-size: 20px; font-weight: bold;">& is awarded this certificate.    </p>
                                             
                                         </div>
                                     </div>
 
                             
 <br><br><br><br>
-                                    <div class="col-xs-12 cert-btm-general" style="margin-top:45px;">
+                                    <div class="col-xs-12 cert-btm-general" style="margin-top:21px;">
                                     <p class="btm-p">_______________</p>
                                         <p class="btm-p" style="font-weight:bold;">Training Coordinator</p>
                                         <p class="btm-p" style="font-weight:bold;">Training Conducted by: ${trainingPartner}</p>
@@ -238,26 +247,32 @@ try{
                                      
                                             <p class="left-p" style="margin-left:-57px;font-weight:bold;">Refresher Due on: <%=strNewDateExpiry%></p>
                                         </div>
-                                        <div class="col-md-6 col-xs-6" style="margin-top:-25px;">
+                                        <div class="col-md-6 col-xs-6" style="margin-top:-58px;">
                                          <img src="website/images/fostac-logo.png" width="150px" class="img-responsive sign-train-p">
                                            
                                         </div>
                                     </div>             
 						     
-						     									<div class="row">
+						     									<!-- <div class="row">
 						                                        <div class="col-md-4 col-xs-12"></div>
 						                                        <div class="col-md-4 col-xs-12" style="position: absolute;top: 54em;left: 12px;">
 						                                            <a href="#" onclick="window.print()" class="btn login-btn" style="width: 100%;">Print</a>
 						                                        </div>
 						                                        <div class="col-md-4 col-xs-12"></div>
-						                                    </div>
+						                                    </div> -->
 						                                </div>
                                                         <!-- html code ends here -->
                                                     </div>
                                                 </div>
                                             </div>
                                             <!--  FOOD SAFETY TRAINER ENDS -->
-                                            
+                                                          <div class="row">
+						                                        <div class="col-md-4 col-xs-12"></div>
+						                                        <div class="col-md-4 col-xs-12" style="position: absolute;top: 54em;left: 12px;margin-top:122px;margin-left:363px;" >
+						                                            <a href="#" onclick="printDiv();" class="btn login-btn" style="width: 100%;">Print</a>
+						                                        </div>
+						                                        <div class="col-md-4 col-xs-12"></div>
+						                                    </div>
                                             
                                         </div>
                                     </div>

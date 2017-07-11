@@ -132,16 +132,24 @@ try{
                 <title></title>
                 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
                 <script type="text/javascript">
-                    $("#btnPrint").live("click", function () {
+                   /*  $("#btnPrint").live("click", function () {
                         var divContents = $("#dvContainer").html();
                         var printWindow = window.open('', '', 'height=400,width=800');
                         /* printWindow.document.write('<html><head><title>DIV Contents</title>'); */
-                        printWindow.document.write('</head><body >');
+                       /*  printWindow.document.write('</head><body >');
                         printWindow.document.write(divContents);
                         printWindow.document.write('</body></html>');
                         printWindow.document.close();
                         printWindow.print();
-                    });
+                    }); */ 
+                    
+                    function printDiv() {    
+                        var printContents = document.getElementById('dvContainer').innerHTML;
+                        var originalContents = document.body.innerHTML;
+                         document.body.innerHTML = printContents;
+                         window.print();
+                         document.body.innerHTML = originalContents;
+                        }
                 </script>
             </head>
 
@@ -156,7 +164,9 @@ try{
                         <div class="container-fluid">
                             <div id="wrapper">
                                 <!-- Sidebar menu -->
+                                <section>
                                 <%@include file="../roles/slider.jsp" %>
+                                </section>
                                     <!-- Sidebar menu -->
                                     <!-- /#sidebar-wrapper -->
                                     <!-- Page Content -->
@@ -185,45 +195,45 @@ try{
     <h2 class="text-center th-pos" style="margin-top: 2px;
     font-size: 34px;font-family:calibri;font-weight:bold;color:#365f91;"> Certificate of Competence</h2>
 
-                                        <h3 class="text-center th-pos" style="margin-top:30px;font-size:19px;font-weight:bold; font-family: times new roman; font-weight: bold;
-    font-size: 22px;">This is to certify that</h3>
-                                        <p class="text-center for-p"><span><strong>${traineeCertificateName}</strong></span></p>
+                                        <h3 class="text-center th-pos" style="margin-top:18px;font-size:19px;font-weight:bold; font-family: times new roman; font-weight: bold;
+    font-size: 20px;">This is to certify that</h3>
+                                        <p class="text-center for-p" style="margin-top:-10px;"><span><strong>${traineeCertificateName}</strong></span></p>
                                         <hr class="nam-hr">
                                         <div class=" text-center">
-                                            <p style="font-weight:bold; font-family: times new roman; font-weight: bold;
-    font-size: 22px;">has successfully completed training  </p>
+                                            <p style="font-weight:bold; font-family: times new roman; font-weight: bold;margin-top:-10px;
+    font-size: 20px;">has successfully completed training  </p>
                                             
                                         </div>
                                           <div class=" text-center">
                                             <p style="font-weight:bold; font-family: times new roman; font-weight: bold;
-    font-size: 22px;">in</p>
+    font-size: 20px;">in</p>
                                             
                                         </div>
                                          <div class=" text-center">
                                             <p style="font-weight:bold; font-family: times new roman; font-weight: bold;
-    font-size: 22px;"><span><strong>${courseName}</strong></span></p>
+    font-size: 20px;"><span><strong>${courseName}</strong></span></p>
                                             
                                         </div>
                                           <div class=" text-center">
                                             <p style="font-weight:bold; font-family: times new roman; font-weight: bold;
-    font-size: 22px;">held at</p>
+    font-size: 20px;">held at</p>
                                             
                                         </div>
                                          <div class=" text-center">
                                             <p style="font-weight:bold; font-family: times new roman; font-weight: bold;
-    font-size: 22px;">${trainingAddress}</p>
+    font-size: 20px;">${trainingAddress}</p>
                                             
                                         </div>
                                         <div class=" text-center">
                                             <p style="font-family: times new roman; font-weight: bold;
-    font-size: 22px;">& is awarded this certificate.    </p>
+    font-size: 20px;">& is awarded this certificate.    </p>
                                             
                                         </div>
                                     </div>
 
                                 
 <br><br><br><br>
-                                    <div class="col-xs-12 cert-btm-general" style="margin-top:35px;">
+                                    <div class="col-xs-12 cert-btm-general" style="margin-top:11px;">
                                     <p class="btm-p">_______________</p>
                                         <p class="btm-p" style="font-weight:bold;">Training Coordinator</p>
                                         <p class="btm-p" style="font-weight:bold;">Training Conducted by: ${trainingPartner}</p>
@@ -239,19 +249,13 @@ try{
                                      
                                             <p class="left-p" style="margin-left:-57px;font-weight:bold;">Refresher Due on: <%=strNewDateExpiry%></p>
                                         </div>
-                                        <div class="col-md-6 col-xs-6" style="margin-top:-25px;">
+                                        <div class="col-md-6 col-xs-6" style="margin-top:-58px;">
                                          <img src="website/images/fostac-logo.png" width="150px" class="img-responsive sign-train-p">
                                            
                                         </div>
                                     </div>        
                                     
-                                    							<div class="row">
-						                                        <div class="col-md-4 col-xs-12"></div>
-						                                        <div class="col-md-4 col-xs-12" style="position: absolute;top: 54em;left: 12px;">
-						                                            <a href="#" onclick="window.print()" class="btn login-btn" style="width: 100%;">Print</a>
-						                                        </div>
-						                                        <div class="col-md-4 col-xs-12"></div>
-						                                    </div>
+                                    							
 						                                </div>
                                                         <!-- html code ends here -->
                                                     </div>
@@ -259,12 +263,19 @@ try{
                                             </div>
                                             <!--  HWC ENDS -->
                                             
-                                            
+                                                             <div class="row">
+						                                        <div class="col-md-4 col-xs-12"></div>
+						                                        <div class="col-md-4 col-xs-12" style="position: absolute;top: 54em;left: 12px;margin-top:122px;margin-left:363px;" >
+						                                            <a href="#" onclick="printDiv();" class="btn login-btn" style="width: 100%;">Print</a>
+						                                        </div>
+						                                        <div class="col-md-4 col-xs-12"></div>
+						                                    </div>      
                                             
                                          
                                             
                                         </div>
                                     </div>
+                                    
                     </section>
                     <!-- scripts -->
                 </form>

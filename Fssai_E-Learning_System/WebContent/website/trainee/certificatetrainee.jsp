@@ -13,6 +13,27 @@ try{
 %>
             <head>
                 <title></title>
+                <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+                <script type="text/javascript">
+                   /*  $("#btnPrint").live("click", function () {
+                        var divContents = $("#dvContainer").html();
+                        var printWindow = window.open('', '', 'height=400,width=800');
+                        /* printWindow.document.write('<html><head><title>DIV Contents</title>'); */
+                       /*  printWindow.document.write('</head><body >');
+                        printWindow.document.write(divContents);
+                        printWindow.document.write('</body></html>');
+                        printWindow.document.close();
+                        printWindow.print();
+                    }); */ 
+                    
+                    function printDiv() {    
+                        var printContents = document.getElementById('dvContainer').innerHTML;
+                        var originalContents = document.body.innerHTML;
+                         document.body.innerHTML = printContents;
+                         window.print();
+                         document.body.innerHTML = originalContents;
+                        }
+                </script>
             </head>
 
             <body>
@@ -53,34 +74,30 @@ try{
     <h2 class="text-center th-pos" style="margin-top: 2px;
     font-size: 34px;font-family:calibri;font-weight:bold;color:#365f91;"> Certificate of Competence</h2>
    
-                                        <h3 class="text-center th-pos" style="margin-top: 20px;
-    font-family: times new roman;
-    font-size: 22px;
+                                        <h3 class="text-center th-pos" style="margin-top: 30px; font-family: times new roman; font-size: 18px;
     font-weight: bold;">This is to certify that</h3>
-                                        <p class="text-center for-p"><span><strong></strong></span></p>
+                                        <p class="text-center for-p"><span><strong>${traineeCertificateName}</strong></span></p>
                                         <hr class="nam-hr">
                                         <div class=" text-center">
-                                            <p class="th-pos" style="
-    font-family: times new roman;
-    font-size: 22px;
-    font-weight: bold;">has successfully completed training  </p>
+                                            <p class="th-pos" style=" font-family: times new roman;font-size: 20px;margin-top:-10px;
+    font-weight: bold;">has successfully completed training </p>
                                             
                                         </div>
                                           <div class=" text-center">
                                             <p class="th-pos" style="
     font-family: times new roman;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bold;">in</p>
                                             
                                         </div>
                                          <div class=" text-center">
-                                            <p class="th-pos" ><span><strong>&nbsp;</strong></span></p>
+                                            <p class="th-pos" ><span><strong>${courseName}&nbsp;</strong></span></p>
                                             
                                         </div>
                                           <div class=" text-center">
                                             <p class="th-pos" style="
     font-family: times new roman;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bold;">held at</p>
                                             
                                         </div>
@@ -91,7 +108,7 @@ try{
                                         <div class=" text-center">
                                             <p class="th-pos" style="
     font-family: times new roman;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bold;">& is awarded this certificate.    </p>
                                             
                                         </div>
@@ -99,7 +116,7 @@ try{
 
                               
 <br><br>
-                                    <div class="col-xs-12 cert-btm-general" style="margin-top:45px;">
+                                    <div class="col-xs-12 cert-btm-general" style="margin-top:21px;">
                                     <p class="btm-p">_______________</p>
                                         <p class="btm-p" style="font-weight:bold;">Training Coordinator</p>
                                         
@@ -116,7 +133,7 @@ try{
                                      
                                             <p class="left-p" style="margin-left:-57px;font-weight:bold;">Refresher Due on: <%=strNewDateExpiry%></p>
                                         </div>
-                                        <div class="col-md-6 col-xs-6" style="margin-top:-25px;">
+                                        <div class="col-md-6 col-xs-6" style="margin-top:-58px;">
                                          <img src="website/images/fostac-logo.png" width="150px" class="img-responsive sign-train-p">
                                            
                                         </div>
@@ -127,6 +144,14 @@ try{
                                                     </div>
                                                 </div>
                                             </div>   
+                                                            <div class="row">
+						                                        <div class="col-md-4 col-xs-12"></div>
+						                                        <div class="col-md-4 col-xs-12" style="position: absolute;top: 54em;left: 12px;margin-top:122px;margin-left:363px;" >
+						                                            <a href="#" onclick="printDiv();" class="btn login-btn" style="width: 100%;">Print</a>
+						                                        </div>
+						                                        <div class="col-md-4 col-xs-12"></div>
+						                                    </div> 
+                                            
                                         </div>
                                     </div>
                     </section>
