@@ -23,7 +23,10 @@ INSERT INTO title( titleid, titlename)  VALUES (4, 'Master');
 
 INSERT INTO coursetype(coursetypeid, coursetype) VALUES (1, 'Basic');
 INSERT INTO coursetype(coursetypeid, coursetype) VALUES (2, 'Advance');
-INSERT INTO coursetype(coursetypeid, coursetype) VALUES (3, 'Special');INSERT INTO coursetype(coursetypeid, coursetype) VALUES (4, 'TOT');
+INSERT INTO coursetype(coursetypeid, coursetype) VALUES (3, 'Special');
+INSERT INTO coursetype(coursetypeid, coursetype) VALUES (4, 'TOT');
+INSERT INTO coursetype(coursetypeid, coursetype) VALUES (5, 'Awareness');
+
 
 INSERT INTO Steps (stepId,steps) values (1 ,'Course EnrollMent');
 INSERT INTO Steps (stepId,steps) values (2 ,'Get Your Admit Card');

@@ -54,6 +54,8 @@ public interface PageLoadService {
 	public List<ManageTrainingPartnerForm> manageTrainingPartnerList();
 	public List<ManageAssessmentAgencyForm> manageAssessmentAgencyList();
 	public List commonList2(int i);
+	public List courseCommonList2(int id);
+	
 	
 	
 	 

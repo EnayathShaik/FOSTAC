@@ -204,15 +204,19 @@ public class MainRedirect {
 		 try{
 			 if(id==1){
 					model.addAttribute("commonList", this.pageLoadService.cateringList());
+					model.addAttribute("commonList2", this.pageLoadService.courseCommonList2(id));
 		 }
 		 else if(id==2){
 				model.addAttribute("commonList", this.pageLoadService.manufacturingList());
+				model.addAttribute("commonList2", this.pageLoadService.courseCommonList2(id));
 		 }
 		 else if(id==3){
 				model.addAttribute("commonList", this.pageLoadService.transportList());
+				model.addAttribute("commonList2", this.pageLoadService.courseCommonList2(id));
 		 }
 		 else if(id==4){
 				model.addAttribute("commonList", this.pageLoadService.retailList());
+				model.addAttribute("commonList2", this.pageLoadService.courseCommonList2(id));
 		 }
 		 else if(id==5){
 				model.addAttribute("commonList", this.pageLoadService.basicList());

@@ -329,7 +329,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		public List<CourseName> cateringList() {
 			System.out.println("Page Load DAOImpl process start in specialCourseList  ");
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("from CourseName where courseName like '%Catering%' ");
+			Query query = session.createQuery("from CourseName where upper(courseName) like '%CATERING%' ");
 			List cateringList = query.list();
 			System.out.println("CourseName  ************* list dao     :"+ cateringList);
 			return cateringList;
@@ -340,7 +340,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		public List<CourseName> manufacturingList() {
 			System.out.println("Page Load DAOImpl process start in specialCourseList  ");
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("from CourseName where courseName like '%Manufacturing%' ");
+			Query query = session.createQuery("from CourseName where upper(courseName) like '%MANUFACTURING%' ");
 			List manufacturingList = query.list();
 			System.out.println("CourseName  ************* list dao     :"+ manufacturingList);
 			return manufacturingList;
@@ -351,10 +351,10 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		public List<CourseName> transportList() {
 			System.out.println("Page Load DAOImpl process start in specialCourseList  ");
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("from CourseName where courseName like '%Transport%' or courseName like '%Storage%'  ");
+			Query query = session.createQuery("from CourseName where upper(courseName) like '%TRANSPORT%' or upper(courseName) like '%STORAGE%'  ");
 			List transportList = query.list();
 			System.out.println("CourseName  ************* list dao     :"+ transportList);
-			return transportList;
+			return transportList; 
 		}
 
 
@@ -362,7 +362,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		public List<CourseName> retailList() {
 			System.out.println("Page Load DAOImpl process start in specialCourseList  ");
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("from CourseName where courseName like '%Retail%' ");
+			Query query = session.createQuery("from CourseName where upper(courseName) like '%RETAIL%' ");
 			List retailList = query.list();
 			System.out.println("CourseName  ************* list dao     :"+ retailList);
 			return retailList;
@@ -442,6 +442,26 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			List basicList = query.list();
 			System.out.println("basicList2  ************* list dao     :"+ basicList);
 			return basicList;
+		}
+
+
+		@Override
+		public List courseCommonList2(int id) {
+			// TODO Auto-generated method stub
+			Query query=null;
+			Session session = sessionFactory.getCurrentSession();
+			if(id==1)
+				query = session.createSQLQuery("select cn.coursecode , ct.coursetype , mcm.contentlinkinput , mcm.contentlocationinput, mcm.modeoftraininginput , mcm.contenttypeinput, mcm.contentnameinput ,mcm.uploadedContent, mcm.managecoursecontentid from ManageCoursecontent as mcm inner join coursetype as ct on ct.coursetypeid = mcm.coursetypeinput  inner join coursename as cn on cn.coursenameid = mcm.coursenameinput where upper(cn.coursename) like '%CATERING%' order by mcm.managecoursecontentid desc ");
+			else if(id==2)
+				query = session.createSQLQuery("select cn.coursecode , ct.coursetype , mcm.contentlinkinput , mcm.contentlocationinput, mcm.modeoftraininginput , mcm.contenttypeinput, mcm.contentnameinput ,mcm.uploadedContent, mcm.managecoursecontentid from ManageCoursecontent as mcm inner join coursetype as ct on ct.coursetypeid = mcm.coursetypeinput  inner join coursename as cn on cn.coursenameid = mcm.coursenameinput where upper(cn.coursename) like '%MANUFACTURING%' order by mcm.managecoursecontentid desc ");
+			else if(id==3)
+				 query = session.createSQLQuery("select cn.coursecode , ct.coursetype , mcm.contentlinkinput , mcm.contentlocationinput, mcm.modeoftraininginput , mcm.contenttypeinput, mcm.contentnameinput ,mcm.uploadedContent, mcm.managecoursecontentid from ManageCoursecontent as mcm inner join coursetype as ct on ct.coursetypeid = mcm.coursetypeinput  inner join coursename as cn on cn.coursenameid = mcm.coursenameinput where upper(cn.coursename)  like '%TRANSPORT%' or upper(cn.coursename)   like '%STORAGE%'  order by mcm.managecoursecontentid desc ");
+			else if(id==4)
+				query = session.createSQLQuery("select cn.coursecode , ct.coursetype , mcm.contentlinkinput , mcm.contentlocationinput, mcm.modeoftraininginput , mcm.contenttypeinput, mcm.contentnameinput ,mcm.uploadedContent, mcm.managecoursecontentid from ManageCoursecontent as mcm inner join coursetype as ct on ct.coursetypeid = mcm.coursetypeinput  inner join coursename as cn on cn.coursenameid = mcm.coursenameinput where upper(cn.coursename) like '%RETAIL%' order by mcm.managecoursecontentid desc ");
+			
+			List courseCommList = query.list();
+			
+			return courseCommList;
 		}
 
 

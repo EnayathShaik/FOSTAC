@@ -6,7 +6,7 @@
 	function OnStart() {
 		  url = window.location.href;
 		  //alert(url);
-		  p = url.charAt(69);
+		  p = url.charAt(url.length-1);
 		  
 		  // alert(p);
 		if (p==5) {

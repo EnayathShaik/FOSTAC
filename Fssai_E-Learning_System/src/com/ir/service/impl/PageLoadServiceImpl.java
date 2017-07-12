@@ -271,5 +271,12 @@ public class PageLoadServiceImpl implements PageLoadService {
 		return  pageLoadDao.commonList2(i);
 	}
 
+	@Override
+	@Transactional
+	public List courseCommonList2(int id) {
+		// TODO Auto-generated method stub
+		return  pageLoadDao.courseCommonList2(id);
+	}
+
 	
 }
