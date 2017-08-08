@@ -1049,10 +1049,14 @@ public class AdminDAOImpl implements AdminDAO {
 		@Override
 		public void updateUser( String userid , String tableName , String status){
 			Session session = sessionFactory.getCurrentSession();
-			new ZLogger("contactTrainigPartnerSave", "update "+tableName+" set isActive='"+status+"' where id="+userid, "AdminDAOImpl.java");
-			String sql="update "+tableName+" set isActive='"+status+"' where id="+userid;
+			new ZLogger("contactTrainigPartnerSave", "update "+tableName+" set isActive='"+status+"' , status='"+(status.equalsIgnoreCase("Y")? "A" :"I")+"' where id="+userid, "AdminDAOImpl.java");
+			String sql="update "+tableName+" set isActive='"+status+"' , status='"+(status.equalsIgnoreCase("Y")? "A" :"I")+"'  where id="+userid;
 			Query query = session.createSQLQuery(sql);
 			query.executeUpdate();
+			
+			
+			
+			
 			
 		}
 		
