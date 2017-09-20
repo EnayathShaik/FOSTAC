@@ -308,7 +308,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 			// TODO Auto-generated method stub
 			System.out.println("Page Load DAOImpl process start in district name ");
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("from District where status = 'A'  and stateId =  '"+stateId+"'");
+			Query query = session.createQuery("from District where status = 'A'  and stateId =  '"+stateId+"' ORDER BY districtname");
 			List districtList = query.list();
 			System.out.println("district  ************* list dao     :"+ districtList);
 			return districtList;
@@ -318,7 +318,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		public List<City> loadCity(String distId) {
 			System.out.println("Page Load DAOImpl process start in city ");
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("from City  where status = 'A' and districtid= '"+distId+"'");
+			Query query = session.createQuery("from City  where status = 'A' and districtid= '"+distId+"' ORDER BY cityname");
 			List listCity = query.list();
 			System.out.println("city  ************* list dao     :"+ listCity);
 			return listCity;
@@ -416,7 +416,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		public List<ManageTrainingPartnerForm> manageTrainingPartnerList() {
 			System.out.println("Page Load DAOImpl process start in specialCourseList  ");
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createSQLQuery("select l.loginid,tp.trainingPartnerName,tp.websiteUrl,(CASE WHEN l.status = 'N' THEN 'INACTIVE' ELSE 'ACTIVE' END) as currentStatus from ManageTrainingPartner tp inner join logindetails l on tp.logindetails=l.id");
+			Query query = session.createSQLQuery("select l.loginid,tp.trainingPartnerName,tp.websiteUrl,(CASE WHEN l.status = 'N' THEN 'INACTIVE' ELSE 'ACTIVE' END) as currentStatus from ManageTrainingPartner tp inner join logindetails l on tp.logindetails=l.id where l.status = 'A'");
 			List manageTrainingPartnerList = query.list();
 			System.out.println("CourseName  ************* list dao     :"+ manageTrainingPartnerList);
 			return manageTrainingPartnerList;
@@ -426,7 +426,7 @@ public class PageLoadDaoImpl implements PageLoadDao {
 		public List<ManageAssessmentAgencyForm> manageAssessmentAgencyList() {
 			System.out.println("Page Load DAOImpl process start in specialCourseList  ");
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createSQLQuery("select l.loginid,ma.assessmentAgencyName,ma.websiteUrl,(CASE WHEN l.status = 'N' THEN 'INACTIVE' ELSE 'ACTIVE' END) as status from ManageAssessmentAgency ma inner join logindetails l on ma.logindetails=l.id");
+			Query query = session.createSQLQuery("select l.loginid,ma.assessmentAgencyName,ma.websiteUrl,(CASE WHEN l.status = 'N' THEN 'INACTIVE' ELSE 'ACTIVE' END) as status from ManageAssessmentAgency ma inner join logindetails l on ma.logindetails=l.id where l.status = 'A'");
 			List manageAssessmentAgencyList = query.list();
 			System.out.println("CourseName  ************* list dao     :"+ manageAssessmentAgencyList);
 			return manageAssessmentAgencyList;

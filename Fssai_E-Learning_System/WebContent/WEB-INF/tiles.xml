@@ -71,6 +71,25 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/contact.jsp" />
 	</definition>
+	
+	<definition name="risksolutions" extends="base.before.login">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/risksolutions.jsp" />
+	</definition>
+	
+	<definition name="help" extends="base.before.login">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/help.jsp" />
+	</definition>
+	<definition name="archive" extends="base.before.login">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/archive.jsp" />
+	</definition>
+	<definition name="usefullinks" extends="base.before.login">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/usefullinks.jsp" />
+	</definition>
+	
 	<definition name="faq" extends="base.before.login">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/faq.jsp" />

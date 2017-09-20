@@ -1570,11 +1570,11 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 					 " and mtp.trainingpartnername like '"+tpname+"%' and mtp.pan like '"+pan+"%' and mtp.websiteurl like '"+websiteURL+"%' " +
 					 " and mtp.email like '"+email+"%' and mtp.headOfficeDataAddress1 like '"+headOfficeDataAddress1+"%' " +
 					 " and mtp.headOfficeDataAddress2 like '"+headOfficeDataAddress2+"%' and mtp.pin like '"+pin+"%' and cast(mtp.state as varchar) like '"+stateId+"'" +
-					 "and cast(mtp.district as varchar) like '"+district+"' and cast(mtp.city as varchar) like '"+city+"'";
+					 "and cast(mtp.district as varchar) like '"+district+"' and cast(mtp.city as varchar) like '"+city+"' ORDER BY ld.loginid";
 		else
 			 sql ="select mtp.managetrainingpartnerid  , ld.loginid  , mtp.trainingpartnername , mtp.pan , "+
 						" mtp.websiteurl , (CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus ,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus from managetrainingpartner as mtp "+
-						" inner join logindetails as ld on ld.id=mtp.logindetails ";
+						" inner join logindetails as ld on ld.id=mtp.logindetails ORDER BY ld.loginid";
 			
 		Query query = session.createSQLQuery(sql);
 		System.out.println("sql===>"+sql);

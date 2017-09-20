@@ -44,6 +44,9 @@ public class LoginDetails {
 	@Column(columnDefinition="varchar(1) default 'Y'")
 	private String isActive;
 	
+	@Column(columnDefinition="varchar(1) default 'N'")
+	private String isAction;
+	
 	public String getStatus() {
 		return status;
 	}
@@ -110,7 +113,12 @@ public class LoginDetails {
 	public void setIsActive(String isActive) {
 		this.isActive = isActive;
 	}
-	
+	public String getIsAction() {
+		return isAction;
+	}
+	public void setIsAction(String isAction) {
+		this.isAction = isAction;
+	}
 	private String profile;
 
 	public String getProfile() {

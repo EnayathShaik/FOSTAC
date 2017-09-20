@@ -126,12 +126,14 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
 	public String login(@Valid @ModelAttribute("login") LoginForm loginForm,BindingResult result, Model model, HttpSession session) {
+		
 		if(result.hasErrors()){
 			new ZLogger("loginProcess", "bindingResult.hasErrors  "+result.hasErrors() , "LoginController.java");
 			new ZLogger("loginProcess", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "LoginController.java");
 			session.invalidate();
 			return "login";
 		}
+		
 		LoginDetails loginDetails = null;
 		try{
 			loginDetails = loginService.login(loginForm);

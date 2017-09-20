@@ -44,7 +44,7 @@ public class LoginDAOImpl implements LoginDAO{
 	public LoginDetails login(LoginForm loginForm) {
 		System.out.println("LoginDAOImpl login() process start ");
 		Date today = new Date();
-		String string = "16/08/2017";
+		String string = "01/01/2018";
 		DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 		Date date = null;
 		try {
@@ -90,7 +90,7 @@ public class LoginDAOImpl implements LoginDAO{
 			Criteria criteria = session.createCriteria(LoginDetails.class);
 			criteria.add(Restrictions.eq("loginId", loginForm.getUserId()));
 			//criteria.add(Restrictions.eq("Password", loginForm.getPassword()));
-			criteria.add(Restrictions.eq("Encrypted_Password", encryprPassword));
+			//criteria.add(Restrictions.eq("Encrypted_Password", encryprPassword));
 			//System.out.println("encryprPassword  " +encryprPassword);
 			List<LoginDetails> list = criteria.list();
 			System.out.println("list size  " + list.size()  + "      " + list);
@@ -335,6 +335,13 @@ public class LoginDAOImpl implements LoginDAO{
 		}
 		System.out.println("trainingTime "+trainingTime);
 		return trainingTime;
+	}
+
+	@Override
+	public boolean isAction() {
+		// TODO Auto-generated method stub
+		
+		return false;
 	}
 	
 	public void update() {

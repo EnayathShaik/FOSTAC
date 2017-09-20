@@ -17,6 +17,8 @@ public interface LoginService {
 	
 	
 	public LoginDetails login(LoginForm loginForm);
+	
+	public boolean isAction();
 
 	
 	public List<CourseEnrolled> courseEnrolledList();

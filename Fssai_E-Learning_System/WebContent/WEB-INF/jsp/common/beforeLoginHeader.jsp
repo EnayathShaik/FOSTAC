@@ -50,12 +50,12 @@ function googleTranslateElementInit() {
            <li id="contactpagefssai"><a onclick="setID('contactpagefssai')" href="contact.fssai">CONTACT</a></li>
           <li><a href="login.fssai">LOGIN</a></li>
         </ul>
-        <div class="search">
+        <!-- <div class="search">
           <form role="form" class="searchbar">
             <input type="text" name="search" class="search-form" autocomplete="off" placeholder="Search...">
             <i style="color:#71b44b;" class="fa fa-search"></i>
           </form>
-        </div>
+        </div> -->
       </div>
     </div>
     <!--/.container--> 

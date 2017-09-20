@@ -48,7 +48,7 @@ window.onload = OnStart;
     <nav class="navbar navbar-default navbar-fixed-top top-logo-background">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-xs-6 fostac-logo-left"> <a href="index.html"><img src="img/fostac-logo.png" class="img-responsive fostac-logo-top-padding" alt="logo" /></a> </div>
+          <div class="col-xs-6 fostac-logo-left"> <a href="#"><img src="img/fostac-logo.png" class="img-responsive fostac-logo-top-padding" alt="logo" /></a> </div>
           <div class="col-xs-6 fssai-logo-right"> <a href="#"><img src="img/fssai-logo.png" class="img-responsive pull-right" alt="logo" /></a> </div>
         </div>
       </div>

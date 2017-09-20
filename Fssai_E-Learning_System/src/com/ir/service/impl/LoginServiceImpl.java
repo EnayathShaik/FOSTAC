@@ -150,6 +150,13 @@ public class LoginServiceImpl implements LoginService {
 		String trainingEndDate = loginDAO.getTrainingEndDateOfTrainee(loginId);
 		return trainingEndDate;
 	}
+
+	@Override
+	public boolean isAction() {
+		// TODO Auto-generated method stub
+		loginDAO.isAction();
+		return false;
+	}
 	
 
 	

@@ -131,6 +131,18 @@ public class MainRedirect {
 		   session.invalidate();
 		   return "redirect:index.jsp";
 	   }
+	   @RequestMapping(value="/help" ,method = RequestMethod.GET)
+	   public String help() {
+		   return "help";
+	   }
+	   @RequestMapping(value="/archive" ,method = RequestMethod.GET)
+	   public String archive() {
+		   return "archive";
+	   }
+	   @RequestMapping(value="/usefullinks" ,method = RequestMethod.GET)
+	   public String usefullinks() {
+		   return "usefullinks";
+	   }
 	   @RequestMapping(value="/contact" ,method = RequestMethod.GET)
 	   public String contact() {
 		   return "contact";
@@ -146,6 +158,10 @@ public class MainRedirect {
 	   @RequestMapping(value="/feedback" ,method = RequestMethod.GET)
 	   public String feedback() {
 		   return "feedback";
+	   }
+	   @RequestMapping(value="/risksolutions" ,method = RequestMethod.GET)
+	   public String risksolutions() {
+		   return "risksolutions";
 	   }
 	   @RequestMapping(value="/faq" ,method = RequestMethod.GET)
 	   public String faq() {

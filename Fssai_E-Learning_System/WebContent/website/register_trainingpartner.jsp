@@ -30,11 +30,17 @@
         		document.getElementById("txtCaptcha").value = code
         	}
         	
+        	
         	function ValidCaptcha() {
+        		alert('START VALIDATING');
         		var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
         		var str2 = removeSpaces(document.getElementById('txtInput').value);
+        		
+        		alert('START AAA VALIDATING');
+        		alert(str1)
+        		alert(str2)
         		if (str1 == str2) {
-        			return checkagree();
+        			//return checkagree();
         			return true;
         		} else {
         			alert("Please Enter correct captcha");
@@ -42,6 +48,16 @@
         			return false;
         		}
 
+        	}
+        	
+        	function checkagree() {
+        		var d = document.getElementById('check').checked;
+        		if (d == true) {
+        			return true;
+        		} else {
+        			alert('Please Confirm on agree');
+        			return false;
+        		}
         	}
                 function validate() {
                     var status = true;
