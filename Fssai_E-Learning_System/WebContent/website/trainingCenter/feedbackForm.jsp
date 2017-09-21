@@ -67,13 +67,13 @@
                             url: 'traineeCenterViewFeedBack.jspp?' + total,
                             async: false,
                             success: function(data) {
-                                $('#newTable').show();
+                                $('#newTableT').show();
                                 //var mainData = JSON.stringify(data);
                                 var mainData1 = jQuery.parseJSON(data);
                                 var j = 1;
                                 //$('#newTable tr').remove();
                                 $.each(mainData1, function(i, obj) {
-                                    $('#newTable').append('<tr id="tableRow"><td>' + j++ + '</td><td>' + obj[0] + '</td><td>' + obj[1] + '</td><td>' + obj[2] + '</td><td>' + obj[3] + '</td><td>' + obj[4] + '</td></tr>');
+                                    $('#newTableT').append('<tr id="tableRow"><td>' + j++ + '</td><td>' + obj[0] + '</td><td>' + obj[1] + '</td><td>' + obj[2] + '</td><td>' + obj[3] + '</td><td>' + obj[4] + '</td></tr>');
 
                                 });
                             }
@@ -272,7 +272,7 @@
                                                                             <th>Points</th>
                                                                         </tr>
                                                                     </thead>
-                                                                    <tbody id="newTable">
+                                                                    <tbody id="newTableT">
                                                                     </tbody>
                                                                 </table>
                                                             </div>

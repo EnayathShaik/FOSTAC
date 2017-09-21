@@ -16,6 +16,10 @@
     	
     	var name = $("#name").val();
     	localStorage.setItem("name", name);
+    	
+    	var genderValue = $("input[name='gender']:checked").val();
+    	localStorage.setItem("genderValue", genderValue);
+    	
     	if(aadhar != ''){
     		if(aadhar.length == 12){
     			localStorage.setItem("traineeAadhar", aadhar);

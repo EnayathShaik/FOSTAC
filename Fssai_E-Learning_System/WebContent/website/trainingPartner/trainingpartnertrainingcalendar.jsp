@@ -155,12 +155,12 @@ window.onload = OnStart;
 			  data:name1,
 			async : false,
 			success : function(data) {
-				$('#newTable').show();
+				$('#newTableT').show();
 				var mainData1 = jQuery.parseJSON(data);
 				var j = 1;
-				$('#newTable tr').remove();
+				$('#newTableT tr').remove();
 				$.each(mainData1, function(i, obj) {
-					$('#newTable').append(
+					$('#newTableT').append(
 							'<tr id="tableRow"><td><input id='+obj[0]+' type="hidden"/>' + j++ 
 										
 									+ '</td><td><input type="hidden" value='+obj[6]+' id=selCourseType'+i+' />'
@@ -547,7 +547,7 @@ window.onload = OnStart;
 															<th >Cancel</th>
 														</tr>
 													</thead>
-													<tbody id="newTable">
+													<tbody id="newTableT">
 													</tbody>
 												</table>
 												</div>

@@ -388,6 +388,19 @@ window.onload = OnStart;
                 }
           
         }
+        var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
+        var str2 = removeSpaces(document.getElementById('txtInput').value);
+        
+        
+        if (str1 == str2) 
+    	{ 
+        	return checkagree();
+        	return true;
+    	} else{      
+    		alert("Please Enter correct captcha");
+    		document.getElementById('txtInput').value="";
+        return false;
+    	}  
 
     }
 </script>
@@ -710,8 +723,8 @@ function checkagree()
 									</ul>
 								</div>
 								<label class="radio-inline"> <cf:radiobutton
-										path="gender" value="M" checked="true" />Male&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<cf:radiobutton path="gender" value="F" />Female
+										path="gender" id="male" value="M" checked="true" />Male&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<cf:radiobutton id="female" path="gender" value="F" />Female
 									</td>
 								</label>
 							</div>
@@ -1438,6 +1451,14 @@ function checkagree()
  	var firstname = localStorage.getItem('name');
  	document.getElementById( "traineeFirstName" ).value =firstname;
  	localStorage.removeItem('name');
+ 	
+ 	var genderValue = localStorage.getItem('genderValue');
+ 	if (genderValue == 'M') {
+        document.getElementById('male').checked = true;
+    } else if (genderValue = 'F') {
+        document.getElementById('female').checked = true;
+    }
+ 	localStorage.removeItem('genderValue');
  	
  	
 	</script>

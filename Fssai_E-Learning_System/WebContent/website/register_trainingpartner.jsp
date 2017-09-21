@@ -37,10 +37,9 @@
         		var str2 = removeSpaces(document.getElementById('txtInput').value);
         		
         		alert('START AAA VALIDATING');
-        		alert(str1)
-        		alert(str2)
+        		
         		if (str1 == str2) {
-        			//return checkagree();
+        			return checkagree();
         			return true;
         		} else {
         			alert("Please Enter correct captcha");

@@ -126,7 +126,7 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/registrationTrainer.jsp" />
 	</definition>
-	<definition name="trainingPartner" extends="base.before.login">
+	<definition name="trainingPartn88er" extends="base.before.login">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/trainingPartner.html" />
 	</definition>
