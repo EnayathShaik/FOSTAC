@@ -262,8 +262,8 @@ window.onload = OnStart;
 														<div>
 															<ul class="lab-no">
 																<li class="style-li"><strong>Course Type:</strong></li>
-																<label id="courseTypeError" class="error visibility">select
-																	course type</label>
+																 <li class="style-li error-red">*</li>
+																 <li id="courseTypeError" style="display:none;" class="style-li error-red" >Please Select Course Type.</li>
 																<span id="name_status"> ${created } </span>
 															</ul>
 														</div>
@@ -294,10 +294,7 @@ window.onload = OnStart;
 															<ul class="lab-no">
 																<li class="style-li"><strong>Course Code:<span
 																		style="color: red;">*</span></strong></li>
-																<li class="style-li error-red"><label
-																	id="courseNameError" class="error visibility">select
-																		course code</label> <%--  <cf:errors path="courseName" cssclass="error"/> --%>
-																</li>
+																 <li id="courseCodeError" style="display:none;" class="style-li error-red" >Please Select Course Code.</li>
 															</ul>
 														</div>
 														<select class="form-control" name="selCourseName"
@@ -309,7 +306,8 @@ window.onload = OnStart;
 														<div>
 															<ul class="lab-no">
 																<li class="style-li"><strong>Trainer Name:</strong></li>
-
+																 <li class="style-li error-red">*</li>
+																<li id="TrainerNamesError" style="display:none;" class="style-li error-red" >Please Select Course Code.</li>
 															</ul>
 														</div>
 														<select class="form-control" name="selTrainerNames"
@@ -333,7 +331,8 @@ window.onload = OnStart;
 														<div>
 															<ul class="lab-no">
 																<li class="style-li"><strong>Seat Capacity:</strong></li>
-																<li class="style-li error-red"></li>
+																<li class="style-li error-red">*</li>
+																<li id="seatCapacityError" style="display:none;" class="style-li error-red" >Please Enter Seat Capacity.</li>
 															</ul>
 														</div>
 														<input type="text" value="" name="seatCapacity" 
@@ -345,10 +344,7 @@ window.onload = OnStart;
 															<ul class="lab-no">
 																<li class="style-li"><strong> Type:<span
 																		style="color: red;">*</span></strong></li>
-																<li class="style-li error-red"><label
-																	id="courseNameError" class="error visibility">select
-																		Type</label> <%--  <cf:errors path="type" cssclass="error"/> --%>
-																</li>
+																<li id="typeError" style="display:none;" class="style-li error-red" >Please Select Course Code.</li>
 															</ul>
 														</div>
 														<select class="form-control" name="type" id="type">
@@ -359,7 +355,15 @@ window.onload = OnStart;
 													</div>
 					
 											<div class="form-group" id="trainingPart" >
-                          						<label>Training Partner</label> &nbsp;&nbsp;
+											<div>
+															<ul class="lab-no">
+																<li class="style-li"><strong> Training Partner:<span
+																		style="color: red;">*</span></strong></li>
+																<li id="trainingPartnerError" style="display:none;" class="style-li error-red" >Please Select Training Partner.</li>
+															</ul>
+														</div>
+											
+												
 											 	<select class="form-control" name="trainingPartner" onchange="getTrainingCenter(this.value , 'trainingCenter');"
 															id="trainingPartner">
 														</select>
@@ -394,7 +398,8 @@ window.onload = OnStart;
 															<ul class="lab-no">
 																<li class="style-li"><strong>Training Start
 																		Date:</strong></li>
-																<li class="style-li error-red"></li>
+																<li class="style-li error-red">*</li>
+																<li id="trainingStartDateError" style="display:none;" class="style-li error-red" >Please Select Training Start Date.</li>
 															</ul>
 														</div>
 														<input type="text" value="" name="trainingStartDate" 
@@ -404,7 +409,8 @@ window.onload = OnStart;
 														<div>
 															<ul class="lab-no">
 																<li class="style-li"><strong>Training End Date</strong></li>
-																<li class="style-li error-red"></li>
+																<li class="style-li error-red">*</li>
+																<li id="trainingEndDateError" style="display:none;" class="style-li error-red" >Please Select Training End Date.</li>
 															</ul>
 														</div>
 														<input type="text" name="trainingEndDate" 
@@ -418,7 +424,8 @@ window.onload = OnStart;
                                                         <div>
                                                             <ul class="lab-no">
                                                                 <li class="style-li"><strong>Assessment Date and Time:</strong></li>
-                                                                <li class="style-li error-red"> </li>
+                                                                <li class="style-li error-red">*</li>
+																<li id="assessmentDateTimeError" style="display:none;" class="style-li error-red" >Please Select Assessment Date.</li>
                                                             </ul>
                                                         </div>
                                                         <input type="text"  id="assessmentDateTime" value="" name="assessmentDateTime" class="form-control">
@@ -426,7 +433,14 @@ window.onload = OnStart;
                       
                       
                       							 <div class="form-group">
-                          						<label>Assesment Agency Name</label> &nbsp;&nbsp;
+                      							   <div>
+                                                            <ul class="lab-no">
+                                                                <li class="style-li"><strong>Assesment Agency Name:</strong></li>
+                                                                <li class="style-li error-red">*</li>
+																<li id="assessmentAgencyNameError" style="display:none;" class="style-li error-red" >Please Select Assesment Agency Name.</li>
+                                                            </ul>
+                                                        </div>
+                          						
 											 	<select class="form-control" name="assessmentAgencyName" onchange="getAssessorName(this.value)"
 															id="assessmentAgencyName">
 														</select>
@@ -466,7 +480,8 @@ window.onload = OnStart;
 															<ul class="lab-no">
 																<li class="style-li"><strong>Training
 																		Center:</strong></li>
-																<li class="style-li error-red"></li>
+																 <li class="style-li error-red">*</li>
+																<li id="trainingCenterError" style="display:none;" class="style-li error-red" >Please Select Training Center.</li>
 															</ul>
 														</div>
 										
@@ -478,10 +493,10 @@ window.onload = OnStart;
 
 													<input type="hidden" path="userName" name="userName" value="${userName}">
 													<input type="hidden" path="tcid" name="tcid" value="0" id="tcid">
-													<input type="submit" onclick="return saveDetails();"
+													<input type="submit" 
 														style="margin-top: 20px;"
 														class="btn login-btn pull-right show-details-vacancy collapsed" id="btnCreate"
-														data-target="#show-result" aria-expanded="false"
+														data-target="#show-result" aria-expanded="false"  onclick=" return validateFields(); "
 														value="Create">
 														
 														<input type="submit" 
@@ -567,3 +582,176 @@ window.onload = OnStart;
 	</section>
 	
 </cf:form>
+ <script>
+   
+   
+   function validateFields(){
+$("#courseTypeError").css("display" , "none");
+$("#courseCodeError").css("display" , "none");
+$("#TrainerNamesError").css("display" , "none");
+$("#seatCapacityError").css("display" , "none");
+$("#typeError").css("display" , "none");
+$("#trainingPartnerError").css("display" , "none");
+$("#trainingStartDateError").css("display" , "none");
+$("#trainingEndDateError").css("display" , "none");
+$("#assessmentDateTimeError").css("display" , "none");
+$("#assessmentAgencyNameError").css("display" , "none");
+$("#assessorNameError").css("display" , "none");
+$("#trainingCenterError").css("display" , "none");
+
+if($("#selCourseType").val() == null){
+		 
+		$("#courseTypeError").css("display" , "block");
+		return false;
+	 }  
+	
+if($("#selCourseName").val() == 0){
+	 
+	$("#courseCodeError").css("display" , "block");
+	return false;
+ } 
+if($("#selTrainerNames").val() == null){
+	 
+	$("#TrainerNamesError").css("display" , "block");
+	return false;
+ }
+ if($("#seatCapacity").val() == ''){
+	 
+	$("#seatCapacityError").css("display" , "block");
+	return false;
+ } 
+if($("#type").val() == 0){
+	 
+	$("#typeError").css("display" , "block");
+	return false;
+ }
+if($("#trainingPartner").val() == null){
+	 
+	$("#trainingPartnerError").css("display" , "block");
+	return false;
+ }
+if($("#trainingStartDate").val() == ''){
+	 
+	$("#trainingStartDateError").css("display" , "block");
+	return false;
+ }
+var currDate=new Date();
+
+var currDateFormat=(currDate.getMonth()+1)+"-"+currDate.getDate()+"-"+currDate.getFullYear();
+var currmili=new Date(currDateFormat).getTime();
+var d1=$("#trainingStartDate").val().split('-');
+
+
+var temp=d1[0];
+d1[0]=d1[1];
+d1[1]=temp;
+var d1mili=new Date(d1).getTime();
+
+if(d1mili<currmili){
+	alert("Today is "+currDate.getDate()+"-"+(currDate.getMonth()+1)+"-"+currDate.getFullYear()+". Selected Date("+$("#trainingStartDate").val()+") is a past Date.");
+	$("#trainingStartDate").val("");
+	$("#trainingStartDate").focus();
+	return false;
+	
+	}
+	
+
+if($("#trainingEndDate").val() == ''){
+	 
+	$("#trainingEndDateError").css("display" , "block");
+	return false;
+ } 
+ 
+ 
+ 
+ 
+var d2=$("#trainingEndDate").val().split('-');
+temp2=d2[0];
+d2[0]=d2[1];
+d2[1]=temp2;
+
+var sd=new Date(d1).getTime();
+ var ed=new Date(d2).getTime();
+
+	if(sd>ed){
+ alert("End Date cannot be less than Start Date  ");
+ $("#trainingEndDate").val("");
+	$("#trainingEndDate").focus();
+
+ return false;
+}
+	
+	
+if($("#assessmentDateTime").val() == ''){
+	 
+	$("#assessmentDateTimeError").css("display" , "block");
+	return false;
+ }
+
+
+var d3=$("#assessmentDateTime").val().split('-');
+temp3=d3[0];
+d3[0]=d3[1];
+d3[1]=temp3;
+
+ var ad=new Date(d3).getTime();
+
+ if(sd>ad || ed<ad){
+	 alert("Assessment Date should be between start date and end date");
+	 $("#assessmentDateTime").val("");
+		$("#assessmentDateTime").focus();
+
+	 return false;
+ }
+	
+	
+if($("#assessmentAgencyName").val() == null){
+	 
+	$("#assessmentAgencyNameError").css("display" , "block");
+	return false;
+ }
+if($("#assessorName").val() == 0){
+	 
+	$("#assessorNameError").css("display" , "block");
+	return false;
+ }
+if($("#trainingCenter").val() ==0){
+	 
+	$("#trainingCenterError").css("display" , "block");
+	return false;
+ }
+ 
+
+
+	
+   }
+   function validate2() {
+		if ($("#trainingEndDate").val() == 0) {
+			$("#trainingEndDateErr").css("display", "block");
+			$("#trainingEndDate").focus();
+			return false;
+		}
+		
+		var d1=$("#trainingStartDate").val().split('-');
+		var d2=$("#trainingEndDate").val().split('-');
+
+		var temp=d1[0];
+		d1[0]=d1[1];
+		d1[1]=temp;
+		
+		temp=d2[0];
+		d2[0]=d2[1];
+		d2[1]=temp;
+		
+		var sd=new Date(d1).getTime();
+		 var ed=new Date(d2).getTime();
+	
+		 if(sd>ed){
+			 alert("End Date cannot be less than Start Date  ");
+			 $("#trainingEndDate").val("");
+				$("#trainingEndDate").focus();
+
+		 return false;
+		 }
+   }
+   </script>
