@@ -229,6 +229,9 @@ public class AdminController {
 	public String manageAssessmentQuestionsSave(
 			@Valid @ModelAttribute("assessmentQuestionForm") AssessmentQuestionForm assessmentQuestionForm,
 			BindingResult result, Model model) {
+		List<CourseType> courseTypeList = pageLoadService.courseTypeList();
+		model.addAttribute("courseTypeList", courseTypeList);
+		
 		if (result.hasErrors()) {
 			new ZLogger("manageAssessmentQuestionsSave", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
 			new ZLogger("manageAssessmentQuestionsSave", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");

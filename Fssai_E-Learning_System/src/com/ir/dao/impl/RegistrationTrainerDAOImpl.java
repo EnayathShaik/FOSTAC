@@ -214,7 +214,7 @@ private Title title;
 				}
 
 				String SpecialCourse = registrationFormTrainer.getSpecialCourse1();
-				if(AdvanceCourse.length() > 0){
+				if(SpecialCourse.length() > 0){
 					String[] SpecialCoursesplited = SpecialCourse.split(",");
 					System.out.println("SpecialCourse course length   "+ SpecialCoursesplited.length + "  array "+SpecialCoursesplited.toString());
 					if(SpecialCoursesplited.length > 0){

@@ -926,7 +926,7 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	        
 		Session session = sessionFactory.getCurrentSession();
 		 String sql ="";
-	        sql = "select  B.batchCode,D.courseCode,B.trainingdate,B.trainingtime,C.firstname || ' '|| C.middlename ||' '|| C.lastname as participantName,replace(D.classroom ||' '|| D.online,'Nil',''),D.status from courseenrolleduser  A"
+	        sql = "select  B.batchCode,D.courseCode,B.trainingdate,B.trainingtime,C.firstname || ' '|| C.middlename ||' '|| C.lastname as participantName,replace(D.classroom ||' '|| D.online,'Nil',''),D.status,C.email,C.mobile from courseenrolleduser  A"
 					+ " inner join trainingcalendar B on(A.trainingcalendarid= B.trainingcalendarid)"
 					+ " inner join coursename D on (D.coursenameid = B.coursename)"
 					+ " inner join coursetype E on (E.coursetypeid = B.coursetype)"

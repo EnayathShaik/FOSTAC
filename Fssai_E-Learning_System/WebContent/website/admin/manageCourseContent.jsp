@@ -267,7 +267,7 @@ function deleteCourseContent(i){
                                                             <li class="style-li error-red"></li>
                                                         </ul>
                                                     </div>
-<cf:select path="courseName" class="form-control">
+<cf:select path="courseName" class="form-control" onchange="getCourseTrainingType();">
 <cf:option value="0" label="Select Course Code" />
 <cf:options items="${courseNameList}" itemValue="coursenameid" itemLabel="courseCode"/>
 </cf:select> 

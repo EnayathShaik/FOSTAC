@@ -49,25 +49,27 @@ function showDetails(){
 		//var mainData = JSON.stringify(data);
 		var mainData1 = jQuery.parseJSON(data);
 		var j=1;
-	$('#newTable tr').remove();
+	//$('#newTable tr').remove();
    
-	$('#newTable').append('<tr  class="background-open-vacancies"><th>Sr.No.</th><th>Batch Code</th><th>Course Code</th><th>Training Start Date</th><th>Training End Date</th><th>Participant Name</th><th>Mode Of Training</th><th>Status</th></tr>'); 
+	//$('#newTable').append('<tr class="table table-bordered table-responsive table-striped table-hover"><th>Sr.No.</th><th>Batch Code</th><th>Course Code</th><th>Training Start Date</th><th>Training End Date</th><th>Participant Name</th><th>Mode Of Training</th><th>Status</th></tr>'); 
  
 		$.each(mainData1 , function(i , obj)
 		{
-		//	$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td>'+obj[5]+'</td><td>Pending</td></tr>');
+			//$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td>'+obj[7]+'</td><td>'+obj[8]+'</td><td>'+obj[5]+'</td><td>Pending</td></tr>');
 		
-		
+	
 			  $('#newTable').dataTable().fnAddData( [ j++,
 			                                          obj[0] ,
 			                                          obj[1],
 			                                          obj[2],
 			                                          obj[3],
 			                                          obj[4],
+			                                          obj[7],
+			                                          obj[8],
 			                                          obj[5],
 			                                          'Pending'
 			                                          
-													 ] );
+													 ] ); 
 			
 		});
 		}
@@ -260,6 +262,8 @@ function showDetails(){
                             <th>Training Start Date</th>
                             <th>Training End Date</th>
                             <th>Participant Name</th>
+                             <th>Email</th>
+                              <th>Mobile No.</th>
                             <th>Mode OF Training</th>
                             <th>Status</th>
                           </tr>
