@@ -1,20 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
-    <%@ taglib prefix="cs" uri="http://www.springframework.org/tags" %>
-        <%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="cf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="cs" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="ct" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-     <script src="website/js/commonController.js"></script>   
+<script src="website/js/commonController.js"></script>
 
-   <style>
-                .error {
-                    color: red;
-                }
+<style>
+.error {
+	color: red;
+}
+</style>
 
-            </style>
-         
-            <script >
+<script>
             
         	function DrawCaptcha() {
         		
@@ -110,13 +109,13 @@
                 window.onload = OnStart;
 
             </script>
-            <script>
+<script>
                 function updateDiv() {
                     $("#updateDiv").hide();
                 }
 
             </script>
-            <script type="text/javascript">
+<script type="text/javascript">
                 function preventBack() {
                     window.history.forward();
                 }
@@ -127,7 +126,7 @@
 
             </script>
 
-            <script language="javascript" type="text/javascript">
+<script language="javascript" type="text/javascript">
                 function AvoidSpace(event) {
                     var k = event ? event.which : window.event.keyCode;
                     if (k == 32) return false;
@@ -138,7 +137,7 @@
   
 
             </script>
-            <script type="text/javascript" language="javascript">
+<script type="text/javascript" language="javascript">
                 function pan_validate(pan) {
                 	alert(pan);
                 	if(pan != ''){
@@ -282,7 +281,7 @@
                 }
 
             </script>
-            <script>
+<script>
                 function updateMTP() {
                     var status = $("#status").val();;
                     var url = $("#websiteUrl").val();;
@@ -316,7 +315,9 @@
 
             </script>
 
-  <cf:form action="manageTrainingPartnerSave.fssai" name="myForm" method="POST" commandName="manageTrainingPartnerForm" onsubmit="return validateFields();">
+<cf:form action="manageTrainingPartnerSave.fssai" name="myForm"
+	method="POST" commandName="manageTrainingPartnerForm"
+	onsubmit="return validate();">
 
 	<!-- login form -->
 	<div class="row">
@@ -333,61 +334,63 @@
 					<div class="col-md-6 col-xs-12">
 
 
-					       <div class="form-group">
-                                                                    <div>
-                                                                        <ul class="lab-no">
-                                                                            <li class="style-li"><strong>Training Partner Name:</strong></li>
-                                                                            <li class="style-li error-red">
-                                                                                <cf:errors path="trainingPartnerName" cssClass="error" />
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <cf:input path="trainingPartnerName" maxlength="100" placeholder="Training Partner Name" class="form-control" />
-                                                                </div>
-					
-					    <div class="form-group">
-                                                                    <div>
-                                                                        <ul class="lab-no">
-                                                                            <li class="style-li"><strong>Website URL:</strong></li>
-                                                                            <li class="style-li error-red">
-                                                                                <cf:errors path="websiteUrl" cssClass="error" />
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <cf:input path="websiteUrl" maxlength="100" placeholder="Website URL" class="form-control" />
-                                                                </div>
-					
+						<div class="form-group">
+							<div>
+								<ul class="lab-no">
+									<li class="style-li"><strong>Training Partner
+											Name:</strong></li>
+									<li class="style-li error-red"><cf:errors
+											path="trainingPartnerName" cssClass="error" /></li>
+								</ul>
+							</div>
+							<cf:input path="trainingPartnerName" maxlength="100"
+								placeholder="Training Partner Name" class="form-control" />
+						</div>
 
-					
+						<div class="form-group">
+							<div>
+								<ul class="lab-no">
+									<li class="style-li"><strong>Website URL:</strong></li>
+									<li class="style-li error-red"><cf:errors
+											path="websiteUrl" cssClass="error" /></li>
+								</ul>
+							</div>
+							<cf:input path="websiteUrl" maxlength="100"
+								placeholder="Website URL" class="form-control" />
+						</div>
+
+
+
 					</div>
 					<!-- right side -->
 					<div class="col-md-6 col-xs-12">
 
-				     <div class="form-group">
-                                                                    <div>
-                                                                        <ul class="lab-no">
-                                                                            <li class="style-li"><strong>PAN:</strong></li>
-                                                                            <li class="style-li error-red">
-                                                                                <span id="name_status"> </span>
-                                                                                <span id="panstatus"></span>
-                                                                                <cf:errors path="PAN" cssClass="error" />
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <cf:input path="PAN" maxlength="10" placeholder="PAN" class="form-control" onKeyUP="this.value = this.value.toUpperCase();" onblur="pan_validate(this.id,this.value);" />
-                                                                </div>
+						<div class="form-group">
+							<div>
+								<ul class="lab-no">
+									<li class="style-li"><strong>PAN:</strong></li>
+									<li class="style-li error-red"><span id="name_status">
+									</span> <span id="panstatus"></span> <cf:errors path="PAN"
+											cssClass="error" /></li>
+								</ul>
+							</div>
+							<cf:input path="PAN" maxlength="10" placeholder="PAN"
+								class="form-control"
+								onKeyUP="this.value = this.value.toUpperCase();"
+								onblur="pan_validate(this.id,this.value);" />
+						</div>
 
 
-					                          <div class="form-group">
-                                                                    <div>
-                                                                        <ul class="lab-no">
-                                                                            <li class="style-li"><strong>Email:</strong></li>
-                                                                            <li class="style-li error-red"></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <cf:input path="email" class="form-control" maxlength="100" />
+						<div class="form-group">
+							<div>
+								<ul class="lab-no">
+									<li class="style-li"><strong>Email:</strong></li>
+									<li class="style-li error-red"></li>
+								</ul>
+							</div>
+							<cf:input path="email" class="form-control" maxlength="100" />
 
-                                                                </div>
+						</div>
 					</div>
 				</fieldset>
 			</div>
@@ -401,136 +404,138 @@
 					<!--Left side-->
 					<div class="col-md-6 col-xs-12">
 
-						 <div class="form-group">
-                                                                    <div>
-                                                                        <ul class="lab-no">
-                                                                            <li class="style-li"><strong>Contact Person Name:</strong></li>
-                                                                            <li class="style-li error-red">
-                                                                                <cf:errors path="contactPersonName" cssClass="error" />
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <cf:input path="contactPersonName" maxlength="100" placeholder="Contact Person Name" class="form-control" />
-                                                                </div>
+						<div class="form-group">
+							<div>
+								<ul class="lab-no">
+									<li class="style-li"><strong>Contact Person Name:</strong></li>
+									<li class="style-li error-red"><cf:errors
+											path="contactPersonName" cssClass="error" /></li>
+								</ul>
+							</div>
+							<cf:input path="contactPersonName" maxlength="100"
+								placeholder="Contact Person Name" class="form-control" />
+						</div>
 
-					       <div class="form-group">
-                                                                    <div>
-                                                                        <ul class="lab-no">
-                                                                            <li class="style-li"><strong>Contact Email:</strong></li>
-                                                                            <li class="style-li error-red">
-                                                                                <cf:errors path="contactEmail" cssClass="error" />
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <cf:input path="contactEmail" maxlength="100" placeholder="Contact Email" class="form-control" />
-                                                                </div>
+						<div class="form-group">
+							<div>
+								<ul class="lab-no">
+									<li class="style-li"><strong>Contact Email:</strong></li>
+									<li class="style-li error-red"><cf:errors
+											path="contactEmail" cssClass="error" /></li>
+								</ul>
+							</div>
+							<cf:input path="contactEmail" maxlength="100"
+								placeholder="Contact Email" class="form-control" />
+						</div>
 					</div>
 					<!-- left side ends -->
 					<!-- right side -->
 					<div class="col-md-6 col-xs-12">
-                               <div class="col-md-6 col-xs-12">
+						<div class="col-md-6 col-xs-12">
 
-                                                                <div class="form-group">
-                                                                    <div>
-                                                                        <ul class="lab-no">
-                                                                            <li class="style-li"><strong>Mobile:</strong></li>
-                                                                            <li class="style-li error-red">
-                                                                                <span id="mobile"> </span>
-                                                                                <span id="mobile"></span>
-                                                                                <cf:errors path="mobile" cssClass="error" />
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <cf:input path="mobile" maxlength="10" placeholder="Mobile" max="10" class="form-control"  />
-                                                                </div>
+							<div class="form-group">
+								<div>
+									<ul class="lab-no">
+										<li class="style-li"><strong>Mobile:</strong></li>
+										<li class="style-li error-red"><span id="mobile">
+										</span> <span id="mobile"></span> <cf:errors path="mobile"
+												cssClass="error" /></li>
+									</ul>
+								</div>
+								<cf:input path="mobile" maxlength="10" placeholder="Mobile"
+									max="10" class="form-control" />
+							</div>
 
 
-                                                            </div>
+						</div>
 					</div>
 				</fieldset>
 
-				<br>
-				<br>
+				<br> <br>
 
 				<fieldset>
 					<legend>Head Office Data</legend>
 					<!--Left side-->
 					<div class="col-md-6 col-xs-12" id="permanent1">
 
-				      <div class="form-group">
-                                                                <div>
-                                                                    <ul class="lab-no">
-                                                                        <li class="style-li"><strong>Address 1:</strong></li>
-                                                                        <li class="style-li error-red">
-                                                                            <cf:errors path="headOfficeDataAddress1" cssClass="error" />
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <cf:input path="headOfficeDataAddress1" maxlength="100" placeholder="Address" class="form-control" />
-                                                            </div>
-												<div class="form-group">
-                                                                <div>
-                                                                    <ul class="lab-no">
-                                                                        <li class="style-li"><strong>Address 2:</strong></li>
-                                                                        <li class="style-li error-red">
-                                                                            <cf:errors path="headOfficeDataAddress2" cssClass="error" />
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <cf:input path="headOfficeDataAddress2" maxlength="100" placeholder="Address" class="form-control" />
-                                                            </div>
+						<div class="form-group">
+							<div>
+								<ul class="lab-no">
+									<li class="style-li"><strong>Address 1:</strong></li>
+									<li class="style-li error-red"><cf:errors
+											path="headOfficeDataAddress1" cssClass="error" /></li>
+								</ul>
+							</div>
+							<cf:input path="headOfficeDataAddress1" maxlength="100"
+								placeholder="Address" class="form-control" />
+						</div>
+						<div class="form-group">
+							<div>
+								<ul class="lab-no">
+									<li class="style-li"><strong>Address 2:</strong></li>
+									<li class="style-li error-red"><cf:errors
+											path="headOfficeDataAddress2" cssClass="error" /></li>
+								</ul>
+							</div>
+							<cf:input path="headOfficeDataAddress2" maxlength="100"
+								placeholder="Address" class="form-control" />
+						</div>
 
-					     <div class="form-group">
-                                                                <div>
-                                                                    <ul class="lab-no">
-                                                                        <li class="style-li"><strong>PIN:</strong></li>
-                                                                        <li class="style-li error-red">
-                                                                            <cf:errors path="pin" cssClass="error" />
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <cf:input path="pin" maxlength="6" placeholder="PIN" class="form-control" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" />
-                                                            </div>
+						<div class="form-group">
+							<div>
+								<ul class="lab-no">
+									<li class="style-li"><strong>PIN:</strong></li>
+									<li class="style-li error-red"><cf:errors path="pin"
+											cssClass="error" /></li>
+								</ul>
+							</div>
+							<cf:input path="pin" maxlength="6" placeholder="PIN"
+								class="form-control"
+								onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" />
+						</div>
 
 
 					</div>
 					<!-- left side ends -->
 					<!-- right side -->
 					<div class="col-md-6 col-xs-12" id="permanent2">
-													<div class="form-group">
-                                                                <div>
-                                                                    <ul class="lab-no">
-                                                                        <li class="style-li"><strong>State:</strong></li>
-                                                                        <li class="style-li error-red"></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <cf:select path="state" class="form-control" onchange="getDistrict(this.value , 'district')">
-                                                                    <cf:option value="0" label="Select State" />
-                                                                    <cf:options items="${stateList}" itemValue="stateId" itemLabel="stateName" />
-                                                                </cf:select>
-                                                            </div>
-														<div class="form-group">
-                                                                <div>
-                                                                    <ul class="lab-no">
-                                                                        <li class="style-li"><strong>District:</strong></li>
-                                                                        <li class="style-li error-red"></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <cf:select path="district" class="form-control" onchange="getCity(this.value , 'city')">
-                                                                    <cf:option value="0" label="Select District" />
-                                                                </cf:select>
-                                                            </div>
-															<div class="form-group">
-                                                                <div>
-                                                                    <ul class="lab-no">
-                                                                        <li class="style-li"><strong>City:</strong></li>
-                                                                        <li class="style-li error-red"></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <cf:select path="city" class="form-control">
-                                                                    <cf:option value="0" label="Select City" />
-                                                                </cf:select>
-                                                            </div>
+						<div class="form-group">
+							<div>
+								<ul class="lab-no">
+									<li class="style-li"><strong>State:</strong></li>
+									<li class="style-li error-red"></li>
+								</ul>
+							</div>
+							<cf:select path="state" class="form-control"
+								onchange="getDistrict(this.value , 'district')">
+								<cf:option value="0" label="Select State" />
+								<cf:options items="${stateList}" itemValue="stateId"
+									itemLabel="stateName" />
+							</cf:select>
+						</div>
+						<div class="form-group">
+							<div>
+								<ul class="lab-no">
+									<li class="style-li"><strong>District:</strong></li>
+									<li class="style-li error-red"></li>
+								</ul>
+							</div>
+							<cf:select path="district" class="form-control"
+								onchange="getCity(this.value , 'city')">
+								<cf:option value="0" label="Select District" />
+							</cf:select>
+						</div>
+						<div class="form-group">
+							<div>
+								<ul class="lab-no">
+									<li class="style-li"><strong>City:</strong></li>
+									<li class="style-li error-red"></li>
+								</ul>
+							</div>
+							<cf:select path="city" class="form-control">
+								<cf:option value="0" label="Select City" />
+							</cf:select>
+						</div>
 
 
 					</div>
@@ -589,7 +594,7 @@
 		<div class="col-md-2 hidden-xs"></div>
 	</div>
 </cf:form>
-<script >
+<script>
 	function OnStart() {
 		DrawCaptcha();
 	}
