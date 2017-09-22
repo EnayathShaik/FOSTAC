@@ -586,6 +586,7 @@ window.onload = OnStart;
    
    
    function validateFields(){
+	   var pid = ${profileId};
 $("#courseTypeError").css("display" , "none");
 $("#courseCodeError").css("display" , "none");
 $("#TrainerNamesError").css("display" , "none");
@@ -625,13 +626,15 @@ if($("#type").val() == 0){
 	$("#typeError").css("display" , "block");
 	return false;
  }
-if($("#trainingPartner").val() == null){
-	 
-	$("#trainingPartnerError").css("display" , "block");
-	return false;
+ if(pid==7){
+	 if($("#trainingPartner").val() == null){
+		 
+			$("#trainingPartnerError").css("display" , "block");
+			return false;
+		 }
  }
+
 if($("#trainingStartDate").val() == ''){
-	 
 	$("#trainingStartDateError").css("display" , "block");
 	return false;
  }
@@ -715,43 +718,15 @@ if($("#assessorName").val() == 0){
 	$("#assessorNameError").css("display" , "block");
 	return false;
  }
-if($("#trainingCenter").val() ==0){
-	 
-	$("#trainingCenterError").css("display" , "block");
-	return false;
- }
- 
-
-
-	
-   }
-   function validate2() {
-		if ($("#trainingEndDate").val() == 0) {
-			$("#trainingEndDateErr").css("display", "block");
-			$("#trainingEndDate").focus();
+ if(pid==7){
+	 if($("#trainingCenter").val() ==0){
+		 
+			$("#trainingCenterError").css("display" , "block");
 			return false;
-		}
-		
-		var d1=$("#trainingStartDate").val().split('-');
-		var d2=$("#trainingEndDate").val().split('-');
+		 } 
+ }
 
-		var temp=d1[0];
-		d1[0]=d1[1];
-		d1[1]=temp;
-		
-		temp=d2[0];
-		d2[0]=d2[1];
-		d2[1]=temp;
-		
-		var sd=new Date(d1).getTime();
-		 var ed=new Date(d2).getTime();
-	
-		 if(sd>ed){
-			 alert("End Date cannot be less than Start Date  ");
-			 $("#trainingEndDate").val("");
-				$("#trainingEndDate").focus();
+ 
+  }
 
-		 return false;
-		 }
-   }
    </script>

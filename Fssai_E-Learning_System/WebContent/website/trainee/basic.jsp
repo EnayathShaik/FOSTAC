@@ -18,7 +18,6 @@ function OnStart(){
 	var steps = 1;
 	var traineeSteps =
 		<%=(Integer) session.getAttribute("traineeSteps")%>
-	
 	var trainingEndDate = '${trainingEndDate}';
 	
 	var trainingDate = convertStringToDate(trainingEndDate);
@@ -33,7 +32,7 @@ function OnStart(){
 		window.location.href ='/Fssai_E-Learning_System/loginProcess.fssai';
 	} 
 }
-//window.onload = OnStart;
+window.onload = OnStart;
 
  
  function getcourseType(){
