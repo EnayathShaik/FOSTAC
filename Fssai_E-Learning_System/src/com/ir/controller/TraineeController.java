@@ -624,8 +624,8 @@ public class TraineeController {
 				List<String> listcontentLink =  new ArrayList<String>();
 				for(CourseTrainee courseTrainee : ListcourseTrainee ){
 					String docPath = "";
-					docPath = request.getContextPath().replace("Fssai_E-Learning_System", "Fostac/Course/");
-				System.out.println(courseTrainee.getCourseTypeId().toUpperCase());
+					/*docPath = request.getContextPath().replace("Fssai_E-Learning_System", "Fostac/Course/");
+					System.out.println(courseTrainee.getCourseTypeId().toUpperCase());
 				
 				if( courseTrainee.getCourseTypeId() != null && courseTrainee.getCourseTypeId().toUpperCase().contains("BASIC")){
 					new ZLogger("course-training", courseTrainee.getContentLinkInput().toUpperCase() + " "+ courseTrainee.getContentLinkInput().toUpperCase().contains("STUDY")  , "TraineeController.java");
@@ -663,13 +663,20 @@ public class TraineeController {
 				
 				listcontentPath.add(docPath);
 				listcontentLink.add(courseTrainee.getContentLinkInput());
-			
+			*/
+					
+					
+					//new September 
+					map.put(courseTrainee.getUploadedContent(), courseTrainee.getContentNameInput());
+					listcontentLink.add(courseTrainee.getContentLinkInput());
+				
 			
 				}
 	
 				model.addAttribute("contentName", listcontentName);
 				model.addAttribute("contentPath", listcontentPath);
 				model.addAttribute("contentLink", map);
+				model.addAttribute("contentLink2", listcontentLink);
 				model.addAttribute("courseTrainee", courseTraineeDisplay);
 				
 			Utility utility=new Utility();

@@ -636,7 +636,7 @@ public class AdminController {
 	@RequestMapping(value = "/manageCourseContentSearch", method = RequestMethod.POST)
 	public String manageCourseContentSearch(
 			@RequestParam CommonsMultipartFile file,@Valid @ModelAttribute("manageCourseContent") ManageCourseContentForm manageCourseContentForm,
-			BindingResult result, Model model, HttpSession session) {
+			BindingResult result, Model model, HttpSession session ,HttpServletRequest request) {
 	if (result.hasErrors()) {
 			new ZLogger("manageCourseContentSearch", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
 			new ZLogger("manageCourseContentSearch", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
@@ -649,10 +649,31 @@ public class AdminController {
 			{
 				String name = manageCourseContentForm.getContentName();
 				System.out.println(name);
-				String ss1 = session.getServletContext().getRealPath("").replace("Fssai_E-Learning_System", "uploads");
-				String ss = session.getServletContext().getRealPath("Content");
-				System.out.println(" ss "+ss  + " ss1 "+ss1);
-				File dir = new File(ss);
+				String pth="Fostac/Course/Content/";
+				System.out.println(manageCourseContentForm.getCourseType()+" wwwww");
+				if(manageCourseContentForm.getCourseType()==1)
+					pth=pth+"BASIC/";
+				else if(manageCourseContentForm.getCourseType()==2)
+					pth=pth+"ADVANCE/";
+				else if(manageCourseContentForm.getCourseType()==3)
+					pth=pth+"SPECIAL/";
+				else if(manageCourseContentForm.getCourseType()==4)
+					pth=pth+"TOT/";
+				
+				if(manageCourseContentForm.getContentType().equals("PPTs"))
+					pth=pth+"PPT";
+					if(manageCourseContentForm.getContentType().equals("Videos"))
+						pth=pth+"VIDEO";
+						if(manageCourseContentForm.getContentType().equals("StudyMaterial"))
+							pth=pth+"STUDYMATERIAL";
+							
+							
+				
+				String newPath = request.getContextPath().replace("Fssai_E-Learning_System", pth);
+		
+				//String ss = session.getServletContext().getRealPath(newPath);
+				//System.out.println(" ss "+ss  + " ss1 "+ss1);
+				File dir = new File(newPath);
 				if (!dir.exists())
 					dir.mkdirs();
 				String extension = "";
@@ -661,11 +682,11 @@ public class AdminController {
 				int i = fileName.lastIndexOf('.');
 				if (i > 0) {
 					extension = fileName.substring(i + 1);
-					uploadLink="Content/"+name+"."+extension; 		
+					uploadLink=newPath+"/"+name+"."+extension; 		
 				}
 		    byte[] bytes = file.getBytes();  
 		    BufferedOutputStream stream =new BufferedOutputStream(new FileOutputStream(  
-		         new File(ss + File.separator + name+"." +extension)));  
+		         new File(newPath + File.separator + name+"." +extension)));  
 		    stream.write(bytes);  
 		    stream.flush();  
 		    stream.close();  

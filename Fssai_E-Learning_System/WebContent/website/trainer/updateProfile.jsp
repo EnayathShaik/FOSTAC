@@ -359,7 +359,7 @@
                                                                                         <div class="form-group">
                                                                                             <div>
                                                                                                 <ul class="lab-no">
-                                                                                                    <li class="style-li"><strong>User Id:</strong></li>
+                                                                                                    <li class="style-li"><strong>User Id</strong></li>
                                                                                                 </ul>
                                                                                             </div>
                                                                                             <input type="text" class="form-control" disabled="disabled" value="${loginUr.loginDetails.loginId}">
@@ -368,7 +368,7 @@
                                                                                         <div class="form-group">
                                                                                             <div>
                                                                                                 <ul class="lab-no">
-                                                                                                    <li class="style-li"><strong>Aadhar:</strong></li>
+                                                                                                    <li class="style-li"><strong>Aadhar Number</strong></li>
                                                                                                 </ul>
                                                                                             </div>
                                                                                             <input type="text" class="form-control" placeholder="Aadhar Number" disabled="disabled" value="${loginUr.aadharNumber}">
@@ -377,7 +377,7 @@
                                                                                         <div class="form-group">
                                                                                             <div>
                                                                                                 <ul class="lab-no">
-                                                                                                    <li class="style-li"><strong>Date of Birth:</strong></li>
+                                                                                                    <li class="style-li"><strong>Date of Birth</strong></li>
                                                                                                 </ul>
                                                                                             </div>
                                                                                             <input type="text" class="form-control" placeholder="Date" disabled="disabled" value="${loginUr.DOB}">
@@ -392,12 +392,13 @@
                                                                                         </div>
 
                                                                                     </div>
+                                                                                    
                                                                                     <!-- right side -->
                                                                                     <div class="col-md-6 col-xs-12">
                                                                                         <div class="form-group">
                                                                                             <div>
                                                                                                 <ul class="lab-no">
-                                                                                                    <li class="style-li"><strong>Title:</strong></li>
+                                                                                                    <li class="style-li"><strong>Title</strong></li>
                                                                                                 </ul>
                                                                                             </div>
                                                                                             <cf:select path="Title" class="form-control" disabled="true">
@@ -408,21 +409,21 @@
                                                                                         <div class="form-group">
                                                                                             <div>
                                                                                                 <ul class="lab-no">
-                                                                                                    <li class="style-li"><strong>First Name:</strong></li>
+                                                                                                    <li class="style-li"><strong>First Name</strong></li>
                                                                                                 </ul>
                                                                                             </div>
                                                                                             <input type="text" class="form-control" placeholder="First Name" disabled="disabled" value="${loginUr.firstName}"> </div>
                                                                                         <div class="form-group">
                                                                                             <div>
                                                                                                 <ul class="lab-no">
-                                                                                                    <li class="style-li"><strong>Middle Name:</strong></li>
+                                                                                                    <li class="style-li"><strong>Middle Name</strong></li>
                                                                                                 </ul>
                                                                                             </div>
                                                                                             <input type="text" class="form-control" placeholder="Middle Name" disabled="disabled" value="${loginUr.middleName}"> </div>
                                                                                         <div class="form-group">
                                                                                             <div>
                                                                                                 <ul class="lab-no">
-                                                                                                    <li class="style-li"><strong>Last Name:</strong></li>
+                                                                                                    <li class="style-li"><strong>Last Name</strong></li>
                                                                                                 </ul>
                                                                                             </div>
                                                                                             <input type="text" class="form-control" placeholder="Last Name" disabled="disabled" value="${loginUr.lastName}"> </div>
@@ -430,7 +431,7 @@
                                                                                         <div class="form-group">
                                                                                             <div>
                                                                                                 <ul class="lab-no">
-                                                                                                    <li class="style-li"><strong>Father Name:</strong></li>
+                                                                                                    <li class="style-li"><strong>Father's Name/Mother Name</strong></li>
                                                                                                 </ul>
                                                                                             </div>
                                                                                             <input type="text" class="form-control" placeholder="Father Name" disabled="disabled" value="${loginUr.fathername}"> </div>
@@ -442,16 +443,15 @@
                                                                             <!-- contact details -->
                                                                             <div class="personel-info">
                                                                                 <fieldset>
-                                                                                    <legend>
-                                                                                        <h3>Contact Information</h3> </legend>
+                                                                                    <legend>Correspondence Address</legend>
                                                                                     <!-- permanent address -->
                                                                                     <!--Left side-->
                                                                                     <div class="col-md-6 col-xs-12">
-                                                                                        <h4>Correspondence Address</h4>
+                                                                       
                                                                                         <div class="form-group">
                                                                                             <div>
                                                                                                 <ul class="lab-no">
-                                                                                                    <li class="style-li"><strong>Correspondence Address Line 1:</strong></li>
+                                                                                                    <li class="style-li"><strong>Correspondence Address Line 1</strong></li>
                                                                                                     <li class="style-li error-red">
                                                                                                         <label id="TrainingCenterCorrespondenceLine1Error" class="error visibility">* enter your TrainingCenterCorrespondence1</label>
                                                                                                         <cf:errors path="TrainingCenterCorrespondenceLine1" cssclass="error" />
@@ -462,7 +462,7 @@
                                                                                         <div class="form-group">
                                                                                             <div>
                                                                                                 <ul class="lab-no">
-                                                                                                    <li class="style-li"><strong>Correspondence Address Line 2:</strong></li>
+                                                                                                    <li class="style-li"><strong>Correspondence Address Line 2</strong></li>
                                                                                                     <li class="style-li error-red">
                                                                                                         <label id="TrainingCenterCorrespondenceLine2Error" class="error visibility">* enter your TrainingCenterCorrespondence2</label>
                                                                                                         <cf:errors path="TrainingCenterCorrespondenceLine2" cssclass="error" />
@@ -473,7 +473,7 @@
                                                                                         <div class="form-group">
                                                                                             <div>
                                                                                                 <ul class="lab-no">
-                                                                                                    <li class="style-li"><strong>State:</strong></li>
+                                                                                                    <li class="style-li"><strong>State</strong></li>
                                                                                                     <li class="style-li error-red">
                                                                                                         <label id="TrainingCenterCorrespondenceStateError" class="error visibility">* enter your TrainingCenterCorrespondenceState</label>
                                                                                                         <cf:errors path="TrainingCenterCorrespondenceState" cssclass="error" />
@@ -488,7 +488,7 @@
                                                                                         <div class="form-group">
                                                                                             <div>
                                                                                                 <ul class="lab-no">
-                                                                                                    <li class="style-li"><strong>District:</strong></li>
+                                                                                                    <li class="style-li"><strong>District</strong></li>
                                                                                                     <li class="style-li error-red">
                                                                                                         <label id="TrainingCenterCorrespondenceDistrictError" class="error visibility">* enter your TrainingCenterCorrespondenceDistrict</label>
                                                                                                         <cf:errors path="TrainingCenterCorrespondenceDistrict" cssclass="error" />
@@ -504,12 +504,11 @@
                                                                                     <!-- left side ends -->
                                                                                     <!-- right side -->
                                                                                     <div class="col-md-6 col-xs-12">
-                                                                                        <h5><br>
-                          </h5>
+                                                                                        
                                                                                         <div class="form-group">
                                                                                             <div>
                                                                                                 <ul class="lab-no">
-                                                                                                    <li class="style-li"><strong>Closest City:</strong></li>
+                                                                                                    <li class="style-li"><strong>Tehsil/Taluka/City</strong></li>
                                                                                                     <li class="style-li error-red">
                                                                                                         <label id="TrainingCenterCorrespondenceCityError" class="error visibility">* enter your TrainingCenterCorrespondenceCity</label>
                                                                                                         <cf:errors path="TrainingCenterCorrespondenceCity" cssclass="error" />
@@ -729,14 +728,15 @@
                                                                     <option>2004</option>
                                                                     <option>2005</option>
                                                                 </select> -->
-                                                                                                    <cf:input type="text" name="experienceyear" path="ExpInFoodSafefyTimeYear" value="${loginUr.expInFoodSafefyTimeYear}" style="height:40px;border-Color:red" />
+                                                                                                    <cf:input  type="text" class="form-control" name="experienceyear" path="ExpInFoodSafefyTimeYear" value="${loginUr.expInFoodSafefyTimeYear}"  />
                                                                                                 </div>
                                                                                                 <div class="col-xs-6">
-
+																									<ul class="lab-no" style="padding-bottom: 0px; margin-bottom: 0px;">
                                                                                                     <li class="style-li error-red">
                                                                                                         <label id="ExpInFoodSafefyTimeMonthError" class="error visibility">* enter your ExpInFoodSafefyTimeMonth</label>
                                                                                                         <cf:errors path="ExpInFoodSafefyTimeMonth" cssclass="error" />
                                                                                                     </li>
+                                                                                                    </ul>
                                                                                                     <cf:select path="ExpInFoodSafefyTimeMonth" class="form-control">
                                                                                                         <cf:option value="0" label="Select Month" />
                                                                                                         <cf:option value="1" label="1" />
@@ -773,10 +773,12 @@
                                                                                     <div class="col-md-6 col-xs-12">
                                                                                         <div class="form-group">
                                                                                             <label>How Many Trainings (4Hrs) Sessions Wish To Conduct in a Month ?</label>
+                                                                                            <ul class="lab-no"  style="padding-bottom: 0px;">
                                                                                             <li class="style-li error-red">
                                                                                                 <label id="TrainingSessionWishToConductError" class="error visibility">* enter your TrainingSessionWishToConduct</label>
                                                                                                 <cf:errors path="TrainingSessionWishToConduct" cssclass="error" />
                                                                                             </li>
+                                                                                            </ul>
                                                                                             <cf:input type="text" class="form-control" path="TrainingSessionWishToConduct" placeholder="Session Number" value="${loginUr.trainingSessionWishToConduct}" /> </div>
                                                                                         <div class="form-group">
                                                                                             <label>Associated with any Training Partner ?</label>

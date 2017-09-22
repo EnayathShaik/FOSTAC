@@ -21,8 +21,15 @@ public class CourseTrainee {
 	private String assessor;
 	private String assessorAgency;
 	private String contentType;
+	private String uploadedContent;
 	
 	
+	public String getUploadedContent() {
+		return uploadedContent;
+	}
+	public void setUploadedContent(String uploadedContent) {
+		this.uploadedContent = uploadedContent;
+	}
 	public String getCourseCode() {
 		return courseCode;
 	}

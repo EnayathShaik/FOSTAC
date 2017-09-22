@@ -75,9 +75,16 @@ window.onload = OnStart;
 					<fieldset>
                     <legend><h3>Course Content</h3></legend>
                     
+                    
+                    	<h3>Uploaded Content</h3>
  						<ct:forEach items="${contentLink}" var="contentLink">
  							<%-- <h4>${contentLink.value}</h4> --%>
-							<h4><a href="${contentLink.key}" target="_blank" >${contentLink.value}</a></h4>
+							<h4><a href="${contentLink.key}" target="_blank" >dp ${contentLink.value}</a></h4>
+							</ct:forEach>
+                   <h3> Content links</h3>
+                    <ct:forEach items="${contentLink2}" var="contentLink">
+ 							<%-- <h4>${contentLink.value}</h4> --%>
+							<h4><a href="${contentLink}" target="_blank" >cl ${contentLink}</a></h4>
 							</ct:forEach>
 					<ct:choose>
 						<ct:when

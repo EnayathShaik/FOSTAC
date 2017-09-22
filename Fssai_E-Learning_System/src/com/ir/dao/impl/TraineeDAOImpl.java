@@ -213,7 +213,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		StringBuffer sql = new StringBuffer();
 		sql.append("Select distinct D.coursenameid,D.coursename,D.courseduration ");
 		sql.append(" ,concat(E.firstname , ' ' , E.middlename , ' ' , E.lastname ) ,F.assessmentagencyname,G.contentnameinput, G.contentlinkinput, G.contenttypeinput, C.coursetype");
-		sql.append(" ,D.courseCode from courseenrolleduser A");
+		sql.append(" ,D.courseCode, G.uploadedContent from courseenrolleduser A");
 		sql.append(" inner join trainingcalendar B on(A.trainingcalendarid=B.trainingcalendarid)");
 		sql.append(" inner join coursetype C on(B.coursetype=C.coursetypeid)");
 		sql.append(" inner join coursename D on(B.coursename=D.coursenameid)");
@@ -238,6 +238,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 			courseTrainee.setContentType(o[7] == null ? "" : o[7].toString());
 			courseTrainee.setCourseTypeId(o[8] == null ? "" : o[8].toString());
 			courseTrainee.setCourseCode(o[9] == null ? "" : o[9].toString());
+			courseTrainee.setUploadedContent(o[10] == null ? "" : o[10].toString());
 			System.out.println("before adding "+courseTrainee.getContentNameInput());
 			listCourseTrainee.add(courseTrainee);
 			
