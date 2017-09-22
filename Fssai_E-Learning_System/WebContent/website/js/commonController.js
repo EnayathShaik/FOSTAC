@@ -71,7 +71,7 @@ function ck_aadhar(tableName ) {
     		    	$('#aadhar_status').html(response);
     		    	if (response.trim() == 'Already') {
     					document.getElementById('AadharNumber').value = "";
-    					document.getElementById("register").style.display = 'none';
+    					//document.getElementById("register").style.display = 'none';
     					return false;
 
     				} else {
@@ -84,7 +84,7 @@ function ck_aadhar(tableName ) {
     		      });
      }else{
    	  $( '#aadhar_status' ).html("");
-         document.getElementById("register").style.display = 'none';
+        // document.getElementById("register").style.display = 'none';
          return false;
      }
 }

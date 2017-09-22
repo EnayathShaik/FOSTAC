@@ -40,7 +40,7 @@ function DrawCaptcha()
 }
 
 // Validate the Entered input aganist the generated security code function   
-function ValidCaptcha(){
+/* function ValidCaptcha(){
     var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
     var str2 = removeSpaces(document.getElementById('txtInput').value);
     if (str1 == str2) 
@@ -66,7 +66,7 @@ function checkagree()
 		alert('Please Confirm on agree');
 		return false;
 		}
-	}
+	} */
 
 // Remove the spaces from the entered and generated code
 function removeSpaces(string)
@@ -111,7 +111,7 @@ function removeSpaces(string)
     	    }
     } 
     
-    function validateFields() {
+    function validateFields_old() {
     	////alert("hhhhhhhhhhhhhhhhhhhhhh");
     /* 	if(document.getElementById("UserId").value=="") {
     		////alert("IN Fname");
@@ -556,9 +556,14 @@ return true;
 								<ul class="lab-no">
 									<li class="style-li"><strong><cs:message
 												code="lbl.Trainee.DOB" /></strong></li>
-									<li class="style-li error-red"><label id="DOBError"
+									<%-- <li class="style-li error-red"><label id="DOBError"
 										class="error visibility">* select your date of birth</label> <cf:errors
-											path="DOB" cssclass="error" /></li>
+											path="DOB" cssclass="error" /></li> --%>
+											
+											<li class="style-li error-red">*</li>
+																<li id="DOBError" style="display:none;" class="style-li error-red" >select your date of birth</li>
+																
+																
 								</ul>
 							</div>
 							<cf:input path="DOB" type="text" id="dateP" readonly="true"
@@ -1239,7 +1244,7 @@ return true;
 				<div class="pull-right">
 					<div class="form-group">
 						<input type="submit" class="form-control login-btn"
-							value="Register" onclick="return ValidCaptcha();">
+							value="Register" >
 					</div>
 				</div>
 			</div>
@@ -1249,3 +1254,149 @@ return true;
 		<div class="col-md-2 hidden-xs"></div>
 	</div>
 </cf:form>
+<script>
+function validateFields(){
+	$("#DOBError").css("display" , "none");
+	$("#casteError").css("display" , "none");
+	$("#TitleError").css("display" , "none");
+	$("#firstNameError").css("display" , "none");
+	$("#LastNameError").css("display" , "none");
+	$("#fatherNameError").css("display" , "none");
+	$("#TrainingCenterCorrespondenceLine1Error").css("display" , "none");
+	$("#TrainingCenterCorrespondenceLine2Error").css("display" , "none");
+	$("#TrainingCenterCorrespondenceStateError").css("display" , "none");
+	$("#TrainingCenterCorrespondenceDistrictError").css("display" , "none");
+	$("#TrainingCenterCorrespondenceCityError").css("display" , "none");
+	$("#TrainingCenterPermanentEmailError").css("display" , "none");
+	$("#TrainingCenterPermanentLine1Error").css("display" , "none");
+	$("#TrainingCenterPermanentLine2Error").css("display" , "none");
+	$("#TrainingCenterPermanentStateError").css("display" , "none");
+	$("#TrainingCenterPermanentDistrictError").css("display" , "none");
+	$("#TrainingCenterPermanentCityError").css("display" , "none");
+	$("#TrainingCenterPermanentPincodeError").css("display" , "none");
+	$("#FoodSafetyExpBackgroundError").css("display" , "none");
+	$("#ExpInFoodSafefyTimeMonthError").css("display" , "none");
+	$("#NoOfTrainingSessionConductedError").css("display" , "none");
+	$("#TrainingSessionWishToConductError").css("display" , "none");
+	
+	if($("#AadharNumber").val() == 0){
+		 
+		$("#AadharNumberError").css("display" , "block");
+		return false;
+	 }  
+	if($("#dateP").val() ==''){
+		$("#DOBError").css("display" , "block");
+		return false;
+	 }
+	if($("#caste").val() ==0){
+		$("#casteError").css("display" , "block");
+		return false;
+	 }
+	
+	if($("#Title").val() ==0){
+		$("#TitleError").css("display" , "block");
+		return false;
+	 }
+	if($("#firstName").val() == ''){
+		$("#firstNameError").css("display" , "block");
+		return false;
+	 }  
+	if($("#LastName").val() == ''){
+		$("#LastNameError").css("display" , "block");
+		return false;
+	 }  
+	if($("#fatherName").val() == ''){
+		$("#fatherNameError").css("display" , "block");
+		return false;
+	 } 
+	if($("#TrainingCenterCorrespondenceLine1").val() == ''){
+		$("#TrainingCenterCorrespondenceLine1Error").css("display" , "block");
+		return false;
+	 } 
+	if($("#TrainingCenterCorrespondenceLine2").val() == ''){
+		$("#TrainingCenterCorrespondenceLine2Error").css("display" , "block");
+		return false;
+	 } 
+	if($("#TrainingCenterCorrespondenceState").val() == 0){
+		$("#TrainingCenterCorrespondenceStateError").css("display" , "block");
+		return false;
+	 } 
+	if($("#TrainingCenterCorrespondenceDistrict").val() == 0){
+		$("#TrainingCenterCorrespondenceDistrictError").css("display" , "block");
+		return false;
+	 }
+	if($("#TrainingCenterCorrespondenceCity").val() == 0){
+		$("#TrainingCenterCorrespondenceCityError").css("display" , "block");
+		return false;
+	 }
+	if($("#TrainingCenterCorrespondencePincode").val() == 0){
+		$("#TrainingCenterCorrespondencePincodeError").css("display" , "block");
+		return false;
+	 }
+	if($("#TrainingCenterPermanentEmail").val() == ''){
+		$("#TrainingCenterPermanentEmailError").css("display" , "block");
+		return false;
+	 }
+	if($("#TrainingCenterPermanentMobile").val() == ''){
+		$("#TrainingCenterPermanentMobileError").css("display" , "block");
+		return false;
+	 }
+	if($("#TrainingCenterPermanentLine1").val() == ''){
+		$("#TrainingCenterPermanentLine1Error").css("display" , "block");
+		return false;
+	 }
+	if($("#TrainingCenterPermanentLine2").val() == ''){
+		$("#TrainingCenterPermanentLine2Error").css("display" , "block");
+		return false;
+	 }
+	if($("#TrainingCenterPermanentState").val() == 0){
+		$("#TrainingCenterPermanentStateError").css("display" , "block");
+		return false;
+	 }
+	if($("#TrainingCenterPermanentDistrict").val() == 0){
+		$("#TrainingCenterPermanentDistrictError").css("display" , "block");
+		return false;
+	 }
+	if($("#TrainingCenterPermanentCity").val() == 0){
+		$("#TrainingCenterPermanentCityError").css("display" , "block");
+		return false;
+	 }
+	
+	if($("#TrainingCenterPermanentPincode").val() == 0){
+		$("#TrainingCenterPermanentPincodeError").css("display" , "block");
+		return false;
+	 }
+	if($("#FoodSafetyExpBackground").val() == 0){
+		$("#FoodSafetyExpBackgroundError").css("display" , "block");
+		return false;
+	 }
+	 if($("#ExpInFoodSafefyTimeMonth").val() == 0){
+		$("#ExpInFoodSafefyTimeMonthError").css("display" , "block");
+		return false;
+	 }
+	if($("#NoOfTrainingSessionConducted").val() == ''){
+		$("#NoOfTrainingSessionConductedError").css("display" , "block");
+		return false;
+	 }
+	if($("#TrainingSessionWishToConduct").val() == ''){
+		$("#TrainingSessionWishToConductError").css("display" , "block");
+		return false;
+	 } 
+	
+	var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
+    var str2 = removeSpaces(document.getElementById('txtInput').value);
+    if (!(str1 == str2)) {
+   	 alert("Please Enter correct captcha");
+        document.getElementById('txtInput').value = "";
+        return false;
+    }
+		
+  	 if($("#check").is(":checked")== false){
+  		 alert("click on check box");
+  		 return false;
+ 	 }  
+	
+	return true;
+}
+
+</script>
