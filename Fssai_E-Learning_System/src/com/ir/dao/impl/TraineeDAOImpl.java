@@ -538,6 +538,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 		if(ctype != null && ctype.getCourseType().toUpperCase().equals("TOT")){
 			rollNo = "T"+rollNo;
 		}
+		System.out.println(" rollNo "+rollNo);
 		courseEnrolledUser.setRollno(rollNo);
 		courseEnrolledUser.setRollSeqNo(maxId);
 		courseEnrolledUser.setLoginDetails(loginid);
@@ -837,12 +838,10 @@ public class TraineeDAOImpl implements TraineeDAO {
 	@Override
 	public Boolean updateSteps(int tableID, int profileID, int steps) {
 		// TODO Auto-generated method stub
-		Session session = sessionFactory.getCurrentSession();
-		PersonalInformationTrainee personalInformationTrainee = (PersonalInformationTrainee) session
-				.load(PersonalInformationTrainee.class, tableID);
-		new ZLogger("getTableIdForEnrolmentID","tableID :"+tableID + " profileID "+profileID , "TraineeDAOImpl.java");
-		personalInformationTrainee.setSteps(steps);
-		session.update(personalInformationTrainee);
+		Session session = sessionFactory.getCurrentSession();		
+		String sql="update personalInformationTrainee set steps="+steps+"   where personalInformationTraineeId="+tableID;
+		Query query = session.createSQLQuery(sql);
+		query.executeUpdate();
 		return true;
 	}
 
@@ -1118,7 +1117,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 				" inner join city as c on c.cityid = pitp.trainingpartnerpermanentcity "+
 				" inner join district as d on d.districtid = pitp.trainingpartnerpermanentdistrict "+
 				" and tc.trainingcenter = pitp.personalinformationtrainingpartnerid "+
-				" where CAST(tc.coursename AS varchar(10)) like '"+courseName+"' "+
+				" where COALESCE(tc.tcstatus , '') not in ('I') and  CAST(tc.coursename AS varchar(10)) like '"+courseName+"' "+
 				" and CAST(tc.courseType AS varchar(10)) like  '"+courseType+"' "+
 				//" and cn.modeoftraining like '"+modeOfTraining+"' "+
 			//	" and CAST(tc.trainingpartner AS varchar(10)) like '"+trainingPatrtner+"'  "+

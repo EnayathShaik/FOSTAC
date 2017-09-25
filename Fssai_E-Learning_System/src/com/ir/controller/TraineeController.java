@@ -271,6 +271,7 @@ public class TraineeController {
 			loginId = (int) httpSession.getAttribute("loginIdUnique");
 			int tableID = traineeService.getTableIdForEnrolmentID(loginId, profileId);
 			String basicEnroll = traineeService.basicSave(courseEnrolledUserForm , loginId , tableID,profileId);
+			
 				if(basicEnroll != null && basicEnroll.length()  > 1){
 					Boolean status = traineeService.updateSteps(tableID, profileId, 1);
 					httpSession.setAttribute("traineeSteps", 1);

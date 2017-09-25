@@ -172,7 +172,7 @@ window.onload = OnStart;
 									+'</td><td><input type="hidden" value='+obj[8]+'  id=selTrainerNames'+i+' />' + obj[5]	
 									+'</td><td id=seatCapacity'+i+'>' + obj[14]
 									+'</td><td><input type="hidden" value='+obj[16]+'  id=type'+i+' />' + obj[15]
-									+ '</td><td><input type="button" id="TP" class="TPEdit"   onClick="editTrainingCalendar(\''+i+'\',\''+obj[0]+'\',\''+obj[1]+'\');" value="Reschedule"/></td><td> <input type="submit"  onclick=" return setId('+obj[0]+')" value="Cancel Training"/> </td></tr>');
+									+ '</td><td class="TPEdit"><input type="button" id="TP"  onClick="editTrainingCalendar(\''+i+'\',\''+obj[0]+'\',\''+obj[1]+'\');" value="Reschedule"/></td><td> <input type="submit"  onclick=" return setId('+obj[0]+')" value="Cancel Training"/> </td></tr>');
 
 				});
 			}
@@ -182,7 +182,8 @@ window.onload = OnStart;
 		
 		if(window.profileId == 7){
 			
-			$(".TPEdit").attr('disabled' , true);
+			$(".TPEdit").css("display" , "none");
+			//$(".TPEdit").attr('disabled' , true);
 			
 		
 		}
@@ -558,7 +559,7 @@ window.onload = OnStart;
 															<th>Trainer Name</th>
 															<th>Seat Capacity</th>
 															<th>Type</th>
-															<th >Reschedule</th>
+															<th class="TPEdit">Reschedule</th>
 															<th >Cancel</th>
 														</tr>
 													</thead>
