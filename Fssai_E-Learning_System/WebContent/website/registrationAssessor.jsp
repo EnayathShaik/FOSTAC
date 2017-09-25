@@ -135,9 +135,9 @@
 	
 </script>
 <script type='text/javascript'>
-	function validate() {
+	function validateFields() {
 		//alert("The form was submitted");
-		if (document.getElementById('AadharNumber').value == null) {
+		if (document.getElementById('AadharNumber').value == 0) {
 			document.getElementById('AadharNumber').focus();
 			document.getElementById('AadharNumber').style.color = "red";
 			document.getElementById('errorAadharNumber').style.display = 'block';
@@ -146,7 +146,7 @@
 			document.getElementById('AadharNumber').style.color = "#ccc";
 			document.getElementById('errorAadharNumber').style.display = 'none';
 		}
-		if (document.getElementById('Title').value == null) {
+		if (document.getElementById('Title').value == 0) {
 			document.getElementById('Title').focus();
 			document.getElementById('Title').style.borderColor = "red";
 			document.getElementById('errorTitle').style.display = 'block';
@@ -156,17 +156,17 @@
 			document.getElementById('errorTitle').style.display = 'none';
 		}
 
-		if (document.getElementById('DOB').value == null) {
-			document.getElementById('DOB').focus();
-			document.getElementById('DOB').style.borderColor = "red";
+		if (document.getElementById('dateP').value == '') {
+			document.getElementById('dateP').focus();
+			document.getElementById('dateP').style.borderColor = "red";
 			document.getElementById('errorDOB').style.display = 'block';
 			return false;
 		} else {
-			document.getElementById('DOB').style.borderColor = "#ccc";
+			document.getElementById('dateP').style.borderColor = "#ccc";
 			document.getElementById('errorDOB').style.display = 'none';
 		}
 
-		if (document.getElementById('gender').value == null) {
+		/* if (document.getElementById('gender').value == '') {
 			document.getElementById('gender').focus();
 			document.getElementById('gender').style.borderColor = "red";
 			document.getElementById('errorgender').style.display = 'block';
@@ -174,9 +174,9 @@
 		} else {
 			document.getElementById('gender').style.borderColor = "#ccc";
 			document.getElementById('errorgender').style.display = 'none';
-		}
+		} */
 
-		if (document.getElementById('FirstName').value == null) {
+		if (document.getElementById('FirstName').value == '') {
 			document.getElementById('FirstName').focus();
 			document.getElementById('FirstName').style.borderColor = "red";
 			document.getElementById('errorFirstName').style.display = 'block';
@@ -186,7 +186,7 @@
 			document.getElementById('errorFirstName').style.display = 'none';
 		}
 
-		if (document.getElementById('MiddleName').value == null) {
+		if (document.getElementById('MiddleName').value == '') {
 			document.getElementById('MiddleName').focus();
 			document.getElementById('MiddleName').style.borderColor = "red";
 			document.getElementById('errorMiddleName').style.display = 'block';
@@ -196,7 +196,7 @@
 			document.getElementById('errorMiddleName').style.display = 'none';
 		}
 
-		if (document.getElementById('LastName').value == null) {
+		if (document.getElementById('LastName').value == '') {
 			document.getElementById('LastName').focus();
 			document.getElementById('LastName').style.borderColor = "red";
 			document.getElementById('errorLastName').style.display = 'block';
@@ -206,7 +206,7 @@
 			document.getElementById('errorLastName').style.display = 'none';
 		}
 
-		if (document.getElementById('AssessmentAgencyName').value == null) {
+		if (document.getElementById('AssessmentAgencyName').value == 0) {
 			document.getElementById('AssessmentAgencyName').focus();
 			document.getElementById('AssessmentAgencyName').style.borderColor = "red";
 			document.getElementById('AssessmentAgencyNameError').style.display = 'block';
@@ -216,7 +216,7 @@
 			document.getElementById('AssessmentAgencyNameError').style.display = 'none';
 		}
 
-		if (document.getElementById('AssessorCorrespondenceLine1').value == null) {
+		if (document.getElementById('AssessorCorrespondenceLine1').value == '') {
 			document.getElementById('AssessorCorrespondenceLine1').focus();
 			document.getElementById('AssessorCorrespondenceLine1').style.borderColor = "red";
 			document.getElementById('errorAssessorCorrespondenceLine1').style.display = 'block';
@@ -226,7 +226,7 @@
 			document.getElementById('errorAssessorCorrespondenceLine1').style.display = 'none';
 		}
 
-		if (document.getElementById('AssessorCorrespondenceLine2').value == null) {
+		if (document.getElementById('AssessorCorrespondenceLine2').value == '') {
 			document.getElementById('AssessorCorrespondenceLine2').focus();
 			document.getElementById('AssessorCorrespondenceLine2').style.borderColor = "red";
 			document.getElementById('errorAssessorCorrespondenceLine2').style.display = 'block';
@@ -236,7 +236,7 @@
 			document.getElementById('errorAssessorCorrespondenceLine2').style.display = 'none';
 		}
 
-		if (document.getElementById('AssessorCorrespondenceState').value == null) {
+		if (document.getElementById('AssessorCorrespondenceState').value == 0) {
 			document.getElementById('AssessorCorrespondenceState').focus();
 			document.getElementById('AssessorCorrespondenceState').style.borderColor = "red";
 			document.getElementById('AssessorCorrespondenceStateError').style.display = 'block';
@@ -246,7 +246,7 @@
 			document.getElementById('AssessorCorrespondenceStateError').style.display = 'none';
 		}
 
-		if (document.getElementById('AssessorCorrespondenceDistrict').value == null) {
+		if (document.getElementById('AssessorCorrespondenceDistrict').value == 0) {
 			document.getElementById('AssessorCorrespondenceDistrict').focus();
 			document.getElementById('AssessorCorrespondenceDistrict').style.borderColor = "red";
 			document.getElementById('AssessorCorrespondenceDistrictError').style.display = 'block';
@@ -256,7 +256,7 @@
 			document.getElementById('AssessorCorrespondenceDistrictError').style.display = 'none';
 		}
 
-		if (document.getElementById('AssessorCorrespondenceCity').value == null) {
+		if (document.getElementById('AssessorCorrespondenceCity').value == 0) {
 			document.getElementById('AssessorCorrespondenceCity').focus();
 			document.getElementById('AssessorCorrespondenceCity').style.borderColor = "red";
 			document.getElementById('AssessorCorrespondenceCityError').style.display = 'block';
@@ -266,7 +266,7 @@
 			document.getElementById('AssessorCorrespondenceCityError').style.display = 'none';
 		}
 
-		if (document.getElementById('AssessorPermanentEmail').value == null) {
+		if (document.getElementById('AssessorPermanentEmail').value == '') {
 			document.getElementById('AssessorPermanentEmail').focus();
 			document.getElementById('AssessorPermanentEmail').style.borderColor = "red";
 			document.getElementById('errorAssessorPermanentEmail').style.display = 'block';
@@ -276,7 +276,7 @@
 			document.getElementById('errorAssessorPermanentEmail').style.display = 'none';
 		}
 
-		if (document.getElementById('AssessorPermanentMobile').value == null) {
+		if (document.getElementById('AssessorPermanentMobile').value == '') {
 			document.getElementById('AssessorPermanentMobile').focus();
 			document.getElementById('AssessorPermanentMobile').style.borderColor = "red";
 			document.getElementById('errorAssessorPermanentMobile').style.display = 'block';
@@ -286,7 +286,7 @@
 			document.getElementById('errorAssessorPermanentMobile').style.display = 'none';
 		}
 
-		if (document.getElementById('AssessorPermanentLine1').value == null) {
+		if (document.getElementById('AssessorPermanentLine1').value == '') {
 			document.getElementById('AssessorPermanentLine1').focus();
 			document.getElementById('AssessorPermanentLine1').style.borderColor = "red";
 			document.getElementById('errorAssessorPermanentLine1').style.display = 'block';
@@ -296,7 +296,7 @@
 			document.getElementById('errorAssessorPermanentLine1').style.display = 'none';
 		}
 
-		if (document.getElementById('AssessorPermanentLine2').value == null) {
+		if (document.getElementById('AssessorPermanentLine2').value == '') {
 			document.getElementById('AssessorPermanentLine2').focus();
 			document.getElementById('AssessorPermanentLine2').style.borderColor = "red";
 			document.getElementById('errorAssessorPermanentLine2').style.display = 'block';
@@ -306,7 +306,7 @@
 			document.getElementById('errorAssessorPermanentLine2').style.display = 'none';
 		}
 
-		if (document.getElementById('AssessorrPermanentState').value == null) {
+		if (document.getElementById('AssessorrPermanentState').value == 0) {
 			document.getElementById('AssessorrPermanentState').focus();
 			document.getElementById('AssessorrPermanentState').style.borderColor = "red";
 			document.getElementById('AssessorrPermanentStateError').style.display = 'block';
@@ -316,7 +316,7 @@
 			document.getElementById('AssessorrPermanentStateError').style.display = 'none';
 		}
 
-		if (document.getElementById('AssessorPermanentDistrict').value == null) {
+		if (document.getElementById('AssessorPermanentDistrict').value == 0) {
 			document.getElementById('AssessorPermanentDistrict').focus();
 			document.getElementById('AssessorPermanentDistrict').style.borderColor = "red";
 			document.getElementById('AssessorPermanentDistrictError').style.display = 'block';
@@ -326,7 +326,7 @@
 			document.getElementById('AssessorPermanentDistrictError').style.display = 'none';
 		}
 
-		if (document.getElementById('AssessorPermanentCity').value == null) {
+		if (document.getElementById('AssessorPermanentCity').value == 0) {
 			document.getElementById('AssessorPermanentCity').focus();
 			document.getElementById('AssessorPermanentCity').style.borderColor = "red";
 			document.getElementById('AssessorPermanentCityError').style.display = 'block';
@@ -337,7 +337,7 @@
 		}
 
 
-		if (document.getElementById('ReleventExpOfAuditInMonth').value == null) {
+		if (document.getElementById('ReleventExpOfAuditInMonth').value == 0) {
 			document.getElementById('ReleventExpOfAuditInMonth').focus();
 			document.getElementById('ReleventExpOfAuditInMonth').style.borderColor = "red";
 			document.getElementById('ReleventExpOfAuditInMonthError').style.display = 'block';
@@ -351,7 +351,7 @@
 </script>
 
 <cf:form action="registrationAsssessor.fssai" name="myForm"
-	method="POST" commandName="registrationFormAssessor">
+	method="POST" commandName="registrationFormAssessor" onsubmit="return validateFields();">
 
 	<!-- login form -->
 	<div class="row">
@@ -373,7 +373,7 @@
 								<ul class="lab-no">
 									<li class="style-li"><strong><cs:message
 												code="lbl.Trainee.AadharNumber" /></strong></li>
-									<li class="style-li error-red"><span id="aadhar_status"><label
+									<li class="style-li error-red"><span><label
 										id="errorAadharNumber" class="error visibility">*
 											error</label> <cf:errors path="AadharNumber" cssClass="error" /></li>
 								</ul>
@@ -979,7 +979,7 @@
 							style="background-image: url(1.jpg); text-align: center; border: none; width: 140px; margin-left: 8px; font-weight: bold; font-family: Modern"
 							disabled="disabled" /> <input type="button" id="btnrefresh"
 							value="Refresh" onclick="DrawCaptcha();" /> <input type="text"
-							id="txtInput" placeholder="Captcha" style="width: 140px;"/ >
+							id="txtInput" placeholder="Captcha" style="width: 140px;" >
 
 					</div>
 				</div>
