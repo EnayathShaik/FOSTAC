@@ -669,8 +669,8 @@ public class AdminController {
 							
 							
 				
-				String newPath = request.getContextPath().replace("Fssai_E-Learning_System", pth);
-		
+				String newPath = session.getServletContext().getRealPath("").replace("Fssai_E-Learning_System", pth);
+		System.out.println("wwwwwee"+ newPath);
 				//String ss = session.getServletContext().getRealPath(newPath);
 				//System.out.println(" ss "+ss  + " ss1 "+ss1);
 				File dir = new File(newPath);
@@ -682,7 +682,7 @@ public class AdminController {
 				int i = fileName.lastIndexOf('.');
 				if (i > 0) {
 					extension = fileName.substring(i + 1);
-					uploadLink=newPath+"/"+name+"."+extension; 		
+					uploadLink="/"+pth+"/"+name+"."+extension; 		
 				}
 		    byte[] bytes = file.getBytes();  
 		    BufferedOutputStream stream =new BufferedOutputStream(new FileOutputStream(  

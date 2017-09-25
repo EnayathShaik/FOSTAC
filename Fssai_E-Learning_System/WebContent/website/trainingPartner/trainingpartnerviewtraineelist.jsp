@@ -21,7 +21,7 @@ window.onload = OnStart;
 </script>
 <script>
 
-function showDetails(){
+function showDetails(table){
 	
 	var courseType =  ($("#selCourseType").val()== null ? "" : $("#selCourseType").val());
 	 var courseName = ( $("#selCourseName").val() == null ? "" : $("#selCourseName").val());
@@ -45,7 +45,7 @@ function showDetails(){
 		 data:name1,
 		async: false, 
 		success: function (data){
-		$('#newTable').show();
+		$('#'+table+'').show();
 		//var mainData = JSON.stringify(data);
 		var mainData1 = jQuery.parseJSON(data);
 		var j=1;
@@ -57,8 +57,8 @@ function showDetails(){
 		{
 			//$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td>'+obj[7]+'</td><td>'+obj[8]+'</td><td>'+obj[5]+'</td><td>Pending</td></tr>');
 		
-	
-			  $('#newTable').dataTable().fnAddData( [ j++,
+	if(table=="newTable"){
+			  $('#'+table+'').dataTable().fnAddData( [ j++,
 			                                          obj[0] ,
 			                                          obj[1],
 			                                          obj[2],
@@ -70,13 +70,18 @@ function showDetails(){
 			                                          'Pending'
 			                                          
 													 ] ); 
+	}
+	else
+		{
+		$('#'+table+'').append('<tr id="tableRow"><td>'+j++ +'</td><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td><td>'+obj[3]+'</td><td>'+obj[4]+'</td><td>'+obj[7]+'</td><td>'+obj[8]+'</td><td>'+obj[5]+'</td><td>Pending</td></tr>');
+
+		}
 			
 		});
 		}
 		});
 	return result; 
 }
-
 
 </script>
 <section>
@@ -227,8 +232,8 @@ function showDetails(){
 														</script>
 														
                                                     </div>
-                                                     <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails();return false">Show Details</button>
-                                                		<input type="button" id="btnExport" style="margin-right: 20px;"  class="btn login-btn pull-right" value="Download" />
+                                                     <button class="btn login-btn pull-right show-details-vacancy collapsed" data-toggle="collapse" data-target="#show-result" aria-expanded="false" onclick="showDetails('newTable');return false">Show Details</button>
+                                                		<input type="button" id="btnExport" style="margin-right: 20px;"  class="btn login-btn pull-right" value="Download" onclick="showDetails('exportTable');return false;"/>
                                                 		
                                                 		<!-- <a href="#testt" class="pull-right" onclick="showDetails();">Search</a> -->
                                                 </div>
@@ -252,7 +257,7 @@ function showDetails(){
                       <legend>
                       <h4>Search results</h4>
                       </legend>
-                      <div id="dvData">
+                      <div >
                       <table  id="newTable"   class="table table-bordered table-responsive table-striped table-hover">
                         <thead>
                           <tr class="background-open-vacancies">
@@ -273,6 +278,28 @@ function showDetails(){
                       </table>
                       </div>
                     </fieldset>
+                    
+                      <div id="dvData" style="display:none;">
+                      <table  id="exportTable"   >
+                        <thead>
+                          <tr class="background-open-vacancies">
+                            <th>S.No.</th>
+                            <th>Batch Code</th>
+                            <th>Course Code</th>
+                            <th>Training Start Date</th>
+                            <th>Training End Date</th>
+                            <th>Participant Name</th>
+                             <th>Email</th>
+                              <th>Mobile No.</th>
+                            <th>Mode OF Training</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                     <!--    <tbody id="newTable">
+                        </tbody> -->
+                      </table>
+                      </div>
+                    
                     <div style="width: 95px;">
                       <ul class="pager">
                        

@@ -40,7 +40,7 @@ function getQuestions(){
 	$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Course Code</th><th>Question Number</th></tr>')
 	$.each(mainData1 , function(i , obj)
 	{
-		$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[3]+')">'+obj[4]+'</a></td><td>'+obj[2]+'</td></tr>');
+		$('#newTable').append('<tr id="tableRow"><td>'+j +'</td><td><a href="" onClick="return editAssessmentQuestion('+obj[3]+')">'+obj[4]+'</a></td><td>'+(j++)+'</td></tr>');
 		
 	});
 	}
