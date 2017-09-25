@@ -397,5 +397,10 @@ public class TrainingPartnerServiceImpl implements TrainingPartnerService  {
 		return loadTrainingList;
 	}
 	
-	
+	@Override
+	@Transactional
+	public List<IntStringBean> loadTrainingPartnerList2() {
+		List<IntStringBean> loadTrainingPartnerList = trainingPartnerDAO.loadTrainingPartnerList2();
+		return loadTrainingPartnerList;
+	}
 }

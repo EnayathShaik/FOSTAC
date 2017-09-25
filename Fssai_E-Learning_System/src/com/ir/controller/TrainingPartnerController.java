@@ -308,9 +308,13 @@ public class TrainingPartnerController {
 			new ZLogger("trainingpartnertrainingcalendar", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "TrainingPartnerController.java");
 			return "trainingpartnertrainingcalendar";
 		}
-		int prifileId = (int) session.getAttribute("profileId");
-		System.out.println("prifileId "+prifileId);
-		if(prifileId == 7){
+		int profileId = (int) session.getAttribute("profileId");
+		System.out.println("profileId "+profileId);
+		if( profileId==6){
+			List<IntStringBean> trainingPartnerList = trainingPartnerService.loadTrainingPartnerList2();
+			trainingPartnerTrainingCalender.setTrainingPartnerList(trainingPartnerList);
+		}
+		if(profileId == 7){
 			int partnerId = (int) session.getAttribute("partnerId");
 			List<IntStringBean> trainingPartnerList = trainingPartnerService.loadTrainingPartnerList(partnerId);
 			trainingPartnerTrainingCalender.setTrainingPartnerList(trainingPartnerList);

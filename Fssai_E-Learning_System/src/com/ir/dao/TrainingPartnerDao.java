@@ -2,6 +2,8 @@ package com.ir.dao;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import com.ir.bean.common.IntStringBean;
 import com.ir.bean.common.StringStringBean;
 import com.ir.form.ChangePasswordForm;
@@ -107,4 +109,6 @@ public interface TrainingPartnerDao {
 	public int isVacancyOpen(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
 	
 	public List getTrainingCalender(String data);
+	
+	public List<IntStringBean> loadTrainingPartnerList2();
 }

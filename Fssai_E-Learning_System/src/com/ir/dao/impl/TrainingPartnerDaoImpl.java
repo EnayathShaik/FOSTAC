@@ -861,11 +861,12 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 	System.out.println(profileId + " profileId");
 		if(Integer.parseInt(profileId) == 6){
 			sql = "select A.trainingcalendarid , A.batchcode,C.coursecode,A.trainingdate,A.trainingtime,pitr.firstname || ' '|| pitr.middlename ||' '|| pitr.lastname as participantName   " +
-					" , A.coursetype as coursetypeid  , A.coursename as coursenameid , A.trainername as trainernameid , A.assessmentDatetime , A.assessmentpartnername , D.assessmentagencyname ,  A.assessor , cast(E.firstname || ' ' ||  E.middlename || ' ' ||  E.lastname as varchar(100)) , A.seatcapacity , case when  A.type ='P' then 'Paid' else 'Un-Paid'  end as type ,A.type as typecode  from trainingcalendar A " +
+					" , A.coursetype as coursetypeid  , A.coursename as coursenameid , A.trainername as trainernameid , A.assessmentDatetime , A.assessmentpartnername , D.assessmentagencyname ,  A.assessor , cast(E.firstname || ' ' ||  E.middlename || ' ' ||  E.lastname as varchar(100)) , A.seatcapacity , case when  A.type ='P' then 'Paid' else 'Un-Paid'  end as type ,A.type as typecode ,A.trainingPartner,mtp.trainingPartnerName from trainingcalendar A " +
 					" inner join coursetype B on(A.coursetype=B.coursetypeid)" +
 					" inner join coursename C on(A.coursename=C.coursenameid)"+
 					" left join ManageAssessmentAgency D on(cast(A.assessmentpartnername as numeric)=D.manageassessmentagencyid)"+
 					" left join personalInformationAssessor E on(A.assessor=E.personalinformationassessorid)"+
+					"inner join managetrainingpartner mtp on mtp.managetrainingpartnerid=A.trainingPartner"+
 					" inner join personalinformationtrainer as pitr on CAST(CAST (A.trainername AS NUMERIC(19,4)) AS INT) = pitr.personalinformationtrainerid "
 					+" where A.tcStatus is null and  cast( E.logindetails as varchar(50))='"+userId+"'  and  cast( B.coursetypeid  as varchar(10)) like '"+courseType+"%' " +
 							"and  cast(C.coursenameid as varchar(10)) like '"+courseName+"%' and  " +
@@ -874,9 +875,10 @@ public class TrainingPartnerDaoImpl implements TrainingPartnerDao {
 			
 		}else{
 			sql = "select A.trainingcalendarid , A.batchcode,C.coursecode,A.trainingdate,A.trainingtime,pitr.firstname || ' '|| pitr.middlename ||' '|| pitr.lastname as participantName   " +
-					" , A.coursetype as coursetypeid  , A.coursename as coursenameid , A.trainername as trainernameid , A.assessmentDatetime , A.assessmentpartnername , D.assessmentagencyname ,  A.assessor , cast(E.firstname || ' ' ||  E.middlename || ' ' ||  E.lastname as varchar(100)) , A.seatcapacity , case when  A.type ='P' then 'Paid' else 'Un-Paid'  end as type ,A.type as typecode  from trainingcalendar A " +
+					" , A.coursetype as coursetypeid  , A.coursename as coursenameid , A.trainername as trainernameid , A.assessmentDatetime , A.assessmentpartnername , D.assessmentagencyname ,  A.assessor , cast(E.firstname || ' ' ||  E.middlename || ' ' ||  E.lastname as varchar(100)) , A.seatcapacity , case when  A.type ='P' then 'Paid' else 'Un-Paid'  end as type ,A.type as typecode ,A.trainingPartner,mtp.trainingPartnerName from trainingcalendar A " +
 					" inner join coursetype B on(A.coursetype=B.coursetypeid)" +
 					" inner join coursename C on(A.coursename=C.coursenameid)"+
+					"inner join managetrainingpartner mtp on mtp.managetrainingpartnerid=A.trainingPartner"+
 					" left join ManageAssessmentAgency D on(cast(A.assessmentpartnername as numeric)=D.manageassessmentagencyid)"+
 					" left join personalInformationAssessor E on(A.assessor=E.personalinformationassessorid)"+
 					" inner join personalinformationtrainer as pitr on CAST(CAST (A.trainername AS NUMERIC(19,4)) AS INT) = pitr.personalinformationtrainerid "
@@ -1771,4 +1773,23 @@ String sql ="select mtp.managetrainingpartnerid as id, mtp.trainingpartnername ,
 		return list;
 	}
 	
+	@Override
+	public List<IntStringBean> loadTrainingPartnerList2(){
+		Session session = sessionFactory.getCurrentSession();
+		List<IntStringBean> trinerNameList=new ArrayList<>();
+		String sql="select managetrainingpartnerid , trainingpartnername from managetrainingpartner";
+		
+		Query query = session.createSQLQuery(sql);
+		List<Object[]> courseTypeList = query.list();
+		if(courseTypeList.size()>0){
+			for(int index=0;index<courseTypeList.size();index++){
+				IntStringBean bean=new IntStringBean();
+				Object[] objecList=courseTypeList.get(index);
+				bean.setId(Integer.parseInt(objecList[0].toString()));
+				bean.setValue(objecList[1].toString());
+				trinerNameList.add(bean);
+			}
+		}
+		return trinerNameList;
+	}
 }

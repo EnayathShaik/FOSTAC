@@ -54,6 +54,7 @@ function editTrainingCalendar( srNo , id, courseType){
       }, 2000);
 	
 	$("#selCourseName").val($("#selCourseName"+srNo).val());
+	$("#trainingPartner").val($("#trainingPartner"+srNo).val());
 	$("#selTrainerNames").val($("#selTrainerNames"+srNo).val());
 	$("#trainingStartDate").val($("#trainingStartDate"+srNo).text());
 	$("#trainingEndDate").val($("#trainingEndDate"+srNo).text());
@@ -92,6 +93,7 @@ function editTrainingCalendar( srNo , id, courseType){
 		$("#trainingEndDate").attr('readonly',true);
 		$("#assessmentAgencyName").attr('readonly',true);
 		$("#assessorName").attr('readonly',true);
+		$("#trainingPartner").attr('readonly',true);
 		$("#seatCapacity").attr('readonly',true);
 		$("#type").attr('readonly' , true);
 		
@@ -171,8 +173,8 @@ window.onload = OnStart;
 									+'</td><td><input type="hidden" value='+obj[12]+'  id=assessorName'+i+' />' + obj[13]	
 									+'</td><td><input type="hidden" value='+obj[8]+'  id=selTrainerNames'+i+' />' + obj[5]	
 									+'</td><td id=seatCapacity'+i+'>' + obj[14]
-									+'</td><td><input type="hidden" value='+obj[16]+'  id=type'+i+' />' + obj[15]
-									+ '</td><td class="TPEdit"><input type="button" id="TP"  onClick="editTrainingCalendar(\''+i+'\',\''+obj[0]+'\',\''+obj[1]+'\');" value="Reschedule"/></td><td> <input type="submit"  onclick=" return setId('+obj[0]+')" value="Cancel Training"/> </td></tr>');
+									+'</td><td><input type="hidden" value='+obj[16]+'  id=type'+i+' />' + obj[15]+'</td>'+'<input type="hidden" value='+obj[17]+'  id=trainingPartner'+i+' />' + obj[18]
+									+ '<td class="TPEdit"><input type="button" id="TP"  onClick="editTrainingCalendar(\''+i+'\',\''+obj[0]+'\',\''+obj[1]+'\');" value="Reschedule"/></td><td> <input type="submit"  onclick=" return setId('+obj[0]+')" value="Cancel Training"/> </td></tr>');
 
 				});
 			}
@@ -251,7 +253,6 @@ window.onload = OnStart;
 											var trainerList = formData.trainerList;
 											var assessmentAgencyNameList = formData.assessmentAgencyName;
 											var trainingPartnerList = formData.trainingPartnerList;
-											
 										</script>
 
 										<div class="row">
@@ -365,7 +366,7 @@ window.onload = OnStart;
 														</div>
 											
 												
-											 	<select class="form-control" name="trainingPartner" onchange="getTrainingCenter(this.value , 'trainingCenter');"
+											 	<select class="form-control" name="trainingPartner" onmousemove="getTrainingCenter(this.value , 'trainingCenter');"
 															id="trainingPartner">
 														</select>
 														<script>

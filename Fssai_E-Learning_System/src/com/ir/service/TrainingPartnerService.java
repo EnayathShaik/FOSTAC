@@ -155,4 +155,6 @@ public interface TrainingPartnerService {
 	public int isVacancyOpen(PostVacancyTrainingCenterBean postVacancyTrainingCenterBean);
 	
 	public List getTrainingCalender(String data);
+	
+	public List<IntStringBean> loadTrainingPartnerList2();
 }
