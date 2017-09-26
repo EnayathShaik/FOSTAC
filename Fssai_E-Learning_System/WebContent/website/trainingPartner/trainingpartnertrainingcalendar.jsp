@@ -309,7 +309,7 @@ window.onload = OnStart;
 															<ul class="lab-no">
 																<li class="style-li"><strong>Trainer Name:</strong></li>
 																 <li class="style-li error-red">*</li>
-																<li id="TrainerNamesError" style="display:none;" class="style-li error-red" >Please Select Course Code.</li>
+																<li id="TrainerNamesError" style="display:none;" class="style-li error-red" >Please Select Trainer Name.</li>
 															</ul>
 														</div>
 														<select class="form-control" name="selTrainerNames"
@@ -346,11 +346,11 @@ window.onload = OnStart;
 															<ul class="lab-no">
 																<li class="style-li"><strong> Type:<span
 																		style="color: red;">*</span></strong></li>
-																<li id="typeError" style="display:none;" class="style-li error-red" >Please Select Course Code.</li>
+																<li id="typeError" style="display:none;" class="style-li error-red" >Please Select Payment Type.</li>
 															</ul>
 														</div>
 														<select class="form-control" name="type" id="type">
-														<option value="0">Select Type</option>
+														<option value="0">Select Payment Type</option>
 														<option value="P">Paid</option>
 														<option value="U">Un-Paid</option>
 														</select>

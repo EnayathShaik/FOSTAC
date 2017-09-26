@@ -51,8 +51,16 @@
                 <!-- main body -->
                 <section class="main-section-margin-top">
                     <div class="container-fluid">
+                     <div class="row">
+                                        <div class="col-lg-12">
+                                            <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle">
+                                                <input type="hidden" id="userId" value='${loginUsertrainingpartner}' />
+                                                <i class="fa fa-bars"></i> <span class="orange-font">Welcome : ${userName}</span>
+                                            </a>
+                                        </div>
+                                    </div>
                         <div id="wrapper">
-
+							
                             <!-- Sidebar -->
                             <%@include file="../roles/slider.jsp" %>
                                 <!-- /#sidebar-wrapper -->

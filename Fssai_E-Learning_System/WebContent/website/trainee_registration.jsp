@@ -308,7 +308,7 @@ window.onload = OnStart;
                         document.getElementById("DesignationError").style.display = 'none';
                     }
 
-                    alert(document.getElementById("registrationNo").value )
+                 //   alert(document.getElementById("registrationNo").value )
                     if (document.getElementById("registrationNo").value == "") {
                         document.getElementById('registrationNo').style.borderColor = "red";
                         document.getElementById("registrationNoError").style.display = 'block';

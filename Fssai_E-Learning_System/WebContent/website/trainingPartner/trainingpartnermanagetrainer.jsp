@@ -89,7 +89,7 @@
 								<a href="#menu-toggle" class="vertical-menu-position-btn"
 									id="menu-toggle"> <i class="fa fa-bars"></i> <span
 									class="orange-font">Welcome :
-										${loginUser.loginDetails.loginId}</span>
+										${userName}</span>
 								</a>
 							</div>
 						</div>

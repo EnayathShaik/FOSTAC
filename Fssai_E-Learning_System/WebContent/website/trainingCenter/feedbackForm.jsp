@@ -104,7 +104,7 @@
                                         <div class="col-lg-12">
                                             <a href="#menu-toggle" class="vertical-menu-position-btn" id="menu-toggle">
                                                 <input type="hidden" id="userId" value='${loginUsertrainingpartner}' />
-                                                <i class="fa fa-bars"></i> <span class="orange-font">Welcome : ${loginUserS.loginDetails.loginId}</span>
+                                                <i class="fa fa-bars"></i> <span class="orange-font">Welcome : ${userName}</span>
                                             </a>
                                         </div>
                                     </div>

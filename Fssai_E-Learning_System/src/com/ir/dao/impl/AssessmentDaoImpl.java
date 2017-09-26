@@ -97,7 +97,7 @@ public class AssessmentDaoImpl implements AssessmentDao{
 			for(int i =0 ; i<tpList.size(); i++){
 				
 				IntStringBean tc = new IntStringBean();
-				Object[] o =tpList.get(0);
+				Object[] o =tpList.get(i);
 				tc.setId((int)o[0]);
 				tc.setValue(o[1].toString());
 				trainingPartnerList.add(tc);
