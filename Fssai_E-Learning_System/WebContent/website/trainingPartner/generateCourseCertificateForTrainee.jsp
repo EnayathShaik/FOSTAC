@@ -63,7 +63,7 @@ var address = (address == null ? "" :address );
 $("#mainCertificateId").val(certificateId);
 $("#loginId").val(parseInt(loginId));
 $("#traineeId").val(parseInt(traineeId));
-if(result != "P" ){
+if(result == "P" ){
 	//
 	$("#generateCourseCertificateForm").attr("action" , "generateCourseCertificateGO.fssai");
 	$("#generateCourseCertificateForm").submit();	

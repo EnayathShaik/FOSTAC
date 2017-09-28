@@ -55,6 +55,15 @@ public class CourseName implements Serializable{
 	@Column(name = "modify_date")
 	private Date modifyDate;
 	
+	@Column(columnDefinition = "int default 60") 
+	private int eligibility;
+
+	public int getEligibility() {
+		return eligibility;
+	}
+	public void setEligibility(int eligibility) {
+		this.eligibility = eligibility;
+	}
 	
 	public int getCoursenameid() {
 		return coursenameid;

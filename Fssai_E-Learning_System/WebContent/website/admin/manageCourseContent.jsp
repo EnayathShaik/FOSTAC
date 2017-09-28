@@ -59,7 +59,7 @@ function getContentName(val)
 
 </script>
 <script type='text/javascript'>
-function editCourseContentData(){
+/* function editCourseContentData(){
 	var mccId  =  document.getElementById('mccId').value;
 	var contentLocation =  $("#contentLocation").val();
 	var courseType =  $("#courseType").val();
@@ -84,7 +84,7 @@ function editCourseContentData(){
 	});
 	location.reload();
 return result;
-}
+} */
 
 function searchManageCourseContent(indicator){
 	var contentLocation =  $("#contentLocation").val();
@@ -141,6 +141,7 @@ function editCourseContent(location , courseType , courseName ,modeOfTraining , 
 	$('.error-red').html('');
 	console.log("-----> "+location + " "+courseType + " " +courseName + " "+modeOfTraining + " "+contentType + " "+contentName + " "+link);
 	document.getElementById('mccId').value =  $("#idLabel"+i).val();
+	document.getElementById('manageCourseContentId').value =  $("#idLabel"+i).val();
 	document.getElementById('btnUpdate').style.display = 'block';
 	document.getElementById('btnCreate').style.display = 'none';
 	$("#contentLocation").val(location);
@@ -357,12 +358,16 @@ function deleteCourseContent(i){
   
                                                     <button  type="submit" id="btnCreate" class="btn login-btn">Create</button>
                                               		<a href="#testt" class="btn login-btn" onclick="searchManageCourseContent('SELECTED');">Search</a>
-                                                
-<a href="#" onclick="editCourseContentData();" id="btnUpdate" style="display: none; padding: 6px 7px; width: 20%; margin-bottom: 0; font-size: 14px; 
+    <input type="submit" value="Update" id="btnUpdate" formaction="UpdateManageCourseContent.fssai" style="display: none; padding: 6px 7px; width: 20%; margin-bottom: 0; font-size: 14px; 
 font-weight: normal; line-height: 1.42857143; text-align: center; white-space: nowrap; vertical-align: middle;
  -ms-touch-action: manipulation; touch-action: manipulation; cursor: pointer; -webkit-user-select: none; 
  -moz-user-select: none; -ms-user-select: none; user-select: none; background-image: none; border: 1px solid transparent;
-  background: #ef580d !important; color: #fff; border: 1px solid transparent; transition: all 0.8s linear;">Update</a>
+  background: #ef580d !important; color: #fff; border: 1px solid transparent; transition: all 0.8s linear;">                                            
+<!-- <a href="#" onclick="editCourseContentData();" id="btnUpdate" style="display: none; padding: 6px 7px; width: 20%; margin-bottom: 0; font-size: 14px; 
+font-weight: normal; line-height: 1.42857143; text-align: center; white-space: nowrap; vertical-align: middle;
+ -ms-touch-action: manipulation; touch-action: manipulation; cursor: pointer; -webkit-user-select: none; 
+ -moz-user-select: none; -ms-user-select: none; user-select: none; background-image: none; border: 1px solid transparent;
+  background: #ef580d !important; color: #fff; border: 1px solid transparent; transition: all 0.8s linear;">Update</a> -->
                                                
 
 
@@ -462,4 +467,5 @@ font-weight: normal; line-height: 1.42857143; text-align: center; white-space: n
         </div>
     </section>
     <input type="hidden" id="mccId" value="" />
+        <cf:hidden path="manageCourseContentId" />
     </cf:form>

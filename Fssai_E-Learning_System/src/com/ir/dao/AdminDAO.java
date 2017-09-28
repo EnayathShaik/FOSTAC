@@ -132,4 +132,6 @@ public interface AdminDAO {
 		
 		public String changeAssessor(String data);
 		public List trainingCenterDetails(int data);
+
+		public void updateManageCourseContent(ManageCourseContentForm manageCourseContentForm);
 }

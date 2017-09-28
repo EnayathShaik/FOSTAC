@@ -456,5 +456,12 @@ public class AdminServiceImpl implements AdminService {
 	public List<TrainingCenterReport> trainingCenterDetails(int trainingPartner){
 		List<TrainingCenterReport> courseData = adminDAO.trainingCenterDetails(trainingPartner);
 		return courseData;
+	}
+
+	@Override
+	@Transactional
+	public void updateManageCourseContent(ManageCourseContentForm manageCourseContentForm) {
+		// TODO Auto-generated method stub
+		adminDAO.updateManageCourseContent(manageCourseContentForm);
 	}	
 }

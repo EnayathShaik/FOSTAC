@@ -301,7 +301,7 @@ public class AdminDAOImpl implements AdminDAO {
 		}else{
 			courseName.setClassroom("Classroom");
 		}
-		
+		courseName.setEligibility(manageCourse.getEligibility());
 		courseName.setCreatedby(2);
 		courseName.setUpdatedby(2);
 		
@@ -1105,12 +1105,12 @@ public class AdminDAOImpl implements AdminDAO {
 			String sql = null;
 			if(!name.equalsIgnoreCase("ALL"))
 				sql ="select cn.coursetypeid,ct.coursetype , cn.coursename , cn.courseduration , cn.paidunpaid ,  cn.status ,cn.coursenameid , cn.online , cn.classroom"+
-							" ,cn.courseCode from coursename as cn inner join coursetype as ct on ct.coursetypeid= cn.coursetypeid "+
+							" ,cn.courseCode, cn.eligibility from coursename as cn inner join coursetype as ct on ct.coursetypeid= cn.coursetypeid "+
 							" where cast(cn.coursetypeid as varchar(10)) like '"+courseType+"%' and upper(cn.coursename) like '"+ courseName.toUpperCase()+"%'"+
 							"  and paidunpaid like'"+freePaid+"%' and cn.courseduration like '"+duration+"%' and cn.status like '"+status+"%' Order By cn.coursenameid desc ";
 				else
 				sql ="select cn.coursetypeid,ct.coursetype , cn.coursename , cn.courseduration , cn.paidunpaid ,  cn.status ,cn.coursenameid , cn.online , cn.classroom"+
-								" ,cn.courseCode from coursename as cn inner join coursetype as ct on ct.coursetypeid= cn.coursetypeid Order By cn.coursenameid desc " ;
+								" ,cn.courseCode, cn.eligibility from coursename as cn inner join coursetype as ct on ct.coursetypeid= cn.coursetypeid Order By cn.coursenameid desc " ;
 			Session session = sessionFactory.getCurrentSession();
 			Query query = session.createSQLQuery(sql);
 			List courseTypeList = query.list();
@@ -1128,6 +1128,7 @@ public class AdminDAOImpl implements AdminDAO {
 			
 			String[] totalConnected = name.split("-");
 			String courseName , courseDuration , online, status , paidunpaid , id  , classroom;
+			int eligibility;
 			
 			courseName = (totalConnected[1].split("="))[1].replaceAll("%20", " ").trim();
 			courseDuration = (totalConnected[4].split("="))[1].replaceAll("%20", " ").trim();
@@ -1145,7 +1146,8 @@ public class AdminDAOImpl implements AdminDAO {
 			}else{
 				classroom = "Nil";
 			}
-			
+			eligibility=Integer.parseInt((totalConnected[7].split("="))[1]);
+			System.out.println("wwwwwwwwwwweeeeeeeee "+eligibility);
 			System.out.println(courseName + " "+courseDuration + " "+ online + "  "+ classroom + " "+ status + "  "+id);
 			
 			Session session = sessionFactory.getCurrentSession();
@@ -1156,6 +1158,7 @@ public class AdminDAOImpl implements AdminDAO {
 			courseNameee.setClassroom(classroom);
 			courseNameee.setStatus(status);	
 			courseNameee.setPaidunpaid(paidunpaid);
+			courseNameee.setEligibility(eligibility);
 			session.update(courseNameee);
 			String newList = "Recors successfully updated !!!" ;
 			
@@ -1683,6 +1686,21 @@ public class AdminDAOImpl implements AdminDAO {
 				mailList.add(tc);
 			}
 			return mailList;
+		}
+		@Override
+		public void updateManageCourseContent(ManageCourseContentForm manageCourseContentForm) {
+			// TODO Auto-generated method stub
+			Session session=sessionFactory.getCurrentSession();
+			ManageCourseContent   mcc= (ManageCourseContent) session.load(ManageCourseContent.class, manageCourseContentForm.getManageCourseContentId());
+			mcc.setContentLocationInput(manageCourseContentForm.getContentLocation());
+			mcc.setContentTypeInput(manageCourseContentForm.getContentType());
+			mcc.setContentNameInput(manageCourseContentForm.getContentName());
+			mcc.setModeOfTrainingInput(manageCourseContentForm.getModeOfTraining());
+			mcc.setContentLinkInput(manageCourseContentForm.getContentLink());
+			mcc.setContentNameInput(manageCourseContentForm.getContentName());
+			if(!(manageCourseContentForm.getUploadedContent().equals("Not Uploaded")))
+			mcc.setUploadedContent(manageCourseContentForm.getUploadedContent());
+			session.update(mcc);
 		}
 }
 

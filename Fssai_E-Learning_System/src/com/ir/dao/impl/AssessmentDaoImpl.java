@@ -128,7 +128,7 @@ public class AssessmentDaoImpl implements AssessmentDao{
 	@Override
 	public int getElegibilityForAssessment(int coursenameid){
 		Session session = sessionFactory.getCurrentSession();
-		String sql = "select eligibility from assessmenteligibility where coursenameid="+coursenameid;
+		String sql = "select eligibility from courseName where coursenameid="+coursenameid;
 		Query query = session.createSQLQuery(sql);
 		List listEligibility = query.list();
 		if(listEligibility.size() > 0)

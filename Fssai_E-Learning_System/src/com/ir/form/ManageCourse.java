@@ -9,7 +9,17 @@ public class ManageCourse {
 	private String modeOfTraining;
 	private String courseCode;
 	private int seqNo;
+	private int eligibility;
 	
+	
+	
+	
+	public int getEligibility() {
+		return eligibility;
+	}
+	public void setEligibility(int eligibility) {
+		this.eligibility = eligibility;
+	}
 	public String getOnline() {
 		return online;
 	}

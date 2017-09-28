@@ -718,6 +718,80 @@ public class AdminController {
 		return "redirect:manageCourseContent.fssai";
 	}
 	
+	@RequestMapping(value = "/UpdateManageCourseContent", method = RequestMethod.POST)
+	public String updateManageCourseContent(
+			@RequestParam CommonsMultipartFile file,@Valid @ModelAttribute("manageCourseContent") ManageCourseContentForm manageCourseContentForm,
+			BindingResult result, Model model, HttpSession session ,HttpServletRequest request) {
+	if (result.hasErrors()) {
+			new ZLogger("manageCourseContentSearch", "bindingResult.hasErrors  "+result.hasErrors() , "AdminController.java");
+			new ZLogger("manageCourseContentSearch", "bindingResult.hasErrors  "+result.getErrorCount() +" All Errors "+result.getAllErrors(), "AdminController.java");
+			return "manageCourseContent";
+		}
+	
+	//upload file
+	String uploadLink="Not Uploaded";
+	if(file!=null){
+			try
+			{
+				String name = manageCourseContentForm.getContentName();
+				String pth="Fostac/Course/Content/";
+				if(manageCourseContentForm.getCourseType()==1)
+					pth=pth+"BASIC/";
+				else if(manageCourseContentForm.getCourseType()==2)
+					pth=pth+"ADVANCE/";
+				else if(manageCourseContentForm.getCourseType()==3)
+					pth=pth+"SPECIAL/";
+				else if(manageCourseContentForm.getCourseType()==4)
+					pth=pth+"TOT/";
+				
+				if(manageCourseContentForm.getContentType().equals("PPTs"))
+					pth=pth+"PPT";
+					if(manageCourseContentForm.getContentType().equals("Videos"))
+						pth=pth+"VIDEO";
+						if(manageCourseContentForm.getContentType().equals("StudyMaterial"))
+							pth=pth+"STUDYMATERIAL";
+							
+							
+				
+				String newPath = session.getServletContext().getRealPath("").replace("Fssai_E-Learning_System", pth);
+				//String ss = session.getServletContext().getRealPath(newPath);
+				//System.out.println(" ss "+ss  + " ss1 "+ss1);
+				File dir = new File(newPath);
+				if (!dir.exists())
+					dir.mkdirs();
+				String extension = "";
+				
+				String fileName = file.getOriginalFilename();
+				int i = fileName.lastIndexOf('.');
+				if (i > 0) {
+					extension = fileName.substring(i + 1);
+					uploadLink="/"+pth+"/"+name+"."+extension; 		
+				}
+		    byte[] bytes = file.getBytes();  
+		    BufferedOutputStream stream =new BufferedOutputStream(new FileOutputStream(  
+		         new File(newPath + File.separator + name+"." +extension)));  
+		    stream.write(bytes);  
+		    stream.flush();  
+		    stream.close();  
+		    manageCourseContentForm.setUploadedContent(uploadLink);
+			}catch(Exception e){
+				e.printStackTrace();
+				new ZLogger("filesave", "Exception while  saveFile "+e.getMessage(), "AdminController.java");
+			}
+	}
+	
+	
+		try {
+		adminService
+					.updateManageCourseContent(manageCourseContentForm);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			new ZLogger("manageCourseContentSearch", "Exception while manageCourseContentSearch :  "+ e.getMessage(), "AdminController.java");
+		}
+		
+		return "redirect:manageCourseContent.fssai";
+	}
 	
 
 	@RequestMapping(value = "/trainingCalendarForm", method = RequestMethod.GET)

@@ -167,6 +167,8 @@ public interface AdminService {
 	
 	String changeAssessor(String data);
 	List<TrainingCenterReport> trainingCenterDetails(int trainingPartner );
+
+	void  updateManageCourseContent(ManageCourseContentForm manageCourseContentForm);
 	
 }
 

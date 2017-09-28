@@ -34,6 +34,16 @@ function validateFields() {
 		    document.getElementById('duration').style.borderColor = "#ccc";
 		    document.getElementById("durationError").style.display = 'none';
 		    }
+	if(document.getElementById("eligibility").value=="") {
+		document.getElementById("eligibility").style.borderColor = "red";
+		document.getElementById("eligibilityError").style.display = 'block';
+		document.getElementById("eligibility").focus();
+		return false;
+		}else{
+		    document.getElementById('eligibility').style.borderColor = "#ccc";
+		    document.getElementById("eligibilityError").style.display = 'none';
+		    }
+	
 	if(document.getElementById("freePaid").value=="") {
 		document.getElementById("freePaid").style.borderColor = "red";
 		document.getElementById("freePaidError").style.display = 'block';
@@ -87,7 +97,7 @@ function searchManageCourse(indicator){
 		var mainData1 = jQuery.parseJSON(data);
 		var j=1;
 		$('#newTable tr').remove();
-		$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Course Code</th><th>Course Type</th><th>Course Name</th><th>Duration</th><th>Free/ Paid</th><th>Online</th><th>Classroom</th><th>Status</th><th>Option</th></tr>')
+		$('#newTable').append('<tr  class="background-open-vacancies"><th>S.No.</th><th>Course Code</th><th>Course Type</th><th>Course Name</th><th>Duration</th><th>Free/ Paid</th><th>Online</th><th>Classroom</th><th>Eligibility</th><th>Status</th><th>Option</th></tr>')
 		$.each(mainData1 , function(i , obj)
 		{
 			var stat ;
@@ -96,7 +106,7 @@ function searchManageCourse(indicator){
 			}else{
 				stat ='In-Active';
 			}
-			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><input type="hidden" id="courseTypeVal'+i+'" value="'+obj[0]+'">'+obj[0]+'<td>'+obj[9]+'</td><td><input type="hidden" id="courseTypeL'+i+'" value="'+obj[1]+'">'+obj[1]+'</td><td><input type="hidden" id="courseNameL'+i+'" value="'+obj[2]+'">'+obj[2]+'</td><td><input type="hidden" id="durationL'+i+'" value="'+obj[3]+'">'+obj[3]+'</td><td><input type="hidden" id="freepaidL'+i+'" value="'+obj[4]+'">'+obj[4]+'</td><td><input type="hidden" id="onlineL'+i+'" value="'+obj[7]+'">'+obj[7]+'</td><td><input type="hidden" id="classroomL'+i+'" value="'+obj[8]+'">'+obj[8]+'</td><td><input type="hidden" id="statusL'+i+'" value="'+stat+'">'+stat+'</td><td><input type="hidden" id="cnid'+i+'" value="'+obj[6]+'"><a href="#" onClick="editManageCourse(\''+i+'\',\''+obj[0]+'\');">edit</a> </td></tr>');	
+			$('#newTable').append('<tr id="tableRow"><td>'+j++ +'</td><input type="hidden" id="courseTypeVal'+i+'" value="'+obj[0]+'">'+obj[0]+'<td>'+obj[9]+'</td><td><input type="hidden" id="courseTypeL'+i+'" value="'+obj[1]+'">'+obj[1]+'</td><td><input type="hidden" id="courseNameL'+i+'" value="'+obj[2]+'">'+obj[2]+'</td><td><input type="hidden" id="durationL'+i+'" value="'+obj[3]+'">'+obj[3]+'</td><td><input type="hidden" id="freepaidL'+i+'" value="'+obj[4]+'">'+obj[4]+'</td><td><input type="hidden" id="onlineL'+i+'" value="'+obj[7]+'">'+obj[7]+'</td><td><input type="hidden" id="classroomL'+i+'" value="'+obj[8]+'">'+obj[8]+'</td><td><input type="hidden" id="eligibilityL'+i+'" value="'+obj[10]+'">'+obj[10]+'</td><td><input type="hidden" id="statusL'+i+'" value="'+stat+'">'+stat+'</td><td><input type="hidden" id="cnid'+i+'" value="'+obj[6]+'"><a href="#" onClick="editManageCourse(\''+i+'\',\''+obj[0]+'\');">edit</a> </td></tr>');	
 		});
 		}
 		});
@@ -117,12 +127,14 @@ function editManageCourse(i,courseType){
 	var onlineLL =  $("#onlineL"+i).val();
 	var classroomLL =  $("#classroomL"+i).val();
 	var statusLL =  $("#statusL"+i).val();
+	var eligibilityLL= $("#eligibilityL"+i).val();
 	document.getElementById('courseType').value = courseType;
 	document.getElementById('btnUpdate').style.display = 'block';
 	document.getElementById('btnCreate').style.display = 'none';
 
 	document.getElementById('courseName').value = courseNameLL; 
 	document.getElementById('duration').value = durationLL;
+	document.getElementById('eligibility').value = eligibilityLL;
 	if(freepaidLL=="free"){
 		$('#freePaid option').remove();
 		$('#freePaid').append('<option value="free" selected="true">free</option><option value="paid">paid</option>');
@@ -163,12 +175,13 @@ function editManageCourseData(){
 	var status = ($("#status").val()== null ? "" : $("#status").val() );
 	var freePaid = ($("#freePaid").val() == null ? "" : $("#freePaid").val());
 	var idHidden =  ($("#idHidden").val() == null ? "" : $("#idHidden").val());
+	var eligi=$("#eligibility").val();
 	document.getElementById('btnUpdate').style.display = 'none';
 	document.getElementById('btnCreate').style.display = 'block';
 	$(".displayNone").css("display","block");
 	 
 		var result="";
-		var total = "freePaid="+freePaid+"-courseName="+courseName+"-online="+online+"-status="+status+"-duration="+duration+"-id="+idHidden+"-classroom="+classroom;
+		var total = "freePaid="+freePaid+"-courseName="+courseName+"-online="+online+"-status="+status+"-duration="+duration+"-id="+idHidden+"-classroom="+classroom+"-eligibility="+eligi;
 		console.log("total "+total);
 	//	alert(idHidden);
 		$('#newTable').hide();
@@ -286,6 +299,16 @@ function deleteManageCourse(){
                                                         </ul>
                                                     </div>
                                                   <cf:input path="duration"  onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"   placeholder="In Hours" class="form-control"   />
+                                                </div>
+                                                 <div class="form-group">
+                                                    <div>
+                                                        <ul class="lab-no">
+                                                            <li class="style-li"><strong>Eligibility:</strong></li>
+                                                            <li class="style-li error-red">
+                                                            <label class="error visibility" id="eligibilityError">* error</label></li>
+                                                        </ul>
+                                                    </div>
+                                                  <cf:input path="eligibility" class="form-control"  value="60" />
                                                 </div>
                                             </div> <!-- left side ends -->
 
