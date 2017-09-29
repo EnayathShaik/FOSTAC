@@ -30,8 +30,8 @@
         	}
         	
         	
-        	function ValidCaptcha() {
-        		alert('START VALIDATING');
+        	 /* function ValidCaptcha() {
+        		//alert('START VALIDATING');
         		var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
         		var str2 = removeSpaces(document.getElementById('txtInput').value);
         		
@@ -46,7 +46,7 @@
         			return false;
         		}
 
-        	}
+        	}  */
         	
         	function checkagree() {
         		var d = document.getElementById('check').checked;
@@ -101,6 +101,22 @@
                     if (!status) {
                         return false;
                     }
+                    
+                    var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
+                    var str2 = removeSpaces(document.getElementById('txtInput').value);
+                    if (!(str1 == str2)) {
+                   	 alert("Please Enter correct captcha");
+                        document.getElementById('txtInput').value = "";
+                        return false;
+                    }
+                    if($("#check").is(":checked")== false){
+                    	alert('Please Confirm on agree');
+                 		 return false;
+                	 } 
+                }
+                // Remove the spaces from the entered and generated code
+                function removeSpaces(string) {
+                    return string.split(' ').join('');
                 }
 
                 function OnStart() {
@@ -339,7 +355,7 @@
 								<ul class="lab-no">
 									<li class="style-li"><strong>Training Partner
 											Name:</strong></li>
-									<li class="style-li error-red"><cf:errors
+									<li class="style-li error-red">*<cf:errors
 											path="trainingPartnerName" cssClass="error" /></li>
 								</ul>
 							</div>
@@ -351,7 +367,7 @@
 							<div>
 								<ul class="lab-no">
 									<li class="style-li"><strong>Website URL:</strong></li>
-									<li class="style-li error-red"><cf:errors
+									<li class="style-li error-red">*<cf:errors
 											path="websiteUrl" cssClass="error" /></li>
 								</ul>
 							</div>
@@ -385,7 +401,7 @@
 							<div>
 								<ul class="lab-no">
 									<li class="style-li"><strong>Email:</strong></li>
-									<li class="style-li error-red"></li>
+									<li class="style-li error-red">*</li>
 								</ul>
 							</div>
 							<cf:input path="email" class="form-control" maxlength="100" />
@@ -462,7 +478,7 @@
 							<div>
 								<ul class="lab-no">
 									<li class="style-li"><strong>Address 1:</strong></li>
-									<li class="style-li error-red"><cf:errors
+									<li class="style-li error-red">*<cf:errors
 											path="headOfficeDataAddress1" cssClass="error" /></li>
 								</ul>
 							</div>
@@ -473,7 +489,7 @@
 							<div>
 								<ul class="lab-no">
 									<li class="style-li"><strong>Address 2:</strong></li>
-									<li class="style-li error-red"><cf:errors
+									<li class="style-li error-red">*<cf:errors
 											path="headOfficeDataAddress2" cssClass="error" /></li>
 								</ul>
 							</div>
@@ -503,7 +519,7 @@
 							<div>
 								<ul class="lab-no">
 									<li class="style-li"><strong>State:</strong></li>
-									<li class="style-li error-red"></li>
+									<li class="style-li error-red">*</li>
 								</ul>
 							</div>
 							<cf:select path="state" class="form-control"
@@ -517,7 +533,7 @@
 							<div>
 								<ul class="lab-no">
 									<li class="style-li"><strong>District:</strong></li>
-									<li class="style-li error-red"></li>
+									<li class="style-li error-red">*</li>
 								</ul>
 							</div>
 							<cf:select path="district" class="form-control"
@@ -529,7 +545,7 @@
 							<div>
 								<ul class="lab-no">
 									<li class="style-li"><strong>City:</strong></li>
-									<li class="style-li error-red"></li>
+									<li class="style-li error-red">*</li>
 								</ul>
 							</div>
 							<cf:select path="city" class="form-control">
