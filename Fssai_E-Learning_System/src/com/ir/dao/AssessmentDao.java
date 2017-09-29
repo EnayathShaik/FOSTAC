@@ -22,7 +22,7 @@ public interface AssessmentDao {
 	public List<CourseType> courseTypeList();
 	public List searchAssessorCalendar(String data);
 	public List viewAssessmentAgencyCalendar(String data);
-	public List searchAssessorTraineesForResults(String data);
+	public List searchAssessorTraineesForResults(String data, int userId);
 	public String updateTraineeAssessmentResult(String data);
 	public String updateTraineeAssessmentResultOnline(Integer userID,String result,String comment);
 	

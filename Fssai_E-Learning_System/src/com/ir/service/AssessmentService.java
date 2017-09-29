@@ -41,7 +41,7 @@ public interface AssessmentService {
 	
 	public List viewAssessmentAgencyCalendar(String data);
 	
-	public List searchAssessorTraineesForResults(String data);
+	public List searchAssessorTraineesForResults(String data,int userId);
 	
 	public String updateTraineeAssessmentResult(String data);
 	

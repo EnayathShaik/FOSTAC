@@ -158,8 +158,8 @@ public class AssessmentServiceImpl implements AssessmentService {
 	
 	@Override
 	@Transactional
-	public List searchAssessorTraineesForResults(String data) {
-		List courseTypeList = assessmentDao.searchAssessorTraineesForResults(data);
+	public List searchAssessorTraineesForResults(String data,int userId) {
+		List courseTypeList = assessmentDao.searchAssessorTraineesForResults(data,userId);
 		return courseTypeList;
 	}
 	

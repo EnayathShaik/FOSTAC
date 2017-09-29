@@ -50,6 +50,9 @@ function showDetails(table){
 		var mainData1 = jQuery.parseJSON(data);
 		var j=1;
 	//$('#newTable tr').remove();
+	//$('#newTable tbody > tr').remove();
+	//$("#newTable tbody").empty();
+
    
 	//$('#newTable').append('<tr class="table table-bordered table-responsive table-striped table-hover"><th>Sr.No.</th><th>Batch Code</th><th>Course Code</th><th>Training Start Date</th><th>Training End Date</th><th>Participant Name</th><th>Mode Of Training</th><th>Status</th></tr>'); 
  

@@ -178,9 +178,10 @@ public class AssessorController {
 	
 	@RequestMapping(value="/searchAssessorTraineesForResults" , method=RequestMethod.POST)
 	@ResponseBody
-	public void searchAssessorTraineesForResults(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+	public void searchAssessorTraineesForResults(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response,HttpSession session) throws IOException{
 		new ZLogger("searchAssessorTraineesForResults","searchAssessorTraineesForResults............" + data  , "AdminController.java");
-		List courseList = assessmentService.searchAssessorTraineesForResults(data);
+		int userId=(int)session.getAttribute("loginUserAssessor");
+		List courseList = assessmentService.searchAssessorTraineesForResults(data,userId);
 		PrintWriter out = response.getWriter();
 		Gson g =new Gson();
 		String newList = g.toJson(courseList); 

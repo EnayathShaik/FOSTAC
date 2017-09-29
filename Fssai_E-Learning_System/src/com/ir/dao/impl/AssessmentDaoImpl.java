@@ -225,7 +225,7 @@ public class AssessmentDaoImpl implements AssessmentDao{
 	//searchAssessorTraineesForResults
 	
 	@Override
-	public List searchAssessorTraineesForResults(String data) {
+	public List searchAssessorTraineesForResults(String data,int userId) {
 		
 		
 		String [] n1 = data.split("@");
@@ -271,7 +271,7 @@ public class AssessmentDaoImpl implements AssessmentDao{
 				+ " inner join personalinformationtrainee F on(F.logindetails=B.logindetails) "
 				+" where "
 				//+ " to_timestamp(COALESCE(A.assessmentdatetime, '19900101010101'),'DD-MM-YYYY') >= CURRENT_TIMESTAMP - INTERVAL '1 days' and "
-				+ "  cast(A.courseType as varchar(100)) like '"+courseType+"%'  and  cast(A.coursename as varchar(100)) like '"+courseName+"%'   and  cast(A.trainingdate as varchar(100)) like '"+trainingDate+"%'  and cast(A.trainingcenter as varchar(100)) like '"+trainingCenter+"%'";
+				+ "  cast(A.courseType as varchar(100)) like '"+courseType+"%'  and  cast(A.coursename as varchar(100)) like '"+courseName+"%'   and  cast(A.trainingdate as varchar(100)) like '"+trainingDate+"%'  and cast(A.trainingcenter as varchar(100)) like '"+trainingCenter+"%'  and assessor ="+userId;
 				
 				
 		Session session = sessionFactory.getCurrentSession();
@@ -304,6 +304,10 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		courseEnrolledUser.setResult(status);
 		courseEnrolledUser.setAssessorComment(comment);
 		session.update(courseEnrolledUser);
+		
+		List ls=session.createSQLQuery("select personalinformationtraineeid from personalinformationtrainee where logindetails=(select logindetails from courseenrolleduser where courseenrolleduserid="+id+")").list();
+	session.createSQLQuery("update personalinformationtrainee set steps=0 where  personalinformationtraineeid="+ls.get(0)).executeUpdate();
+		
 		String newList = "Records successfully updated !!!" ; 
 				
 	
