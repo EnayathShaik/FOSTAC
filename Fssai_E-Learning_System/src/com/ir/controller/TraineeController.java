@@ -735,9 +735,18 @@ public class TraineeController {
 	
 	@RequestMapping(value="/getCourseDetailInfo" , method=RequestMethod.POST)
 	@ResponseBody
-	public void getCourseDetailInfo(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException{
+	public void getCourseDetailInfo(@RequestParam("data") String data ,@RequestBody GenerateCourseCertificateForm generateCourseCertificateForm,HttpServletRequest httpServletRequest, HttpServletResponse response, HttpSession session) throws IOException{
 		new ZLogger("getCourseDetailInfo","getCourseDetailInfo............" + data  , "TrainingPartnerController.java");
-		List batchCodeList = traineeService.getCourseDetails(data);
+		Integer profileID = 0;
+		int loginId = 0;
+		try{
+			profileID = (Integer) session.getAttribute("profileId");
+			loginId = (int) session.getAttribute("loginIdUnique");
+		}catch(Exception e){
+			new ZLogger("afterFeedbackSubmit", "Exception while afterFeedbackSubmit  "+e.getMessage() , "TraineeController.java");
+		}
+		
+		List batchCodeList = traineeService.getCourseDetails(data, loginId);
 		PrintWriter out = response.getWriter();
 		Gson g =new Gson();
 		String newList = g.toJson(batchCodeList); 

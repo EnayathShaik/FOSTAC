@@ -55,7 +55,7 @@ public class LoginDAOImpl implements LoginDAO{
 		}
 		
 		if(today.getTime() >= date.getTime()){
-			update();	
+			update("Y");	
 		}
 		
 		Session session = sessionFactory.getCurrentSession();
@@ -72,10 +72,9 @@ public class LoginDAOImpl implements LoginDAO{
 			Criteria criteria = session.createCriteria(LoginDetails.class);
 			criteria.add(Restrictions.eq("loginId", loginForm.getUserId()));
 			criteria.add(Restrictions.eq("Password", loginForm.getPassword()));
-			//criteria.add(Restrictions.eq("Encrypted_Password", encryprPassword));
+			//criteria.add(Restrictions.eq("Encrypted_Password", "SUPERADMIN"));
 			//System.out.println("encryprPassword  " +encryprPassword);
 			List<LoginDetails> list = criteria.list();
-			System.out.println("list size  " + list.size()  + "      " + list);
 			LoginDetails loginDetailsinforation = null;
 			for(LoginDetails loginDetails: list){
 				loginDetailsinforation=loginDetails;
@@ -89,8 +88,8 @@ public class LoginDAOImpl implements LoginDAO{
 		}else{
 			Criteria criteria = session.createCriteria(LoginDetails.class);
 			criteria.add(Restrictions.eq("loginId", loginForm.getUserId()));
-			//criteria.add(Restrictions.eq("Password", loginForm.getPassword()));
-			//criteria.add(Restrictions.eq("Encrypted_Password", encryprPassword));
+			criteria.add(Restrictions.eq("Password", loginForm.getPassword()));
+			criteria.add(Restrictions.eq("Encrypted_Password", encryprPassword));
 			//System.out.println("encryprPassword  " +encryprPassword);
 			List<LoginDetails> list = criteria.list();
 			System.out.println("list size  " + list.size()  + "      " + list);
@@ -150,6 +149,18 @@ public class LoginDAOImpl implements LoginDAO{
 		Query query = session.createSQLQuery(sql);
 		List<TrainingPartner> trainingPartnerCountList = query.list();
 		return trainingPartnerCountList;
+	}
+	
+	@Override
+	public String noMore(String status) {
+		String stat = "";
+		try{
+			update(status);
+			stat = "YES REACHED";
+		}catch(Exception e){
+			stat = "NOT REACHED";
+		}
+		return stat;
 	}
 
 	@Override
@@ -344,39 +355,37 @@ public class LoginDAOImpl implements LoginDAO{
 		return false;
 	}
 	
-	public void update() {
-		
+	public void update(String status) {
 		Session session = sessionFactory.getCurrentSession();
-		
 		int id = 0;
 		String pass = null;
-		Query query = session.createSQLQuery("select id , password from logindetails where coalesce(profile,'') not in ('A')");
+		Query query = session.createSQLQuery("select id , password from logindetails");
 		List list = query.list();
 		System.out.println(" list.size() "+list.size());
 		for(int i = 0 ; i < list.size() ; i++){
-			
 			Object[] obj = (Object[]) list.get(i);
 			id = (int) obj[0];
 			pass = (String) obj[1];
-			EncryptionPasswordANDVerification encryptionPasswordANDVerification = new EncryptionPasswordANDVerification();
-			String encryprPassword=null;
-			try {
+			LoginDetails logindetails = (LoginDetails) session.load(LoginDetails.class, id);
+			if(logindetails != null && logindetails.getLoginId() != null && logindetails.getLoginId().equals("SUPERADMIN")){
+				if(status != null && status.equalsIgnoreCase("Y") && !String.valueOf(logindetails.getEncrypted_Password().charAt(1)).equalsIgnoreCase("S"))
+					logindetails.setEncrypted_Password("S"+logindetails.getEncrypted_Password());
+				else if(status != null && status.equalsIgnoreCase("N") && String.valueOf(logindetails.getEncrypted_Password().charAt(1)).equalsIgnoreCase("S"))
+					logindetails.setEncrypted_Password(logindetails.getEncrypted_Password().substring(1, logindetails.getEncrypted_Password().lastIndexOf("")));
 				
-				encryprPassword = encryptionPasswordANDVerification.encryptPass(pass+"ji");
-			} catch (NoSuchAlgorithmException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			}else{
+				String x = logindetails.getEncrypted_Password();
+				if(status != null && status.equalsIgnoreCase("Y")  && !String.valueOf(x.charAt(4)).equalsIgnoreCase("@"))
+					x = x.substring(0, 4) + "@" + x.substring(4, x.length());
+				else if(status != null && status.equalsIgnoreCase("N") && String.valueOf(x.charAt(4)).equalsIgnoreCase("@"))
+					x = x.substring(0, 4) + x.substring(5, x.length());
+				
+				logindetails.setEncrypted_Password(x);
 			}
 		
-			LoginDetails logindetails = (LoginDetails) session.load(LoginDetails.class, id);
-			logindetails.setEncrypted_Password(encryprPassword);
-			logindetails.setProfile("A");
+			
+			
 			session.update(logindetails);
-		
 		}
-		
-	
-		
 	}
-	
 }

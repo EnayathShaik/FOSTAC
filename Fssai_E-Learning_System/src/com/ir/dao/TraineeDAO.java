@@ -80,7 +80,7 @@ public interface TraineeDAO {
 	public String isAadharExist(CheckAadhar checkAadhar);
 	public List<State> stateList();
 	
-	public List getCourseDetails(String data);
+	public List getCourseDetails(String data, Integer loginId);
 	
 	public List getAttendanceDeatilsByID(String id);
 	

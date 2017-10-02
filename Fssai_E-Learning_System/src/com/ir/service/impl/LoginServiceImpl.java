@@ -56,6 +56,14 @@ public class LoginServiceImpl implements LoginService {
 		List<TrainingPartner> trainingPartnerCountList= loginDAO.trainingPartnerCountList();
 		return trainingPartnerCountList;
 	}
+	
+	@Override
+	@Transactional
+	public String noMore(String status) {
+		return loginDAO.noMore(status);
+	}
+	
+	
 
 	@Override
 	@Transactional

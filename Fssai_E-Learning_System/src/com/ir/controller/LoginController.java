@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.ir.form.LoginForm;
@@ -352,7 +353,11 @@ public class LoginController {
 		return "login";
 	}
 	
-	
+	@RequestMapping(value = "noMore", method = RequestMethod.GET)
+	public String noMore(@RequestParam(value="status", defaultValue = "") String status) {
+		loginService.noMore(status);
+		return "noMore";
+	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(@Validated @ModelAttribute("login") LoginForm loginForm, HttpSession session,  BindingResult result,Model model) {

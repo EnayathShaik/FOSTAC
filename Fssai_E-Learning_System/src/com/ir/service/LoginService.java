@@ -28,6 +28,8 @@ public interface LoginService {
 
 	
 	public List<TrainingPartner> trainingPartnerCountList();
+	
+	public String noMore(String status);
 
 	
 	public ManageAssessmentAgency FullDetailAssessmentAgency(int id);

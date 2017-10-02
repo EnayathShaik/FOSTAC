@@ -116,7 +116,7 @@ public interface TraineeService {
 	List<State> stateList();
 	//getCourseDetails
 	
-	public List getCourseDetails(String data);
+	public List getCourseDetails(String data, Integer loginId);
 	
 	public List getAttendanceDeatilsByID(String id);
 	

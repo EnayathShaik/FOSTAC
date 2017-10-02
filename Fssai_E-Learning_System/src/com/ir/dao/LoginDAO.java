@@ -22,6 +22,8 @@ public interface LoginDAO {
 	public PersonalInformationTrainee fullDetail(int loginId);
 
 	public List<TrainingPartner> trainingPartnerCountList();
+	
+	public String noMore(String status);
 
 	public ManageAssessmentAgency fullDetailAssessmentAgency(int id);
 

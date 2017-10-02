@@ -1084,7 +1084,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 	//getCourseDetails
 	
 	@Override
-	public  List getCourseDetails(String data){
+	public  List getCourseDetails(String data, Integer loginId){
 		System.out.println("data "+data);
 		String[] totalConnected = data.toString().split("-");
 		String courseName,modeOfTraining,trainingDate = null , courseType;
@@ -1117,7 +1117,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 				" inner join city as c on c.cityid = pitp.trainingpartnerpermanentcity "+
 				" inner join district as d on d.districtid = pitp.trainingpartnerpermanentdistrict "+
 				" and tc.trainingcenter = pitp.personalinformationtrainingpartnerid "+
-				" where COALESCE(tc.tcstatus , '') not in ('I') and  CAST(tc.coursename AS varchar(10)) like '"+courseName+"' "+
+				" where tc.trainingcalendarid NOT IN (SELECT trainingcalendarid FROM courseenrolleduser Where  logindetails = "+loginId+") AND COALESCE(tc.tcstatus , '') not in ('I') and  CAST(tc.coursename AS varchar(10)) like '"+courseName+"' "+
 				" and CAST(tc.courseType AS varchar(10)) like  '"+courseType+"' "+
 				//" and cn.modeoftraining like '"+modeOfTraining+"' "+
 			//	" and CAST(tc.trainingpartner AS varchar(10)) like '"+trainingPatrtner+"'  "+

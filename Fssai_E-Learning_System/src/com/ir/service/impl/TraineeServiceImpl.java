@@ -250,9 +250,9 @@ public class TraineeServiceImpl implements TraineeService {
 	
 	@Override
 	@Transactional
-	public List getCourseDetails(String  data) {
+	public List getCourseDetails(String  data, Integer loginId) {
 		// TODO Auto-generated method stub
-		return traineeDAO.getCourseDetails(data);
+		return traineeDAO.getCourseDetails(data,loginId);
 	}
 	
 	//getAttendanceDeatilsByID

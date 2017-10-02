@@ -302,12 +302,17 @@ public class AssessmentDaoImpl implements AssessmentDao{
 		Session session = sessionFactory.getCurrentSession();
 		CourseEnrolledUser courseEnrolledUser = (CourseEnrolledUser) session.load(CourseEnrolledUser.class, Integer.parseInt(id));
 		courseEnrolledUser.setResult(status);
+		if(status != null && status.equals("F")){
+			courseEnrolledUser.setStatus("Y");
+		}
 		courseEnrolledUser.setAssessorComment(comment);
 		session.update(courseEnrolledUser);
 		
-		List ls=session.createSQLQuery("select personalinformationtraineeid from personalinformationtrainee where logindetails=(select logindetails from courseenrolleduser where courseenrolleduserid="+id+")").list();
-	session.createSQLQuery("update personalinformationtrainee set steps=0 where  personalinformationtraineeid="+ls.get(0)).executeUpdate();
-		
+		if(status != null && status.equals("F")){
+			List ls=session.createSQLQuery("select personalinformationtraineeid from personalinformationtrainee where logindetails=(select logindetails from courseenrolleduser where courseenrolleduserid="+id+")").list();
+			session.createSQLQuery("update personalinformationtrainee set steps=0 where  personalinformationtraineeid="+ls.get(0)).executeUpdate();
+		}
+				
 		String newList = "Records successfully updated !!!" ; 
 				
 	
@@ -330,6 +335,7 @@ public class AssessmentDaoImpl implements AssessmentDao{
 				courseEnrolledUser.setResult("P");
 			}else{
 				courseEnrolledUser.setResult("F");
+				courseEnrolledUser.setStatus("Y");
 			}
 			courseEnrolledUser.setAssessorComment(comment);
 			session.update(courseEnrolledUser);

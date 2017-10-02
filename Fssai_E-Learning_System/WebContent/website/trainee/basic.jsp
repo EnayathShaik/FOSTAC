@@ -4,16 +4,7 @@
 <script src="website/js/commonController.js"></script>
 <script type="text/javascript">
 
-function convertStringToDate(dateString){
-	    dateTimeParts = dateString.split(' '),
-	    timeParts = dateTimeParts[1].split(':'),
-	    dateParts = dateTimeParts[0].split('-'),
-	    date = '';
-	date = new Date(dateParts[2], parseInt(dateParts[1], 10) - 1, dateParts[0], timeParts[0], timeParts[1]);
-	console.log(date.getTime()); //1379426880000
-	console.log(date);
-	return date;
-	}
+
 function OnStart(){
 	var steps = 1;
 	var traineeSteps =
@@ -34,7 +25,16 @@ function OnStart(){
 }
 window.onload = OnStart;
 
- 
+function convertStringToDate(dateString){
+	dateTimeParts = dateString.split(' '),
+    timeParts = dateTimeParts[1].split(':'),
+    dateParts = dateTimeParts[0].split('-'),
+    date = '';
+date = new Date(dateParts[2], parseInt(dateParts[1], 10) - 1, dateParts[0], timeParts[0], timeParts[1]);
+console.log(date.getTime()); //1379426880000
+console.log(date);
+return date;
+}
  function getcourseType(){
 	 
 	 var courseType = $("#courseType").val();

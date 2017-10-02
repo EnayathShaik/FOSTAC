@@ -97,11 +97,12 @@ public class AssessmentController {
 					.saveTraineeAssessmentEvaluation(traineeAssessmentEvaluation);
 			
 			//Update Result in Course Enrolled User
+			String result = "";
 			if(traineeAssessmentEvaluation != null && traineeAssessmentEvaluation.getResult() != null){
 				//Update Result
-				
+				result = traineeAssessmentEvaluation.getResult();
 				System.out.println("Update Result -- " +traineeAssessmentEvaluation.getResult());
-				assessmentService.updateTraineeAssessmentResultOnline(userId, traineeAssessmentEvaluation.getResult(), String.valueOf(traineeAssessmentEvaluation.getTotalScore()));
+				assessmentService.updateTraineeAssessmentResultOnline(userId, result, String.valueOf(traineeAssessmentEvaluation.getTotalScore()));
 			}
 			
 			
@@ -120,10 +121,18 @@ public class AssessmentController {
 			} catch (Exception e) {
 				new ZLogger("submitAssessment"," Exception while submitAssessment "+e.getMessage(), "AssessmentController.java");
 			}
-			int tableID = traineeService.getTableIdForEnrolmentID(loginId,
-					profileID);
-			traineeService.updateSteps(tableID, profileID, 4);
-			session.setAttribute("traineeSteps", 4);
+			if(result != null && result.toUpperCase().equals("PASS")){
+				int tableID = traineeService.getTableIdForEnrolmentID(loginId,
+						profileID);
+				traineeService.updateSteps(tableID, profileID, 4);
+				session.setAttribute("traineeSteps", 4);
+			}else{
+				int tableID = traineeService.getTableIdForEnrolmentID(loginId,
+						profileID);
+				traineeService.updateSteps(tableID, profileID, 0);
+				session.setAttribute("traineeSteps", 0);
+			}
+			
 		}catch(Exception e){
 			e.printStackTrace();
 			new ZLogger("submitAssessment"," Exception while submitAssessment "+e.getMessage(), "AssessmentController.java");
