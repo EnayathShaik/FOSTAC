@@ -94,6 +94,12 @@
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/faq.jsp" />
 	</definition>
+	
+	<definition name="trainingManuals" extends="base.before.login">
+		<put-attribute name="title" value="Fssai E-Learning System" />
+		<put-attribute name="body" value="/website/trainingManuals.jsp" />
+	</definition>
+	
 	<definition name="login" extends="base.before.login">
 		<put-attribute name="title" value="Fssai E-Learning System" />
 		<put-attribute name="body" value="/website/login.jsp" />
