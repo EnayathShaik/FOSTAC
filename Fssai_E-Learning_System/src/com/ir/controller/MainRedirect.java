@@ -167,6 +167,12 @@ public class MainRedirect {
 	   public String faq() {
 		   return "faq";
 	   }
+	   
+	   @RequestMapping(value="/trainingManuals" ,method = RequestMethod.GET)
+	   public String trainingManuals() {
+		   return "trainingManuals";
+	   }
+	   
 	   @RequestMapping(value="/knowYourTrainingPartner" ,method = RequestMethod.GET)
 	   public String knowYourTrainingPartner(Model model) {
 		   model.addAttribute("manageTrainingPartnerList", this.pageLoadService.manageTrainingPartnerList());
