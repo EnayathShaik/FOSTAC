@@ -118,6 +118,8 @@
 						<li id="loginpagefssai"><a onclick="setID('loginpagefssai')"
 							target="_blank" href="./website/trainingPartner/EOI.pdf">EOI
 								FOR TRAINING PARTNER</a></li>
+						<li id="trainingManuals"><a onclick="setID('trainingManuals')"
+							href="trainingManuals.fssai">TRAINING MANUALS</a></li>
 					</ul>
 					<!-- <div class="search">
                                     <form role="form" class="searchbar">
