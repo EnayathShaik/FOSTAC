@@ -82,7 +82,7 @@ public class AssessmentDaoImpl implements AssessmentDao{
 	public List<IntStringBean> getTrainingPartners(int assessorId){
 		Session session = sessionFactory.getCurrentSession();
 		List<IntStringBean> trainingPartnerList = new ArrayList<IntStringBean>();
-		String strQuery = "select pit.personalinformationtrainingpartnerid, pit.trainingcentrename "
+		/*String strQuery = "select pit.personalinformationtrainingpartnerid, pit.trainingcentrename "
 				+ "from personalinformationassessor pia "
 				+ "inner join courseenrolled ce on ce.logindetails = pia.logindetails "
 				+ "inner join trainingcalendar tc on tc.coursename = ce.coursenameid "
@@ -90,6 +90,8 @@ public class AssessmentDaoImpl implements AssessmentDao{
 				+ "inner join personalinformationtrainingpartner pit on pit.personalinformationtrainingpartnerid = tc.trainingcenter "
 				+ "where pia.logindetails = "+assessorId + " "
 						+ "group by pit.personalinformationtrainingpartnerid, pit.trainingcentrename";
+	*/	
+		String strQuery = "Select DISTINCT A.personalinformationtrainingpartnerid, A.trainingcentrename from personalinformationtrainingpartner A inner join trainingcalendar B on(A.personalinformationtrainingpartnerid=B.trainingcenter) inner join personalinformationassessor C on(B.assessor = C.personalinformationassessorid) Where C.logindetails = "+assessorId;
 		Query query = session.createSQLQuery(strQuery);
 		//List tpList = query.list();
 		List<Object[]> tpList =(List<Object[]>) query.list();
