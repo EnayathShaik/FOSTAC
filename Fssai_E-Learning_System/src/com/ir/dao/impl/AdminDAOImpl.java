@@ -447,12 +447,16 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List<PersonalInformationTrainee> traineeUserManagementSearch(TraineeUserManagementForm traineeUserManagementForm) {
 		Session session = sessionFactory.getCurrentSession();
+		String userId = traineeUserManagementForm.getUserId();
 		String FirstName = traineeUserManagementForm.getFirstName();
 		String MiddleName = traineeUserManagementForm.getMiddleName();
 		String LastName = traineeUserManagementForm.getLastName() ;
 		String AadharNumber = traineeUserManagementForm.getAadharNumber();
 		String status = traineeUserManagementForm.getStatus();
 		
+		if(userId.length() == 0){
+			userId = "%";
+		}
 		if(FirstName.length() == 0){
 			FirstName = "%";
 		}
@@ -474,7 +478,7 @@ public class AdminDAOImpl implements AdminDAO {
 		}
 		
 		String join = " inner join loginDetails as ld on pitp.loginDetails = ld.id";
-		String like= " where upper(pitp.FirstName) like '"+FirstName.toUpperCase()+"' and pitp.MiddleName like '"+MiddleName+"' and pitp.LastName like '"+LastName+"' and "
+		String like= " where ld.loginid like '"+userId+"' and   upper(pitp.FirstName) like '"+FirstName.toUpperCase()+"' and pitp.MiddleName like '"+MiddleName+"' and pitp.LastName like '"+LastName+"' and "
 				+ "pitp.AadharNumber like '"+AadharNumber +"' and ld.status like '"+ status+"'";
 		String select = "pitp.personalInformationTraineeId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails,(CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus ";
 		
@@ -492,13 +496,18 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public List<PersonalInformationTrainer> trainerUserManagementSearch(TrainerUserManagementForm trainerUserManagementForm) {
+		
 		Session session = sessionFactory.getCurrentSession();
+		String userId = trainerUserManagementForm.getUserId();
 		String FirstName = trainerUserManagementForm.getFirstName();
 		String MiddleName = trainerUserManagementForm.getMiddleName();
 		String LastName = trainerUserManagementForm.getLastName() ;
 		String AadharNumber = trainerUserManagementForm.getAadharNumber();
 		String status = trainerUserManagementForm.getStatus();
 		
+		if(userId.length() == 0){
+			userId = "%";
+		}
 		if(FirstName.length() == 0){
 			FirstName = "%";
 		}
@@ -520,7 +529,7 @@ public class AdminDAOImpl implements AdminDAO {
 		}
 		
 		String join = " inner join loginDetails as ld on pitp.loginDetails = ld.id";
-		String like= " where upper(pitp.FirstName) like '"+FirstName.toUpperCase()+"' and pitp.MiddleName like '"+MiddleName+"' and pitp.LastName like '"+LastName+"' and "
+		String like= " where ld.loginid  like '"+userId +"' and  upper(pitp.FirstName) like '"+FirstName.toUpperCase()+"' and pitp.MiddleName like '"+MiddleName+"' and pitp.LastName like '"+LastName+"' and "
 				+ "pitp.AadharNumber like '"+AadharNumber +"' and ld.status like '"+ status+"'";
 		String select = "pitp.personalInformationTrainerId,ld.loginid,pitp.FirstName,pitp.MiddleName,pitp.LastName,pitp.AadharNumber,pitp.logindetails ,(CASE WHEN ld.isActive = 'Y' THEN 'INACTIVE' ELSE 'ACTIVE' END) as updateStatus,(CASE WHEN ld.isActive = 'Y' THEN 'ACTIVE' ELSE 'INACTIVE' END) as currentstatus ";
 		
@@ -540,12 +549,16 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List<PersonalInformationAssessor> assessorUserManagementSearch(AssessorUserManagementForm assessorUserManagementForm,Integer profileid,Integer userID) {
 		Session session = sessionFactory.getCurrentSession();
+		String userId = assessorUserManagementForm.getUserId();
 		String FirstName = assessorUserManagementForm.getFirstName();
 		String MiddleName = assessorUserManagementForm.getMiddleName();
 		String LastName = assessorUserManagementForm.getLastName() ;
 		String AadharNumber = assessorUserManagementForm.getAadharNumber();
 		String status = assessorUserManagementForm.getStatus();
 		
+		if(userId.length() == 0){
+			userId = "%";
+		}
 		if(FirstName.length() == 0){
 			FirstName = "%";
 		}
@@ -576,7 +589,7 @@ public class AdminDAOImpl implements AdminDAO {
 			userBuffer.append(" AND pitp.assessmentagencyname="+perAssessorAgencyID);
 		}
 		String join = " inner join loginDetails as ld on pitp.loginDetails = ld.id";
-		String like= " where upper(pitp.FirstName) like '"+FirstName.toUpperCase()+"' and pitp.MiddleName like '"+MiddleName+"' and pitp.LastName like '"+LastName+"' and "
+		String like= " where ld.loginid like '"+userId +"' and  upper(pitp.FirstName) like '"+FirstName.toUpperCase()+"' and pitp.MiddleName like '"+MiddleName+"' and pitp.LastName like '"+LastName+"' and "
 				+ "pitp.AadharNumber like '"+AadharNumber +"' and pitp.AadharNumber  like '"+ AadharNumber+"'";
 		
 		like = like + userBuffer.toString();
