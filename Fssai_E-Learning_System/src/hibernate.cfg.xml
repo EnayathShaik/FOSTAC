@@ -10,7 +10,7 @@
 		<!-- <property name="hibernate.connection.url">jdbc:postgresql://localhost/FSSAI</property>
 		<property name="hibernate.connection.username">postgres</property>
 		<property name="hibernate.connection.password">Fss2iZentech</property> -->
-		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5433/fostac</property>
+			<property name="hibernate.connection.url">jdbc:postgresql://localhost/fostac</property>
 		<property name="hibernate.connection.username">fostacadmin</property>
 		<property name="hibernate.connection.password">Fss2iZentech</property>
 		

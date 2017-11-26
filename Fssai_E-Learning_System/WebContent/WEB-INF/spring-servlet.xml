@@ -102,7 +102,7 @@ class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="url" value="jdbc:postgresql://localhost:5433/fostac" />
+		<property name="url" value="jdbc:postgresql://localhost/fostac" />
 		<property name="username" value="fostacadmin" />
 		<property name="password" value="Fss2iZentech" />
 	</bean>
