@@ -49,6 +49,8 @@ function googleTranslateElementInit() {
           <li><a href="faq.fssai">FAQ</a></li>
            <li id="contactpagefssai"><a onclick="setID('contactpagefssai')" href="contact.fssai">CONTACT</a></li>
           <li><a href="login.fssai">LOGIN</a></li>
+          			<li id="trainingManuals"><a onclick="setID('trainingManuals')"
+							href="trainingManuals.fssai">TRAINING MANUALS</a></li>
         </ul>
         <!-- <div class="search">
           <form role="form" class="searchbar">
