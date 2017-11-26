@@ -1,182 +1,117 @@
-<section id="main-slider" class="no-margin">
-    <div class="carousel-inner innerpage">
-        <div class="container">
-            <div class="row slide-margin">
-                <div class="col-sm-12">
-                    <h1 class="animation animated-item-1" style="padding-bottom:10px;">TRAINING MANUALS</h1>
-                </div>
+<h2>Training Manuals</h2>
 
-            </div>
-        </div>
-
-        <!--/.item-->
-
-        <!--/.item-->
-
-        <!--/.item-->
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="table-responsive">
+      <h3 align="left">Basic</h3>
+      <h5 align="left">Basic Food Safety Training Manual Catering</h3>
+        <table summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
+          <tbody>
+            <tr>
+              <td>Urdu  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Bengali  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Kannada  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Punjabi  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Malayalam  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Odia  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Tamil  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Telegu  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Marathi  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Gujarati  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+            </tr>
+          </tbody>
+        </table>
+        <h5 align="left">Basic Food Safety Training Manual for Food Manufacturers, Processors and Packers</h3>
+        <table summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
+          <tbody>
+            <tr>
+              <td>Urdu  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Bengali  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Kannada  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Punjabi  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Malayalam  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Odia  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Telegu  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Gujarati  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+            </tr>
+          </tbody>
+          </table>
+          <h5 align="left">Basic Food Safety Training Manual Supervisor Basic (Level 1) Storage and Transport</h3>
+          <table summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
+          <tbody>
+            <tr>
+              <td>Urdu  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Bengali  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Kannada  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Malayalam  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Odia  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Telegu  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Marathi  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Gujarati  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+            </tr>
+          </tbody>
+          </table>
+          <table summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
+          <tbody>
+            <tr>
+              <td>Basic Food Safety Training Manual Supervisor Course Basic (Level 1) Retail & Distribution  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+            </tr>
+          </tbody>
+          </table>
+          <h5 align="left">Street Food Vendor Training On Food Safety and Hygiene</h3>
+          <table summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
+          <tbody>
+            <tr>
+              <td>Urdu  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Bengali  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Kannada  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Hindi  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Odia  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+              <td>Telegu  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+            </tr>
+          </tbody>
+          </table>
+          
+          <h3 align="left">Advance</h3>
+        <table summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
+          <tbody>
+            <tr>
+              <td>Food Safety Supervisor Course Advance (Level 2) Catering.  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+            </tr>
+            <tr>
+              <td>Food Safety Supervisor Course Advance (Level 2) Manufacturing.  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+            </tr>
+            <tr>
+              <td>Food Safety Supervisor Course Advance (Level 2) Retail Distribution.  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+            </tr>
+            <tr>
+              <td>Food Safety Supervisor Course Advance (Level 2) Storage and Transport.  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h3 align="left">Special</h3>
+        <table summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
+          <tbody>
+            <tr>
+              <td>Manuals for Small Scale Bakery Units.  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+            </tr>
+            <tr>
+              <td>Food Safety Supervisor Course Special - (Level 3) Manufacturing Milk and Milk Product.  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+            </tr>
+            <tr>
+              <td>Food Safety Supervisor Manufacturing : Oils & Fats.  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+            </tr>
+            <tr>
+              <td>Water Manual.  <a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf"><span><i class="fa fa-download"></i></span></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div><!--end of .table-responsive-->
     </div>
-    <!--/.carousel-inner-->
-
-    <!--/.carousel-->
-</section>
-<!--/#main-slider-->
-
-<section id="feature">
-		<div class="container">
-			<div class="row">
-				<div class="features">
-					<div class="col-md-3 col-sm-4 wow fadeInDown"
-						data-wow-duration="1000ms" data-wow-delay="600ms">
-						<div class="feature-wrap">
-							<a href="commonCourses.fssai?id=8"><img
-								class="img-responsive center-block"
-								src="website/images/fssai-certification-logo.jpg" width="100"
-								height="100"></a>
-							<h3>
-								<a target="_blank" href="./website/trainingManuals/basic_manual_retail.docx">BASIC MANUAL<br>
-									RETAIL
-								</a>
-							</h3>
-						</div>
-					</div>
-					<!--/.col-md-4-->
-
-					<div class="col-md-3 col-sm-4 wow fadeInDown"
-						data-wow-duration="1000ms" data-wow-delay="600ms">
-						<div class="feature-wrap feature-wrapbasic">
-							<a href="commonCourses.fssai?id=5"><img
-								class="img-responsive center-block"
-								src="website/images/fssai-certification-logo.jpg" width="100"
-								height="100"></a>
-							<h3>
-								<a target="_blank" href="./website/trainingManuals/Food_Safety_training_manual_storage.docx">FOOD SAFETY<br>
-									 TRAINING MANUAL STORAGE
-								</a>
-							</h3>
-						</div>
-					</div>
-					<!--/.col-md-4-->
-
-					<div class="col-md-3 col-sm-4 wow fadeInDown"
-						data-wow-duration="1000ms" data-wow-delay="600ms">
-						<div class="feature-wrap feature-wrapadvance">
-							<a href="commonCourses.fssai?id=6"><img
-								class="img-responsive center-block"
-								src="website/images/fssai-certification-logo.jpg" width="132"
-								height="87"></a>
-							<h3>
-								<a target="_blank" href="./website/trainingManuals/TrainingManualDistribution.pdf">TRAINING MANUAL<br>
-									RETAIL & AMP DISTRIBUTION
-								</a>
-							</h3>
-						</div>
-					</div>
-					<!--/.col-md-4-->
-
-					<div class="col-md-3 col-sm-4 wow fadeInDown"
-						data-wow-duration="1000ms" data-wow-delay="600ms">
-						<div class="feature-wrap">
-							<a href="commonCourses.fssai?id=7"><img
-								class="img-responsive center-block"
-								src="website/images/fssai-certification-logo.jpg" width="132"
-								height="87"></a>
-							<h3>
-								<a target="_blank" href="./website/trainingManuals/WATER MANUAL.pdf">WATER MANUAL<br>
-								</a>
-							</h3>
-						</div>
-					</div>
-				</div>
-				<!--/.services-->
-			</div>
-			<!--/.row-->
-		</div>
-		<!--/.container-->
-	</section>
-	
-	<div class="container">
-            <div class="row slide-margin">
-                <div class="col-sm-12">
-                    <h1 class="animation animated-item-1" style="padding-bottom:10px;">Clean Street Food</h1>
-                </div>
-
-            </div>
-    </div>
-	
-	<!--/#feature-->
-	<section id="feature">
-		<div class="container">
-			<div class="row">
-				<div class="course-heading">Courses</div>
-				<div class="course-arrow">
-					<img src="website/images/course-down-arroe.png" width="8"
-						height="25">
-				</div>
-			</div>
-			<div class="row">
-				<div class="features">
-					<div class="col-md-3 col-sm-4 wow fadeInDown"
-						data-wow-duration="1000ms" data-wow-delay="600ms">
-						<div class="feature-wrap course-bg">
-							<img class="img-responsive center-block"
-								src="website/images/catering-sector.png" width="94" height="94">
-							<h3 class="industry-heading">
-								<a href="">Kannada</a>
-							</h3>
-						</div>
-					</div>
-					<!--/.col-md-4-->
-
-					<div class="col-md-3 col-sm-4 wow fadeInDown"
-						data-wow-duration="1000ms" data-wow-delay="600ms">
-						<div class="feature-wrap course-bg">
-							<img class="img-responsive center-block"
-								src="website/images/manufacturing-sector.png" width="94"
-								height="94">
-							<h3 class="industry-heading">
-								<a href="">Bengali</a>
-							</h3>
-						</div>
-					</div>
-					<!--/.col-md-4-->
-					<div class="col-md-3 col-sm-4 wow fadeInDown"
-						data-wow-duration="1000ms" data-wow-delay="600ms">
-						<div class="feature-wrap course-bg">
-							<img class="img-responsive center-block"
-								src="website/images/transport-sector.png" width="94" height="94">
-							<h3 class="industry-heading">
-								<a href="commonCourses.fssai?id=3">Transport & Storage</a>
-							</h3>
-							<!--  <ul>
-                                            <li><a href="basic-level.fssai">Basic Level</a></li>
-                                            <li><a href="advance-level.fssai">Advance Level</a></li>
-                                        </ul> -->
-						</div>
-					</div>
-					<!--/.col-md-4-->
-
-					<div class="col-md-3 col-sm-4 wow fadeInDown"
-						data-wow-duration="1000ms" data-wow-delay="600ms">
-						<div class="feature-wrap course-bg">
-							<img class="img-responsive center-block"
-								src="website/images/retail-sector.png" width="94" height="94">
-							<h3 class="industry-heading">
-								<a href="commonCourses.fssai?id=4">Retail</a>
-							</h3>
-							<!-- <ul>
-                                            <li><a href="basic-level.fssai">Basic Level</a></li>
-                                            <li><a href="advance-level.fssai">Advance Level</a></li>
-                                        </ul> -->
-						</div>
-					</div>
-					<!--/.col-md-4-->
-				</div>
-				<!--/.services-->
-			</div>
-			<!--/.row-->
-		</div>
-		<!--/.container-->
-	</section>
+  </div>
+</div>
 <!-- <script>
 var id = localStorage.getItem('activeID');
 document.getElementById(id).className = "active";
